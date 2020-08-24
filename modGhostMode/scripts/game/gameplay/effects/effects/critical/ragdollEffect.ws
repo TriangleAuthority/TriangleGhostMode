@@ -18,6 +18,15 @@ class W3Effect_Ragdoll extends W3CriticalEffect
 	default	explorationStateHandling	= ECH_HandleNow;
 	default usesFullBodyAnim			= true;
 	
+	//modSigns
+	event OnEffectRemoved()
+	{
+		super.OnEffectRemoved();
+		
+		if(this == target.GetCurrentlyAnimatedCS())
+			target.RequestCriticalAnimStop(target.IsInAir());
+	}
+	
 	public function CacheSettings()
 	{
 		super.CacheSettings();
@@ -64,29 +73,35 @@ class W3Effect_Ragdoll extends W3CriticalEffect
 			OnUpdate(deltaTime);	
 		}
 		
-		if(timeLeft <= 0)
+		//modSigns
+		if(duration != -1 && timeLeft <= 0 && isActive)
 		{
-			if(!timeEndedHandled)
-			{
-				timeEndedHandled = true;				
-				
-				
-				if(isActive && this == target.GetCurrentlyAnimatedCS())
-				{				
-					target.RequestCriticalAnimStop(target.IsInAir());
-				}
-				else
-				{
-					LogCritical("Deactivating not animated CS <<" + criticalStateType + ">>");
-					isActive = false;			
-				}
-			}
-			else if(isActive)
-			{
-				isInAir = target.IsInAir();
-				target.RequestCriticalAnimStop(isInAir);
-				isActive = isInAir;
-			}
+			isActive = false;
 		}
+		
+		//if(timeLeft <= 0)
+		//{
+		//	if(!timeEndedHandled)
+		//	{
+		//		timeEndedHandled = true;				
+		//		
+		//		
+		//		if(isActive && this == target.GetCurrentlyAnimatedCS())
+		//		{				
+		//			target.RequestCriticalAnimStop(target.IsInAir());
+		//		}
+		//		else
+		//		{
+		//			LogCritical("Deactivating not animated CS <<" + criticalStateType + ">>");
+		//			isActive = false;			
+		//		}
+		//	}
+		//	else if(isActive)
+		//	{
+		//		isInAir = target.IsInAir();
+		//		target.RequestCriticalAnimStop(isInAir);
+		//		isActive = isInAir;
+		//	}
+		//}
 	}
 }

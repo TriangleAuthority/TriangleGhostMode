@@ -103,12 +103,14 @@ class BTTaskCaretakerManager extends IBehTreeTask
 		{
 			CalculateHealingValues();
 			
-			l_damage = GetEventParamFloat( 0 );
+			l_damage = GetEventParamFloat( 0 ); //modSigns: relative damage: 0...1
 			
+			//modSigns: make relative damage affect healing rate
+			//healing from shades is always 100% of xml value
 			if( m_SummonerComponent.GetNumberOfSummonedEntities() > 0 )			
-				RestoreHealth( m_Npc.GetMaxHealth() * recoverPercPerHit * shadesModifier );
+				RestoreHealth( m_Npc.GetMaxHealth() * l_damage * recoverPercPerHit * shadesModifier );
 			else 
-				RestoreHealth( m_Npc.GetMaxHealth() * recoverPercPerHit );
+				RestoreHealth( m_Npc.GetMaxHealth() * l_damage * recoverPercPerHit );
 		}
 		if( eventName == 'Death' )
 		{

@@ -14,22 +14,50 @@ class W3Potion_GoldenOriole extends CBaseGameplayEffect
 	{
 		super.OnEffectAdded(customParams);
 		
-		if(GetBuffLevel() < 3)
-		{
-			target.RemoveAllBuffsOfType(EET_Poison);
-			target.RemoveAllBuffsOfType(EET_PoisonCritical);
-		}
+		//if(GetBuffLevel() < 3)
+		//{
+		//	target.RemoveAllBuffsOfType(EET_Poison);
+		//	target.RemoveAllBuffsOfType(EET_PoisonCritical);
+		//}
+		HandlePoisonStatus(); //modSigns
 	}
 	
 	public function CumulateWith(effect: CBaseGameplayEffect)
 	{
 		super.CumulateWith(effect);
 		
-		if(GetBuffLevel() < 3)
+		//if(GetBuffLevel() < 3)
+		//{
+		//	target.RemoveAllBuffsOfType(EET_Poison);
+		//	target.RemoveAllBuffsOfType(EET_PoisonCritical);
+		//}
+		HandlePoisonStatus(); //modSigns
+	}
+	
+	//modSigns
+	function HandlePoisonStatus()
+	{
+		var min, max : SAbilityAttributeValue;
+		
+		target.RemoveAllBuffsOfType(EET_Poison);
+		target.RemoveAllBuffsOfType(EET_PoisonCritical);
+		if(GetBuffLevel() == 3)
 		{
-			target.RemoveAllBuffsOfType(EET_Poison);
-			target.RemoveAllBuffsOfType(EET_PoisonCritical);
+			target.AddBuffImmunity(EET_Poison, 'GoldenOrioleTempPoisonImmunity', true);
+			target.AddBuffImmunity(EET_PoisonCritical, 'GoldenOrioleTempPoisonImmunity', true);
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'poison_immunity_duration', min, max);
+			target.AddTimer('RemoveGoldenOriolePoisonImmunity', min.valueAdditive, false, false, , true, true);
+			//theGame.witcherLog.AddMessage("Golden Oriole immunity added! Timer (sec): " + min.valueAdditive);
 		}
+	}
+	
+	//modSigns
+	event OnEffectRemoved()
+	{
+		super.OnEffectRemoved();
+		
+		target.RemoveBuffImmunity(EET_Poison, 'GoldenOrioleTempPoisonImmunity');
+		target.RemoveBuffImmunity(EET_PoisonCritical, 'GoldenOrioleTempPoisonImmunity');
 	}
 	
 	

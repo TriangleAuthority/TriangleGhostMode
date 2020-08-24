@@ -93,6 +93,8 @@ class W3Effect_Frozen extends W3ImmobilizeEffect
 			wasKnockedDown = true;
 		}
 		effectManager.PauseAllRegenEffects('FrozenEffect');
+		
+		effectManager.PauseAllDoTEffects('FrozenEffect'); //modSigns
 
 		if( target.HasTag( 'scolopendromorph' ) )
 		{
@@ -148,6 +150,8 @@ class W3Effect_Frozen extends W3ImmobilizeEffect
 		target.SignalGameplayEventParamInt('ForceStopCriticalEffect',(int)criticalStateType);
 		effectManager.ResumeAllRegenEffects('FrozenEffect');
 		target.RequestCriticalAnimStop();
+		
+		effectManager.ResumeAllDoTEffects('FrozenEffect'); //modSigns
 		
 		
 		target.SetInteractionPriority(pushPriority);

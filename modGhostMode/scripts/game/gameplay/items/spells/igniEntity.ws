@@ -100,19 +100,19 @@ statemachine class W3IgniEntity extends W3SignEntity
 		}
 		else
 		{
-			if(owner.GetActor().HasAbility('Glyphword 7 _Stats', true))
+			if((W3PlayerWitcher)owner.GetActor() && ((W3PlayerWitcher)owner.GetActor()).HasGlyphwordActive('Glyphword 7 _Stats')) //modSigns
 				fireMode = 2;
 				
 			GotoState( 'IgniCast' );
 		}
 	}
 	
-	protected function FillActionBuffsFromSkill(act : W3DamageAction)
+	/*protected function FillActionBuffsFromSkill(act : W3DamageAction)
 	{
 		
 		if(fireMode != 2)
 			super.FillActionBuffsFromSkill(act);
-	}
+	}*/ //modSigns: add -50% debuff to burning chance instead
 	
 	
 	
@@ -158,42 +158,54 @@ statemachine class W3IgniEntity extends W3SignEntity
 	protected function InitThrown()
 	{
 		var entity : CEntity;
+		var spellPower : SAbilityAttributeValue; //modSigns
+		var sp : float;
 		
 		entity = theGame.GetEntityByTag( 'forest' );		
 		if(entity)
 			forestTrigger = (W3ForestTrigger)entity;
 				
-		if(false)
-		{
-			PlayEffect( effects[fireMode].upgradedThrowEffect );
-		}
-		else
-		{
-			if(!IsAlternateCast() && owner.CanUseSkill(S_Magic_s07))
+		//if( false )
+		//{
+		//	PlayEffect( effects[fireMode].upgradedThrowEffect ); //upgradedThrowEffect doesn't actually set up and uses regular effect instead (probably related to dropped range upgrade)
+		//}
+		//else
+		//{
+			//modSigns: make fx depend on sign power
+			spellPower = owner.GetActor().GetTotalSignSpellPower(GetSkill());
+			sp = spellPower.valueMultiplicative - 1;
+			if(fireMode == 0 && sp > 1.0 /*owner.CanUseSkill(S_Magic_s07)*/) //modSigns: igni_blast_360_power effect doesn't seem to be working
 			{
 				PlayEffect( effects[fireMode].throwEffectSpellPower );
+				//theGame.witcherLog.AddMessage("throwEffectSpellPower: " + effects[fireMode].throwEffectSpellPower);
 			}
 			else
 			{
 				PlayEffect( effects[fireMode].throwEffect );
+				//theGame.witcherLog.AddMessage("throwEffect: " + effects[fireMode].throwEffect);
 			}
-		}
-			
+		//}
+		
 		
 		if(!IsAlternateCast())
 		{
-			
 			if(owner.CanUseSkill(S_Magic_s08))
-				PlayEffect(effects[0].meltArmorEffect);
-			
+			{
+				PlayEffect(effects[fireMode].meltArmorEffect); //modSigns
+				//theGame.witcherLog.AddMessage("meltArmorEffect: " + effects[fireMode].meltArmorEffect);
+			}
 			
 			if(owner.CanUseSkill(S_Magic_s09))
-				PlayEffect(effects[0].combustibleEffect);
+			{
+				PlayEffect(effects[fireMode].combustibleEffect); //modSigns
+				//theGame.witcherLog.AddMessage("combustibleEffect: " + effects[fireMode].combustibleEffect);
+			}
 		}
 		
 		if( owner.IsPlayer() && forestTrigger && forestTrigger.IsPlayerInForest() )
 		{
 			PlayEffect( effects[fireMode].forestEffect );
+			//theGame.witcherLog.AddMessage("forestEffect: " + effects[fireMode].forestEffect);
 		}
 	}
 	
@@ -293,6 +305,16 @@ state IgniCast in W3IgniEntity extends NormalCast
 			{
 				parent.ManagePlayerStamina();
 				parent.ManageGryphonSetBonusBuff();
+				thePlayer.AddEffectDefault(EET_IgniCooldown, NULL, "normal_cast"); //modSigns
+				//modSigns: new mutagen10 effect
+				if(thePlayer.HasBuff(EET_Mutagen10))
+					((W3Mutagen10_Effect)thePlayer.GetBuff(EET_Mutagen10)).AddMutagen10Ability();
+				//modSigns: new mutagen17 effect
+				if(thePlayer.HasBuff(EET_Mutagen17))
+					((W3Mutagen17_Effect)thePlayer.GetBuff(EET_Mutagen17)).RemoveMutagen17Abilities();
+				//modSigns: new mutagen22 effect
+				if(thePlayer.HasBuff(EET_Mutagen22))
+					((W3Mutagen22_Effect)thePlayer.GetBuff(EET_Mutagen22)).AddMutagen22Ability();
 			}
 			else 
 			{
@@ -430,6 +452,26 @@ state IgniChanneled in W3IgniEntity extends Channeling
 		caster.OnDelayOrientationChange();
 	}
 	
+	//modSigns
+	event OnLeaveState( nextStateName : name )
+	{
+		if(caster.IsPlayer())
+		{
+			thePlayer.AddEffectDefault(EET_IgniCooldown, NULL, "alt_cast");
+			//modSigns: new mutagen10 effect
+			if(thePlayer.HasBuff(EET_Mutagen10))
+				((W3Mutagen10_Effect)thePlayer.GetBuff(EET_Mutagen10)).AddMutagen10Ability();
+			//modSigns: new mutagen17 effect
+			if(thePlayer.HasBuff(EET_Mutagen17))
+				((W3Mutagen17_Effect)thePlayer.GetBuff(EET_Mutagen17)).RemoveMutagen17Abilities();
+			//modSigns: new mutagen22 effect
+			if(thePlayer.HasBuff(EET_Mutagen22))
+				((W3Mutagen22_Effect)thePlayer.GetBuff(EET_Mutagen22)).AddMutagen22Ability();
+		}
+		caster.GetActor().OnSignCastPerformed(ST_Igni, true); //modSigns: moved to the end of cast
+		super.OnLeaveState(nextStateName);
+	}
+	
 	event OnThrowing()
 	{
 		if ( super.OnThrowing() )
@@ -455,15 +497,15 @@ state IgniChanneled in W3IgniEntity extends Channeling
 		
 		CleanUp();
 		
-		if ( false )
-		{
-			parent.StopEffect( parent.effects[parent.fireMode].upgradedThrowEffect );
-		}
-		else
-		{
+		//if( false )
+		//{
+		//	parent.StopEffect( parent.effects[parent.fireMode].upgradedThrowEffect );
+		//}
+		//else
+		//{
 			parent.StopEffect( parent.effects[parent.fireMode].throwEffect );
 			parent.StopEffect( parent.effects[parent.fireMode].throwEffectSpellPower );			
-		}
+		//}
 	}
 	
 	event OnSignAborted( optional force : bool )
@@ -483,21 +525,23 @@ state IgniChanneled in W3IgniEntity extends Channeling
 	
 	entry function ChannelIgni()
 	{
-		var lastTime, currTime : float;
+		//var lastTime, currTime : float;
 		
-		lastTime = -1;
-		caster.GetActor().OnSignCastPerformed(ST_Igni, true);
-		while( Update() )
+		//lastTime = -1;
+		//caster.GetActor().OnSignCastPerformed(ST_Igni, true);
+		while( Update(theTimer.timeDelta) ) //modSigns
 		{
-			currTime = theGame.GetEngineTimeAsSeconds();
+			/*currTime = theGame.GetEngineTimeAsSeconds();
 			if(lastTime == -1)
-				lastTime = currTime;	
+				lastTime = currTime;	//on first run dt is 0
 			
-			if(currTime - lastTime > 0)	
+			if(currTime - lastTime > 0)	//because SleepOneFrame() is broken - why am I not surprised?
 				ProcessThrow(currTime - lastTime);
 				
-			lastTime = currTime;			
-			SleepOneFrame();
+			lastTime = currTime;
+			SleepOneFrame();*/
+			ProcessThrow(theTimer.timeDelta); //modSigns
+			Sleep(theTimer.timeDelta); //modSigns
 		}
 	}
 	

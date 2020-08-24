@@ -225,10 +225,14 @@ class CR4HudModuleWolfHead extends CR4HudModuleBase
 		var damageThreshold	: float;
 		var curDeadlyToxicity : bool;
 		
-		thePlayer.GetStats( BCS_Toxicity, curToxicity, curMaxToxicity );
+		//thePlayer.GetStats( BCS_Toxicity, curToxicity, curMaxToxicity );
 		
-		curLockedToxicity = thePlayer.GetStat(BCS_Toxicity) - curToxicity;
+		//curLockedToxicity = thePlayer.GetStat(BCS_Toxicity) - curToxicity;
 		
+		//modSigns
+		curToxicity = GetWitcherPlayer().GetStat(BCS_Toxicity, false); //toxicity from potions + toxicity offset from decoctions
+		curMaxToxicity = GetWitcherPlayer().GetStatMax(BCS_Toxicity); //max toxicity
+		curLockedToxicity = curToxicity - GetWitcherPlayer().GetStat(BCS_Toxicity, true); //toxicity offset from decoctions
 		
 		m_curToxicity = curToxicity;
 		m_lockedToxicity = curLockedToxicity;
@@ -241,7 +245,8 @@ class CR4HudModuleWolfHead extends CR4HudModuleBase
 				m_fxSetLockedToxicity.InvokeSelfOneArg( FlashArgNumber( ( curLockedToxicity )/ curMaxToxicity ) );
 				m_LastLockedToxicity = curLockedToxicity;
 			}
-			m_fxSetToxicity.InvokeSelfOneArg( FlashArgNumber( ( curToxicity + m_LastLockedToxicity )/ curMaxToxicity ) );
+			//m_fxSetToxicity.InvokeSelfOneArg( FlashArgNumber( ( curToxicity + m_LastLockedToxicity )/ curMaxToxicity ) );
+			m_fxSetToxicity.InvokeSelfOneArg( FlashArgNumber( curToxicity / curMaxToxicity ) ); //modSigns
 			m_LastToxicity 	= curToxicity;
 			m_LastMaxToxicity = curMaxToxicity;
 			

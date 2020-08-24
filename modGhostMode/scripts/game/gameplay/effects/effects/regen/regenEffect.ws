@@ -42,20 +42,26 @@ abstract class W3RegenEffect extends CBaseGameplayEffect
 			
 			regenPoints = effectValue.valueAdditive + effectValue.valueMultiplicative * target.GetStatMax(stat);
 			
-			if (isOnPlayer && regenStat == CRS_Stamina && attributeName == RegenStatEnumToName(regenStat) && GetWitcherPlayer())
+			if(theGame.params.IsArmorRegenPenaltyEnabled()) //modSigns
 			{
-				baseStaminaRegenVal = GetWitcherPlayer().CalculatedArmorStaminaRegenBonus();
-				
-				regenPoints *= 1 + baseStaminaRegenVal;
+				if (isOnPlayer && regenStat == CRS_Stamina && attributeName == RegenStatEnumToName(regenStat) && GetWitcherPlayer())
+				{
+					baseStaminaRegenVal = GetWitcherPlayer().CalculatedArmorStaminaRegenBonus();
+					
+					regenPoints *= 1 + baseStaminaRegenVal;
+				}
 			}
 			
-			else if(regenStat == CRS_Vitality || regenStat == CRS_Essence)
+			if(!(isOnPlayer && target.HasBuff(EET_UndyingSkillImmortal))) //modSigns
 			{
-				hpRegenPauseBuff = (W3Effect_DoTHPRegenReduce)target.GetBuff(EET_DoTHPRegenReduce);
-				if(hpRegenPauseBuff)
+				if(regenStat == CRS_Vitality || regenStat == CRS_Essence)
 				{
-					pauseRegenVal = hpRegenPauseBuff.GetEffectValue();
-					regenPoints = MaxF(0, regenPoints * (1 - pauseRegenVal.valueMultiplicative) - pauseRegenVal.valueAdditive);
+					hpRegenPauseBuff = (W3Effect_DoTHPRegenReduce)target.GetBuff(EET_DoTHPRegenReduce);
+					if(hpRegenPauseBuff)
+					{
+						pauseRegenVal = hpRegenPauseBuff.GetEffectValue();
+						regenPoints = MaxF(0, regenPoints * (1 - pauseRegenVal.valueMultiplicative) - pauseRegenVal.valueAdditive);
+					}
 				}
 			}
 			

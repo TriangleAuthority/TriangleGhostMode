@@ -5,12 +5,12 @@
 /***********************************************************************/
 class W3Effect_Mutation7Debuff extends W3Mutation7BaseEffect
 {
-	private var minCapStacks : int;
+	//private var minCapStacks : int;
 	
 	default effectType = EET_Mutation7Debuff;
 	default isNegative = true;
-	default isSonarIncreasing = true;
-	default enemyFlashFX = 'buff';
+	//default isSonarIncreasing = true;
+	//default enemyFlashFX = 'buff';
 	
 	event OnEffectAdded( optional customParams : W3BuffCustomParams )
 	{
@@ -19,12 +19,16 @@ class W3Effect_Mutation7Debuff extends W3Mutation7BaseEffect
 		
 		super.OnEffectAdded( customParams );
 		
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation7Debuff', 'minCapStacks', min, max );
-		minCapStacks = (int) min.valueAdditive;
+		//theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation7Debuff', 'minCapStacks', min, max );
+		//minCapStacks = (int) min.valueAdditive;
+		//
+		//target.AddAbilityMultiple( 'Mutation7Debuff', Min( minCapStacks, actorsCount - 1 ) );
+		//
+		//target.PauseHPRegenEffects( 'Mutation 7 Debuff' );
 		
-		target.AddAbilityMultiple( 'Mutation7Debuff', Min( minCapStacks, actorsCount - 1 ) );
-		
-		target.PauseHPRegenEffects( 'Mutation 7 Debuff' );
+		//modSigns
+		savedFocusPts = ((W3Mutation7DebuffParams)customParams).savedFocusPts;
+		target.AddAbilityMultiple( 'Mutation7Debuff', savedFocusPts );
 		
 		fxEntity = target.CreateFXEntityAtPelvis( 'mutation7_flash', false );
 		fxEntity.PlayEffect( 'debuff' );
@@ -34,10 +38,10 @@ class W3Effect_Mutation7Debuff extends W3Mutation7BaseEffect
 	}
 	
 	
-	public function GetStacks() : int
-	{
-		return (int)( Min( minCapStacks, actorsCount - 1 ) * 100 * apBonus );
-	}
+	//public function GetStacks() : int
+	//{
+	//	return (int)( Min( minCapStacks, actorsCount - 1 ) * 100 * apBonus );
+	//}
 	
 	event OnEffectAddedPost()
 	{
@@ -46,28 +50,33 @@ class W3Effect_Mutation7Debuff extends W3Mutation7BaseEffect
 		super.OnEffectAddedPost();
 		
 		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation7Debuff', 'attack_power', min, max );
-		apBonus = min.valueMultiplicative;
+		apBonus = -min.valueMultiplicative;
 	}
 	
-	event OnUpdate(deltaTime : float)
-	{
-		if( timeActive <= 1.f )
-		{
-			scale = MinF( timeActive / 1.f, 1.f );
-			scale = 1.f + 14.f * scale;
-		}
-		
-		super.OnUpdate( deltaTime );
-	}
+	//event OnUpdate(deltaTime : float)
+	//{
+	//	if( timeActive <= 1.f )
+	//	{
+	//		scale = MinF( timeActive / 1.f, 1.f );
+	//		scale = 1.f + 14.f * scale;
+	//	}
+	//	
+	//	super.OnUpdate( deltaTime );
+	//}
 	
 	event OnEffectRemoved()
 	{
 		target.RemoveAbilityAll( 'Mutation7Debuff' );
-		target.ResumeHPRegenEffects( 'Mutation 7 Debuff' );
+		//target.ResumeHPRegenEffects( 'Mutation 7 Debuff' );
 		
-		theGame.MutationHUDFeedback( MFT_PlayHide );
+		//theGame.MutationHUDFeedback( MFT_PlayHide );
 		
 		target.StopEffect( 'mutation_7_debaff' );
+		
+		if( target.IsInCombat() )
+		{
+			target.AddEffectDefault( EET_Mutation7Buff, target, "Mutation 7 buff phase" );
+		}
 		
 		super.OnEffectRemoved();
 	}
@@ -75,5 +84,6 @@ class W3Effect_Mutation7Debuff extends W3Mutation7BaseEffect
 
 class W3Mutation7DebuffParams extends W3BuffCustomParams
 {
-	var actorsCount : int;
+	//modSigns
+	var savedFocusPts : int;
 }

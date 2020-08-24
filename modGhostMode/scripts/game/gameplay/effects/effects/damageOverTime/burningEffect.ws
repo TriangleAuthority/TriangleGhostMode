@@ -74,7 +74,7 @@ class W3Effect_Burning extends W3CriticalDOTEffect
 			powerStatType = CPS_Undefined;
 			
 		
-		if(!isOnPlayer && GetCreator() == thePlayer && thePlayer.HasAbility('Glyphword 12 _Stats', true) && isSignEffect && IsRequiredAttitudeBetween(thePlayer, target, true))
+		if(!isOnPlayer && GetCreator() == GetWitcherPlayer() && GetWitcherPlayer().HasGlyphwordActive('Glyphword 12 _Stats') && isSignEffect && IsRequiredAttitudeBetween(thePlayer, target, true)) //modSigns
 		{
 			isWithGlyphword12 = true;
 			template = (CEntityTemplate)LoadResource('glyphword_12');
@@ -114,9 +114,9 @@ class W3Effect_Burning extends W3CriticalDOTEffect
 		var range : float;
 		var actor : CActor;
 		var ents : array<CGameplayEntity>;
-		var params 				: SCustomEffectParams;
+		//var params 				: SCustomEffectParams;
 		var min, max : SAbilityAttributeValue;
-	
+		
 		if ( this.isOnPlayer )
 		{
 			if ( player.bLAxisReleased )
@@ -137,10 +137,10 @@ class W3Effect_Burning extends W3CriticalDOTEffect
 				theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 12 _Stats', 'duration', min, max);
 				FindGameplayEntitiesInCylinder(ents, target.GetWorldPosition(), range, 2.f, 10,,FLAG_OnlyAliveActors + FLAG_ExcludePlayer + FLAG_ExcludeTarget, target);
 				
-				params.effectType = EET_Burning;
-				params.creator = thePlayer;
-				params.sourceName = 'glyphword 12';
-				params.duration = min.valueAdditive;
+				//params.effectType = EET_Burning;
+				//params.creator = thePlayer;
+				//params.sourceName = 'glyphword 12';
+				//params.duration = min.valueAdditive;
 				
 				
 				for(i=0; i<ents.Size(); i+=1)
@@ -157,7 +157,10 @@ class W3Effect_Burning extends W3CriticalDOTEffect
 						continue;
 					}
 					
-					actor.AddEffectCustom(params);					
+					//actor.AddEffectCustom(params);					
+					
+					//modSigns: default burning
+					actor.AddEffectDefault(EET_Burning, thePlayer, 'glyphword 12');
 				}
 				
 				glyphword12Delay = 0.f;

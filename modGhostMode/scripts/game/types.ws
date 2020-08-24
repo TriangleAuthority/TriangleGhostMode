@@ -24,7 +24,8 @@ enum EActorImmortalityChanel
 	AIC_Fistfight = 16,
 	AIC_SyncedAnim = 32,
 	AIC_WhiteRaffardsPotion = 64,
-	AIC_IsAttackableByPlayer = 128
+	AIC_IsAttackableByPlayer = 128,
+	AIC_UndyingSkill = 256 //modSigns
 	
 }
 
@@ -269,6 +270,39 @@ struct SAttackEventData
 	var parriedBy : array<CActor>;				
 };
 
+//modSigns
+function GetHitSeverityFromDamageData( damageData : W3DamageAction ) : int
+{
+	var healthPrc, damage, capsuleHeight : float;
+	var actorVictim : CActor;
+
+	if( damageData.IsDoTDamage() && (CBaseGameplayEffect)damageData.causer || !damageData.DealtDamage() )
+		return 0;
+		
+	actorVictim = (CActor)damageData.victim;
+	
+	if(actorVictim.UsesEssence())
+		damage = damageData.processedDmg.essenceDamage;
+	else
+		damage = damageData.processedDmg.vitalityDamage;
+	
+	healthPrc = damage / actorVictim.GetMaxHealth() * 100;
+	
+	capsuleHeight = actorVictim.GetCapsuleHeight();
+	
+	healthPrc /= 1 + MaxF(0, capsuleHeight - 2); //same as multiplying the thresholds -> huge enemies have bigger reduction
+	
+	if(healthPrc < 5)
+		return 0;
+	if(healthPrc < 10)
+		return 1;
+	if(healthPrc < 15)
+		return 2;
+	if(healthPrc < 20)
+		return 3;
+	return 4;
+}
+
 enum EHitReactionType
 {
 	EHRT_None,
@@ -279,17 +313,122 @@ enum EHitReactionType
 	EHRT_LightClose
 }
 
+function ModifyHitSeverityReactionFromDamage( out damageData : W3DamageAction ) //modSigns
+{
+	var healthPrc, damage, capsuleHeight : float;
+	var type : EHitReactionType;
+	var severityReduction : int;
+	var actorVictim : CActor;
+	var npcVictim : CNewNPC;
+	var attackAction : W3Action_Attack;
+	
+	if( damageData.IsDoTDamage() ) //don't modify DoT damage
+		return;
+		
+	attackAction = (W3Action_Attack)damageData;
+	
+	if( attackAction && ( attackAction.IsParried() || attackAction.IsCountered() || attackAction.WasDodged() ) )
+		return;
+	
+	actorVictim = (CActor)damageData.victim;
+	
+	if( !actorVictim )
+		return;
+		
+	npcVictim = (CNewNPC)actorVictim;
+	
+	if(npcVictim && npcVictim.IsFlying())
+	{
+		//theGame.witcherLog.AddMessage("NPC is flying");
+		return;
+	}
+
+	if(actorVictim.UsesEssence() && damageData.processedDmg.essenceDamage < 1)
+	{
+		damageData.processedDmg.essenceDamage = 0;
+		damageData.SetHitAnimationPlayType(EAHA_ForceNo);
+		return;
+	}
+	
+	if(actorVictim.UsesVitality() && damageData.processedDmg.vitalityDamage < 1)
+	{
+		damageData.processedDmg.vitalityDamage = 0;
+		damageData.SetHitAnimationPlayType(EAHA_ForceNo);
+		return;
+	}
+	
+	//make golems immune to hit stagger
+	if(actorVictim.HasAbility('mon_golem_base'))
+	{
+		damageData.SetHitReactionType(EHRT_None);
+		damageData.SetHitAnimationPlayType(EAHA_ForceNo);
+		return;
+	}
+	
+	capsuleHeight = actorVictim.GetCapsuleHeight();
+	//theGame.witcherLog.AddMessage("Capsule height = " + capsuleHeight); //modSigns: debug
+	
+	//don't modify melee hits that deal any damage at all - we have parry and counter for these
+	//exception: huge enemies
+	if(damageData.IsActionMelee() && capsuleHeight <= 2.0f)
+		return;
+		
+	//theGame.witcherLog.AddMessage("Attempt to modify hit severity for attacker " + ((CActor)damageData.attacker).GetDisplayName()); //modSigns: debug
+	
+	type = damageData.GetHitReactionType();
+	
+	if(actorVictim.UsesEssence())
+		damage = damageData.processedDmg.essenceDamage;
+	else
+		damage = damageData.processedDmg.vitalityDamage;
+	
+	healthPrc = damage / actorVictim.GetMaxHealth() * 100;
+	
+	healthPrc /= 1 + MaxF(0, capsuleHeight - 2); //same as multiplying the thresholds -> huge enemies have bigger reduction
+	
+	//theGame.witcherLog.AddMessage("Health prc = " + healthPrc); //modSigns: debug
+	
+	if( healthPrc < 1 )
+		severityReduction = 2;
+	else if( healthPrc < 3 )
+		severityReduction = 1;
+	
+	//bosses
+	/*if( actorVictim.HasTag( 'HideHealthBarModule' ) && healthPrc < 5 )
+	{
+		severityReduction += 1;
+	}*/
+	
+	//theGame.witcherLog.AddMessage("Severity = " + type); //modSigns: debug
+	type = ModifySeverity( type, severityReduction );
+	//theGame.witcherLog.AddMessage("Severity modified = " + type); //modSigns: debug
+	if(type != damageData.GetHitReactionType())
+		damageData.SetHitReactionType(type);
+	if(type == EHRT_None)
+		damageData.SetHitAnimationPlayType(EAHA_ForceNo);
+}
+
 function ModifyHitSeverityReaction(target : CActor, type : EHitReactionType) : EHitReactionType
 {
-	var severityReduction, severity : int;
+	return type; //because hit_severity is not actually used
+	//var severityReduction : int; //modSigns
+	//severityReduction = RoundMath(CalculateAttributeValue(target.GetAttributeValue('hit_severity')));
+	//return ModifySeverity( type, severityReduction ); //modSigns
+}		
+	
+function ModifySeverity(type : EHitReactionType, severityReduction : int) : EHitReactionType //modSigns
+{
+	var severity : int;
 
-	severityReduction = RoundMath(CalculateAttributeValue(target.GetAttributeValue('hit_severity')));
-	if(severityReduction == 0 || type == EHRT_Igni)
+	if(severityReduction == 0) //modSigns
 		return type;
 		
-	
 	switch(type)
 	{
+		//case EHRT_Igni :
+		case EHRT_Reflect :
+			return type;
+		case EHRT_Igni :
 		case EHRT_Heavy :
 			severity = 2;
 			break;
@@ -302,9 +441,7 @@ function ModifyHitSeverityReaction(target : CActor, type : EHitReactionType) : E
 			break;
 	}
 	
-	
-	severity -= severityReduction;
-	
+	severity = Clamp(severity - severityReduction, 0, 2);
 	
 	switch(severity)
 	{
@@ -525,7 +662,7 @@ function MonsterCategoryToCriticalChanceBonus(type : EMonsterCategory) : name
 		case MC_Necrophage :		return 'vsNecrophage_critical_hit_chance';
 		case MC_Relic :				return 'vsRelic_critical_hit_chance';
 		case MC_Specter :			return 'vsSpecter_critical_hit_chance';
-		case MC_Troll :				return 'vsTroll_critical_hit_chance';
+		case MC_Troll :				return 'vsOgre_critical_hit_chance'; //modSigns
 		case MC_Vampire :			return 'vsVampire_critical_hit_chance';
 		
 		default :				return '';
@@ -545,7 +682,7 @@ function MonsterCategoryToCriticalDamageBonus(type : EMonsterCategory) : name
 		case MC_Necrophage :		return 'vsNecrophage_critical_hit_damage_bonus';
 		case MC_Relic :				return 'vsRelic_critical_hit_damage_bonus';
 		case MC_Specter :			return 'vsSpecter_critical_hit_damage_bonus';
-		case MC_Troll :				return 'vsTroll_critical_hit_damage_bonus';
+		case MC_Troll :				return 'vsOgre_critical_hit_damage_bonus'; //modSigns
 		case MC_Vampire :			return 'vsVampire_critical_hit_damage_bonus';
 		
 		default :				return '';
@@ -565,7 +702,7 @@ function MonsterCategoryToResistReduction(type : EMonsterCategory) : name
 		case MC_Necrophage :		return 'vsNecrophage_resist_reduction';
 		case MC_Relic :				return 'vsRelic_resist_reduction';
 		case MC_Specter :			return 'vsSpecter_resist_reduction';
-		case MC_Troll :				return 'vsTroll_resist_reduction';
+		case MC_Troll :				return 'vsOgre_resist_reduction'; //modSigns
 		case MC_Vampire :			return 'vsVampire_resist_reduction';
 		
 		default :				return '';

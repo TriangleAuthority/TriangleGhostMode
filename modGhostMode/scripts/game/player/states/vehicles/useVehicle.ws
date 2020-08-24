@@ -491,6 +491,11 @@ statemachine class W3VehicleCombatManager extends CEntity
 	
 	default autoState = 'Null';
 	
+	//modSigns begin
+	protected var ON_HORSEBACK_STAMINA_MULTIPLIER : float;
+	default ON_HORSEBACK_STAMINA_MULTIPLIER = 3.0;
+	//modSigns end
+	
 	public function Setup( player : CR4Player, _vehicle : CVehicleComponent )
 	{
 		rider = player;
@@ -636,6 +641,17 @@ state Null in W3VehicleCombatManager
 			return false;
 		
 		
+		//modSigns begin
+		if(rider == GetWitcherPlayer() && !thePlayer.HasStaminaToUseAction(ESAT_UsableItem))
+		{
+			if(IsPressed(action))
+			{			
+				thePlayer.SoundEvent( "gui_ingame_low_stamina_warning" );
+			}
+			return false;
+		}
+		//modSigns end
+		
 		if( rider.inv.IsItemCrossbow(itemId) )
 		{
 			if ( rider.IsActionAllowed(EIAB_Crossbow) )
@@ -767,7 +783,16 @@ state Null in W3VehicleCombatManager
 		{
 			if ( thePlayer.IsWeaponHeld( 'steelsword' ) || thePlayer.IsWeaponHeld( 'silversword' ))
 			{
-				parent.GotoState( 'SwordAttack' );
+				//modSigns begin
+				if(rider == GetWitcherPlayer() && !thePlayer.HasStaminaToUseAction(ESAT_LightAttack,,,parent.ON_HORSEBACK_STAMINA_MULTIPLIER))
+				{
+					thePlayer.SoundEvent( "gui_ingame_low_stamina_warning" );
+				}
+				else
+				{
+					parent.GotoState( 'SwordAttack' );
+				}
+				//modSigns end
 			}
 			else
 			{
@@ -1122,6 +1147,12 @@ state SwordAttack in W3VehicleCombatManager
 	{
 		if( IsReleased( action ) && attackInProgress && ( rider.GetCurrentMeleeWeaponType() == PW_Steel || rider.GetCurrentMeleeWeaponType() == PW_Silver ) )
 		{
+			//modSigns begin
+			if(rider == GetWitcherPlayer())
+			{
+				thePlayer.DrainStamina(ESAT_LightAttack,,,,,parent.ON_HORSEBACK_STAMINA_MULTIPLIER);
+			}
+			//modSigns end
 			if( CanPerformAttack() )
 				FinishAttack();
 			else
@@ -1406,6 +1437,8 @@ state SwordAttack in W3VehicleCombatManager
 		var horse : CNewNPC;
 		var bloodTrailParam : CBloodTrailEffect;
 		var weaponId : SItemUniqueId;
+		var dmgInfos : array< SRawDamage >; //modSigns
+		var dmgSize, k : int; //modSigns
 		
 		horse = (CNewNPC)(rider.GetUsedVehicle());
 		damage = new W3Action_Attack in this;
@@ -1419,16 +1452,30 @@ state SwordAttack in W3VehicleCombatManager
 			
 			if( actor )
 			{
-				actor.DrainStamina(ESAT_FixedValue, 100, 1);
+				//actor.DrainStamina(ESAT_FixedValue, 100, 1); //modSigns: removed
+				//theGame.witcherLog.AddMessage("Attacking from horse: " + actor.GetDisplayName()); //modSigns: debug
 
 				damage.Init( rider, actor ,NULL, rider.GetInventory().GetItemFromSlot( 'r_weapon' ),'attack_heavy',rider.GetName(),EHRT_Heavy, false, false, 'attack_heavy', AST_Jab, ASD_NotSet, true, false, false, false );
-				if ( speed < 2 )
+				/*if ( speed < 2 )
 				{
 					damage.AddDamage( theGame.params.DAMAGE_NAME_DIRECT, baseDamage );
 				} else
 				{
 					damage.AddDamage( theGame.params.DAMAGE_NAME_DIRECT, baseDamage * MaxF( 1.1 + speed, 1 ) );
+				}*/ //modSigns: removed
+				//modSigns begin
+				if(speed > 0)
+				{
+					dmgSize = damage.GetDTs( dmgInfos );
+					for(k = 0; k < dmgSize; k += 1)
+					{
+						if(dmgInfos[k].dmgVal > 0)
+						{
+							damage.AddDamage(dmgInfos[k].dmgType, dmgInfos[k].dmgVal*ClampF(speed/4.0, 0.0f, 1.0f));
+						}
+					}
 				}
+				//modSigns end
 				if( speed >= 4.0 )
 					damage.AddEffectInfo( EET_KnockdownTypeApplicator );
 				damage.SetSoundAttackType('wpn_slice')	;
@@ -1490,6 +1537,8 @@ state CastSign in W3VehicleCombatManager
 	private var witcher : W3PlayerWitcher;
 	private var horse : CActor;
 	private var horseComp : W3HorseComponent;
+	private var ON_HORSEBACK_AXII_COST : float; default ON_HORSEBACK_AXII_COST = 50; //modSigns
+	private var staminaSpent : float; //modSigns
 
 	event OnEnterState( prevStateName : name )
 	{
@@ -1499,7 +1548,9 @@ state CastSign in W3VehicleCombatManager
 		horse = (CActor)(parent.vehicle.GetEntity());
 		horseComp = (W3HorseComponent)parent.vehicle;
 		
-		if( witcher )
+		staminaSpent = -1; //modSigns
+		
+		if( witcher && HasResourcesForAxii(ON_HORSEBACK_AXII_COST) ) //modSigns
 		{
 			StartCastingSign();
 		}
@@ -1508,6 +1559,35 @@ state CastSign in W3VehicleCombatManager
 			CastingSignFailed();
 		}
 	}
+	
+	//modSigns begin
+	function HasResourcesForAxii(cost : float) : bool
+	{
+		var ret : bool;
+		ret = (thePlayer.GetStat(BCS_Stamina) >= cost);
+		if(!ret && thePlayer.CanUseSkill(S_Perk_10))
+		{
+			ret = ((thePlayer.GetStat(BCS_Stamina) + thePlayer.GetStat(BCS_Focus)*thePlayer.GetStatMax(BCS_Stamina)/thePlayer.GetStatMax(BCS_Focus)) >= cost);
+		}
+		return ret;
+	}
+	
+	function DrainResourcesForAxii(cost : float)
+	{
+		var delay, savedStamina : float;
+		
+		savedStamina = thePlayer.GetStat(BCS_Stamina);
+		if(savedStamina > 0)
+		{
+			thePlayer.DrainStamina(ESAT_FixedValue, cost, 0.5);
+		}
+		if(cost > savedStamina && thePlayer.CanUseSkill(S_Perk_10))
+		{
+			thePlayer.DrainFocus((cost - savedStamina)*thePlayer.GetStatMax(BCS_Focus)/thePlayer.GetStatMax(BCS_Stamina));
+		}
+		staminaSpent += cost;
+	}
+	//modSigns end
 	
 	entry function StartCastingSign()
 	{
@@ -1523,13 +1603,17 @@ state CastSign in W3VehicleCombatManager
 			CastingSignFailed();
 		}
 		
+		staminaSpent = 0; //modSigns
+		
 		while( true )
 		{
-			SleepOneFrame();
+			//SleepOneFrame();
+			Sleep(0.1f); //modSigns: no need to do it each frame
 			
-			if( theInput.IsActionPressed( 'VehicleCastSign' )  )
+			if( theInput.IsActionPressed( 'VehicleCastSign' ) && HasResourcesForAxii(ON_HORSEBACK_AXII_COST*0.01) )
 			{
-				ApplyEffectOnHorse( 0.1 );
+				ApplyEffectOnHorse( 0.5 ); //modSigns
+				DrainResourcesForAxii(ON_HORSEBACK_AXII_COST*0.01); //modSigns
 			}
 			else
 			{
@@ -1562,6 +1646,11 @@ state CastSign in W3VehicleCombatManager
 		witcher.SetBehaviorVariable( 'IsCastingSign', 0.0 );
 		witcher.CastSignAbort();
 		witcher.SetCurrentlyCastSign( ST_None, NULL );
+		
+		//if( staminaSpent >= 0 && staminaSpent < ON_HORSEBACK_AXII_COST ) //modSigns
+		//{
+		//	DrainResourcesForAxii(ON_HORSEBACK_AXII_COST - staminaSpent);
+		//}
 		
 		if( horseComp.GetPanicPercent() > 0.05 )
 		{

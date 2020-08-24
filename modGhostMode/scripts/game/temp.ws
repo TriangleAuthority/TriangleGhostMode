@@ -5648,6 +5648,50 @@ exec function unenchantItem()
 	thePlayer.inv.UnenchantItem( swordId );
 }
 
+//modSigns begin
+exec function enchantSteel(n : name)
+{
+	var swordId : SItemUniqueId;
+	GetWitcherPlayer().GetItemEquippedOnSlot( EES_SteelSword, swordId );
+	thePlayer.inv.EnchantItem( swordId, n, getEnchamtmentStatName(n) );
+}
+
+exec function enchantSilver(n : name)
+{
+	var swordId : SItemUniqueId;
+	GetWitcherPlayer().GetItemEquippedOnSlot( EES_SilverSword, swordId );
+	thePlayer.inv.EnchantItem( swordId, n, getEnchamtmentStatName(n) );
+}
+
+exec function enchantArmor(n : name)
+{
+	var itemId : SItemUniqueId;
+	GetWitcherPlayer().GetItemEquippedOnSlot( EES_Armor, itemId );
+	thePlayer.inv.EnchantItem( itemId, n, getEnchamtmentStatName(n) );
+}
+
+exec function unenchantSteel()
+{
+	var swordId : SItemUniqueId;
+	GetWitcherPlayer().GetItemEquippedOnSlot( EES_SteelSword, swordId );
+	thePlayer.inv.UnenchantItem( swordId );
+}
+
+exec function unenchantSilver()
+{
+	var swordId : SItemUniqueId;
+	GetWitcherPlayer().GetItemEquippedOnSlot( EES_SilverSword, swordId );
+	thePlayer.inv.UnenchantItem( swordId );
+}
+
+exec function unenchantArmor()
+{
+	var itemId : SItemUniqueId;
+	GetWitcherPlayer().GetItemEquippedOnSlot( EES_Armor, itemId );
+	thePlayer.inv.UnenchantItem( itemId );
+}
+//modSigns end
+
 exec function playerkill(optional ignoreImmortalityMode : bool)
 {
 	thePlayer.Kill( 'Debug', ignoreImmortalityMode );
@@ -5724,6 +5768,15 @@ exec function additem(itemName : name, optional count : int, optional equip : bo
 	{
 		LogItems("exec function additem: Invalid item name <<"+itemName+">>, cannot add");
 	}
+}
+
+//modSigns
+exec function actionlogfact(id : string)
+{
+    if ( FactsDoesExist( id ) )
+		theGame.witcherLog.AddMessage("Fact value = " + FactsQuerySum(id));
+	else
+		theGame.witcherLog.AddMessage("Fact doesn't exists");
 }
 
 exec function printfact(id : string)
@@ -8965,82 +9018,63 @@ exec function addHairDLC3()
 
 exec function addLightArmors()
 {
-thePlayer.inv.RemoveAllItems();
-thePlayer.inv.AddAnItem('Light armor 01', 1);
-thePlayer.inv.AddAnItem('Light armor 02', 1);
-thePlayer.inv.AddAnItem('Light armor 03', 1);
-thePlayer.inv.AddAnItem('Light armor 04', 1);
-thePlayer.inv.AddAnItem('Light armor 06', 1);
-thePlayer.inv.AddAnItem('Light armor 07', 1);
-thePlayer.inv.AddAnItem('Light armor 08', 1);
-thePlayer.inv.AddAnItem('Light armor 09', 1);
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Starting Pants', 1);
-thePlayer.inv.AddAnItem('Starting Boots', 1);
-
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Long Steel Sword', 1);
-thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
+	thePlayer.inv.RemoveAllItems();
+	thePlayer.inv.AddAnItem('Light armor 01', 1);
+	thePlayer.inv.AddAnItem('Light armor 02', 1);
+	thePlayer.inv.AddAnItem('Light armor 03', 1);
+	thePlayer.inv.AddAnItem('Light armor 04', 1);
+	thePlayer.inv.AddAnItem('Light armor 06', 1);
+	thePlayer.inv.AddAnItem('Light armor 07', 1);
+	thePlayer.inv.AddAnItem('Light armor 08', 1);
+	thePlayer.inv.AddAnItem('Light armor 09', 1);
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Starting Pants', 1);
+	thePlayer.inv.AddAnItem('Starting Boots', 1);
+	
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Long Steel Sword', 1);
+	thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
 }
 
 exec function addMediumArmors()
 {
-thePlayer.inv.RemoveAllItems();
-thePlayer.inv.AddAnItem('Medium armor 01', 1);
-thePlayer.inv.AddAnItem('Medium armor 02', 1);
-thePlayer.inv.AddAnItem('Medium armor 03', 1);
-thePlayer.inv.AddAnItem('Medium armor 04', 1);
-thePlayer.inv.AddAnItem('Medium armor 05', 1);
-thePlayer.inv.AddAnItem('Medium armor 07', 1);
-thePlayer.inv.AddAnItem('Medium armor 10', 1);
-thePlayer.inv.AddAnItem('Medium armor 11', 1);
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Starting Pants', 1);
-thePlayer.inv.AddAnItem('Starting Boots', 1);
-
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Long Steel Sword', 1);
-thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
+	thePlayer.inv.RemoveAllItems();
+	thePlayer.inv.AddAnItem('Medium armor 01', 1);
+	thePlayer.inv.AddAnItem('Medium armor 02', 1);
+	thePlayer.inv.AddAnItem('Medium armor 03', 1);
+	thePlayer.inv.AddAnItem('Medium armor 04', 1);
+	thePlayer.inv.AddAnItem('Medium armor 05', 1);
+	thePlayer.inv.AddAnItem('Medium armor 07', 1);
+	thePlayer.inv.AddAnItem('Medium armor 10', 1);
+	thePlayer.inv.AddAnItem('Medium armor 11', 1);
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Starting Pants', 1);
+	thePlayer.inv.AddAnItem('Starting Boots', 1);
+	
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Long Steel Sword', 1);
+	thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
 }
 
 exec function addHeavyArmors()
 {
-thePlayer.inv.RemoveAllItems();
-thePlayer.inv.AddAnItem('Heavy armor 01', 1);
-thePlayer.inv.AddAnItem('Heavy armor 02', 1);
-thePlayer.inv.AddAnItem('Heavy armor 03', 1);
-thePlayer.inv.AddAnItem('Heavy armor 04', 1);
-thePlayer.inv.AddAnItem('Heavy armor 05', 1);
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Starting Pants', 1);
-thePlayer.inv.AddAnItem('Starting Boots', 1);
-
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Long Steel Sword', 1);
-thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
+	thePlayer.inv.RemoveAllItems();
+	thePlayer.inv.AddAnItem('Heavy armor 01', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 02', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 03', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 04', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 05', 1);
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Starting Pants', 1);
+	thePlayer.inv.AddAnItem('Starting Boots', 1);
+	
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Long Steel Sword', 1);
+	thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
 }
 
 exec function addBearArmors()
 {
-	var lm : W3PlayerWitcher;
-	var exp, prevLvl, currLvl : int;
-	
-	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
-	lm = GetWitcherPlayer();
-	prevLvl = lm.GetLevel();
-	currLvl = lm.GetLevel();
-		
-	while(currLvl < 60)
-	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false); 
-		currLvl = lm.GetLevel();
-		if(prevLvl == currLvl)
-			break;
-		prevLvl = currLvl;
-	}	
-	
-	thePlayer.inv.RemoveAllItems();
 	thePlayer.inv.AddAnItem('Bear Armor', 1);
 	thePlayer.inv.AddAnItem('Bear Armor 1', 1);
 	thePlayer.inv.AddAnItem('Bear Armor 2', 1);
@@ -9084,31 +9118,10 @@ exec function addBearArmors()
 	thePlayer.inv.AddAnItem('Dye Turquoise',10);
 	thePlayer.inv.AddAnItem('Dye White',10);
 	thePlayer.inv.AddAnItem('Dye Yellow',10);
-
-	EncumbranceBoy( 0 );
 }
 
 exec function addLynxArmors()
 {
-	var lm : W3PlayerWitcher;
-	var exp, prevLvl, currLvl : int;
-	
-	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
-	lm = GetWitcherPlayer();
-	prevLvl = lm.GetLevel();
-	currLvl = lm.GetLevel();
-		
-	while(currLvl < 60)
-	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false); 
-		currLvl = lm.GetLevel();
-		if(prevLvl == currLvl)
-			break;
-		prevLvl = currLvl;
-	}	
-
-	thePlayer.inv.RemoveAllItems();
 	thePlayer.inv.AddAnItem('Lynx Armor', 1);
 	thePlayer.inv.AddAnItem('Lynx Armor 1', 1);
 	thePlayer.inv.AddAnItem('Lynx Armor 2', 1);
@@ -9152,8 +9165,6 @@ exec function addLynxArmors()
 	thePlayer.inv.AddAnItem('Dye Turquoise',10);
 	thePlayer.inv.AddAnItem('Dye White',10);
 	thePlayer.inv.AddAnItem('Dye Yellow',10);
-	
-	EncumbranceBoy( 0 );
 }
 
 
@@ -9209,26 +9220,6 @@ exec function testappearance()
 
 exec function addGryphonArmors()
 {
-
-	var lm : W3PlayerWitcher;
-	var exp, prevLvl, currLvl : int;
-	
-	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
-	lm = GetWitcherPlayer();
-	prevLvl = lm.GetLevel();
-	currLvl = lm.GetLevel();
-		
-	while(currLvl < 60)
-	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false); 
-		currLvl = lm.GetLevel();
-		if(prevLvl == currLvl)
-			break;
-		prevLvl = currLvl;
-	}	
-
-	thePlayer.inv.RemoveAllItems();
 	thePlayer.inv.AddAnItem('Gryphon Armor', 1);
 	thePlayer.inv.AddAnItem('Gryphon Armor 1', 1);
 	thePlayer.inv.AddAnItem('Gryphon Armor 2', 1);
@@ -9273,231 +9264,189 @@ exec function addGryphonArmors()
 	thePlayer.inv.AddAnItem('Dye Turquoise',10);
 	thePlayer.inv.AddAnItem('Dye White',10);
 	thePlayer.inv.AddAnItem('Dye Yellow',10);
-
-	EncumbranceBoy( 0 );
 }
 
-exec function addViperArmors()
+exec function addStartingArmors()
 {
+	thePlayer.inv.AddAnItem('Starting Armor', 1);
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Starting Pants', 1);
+	thePlayer.inv.AddAnItem('Starting Boots', 1);
 
-	var lm : W3PlayerWitcher;
-	var exp, prevLvl, currLvl : int;
-	
-	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
-	lm = GetWitcherPlayer();
-	prevLvl = lm.GetLevel();
-	currLvl = lm.GetLevel();
-		
-	while(currLvl < 60)
-	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false); 
-		currLvl = lm.GetLevel();
-		if(prevLvl == currLvl)
-			break;
-		prevLvl = currLvl;
-	}	
-
-thePlayer.inv.RemoveAllItems();
-thePlayer.inv.AddAnItem('Starting Armor', 1);
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Starting Pants', 1);
-thePlayer.inv.AddAnItem('Starting Boots', 1);
-
-thePlayer.inv.AddAnItem('Long Steel Sword', 1);
-thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
-
-
-	thePlayer.inv.AddAnItem('Dye Default',10);
-	thePlayer.inv.AddAnItem('Dye Black',10);
-	thePlayer.inv.AddAnItem('Dye Blue',10);
-	thePlayer.inv.AddAnItem('Dye Brown',10);
-	thePlayer.inv.AddAnItem('Dye Gray',10);
-	thePlayer.inv.AddAnItem('Dye Green',10);
-	thePlayer.inv.AddAnItem('Dye Orange',10);
-	thePlayer.inv.AddAnItem('Dye Pink',10);
-	thePlayer.inv.AddAnItem('Dye Purple',10);
-	thePlayer.inv.AddAnItem('Dye Red',10);
-	thePlayer.inv.AddAnItem('Dye Turquoise',10);
-	thePlayer.inv.AddAnItem('Dye White',10);
-	thePlayer.inv.AddAnItem('Dye Yellow',10);
-
-	EncumbranceBoy( 0 );
+	thePlayer.inv.AddAnItem('Long Steel Sword', 1);
+	thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
 }
 
 exec function addRelicArmors()
 {
-thePlayer.inv.RemoveAllItems();
-thePlayer.inv.AddAnItem('Shiadhal armor', 1);
-thePlayer.inv.AddAnItem('Thyssen armor', 1);
-thePlayer.inv.AddAnItem('Oathbreaker armor', 1);
-thePlayer.inv.AddAnItem('Zireael armor', 1);
-thePlayer.inv.AddAnItem('Shadaal armor', 1);
-thePlayer.inv.AddAnItem('Relic Heavy 3 armor', 1);
-
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Long Steel Sword', 1);
-thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
+	thePlayer.inv.AddAnItem('Thyssen armor', 1);
+	thePlayer.inv.AddAnItem('Oathbreaker armor', 1);
+	thePlayer.inv.AddAnItem('Zireael armor', 1);
+	thePlayer.inv.AddAnItem('Shadaal armor', 1);
+	thePlayer.inv.AddAnItem('Shiadhal armor', 1);
+	thePlayer.inv.AddAnItem('Relic Heavy 3 armor', 1);
+	
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Long Steel Sword', 1);
+	thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
 }
 
 exec function addAllArmors()
 {
-thePlayer.inv.RemoveAllItems();
-thePlayer.inv.AddAnItem('Starting Armor', 1);
-thePlayer.inv.AddAnItem('Geralt Shirt', 1);
-thePlayer.inv.AddAnItem('Body torso 01', 1);
-thePlayer.inv.AddAnItem('Wolf Armor', 1);
-thePlayer.inv.AddAnItem('Wolf Armor 1', 1);
-thePlayer.inv.AddAnItem('Wolf Armor 2', 1);
-thePlayer.inv.AddAnItem('Wolf Armor 3', 1);
-thePlayer.inv.AddAnItem('Lynx Armor', 1);
-thePlayer.inv.AddAnItem('Lynx Armor 1', 1);
-thePlayer.inv.AddAnItem('Lynx Armor 2', 1);
-thePlayer.inv.AddAnItem('Lynx Armor 3', 1);
-thePlayer.inv.AddAnItem('Gryphon Armor', 1);
-thePlayer.inv.AddAnItem('Gryphon Armor 1', 1);
-thePlayer.inv.AddAnItem('Gryphon Armor 2', 1);
-thePlayer.inv.AddAnItem('Gryphon Armor 3', 1);
-thePlayer.inv.AddAnItem('Bear Armor', 1);
-thePlayer.inv.AddAnItem('Bear Armor 1', 1);
-thePlayer.inv.AddAnItem('Bear Armor 2', 1);
-thePlayer.inv.AddAnItem('Bear Armor 3', 1);
-thePlayer.inv.AddAnItem('Light armor 01', 1);
-thePlayer.inv.AddAnItem('Light armor 02', 1);
-thePlayer.inv.AddAnItem('Light armor 03', 1);
-thePlayer.inv.AddAnItem('Light armor 04', 1);
-thePlayer.inv.AddAnItem('Light armor 06', 1);
-thePlayer.inv.AddAnItem('Light armor 07', 1);
-thePlayer.inv.AddAnItem('Light armor 08', 1);
-thePlayer.inv.AddAnItem('Light armor 09', 1);
-thePlayer.inv.AddAnItem('Medium armor 01', 1);
-thePlayer.inv.AddAnItem('Medium armor 02', 1);
-thePlayer.inv.AddAnItem('Medium armor 03', 1);
-thePlayer.inv.AddAnItem('Medium armor 04', 1);
-thePlayer.inv.AddAnItem('Medium armor 05', 1);
-thePlayer.inv.AddAnItem('Medium armor 07', 1);
-thePlayer.inv.AddAnItem('Medium armor 10', 1);
-thePlayer.inv.AddAnItem('Medium armor 11', 1);
-thePlayer.inv.AddAnItem('Heavy armor 01', 1);
-thePlayer.inv.AddAnItem('Heavy armor 02', 1);
-thePlayer.inv.AddAnItem('Heavy armor 03', 1);
-thePlayer.inv.AddAnItem('Heavy armor 04', 1);
-thePlayer.inv.AddAnItem('Heavy armor 05', 1);
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Starting Pants', 1);
-thePlayer.inv.AddAnItem('Starting Boots', 1);
-thePlayer.inv.AddAnItem('Shiadhal armor', 1);
-thePlayer.inv.AddAnItem('Thyssen armor', 1);
-thePlayer.inv.AddAnItem('Oathbreaker armor', 1);
-thePlayer.inv.AddAnItem('Zireael armor', 1);
-thePlayer.inv.AddAnItem('Shadaal armor', 1);
-thePlayer.inv.AddAnItem('Relic Heavy 3 armor', 1);
-
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Long Steel Sword', 1);
-thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
+	thePlayer.inv.AddAnItem('Starting Armor', 1);
+	thePlayer.inv.AddAnItem('Geralt Shirt', 1);
+	thePlayer.inv.AddAnItem('Body torso 01', 1);
+	thePlayer.inv.AddAnItem('Wolf Armor', 1);
+	thePlayer.inv.AddAnItem('Wolf Armor 1', 1);
+	thePlayer.inv.AddAnItem('Wolf Armor 2', 1);
+	thePlayer.inv.AddAnItem('Wolf Armor 3', 1);
+	thePlayer.inv.AddAnItem('Lynx Armor', 1);
+	thePlayer.inv.AddAnItem('Lynx Armor 1', 1);
+	thePlayer.inv.AddAnItem('Lynx Armor 2', 1);
+	thePlayer.inv.AddAnItem('Lynx Armor 3', 1);
+	thePlayer.inv.AddAnItem('Gryphon Armor', 1);
+	thePlayer.inv.AddAnItem('Gryphon Armor 1', 1);
+	thePlayer.inv.AddAnItem('Gryphon Armor 2', 1);
+	thePlayer.inv.AddAnItem('Gryphon Armor 3', 1);
+	thePlayer.inv.AddAnItem('Bear Armor', 1);
+	thePlayer.inv.AddAnItem('Bear Armor 1', 1);
+	thePlayer.inv.AddAnItem('Bear Armor 2', 1);
+	thePlayer.inv.AddAnItem('Bear Armor 3', 1);
+	thePlayer.inv.AddAnItem('Light armor 01', 1);
+	thePlayer.inv.AddAnItem('Light armor 02', 1);
+	thePlayer.inv.AddAnItem('Light armor 03', 1);
+	thePlayer.inv.AddAnItem('Light armor 04', 1);
+	thePlayer.inv.AddAnItem('Light armor 06', 1);
+	thePlayer.inv.AddAnItem('Light armor 07', 1);
+	thePlayer.inv.AddAnItem('Light armor 08', 1);
+	thePlayer.inv.AddAnItem('Light armor 09', 1);
+	thePlayer.inv.AddAnItem('Medium armor 01', 1);
+	thePlayer.inv.AddAnItem('Medium armor 02', 1);
+	thePlayer.inv.AddAnItem('Medium armor 03', 1);
+	thePlayer.inv.AddAnItem('Medium armor 04', 1);
+	thePlayer.inv.AddAnItem('Medium armor 05', 1);
+	thePlayer.inv.AddAnItem('Medium armor 07', 1);
+	thePlayer.inv.AddAnItem('Medium armor 10', 1);
+	thePlayer.inv.AddAnItem('Medium armor 11', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 01', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 02', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 03', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 04', 1);
+	thePlayer.inv.AddAnItem('Heavy armor 05', 1);
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Starting Pants', 1);
+	thePlayer.inv.AddAnItem('Starting Boots', 1);
+	thePlayer.inv.AddAnItem('Shiadhal armor', 1);
+	thePlayer.inv.AddAnItem('Thyssen armor', 1);
+	thePlayer.inv.AddAnItem('Oathbreaker armor', 1);
+	thePlayer.inv.AddAnItem('Zireael armor', 1);
+	thePlayer.inv.AddAnItem('Shadaal armor', 1);
+	thePlayer.inv.AddAnItem('Relic Heavy 3 armor', 1);
+	
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Long Steel Sword', 1);
+	thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
 }
 
 exec function addCasualArmors()
 {
-thePlayer.inv.RemoveAllItems();
-thePlayer.inv.AddAnItem('Nilfgaardian Casual Suit 01', 1);
-thePlayer.inv.AddAnItem('Nilfgaardian Casual Suit 02', 1);
-thePlayer.inv.AddAnItem('Nilfgaardian Casual Suit 03', 1);
-thePlayer.inv.AddAnItem('Skellige Casual Suit 01', 1);
-thePlayer.inv.AddAnItem('Skellige Casual Suit 02', 1);
-thePlayer.inv.AddAnItem('Geralt Shirt', 1);
-thePlayer.inv.AddAnItem('Nilfgaardian Casual Pants', 1);
-thePlayer.inv.AddAnItem('Skellige Casual Pants 01', 1);
-thePlayer.inv.AddAnItem('Skellige Casual Pants 02', 1);
-thePlayer.inv.AddAnItem('Bath Towel Pants 01', 1);
-thePlayer.inv.AddAnItem('Skellige casual shoes', 1);
-thePlayer.inv.AddAnItem('Nilfgaardian casual shoes', 1);
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-
-thePlayer.inv.AddAnItem('Long Steel Sword', 1);
-thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
+	thePlayer.inv.AddAnItem('Nilfgaardian Casual Suit 01', 1);
+	thePlayer.inv.AddAnItem('Nilfgaardian Casual Suit 02', 1);
+	thePlayer.inv.AddAnItem('Nilfgaardian Casual Suit 03', 1);
+	thePlayer.inv.AddAnItem('Skellige Casual Suit 01', 1);
+	thePlayer.inv.AddAnItem('Skellige Casual Suit 02', 1);
+	thePlayer.inv.AddAnItem('Geralt Shirt', 1);
+	thePlayer.inv.AddAnItem('Nilfgaardian Casual Pants', 1);
+	thePlayer.inv.AddAnItem('Skellige Casual Pants 01', 1);
+	thePlayer.inv.AddAnItem('Skellige Casual Pants 02', 1);
+	thePlayer.inv.AddAnItem('Bath Towel Pants 01', 1);
+	thePlayer.inv.AddAnItem('Skellige casual shoes', 1);
+	thePlayer.inv.AddAnItem('Nilfgaardian casual shoes', 1);
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	
+	thePlayer.inv.AddAnItem('Long Steel Sword', 1);
+	thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
 }
 
-exec function addAllGloves(){
-
-thePlayer.inv.AddAnItem('Starting Gloves', 1);
-thePlayer.inv.AddAnItem('Lynx Gloves 1', 1);
-thePlayer.inv.AddAnItem('Lynx Gloves 2', 1);
-thePlayer.inv.AddAnItem('Gryphon Gloves 1', 1);
-thePlayer.inv.AddAnItem('Gryphon Gloves 2', 1);
-thePlayer.inv.AddAnItem('Bear Gloves 1', 1);
-thePlayer.inv.AddAnItem('Bear Gloves 2', 1);
-
-thePlayer.inv.AddAnItem('Gloves 01', 1);
-thePlayer.inv.AddAnItem('Gloves 02', 1);
-thePlayer.inv.AddAnItem('Gloves 03', 1);
-thePlayer.inv.AddAnItem('Gloves 04', 1);
-thePlayer.inv.AddAnItem('Heavy gloves 01', 1);
-thePlayer.inv.AddAnItem('Heavy gloves 02', 1);
-thePlayer.inv.AddAnItem('Heavy gloves 03', 1);
-thePlayer.inv.AddAnItem('Heavy gloves 04', 1);
+exec function addAllGloves()
+{
+	thePlayer.inv.AddAnItem('Starting Gloves', 1);
+	thePlayer.inv.AddAnItem('Lynx Gloves 1', 1);
+	thePlayer.inv.AddAnItem('Lynx Gloves 2', 1);
+	thePlayer.inv.AddAnItem('Gryphon Gloves 1', 1);
+	thePlayer.inv.AddAnItem('Gryphon Gloves 2', 1);
+	thePlayer.inv.AddAnItem('Bear Gloves 1', 1);
+	thePlayer.inv.AddAnItem('Bear Gloves 2', 1);
+	
+	thePlayer.inv.AddAnItem('Gloves 01', 1);
+	thePlayer.inv.AddAnItem('Gloves 02', 1);
+	thePlayer.inv.AddAnItem('Gloves 03', 1);
+	thePlayer.inv.AddAnItem('Gloves 04', 1);
+	thePlayer.inv.AddAnItem('Heavy gloves 01', 1);
+	thePlayer.inv.AddAnItem('Heavy gloves 02', 1);
+	thePlayer.inv.AddAnItem('Heavy gloves 03', 1);
+	thePlayer.inv.AddAnItem('Heavy gloves 04', 1);
 }
 
-exec function addAllBoots(){
-
-thePlayer.inv.AddAnItem('Gryphon Boots 1', 1);
-thePlayer.inv.AddAnItem('Gryphon Boots 2', 1);
-thePlayer.inv.AddAnItem('Lynx Boots 1', 1);
-thePlayer.inv.AddAnItem('Lynx Boots 2', 1);
-thePlayer.inv.AddAnItem('Bear Boots 1', 1);
-thePlayer.inv.AddAnItem('Bear Boots 2', 1);
-
-thePlayer.inv.AddAnItem('Boots 01', 1);
-thePlayer.inv.AddAnItem('Boots 02', 1);
-thePlayer.inv.AddAnItem('Boots 03', 1);
-thePlayer.inv.AddAnItem('Boots 04', 1);
-thePlayer.inv.AddAnItem('Boots 01 q2', 1);
-thePlayer.inv.AddAnItem('Heavy boots 01', 1);
-thePlayer.inv.AddAnItem('Heavy boots 02', 1);
-thePlayer.inv.AddAnItem('Heavy boots 03', 1);
-thePlayer.inv.AddAnItem('Heavy boots 04', 1);
-thePlayer.inv.AddAnItem('Heavy boots 05', 1);
-thePlayer.inv.AddAnItem('Heavy boots 06', 1);
-thePlayer.inv.AddAnItem('Heavy boots 07', 1);
-thePlayer.inv.AddAnItem('Heavy boots 08', 1);
-
-thePlayer.inv.AddAnItem('Nilfgaardian casual shoes', 1);
-thePlayer.inv.AddAnItem('Skellige casual shoes', 1);
+exec function addAllBoots()
+{
+	thePlayer.inv.AddAnItem('Gryphon Boots 1', 1);
+	thePlayer.inv.AddAnItem('Gryphon Boots 2', 1);
+	thePlayer.inv.AddAnItem('Lynx Boots 1', 1);
+	thePlayer.inv.AddAnItem('Lynx Boots 2', 1);
+	thePlayer.inv.AddAnItem('Bear Boots 1', 1);
+	thePlayer.inv.AddAnItem('Bear Boots 2', 1);
+	
+	thePlayer.inv.AddAnItem('Boots 01', 1);
+	thePlayer.inv.AddAnItem('Boots 02', 1);
+	thePlayer.inv.AddAnItem('Boots 03', 1);
+	thePlayer.inv.AddAnItem('Boots 04', 1);
+	thePlayer.inv.AddAnItem('Boots 01 q2', 1);
+	thePlayer.inv.AddAnItem('Heavy boots 01', 1);
+	thePlayer.inv.AddAnItem('Heavy boots 02', 1);
+	thePlayer.inv.AddAnItem('Heavy boots 03', 1);
+	thePlayer.inv.AddAnItem('Heavy boots 04', 1);
+	thePlayer.inv.AddAnItem('Heavy boots 05', 1);
+	thePlayer.inv.AddAnItem('Heavy boots 06', 1);
+	thePlayer.inv.AddAnItem('Heavy boots 07', 1);
+	thePlayer.inv.AddAnItem('Heavy boots 08', 1);
+	
+	thePlayer.inv.AddAnItem('Nilfgaardian casual shoes', 1);
+	thePlayer.inv.AddAnItem('Skellige casual shoes', 1);
 }
 
-exec function addAllPants(){
-
-thePlayer.inv.AddAnItem('Gryphon Pants 1', 1);
-thePlayer.inv.AddAnItem('Gryphon Pants 2', 1);
-thePlayer.inv.AddAnItem('Lynx Pants 1', 1);
-thePlayer.inv.AddAnItem('Lynx Pants 2', 1);
-thePlayer.inv.AddAnItem('Bear Pants 1', 1);
-thePlayer.inv.AddAnItem('Bear Pants 2', 1);
-
-thePlayer.inv.AddAnItem('Pants 01', 1);
-thePlayer.inv.AddAnItem('Pants 02', 1);
-thePlayer.inv.AddAnItem('Pants 03', 1);
-thePlayer.inv.AddAnItem('Pants 04', 1);
-thePlayer.inv.AddAnItem('Heavy pants 01', 1);
-thePlayer.inv.AddAnItem('Heavy pants 02', 1);
-thePlayer.inv.AddAnItem('Heavy pants 03', 1);
-thePlayer.inv.AddAnItem('Heavy pants 04', 1);
+exec function addAllPants()
+{
+	thePlayer.inv.AddAnItem('Gryphon Pants 1', 1);
+	thePlayer.inv.AddAnItem('Gryphon Pants 2', 1);
+	thePlayer.inv.AddAnItem('Lynx Pants 1', 1);
+	thePlayer.inv.AddAnItem('Lynx Pants 2', 1);
+	thePlayer.inv.AddAnItem('Bear Pants 1', 1);
+	thePlayer.inv.AddAnItem('Bear Pants 2', 1);
+	
+	thePlayer.inv.AddAnItem('Pants 01', 1);
+	thePlayer.inv.AddAnItem('Pants 02', 1);
+	thePlayer.inv.AddAnItem('Pants 03', 1);
+	thePlayer.inv.AddAnItem('Pants 04', 1);
+	thePlayer.inv.AddAnItem('Heavy pants 01', 1);
+	thePlayer.inv.AddAnItem('Heavy pants 02', 1);
+	thePlayer.inv.AddAnItem('Heavy pants 03', 1);
+	thePlayer.inv.AddAnItem('Heavy pants 04', 1);
 }
 
 exec function addHorseArmors()
 {
-thePlayer.inv.AddAnItem('i_01_hd__bags_lvl2', 1);
-thePlayer.inv.AddAnItem('i_01_hd__bags_lvl3', 1);
-thePlayer.inv.AddAnItem('c_01_hd__champron_lvl3', 1);
-thePlayer.inv.AddAnItem('c_01_hd__champron_lvl2', 1);
-thePlayer.inv.AddAnItem('s_01_hd__saddle_lvl1', 1);
-thePlayer.inv.AddAnItem('s_01_hd__saddle_lvl2', 1);
-thePlayer.inv.AddAnItem('s_01_hd__saddle_lvl3', 1);
-thePlayer.inv.AddAnItem('s_01_hd__saddle_lvl4', 1);
+	thePlayer.inv.AddAnItem('i_01_hd__bags_lvl2', 1);
+	thePlayer.inv.AddAnItem('i_01_hd__bags_lvl3', 1);
+	thePlayer.inv.AddAnItem('c_01_hd__champron_lvl3', 1);
+	thePlayer.inv.AddAnItem('c_01_hd__champron_lvl2', 1);
+	thePlayer.inv.AddAnItem('s_01_hd__saddle_lvl1', 1);
+	thePlayer.inv.AddAnItem('s_01_hd__saddle_lvl2', 1);
+	thePlayer.inv.AddAnItem('s_01_hd__saddle_lvl3', 1);
+	thePlayer.inv.AddAnItem('s_01_hd__saddle_lvl4', 1);
 }
 
-exec function AddAllThMaps ()
+exec function AddAllThMaps()
 {
 	thePlayer.inv.AddAnItem('th1003_map_lynx_upgrade1a', 1);
 	thePlayer.inv.AddAnItem('th1003_map_lynx_upgrade1b', 1);
@@ -9514,24 +9463,12 @@ exec function AddAllThMaps ()
 }
 
 exec function addAllSkills(val : int, optional level : int)
-{	
-	var lm : W3PlayerWitcher;
-	var i,exp,k : int;
+{
+	var k : int;
+
+	resetLevels_internal(level); //modSigns
 	
-	if(level < 1)
-	{
-		level = 1;
-	}
-	
-	lm = GetWitcherPlayer();
-	for(i=0; i<level; i+=1)
-	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false );
-	}
-	
-	
-	for ( k=0 ; k < val; k += 1 )
+	for(k = 0; k < val; k += 1)
 	{
 		thePlayer.AddSkill(S_Sword_1 );
 		thePlayer.AddSkill(S_Sword_2 );
@@ -12459,7 +12396,26 @@ exec function startContentEP2(contentName : string)
 	}
 }
 
+//modSigns
+exec function allsets()
+{
+	addset_internal(EIST_Lynx);
+	addset_internal(EIST_Gryphon);
+	addset_internal(EIST_Bear);
+	addset_internal(EIST_Wolf);
+	addset_internal(EIST_RedWolf);
+	addset_internal(EIST_Vampire);
+	addset_internal(EIST_Viper);
+}
+
+//modSigns
 exec function addset( set : EItemSetType, optional equip : bool, optional addExp : bool, optional clearGeralt : bool )
+{
+	addset_internal( set, equip, addExp, clearGeralt );
+}
+
+//modSigns
+function addset_internal( set : EItemSetType, optional equip : bool, optional addExp : bool, optional clearGeralt : bool )
 {
 	var witcher : W3PlayerWitcher;
 	
@@ -12468,7 +12424,7 @@ exec function addset( set : EItemSetType, optional equip : bool, optional addExp
 	
 	if( clearGeralt )
 	{
-		witcher.Debug_ClearCharacterDevelopment();
+		witcher.Debug_ClearCharacterDevelopment(true);
 	}
 	
 	if( addExp )
@@ -12519,7 +12475,7 @@ exec function addset( set : EItemSetType, optional equip : bool, optional addExp
 			}
 			break;
 		case EIST_Bear:
-			witcher.Debug_BearSetBonusQuenSkills();
+			//witcher.Debug_BearSetBonusQuenSkills();
 			if(equip)
 			{
 				witcher.AddAndEquipItem( 'Bear Armor 4' );
@@ -12540,12 +12496,12 @@ exec function addset( set : EItemSetType, optional equip : bool, optional addExp
 			}
 			break;
 		case EIST_Wolf:
-			witcher.inv.AddAnItem( 'Grapeshot 2' );
+			/*witcher.inv.AddAnItem( 'Grapeshot 2' );
 			witcher.inv.AddAnItem( 'Dancing Star 2' );
 			witcher.inv.AddAnItem( 'Hybrid Oil 2' );
 			witcher.inv.AddAnItem( 'Cursed Oil 2' );
 			witcher.inv.AddAnItem( 'Magical Oil 2' );
-			witcher.inv.AddAnItem( 'Specter Oil 2' );
+			witcher.inv.AddAnItem( 'Specter Oil 2' );*/
 			if(equip)
 			{
 				witcher.AddAndEquipItem( 'Wolf Armor 4' );
@@ -12566,9 +12522,9 @@ exec function addset( set : EItemSetType, optional equip : bool, optional addExp
 			}
 			break;
 		case EIST_RedWolf:
-			witcher.inv.AddAnItem( 'Black Blood 2' );
+			/*witcher.inv.AddAnItem( 'Black Blood 2' );
 			witcher.inv.AddAnItem( 'Swallow 2' );
-			witcher.inv.AddAnItem( 'Grapeshot 2' );
+			witcher.inv.AddAnItem( 'Grapeshot 2' );*/
 			if(equip)
 			{
 				witcher.AddAndEquipItem( 'Red Wolf Armor 1' );
@@ -12607,6 +12563,43 @@ exec function addset( set : EItemSetType, optional equip : bool, optional addExp
 				witcher.inv.AddAnItem( 'q702_vampire_mask' );
 				witcher.inv.AddAnItem( 'q702 vampire steel sword' );
 			}
+			break;
+		case EIST_Viper: //modSigns
+			if( equip )
+			{
+				witcher.AddAndEquipItem('EP1 Witcher Armor');
+				witcher.AddAndEquipItem('EP1 Witcher Boots');
+				witcher.AddAndEquipItem('EP1 Witcher Gloves');
+				witcher.AddAndEquipItem('EP1 Witcher Pants');
+				witcher.AddAndEquipItem('EP1 Viper School steel sword');
+				witcher.AddAndEquipItem('EP1 Viper School silver sword');
+			}
+			else
+			{
+				witcher.inv.AddAnItem('EP1 Witcher Armor');
+				witcher.inv.AddAnItem('EP1 Witcher Boots');
+				witcher.inv.AddAnItem('EP1 Witcher Gloves');
+				witcher.inv.AddAnItem('EP1 Witcher Pants');
+				witcher.inv.AddAnItem('EP1 Viper School steel sword');
+				witcher.inv.AddAnItem('EP1 Viper School silver sword');
+			}
+			break;
+		case EIST_KaerMorhen: //modSigns
+			if( equip )
+			{
+				witcher.AddAndEquipItem('Kaer Morhen Armor 3');
+				witcher.AddAndEquipItem('Kaer Morhen Pants 3');
+				witcher.AddAndEquipItem('Kaer Morhen Boots 3');
+				witcher.AddAndEquipItem('Kaer Morhen Gloves 3');
+			}
+			else
+			{
+				witcher.inv.AddAnItem('Kaer Morhen Armor 3');
+				witcher.inv.AddAnItem('Kaer Morhen Pants 3');
+				witcher.inv.AddAnItem('Kaer Morhen Boots 3');
+				witcher.inv.AddAnItem('Kaer Morhen Gloves 3');
+			}
+			break;
 	}
 }
 
@@ -12869,13 +12862,13 @@ exec function mutrev( optional unlockMutations : bool )
 	god_internal();
 }
 
-exec function addsetrec( n : EItemSetType, optional clearInv : bool )
+exec function addsetrec( n : EItemSetType, optional clearDev : bool ) //modSigns
 {
 	var w		: W3PlayerWitcher;
 	
 	w = GetWitcherPlayer();
 
-	if( clearInv )
+	if( clearDev )
 	{
 		w.Debug_ClearCharacterDevelopment();
 	}

@@ -19,9 +19,9 @@ class CBTTaskShoot extends CBTTaskPlayAnimationEventDecorator
 		InitializeCombatDataStorage();
 		if ( !((CHumanAICombatStorage)combatDataStorage).GetProjectile() )
 		{
-			return CreateProjectile();
+			return CreateProjectile() && super.IsAvailable(); //modSigns
 		}
-		return true;
+		return super.IsAvailable(); //modSigns
 	}
 	
 	private function CreateProjectile() : bool
@@ -107,6 +107,14 @@ class CBTTaskShoot extends CBTTaskPlayAnimationEventDecorator
 		collisionGroups.PushBack('Ragdoll');
 		collisionGroups.PushBack('Terrain');
 		collisionGroups.PushBack('Static');
+		//W3EE: collisions fix
+		collisionGroups.PushBack('Debris');
+		collisionGroups.PushBack('Destructible');
+		collisionGroups.PushBack('RigidBody');
+		collisionGroups.PushBack('Foliage');
+		collisionGroups.PushBack('Door');
+		collisionGroups.PushBack('Platforms');
+		collisionGroups.PushBack('Fence');
 		
 		if ( this.useCombatTarget )
 		{
@@ -206,6 +214,9 @@ class CBTTaskShootDef extends CBTTaskPlayAnimationEventDecoratorDef
 	
 	default dodgeable = true;
 	default useCombatTarget = true;
+	
+	default xmlStaminaCostName 					= 'light_action_stamina_cost'; //modSigns
+	default drainStaminaOnUse					= true; //modSigns
 	
 	public function Initialize()
 	{

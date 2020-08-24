@@ -11,23 +11,39 @@ class W3Potion_WhiteRaffardDecoction extends CBaseGameplayEffect
 {
 	default effectType = EET_WhiteRaffardDecoction;
 	
+	//modSigns begin
+	default dontAddAbilityOnTarget = true;
+	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
-		var vitality : float;
-		var vitAtt, min, max : SAbilityAttributeValue;
-		
 		super.OnEffectAdded(customParams);
 		
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, StatEnumToName(BCS_Vitality), min, max);
-		vitAtt = GetAttributeRandomizedValue(min, max);
-		vitality = target.GetStatMax(BCS_Vitality) * vitAtt.valueMultiplicative + vitAtt.valueAdditive;
-		target.GainStat(BCS_Vitality, vitality);
+		AddVitality();
 		
 		if(GetBuffLevel() == 3)
 		{
 			target.SetImmortalityMode(AIM_Invulnerable, AIC_WhiteRaffardsPotion);
 		}
 	}
+	
+	public function CumulateWith(effect: CBaseGameplayEffect)
+	{
+		super.CumulateWith(effect);
+		AddVitality();
+	}
+	
+	function AddVitality()
+	{
+		var vitality : float;
+		var vitAtt, min, max : SAbilityAttributeValue;
+		
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, StatEnumToName(BCS_Vitality), min, max);
+		vitAtt = GetAttributeRandomizedValue(min, max);
+		vitality = target.GetStatMax(BCS_Vitality) * vitAtt.valueMultiplicative + vitAtt.valueAdditive;
+		target.GainStat(BCS_Vitality, vitality);
+		target.RemoveAllBuffsOfType(EET_Bleeding); //modSigns
+	}
+	//modSigns end
 	
 	event OnEffectRemoved()
 	{

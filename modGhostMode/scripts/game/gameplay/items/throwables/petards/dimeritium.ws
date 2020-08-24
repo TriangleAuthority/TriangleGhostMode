@@ -25,6 +25,9 @@ class W3Dimeritium extends W3Petard
 		
 		
 		disabledFxDT = DISABLED_FX_CHECK_DELAY;
+		
+		//theGame.witcherLog.AddMessage("range impact = " + impactParams.range); //debug
+		//theGame.witcherLog.AddMessage("range loop = " + loopParams.range); //debug
 	}
 	
 	protected function ProcessMechanicalEffect(targets : array<CGameplayEntity>, isImpact : bool, optional dt : float)
@@ -35,15 +38,12 @@ class W3Dimeritium extends W3Petard
 	
 		super.ProcessMechanicalEffect(targets, isImpact, dt);
 			
-		
+		//stop Quen on player
 		witcher = GetWitcherPlayer();
 		if(targets.Contains(witcher) && witcher.GetCurrentlyCastSign() == ST_Quen)
 			witcher.CastSignAbort();
-			
 		
-		
-		
-		
+		//close wild hunt portal
 		for(i=0; i<targets.Size(); i+=1)
 		{
 			rift = (CRiftEntity)targets[i];
@@ -64,6 +64,7 @@ class W3Dimeritium extends W3Petard
 		
 		super.LoopFunction(dt);
 		
+		//just for playing affected fx
 		
 		disabledFxDT -= dt;
 		if( disabledFxDT > 0.f )
@@ -72,7 +73,7 @@ class W3Dimeritium extends W3Petard
 		}
 		disabledFxDT = DISABLED_FX_CHECK_DELAY;
 		
-		
+		/*
 		blocked = false;
 		for(i=0; i<targetsSinceLastCheck.Size(); i+=1)
 		{
@@ -105,7 +106,19 @@ class W3Dimeritium extends W3Petard
 			if(blocked)
 				break;
 		}	
+		*/
 		
+		//modSigns: check for dimeritium effect on target
+		blocked = false;
+		for(i = 0; i < targetsSinceLastCheck.Size(); i += 1)
+		{
+			actor = (CActor)targetsSinceLastCheck[i];
+			if(actor && actor.HasBuff(EET_DimeritiumEffect))
+			{
+				blocked = true;
+				break;
+			}
+		}		
 		
 		if(blocked)
 		{
@@ -130,8 +143,8 @@ class W3Dimeritium extends W3Petard
 		StopEffect(affectedFX);
 	}
 	
-	
-	protected function ProcessTargetOutOfArea(entity : CGameplayEntity)
+	//modSigns - uses parent code
+	/*protected function ProcessTargetOutOfArea(entity : CGameplayEntity)
 	{
 		var bombLevel, i : int;
 		var duration : float;
@@ -156,7 +169,7 @@ class W3Dimeritium extends W3Petard
 					}
 				}
 				
-				else if(bombLevel == 3)
+				else //if(bombLevel == 3) // modSigns - enable for all tiers
 				{
 					theGame.GetDefinitionsManager().GetItemAttributeValueNoRandom(itemName, true, 'duration_out_of_cloud', min, max);
 					duration = CalculateAttributeValue(min);
@@ -168,5 +181,5 @@ class W3Dimeritium extends W3Petard
 				}					
 			}
 		}
-	}
+	}*/
 }

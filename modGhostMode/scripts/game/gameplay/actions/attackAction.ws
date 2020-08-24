@@ -32,6 +32,7 @@ class W3Action_Attack extends W3DamageAction
 	{		
 		var player : CR4Player;
 		var powerStat : ECharacterPowerStats;
+		var weaponName : name; //modSigns
 	
 		if(attName == '' || !attackr)
 		{
@@ -45,6 +46,14 @@ class W3Action_Attack extends W3DamageAction
 		else
 			powerStat = CPS_AttackPower;
 		
+		
+		//modSigns: fix magic fists - make them deal ranged damage rather than melee damage
+		weaponName = ((CActor)attackr).GetInventory().GetItemName(weapId);
+		if(weaponName == 'fists_lightning' || weaponName == 'fists_fire')
+		{
+			isM = false;
+			isR = true;
+		}
 		
 		super.Initialize( attackr, victm, causr, src, hrt, powerStat, isM, isR, isW, isE, hitFX_, hitBackFX_, hitParriedFX_, hitBackParriedFX_);
 		
@@ -248,14 +257,14 @@ class W3Action_Attack extends W3DamageAction
 		var actorVictim, actorAttacker : CActor;
 		var monsterCategory : EMonsterCategory;
 		var tmpBool : bool;
-		var horse : CNewNPC;
+		//var horse : CNewNPC; //modSigns
 		var horseSpeed, holdRatio : float;
 		var i : int;
 		var dm : CDefinitionsManagerAccessor;
 		var attributes : array<name>;
-		var mutagenBuff : W3Mutagen28_Effect;
-		var playerAttacker : CPlayer;
-		var mutagen25 : W3Mutagen25_Effect;
+		//var mutagenBuff : W3Mutagen28_Effect; //modSigns
+		//var playerAttacker : CPlayer;
+		//var mutagen25 : W3Mutagen25_Effect;
 		
 
 		result = super.GetPowerStatValue();
@@ -267,20 +276,21 @@ class W3Action_Attack extends W3DamageAction
 			
 			theGame.GetMonsterParamsForActor( actorVictim, monsterCategory, temp, tmpBool, tmpBool, tmpBool);
 			
-			
+			//modSigns: oil ammo percentage
 			if( actorAttacker.GetInventory().ItemHasActiveOilApplied( weaponId, monsterCategory ) )
 			{
-				actorAttacker.GetInventory().GetItemAbilities(weaponId, attributes);
-				result += actorAttacker.GetInventory().GetItemAttributeValue(weaponId, MonsterCategoryToAttackPowerBonus(monsterCategory) );
+				result += actorAttacker.GetInventory().GetOilAttackPowerBonus( weaponId, monsterCategory );
+				//actorAttacker.GetInventory().GetItemAbilities(weaponId, attributes);
+				//result += actorAttacker.GetInventory().GetItemAttributeValue(weaponId, MonsterCategoryToAttackPowerBonus(monsterCategory) );
 			}
 			
 			
-			playerAttacker = (CPlayer)actorAttacker;
-			if(playerAttacker && playerAttacker.HasBuff(EET_Mutagen28))
-			{
-				mutagenBuff = (W3Mutagen28_Effect)playerAttacker.GetBuff(EET_Mutagen28);
-				result += mutagenBuff.GetMonsterDamageBonus(monsterCategory);				
-			}
+			//playerAttacker = (CPlayer)actorAttacker; //modSigns
+			//if(playerAttacker && playerAttacker.HasBuff(EET_Mutagen28))
+			//{
+			//	mutagenBuff = (W3Mutagen28_Effect)playerAttacker.GetBuff(EET_Mutagen28);
+			//	result += mutagenBuff.GetMonsterDamageBonus(monsterCategory);				
+			//}
 		}
 		
 		
@@ -289,47 +299,49 @@ class W3Action_Attack extends W3DamageAction
 		{		
 			
 			
+			//modSigns: exclude crossbow
+			if(IsActionMelee())
+			{
+				if(witcherAttacker.IsHeavyAttack(attackTypeName) && witcherAttacker.CanUseSkill(S_Sword_2))
+					result += witcherAttacker.GetSkillAttributeValue(S_Sword_2, PowerStatEnumToName(CPS_AttackPower), false, true);
+				
+				
+				if(witcherAttacker.IsHeavyAttack(attackTypeName) && witcherAttacker.CanUseSkill(S_Sword_s04))
+					result += witcherAttacker.GetSkillAttributeValue(S_Sword_s04, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s04);
+				
+				
+				if(witcherAttacker.IsLightAttack(attackTypeName) && witcherAttacker.CanUseSkill(S_Sword_s21))
+					result += witcherAttacker.GetSkillAttributeValue(S_Sword_s21, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s21);
+							
+				
+				//if(witcherAttacker.HasRecentlyCountered() && witcherAttacker.CanUseSkill(S_Sword_s11))
+				if(witcherAttacker.CanUseSkill(S_Sword_s11) && actorVictim && actorVictim.WasCountered())
+				{
+					result += witcherAttacker.GetSkillAttributeValue(S_Sword_s11, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s11);
+					//theGame.witcherLog.AddMessage("+counter AP buff");
+				}
+				
+				
+				//if(witcherAttacker.IsLightAttack(attackTypeName)) //modSigns
+				//{
+				//	result += witcherAttacker.GetAttributeValue('attack_power_fast_style');
+				//}
+				
+				
+				//if(witcherAttacker.IsHeavyAttack(attackTypeName)) //modSigns
+				//{
+				//	result += witcherAttacker.GetAttributeValue('attack_power_heavy_style');
+				//}
+			}
 			
-
-			
-			if(witcherAttacker.IsHeavyAttack(attackTypeName) && witcherAttacker.CanUseSkill(S_Sword_2))
-				result += witcherAttacker.GetSkillAttributeValue(S_Sword_2, PowerStatEnumToName(CPS_AttackPower), false, true);
-			
-			
-			if(witcherAttacker.IsHeavyAttack(attackTypeName) && witcherAttacker.CanUseSkill(S_Sword_s04))
-				result += witcherAttacker.GetSkillAttributeValue(S_Sword_s04, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s04);
-			
-			
-			if(witcherAttacker.IsLightAttack(attackTypeName) && witcherAttacker.CanUseSkill(S_Sword_s21))
-				result += witcherAttacker.GetSkillAttributeValue(S_Sword_s21, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s21);
-						
-			
-			if(witcherAttacker.inv.IsIdValid(crossbowId) && witcherAttacker.CanUseSkill(S_Perk_02))
+			/*if(witcherAttacker.inv.IsIdValid(crossbowId) && witcherAttacker.CanUseSkill(S_Perk_02))
 			{				
 				result += witcherAttacker.GetSkillAttributeValue(S_Perk_02, PowerStatEnumToName(CPS_AttackPower), false, true);
-			}
-
-			
-			if(witcherAttacker.HasRecentlyCountered() && witcherAttacker.CanUseSkill(S_Sword_s11))
-			{
-				result += witcherAttacker.GetSkillAttributeValue(S_Sword_s11, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s11);
-			}
-			
-			
-			if(witcherAttacker.IsLightAttack(attackTypeName))
-			{
-				result += witcherAttacker.GetAttributeValue('attack_power_fast_style');
-			}
-			
-			
-			if(witcherAttacker.IsHeavyAttack(attackTypeName))
-			{
-				result += witcherAttacker.GetAttributeValue('attack_power_heavy_style');
-			}
+			}*/ //modSigns
 		}
 			
 		
-		if(actorAttacker)
+		/*if(actorAttacker)
 		{
 			horse = (CNewNPC)(actorAttacker.GetUsedVehicle());
 			
@@ -344,7 +356,7 @@ class W3Action_Attack extends W3DamageAction
 					result += mutagen25.GetAttackPowerBonus();
 				}
 			}
-		}
+		}*/ //modSigns: reworked
 		
 		
 		dm = theGame.GetDefinitionsManager();

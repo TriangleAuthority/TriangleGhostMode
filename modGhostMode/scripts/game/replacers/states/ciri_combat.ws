@@ -1228,6 +1228,7 @@ state CombatSword in W3ReplacerCiri extends Combat
 		
 		parent.AddBuffImmunity_AllNegative( 'CiriSpecial', true );
 		parent.StopEffect('critical_poison');
+		parent.MakeInvulnerable(true); //Ciri special attack invulnerability fix
 		
 		if ( jumpBehindTarget )
 		{
@@ -1320,6 +1321,7 @@ state CombatSword in W3ReplacerCiri extends Combat
 		
 		Appear();
 		parent.RemoveBuffImmunity_AllNegative( 'CiriSpecial' );
+		parent.MakeInvulnerable(false); //Ciri special attack invulnerability fix
 	}
 	
 	
@@ -1421,6 +1423,7 @@ state CombatSword in W3ReplacerCiri extends Combat
 		parent.SetBehaviorVariable( 'isCompletingSpecialAttack', 0.f );	
 		parent.SetBehaviorVariable( 'isPerformingSpecialAttack', 0.f );
 		isCompletingSpecialAttack = false;
+		parent.RemoveBuffImmunity_AllNegative( 'CiriSpecial' ); //immunity cleanup fix
 		parent.MakeInvulnerable(false);
 		parent.SetBehaviorVariable( 'specialAttackInPlace', 1.f );
 		Appear();

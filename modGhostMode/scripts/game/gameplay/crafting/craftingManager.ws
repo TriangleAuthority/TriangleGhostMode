@@ -150,7 +150,7 @@ class W3CraftingManager
 	
 		if ( GetSchematic(schematic, schem) )
 		{
-			return craftMasterComp.CalculateCostOfCrafting( schem.craftedItemName );
+			return craftMasterComp.CalculateCostOfCrafting( schem );
 		}
 
 		return -1;

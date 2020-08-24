@@ -19,6 +19,12 @@ class W3Effect_CounterStrikeHit extends W3CriticalEffect
 	public function CacheSettings()
 	{
 		super.CacheSettings();
+		
+		//modSigns: added more actions to block
+		blockedActions.PushBack(EIAB_Roll);
+		blockedActions.PushBack(EIAB_RunAndSprint);
+		blockedActions.PushBack(EIAB_Dodge);
+		blockedActions.PushBack(EIAB_Sprint);
 	
 		blockedActions.PushBack(EIAB_Signs);
 		blockedActions.PushBack(EIAB_DrawWeapon);

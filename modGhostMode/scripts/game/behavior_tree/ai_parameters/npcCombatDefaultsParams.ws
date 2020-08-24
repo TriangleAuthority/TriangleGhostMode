@@ -59,9 +59,9 @@ class CAINpcCombatParams extends CAICombatParameters
 	
 	default reachabilityTolerance = 2.0f;
 	
-	default	hitterWeight 		= 20.0f; 
-	default	currentTargetWeight = 9.0f;  
-	default	playerWeight		= 100.0f; 
+	default	hitterWeight 		= 30.0f;		//modSigns
+	default	currentTargetWeight = 20.0f;		//modSigns
+	default	playerWeight		= 15.0f;		//modSigns
 	
 	
 	
@@ -69,7 +69,7 @@ class CAINpcCombatParams extends CAICombatParameters
 	default	distanceWeight 		= 30.0f;
 	default maxWeightedDistance = 30.0f;
 	
-	default monsterWeight		= 101.0f;
+	default monsterWeight		= 25.0f;		//modSigns
 		
 	
 	default	targetOnlyPlayer = false;

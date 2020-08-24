@@ -596,6 +596,7 @@ state Aiming in PlayerAiming
 	var speedMultCasuserId	: int;
 	function SloMo()
 	{
+		var min, max : SAbilityAttributeValue; //modSigns
 		var speed : float;
 		
 		if (!(parent.owner))
@@ -610,6 +611,15 @@ state Aiming in PlayerAiming
 		else if (parent.aimType == AT_Bomb && parent.owner.CanUseSkill(S_Alchemy_s09) )
 			speed -= CalculateAttributeValue( ((CR4Player)parent.owner).GetSkillAttributeValue(S_Alchemy_s09, 'slowdown_mod', false, true) ) * parent.owner.GetSkillLevel(S_Alchemy_s09);
 		
+		//modSigns
+		if( ((W3PlayerWitcher)parent.owner) && parent.aimType == AT_Bolt && GetWitcherPlayer().IsMutationActive( EPMT_Mutation9 ) && GetWitcherPlayer().GetStat(BCS_Toxicity, false) > 0 )
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation9', 'mut9_slowdown', min, max);
+			speed -= min.valueAdditive;
+		}
+		
+		//modSigns
+		speed = MaxF(speed, 0.1);
 		
 			theSound.SoundEvent( "gui_slowmo_start" );
 	

@@ -428,6 +428,13 @@ class CR4EnchantingMenu extends CR4MenuBase
 		
 		m_playerInventory.UnenchantItem(itemId);
 		enchantResult = m_playerInventory.EnchantItem( itemId, enchantmentName, getEnchamtmentStatName(enchantmentName) );
+		//modSigns: fix armor bonuses
+		//if( enchantmentName == 'Glyphword 2' || enchantmentName == 'Glyphword 3' || enchantmentName == 'Glyphword 4' )
+		//{
+		//	((W3PlayerAbilityManager)(GetWitcherPlayer().GetAbilityManager())).SetPerkArmorBonus(S_Perk_05);
+		//	((W3PlayerAbilityManager)(GetWitcherPlayer().GetAbilityManager())).SetPerkArmorBonus(S_Perk_06);
+		//	((W3PlayerAbilityManager)(GetWitcherPlayer().GetAbilityManager())).SetPerkArmorBonus(S_Perk_07);
+		//} //modSigns: reworked
 		
 		if (enchantResult)
 		{
@@ -467,8 +474,18 @@ class CR4EnchantingMenu extends CR4MenuBase
 	event  OnRemoveEnchantment(itemId : SItemUniqueId):void
 	{
 		var unenchantResult : bool;
+		//var hasArmorTypeEnchantment : bool; //modSigns
+		
+		//hasArmorTypeEnchantment = m_playerInventory.ItemHasAbility(itemId, 'Glyphword 2 _Stats') || m_playerInventory.ItemHasAbility(itemId, 'Glyphword 3 _Stats') || m_playerInventory.ItemHasAbility(itemId, 'Glyphword 4 _Stats');
 		
 		unenchantResult = m_playerInventory.UnenchantItem(itemId);
+		//modSigns: fix armor bonuses
+		//if( hasArmorTypeEnchantment )
+		//{
+		//	((W3PlayerAbilityManager)(GetWitcherPlayer().GetAbilityManager())).SetPerkArmorBonus(S_Perk_05);
+		//	((W3PlayerAbilityManager)(GetWitcherPlayer().GetAbilityManager())).SetPerkArmorBonus(S_Perk_06);
+		//	((W3PlayerAbilityManager)(GetWitcherPlayer().GetAbilityManager())).SetPerkArmorBonus(S_Perk_07);
+		//} //modSigns: reworked
 		if (unenchantResult)
 		{
 			theGame.GetGuiManager().ShowNotification(GetLocStringByKeyExt("panel_enchanting_notification_enchant_removed"));

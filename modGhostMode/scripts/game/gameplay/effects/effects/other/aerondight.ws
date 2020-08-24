@@ -5,213 +5,179 @@
 /***********************************************************************/
 class W3Effect_Aerondight extends CBaseGameplayEffect
 {
-	private var m_maxCount					: int;
-	private saved var m_currCount			: int;
-	private saved var m_wasDischarged		: bool;
-	private saved var m_aerondightTime		: float;
-	private var m_attribute					: SAbilityAttributeValue;
-	private var m_stacksPerLevel			: SAbilityAttributeValue;
-	private saved var m_currChargingEffect	: name;	
-	private var m_aerondightDelay			: float;
-	private saved var timeOfPause			: GameTime;
+	default effectType 				= EET_Aerondight;
+	default isPositive 				= true;
 	
-		default effectType 				= EET_Aerondight;
-		default isPositive 				= true;
+	//modSigns: redone
+	//now added at combat start and removed at combat end
+	//paused on sword sheathed, unpaused at sword unsheathed
 	
-	event OnUpdate( deltaTime : float )
+	//StopEffect won't work for some of the effects as well as StopAllEffects!
+	//Probably because there is more than one entity and PlayEffect
+	//propagates to children while StopEffect doesn't.
+	
+	//xml params
+	private var xml_crit_dmg_bonus			: float;
+	private var xml_dmg_boost_per_enemy		: float;
+	private var xml_collateral_dmg			: float;
+	private var xml_hitsToCharge			: int;
+	private var xml_stackDrainDelay			: float;
+	
+	//the sword
+	var aerondightEnt						: CItemEntity;
+	private var visualEffects				: array<name>;
+	var effectComponent						: W3AerondightFXComponent;
+	
+	//charge
+	private var currCount					: int;
+	private var drainDelay					: float;
+	
+	private function InitXmlValues()
 	{
-		m_aerondightTime -= deltaTime;
-		
-		if( m_aerondightTime <=0 && m_currCount > 0 )
-		{
-			m_currCount -= 1;
-			UpdateAerondightFX();
-			ResetAerondightTime();
-		}
-		
-		super.OnUpdate( deltaTime );
+		var defMgr : CDefinitionsManagerAccessor = theGame.GetDefinitionsManager();
+		var min, max : SAbilityAttributeValue;
+	
+		defMgr.GetAbilityAttributeValue(abilityName, 'crit_dmg_bonus', min, max);
+		xml_crit_dmg_bonus = CalculateAttributeValue(min);
+		defMgr.GetAbilityAttributeValue(abilityName, 'dmg_boost_per_enemy', min, max);
+		xml_dmg_boost_per_enemy = CalculateAttributeValue(min);
+		defMgr.GetAbilityAttributeValue(abilityName, 'collateral_dmg', min, max);
+		xml_collateral_dmg = CalculateAttributeValue(min);
+		defMgr.GetAbilityAttributeValue(abilityName, 'hitsToCharge', min, max);
+		xml_hitsToCharge = RoundMath(CalculateAttributeValue(min));
+		defMgr.GetAbilityAttributeValue(abilityName, 'stackDrainDelay', min, max);
+		xml_stackDrainDelay = CalculateAttributeValue(min);
 	}
 	
-	public function OnTimeUpdated(dt : float)
+	private function InitSword()
 	{
-		super.OnTimeUpdated( dt );
+		target.GetInventory().GetCurrentlyHeldSwordEntity(aerondightEnt);
+		effectComponent = (W3AerondightFXComponent)aerondightEnt.GetComponentByClassName('W3AerondightFXComponent');
+		visualEffects = effectComponent.m_visualEffects;
 	}
 	
 	event OnEffectAdded( customParams : W3BuffCustomParams )
 	{		
-		ResetAerondightTime();
-		
+		InitXmlValues();
+		InitSword();
+		ResetCharges();
 		super.OnEffectAdded( customParams );
-	}
-	
-	event OnEffectAddedPost()
-	{
-		LoadParams();		
-	
-		super.OnEffectAddedPost();
-	}
-	
-	private function LoadParams()
-	{
-		var val : SAbilityAttributeValue;
-		
-		m_attribute = target.GetAbilityAttributeValue( 'AerondightEffect', 'perm_dmg_boost' );
-		m_stacksPerLevel = target.GetAbilityAttributeValue( 'AerondightEffect', 'stacks_per_level' );
-		
-		val = target.GetAbilityAttributeValue( 'AerondightEffect', 'maxStacks' );
-		m_maxCount = (int) val.valueAdditive;
-		val = target.GetAbilityAttributeValue( 'AerondightEffect', 'stackDrainDelay' );
-		m_aerondightDelay = val.valueAdditive;
-	}
-	
-	public function OnLoad( t : CActor, eff : W3EffectManager )
-	{
-		super.OnLoad( t, eff );
-		
-		LoadParams();
-		ResetAerondightTime();
 	}
 	
 	event OnEffectRemoved()
 	{
 		StopAerondightEffects();
-		
 		super.OnEffectRemoved();
 	}
 		
-	public function IncreaseAerondightCharges( attackName : name )
+	event OnUpdate( deltaTime : float )
 	{
-		ResetAerondightTime();
+		drainDelay -= deltaTime;
 		
-		if( m_wasDischarged )
-		{
-			m_wasDischarged = false;
+		if(drainDelay <=0)
+			RemoveCharge();
+		
+		super.OnUpdate(deltaTime);
+	}
+	
+	public function RemoveCharge()
+	{
+		drainDelay = xml_stackDrainDelay;
+		
+		if(currCount <= 0)
 			return;
-		}
 		
-		if( m_currCount < m_maxCount && !m_wasDischarged )
-		{
-			if( target.IsLightAttack( attackName ) || thePlayer.GetCombatAction() == EBAT_SpecialAttack_Light )
-			{
-				m_currCount += 1;
-			}
-			else 
-			{
-				m_currCount = Min( m_maxCount, ( m_currCount + 2 ) );
-			}
-			
-			UpdateAerondightFX();
-		}
+		currCount -= 1;
+		if(currCount == 0)
+			StopAerondightEffects();
+		UpdateAerondightFX();
+	}
+	
+	public function AddCharge()
+	{
+		drainDelay = xml_stackDrainDelay;
+		
+		if(IsFullyCharged())
+			return;
+		
+		currCount += 1;
+		UpdateAerondightFX();
+	}
+	
+	public function ResetCharges()
+	{
+		currCount = 0;
+		StopAerondightEffects();
+		UpdateAerondightFX();
 	}
 	
 	private function UpdateAerondightFX()
 	{
-		var l_aerondightEnt			: CItemEntity;
-		var l_effectComponent		: W3AerondightFXComponent;
-		var l_newChargingEffect		: name;
-		
-		target.GetInventory().GetCurrentlyHeldSwordEntity( l_aerondightEnt );
-		
-		l_effectComponent = (W3AerondightFXComponent)l_aerondightEnt.GetComponentByClassName( 'W3AerondightFXComponent' );
-		
-		l_aerondightEnt.StopEffect( m_currChargingEffect );
-		
-		l_newChargingEffect = l_effectComponent.m_visualEffects[ m_currCount - 1 ];
-		
-		l_aerondightEnt.PlayEffect( l_newChargingEffect );
-		
-		m_currChargingEffect = l_newChargingEffect;
+		if(currCount > 0)
+		{
+			aerondightEnt.PlayEffect(visualEffects[Modded2Vanilla()]);
+			//theGame.witcherLog.AddMessage("currCount = " + currCount);
+			//theGame.witcherLog.AddMessage("Modded2Vanilla() = " + Modded2Vanilla());
+		}
+		else
+			aerondightEnt.PlayEffect(visualEffects[0]);
 	}
 	
-	public function DischargeAerondight() : bool
-	{	
-		var l_inv					: CInventoryComponent;
-		var l_sword					: SItemUniqueId;
-		var l_currPermDmgBoost		: float;
-		var l_newPermDmgBoost		: float;
-		var l_levelDiff				: int;
+	//vanilla aerondight has 10 charges max, so 10 different effects
+	//GM has less charges, need to recalculate
+	private function Modded2Vanilla() : int
+	{
+		return RoundMath(1.0 * currCount / xml_hitsToCharge * visualEffects.Size()) - 1;
+	}
 	
-		l_inv = target.GetInventory();
-		l_sword = l_inv.GetCurrentlyHeldSword();
+	public function StopAerondightEffects()
+	{
+		aerondightEnt.StopAllEffects();
+	}
+	
+	public function DischargeAerondight(optional excludeEnt : CGameplayEntity)
+	{
+		var ents					: array<CGameplayEntity>;
+		var i						: int;
+		var action					: W3DamageAction;
 		
-		l_levelDiff = ( target.GetLevel() - l_inv.GetItemLevel( l_sword ) ) + 1;
-		l_currPermDmgBoost = l_inv.GetItemModifierFloat( l_sword, 'PermDamageBoost' );
-		
-		
-		if( l_currPermDmgBoost < 0 )
+		//same as QuenImpulse
+		FindGameplayEntitiesInRange(ents, target, 3, 100, , FLAG_OnlyAliveActors + FLAG_ExcludeTarget + FLAG_Attitude_Hostile, target);
+		for(i = 0; i < ents.Size(); i += 1)
 		{
-			l_currPermDmgBoost = 0;
+			if(excludeEnt && ents[i] == excludeEnt)
+				continue;
+		
+			action = new W3DamageAction in theGame;
+			action.Initialize(target, ents[i], this, "AerondightDischarge", EHRT_Light, CPS_AttackPower, false, false, false, false);
+			action.SetCannotReturnDamage(true);
+			action.SetProcessBuffsIfNoDamage(true);
+			action.SetHitEffectAllTypes('hit_electric_quen');
+			action.AddDamage(theGame.params.DAMAGE_NAME_SHOCK, xml_collateral_dmg);
+			action.AddEffectInfo(EET_Stagger);
+			theGame.damageMgr.ProcessAction(action);
+			delete action;
 		}
-		
-		
-		if( l_levelDiff * m_stacksPerLevel.valueAdditive * m_attribute.valueAdditive <= l_currPermDmgBoost )
-		{
-			return false;
-		}
-		
-		m_wasDischarged = true;
-		
-		target.PlayEffect( 'lasting_shield_discharge' );
-		l_newPermDmgBoost = l_currPermDmgBoost + m_attribute.valueAdditive;
-		
-		
-		l_inv.SetItemModifierFloat( l_sword, 'PermDamageBoost', l_newPermDmgBoost );
-
-		ResetCurrentCount();
-
-		StopAerondightEffects();
-		
-		m_currChargingEffect = '';
-		
-		return true;
+	
+		target.PlayEffect('lasting_shield_discharge');
+		ResetCharges();
 	}
 	
 	protected function OnPaused()
 	{
 		super.OnPaused();
 		
-		SetShowOnHUD( false );
-		StopAerondightEffects();
-		timeOfPause = theGame.GetGameTime();
+		SetShowOnHUD(false);
+		ResetCharges();
 	}
 	
 	protected function OnResumed()
 	{
-		var l_aerondightEnt	: CItemEntity;
-		var secsInPause : float;
-		var stacksLost : int;
-		var timeInPause : GameTime;
-		
 		super.OnResumed();
 		
-		
-		timeInPause = theGame.GetGameTime() - timeOfPause;
-		secsInPause = ConvertGameSecondsToRealTimeSeconds( GameTimeToSeconds( timeInPause ) );
-		stacksLost = FloorF( secsInPause / m_aerondightDelay );
-		m_currCount = Max( 0, m_currCount - stacksLost );
-		OnUpdate( secsInPause - stacksLost * m_aerondightDelay );	
-		
-		if( target.GetInventory().ItemHasTag( target.GetInventory().GetCurrentlyHeldSword(), 'Aerondight' ) )
-		{
-			UpdateAerondightFX();
-			
-			SetShowOnHUD( true );
-			if( m_currChargingEffect != '' )
-			{
-				target.GetInventory().GetCurrentlyHeldSwordEntity( l_aerondightEnt );
-				l_aerondightEnt.PlayEffect( m_currChargingEffect );
-			}
-		}
-	}
-	
-	public function StopAerondightEffects()
-	{
-		var l_aerondightEnt			: CItemEntity;
-		
-		target.GetInventory().GetCurrentlyHeldSwordEntity( l_aerondightEnt );
-		
-		
-		l_aerondightEnt.StopEffect( m_currChargingEffect );
+		SetShowOnHUD(true);
+		InitSword();
+		ResetCharges();
 	}
 	
 	protected function StopTargetFX()
@@ -221,42 +187,52 @@ class W3Effect_Aerondight extends CBaseGameplayEffect
 		StopAerondightEffects();
 	}
 	
-	public function IsFullyCharged() : bool
+	public function PlayTrailEffect(bloodType : EBloodType)
 	{
-		return m_currCount == m_maxCount;
+		var trailFxName				: name;
+		
+		switch(bloodType)
+		{
+			case BT_Red : 
+				trailFxName = 'aerondight_blood_red';
+				break;
+			case BT_Yellow :
+				trailFxName = 'aerondight_blood_yellow';
+				break;
+			case BT_Black : 
+				trailFxName = 'aerondight_blood_black';
+				break;
+			case BT_Green :
+				trailFxName = 'aerondight_blood_green';
+				break;
+		}
+		aerondightEnt.PlayEffect(trailFxName);
 	}
 	
+	public function GetDamageBoost() : float
+	{
+		return ((W3PlayerWitcher)target).GetNumHostilesInRange() * xml_dmg_boost_per_enemy;
+	}
 	
+	public function GetCritPowerBoost() : float
+	{
+		return xml_crit_dmg_bonus;
+	}
+	
+	public function IsFullyCharged() : bool
+	{
+		return currCount == xml_hitsToCharge;
+	}
 	
 	public function GetCurrentCount() : int
 	{
-		return m_currCount;
+		return currCount;
 	}
 	
 	public function GetMaxCount() : int
 	{
-		return m_maxCount;
+		return xml_hitsToCharge;
 	}
-	
-	
-	
-	public function ResetAerondightTime()
-	{
-		m_aerondightTime = m_aerondightDelay;
-	}
-	
-	public function ReduceAerondightStacks()
-	{
-		m_currCount /= 2;
-		
-		StopAerondightEffects();
-	}
-	
-	public function ResetCurrentCount()
-	{
-		m_currCount = 0;
-	}
-	
 }
 
 class W3AerondightFXComponent extends CScriptedComponent

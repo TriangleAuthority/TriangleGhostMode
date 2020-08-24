@@ -99,6 +99,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			InitSkills();
 			
 			PrecacheModifierSkills();			
+			
+			alchemy19OptimizationDone = true; //modSigns
 		}
 		else
 		{
@@ -333,7 +335,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 		for(i=0; i<skills.Size(); i+=1)
 		{
-			if(skills[i].skillPath == ESP_Signs && skills[i].level < skills[i].maxLevel)
+			//modSigns: also need to check if skill is equipped - won't activate maxed out but unequipped skills!
+			if(skills[i].skillPath == ESP_Signs && (skills[i].level < skills[i].maxLevel || !IsSkillEquipped(skills[i].skillType)))
 			{
 				temp.skillType = skills[i].skillType;
 				temp.level = skills[i].level;
@@ -399,6 +402,11 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		points = GetStat(BCS_Focus);
 		
+		if(points < owner.GetStatMax(BCS_Focus)) //modSigns
+		{
+			owner.RemoveBuff(EET_Runeword11);
+		}
+		
 		if(points < 1 && owner.HasBuff(EET_BattleTrance))
 		{
 			owner.RemoveBuff(EET_BattleTrance);
@@ -409,20 +417,20 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				owner.AddEffectDefault(EET_BattleTrance, owner, "BattleTranceSkill");
 		}
 		
-		if ( points >= owner.GetStatMax(BCS_Focus) && owner.HasAbility('Runeword 8 _Stats', true) && !owner.HasBuff(EET_Runeword8) )
+		if ( (W3PlayerWitcher)owner && points >= owner.GetStatMax(BCS_Focus) && ((W3PlayerWitcher)owner).HasRunewordActive('Runeword 8 _Stats') && !owner.HasBuff(EET_Runeword8) ) //modSigns
 		{
 			owner.AddEffectDefault(EET_Runeword8, owner, "max focus");
 		}
 		
 		
-		if( points >= 1.f && GetWitcherPlayer().IsMutationActive( EPMT_Mutation5 ) && !owner.HasBuff( EET_Mutation5 ) && owner.IsInCombat() )
-		{
-			owner.AddEffectDefault( EET_Mutation5, owner, "", false );
-		}
-		else if( points < 1.f && GetWitcherPlayer().IsMutationActive( EPMT_Mutation5 ) )
-		{
-			owner.RemoveBuff( EET_Mutation5 );
-		}
+		//if( points >= 1.f && GetWitcherPlayer().IsMutationActive( EPMT_Mutation5 ) && !owner.HasBuff( EET_Mutation5 ) && owner.IsInCombat() )
+		//{
+		//	owner.AddEffectDefault( EET_Mutation5, owner, "", false );
+		//}
+		//else if( points < 1.f && GetWitcherPlayer().IsMutationActive( EPMT_Mutation5 ) )
+		//{
+		//	owner.RemoveBuff( EET_Mutation5 );
+		//} //modSigns: mutation changed
 	}
 	
 	
@@ -438,9 +446,22 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			owner.RemoveBuff(EET_LowHealth);
 			
 		if(vitPerc < 1.f)
-			ResetOverhealBonus();
+		{
+			//ResetOverhealBonus();
+			owner.RemoveBuff(EET_Runeword4); //modSigns
+		}
+		
+		//modSigns: new mutagen24 effect
+		if(owner.HasBuff(EET_Mutagen24))
+			((W3Mutagen24_Effect)owner.GetBuff(EET_Mutagen24)).ManageMutagen24Bonus();
 	
 		theTelemetry.SetCommonStatFlt(CS_VITALITY, GetStat(BCS_Vitality));
+	}
+	
+	protected final function OnStaminaChanged() //modSigns
+	{
+		if(owner.HasBuff(EET_Mutagen12))
+			((W3Mutagen12_Effect)owner.GetBuff(EET_Mutagen12)).ManageAdditionalBonus();
 	}
 	
 	protected final function OnAirChanged()
@@ -477,20 +498,21 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}	
 		
 		
-		if( tox == 0.f )
-		{
-			owner.RemoveBuff( EET_Mutation10 );
-		}
-		else if( (W3PlayerWitcher)owner && GetWitcherPlayer().IsMutationActive( EPMT_Mutation10 ) && !owner.HasBuff( EET_Mutation10 ) && owner.IsInCombat() )
-		{
-			enemies = GetWitcherPlayer().GetEnemies();
-			
-			
-			if( enemies.Size() > 0 )
-			{
-				owner.AddEffectDefault( EET_Mutation10, NULL, "Mutation 10" );
-			}
-		}
+		//if( tox == 0.f )
+		//{
+		//	owner.RemoveBuff( EET_Mutation10 );
+		//}
+		//else if( (W3PlayerWitcher)owner && GetWitcherPlayer().IsMutationActive( EPMT_Mutation10 ) && !owner.HasBuff( EET_Mutation10 ) && owner.IsInCombat() )
+		//{
+		//	//modSigns
+		//	//enemies = GetWitcherPlayer().GetEnemies();
+		//	
+		//	
+		//	//if( enemies.Size() > 0 )
+		//	//{
+		//		owner.AddEffectDefault( EET_Mutation10, NULL, "Mutation 10" );
+		//	//}
+		//} //modSigns: reworked
 			
 		theTelemetry.SetCommonStatFlt(CS_TOXICITY, GetStat(BCS_Toxicity));
 	}
@@ -621,6 +643,15 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		theGame.GetGamerProfile().CheckTrialOfGrasses();
 		
 		thePlayer.inv.SetItemStackable( item, false );
+		
+		if(thePlayer.HasBuff(EET_Mutagen09)) //modSigns
+			((W3Mutagen09_Effect)thePlayer.GetBuff(EET_Mutagen09)).RecalcM09Bonus();
+		
+		if(thePlayer.HasBuff(EET_Mutagen23)) //modSigns
+			((W3Mutagen23_Effect)thePlayer.GetBuff(EET_Mutagen23)).AddM23Abilities();
+		
+		if(thePlayer.HasBuff(EET_Mutagen25)) //modSigns
+			((W3Mutagen25_Effect)thePlayer.GetBuff(EET_Mutagen25)).RecalcM25Bonus();
 	}
 	
 	public final function OnSkillMutagenUnequipped( out item : SItemUniqueId, slot : EEquipmentSlots, prevColor : ESkillColor, optional dontMerge : bool )
@@ -658,6 +689,15 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		
 		theGame.GetGuiManager().IgnoreNewItemNotifications( false );
+		
+		if(thePlayer.HasBuff(EET_Mutagen09)) //modSigns
+			((W3Mutagen09_Effect)thePlayer.GetBuff(EET_Mutagen09)).RecalcM09Bonus();
+		
+		if(thePlayer.HasBuff(EET_Mutagen23)) //modSigns
+			((W3Mutagen23_Effect)thePlayer.GetBuff(EET_Mutagen23)).AddM23Abilities();
+		
+		if(thePlayer.HasBuff(EET_Mutagen25)) //modSigns
+			((W3Mutagen25_Effect)thePlayer.GetBuff(EET_Mutagen25)).RecalcM25Bonus();
 	}
 	
 	
@@ -680,6 +720,15 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		LinkUpdate(newColorA, oldColorA);
 		LinkUpdate(newColorB, oldColorB);
+		
+		if(thePlayer.HasBuff(EET_Mutagen09)) //modSigns
+			((W3Mutagen09_Effect)thePlayer.GetBuff(EET_Mutagen09)).RecalcM09Bonus();
+		
+		if(thePlayer.HasBuff(EET_Mutagen23)) //modSigns
+			((W3Mutagen23_Effect)thePlayer.GetBuff(EET_Mutagen23)).AddM23Abilities();
+		
+		if(thePlayer.HasBuff(EET_Mutagen25)) //modSigns
+			((W3Mutagen25_Effect)thePlayer.GetBuff(EET_Mutagen25)).RecalcM25Bonus();
 	}
 	
 	private final function Alchemy19OptimizationRetro()
@@ -708,7 +757,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	}
 	
 	
-	
 	private final function MutagensSyngergyBonusUpdate( skillGroupID : int, skillLevel : int )
 	{
 		var i : int;
@@ -734,6 +782,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var mutagenItemID : SItemUniqueId;
 		var delta : int;
 		
+		//theGame.witcherLog.AddMessage("Synergy bonus update test.");
+		
 		if( skillGroupID < 0 )
 		{
 			return;
@@ -746,11 +796,15 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		{			
 			current.abilityName = GetMutagenBonusAbilityName( mutagenItemID );
 			
+			//theGame.witcherLog.AddMessage("Current mutagen ability name: " + current.abilityName);
+			
 			if( skillLevel > 0 )
 			{
 				color = owner.GetInventory().GetSkillMutagenColor( mutagenItemID );
-				current.count = skillLevel * GetSkillGroupColorCount(color, skillGroupID);
+				current.count = skillLevel * (1 + GetSkillGroupColorCount(color, skillGroupID)); //modSigns: count the mutagen itself
 			}
+			
+			//theGame.witcherLog.AddMessage("Current mutagen ability count: " + current.count);
 		}
 		
 		
@@ -972,7 +1026,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	private final function UpdateLinkBonus(a : ESkillColor, added : bool)
 	{	
-		return;
+		return; //I like this one. Anyone is surprised that TW3 scripts are an unmaintainable mess?
 		if(added)
 		{
 			if(a == SC_Blue)
@@ -1031,6 +1085,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var reductionCounter : int;
 		var ability, attributeName : name;
 		var ret, costReduction : SAbilityAttributeValue;
+		var cost : float; //modSigns
 	
 		ability = '';
 		
@@ -1053,7 +1108,23 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			ret -= costReduction;
 		}
 		
-		return CalculateAttributeValue(ret);
+		cost = CalculateAttributeValue(ret);
+		
+		//modSigns
+		if((W3PlayerWitcher)owner && IsSkillSign(skill))
+		{
+			gmModSignStaminaCost(cost);
+			cost *= 1 + CalcSignCastingArmorPenalty(); //armor penalty
+			if(CanUseSkill(S_Perk_06)) //griffin school perk - reduce sign skills cost
+				cost *= 1 - ((W3PlayerWitcher)owner).GetPerk6StaminaCostReduction();
+			if(owner.HasBuff(EET_GryphonSetBonus)) //griffin set tier1 bonus
+				cost *= 1 - ((W3PlayerWitcher)owner).GetGryphonSetTier1Bonus();
+			cost *= 1 + GetGlyphword234Mod(ESAT_Ability, true); //glyphwords
+		}
+		
+		cost = ClampF(cost, 0, 100); //modSigns
+		
+		return cost;
 	}
 	
 	public final function GetSkillAttributeValue(abilityName: name, attributeName : name, addBaseCharAttribute : bool, addSkillModsAttribute : bool) : SAbilityAttributeValue
@@ -1114,7 +1185,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	{
 		var attributeName : name;
 		var skill : ESkill;
-		var blizzard : W3Potion_Blizzard;
+		//var blizzard : W3Potion_Blizzard;
 	
 		super.GetStaminaActionCostInternal(action, isPerSec, cost, delay, abilityName);
 		
@@ -1131,15 +1202,15 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			cost += GetSkillAttributeValue(SkillEnumToName(S_Sword_1), attributeName, false, true);
 		else if(action == ESAT_HeavyAttack && CanUseSkill(S_Sword_2) )
 			cost += GetSkillAttributeValue(SkillEnumToName(S_Sword_2), attributeName, false, true);
-		else if ((action == ESAT_Sprint || action == ESAT_Jump) && thePlayer.HasBuff(EET_Mutagen24) && !thePlayer.IsInCombat())
+		/*else if ((action == ESAT_Sprint || action == ESAT_Jump) && thePlayer.HasBuff(EET_Mutagen24) && !thePlayer.IsInCombat())
 		{
 			cost.valueAdditive = 0;
 			cost.valueBase = 0;
 			cost.valueMultiplicative = 0;
-		}
+		}*/ //modSigns: moved to another place
 		
 		
-		if( thePlayer.HasBuff( EET_Blizzard ) && owner == GetWitcherPlayer() && GetWitcherPlayer().GetPotionBuffLevel( EET_Blizzard ) == 3 && thePlayer.HasBuff( EET_BattleTrance ) )
+		/*if( thePlayer.HasBuff( EET_Blizzard ) && owner == GetWitcherPlayer() && GetWitcherPlayer().GetPotionBuffLevel( EET_Blizzard ) == 3 && thePlayer.HasBuff( EET_BattleTrance ) )
 		{
 			blizzard = ( W3Potion_Blizzard )thePlayer.GetBuff( EET_Blizzard );
 			if( blizzard.IsSlowMoActive() )
@@ -1148,8 +1219,244 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				cost.valueBase = 0;
 				cost.valueMultiplicative = 0;
 			}
-		}
+		}*/ //modSigns: moved to another place
 	}
+	
+	//modSigns
+	public function GetStaminaActionCost(action : EStaminaActionType, out cost : float, out delay : float, optional fixedCost : float, optional fixedDelay : float, optional abilityName : name, optional dt : float, optional costMult : float)
+	{
+		var blizzard : W3Potion_Blizzard;
+		var bonus, penalty : float;
+		
+		//if ((action == ESAT_Sprint || action == ESAT_Jump) && thePlayer.HasBuff(EET_Mutagen24) && !thePlayer.IsInCombat())
+		//{
+		//	cost = 0;
+		//	return;
+		//} //modSigns: changed
+		
+		if( thePlayer.HasBuff( EET_Blizzard ) && owner == GetWitcherPlayer() && GetWitcherPlayer().GetPotionBuffLevel( EET_Blizzard ) == 3 && thePlayer.GetStat(BCS_Focus) >= 3 )
+		{
+			blizzard = ( W3Potion_Blizzard )thePlayer.GetBuff( EET_Blizzard );
+			if( blizzard.IsSlowMoActive() )
+			{
+				cost = 0;
+				return;
+			}
+		}
+		
+		super.GetStaminaActionCost(action, cost, delay, fixedCost, fixedDelay, abilityName, dt, costMult);
+		
+		//modSigns
+		if((W3PlayerWitcher)owner)
+		{
+			//signs (also see GetSkillStaminaUseCost)
+			if(action == ESAT_Ability && IsSkillSign(SkillNameToEnum(abilityName)))
+			{
+				gmModSignStaminaCost(cost);
+				cost *= 1 + CalcSignCastingArmorPenalty(); //armor penalty
+				if(CanUseSkill(S_Perk_06)) //griffin school perk - reduce sign skills cost
+					cost *= 1 - GetWitcherPlayer().GetPerk6StaminaCostReduction();
+				if(owner.HasBuff(EET_GryphonSetBonus)) //griffin set tier1 bonus
+					cost *= 1 - ((W3PlayerWitcher)owner).GetGryphonSetTier1Bonus();
+				cost *= 1 + GetGlyphword234Mod(ESAT_Ability, true); //glyphwords
+			}
+			//everything else
+			else if(IsActionMelee(action))
+			{
+				if(action == ESAT_Sprint || action == ESAT_Jump)
+					gmModAgilityStaminaCost(cost);
+				else
+					gmModMeleeStaminaCost(cost);
+				bonus = GetPerk10Bonus();
+				//theGame.witcherLog.AddMessage("Perk10 cost bonus = " + bonus);
+				if(action != ESAT_UsableItem)
+					penalty = CalcStaminaArmorPenalty(action) + CalcStaminaOverEncumbrancePenalty(action);
+				//theGame.witcherLog.AddMessage("Cost penalty = " + penalty);
+				cost *= (1 - bonus); //Perk10 bonus
+				cost *= (1 + penalty); //armor and overencumbrance penalties
+				if(owner.HasBuff(EET_GryphonSetBonus)) //griffin set tier1 bonus
+					cost *= 1 - ((W3PlayerWitcher)owner).GetGryphonSetTier1Bonus();
+				if(owner.HasBuff(EET_Mutagen25)) //Mutagen25 bonus
+					cost *= 1 - ((W3Mutagen25_Effect)owner.GetBuff(EET_Mutagen25)).GetM25Bonus();
+				if(owner.HasBuff(EET_Mutagen04)) //Mutagen04 penalty
+					cost *= 1 + CalcMutagen04Penalty(action);
+				cost *= 1 + GetGlyphword234Mod(action); //glyphwords
+				if(action == ESAT_Parry)
+					cost *= 1 - GetDeflectionBonus();
+				//theGame.witcherLog.AddMessage("Melee action stamina cost = " + cost);
+				//theGame.witcherLog.AddMessage("Action = " + action);
+			}
+		}
+		cost = ClampF(cost, 0, 100); //modSigns
+	}
+	
+	//modSigns: positive value means penalty, negative value means bonus
+	private function GetGlyphword234Mod(action : EStaminaActionType, optional isSign : bool) : float
+	{
+		var min, max : SAbilityAttributeValue;
+		var modifier : float;
+	
+		if(GetWitcherPlayer().HasGlyphwordActive('Glyphword 2 _Stats')) //levity
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 2 _Stats', 'glyphword2_mod', min, max);
+			modifier = CalculateAttributeValue(min);
+			if(action == ESAT_Ability && isSign)
+				return modifier; //penalty for casting signs
+			else if(IsActionMelee(action))
+				return -modifier; //bonus for melee actions
+		}
+		else if(GetWitcherPlayer().HasGlyphwordActive('Glyphword 3 _Stats')) //balance
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 3 _Stats', 'glyphword3_mod', min, max);
+			modifier = CalculateAttributeValue(min);
+			if(action == ESAT_Ability && isSign)
+				return -modifier; //bonus for casting signs
+			else if(IsActionMelee(action))
+				return modifier; //penalty for melee actions
+		}
+		else if(GetWitcherPlayer().HasGlyphwordActive('Glyphword 4 _Stats')) //heft
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 4 _Stats', 'glyphword4_mod', min, max);
+			modifier = CalculateAttributeValue(min);
+			if(action == ESAT_LightAttack || action == ESAT_HeavyAttack || action == ESAT_Counterattack)
+				return modifier; //penalty for damaging melee actions
+		}
+		
+		return 0.f;
+	}
+	
+	//modSigns
+	private function IsActionMelee(action : EStaminaActionType) : bool
+	{
+		if( action == ESAT_LightAttack || action == ESAT_HeavyAttack ||
+			action == ESAT_UsableItem ||
+			action == ESAT_Parry || action == ESAT_Counterattack ||
+			action == ESAT_Dodge || action == ESAT_Roll || action == ESAT_Evade ||
+			action == ESAT_Sprint || action == ESAT_Jump )
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	//modSigns
+	private function CalcSignCastingArmorPenalty() : float
+	{
+		var armorPieces : array<int>;
+		var witcher : W3PlayerWitcher;
+		
+		witcher = GetWitcherPlayer();
+		
+		if(owner != witcher)
+			return 0;
+		
+		witcher.inv.CountArmorPieces(armorPieces);
+		return armorPieces[2] * 0.125; // light - 0%, medium - 0%, heavy - 50% (4 pieces)
+	}
+	
+	//modSigns
+	private function GetPerk10Bonus() : float
+	{
+		var focus : float;
+		var ability : SAbilityAttributeValue;
+		
+		if(!((W3PlayerWitcher)owner))
+			return 0;
+	
+		if(thePlayer.CanUseSkill(S_Perk_10))
+		{
+			focus = FloorF(owner.GetStat(BCS_Focus));
+			if(focus > 0)
+			{
+				ability = ((W3PlayerWitcher)owner).GetSkillAttributeValue(S_Perk_10, 'stamina_cost_reduction', false, true);
+				//theGame.witcherLog.AddMessage("Perk10 bonus = " + (focus * ability.valueAdditive));
+				return focus * ability.valueAdditive;
+			}
+		}
+		
+		return 0.0f;
+	}
+	
+	//modSigns
+	private function GetDeflectionBonus() : float
+	{
+		if(thePlayer.CanUseSkill(S_Sword_s10) && thePlayer.GetSkillLevel(S_Sword_s10) >= 3)
+		{
+			if(((W3PlayerWitcher)owner).GetNumHostilesInRange() > 1)
+				return CalculateAttributeValue(((W3PlayerWitcher)owner).GetSkillAttributeValue(S_Sword_s10, 'parry_cost_decrease', false, false));
+		}
+		return 0.0f;
+	}
+	
+	//modSigns
+	private function CalcStaminaArmorPenalty(action : EStaminaActionType) : float
+	{
+		var armorPieces : array<int>;
+		var witcher : W3PlayerWitcher;
+		
+		witcher = GetWitcherPlayer();
+		
+		if(owner != witcher)
+			return 0;
+		
+		witcher.inv.CountArmorPieces(armorPieces);
+		
+		/*switch(action)
+		{
+			case ESAT_Roll:
+				return armorPieces[1] * 2.50 + armorPieces[2] * 5.00; //light - 0, medium - 10, heavy - 20 (4 pieces)
+			case ESAT_Sprint:
+				return armorPieces[1] * 1.25 + armorPieces[2] * 3.75; //light - 0, medium -  5, heavy - 15 (4 pieces)
+			case ESAT_Jump:
+				return armorPieces[1] * 1.25 + armorPieces[2] * 3.75; //light - 0, medium -  5, heavy - 15 (4 pieces)
+			case ESAT_Dodge:
+				return                         armorPieces[2] * 2.50; //light - 0, medium -  0, heavy - 10 (4 pieces)
+			default:
+				return 0;
+		}
+		return 0;*/
+		
+		//return armorPieces[1] * 0.125 + armorPieces[2] * 0.25 - (4 - armorPieces[0] - armorPieces[1] - armorPieces[2]) * 0.0625; // light - 0%, medium - 50%, heavy - 100% (4 pieces)
+		// no armor: -50%, light: -30%, medium - 0%, heavy - 50% (4 pieces)
+		return -armorPieces[0] * 0.075 + armorPieces[2] * 0.125 - (4 - armorPieces[0] - armorPieces[1] - armorPieces[2]) * 0.125;
+	}
+	
+	//modSigns
+	private function CalcStaminaOverEncumbrancePenalty(action : EStaminaActionType) : float
+	{
+		var tmpBool : bool;
+		var witcher : W3PlayerWitcher;
+		
+		witcher = GetWitcherPlayer();
+		
+		if(owner != witcher)
+			return 0;
+		
+		if(witcher.HasBuff(EET_OverEncumbered))
+		{
+			return ClampF(witcher.GetEncumbrance()/witcher.GetMaxRunEncumbrance(tmpBool) - 1, 0, 1);// * 100;
+		}
+		
+		return 0;
+	}
+	
+	//modSigns
+	private function CalcMutagen04Penalty(action : EStaminaActionType) : float
+	{
+		var witcher : W3PlayerWitcher;
+		
+		witcher = GetWitcherPlayer();
+		
+		if(owner != witcher || !witcher.HasBuff(EET_Mutagen04))
+			return 0;
+		
+		if(action == ESAT_LightAttack || action == ESAT_HeavyAttack || action == ESAT_Counterattack)
+			return ((W3Mutagen04_Effect)witcher.GetBuff(EET_Mutagen04)).GetAttackCostIncrease();
+		
+		return 0;
+	}
+	
 		
 	
 	
@@ -1335,6 +1642,12 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		return skills[skill].isCoreSkill;
 	}
 	
+	
+    //modSigns: restore vanilla max level
+	public final function ResetAlchemy05SkillMaxLevel()
+	{
+		skills[S_Alchemy_s05].maxLevel = 5;
+	}
 	
 	protected final function CacheSkills(skillDefinitionName : name, out cache : array<SSkill>)
 	{
@@ -1931,23 +2244,36 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			owner.AddTimer('AbilityManager_FloorStaminaSegment', 0.1, , , , true);
 		}
 		
-		
-		if (cost > 0 && dt <= 0 && owner == thePlayer && thePlayer.HasBuff(EET_Mutagen21) && abilityName != 'sword_s1' && abilityName != 'sword_s2')
+		// Mutagen 21 - action costing stamina heal geralt, Whirl and Rend handled separately due to their hacks
+		// modSigns: remove hacks, make healing proportional to stamina spent
+		/*if (cost > 0 && dt <= 0 && owner == thePlayer && thePlayer.HasBuff(EET_Mutagen21) && abilityName != 'sword_s1' && abilityName != 'sword_s2')
 		{	
 			mutagen = (W3Mutagen21_Effect)thePlayer.GetBuff(EET_Mutagen21);
 			mutagen.Heal();
+		}*/
+		if(cost > 0 && owner == thePlayer && thePlayer.HasBuff(EET_Mutagen21))
+		{
+			mutagen = (W3Mutagen21_Effect)thePlayer.GetBuff(EET_Mutagen21);
+			mutagen.Heal(cost);
 		}
 		
-		
-		
-		if(owner == GetWitcherPlayer() && GetStat(BCS_Stamina, true) <= 0.f)
+		//modSigns: manage signs
+		if(owner == GetWitcherPlayer())
 		{
-			signEntity = GetWitcherPlayer().GetSignEntity(GetWitcherPlayer().GetCurrentlyCastSign());
+			//signEntity = GetWitcherPlayer().GetSignEntity(GetWitcherPlayer().GetCurrentlyCastSign());
+			signEntity = GetWitcherPlayer().GetCurrentSignEntity();
 			
-			
-			if( !( ( W3QuenEntity ) signEntity ) || !owner.HasBuff( EET_Mutation11Buff ) )
+			//debug
+			//theGame.witcherLog.AddMessage("Cast sign: " + GetWitcherPlayer().GetCurrentlyCastSign());
+		
+			if(signEntity)
 			{
-				signEntity.OnSignAborted(true);
+				signEntity.ManageFocusGain(cost, dt);
+			
+				/*if( GetStat(BCS_Stamina, true) <= 0.f && ( !((W3QuenEntity)signEntity) || !owner.HasBuff(EET_Mutation11Buff) ) )
+				{
+					signEntity.OnSignAborted(true);
+				}*/ //is already handled by sign entity script
 			}
 		}
 		
@@ -1956,9 +2282,20 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	public function GainStat( stat : EBaseCharacterStats, amount : float )
 	{
-		
-		if(stat == BCS_Focus && owner.HasBuff(EET_Runeword8))
-			return;
+		//modSigns: stop focus gain while paying the cost of action with focus points
+		if(stat == BCS_Focus)
+		{
+			if(owner.IsFocusGainPaused())
+				return;
+			if(owner.HasBuff(EET_Runeword8))
+				return;
+			//modSigns: no focus gain when spending focus to sustain whirl -> reworked to use PauseFocusGain
+			//if(owner.GetBehaviorVariable( 'isPerformingSpecialAttack' ) > 0 && owner.GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Light && owner.GetStat(BCS_Stamina) <= 0)
+			//	return;
+			//modSigns: no focus gain during Undying skill buff
+			if(owner.HasBuff(EET_UndyingSkillImmortal))
+				return;
+		}
 			
 		super.GainStat(stat, amount);
 	}
@@ -1989,22 +2326,34 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	public final function AddToxicityOffset(val : float)
 	{
 		if(val > 0)
+		{
 			toxicityOffset += val;
+			OnToxicityChanged(); //modSigns
+		}
 	}
 	
 	public final function SetToxicityOffset( val : float)
 	{
 		if(val >= 0)
+		{
 			toxicityOffset = val;
+			OnToxicityChanged(); //modSigns
+		}
 	}
 		
 	public final function RemoveToxicityOffset(val : float)
 	{
 		if(val > 0)
+		{
 			toxicityOffset -= val;
+			OnToxicityChanged(); //modSigns
+		}
 		
 		if (toxicityOffset < 0)
+		{
 			toxicityOffset = 0;
+			OnToxicityChanged(); //modSigns
+		}
 	}
 	
 	
@@ -2310,7 +2659,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var prevColor : ESkillColor;
 		var skill : ESkill;
 	
-		idx = GetSkillSlotIndex(slotID, true);
+		//idx = GetSkillSlotIndex(slotID, true); //modSigns:
+		idx = GetSkillSlotIndex(slotID, false);  //fix a bug with skills permanently stuck in locked slots after 1.22 patch
 		if(idx < 0)
 			return false;
 		
@@ -2333,14 +2683,14 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	private final function OnSkillEquip(skill : ESkill)
 	{
-		var skillName : name;
-		var names, abs : array<name>;
+		//var skillName : name;
+		var /*names,*/ abs : array<name>;
 		var buff : W3Effect_Toxicity;
 		var witcher : W3PlayerWitcher;
 		var i, skillLevel : int;
 		var isPassive, isNight : bool;
-		var m_alchemyManager : W3AlchemyManager;
-		var recipe : SAlchemyRecipe;
+		//var m_alchemyManager : W3AlchemyManager;
+		//var recipe : SAlchemyRecipe;
 		var uiState : W3TutorialManagerUIHandlerStateCharacterDevelopment;
 		var battleTrance : W3Effect_BattleTrance;
 		var mutagens : array<CBaseGameplayEffect>;
@@ -2376,7 +2726,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		
 		
-		if(GetSkillPathType(skill) == ESP_Sword)
+		/*if(GetSkillPathType(skill) == ESP_Sword)
 		{
 			owner.AddAbilityMultiple('sword_adrenalinegain', GetSkillLevel(skill) );
 		}
@@ -2391,31 +2741,40 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		if(GetSkillPathType(skill) == ESP_Alchemy)
 		{
 			owner.AddAbilityMultiple('alchemy_potionduration', GetSkillLevel(skill) );
-		}
-		
+		}*/ //modSigns
 		
 		if ( CanUseSkill(S_Alchemy_s19) )
 		{
 			MutagensSyngergyBonusUpdate( GetSkillGroupIdFromSkill( skill ), GetSkillLevel(S_Alchemy_s19) );
 		}
-		else if(skill == S_Alchemy_s20)
+		
+		//should be no else here
+		if(skill == S_Alchemy_s20)
 		{
 			if ( GetWitcherPlayer().GetStatPercents(BCS_Toxicity) >= GetWitcherPlayer().GetToxicityDamageThreshold() )
 				owner.AddEffectDefault(EET_IgnorePain, owner, 'IgnorePain');
 		}
-		
-		if(skill == S_Alchemy_s18)
+		else if(skill == S_Alchemy_s16) //modSigns
 		{
-			m_alchemyManager = new W3AlchemyManager in this;
-			m_alchemyManager.Init();
-			names = witcher.GetAlchemyRecipes();
-			skillName = SkillEnumToName(S_Alchemy_s18);
-			for(i=0; i<names.Size(); i+=1)
-			{
-				m_alchemyManager.GetRecipe(names[i], recipe);
-				if ((recipe.cookedItemType != EACIT_Bolt) && (recipe.cookedItemType != EACIT_Undefined) && (recipe.cookedItemType != EACIT_Dye) && (recipe.level <= GetSkillLevel(S_Alchemy_s18)))
-					charStats.AddAbility(skillName, true);
-			}
+			if ( GetWitcherPlayer().GetStatPercents(BCS_Toxicity) >= GetWitcherPlayer().GetToxicityDamageThreshold() )
+				thePlayer.AddAbilityMultiple(SkillEnumToName(S_Alchemy_s16), thePlayer.GetSkillLevel(S_Alchemy_s16));
+		}
+		else if(skill == S_Alchemy_s18)
+		{
+			//m_alchemyManager = new W3AlchemyManager in this;
+			//m_alchemyManager.Init();
+			//names = witcher.GetAlchemyRecipes();
+			//skillName = SkillEnumToName(S_Alchemy_s18);
+			//for(i=0; i<names.Size(); i+=1)
+			//{
+			//	m_alchemyManager.GetRecipe(names[i], recipe);
+			//	//modSigns
+			//	//if ((recipe.cookedItemType != EACIT_Bolt) && (recipe.cookedItemType != EACIT_Undefined) && (recipe.cookedItemType != EACIT_Dye) && (recipe.level <= GetSkillLevel(S_Alchemy_s18)))
+			//	if (IsAlchemy18Recipe(recipe.cookedItemType) && GetAlchemy18RecipeLevel(recipe) <= GetSkillLevel(S_Alchemy_s18))
+			//		charStats.AddAbility(skillName, true);
+			//}
+			//modSigns: moved to other place
+			witcher.RecalcAlchemy18Abilities();
 		}
 		else if(skill == S_Alchemy_s15 && owner.HasBuff(EET_Toxicity))
 		{
@@ -2424,11 +2783,12 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		else if(skill == S_Alchemy_s13)
 		{
-			mutagens = GetWitcherPlayer().GetDrunkMutagens();
+			/*mutagens = GetWitcherPlayer().GetDrunkMutagens();
 			if(mutagens.Size() > 0)	
 			{
 				charStats.AddAbilityMultiple( GetSkillAbilityName( skill ), (GetSkillLevel( skill ) * mutagens.Size() ));
-			}
+			}*/
+			GetWitcherPlayer().RecalcTransmutationAbilities(); //modSigns
 		}		
 		else if(skill == S_Alchemy_s06)
 		{
@@ -2438,15 +2798,19 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				hud.OnRelevantSkillChanged( skill, true );
 			}
 		}
+		else if(skill == S_Alchemy_s10) //modSigns: check ammo
+		{
+			thePlayer.SkillReduceBombAmmoBonus();
+		}
 		else if(skill == S_Magic_s11)		
 		{
 			((W3YrdenEntity) (witcher.GetSignEntity(ST_Yrden))).SkillEquipped(skill);
 		}
-		else if(skill == S_Magic_s07)		
+		/*else if(skill == S_Magic_s07)		
 		{
 			if(owner.HasBuff(EET_BattleTrance))
 				owner.AddAbility( GetSkillAbilityName(S_Magic_s07) );
-		}
+		}*/ //modSigns: early Igni design leftover code - Concentration ability - removing
 		else if(skill == S_Perk_08)
 		{
 			
@@ -2555,6 +2919,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var witcher : W3PlayerWitcher;
 		var weapon, armor : W3RepairObjectEnhancement;
 		var foodBuff : W3Effect_WellFed;
+		var waterBuff : W3Effect_WellHydrated; //modSigns
 		var commonMenu : CR4CommonMenu;
 		var guiMan : CR4GuiManager;
 		var hud : CR4ScriptedHud;
@@ -2577,7 +2942,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		
 		
-		if(GetSkillPathType(skill) == ESP_Sword)
+		/*if(GetSkillPathType(skill) == ESP_Sword)
 		{
 			owner.RemoveAbilityMultiple('sword_adrenalinegain', skillLevel );
 		}
@@ -2592,30 +2957,30 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		if(GetSkillPathType(skill) == ESP_Alchemy)
 		{
 			owner.RemoveAbilityMultiple('alchemy_potionduration', GetSkillLevel(skill) );
-		}
+		}*/ //modSigns
 		
 		
 		if(skill == S_Magic_s11)		
 		{
 			((W3YrdenEntity) (GetWitcherPlayer().GetSignEntity(ST_Yrden))).SkillUnequipped(skill);
 		}
-		else if(skill == S_Magic_s07)	
+		/*else if(skill == S_Magic_s07)	
 		{
 			owner.RemoveAbility( GetSkillAbilityName(S_Magic_s07) );
-		}
-		else if(skill == S_Alchemy_s04)	
+		}*/  //modSigns: early Igni design leftover code - Concentration ability - removing
+		/*else if(skill == S_Alchemy_s04)	
 		{
 			owner.RemoveEffect(GetWitcherPlayer().GetSkillBonusPotionEffect());
-		}
-		
+		}*/ //modSigns: removed due to skill change
 		else if(skill == S_Alchemy_s13)
 		{
-			mutagens = GetWitcherPlayer().GetDrunkMutagens();
+			/*mutagens = GetWitcherPlayer().GetDrunkMutagens();
 			
 			if(mutagens.Size() > 0)
 			{
 				charStats.RemoveAbilityMultiple( GetSkillAbilityName( S_Alchemy_s13 ), ( GetSkillLevel( skill ) * mutagens.Size() ));
-			}
+			}*/
+			GetWitcherPlayer().RecalcTransmutationAbilities(); //modSigns
 		}
 		else if(skill == S_Alchemy_s06)
 		{
@@ -2628,6 +2993,10 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		else if(skill == S_Alchemy_s20)
 		{
 			owner.RemoveBuff(EET_IgnorePain);
+		}
+		else if(skill == S_Alchemy_s16) //modSigns
+		{
+			thePlayer.RemoveAbilityAll(SkillEnumToName(S_Alchemy_s16));
 		}
 		else if(skill == S_Alchemy_s15 && owner.HasBuff(EET_Toxicity))
 		{
@@ -2686,6 +3055,12 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			if( foodBuff )
 			{
 				foodBuff.OnPerk15Unequipped();
+			}
+			//modSigns: add well hydrated effect
+			waterBuff = (W3Effect_WellHydrated)owner.GetBuff( EET_WellHydrated );
+			if( waterBuff )
+			{
+				waterBuff.OnPerk15Unequipped();
 			}
 		}
 		else if(skill == S_Perk_19 && owner.HasBuff(EET_BattleTrance))
@@ -2813,7 +3188,38 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				charStats.RemoveAbilityMultiple( abilityName, currAbs - count );
 			}
 		}
-	}	
+	}
+
+	//modSigns
+	public function ManageSetArmorTypeBonus()
+	{
+		var toxicity : W3Effect_Toxicity;
+		var hadAbl : bool;
+		
+		hadAbl = charStats.HasAbility('ArmorTypeMediumSetBonusAbility');
+		
+		charStats.RemoveAbility('ArmorTypeHeavySetBonusAbility');
+		charStats.RemoveAbility('ArmorTypeMediumSetBonusAbility');
+		charStats.RemoveAbility('ArmorTypeLightSetBonusAbility');
+		switch( owner.GetInventory().GetSetArmorType() )
+		{
+			case EAT_Heavy:
+				charStats.AddAbility('ArmorTypeHeavySetBonusAbility' , false);
+				break;
+			case EAT_Medium:
+				charStats.AddAbility('ArmorTypeMediumSetBonusAbility' , false);
+				break;
+			case EAT_Light:
+				charStats.AddAbility('ArmorTypeLightSetBonusAbility' , false);
+				break;
+		}
+		if(hadAbl || charStats.HasAbility('ArmorTypeMediumSetBonusAbility'))
+		{
+			toxicity = (W3Effect_Toxicity)owner.GetBuff(EET_Toxicity);
+			if(toxicity)
+				toxicity.RecalcEffectValue();
+		}
+	}
 	
 	
 	public final function SetPerk01Abilities(enableDay : bool, enableNight : bool)
@@ -2857,6 +3263,22 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		if(IsCoreSkill(skill))
 			return;
 		
+		//modSigns begin
+		skillAbilityName = SkillEnumToName(skill);
+		if( theGame.GetDefinitionsManager().AbilityHasTag(skillAbilityName, theGame.params.SKILL_GLOBAL_PASSIVE_TAG) )
+		{
+			cnt = owner.GetAbilityCount(skillAbilityName);
+			if(cnt < currLevel)
+			{
+				owner.AddAbilityMultiple(skillAbilityName, currLevel - cnt);
+			}
+			else
+			{
+				owner.RemoveAbilityMultiple(skillAbilityName, cnt - currLevel);
+			}
+		}
+		//modSigns end
+		
 		if(skill == S_Alchemy_s08)
 		{
 			if(currLevel < prevLevel)
@@ -2864,36 +3286,41 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		else if(skill == S_Alchemy_s18)
 		{
-			m_alchemyManager = new W3AlchemyManager in this;
-			m_alchemyManager.Init();
-			names = GetWitcherPlayer().GetAlchemyRecipes();
-			skillAbilityName = SkillEnumToName(S_Alchemy_s18);
-			cnt = 0;
-			
-			
-			for(i=0; i<names.Size(); i+=1)
-			{
-				m_alchemyManager.GetRecipe(names[i], recipe);
-				if ((recipe.cookedItemType != EACIT_Bolt) && (recipe.cookedItemType != EACIT_Undefined) && (recipe.cookedItemType != EACIT_Dye) && (recipe.level <= GetSkillLevel(S_Alchemy_s18)))
-					cnt += 1;
-			}
-			
-			
-			cnt -= owner.GetAbilityCount(skillAbilityName);
-			if(cnt > 0)
-				charStats.AddAbilityMultiple(skillAbilityName, cnt);
-			else if(cnt < 0)
-				charStats.RemoveAbilityMultiple(skillAbilityName, -cnt);
+			//m_alchemyManager = new W3AlchemyManager in this;
+			//m_alchemyManager.Init();
+			//names = GetWitcherPlayer().GetAlchemyRecipes();
+			//skillAbilityName = SkillEnumToName(S_Alchemy_s18);
+			//cnt = 0;
+			//
+			//
+			//for(i=0; i<names.Size(); i+=1)
+			//{
+			//	m_alchemyManager.GetRecipe(names[i], recipe);
+			//	//modSigns
+			//	//if ((recipe.cookedItemType != EACIT_Bolt) && (recipe.cookedItemType != EACIT_Undefined) && (recipe.cookedItemType != EACIT_Dye) && (recipe.level <= GetSkillLevel(S_Alchemy_s18)))
+			//	if(IsAlchemy18Recipe(recipe.cookedItemType) && GetAlchemy18RecipeLevel(recipe) <= GetSkillLevel(S_Alchemy_s18))
+			//		cnt += 1;
+			//}
+			//
+			//
+			//cnt -= owner.GetAbilityCount(skillAbilityName);
+			//if(cnt > 0)
+			//	charStats.AddAbilityMultiple(skillAbilityName, cnt);
+			//else if(cnt < 0)
+			//	charStats.RemoveAbilityMultiple(skillAbilityName, -cnt);
+			//modSigns: moved to another place
+			GetWitcherPlayer().RecalcAlchemy18Abilities();
 		}
 		else if(skill == S_Alchemy_s13)
 		{
-			mutagens = GetWitcherPlayer().GetDrunkMutagens();
+			/*mutagens = GetWitcherPlayer().GetDrunkMutagens();
 			skillAbilityName = GetSkillAbilityName(S_Alchemy_s13);			
 			
 			if(mutagens.Size() > 0)
 				charStats.AddAbilityMultiple(skillAbilityName, GetSkillLevel(skill));
 			else
-				charStats.RemoveAbilityMultiple(skillAbilityName, GetSkillLevel(skill));						
+				charStats.RemoveAbilityMultiple(skillAbilityName, GetSkillLevel(skill));*/
+			GetWitcherPlayer().RecalcTransmutationAbilities(); //modSigns
 		}
 		else if(skill == S_Alchemy_s19)
 		{
@@ -2911,6 +3338,12 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				ignorePain.OnSkillLevelChanged(currLevel - prevLevel);
 			}
 		}
+		else if(skill == S_Alchemy_s16) //modSigns
+		{
+			thePlayer.RemoveAbilityAll(SkillEnumToName(S_Alchemy_s16));
+			if ( GetWitcherPlayer().GetStatPercents(BCS_Toxicity) >= GetWitcherPlayer().GetToxicityDamageThreshold() )
+				thePlayer.AddAbilityMultiple(SkillEnumToName(S_Alchemy_s16), thePlayer.GetSkillLevel(S_Alchemy_s16));
+		}
 		else if(skill == S_Perk_08)
 		{
 			if(currLevel == 3)
@@ -2920,7 +3353,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		
 		
-		if(GetSkillPathType(skill) == ESP_Sword)
+		/*if(GetSkillPathType(skill) == ESP_Sword)
 		{
 			if ( (currLevel - prevLevel) > 0)
 				owner.AddAbilityMultiple('sword_adrenalinegain', currLevel - prevLevel );
@@ -2944,7 +3377,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				owner.AddAbilityMultiple('alchemy_potionduration', currLevel - prevLevel );
 			else if ( (currLevel - prevLevel) < 0)
 				owner.RemoveAbilityMultiple('alchemy_potionduration', currLevel - prevLevel );
-		}
+		}*/ //modSigns
 		
 		if(GetSkillPathType(skill) == ESP_Alchemy)
 			GetWitcherPlayer().RecalcPotionsDurations();
@@ -3050,9 +3483,16 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			pathPointsSpent[i] = 0;
 		}
 		
-		owner.RemoveAbilityAll('sword_adrenalinegain');
-		owner.RemoveAbilityAll('magic_staminaregen');
-		owner.RemoveAbilityAll('alchemy_potionduration');
+		//owner.RemoveAbilityAll('sword_adrenalinegain');
+		//owner.RemoveAbilityAll('magic_staminaregen');
+		//owner.RemoveAbilityAll('alchemy_potionduration');
+		
+		//modSigns
+		if( FactsQuerySum( "modSigns_S_Alchemy_s05_Fix_2" ) < 1 )
+		{
+			ResetAlchemy05SkillMaxLevel();
+			FactsAdd( "modSigns_S_Alchemy_s05_Fix_2" );
+		}
 	}
 	
 	
@@ -3335,6 +3775,23 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		return total;
 	}
+
+	//modSigns
+	public final function GetMutationsUsedMutagens() : array<int>
+	{
+		var total : array<int>;
+		var i : int;
+		
+		total.Resize(3);
+		for(i = 0; i < mutations.Size(); i += 1)
+		{
+			total[0] += mutations[i].progress.redUsed;
+			total[1] += mutations[i].progress.blueUsed;
+			total[2] += mutations[i].progress.greenUsed;
+		}
+		
+		return total;
+	}
 	
 	
 	private final function LoadMutationData()
@@ -3540,11 +3997,11 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			theSound.SoundUnloadBank( bank );
 		}
 		
-		if( mutationType == EPMT_Mutation5 )
+		/*if( mutationType == EPMT_Mutation5 ) //modSigns: mutation changed
 		{
 			owner.RemoveBuff( EET_Mutation5 );
 		}
-		else if( mutationType == EPMT_Mutation10 )
+		else*/ if( mutationType == EPMT_Mutation10 )
 		{
 			owner.RemoveBuff( EET_Mutation10 );
 			owner.StopEffect( 'mutation_10' );
@@ -3557,8 +4014,10 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				owner.RemoveEffect( buffs[i] );
 			}
 		}
-		
-		owner.RemoveBuff( EET_Mutation3 );
+		else if( mutationType == EPMT_Mutation3 ) //modSigns: condition added
+		{
+			owner.RemoveBuff( EET_Mutation3 );
+		}
 		
 		
 		theGame.MutationHUDFeedback( MFT_PlayHide );
@@ -3580,7 +4039,9 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		UpdateMutationSkillSlots();
 		
-		if( GetWitcherPlayer().IsMutationActive( EPMT_Mutation10 ) && GetStat( BCS_Toxicity ) != 0 && owner.IsInCombat() )
+		//modSigns: Euphoria rework
+		//if( GetWitcherPlayer().IsMutationActive( EPMT_Mutation10 ) && GetStat( BCS_Toxicity ) != 0 && owner.IsInCombat() )
+		if( GetWitcherPlayer().IsMutationActive( EPMT_Mutation10 ) && GetWitcherPlayer().GetStatPercents(BCS_Toxicity) >= GetWitcherPlayer().GetToxicityDamageThreshold() && GetWitcherPlayer().IsInCombat() )
 		{
 			owner.AddEffectDefault( EET_Mutation10, NULL, "Mutation 10" );
 		}
@@ -3601,6 +4062,18 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			}
 			
 			GameplayFactsAdd( "tutorial_mutations_equipped_mutation" );
+		}
+	}
+	
+	//modSigns
+	public final function LoadCurrentMutationSoundBank()
+	{
+		var bank : string;
+		
+		bank = GetMutationSoundBank( GetEquippedMutationType() );
+		if( bank != "" && !theSound.SoundIsBankLoaded( bank ) )
+		{
+			theSound.SoundLoadBank( bank, true );
 		}
 	}
 	
@@ -4090,6 +4563,12 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		GetMutationResearchProgress( EPMT_MutationMaster );
 		
 		UpdateMutationSkillSlots();
+		
+		//modSigns
+		if( mutationType == EPMT_Mutation11 /*|| mutationType == EPMT_Mutation12*/ )
+		{
+			GetWitcherPlayer().AddAlchemyRecipe('Recipe for Mutation Trigger', false, true);
+		}
 		
 		
 		theGame.GetGamerProfile().AddAchievement( EA_SchoolOfTheMutant );

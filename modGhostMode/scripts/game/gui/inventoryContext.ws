@@ -132,6 +132,18 @@ class  W3InventoryItemContext extends W3UIContext
 					return;
 				}
 			}
+			//modSigns
+			else if(!GetWitcherPlayer().CanUseSkill(S_Perk_15) && (invComponentRef.ItemHasTag(currentItemId, 'Alcohol') || invComponentRef.ItemHasTag(currentItemId, 'Uncooked')) && !GetWitcherPlayer().ToxicityLowEnoughToDrinkPotion(EES_Potion1,currentItemId))
+			{
+				notificationText = GetLocStringByKeyExt("menu_cannot_perform_action_now") + "<br/>" + GetLocStringByKeyExt("panel_common_statistics_tooltip_current_toxicity");
+				theGame.GetGameLanguageName(audioLanguage,language);
+				if (language == "AR")
+					notificationText += (int)(thePlayer.abilityManager.GetStat(BCS_Toxicity, false)) + " / " +  (int)(thePlayer.abilityManager.GetStatMax(BCS_Toxicity)) + " :";
+				else
+					notificationText += ": " + (int)(thePlayer.abilityManager.GetStat(BCS_Toxicity, false)) + " / " +  (int)(thePlayer.abilityManager.GetStatMax(BCS_Toxicity));
+				theSound.SoundEvent("gui_global_denied");
+				invMenuRef.showNotification(notificationText);
+			} else
 			if( invComponentRef.ItemHasTag(currentItemId, 'Edibles') || invComponentRef.ItemHasTag(currentItemId, 'Drinks') || invComponentRef.ItemHasTag(currentItemId, 'Consumable'))
 			{
 				invMenuRef.OnConsumeItem(currentItemId);
@@ -359,6 +371,18 @@ class W3InventoryGridContext extends W3InventoryItemContext
 							AddInputBinding("panel_button_hud_interaction_useitem", "enter-gamepad_A", IK_E, true);
 						}
 					}
+					else if ( invComponentRef.GetItemName(currentItemId) == 'Razor' ) //modSigns: razor shaving
+					{
+						AddInputBinding("panel_button_hud_interaction_useitem", "enter-gamepad_A", IK_E, true);
+					}
+					else if ( invComponentRef.ItemHasRecyclingParts(currentItemId) && invComponentRef.GetItemQuantityByName('gear_dismantle_kit_1') > 0 && ( invComponentRef.IsItemCraftingIngredient(currentItemId) || invComponentRef.IsItemJunk(currentItemId) ) ) //modSigns: dismantle kits
+					{
+						AddInputBinding("panel_button_hud_interaction_dismantle", "enter-gamepad_A", IK_E, true);
+					}
+					else if ( invComponentRef.ItemHasRecyclingParts(currentItemId) && invComponentRef.GetItemQuantityByName('alchemy_dismantle_kit_1') > 0 && invComponentRef.IsItemAlchemyIngredient(currentItemId) ) //modSigns: dismantle kits
+					{
+						AddInputBinding("panel_button_hud_interaction_dismantle", "enter-gamepad_A", IK_E, true);
+					}
 					break;
 				case IMS_Shop:
 					if (!isBodkinBolt)
@@ -438,6 +462,23 @@ class W3InventoryGridContext extends W3InventoryItemContext
 						 invComponentRef.ItemHasTag(currentItemId, 'SilverOil'))
 					{
 						invMenuRef.ShowApplyOilMode(currentItemId);
+					}
+					else if (invComponentRef.GetItemName(currentItemId) == 'Razor') //modSigns: razor shaving
+					{
+						ShaveGeralt_Quest();
+						invMenuRef.UpdateFace();
+						theSound.SoundEvent("gui_inventory_other_attach");
+						invMenuRef.showNotification(GetLocStringByKeyExt("gm_used_razor_success"));
+					}
+					else if ( invComponentRef.ItemHasRecyclingParts(currentItemId) && invComponentRef.GetItemQuantityByName('gear_dismantle_kit_1') > 0 && ( invComponentRef.IsItemCraftingIngredient(currentItemId) || invComponentRef.IsItemJunk(currentItemId) ) ) //modSigns: dismantle kits
+					{
+						invMenuRef.PlayerDismantleItem(currentItemId);
+						UpdateContext();
+					}
+					else if ( invComponentRef.ItemHasRecyclingParts(currentItemId) && invComponentRef.GetItemQuantityByName('alchemy_dismantle_kit_1') > 0 && invComponentRef.IsItemAlchemyIngredient(currentItemId) ) //modSigns: dismantle kits
+					{
+						invMenuRef.PlayerDismantleItem(currentItemId);
+						UpdateContext();
 					}
 					else if (!invMenuRef.TryEquipToPockets(currentItemId, currentSlot))
 					{

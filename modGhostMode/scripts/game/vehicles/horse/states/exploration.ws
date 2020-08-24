@@ -277,7 +277,7 @@ state Exploration in W3HorseComponent
 		var isMonster : bool;
 		var threatMult : int;
 		
-		if( parentActor.HasAbility( 'DisableHorsePanic' ) || thePlayer.HasBuff( EET_Mutagen25 ) )
+		if( parentActor.HasAbility( 'DisableHorsePanic' ) /*|| thePlayer.HasBuff( EET_Mutagen25 )*/ /* modSigns */ )
 			return false;
 		
 		actorAttacker = (CNewNPC)action.attacker;
@@ -294,7 +294,7 @@ state Exploration in W3HorseComponent
 	
 	event OnCriticalEffectAdded( criticalEffect : ECriticalStateType )
 	{
-		if( parentActor.HasAbility( 'DisableHorsePanic' ) || thePlayer.HasBuff( EET_Mutagen25 ) )
+		if( parentActor.HasAbility( 'DisableHorsePanic' ) /*|| thePlayer.HasBuff( EET_Mutagen25 )*/ /* modSigns */ )
 		{
 			if( thePlayer.IsActionAllowed( EIAB_Movement ) )
 			{
@@ -1964,7 +1964,8 @@ state Exploration in W3HorseComponent
 	
 	private function CanCanter() : bool
 	{
-		return ( thePlayer.m_SettlementBlockCanter < 1 ) || ( thePlayer.GetIsHorseRacing() ); 
+		//modSigns
+		return thePlayer.IsActionAllowed( EIAB_RunAndSprint ) && ( ( thePlayer.m_SettlementBlockCanter < 1 ) || thePlayer.GetIsHorseRacing() ); // #B shouldn't be also here speedRestriction <= CANTER_SPEED ?
 	}
 	
 	

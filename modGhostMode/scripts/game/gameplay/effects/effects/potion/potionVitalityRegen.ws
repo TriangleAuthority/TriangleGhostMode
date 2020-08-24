@@ -4,9 +4,19 @@
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski.
 /***********************************************************************/
 
+//modSigns: boosts existing autoregen effect instead of adding another one
+//to avoid conflicts.
+class W3Potion_VitalityRegen extends CBaseGameplayEffect
+{
+}
 
-
-class W3Potion_VitalityRegen extends W3RegenEffect
+//I will never understand how this was supposed to work.
+//First: it takes params from tier 1 effect always.
+//Second: it triggers autoregen update.
+//Third: autoregen effect value is updated with cumulative regen value on the player,
+//i.e. it counts potion bonus in and doubles effect value.
+//TL;DR: IT'S A MESS!
+/*class W3Potion_VitalityRegen extends W3RegenEffect
 {
 	protected var combatRegen, nonCombatRegen : SAbilityAttributeValue;			
 	protected var playerTarget : CR4Player;
@@ -66,4 +76,4 @@ class W3Potion_VitalityRegen extends W3RegenEffect
 			
 		super.OnUpdate(deltaTime);
 	}
-}
+}*/

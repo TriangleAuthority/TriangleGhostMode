@@ -6,40 +6,64 @@
 
 
 
-class W3Effect_YrdenHealthDrain extends W3DamageOverTimeEffect
+//class W3Effect_YrdenHealthDrain extends W3DamageOverTimeEffect
+class W3Effect_YrdenHealthDrain extends CBaseGameplayEffect
 {
-	private var hitFxDelay : float;
+	//private var hitFxDelay : float;
 	
 	default effectType = EET_YrdenHealthDrain;
 	default isPositive = false;
 	default isNeutral = false;
 	default isNegative = true;
 	
-	event OnEffectAdded(optional customParams : W3BuffCustomParams)
+	//modSigns: new skill mechanic - it's no longer drain, but damage bonus,
+	//too lazy to rename/create a separate new effect
+	
+	private var dmgBonus : float;
+	private var lastPlayedTime : float;
+	
+	public function SetDmgBonus(b : float)
 	{
-		super.OnEffectAdded(customParams);
-		
-		hitFxDelay = 0.9 + RandF() / 5;	
-		
-		
-		SetEffectValue();
+		dmgBonus = b;
 	}
 	
-	
-	protected function SetEffectValue()
+	public function GetDmgBonus() : float
 	{
-		effectValue = thePlayer.GetSkillAttributeValue(S_Magic_s11, 'direct_damage_per_sec', false, true) * thePlayer.GetSkillLevel(S_Magic_s11);
+		return dmgBonus;
 	}
 	
-	event OnUpdate(dt : float)
+	public function PlayFX()
 	{
-		super.OnUpdate(dt);
-		
-		hitFxDelay -= dt;
-		if(hitFxDelay <= 0)
+		if(theGame.GetEngineTimeAsSeconds() - lastPlayedTime > 1.f)
 		{
-			hitFxDelay = 0.9 + RandF() / 5;	
 			target.PlayEffect('yrden_shock');
+			lastPlayedTime = theGame.GetEngineTimeAsSeconds();
 		}
 	}
+	
+	//modSigns: old drain mechanic as it worked in GM before the skill was redone
+	//event OnEffectAdded(optional customParams : W3BuffCustomParams)
+	//{
+	//	super.OnEffectAdded(customParams);
+	//	
+	//	hitFxDelay = 0;
+	//}
+	//
+	//public function ResetHealthDrainEffect(newVal : SAbilityAttributeValue)
+	//{
+	//	effectValue = newVal;
+	//	timeLeft = initialDuration;
+	//}
+	//
+	//event OnUpdate(dt : float)
+	//{
+	//	super.OnUpdate(dt);
+	//	
+	//	hitFxDelay -= dt;
+	//	if(hitFxDelay <= 0)
+	//	{
+	//		hitFxDelay = 0.9 + RandF() / 5;	//0.9-1.1
+	//		target.PlayEffect('yrden_shock');
+	//	}
+	//}
 }

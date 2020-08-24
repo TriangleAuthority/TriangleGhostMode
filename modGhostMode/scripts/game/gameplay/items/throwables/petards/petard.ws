@@ -288,11 +288,14 @@ class W3Petard extends CThrowable
 			
 			if(!FactsDoesExist("debug_fact_inf_bombs"))
 				thePlayer.inv.SingletonItemRemoveAmmo(itemId, 1);
+			//modSigns begin
+			thePlayer.DrainStamina(ESAT_UsableItem);
+			//modSigns end
 				
 			
 			if( thePlayer.inv.GetItemQuantity(itemId) < 1 )		
 				thePlayer.ClearSelectedItemId();
-			else if( !GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_2 ) )
+			else if( !GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_1 ) ) //modSigns: move ability to manticore set tier 1 bonus
 			{
 				GetWitcherPlayer().AddBombThrowDelay(itemId);
 			}
@@ -416,7 +419,7 @@ class W3Petard extends CThrowable
 		victim.SignalGameplayEvent( 'HitByBomb' );	
 		
 		
-		if( itemName == 'Grapeshot 2' || itemName == 'Grapeshot 3' )
+		if( /*itemName == 'Grapeshot 2' ||*/ itemName == 'Grapeshot 3' ) //modSigns
 		{
 			if( npc && npc.IsShielded( thePlayer ) )
 			{

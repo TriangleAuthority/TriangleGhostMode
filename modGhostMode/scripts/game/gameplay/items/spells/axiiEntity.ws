@@ -41,9 +41,9 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		}
 		
 		ownerActor.SetBehaviorVariable( 'bStopSign', 0.f );
-		if ( inOwner.CanUseSkill(S_Magic_s17) && inOwner.GetSkillLevel(S_Magic_s17) > 1)
+		/*if ( inOwner.CanUseSkill(S_Magic_s17) && inOwner.GetSkillLevel(S_Magic_s17) > 1)
 			ownerActor.SetBehaviorVariable( 'bSignUpgrade', 1.f );
-		else
+		else*/ //modSigns: remove as it breaks Puppet
 			ownerActor.SetBehaviorVariable( 'bSignUpgrade', 0.f );
 		
 		return super.Init( inOwner, prevInstance, skipCastingAnimation );
@@ -74,10 +74,12 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		
 		SelectTargets();
 		
-		for(i=0; i<targets.Size(); i+=1)
-		{
-			AddMagic17Effect(targets[i]);
-		}
+		//for(i=0; i<targets.Size(); i+=1)
+		//{
+		//	AddMagic17Effect(targets[i]);
+		//}
+		
+		SloMo(); //modSigns
 		
 		Attach(true);
 		
@@ -171,6 +173,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		if(actor && IsTargetValid(actor, false))
 		{
 			targets.PushBack(actor);
+			//theGame.witcherLog.AddMessage("Primary target"); //modSigns: debug
 			projCount -= 1;
 			
 			if(projCount == 0)
@@ -217,7 +220,10 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			for(i=0; i<projCount; i+=1)
 			{
 				if(finalActors[i])
+				{
 					targets.PushBack(finalActors[i]);
+					//theGame.witcherLog.AddMessage("Secondary target"); //modSigns: debug
+				}
 				else
 					break;	
 			}
@@ -256,27 +262,28 @@ statemachine class W3AxiiEntity extends W3SignEntity
 	event OnEnded(optional isEnd : bool)
 	{
 		var buff : EEffectInteract;
-		var conf : W3ConfuseEffect;
+		//var conf : W3ConfuseEffect;
 		var i : int;
-		var duration, durationAnimal : SAbilityAttributeValue;
+		var duration, durationAnimal, axiiPower: SAbilityAttributeValue; //modSigns: new vars
 		var casterActor : CActor;
 		var dur, durAnimals : float;
 		var params, staggerParams : SCustomEffectParams;
 		var npcTarget : CNewNPC;
 		var jobTreeType : EJobTreeType;
+		var pts, prc, chance, currentDuration : float; //modSigns: new vars
 		
 		casterActor = owner.GetActor();		
 		ProcessThrow();
 		StopEffect(effects[fireMode].throwEffect);
 		
 		
-		for(i=0; i<targets.Size(); i+=1)
-		{
-			RemoveMagic17Effect(targets[i]);
-		}
-		
-		
-		RemoveMagic17Effect(orientationTarget);
+		//for(i=0; i<targets.Size(); i+=1)
+		//{
+		//	RemoveMagic17Effect(targets[i]);
+		//}
+		//
+		//
+		//RemoveMagic17Effect(orientationTarget);
 				
 		if(IsAlternateCast())
 		{
@@ -286,98 +293,149 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		
 		if (targets.Size() > 0 )
 		{
+			//modSigns: redone
 			
-			duration = thePlayer.GetSkillAttributeValue(skillEnum, 'duration', false, true);
+			//animals
 			durationAnimal = thePlayer.GetSkillAttributeValue(skillEnum, 'duration_animals', false, true);
-			
-			duration.valueMultiplicative = 1.0f;
 			durationAnimal.valueMultiplicative = 1.0f;
-			
-			
-			
-			
-			if(owner.CanUseSkill(S_Magic_s19))
-			{
-				duration -= owner.GetSkillAttributeValue(S_Magic_s19, 'duration', false, true) * (3 - owner.GetSkillLevel(S_Magic_s19));
-				durationAnimal -= owner.GetSkillAttributeValue(S_Magic_s19, 'duration', false, true) * (3 - owner.GetSkillLevel(S_Magic_s19));
-			}
-			
-			
-			dur = CalculateAttributeValue(duration);
 			durAnimals = CalculateAttributeValue(durationAnimal);
 			
+			//others
+			duration = thePlayer.GetSkillAttributeValue(skillEnum, 'duration', false, true);
+			if(IsAlternateCast())
+				duration += thePlayer.GetSkillAttributeValue(S_Magic_s05, 'duration_bonus_after1', false, true) * (thePlayer.GetSkillLevel(S_Magic_s05) - 1);
+			
+			duration.valueMultiplicative = 1.0f;
+			
+			//no penalty for single target
+			if(owner.CanUseSkill(S_Magic_s19) && targets.Size() > 1)
+				duration -= owner.GetSkillAttributeValue(S_Magic_s19, 'duration', false, true) * (3 - owner.GetSkillLevel(S_Magic_s19));
+			
+			dur = CalculateAttributeValue(duration);
+			
+			//modSigns: duration bonus from power skill
+			if(owner.CanUseSkill(S_Magic_s18))
+				dur *= 1 + CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_s18, 'axii_duration_bonus', false, false)) * owner.GetSkillLevel(S_Magic_s18);
+			
+			axiiPower = casterActor.GetTotalSignSpellPower(skillEnum);
 			
 			params.creator = casterActor;
 			params.sourceName = "axii_" + skillEnum;			
 			params.customPowerStatValue = casterActor.GetTotalSignSpellPower(skillEnum);
 			params.isSignEffect = true;
 			
+			
 			for(i=0; i<targets.Size(); i+=1)
 			{
 				npcTarget = (CNewNPC)targets[i];
 				
-				
+				//choose the base duration
 				if( targets[i].IsAnimal() || npcTarget.IsHorse() )
+					currentDuration = durAnimals;
+				else
+					currentDuration = dur;
+				
+				//apply chance is only affected by percent resistance
+				if( owner.GetActor() == thePlayer && GetAttitudeBetween(targets[i], owner.GetActor()) == AIA_Hostile )
 				{
-					params.duration = durAnimals;
+					targets[i].GetResistValue(CDS_WillRes, pts, prc);
+					chance = ClampF(1 - prc, 0.0, 1.0);
 				}
 				else
 				{
-					params.duration = dur;
+					pts = 0;
+					chance = 1;
 				}
+
+				//percent resistance reduction is calculated in baseEffect!
+				params.duration = currentDuration * (1 + SignPowerStatToPowerBonus(MaxF(0, axiiPower.valueMultiplicative - pts/100)));
 				
 				jobTreeType = npcTarget.GetCurrentJTType();	
 					
-				if ( jobTreeType == EJTT_InfantInHand )
+				if( jobTreeType == EJTT_InfantInHand )
 				{
 					params.effectType = EET_AxiiGuardMe;
+					chance = 1;
 				}
-				
-				else if(IsAlternateCast() && owner.GetActor() == thePlayer && GetAttitudeBetween(targets[i], owner.GetActor()) == AIA_Friendly)
+				else if( IsAlternateCast() && owner.GetActor() == thePlayer && GetAttitudeBetween(targets[i], owner.GetActor()) == AIA_Friendly )
 				{
 					params.effectType = EET_Confusion;
+					chance = 1;
 				}
 				else
 				{
 					params.effectType = actionBuffs[0].effectType;
 				}
-			
 				
-				RemoveMagic17Effect(targets[i]);
-			
-				buff = targets[i].AddEffectCustom(params);
+				//RemoveMagic17Effect(targets[i]);
+				
+				//modSigns
+				//theGame.witcherLog.AddMessage("duration = " + params.duration);
+				//theGame.witcherLog.AddMessage("chance = " + chance);
+				if( params.duration > 0 && chance > 0 && RandF() < chance )
+					buff = targets[i].AddEffectCustom(params);
+				else
+					buff = EI_Deny;
+					
 				if( buff == EI_Pass || buff == EI_Override || buff == EI_Cumulate )
 				{
 					targets[i].OnAxiied( casterActor );
-									
-					if(owner.CanUseSkill(S_Magic_s18))
+					
+					/*if(owner.CanUseSkill(S_Magic_s18))
 					{
 						conf = (W3ConfuseEffect)(targets[i].GetBuff(params.effectType, "axii_" + skillEnum));
 						conf.SetDrainStaminaOnExit();
-					}
+					}*/ //modSigns: early design leftover code - Demotivate ability - removing
 				}
 				else
 				{
-					
-					if(owner.CanUseSkill(S_Magic_s17) && owner.GetSkillLevel(S_Magic_s17) == 3)
-					{
-						staggerParams = params;
-						staggerParams.effectType = EET_Stagger;
-						params.duration = 0;	
-						targets[i].AddEffectCustom(staggerParams);					
-					}
-					else
-					{
-						
+					//modSigns: stagger by default
+					//if(owner.CanUseSkill(S_Magic_s17) && owner.GetSkillLevel(S_Magic_s17) == 3)
+					params.duration = 0.5;
+					staggerParams = params;
+					staggerParams.effectType = EET_Stagger;
+					buff = targets[i].AddEffectCustom(staggerParams);
+					if( buff == EI_Deny || buff == EI_Undefined )
 						owner.GetActor().SetBehaviorVariable( 'axiiResisted', 1.f );
-					}
 				}
 			}
 		}
 		
 		casterActor.OnSignCastPerformed(ST_Axii, fireMode);
 		
+		RemoveSloMo();
+		
 		super.OnEnded();
+	}
+	
+	//modSigns: new Delusion mechanic - time slowdown as when aiming crossbow and bombs
+	var speedMultCasuserId	: int;
+	protected const var SLOWMO_SPEED : float; default SLOWMO_SPEED = 0.6;
+	
+	function SloMo()
+	{
+		var speed : float;
+		
+		theGame.RemoveTimeScale(theGame.GetTimescaleSource(ETS_ThrowingAim));
+		owner.GetActor().ResetAnimationSpeedMultiplier(speedMultCasuserId);
+		
+		if(!owner.GetPlayer())
+			return;
+		
+		speed = SLOWMO_SPEED;
+		if(owner.CanUseSkill(S_Magic_s17))
+			speed -= CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_s17, 'slowdown_mod', false, true)) * owner.GetSkillLevel(S_Magic_s17);
+	
+		theGame.SetTimeScale(speed, theGame.GetTimescaleSource(ETS_ThrowingAim), theGame.GetTimescalePriority(ETS_ThrowingAim), false);
+		speedMultCasuserId = owner.GetActor().SetAnimationSpeedMultiplier(1/speed * 0.5);
+		theSound.SoundEvent("gui_slowmo_start");
+	}
+	
+	function RemoveSloMo()
+	{
+		theGame.RemoveTimeScale(theGame.GetTimescaleSource(ETS_ThrowingAim));
+		owner.GetActor().ResetAnimationSpeedMultiplier(speedMultCasuserId);
+		theSound.SoundEvent("gui_slowmo_end");
 	}
 	
 	event OnSignAborted( optional force : bool )
@@ -389,55 +447,56 @@ statemachine class W3AxiiEntity extends W3SignEntity
 	
 	public function HAXX_AXII_ABORTED()
 	{
-		var i : int;
-		
-		for(i=0; i<targets.Size(); i+=1)
-		{
-			RemoveMagic17Effect(targets[i]);
-		}
-		RemoveMagic17Effect(orientationTarget);
+		RemoveSloMo(); //modSigns
+		//var i : int;
+		//
+		//for(i=0; i<targets.Size(); i+=1)
+		//{
+		//	RemoveMagic17Effect(targets[i]);
+		//}
+		//RemoveMagic17Effect(orientationTarget);
 	}
 	
 	
 	public function OnDisplayTargetChange(newTarget : CActor)
 	{
-		var buffParams : SCustomEffectParams;
-	
-		
-		if(!owner.CanUseSkill(S_Magic_s17) || owner.GetSkillLevel(S_Magic_s17) == 0)
-			return;
+		//var buffParams : SCustomEffectParams;
+		//
+		//
+		//if(!owner.CanUseSkill(S_Magic_s17) || owner.GetSkillLevel(S_Magic_s17) == 0)
+		//	return;
 	 
 		if(newTarget == orientationTarget)
 			return;
 			
-		RemoveMagic17Effect(orientationTarget);
+		//RemoveMagic17Effect(orientationTarget);
 		orientationTarget = newTarget;
-		
-		AddMagic17Effect(orientationTarget);			
+		//theGame.witcherLog.AddMessage("New target"); //modSigns: debug
+		//AddMagic17Effect(orientationTarget);			
 	}
 	
-	private function AddMagic17Effect(target : CActor)
-	{
-		var buffParams : SCustomEffectParams;
-		
-		if(!target || owner.GetActor() != GetWitcherPlayer() || !GetWitcherPlayer().CanUseSkill(S_Magic_s17))
-			return;
-		
-		buffParams.effectType = EET_SlowdownAxii;
-		buffParams.creator = this;
-		buffParams.sourceName = "axii_immobilize";
-		buffParams.duration = 10;
-		buffParams.effectValue.valueAdditive = 0.999f;
-		buffParams.isSignEffect = true;
-		
-		target.AddEffectCustom(buffParams);
-	}
-	
-	private function RemoveMagic17Effect(target : CActor)
-	{
-		if(target)
-			target.RemoveBuff(EET_SlowdownAxii, true, "axii_immobilize");
-	}
+	//private function AddMagic17Effect(target : CActor)
+	//{
+	//	var buffParams : SCustomEffectParams;
+	//	
+	//	if(!target || owner.GetActor() != GetWitcherPlayer() || !GetWitcherPlayer().CanUseSkill(S_Magic_s17))
+	//		return;
+	//	
+	//	buffParams.effectType = EET_SlowdownAxii;
+	//	buffParams.creator = this;
+	//	buffParams.sourceName = "axii_immobilize";
+	//	buffParams.duration = 10;
+	//	buffParams.effectValue.valueAdditive = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s17, 'axii_slowdown_prc', false, false)) * GetWitcherPlayer().GetSkillLevel(S_Magic_s17); //modSigns: new mechanic
+	//	buffParams.isSignEffect = true;
+	//	
+	//	target.AddEffectCustom(buffParams);
+	//}
+	//
+	//private function RemoveMagic17Effect(target : CActor)
+	//{
+	//	if(target)
+	//		target.RemoveBuff(EET_SlowdownAxii, true, "axii_immobilize");
+	//}
 }
 
 state AxiiCast in W3AxiiEntity extends NormalCast
@@ -447,8 +506,8 @@ state AxiiCast in W3AxiiEntity extends NormalCast
 		var player			: CR4Player;
 		
 		
-		parent.OnEnded(isEnd);
-		super.OnEnded(isEnd);
+		//parent.OnEnded(isEnd);
+		//super.OnEnded(isEnd);
 			
 		player = caster.GetPlayer();
 		
@@ -456,11 +515,25 @@ state AxiiCast in W3AxiiEntity extends NormalCast
 		{
 			parent.ManagePlayerStamina();
 			parent.ManageGryphonSetBonusBuff();
+			thePlayer.AddEffectDefault(EET_AxiiCooldown, NULL, "normal_cast"); //modSigns
+			//modSigns: new mutagen10 effect
+			if(thePlayer.HasBuff(EET_Mutagen10))
+				((W3Mutagen10_Effect)thePlayer.GetBuff(EET_Mutagen10)).AddMutagen10Ability();
+			//modSigns: new mutagen17 effect
+			if(thePlayer.HasBuff(EET_Mutagen17))
+				((W3Mutagen17_Effect)thePlayer.GetBuff(EET_Mutagen17)).RemoveMutagen17Abilities();
+			//modSigns: new mutagen22 effect
+			if(thePlayer.HasBuff(EET_Mutagen22))
+				((W3Mutagen22_Effect)thePlayer.GetBuff(EET_Mutagen22)).AddMutagen22Ability();
 		}
 		else
 		{
 			caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
 		}
+		
+		//modSigns: cleanup should happen after stamina is drained
+		parent.OnEnded(isEnd);
+		super.OnEnded(isEnd);
 	}
 	
 	event OnEnterState( prevStateName : name )
@@ -492,6 +565,19 @@ state AxiiChanneled in W3AxiiEntity extends Channeling
 {
 	event OnEnded(optional isEnd : bool)
 	{
+		if(caster.IsPlayer()) //modSigns
+		{
+			thePlayer.AddEffectDefault(EET_AxiiCooldown, NULL, "alt_cast");
+			//modSigns: new mutagen10 effect
+			if(thePlayer.HasBuff(EET_Mutagen10))
+				((W3Mutagen10_Effect)thePlayer.GetBuff(EET_Mutagen10)).AddMutagen10Ability();
+			//modSigns: new mutagen17 effect
+			if(thePlayer.HasBuff(EET_Mutagen17))
+				((W3Mutagen17_Effect)thePlayer.GetBuff(EET_Mutagen17)).RemoveMutagen17Abilities();
+			//modSigns: new mutagen22 effect
+			if(thePlayer.HasBuff(EET_Mutagen22))
+				((W3Mutagen22_Effect)thePlayer.GetBuff(EET_Mutagen22)).AddMutagen22Ability();
+		}
 		
 		parent.OnEnded(isEnd);
 		super.OnEnded(isEnd);
@@ -504,6 +590,16 @@ state AxiiChanneled in W3AxiiEntity extends Channeling
 		parent.owner.GetActor().SetBehaviorVariable( 'axiiResisted', 0.f );
 		caster.OnDelayOrientationChange();
 	}
+	
+	//modSigns
+	/*event OnLeaveState( nextStateName : name )
+	{
+		if(caster.IsPlayer())
+		{
+			thePlayer.AddEffectDefault(EET_AxiiCooldown, NULL, "alt_cast");
+		}
+		super.OnLeaveState(nextStateName);
+	}*/
 
 	event OnProcessSignEvent( eventName : name )
 	{
@@ -542,9 +638,9 @@ state AxiiChanneled in W3AxiiEntity extends Channeling
 	
 	entry function ChannelAxii()
 	{	
-		while( Update() )
+		while( Update(theTimer.timeDelta) ) //modSigns
 		{
-			Sleep( 0.0001f );
+			Sleep(theTimer.timeDelta); //modSigns
 		}
 	}
 }

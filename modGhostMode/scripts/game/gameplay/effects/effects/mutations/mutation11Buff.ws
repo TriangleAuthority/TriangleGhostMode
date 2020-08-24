@@ -12,15 +12,97 @@ class W3Effect_Mutation11Buff extends CBaseGameplayEffect
 	default effectType = EET_Mutation11Buff;
 	default isPositive = true;
 	
+	//modSigns
+	private var drainTemplate : CEntityTemplate;
+	private var actors : array< CActor >;
+	private var numActors : int;
+	private var drainEnts : array< CEntity >;
+	private var drainStrength : float;
+	
+	//private var debugHealth : array< float >;
+	
+	//modSigns: changed
 	event OnEffectAdded( customParams : W3BuffCustomParams )
 	{
 		var min, max			: SAbilityAttributeValue;		
+		var i					: int;
+		var tmpActors			: array< CActor >;
 		
 		super.OnEffectAdded( customParams );
 		
 		
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation11', 'health_prc', min, max );		
-		target.ForceSetStat( BCS_Vitality, target.GetMaxHealth() * min.valueAdditive );
+		//theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation11', 'health_prc', min, max );		
+		//target.ForceSetStat( BCS_Vitality, target.GetMaxHealth() * min.valueAdditive );
+		
+		//modSigns
+		drainTemplate = (CEntityTemplate)LoadResource("fx\monsters\noonwraith\drain_energy\drain_energy.w2ent", true);
+		tmpActors = GetActorsInRange( target, 30, 50, '', true );
+		for(i = tmpActors.Size() - 1; i >= 0; i -= 1)
+		{
+			if( GetAttitudeBetween( target, tmpActors[i] ) != AIA_Hostile )
+			{
+				tmpActors.Erase( i );
+			}
+		}
+		numActors = Min(3, tmpActors.Size());
+		for(i = 0; i < numActors; i += 1)
+		{
+			actors.PushBack(tmpActors[i]);
+		}
+		
+		drainStrength = ((W3PlayerWitcher)target).Mutation11GetBaseStrength();
+		drainStrength *= target.GetStat(BCS_Focus);
+
+		//theGame.witcherLog.AddMessage("Mutation11 drainStrength = " + drainStrength);
+		//theGame.witcherLog.AddMessage("Mutation11 totalDrain = " + drainStrength * initialDuration);
+		
+		drainStrength /= 1.0 * numActors;
+		//theGame.witcherLog.AddMessage("Mutation11 drainStrength/numActors = " + drainStrength);
+		
+		drainStrength = MaxF(1, drainStrength);
+		
+		//add effects
+		for(i = 0; i < actors.Size(); i += 1)
+		{
+			//debugHealth.PushBack( actors[i].GetHealth() );
+			PlayDrainEnergy( actors[i] );
+			AddDrainBuff( actors[i] );
+		}
+	}
+	
+	//modSigns
+	private function PlayDrainEnergy( npc : CActor )
+	{
+		var targetNode : CNode;
+		var sourceNode : CNode;
+		var drainEffectEntity : CEntity;
+		
+		targetNode = target.GetComponent("DrainEnergyTarget");
+		if( !targetNode )
+			targetNode = target;
+		
+		sourceNode = npc.GetComponent("torso3effect");
+		if( !sourceNode )
+			sourceNode = npc;
+		
+		drainEffectEntity = theGame.CreateEntity( drainTemplate, sourceNode.GetWorldPosition(), target.GetWorldRotation() );
+		drainEffectEntity.PlayEffect( 'drain_energy', targetNode );
+		
+		drainEnts.PushBack( drainEffectEntity );
+	}
+	
+	//modSigns
+	private function AddDrainBuff( npc : CActor )
+	{
+		var drainParams : SCustomEffectParams;
+		
+		drainParams.effectType	= EET_VitalityDrain;
+		drainParams.creator		= target;
+		drainParams.sourceName	= 'Mutation11';
+		drainParams.duration	= initialDuration;
+		drainParams.effectValue.valueAdditive = drainStrength;
+			
+		npc.AddEffectCustom( drainParams );
 	}
 
 	event OnEffectAddedPost()
@@ -42,8 +124,46 @@ class W3Effect_Mutation11Buff extends CBaseGameplayEffect
 		theGame.MutationHUDFeedback( MFT_PlayRepeat );
 	}
 	
+	//modSigns
+	event OnUpdate( deltaTime : float )
+	{
+		var i : int;
+		var sourceNode : CNode;
+		var val : SAbilityAttributeValue;
+		
+		super.OnUpdate( deltaTime );
+		
+		numActors = 0;
+		for( i = 0; i < actors.Size(); i += 1 )
+		{
+			if( !actors[i].IsAlive() )
+			{
+				if( drainEnts[i] && drainEnts[i].IsEffectActive( 'drain_energy' ) )
+				{
+					drainEnts[i].StopEffect( 'drain_energy' );
+					drainEnts[i].DestroyAfter( 3 );
+				}
+			}
+			else
+			{
+				numActors += 1;
+				if( drainEnts[i] )
+				{
+					sourceNode = actors[i].GetComponent("torso3effect");
+					if( !sourceNode )
+						sourceNode = actors[i];
+					drainEnts[i].Teleport( sourceNode.GetWorldPosition() );
+				}
+				val = actors[i].GetBuff(EET_VitalityDrain).GetEffectValue();
+			}
+		}
+		
+		target.Heal( drainStrength * numActors * deltaTime );
+	}
+	
 	event OnEffectRemoved()
 	{
+		var i : int; //modSigns
 		
 		target.RemoveBuff( EET_Mutation11Immortal );
 		
@@ -51,5 +171,54 @@ class W3Effect_Mutation11Buff extends CBaseGameplayEffect
 		target.AddEffectDefault( EET_Mutation11Debuff, NULL, "Mutation 11 Debuff", false );
 		
 		super.OnEffectRemoved();
+		
+		//modSigns
+		for( i = 0; i < drainEnts.Size(); i += 1 )
+		{
+			if( drainEnts[i] )
+			{
+				drainEnts[i].StopEffect( 'drain_energy' );
+				drainEnts[i].DestroyAfter( 3 );
+			}
+		}
+		
+		//for(i = 0; i < actors.Size(); i += 1)
+		//{
+		//	theGame.witcherLog.AddMessage("Mutation11 health drained = " + (debugHealth[i] - actors[i].GetHealth()));
+		//}
+		
+		Impulse();
+	}
+	
+	//modSigns
+	public function Impulse()
+	{
+		var ents					: array<CGameplayEntity>;
+		var i, j					: int;
+		var action					: W3DamageAction;
+		var damages					: array< SRawDamage >;
+		
+		damages = theGame.GetDefinitionsManager().GetDamagesFromAbility( 'Mutation11' );
+		
+		//same as QuenImpulse
+		FindGameplayEntitiesInRange(ents, target, 5.f, 1000, , FLAG_OnlyAliveActors + FLAG_ExcludeTarget + FLAG_Attitude_Hostile, target);
+		for(i = 0; i < ents.Size(); i += 1)
+		{
+			action = new W3DamageAction in theGame;
+			action.Initialize(target, ents[i], NULL, "Mutation11", EHRT_Heavy, CPS_SpellPower, false, false, true, false);
+			for(j = 0; j < damages.Size(); j += 1)
+			{
+				action.AddDamage(damages[j].dmgType, damages[j].dmgVal);
+			}
+			action.AddEffectInfo(EET_KnockdownTypeApplicator);
+			action.SetCannotReturnDamage(true);
+			action.SetProcessBuffsIfNoDamage(true);
+			action.SetHitAnimationPlayType(EAHA_ForceYes);
+			action.SetHitEffectAllTypes('hit_electric_quen');
+			theGame.damageMgr.ProcessAction(action);
+			delete action;
+		}
+		
+		target.PlayEffect('lasting_shield_discharge');
 	}
 }	

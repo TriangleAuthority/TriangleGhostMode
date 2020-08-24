@@ -140,7 +140,7 @@ class W3TooltipComponent
 		
 		var allItems	: array< SItemUniqueId >;
 		var i,j : int;
-		var m_schematicList, m_recipeList : array< name >;
+		var m_schematicList, m_recipeList, arrNames, arrUniqueNames : array< name >; //modSigns: debug
 		var itemCategory : name;
 		
 		var requiredLevel		  : string;
@@ -220,6 +220,7 @@ class W3TooltipComponent
 			
 			craftItemCategory = definitionsMgr.GetItemCategory(craftItemName);
 			itemInvComponent.GetItemStatsFromName(craftItemName, itemStats);
+			itemInvComponent.GetPotionAttributesByName(craftItemName, itemStats); //modSigns
 			if ( FactsQuerySum("NewGamePlus") > 0 )
 			{
 				IncreaseNGPPrimaryStatValue( craftItemCategory, itemStats );
@@ -243,8 +244,10 @@ class W3TooltipComponent
 					}
 				}
 				additionalDescription += "<br/>";
-				additionalDescription += itemInvComponent.GetItemLevelColor( craftedItemLevel ) + GetLocStringByKeyExt( 'panel_inventory_item_requires_level' ) + " " + craftedItemLevel + "</font><br>"; 
+				additionalDescription += itemInvComponent.GetItemLevelColor( craftedItemLevel ) + GetLocStringByKeyExt( 'panel_inventory_item_requires_level' ) + " " + craftedItemLevel + "</font>"; //modSigns - removed additional br
 			}
+			//modSigns
+			addComponentsInfo(item, itemInvComponent, additionalDescription);
 			
 			ignorePrimaryStat = false;
 			itemAttributePrefix = "";
@@ -256,6 +259,10 @@ class W3TooltipComponent
 			if (itemInvComponent.IsItemPotion(item) || itemInvComponent.IsItemFood(item) )
 			{
 				itemInvComponent.GetPotionAttributesForTooltip(item, itemStats);
+			}
+			if (itemInvComponent.IsItemBomb(item)) //modSigns
+			{
+				itemInvComponent.GetBombAttributesForTooltip(item, itemStats);
 			}
 			if (compareItemInv.IsIdValid(compareWithItem))
 			{
@@ -289,7 +296,11 @@ class W3TooltipComponent
 		
 		
 		
-		AddItemStats(itemStats, statsList, tooltipData, ignorePrimaryStat, itemAttributePrefix, isArmorOrWeapon);
+		//modSigns
+		if(itemInvComponent.IsItemOil(item))
+			AddOilStats(itemStats, statsList, tooltipData); //modSigns
+		else
+			AddItemStats(itemStats, statsList, tooltipData, ignorePrimaryStat, itemAttributePrefix, isArmorOrWeapon || itemInvComponent.IsItemTrophy(item)); //modSigns
 		AddBuffStats(item, itemInvComponent, statsList, tooltipData);
 		
 		
@@ -356,13 +367,13 @@ class W3TooltipComponent
 		}
 		
 		
-		if( itemInvComponent.ItemHasTag( item, 'Aerondight' ) )
-		{
-			if( itemInvComponent.GetItemModifierFloat( item, 'PermDamageBoost' ) >= 0.f )
-			{
-				primaryStatOriginValue += itemInvComponent.GetItemModifierFloat( item, 'PermDamageBoost' );
-			}
-		}
+		//if( itemInvComponent.ItemHasTag( item, 'Aerondight' ) )
+		//{
+		//	if( itemInvComponent.GetItemModifierFloat( item, 'PermDamageBoost' ) >= 0.f )
+		//	{
+		//		primaryStatOriginValue += itemInvComponent.GetItemModifierFloat( item, 'PermDamageBoost' );
+		//	}
+		//} //modSigns
 		
 		if (isArmorOrWeapon)
 		{
@@ -395,7 +406,8 @@ class W3TooltipComponent
 			}
 		}
 		
-		if( ( isArmorOrWeapon || categoryName == 'mask' ) && itemInvComponent.IsItemSetItem( item ) )
+		//modSigns
+		if( ( isArmorOrWeapon || categoryName == 'mask' ) && itemInvComponent.IsItemSetItem( item ) && itemInvComponent.ItemHasTag(item, 'SetBonusPiece') || itemInvComponent.IsSetArmorType(item) )
 		{
 			AddSetAttributes( item, itemInvComponent, tooltipData );
 		}		
@@ -428,7 +440,33 @@ class W3TooltipComponent
 		typeString = GetLocStringByKeyExt(GetFilterTypeName( itemInvComponent.GetFilterTypeByItem(item) ));
 		
 		uniqueDescription = "";
-		if (!isArmorOrWeapon)
+		if( itemInvComponent.ItemHasTag(item, 'Mutagen') ) //modSigns
+		{
+			itemInvComponent.FillInMutagenDescription(item, uniqueDescription);
+		}
+		else if( categoryName == 'alchemy_recipe' && theGame.GetDefinitionsManager().ItemHasTag(craftItemName, 'Mutagen') ) //modSigns
+		{
+			itemInvComponent.FillInMutagenDescriptionByName(craftItemName, uniqueDescription);
+		}
+		else if (categoryName == 'gwint') //modSigns
+		{
+			uniqueDescription = "";
+		}
+		else if (!isArmorOrWeapon)
+		{
+			//modSigns: restore unique descriptions
+			if(!itemInvComponent.IsItemHorseItem(item))
+				uniqueDescription = GetLocStringByKeyExt( StrReplaceAll(itemInvComponent.GetItemLocalizedNameByUniqueID(item), "item_name_", "item_desc_") );
+			if(uniqueDescription == "") //no unique description found
+			{
+				if( categoryName == 'junk' && !itemInvComponent.ItemHasRecyclingParts(item) ) //junk with no recycling parts
+					uniqueDescription = GetLocStringByKeyExt( "item_desc_junk_no_ingr" );
+				else //default description
+					uniqueDescription = GetLocStringByKeyExt( itemInvComponent.GetItemLocalizedDescriptionByUniqueID(item) );
+			}
+		}
+		//modSigns: add armor type description
+		else
 		{
 			uniqueDescription = GetLocStringByKeyExt( itemInvComponent.GetItemLocalizedDescriptionByUniqueID(item) );
 		}
@@ -437,24 +475,32 @@ class W3TooltipComponent
 			uniqueDescription = "<font color=\"#FFDB00\">Item name: '" + itemName + "'</font><br>" + uniqueDescription;
 		}
 		
-		if (itemInvComponent.ItemHasTag(item, 'OlgierdSabre'))
-		{
-			uniqueDescription = GetLocStringByKeyExt( "attribute_name_double_strike" );
-		}
+		//if (itemInvComponent.ItemHasTag(item, 'OlgierdSabre'))
+		//{
+		//	uniqueDescription = GetLocStringByKeyExt( "attribute_name_double_strike" );
+		//} //modSigns
 		
 		
 		if( itemInvComponent.ItemHasTag( item, 'Aerondight' ) )
 		{
 			uniqueDescription = GetAerondightTooltipDescription( item );
 		}
+		if( itemInvComponent.ItemHasTag( item, 'PhantomWeapon' ) ) //modSigns
+		{
+			uniqueDescription = GetIrisTooltipDescription( item );
+		}
 		
 		uniqueDescription += additionalDescription;
+		
+		//modSigns: grindstone and armorer's table descriptions
+		uniqueDescription = itemInvComponent.GetEnhancedBuffInfo(item) + uniqueDescription;
 		
 		if (categoryName == 'armor'|| categoryName == 'pants' || categoryName == 'boots' || categoryName == 'gloves')
 		{
 			armorType = "";
 			
-			armorTypeGlyphWordBonus = (thePlayer.HasAbility('Glyphword 2 _Stats', true) || thePlayer.HasAbility('Glyphword 3 _Stats', true) || thePlayer.HasAbility('Glyphword 4 _Stats', true)) && GetWitcherPlayer().IsItemEquipped(item);
+			//armorTypeGlyphWordBonus = (thePlayer.HasAbility('Glyphword 2 _Stats', true) || thePlayer.HasAbility('Glyphword 3 _Stats', true) || thePlayer.HasAbility('Glyphword 4 _Stats', true)) && GetWitcherPlayer().IsItemEquipped(item);
+			armorTypeGlyphWordBonus = false; //modSigns: reworked
 			armorEnumType = itemInvComponent.GetArmorType(item);
 			
 			switch (armorEnumType)
@@ -616,7 +662,30 @@ class W3TooltipComponent
 		tooltipData.SetMemberFlashInt("ItemRarityIdx", itemInvComponent.GetItemQuality(item));
 		tooltipData.SetMemberFlashString("ItemName", rarityColor + itemLabel + "</font>");
 		tooltipData.SetMemberFlashString("IconPath", itemInvComponent.GetItemIconPathByUniqueID(item) );
-		tooltipData.SetMemberFlashString("ItemCategory", categoryLabel);		
+		tooltipData.SetMemberFlashString("ItemCategory", categoryLabel);
+		//modSigns: debug
+		if( FactsQuerySum( "modSigns_debug_labels" ) > 0 )
+		{
+			uniqueDescription += "<br>Name: " + itemInvComponent.GetItemName(item);
+			itemInvComponent.GetItemTags(item, arrNames);
+			if(arrNames.Size() > 0)
+			{
+				uniqueDescription += "<br>Tags: ";
+				for( i = 0; i < arrNames.Size(); i += 1 )
+					uniqueDescription += arrNames[i] + ", ";
+				arrNames.Clear();
+			}
+			itemInvComponent.GetItemAbilities(item, arrNames);
+			arrUniqueNames.Clear();
+			ArrayOfNamesAppendUnique(arrUniqueNames, arrNames);
+			if(arrUniqueNames.Size() > 0)
+			{
+				uniqueDescription += "<br>Abilities: ";
+				for( i = 0; i < arrUniqueNames.Size(); i += 1 )
+					uniqueDescription += arrUniqueNames[i] + ", ";
+				arrUniqueNames.Clear();
+			}
+		}
 		tooltipData.SetMemberFlashString("Description", uniqueDescription);
 		
 		tooltipData.SetMemberFlashArray("SocketsList", socketsList);
@@ -714,6 +783,62 @@ class W3TooltipComponent
 		}
 	}
 	
+	//modSigns
+	private function addComponentsInfo( item : SItemUniqueId, itemInvComponent : CInventoryComponent, out description : string )
+	{
+		var schematic 		 	 : SCraftingSchematic;		
+		var recipe 			 	 : SAlchemyRecipe;
+		var enchantment			 : SEnchantmentSchematic;
+		var itemName			 : name;
+		var count	 			 : int;
+		var curItemPart			 : SItemParts;
+		var ingredients			 : array<SItemParts>;
+		var i 					 : int;
+		var itemQuantity		 : int;
+		var fontColor	 		 : string;
+
+		itemName = itemInvComponent.GetItemName(item);
+		schematic = getCraftingSchematicFromName(itemName);
+			
+		if(schematic.schemName != '')
+		{
+			ingredients = schematic.ingredients;
+		}			
+		else 
+		{
+			recipe = getAlchemyRecipeFromName(itemName);
+			if(recipe.recipeName != '')
+			{
+				ingredients = recipe.requiredIngredients;
+			}
+			else
+			{
+				enchantment = getEnchantmentSchematicFromName(itemName);
+				if(enchantment.schemName != '')
+				{
+					ingredients = enchantment.ingredients;
+				}
+			}
+		}
+			
+		count = ingredients.Size();
+		for(i = 0; i < count; i += 1)
+		{
+			curItemPart = ingredients[i];
+				
+			itemQuantity = m_playerInv.GetItemQuantityByName(curItemPart.itemName);
+			if(curItemPart.quantity > itemQuantity)
+			{
+				fontColor = "<font color=\"#FF0000\">";
+			}
+			else
+			{
+				fontColor = "<font color=\"#00FF00\">";
+			}
+			description += "<br/>" + fontColor + itemQuantity + " / " + curItemPart.quantity + " " + GetLocStringByKeyExt( m_playerInv.GetItemLocalizedNameByName(curItemPart.itemName ) ) + "</font>";
+		}
+	}
+	
 	
 	private final function IncreaseNGPPrimaryStatValue( category : name, out itemStats : array<SAttributeTooltip> )
 	{
@@ -805,27 +930,26 @@ class W3TooltipComponent
 		}
 	}
 	
+	//modSigns
 	private function AddSetAttributes( itemId : SItemUniqueId, itemInvComponent : CInventoryComponent, out flashDataObj : CScriptedFlashObject ):bool
 	{
 		var setAttributesList : CScriptedFlashArray;
 		var setAttribute  	  : CScriptedFlashObject;
-		var currentCount	  : int;
-		var requiredCount	  : int;
-		var desc1			  : string;
-		var desc2			  : string;
-		var counterText		  : string;
-		var isActive1		  : bool;
-		var isActive2		  : bool;
-		var setType			  : EItemSetType;
+		var currentCount, activationCount, fullCount : int;
+		var desc1, desc2, counterText : string;
+		var isActive1, isActive2 : bool;
+		var setType : EItemSetType;
 		
-		setType = GetWitcherPlayer().GetSetBonusStatus( itemId, desc1, desc2, isActive1, isActive2 );
+		//modSigns
+		setType = GetWitcherPlayer().GetSetBonusStatusByName( itemInvComponent.GetItemName(itemId), desc1, desc2, isActive1, isActive2 );
 		
 		if( setType != EIST_Undefined )
 		{
-			currentCount = GetWitcherPlayer().GetSetPartsEquipped( setType );
-			requiredCount = theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
+			currentCount = GetWitcherPlayer().GetSetPartsEquippedRaw( setType );
+			activationCount = GetNumItemsRequiredForSetActivation(setType);
+			fullCount = GetNumItemsRequiredForFullSet(setType);
 			
-			counterText = currentCount + "/" + requiredCount;
+			counterText = currentCount + "/" + fullCount;
 			
 			flashDataObj.SetMemberFlashString( "SetCounter", counterText);
 			
@@ -841,17 +965,21 @@ class W3TooltipComponent
 			}
 			
 			
+			//modSigns
+			if( isActive1 && GetWitcherPlayer().HasMixedSetsEquipped() )
+				desc1 = "(" + GetWitcherPlayer().GetSetPartsEquipped( setType ) + "/" + fullCount + ") " + desc1;
+			
 			setAttribute = flashDataObj.CreateFlashObject();
-			setAttribute.SetMemberFlashString( "value", theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS );
+			setAttribute.SetMemberFlashString( "value", activationCount );
 			setAttribute.SetMemberFlashString( "name", desc1 );
 			setAttribute.SetMemberFlashBool( "active", isActive1 );
 			setAttributesList.PushBackFlashObject( setAttribute );
 			
-			if( desc2 != "" )
+			if( desc2 != "" && fullCount != activationCount )
 			{
 				
 				setAttribute = flashDataObj.CreateFlashObject();
-				setAttribute.SetMemberFlashString( "value", theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS );
+				setAttribute.SetMemberFlashString( "value", fullCount );
 				setAttribute.SetMemberFlashString( "name", desc2 );
 				setAttribute.SetMemberFlashBool( "active", isActive2 );
 				setAttributesList.PushBackFlashObject( setAttribute );
@@ -860,6 +988,24 @@ class W3TooltipComponent
 			flashDataObj.SetMemberFlashArray( "SetStatsList", setAttributesList );
 			
 			return true;
+		}
+		//modSigns
+		else
+		{
+			activationCount = 4;
+			fullCount = 4;
+			currentCount = itemInvComponent.GetSetArmorItemDescription(itemId, counterText, desc1);
+			isActive1 = (currentCount == activationCount);
+			
+			flashDataObj.SetMemberFlashString( "SetCounter", counterText);
+			setAttributesList = flashDataObj.CreateFlashArray();
+			setAttribute = flashDataObj.CreateFlashObject();
+			setAttribute.SetMemberFlashString( "value", activationCount );
+			setAttribute.SetMemberFlashString( "name", desc1 );
+			setAttribute.SetMemberFlashBool( "active", isActive1 );
+			setAttributesList.PushBackFlashObject( setAttribute );
+			
+			flashDataObj.SetMemberFlashArray( "SetStatsList", setAttributesList );
 		}
 		
 		return false;
@@ -974,9 +1120,9 @@ class W3TooltipComponent
 		var oilMaxCharges : int;
 		var oilBonus 	  : float;
 		var oilStats 	  : array<SAttributeTooltip>;
-		var oilStatFirst  : SAttributeTooltip;
+		//var oilStatFirst  : SAttributeTooltip; //modSigns
 		var oilBonusValue : string;
-		var i, count	  : int;
+		var i, j, count	  : int; //modSigns
 		
 		var appliedOilsList : array< W3Effect_Oil >;
 		var appliedOil    	: W3Effect_Oil;
@@ -996,35 +1142,69 @@ class W3TooltipComponent
 				oilMaxCharges = appliedOil.GetAmmoMaxCount();		
 				itemInvComponent.GetItemStatsFromName( oilName, oilStats );
 				
-				if (oilStats.Size() > 0)
+				//modSigns
+				if( oilCharges < 1 )
+					continue;
+					
+				oilBonusValue = oilLocName + " (" + oilCharges + "/" + oilMaxCharges + ")";
+				flashDataObj.SetMemberFlashString("appliedOilInfo" +(string)(i + 1), oilBonusValue);
+				
+				/*for( j = 0; j < oilStats.Size(); j += 1 )
 				{
-					oilStatFirst = oilStats[0];
-					if( oilStatFirst.percentageValue )
+					if( oilStats[j].percentageValue )
 					{
-						oilBonusValue = "+" + RoundMath(oilStatFirst.value * 100) + " %";
+						oilBonusValue = "+" + RoundMath(oilStats[j].value * 100) + " %";
 					}
 					else
 					{
-						oilBonusValue = "+" + RoundMath(oilStatFirst.value);
+						oilBonusValue = "+" + RoundMath(oilStats[j].value);
 					}
-				}
-				
-				if(oilCharges <=0)
-				{
-					oilBonusValue = "<font color=\"#FF0000\">" + oilBonusValue +  " " + oilStatFirst.attributeName + " (" + oilLocName + ")(" + oilCharges + "/" + oilMaxCharges + ")"+ "</font>";
-				}
-				else
-				{
-					oilBonusValue = oilBonusValue +  " " + oilStatFirst.attributeName + " (" + oilLocName + ")(" + oilCharges + "/" + oilMaxCharges + ")";
-				}
-				
-				flashDataObj.SetMemberFlashString("appliedOilInfo" +(string)(i + 1), oilBonusValue);
+					
+					oilBonusValue = oilLocName + ": " + oilBonusValue +  " " + oilStats[j].attributeName;
+					
+					flashDataObj.SetMemberFlashString("appliedOilInfo" +(string)((i + 1)*count + j + 1), oilBonusValue);
+				}*/
 			}
 		}
 	}
 	
+	//modSigns
+	private function AddOilStats(itemStats : array<SAttributeTooltip>, out resultGFxArray : CScriptedFlashArray, rootGFxObject : CScriptedFlashObject) : void
+	{
+		var l_flashObject : CScriptedFlashObject;
+		var currentStat	  : SAttributeTooltip;
+		var i, statsCount : int;
+		var valuePrefix	  : string;
+		var valuePostfix  : string;
+		var valueString   : string;
+		var min, max      : SAbilityAttributeValue;
+		
+		statsCount= itemStats.Size();
+		for( i = 0; i < statsCount; i += 1) 
+		{
+			currentStat = itemStats[i];
+			if( GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_1 ) ) //new wolf set lvl 1 bonus
+			{
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_1 ), 'per_piece_oil_bonus', min, max );
+				currentStat.value *= 1 + CalculateAttributeValue(min) * GetWitcherPlayer().GetSetPartsEquipped( EIST_Wolf );
+			}
+			valuePrefix = "";
+			valuePostfix = "";
+			valueString = NoTrailZeros( RoundMath( currentStat.value * 100 ) ) + " %";
+			l_flashObject = rootGFxObject.CreateFlashObject();
+			l_flashObject.SetMemberFlashString("id", NameToString(currentStat.originName));
+			l_flashObject.SetMemberFlashString("name", currentStat.attributeName);
+			l_flashObject.SetMemberFlashString("color", currentStat.attributeColor);				
+			l_flashObject.SetMemberFlashString("value", valuePrefix + valueString + valuePostfix);
+			l_flashObject.SetMemberFlashString("valuePrefix", valuePrefix);
+			l_flashObject.SetMemberFlashBool("isPercentageValue", currentStat.percentageValue);
+			l_flashObject.SetMemberFlashNumber("floatValue", currentStat.value);
+			resultGFxArray.PushBackFlashObject(l_flashObject);
+		}
+	}
 	
-	private function AddItemStats(itemStats : array<SAttributeTooltip>, out resultGFxArray : CScriptedFlashArray, rootGFxObject : CScriptedFlashObject, ignorePrimaryStat : bool, defaultPrefix : string, isArmorOrWeapon : bool):void
+	
+	private function AddItemStats(itemStats : array<SAttributeTooltip>, out resultGFxArray : CScriptedFlashArray, rootGFxObject : CScriptedFlashObject, ignorePrimaryStat : bool, defaultPrefix : string, toggleToxicityDisplayMode : bool):void //modSigns
 	{
 		var l_flashObject : CScriptedFlashObject;
 		var currentStat	  : SAttributeTooltip;
@@ -1038,22 +1218,48 @@ class W3TooltipComponent
 		for( i = 0; i < statsCount; i += 1) 
 		{
 			currentStat = itemStats[i];
+			//modSigns begin
+			if(!theGame.params.IsArmorRegenPenaltyEnabled() && currentStat.originName == 'staminaRegen_armor_mod')
+			{
+				continue;
+			}
 			if (!ignorePrimaryStat || !currentStat.primaryStat)
 			{
 				
+				if (currentStat.originName == 'toxicity' && !toggleToxicityDisplayMode)
+				{
+					if (GetWitcherPlayer().CanUseSkill(S_Alchemy_s03))
+					{
+						currentStat.value -= CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s03, 'toxicityReduction', false, false)) * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s03);
+					}
+				}
+				if (currentStat.originName == 'toxicity_offset' && !toggleToxicityDisplayMode)
+				{
+					if (GetWitcherPlayer().CanUseSkill(S_Alchemy_s14))
+					{
+						currentStat.value *= MaxF(0, 1 - GetWitcherPlayer().GetAdaptationToxReduction());
+					}
+				}
+				//modSigns end
+				
 				if (currentStat.originName == 'toxicity_offset')
 				{
-					currentStat.attributeName = GetAttributeNameLocStr('toxicity', false);
-					currentStat.originName = 'toxicity';
+					//modSigns begin
+					//currentStat.attributeName = GetAttributeNameLocStr('toxicity', false);
+					//currentStat.originName = 'toxicity';
 					currentStat.percentageValue = false;
+					valuePrefix = "";
+					valuePostfix = "";
+					//modSigns end
 				}
 				if (currentStat.originName == 'toxicity')
 				{
-					if (!isArmorOrWeapon)
+					if (!toggleToxicityDisplayMode) //modSigns
 					{
-						maxToxicity = RoundMath(thePlayer.GetStatMax( BCS_Toxicity ));
+						//maxToxicity = RoundMath(thePlayer.GetStatMax( BCS_Toxicity ));
 						valuePrefix = "";
-						valuePostfix = "/" + maxToxicity;
+						//valuePostfix = "/" + maxToxicity;
+						valuePostfix = "";
 					}
 					else
 					{
@@ -1063,7 +1269,7 @@ class W3TooltipComponent
 					}
 				}
 				else
-				if (currentStat.originName == 'duration')
+				if (currentStat.originName == 'duration' || currentStat.originName == 'cloud_duration' || currentStat.originName == 'duration_out_of_cloud' || currentStat.originName == 'poison_immunity_duration') //modSigns
 				{
 					valuePrefix = "";
 					valuePostfix = " " + GetLocStringByKeyExt("per_second");
@@ -1099,7 +1305,7 @@ class W3TooltipComponent
 				{
 					valueString = NoTrailZeros( RoundMath( currentStat.value * 100 ) ) + " %";
 				}
-				else if(currentStat.originName == 'focus_gain')
+				else if(currentStat.originName == 'focus_gain' /*|| currentStat.originName == 'mutagen02_focus'*/) //modSigns
 				{
 					valueString = NoTrailZeros(currentStat.value);
 				}
@@ -1107,6 +1313,9 @@ class W3TooltipComponent
 				{
 					valueString = NoTrailZeros( RoundMath( currentStat.value ) );
 				}
+				//modSigns: remove + prefix for negative stat values
+				if( currentStat.value < 0 && valuePrefix == "+" )
+					valuePrefix = "";
 				
 				l_flashObject = rootGFxObject.CreateFlashObject();
 				l_flashObject.SetMemberFlashString("id", NameToString(currentStat.originName));
@@ -1134,12 +1343,20 @@ class W3TooltipComponent
 		
 		var isEdibles : bool;
 		var isDrinks  : bool;
+		var isPotion, isMutagenPotion  : bool; //modSigns
 		
 		var t1:int;
 		var t2:int;
 		
 		isEdibles = itemInvComponent.ItemHasTag(itemId, 'Edibles');
 		isDrinks = itemInvComponent.ItemHasTag(itemId, 'Drinks');
+		isPotion = itemInvComponent.ItemHasTag(itemId, 'Potion'); //modSigns
+		isMutagenPotion = itemInvComponent.ItemHasTag(itemId, 'Mutagen'); //modSigns
+		
+		if (isPotion) //modSigns
+		{
+			buffDuration = GetWitcherPlayer().CalculatePotionDuration( itemId, isMutagenPotion );
+		}
 		
 		if (isEdibles || isDrinks || itemInvComponent.IsItemBomb(itemId))
 		{
@@ -1167,6 +1384,10 @@ class W3TooltipComponent
 					curBufValue = curFlashObject.GetMemberFlashNumber("floatValue");
 					
 					curBufValue += buffDuration;
+					if (isPotion) //modSigns
+					{
+						curBufValue = buffDuration;
+					}
 					curBufValueStr = NoTrailZeros( RoundMath( curBufValue) ) + " " + GetLocStringByKeyExt("per_second");
 					
 					curFlashObject.SetMemberFlashString("value",  curBufValueStr);
@@ -1176,8 +1397,15 @@ class W3TooltipComponent
 				}
 			}
 			
+			//modSigns: perk_15 duration
+			if(itemInvComponent.ItemHasTag(itemId, 'Alcohol') && GetWitcherPlayer().CanUseSkill(S_Perk_15))
+			{
+				min = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_15, 'duration_bonus', false, false );
+				buffDuration *= 1 + min.valueMultiplicative;
+			}
+			
 			curFlashObject = rootGFxObject.CreateFlashObject();
-			if (isEdibles && GetWitcherPlayer().HasRunewordActive('Runeword 6 _Stats') && GetWitcherPlayer().IsItemEquipped(itemId))
+			if (isEdibles && GetWitcherPlayer().HasRunewordActive('Runeword 6 _Stats') /*&& GetWitcherPlayer().IsItemEquipped(itemId)*/) //modSigns
 			{
 				theGame.GetDefinitionsManager().GetAbilityAttributeValue('Runeword 6 _Stats', 'runeword6_duration_bonus', min, max);
 				curBufValueStr = "<font color='#E67E0B'>" + NoTrailZeros ( RoundMath( buffDuration * (1 + min.valueMultiplicative) )) + " " + GetLocStringByKeyExt("per_second") + "</font>";
@@ -1936,7 +2164,7 @@ class W3TooltipComponent
 		var rec : SAlchemyRecipe;
 		
 		dm = theGame.GetDefinitionsManager();
-		main = dm.GetCustomDefinition('alchemy_recipies');
+		main = dm.GetCustomDefinition('alchemy_recipes'); //modSigns: no one ever tests things, it seems
 		
 		for(i=0; i<main.subNodes.Size(); i+=1)
 		{
@@ -1981,48 +2209,80 @@ class W3TooltipComponent
 		return rec;
 	}
 	
+	//modSigns: unique description for Iris sword
+	public function GetIrisTooltipDescription( sword : SItemUniqueId ) : string
+	{
+		var uniqueDesc		: string;
+		var argsInt			: array<int>;
+		var dm				: CDefinitionsManagerAccessor = theGame.GetDefinitionsManager();
+		var min, max		: SAbilityAttributeValue;
+		var phantomWeapon	: W3Effect_PhantomWeapon;
+		var healthPrc		: float;
+		var hitsToCharge	: float;
+	
+		dm.GetAbilityAttributeValue( 'PhantomWeaponEffect', 'dmg_bonus_prc', min, max );
+		argsInt.PushBack( RoundMath( min.valueAdditive * 100 ) );
+		healthPrc = min.valueAdditive;
+		dm.GetAbilityAttributeValue( 'PhantomWeaponEffect', 'hitsToCharge', min, max );
+		argsInt.PushBack( RoundMath( min.valueAdditive ) );
+		hitsToCharge = min.valueAdditive;
+		dm.GetAbilityAttributeValue( 'PhantomWeaponEffect', 'stackDrainDelay', min, max );
+		argsInt.PushBack( RoundMath( min.valueAdditive ) );
+		argsInt.PushBack( RoundMath( min.valueAdditive ) );
+		
+		phantomWeapon = (W3Effect_PhantomWeapon)thePlayer.GetBuff( EET_PhantomWeapon );
+		if( phantomWeapon )
+			argsInt.PushBack( phantomWeapon.GetCurrentCount() );
+		else
+			argsInt.PushBack( 0 );
+		
+		argsInt.PushBack( RoundMath( hitsToCharge ) );
+		argsInt.PushBack( RoundMath( thePlayer.GetMaxHealth() * healthPrc ) );
+		
+		uniqueDesc = GetLocStringByKeyExtWithParams( "attribute_name_double_strike", argsInt );
+		
+		return uniqueDesc;
+	}
+	
+	//modSigns: redone for the new mechanic
 	public function GetAerondightTooltipDescription( sword : SItemUniqueId ) : string
 	{
 		var uniqueDesc		: string;
-		var argsString		: array<string>;
+		var argsInt			: array<int>;
 		var val_1, val_2	: float;
 		var min, max		: SAbilityAttributeValue;
+		var aerondight		: W3Effect_Aerondight;
 		var dm				: CDefinitionsManagerAccessor = theGame.GetDefinitionsManager();
 		
-		dm.GetAbilityAttributeValue( 'AerondightEffect', 'dmg_bonus', min, max );		
-		argsString.PushBack( NoTrailZeros( RoundF( min.valueMultiplicative * 100 ) ) );
-		uniqueDesc = GetLocStringByKeyExtWithParams( "attribute_name_aerondight",,, argsString );
+		dm.GetAbilityAttributeValue( 'AerondightEffect', 'dmg_boost_per_enemy', min, max );
+		argsInt.PushBack( RoundMath( min.valueAdditive ) );
+		dm.GetAbilityAttributeValue( 'AerondightEffect', 'crit_dmg_bonus', min, max );
+		argsInt.PushBack( RoundMath( min.valueAdditive * 100 ) );
+		dm.GetAbilityAttributeValue( 'AerondightEffect', 'hitsToCharge', min, max );
+		argsInt.PushBack( RoundMath( min.valueAdditive ) );
+		dm.GetAbilityAttributeValue( 'AerondightEffect', 'stackDrainDelay', min, max );
+		argsInt.PushBack( RoundMath( min.valueAdditive ) );
 		
-		argsString.Clear();
+		uniqueDesc = GetLocStringByKeyExtWithParams( "attribute_name_aerondight", argsInt );
 		
+		argsInt.Clear();
 		
-		val_1 = thePlayer.inv.GetItemModifierFloat( sword, 'PermDamageBoost' );
-		
-		
-		if( val_1 > 0 )
+		aerondight = (W3Effect_Aerondight)thePlayer.GetBuff( EET_Aerondight );
+		if( aerondight )
 		{
-			argsString.PushBack( "<font color='#ffffff'>" + FloatToString( val_1 ) + "</font>" );
+			argsInt.PushBack( aerondight.GetCurrentCount() );
+			argsInt.PushBack( aerondight.GetMaxCount() );
+			argsInt.PushBack( RoundMath( aerondight.GetDamageBoost() ) );
 		}
 		else
 		{
-			argsString.PushBack( "<font color='#ffffff'>" + FloatToString( 0 ) + "</font>" );
+			argsInt.PushBack( 0 );
+			dm.GetAbilityAttributeValue( 'AerondightEffect', 'hitsToCharge', min, max );
+			argsInt.PushBack( RoundMath( min.valueAdditive ) );
+			argsInt.PushBack( 0 );
 		}
 		
-		
-		val_2 = thePlayer.GetLevel() - thePlayer.inv.GetItemLevel( sword ) + 1;
-		
-		dm.GetAbilityAttributeValue( 'AerondightEffect', 'stacks_per_level', min, max );		
-		val_2 *= min.valueAdditive;
-		
-		dm.GetAbilityAttributeValue( 'AerondightEffect', 'perm_dmg_boost', min, max );		
-		val_2 *= min.valueAdditive;
-		
-		argsString.PushBack( "<font color='#ffffff'>" + FloatToString( val_2 ) + "</font>" );
-		
-		
-		uniqueDesc += "<br>" + "<br>";
-		
-		uniqueDesc += GetLocStringByKeyExtWithParams( "attribute_name_aerondight_counter",,,argsString );
+		uniqueDesc += GetLocStringByKeyExtWithParams( "attribute_name_aerondight_counter", argsInt );
 		
 		return uniqueDesc;
 	}
@@ -2058,8 +2318,18 @@ function CalculateStatsComparance(itemStats : array<SAttributeTooltip>, compareI
 	statsCount = itemStats.Size();
 	for( i = 0; i < statsCount; i += 1 ) 
 	{
+		//modSigns
+		if(!theGame.params.IsArmorRegenPenaltyEnabled() && itemStats[i].originName == 'staminaRegen_armor_mod')
+		{
+			continue;
+		}
 		if (!(itemStats[i].primaryStat && ignorePrimStat))
 		{
+			if(itemStats[i].originName == 'slow_motion') //modSigns
+				itemStats[i].attributeName = GetLocStringByKey('attribute_name_SlowdownEffect');
+			else if(itemStats[i].originName == 'air') //modSigns
+				itemStats[i].attributeName = GetLocStringByKey('panel_hud_breath');
+			
 			l_flashObject = rootGFxObject.CreateFlashObject();
 			l_flashObject.SetMemberFlashString("name",itemStats[i].attributeName);
 			l_flashObject.SetMemberFlashString("color",itemStats[i].attributeColor);
@@ -2139,8 +2409,17 @@ function CalculateStatsComparance(itemStats : array<SAttributeTooltip>, compareI
 				
 				if (strDiffValue == "" && !statToCompareExist)
 				{
-					strDifference = "better";
-					strDiffPrefix = "<font color=\"#19D900\"> +";
+					//modSigns: fix negative modifiers comparison
+					if( itemStats[i].value < 0 )
+					{
+						strDifference = "worse";
+						strDiffPrefix = "<font color=\"#E00000\"> ";
+					}
+					else
+					{
+						strDifference = "better";
+						strDiffPrefix = "<font color=\"#19D900\"> +";
+					}
 					strDiffPostfix = "</font>";
 					if( itemStats[i].percentageValue )
 					{
@@ -2166,7 +2445,7 @@ function CalculateStatsComparance(itemStats : array<SAttributeTooltip>, compareI
 				valuePostfix = "";
 			}
 			else
-			if (itemStats[i].originName == 'duration')
+			if (itemStats[i].originName == 'duration' || itemStats[i].originName == 'cloud_duration' || itemStats[i].originName == 'duration_out_of_cloud' || itemStats[i].originName == 'poison_immunity_duration') //modSigns
 			{
 				valuePrefix = "";
 				valuePostfix = " " + GetLocStringByKeyExt("per_second");
@@ -2183,6 +2462,10 @@ function CalculateStatsComparance(itemStats : array<SAttributeTooltip>, compareI
 				valuePostfix = "";
 			}
 			
+			//modSigns: remove + prefix for negative stat values
+			if( itemStats[i].value < 0 && valuePrefix == "+" )
+				valuePrefix = "";
+					
 			if( itemStats[i].percentageValue )
 			{
 				l_flashObject.SetMemberFlashString("value", valuePrefix + RoundMath( itemStats[i].value * 100 ) + " %" + valuePostfix );
@@ -2213,22 +2496,38 @@ function CalculateStatsComparance(itemStats : array<SAttributeTooltip>, compareI
 		
 		for( j = 0; j < compareItemStats.Size(); j += 1 )
 		{
+			//modSigns
+			if(!theGame.params.IsArmorRegenPenaltyEnabled() && compareItemStats[j].originName == 'staminaRegen_armor_mod')
+			{
+				continue;
+			}
 			if (!(compareItemStats[j].primaryStat && ignorePrimStat))
 			{
 				l_flashObject = rootGFxObject.CreateFlashObject();
 				l_flashObject.SetMemberFlashString("name",compareItemStats[j].attributeName);
 				l_flashObject.SetMemberFlashString("color",compareItemStats[j].attributeColor);
-				l_flashObject.SetMemberFlashString("icon", "worse");
+				//modSigns: negative modifiers comparison fix
+				if( compareItemStats[j].value < 0 )
+				{
+					l_flashObject.SetMemberFlashString("icon", "better");
+					diffValue = "<font color=\"#19D900\"> +";
+					compareItemStats[j].value *= -1;
+				}
+				else
+				{
+					l_flashObject.SetMemberFlashString("icon", "worse");
+					diffValue = "<font color=\"#E00000\"> -";
+				}
 				
 				if( compareItemStats[j].percentageValue )
 				{
 					strValue = valuePrefix + "0 %";
-					diffValue = "<font color=\"#E00000\"> -" + RoundMath( compareItemStats[j].value * 100 ) + " %</font>";
+					diffValue /*= "<font color=\"#E00000\"> -" +*/ += RoundMath( compareItemStats[j].value * 100 ) + " %</font>";
 				}
 				else
 				{
 					strValue = valuePrefix + "0";
-					diffValue = "<font color=\"#E00000\"> -" + RoundMath(compareItemStats[j].value) + "</font>";
+					diffValue /*= "<font color=\"#E00000\"> -" +*/ += RoundMath(compareItemStats[j].value) + "</font>";
 				}
 				
 				l_flashObject.SetMemberFlashString("value", strValue);

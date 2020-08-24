@@ -32,11 +32,16 @@ abstract class W3Mutagen_Effect extends CBaseGameplayEffect
 		
 		mutParams = (W3MutagenBuffCustomParams)customParams;
 		toxicityOffset = mutParams.toxicityOffset;
-		witcher.AddToxicityOffset(toxicityOffset);
 		
-		if(witcher.CanUseSkill(S_Alchemy_s13))
+		if(toxicityOffset > 0) //modSigns
 		{
-			witcher.AddAbilityMultiple(witcher.GetSkillAbilityName(S_Alchemy_s13), witcher.GetSkillLevel(S_Alchemy_s13));
+			witcher.AddToxicityOffset(toxicityOffset);
+		
+			/*if(witcher.CanUseSkill(S_Alchemy_s13))
+			{
+				witcher.AddAbilityMultiple(witcher.GetSkillAbilityName(S_Alchemy_s13), witcher.GetSkillLevel(S_Alchemy_s13));
+			}*/
+			witcher.RecalcTransmutationAbilities(); //modSigns
 		}
 		
 		
@@ -54,11 +59,16 @@ abstract class W3Mutagen_Effect extends CBaseGameplayEffect
 		var witcher : W3PlayerWitcher;
 		
 		witcher = GetWitcherPlayer();
-		witcher.RemoveToxicityOffset(toxicityOffset);
 		
-		if(witcher.CanUseSkill(S_Alchemy_s13))
+		if(toxicityOffset > 0) //modSigns
 		{
-			witcher.RemoveAbilityMultiple(witcher.GetSkillAbilityName(S_Alchemy_s13), witcher.GetSkillLevel(S_Alchemy_s13));
+			witcher.RemoveToxicityOffset(toxicityOffset);
+		
+			/*if(witcher.CanUseSkill(S_Alchemy_s13))
+			{
+				witcher.RemoveAbilityMultiple(witcher.GetSkillAbilityName(S_Alchemy_s13), witcher.GetSkillLevel(S_Alchemy_s13));
+			}*/
+			witcher.RecalcTransmutationAbilities(); //modSigns
 		}
 		
 		target.RemoveAbilityAll( abilityName );

@@ -19,6 +19,8 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 	private saved var dmgTypeName 			: name;							
 	private saved var toxThresholdEffect	: int;
 	private var delayToNextVFXUpdate		: float;
+	
+	private var mutation4factor				: float; //modSigns
 		
 	
 	public function CacheSettings()
@@ -52,51 +54,35 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 	}
 	
 	
+	private var playerHadQuen : bool; //modSigns
 	
 	event OnUpdate(deltaTime : float)
 	{
-		var dmg, maxStat, toxicity, threshold, drainVal : float;
-		var dmgValue, min, max : SAbilityAttributeValue;
+		var min, max : SAbilityAttributeValue; //modSigns
+		var dmg, /*maxStat,*/ toxicity, threshold, drainVal : float;
+		//var dmgValue, min, max : SAbilityAttributeValue;
 		var currentStateName 	: name;
 		var currentThreshold	: int;
 	
 		super.OnUpdate(deltaTime);
 		
-		
 		toxicity = GetWitcherPlayer().GetStat(BCS_Toxicity, false) / GetWitcherPlayer().GetStatMax(BCS_Toxicity);
 		threshold = GetWitcherPlayer().GetToxicityDamageThreshold();
 		
-		
-		if( toxicity >= 0.5f && !isPlayingCameraEffect)
+		if( toxicity >= threshold && !isPlayingCameraEffect)
 			switchCameraEffect = true;
-		else if(toxicity < 0.5f && isPlayingCameraEffect)
+		else if(toxicity < threshold && isPlayingCameraEffect)
 			switchCameraEffect = true;
 
 		
 		if( delayToNextVFXUpdate <= 0 )
 		{		
-			
-			
-			if(toxicity < 0.25f)		currentThreshold = 0;
-			else if(toxicity < 0.5f)	currentThreshold = 1;
-			else if(toxicity < 0.75f)	currentThreshold = 2;
-			else						currentThreshold = 3;
-			
-			if( toxThresholdEffect != currentThreshold && !target.IsEffectActive('invisible' ) )
-			{
-				toxThresholdEffect = currentThreshold;
-				
-				switch ( toxThresholdEffect )
-				{
-					case 0: PlayHeadEffect('toxic_000_025'); break;
-					case 1: PlayHeadEffect('toxic_025_050'); break;
-					case 2: PlayHeadEffect('toxic_050_075'); break;
-					case 3: PlayHeadEffect('toxic_075_100'); break;
-				}
-				
-				
-				delayToNextVFXUpdate = 2;
-			}			
+			//modSigns begin
+			//Quen playing effects on the player breaks toxicity effects
+			UpdateHeadEffect(toxThresholdEffect, ToxPrc2EffectIdx(toxicity), GetWitcherPlayer().IsAnyQuenActive() || playerHadQuen);
+			delayToNextVFXUpdate = 2;
+			playerHadQuen = GetWitcherPlayer().IsAnyQuenActive();
+			//modSigns end
 		}
 		else
 		{
@@ -109,15 +95,18 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 			currentStateName = thePlayer.GetCurrentStateName();
 			if(currentStateName != 'Meditation' && currentStateName != 'MeditationWaiting')
 			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, dmgTypeName, min, max);	
+				//modSigns: rework
+				//theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, dmgTypeName, min, max);	
 			
-				if(DamageHitsVitality(dmgTypeName))
-					maxStat = target.GetStatMax(BCS_Vitality);
-				else
-					maxStat = target.GetStatMax(BCS_Essence);
+				//if(DamageHitsVitality(dmgTypeName))
+				//	maxStat = target.GetStatMax(BCS_Vitality);
+				//else
+				//	maxStat = target.GetStatMax(BCS_Essence);
 				
-				dmgValue = GetAttributeRandomizedValue(min, max);
-				dmg = MaxF(0, deltaTime * ( dmgValue.valueAdditive + (dmgValue.valueMultiplicative * (maxStat + dmgValue.valueBase) ) ));
+				//dmgValue = GetAttributeRandomizedValue(min, max);
+				//dmg = MaxF(0, deltaTime * ( dmgValue.valueAdditive + (dmgValue.valueMultiplicative * (maxStat + dmgValue.valueBase) ) ));
+				dmg = GetWitcherPlayer().GetToxicityDamage();
+				dmg = MaxF(0, deltaTime * dmg);
 				
 				
 				
@@ -134,22 +123,86 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 			
 			if(thePlayer.CanUseSkill(S_Alchemy_s20) && !target.HasBuff(EET_IgnorePain))
 				target.AddEffectDefault(EET_IgnorePain, target, 'IgnorePain');
+			
+			//modSigns: Frenzy
+			if(thePlayer.CanUseSkill(S_Alchemy_s16) && !thePlayer.HasAbility(SkillEnumToName(S_Alchemy_s16)))
+				thePlayer.AddAbilityMultiple(SkillEnumToName(S_Alchemy_s16), thePlayer.GetSkillLevel(S_Alchemy_s16));
+			
+			//modSigns: new Euphoria mutation
+			if(GetWitcherPlayer().IsMutationActive(EPMT_Mutation10) && !thePlayer.HasBuff(EET_Mutation10) && thePlayer.IsInCombat())
+				thePlayer.AddEffectDefault(EET_Mutation10, NULL, "Mutation 10");
 		}
 		else
 		{
 			
 			target.RemoveBuff(EET_IgnorePain);
+			
+			//modSigns: Frenzy
+			thePlayer.RemoveAbilityAll(SkillEnumToName(S_Alchemy_s16));
+			
+			//modSigns: new Euphoria mutation
+			thePlayer.RemoveBuff(EET_Mutation10);
 		}
 			
-		
-		drainVal = deltaTime * (effectValue.valueAdditive + (effectValue.valueMultiplicative * (effectValue.valueBase + target.GetStatMax(BCS_Toxicity)) ) );
-		
-		
-		if(!target.IsInCombat())
-			drainVal *= 2;
+		if(GetWitcherPlayer().GetStat(BCS_Toxicity, true) > 0) //modSigns
+		{
+			drainVal = deltaTime * (effectValue.valueAdditive + (effectValue.valueMultiplicative * (effectValue.valueBase + target.GetStatMax(BCS_Toxicity)) ) );
 			
-		effectManager.CacheStatUpdate(BCS_Toxicity, drainVal);
+		
+			if(GetWitcherPlayer().IsMutationActive(EPMT_Mutation4)) //modSigns: Toxic Blood mutation
+			{
+				if(mutation4factor <= 0)
+				{
+					theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation4', 'toxicityRegenFactor', min, max);
+					mutation4factor = min.valueAdditive;
+				}
+				drainVal *= MaxF(0.01, 1 - mutation4factor);
+			}
+			
+			//if(!target.IsInCombat())
+			//	drainVal *= 2; //modSigns - removed
+				
+			effectManager.CacheStatUpdate(BCS_Toxicity, drainVal);
+		}
 	}
+	
+	//modSigns begin
+	function ToxPrc2EffectIdx(toxPrc : float) : int
+	{
+		if(toxPrc < 0.25f)		return 0;
+		else if(toxPrc < 0.5f)	return 1;
+		else if(toxPrc < 0.75f)	return 2;
+		else					return 3;
+	}
+	
+	function EffectIdx2EffectName(effectIdx : int) : name
+	{
+		switch(effectIdx)
+		{
+			case 0: return 'toxic_000_025';
+			case 1: return 'toxic_025_050';
+			case 2: return 'toxic_050_075';
+			case 3: return 'toxic_075_100';
+		}
+		return '';
+	}
+	
+	function UpdateHeadEffect( prevEffectIdx : int, nextEffectIdx : int, forceUpdate : bool )
+	{
+		var prevEffect, nextEffect : name;
+		
+		if(target.IsEffectActive('invisible') || (prevEffectIdx == nextEffectIdx && !forceUpdate))
+			return;
+		
+		prevEffect = EffectIdx2EffectName(prevEffectIdx);
+		nextEffect = EffectIdx2EffectName(nextEffectIdx);
+	
+		if(prevEffect != '') PlayHeadEffect(prevEffect, true);
+		if(nextEffect != '') PlayHeadEffect(nextEffect);
+		
+		toxThresholdEffect = nextEffectIdx;
+	}
+	//modSigns end
 	
 	function PlayHeadEffect( effect : name, optional stop : bool )
 	{
@@ -208,8 +261,12 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 		super.OnEffectRemoved();
 		
 		
-		if(thePlayer.CanUseSkill(S_Alchemy_s20) && target.HasBuff(EET_IgnorePain))
+		if(/*thePlayer.CanUseSkill(S_Alchemy_s20) &&*/ target.HasBuff(EET_IgnorePain))
 			target.RemoveBuff(EET_IgnorePain);
+			
+		//modSigns: Frenzy
+		if(thePlayer.HasAbility(SkillEnumToName(S_Alchemy_s16)))
+			thePlayer.RemoveAbilityAll(SkillEnumToName(S_Alchemy_s16));
 			
 		
 		
@@ -250,6 +307,12 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 		if(thePlayer.CanUseSkill(S_Alchemy_s15))
 			effectValue += thePlayer.GetSkillAttributeValue(S_Alchemy_s15, attributeName, false, true) * thePlayer.GetSkillLevel(S_Alchemy_s15);
 			
+		if(thePlayer.HasAbility('ArmorTypeMediumSetBonusAbility')) //modSigns
+		{
+			dm.GetAbilityAttributeValue('ArmorTypeMediumSetBonusAbility', 'toxicityRegen', min, max);
+			effectValue += min;
+		}
+		
 		if(thePlayer.HasAbility('Runeword 8 Regen'))
 			effectValue += thePlayer.GetAbilityAttributeValue('Runeword 8 Regen', 'toxicityRegen');
 	}

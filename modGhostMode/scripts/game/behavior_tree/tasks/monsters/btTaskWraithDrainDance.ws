@@ -93,7 +93,17 @@ class CBTTaskWraithDrainDance extends CBTTaskPlayAnimationEventDecorator
 				{
 					
 					l_summonerHealth = summonedEntityComponent.GetSummoner().GetCurrentHealth();
-					summonedEntityComponent.GetSummoner().Heal( l_summonerHealth * 0.002f );
+					//modSigns
+					if( summonedEntityComponent.GetSummoner().HasBuff(EET_SilverDust) )
+					{
+						summonedEntityComponent.GetSummoner().Heal( l_summonerHealth * 0.0005f );
+						//theGame.witcherLog.AddMessage("silverdust hp healed = " + l_summonerHealth * 0.0005f); //debug
+					}
+					else
+					{
+						summonedEntityComponent.GetSummoner().Heal( l_summonerHealth * 0.002f );
+						//theGame.witcherLog.AddMessage("hp healed = " + l_summonerHealth * 0.002f); //debug
+					}
 				}
 				
 				if( !m_DrainEffectEntity )

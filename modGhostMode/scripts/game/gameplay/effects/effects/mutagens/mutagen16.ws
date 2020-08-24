@@ -10,7 +10,31 @@ class W3Mutagen16_Effect extends W3Mutagen_Effect
 {
 	default effectType = EET_Mutagen16;
 	
-	event OnEffectAddedPost()
+	//modSigns
+	var healthPrc : float;
+	
+	public function Mutagen16ModifyHitAnim(out action : W3DamageAction)
+	{
+		if(action.IsDoTDamage())
+			return;
+		
+		//lazy
+		if(healthPrc <= 0)
+		{
+			healthPrc = CalculateAttributeValue(thePlayer.GetAbilityAttributeValue('Mutagen16Effect', 'mutagen16_health_prc'));
+			//theGame.witcherLog.AddMessage("Mutagen16: healthPrc = " + healthPrc);
+		}
+		
+		//theGame.witcherLog.AddMessage("Mutagen16: damage = " + action.GetDamageDealt());
+		
+		if(action.GetDamageDealt() <= healthPrc * target.GetMaxHealth())
+		{
+			action.SetHitAnimationPlayType(EAHA_ForceNo);
+			//theGame.witcherLog.AddMessage("Mutagen16: no hit anim");
+		}
+	}
+	
+	/*event OnEffectAddedPost()
 	{
 		super.OnEffectAddedPost();
 		
@@ -36,5 +60,5 @@ class W3Mutagen16_Effect extends W3Mutagen_Effect
 			if(invMenu)
 				invMenu.UpdateEncumbranceInfo();
 		}
-	}
+	}*/
 }

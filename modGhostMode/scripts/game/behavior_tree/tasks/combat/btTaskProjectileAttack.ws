@@ -278,6 +278,12 @@ class CBTTaskProjectileAttack extends CBTTaskAttack
 			collisionGroups.PushBack('Terrain');
 			collisionGroups.PushBack('Static');
 			collisionGroups.PushBack('Water');
+			//W3EE: collisions fix
+			collisionGroups.PushBack('Debris');
+			collisionGroups.PushBack('RigidBody');
+			collisionGroups.PushBack('Foliage');
+			collisionGroups.PushBack('Door');
+			collisionGroups.PushBack('Fence');
 		}
 		else
 		{
@@ -292,6 +298,12 @@ class CBTTaskProjectileAttack extends CBTTaskAttack
 			if( collideWithStatic )
 			{
 				collisionGroups.PushBack('Static');
+				//W3EE: collisions fix
+				collisionGroups.PushBack('Debris');
+				collisionGroups.PushBack('RigidBody');
+				collisionGroups.PushBack('Foliage');
+				collisionGroups.PushBack('Door');
+				collisionGroups.PushBack('Fence');
 			}
 			if( collideWithWater )
 			{

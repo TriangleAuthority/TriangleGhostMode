@@ -10,4 +10,20 @@
 class W3Potion_Swallow extends W3Potion_VitalityRegen
 {
 	default effectType = EET_Swallow;
+	
+	//modSigns begin
+	event OnEffectAdded(optional customParams : W3BuffCustomParams)
+	{
+		super.OnEffectAdded(customParams);
+		
+		target.RemoveAllBuffsOfType(EET_Bleeding);
+	}
+	
+	public function CumulateWith(effect: CBaseGameplayEffect)
+	{
+		super.CumulateWith(effect);
+
+		target.RemoveAllBuffsOfType(EET_Bleeding);
+	}
+	//modSigns end
 }

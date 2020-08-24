@@ -16,6 +16,8 @@ class W3Effect_AutoVitalityRegen extends W3AutoRegenEffect
 		default effectType = EET_AutoVitalityRegen;
 		default regenModeIsCombat = false;
 	
+	private var wasLoaded : bool; //modSigns
+	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
 		super.OnEffectAdded(customParams);
@@ -28,10 +30,16 @@ class W3Effect_AutoVitalityRegen extends W3AutoRegenEffect
 		super.OnLoad(t, eff);
 		if(isOnPlayer)
 			cachedPlayer = (CR4Player)target;
+		wasLoaded = true; //modSigns
 	}
 	
 	event OnUpdate(deltaTime : float)
 	{
+		if(wasLoaded) //modSigns
+		{
+			SetEffectValue();
+			wasLoaded = false;
+		}
 		
 		if(isOnPlayer)
 		{
@@ -47,7 +55,7 @@ class W3Effect_AutoVitalityRegen extends W3AutoRegenEffect
 		
 		super.OnUpdate(deltaTime);
 		
-		if( target.GetStatPercents( BCS_Vitality ) >= 1.0f && !target.HasAbility('Runeword 4 _Stats', true))
+		if( target.GetStatPercents( BCS_Vitality ) >= 1.0f && !((W3PlayerWitcher)target).HasRunewordActive('Runeword 4 _Stats')) //modSigns
 		{
 			target.StopVitalityRegen();
 		}
@@ -56,5 +64,7 @@ class W3Effect_AutoVitalityRegen extends W3AutoRegenEffect
 	protected function SetEffectValue()
 	{
 		effectValue = target.GetAttributeValue(attributeName);
+		if(isOnPlayer && GetWitcherPlayer()) //modSigns
+			gmModRegenValue(attributeName, effectValue);
 	}
 }

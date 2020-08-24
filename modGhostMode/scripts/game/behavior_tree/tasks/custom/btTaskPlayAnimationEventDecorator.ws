@@ -22,7 +22,8 @@ class CBTTaskPlayAnimationEventDecorator extends IBehTreeTask
 	var useCombatTargetForRotation			: bool; 
 	var setIsImportantAnim 					: bool; 
 	
-	private var staminaCost					: float;
+	protected var staminaCost				: float; //modSigns
+	protected var staminaDelay				: float; //modSigns
 	private var moraleThreshold				: float;
 	private var lookAt 						: bool;
 	private var hitAnim 					: bool;
@@ -64,7 +65,7 @@ class CBTTaskPlayAnimationEventDecorator extends IBehTreeTask
 		}
 		
 		if ( drainStaminaOnUse && staminaCost )
-			npc.DrainStamina(ESAT_FixedValue, staminaCost, 1);
+			npc.DrainStamina(ESAT_FixedValue, staminaCost, staminaDelay); //modSigns: stamina regen delay
 		if ( disableHitOnActivation )
 			npc.SetCanPlayHitAnim( false );
 		if ( disableLookatOnActivation )
@@ -76,6 +77,10 @@ class CBTTaskPlayAnimationEventDecorator extends IBehTreeTask
 		{
 			npc.RaiseEvent('InterruptOverlay');
 		}
+		//modSigns: risky af!
+		//if(GetActor().IsHuman() && !GetActor().HasTag('HideHealthBarModule'))
+		if(GetActor().IsInCombat())
+			GetActor().PauseStaminaRegen('gm_combat_action', 10.f);
 		return BTNS_Active;
 	}
 	
@@ -83,6 +88,7 @@ class CBTTaskPlayAnimationEventDecorator extends IBehTreeTask
 	{
 		var npc : CNewNPC = GetNPC();
 		
+		GetActor().ResumeStaminaRegen('gm_combat_action'); //modSigns
 		if ( setIsImportantAnim )
 		{
 			combatDataStorage.SetIsInImportantAnim( false );
@@ -139,6 +145,27 @@ class CBTTaskPlayAnimationEventDecorator extends IBehTreeTask
 		if ( xmlStaminaCostName )
 		{
 			staminaCost = CalculateAttributeValue(GetNPC().GetAttributeValue( xmlStaminaCostName ));
+			//modSigns: stamina delay for different actions
+			switch(xmlStaminaCostName)
+			{
+				case theGame.params.STAMINA_COST_LIGHT_ACTION_ATTRIBUTE:
+				case theGame.params.STAMINA_COST_LIGHT_SPECIAL_ATTRIBUTE:
+				case theGame.params.STAMINA_COST_PARRY_ATTRIBUTE:
+				case theGame.params.STAMINA_COST_COUNTERATTACK_ATTRIBUTE:
+				case theGame.params.STAMINA_COST_DODGE_ATTRIBUTE:
+					staminaDelay = theGame.params.STAMINA_DELAY_LIGHT_NPC;
+					break;
+				case theGame.params.STAMINA_COST_HEAVY_ACTION_ATTRIBUTE:
+				case theGame.params.STAMINA_COST_HEAVY_SPECIAL_ATTRIBUTE:
+					staminaDelay = theGame.params.STAMINA_DELAY_HEAVY_NPC;
+					break;
+				case theGame.params.STAMINA_COST_SUPER_HEAVY_ACTION_ATTRIBUTE:
+					staminaDelay = theGame.params.STAMINA_DELAY_SUPER_HEAVY_NPC;
+					break;
+				default:
+					staminaDelay = theGame.params.STAMINA_DELAY_DEFAULT_NPC;
+					break;
+			}
 		}
 		if ( xmlMoraleCheckName )
 		{

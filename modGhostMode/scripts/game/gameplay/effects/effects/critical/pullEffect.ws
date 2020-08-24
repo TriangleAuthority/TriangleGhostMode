@@ -128,8 +128,11 @@ class W3Effect_Tangled extends W3ImmobilizeEffect
 		else
 			target.PlayEffectSingle('black_spider_web');
 		
-		theInput.ForceDeactivateAction('CastSignHold');
+		//theInput.ForceDeactivateAction('CastSignHold');
+		ForceDeactivateCastSignHold(); //modSigns
 		
+		if(isOnPlayer) //modSigns
+			thePlayer.AbortSign();
 		
 	}
 	

@@ -17,6 +17,33 @@ class W3Effect_AxiiGuardMe extends CBaseGameplayEffect
 	default isNegative = true;
 	default drainStaminaOnExit = false;
 	
+	private saved var glyphwordAblAdded : bool; //modSigns
+	
+	private function AddGlyphwordBonuses() //modSigns
+	{
+		var dm : CDefinitionsManagerAccessor = theGame.GetDefinitionsManager();
+		var min, max : SAbilityAttributeValue;
+		var count, maxStacks : float;
+		
+		if(!isOnPlayer && GetCreator() == thePlayer && isSignEffect)
+		{
+			dm.GetAbilityAttributeValue('Glyphword 10 abl', 'g10_max_stacks', min, max);
+			maxStacks = CalculateAttributeValue(min);
+			count = thePlayer.GetAbilityCount('Glyphword 10 abl');
+			if(count < maxStacks)
+			{
+				thePlayer.AddAbility('Glyphword 10 abl', true);
+				glyphwordAblAdded = true;
+			}
+		}
+	}
+	
+	private function RemoveGlyphwordBonuses() //modSigns
+	{
+		if(glyphwordAblAdded)
+			thePlayer.RemoveAbility('Glyphword 10 abl');
+	}
+	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
 		var npc : CNewNPC;
@@ -24,6 +51,8 @@ class W3Effect_AxiiGuardMe extends CBaseGameplayEffect
 		var skillLevel, i : int;
 		
 		super.OnEffectAdded(customParams);
+		
+		AddGlyphwordBonuses(); //modSigns
 		
 		npc = (CNewNPC)target;
 		
@@ -63,6 +92,8 @@ class W3Effect_AxiiGuardMe extends CBaseGameplayEffect
 		var bonusAbilityName : name;
 		
 		super.OnEffectRemoved();
+		
+		RemoveGlyphwordBonuses(); //modSigns
 		
 		npc = (CNewNPC)target;		
 		if(npc)

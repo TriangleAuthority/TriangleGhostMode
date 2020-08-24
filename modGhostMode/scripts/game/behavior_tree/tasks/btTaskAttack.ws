@@ -53,11 +53,19 @@ class CBTTaskAttack extends CBTTaskPlayAnimationEventDecorator
 	function IsAvailable() : bool
 	{
 		var target : CActor = GetCombatTarget();
-		
+		//var npc : CNewNPC = GetNPC(); //modSigns
+
 		if ( unavailableWhenInvisibleTarget && target && !target.GetGameplayVisibility() )
 		{
 			return false;
 		}
+		
+		//modSigns
+		/*if( npc.IsAbilityBlocked('ablMagic') && attackType < EAT_Attack4 )
+		{
+			theGame.witcherLog.AddMessage("type = " + attackType + " - is blocked"); //modSigns: debug
+			return false;
+		}*/
 		
 		return super.IsAvailable();
 	}
@@ -71,6 +79,12 @@ class CBTTaskAttack extends CBTTaskPlayAnimationEventDecorator
 		var minDistance : float;
 		var actorTarget : CActor;
 		var humanCombatDataStorage : CHumanAICombatStorage;
+		
+		if( !IsAvailable() ) //modSigns
+		{
+			Complete(false);
+			return BTNS_Failed;
+		}
 		
 		extractedMotionDisabled = false;
 		
@@ -177,6 +191,12 @@ class CBTTaskAttack extends CBTTaskPlayAnimationEventDecorator
 		combatDataStorage.SetIsAttacking( true, GetLocalTime() );
 		theGame.GetBehTreeReactionManager().CreateReactionEventIfPossible( GetActor(), 'NpcAttackAction', 10.0, 15.0f, -1, -1, true); 
 		
+		//dance around bugged ghouls and bears
+		if(!drainStaminaOnUse && staminaCost && (GetActor().HasAbility('mon_ghoul_base') || GetActor().HasAbility('mon_bear_base')) && (xmlStaminaCostName == 'light_action_stamina_cost' || xmlStaminaCostName == 'counter_stamina_cost'))
+		{
+			GetActor().DrainStamina(ESAT_FixedValue, staminaCost, staminaDelay);
+		}
+		
 		return BTNS_Active;
 	}
 	
@@ -216,6 +236,16 @@ class CBTTaskAttack extends CBTTaskPlayAnimationEventDecorator
 		stopTask = false;
 		
 		super.OnDeactivate();
+	}
+	
+	//modSigns
+	function GetStats()
+	{
+		super.GetStats();
+		if((GetActor().HasAbility('mon_ghoul_base') || GetActor().HasAbility('mon_bear_base')) && (xmlStaminaCostName == 'light_action_stamina_cost' || xmlStaminaCostName == 'counter_stamina_cost'))
+			drainStaminaOnUse = false; //ghouls and bears are bugged af
+		else
+			drainStaminaOnUse = true; //ensure stamina drain
 	}
 	
 	function OnAnimEvent( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo ) : bool
@@ -501,6 +531,9 @@ class CBTTaskAttackDef extends CBTTaskPlayAnimationEventDecoratorDef
 	editable var customEffectPercentValue						: float;
 	editable var unavailableWhenInvisibleTarget 				: bool;
 	
+	default xmlStaminaCostName 									= 'light_action_stamina_cost'; //modSigns: default cost for all attacks
+	default drainStaminaOnUse 									= true; //modSigns: drain stamina by default
+	
 	default attackType 											= EAT_Attack1;
 	default stopTaskAfterDealingDmg 							= false;
 	default useDirectionalAttacks 								= false;
@@ -525,6 +558,12 @@ class CBTTaskAttackDef extends CBTTaskPlayAnimationEventDecoratorDef
 		if( attackType ==  EAT_None && GetValInt( attackParameter ) >= 0 )
 		{
 			thisTask.attackType	= GetValInt( attackParameter );
+		}
+		
+		if( attackType == EAT_Attack20 ) //modSigns: counterattack stamina cost
+		{
+			thisTask.xmlStaminaCostName = 'counter_stamina_cost';
+			thisTask.checkStats = true;
 		}
 	}
 };

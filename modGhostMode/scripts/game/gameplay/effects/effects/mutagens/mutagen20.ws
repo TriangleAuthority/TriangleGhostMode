@@ -9,7 +9,9 @@
 class W3Mutagen20_Effect extends W3Mutagen_Effect
 {	
 	default effectType = EET_Mutagen20;
-	default dontAddAbilityOnTarget = true;
+	
+	//modSigns: simply adds resistances instead
+	/*default dontAddAbilityOnTarget = true;
 	
 	private var burningPoints, burningPercents, poisonPoints, poisonPercents, bleedingPoints, bleedingPercents : SAbilityAttributeValue;
 	private var burningResistanceCounter, poisonResistanceCounter, bleedingResistanceCounter : float;
@@ -104,5 +106,5 @@ class W3Mutagen20_Effect extends W3Mutagen_Effect
 			points = points * bleedingResistanceCounter;
 			percents = percents * bleedingResistanceCounter;
 		}
-	}
+	}*/
 }

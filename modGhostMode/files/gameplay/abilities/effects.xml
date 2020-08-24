@@ -48,30 +48,29 @@
       <ability name="AxiiGuardMeEffect">
         <duration type="add" min="15" max="15" />
       </ability>
-	  
 	  <ability name="BasicQuenEffect">
         <duration type="add" min="-1" />
       </ability>
-	  
       <ability name="BattleTranceEffect">
         <duration type="add" min="-1" />        
       </ability>
       <ability name="BleedingEffect">
-        <DirectDamage type="mult" min="0.008" max="0.008" />
-        <duration type="add" min="10" max="10" />
+        <DirectDamage type="mult" min="0.01" max="0.01" />
+        <duration type="add" min="8" max="8" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
       <ability name="BleedingTrackingEffect">
-        <DirectDamage type="mult" min="0.001" max="0.001" />
-        <duration type="add" min="30" max="30" />
+		<!-- modSigns: damage increased -->
+        <DirectDamage type="mult" min="0.005" max="0.005" />
+        <duration type="add" min="16" max="16" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  <ability name="BleedingEffect_BroadheadBolt">
-		<DirectDamage type="add" min="10" max="10" />
-        <DirectDamage type="mult" min="0.001" max="0.002" />
-        <duration type="add" min="10" max="10" />
+		<!-- modSigns: damage increased -->
+        <DirectDamage type="mult" min="0.01" max="0.01" />
+        <duration type="add" min="8" max="8" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
@@ -84,14 +83,18 @@
         <duration type="add" min="3" max="3" />
       </ability>
 	  
+	  <!-- modSigns: added critical chance to the effect -->
 	  <ability name="BlindnessEffect_Samum_1">
         <duration type="add" min="4" max="4" />
+		<critical_hit_chance type="add" min="0.5" />
       </ability>
       <ability name="BlindnessEffect_Samum_2">
-        <duration type="add" min="6" max="6" />
+        <duration type="add" min="5" max="5" />
+		<critical_hit_chance type="add" min="0.75" />
       </ability>
       <ability name="BlindnessEffect_Samum_3">
-        <duration type="add" min="8" max="8" />
+        <duration type="add" min="6" max="6" />
+		<critical_hit_chance type="add" min="1" />
       </ability>
 	  
       <ability name="BoostedEssenceRegen">
@@ -108,34 +111,33 @@
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
-	  
 	  <ability name="BurningEffect_FireStream">
-        <FireDamage type="mult" min="0.01" max="0.01" />
-        <duration type="add" min="1" max="1" />
+        <FireDamage type="mult" min="0.027" max="0.027" />
+        <duration type="add" min="3" max="3" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
+	  <!-- modSigns -->
+	  <!-- bombs create an area of continuous effect application (see loop duration in petards xml) -->
+	  <!-- this is why DoT damage for bombs is smaller: their effects actually last longer -->
       <ability name="BurningEffect_DancingStar_1">
         <FireDamage type="mult" min="0.01" max="0.01" />
-		<FireDamage type="add" min="20" />
-        <duration type="add" min="0.3" />
+        <duration type="add" min="3" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="BurningEffect_DancingStar_2">
         <FireDamage type="mult" min="0.01" max="0.01" />
-		<FireDamage type="add" min="30" />
-        <duration type="add" min="0.3" />
+        <duration type="add" min="3" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="BurningEffect_DancingStar_3">
         <FireDamage type="mult" min="0.01" max="0.01" />
-		<FireDamage type="add" min="40" />
-        <duration type="add" min="3" max="3" />
+        <duration type="add" min="3" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
@@ -145,11 +147,12 @@
         <duration type="add" min="2" max="2" />
       </ability>
       <ability name="ConfusionEffect">
-        <duration type="add" min="2" max="2" />
+        <duration type="add" min="3" max="3" />
+		<critical_hit_chance type="add" min="0.25" /> <!-- modSigns -->
       </ability>
      
       <ability name="CounterStrikeHitEffect">
-        <duration type="add" min="0.5" max="0.5" />
+        <duration type="add" min="1.0" max="1.0" />
       </ability>
       <ability name="DoTHPRegenReduceEffect">
         <duration type="add" min="5" />
@@ -165,7 +168,7 @@
         <DirectDamage type="mult" min="0.1" />
       </ability>
 	  <ability name="DrunkennessEffect">
-		<duration type="add" min="30" />
+		<duration type="add" min="60" />
 	  </ability>
       <ability name="EdibleEffect_Level1">
         <duration type="add" min="10" max="10" />
@@ -181,12 +184,20 @@
       </ability>
 	  
 	  <ability name="EnhancedArmorEffect">
-        <duration type="add" min="900" />
-        <armor type="mult" min="0.2" />
+		<!-- modSigns -->
+        <duration type="add" min="1800" />
+		<resistance_perc_bonus_descr type="add" min="0.05" />
+		<slashing_resistance_perc type="add" min="0.05" />
+		<piercing_resistance_perc type="add" min="0.05" />
+		<bludgeoning_resistance_perc type="add" min="0.05" />
+		<rending_resistance_perc type="add" min="0.05" />
+		<elemental_resistance_perc type="add" min="0.05" />
       </ability>
 	  <ability name="EnhancedWeaponEffect">
-        <duration type="add" min="900" />
-        <attack_power type="mult" min="0.2" />
+		<!-- modSigns -->
+        <duration type="add" min="1800" />
+		<armor_reduction type = "add" min="10" max="10"/>
+        <armor_reduction_perc type="add" min="0.05" max="0.05" />
       </ability>
 	  
 	  <!-- needed for ability inside ability detection of fact potion item's ability -->
@@ -199,27 +210,30 @@
         <duration type="add" min="-1" max="-1" />
       </ability>
       <ability name="FrozenEffect">
-        <duration type="add" min="4" max="4" />
-        <hpPercDamageBonusPerHit type="add" min="0.0" />
+        <duration type="add" min="5" max="5" />
+		<!-- modSigns: it's now a damage increase instead -->
+        <hpPercDamageBonusPerHit type="add" min="0.5" />
       </ability>
 	  <ability name="FrozenEffect_WhiteFrost1">
         <duration type="add" min="4"/>
-        <hpPercDamageBonusPerHit type="add" min="0.05" />
+		<!-- modSigns: it's now a damage increase instead -->
+        <hpPercDamageBonusPerHit type="add" min="0.25" />
       </ability>
 	  <ability name="FrozenEffect_WhiteFrost2">
         <duration type="add" min="5"/>
-        <hpPercDamageBonusPerHit type="add" min="0.07" />
+		<!-- modSigns: it's now a damage increase instead -->
+        <hpPercDamageBonusPerHit type="add" min="0.35" />
       </ability>
 	  <ability name="FrozenEffect_WhiteFrost3">
         <duration type="add" min="6"/>
-        <hpPercDamageBonusPerHit type="add" min="0.1" />
+		<!-- modSigns: it's now a damage increase instead -->
+        <hpPercDamageBonusPerHit type="add" min="0.5" />
       </ability>
-	  
       <ability name="HeavyKnockdownEffect">
-        <duration type="add" min="3" max="5" />
+        <duration type="add" min="5" max="5" />
       </ability>
       <ability name="HypnotizedEffect">
-        <duration type="add" min="3" max="3" />
+        <duration type="add" min="5" max="5" />
       </ability>
       <ability name="IgnorePainEffect">
         <duration type="add" min="-1" />
@@ -263,30 +277,33 @@
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
+	  <!-- modSigns -->
+	  <!-- bombs create an area of continuous effect application (see loop duration in petards xml) -->
+	  <!-- this is why DoT damage for bombs is smaller: their effects actually last longer -->
       <ability name="PoisonEffect_DevilsPuffball_1">
-        <duration type="add" min="0.3"/>
-        <PoisonDamage type="add" min="30" max="30" />
+        <PoisonDamage type="mult" min="0.01" max="0.01" />
+        <duration type="add" min="3"/>
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="PoisonEffect_DevilsPuffball_2">
-        <duration type="add" min="0.3"/>
-        <PoisonDamage type="add" min="60" max="60" />
+        <PoisonDamage type="mult" min="0.01" max="0.01" />
+        <duration type="add" min="3"/>
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="PoisonEffect_DevilsPuffball_3">
-        <duration type="add" min="3" />
-        <PoisonDamage type="add" min="90" max="90" />
+        <PoisonDamage type="mult" min="0.01" max="0.01" />
+        <duration type="add" min="3"/>
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="PoisonCriticalEffect">
         <duration type="add" min="5" max="5" />
-        <PoisonDamage type="mult" min="0.02" max="0.02" />
+        <PoisonDamage type="mult" min="0.016" max="0.016" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
@@ -296,22 +313,27 @@
       </ability>
 	  
       <ability name="ShrineAardEffect">
+		<!-- modSigns -->
 		<spell_power_aard type="mult" min="0.2" />
         <duration type="add" min="1800" max="1800" />
       </ability>
       <ability name="ShrineAxiiEffect">
+		<!-- modSigns -->
 		<spell_power_axii type="mult" min="0.2" />
         <duration type="add" min="1800" max="1800" />
       </ability>
       <ability name="ShrineIgniEffect">
+		<!-- modSigns -->
 		<spell_power_igni type="mult" min="0.2" />
         <duration type="add" min="1800" max="1800" />
       </ability>
       <ability name="ShrineQuenEffect">
+		<!-- modSigns -->
 		<spell_power_quen type="mult" min="0.2" />
         <duration type="add" min="1800" max="1800" />
       </ability>
       <ability name="ShrineYrdenEffect">
+		<!-- modSigns -->
 		<spell_power_yrden type="mult" min="0.2" />
         <duration type="add" min="1800" max="1800" />
       </ability>
@@ -320,20 +342,40 @@
         <duration type="add" min="20" />
       </ability>
       <ability name="SilverDustEffect_Level2">
-        <duration type="add" min="40" />
+        <duration type="add" min="30" /> <!-- modSigns -->
       </ability>
       <ability name="SilverDustEffect_Level3">
-        <duration type="add" min="-1" />
+        <duration type="add" min="40" /> <!-- modSigns -->
       </ability>
+	  <!-- modSigns begin -->
+      <ability name="DimeritiumEffect_Level1">
+        <duration type="add" min="20" />
+		<dbomb_armor_piercing type="add" min="50" />
+		<dbomb_resist_reduction type="add" min="0.05" />
+		<dbomb_dmg_reduction type="add" min="0.3" />
+      </ability>
+      <ability name="DimeritiumEffect_Level2">
+        <duration type="add" min="30" />
+		<dbomb_armor_piercing type="add" min="75" />
+		<dbomb_resist_reduction type="add" min="0.10" />
+		<dbomb_dmg_reduction type="add" min="0.4" />
+      </ability>
+      <ability name="DimeritiumEffect_Level3">
+        <duration type="add" min="40" />
+		<dbomb_armor_piercing type="add" min="100" />
+		<dbomb_resist_reduction type="add" min="0.15" />
+		<dbomb_dmg_reduction type="add" min="0.5" />
+      </ability>
+	  <!-- modSigns end -->
       <ability name="SlowdownEffect">
-        <slowdown type="add" min="0.5" />
-        <duration type="add" min="10" max="10" />
+        <slowdown type="add" min="0.35" />
+        <duration type="add" min="7.5" max="7.5" />
 		<decay_per_sec type="add" min="-1" />
 		<decay_delay type="add" min="-1" />
 	  </ability>
 	  <ability name="SlowdownFrostEffect">
-        <slowdown type="add" min="0.5" />
-        <duration type="add" min="10" max="10" />
+        <slowdown type="add" min="0.35" />
+        <duration type="add" min="7.5" max="7.5" />
 		<decay_per_sec type="add" min="-1" />
 		<decay_delay type="add" min="-1" />
       </ability>
@@ -377,39 +419,48 @@
         <duration type="add" min="-1" />
       </ability>
       <ability name="WellFedEffect_Level1">
-        <duration type="add" min="5" max="5" />
-        <vitalityRegen type="add" min="50" max="50" />
-        <vitalityCombatRegen type="add" min="50" max="50" />
+		<!-- modSigns -->
+        <duration type="add" min="60" max="60" />
+        <vitalityRegen type="add" min="10" max="10" />
+        <vitalityCombatRegen type="add" min="1" max="1" />
         <level type="add" min="1" />
       </ability>
       <ability name="WellFedEffect_Level2">
-        <duration type="add" min="10" max="10" />
-        <vitalityRegen type="add" min="50" max="50" />
-        <vitalityCombatRegen type="add" min="50" max="50" />
+		<!-- modSigns -->
+        <duration type="add" min="60" max="60" />
+        <vitalityRegen type="add" min="20" max="20" />
+        <vitalityCombatRegen type="add" min="5" max="5" />
         <level type="add" min="2" />
       </ability>
       <ability name="WellFedEffect_Level3">
-        <duration type="add" min="10" max="10" />
-        <vitalityRegen type="add" min="80" max="80" />
-        <vitalityCombatRegen type="add" min="80" max="80" />
+		<!-- modSigns -->
+        <duration type="add" min="60" max="60" />
+        <vitalityRegen type="add" min="30" max="30" />
+        <vitalityCombatRegen type="add" min="10" max="10" />
         <level type="add" min="3" />
       </ability>
       <ability name="WellHydratedEffect_Level1">
-        <duration type="add" min="15" max="15" />
-        <vitalityRegen type="add" min="10" max="10" />
-        <vitalityCombatRegen type="add" min="10" max="10" />
+		<!-- modSigns: water -->
+        <duration type="add" min="60" max="60" />
+        <vitalityRegen type="add" min="5" max="5" />
+        <vitalityCombatRegen type="add" min="1" max="1" />
+		<staminaRegen min="0.01" type="mult"/>
         <level type="add" min="1" />
       </ability>
       <ability name="WellHydratedEffect_Level2">
-        <duration type="add" min="20" max="20" />
-        <vitalityRegen type="add" min="15" max="15" />
-        <vitalityCombatRegen type="add" min="15" max="15" />
+		<!-- modSigns: juice, beer -->
+        <duration type="add" min="60" max="60" />
+        <vitalityRegen type="add" min="10" max="10" />
+        <vitalityCombatRegen type="add" min="5" max="5" />
+		<staminaRegen min="0.02" type="mult"/>
         <level type="add" min="2" />
       </ability>
       <ability name="WellHydratedEffect_Level3">
-        <duration type="add" min="30" max="30" />
-        <vitalityRegen type="add" min="15" max="15" />
-        <vitalityCombatRegen type="add" min="15" max="15" />
+		<!-- modSigns: milk, alcohol -->
+        <duration type="add" min="60" max="60" />
+        <vitalityRegen type="add" min="20" max="20" />
+        <vitalityCombatRegen type="add" min="10" max="10" />
+		<staminaRegen min="0.03" type="mult"/>
         <level type="add" min="3" />
       </ability>
       <ability name="YrdenHealthDrainEffect">
@@ -419,6 +470,52 @@
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
+	  
+	  <!-- modSigns -->
+	  <ability name="UndyingSkillImmortalEffect">
+		<duration type="add" min="5" />
+        <vitalityRegen type="mult" min="0.01" max="0.01" /> <!-- percentage of max health healed per level per adrenaline point per second -->
+        <vitalityCombatRegen type="mult" min="0.01" max="0.01" /> <!-- percentage of max health healed per level per adrenaline point per second -->
+	  </ability>
+	  <ability name="UndyingSkillCooldownEffect">
+		<duration type="add" min="-1" /> <!-- duration is set by skill -->
+	  </ability>
+	  <ability name="WhirlCooldownEffect">
+		<duration type="add" min="-1" /> <!-- duration is set in options -->
+	  </ability>
+	  <ability name="RendCooldownEffect">
+		<duration type="add" min="-1" /> <!-- duration is set in options -->
+	  </ability>
+	  <ability name="AardCooldownEffect">
+		<duration type="add" min="-1" /> <!-- duration is set in options -->
+	  </ability>
+	  <ability name="IgniCooldownEffect">
+		<duration type="add" min="-1" /> <!-- duration is set in options -->
+	  </ability>
+	  <ability name="YrdenCooldownEffect">
+		<duration type="add" min="-1" /> <!-- duration is set in options -->
+	  </ability>
+	  <ability name="QuenCooldownEffect">
+		<duration type="add" min="-1" /> <!-- duration is set in options -->
+	  </ability>
+	  <ability name="AxiiCooldownEffect">
+		<duration type="add" min="-1" /> <!-- duration is set in options -->
+	  </ability>
+	  <!-- modSigns: new Melt Armor mechanic -->
+	  <ability name="MeltArmorDebuff">
+		<duration						type="add"	min="15"		/>
+		<armor							type="add"	min="-2"		/>
+		<physical_resistance_perc		type="add"	min="-0.002"	/>
+		<slashing_resistance_perc		type="add"	min="-0.002"	/>
+		<piercing_resistance_perc		type="add"	min="-0.002"	/>
+		<bludgeoning_resistance_perc	type="add"	min="-0.002"	/>
+		<rending_resistance_perc		type="add"	min="-0.002"	/>
+		<elemental_resistance_perc		type="add"	min="-0.002"	/>
+	  </ability>
+	  <!-- Melt Armor Timer Indicator for the player -->
+	  <ability name="MeltArmorTimer">
+		<duration						type="add"	min="15"		/>
+	  </ability>
     </abilities>
   </definitions>
   <custom>
@@ -449,7 +546,19 @@
       <effect name_name="ShrineQuenEffect" 		 	defaultAbilityName_name="ShrineQuenEffect" 			iconType_name="EffectQuen"   	showOnHUD="1" effectNameLocalisationKey_name="skill_name_magic_4" 		/>
       <effect name_name="ShrineYrdenEffect" 	 	defaultAbilityName_name="ShrineYrdenEffect" 		iconType_name="EffectYrden"  	showOnHUD="1" effectNameLocalisationKey_name="skill_name_magic_3" 		/>
 	  <effect name_name="EnhancedArmorEffect" 	 	defaultAbilityName_name="EnhancedArmorEffect" 		iconType_name="EnhancedArmor"  	showOnHUD="1" effectNameLocalisationKey_name="effect_enhanced_armor"	/>
-	  <effect name_name="EnhancedWeaponEffect" 	 	defaultAbilityName_name="EnhancedWeaponEffect" 		iconType_name="EnhancedWeapon" 	showOnHUD="1" effectNameLocalisationKey_name="effect_enhanced_weapon"	/>	  
+	  <effect name_name="EnhancedWeaponEffect" 	 	defaultAbilityName_name="EnhancedWeaponEffect" 		iconType_name="EnhancedWeapon" 	showOnHUD="1" effectNameLocalisationKey_name="effect_enhanced_weapon"	/>
+	  <!-- modSigns -->
+	  <effect name_name="UndyingSkillImmortalEffect"	defaultAbilityName_name="UndyingSkillImmortalEffect"	iconType_name="UndyingSkillImmortal"	showOnHUD="1"	effectNameLocalisationKey_name="effect_undying_skill"	/>
+	  <effect name_name="UndyingSkillCooldownEffect"	defaultAbilityName_name="UndyingSkillCooldownEffect"	iconType_name="UndyingSkillImmortal"	showOnHUD="1"	effectNameLocalisationKey_name="effect_undying_cooldown"	/>
+      <effect name_name="DimeritiumEffect"        																iconType_name="Dimeritium"	 			showOnHUD="1"	effectNameLocalisationKey_name="effect_dimeritium"	/>
+	  <effect name_name="WhirlCooldownEffect"		defaultAbilityName_name="WhirlCooldownEffect"		iconType_name="WhirlCooldown"	showOnHUD="1" effectNameLocalisationKey_name="effect_whirl_cooldown"	/>
+	  <effect name_name="RendCooldownEffect"		defaultAbilityName_name="RendCooldownEffect"		iconType_name="RendCooldown"	showOnHUD="1" effectNameLocalisationKey_name="effect_rend_cooldown"	/>
+	  <effect name_name="AardCooldownEffect"		defaultAbilityName_name="AardCooldownEffect"		iconType_name="AardCooldown"	showOnHUD="1" effectNameLocalisationKey_name="effect_aard_cooldown"	/>
+	  <effect name_name="IgniCooldownEffect"		defaultAbilityName_name="IgniCooldownEffect"		iconType_name="IgniCooldown"	showOnHUD="1" effectNameLocalisationKey_name="effect_igni_cooldown"	/>
+	  <effect name_name="YrdenCooldownEffect"		defaultAbilityName_name="YrdenCooldownEffect"		iconType_name="YrdenCooldown"	showOnHUD="1" effectNameLocalisationKey_name="effect_yrden_cooldown"	/>
+	  <effect name_name="QuenCooldownEffect"		defaultAbilityName_name="QuenCooldownEffect"		iconType_name="QuenCooldown"	showOnHUD="1" effectNameLocalisationKey_name="effect_quen_cooldown"	/>
+	  <effect name_name="AxiiCooldownEffect"		defaultAbilityName_name="AxiiCooldownEffect"		iconType_name="AxiiCooldown"	showOnHUD="1" effectNameLocalisationKey_name="effect_axii_cooldown"	/>
+	  <effect name_name="MeltArmorTimer"			defaultAbilityName_name="MeltArmorTimer"			iconType_name="MeltArmorTimer"	showOnHUD="1" effectNameLocalisationKey_name="effect_melt_armor_timer"	/>
 	
       <!-- not displayed on hud-->
       <effect name_name="BoostedEssenceRegen" 			defaultAbilityName_name="BoostedEssenceRegen"      		showOnHUD="0" />
@@ -489,7 +598,7 @@
       <effect name_name="AutoPanicRegen" 															       		showOnHUD="0" />
       <effect name_name="AutoSwimmingStaminaRegen" 																showOnHUD="0" />
       <effect name_name="DoppelgangerEssenceRegen"  												       		showOnHUD="0" />
-      <effect name_name="FactPotion" 																	   		showOnHUD="1" iconType_name="PopsPotion" />
+      <effect name_name="FactPotion" 																	   		showOnHUD="1" iconType_name="PopsPotion" onStartSound_name="gui_potion_activation" />
       <effect name_name="PullEffect" 															   				showOnHUD="0" />
       <effect name_name="FrozenEffect" 	defaultAbilityName_name="FrozenEffect" 	iconType_name="Immobilized"  	showOnHUD="1"  resistStatName_name="frost_resistance" targetEffectName_name="critical_frozen" effectNameLocalisationKey_name="effect_immobilized">
 		<denies>
@@ -534,6 +643,8 @@
       <applicator_aura name_name="FireAuraEffect" defaultAbilityName_name="FireAuraEffect" showOnHUD="0" isOneTimeOnly="0" range="4.0">
         <effect name_name="BurningEffect" affectsHostile="1" affectsNeutral="1" affectsFriendly="1" />
       </applicator_aura>
+	  <!-- modSigns -->
+      <effect name_name="MeltArmorDebuff"		defaultAbilityName_name="MeltArmorDebuff"		showOnHUD="0" />
     </effects>
 	
     <effect_icons>
@@ -560,6 +671,17 @@
 	  <effect iconType_name="EffectBear"    	path="icons/inventory/potions/pheromone-bear-64x64.png" />
 	  <effect iconType_name="PopsPotion"    	path="icons/inventory/ingredients/alchemy/alcohol_vodka_pepper_64x64.png" />
 	  <effect iconType_name="Quen"    			path="icons/Skills/core/magic_4.png" />
+	  <!-- modSigns -->
+      <effect iconType_name="UndyingSkillImmortal"	path="icons/Skills/sword/sword_s18.png" />
+	  <effect iconType_name="Dimeritium"		path="icons/inventory/bombs/dwimeritium_bomb.png" />
+	  <effect iconType_name="WhirlCooldown"		path="icons/Skills/Sword/sword_s1.png" />
+	  <effect iconType_name="RendCooldown"		path="icons/Skills/Sword/sword_s2.png" />
+	  <effect iconType_name="AardCooldown"		path="icons/Skills/core/magic_1.png" />
+	  <effect iconType_name="IgniCooldown"		path="icons/Skills/core/magic_2.png" />
+	  <effect iconType_name="YrdenCooldown"		path="icons/Skills/core/magic_3.png" />
+	  <effect iconType_name="QuenCooldown"		path="icons/Skills/core/magic_4.png" />
+	  <effect iconType_name="AxiiCooldown"		path="icons/Skills/core/magic_5.png" />
+	  <effect iconType_name="MeltArmorTimer"	path="icons/Skills/Signs/magic_s8.png" />
     </effect_icons>
   </custom>
 </redxml>

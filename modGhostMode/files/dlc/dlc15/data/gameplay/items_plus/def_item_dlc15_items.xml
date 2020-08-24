@@ -10,6 +10,7 @@
 		stackable						="100"
 		category						="misc"
 		price							="10"
+		weight							="0.05"
 		icon_path						="icons/inventory/quests/icon_cat_medailon_64x64.png"
 		localisation_key_name			="item_name_mq1058_cat_medallion"
 		localisation_key_description	="item_desc_quest_item"
@@ -23,6 +24,7 @@
 		stackable						="100"
 		category						="misc"
 		price							="10"
+		weight							="0.05"
 		icon_path						="icons/inventory/quests/rug_doll_64x64.png"
 		localisation_key_name			="item_name_mq1058_doll"
 		localisation_key_description	="item_desc_quest_item"
@@ -36,20 +38,20 @@
 		stackable						="100"
 		category						="misc"
 		price							="1"
+		weight							="0.05"
 		icon_path						="icons/inventory/quests/drawing_of_geralt_charcoal_64x64.png"
 		localisation_key_name			="item_name_mq1058_drawing"
 		localisation_key_description	="item_desc_mq1058_drawing"
 	>
 		<tags>							
 		</tags>
-		<recycling_parts>				<parts count="1">Note</parts>
-		</recycling_parts>
 	</item>	
 
 	<item
 		name							="mq1058_contract"
 		category						="misc"
-		weight							="0.1"
+		price							="1"
+		weight							="0.05"
 		stackable						="20"
 		ability_slots					="0"
 		localisation_key_name			="item_name_mq1058_contract"
@@ -58,14 +60,13 @@
 	>
 		<tags>							ReadableItem, NoticeBoardNote, mod_book
 		</tags>
-		<recycling_parts>				<parts count="1">Note</parts>
-		</recycling_parts>
 	</item>
 	
 	<item
 		name							="mq1058_cat_note"
 		category						="misc"
-		weight							="0.1"
+		price							="1"
+		weight							="0.05"
 		stackable						="20"
 		ability_slots					="0"
 		localisation_key_name			="item_name_mq1058_cat_note"
@@ -74,8 +75,6 @@
 	>
 		<tags>							ReadableItem
 		</tags>
-		<recycling_parts>				<parts count="1">Note</parts>
-		</recycling_parts>
 	</item>	
 	
 </items>

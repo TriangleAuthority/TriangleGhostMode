@@ -293,6 +293,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 		wplayer = GetWitcherPlayer();
 		dm = theGame.GetDefinitionsManager();
 		_inv.GetItemStatsFromName(craftedItemName, attributes);
+		_inv.GetPotionAttributesByName(craftedItemName, attributes); //modSigns
+		_inv.GetBombAttributesForTooltipByName(craftedItemName, attributes); //modSigns
 		_inv.GetItemQualityFromName(craftedItemName, minQuality, maxQuality);
 		itemType = dm.GetFilterTypeByItem(craftedItemName);
 		
@@ -301,7 +303,7 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 		dm.GetItemAttributeValueNoRandom(craftedItemName, true, 'weight', minWeightAttribute, maxWeightAttribute);
 		weightValue = minWeightAttribute.valueBase;
 		
-		if ( itemCategory == 'usable' || itemCategory == 'upgrade' || itemCategory == 'junk' )
+		/*if ( itemCategory == 'usable' || itemCategory == 'upgrade' || itemCategory == 'junk' )
 		{
 			weightValue = 0.01 + weightValue * 0.2;
 		}
@@ -312,13 +314,17 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 		else
 		{
 			weightValue = 0.01 + weightValue * 0.5;
-		}
+		}*/ //modSigns: probably need to display adjusted weight here
 		
 		tmpStr = FloatToStringPrec( weightValue, 2 );
 		weight = GetLocStringByKeyExt("attribute_name_weight") + "  " + tmpStr;
 		
 		itemName = GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(craftedItemName));
-		itemDesc = GetLocStringByKeyExt(_inv.GetItemLocalizedDescriptionByName(craftedItemName));
+		//modSigns
+		if(dm.ItemHasTag(craftedItemName, 'Mutagen'))
+			_inv.FillInMutagenDescriptionByName(craftedItemName, itemDesc);
+		else
+			itemDesc = GetLocStringByKeyExt(_inv.GetItemLocalizedDescriptionByName(craftedItemName));
 		
 		rarityId = minQuality;
 		rarity = GetItemRarityDescriptionFromInt(minQuality);
@@ -327,16 +333,16 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 		setBonusText = "";
 		setBonusText2 = "";
 		
-		if ( dm.IsItemSetItem( craftedItemName ) ) 
+		if ( dm.IsItemSetItem( craftedItemName ) && dm.ItemHasTag( craftedItemName, 'SetBonusPiece' ) || _inv.IsSetArmorTypeByName( craftedItemName ) ) // modSigns
 		{
 			GetWitcherPlayer().GetSetBonusStatusByName( craftedItemName, setBonusDescription1, setBonusDescription2, isSetBonus1Active, isSetBonus2Active );
 			
-			if( setBonusDescription1!="" && setBonusDescription2!="" )
+			if( setBonusDescription1!="" /*&& setBonusDescription2!=""*/ /* modSigns */ )
 			{				
-				if ( !dm.ItemHasTag( craftedItemName, 'SetBonusPiece' ) )
+				/*if ( !dm.ItemHasTag( craftedItemName, 'SetBonusPiece' ) )
 				{
 					setBonusText = setBonusText + "<font color='#FF0000'>" + GetLocStringByKeyExt( "tooltip_set_bonus_not_avilable_yet" ) + "</font><br/>";
-				}
+				}*/ // modSigns
 				
 				setBonusText = setBonusText + "<font color='#b7ae8c'>" + StrUpperUTF( GetLocStringByKeyExt( "crafting_bonus_title" ) ) + "</font><br/><br/>";
 				
@@ -352,6 +358,19 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 					setBonusText2 = setBonusText2 + "<font color='#818181'>" + setBonusDescription2 + "</font>";
 				}
 				
+				targetObject.SetMemberFlashString( "SetBonusDescription", setBonusText );
+				targetObject.SetMemberFlashString( "SetBonusDescription2", setBonusText2 );
+			}
+			//modSigns
+			else
+			{
+				_inv.GetSetArmorItemDescriptionByName(craftedItemName, setBonusText);
+				paramString.Clear();
+				paramString.PushBack("4");
+				setBonusText = "<font color='#b7ae8c'>" + StrUpperUTF( GetLocStringByKeyExt( "gm_crafting_bonus_title" ) ) + "</font><br/><br/>"
+					+ "<font color='#9f977a'>" + GetLocStringByKeyExtWithParams( "crafting_bonus_set_title",,, paramString ) + ":</font><br/>"
+					+ "<font color='#818181'>" + setBonusText + "</font>";
+				setBonusText2 = "";
 				targetObject.SetMemberFlashString( "SetBonusDescription", setBonusText );
 				targetObject.SetMemberFlashString( "SetBonusDescription2", setBonusText2 );
 			}
@@ -431,7 +450,6 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 		attributesStr = "";
 		for (i = 0; i < attributes.Size(); i += 1)
 		{
-			
 			color = attributes[i].attributeColor;
 			attributesStr += "<font color=\"#" + color + "\">";
 			attributesStr += attributes[i].attributeName + ": ";
@@ -447,10 +465,10 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 		}
 
 		addDescription = "";
-		if (maxQuality > 1 && maxQuality < 4) 
-		{
-			addDescription += "<font color=\"#AAFFFC\">" + (minQuality - 1) + " - " + (maxQuality - 1) + " " + GetLocStringByKeyExt("panel_crafting_number_random_attributes") + "</font>";
-		}
+		//if (maxQuality > 1 && maxQuality < 4) 
+		//{
+		//	addDescription += "<font color=\"#AAFFFC\">" + (minQuality - 1) + " - " + (maxQuality - 1) + " " + GetLocStringByKeyExt("panel_crafting_number_random_attributes") + "</font>";
+		//} //modSigns
 		
 		if ( theGame.GetGuiManager().GetShowItemNames() )
 		{

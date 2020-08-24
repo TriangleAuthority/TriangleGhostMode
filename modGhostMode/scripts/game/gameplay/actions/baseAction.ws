@@ -57,6 +57,7 @@ class W3DamageAction extends CDamageData
 	protected var swingDirection : EAttackSwingDirection;			
 	protected var signSkill : ESkill;								
 	protected var isDodged : bool;									
+	protected var grazeDamageReduction : float; //modSigns
 	protected var shouldProcessBuffsIfNoDamage : bool;				
 	private var ignoreImmortalityMode : bool;						
 	private var dealtFireDamage : bool;								
@@ -77,6 +78,7 @@ class W3DamageAction extends CDamageData
 	protected var instantKillCooldownIgnore : bool;					
 	protected var wasFrozen	: bool;									
 	protected var mutation4Triggered : bool;						
+	protected var mutation5Triggered : bool; //modSigns
 	protected var didReturnDamageToAttacker : bool;					
 	
 	
@@ -93,6 +95,7 @@ class W3DamageAction extends CDamageData
 	default isPointResistIgnored 			= false;
 	default canPlayHitParticle 				= true;
 	default isDodged						= false;
+	default grazeDamageReduction			= 0.f; //modSigns
 	default isActionMelee					= false;
 	default isActionRanged					= false;
 	default isActionWitcherSign				= false;
@@ -174,6 +177,7 @@ class W3DamageAction extends CDamageData
 		swingDirection = ASD_NotSet;
 		signSkill = S_SUndefined;
 		isDodged = false;
+		grazeDamageReduction = 0.f; //modSigns
 		shouldProcessBuffsIfNoDamage = false;
 		ignoreImmortalityMode = false;
 		dealtFireDamage = false;
@@ -255,7 +259,6 @@ class W3DamageAction extends CDamageData
 		
 		dmgInfos.PushBack( dmgInfo );
 	}
-	
 	
 	function AddEffectInfo(effectType : EEffectType, optional duration : float, optional effectCustomValue : SAbilityAttributeValue, optional effectAbilityName : name, optional customParams : W3BuffCustomParams, optional buffApplyChance : float )
 	{
@@ -368,6 +371,14 @@ class W3DamageAction extends CDamageData
 		return false;
 	}
 	
+	//modSigns
+	public function SetDTs( dmgTypes : array< SRawDamage > ) : int
+	{
+		dmgInfos.Clear();
+		dmgInfos = dmgTypes;
+		
+		return dmgInfos.Size();
+	}
 	
 	public function GetDTs( out dmgTypes : array< SRawDamage > ) : int
 	{
@@ -432,6 +443,7 @@ class W3DamageAction extends CDamageData
 	
 	public function CanBeParried() : bool						{return canBeParried;}
 	public function CanBeDodged() : bool						{return canBeDodged;}
+	public function SetCanBeDodged(b : bool)					{canBeDodged = b;} //modSigns
 	public function SetPointResistIgnored(b : bool)				{isPointResistIgnored = b;}
 	public function CanPlayHitParticle() : bool					{return canPlayHitParticle;}
 	public function SetCanPlayHitParticle(b : bool)				{canPlayHitParticle = b;}
@@ -446,7 +458,10 @@ class W3DamageAction extends CDamageData
 	public function GetSwingType() : EAttackSwingType			{return swingType;}
 	public function GetSwingDirection() : EAttackSwingDirection	{return swingDirection;}
 	public function SetWasDodged()								{isDodged = true;}
+	public function SetGrazeDamageReduction(dmg : float)		{grazeDamageReduction = dmg;} //modSigns
 	public function WasDodged() : bool							{return isDodged;}	
+	public function IsGrazeDamage() : bool						{return grazeDamageReduction > 0;} //modSigns
+	public function GetGrazeDamageReduction() : float			{return grazeDamageReduction;} //modSigns
 	public function IsDoTDamage() : bool						{return isDoTDamage;}
 	public function SetForceExplosionDismemberment()			{forceExplosionDismemberment = true;}
 	public function HasForceExplosionDismemberment() : bool		{return forceExplosionDismemberment;}
@@ -664,6 +679,8 @@ class W3DamageAction extends CDamageData
 	public final function GetWasFrozen() : bool					{return wasFrozen;}
 	public final function SetMutation4Triggered()				{mutation4Triggered = true;}
 	public final function GetMutation4Triggered() : bool		{return mutation4Triggered;}
+	public final function SetMutation5Triggered()				{mutation5Triggered = true;} //modSigns
+	public final function GetMutation5Triggered() : bool		{return mutation5Triggered;} //modSigns
 	public final function WasDamageReturnedToAttacker() : bool  {return didReturnDamageToAttacker;}
 	public final function SetWasDamageReturnedToAttacker( b : bool ) {didReturnDamageToAttacker = b;}
 
@@ -688,6 +705,37 @@ class W3DamageAction extends CDamageData
 		return 0;
 	}
 	
+	//modSigns
+	public final function GetVitalityDamageTotal() : float
+	{
+		var i : int;
+		var ret : float;
+		
+		ret = 0;
+		for(i = 0; i < dmgInfos.Size(); i += 1)
+		{
+			if(DamageHitsVitality(dmgInfos[i].dmgType))
+				ret += dmgInfos[i].dmgVal;
+		}
+				
+		return ret;
+	}
+	
+	//modSigns
+	public final function GetEssenceDamageTotal() : float
+	{
+		var i : int;
+		var ret : float;
+		
+		ret = 0;
+		for(i = 0; i < dmgInfos.Size(); i += 1)
+		{
+			if(DamageHitsEssence(dmgInfos[i].dmgType))
+				ret += dmgInfos[i].dmgVal;
+		}
+				
+		return ret;
+	}
 	
 	public final function GetDamageValueTotal() : float
 	{

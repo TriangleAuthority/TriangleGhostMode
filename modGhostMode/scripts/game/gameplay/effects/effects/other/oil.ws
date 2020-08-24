@@ -11,6 +11,7 @@ class W3Effect_Oil extends CBaseGameplayEffect
 	private saved var oilAbility : name;		
 	private saved var oilItemName : name;		
 	private saved var queueTimer : int;
+	private saved var oilLevel : int; //modSigns
 	
 	default effectType = EET_Oil;
 	default isPositive = true;
@@ -190,7 +191,7 @@ class W3Effect_Oil extends CBaseGameplayEffect
 
 	public final function GetAmmoPercentage() : float
 	{
-		return currCount / maxCount;
+		return ((float)(currCount)) / ((float)(maxCount)); //modSigns
 	}
 	
 	public final function GetSwordItemId() : SItemUniqueId
@@ -226,6 +227,248 @@ class W3Effect_Oil extends CBaseGameplayEffect
 		}
 			
 		return MC_NotSet;
+	}
+	
+	//modSigns
+	private final function GetScaleFactor() : float
+	{
+		return GetAmmoPercentage() * theGame.params.OIL_DECAY_FACTOR + (1 - theGame.params.OIL_DECAY_FACTOR);
+	}
+	
+	//modSigns
+	private final function ScaleBonus(out attrVal : SAbilityAttributeValue)
+	{
+		var factor : float = GetScaleFactor();
+		
+		attrVal.valueBase *= factor;
+		attrVal.valueAdditive *= factor;
+		attrVal.valueMultiplicative *= factor;
+	}
+	
+	//modSigns
+	private final function ScaleBonusVal(out val : float)
+	{
+		val *= GetScaleFactor();
+	}
+	
+	public final function GetAttackPowerBonus( monsterCategory : EMonsterCategory ) : SAbilityAttributeValue
+	{
+		var attrVal, min, max : SAbilityAttributeValue;
+		
+		if( GetMonsterCategory() != monsterCategory || GetAmmoCurrentCount() < 1 )
+			return attrVal;
+		
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue( oilAbility, MonsterCategoryToAttackPowerBonus( monsterCategory ), min, max );
+		attrVal = GetAttributeRandomizedValue(min, max);
+		if( GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_1 ) ) //new wolf set lvl 1 bonus
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_1 ), 'per_piece_oil_bonus', min, max );
+			attrVal.valueMultiplicative *= 1 + CalculateAttributeValue(min) * GetWitcherPlayer().GetSetPartsEquipped( EIST_Wolf );
+		}
+		if( FactsQuerySum( "modSigns_debug_oils" ) > 0 ) //debug
+		{
+			theGame.witcherLog.AddMessage("Ability: " + oilAbility);
+			theGame.witcherLog.AddMessage("Attribute: " + MonsterCategoryToAttackPowerBonus( monsterCategory ));
+			theGame.witcherLog.AddMessage("Value: " + attrVal.valueMultiplicative);
+		}
+		ScaleBonus(attrVal);
+		if( FactsQuerySum( "modSigns_debug_oils" ) > 0 ) //debug
+		{
+			theGame.witcherLog.AddMessage("Value modified: " + attrVal.valueMultiplicative);
+		}
+		return attrVal;
+	}
+
+	//modSigns
+	public final function GetResistReductionBonus( monsterCategory : EMonsterCategory ) : SAbilityAttributeValue
+	{
+		var attrVal, min, max : SAbilityAttributeValue;
+		
+		if( GetMonsterCategory() != monsterCategory || GetAmmoCurrentCount() < 1 )
+			return attrVal;
+		
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue( oilAbility, MonsterCategoryToResistReduction( monsterCategory ), min, max );
+		attrVal = GetAttributeRandomizedValue(min, max);
+		if( GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_1 ) ) //new wolf set lvl 1 bonus
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_1 ), 'per_piece_oil_bonus', min, max );
+			attrVal.valueAdditive *= 1 + CalculateAttributeValue(min) * GetWitcherPlayer().GetSetPartsEquipped( EIST_Wolf );
+		}
+		if( FactsQuerySum( "modSigns_debug_oils" ) > 0 ) //debug
+		{
+			theGame.witcherLog.AddMessage("Ability: " + oilAbility);
+			theGame.witcherLog.AddMessage("Attribute: " + MonsterCategoryToResistReduction( monsterCategory ));
+			theGame.witcherLog.AddMessage("Value: " + CalculateAttributeValue( attrVal ));
+		}
+		ScaleBonus(attrVal);
+		if( FactsQuerySum( "modSigns_debug_oils" ) > 0 ) //debug
+		{
+			theGame.witcherLog.AddMessage("Value modified: " + CalculateAttributeValue( attrVal ));
+		}
+		return attrVal;
+	}
+	
+	//modSigns
+	public final function GetCriticalChanceBonus( monsterCategory : EMonsterCategory ) : SAbilityAttributeValue
+	{
+		var attrVal, min, max : SAbilityAttributeValue;
+		var dm : CDefinitionsManagerAccessor;
+		
+		if( GetAmmoCurrentCount() < 1 )
+			return attrVal;
+		
+		dm = theGame.GetDefinitionsManager();
+		
+		if( GetMonsterCategory() == monsterCategory )
+		{
+			dm.GetAbilityAttributeValue( oilAbility, MonsterCategoryToCriticalChanceBonus( monsterCategory ), min, max );
+			attrVal = GetAttributeRandomizedValue(min, max);
+			if( GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_1 ) ) //new wolf set lvl 1 bonus
+			{
+				dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_1 ), 'per_piece_oil_bonus', min, max );
+				attrVal.valueAdditive *= 1 + CalculateAttributeValue(min) * GetWitcherPlayer().GetSetPartsEquipped( EIST_Wolf );
+			}
+			if( FactsQuerySum( "modSigns_debug_oils" ) > 0 ) //debug
+			{
+				theGame.witcherLog.AddMessage("Ability: " + oilAbility);
+				theGame.witcherLog.AddMessage("Attribute: " + MonsterCategoryToCriticalChanceBonus( monsterCategory ));
+				theGame.witcherLog.AddMessage("Value: " + CalculateAttributeValue( attrVal ));
+			}
+		}
+		if( GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_2 ) )
+		{
+			dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_2 ), 'per_oil_crit_chance_bonus', min, max );
+			attrVal += min;
+		}
+		ScaleBonus(attrVal);
+		if( FactsQuerySum( "modSigns_debug_oils" ) > 0 ) //debug
+		{
+			theGame.witcherLog.AddMessage("Value modified: " + CalculateAttributeValue( attrVal ));
+		}
+		return attrVal;
+	}
+	
+	//modSigns
+	public final function GetCriticalDamageBonus( monsterCategory : EMonsterCategory ) : SAbilityAttributeValue
+	{
+		var attrVal, min, max : SAbilityAttributeValue;
+		var dm : CDefinitionsManagerAccessor;
+		
+		if( GetAmmoCurrentCount() < 1 )
+			return attrVal;
+		
+		dm = theGame.GetDefinitionsManager();
+		
+		if( GetMonsterCategory() == monsterCategory )
+		{
+			dm.GetAbilityAttributeValue( oilAbility, MonsterCategoryToCriticalDamageBonus( monsterCategory ), min, max );
+			attrVal = GetAttributeRandomizedValue(min, max);
+			if( GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_1 ) ) //new wolf set lvl 1 bonus
+			{
+				dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_1 ), 'per_piece_oil_bonus', min, max );
+				attrVal.valueAdditive *= 1 + CalculateAttributeValue(min) * GetWitcherPlayer().GetSetPartsEquipped( EIST_Wolf );
+			}
+			if( FactsQuerySum( "modSigns_debug_oils" ) > 0 ) //debug
+			{
+				theGame.witcherLog.AddMessage("Ability: " + oilAbility);
+				theGame.witcherLog.AddMessage("Attribute: " + MonsterCategoryToCriticalDamageBonus( monsterCategory ));
+				theGame.witcherLog.AddMessage("Value: " + CalculateAttributeValue( attrVal ));
+			}
+		}
+		if( GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_2 ) )
+		{
+			dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_2 ), 'per_oil_crit_power_bonus', min, max );
+			attrVal += min;
+		}
+		ScaleBonus(attrVal);
+		if( FactsQuerySum( "modSigns_debug_oils" ) > 0 ) //debug
+		{
+			theGame.witcherLog.AddMessage("Value modified: " + CalculateAttributeValue( attrVal ));
+		}
+		return attrVal;
+	}
+	
+	//modSigns
+	public function GetOilLevel() : int
+	{
+		if(oilLevel <= 0)
+		{
+			InitOilLevel();
+		}
+		return oilLevel;
+	}
+	
+	//modSigns
+	private function InitOilLevel()
+	{
+		var dm : CDefinitionsManagerAccessor;
+		var min, max : SAbilityAttributeValue;
+		
+		dm = theGame.GetDefinitionsManager();
+		dm.GetItemAttributeValueNoRandom(oilItemName, true, 'level', min, max);
+		oilLevel = RoundMath(CalculateAttributeValue(min));
+	}
+	
+	//modSigns
+	public final function GetProtectionAgainstMonster( monsterCategory : EMonsterCategory ) : float
+	{
+		var skillLevel : int;
+		var perSkillLevelBonus, perOilLevelBonus, bonus : float;
+		
+		if(GetAmmoCurrentCount() < 1 || !thePlayer.CanUseSkill(S_Alchemy_s05))
+			return 0;
+		
+		if(GetMonsterCategory() == monsterCategory)
+		{
+			perOilLevelBonus = CalculateAttributeValue(thePlayer.GetSkillAttributeValue(S_Alchemy_s05, 'oil_level_defence', false, true));
+			skillLevel = thePlayer.GetSkillLevel(S_Alchemy_s05);
+			perSkillLevelBonus = CalculateAttributeValue(thePlayer.GetSkillAttributeValue(S_Alchemy_s05, 'defence_bonus', false, true));
+			bonus = skillLevel * perSkillLevelBonus + (GetOilLevel() - 1) * perOilLevelBonus;
+			if(FactsQuerySum( "modSigns_debug_oils" ) > 0) //debug
+			{
+				theGame.witcherLog.AddMessage("Ability: " + oilAbility);
+				theGame.witcherLog.AddMessage("Attribute: bonus resistance");
+				theGame.witcherLog.AddMessage("Oil Level: " + GetOilLevel());
+				theGame.witcherLog.AddMessage("Bonus: " + bonus);
+			}
+		}
+		ScaleBonusVal(bonus);
+		if(FactsQuerySum( "modSigns_debug_oils" ) > 0) //debug
+		{
+			theGame.witcherLog.AddMessage("Bonus modified: " + bonus);
+		}
+		return bonus;
+	}
+	
+	//modSigns
+	public final function GetPoisonChanceAgainstMonster( monsterCategory : EMonsterCategory ) : float
+	{
+		var skillLevel : int;
+		var perSkillLevelBonus, perOilLevelBonus, bonus : float;
+		
+		if(GetAmmoCurrentCount() < 1 || !thePlayer.CanUseSkill(S_Alchemy_s12))
+			return 0;
+		
+		if(GetMonsterCategory() == monsterCategory)
+		{
+			perOilLevelBonus = CalculateAttributeValue(thePlayer.GetSkillAttributeValue(S_Alchemy_s12, 'oil_level_chance', false, true));
+			skillLevel = thePlayer.GetSkillLevel(S_Alchemy_s12);
+			perSkillLevelBonus = CalculateAttributeValue(thePlayer.GetSkillAttributeValue(S_Alchemy_s12, 'skill_chance', false, true));
+			bonus = skillLevel * perSkillLevelBonus + (GetOilLevel() - 1) * perOilLevelBonus;
+			if(FactsQuerySum( "modSigns_debug_oils" ) > 0) //debug
+			{
+				theGame.witcherLog.AddMessage("Ability: " + oilAbility);
+				theGame.witcherLog.AddMessage("Attribute: bonus poison chance");
+				theGame.witcherLog.AddMessage("Oil Level: " + GetOilLevel());
+				theGame.witcherLog.AddMessage("Bonus: " + bonus);
+			}
+		}
+		ScaleBonusVal(bonus);
+		if(FactsQuerySum( "modSigns_debug_oils" ) > 0) //debug
+		{
+			theGame.witcherLog.AddMessage("Bonus modified: " + bonus);
+		}
+		return bonus;
 	}
 	
 	protected function GetSelfInteraction( e : CBaseGameplayEffect) : EEffectInteract

@@ -4,13 +4,13 @@
 		<abilities>		
 			<!-- BLACK BLOOD -->
 			<ability name="BlackBloodEffect_Level1">
-				<return_damage min="0.15" type="mult"/>									
+				<return_damage min="0.1" type="mult"/>									
 			</ability>
 			<ability name="BlackBloodEffect_Level2">
-				<return_damage min="0.2" type="mult"/>									
+				<return_damage min="0.15" type="mult"/>									
 			</ability>
 			<ability name="BlackBloodEffect_Level3">
-				<return_damage min="0.3" type="mult"/>									
+				<return_damage min="0.2" type="mult"/>									
 			</ability>
 			
 			<!-- BLIZZARD -->
@@ -18,10 +18,10 @@
 				<slow_motion min="0.5" type="add"/>
 			</ability>
 			<ability name="BlizzardEffect_Level2">
-				<slow_motion min="0.45" type="add"/>
+				<slow_motion min="0.35" type="add"/>
 			</ability>
 			<ability name="BlizzardEffect_Level3">
-				<slow_motion min="0.4" type="add"/>
+				<slow_motion min="0.25" type="add"/>
 			</ability>
 			
 			<!-- CAT -->
@@ -41,29 +41,30 @@
 			<!-- FULL MOON -->
 			<ability name="FullMoonEffect_Level1">
 				<tags>passive</tags>
-				<vitality type="add" min="600" max="600"/>
+				<vitality type="add" min="1300" max="1300"/>
 			</ability>
 			<ability name="FullMoonEffect_Level2">
 				<tags>passive</tags>
-				<vitality type="add" min="1100" max="1100"/>
+				<vitality type="add" min="1700" max="1700"/>
 			</ability>
 			<ability name="FullMoonEffect_Level3">
 				<tags>passive</tags>
-				<vitality type="add" min="1500" max="1500"/>
+				<vitality type="add" min="2100" max="2100"/>
 			</ability>
 			
-			<!-- GOLDEN ORIOLE -->
+			<!-- GOLDEN ORIOLE: modSigns - resistances changed -->
 			<ability name="GoldenOrioleEffect_Level1">
 				<tags>passive</tags>
-				<poison_resistance_perc type="base" min="1"/>
+				<poison_resistance_perc type="add" min="0.20" max="0.20"/>
 			</ability>
 			<ability name="GoldenOrioleEffect_Level2">
 				<tags>passive</tags>
-				<poison_resistance_perc type="base" min="1"/>
+				<poison_resistance_perc type="add" min="0.35" max="0.35"/>
 			</ability>
 			<ability name="GoldenOrioleEffect_Level3">
 				<tags>passive</tags>
-				<!-- no poison res as it grants absorb -->
+				<poison_resistance_perc type="add" min="0.50" max="0.50"/>
+				<poison_immunity_duration type="add" min="5.0" max="5.0"/>
 			</ability>
 			
 			<!-- KILLER WHALE -->
@@ -93,26 +94,26 @@
 			</ability>
 			<ability name="MariborForestEffect_Level2">
 				<tags>passive</tags>
-				<focus_gain type="add" min="0.15" max="0.15"/>
+				<focus_gain type="add" min="0.2" max="0.2"/>
 			</ability>
 			<ability name="MariborForestEffect_Level3">
 				<tags>passive</tags>
-				<focus_gain type="add" min="0.15" max="0.15"/>
+				<focus_gain type="add" min="0.25" max="0.25"/>
 				<focus_on_drink type="add" min="1" />
 			</ability>
 			
 			<!-- PETRI PHILTRE -->
 			<ability name="PetriPhiltreEffect_Level1">
 				<tags>passive</tags>
-				<spell_power type="mult" min="0.15" max="0.15"/>
+				<spell_power type="mult" min="0.25" max="0.25"/>
 			</ability>
 			<ability name="PetriPhiltreEffect_Level2">
 				<tags>passive</tags>
-				<spell_power type="mult" min="0.2" max="0.2"/>
+				<spell_power type="mult" min="0.3" max="0.3"/>
 			</ability>
 			<ability name="PetriPhiltreEffect_Level3">
 				<tags>passive</tags>
-				<spell_power type="mult" min="0.25" max="0.25"/>
+				<spell_power type="mult" min="0.35" max="0.35"/>
 			</ability>
 			
 			<!-- PHEROMONES -->
@@ -120,21 +121,24 @@
 			<ability name="PheromoneEffect_Drowner" />
 			<ability name="PheromoneEffect_Nekker" />
 			
-			<!-- SWALLOW -->
+			<!-- SWALLOW: modSigns - bleeding res -->
 			<ability name="SwallowEffect_Level1">
 				<tags>passive</tags>
-				<vitalityRegen type="add" max="80" min="80" always_random="false"/>
+				<vitalityRegen type="add" max="40" min="40" always_random="false"/>
 				<vitalityCombatRegen type="add" min="40" max="40"/>
+				<bleeding_resistance_perc type="add" min="0.20" />
 			</ability>
 			<ability name="SwallowEffect_Level2">
 				<tags>passive</tags>
-				<vitalityRegen type="add" max="100" min="100" always_random="false"/>
+				<vitalityRegen type="add" max="65" min="65" always_random="false"/>
 				<vitalityCombatRegen type="add" min="65" max="65"/>
+				<bleeding_resistance_perc type="add" min="0.35" />
 			</ability>
 			<ability name="SwallowEffect_Level3">
 				<tags>passive</tags>
-				<vitalityRegen type="add" max="150" min="150" always_random="false"/>
+				<vitalityRegen type="add" max="80" min="80" always_random="false"/>
 				<vitalityCombatRegen type="add" min="80" max="80"/>
+				<bleeding_resistance_perc type="add" min="0.50" />
 			</ability>
 			
 			<!-- TAWNY OWL -->
@@ -154,7 +158,7 @@
 			<!-- THUNDERBOLT -->
 			<ability name="ThunderboltEffect_Level1">
 				<tags>passive</tags>
-				<attack_power type="mult" min="0.3"/>
+				<attack_power type="mult" min="0.25"/>
 			</ability>
 			<ability name="ThunderboltEffect_Level2">
 				<tags>passive</tags>
@@ -179,18 +183,23 @@
 			<!-- WHITE RAFFARD DECOCTION -->
 			<ability name="WhiteRaffardDecoctionEffect_Level1">
 				<tags>passive</tags>
-				<vitality min="0.60" type="mult" />
+				<vitality min="0.35" type="mult" />
 				<duration min="0.01" type="add" />
 			</ability>
 			<ability name="WhiteRaffardDecoctionEffect_Level2">
 				<tags>passive</tags>
-				<vitality min="0.80" type="mult" />
+				<vitality min="0.60" type="mult" />
 				<duration min="0.01" type="add" />
 			</ability>
 			<ability name="WhiteRaffardDecoctionEffect_Level3">
 				<tags>passive</tags>
 				<vitality min="1" type="mult" />
 				<duration min="3" type="add" />
+			</ability>
+			
+			<!-- modSigns -->
+			<ability name="MutationTriggerEffect">
+				<duration min="0.01" type="add" />
 			</ability>
 			
 			<!-- WOLF HOUR -->
@@ -217,21 +226,14 @@
 			<effect name_name="TawnyOwlEffect" 				effectNameLocalisationKey_name="effect_TawnyOwlEffect" 				effectDescriptionLocalisationKey_name="effect_TawnyOwlEffect_desc" 				isPotionEffect="1" iconType_name="icon_effect_TawnyOwlEffect"      			 showOnHUD="1" defaultAbilityName_name="TawnyOwlEffect_Level1" 				onStartSound_name="gui_potion_activation"/>
 			<effect name_name="ThunderboltEffect" 			effectNameLocalisationKey_name="effect_ThunderboltEffect" 			effectDescriptionLocalisationKey_name="effect_ThunderboltEffect_desc" 			isPotionEffect="1" iconType_name="icon_effect_ThunderboltEffect"       		 showOnHUD="1" defaultAbilityName_name="ThunderboltEffect_Level1" 			onStartSound_name="gui_potion_activation"/>		
 			<effect name_name="WhiteHoneyEffect" 			effectNameLocalisationKey_name="effect_WhiteHoneyEffect" 			effectDescriptionLocalisationKey_name="effect_WhiteHoneyEffect_desc" 			isPotionEffect="1" iconType_name="icon_effect_WhiteHoneyEffect" 		 	 showOnHUD="1" defaultAbilityName_name="WhiteHoneyEffect_Level1" 			onStartSound_name="gui_potion_activation" />			
-			<effect name_name="MariborForestEffect" 		effectNameLocalisationKey_name="effect_MariborForestEffect" 		effectDescriptionLocalisationKey_name="effect_MariborForestEffect_desc" 		isPotionEffect="1" iconType_name="icon_effect_MariborForestEffect" 	 		 showOnHUD="1" defaultAbilityName_name="MariborForestEffect_Level1" 		onStartSound_name="gui_potion_activation">
-				<overrides>
-					WellHydratedEffect
-				</overrides>
-			</effect>
-			<effect name_name="WhiteRaffardDecoctionEffect" effectNameLocalisationKey_name="effect_WhiteRaffardDecoctionEffect" effectDescriptionLocalisationKey_name="effect_WhiteRaffardDecoctionEffect_desc" isPotionEffect="1" iconType_name="icon_effect_WhiteRaffardDecoctionEffect" 	 showOnHUD="1" defaultAbilityName_name="WhiteRaffardDecoctionEffect_Level1" onStartSound_name="gui_potion_activation">
-				<overrides>
-					SwallowEffect
-				</overrides>
-			</effect>
-			
-			<effect name_name="PheromoneEffectBear" 	defaultAbilityName_name="PheromoneEffectBear" 		iconType_name="EffectBear"		isPotionEffect="1"	showOnHUD="1" effectNameLocalisationKey_name="item_name_pheromone_potion_bear_1" />
-			<effect name_name="PheromoneEffectDrowner" 	defaultAbilityName_name="PheromoneEffectDrowner" 	iconType_name="EffectDrowner"	isPotionEffect="1"	showOnHUD="1" effectNameLocalisationKey_name="item_name_pheromone_potion_drowner_1" />
-			<effect name_name="PheromoneEffectNekker" 	defaultAbilityName_name="PheromoneEffectNekker" 	iconType_name="EffectNekker"	isPotionEffect="1"	showOnHUD="1" effectNameLocalisationKey_name="item_name_pheromone_potion_nekker_1" />			
+			<effect name_name="MariborForestEffect" 		effectNameLocalisationKey_name="effect_MariborForestEffect" 		effectDescriptionLocalisationKey_name="effect_MariborForestEffect_desc" 		isPotionEffect="1" iconType_name="icon_effect_MariborForestEffect" 	 		 showOnHUD="1" defaultAbilityName_name="MariborForestEffect_Level1" 		onStartSound_name="gui_potion_activation" />
+			<effect name_name="WhiteRaffardDecoctionEffect" effectNameLocalisationKey_name="effect_WhiteRaffardDecoctionEffect" effectDescriptionLocalisationKey_name="effect_WhiteRaffardDecoctionEffect_desc" isPotionEffect="1" iconType_name="icon_effect_WhiteRaffardDecoctionEffect" 	 showOnHUD="1" defaultAbilityName_name="WhiteRaffardDecoctionEffect_Level1" onStartSound_name="gui_potion_activation" />
+			<effect name_name="PheromoneEffectBear" 	defaultAbilityName_name="PheromoneEffectBear" 		iconType_name="EffectBear"		isPotionEffect="1"	showOnHUD="1" effectNameLocalisationKey_name="item_name_pheromone_potion_bear_1" onStartSound_name="gui_potion_activation" />
+			<effect name_name="PheromoneEffectDrowner" 	defaultAbilityName_name="PheromoneEffectDrowner" 	iconType_name="EffectDrowner"	isPotionEffect="1"	showOnHUD="1" effectNameLocalisationKey_name="item_name_pheromone_potion_drowner_1" onStartSound_name="gui_potion_activation" />
+			<effect name_name="PheromoneEffectNekker" 	defaultAbilityName_name="PheromoneEffectNekker" 	iconType_name="EffectNekker"	isPotionEffect="1"	showOnHUD="1" effectNameLocalisationKey_name="item_name_pheromone_potion_nekker_1" onStartSound_name="gui_potion_activation" />
 			<effect name_name="WolfHourEffect" 			effectNameLocalisationKey_name="item_name_wolf_hour" 				effectDescriptionLocalisationKey_name="item_desc_wolf_hour" 				isPotionEffect="1" iconType_name="icon_effect_WolfHourEffect" 		 		 showOnHUD="1" defaultAbilityName_name="WolfHourEffect" />
+			<!-- modSigns -->
+			<effect name_name="MutationTriggerEffect"		isPotionEffect="1"		showOnHUD="0"		defaultAbilityName_name="MutationTriggerEffect"		onStartSound_name="gui_potion_activation" />
 		</effects>	
 
 		<effect_icons>

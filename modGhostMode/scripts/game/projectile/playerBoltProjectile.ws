@@ -17,6 +17,8 @@ class W3BoltProjectile extends W3ArrowProjectile
 	private var hitVictims					: array<CActor>;			
 	protected saved var wasShotUnderWater	: bool;						
 	
+	protected var boltItemName				: name; //modSigns
+	
 		default dodgeable = true;
 	
 	
@@ -28,6 +30,7 @@ class W3BoltProjectile extends W3ArrowProjectile
 	
 	event OnProjectileInit()
 	{
+		collidedEntities.Clear(); //modSigns
 		InitCollisionGroups();
 		super.OnProjectileInit();
 	}
@@ -53,6 +56,19 @@ class W3BoltProjectile extends W3ArrowProjectile
 	{
 		var action : W3Action_Attack;
 		var victimTags, attackerTags : array<name>;
+		var boltAdded : bool; //modSigns
+		
+		if(collidedEntities.Contains(victim)) //modSigns: prevent dealing double (and triple) damage to the same entity
+			return;
+		
+		//modSigns: begin - last bolt in stack fix
+		if(GetOwner().GetInventory().GetItemQuantity(itemId) <= 0 && IsNameValid(boltItemName))
+		{
+			GetOwner().GetInventory().AddAnItem(boltItemName, 1, true, true);
+			itemId = GetOwner().GetInventory().GetItemId(boltItemName);
+			boltAdded = true;
+		}
+		//modSigns: end
 
 		
 		
@@ -93,6 +109,14 @@ class W3BoltProjectile extends W3ArrowProjectile
 			
 			thePlayer.RemoveItemAbilities(crossbowId);
 		}
+		
+		//modSigns: begin - last bolt in stack fix
+		if(boltAdded)
+		{
+			GetOwner().GetInventory().RemoveItemByName(boltItemName, 1);
+			boltAdded = false;
+		}
+		//modSigns: end
 		
 		collidedEntities.PushBack(victim);
 		
@@ -358,6 +382,8 @@ class W3BoltProjectile extends W3ArrowProjectile
 		projectiles[0].SoundEvent("cmb_arrow_swoosh");
 		
 		
+		boltItemName = GetOwner().GetInventory().GetItemName(itemId); //modSigns
+		
 		if(!FactsDoesExist("debug_fact_inf_bolts"))
 		{
 			inv = GetOwner().GetInventory();
@@ -365,6 +391,9 @@ class W3BoltProjectile extends W3ArrowProjectile
 			if(!inv.ItemHasTag(itemId, theGame.params.TAG_INFINITE_AMMO))
 				inv.RemoveItem(itemId);
 		}
+		//modSigns begin
+		thePlayer.DrainStamina(ESAT_UsableItem);
+		//modSigns end
 		
 		if ( dodgeable && target )
 		{

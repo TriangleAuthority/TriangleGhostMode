@@ -1155,6 +1155,11 @@ class CPlayerInput
 				default :
 					break;
 			}
+			if( gmInstantCastingAllowed() ) //modSigns
+			{
+				thePlayer.SetCastSignHoldTimestamp( theGame.GetEngineTimeAsSeconds() );
+				return CastSign();
+			}
 		}
 	}
 	
@@ -1810,6 +1815,14 @@ class CPlayerInput
 			return true;
 		}
 		
+		//modSigns
+		if(thePlayer.HasBuff(EET_WhirlCooldown))
+		{
+			//theSound.SoundEvent("gui_global_denied");
+			thePlayer.SoundEvent("gui_no_adrenaline");
+			return false;
+		}
+		
 		if ( !IsPlayerAbleToPerformSpecialAttack() )
 			return false;
 		
@@ -1838,6 +1851,14 @@ class CPlayerInput
 		{
 			thePlayer.CancelHoldAttacks();
 			return true;
+		}
+		
+		//modSigns
+		if(thePlayer.HasBuff(EET_RendCooldown))
+		{
+			//theSound.SoundEvent("gui_global_denied");
+			thePlayer.SoundEvent("gui_no_adrenaline");
+			return false;
 		}
 		
 		if ( !IsPlayerAbleToPerformSpecialAttack() )
@@ -2079,7 +2100,7 @@ class CPlayerInput
 	
 	event OnCastSign( action : SInputAction )
 	{
-		var signSkill : ESkill;
+		//var signSkill : ESkill; //modSigns
 	
 		if( !thePlayer.GetBIsInputAllowed() )
 		{	
@@ -2088,42 +2109,73 @@ class CPlayerInput
 		
 		if( IsPressed(action) )
 		{
-			if( !IsActionAllowed(EIAB_Signs) )
-			{				
-				thePlayer.DisplayActionDisallowedHudMessage(EIAB_Signs);
+			//modSigns begin
+			return CastSign();
+			//modSigns end
+		}
+	}
+	
+	function CastSign() : bool //modSigns
+	{
+		var signSkill : ESkill;
+		
+		if( GetWitcherPlayer().IsInCombatAction() && thePlayer.GetBehaviorVariable( 'combatActionType' ) == (int)CAT_CastSign ) //modSigns
+		{
+			return false;
+		}
+	
+		if( !IsActionAllowed(EIAB_Signs) )
+		{
+			thePlayer.DisplayActionDisallowedHudMessage(EIAB_Signs);
+			return false;
+		}
+		if ( thePlayer.IsHoldingItemInLHand() && thePlayer.IsUsableItemLBlocked() )
+		{
+			thePlayer.DisplayActionDisallowedHudMessage(EIAB_Undefined, false, false, true);
+			return false;
+		}
+		signSkill = SignEnumToSkillEnum( thePlayer.GetEquippedSign() );
+		if( signSkill != S_SUndefined )
+		{
+			if(!thePlayer.CanUseSkill(signSkill))
+			{
+				thePlayer.DisplayActionDisallowedHudMessage(EIAB_Signs, false, false, true);
 				return false;
 			}
- if ( thePlayer.IsHoldingItemInLHand() && thePlayer.IsUsableItemLBlocked() )
+		
+			//modSigns
+			if(IsSignOnCooldown(thePlayer.GetEquippedSign()))
 			{
-				thePlayer.DisplayActionDisallowedHudMessage(EIAB_Undefined, false, false, true);
+				//theSound.SoundEvent("gui_global_denied");
+				thePlayer.SoundEvent("gui_no_adrenaline");
 				return false;
 			}
-			signSkill = SignEnumToSkillEnum( thePlayer.GetEquippedSign() );
-			if( signSkill != S_SUndefined )
+		
+			if( thePlayer.HasStaminaToUseSkill( signSkill, false ) )
 			{
-				if(!thePlayer.CanUseSkill(signSkill))
-				{
-					thePlayer.DisplayActionDisallowedHudMessage(EIAB_Signs, false, false, true);
-					return false;
-				}
-			
-				if( thePlayer.HasStaminaToUseSkill( signSkill, false ) )
-				{
-					if( GetInvalidUniqueId() != thePlayer.inv.GetItemFromSlot( 'l_weapon' ) && !thePlayer.IsUsableItemLBlocked())
-					{
-
-						
-						
-					}
-					
-					thePlayer.SetupCombatAction( EBAT_CastSign, BS_Pressed );
-				}
-				else
-				{
-					thePlayer.SoundEvent("gui_no_stamina");
-				}
+				thePlayer.SetupCombatAction( EBAT_CastSign, BS_Pressed );
+			}
+			else
+			{
+				thePlayer.SoundEvent("gui_no_stamina");
 			}
 		}
+		return true;
+	}
+	
+	//modSigns
+	function IsSignOnCooldown(signType : ESignType) : bool
+	{
+		switch(signType)
+		{
+			case ST_Aard: 	return thePlayer.HasBuff(EET_AardCooldown);
+			case ST_Igni: 	return thePlayer.HasBuff(EET_IgniCooldown);
+			case ST_Yrden: 	return thePlayer.HasBuff(EET_YrdenCooldown);
+			case ST_Quen: 	return thePlayer.HasBuff(EET_QuenCooldown);
+			case ST_Axii: 	return thePlayer.HasBuff(EET_AxiiCooldown);
+			default:		return true;
+		}
+		return true;
 	}
 	
 	
@@ -2137,7 +2189,7 @@ class CPlayerInput
 		if(!thePlayer.inv.IsItemBomb(selectedItemId))
 			return false;
 		
-		if( thePlayer.inv.SingletonItemGetAmmo(selectedItemId) == 0 )
+		if( thePlayer.inv.SingletonItemGetAmmo(selectedItemId) == 0 || !thePlayer.HasStaminaToUseAction(ESAT_UsableItem) ) //modSigns
 		{
 			
 			if(IsPressed(action))
@@ -2213,12 +2265,12 @@ class CPlayerInput
 		if(!thePlayer.inv.IsItemBomb(selectedItemId))
 			return false;
 		
-		if( thePlayer.inv.SingletonItemGetAmmo(selectedItemId) == 0 )
+		if( thePlayer.inv.SingletonItemGetAmmo(selectedItemId) == 0 || !thePlayer.HasStaminaToUseAction(ESAT_UsableItem) ) //modSigns
 		{
 			
 			if(IsPressed(action))
 			{			
-				thePlayer.SoundEvent( "gui_ingame_low_stamina_warning" );
+				//thePlayer.SoundEvent( "gui_ingame_low_stamina_warning" ); //modSigns - remove double warning sound
 			}
 			
 			return false;
@@ -2310,6 +2362,17 @@ class CPlayerInput
 		
 		
 		
+		//modSigns begin
+		if(!thePlayer.HasStaminaToUseAction(ESAT_UsableItem))
+		{
+			if(IsPressed(action))
+			{			
+				thePlayer.SoundEvent( "gui_ingame_low_stamina_warning" );
+			}
+			return false;
+		}
+		//modSigns end
+		
 		if( isCrossbow )
 		{
 			if ( IsActionAllowed(EIAB_Crossbow) )
@@ -2400,6 +2463,13 @@ class CPlayerInput
 		
 		if(!thePlayer.inv.IsIdValid(itemId))
 			return false;
+		
+		//modSigns begin
+		if(!thePlayer.HasStaminaToUseAction(ESAT_UsableItem))
+		{
+			return false;
+		}
+		//modSigns end
 		
 		isCrossbow = thePlayer.inv.IsItemCrossbow(itemId);
 		if(!isCrossbow)

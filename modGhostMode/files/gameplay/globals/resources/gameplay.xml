@@ -1188,6 +1188,7 @@
 	<res alias="rotfiend"									path="characters\npc_entities\monsters\rotfiend_lvl1.w2ent" />
 	<res alias="rotfiend_large"								path="characters\npc_entities\monsters\rotfiend_lvl2.w2ent" chunk="content4" />
 	<res alias="succubus"									path="gameplay\templates\characters\npcs\test_enemies\enemy_succubus.w2ent" chunk="content4" />
+	<res alias="succubus_mh"								path="quests\generic_quests\novigrad\quest_files\mh303_succubus\characters\mh303_succbus_v2.w2ent" chunk="content4" />
 	<res alias="heart"										path="environment\decorations\magic_items\tree_heart\tree_heart.w2ent" chunk="content4" />
 	<res alias="him"										path="characters\npc_entities\monsters\_quest__him.w2ent" chunk="content4" />
 	<res alias="frozen_soldier"								path="environment\decorations\corpses\human_corpses\nilfgaard_soldiers\nilfgardian_soldier_frozen_px.w2ent" chunk="content4" />

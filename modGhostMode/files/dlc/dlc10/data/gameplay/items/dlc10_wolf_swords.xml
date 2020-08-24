@@ -4,227 +4,167 @@
 		<abilities>
 		
 		<!-- WITCHER WOLF STEEL SWORD -->
-			<ability name="Wolf School steel sword _Stats">
-				<weight							type="base"	min="3.4"				/>
+			<ability name="Wolf School steel sword _Stats"> <!-- lvl 21, 2 slots, 15% attack power -->
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="156"				/>
+				<SlashingDamage 				type="base"	min="194"				/>
 				<SilverDamage 					type="base"	min="1"					/>	
-				<desc_bleedingchance_mult		type="add"	min="0.05"				/>
-				<buff_apply_chance				type="add"	min="0.05"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.05"				/>
-				<focus_gain 					type="add" min="0.05" 				/>
-				<human_exp_bonus_when_fatal		type="add"	min="0.05"				/>
-			</ability>
-
-			<ability name="Wolf School steel sword 1 _Stats">
-				<weight							type="base"	min="4.5"				/>
-				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="212"				/>
-				<SilverDamage 					type="base"	min="1"					/>
-				<desc_bleedingchance_mult		type="add"	min="0.06"				/>
-				<buff_apply_chance				type="add"	min="0.06"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.06"				/>
-				<focus_gain 					type="add" min="0.06" 				/>
-				<human_exp_bonus_when_fatal		type="add"	min="0.05"				/>
-			</ability>
-
-			<ability name="Wolf School steel sword 2 _Stats">
-				<weight							type="base"	min="4.4"				/>
-				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="276"				/>
-				<SilverDamage 					type="base"	min="1"					/>
-				<critical_hit_chance			type="add"	min="0.05"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.07"				/>
-				<buff_apply_chance				type="add"	min="0.07"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.07"				/>
-				<focus_gain 					type="add" min="0.07" 				/>
-				<human_exp_bonus_when_fatal		type="add"	min="0.05"				/>
-			</ability>
-
-			<ability name="Wolf School steel sword 3 _Stats">
-				<weight							type="base"	min="5.6"				/>
-				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="316"				/>
-				<SilverDamage 					type="base"	min="1"					/>
-				<critical_hit_chance			type="add"	min="0.10"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.10"				/>
-				<buff_apply_chance				type="add"	min="0.10"				/>
-				<BleedingEffect					is_ability="true"					/>
+				<attack_power					type="mult"	min="0.15"				/>
 				<spell_power					type="mult"	min="0.10"				/>
-				<focus_gain 					type="add" min="0.10" 				/>
-				<human_exp_bonus_when_fatal		type="add"	min="0.05"				/>
+			</ability>
+
+			<ability name="Wolf School steel sword 1 _Stats"> <!-- lvl 24, 2 slots, 15% attack power, 10% spell -->
+				<weight							type="base"	min="4"					/>
+				<quality						type="add"	min="5"					/>
+				<SlashingDamage 				type="base"	min="218"				/>
+				<SilverDamage 					type="base"	min="1"					/>
+				<attack_power					type="mult"	min="0.20"				/>
+				<spell_power					type="mult"	min="0.10"				/>
+			</ability>
+
+			<ability name="Wolf School steel sword 2 _Stats"> <!-- lvl 28, 3 slots, 20% attack power, 15% spell -->
+				<weight							type="base"	min="4"					/>
+				<quality						type="add"	min="5"					/>
+				<SlashingDamage 				type="base"	min="250"				/>
+				<SilverDamage 					type="base"	min="1"					/>
+				<attack_power					type="mult"	min="0.20"				/>
+				<spell_power					type="mult"	min="0.15"				/>
+			</ability>
+
+			<ability name="Wolf School steel sword 3 _Stats"> <!-- lvl 34, 3 slots, 25% attack power, 20% spell -->
+				<weight							type="base"	min="4"					/>
+				<quality						type="add"	min="5"					/>
+				<SlashingDamage 				type="base"	min="298"				/>
+				<SilverDamage 					type="base"	min="1"					/>
+				<attack_power					type="mult"	min="0.25"				/>
+				<spell_power					type="mult"	min="0.20"				/>
 			</ability>	
 
 		<!-- WITCHER WOLF SILVER SWORD -->
-			<ability name="Wolf School silver sword _Stats">
-				<weight							type="base"	min="3.4"				/>
+			<ability name="Wolf School silver sword _Stats"> <!-- lvl 21, 2 slots, 15% attack power -->
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
-				<SilverDamage 					type="base"	min="254"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.05"				/>
-				<buff_apply_chance				type="add"	min="0.05"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.05"				/>
-				<focus_gain 					type="add" min="0.05" 				/>
-				<nonhuman_exp_bonus_when_fatal	type="add"	min="0.20"				/>
-			</ability>
-
-			<ability name="Wolf School silver sword 1 _Stats">
-				<weight							type="base"	min="3.2"				/>
-				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="1"					/>
-				<SilverDamage 					type="base"	min="324"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.06"				/>
-				<buff_apply_chance				type="add"	min="0.06"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.06"				/>
-				<focus_gain 					type="add" min="0.06" 				/>
-				<nonhuman_exp_bonus_when_fatal	type="add"	min="0.20"				/>
-			</ability>
-
-			<ability name="Wolf School silver sword 2 _Stats">
-				<weight							type="base"	min="5.6"				/>
-				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="1"					/>
-				<SilverDamage 					type="base"	min="404"				/>
-				<critical_hit_chance			type="add"	min="0.05"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.07"				/>
-				<buff_apply_chance				type="add"	min="0.07"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.07"				/>
-				<focus_gain 					type="add" min="0.07" 				/>
-				<nonhuman_exp_bonus_when_fatal	type="add"	min="0.20"				/>
-			</ability>
-
-			<ability name="Wolf School silver sword 3 _Stats">
-				<weight							type="base"	min="5.6"				/>
-				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="1"					/>
-				<SilverDamage 					type="base"	min="454"				/>
-				<critical_hit_chance			type="add"	min="0.10"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.10"				/>
-				<buff_apply_chance				type="add"	min="0.10"				/>
-				<BleedingEffect					is_ability="true"					/>
+				<SilverDamage 					type="base"	min="301"				/>
+				<attack_power					type="mult"	min="0.15"				/>
 				<spell_power					type="mult"	min="0.10"				/>
-				<focus_gain 					type="add" min="0.10" 				/>
-				<nonhuman_exp_bonus_when_fatal	type="add"	min="0.20"				/>
+			</ability>
+
+			<ability name="Wolf School silver sword 1 _Stats"> <!-- lvl 24, 2 slots, 15% attack power, 10% spell -->
+				<weight							type="base"	min="2"					/>
+				<quality						type="add"	min="5"					/>
+				<SlashingDamage 				type="base"	min="1"					/>
+				<SilverDamage 					type="base"	min="331"				/>
+				<attack_power					type="mult"	min="0.20"				/>
+				<spell_power					type="mult"	min="0.10"				/>
+			</ability>
+
+			<ability name="Wolf School silver sword 2 _Stats"> <!-- lvl 28, 3 slots, 20% attack power, 15% spell -->
+				<weight							type="base"	min="2"					/>
+				<quality						type="add"	min="5"					/>
+				<SlashingDamage 				type="base"	min="1"					/>
+				<SilverDamage 					type="base"	min="371"				/>
+				<attack_power					type="mult"	min="0.20"				/>
+				<spell_power					type="mult"	min="0.15"				/>
+			</ability>
+
+			<ability name="Wolf School silver sword 3 _Stats"> <!-- lvl 34, 3 slots, 25% attack power, 20% spell -->
+				<weight							type="base"	min="2"					/>
+				<quality						type="add"	min="5"					/>
+				<SlashingDamage 				type="base"	min="1"					/>
+				<SilverDamage 					type="base"	min="431"				/>
+				<attack_power					type="mult"	min="0.25"				/>
+				<spell_power					type="mult"	min="0.20"				/>
 			</ability>
 			
 		<!-- NEW GAME+ WITCHER WOLF STEEL SWORD -->
-			<ability name="NGP Wolf School steel sword _Stats">
-				<weight							type="base"	min="3.4"				/>
+			<ability name="NGP Wolf School steel sword _Stats"> <!-- lvl 51, 2 slots, 15% attack power -->
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="356"				/>
+				<SlashingDamage 				type="base"	min="434"				/>
 				<SilverDamage 					type="base"	min="1"					/>	
-				<critical_hit_chance			type="add"	min="0.11"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.11"				/>
-				<buff_apply_chance				type="add"	min="0.11"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.11"				/>
-				<focus_gain 					type="add" min="0.11" 				/>
-				<human_exp_bonus_when_fatal		type="add"	min="0.05"				/>
+				<attack_power					type="mult"	min="0.30"				/>
+				<spell_power					type="mult"	min="0.25"				/>
+				<sword_dmg_bonus				type="add"	min="0.05" 				/>
+				<spell_dmg_bonus				type="add"	min="0.05"				/>
 			</ability>
 
-			<ability name="NGP Wolf School steel sword 1 _Stats">
-				<weight							type="base"	min="4.5"				/>
+			<ability name="NGP Wolf School steel sword 1 _Stats"> <!-- lvl 54, 2 slots, 15% attack power, 10% spell -->
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="412"				/>
+				<SlashingDamage 				type="base"	min="458"				/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<critical_hit_chance			type="add"	min="0.12"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.12"				/>
-				<buff_apply_chance				type="add"	min="0.12"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.12"				/>
-				<focus_gain 					type="add" min="0.12" 				/>
-				<human_exp_bonus_when_fatal		type="add"	min="0.05"				/>
+				<attack_power					type="mult"	min="0.30"				/>
+				<spell_power					type="mult"	min="0.25"				/>
+				<sword_dmg_bonus				type="add"	min="0.10" 				/>
+				<spell_dmg_bonus				type="add"	min="0.10"				/>
 			</ability>
 
-			<ability name="NGP Wolf School steel sword 2 _Stats">
-				<weight							type="base"	min="4.4"				/>
+			<ability name="NGP Wolf School steel sword 2 _Stats"> <!-- lvl 58, 3 slots, 20% attack power, 15% spell -->
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="476"				/>
+				<SlashingDamage 				type="base"	min="490"				/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<critical_hit_chance			type="add"	min="0.13"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.13"				/>
-				<buff_apply_chance				type="add"	min="0.13"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.13"				/>
-				<focus_gain 					type="add" min="0.13" 				/>
-				<human_exp_bonus_when_fatal		type="add"	min="0.05"				/>
+				<attack_power					type="mult"	min="0.30"				/>
+				<spell_power					type="mult"	min="0.25"				/>
+				<sword_dmg_bonus				type="add"	min="0.15" 				/>
+				<spell_dmg_bonus				type="add"	min="0.15"				/>
 			</ability>
 
-			<ability name="NGP Wolf School steel sword 3 _Stats">
-				<weight							type="base"	min="5.6"				/>
+			<ability name="NGP Wolf School steel sword 3 _Stats"> <!-- lvl 64, 3 slots, 25% attack power, 20% spell -->
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
-				<SlashingDamage 				type="base"	min="516"				/>
+				<SlashingDamage 				type="base"	min="538"				/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<critical_hit_chance			type="add"	min="0.15"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.15"				/>
-				<buff_apply_chance				type="add"	min="0.15"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.15"				/>
-				<focus_gain 					type="add" min="0.15" 				/>
-				<human_exp_bonus_when_fatal		type="add"	min="0.05"				/>
+				<attack_power					type="mult"	min="0.30"				/>
+				<spell_power					type="mult"	min="0.25"				/>
+				<sword_dmg_bonus				type="add"	min="0.20" 				/>
+				<spell_dmg_bonus				type="add"	min="0.20"				/>
 			</ability>	
 
 		<!-- NEW GAME+ WITCHER WOLF SILVER SWORD -->
-			<ability name="NGP Wolf School silver sword _Stats">
-				<weight							type="base"	min="3.4"				/>
+			<ability name="NGP Wolf School silver sword _Stats"> <!-- lvl 51, 2 slots, 15% attack power -->
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
-				<SilverDamage 					type="base"	min="504"				/>
-				<critical_hit_chance			type="add"	min="0.11"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.11"				/>
-				<buff_apply_chance				type="add"	min="0.11"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.11"				/>
-				<focus_gain 					type="add" min="0.11" 				/>
-				<nonhuman_exp_bonus_when_fatal	type="add"	min="0.20"				/>
+				<SilverDamage 					type="base"	min="601"				/>
+				<attack_power					type="mult"	min="0.30"				/>
+				<spell_power					type="mult"	min="0.25"				/>
+				<sword_dmg_bonus				type="add"	min="0.05" 				/>
+				<spell_dmg_bonus				type="add"	min="0.05"				/>
 			</ability>
 
-			<ability name="NGP Wolf School silver sword 1 _Stats">
-				<weight							type="base"	min="3.2"				/>
+			<ability name="NGP Wolf School silver sword 1 _Stats"> <!-- lvl 54, 2 slots, 15% attack power, 10% spell -->
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
-				<SilverDamage 					type="base"	min="574"				/>
-				<critical_hit_chance			type="add"	min="0.12"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.12"				/>
-				<buff_apply_chance				type="add"	min="0.12"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.12"				/>
-				<focus_gain 					type="add" min="0.12" 				/>
-				<nonhuman_exp_bonus_when_fatal	type="add"	min="0.20"				/>
+				<SilverDamage 					type="base"	min="631"				/>
+				<attack_power					type="mult"	min="0.30"				/>
+				<spell_power					type="mult"	min="0.25"				/>
+				<sword_dmg_bonus				type="add"	min="0.10" 				/>
+				<spell_dmg_bonus				type="add"	min="0.10"				/>
 			</ability>
 
-			<ability name="NGP Wolf School silver sword 2 _Stats">
-				<weight							type="base"	min="5.6"				/>
+			<ability name="NGP Wolf School silver sword 2 _Stats"> <!-- lvl 58, 3 slots, 20% attack power, 15% spell -->
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
-				<SilverDamage 					type="base"	min="654"				/>
-				<critical_hit_chance			type="add"	min="0.13"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.13"				/>
-				<buff_apply_chance				type="add"	min="0.13"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.13"				/>
-				<focus_gain 					type="add" min="0.13" 				/>
-				<nonhuman_exp_bonus_when_fatal	type="add"	min="0.20"				/>
+				<SilverDamage 					type="base"	min="671"				/>
+				<attack_power					type="mult"	min="0.30"				/>
+				<spell_power					type="mult"	min="0.25"				/>
+				<sword_dmg_bonus				type="add"	min="0.15" 				/>
+				<spell_dmg_bonus				type="add"	min="0.15"				/>
 			</ability>
 
-			<ability name="NGP Wolf School silver sword 3 _Stats">
-				<weight							type="base"	min="5.6"				/>
+			<ability name="NGP Wolf School silver sword 3 _Stats"> <!-- lvl 64, 3 slots, 25% attack power, 20% spell -->
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
-				<SilverDamage 					type="base"	min="704"				/>
-				<critical_hit_chance			type="add"	min="0.15"				/>
-				<desc_bleedingchance_mult		type="add"	min="0.15"				/>
-				<buff_apply_chance				type="add"	min="0.15"				/>
-				<BleedingEffect					is_ability="true"					/>
-				<spell_power					type="mult"	min="0.15"				/>
-				<focus_gain 					type="add" min="0.15" 				/>
-				<nonhuman_exp_bonus_when_fatal	type="add"	min="0.20"				/>
+				<SilverDamage 					type="base"	min="731"				/>
+				<attack_power					type="mult"	min="0.30"				/>
+				<spell_power					type="mult"	min="0.25"				/>
+				<sword_dmg_bonus				type="add"	min="0.20" 				/>
+				<spell_dmg_bonus				type="add"	min="0.20"				/>
 			</ability>
 			
 		</abilities>
@@ -235,10 +175,10 @@
 			<item
 				name							="Wolf School steel sword"
 				category						="steelsword" 
-				price							="108"
+				price							="288"
 				initial_durability				="100"
 				max_durability					="100"
-				enhancement_slots				="1"
+				enhancement_slots				="2"
 				stackable						="1"
 				grid_size						="2"
 				equip_template					="witcher_steel_wolf_sword_lvl1"
@@ -259,14 +199,14 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl1_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather squares</parts>
-												<parts count="2">Steel ingot</parts>
-												<parts count="1">Fifth essence</parts>
+				<recycling_parts>				<parts count="1">Steel ingot</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -305,7 +245,7 @@
 			<item
 				name							="Wolf School steel sword 1"
 				category						="steelsword" 
-				price							="120"
+				price							="502"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -329,13 +269,14 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl2_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -374,7 +315,7 @@
 			<item
 				name							="Wolf School steel sword 2"
 				category						="steelsword" 
-				price							="120"
+				price							="775"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -398,13 +339,14 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl3_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather squares</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -443,7 +385,7 @@
 			<item
 				name							="Wolf School steel sword 3"
 				category						="steelsword" 
-				price							="664"
+				price							="1351"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -467,14 +409,14 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl4_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Dwimeryte ore</parts>
-												<parts count="2">Glowing ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -513,10 +455,10 @@
 			<item
 				name							="Wolf School silver sword"
 				category						="silversword" 
-				price							="152"
+				price							="324"
 				initial_durability				="100"
 				max_durability					="100"
-				enhancement_slots				="1"
+				enhancement_slots				="2"
 				stackable						="1"
 				grid_size						="2"
 				equip_template					="witcher_silver_wolf_sword_lvl1"
@@ -537,14 +479,14 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl1_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="3">Silver ingot</parts>
-												<parts count="1">Fifth essence</parts>
+				<recycling_parts>				<parts count="1">Silver ingot</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -590,7 +532,7 @@
 			<item
 				name							="Wolf School silver sword 1"
 				category						="silversword" 
-				price							="152"
+				price							="574"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -614,13 +556,14 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl2_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Meteorite silver ingot</parts>
+				<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -666,7 +609,7 @@
 			<item
 				name							="Wolf School silver sword 2"
 				category						="silversword" 
-				price							="224"
+				price							="1011"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -690,14 +633,14 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl3_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="1">Dwimeryte ore</parts>
-												<parts count="3">Glowing ingot</parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -743,7 +686,7 @@
 			<item
 				name							="Wolf School silver sword 3"
 				category						="silversword" 
-				price							="224"
+				price							="1614"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -767,14 +710,14 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl4_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Dwimeryte ore</parts>
-												<parts count="2">Glowing ingot</parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -820,10 +763,10 @@
 			<item
 				name							="NGP Wolf School steel sword"
 				category						="steelsword" 
-				price							="108"
+				price							="288"
 				initial_durability				="100"
 				max_durability					="100"
-				enhancement_slots				="1"
+				enhancement_slots				="2"
 				stackable						="1"
 				grid_size						="2"
 				equip_template					="witcher_steel_wolf_sword_lvl1"
@@ -844,13 +787,14 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl1_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Steel ingot</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -889,7 +833,7 @@
 			<item
 				name							="NGP Wolf School steel sword 1"
 				category						="steelsword" 
-				price							="120"
+				price							="502"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -913,13 +857,14 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl2_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -958,7 +903,7 @@
 			<item
 				name							="NGP Wolf School steel sword 2"
 				category						="steelsword" 
-				price							="120"
+				price							="775"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -982,13 +927,14 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl3_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -1027,7 +973,7 @@
 			<item
 				name							="NGP Wolf School steel sword 3"
 				category						="steelsword" 
-				price							="664"
+				price							="1351"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -1051,13 +997,14 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl4_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSet, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Dwimeryte ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -1096,10 +1043,10 @@
 			<item
 				name							="NGP Wolf School silver sword"
 				category						="silversword" 
-				price							="152"
+				price							="324"
 				initial_durability				="100"
 				max_durability					="100"
-				enhancement_slots				="1"
+				enhancement_slots				="2"
 				stackable						="1"
 				grid_size						="2"
 				equip_template					="witcher_silver_wolf_sword_lvl1"
@@ -1120,13 +1067,14 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl1_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather straps</parts>
-												<parts count="3">Silver ingot</parts>
+				<recycling_parts>				<parts count="1">Silver ingot</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -1172,7 +1120,7 @@
 			<item
 				name							="NGP Wolf School silver sword 1"
 				category						="silversword" 
-				price							="152"
+				price							="574"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -1196,13 +1144,14 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl2_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather straps</parts>
-												<parts count="3">Silver ingot</parts>
+				<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -1248,7 +1197,7 @@
 			<item
 				name							="NGP Wolf School silver sword 2"
 				category						="silversword" 
-				price							="224"
+				price							="1011"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -1272,13 +1221,14 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl3_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Meteorite silver ingot</parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -1324,7 +1274,7 @@
 			<item
 				name							="NGP Wolf School silver sword 3"
 				category						="silversword" 
-				price							="224"
+				price							="1614"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -1348,13 +1298,14 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl4_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSet, mod_weapon, mod_legendary, SetBonusPiece
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Meteorite silver ingot</parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 

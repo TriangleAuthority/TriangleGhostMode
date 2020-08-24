@@ -22,6 +22,8 @@ class  W3Potion_PheromoneBear extends W3Potion_Pheromone
 		super.OnEffectAdded(customParams);
 		theGame.SetGlobalAttitude( 'AG_bear_berserker', 'player', AIA_Friendly );
 		theGame.SetGlobalAttitude( 'q201_cage_bear', 'player', AIA_Friendly );
+		//modSigns
+		theGame.SetGlobalAttitude( 'AG_grizzly_bear', 'player', AIA_Friendly );
 	}
 	
 	event OnEffectRemoved()
@@ -30,5 +32,7 @@ class  W3Potion_PheromoneBear extends W3Potion_Pheromone
 		
 		theGame.SetGlobalAttitude( 'AG_bear_berserker', 'player', AIA_Hostile );
 		theGame.SetGlobalAttitude( 'q201_cage_bear', 'player', AIA_Hostile );
+		//modSigns
+		theGame.SetGlobalAttitude( 'AG_grizzly_bear', 'player', AIA_Hostile );
 	}
 }

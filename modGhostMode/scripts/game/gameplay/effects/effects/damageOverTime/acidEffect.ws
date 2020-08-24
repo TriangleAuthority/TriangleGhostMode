@@ -18,4 +18,20 @@ class W3Effect_Acid extends W3DamageOverTimeEffect
 		
 		target.SoundEvent( 'ep2_mutations_04_poison_blood_spray_enemy' );
 	}
+	
+	//modSigns: moved stamina debuff here
+	event OnEffectAdded(optional customParams : W3BuffCustomParams)
+	{
+		super.OnEffectAdded(customParams);
+		
+		if(target != thePlayer)
+			target.AddAbility('Mutation4BloodDebuff');
+	}
+	
+	event OnEffectRemoved()
+	{
+		super.OnEffectRemoved();
+		
+		target.RemoveAbilityAll('Mutation4BloodDebuff');
+	}
 }

@@ -25,11 +25,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	private saved var booksRead 						: array<name>; 					
 	
+	private saved var enemiesKilledByType				: array<int>; //modSigns
+	
 	
 	private 			var fastAttackCounter, heavyAttackCounter	: int;		
 	private				var isInFrenzy : bool;
-	private				var hasRecentlyCountered : bool;
-	private saved 		var cannotUseUndyingSkill : bool;						
+	//private				var hasRecentlyCountered : bool; //modSigns
+	//private saved 		var cannotUseUndyingSkill : bool; //modSigns
 	
 	
 	protected saved			var amountOfSetPiecesEquipped			: array<int>;
@@ -182,6 +184,37 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		itemSlots.Resize( EnumGetMax('EEquipmentSlots')+1 );
 
+		//modSigns
+		if( FactsQuerySum("ModSignsRecipesAdded") < 1 )
+		{
+			AddAlchemyRecipe('Recipe for Tawny Owl 1', true, true); // fix missing Tawny Owl recipe
+			AddCraftingSchematic('Meteorite plate schematic', true, true); //add missing meteorite plate schematic
+			FactsAdd("ModSignsRecipesAdded");
+		}
+		
+		FactsRemove("player_had_quen"); //remove, no need for this and never was
+		
+		//modSigns
+		if( FactsQuerySum("ModSignsKMSetSchematicsAdded") < 1 )
+		{
+			AddCraftingSchematic('Kaer Morhen Armor 1 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Armor 2 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Armor 3 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Pants schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Pants 1 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Pants 2 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Pants 3 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Boots schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Boots 1 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Boots 2 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Boots 3 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Gloves schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Gloves 1 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Gloves 2 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Gloves 3 schematic',true, true);
+			FactsAdd("ModSignsKMSetSchematicsAdded");
+		}
+		
 		if(!spawnData.restored)
 		{
 			levelManager = new W3LevelManager in this;			
@@ -294,7 +327,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 		RemoveAbility('Ciri_Q501');
 		RemoveAbility('SkillCiri');
 		
-		if(spawnData.restored)
+		//modSigns: remove passive bonuses
+		RemoveAbilityAll('sword_adrenalinegain');
+		RemoveAbilityAll('magic_staminaregen');
+		RemoveAbilityAll('alchemy_potionduration');
+		
+		/*if(spawnData.restored)
 		{
 			RestoreQuen(savedQuenHealth, savedQuenDuration);			
 		}
@@ -302,7 +340,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			savedQuenHealth = 0.f;
 			savedQuenDuration = 0.f;
-		}
+		}*/ //modSigns: removed, params aren't saved properly anyway
+		savedQuenHealth = 0.f;
+		savedQuenDuration = 0.f;
 		
 		if(spawnData.restored)
 		{
@@ -312,6 +352,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			
 			FactsAdd( "new_game_started_in_1_20" );
+			
+			FactsAdd( "new_game_started_with_GM_40" ); //modSigns
 		}
 		
 		if ( spawnData.restored )
@@ -334,24 +376,75 @@ statemachine class W3PlayerWitcher extends CR4Player
 			}
 		}
 		
+		//modSigns: load sound banks for mutations
+		((W3PlayerAbilityManager)abilityManager).LoadCurrentMutationSoundBank();
+		//modSigns: load sound banks for sets
+		LoadCurrentSetBonusSoundbank();
+		//modSigns: add mutation trigger recipe
+		if(IsMutationResearched(EPMT_Mutation11) /*|| IsMutationResearched(EPMT_Mutation12)*/)
+		{
+			if(!alchemyRecipes.Contains('Recipe for Mutation Trigger'))
+				AddAlchemyRecipe('Recipe for Mutation Trigger', true, true);
+		}
+		
 		
 		ResumeStaminaRegen('WhirlSkill');
+		ResumeStaminaRegen('RendSkill'); //modSigns
+		ResumeStaminaRegen('IsPerformingFinisher'); //modSigns
 		
-		if(HasAbility('Runeword 4 _Stats', true))
+		ResumeHPRegenEffects('FistFightMinigame'); //modSigns
+		
+		if(HasRunewordActive('Runeword 4 _Stats')) //modSigns
 			StartVitalityRegen();
-		
 		
 		if(HasAbility('sword_s19'))
 		{
 			RemoveTemporarySkills();
 		}
 		
-		HACK_UnequipWolfLiver();
+		//HACK_UnequipWolfLiver(); //modSigns
+		
+		if( enemiesKilledByType.Size() == 0 )
+		{
+			enemiesKilledByType.Resize(EENT_MAX_TYPES);
+		}
 		
 		
 		if( HasBuff( EET_GryphonSetBonusYrden ) )
 		{
 			RemoveBuff( EET_GryphonSetBonusYrden, false, "GryphonSetBonusYrden" );
+		}
+		
+		if( HasBuff( EET_GryphonSetBonus ) ) //modSigns: remove on spawn
+		{
+			RemoveBuff( EET_GryphonSetBonus );
+		}
+		
+		if( HasBuff(EET_KaerMorhenSetBonus) ) //modSigns: remove on spawn
+		{
+			RemoveBuff(EET_KaerMorhenSetBonus);
+		}
+		
+		if( HasBuff( EET_Aerondight ) ) //modSigns: remove Aerondight effect
+			RemoveBuff( EET_Aerondight );
+		
+		if( HasBuff( EET_PhantomWeapon ) ) //modSigns: remove Iris effect
+			RemoveBuff( EET_PhantomWeapon );
+		
+		RemoveBuff(EET_Runeword4); //modSigns
+		RemoveBuff(EET_Runeword11); //modSigns
+		RemoveAbilityAll('Glyphword 14 _Stats'); //modSigns
+		RemoveAbilityAll('Glyphword 10 _Stats'); //modSigns
+		
+		//modSigns
+		if( FactsQuerySum("standalone_ep1") > 0 && FactsQuerySum("standalone_ep1_inv") < 1 )
+		{
+			AddTimer('GiveStandAloneEP1Items', 0.00001, true, , , true);
+		}
+		//modSigns
+		if( FactsQuerySum("standalone_ep2") > 0 && FactsQuerySum("standalone_ep2_inv") < 1 )
+		{
+			AddTimer('GiveStandAloneEP2Items', 0.00001, true, , , true);
 		}
 		
 		if( spawnData.restored )
@@ -362,6 +455,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			RemoveBuff( EET_Mutation11Immortal );
 			RemoveBuff( EET_Mutation11Buff );
+			
+			//modSigns:
+			RemoveBuff( EET_UndyingSkillImmortal );
 		}
 		
 		
@@ -409,6 +505,31 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 	}
 	
+	public function IncKills( et : EEnemyType ) //modSigns
+	{
+		enemiesKilledByType[et] += 1;
+		//theGame.witcherLog.AddMessage(et + ": " + enemiesKilledByType[et]);
+	}
+	
+	public function GetKills( et : EEnemyType ) : int //modSigns
+	{
+		return enemiesKilledByType[et];
+	}
+	
+	public function GetExpModifierByEnemyType( et : EEnemyType ) : float //modSigns
+	{
+		switch(et)
+		{
+			case EENT_BOSS:
+				return 1;
+			case EENT_GENERIC:
+			case EENT_ANIMAL:
+				return 0;
+			default:
+				return 1 - MinF(100.0f, (float)GetKills(et))/100.0f;
+		}
+	}
+	
 	
 	
 	
@@ -434,12 +555,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 	{
 		super.OnAbilityAdded(abilityName);
 		
-		if( HasAbility('Runeword 4 _Stats', true) )
+		if( HasRunewordActive('Runeword 4 _Stats') ) //modSigns
 		{
 			StartVitalityRegen();
 		}
 			
-		if ( abilityName == 'Runeword 8 _Stats' && GetStat(BCS_Focus, true) >= GetStatMax(BCS_Focus) && !HasBuff(EET_Runeword8) )
+		if ( abilityName == 'Runeword 8 _Stats' && GetStat(BCS_Focus, true) >= GetStatMax(BCS_Focus) && !HasBuff(EET_Runeword8) ) //modSigns
 		{
 			AddEffectDefault(EET_Runeword8, this, "equipped item");
 		}
@@ -521,7 +642,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var spentSkillPoints, swordSkillPointsSpent, alchemySkillPointsSpent, perkSkillPointsSpent, pointsToAdd : int;
 		var mutagens : array< W3Mutagen_Effect >;
 		
-		if(FactsQuerySum("ClearingPotionPassiveBonusFix") < 1)
+		/*if(FactsQuerySum("ClearingPotionPassiveBonusFix") < 1)
 		{
 			pam = (W3PlayerAbilityManager)abilityManager;
 
@@ -538,10 +659,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 				RemoveAbilityMultiple('alchemy_potionduration', cnt);
 		
 			FactsAdd("ClearingPotionPassiveBonusFix");
-		}
+		}*/ //modSigns
 				
 		
-		if(FactsQuerySum("DimeritiumSynergyFix") < 1)
+		/*if(FactsQuerySum("DimeritiumSynergyFix") < 1)
 		{
 			slotId = GetSkillSlotID(S_Alchemy_s19);
 			if(slotId != -1)
@@ -563,7 +684,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				EquipSkill(S_Alchemy_s19, slotId);
 		
 			FactsAdd("DimeritiumSynergyFix");
-		}
+		}*/ //modSigns
 		
 		
 		if(FactsQuerySum("DontShowRecipePinTut") < 1)
@@ -606,7 +727,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			SetToxicityOffset(offset);
 			
 		
-		mutagenCount *= GetSkillLevel(S_Alchemy_s13);
+		/*mutagenCount *= GetSkillLevel(S_Alchemy_s13);
 		transmutationAbility = GetSkillAbilityName(S_Alchemy_s13);
 		transmutationCount = GetAbilityCount(transmutationAbility);
 		if(mutagenCount < transmutationCount)
@@ -616,7 +737,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		else if(mutagenCount > transmutationCount)
 		{
 			AddAbilityMultiple(transmutationAbility, mutagenCount - transmutationCount);
-		}
+		}*/ //modSigns: skill changed
+		RecalcTransmutationAbilities();
 		
 		
 		if(theGame.GetDLCManager().IsEP1Available())
@@ -661,27 +783,27 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if(FactsQuerySum("Patch_Armor_Type_Glyphwords") < 1)
-		{
-			pam = (W3PlayerAbilityManager)abilityManager;
-			
-			pam.SetPerkArmorBonus( S_Perk_05, this );
-			pam.SetPerkArmorBonus( S_Perk_06, this );
-			pam.SetPerkArmorBonus( S_Perk_07, this );
-			
-			FactsAdd("Patch_Armor_Type_Glyphwords");
-		}
-		else if( FactsQuerySum("154999") < 1 )
-		{
-			
-			pam = (W3PlayerAbilityManager)abilityManager;
-			
-			pam.SetPerkArmorBonus( S_Perk_05, this );
-			pam.SetPerkArmorBonus( S_Perk_06, this );
-			pam.SetPerkArmorBonus( S_Perk_07, this );
-			
-			FactsAdd("154999");
-		}
+		//if(FactsQuerySum("Patch_Armor_Type_Glyphwords") < 1)
+		//{
+		//	pam = (W3PlayerAbilityManager)abilityManager;
+		//	
+		//	pam.SetPerkArmorBonus( S_Perk_05, this );
+		//	pam.SetPerkArmorBonus( S_Perk_06, this );
+		//	pam.SetPerkArmorBonus( S_Perk_07, this );
+		//	
+		//	FactsAdd("Patch_Armor_Type_Glyphwords");
+		//}
+		//else if( FactsQuerySum("154999") < 1 )
+		//{
+		//	
+		//	pam = (W3PlayerAbilityManager)abilityManager;
+		//	
+		//	pam.SetPerkArmorBonus( S_Perk_05, this );
+		//	pam.SetPerkArmorBonus( S_Perk_06, this );
+		//	pam.SetPerkArmorBonus( S_Perk_07, this );
+		//	
+		//	FactsAdd("154999");
+		//}
 		
 		if( FactsQuerySum( "Patch_Decoction_Buff_Icons" ) < 1 )
 		{
@@ -696,20 +818,39 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if( FactsQuerySum( "154997" ) < 1 )
-		{
-			if( IsSkillEquipped( S_Alchemy_s18 ) )
-			{
-				slot = GetSkillSlotID( S_Alchemy_s18 );
-				UnequipSkill( slot );
-				EquipSkill( S_Alchemy_s18, slot );
-			}
-			FactsAdd( "154997" );
-		}
+		//if( FactsQuerySum( "154997" ) < 1 )
+		//{
+		//	if( IsSkillEquipped( S_Alchemy_s18 ) )
+		//	{
+		//		slot = GetSkillSlotID( S_Alchemy_s18 );
+		//		UnequipSkill( slot );
+		//		EquipSkill( S_Alchemy_s18, slot );
+		//	}
+		//	FactsAdd( "154997" );
+		//}
 		if( FactsQuerySum( "Patch_Mutagen_Ing_Stacking" ) < 1 )
 		{
 			Patch_MutagenStacking();		
 			FactsAdd( "Patch_Mutagen_Ing_Stacking" );
+		}
+		
+		//modSigns
+		if(FactsQuerySum("new_game_started_with_GM_40") < 1 )
+		{
+			if( FactsQuerySum( "modSigns_ArmorTypeSetsIntroduced" ) < 1 )
+			{
+				pam = (W3PlayerAbilityManager)abilityManager;
+				pam.ManageSetArmorTypeBonus();
+				RecalcSetItemsEquipped();
+				FactsAdd( "modSigns_ArmorTypeSetsIntroduced" );
+			}
+			if( FactsQuerySum( "modSigns_KMArmorTypeSetIntroduced" ) < 1 )
+			{
+				pam = (W3PlayerAbilityManager)abilityManager;
+				pam.ManageSetArmorTypeBonus();
+				RecalcSetItemsEquipped();
+				FactsAdd( "modSigns_KMArmorTypeSetIntroduced" );
+			}
 		}
 	}
 	
@@ -812,6 +953,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				restoredQuen.SetAlternateCast( S_Magic_s04 );
 			}
 			
+			restoredQuen.freeCast = true; //modSigns
 			restoredQuen.OnStarted();
 			restoredQuen.OnThrowing();
 			
@@ -955,8 +1097,31 @@ statemachine class W3PlayerWitcher extends CR4Player
     	horseInventory.RemoveItemByName('q203_broken_eyeofloki', -1);
     	
     	
+		//modSigns
+		if( FactsQuerySum("ModSignsKMSetSchematicsAdded") < 1 )
+		{
+			AddCraftingSchematic('Kaer Morhen Armor 1 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Armor 2 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Armor 3 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Pants schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Pants 1 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Pants 2 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Pants 3 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Boots schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Boots 1 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Boots 2 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Boots 3 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Gloves schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Gloves 1 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Gloves 2 schematic',true, true);
+			AddCraftingSchematic('Kaer Morhen Gloves 3 schematic',true, true);
+			FactsAdd("ModSignsKMSetSchematicsAdded");
+		}
+		
     	NewGamePlusReplaceViperSet(inv);
     	NewGamePlusReplaceViperSet(horseInventory);
+		NewGamePlusReplaceKaerMorhenSet(inv); //modSigns
+		NewGamePlusReplaceKaerMorhenSet(horseInventory); //modSigns
     	NewGamePlusReplaceLynxSet(inv);
     	NewGamePlusReplaceLynxSet(horseInventory);
     	NewGamePlusReplaceGryphonSet(inv);
@@ -1129,6 +1294,27 @@ statemachine class W3PlayerWitcher extends CR4Player
 		NewGamePlusAdjustDLCItem('NGP DLC14 Skellige Boots', 'NGP DLC Compatibility Armor Mod', inv);
 	}
 	
+	//modSigns
+	private final function NewGamePlusReplaceKaerMorhenSet(out inv : CInventoryComponent)
+	{
+		NewGamePlusReplaceItem('Kaer Morhen Armor','NGP Kaer Morhen Armor', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Armor 1','NGP Kaer Morhen Armor 1', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Armor 2','NGP Kaer Morhen Armor 2', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Armor 3','NGP Kaer Morhen Armor 3', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Pants','NGP Kaer Morhen Pants', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Pants 1','NGP Kaer Morhen Pants 1', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Pants 2','NGP Kaer Morhen Pants 2', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Pants 3','NGP Kaer Morhen Pants 3', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Boots','NGP Kaer Morhen Boots', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Boots 1','NGP Kaer Morhen Boots 1', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Boots 2','NGP Kaer Morhen Boots 2', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Boots 3','NGP Kaer Morhen Boots 3', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Gloves','NGP Kaer Morhen Gloves', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Gloves 1','NGP Kaer Morhen Gloves 1', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Gloves 2','NGP Kaer Morhen Gloves 2', inv);
+		NewGamePlusReplaceItem('Kaer Morhen Gloves 3','NGP Kaer Morhen Gloves 3', inv);
+	}
+	
 	private final function NewGamePlusReplaceViperSet(out inv : CInventoryComponent)
 	{
 		NewGamePlusReplaceItem('Viper School steel sword', 'NGP Viper School steel sword', inv);
@@ -1251,7 +1437,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		NewGamePlusReplaceItem('Crafted Ofir Steel Sword', 'NGP Crafted Ofir Steel Sword', inv);
 		
 		NewGamePlusReplaceItem('EP1 Crafted Witcher Silver Sword', 'NGP EP1 Crafted Witcher Silver Sword', inv);
-		NewGamePlusReplaceItem('Olgierd Sabre', 'NGP Olgierd Sabre', inv);
+		//NewGamePlusReplaceItem('Olgierd Sabre', 'NGP Olgierd Sabre', inv);
 		
 		NewGamePlusReplaceItem('EP1 Witcher Armor', 'NGP EP1 Witcher Armor', inv);
 		NewGamePlusReplaceItem('EP1 Witcher Boots', 'NGP EP1 Witcher Boots', inv);
@@ -1309,7 +1495,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		NewGamePlusReplaceItem('Guard Lvl2 A Armor 3', 'NGP Guard Lvl2 A Armor 3', inv);
 		NewGamePlusReplaceItem('Knight Geralt Armor 3', 'NGP Knight Geralt Armor 3', inv);
 		NewGamePlusReplaceItem('Knight Geralt A Armor 3', 'NGP Knight Geralt A Armor 3', inv);
-		NewGamePlusReplaceItem('q702_vampire_armor', 'NGP q702_vampire_armor', inv);
+		//NewGamePlusReplaceItem('q702_vampire_armor', 'NGP q702_vampire_armor', inv);
 		
 		NewGamePlusReplaceItem('Guard Lvl1 Gloves 3', 'NGP Guard Lvl1 Gloves 3', inv);
 		NewGamePlusReplaceItem('Guard Lvl1 A Gloves 3', 'NGP Guard Lvl1 A Gloves 3', inv);
@@ -1317,7 +1503,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		NewGamePlusReplaceItem('Guard Lvl2 A Gloves 3', 'NGP Guard Lvl2 A Gloves 3', inv);
 		NewGamePlusReplaceItem('Knight Geralt Gloves 3', 'NGP Knight Geralt Gloves 3', inv);
 		NewGamePlusReplaceItem('Knight Geralt A Gloves 3', 'NGP Knight Geralt A Gloves 3', inv);
-		NewGamePlusReplaceItem('q702_vampire_gloves', 'NGP q702_vampire_gloves', inv);
+		//NewGamePlusReplaceItem('q702_vampire_gloves', 'NGP q702_vampire_gloves', inv);
 		
 		NewGamePlusReplaceItem('Guard Lvl1 Pants 3', 'NGP Guard Lvl1 Pants 3', inv);
 		NewGamePlusReplaceItem('Guard Lvl1 A Pants 3', 'NGP Guard Lvl1 A Pants 3', inv);
@@ -1325,7 +1511,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		NewGamePlusReplaceItem('Guard Lvl2 A Pants 3', 'NGP Guard Lvl2 A Pants 3', inv);
 		NewGamePlusReplaceItem('Knight Geralt Pants 3', 'NGP Knight Geralt Pants 3', inv);
 		NewGamePlusReplaceItem('Knight Geralt A Pants 3', 'NGP Knight Geralt A Pants 3', inv);
-		NewGamePlusReplaceItem('q702_vampire_pants', 'NGP q702_vampire_pants', inv);
+		//NewGamePlusReplaceItem('q702_vampire_pants', 'NGP q702_vampire_pants', inv);
 		
 		NewGamePlusReplaceItem('Guard Lvl1 Boots 3', 'NGP Guard Lvl1 Boots 3', inv);
 		NewGamePlusReplaceItem('Guard Lvl1 A Boots 3', 'NGP Guard Lvl1 A Boots 3', inv);
@@ -1333,7 +1519,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		NewGamePlusReplaceItem('Guard Lvl2 A Boots 3', 'NGP Guard Lvl2 A Boots 3', inv);
 		NewGamePlusReplaceItem('Knight Geralt Boots 3', 'NGP Knight Geralt Boots 3', inv);
 		NewGamePlusReplaceItem('Knight Geralt A Boots 3', 'NGP Knight Geralt A Boots 3', inv);
-		NewGamePlusReplaceItem('q702_vampire_boots', 'NGP q702_vampire_boots', inv);
+		//NewGamePlusReplaceItem('q702_vampire_boots', 'NGP q702_vampire_boots', inv);
 		
 		NewGamePlusReplaceItem('Serpent Steel Sword 1', 'NGP Serpent Steel Sword 1', inv);
 		NewGamePlusReplaceItem('Serpent Steel Sword 2', 'NGP Serpent Steel Sword 2', inv);
@@ -1343,7 +1529,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		NewGamePlusReplaceItem('Knights steel sword 3', 'NGP Knights steel sword 3', inv);
 		NewGamePlusReplaceItem('Hanza steel sword 3', 'NGP Hanza steel sword 3', inv);
 		NewGamePlusReplaceItem('Toussaint steel sword 3', 'NGP Toussaint steel sword 3', inv);
-		NewGamePlusReplaceItem('q702 vampire steel sword', 'NGP q702 vampire steel sword', inv);
+		//NewGamePlusReplaceItem('q702 vampire steel sword', 'NGP q702 vampire steel sword', inv);
 		
 		NewGamePlusReplaceItem('Serpent Silver Sword 1', 'NGP Serpent Silver Sword 1', inv);
 		NewGamePlusReplaceItem('Serpent Silver Sword 2', 'NGP Serpent Silver Sword 2', inv);
@@ -1703,18 +1889,30 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var baseRepairValue		  	: float;
 		var reapirValue				: float;
 		var itemAttribute			: SAbilityAttributeValue;
+		//var dmgBoost				: float; //modSigns
 		
 		itemMaxDurablity = inv.GetItemMaxDurability(usedOnItem);
 		itemCurrDurablity = inv.GetItemDurability(usedOnItem);
 		itemAttribute = inv.GetItemAttributeValue ( rapairKitId, 'repairValue' );
 		
-		if( itemCurrDurablity >= itemMaxDurablity )
+		/*if( itemCurrDurablity >= itemMaxDurablity )
 		{
 			return;
-		}
+		}*/ //modSigns
 		
 		if ( inv.IsItemAnyArmor ( usedOnItem )|| inv.IsItemWeapon( usedOnItem ) )
 		{			
+			//modSigns: master repair kits increase item level
+			if( inv.ItemHasTag( rapairKitId, 'ArmorReapairKit_Master' ) || inv.ItemHasTag( rapairKitId, 'WeaponReapairKit_Master' ) )
+			{
+				inv.AddItemLevelAbility( usedOnItem );
+				//if( inv.ItemHasTag( usedOnItem, 'Aerondight' ) )
+				//{
+				//	dmgBoost = inv.GetItemModifierFloat( usedOnItem, 'PermDamageBoost' );
+				//	if( dmgBoost > 10 )
+				//		inv.SetItemModifierFloat( usedOnItem, 'PermDamageBoost', dmgBoost - 10 );
+				//}
+			}
 			
 			baseRepairValue = itemMaxDurablity * itemAttribute.valueMultiplicative;					
 			reapirValue = MinF( itemCurrDurablity + baseRepairValue, itemMaxDurablity );
@@ -1739,7 +1937,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	}
 	public function IsItemRepairAble ( item : SItemUniqueId ) : bool
 	{
-		return inv.GetItemDurabilityRatio(item) <= 0.99999f;
+		return inv.HasItemDurability(item); //inv.GetItemDurabilityRatio(item) <= 0.99999f; //modSigns
 	}
 	
 	
@@ -1798,212 +1996,371 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	
 	
-	function ReduceDamage(out damageData : W3DamageAction)
+	//modSigns: separate function for dodge
+	function DodgeDamage(out damageData : W3DamageAction)
 	{
 		var actorAttacker : CActor;
-		var quen : W3QuenEntity;
 		var attackRange : CAIAttackRange;
-		var attackerMovementAdjustor : CMovementAdjustor;
-		var dist, distToAttacker, actionHeading, attackerHeading, currAdrenaline, adrenReducedDmg, focus : float;
+		var safeAngleDist, angleDist, distToAttacker, damageReduction : float;
 		var attackName : name;
-		var useQuenForBleeding : bool;
-		var min, max : SAbilityAttributeValue;
-		var skillLevel : int;
+		var isDodging, isIceGiantSpecial : bool;
 		
-		super.ReduceDamage(damageData);
-		
-		
-		
-		quen = (W3QuenEntity)signs[ST_Quen].entity;
-		useQuenForBleeding = false;
-		if(quen && !damageData.DealsAnyDamage() && ((W3Effect_Bleeding)damageData.causer) && damageData.GetDamageValue(theGame.params.DAMAGE_NAME_DIRECT) > 0.f)
-			useQuenForBleeding = true;
-		
-		
-		if(!useQuenForBleeding && !damageData.DealsAnyDamage())
-			return;	
+		super.DodgeDamage(damageData);
 		
 		actorAttacker = (CActor)damageData.attacker;
+		//modSigns: fix dodge detection bug - shouldn't be needed anymore, but leaving it here just in case
+		isDodging = IsCurrentlyDodging() || IsInCombatAction() && ((int)GetBehaviorVariable( 'combatActionType' ) == CAT_Dodge || (int)GetBehaviorVariable( 'combatActionType' ) == CAT_Roll);
 		
-		
-		if(actorAttacker && IsCurrentlyDodging() && damageData.CanBeDodged())
+		//modSigns: debug
+		if( FactsQuerySum( "modSigns_debug_reduce_damage" ) > 0 )
 		{
-			
-			
-			actionHeading = evadeHeading;
-			attackerHeading = actorAttacker.GetHeading();
-			dist = AngleDistance(actionHeading, attackerHeading);
-			distToAttacker = VecDistance(this.GetWorldPosition(),damageData.attacker.GetWorldPosition());
+			theGame.witcherLog.AddMessage("Is in combat action: " + (int)IsInCombatAction());
+			theGame.witcherLog.AddMessage("Player action: " + GetBehaviorVariable( 'combatActionType' ));
+			theGame.witcherLog.AddMessage("Player is dodging: " + isDodging);
+		}
+		
+		if(actorAttacker && isDodging && !(damageData.IsActionEnvironment() || damageData.IsDoTDamage()))
+		{
 			attackName = actorAttacker.GetLastAttackRangeName();
-			attackRange = theGame.GetAttackRangeForEntity( actorAttacker, attackName );
-			attackerMovementAdjustor = actorAttacker.GetMovingAgentComponent().GetMovementAdjustor();
-			if( ( AbsF(dist) < 150 && attackName != 'stomp' && attackName != 'anchor_special_far' && attackName != 'anchor_far' ) 
-				|| ( ( attackName == 'stomp' || attackName == 'anchor_special_far' || attackName == 'anchor_far' ) && distToAttacker > attackRange.rangeMax * 0.75 ) )
+			angleDist = AbsF(AngleDistance(evadeHeading, actorAttacker.GetHeading()));
+			attackRange = theGame.GetAttackRangeForEntity(actorAttacker, attackName);
+			distToAttacker = VecDistance(this.GetWorldPosition(), damageData.attacker.GetWorldPosition());
+			isIceGiantSpecial = ( attackName == 'stomp' || attackName == 'anchor_special_far' || attackName == 'anchor_far' );
+			//Fleet Footed graze damage reduction
+			if( CanUseSkill(S_Sword_s09) )
+				damageReduction = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s09, 's9_damage_reduction', false, true)) * GetSkillLevel(S_Sword_s09);
+			else
+				damageReduction = 0;
+			//attack can be dodged
+			if( damageData.CanBeDodged() )
 			{
-				if ( theGame.CanLog() )
+				//set up safe angle distance
+				safeAngleDist = 120;
+				if( HasAbility('ArmorTypeLightSetBonusAbility') )
+					safeAngleDist += CalculateAttributeValue(GetAbilityAttributeValue('ArmorTypeLightSetBonusAbility', 'dodge_safe_ange_dist_deg'));
+				safeAngleDist = ClampF( safeAngleDist, 0, 180 );
+				//check dodge success
+				if( angleDist <= safeAngleDist && !isIceGiantSpecial || isIceGiantSpecial && distToAttacker > attackRange.rangeMax * 0.75 )
 				{
-					LogDMHits("W3PlayerWitcher.ReduceDamage: Attack dodged by player - no damage done", damageData);
-				}
-				damageData.SetAllProcessedDamageAs(0);
-				damageData.SetWasDodged();
-			}
-			
-			else if( !damageData.IsActionEnvironment() && !damageData.IsDoTDamage() && CanUseSkill( S_Sword_s09 ) )
-			{
-				skillLevel = GetSkillLevel( S_Sword_s09 );
-				if( skillLevel == GetSkillMaxLevel( S_Sword_s09 ) )
-				{
-					damageData.SetAllProcessedDamageAs(0);
+					if( theGame.CanLog() )
+					{
+						LogDMHits("W3PlayerWitcher.DodgeDamage: Attack dodged by player - no damage done", damageData);
+					}
 					damageData.SetWasDodged();
 				}
-				else
-				{
-					damageData.processedDmg.vitalityDamage *= 1 - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s09, 'damage_reduction', false, true)) * skillLevel;
-				}
-				
-				if ( theGame.CanLog() )
-				{
-					LogDMHits("W3PlayerWitcher.ReduceDamage: skill S_Sword_s09 reduced damage while dodging", damageData );
-				}
 			}
-		}
-		
-		
-		if(quen && damageData.GetBuffSourceName() != "FallingDamage")
-		{
-			if ( theGame.CanLog() )
-			{		
-				LogDMHits("W3PlayerWitcher.ReduceDamage: Processing Quen sign damage reduction...", damageData);
-			}
-			quen.OnTargetHit( damageData );
-		}	
-		
-		
-		if( HasBuff( EET_GryphonSetBonusYrden ) )
-		{
-			min = GetAttributeValue( 'gryphon_set_bns_dmg_reduction' );
-			damageData.processedDmg.vitalityDamage *= 1 - min.valueAdditive;
-		}
-		
-		
-		if( IsMutationActive( EPMT_Mutation5 ) && !IsAnyQuenActive() && !damageData.IsDoTDamage() )
-		{
-			focus = GetStat( BCS_Focus );
-			currAdrenaline = FloorF( focus );
-			if( currAdrenaline >= 1 )
+			//graze damage reduction
+			if( !damageData.WasDodged() && damageReduction > 0 )
 			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation5', 'mut5_dmg_red_perc', min, max );
-				adrenReducedDmg = ( currAdrenaline * min.valueAdditive );
-				damageData.processedDmg.vitalityDamage *= 1 - adrenReducedDmg;
-				
-				
-				theGame.MutationHUDFeedback( MFT_PlayOnce );
-				
-				if( focus >= 3.f )
+				if( theGame.CanLog() )
 				{
-					PlayEffect( 'mutation_5_stage_03' );
+					LogDMHits("W3PlayerWitcher.DodgeDamage: reduced damage while dodging an attack", damageData );
 				}
-				else if( focus >= 2.f )
-				{
-					PlayEffect( 'mutation_5_stage_02' );
-				}
-				else
-				{
-					PlayEffect( 'mutation_5_stage_01' );
-				}
+				damageData.SetGrazeDamageReduction(damageReduction);
 			}
-		}
-		
-		
-		if(!damageData.GetIgnoreImmortalityMode())
-		{
-			if(!((W3PlayerWitcher)this))
-				Log("");
-			
-			
-			if( IsInvulnerable() )
+			//modSigns: debug
+			if( FactsQuerySum( "modSigns_debug_reduce_damage" ) > 0 )
 			{
-				if ( theGame.CanLog() )
-				{
-					LogDMHits("CActor.ReduceDamage: victim Invulnerable - no damage will be dealt", damageData );
-				}
-				damageData.SetAllProcessedDamageAs(0);
-				return;
+				theGame.witcherLog.AddMessage("Fleet Footed damage reduction: " + damageReduction);
+				theGame.witcherLog.AddMessage("Attack name: " + attackName);
+				theGame.witcherLog.AddMessage("Attack can be dodged: " + damageData.CanBeDodged());
+				theGame.witcherLog.AddMessage("Safe angle distance: " + safeAngleDist);
+				theGame.witcherLog.AddMessage("Attacker and evade angle distance: " + angleDist);
+				theGame.witcherLog.AddMessage("Attack range: " + attackRange.rangeMax);
+				theGame.witcherLog.AddMessage("Distance to attacker: " + distToAttacker);
+				theGame.witcherLog.AddMessage("Damage was dodged completely: " + damageData.WasDodged());
 			}
-			
-			if(actorAttacker && damageData.DealsAnyDamage() )
-				actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
-			
-			
-			if( IsImmortal() )
-			{
-				if ( theGame.CanLog() )
-				{
-					LogDMHits("CActor.ReduceDamage: victim is Immortal, clamping damage", damageData );
-				}
-				damageData.processedDmg.vitalityDamage = ClampF(damageData.processedDmg.vitalityDamage, 0, GetStat(BCS_Vitality)-1 );
-				damageData.processedDmg.essenceDamage  = ClampF(damageData.processedDmg.essenceDamage, 0, GetStat(BCS_Essence)-1 );
-				return;
-			}
-		}
-		else
-		{
-			
-			if(actorAttacker && damageData.DealsAnyDamage() )
-				actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
 		}
 	}
 	
-	timer function UndyingSkillCooldown(dt : float, id : int)
+	//modSigns: rewritten
+	function ReduceDamage(out damageData : W3DamageAction)
+	{
+		var quen : W3QuenEntity;
+		var min, max : SAbilityAttributeValue;
+		var /*currAdrenaline, adrenReducedDmg, focus,*/ chance : float;
+		var whirlDmgReduction : SAbilityAttributeValue;
+		
+		super.ReduceDamage(damageData);
+		
+		//new mutagen27 effect: prevent chain damage
+		if(HasBuff(EET_Mutagen27) && !(damageData.IsActionEnvironment() || damageData.IsDoTDamage()))
+		{
+			((W3Mutagen27_Effect)GetBuff(EET_Mutagen27)).ReduceDamage(damageData);
+		}
+			
+		//damage prevented
+		if(!damageData.DealsAnyDamage())
+			return;
+		
+		//modSigns: dodge detection moved to separate function!
+		//reduce damage from dodging, if was partially dodged
+		if(damageData.IsGrazeDamage())
+		{
+			damageData.processedDmg.vitalityDamage *= ClampF( 1 - damageData.GetGrazeDamageReduction(), 0.05, 1 );
+			//modSigns: debug
+			if( FactsQuerySum( "modSigns_debug_reduce_damage" ) > 0 )
+			{
+				theGame.witcherLog.AddMessage("Is graze damage: " + damageData.IsGrazeDamage());
+				theGame.witcherLog.AddMessage("Graze damage reduction: " + damageData.GetGrazeDamageReduction());
+			}
+		}
+		
+		quen = (W3QuenEntity)signs[ST_Quen].entity;
+		
+		//Protective Coating damage reduction
+		if( !damageData.IsDoTDamage() && CanUseSkill(S_Alchemy_s05) )
+		{
+			damageData.processedDmg.vitalityDamage *= ClampF(1 - GetOilProtectionAgainstMonster(damageData), 0.f, 1.f);
+			//modSigns: debug
+			if( FactsQuerySum( "modSigns_debug_reduce_damage" ) > 0 )
+			{
+				theGame.witcherLog.AddMessage("Oil protection against monster: " + GetOilProtectionAgainstMonster(damageData));
+			}
+		}
+		
+		//Mutated Skin passive ability -> changed
+		//if( IsMutationActive( EPMT_Mutation5 ) && !IsAnyQuenActive() && !damageData.IsDoTDamage() )
+		//{
+		//	focus = GetStat( BCS_Focus );
+		//	currAdrenaline = FloorF( focus );
+		//	if( currAdrenaline >= 1 )
+		//	{
+		//		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation5', 'mut5_dmg_red_perc', min, max );
+		//		adrenReducedDmg = ( currAdrenaline * min.valueAdditive );
+		//		damageData.processedDmg.vitalityDamage *= ClampF(1 - adrenReducedDmg, 0, 1);
+		//		
+		//		
+		//		theGame.MutationHUDFeedback( MFT_PlayOnce );
+		//		
+		//		if( focus >= 3.f )
+		//		{
+		//			PlayEffect( 'mutation_5_stage_03' );
+		//		}
+		//		else if( focus >= 2.f )
+		//		{
+		//			PlayEffect( 'mutation_5_stage_02' );
+		//		}
+		//		else
+		//		{
+		//			PlayEffect( 'mutation_5_stage_01' );
+		//		}
+		//	}
+		//}
+		
+		//modSigns: whirl incoming damage reduction
+		if( !damageData.IsDoTDamage() && GetStat(BCS_Focus) > 0 && IsDoingSpecialAttack(false) )
+		{
+			whirlDmgReduction = GetSkillAttributeValue(S_Sword_s01, 'whirl_dmg_reduction', false, true)
+				+ GetSkillAttributeValue(S_Sword_s01, 'whirl_dmg_reduction_bonus_after_1', false, true) * (GetSkillLevel(S_Sword_s01) - 1);
+			damageData.processedDmg.vitalityDamage *= ClampF(1 - whirlDmgReduction.valueMultiplicative, 0.f, 1.f);
+			//DrainFocus(1);
+			//PauseFocusGain( true );
+			//AddTimer( 'ResumeFocusGain', 1.f );
+			//theGame.witcherLog.AddMessage("Whirl damage reduction."); //modSigns: debug
+		}
+		
+		//modSigns: cast quen on projectile ability, moved here
+		if((!quen || !quen.IsAnyQuenActive()) && damageData.IsActionRanged() && !damageData.IsActionWitcherSign() && !damageData.IsDoTDamage() && !damageData.WasDodged())
+		{
+			chance = CalculateAttributeValue(GetAttributeValue('quen_chance_on_projectile'));
+			if(chance > 0)
+			{
+				chance = ClampF(chance, 0, 1);
+				
+				if(RandF() < chance)
+				{
+					if(!quen)
+					{
+						quen = (W3QuenEntity)theGame.CreateEntity(signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
+					}
+					quen.Init(signOwner, signs[ST_Quen].entity, true );
+					quen.freeCast = true;
+					quen.OnStarted();
+					quen.OnThrowing();
+					quen.OnEnded();
+					if ( theGame.CanLog() )
+					{		
+						LogDMHits("W3PlayerWitcher.ReduceDamage: Processing Quen On Projectile armor ability...", damageData);
+					}
+					//quen.OnTargetHit( damageData );
+					quen.ShowHitFX(); //modSigns: play FX
+					damageData.SetAllProcessedDamageAs(0);
+					damageData.SetEndsQuen(true);
+				}
+			}
+		}
+		//damage reduction from signs
+		//else if((quen && quen.IsAnyQuenActive()) && damageData.GetBuffSourceName() != "FallingDamage")
+		//{
+		//	if ( theGame.CanLog() )
+		//	{		
+		//		LogDMHits("W3PlayerWitcher.ReduceDamage: Processing Quen sign damage reduction...", damageData);
+		//	}
+		//	quen.OnTargetHit( damageData );
+		//} //modSigns: moved to damage manager to decrease raw damage
+		
+		//modSigns: gryphon set tier 2 damage reduction - removed, adds resistances instead
+		/*if( HasBuff( EET_GryphonSetBonusYrden ) )
+		{
+			min = GetAttributeValue( 'gryphon_set_bns_dmg_reduction' );
+			damageData.processedDmg.vitalityDamage *= ClampF(1 - min.valueAdditive, 0, 1);
+		}*/
+		
+		
+		//if you need to copy-paste a part of a parent function
+		//and do some shitty dancing around a part of the code,
+		//this probably means that the code doesn't belong here
+		//and should be placed somewhere else instead... yeah?
+		//if(!damageData.GetIgnoreImmortalityMode())
+		//{
+		//	if(!((W3PlayerWitcher)this))
+		//		Log("");
+		//	
+		//	
+		//	if( IsInvulnerable() )
+		//	{
+		//		if ( theGame.CanLog() )
+		//		{
+		//			LogDMHits("CActor.ReduceDamage: victim Invulnerable - no damage will be dealt", damageData );
+		//		}
+		//		damageData.SetAllProcessedDamageAs(0);
+		//		return;
+		//	}
+		//	
+		//	if(actorAttacker && damageData.DealsAnyDamage() )
+		//		actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
+		//	
+		//	
+		//	if( IsImmortal() )
+		//	{
+		//		if ( theGame.CanLog() )
+		//		{
+		//			LogDMHits("CActor.ReduceDamage: victim is Immortal, clamping damage", damageData );
+		//		}
+		//		damageData.processedDmg.vitalityDamage = ClampF(damageData.processedDmg.vitalityDamage, 0, GetStat(BCS_Vitality)-1 );
+		//		damageData.processedDmg.essenceDamage  = ClampF(damageData.processedDmg.essenceDamage, 0, GetStat(BCS_Essence)-1 );
+		//		return;
+		//	}
+		//}
+		//else
+		//{
+		//	
+		//	if(actorAttacker && damageData.DealsAnyDamage() )
+		//		actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
+		//}
+	}
+	
+	//modSigns
+	private function GetOilProtectionAgainstMonster(damageData : W3DamageAction) : float
+	{
+		var i : int;
+		var heldWeapons : array< SItemUniqueId >;
+		var weapon : SItemUniqueId;
+		var resist : float;
+		var attackerMonsterCategory : EMonsterCategory;
+		var tmpName : name;
+		var tmpBool	: bool;
+		
+		if( !((CActor)damageData.attacker) )
+			return 0;
+		
+		resist = 0;
+		heldWeapons = inv.GetHeldWeapons();
+		
+		for( i = 0; i < heldWeapons.Size(); i += 1 )
+		{
+			if( !inv.IsItemFists( heldWeapons[ i ] ) )
+			{
+				weapon = heldWeapons[ i ];
+				break;
+			}
+		}
+		
+		if( !inv.IsIdValid( weapon ) )
+			return 0;
+		
+		theGame.GetMonsterParamsForActor((CActor)damageData.attacker, attackerMonsterCategory, tmpName, tmpBool, tmpBool, tmpBool);
+	
+		resist = inv.GetOilProtectionAgainstMonster(weapon, attackerMonsterCategory);
+		
+		return resist;
+	}
+	
+	/*timer function UndyingSkillCooldown(dt : float, id : int)
 	{
 		cannotUseUndyingSkill = false;
+	}*/
+	
+	//modSigns
+	public function CastFreeQuen()
+	{
+		var quen : W3QuenEntity;
+		
+		quen = (W3QuenEntity)signs[ST_Quen].entity;
+
+		if(!quen)
+			quen = (W3QuenEntity)theGame.CreateEntity(signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation());
+		
+		PlayEffect( 'quen_lasting_shield_back' ); //make use of vanilla bear set effect
+		
+		quen.Init(signOwner, signs[ST_Quen].entity, true);
+		quen.freeCast = true;
+		quen.OnStarted();
+		quen.OnThrowing();
+		quen.OnEnded();
 	}
 	
 	event OnTakeDamage( action : W3DamageAction)
 	{
 		var currVitality, rgnVitality, hpTriggerTreshold : float;
-		var healingFactor : float;
+		//var healingFactor : float;
 		var abilityName : name;
 		var abilityCount, maxStack, itemDurability : float;
 		var addAbility : bool;
 		var min, max : SAbilityAttributeValue;
-		var mutagenQuen : W3SignEntity;
+		//var mutagenQuen : W3SignEntity; //modSigns
 		var equipped : array<SItemUniqueId>;
 		var i : int;
 		var killSourceName : string;
 		var aerondight	: W3Effect_Aerondight;
-	
+		var phantomWeapon	: W3Effect_PhantomWeapon; //modSigns
+		//var quen : W3QuenEntity; //modSigns
+		var mutation5CustomEffect : SCustomEffectParams; //modSigns
+		
 		currVitality = GetStat(BCS_Vitality);
+		killSourceName = action.GetBuffSourceName();
 		
 		
 		if(action.processedDmg.vitalityDamage >= currVitality)
 		{
-			killSourceName = action.GetBuffSourceName();
+			//killSourceName = action.GetBuffSourceName();
 			
 			
 			if( killSourceName != "Quest" && killSourceName != "Kill Trigger" && killSourceName != "Trap" && killSourceName != "FallingDamage" )
 			{			
-				
-				if(!cannotUseUndyingSkill && FloorF(GetStat(BCS_Focus)) >= 1 && CanUseSkill(S_Sword_s18) && HasBuff(EET_BattleTrance) )
-				{
-					healingFactor = CalculateAttributeValue( GetSkillAttributeValue(S_Sword_s18, 'healing_factor', false, true) );
-					healingFactor *= GetStatMax(BCS_Vitality);
-					healingFactor *= GetStat(BCS_Focus);
-					healingFactor *= 1 + CalculateAttributeValue( GetSkillAttributeValue(S_Sword_s18, 'healing_bonus', false, true) ) * (GetSkillLevel(S_Sword_s18) - 1);
-					ForceSetStat(BCS_Vitality, GetStatMax(BCS_Vitality));
-					DrainFocus(GetStat(BCS_Focus));
-					RemoveBuff(EET_BattleTrance);
-					cannotUseUndyingSkill = true;
-					AddTimer('UndyingSkillCooldown', CalculateAttributeValue( GetSkillAttributeValue(S_Sword_s18, 'trigger_delay', false, true) ), false, , , true);
-				}
-				
-				else if( IsMutationActive( EPMT_Mutation11 ) && !HasBuff( EET_Mutation11Debuff ) && !IsInAir() )
+				//modSigns: Second Life mutation will now have priority over Undying skill -> mutation changed
+				/*if( IsMutationActive( EPMT_Mutation11 ) && !HasBuff( EET_Mutation11Debuff ) && !IsInAir() )
 				{
 					theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation11', 'health_prc', min, max );
 
 					action.SetAllProcessedDamageAs( 0 );
 					
 					OnMutation11Triggered();					
+				}
+				else*/ if(/*!cannotUseUndyingSkill*/ !HasBuff( EET_UndyingSkillImmortal ) && !HasBuff( EET_UndyingSkillCooldown ) && GetStat(BCS_Focus) >= 1 && CanUseSkill(S_Sword_s18) /*&& HasBuff(EET_BattleTrance)*/ )
+				{
+					//healingFactor = CalculateAttributeValue( GetSkillAttributeValue(S_Sword_s18, 'healing_factor', false, true) );
+					//healingFactor *= GetStatMax(BCS_Vitality);
+					//healingFactor *= GetStat(BCS_Focus);
+					//healingFactor *= 1 + CalculateAttributeValue( GetSkillAttributeValue(S_Sword_s18, 'healing_bonus', false, true) ) * (GetSkillLevel(S_Sword_s18) - 1);
+					action.SetAllProcessedDamageAs( 0 ); //modSigns
+					ForceSetStat(BCS_Vitality, 1); //modSigns: heal 1 point of damage
+					//DrainFocus(GetStat(BCS_Focus));
+					//RemoveBuff(EET_BattleTrance);
+					//cannotUseUndyingSkill = true;
+					AddEffectDefault( EET_UndyingSkillImmortal, NULL, "UndyingSkill" ); //modSigns: brief immortality
+					//AddTimer('UndyingSkillCooldown', CalculateAttributeValue( GetSkillAttributeValue(S_Sword_s18, 'trigger_delay', false, true) ), false, , , true);
 				}
 				else
 				{
@@ -2033,34 +2390,61 @@ statemachine class W3PlayerWitcher extends CR4Player
 			}
 		}
 		
-		
-		if(action.DealsAnyDamage() && !((W3Effect_Toxicity)action.causer) )
+		//modSigns: new Mutated Skin ability
+		if(IsMutationActive(EPMT_Mutation5) && !action.IsDoTDamage() && action.processedDmg.vitalityDamage > 0.0 && GetStat(BCS_Focus) >= 1.0)
 		{
-			if(HasBuff(EET_Mutagen10))
-				RemoveAbilityAll( GetBuff(EET_Mutagen10).GetAbilityName() );
-			
-			if(HasBuff(EET_Mutagen15))
-				RemoveAbilityAll( GetBuff(EET_Mutagen15).GetAbilityName() );
+			if(action.processedDmg.vitalityDamage < currVitality || killSourceName != "Quest" && killSourceName != "Kill Trigger" && killSourceName != "Trap" && killSourceName != "FallingDamage")
+			{
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation5', 'mut5_duration_per_point', min, max);
+				//custom effect params
+				mutation5CustomEffect.effectType = EET_Mutation5;
+				mutation5CustomEffect.creator = this;
+				mutation5CustomEffect.sourceName = "mutation5";
+				mutation5CustomEffect.duration = min.valueAdditive * GetStat(BCS_Focus);
+				mutation5CustomEffect.effectValue.valueAdditive = action.processedDmg.vitalityDamage / mutation5CustomEffect.duration;
+				AddEffectCustom(mutation5CustomEffect);
+				//the damage is considered to be dealt by the rest of the code (for the swords,
+				//mutagens, etc to work as usual), but DrainVitality is actually omitted
+				action.SetMutation5Triggered();
+			}
 		}
+	
+		
+		//if(action.DealsAnyDamage() && !((W3Effect_Toxicity)action.causer) )
+		//{
+		//	//if(HasBuff(EET_Mutagen10))
+		//	//	RemoveAbilityAll( GetBuff(EET_Mutagen10).GetAbilityName() ); //modSigns: changed
+		//	
+		//	//if(HasBuff(EET_Mutagen15))
+		//	//	RemoveAbilityAll( GetBuff(EET_Mutagen15).GetAbilityName() ); //modSigns: changed
+		//}
 				
 		
-		if(HasBuff(EET_Mutagen19))
+		/*quen = (W3QuenEntity)signs[ST_Quen].entity; //modSigns
+		if(HasBuff(EET_Mutagen19) && (!quen || !quen.IsAnyQuenActive())) //modSigns
 		{
 			theGame.GetDefinitionsManager().GetAbilityAttributeValue(GetBuff(EET_Mutagen19).GetAbilityName(), 'max_hp_perc_trigger', min, max);
 			hpTriggerTreshold = GetStatMax(BCS_Vitality) * CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
 			
+			//theGame.witcherLog.AddMessage( "hpTriggerTreshold = " + hpTriggerTreshold );
+			//theGame.witcherLog.AddMessage( "damage = " + action.GetDamageDealt() );
+			
 			if(action.GetDamageDealt() >= hpTriggerTreshold)
 			{
-				mutagenQuen = (W3SignEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
-				mutagenQuen.Init( signOwner, signs[ST_Quen].entity, true );
-				mutagenQuen.OnStarted();
-				mutagenQuen.OnThrowing();
-				mutagenQuen.OnEnded();
+				if(!quen) //modSigns
+				{
+					quen = (W3QuenEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
+				}
+				quen.Init( signOwner, signs[ST_Quen].entity, true );
+				quen.freeCast = true; //modSigns
+				quen.OnStarted();
+				quen.OnThrowing();
+				quen.OnEnded();
 			}
-		}
+		}*/ //modSigns: reworked
 		
 		
-		if(action.DealsAnyDamage() && !action.IsDoTDamage() && HasBuff(EET_Mutagen27))
+		/*if(action.DealsAnyDamage() && !action.IsDoTDamage() && HasBuff(EET_Mutagen27))
 		{
 			abilityName = GetBuff(EET_Mutagen27).GetAbilityName();
 			abilityCount = GetAbilityCount(abilityName);
@@ -2088,7 +2472,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			{
 				AddAbility(abilityName, true);
 			}
-		}
+		}*/ //modSigns: reworked
 		
 		if(HasBuff(EET_Trap) && !action.IsDoTDamage() && action.attacker.HasAbility( 'mon_dettlaff_monster_base' ))
 		{
@@ -2099,20 +2483,51 @@ statemachine class W3PlayerWitcher extends CR4Player
 		super.OnTakeDamage(action);
 		
 		
-		if( !action.WasDodged() && action.DealtDamage() && inv.ItemHasTag( inv.GetCurrentlyHeldSword(), 'Aerondight' ) && !action.IsDoTDamage() && !( (W3Effect_Toxicity) action.causer ) )
+		//modSigns: Aerondight and Iris
+		if( !action.WasDodged() && action.DealtDamage() && !action.IsDoTDamage() && !( (W3Effect_Toxicity) action.causer ) )
 		{
-			aerondight = (W3Effect_Aerondight)GetBuff( EET_Aerondight );
-			if( aerondight && aerondight.GetCurrentCount() != 0 )
+			if( inv.ItemHasTag( inv.GetCurrentlyHeldSword(), 'Aerondight' ) )
 			{
-				aerondight.ReduceAerondightStacks();
+				aerondight = (W3Effect_Aerondight)GetBuff( EET_Aerondight );
+				if( aerondight /*&& aerondight.GetCurrentCount() != 0*/ )
+				{
+					//aerondight.ReduceAerondightStacks();
+					//modSigns: now resets on damage taken
+					aerondight.ResetCharges();
+				}
+			}
+			if( inv.ItemHasTag( inv.GetCurrentlyHeldSword(), 'PhantomWeapon' ) )
+			{
+				phantomWeapon = (W3Effect_PhantomWeapon)GetBuff( EET_PhantomWeapon );
+				if( phantomWeapon )
+					phantomWeapon.ResetCharges();
 			}
 		}
 		
+		//if( !action.WasDodged() && action.DealtDamage() && !( (W3Effect_Toxicity) action.causer ) )
+		//{
+		//	RemoveBuff( EET_Mutation3 );
+		//} //modSigns: reworked
 		
-		if( !action.WasDodged() && action.DealtDamage() && !( (W3Effect_Toxicity) action.causer ) )
-		{
-			RemoveBuff( EET_Mutation3 );
-		}
+		
+		//modSigns: new mutation3 (Bloodbath effect)
+		if(HasBuff(EET_Mutation3))
+			((W3Effect_Mutation3)GetBuff(EET_Mutation3)).ManageMutation3Bonus(action);
+		//modSigns: new Mutagen02 effect
+		if(HasBuff(EET_Mutagen02) && !action.WasDodged() && action.DealtDamage() && action.IsActionMelee())
+			((W3Mutagen02_Effect)GetBuff(EET_Mutagen02)).AddDebuffToEnemy((CActor)action.attacker);
+		//modSigns: new mutagen05 effect
+		if(HasBuff(EET_Mutagen05))
+			((W3Mutagen05_Effect)GetBuff(EET_Mutagen05)).ManageMutagen05Bonus(action);
+		//modSigns: new mutagen15 effect
+		if(HasBuff(EET_Mutagen15))
+			((W3Mutagen15_Effect)GetBuff(EET_Mutagen15)).ManageMutagen15Bonus(action);
+		//modSigns: new mutagen22 effect
+		if(HasBuff(EET_Mutagen22))
+			((W3Mutagen22_Effect)GetBuff(EET_Mutagen22)).RemoveMutagen22Abilities(action);
+		//modSigns: new Mutagen27 effect
+		if(HasBuff(EET_Mutagen27) && !action.WasDodged() && action.DealtDamage() && !(action.IsActionEnvironment() || action.IsDoTDamage()))
+			((W3Mutagen27_Effect)GetBuff(EET_Mutagen27)).AccumulateHits();
 	}
 	
 	
@@ -2199,18 +2614,21 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		bonus = super.GetCriticalHitDamageBonus(weaponId, victimMonsterCategory, isStrikeAtBack);
 		
-		
-		if( inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) && GetStat( BCS_Focus ) >= 3 && CanUseSkill( S_Alchemy_s07 ) )
+		if( inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) && GetStat( BCS_Focus ) >= 1 && CanUseSkill( S_Alchemy_s07 ) ) //modSigns
 		{
 			monsterBonusType = MonsterCategoryToAttackPowerBonus( victimMonsterCategory );
 			oilBonus = inv.GetItemAttributeValue( weaponId, monsterBonusType );
 			if(oilBonus != null)	
 			{
-				bonus += GetSkillAttributeValue(S_Alchemy_s07, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true);
+				//bonus += GetSkillAttributeValue(S_Alchemy_s07, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true);
+				//modSigns: fix crit bonus
+				bonus += GetSkillAttributeValue(S_Alchemy_s07, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, false) * GetSkillLevel(S_Alchemy_s07) * FloorF(GetStat(BCS_Focus));
 			}
+			//debug log
+			//theGame.witcherLog.AddMessage("Crit dmg bonus: " + bonus.valueAdditive);
 		}
 		
-		
+		// Mutagen 11 - back strike bonus
 		if (isStrikeAtBack && HasBuff(EET_Mutagen11))
 		{
 			mutagen = GetBuff(EET_Mutagen11);
@@ -2244,7 +2662,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	 event OnProcessActionPost(action : W3DamageAction)
 	{
 		var attackAction : W3Action_Attack;
-		var rendLoad : float;
+		var rendLoad, focusVal, stamCost, rendTimeRatio : float; //modSigns
 		var value : SAbilityAttributeValue;
 		var actorVictim : CActor;
 		var weaponId : SItemUniqueId;
@@ -2254,6 +2672,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var dm : CDefinitionsManagerAccessor;
 		var items : array<SItemUniqueId>;
 		var weaponEnt : CEntity;
+		var lynxSetBuff : W3Effect_LynxSetBonus;
+		var min, max, nullBonus, oilBonus : SAbilityAttributeValue; //modSigns
+		var victimMonsterCategory : EMonsterCategory; //modSigns
+		var monsterBonusType : name; //modSigns
+		var tmpName : name; //modSigns
+		var tmpBool	: bool; //modSigns
+		var splitCount : int; //modSigns
 		
 		super.OnProcessActionPost(action);
 		
@@ -2267,18 +2692,27 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				if(SkillNameToEnum(attackAction.GetAttackTypeName()) == S_Sword_s02)
 				{
-					rendLoad = GetSpecialAttackTimeRatio();
+					//rendLoad = GetSpecialAttackTimeRatio();
 					
 					
-					rendLoad = MinF(rendLoad * GetStatMax(BCS_Focus), GetStat(BCS_Focus));
+					//rendLoad = MinF(rendLoad * GetStatMax(BCS_Focus), GetStat(BCS_Focus));
 					
 					
-					rendLoad = FloorF(rendLoad);					
+					//rendLoad = FloorF(rendLoad);					
+					
+					//modSigns
+					RendAoE(attackAction);
+					
+					rendTimeRatio = GetSpecialAttackTimeRatio(); //save for bear tier 2
+					
+					rendLoad = GetStat(BCS_Focus);
+
 					DrainFocus(rendLoad);
 					
 					OnSpecialAttackHeavyActionProcess();
 				}
-				else if(actorVictim && IsRequiredAttitudeBetween(this, actorVictim, true))
+				else if(actorVictim && IsRequiredAttitudeBetween(this, actorVictim, true)
+					    && attackAction.DealsAnyDamage() && !attackAction.WasDodged() && !attackAction.IsParried() && !attackAction.IsCountered()) //modSigns: only gain adrenaline for actual damage dealt
 				{
 					
 					
@@ -2295,15 +2729,63 @@ statemachine class W3PlayerWitcher extends CR4Player
 						value += GetSkillAttributeValue(S_Sword_s20, 'focus_gain', false, true) * GetSkillLevel(S_Sword_s20);
 					}
 					
-					
-					if( IsMutationActive( EPMT_Mutation3 ) && IsRequiredAttitudeBetween( this, action.victim, true ) && !action.victim.HasTag( 'Mutation3InvalidTarget' ) && !attackAction.IsParried() && !attackAction.WasDodged() && !attackAction.IsCountered() && !inv.IsItemFists( attackAction.GetWeaponId() ) && !attackAction.WasDamageReturnedToAttacker() && attackAction.DealtDamage() )
+					//modSigns
+					if( CanUseSkill(S_Sword_s21) && attackAction && attackAction.IsActionMelee() && 
+						IsLightAttack(attackAction.GetAttackName()) && !inv.IsItemFists(attackAction.GetWeaponId()) )
 					{
-						AddEffectDefault( EET_Mutation3, this, "", false );
+						value += GetSkillAttributeValue(S_Sword_s21, 'light_focus_gain', false, true) * GetSkillLevel(S_Sword_s21);
+					}
+					if( CanUseSkill(S_Sword_s04) && attackAction && attackAction.IsActionMelee() && 
+						IsHeavyAttack(attackAction.GetAttackName()) && !inv.IsItemFists(attackAction.GetWeaponId()) )
+					{
+						value += GetSkillAttributeValue(S_Sword_s04, 'heavy_focus_gain', false, true) * GetSkillLevel(S_Sword_s04);
 					}
 					
-					GainStat(BCS_Focus, 0.1f * (1 + CalculateAttributeValue(value)) );
+					//if( IsMutationActive( EPMT_Mutation3 ) && IsRequiredAttitudeBetween( this, action.victim, true ) && !action.victim.HasTag( 'Mutation3InvalidTarget' ) && !attackAction.IsParried() && !attackAction.WasDodged() && !attackAction.IsCountered() && !inv.IsItemFists( attackAction.GetWeaponId() ) && !attackAction.WasDamageReturnedToAttacker() && attackAction.DealtDamage() )
+					//{
+					//	AddEffectDefault( EET_Mutation3, this, "", false );
+					//} //modSigns: reworked
+					
+					focusVal = 0.1f * (1 + CalculateAttributeValue(value));
+					
+					if(!inv.IsItemFists(attackAction.GetWeaponId()))
+					{
+						//modSigns: lynx set tier 2 bonus - doubled adrenaline gain for critical hits
+						if( attackAction.IsCriticalHit() && IsSetBonusActive( EISB_Lynx_2 ) )
+						{
+							focusVal *= 2;
+						}
+						
+						//modSigns: additional adrenaline for bear school perk
+						focusVal += CalculateAttributeValue(GetAttributeValue('bonus_focus_gain'));
+					}
+					
+					//modSigns: new mutation7 (Adrenaline Rush)
+					//theGame.witcherLog.AddMessage("focus before adjustments: " + focusVal);
+					if(HasBuff(EET_Mutation7Buff))
+						focusVal *= 2;
+					else if(HasBuff(EET_Mutation7Debuff))
+						focusVal /= 2;
+					
+					//theGame.witcherLog.AddMessage("melee focus gain: " + focusVal);
+					
+					GainStat(BCS_Focus, focusVal);
 				}
 				
+				//modSigns: bear tier 2 stamina restore
+				if(IsSetBonusActive(EISB_Bear_2) && attackAction.DealsAnyDamage() && !attackAction.WasDodged() && !attackAction.IsParried() && !attackAction.IsCountered())
+				{
+					if(SkillNameToEnum(attackAction.GetAttackTypeName()) == S_Sword_s02)
+						stamCost = rendTimeRatio * GetStatMax(BCS_Stamina);
+					else if(IsHeavyAttack(attackAction.GetAttackName()))
+						stamCost = GetStaminaActionCost(ESAT_HeavyAttack);
+					if(stamCost > 0)
+					{
+						theGame.GetDefinitionsManager().GetAbilityAttributeValue(GetSetBonusAbility(EISB_Bear_2), 'stamina_attack', min, max);
+						GainStat(BCS_Stamina, stamCost * min.valueAdditive);
+						//theGame.witcherLog.AddMessage("stamina gain: " + (stamCost * min.valueAdditive));
+					}
+				}
 				
 				weaponId = attackAction.GetWeaponId();
 				if(actorVictim && (ShouldProcessTutorial('TutorialWrongSwordSteel') || ShouldProcessTutorial('TutorialWrongSwordSilver')) && GetAttitudeBetween(actorVictim, this) == AIA_Hostile)
@@ -2334,7 +2816,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				}
 				
 				
-				if(!action.WasDodged() && HasAbility('Runeword 1 _Stats', true))
+				if(!action.WasDodged() && HasRunewordActive('Runeword 1 _Stats')) //modSigns
 				{
 					if(runewordInfusionType == ST_Axii)
 					{
@@ -2366,6 +2848,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 					weaponEnt.StopEffect('runeword_yrden');
 				}
 				
+				//modSigns: Invigoration
+				if(HasBuff(EET_Runeword4) && (action.IsActionMelee() || action.IsActionWitcherSign() && IsMutationActive(EPMT_Mutation1)) && action.DealsAnyDamage() && !action.IsDoTDamage())
+				{
+					RemoveBuff(EET_Runeword4);
+					actorVictim.CreateFXEntityAtPelvis( 'runeword_4', true );
+				}
 				
 				if(ShouldProcessTutorial('TutorialLightAttacks') || ShouldProcessTutorial('TutorialHeavyAttacks'))
 				{
@@ -2382,10 +2870,41 @@ statemachine class W3PlayerWitcher extends CR4Player
 			else if(attackAction.IsActionRanged())
 			{
 				
-				if(CanUseSkill(S_Sword_s15))
+				if(CanUseSkill(S_Perk_02) && !attackAction.IsDoTDamage() && attackAction.DealsAnyDamage() && !attackAction.WasDodged() && !attackAction.IsParried() && !attackAction.IsCountered()) //modSigns: only gain adrenaline for actual damage dealt
 				{				
-					value = GetSkillAttributeValue(S_Sword_s15, 'focus_gain', false, true) * GetSkillLevel(S_Sword_s15) ;
-					GainStat(BCS_Focus, CalculateAttributeValue(value) );
+					//value = GetSkillAttributeValue(S_Perk_02, 'focus_gain', false, true);
+					//focusVal = CalculateAttributeValue(value);
+					
+					//modSigns: bolts give the same amount of focus as swords
+					
+					value = GetAttributeValue('focus_gain');
+					
+					if( FactsQuerySum("debug_fact_focus_boy") > 0 )
+					{
+						Debug_FocusBoyFocusGain();
+					}
+					
+					if ( CanUseSkill(S_Sword_s20) )
+					{
+						value += GetSkillAttributeValue(S_Sword_s20, 'focus_gain', false, true) * GetSkillLevel(S_Sword_s20);
+					}
+					
+					focusVal = 0.1f * (1 + CalculateAttributeValue(value));
+					
+					//modSigns: new mutation7 (Adrenaline Rush)
+					if(HasBuff(EET_Mutation7Buff))
+						focusVal *= 2;
+					else if(HasBuff(EET_Mutation7Debuff))
+						focusVal /= 2;
+					
+					//modSigns: split bolt
+					splitCount = (int)CalculateAttributeValue(inv.GetItemAttributeValue(attackAction.GetWeaponId(), 'split_count'));
+					if(splitCount > 0)
+						focusVal /= splitCount;
+					
+					//theGame.witcherLog.AddMessage("xbow focus gain: " + focusVal);
+					
+					GainStat(BCS_Focus, focusVal);
 				}
 				
 				
@@ -2413,7 +2932,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if( IsMutationActive( EPMT_Mutation10 ) && ( action.IsActionMelee() || action.IsActionWitcherSign() ) )
+		//modSigns: moved sign fx to signEntity to ensure it's triggered only once per cast (and alt cast)
+		if( IsMutationActive( EPMT_Mutation10 ) && ( action.IsActionMelee() /*|| action.IsActionWitcherSign()*/ ) )
 		{
 			PlayEffect( 'mutation_10_energy' );
 		}
@@ -2422,15 +2942,104 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if(CanUseSkill(S_Perk_18) && ((W3Petard)action.causer) && action.DealsAnyDamage() && !action.IsDoTDamage())
 		{
 			value = GetSkillAttributeValue(S_Perk_18, 'focus_gain', false, true);
-			GainStat(BCS_Focus, CalculateAttributeValue(value));
-		}		
+					
+			//modSigns: new mutation7 (Adrenaline Rush)
+			focusVal = CalculateAttributeValue(value);
+			if(HasBuff(EET_Mutation7Buff))
+				focusVal *= 2;
+			else if(HasBuff(EET_Mutation7Debuff))
+				focusVal /= 2;
+			
+			//modSigns: cluster bombs
+			if(CanUseSkill(S_Alchemy_s11))
+			{
+				splitCount = GetSkillLevel(S_Alchemy_s11) + 1;
+				if(splitCount > 0)
+					focusVal /= splitCount;
+			}
+			
+			//theGame.witcherLog.AddMessage("petard focus gain: " + focusVal);
+			
+			GainStat(BCS_Focus, focusVal);
+		}
 		
-		
-		if( attackAction && IsHeavyAttack( attackAction.GetAttackName() ) && !IsUsingHorse() && attackAction.DealtDamage() && IsSetBonusActive( EISB_Lynx_1 ) && !attackAction.WasDodged() && !attackAction.IsParried() && !attackAction.IsCountered() && ( inv.IsItemSteelSwordUsableByPlayer( attackAction.GetWeaponId() ) || inv.IsItemSilverSwordUsableByPlayer( attackAction.GetWeaponId() ) ) )
+		//modSigns: new mutagen01 effect
+		if(HasBuff(EET_Mutagen01) && attackAction)
 		{
-			AddEffectDefault( EET_LynxSetBonus, NULL, "HeavyAttack" );
-			SoundEvent( "ep2_setskill_lynx_activate" );
-		}		
+			((W3Mutagen01_Effect)GetBuff(EET_Mutagen01)).ManageMutagen01Bonus(attackAction);
+		}
+		
+		//modSigns: new mutagen05 effect
+		if(HasBuff(EET_Mutagen05))
+		{
+			((W3Mutagen05_Effect)GetBuff(EET_Mutagen05)).ManageMutagen05Bonus(action);
+		}
+		
+		//modSigns: new mutagen10 effect
+		if(HasBuff(EET_Mutagen10) && attackAction)
+		{
+			((W3Mutagen10_Effect)GetBuff(EET_Mutagen10)).ManageMutagen10Bonus(attackAction);
+		}
+		
+		//modSigns: new mutagen15 effect
+		if(HasBuff(EET_Mutagen15))
+		{
+			((W3Mutagen15_Effect)GetBuff(EET_Mutagen15)).ManageMutagen15Bonus(action);
+		}
+		
+		//modSigns: new mutagen17 effect
+		if(HasBuff(EET_Mutagen17) && attackAction)
+		{
+			((W3Mutagen17_Effect)GetBuff(EET_Mutagen17)).ManageMutagen17Bonus(attackAction);
+		}
+		
+		//modSigns: new lynx set tier1 bonus
+		if( IsSetBonusActive( EISB_Lynx_1 ) && attackAction && attackAction.IsActionMelee() && !attackAction.WasDodged() )
+		{
+			//theGame.witcherLog.AddMessage("Lynx set tier 1 post action"); //debug
+			if( !HasBuff( EET_LynxSetBonus ) )
+			{
+				AddEffectDefault( EET_LynxSetBonus, NULL, "LynxSetBuff" );
+				SoundEvent( "ep2_setskill_lynx_activate" );
+			}
+			lynxSetBuff = (W3Effect_LynxSetBonus)GetBuff( EET_LynxSetBonus );
+			lynxSetBuff.ManageLynxBonus( IsHeavyAttack( attackAction.GetAttackName() ) );
+		}
+	}
+	
+	//modSigns: rend AoE
+	private function RendAoE(attackAction : W3Action_Attack)
+	{
+		var dmgTypes			: array< name >;
+		var dmgValues			: array< float >;
+		var ents				: array<CGameplayEntity>;
+		var rendAoEAction		: W3DamageAction;
+		var i, j				: int;
+		
+		if(GetStat(BCS_Focus) < 3)
+			return;
+		
+		inv.GetWeaponDTNames(attackAction.GetWeaponId(), dmgTypes);
+		for(i = 0; i < dmgTypes.Size(); i += 1)
+			dmgValues.PushBack(GetTotalWeaponDamage(attackAction.GetWeaponId(), dmgTypes[i], GetInvalidUniqueId()));
+		
+		FindGameplayEntitiesInCylinder(ents, attackAction.victim.GetWorldPosition(), 3, 10, 100, , FLAG_OnlyAliveActors + FLAG_ExcludeTarget + FLAG_Attitude_Hostile, this);
+		
+		for(i = 0; i < ents.Size(); i += 1)
+		{
+			if(ents[i] == attackAction.victim)
+				continue;
+			rendAoEAction = new W3DamageAction in theGame;
+			rendAoEAction.Initialize(attackAction.attacker, ents[i], attackAction.causer, "RendAoE", EHRT_Heavy, CPS_AttackPower, false, false, false, false);
+			rendAoEAction.SetCannotReturnDamage(true);
+			rendAoEAction.SetProcessBuffsIfNoDamage(true);
+			for(j = 0; j < dmgTypes.Size(); j += 1)
+				rendAoEAction.AddDamage(dmgTypes[j], dmgValues[j]);
+			rendAoEAction.AddEffectInfo(EET_KnockdownTypeApplicator);
+			theGame.damageMgr.ProcessAction(rendAoEAction);
+			ents[i].PlayEffect('yrden_shock');
+			delete rendAoEAction;
+		}
 	}
 	
 	
@@ -2491,8 +3100,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	event OnCombatStart()
 	{
-		var quenEntity, glyphQuen : W3QuenEntity;
-		var focus, stamina : float;
+		var quenEntity/*, glyphQuen*/ : W3QuenEntity; //modSigns
+		var focus, stamina, focusMax : float; //modSigns
 		var glowTargets, moTargets, actors : array< CActor >;
 		var delays : array< float >;
 		var rand, i : int;
@@ -2513,10 +3122,23 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if(HasBuff(EET_Mutagen15))
+		//if(HasBuff(EET_Mutagen15)) //modSigns: changed
+		//{
+		//	AddAbility(GetBuff(EET_Mutagen15).GetAbilityName(), false);
+		//}
+		
+		//modSigns: new mutagen24 effect
+		if(HasBuff(EET_Mutagen24))
+			((W3Mutagen24_Effect)GetBuff(EET_Mutagen24)).ManageMutagen24Bonus();
+		
+		//modSigns
+		if( IsSetBonusActive(EISB_KaerMorhen) && !HasBuff(EET_KaerMorhenSetBonus) )
 		{
-			AddAbility(GetBuff(EET_Mutagen15).GetAbilityName(), false);
+			AddEffectDefault(EET_KaerMorhenSetBonus, this, "KaerMorhenSetBonus");
 		}
+		
+		ManageAerondightBuff( true ); //modSigns
+		ManageIrisBuff( true ); //modSigns
 		
 		
 		mutation12IsOnCooldown = false;
@@ -2549,21 +3171,28 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if(CanUseSkill(S_Sword_s20) && IsThreatened())
 		{
 			focus = GetStat(BCS_Focus);
-			if(focus < 1)
+			//modSigns
+			focusMax = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s20, 'focus_add', false, true)) * GetSkillLevel(S_Sword_s20);
+			if(focus < focusMax)
 			{
-				GainStat(BCS_Focus, 1 - focus);
+				GainStat(BCS_Focus, focusMax - focus);
 			}
 		}
 
-		if ( HasAbility('Glyphword 17 _Stats', true) && RandF() < CalculateAttributeValue(GetAttributeValue('quen_apply_chance')) )
+		if ( HasGlyphwordActive('Glyphword 17 _Stats') && (!quenEntity || !quenEntity.IsAnyQuenActive()) ) //modSigns
 		{
-			stamina = GetStat(BCS_Stamina);
-			glyphQuen = (W3QuenEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
-			glyphQuen.Init( signOwner, signs[ST_Quen].entity, true );
-			glyphQuen.OnStarted();
-			glyphQuen.OnThrowing();
-			glyphQuen.OnEnded();
-			ForceSetStat(BCS_Stamina, stamina);
+			//stamina = GetStat(BCS_Stamina); //modSigns
+			if(!quenEntity)
+			{
+				quenEntity = (W3QuenEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
+			}
+			quenEntity.glyphword17Cast = true; //modSigns
+			quenEntity.Init( signOwner, signs[ST_Quen].entity, true );
+			quenEntity.freeCast = true; //modSigns
+			quenEntity.OnStarted();
+			quenEntity.OnThrowing();
+			quenEntity.OnEnded();
+			//ForceSetStat(BCS_Stamina, stamina); //modSigns
 		}
 		
 		
@@ -2573,24 +3202,31 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 
 		
-		if( IsMutationActive( EPMT_Mutation4 ) )
+		if( IsMutationActive( EPMT_Mutation3 ) ) //modSigns: now added at combat start
+		{
+			AddEffectDefault( EET_Mutation3, this, "", false );
+		}
+		else if( IsMutationActive( EPMT_Mutation4 ) )
 		{
 			AddEffectDefault( EET_Mutation4, this, "combat start", false );
 		}
-		else if( IsMutationActive( EPMT_Mutation5 ) && GetStat( BCS_Focus ) >= 1.f )
-		{
-			AddEffectDefault( EET_Mutation5, this, "", false );
-		}
+		//else if( IsMutationActive( EPMT_Mutation5 ) && GetStat( BCS_Focus ) >= 1.f )
+		//{
+		//	AddEffectDefault( EET_Mutation5, this, "", false );
+		//} //modSigns: mutation changed
 		
 		else if( IsMutationActive( EPMT_Mutation7 ) )
 		{
-			
-				
-				RemoveTimer( 'Mutation7CombatStartHackFixGo' );
-				
-				
-				AddTimer( 'Mutation7CombatStartHackFix', 1.f, true, , , , true );
-			
+			//
+			//	
+			//	RemoveTimer( 'Mutation7CombatStartHackFixGo' );
+			//	
+			//	
+			//	AddTimer( 'Mutation7CombatStartHackFix', 1.f, true, , , , true );
+			//
+			//modSigns
+			AddEffectDefault( EET_Mutation7Buff, this, "Mutation 7 buff phase" );
+			theGame.MutationHUDFeedback( MFT_PlayRepeat );
 		}
 		else if( IsMutationActive( EPMT_Mutation8 ) )
 		{
@@ -2599,48 +3235,57 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		else if( IsMutationActive( EPMT_Mutation10 ) )
 		{
-			if( !HasBuff( EET_Mutation10 ) && GetStat( BCS_Toxicity ) > 0.f )
+			/*if( !HasBuff( EET_Mutation10 ) && GetStat( BCS_Toxicity ) > 0.f )
 			{
 				AddEffectDefault( EET_Mutation10, this, "Mutation 10" );
-			}
+			}*/
 			
 			
-			PlayEffect( 'mutation_10' );
+			//PlayEffect( 'mutation_10' );
+			//
+			//
+			//PlayEffect( 'critical_toxicity' );
+			//AddTimer( 'Mutation10StopEffect', 5.f );
+			////modSigns
+			//if( !HasBuff( EET_Mutation10 ) )
+			//{
+			//	AddEffectDefault( EET_Mutation10, NULL, "Mutation 10" );
+			//}
 			
-			
-			PlayEffect( 'critical_toxicity' );
-			AddTimer( 'Mutation10StopEffect', 5.f );
+			//modSigns: Euphoria rework
+			if( GetStatPercents(BCS_Toxicity) >= GetToxicityDamageThreshold() )
+				AddEffectDefault( EET_Mutation10, NULL, "Mutation 10" );
 		}
 	}
 	
-	timer function Mutation7CombatStartHackFix( dt : float, id : int )
-	{
-		var actors : array< CActor >;
-		
-		actors = GetEnemies();
-		
-		if( actors.Size() > 0 )
-		{
-			
-			AddTimer( 'Mutation7CombatStartHackFixGo', 0.5f );
-			RemoveTimer( 'Mutation7CombatStartHackFix' );
-		}
-	}
-	
-	timer function Mutation7CombatStartHackFixGo( dt : float, id : int )
-	{
-		var actors : array< CActor >;
-		
-		if( IsMutationActive( EPMT_Mutation7 ) )
-		{
-			actors = GetEnemies();
-			
-			if( actors.Size() > 1 )
-			{		
-				AddEffectDefault( EET_Mutation7Buff, this, "Mutation 7, combat start" );			
-			}
-		}
-	}
+	//timer function Mutation7CombatStartHackFix( dt : float, id : int )
+	//{
+	//	var actors : array< CActor >;
+	//	
+	//	actors = GetEnemies();
+	//	
+	//	if( actors.Size() > 0 )
+	//	{
+	//		
+	//		AddTimer( 'Mutation7CombatStartHackFixGo', 0.5f );
+	//		RemoveTimer( 'Mutation7CombatStartHackFix' );
+	//	}
+	//}
+	//
+	//timer function Mutation7CombatStartHackFixGo( dt : float, id : int )
+	//{
+	//	var actors : array< CActor >;
+	//	
+	//	if( IsMutationActive( EPMT_Mutation7 ) )
+	//	{
+	//		actors = GetEnemies();
+	//		
+	//		if( actors.Size() > 1 )
+	//		{		
+	//			AddEffectDefault( EET_Mutation7Buff, this, "Mutation 7, combat start" );			
+	//		}
+	//	}
+	//} //modSigns: redone
 	
 	public final function IsInFistFight() : bool
 	{
@@ -2681,68 +3326,39 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	event OnCombatFinished()
 	{
-		var mut17 : W3Mutagen17_Effect;
 		var inGameConfigWrapper : CInGameConfigWrapper;
 		var disableAutoSheathe : bool;
 		
 		super.OnCombatFinished();
 		
-		
+		//modSigns: cleanup mutagens
+		if(HasBuff(EET_Mutagen01))
+			((W3Mutagen01_Effect)GetBuff(EET_Mutagen01)).RemoveMutagen01Abilities();
+		if(HasBuff(EET_Mutagen05))
+			((W3Mutagen05_Effect)GetBuff(EET_Mutagen05)).RemoveMutagen05AbilitiesAll();
 		if(HasBuff(EET_Mutagen10))
-		{
-			RemoveAbilityAll( GetBuff(EET_Mutagen10).GetAbilityName() );
-		}
-		
-		
-		if(HasBuff(EET_Mutagen14))
-		{
-			RemoveAbilityAll( GetBuff(EET_Mutagen14).GetAbilityName() );
-		}
-		
-		
+			((W3Mutagen10_Effect)GetBuff(EET_Mutagen10)).RemoveMutagen10Abilities();
+		if(HasBuff(EET_Mutagen12))
+			((W3Mutagen12_Effect)GetBuff(EET_Mutagen12)).ManageAdditionalBonus();
+		if(HasBuff(EET_Mutagen13))
+			((W3Mutagen13_Effect)GetBuff(EET_Mutagen13)).ManageMutagen13Bonus();
 		if(HasBuff(EET_Mutagen15))
-		{
-			RemoveAbilityAll( GetBuff(EET_Mutagen15).GetAbilityName() );
-		}
-		
-		
+			((W3Mutagen15_Effect)GetBuff(EET_Mutagen15)).RemoveMutagen15AbilitiesAll();
 		if(HasBuff(EET_Mutagen17))
-		{
-			mut17 = (W3Mutagen17_Effect)GetBuff(EET_Mutagen17);
-			mut17.ClearBoost();
-		}
-		
-		
+			((W3Mutagen17_Effect)GetBuff(EET_Mutagen17)).RemoveMutagen17Abilities();
 		if(HasBuff(EET_Mutagen18))
-		{
-			RemoveAbilityAll( GetBuff(EET_Mutagen18).GetAbilityName() );
-		}
-		
-		
+			((W3Mutagen18_Effect)GetBuff(EET_Mutagen18)).ManageMutagen18Bonus();
 		if(HasBuff(EET_Mutagen22))
-		{
-			RemoveAbilityAll( GetBuff(EET_Mutagen22).GetAbilityName() );
-		}
+			((W3Mutagen22_Effect)GetBuff(EET_Mutagen22)).RemoveMutagen22AbilitiesAll();
+		if(HasBuff(EET_Mutagen24))
+			((W3Mutagen24_Effect)GetBuff(EET_Mutagen24)).ResetMutagen24Bonus();
 		
-		
-		if(HasBuff(EET_Mutagen27))
-		{
-			RemoveAbilityAll( GetBuff(EET_Mutagen27).GetAbilityName() );
-		}
-		
-		
+		//cleanup mutations
 		RemoveBuff( EET_Mutation3 );
-		
-		
 		RemoveBuff( EET_Mutation4 );
-		
-		
-		RemoveBuff( EET_Mutation5 );
-		
-		
+		//RemoveBuff( EET_Mutation5 ); //modSigns: mutation changed
 		RemoveBuff( EET_Mutation7Buff );
 		RemoveBuff( EET_Mutation7Debuff );
-			
 		if( IsMutationActive( EPMT_Mutation7 ) )
 		{
 			theGame.MutationHUDFeedback( MFT_PlayHide );
@@ -2751,29 +3367,40 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			theGame.MutationHUDFeedback( MFT_PlayHide );
 		}
-		
-		
 		RemoveBuff( EET_Mutation10 );
 		
-		
+		//cleanup set bonuses
 		RemoveBuff( EET_LynxSetBonus );
+		RemoveBuff( EET_KaerMorhenSetBonus ); //modSigns
 		
+		if( HasBuff( EET_Aerondight ) ) //modSigns
+			RemoveBuff( EET_Aerondight );
 		
+		if( HasBuff( EET_PhantomWeapon ) ) //modSigns
+			RemoveBuff( EET_PhantomWeapon );
+		
+		//cleanup runewords
+		RemoveAbilityAll('Runeword 10 Buff');
+		//thePlayer.abilityManager.ResetOverhealBonus();
+		RemoveBuff(EET_Runeword4); //modSigns
+		runewordInfusionType = ST_None;
+		RemoveBuff(EET_Runeword11); //modSigns
+		
+		RemoveAbilityAll('Glyphword 14 _Stats'); //modSigns
+		RemoveAbilityAll('Glyphword 10 _Stats'); //modSigns
+		
+		//begin out of combat adrenaline drain
 		if(GetStat(BCS_Focus) > 0)
 		{
 			AddTimer('DelayedAdrenalineDrain', theGame.params.ADRENALINE_DRAIN_AFTER_COMBAT_DELAY, , , , true);
 		}
 		
-		
-		thePlayer.abilityManager.ResetOverhealBonus();
-		
+		//profile tracker
 		usedQuenInCombat = false;		
-		
 		theGame.GetGamerProfile().ResetStat(ES_FinesseKills);
 		
+		//sword sheathing
 		LogChannel( 'OnCombatFinished', "OnCombatFinished: DelayedSheathSword timer added" ); 
-		
-		
 		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
 		disableAutoSheathe = inGameConfigWrapper.GetVarValue( 'Gameplay', 'DisableAutomaticSwordSheathe' );			
 		if( !disableAutoSheathe )
@@ -2785,14 +3412,6 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		OnBlockAllCombatTickets( false ); 
-		
-		
-		runewordInfusionType = ST_None;
-		
-		
-		
-		
-		
 	}
 	
 	public function PlayHitEffect( damageAction : W3DamageAction )
@@ -2842,23 +3461,46 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	protected function Attack( hitTarget : CGameplayEntity, animData : CPreAttackEventData, weaponId : SItemUniqueId, parried : bool, countered : bool, parriedBy : array<CActor>, attackAnimationName : name, hitTime : float, weaponEntity : CItemEntity)
 	{
-		var mutagen17 : W3Mutagen17_Effect;
+		//var mutagen17 : W3Mutagen17_Effect;
+		
+		//modSigns: check for mutagen17 activation
+		//if(HasBuff(EET_Mutagen17))
+		//{
+		//	mutagen17 = (W3Mutagen17_Effect)GetBuff(EET_Mutagen17);
+		//	if(mutagen17.IsBoostAvailable())
+		//	{
+		//		mutagen17.ActivateBoost();
+		//		//theGame.witcherLog.AddMessage("mutagen17 boost activated: attack"); //modSigns: debug
+		//	}
+		//}
 		
 		super.Attack(hitTarget, animData, weaponId, parried, countered, parriedBy, attackAnimationName, hitTime, weaponEntity);
 		
-		if( (CActor)hitTarget && HasBuff(EET_Mutagen17) )
+		/*if( (CActor)hitTarget && HasBuff(EET_Mutagen17) )
 		{
 			mutagen17 = (W3Mutagen17_Effect)GetBuff(EET_Mutagen17);
 			if(mutagen17.HasBoost())
 			{
 				mutagen17.ClearBoost();
 			}
-		}
+		}*/ //modSigns: move to other place
 	}
 	
+	//modSigns: redone completely
 	public final timer function SpecialAttackLightSustainCost(dt : float, id : int)
 	{
-		var focusPerSec, cost, delay : float;
+		if(abilityManager && abilityManager.IsInitialized() && IsAlive() && HasResourcesForWhirl(dt))
+		{
+			PauseStaminaRegen('WhirlSkill');
+			PauseFocusGain(true);
+			AddTimer('ResumeFocusGain', 1.f);
+			WhirlDrainResources(dt);
+		}
+		else
+		{
+			OnPerformSpecialAttack(true, false);
+		}
+		/*var focusPerSec, cost, delay : float;
 		var reduction : SAbilityAttributeValue;
 		var skillLevel : int;
 		
@@ -2891,10 +3533,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if(GetStat(BCS_Stamina) <= 0 && GetStat(BCS_Focus) <= 0)
 		{
 			OnPerformSpecialAttack(true, false);
-		}
+		}*/
 	}
 	
-	public final function GetWhirlFocusCostPerSec() : float
+	/*public final function GetWhirlFocusCostPerSec() : float
 	{
 		var ability : SAbilityAttributeValue;
 		var val : float;
@@ -2909,6 +3551,100 @@ statemachine class W3PlayerWitcher extends CR4Player
 		val = CalculateAttributeValue(ability);
 		
 		return val;
+	}*/ //modSigns: redone
+	
+	//modSigns
+	public final function HasResourcesForWhirl(dt : float) : bool
+	{
+		return GetStat(BCS_Stamina) >= GetWhirlStaminaCost(dt);
+	}
+	
+	public final function GetWhirlStaminaCost(dt : float) : float
+	{
+		var cost : float;
+		cost = GetStaminaActionCost(ESAT_Ability, GetSkillAbilityName(S_Sword_s01), dt);
+		cost *= 1 - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s01, 'stamina_cost_reduction_after_1', false, false)) * (GetSkillLevel(S_Sword_s01) - 1);
+		if(HasBuff(EET_Mutagen04))
+			cost *= 1 + ((W3Mutagen04_Effect)GetBuff(EET_Mutagen04)).GetAttackCostIncrease();
+		return cost;
+	}
+	
+	//modSigns
+	private final function WhirlDrainResources(dt : float)
+	{
+		var delay : float;
+		var cost : float;
+		delay = GetStaminaActionDelay(ESAT_Ability, GetSkillAbilityName(S_Sword_s01), dt);
+		cost = GetWhirlStaminaCost(dt);
+		DrainStamina(ESAT_FixedValue, cost, delay, GetSkillAbilityName(S_Sword_s01));
+		//calculating adrenaline drain manually, so it's not affected by stamina bonuses/penalties
+		cost = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s01, 'stamina_cost_per_sec', false, false))
+			 * (1 - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s01, 'stamina_cost_reduction_after_1', false, false)) * (GetSkillLevel(S_Sword_s01) - 1));
+		cost *= dt;
+		DrainFocus(cost/GetStatMax(BCS_Stamina));
+	}
+	
+	//modSigns
+	public final function GetNumHostilesInRange() : int
+	{
+		var ents : array<CGameplayEntity>;
+		
+		FindGameplayEntitiesInRange(ents, this, 30, 100, , FLAG_OnlyAliveActors + FLAG_ExcludeTarget + FLAG_Attitude_Hostile, this);
+		
+		return ents.Size();
+	}
+	
+	//modSigns
+	public final function GetWhirlDamageBonus() : float
+	{
+		var bonusCount : int;
+		var ability : SAbilityAttributeValue;
+		var damageBonus : float;
+		
+		bonusCount = Clamp(GetNumHostilesInRange() - 1, 0, 5);
+		ability = GetSkillAttributeValue(S_Sword_s01, 'whirl_dmg_bonus', false, true) * GetSkillLevel(S_Sword_s01);
+		damageBonus = ability.valueMultiplicative * bonusCount;
+		
+		return damageBonus;
+	}
+	
+	//modSigns
+	public final function GetRendPowerBonus() : float
+	{
+		var	rendLoad, rendBonus, rendRatio : float;
+		var attackBonus, rendBonusPerPoint, staminaRendBonus : SAbilityAttributeValue;
+		
+		rendBonus = 0;
+		//unconditional bonus
+		attackBonus = GetSkillAttributeValue(S_Sword_s02, 'attack_damage_bonus', false, true) * GetSkillLevel(S_Sword_s02);
+		rendBonus += attackBonus.valueMultiplicative;
+		//check how much of the 'gauge' player channeled
+		rendRatio = GetSpecialAttackTimeRatio();
+		if(rendRatio > 0)
+		{
+			//bonus for stamina usage (per skill level, per stamina point)
+			staminaRendBonus = GetSkillAttributeValue(S_Sword_s02, 'stamina_max_dmg_bonus', false, true) * GetSkillLevel(S_Sword_s02);
+			rendBonus += rendRatio * GetStatMax(BCS_Stamina) * staminaRendBonus.valueMultiplicative;
+		}
+		//adrenaline points
+		rendLoad = GetStat(BCS_Focus);
+		//do not round adrenaline points, use as many as possible
+		if(rendLoad > 0)
+		{
+			//bonus for adrenaline usage (per skill level)
+			rendBonusPerPoint = GetSkillAttributeValue(S_Sword_s02, 'adrenaline_final_damage_bonus', false, true) * GetSkillLevel(S_Sword_s02);
+			rendBonus += rendLoad * rendBonusPerPoint.valueMultiplicative;
+		}
+		//theGame.witcherLog.AddMessage("Rend ratio: " + rendRatio);
+		//theGame.witcherLog.AddMessage("Rend load: " + rendLoad);
+		//theGame.witcherLog.AddMessage("Rend bonus: " + rendBonus);
+		return rendBonus;
+	}
+	
+	//modSigns
+	public final function GetRendStaminaCost(dt : float) : float
+	{
+		return GetStaminaActionCost(ESAT_Ability, GetSkillAbilityName(S_Sword_s02), dt);
 	}
 	
 	public final timer function SpecialAttackHeavySustainCost(dt : float, id : int)
@@ -2917,6 +3653,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var hud : CR4ScriptedHud;
 		var hudWolfHeadModule : CR4HudModuleWolfHead;		
 
+		PauseStaminaRegen('RendSkill'); //modSigns
 		
 		DrainStamina(ESAT_Ability, 0, 0, GetSkillAbilityName(S_Sword_s02), dt);
 
@@ -2927,16 +3664,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		ratio = EngineTimeToFloat(theGame.GetEngineTime() - specialHeavyStartEngineTime) / specialHeavyChargeDuration;
 		
-		
-		if(ratio > 0.95)
+		if(ratio > 0.99) //modSigns
 			ratio = 1;
 			
 		SetSpecialAttackTimeRatio(ratio);
 		
 		
-		focusHighlight = ratio * GetStatMax(BCS_Focus);
-		focusHighlight = MinF(focusHighlight, GetStat(BCS_Focus));
-		focusHighlight = FloorF(focusHighlight);
+		//focusHighlight = ratio * GetStatMax(BCS_Focus);
+		//focusHighlight = MinF(focusHighlight, GetStat(BCS_Focus));
+		//focusHighlight = FloorF(focusHighlight);
+		//modSigns
+		/*focusHighlight = FloorF(ratio * GetStat(BCS_Focus));
 		
 		hud = (CR4ScriptedHud)theGame.GetHud();
 		if ( hud )
@@ -2946,7 +3684,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			{
 				hudWolfHeadModule.LockFocusPoints((int)focusHighlight);
 			}		
-		}
+		}*/
 	}
 	
 	public function OnSpecialAttackHeavyActionProcess()
@@ -2975,14 +3713,15 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			if ( GetBIsCombatActionAllowed() && inputHandler.IsActionAllowed(EIAB_SwordAttack))
 			{
-				if(GetStat(BCS_Stamina) > 0)
+				/*if(GetStat(BCS_Stamina) > 0)
 				{
 					hasResource = true;
 				}
 				else
 				{
 					hasResource = (GetStat(BCS_Focus) >= GetWhirlFocusCostPerSec() * time);					
-				}
+				}*/ //modSigns: redone
+				hasResource = HasResourcesForWhirl(0.5f);
 				
 				if(hasResource)
 				{
@@ -2991,7 +3730,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 				}
 				else if(!playedSpecialAttackMissingResourceSound)
 				{
-					IndicateTooLowAdrenaline();
+					//IndicateTooLowAdrenaline(); //modSigns
+					SetShowToLowStaminaIndication(GetWhirlStaminaCost(0.5f));
+					SoundEvent("gui_no_stamina");
 					playedSpecialAttackMissingResourceSound = true;
 				}
 			}			
@@ -3008,7 +3749,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		if ( GetCurrentStateName() == 'CombatSteel' || GetCurrentStateName() == 'CombatSilver' )
 		{
-			cost = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s02, 'stamina_cost_per_sec', false, false));
+			//cost = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s02, 'stamina_cost_per_sec', false, false));
+			cost = GetRendStaminaCost(0.5f); //modSigns
 			
 			if( GetBIsCombatActionAllowed() && inputHandler.IsActionAllowed(EIAB_SwordAttack))
 			{
@@ -3019,7 +3761,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 				}
 				else if(!playedSpecialAttackMissingResourceSound)
 				{
-					IndicateTooLowAdrenaline();
+					//IndicateTooLowAdrenaline(); //modSigns
+					SetShowToLowStaminaIndication(cost);
+					SoundEvent("gui_no_stamina");
 					playedSpecialAttackMissingResourceSound = true;
 				}
 			}
@@ -3036,6 +3780,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		if( (bufferAction == EBAT_Dodge && IsActionAllowed(EIAB_Dodge)) || (bufferAction == EBAT_Roll && IsActionAllowed(EIAB_Roll)) )
 		{
+			//modSigns: check for stamina
+			if( bufferAction == EBAT_Dodge && !HasStaminaToUseAction(ESAT_Dodge, '', 0, 0 ) ||
+				bufferAction == EBAT_Roll && !HasStaminaToUseAction(ESAT_Roll, '', 0, 0 ) )
+			{
+				SoundEvent("gui_no_stamina");
+				return;
+			}
 			
 			if(bufferAction != EBAT_Roll && ShouldProcessTutorial('TutorialDodge'))
 			{
@@ -3106,6 +3857,47 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 	}
 		
+	//modSigns
+	public saved var isLowStaminaSFXPlaying : bool;
+	
+	public function CheckForLowStamina()
+	{
+		var sfxThreshold : float = theGame.params.GetLowStaminaSFXThreshold();
+		var staminaPrc : float = GetStatPercents(BCS_Stamina);
+		var rate : float;
+	
+		if(staminaPrc < sfxThreshold && !isLowStaminaSFXPlaying)
+		{
+			isLowStaminaSFXPlaying = true;
+			//PlayEffectSingle('focus_sound_red_fx');
+			if(!theSound.SoundIsBankLoaded("heartbeat02a.bnk"))
+				theSound.SoundLoadBank("heartbeat02a.bnk", false);
+			theSound.SoundEvent("play_heartbeat_02a_loop");
+			theSound.SoundParameter("heartbeat_rate", theGame.params.GetLowStaminaSFXRate());
+			theSound.SoundParameter("heartbeat_volume", theGame.params.GetLowStaminaSFXVolume());
+		}
+		else if(staminaPrc >= sfxThreshold && isLowStaminaSFXPlaying)
+		{
+			isLowStaminaSFXPlaying = false;
+			//StopEffectIfActive('focus_sound_red_fx');
+			theSound.SoundEvent("stop_heartbeat_02a_loop");
+		}
+		if(isLowStaminaSFXPlaying)
+		{
+			rate = (1.0f - staminaPrc / sfxThreshold) * 100.0f;
+			if(theGame.params.GetLowStaminaSFXDynRate())
+				theSound.SoundParameter("heartbeat_rate", rate);
+			if(theGame.params.GetLowStaminaSFXDynVol())
+				theSound.SoundParameter("heartbeat_volume", rate);
+		}
+	}
+	
+	public function StopLowStaminaSFX() //modSigns
+	{
+		isLowStaminaSFXPlaying = false;
+		//StopEffectIfActive('focus_sound_red_fx');
+		theSound.SoundEvent("stop_heartbeat_02a_loop");
+	}
 	
 	public function ProcessCombatActionBuffer() : bool
 	{
@@ -3429,20 +4221,20 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( IsSwimming() || IsDiving() || IsSailing() || IsUsingHorse() || IsUsingBoat() || IsUsingVehicle() || IsUsingExploration() )
 		{
 			
-			ForceSetStat( BCS_Vitality, GetStatMax( BCS_Vitality ) );
-			
-			
-			theGame.MutationHUDFeedback( MFT_PlayOnce );
-			
-			
-			GCameraShake( 1.0f, , , , true, 'camera_shake_loop_lvl1_1' );
-			AddTimer( 'StopMutation11CamShake', 2.f );
-			
-			
-			theGame.VibrateControllerVeryHard( 2.f );
-			
-			
-			Mutation11ShockWave( true );
+			//ForceSetStat( BCS_Vitality, GetStatMax( BCS_Vitality ) );
+			//
+			//
+			//theGame.MutationHUDFeedback( MFT_PlayOnce );
+			//
+			//
+			//GCameraShake( 1.0f, , , , true, 'camera_shake_loop_lvl1_1' );
+			//AddTimer( 'StopMutation11CamShake', 2.f );
+			//
+			//
+			//theGame.VibrateControllerVeryHard( 2.f );
+			//
+			//
+			//Mutation11ShockWave( true );
 			
 			
 			AddEffectDefault( EET_Mutation11Debuff, NULL, "Mutation 11 Debuff", false );
@@ -3458,90 +4250,105 @@ statemachine class W3PlayerWitcher extends CR4Player
 		theGame.GetGameCamera().StopAnimation( 'camera_shake_loop_lvl1_1' );
 	}
 	
+	public function Mutation12GetBonus() : float //modSigns
+	{
+		var min, max : SAbilityAttributeValue;
+		var buffs : array< CBaseGameplayEffect >;
+		
+		buffs = GetDrunkMutagens("Mutation12");
+		if(buffs.Size() > 0)
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation12', 'mut12bonus', min, max);
+			return buffs.Size() * min.valueAdditive;
+		}
+		else
+			return 0;
+	}
+	
 	private var mutation12IsOnCooldown : bool;
 	
-	public final function AddMutation12Decoction()
+	public final function AddMutation12Decoction() //modSigns: removed, mechanic changed
 	{
-		var params : SCustomEffectParams;
-		var buffs : array< EEffectType >;
-		var existingDecoctionBuffs : array<CBaseGameplayEffect>;
-		var i : int;
-		var effectType : EEffectType;
-		var decoctions : array< SItemUniqueId >;
-		var tmpName : name;
-		var min, max : SAbilityAttributeValue;
-		
-		if( mutation12IsOnCooldown )
-		{
-			return;
-		}
-		
-		
-		existingDecoctionBuffs = GetDrunkMutagens( "Mutation12" );
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'maxcap', min, max );
-		if( existingDecoctionBuffs.Size() >= min.valueAdditive )
-		{
-			return;
-		}
-		
-		
-		mutation12IsOnCooldown = true;		
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'cooldown', min, max );
-		AddTimer( 'Mutation12Cooldown', CalculateAttributeValue( min ) );
-		
-		
-		decoctions = inv.GetItemsByTag( 'Mutagen' );
-		
-		
-		for( i=decoctions.Size()-1; i>=0; i-=1 )
-		{
-			inv.GetPotionItemBuffData( decoctions[i], effectType, tmpName );
-			if( HasBuff( effectType ) )
-			{
-				decoctions.EraseFast( i );
-				continue;
-			}
-			buffs.PushBack( effectType );
-		}
-		
-		
-		if( buffs.Size() == 0 )
-		{
-			for( i=EET_Mutagen01; i<=EET_Mutagen28; i+=1 )
-			{
-				if( !HasBuff( i ) )
-				{
-					buffs.PushBack( i );
-				}
-			}
-		}
-		
-		
-		buffs.Remove( EET_Mutagen16 );
-		buffs.Remove( EET_Mutagen24 );
-		
-		
-		if( buffs.Size() == 0 )
-		{
-			return;
-		}
-		
-		
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'duration', min, max );
-		params.effectType = buffs[ RandRange( buffs.Size() ) ];
-		params.creator = this;
-		params.sourceName = "Mutation12";
-		params.duration = min.valueAdditive;
-		AddEffectCustom( params );
-		( ( W3Mutagen_Effect ) GetBuff( params.effectType, params.sourceName ) ).OverrideIcon( DecoctionEffectTypeToItemName( params.effectType ) );
-		
-		
-		if ( !IsEffectActive( 'invisible' ) )
-		{
-			PlayEffect( 'use_potion' );
-		}
-		
-		theGame.MutationHUDFeedback( MFT_PlayOnce );
+		//var params : SCustomEffectParams;
+		//var buffs : array< EEffectType >;
+		//var existingDecoctionBuffs : array<CBaseGameplayEffect>;
+		//var i : int;
+		//var effectType : EEffectType;
+		//var decoctions : array< SItemUniqueId >;
+		//var tmpName : name;
+		//var min, max : SAbilityAttributeValue;
+		//
+		//if( mutation12IsOnCooldown )
+		//{
+		//	return;
+		//}
+		//
+		//
+		//existingDecoctionBuffs = GetDrunkMutagens( "Mutation12" );
+		//theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'maxcap', min, max );
+		//if( existingDecoctionBuffs.Size() >= min.valueAdditive )
+		//{
+		//	return;
+		//}
+		//
+		//
+		//mutation12IsOnCooldown = true;		
+		//theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'cooldown', min, max );
+		//AddTimer( 'Mutation12Cooldown', CalculateAttributeValue( min ) );
+		//
+		//
+		//decoctions = inv.GetItemsByTag( 'Mutagen' );
+		//
+		//
+		//for( i=decoctions.Size()-1; i>=0; i-=1 )
+		//{
+		//	inv.GetPotionItemBuffData( decoctions[i], effectType, tmpName );
+		//	if( HasBuff( effectType ) )
+		//	{
+		//		decoctions.EraseFast( i );
+		//		continue;
+		//	}
+		//	buffs.PushBack( effectType );
+		//}
+		//
+		//
+		//if( buffs.Size() == 0 )
+		//{
+		//	for( i=EET_Mutagen01; i<=EET_Mutagen28; i+=1 )
+		//	{
+		//		if( !HasBuff( i ) )
+		//		{
+		//			buffs.PushBack( i );
+		//		}
+		//	}
+		//}
+		//
+		//
+		////buffs.Remove( EET_Mutagen16 ); //modSigns
+		////buffs.Remove( EET_Mutagen24 ); //modSigns
+		//
+		//
+		//if( buffs.Size() == 0 )
+		//{
+		//	return;
+		//}
+		//
+		//
+		//theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'duration', min, max );
+		//params.effectType = buffs[ RandRange( buffs.Size() ) ];
+		//params.creator = this;
+		//params.sourceName = "Mutation12";
+		//params.duration = min.valueAdditive;
+		//AddEffectCustom( params );
+		//( ( W3Mutagen_Effect ) GetBuff( params.effectType, params.sourceName ) ).OverrideIcon( DecoctionEffectTypeToItemName( params.effectType ) );
+		//
+		//
+		//if ( !IsEffectActive( 'invisible' ) )
+		//{
+		//	PlayEffect( 'use_potion' );
+		//}
+		//
+		//theGame.MutationHUDFeedback( MFT_PlayOnce );
 	}
 	
 	timer function Mutation12Cooldown( dt : float, id : int )
@@ -3629,6 +4436,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var ents : array< CGameplayEntity >;
 		var i, j : int;
 		var damages : array< SRawDamage >;
+		var quen : W3QuenEntity; //modSigns
 	
 		
 		FindGameplayEntitiesInSphere(ents, GetWorldPosition(), 5.f, 1000, '', FLAG_OnlyAliveActors + FLAG_ExcludeTarget + FLAG_Attitude_Hostile + FLAG_Attitude_Neutral, this);
@@ -3678,7 +4486,16 @@ statemachine class W3PlayerWitcher extends CR4Player
 			PlayEffect( 'mutation_11_second_life' );
 			
 			
-			RestoreQuen( 1000000.f, 10.f, true );
+			//RestoreQuen( 1000000.f, 10.f, true );
+			
+			//modSigns
+			quen = (W3QuenEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
+			quen.Init( signOwner, signs[ST_Quen].entity, true, true );
+			quen.SetAlternateCast( S_Magic_s04 );
+			quen.freeCast = true;
+			quen.OnStarted();
+			quen.OnThrowing();
+			quen.SetDataFromRestore(1000000.f, 10.f);
 		}
 	}
 	
@@ -3717,6 +4534,54 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			SetBehaviorVariable( 'AIControlled', 0.f );
 		}
+	}
+	
+	//modSigns
+	public final function Mutation11GetBaseStrength() : float
+	{
+		var drainStrength : float;
+		var swordDmg, avAP, avSI : float;
+		var abl : SAbilityAttributeValue;
+		var curStats : SPlayerOffenseStats;
+		var sword : SItemUniqueId;
+		
+		//avSI
+		abl  = GetTotalSignSpellPower(S_Magic_1);
+		abl += GetTotalSignSpellPower(S_Magic_2);
+		abl += GetTotalSignSpellPower(S_Magic_3);
+		abl += GetTotalSignSpellPower(S_Magic_4);
+		abl += GetTotalSignSpellPower(S_Magic_5);
+		avSI = MaxF(0.0, abl.valueMultiplicative / 5.0 - 1.0) * 100;
+		//theGame.witcherLog.AddMessage("Mutation11 avSI = " + avSI);
+		//avAP
+		curStats = GetOffenseStatsList();
+		avAP = MaxF(0.0,
+					(	curStats.steelFastAP * (1 - curStats.steelFastCritChance/100.0) + curStats.steelFastCritAP * curStats.steelFastCritChance/100.0
+					+	curStats.silverFastAP * (1 - curStats.silverFastCritChance/100.0) + curStats.silverFastCritAP * curStats.silverFastCritChance/100.0
+					+	curStats.steelStrongAP * (1 - curStats.steelStrongCritChance/100.0) + curStats.steelStrongCritAP * curStats.steelStrongCritChance/100.0
+					+	curStats.silverStrongAP * (1 - curStats.silverStrongCritChance/100.0) + curStats.silverStrongCritAP * curStats.silverStrongCritChance/100.0
+					)/4.0
+			) * 100;
+		//theGame.witcherLog.AddMessage("Mutation11 avAP = " + avAP);
+		//swordDmg
+		sword = inv.GetCurrentlyHeldSword();
+		if( sword == GetInvalidUniqueId() )
+		{
+			GetItemEquippedOnSlot(EES_SteelSword, sword);
+			if( sword == GetInvalidUniqueId() )
+				GetItemEquippedOnSlot(EES_SilverSword, sword);
+		}
+		if( sword != GetInvalidUniqueId() )
+		{
+			if( inv.GetItemCategory(sword) == 'steelsword' )
+				swordDmg = GetTotalWeaponDamage(sword, theGame.params.DAMAGE_NAME_SLASHING, GetInvalidUniqueId());
+			else if( inv.GetItemCategory(sword) == 'silversword' )
+				swordDmg = GetTotalWeaponDamage(sword, theGame.params.DAMAGE_NAME_SILVER, GetInvalidUniqueId());
+		}
+		//theGame.witcherLog.AddMessage("Mutation11 swordDmg = " + swordDmg);
+		drainStrength = swordDmg + avAP + avSI;
+		//theGame.witcherLog.AddMessage("Mutation11 drainStrength = " + drainStrength);
+		return drainStrength;
 	}
 		
 	public final function MutationSystemEnable( enable : bool )
@@ -3857,168 +4722,202 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				
 				dm.GetAbilityAttributeValue( 'Mutation2', 'crit_chance_factor', min, max );
-				arrStr.PushBack( NoTrailZeros( RoundMath( 100 * ( min.valueAdditive + sp.valueMultiplicative * min.valueMultiplicative ) ) ) );
+				//arrStr.PushBack( NoTrailZeros( RoundMath( 100 * ( min.valueAdditive + sp.valueMultiplicative * min.valueMultiplicative ) ) ) );
+				//modSigns: changing the formula
+				arrStr.PushBack( NoTrailZeros( RoundMath( 100 * ( ClampF(min.valueAdditive + SignPowerStatToPowerBonus(sp.valueMultiplicative) * min.valueMultiplicative, 0.f, 1.f) ) ) ) );
 				
 				
 				dm.GetAbilityAttributeValue( 'Mutation2', 'crit_damage_factor', min, max );
-				critBonusDamage = sp.valueMultiplicative * min.valueMultiplicative;
+				//critBonusDamage = sp.valueMultiplicative * min.valueMultiplicative;
+				//modSigns: changing the formula
+				critBonusDamage = min.valueAdditive + SignPowerStatToPowerBonus(sp.valueMultiplicative) * min.valueMultiplicative;
 				
 				arrStr.PushBack( NoTrailZeros( RoundMath( 100 * critBonusDamage ) ) );
 				break;
 				
-			case EPMT_Mutation3 :
-				
-				dm.GetAbilityAttributeValue( 'Mutation3', 'attack_power', min, max );
+			case EPMT_Mutation3 : //modSigns: mutation reworked
+			
+				dm.GetAbilityAttributeValue('Mutation3', 'attack_power', min, max);
 				tmp = min.valueMultiplicative;
-				arrStr.PushBack( NoTrailZeros( RoundMath( 100 * tmp ) ) );
 				
+				dm.GetAbilityAttributeValue('Mutation3', 'mutation3_buff_rate_sword', min, max);
+				tmp2 = tmp * min.valueAdditive;
+				arrStr.PushBack( NoTrailZeros( 100 * tmp2 ) );
+				dm.GetAbilityAttributeValue('Mutation3', 'mutation3_buff_rate_other', min, max);
+				tmp2 = tmp * min.valueAdditive;
+				arrStr.PushBack( NoTrailZeros( 100 * tmp2 ) );
+				dm.GetAbilityAttributeValue('Mutation3', 'mutation3_debuff_rate', min, max);
+				tmp2 = tmp * min.valueAdditive;
+				arrStr.PushBack( NoTrailZeros( 100 * tmp2 ) );
+				dm.GetAbilityAttributeValue('Mutation3', 'mutation3_buff_rate_kill', min, max);
+				tmp2 = tmp * min.valueAdditive;
+				arrStr.PushBack( NoTrailZeros( 100 * tmp2 ) );
+				dm.GetAbilityAttributeValue('Mutation3', 'mutation3_maxcap', min, max);
+				tmp2 = tmp * min.valueAdditive;
+				arrStr.PushBack( NoTrailZeros( 100 * tmp2 ) );
 				
-				dm.GetAbilityAttributeValue( 'Mutation3', 'maxcap', min, max );
-				arrStr.PushBack( NoTrailZeros( RoundMath( 100 * tmp * min.valueAdditive ) ) );
+				//dm.GetAbilityAttributeValue( 'Mutation3', 'attack_power', min, max );
+				//tmp = min.valueMultiplicative;
+				//arrStr.PushBack( NoTrailZeros( RoundMath( 100 * tmp ) ) );
+				//dm.GetAbilityAttributeValue( 'Mutation3', 'maxcap', min, max );
+				//arrStr.PushBack( NoTrailZeros( RoundMath( 100 * tmp * min.valueAdditive ) ) );
 				break;
 				
-			case EPMT_Mutation4 :
+			case EPMT_Mutation4 : //modSigns: mutation reworked
 				
+				dm.GetAbilityAttributeValue( 'Mutation4', 'toxicityRegenFactor', min, max );
+				tmp = min.valueAdditive;
+				arrStr.PushBack( NoTrailZeros( tmp * 100 ) );
+
 				dm.GetAbilityAttributeValue( 'AcidEffect', 'DirectDamage', min, max );
-				tmp2 = 100 * min.valueAdditive;
-				dm.GetAbilityAttributeValue( 'AcidEffect', 'duration', min, max );
-				tmp2 *= min.valueAdditive;
-				arrStr.PushBack( NoTrailZeros( tmp2 ) );
-				
-				
-				tox = GetStat( BCS_Toxicity );
-				if( tox > 0 )
-				{
-					tmp = RoundMath( tmp2 * tox );
-				}
-				else
-				{
-					tmp = tmp2;
-				}
+				tmp = min.valueAdditive;
 				arrStr.PushBack( NoTrailZeros( tmp ) );
+
+				arrStr.PushBack( NoTrailZeros( RoundMath( tmp * GetStat( BCS_Toxicity ) ) ) );
+				arrStr.PushBack( NoTrailZeros( RoundMath( tmp * GetStatMax( BCS_Toxicity ) ) ) );
 				
-				
-				tox = GetStatMax( BCS_Toxicity );
-				tmp = RoundMath( tmp2 * tox );
+				dm.GetAbilityAttributeValue( 'AcidEffect', 'duration', min, max );
+				tmp = min.valueAdditive;
+				arrStr.PushBack( NoTrailZeros( tmp ) );
+
+				dm.GetAbilityAttributeValue( 'Mutation4BloodDebuff', 'staminaRegen', min, max );
+				tmp = AbsF( min.valueMultiplicative ) * 100;
 				arrStr.PushBack( NoTrailZeros( tmp ) );
 				break;
 				
 			case EPMT_Mutation5 :
 				
-				dm.GetAbilityAttributeValue( 'Mutation5', 'mut5_dmg_red_perc', min, max );
-				tmp = min.valueAdditive;
-				arrStr.PushBack( NoTrailZeros( 100 * tmp ) );
+				//dm.GetAbilityAttributeValue( 'Mutation5', 'mut5_dmg_red_perc', min, max );
+				//tmp = min.valueAdditive;
+				//arrStr.PushBack( NoTrailZeros( 100 * tmp ) );
+				//
+				//
+				//arrStr.PushBack( NoTrailZeros( 100 * tmp * 3 ) );
 				
-				
-				arrStr.PushBack( NoTrailZeros( 100 * tmp * 3 ) );
+				//modSigns: mutation changed
+				dm.GetAbilityAttributeValue( 'Mutation5', 'mut5_duration_per_point', min, max );
+				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );
+				arrStr.PushBack( NoTrailZeros( min.valueAdditive * GetStatMax(BCS_Focus) ) );
+				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );
 				
 				break;
 			
 			case EPMT_Mutation6 :	
-				
+				//modSigns: raw and total damage
 				theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation6', 'full_freeze_chance', min, max );
-				arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative ) );	
-				
-				
+				arrStr.PushBack( RoundMath( 100 * min.valueMultiplicative ) );
 				theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation6', 'ForceDamage', min, max );
+				val = CalculateAttributeValue( min );
+				arrStr.PushBack( RoundMath( val ) );
 				sp = GetTotalSignSpellPower( S_Magic_1 );
-				val = sp.valueAdditive + sp.valueMultiplicative * ( sp.valueBase + min.valueAdditive );
-				arrStr.PushBack( NoTrailZeros( RoundMath( val ) ) );	
+				arrStr.PushBack( RoundMath( val * sp.valueMultiplicative ) );
 			
 				break;
 				
-			case EPMT_Mutation7 :
-				
-				dm.GetAbilityAttributeValue( 'Mutation7Buff', 'attack_power', min, max );
-				buffPerc = (int) ( 100 * min.valueMultiplicative );
-				arrStr.PushBack( NoTrailZeros( buffPerc ) );
-				
+			case EPMT_Mutation7 : //modSigns: changed
 				
 				dm.GetAbilityAttributeValue( 'Mutation7BuffEffect', 'duration', min, max );
 				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );
 				
-				
-				exampleEnemyCount = 11;
-				arrStr.PushBack( exampleEnemyCount );
-				
-				
-				arrStr.PushBack( buffPerc * ( exampleEnemyCount -1 ) );
-				
-				
-				dm.GetAbilityAttributeValue( 'Mutation7Debuff', 'attack_power', min, max );
-				debuffPerc = (int) ( - 100 * min.valueMultiplicative );
-				arrStr.PushBack( NoTrailZeros( debuffPerc ) );
-				
-				
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation7Debuff', 'minCapStacks', min, max );
-				arrStr.PushBack( NoTrailZeros( debuffPerc * min.valueAdditive ) );
-				
+				dm.GetAbilityAttributeValue( 'Mutation7Buff', 'attack_power', min, max );
+				buffPerc = RoundMath( 100 * min.valueMultiplicative );
+				arrStr.PushBack( NoTrailZeros( buffPerc ) );
 				
 				dm.GetAbilityAttributeValue( 'Mutation7DebuffEffect', 'duration', min, max );
 				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );
 					
+				dm.GetAbilityAttributeValue( 'Mutation7Debuff', 'attack_power', min, max );
+				buffPerc = RoundMath( -100 * min.valueMultiplicative );
+				arrStr.PushBack( NoTrailZeros( buffPerc ) );
+				
 				break;
 			
-			case EPMT_Mutation8 :
-				
-				dm.GetAbilityAttributeValue( 'Mutation8', 'dmg_bonus', min, max );
-				arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative ) );
-				
+			case EPMT_Mutation8 : //modSigns: changed
 				
 				dm.GetAbilityAttributeValue( 'Mutation8', 'hp_perc_trigger', min, max );
 				arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative ) );
 				
+				dm.GetAbilityAttributeValue( 'Mutation8', 'dmg_bonus', min, max );
+				arrStr.PushBack( FloatToStringPrec( 100 * min.valueMultiplicative, 0 ) );
+				
+				arrStr.PushBack( FloatToStringPrec( 100 * min.valueMultiplicative * GetStatMax(BCS_Focus), 0 ) );
+				
 				break;
 				
-			case EPMT_Mutation9 :
+			case EPMT_Mutation9 : //modSigns: changed
 				
 				
 				
 				
-				stats = GetOffenseStatsList( 1 );
-				arrStr.PushBack( NoTrailZeros( RoundMath( stats.crossbowSteelDmg ) ) );
+				//stats = GetOffenseStatsList( 1 );
+				//arrStr.PushBack( NoTrailZeros( RoundMath( stats.crossbowSteelDmg ) ) );
 				
 				
-				stats2 = GetOffenseStatsList( 2 );
-				arrStr.PushBack( NoTrailZeros( RoundMath( stats2.crossbowSteelDmg ) ) );
+				//stats2 = GetOffenseStatsList( 2 );
+				//arrStr.PushBack( NoTrailZeros( RoundMath( stats2.crossbowSteelDmg ) ) );
 				
 				
-				dm.GetAbilityAttributeValue( 'Mutation9', 'critical_hit_chance', min, max );
+				//dm.GetAbilityAttributeValue( 'Mutation9', 'critical_hit_chance', min, max );
+				//arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative ) );
+				
+				//dm.GetAbilityAttributeValue( 'Mutation9', 'critical_damage', min, max );
+				//arrStr.PushBack( NoTrailZeros( 100 * min.valueAdditive ) );
+				
+				dm.GetAbilityAttributeValue( 'Mutation9', 'mut9_damage', min, max );
 				arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative ) );
-				
 				
 				dm.GetAbilityAttributeValue( 'Mutation9', 'health_reduction', min, max );
 				arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative ) );
 				
-				break;
-				
-			case EPMT_Mutation10 :
-				
-				dm.GetAbilityAttributeValue( 'Mutation10Effect', 'mutation10_stat_boost', min, max );
-				arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative ) );
-				
-				
-				arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative * GetStatMax( BCS_Toxicity ) ) );
+				dm.GetAbilityAttributeValue( 'Mutation9', 'mut9_slowdown', min, max );
+				arrStr.PushBack( NoTrailZeros( 100 * min.valueAdditive ) );
 				
 				break;
 				
-			case EPMT_Mutation11 :
+			case EPMT_Mutation10 : //modSigns: redone
 				
-				arrStr.PushBack( 100 );
+				//dm.GetAbilityAttributeValue( 'Mutation10Effect', 'mutation10_stat_boost', min, max );
+				dm.GetAbilityAttributeValue( 'Mutation10Effect', 'mutation10_factor', min, max );
+				arrStr.PushBack( NoTrailZeros( min.valueMultiplicative ) );
+				arrStr.PushBack( NoTrailZeros( RoundMath(GetToxicityDamage())) );
+
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue('ToxicityEffect', 'DirectDamage', min, max);
+				tmp = min.valueMultiplicative * GetStatMax(BCS_Vitality);
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation10Effect', 'mutation10_factor', min, max);
+				tmp *= 1 + min.valueMultiplicative * GetStatMax(BCS_Toxicity)/100.0;
+				arrStr.PushBack( NoTrailZeros( RoundMath(tmp)) );
 				
+				
+				//arrStr.PushBack( NoTrailZeros( 100 * min.valueMultiplicative * GetStatMax( BCS_Toxicity ) ) );
+				
+				break;
+				
+			case EPMT_Mutation11 : //modSigns: redone
+				
+				dm.GetAbilityAttributeValue( 'Mutation11BuffEffect', 'duration', min, max);
+				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );
 				
 				dm.GetAbilityAttributeValue( 'Mutation11DebuffEffect', 'duration', min, max);
 				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );
+				
+				arrStr.PushBack( NoTrailZeros( MaxF(1, Mutation11GetBaseStrength()) * GetStatMax(BCS_Focus) ) );
+				
 				break;
 				
-			case EPMT_Mutation12 :
+			case EPMT_Mutation12 : //modSigns: changed
 				
-				dm.GetAbilityAttributeValue( 'Mutation12', 'duration', min, max );
-				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );				
+				//dm.GetAbilityAttributeValue( 'Mutation12', 'duration', min, max );
+				//arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );				
 				
 				
 				dm.GetAbilityAttributeValue( 'Mutation12', 'maxcap', min, max );
 				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );	
+				
+				dm.GetAbilityAttributeValue( 'Mutation12', 'mut12bonus', min, max );
+				arrStr.PushBack( NoTrailZeros( min.valueAdditive * 100 ) );
+				
+				dm.GetAbilityAttributeValue( 'Mutation12', 'mut12bonus', min, max );
+				arrStr.PushBack( NoTrailZeros( 1 + min.valueAdditive * 3 ) );
 				break;
 				
 			case EPMT_MutationMaster :
@@ -4031,22 +4930,22 @@ statemachine class W3PlayerWitcher extends CR4Player
 		return GetLocStringByKeyExtWithParams( locKey, , , arrStr );
 	}
 		
-	public final function ApplyMutation10StatBoost( out statValue : SAbilityAttributeValue )
-	{
-		var attValue 			: SAbilityAttributeValue;
-		var currToxicity		: float;
-		
-		if( IsMutationActive( EPMT_Mutation10 ) )
-		{
-			currToxicity = GetStat( BCS_Toxicity );
-			if( currToxicity > 0.f )
-			{
-				attValue = GetAttributeValue( 'mutation10_stat_boost' );
-				currToxicity *= attValue.valueMultiplicative;
-				statValue.valueMultiplicative += currToxicity;
-			}
-		}
-	}
+	//public final function ApplyMutation10StatBoost( out statValue : SAbilityAttributeValue )
+	//{
+	//	var attValue 			: SAbilityAttributeValue;
+	//	var currToxicity		: float;
+	//	
+	//	if( IsMutationActive( EPMT_Mutation10 ) )
+	//	{
+	//		currToxicity = GetStat( BCS_Toxicity );
+	//		if( currToxicity > 0.f )
+	//		{
+	//			attValue = GetAttributeValue( 'mutation10_stat_boost' );
+	//			currToxicity *= attValue.valueMultiplicative;
+	//			statValue.valueMultiplicative += currToxicity;
+	//		}
+	//	}
+	//} //modSigns: redone
 
 	
 	
@@ -4127,6 +5026,51 @@ statemachine class W3PlayerWitcher extends CR4Player
 		alchemyRecipes.Clear();
 	}
 
+	//modSigns: skill changed
+	public function CountAlchemy18Abilities(skillLevel : int) : int
+	{
+		var absToAdd : int;
+		var maxAbsAllowed : int;
+		var names : array<name>;
+		var m_alchemyManager : W3AlchemyManager;
+		var recipe : SAlchemyRecipe;
+		var i : int;
+		
+		absToAdd = 0;
+		maxAbsAllowed = skillLevel * RoundMath(CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s18, 'max_abs_per_lvl_s18', false, false)));
+		m_alchemyManager = new W3AlchemyManager in this;
+		m_alchemyManager.Init();
+		names = GetAlchemyRecipes();
+		for(i = 0; i < names.Size(); i += 1)
+		{
+			m_alchemyManager.GetRecipe(names[i], recipe);
+			//if(IsAlchemy18Recipe(recipe.cookedItemType) && GetAlchemy18RecipeLevel(recipe) <= skillLevel)
+			if(absToAdd < maxAbsAllowed && IsAlchemy18Recipe(recipe.cookedItemType))
+				absToAdd += 1;
+		}
+		
+		return absToAdd;
+	}
+	
+	//modSigns
+	public function RecalcAlchemy18Abilities()
+	{
+		var absToAdd, curAbs : int;
+		var skillName : name = SkillEnumToName(S_Alchemy_s18);
+		
+		if(CanUseSkill(S_Alchemy_s18))
+			absToAdd = CountAlchemy18Abilities(GetSkillLevel(S_Alchemy_s18));
+		else
+			absToAdd = 0;
+		curAbs = GetAbilityCount(skillName);
+	
+		if(absToAdd == 0)
+			RemoveAbilityAll(skillName);
+		else if(absToAdd > curAbs)
+			AddAbilityMultiple(skillName, absToAdd - curAbs);
+		else if(absToAdd < curAbs)
+			RemoveAbilityMultiple(skillName, curAbs - absToAdd);
+	}
 	
 	function AddAlchemyRecipe(nam : name, optional isSilent : bool, optional skipTutorialUpdate : bool) : bool
 	{
@@ -4167,12 +5111,16 @@ statemachine class W3PlayerWitcher extends CR4Player
 		m_alchemyManager.GetRecipe(nam, recipe);
 			
 		
-		if(CanUseSkill(S_Alchemy_s18))
-		{
-			if ((recipe.cookedItemType != EACIT_Bolt) && (recipe.cookedItemType != EACIT_Undefined) && (recipe.cookedItemType != EACIT_Dye) && (recipe.level <= GetSkillLevel(S_Alchemy_s18)))
-				AddAbility(SkillEnumToName(S_Alchemy_s18), true);
-			
-		}
+		//if(CanUseSkill(S_Alchemy_s18))
+		//{
+		//	//modSigns
+		//	//if ((recipe.cookedItemType != EACIT_Bolt) && (recipe.cookedItemType != EACIT_Undefined) && (recipe.cookedItemType != EACIT_Dye) && (recipe.level <= GetSkillLevel(S_Alchemy_s18)))
+		//	if(IsAlchemy18Recipe(recipe.cookedItemType) && recipe.level <= GetSkillLevel(S_Alchemy_s18))
+		//		AddAbility(SkillEnumToName(S_Alchemy_s18), true);
+		//	
+		//}
+		//modSigns: moved to another place
+		RecalcAlchemy18Abilities();
 		
 		
 		if(recipe.cookedItemType == EACIT_Bomb)
@@ -4497,7 +5445,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var module : CR4HudModuleItemInfo;
 		
 		GetItemEquippedOnSlot(slot, item);
-		if(inv.ItemHasTag(item, 'Edibles'))
+		//modSigns: disable drinking mid action
+		if(IsInCombatAction() && (((int)GetBehaviorVariable('combatActionType')) == CAT_SpecialAttack || ((int)GetBehaviorVariable('combatActionType')) == CAT_CastSign && IsCurrentSignChanneled()))
+		{
+			DisplayHudMessage(GetLocStringByKeyExt( "menu_cannot_perform_action_now" ));
+		}
+		//modSigns: handle toxic food and drinks
+		else if(!CanUseSkill(S_Perk_15) && (inv.ItemHasTag(item, 'Alcohol') || inv.ItemHasTag(item, 'Uncooked')) && !ToxicityLowEnoughToDrinkPotion(slot))
+		{
+			SendToxicityTooHighMessage();
+		}
+		else if(inv.ItemHasTag(item, 'Edibles'))
 		{
 			ConsumeItem( item );
 		}
@@ -4646,6 +5604,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	public function ResetCharacterDev()
 	{
+		ForceSetStat(BCS_Toxicity, 0); //modSigns: reset toxicity
 		
 		UnequipItemFromSlot(EES_SkillMutagen1);
 		UnequipItemFromSlot(EES_SkillMutagen2);
@@ -4896,7 +5855,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 	{
 		if( HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_BEAR) || HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_GRYPHON) || 
 			HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_LYNX) || HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_WOLF) ||
-			HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_VIPER)
+			/* modSigns */
+			/*HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_VIPER)*/
+			HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_BEAR_MINOR) || HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_GRYPHON_MINOR) ||
+			HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_LYNX_MINOR) || HasAllItemsFromSet(theGame.params.ITEM_SET_TAG_WOLF_MINOR)
 		)
 		{
 			theGame.GetGamerProfile().AddAchievement(EA_FullyArmed);
@@ -4927,11 +5889,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 			return false;
 			
 		
-		if(setItemTag == theGame.params.ITEM_SET_TAG_BEAR || setItemTag == theGame.params.ITEM_SET_TAG_LYNX)
+		/*if(setItemTag == theGame.params.ITEM_SET_TAG_BEAR || setItemTag == theGame.params.ITEM_SET_TAG_LYNX)
 		{
 			if(!GetItemEquippedOnSlot(EES_RangedWeapon, item) || !inv.ItemHasTag(item, setItemTag))
 				return false;
-		}
+		}*/ //modSigns: removed due to set changes
 
 		return true;
 	}
@@ -5320,6 +6282,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var tutStateSecondPotionEquip : W3TutorialManagerUIHandlerStateSecondPotionEquip;
 		var boltItem : SItemUniqueId;
 		var aerondight : W3Effect_Aerondight;
+		var phantomWeapon : W3Effect_PhantomWeapon; //modSigns
 		
 		if(!inv.IsIdValid(item))
 		{
@@ -5342,19 +6305,31 @@ statemachine class W3PlayerWitcher extends CR4Player
 			return false;
 		}
 		
-		if(inv.ItemHasTag(item, 'PhantomWeapon') && !GetPhantomWeaponMgr())
-		{
-			InitPhantomWeaponMgr();
-		}
+		//if(inv.ItemHasTag(item, 'PhantomWeapon') && !GetPhantomWeaponMgr())
+		//{
+		//	InitPhantomWeaponMgr();
+		//} //modSigns
 		
 		
 		if( slot == EES_SilverSword && inv.ItemHasTag( item, 'Aerondight' ) )
 		{
-			AddEffectDefault( EET_Aerondight, this, "Aerondight" );
-			
-			
-			aerondight = (W3Effect_Aerondight)GetBuff( EET_Aerondight );
-			aerondight.Pause( 'ManageAerondightBuff' );
+			//modSigns: only in combat
+			if(IsInCombat())
+			{
+				AddEffectDefault( EET_Aerondight, this, "Aerondight" );
+				aerondight = (W3Effect_Aerondight)GetBuff( EET_Aerondight );
+				aerondight.Pause( 'ManageAerondightBuff' );
+			}
+		}		
+		
+		if( slot == EES_SteelSword && inv.ItemHasTag( item, 'PhantomWeapon' ) ) //modSigns
+		{
+			if(IsInCombat())
+			{
+				AddEffectDefault( EET_PhantomWeapon, this, "PhantomWeapon" );
+				phantomWeapon = (W3Effect_PhantomWeapon)GetBuff( EET_PhantomWeapon );
+				phantomWeapon.Pause( 'ManageIrisBuff' );
+			}
 		}		
 		
 		
@@ -5478,8 +6453,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		else if(slot == EES_Gloves && HasWeaponDrawn(false))
 		{
-			PlayRuneword4FX(PW_Steel);
-			PlayRuneword4FX(PW_Silver);
+			//PlayRuneword4FX(PW_Steel);
+			//PlayRuneword4FX(PW_Silver);
+			//modSigns
+			if(HasBuff(EET_Runeword4))
+				((W3Effect_Runeword4)GetBuff(EET_Runeword4)).PlayRuneword4FX();
 		}
 		
 		else if( ( slot == EES_Petard1 || slot == EES_Petard2 ) && inv.IsItemBomb( GetSelectedItemId() ) )
@@ -5507,6 +6485,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			armorType = inv.GetArmorType(item);
 			pam = (W3PlayerAbilityManager)abilityManager;
+			
+			pam.ManageSetArmorTypeBonus(); //modSigns
 			
 			if(armorType == EAT_Light)
 			{
@@ -5729,10 +6709,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 		itemSlots[slot] = GetInvalidUniqueId();
 		
 		
-		if(inv.ItemHasTag( item, 'PhantomWeapon' ) && GetPhantomWeaponMgr())
-		{
-			DestroyPhantomWeaponMgr();
-		}
+		//if(inv.ItemHasTag( item, 'PhantomWeapon' ) && GetPhantomWeaponMgr())
+		//{
+		//	DestroyPhantomWeaponMgr();
+		//} //modSigns
 		
 		
 		
@@ -5740,6 +6720,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( slot == EES_SilverSword && inv.ItemHasTag( item, 'Aerondight' ) )
 		{
 			RemoveBuff( EET_Aerondight );
+		}
+		
+		if( slot == EES_SteelSword && inv.ItemHasTag( item, 'PhantomWeapon' ) ) //modSigns
+		{
+			RemoveBuff( EET_PhantomWeapon );
 		}
 		
 		
@@ -5821,7 +6806,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			retBool = true;
 		}		
 		
-		if(retBool && !reequipped)
+		/*if(retBool && !reequipped)
 		{
 			theTelemetry.LogWithLabelAndValue( TE_INV_ITEM_UNEQUIPPED, inv.GetItemName(item), slot );
 			
@@ -5839,7 +6824,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				if( !IsAnyItemEquippedOnSlot(EES_Armor) && !IsAnyItemEquippedOnSlot(EES_Gloves) && !IsAnyItemEquippedOnSlot(EES_Boots) && !IsAnyItemEquippedOnSlot(EES_Pants))
 					RemoveBuff(EET_EnhancedArmor);
 			}
-		}
+		}*/ //modSigns: removed
 		
 		
 		if(inv.ItemHasAbility(item, 'MA_HtH'))
@@ -5862,15 +6847,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 			armorType = inv.GetArmorType(item);
 			pam = (W3PlayerAbilityManager)abilityManager;
 			
-			if(CanUseSkill(S_Perk_05) && (armorType == EAT_Light || GetCharacterStats().HasAbility('Glyphword 2 _Stats', true) || inv.ItemHasAbility(item, 'Glyphword 2 _Stats')))
+			pam.ManageSetArmorTypeBonus(); //modSigns
+			
+			if(CanUseSkill(S_Perk_05) && (armorType == EAT_Light /*|| GetCharacterStats().HasAbility('Glyphword 2 _Stats', true) || inv.ItemHasAbility(item, 'Glyphword 2 _Stats')*/))
 			{
 				pam.SetPerkArmorBonus(S_Perk_05);
 			}
-			if(CanUseSkill(S_Perk_06) && (armorType == EAT_Medium || GetCharacterStats().HasAbility('Glyphword 3 _Stats', true) || inv.ItemHasAbility(item, 'Glyphword 3 _Stats')) )
+			if(CanUseSkill(S_Perk_06) && (armorType == EAT_Medium /*|| GetCharacterStats().HasAbility('Glyphword 3 _Stats', true) || inv.ItemHasAbility(item, 'Glyphword 3 _Stats')*/))
 			{
 				pam.SetPerkArmorBonus(S_Perk_06);
 			}
-			if(CanUseSkill(S_Perk_07) && (armorType == EAT_Heavy || GetCharacterStats().HasAbility('Glyphword 4 _Stats', true) || inv.ItemHasAbility(item, 'Glyphword 4 _Stats')) )
+			if(CanUseSkill(S_Perk_07) && (armorType == EAT_Heavy /*|| GetCharacterStats().HasAbility('Glyphword 4 _Stats', true) || inv.ItemHasAbility(item, 'Glyphword 4 _Stats')*/))
 			{
 				pam.SetPerkArmorBonus(S_Perk_07);
 			}
@@ -6124,7 +7111,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if ( GetDisplayTarget() && this.IsDisplayTargetTargetable() )
 		{
 			enableNoTargetOrientation = false;
-			if ( theInput.GetActionValue( 'CastSignHold' ) > 0 || this.IsCurrentSignChanneled() )
+			if ( /*theInput.GetActionValue( 'CastSignHold' ) > 0*/ TestCastSignHold() /* modSigns */ || this.IsCurrentSignChanneled() )
 			{
 				if ( IsPCModeEnabled() )
 				{
@@ -6168,7 +7155,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		if ( enableNoTargetOrientation )
 		{
-			if ( GetPlayerCombatStance() == PCS_AlertNear && theInput.GetActionValue( 'CastSignHold' ) > 0 )
+			if ( GetPlayerCombatStance() == PCS_AlertNear && /*theInput.GetActionValue( 'CastSignHold' ) > 0*/ TestCastSignHold() /* modSigns */ )
 			{
 				if ( GetDisplayTarget() && !slideTargetActor )
 				{
@@ -6199,7 +7186,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			{
 				if ( !lastAxisInputIsMovement || theInput.LastUsedPCInput() )
 					customOrientationTarget = OT_CameraOffset;
-				else if ( theInput.GetActionValue( 'CastSignHold' ) > 0 )
+				else if ( /*theInput.GetActionValue( 'CastSignHold' ) > 0*/ TestCastSignHold() /* modSigns */ )
 				{
 					if ( GetOrientationTarget() == OT_CameraOffset )
 						customOrientationTarget = OT_CameraOffset;
@@ -6316,13 +7303,25 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var spawnPos : Vector;
 		var slotMatrix : Matrix;
 		var target : CActor;
+		//var mutagen17 : W3Mutagen17_Effect; //modSigns
 		
 		if ( IsInAir() )
 		{
 			return false;
 		}
 		
-		AddTemporarySkills();
+		//AddTemporarySkills(); // moved to sign entity init
+		
+		//modSigns: check for mutagen17 activation
+		//if(HasBuff(EET_Mutagen17))
+		//{
+		//	mutagen17 = (W3Mutagen17_Effect)GetBuff(EET_Mutagen17);
+		//	if(mutagen17.IsBoostAvailable())
+		//	{
+		//		mutagen17.ActivateBoost();
+		//		//theGame.witcherLog.AddMessage("mutagen17 boost activated: sign"); //modSigns: debug
+		//	}
+		//}
 		
 		
 		
@@ -6398,14 +7397,21 @@ statemachine class W3PlayerWitcher extends CR4Player
 
 	public function StartFrenzy()
 	{
-		var ratio, duration : float;
+		//modSigns: reworked
+		var dm : CDefinitionsManagerAccessor = theGame.GetDefinitionsManager();
+		var min, max : SAbilityAttributeValue;
+		var skillAbilityName : name;
 		var skillLevel : int;
-	
+		var ratio, duration : float;
+		
 		isInFrenzy = true;
 		skillLevel = GetSkillLevel(S_Alchemy_s16);
-		ratio = 0.48f - skillLevel * CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s16, 'slowdown_ratio', false, true));
-		duration = skillLevel * CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s16, 'slowdown_duration', false, true));
-	
+		skillAbilityName = SkillEnumToName(S_Alchemy_s16);
+		dm.GetAbilityAttributeValue(skillAbilityName, 'slowdown_ratio', min, max);
+		ratio = 1.0f - skillLevel * CalculateAttributeValue(min);
+		dm.GetAbilityAttributeValue(skillAbilityName, 'slowdown_duration', min, max);
+		duration = CalculateAttributeValue(min);
+		
 		theGame.SetTimeScale(ratio, theGame.GetTimescaleSource(ETS_SkillFrenzy), theGame.GetTimescalePriority(ETS_SkillFrenzy) );
 		AddTimer('SkillFrenzyFinish', duration * ratio, , , , true);
 	}
@@ -6422,10 +7428,29 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		ret = theGame.params.TOXICITY_DAMAGE_THRESHOLD;
 		
-		if(CanUseSkill(S_Alchemy_s01))
-			ret += CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s01, 'threshold', false, true)) * GetSkillLevel(S_Alchemy_s01);
+		//if(CanUseSkill(S_Alchemy_s01)) //modSigns -> skill changed
+		//	ret += CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s01, 'threshold', false, true)) * GetSkillLevel(S_Alchemy_s01);
 		
 		return ret;
+	}
+	
+	//modSigns
+	private var cachedToxDmg : float;
+	public function GetToxicityDamage() : float
+	{
+		var min, max : SAbilityAttributeValue;
+		var dmg : float;
+		
+		if(cachedToxDmg == 0)
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue('ToxicityEffect', 'DirectDamage', min, max);
+			cachedToxDmg = min.valueMultiplicative;
+		}
+		dmg = cachedToxDmg * GetStatMax(BCS_Vitality);
+		if(HasBuff(EET_Mutation10))
+			dmg *= ((W3Effect_Mutation10)GetBuff(EET_Mutation10)).GetDrainMult();
+		
+		return dmg;
 	}
 	
 	
@@ -6443,6 +7468,27 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public final function RemoveToxicityOffset( val : float)
 	{
 		((W3PlayerAbilityManager)abilityManager).RemoveToxicityOffset(val);		
+	}
+	
+	//modSigns
+	public final function RecalcTransmutationAbilities()
+	{
+		var ablName : name = GetSkillAbilityName(S_Alchemy_s13);
+		var offset : float = GetStat(BCS_Toxicity) - GetStat(BCS_Toxicity, true);
+		var numAbls : int = GetAbilityCount(ablName);
+		var targetNumAbls : int;
+		
+		if(!CanUseSkill(S_Alchemy_s13))
+		{
+			RemoveAbilityAll(ablName);
+			return;
+		}
+		
+		targetNumAbls = RoundMath(offset) * GetSkillLevel(S_Alchemy_s13);
+		if(numAbls < targetNumAbls)
+			AddAbilityMultiple(ablName, targetNumAbls - numAbls);
+		else if(numAbls > targetNumAbls)
+			RemoveAbilityMultiple(ablName, numAbls - targetNumAbls);
 	}
 	
 	
@@ -6464,15 +7510,47 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 		skillPassiveMod = CalculateAttributeValue(GetAttributeValue('potion_duration'));
 		
-		if(isMutagenPotion && CanUseSkill(S_Alchemy_s14))
-		{
-			val = GetSkillAttributeValue(S_Alchemy_s14, 'duration', false, true);
-			mutagenSkillMod = val.valueMultiplicative * GetSkillLevel(S_Alchemy_s14);
-		}
+		//if(isMutagenPotion && CanUseSkill(S_Alchemy_s14))
+		//{
+		//	val = GetSkillAttributeValue(S_Alchemy_s14, 'duration', false, true);
+		//	mutagenSkillMod = val.valueMultiplicative * GetSkillLevel(S_Alchemy_s14);
+		//} //modSigns: skill changed
 		
-		duration = duration * (1 + skillPassiveMod + mutagenSkillMod);
+		//modSigns: don't add passive skill mod to mutagen potions
+		//duration = duration * (1 + skillPassiveMod + mutagenSkillMod);
+		if(isMutagenPotion)
+			duration = duration * (1 + mutagenSkillMod);
+		else
+			duration = duration * (1 + skillPassiveMod);
 		
 		return duration;
+	}
+	
+	public function GetAdaptationToxReduction() : float //modSigns
+	{
+		var attr : SAbilityAttributeValue;
+		
+		if(CanUseSkill(S_Alchemy_s14))
+		{
+			attr = GetSkillAttributeValue(S_Alchemy_s14, 'tox_off_bonus', false, false);
+			return attr.valueMultiplicative * GetSkillLevel(S_Alchemy_s14);
+		}
+		else
+			return 0;
+	}
+	
+	public function Mutation12FreeDecoctionAvailable() : bool //modSigns
+	{
+		var min, max : SAbilityAttributeValue;
+		var buffs : array< CBaseGameplayEffect >;
+		
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation12', 'maxcap', min, max);
+		
+		buffs = GetDrunkMutagens("Mutation12");
+		if(buffs.Size() < min.valueAdditive)
+			return true;
+		else
+			return false;
 	}
 	
 	public function ToxicityLowEnoughToDrinkPotion( slotid : EEquipmentSlots, optional itemId : SItemUniqueId ) : bool
@@ -6483,6 +7561,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var toxicityOffset 		: float;
 		var effectType 			: EEffectType;
 		var customAbilityName 	: name;
+		var adrenaline 			: float; //modSigns
+		var costReduction		: SAbilityAttributeValue; //modSigns
 		
 		if(itemId != GetInvalidUniqueId())
 			item = itemId; 
@@ -6492,7 +7572,34 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.GetPotionItemBuffData(item, effectType, customAbilityName);
 		maxTox = abilityManager.GetStatMax(BCS_Toxicity);
 		potionToxicity = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity'));
+		//modSigns begin
+		if(CanUseSkill(S_Alchemy_s03))
+		{
+			potionToxicity -= CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s03, 'toxicityReduction', false, false)) * GetSkillLevel(S_Alchemy_s03);
+		}
+		//modSigns end
 		toxicityOffset = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity_offset'));
+		
+		//modSigns
+		if(CanUseSkill(S_Perk_13))
+		{
+			costReduction = GetSkillAttributeValue(S_Perk_13, 'cost_reduction', false, true);
+			adrenaline = FloorF(GetStat(BCS_Focus));
+			costReduction = costReduction * adrenaline;
+			potionToxicity = (potionToxicity - costReduction.valueBase) * (1 - costReduction.valueMultiplicative) - costReduction.valueAdditive;
+			potionToxicity = MaxF(0.f, potionToxicity);
+		}
+		
+		//modSigns
+		if(IsMutationActive(EPMT_Mutation12) && Mutation12FreeDecoctionAvailable())
+		{
+			toxicityOffset = 0;
+		}
+		else if(CanUseSkill(S_Alchemy_s14))
+		{
+			toxicityOffset *= MaxF(0, 1 - GetAdaptationToxReduction());
+		}
+		
 		
 		if(effectType != EET_WhiteHoney)
 		{
@@ -6520,6 +7627,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		maxTox = abilityManager.GetStatMax(BCS_Toxicity);
 		finalPotionToxicity = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity'));
+		//modSigns begin
+		if(CanUseSkill(S_Alchemy_s03))
+		{
+			finalPotionToxicity -= CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s03, 'toxicityReduction', false, false)) * GetSkillLevel(S_Alchemy_s03);
+		}
+		//modSigns end
 		toxicityOffset = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity_offset'));
 		
 		
@@ -6530,6 +7643,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 			costReduction = costReduction * adrenaline;
 			finalPotionToxicity = (finalPotionToxicity - costReduction.valueBase) * (1 - costReduction.valueMultiplicative) - costReduction.valueAdditive;
 			finalPotionToxicity = MaxF(0.f, finalPotionToxicity);
+		}
+		
+		
+		//modSigns
+		if(IsMutationActive(EPMT_Mutation12) && Mutation12FreeDecoctionAvailable())
+		{
+			toxicityOffset = 0;
+		}
+		else if(CanUseSkill(S_Alchemy_s14))
+		{
+			toxicityOffset *= MaxF(0, 1 - GetAdaptationToxReduction());
 		}
 		
 		
@@ -6546,7 +7670,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var potParams : W3PotionParams;
 		var potionParams : SCustomEffectParams;
 		var factPotionParams : W3Potion_Fact_Params;
-		var adrenaline, hpGainValue, duration, finalPotionToxicity : float;
+		var adrenaline, hpGainValue, staminaGainValue, duration, finalPotionToxicity : float; //modSigns
 		var ret : EEffectInteract;
 		var effectType : EEffectType;
 		var item : SItemUniqueId;
@@ -6602,15 +7726,29 @@ statemachine class W3PlayerWitcher extends CR4Player
 		else if(inv.ItemHasTag( item, 'Mutagen' ))
 		{
 			mutagenParams = new W3MutagenBuffCustomParams in theGame;
-			mutagenParams.toxicityOffset = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity_offset'));
+			//modSigns
+			if(IsMutationActive(EPMT_Mutation12) && Mutation12FreeDecoctionAvailable())
+			{
+				mutagenParams.toxicityOffset = 0;
+				potionParams.sourceName = "Mutation12";
+				theGame.MutationHUDFeedback(MFT_PlayOnce);
+			}
+			else
+			{
+				mutagenParams.toxicityOffset = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity_offset'));
+				if(CanUseSkill(S_Alchemy_s14))
+				{
+					mutagenParams.toxicityOffset *= MaxF(0, 1 - GetAdaptationToxReduction());
+				}
+			}
 			mutagenParams.potionItemName = inv.GetItemName(item);
 			
 			potionParams.buffSpecificParams = mutagenParams;
 			
-			if( IsMutationActive( EPMT_Mutation10 ) && !HasBuff( EET_Mutation10 ) )
-			{
-				AddEffectDefault( EET_Mutation10, this, "Mutation 10" );
-			}
+			//if( IsMutationActive( EPMT_Mutation10 ) && !HasBuff( EET_Mutation10 ) && IsInCombat() ) //modSigns
+			//{
+			//	AddEffectDefault( EET_Mutation10, this, "Mutation 10" );
+			//} //modSigns: reworked
 		}
 		
 		else
@@ -6627,7 +7765,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		potionParams.effectType = effectType;
 		potionParams.creator = this;
-		potionParams.sourceName = "drank_potion";
+		//modSigns
+		if(potionParams.sourceName != "Mutation12")
+			potionParams.sourceName = "drank_potion";
 		potionParams.duration = duration;
 		potionParams.customAbilityName = customAbilityName;
 		ret = AddEffectCustom(potionParams);
@@ -6651,8 +7791,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 			}
 			
 			
-			if(CanUseSkill(S_Perk_13))
+			if(CanUseSkill(S_Perk_13) && !inv.ItemHasTag(item, 'Mutagen')) //modSigns
 			{
+				adrenaline = FloorF(GetStat(BCS_Focus)); //modSigns
 				abilityManager.DrainFocus(adrenaline);
 			}
 			
@@ -6671,6 +7812,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 			}
 			
 			
+			if(CanUseSkill(S_Alchemy_s01)) //modSigns
+			{
+				staminaGainValue = ClampF(GetStatMax(BCS_Stamina) * CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s01, 'stamina_gain_perc', false, true)) * GetSkillLevel(S_Alchemy_s01), 0, GetStatMax(BCS_Stamina));
+				GainStat(BCS_Stamina, staminaGainValue);
+			}			
+			
 			if(CanUseSkill(S_Alchemy_s02))
 			{
 				hpGainValue = ClampF(GetStatMax(BCS_Vitality) * CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s02, 'vitality_gain_perc', false, true)) * GetSkillLevel(S_Alchemy_s02), 0, GetStatMax(BCS_Vitality));
@@ -6678,10 +7825,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 			}			
 			
 			
-			if(CanUseSkill(S_Alchemy_s04) && !skillBonusPotionEffect && (RandF() < CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s04, 'apply_chance', false, true)) * GetSkillLevel(S_Alchemy_s04)))
+			/*if(CanUseSkill(S_Alchemy_s04) && !skillBonusPotionEffect && (RandF() < CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s04, 'apply_chance', false, true)) * GetSkillLevel(S_Alchemy_s04)))
 			{
 				AddRandomPotionEffectFromAlch4Skill( effectType );				
-			}
+			}*/ //modSigns: removed
 			
 			theGame.GetGamerProfile().SetStat(ES_ActivePotions, effectManager.GetPotionBuffsCount());
 		}
@@ -6697,7 +7844,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	}
 	
 	
-	private final function AddRandomPotionEffectFromAlch4Skill( currentlyDrankPotion : EEffectType )
+	/*private final function AddRandomPotionEffectFromAlch4Skill( currentlyDrankPotion : EEffectType )
 	{
 		var randomPotions : array<EEffectType>;
 		var currentPotion : CBaseGameplayEffect;
@@ -6712,7 +7859,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		randomPotions.PushBack( EET_Blizzard );
 		randomPotions.PushBack( EET_FullMoon );
 		randomPotions.PushBack( EET_GoldenOriole );
-		randomPotions.PushBack( EET_KillerWhale );
+		//randomPotions.PushBack( EET_KillerWhale ); //modSigns
 		randomPotions.PushBack( EET_MariborForest );
 		randomPotions.PushBack( EET_PetriPhiltre );
 		randomPotions.PushBack( EET_Swallow );
@@ -6768,7 +7915,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				}
 			}		
 		}
-	}
+	}*/ //modSigns: removed
 	
 	
 	private function BonusPotionGetDurationFromXML(type : EEffectType) : float
@@ -6843,20 +7990,37 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var item : SItemUniqueId;
 		var hasRuneword : bool;
 		
-		if(GetItemEquippedOnSlot(EES_SteelSword, item))
+		hasRuneword = false;
+		
+		if(GetItemEquippedOnSlot(EES_SteelSword, item) && (IsItemHeld(item) || abilityName == 'Runeword 5 _Stats' || abilityName == 'Runeword 6 _Stats')) //modSigns: only drawn sword (or equipped - for runeword 5 and 6)
 		{
 			hasRuneword = inv.ItemHasAbility(item, abilityName);				
 		}
 		
 		if(!hasRuneword)
 		{
-			if(GetItemEquippedOnSlot(EES_SilverSword, item))
+			if(GetItemEquippedOnSlot(EES_SilverSword, item) && (IsItemHeld(item) || abilityName == 'Runeword 5 _Stats' || abilityName == 'Runeword 6 _Stats')) //modSigns: only drawn sword (or equipped - for runeword 5 and 6)
 			{
 				hasRuneword = inv.ItemHasAbility(item, abilityName);
 			}
 		}
 		
 		return hasRuneword;
+	}
+	
+	public final function HasGlyphwordActive(abilityName : name) : bool //modSigns
+	{
+		var item : SItemUniqueId;
+		var hasGlyphword : bool;
+		
+		hasGlyphword = false;
+		
+		if(GetItemEquippedOnSlot(EES_Armor, item))
+		{
+			hasGlyphword = inv.ItemHasAbility(item, abilityName);
+		}
+		
+		return hasGlyphword;
 	}
 	
 	public final function GetShrineBuffs() : array<CBaseGameplayEffect>
@@ -6875,13 +8039,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		added = false;
 		
-		if(weapon && (IsAnyItemEquippedOnSlot(EES_SilverSword) || IsAnyItemEquippedOnSlot(EES_SteelSword)) )
+		if(weapon /*&& (IsAnyItemEquippedOnSlot(EES_SilverSword) || IsAnyItemEquippedOnSlot(EES_SteelSword))*/ ) //modSigns: restrictions removed
 		{
 			AddEffectDefault(EET_EnhancedWeapon, this, "repair_object", false);
 			added = true;
 		}
 		
-		if(armor && (IsAnyItemEquippedOnSlot(EES_Armor) || IsAnyItemEquippedOnSlot(EES_Gloves) || IsAnyItemEquippedOnSlot(EES_Boots) || IsAnyItemEquippedOnSlot(EES_Pants)) )
+		if(armor /*&& (IsAnyItemEquippedOnSlot(EES_Armor) || IsAnyItemEquippedOnSlot(EES_Gloves) || IsAnyItemEquippedOnSlot(EES_Boots) || IsAnyItemEquippedOnSlot(EES_Pants))*/ ) //modSigns: restrictions removed
 		{
 			AddEffectDefault(EET_EnhancedArmor, this, "repair_object", false);
 			added = true;
@@ -7070,15 +8234,16 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				if( damage > 0.f )
 				{
-					npc.AddAbility( 'Mutation4BloodDebuff' );
+					//npc.AddAbility( 'Mutation4BloodDebuff' ); //modSigns: moved to acid effect
 					ProcessActionMutation4ReturnedDamage( damage, npc, EAHA_ForceNo );					
-					npc.AddTimer( 'RemoveMutation4BloodDebuff', 15.f, , , , , true );
+					//npc.AddTimer( 'RemoveMutation4BloodDebuff', 15.f, , , , , true ); //modSigns: moved to acid effect
 				}
 			}
 		}
 	}
 	
 	
+	//modSigns: redone
 	public function ProcessActionMutation4ReturnedDamage( damageDealt : float, attacker : CActor, hitAnimationType : EActionHitAnim, optional action : W3DamageAction ) : bool
 	{
 		var customParams				: SCustomEffectParams;
@@ -7086,8 +8251,27 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var min, max, customDamageValue	: SAbilityAttributeValue;
 		var dm							: CDefinitionsManagerAccessor;
 		var animAction					: W3DamageAction;
+		var customDuration				: float; //modSigns
 
 		if( damageDealt <= 0 )
+		{
+			return false;
+		}
+		
+		currToxicity = GetStat( BCS_Toxicity );
+
+		if( currToxicity <= 0 )
+		{
+			return false;
+		}
+		
+		dm = theGame.GetDefinitionsManager();
+		dm.GetAbilityAttributeValue( 'AcidEffect', 'DirectDamage', min, max );
+		customDamageValue.valueAdditive = currToxicity * min.valueAdditive;
+		dm.GetAbilityAttributeValue( 'AcidEffect', 'duration', min, max );
+		customDuration = min.valueAdditive;
+		
+		if( customDamageValue.valueAdditive <= 0 || customDuration <= 0 )
 		{
 			return false;
 		}
@@ -7096,24 +8280,21 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			action.SetMutation4Triggered();
 		}
-			
-		dm = theGame.GetDefinitionsManager();
-		currToxicity = GetStat( BCS_Toxicity );
 		
-		dm.GetAbilityAttributeValue( 'AcidEffect', 'DirectDamage', min, max );
-		customDamageValue.valueAdditive = damageDealt * min.valueAdditive;
-		
-		if( currToxicity > 0 )
-		{
-			customDamageValue.valueAdditive *= currToxicity;
-		}
-		
-		dm.GetAbilityAttributeValue( 'AcidEffect', 'duration', min, max );
-		customDamageValue.valueAdditive /= min.valueAdditive; 
+		//dm.GetAbilityAttributeValue( 'AcidEffect', 'DirectDamage', min, max );
+		//customDamageValue.valueAdditive = damageDealt * min.valueAdditive;
+		//
+		//if( currToxicity > 0 )
+		//{
+		//	customDamageValue.valueAdditive *= currToxicity;
+		//}
+		//
+		//dm.GetAbilityAttributeValue( 'AcidEffect', 'duration', min, max );
+		//customDamageValue.valueAdditive /= min.valueAdditive; 
 		
 		customParams.effectType = EET_Acid;
 		customParams.effectValue = customDamageValue;
-		customParams.duration = min.valueAdditive;
+		customParams.duration = customDuration;
 		customParams.creator = this;
 		customParams.sourceName = 'Mutation4';
 		
@@ -7204,12 +8385,15 @@ statemachine class W3PlayerWitcher extends CR4Player
 		this.OnPerformSpecialAttack( true, false );
 	}
 	
+	//modSigns: RemoveTemporarySkills should never happen on combat action end,
+	//as if sign casting interrupts any other action, temp skills are removed
+	//by the end of interrupted action and before the sign is actually cast!
 	event OnCombatActionEnd()
 	{
 		this.CleanCombatActionBuffer();		
 		super.OnCombatActionEnd();
 		
-		RemoveTemporarySkills();
+		//RemoveTemporarySkills();
 	}
 	
 	event OnCombatActionFriendlyEnd()
@@ -7230,7 +8414,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		
 		result = super.GetPowerStatValue( stat, ablName, ignoreDeath );
-		ApplyMutation10StatBoost( result );
+		//modSigns: W3DamageAction.GetPowerStatValue calls for actor.GetPowerStatValue twice:
+		//second time with attackName as ablName to obtain attack specific boosts, so Euphoria boost ends up
+		//being applied twice. Character stats for popup menu don't use ablName as there is no attack and no attackName,
+		//so bonus is displayed properly there, but gets doubled when actual damage is calculated in combat.
+		//To fix this we need to check for non-ability specific calls:
+		//if( !IsNameValid(ablName) && stat != CPS_Undefined )
+		//	ApplyMutation10StatBoost( result ); //modSigns: reworked
 		
 		return result;
 	}
@@ -7370,26 +8560,37 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	
 
+	//modSigns: chance to ignore hit anim
+	/*public function GetChanceToIgnoreHitAnim() : float
+	{
+		var armorPieces : array<int>;
+		
+		inv.CountArmorPieces(armorPieces);
+		return armorPieces[0] * 0 + armorPieces[1] * 2.5 + armorPieces[2] * 10;
+	}*/
+	
 	public function ReactToBeingHit(damageAction : W3DamageAction, optional buffNotApplied : bool) : bool
 	{
-		var chance : float;
-		var procQuen : W3SignEntity;
+		//var chance : float;
+		//var procQuen : W3SignEntity;
 		
-		if(!damageAction.IsDoTDamage() && damageAction.DealsAnyDamage())
+		if(IsThrowingItem() || IsThrowingItemWithAim()) //modSigns: no need to abort throwing if not in fact throwing
 		{
-			if(inv.IsItemBomb(selectedItemId))
+			if(!damageAction.IsDoTDamage() && damageAction.DealsAnyDamage() && damageAction.GetHitAnimationPlayType() != EAHA_ForceNo) //modSigns
 			{
-				BombThrowAbort();
+				if(inv.IsItemBomb(selectedItemId))
+				{
+					BombThrowAbort();
+				}
+				else
+				{
+					ThrowingAbort();
+				}			
 			}
-			else
-			{
-				
-				ThrowingAbort();
-			}			
-		}		
+		}
 		
 		
-		if(damageAction.IsActionRanged())
+		/*if(damageAction.IsActionRanged())
 		{
 			chance = CalculateAttributeValue(GetAttributeValue('quen_chance_on_projectile'));
 			if(chance > 0)
@@ -7405,7 +8606,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 					procQuen.OnEnded();
 				}
 			}
-		}
+		}*/ //modSigns: moved to reduce damage
 		
 		
 		if( !((W3Effect_Toxicity)damageAction.causer) )
@@ -7421,7 +8622,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	protected function ShouldPauseHealthRegenOnHit() : bool
 	{
 		
-		if( ( HasBuff( EET_Swallow ) && GetPotionBuffLevel( EET_Swallow ) >= 3 ) || HasBuff( EET_Runeword8 ) || HasBuff( EET_Mutation11Buff ) )
+		if( ( HasBuff( EET_Swallow ) && GetPotionBuffLevel( EET_Swallow ) >= 3 ) || HasBuff( EET_Runeword8 ) || HasBuff( EET_Mutation11Buff ) || HasBuff( EET_UndyingSkillImmortal ) ) //modSigns
 		{
 			return false;
 		}
@@ -7591,306 +8792,317 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	
 	
+	//modSigns: redone
+	//modSigns: by default, there's no armor stamina penalty as armor class already
+	//affects action cost, but you can enable it in options
 	public final function CalculatedArmorStaminaRegenBonus() : float
 	{
 		var armorEq, glovesEq, pantsEq, bootsEq : bool;
-		var tempItem : SItemUniqueId;
+		var armorId, glovesId, pantsId, bootsId : SItemUniqueId;
 		var staminaRegenVal : float;
 		var armorRegenVal : SAbilityAttributeValue;
 		
-		if( HasAbility( 'Glyphword 2 _Stats', true ) )
-		{
-			armorEq = inv.GetItemEquippedOnSlot( EES_Armor, tempItem );
-			glovesEq = inv.GetItemEquippedOnSlot( EES_Gloves, tempItem );
-			pantsEq = inv.GetItemEquippedOnSlot( EES_Pants, tempItem );
-			bootsEq = inv.GetItemEquippedOnSlot( EES_Boots, tempItem );
-			
-			if ( armorEq )
-				staminaRegenVal += 0.1;
-			if ( glovesEq )
-				staminaRegenVal += 0.02;
-			if ( pantsEq )
-				staminaRegenVal += 0.1;
-			if ( bootsEq )
-				staminaRegenVal += 0.03;
-			
-		}
-		else if( HasAbility( 'Glyphword 3 _Stats', true ) )
-		{
-			staminaRegenVal = 0;
-		}
-		else if( HasAbility( 'Glyphword 4 _Stats', true ) )
-		{
-			armorEq = inv.GetItemEquippedOnSlot( EES_Armor, tempItem );
-			glovesEq = inv.GetItemEquippedOnSlot( EES_Gloves, tempItem );
-			pantsEq = inv.GetItemEquippedOnSlot( EES_Pants, tempItem );
-			bootsEq = inv.GetItemEquippedOnSlot( EES_Boots, tempItem );
-			
-			if ( armorEq )
-				staminaRegenVal -= 0.1;
-			if ( glovesEq )
-				staminaRegenVal -= 0.02;
-			if ( pantsEq )
-				staminaRegenVal -= 0.1;
-			if ( bootsEq )
-				staminaRegenVal -= 0.03;
-		}
-		else
-		{
-			armorRegenVal = GetAttributeValue('staminaRegen_armor_mod');
-			staminaRegenVal = armorRegenVal.valueMultiplicative;
-		}
+		if(!theGame.params.IsArmorRegenPenaltyEnabled())
+			return 0.0f;
 		
+		//base armor stamina regen bonus/penalty
+		armorRegenVal = GetAttributeValue('staminaRegen_armor_mod');
+		staminaRegenVal = armorRegenVal.valueMultiplicative;
+
+		//equipped pieces
+		armorEq = inv.GetItemEquippedOnSlot( EES_Armor, armorId );
+		glovesEq = inv.GetItemEquippedOnSlot( EES_Gloves, glovesId );
+		pantsEq = inv.GetItemEquippedOnSlot( EES_Pants, pantsId );
+		bootsEq = inv.GetItemEquippedOnSlot( EES_Boots, bootsId );
+		
+		//glyphwords change stamina, not replace it
+		//if( HasGlyphwordActive( 'Glyphword 2 _Stats' ) )
+		//{
+		//	if ( armorEq && !inv.ItemHasTag(armorId, 'LightArmor') )
+		//		staminaRegenVal += 0.07;
+		//	if ( glovesEq && !inv.ItemHasTag(glovesId, 'LightArmor') )
+		//		staminaRegenVal += 0.01;
+		//	if ( pantsEq && !inv.ItemHasTag(pantsId, 'LightArmor') )
+		//		staminaRegenVal += 0.01;
+		//	if ( bootsEq && !inv.ItemHasTag(bootsId, 'LightArmor') )
+		//		staminaRegenVal += 0.01;
+		//}
+		//else if( HasGlyphwordActive( 'Glyphword 3 _Stats' ) )
+		//{
+		//}
+		//else if( HasGlyphwordActive( 'Glyphword 4 _Stats' ) )
+		//{
+		//	if ( armorEq && !inv.ItemHasTag(armorId, 'HeavyArmor') )
+		//		staminaRegenVal -= 0.20;
+		//	if ( glovesEq && !inv.ItemHasTag(glovesId, 'HeavyArmor') )
+		//		staminaRegenVal -= 0.025;
+		//	if ( pantsEq && !inv.ItemHasTag(pantsId, 'HeavyArmor') )
+		//		staminaRegenVal -= 0.025;
+		//	if ( bootsEq && !inv.ItemHasTag(bootsId, 'HeavyArmor') )
+		//		staminaRegenVal -= 0.05;
+		//} //modSigns: reworked
+
+		//stamina regen bonus for missing armor pieces
+		if ( !armorEq )
+			staminaRegenVal += 0.11;
+		if ( !glovesEq )
+			staminaRegenVal += 0.02;
+		if ( !pantsEq )
+			staminaRegenVal += 0.03;
+		if ( !bootsEq )
+			staminaRegenVal += 0.04;
+		
+		//debug
+		//theGame.witcherLog.AddMessage( "staminaRegenVal = " + staminaRegenVal );
+
 		return staminaRegenVal;
 	}
 	
+	//modSigns: reworked
 	public function GetOffenseStatsList( optional hackMode : int ) : SPlayerOffenseStats
 	{
-		var playerOffenseStats:SPlayerOffenseStats;
+		var playerOffenseStats : SPlayerOffenseStats;
+		var min, max, value : SAbilityAttributeValue;
+		var attackPower : SAbilityAttributeValue;
+		var fastAPBonus, strongAPBonus, steelAPBonus, silverAPBonus : SAbilityAttributeValue;
+		var critChance, critPowerBonus, fastCritChanceBonus, strongCritChanceBonus, fastCritPowerBonus, strongCritPowerBonus : float;
+		var steelCritChanceBonus, silverCritChanceBonus, steelCritPowerBonus, silverCritPowerBonus : float;
 		var steelDmg, silverDmg, elementalSteel, elementalSilver : float;
-		var steelCritChance, steelCritDmg : float;
-		var silverCritChance, silverCritDmg : float;
-		var attackPower	: SAbilityAttributeValue;
-		var fastCritChance, fastCritDmg : float;
-		var strongCritChance, strongCritDmg : float;
-		var fastAP, strongAP, min, max : SAbilityAttributeValue;
-		var item, crossbow : SItemUniqueId;
-		var value : SAbilityAttributeValue;
+		var attackPowerCrossbow : SAbilityAttributeValue;
+		var silverSword, steelSword, crossbow, bolt : SItemUniqueId;
 		var mutagen : CBaseGameplayEffect;
 		var thunder : W3Potion_Thunderbolt;
+		var strongDmgMult, bonusDmgMult, bonusDmgCrossbow, bonusDmgMultCrossbow, bonusDmgMultSteel, bonusDmgMultSilver : float;
+		var steelFastAP, silverFastAP, steelStrongAP, silverStrongAP, steelFastCritAP, silverFastCritAP, steelStrongCritAP, silverStrongCritAP : SAbilityAttributeValue;
+		var steelFastCritChance, silverFastCritChance, steelStrongCritChance, silverStrongCritChance : float;
 		
 		if(!abilityManager || !abilityManager.IsInitialized())
 			return playerOffenseStats;
 		
-		if (CanUseSkill(S_Sword_s21))
-			fastAP += GetSkillAttributeValue(S_Sword_s21, PowerStatEnumToName(CPS_AttackPower), false, true) * GetSkillLevel(S_Sword_s21); 
-		if (CanUseSkill(S_Perk_05))
+		//base damage increase for heavy attacks
+		value = GetSkillAttributeValue(S_Sword_2, 'heavy_attack_dmg_boost', false, true);
+		strongDmgMult = 1 + value.valueMultiplicative;
+		
+		//generic bonuses
+		attackPower = GetPowerStatValue(CPS_AttackPower);
+		//Bear tier 1 power bonus
+		if(IsSetBonusActive(EISB_Bear_1))
 		{
-			fastAP += GetAttributeValue('attack_power_fast_style');
-			fastCritDmg += CalculateAttributeValue(GetAttributeValue('critical_hit_chance_fast_style'));
-			strongCritDmg += CalculateAttributeValue(GetAttributeValue('critical_hit_chance_fast_style'));
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue(GetSetBonusAbility(EISB_Bear_1), 'attack_power', min, max);
+			attackPower.valueMultiplicative += min.valueMultiplicative * GetSetPartsEquipped(EIST_Bear) * FloorF(GetStat(BCS_Focus));
 		}
+		critChance = CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_CHANCE));
+		critPowerBonus = CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
+		
+		//attack type specific bonuses
+		fastAPBonus = GetSkillAttributeValue(S_Sword_1, PowerStatEnumToName(CPS_AttackPower), false, true);
+		strongAPBonus = GetSkillAttributeValue(S_Sword_2, PowerStatEnumToName(CPS_AttackPower), false, true);
+		if (CanUseSkill(S_Sword_s21))
+			fastAPBonus += GetSkillAttributeValue(S_Sword_s21, PowerStatEnumToName(CPS_AttackPower), false, true) * GetSkillLevel(S_Sword_s21); 
 		if (CanUseSkill(S_Sword_s04))
-			strongAP += GetSkillAttributeValue(S_Sword_s04, PowerStatEnumToName(CPS_AttackPower), false, true) * GetSkillLevel(S_Sword_s04);
-		if (CanUseSkill(S_Perk_07))
-			strongAP +=	GetAttributeValue('attack_power_heavy_style');
-			
+			strongAPBonus += GetSkillAttributeValue(S_Sword_s04, PowerStatEnumToName(CPS_AttackPower), false, true) * GetSkillLevel(S_Sword_s04);
+		if (HasBuff(EET_LynxSetBonus)) //lynx tier 1 attack type specific bonuses
+		{
+			fastAPBonus.valueMultiplicative += ((W3Effect_LynxSetBonus)GetBuff(EET_LynxSetBonus)).GetLynxBonus(false);
+			strongAPBonus.valueMultiplicative += ((W3Effect_LynxSetBonus)GetBuff(EET_LynxSetBonus)).GetLynxBonus(true);
+		}
 		if (CanUseSkill(S_Sword_s17)) 
 		{
-			fastCritChance += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * GetSkillLevel(S_Sword_s17);
-			fastCritDmg += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * GetSkillLevel(S_Sword_s17);
+			fastCritChanceBonus = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * GetSkillLevel(S_Sword_s17);
+			fastCritPowerBonus = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * GetSkillLevel(S_Sword_s17);
 		}
-		
 		if (CanUseSkill(S_Sword_s08)) 
 		{
-			strongCritChance += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * GetSkillLevel(S_Sword_s08);
-			strongCritDmg += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * GetSkillLevel(S_Sword_s08);
+			strongCritChanceBonus = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * GetSkillLevel(S_Sword_s08);
+			strongCritPowerBonus = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * GetSkillLevel(S_Sword_s08);
 		}
 		
-		if ( HasBuff(EET_Mutagen05) && (GetStat(BCS_Vitality) == GetStatMax(BCS_Vitality)) )
+		//steel sword specific bonuses
+		if (GetItemEquippedOnSlot(EES_SteelSword, steelSword))
 		{
-			attackPower += GetAttributeValue('damageIncrease');
-		}
-		
-		steelCritChance += CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_CHANCE));
-		silverCritChance += CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_CHANCE));
-		steelCritDmg += CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
-		silverCritDmg += CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
-		attackPower += GetPowerStatValue(CPS_AttackPower);
-		
-		if (GetItemEquippedOnSlot(EES_SteelSword, item))
-		{
-			steelDmg = GetTotalWeaponDamage(item, theGame.params.DAMAGE_NAME_SLASHING, GetInvalidUniqueId());
-			steelDmg += GetTotalWeaponDamage(item, theGame.params.DAMAGE_NAME_PIERCING, GetInvalidUniqueId());
-			steelDmg += GetTotalWeaponDamage(item, theGame.params.DAMAGE_NAME_BLUDGEONING, GetInvalidUniqueId());
-			elementalSteel = CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.DAMAGE_NAME_FIRE));
-			elementalSteel += CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.DAMAGE_NAME_FROST)); 
-			if ( GetInventory().IsItemHeld(item) )
+			steelDmg = GetTotalWeaponDamage(steelSword, theGame.params.DAMAGE_NAME_SLASHING, GetInvalidUniqueId());
+			steelDmg += GetTotalWeaponDamage(steelSword, theGame.params.DAMAGE_NAME_PIERCING, GetInvalidUniqueId());
+			steelDmg += GetTotalWeaponDamage(steelSword, theGame.params.DAMAGE_NAME_BLUDGEONING, GetInvalidUniqueId());
+			elementalSteel = CalculateAttributeValue(GetInventory().GetItemAttributeValue(steelSword, theGame.params.DAMAGE_NAME_FIRE));
+			elementalSteel += CalculateAttributeValue(GetInventory().GetItemAttributeValue(steelSword, theGame.params.DAMAGE_NAME_FROST)); 
+			elementalSteel += CalculateAttributeValue(GetInventory().GetItemAttributeValue(steelSword, theGame.params.DAMAGE_NAME_POISON)); //modSigns
+			//weapon bonuses are added OnHold, so we need to retrieve them specifically if we want to show them
+			if (!GetInventory().IsItemHeld(steelSword))
 			{
-				steelCritChance -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_CHANCE));
-				silverCritChance -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_CHANCE));
-				steelCritDmg -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
-				silverCritDmg -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
+				steelCritChanceBonus += CalculateAttributeValue(GetInventory().GetItemAttributeValue(steelSword, theGame.params.CRITICAL_HIT_CHANCE));
+				steelCritPowerBonus += CalculateAttributeValue(GetInventory().GetItemAttributeValue(steelSword, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
+				steelAPBonus += GetInventory().GetItemAttributeValue(steelSword, 'attack_power');
 			}
-			steelCritChance += CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_CHANCE));
-			steelCritDmg += CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
-			
-			thunder = (W3Potion_Thunderbolt)GetBuff(EET_Thunderbolt);
-			if(thunder && thunder.GetBuffLevel() == 3 && GetCurWeather() == EWE_Storm)
+			//bonus damage
+			bonusDmgMultSteel += CalculateAttributeValue(GetInventory().GetItemAttributeValue(steelSword, 'sword_dmg_bonus'));
+			//tier 2 wolf oil bonuses
+			steelCritChanceBonus += CalculateAttributeValue(inv.GetOilCriticalChanceBonus(steelSword, MC_NotSet));
+			steelCritPowerBonus += CalculateAttributeValue(inv.GetOilCriticalDamageBonus(steelSword, MC_NotSet));
+		}
+		
+		//silver sword specific bonuses
+		if (GetItemEquippedOnSlot(EES_SilverSword, silverSword))
+		{
+			silverDmg = GetTotalWeaponDamage(silverSword, theGame.params.DAMAGE_NAME_SILVER, GetInvalidUniqueId());
+			elementalSilver = CalculateAttributeValue(GetInventory().GetItemAttributeValue(silverSword, theGame.params.DAMAGE_NAME_FIRE));
+			elementalSilver += CalculateAttributeValue(GetInventory().GetItemAttributeValue(silverSword, theGame.params.DAMAGE_NAME_FROST));
+			elementalSilver += CalculateAttributeValue(GetInventory().GetItemAttributeValue(silverSword, theGame.params.DAMAGE_NAME_POISON)); //modSigns
+			//weapon bonuses are added OnHold, so we need to retrieve them specifically if we want to show them
+			if (!GetInventory().IsItemHeld(silverSword))
 			{
-				steelCritChance += 1.0f;
+				silverCritChanceBonus += CalculateAttributeValue(GetInventory().GetItemAttributeValue(silverSword, theGame.params.CRITICAL_HIT_CHANCE));
+				silverCritPowerBonus += CalculateAttributeValue(GetInventory().GetItemAttributeValue(silverSword, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
+				silverAPBonus += GetInventory().GetItemAttributeValue(silverSword, 'attack_power');
 			}
-		}
-		else
-		{
-			steelDmg += 0;
-			steelCritChance += 0;
-			steelCritDmg +=0;
-		}
-		
-		if (GetItemEquippedOnSlot(EES_SilverSword, item))
-		{
-			silverDmg = GetTotalWeaponDamage(item, theGame.params.DAMAGE_NAME_SILVER, GetInvalidUniqueId());
-			elementalSilver = CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.DAMAGE_NAME_FIRE));
-			elementalSilver += CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.DAMAGE_NAME_FROST));
-			if ( GetInventory().IsItemHeld(item) )
-			{
-				steelCritChance -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_CHANCE));
-				silverCritChance -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_CHANCE));
-				steelCritDmg -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
-				silverCritDmg -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
-			}
-			silverCritChance += CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_CHANCE));
-			silverCritDmg += CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
-			
-			thunder = (W3Potion_Thunderbolt)GetBuff(EET_Thunderbolt);
-			if(thunder && thunder.GetBuffLevel() == 3 && GetCurWeather() == EWE_Storm)
-			{
-				silverCritChance += 1.0f;
-			}
-		}
-		else
-		{
-			silverDmg += 0;
-			silverCritChance += 0;
-			silverCritDmg +=0;
+			//bonus damage
+			bonusDmgMultSilver += CalculateAttributeValue(GetInventory().GetItemAttributeValue(silverSword, 'sword_dmg_bonus'));
+			//tier 2 wolf oil bonuses
+			silverCritChanceBonus += CalculateAttributeValue(inv.GetOilCriticalChanceBonus(silverSword, MC_NotSet));
+			silverCritPowerBonus += CalculateAttributeValue(inv.GetOilCriticalDamageBonus(silverSword, MC_NotSet));
 		}
 		
-		if ( HasAbility('Runeword 4 _Stats', true) )
+		//since drawn sword adds its stats to character stats, we now need to do this hackiest shit ever
+		if (GetInventory().IsItemHeld(steelSword))
 		{
-			steelDmg += steelDmg * (abilityManager.GetOverhealBonus() / GetStatMax(BCS_Vitality));
-			silverDmg += silverDmg * (abilityManager.GetOverhealBonus() / GetStatMax(BCS_Vitality));
+			//remove steel bonuses from silver stats
+			silverCritChanceBonus -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(steelSword, theGame.params.CRITICAL_HIT_CHANCE));
+			silverCritPowerBonus -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(steelSword, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
+			silverAPBonus -= GetInventory().GetItemAttributeValue(steelSword, 'attack_power');
 		}
-		
-		fastAP += attackPower;
-		strongAP += attackPower;
-		
-		playerOffenseStats.steelFastCritChance = (steelCritChance + fastCritChance) * 100;
-		playerOffenseStats.steelFastCritDmg = steelCritDmg + fastCritDmg;
-		if ( steelDmg != 0 )
+		if (GetInventory().IsItemHeld(silverSword))
 		{
-			playerOffenseStats.steelFastDmg = (steelDmg + fastAP.valueBase) * fastAP.valueMultiplicative + fastAP.valueAdditive + elementalSteel;
-			playerOffenseStats.steelFastCritDmg = (steelDmg + fastAP.valueBase) * (fastAP.valueMultiplicative + playerOffenseStats.steelFastCritDmg) + fastAP.valueAdditive + elementalSteel;
+			//remove silver bonuses from steel stats
+			steelCritChanceBonus -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(silverSword, theGame.params.CRITICAL_HIT_CHANCE));
+			steelCritPowerBonus -= CalculateAttributeValue(GetInventory().GetItemAttributeValue(silverSword, theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
+			steelAPBonus -= GetInventory().GetItemAttributeValue(silverSword, 'attack_power');
 		}
-		else
-		{
-			playerOffenseStats.steelFastDmg = 0;
-			playerOffenseStats.steelFastCritDmg = 0;
-		}
-		playerOffenseStats.steelFastDPS = (playerOffenseStats.steelFastDmg * (100 - playerOffenseStats.steelFastCritChance) + playerOffenseStats.steelFastCritDmg * playerOffenseStats.steelFastCritChance) / 100;
-		playerOffenseStats.steelFastDPS = playerOffenseStats.steelFastDPS / 0.6;
-		
-		
-		playerOffenseStats.steelStrongCritChance = (steelCritChance + strongCritChance) * 100;
-		playerOffenseStats.steelStrongCritDmg = steelCritDmg + strongCritDmg;
-		if ( steelDmg != 0 )
-		{
-			playerOffenseStats.steelStrongDmg = (steelDmg + strongAP.valueBase) * strongAP.valueMultiplicative + strongAP.valueAdditive + elementalSteel;
-			playerOffenseStats.steelStrongDmg *= 1.833f;
-			playerOffenseStats.steelStrongCritDmg = (steelDmg + strongAP.valueBase) * (strongAP.valueMultiplicative + playerOffenseStats.steelStrongCritDmg) + strongAP.valueAdditive + elementalSteel;
-			playerOffenseStats.steelStrongCritDmg *= 1.833f;		}
-		else
-		{
-			playerOffenseStats.steelStrongDmg = 0;
-			playerOffenseStats.steelStrongCritDmg = 0;
-		}
-		playerOffenseStats.steelStrongDPS = (playerOffenseStats.steelStrongDmg * (100 - playerOffenseStats.steelStrongCritChance) + playerOffenseStats.steelStrongCritDmg * playerOffenseStats.steelStrongCritChance) / 100;
-		playerOffenseStats.steelStrongDPS = playerOffenseStats.steelStrongDPS / 1.1;
-		
-	
-		
-		playerOffenseStats.silverFastCritChance = (silverCritChance + fastCritChance) * 100;
-		playerOffenseStats.silverFastCritDmg = silverCritDmg + fastCritDmg;
-		if ( silverDmg != 0 )
-		{
-			playerOffenseStats.silverFastDmg = (silverDmg + fastAP.valueBase) * fastAP.valueMultiplicative + fastAP.valueAdditive + elementalSilver;
-			playerOffenseStats.silverFastCritDmg = (silverDmg + fastAP.valueBase) * (fastAP.valueMultiplicative + playerOffenseStats.silverFastCritDmg) + fastAP.valueAdditive + elementalSilver;	
-		}
-		else
-		{
-			playerOffenseStats.silverFastDmg = 0;
-			playerOffenseStats.silverFastCritDmg = 0;	
-		}
-		playerOffenseStats.silverFastDPS = (playerOffenseStats.silverFastDmg * (100 - playerOffenseStats.silverFastCritChance) + playerOffenseStats.silverFastCritDmg * playerOffenseStats.silverFastCritChance) / 100;
-		playerOffenseStats.silverFastDPS = playerOffenseStats.silverFastDPS / 0.6;
-		
-		
-		playerOffenseStats.silverStrongCritChance = (silverCritChance + strongCritChance) * 100;
-		playerOffenseStats.silverStrongCritDmg = silverCritDmg + strongCritDmg;		
-		if ( silverDmg != 0 )
-		{
-			playerOffenseStats.silverStrongDmg = (silverDmg + strongAP.valueBase) * strongAP.valueMultiplicative + strongAP.valueAdditive + elementalSilver;
-			playerOffenseStats.silverStrongDmg *= 1.833f;
-			playerOffenseStats.silverStrongCritDmg = (silverDmg + strongAP.valueBase) * (strongAP.valueMultiplicative + playerOffenseStats.silverStrongCritDmg) + strongAP.valueAdditive + elementalSilver;
-			playerOffenseStats.silverStrongCritDmg *= 1.833f;
-		}
-		else
-		{
-			playerOffenseStats.silverStrongDmg = 0;
-			playerOffenseStats.silverStrongCritDmg = 0;
-		}
-		playerOffenseStats.silverStrongDPS = (playerOffenseStats.silverStrongDmg * (100 - playerOffenseStats.silverStrongCritChance) + playerOffenseStats.silverStrongCritDmg * playerOffenseStats.silverStrongCritChance) / 100;
-		playerOffenseStats.silverStrongDPS = playerOffenseStats.silverStrongDPS / 1.1;
-		
-		
-		playerOffenseStats.crossbowCritChance = GetCriticalHitChance( false, false, NULL, MC_NotSet, true );
-	
-		
-		playerOffenseStats.crossbowSteelDmgType = theGame.params.DAMAGE_NAME_PIERCING;
-		if (GetItemEquippedOnSlot(EES_Bolt, item))
-		{
-			
-			
-			steelDmg = CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.DAMAGE_NAME_FIRE));
-			if(steelDmg > 0)
-			{
-				playerOffenseStats.crossbowSteelDmg = steelDmg;
-				
-				playerOffenseStats.crossbowSteelDmgType = theGame.params.DAMAGE_NAME_FIRE;
-				playerOffenseStats.crossbowSilverDmg = steelDmg;
-			}
-			else
-			{
-				playerOffenseStats.crossbowSilverDmg = CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.DAMAGE_NAME_SILVER));
-				
-				steelDmg = CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.DAMAGE_NAME_PIERCING));
-				if(steelDmg > 0)
-				{
-					playerOffenseStats.crossbowSteelDmg = steelDmg;
-					playerOffenseStats.crossbowSteelDmgType = theGame.params.DAMAGE_NAME_PIERCING;
-				}
-				else
-				{
-					playerOffenseStats.crossbowSteelDmg = CalculateAttributeValue(GetInventory().GetItemAttributeValue(item, theGame.params.DAMAGE_NAME_BLUDGEONING));
-					playerOffenseStats.crossbowSteelDmgType = theGame.params.DAMAGE_NAME_BLUDGEONING;
-				}
-			}
-		}
-		
-		if (GetItemEquippedOnSlot(EES_RangedWeapon, item))
-		{
-			attackPower += GetInventory().GetItemAttributeValue(item, PowerStatEnumToName(CPS_AttackPower));
-			if(CanUseSkill(S_Perk_02))
-			{				
-				attackPower += GetSkillAttributeValue(S_Perk_02, PowerStatEnumToName(CPS_AttackPower), false, true);
-			}
 
-			
-			if( hackMode != 1 && ( IsMutationActive( EPMT_Mutation9 ) || hackMode == 2 ) )
-			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation9', 'damage', min, max );
-				playerOffenseStats.crossbowSteelDmg += min.valueAdditive;
-				playerOffenseStats.crossbowSilverDmg += min.valueAdditive;
-			}		
-			
-			playerOffenseStats.crossbowSteelDmg = (playerOffenseStats.crossbowSteelDmg + attackPower.valueBase) * attackPower.valueMultiplicative + attackPower.valueAdditive;
-			playerOffenseStats.crossbowSilverDmg = (playerOffenseStats.crossbowSilverDmg + attackPower.valueBase) * attackPower.valueMultiplicative + attackPower.valueAdditive;
-		}
-		else
+		//Thunderbolt lvl 3 crit chance
+		thunder = (W3Potion_Thunderbolt)GetBuff(EET_Thunderbolt);
+		if(thunder && thunder.GetBuffLevel() == 3 && GetCurWeather() == EWE_Storm)
 		{
-			playerOffenseStats.crossbowSteelDmg = 0;
-			playerOffenseStats.crossbowSilverDmg = 0;
-			playerOffenseStats.crossbowSteelDmgType = theGame.params.DAMAGE_NAME_PIERCING;
+			critPowerBonus += 1.0f;
+		}
+		
+		//heft damage increase
+		if(HasGlyphwordActive('Glyphword 4 _Stats'))
+		{
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 4 _Stats', 'glyphword4_mod', min, max);
+			bonusDmgMult += CalculateAttributeValue(min);
+		}
+		
+		//Euphoria damage bonus
+		if(HasBuff(EET_Mutation10))
+		{
+			steelDmg += GetToxicityDamage();
+			silverDmg += GetToxicityDamage();
+		}
+		
+		//final attributes
+		steelFastAP = attackPower + fastAPBonus + steelAPBonus;
+		silverFastAP = attackPower + fastAPBonus + silverAPBonus;
+		steelStrongAP = attackPower + strongAPBonus + steelAPBonus;
+		silverStrongAP = attackPower + strongAPBonus + silverAPBonus;
+		steelFastCritAP = steelFastAP;
+		steelFastCritAP.valueMultiplicative += critPowerBonus + fastCritPowerBonus + steelCritPowerBonus;
+		silverFastCritAP = silverFastAP;
+		silverFastCritAP.valueMultiplicative += critPowerBonus + fastCritPowerBonus + silverCritPowerBonus;
+		steelStrongCritAP = steelStrongAP;
+		steelStrongCritAP.valueMultiplicative += critPowerBonus + strongCritPowerBonus + steelCritPowerBonus;
+		silverStrongCritAP = silverStrongAP;
+		silverStrongCritAP.valueMultiplicative += critPowerBonus + strongCritPowerBonus + silverCritPowerBonus;
+		steelFastCritChance = critChance + fastCritChanceBonus + steelCritChanceBonus;
+		silverFastCritChance = critChance + fastCritChanceBonus + silverCritChanceBonus;
+		steelStrongCritChance = critChance + strongCritChanceBonus + steelCritChanceBonus;
+		silverStrongCritChance = critChance + strongCritChanceBonus + silverCritChanceBonus;
+		
+		//fill offense stats
+		playerOffenseStats.steelFastAP = steelFastAP.valueMultiplicative;
+		playerOffenseStats.silverFastAP = silverFastAP.valueMultiplicative;
+		playerOffenseStats.steelStrongAP = steelStrongAP.valueMultiplicative;
+		playerOffenseStats.silverStrongAP = silverStrongAP.valueMultiplicative;
+		playerOffenseStats.steelFastCritAP = steelFastCritAP.valueMultiplicative;
+		playerOffenseStats.silverFastCritAP = silverFastCritAP.valueMultiplicative;
+		playerOffenseStats.steelStrongCritAP = steelStrongCritAP.valueMultiplicative;
+		playerOffenseStats.silverStrongCritAP = silverStrongCritAP.valueMultiplicative;
+		playerOffenseStats.steelFastCritChance = steelFastCritChance * 100;
+		playerOffenseStats.silverFastCritChance = silverFastCritChance * 100;
+		playerOffenseStats.steelStrongCritChance = steelStrongCritChance * 100;
+		playerOffenseStats.silverStrongCritChance = silverStrongCritChance * 100;
+		if ( steelDmg != 0 )
+		{
+			playerOffenseStats.steelFastDmg = ((steelDmg + elementalSteel) * (1 + bonusDmgMult + bonusDmgMultSteel) + steelFastAP.valueBase) * steelFastAP.valueMultiplicative + steelFastAP.valueAdditive;
+			playerOffenseStats.steelFastCritDmg = ((steelDmg + elementalSteel) * (1 + bonusDmgMult + bonusDmgMultSteel) + steelFastCritAP.valueBase) * steelFastCritAP.valueMultiplicative + steelFastCritAP.valueAdditive;
+			playerOffenseStats.steelFastDPS = playerOffenseStats.steelFastDmg * (1 - steelFastCritChance) + playerOffenseStats.steelFastCritDmg * steelFastCritChance;
+			playerOffenseStats.steelStrongDmg = ((steelDmg + elementalSteel) * (strongDmgMult + bonusDmgMult + bonusDmgMultSteel) + steelStrongAP.valueBase) * steelStrongAP.valueMultiplicative + steelStrongAP.valueAdditive;
+			playerOffenseStats.steelStrongCritDmg = ((steelDmg + elementalSteel) * (strongDmgMult + bonusDmgMult + bonusDmgMultSteel) + steelStrongCritAP.valueBase) * steelStrongCritAP.valueMultiplicative + steelStrongCritAP.valueAdditive;
+			playerOffenseStats.steelStrongDPS = playerOffenseStats.steelStrongDmg * (1 - steelStrongCritChance) + playerOffenseStats.steelStrongCritDmg * steelStrongCritChance;
+		}
+		if ( silverDmg != 0 )
+		{
+			playerOffenseStats.silverFastDmg = ((silverDmg + elementalSilver) * (1 + bonusDmgMult + bonusDmgMultSilver) + silverFastAP.valueBase) * silverFastAP.valueMultiplicative + silverFastAP.valueAdditive;
+			playerOffenseStats.silverFastCritDmg = ((silverDmg + elementalSilver) * (1 + bonusDmgMult + bonusDmgMultSilver) + silverFastCritAP.valueBase) * silverFastCritAP.valueMultiplicative + silverFastCritAP.valueAdditive;
+			playerOffenseStats.silverFastDPS = playerOffenseStats.silverFastDmg * (1 - silverFastCritChance) + playerOffenseStats.silverFastCritDmg * silverFastCritChance;
+			playerOffenseStats.silverStrongDmg = ((silverDmg + elementalSilver) * (strongDmgMult + bonusDmgMult + bonusDmgMultSilver) + silverStrongAP.valueBase) * silverStrongAP.valueMultiplicative + silverStrongAP.valueAdditive;
+			playerOffenseStats.silverStrongCritDmg = ((silverDmg + elementalSilver) * (strongDmgMult + bonusDmgMult + bonusDmgMultSilver) + silverStrongCritAP.valueBase) * silverStrongCritAP.valueMultiplicative + silverStrongCritAP.valueAdditive;
+			playerOffenseStats.silverStrongDPS = playerOffenseStats.silverStrongDmg * (1 - silverStrongCritChance) + playerOffenseStats.silverStrongCritDmg * silverStrongCritChance;
+		}
+		
+		//modSigns: crossbow redone
+		playerOffenseStats.crossbowSteelDmgType = theGame.params.DAMAGE_NAME_PIERCING;
+		playerOffenseStats.crossbowElementaDmgType = '';
+		if (GetItemEquippedOnSlot(EES_RangedWeapon, crossbow))
+		{
+			attackPowerCrossbow = attackPower + GetInventory().GetItemAttributeValue(crossbow, PowerStatEnumToName(CPS_AttackPower));
+			playerOffenseStats.crossbowAttackPower = attackPowerCrossbow.valueMultiplicative;
+			playerOffenseStats.crossbowCritChance = GetCriticalHitChance( false, false, NULL, MC_NotSet, true );
+
+			value = GetCriticalHitDamageBonus( crossbow, MC_NotSet, false ) + inv.GetItemAttributeValue( crossbow, theGame.params.CRITICAL_HIT_DAMAGE_BONUS );
+			//Cat Eyes mutation crit damage boost
+			if( IsMutationActive( EPMT_Mutation9 ) )
+			{
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation9', 'critical_damage', min, max );
+				value += min;
+			}
+			if( CanUseSkill(S_Sword_s07) )
+			{
+				value += GetSkillAttributeValue(S_Sword_s07, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * GetSkillLevel(S_Sword_s07);
+			}
+			playerOffenseStats.crossbowCritDmgBonus = CalculateAttributeValue(value);
+			
+			//bolt stats
+			if (GetItemEquippedOnSlot(EES_Bolt, bolt))
+			{
+				playerOffenseStats.crossbowSteelDmgType = GetCrossbowSteelDmgName();
+				inv.GetItemStatByName(inv.GetItemName(bolt), playerOffenseStats.crossbowSteelDmgType, playerOffenseStats.crossbowSteelDmg);
+				inv.GetItemStatByName(inv.GetItemName(bolt), 'SilverDamage', playerOffenseStats.crossbowSilverDmg);
+				playerOffenseStats.crossbowElementaDmgType = GetCrossbowElementaDmgName();
+				if(IsNameValid(playerOffenseStats.crossbowElementaDmgType))
+					inv.GetItemStatByName(inv.GetItemName(bolt), playerOffenseStats.crossbowElementaDmgType, playerOffenseStats.crossbowElementaDmg);
+			}
+			
+			//crossbow damage increase skill
+			if( CanUseSkill(S_Sword_s15) )
+			{
+				bonusDmgCrossbow += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s15, 'xbow_dmg_bonus', false, true)) * GetSkillLevel(S_Sword_s15);
+			}
+			
+			playerOffenseStats.crossbowSteelDmg += bonusDmgCrossbow;
+			playerOffenseStats.crossbowSilverDmg += bonusDmgCrossbow;
+			playerOffenseStats.crossbowElementaDmg += bonusDmgCrossbow;
+			
+			//modSigns: mutation9 base damage boost
+			if( IsMutationActive( EPMT_Mutation9 ) )
+			{
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation9', 'mut9_damage', min, max);
+				playerOffenseStats.crossbowSteelDmg *= 1 + min.valueMultiplicative;
+				playerOffenseStats.crossbowSilverDmg *= 1 + min.valueMultiplicative;
+				playerOffenseStats.crossbowElementaDmg *= 1 + min.valueMultiplicative;
+			}
+			
+			playerOffenseStats.crossbowSteelDmg = (playerOffenseStats.crossbowSteelDmg * (1 + bonusDmgMultCrossbow) + attackPowerCrossbow.valueBase) * attackPowerCrossbow.valueMultiplicative;
+			playerOffenseStats.crossbowSilverDmg = (playerOffenseStats.crossbowSilverDmg * (1 + bonusDmgMultCrossbow) + attackPowerCrossbow.valueBase) * attackPowerCrossbow.valueMultiplicative;
+			playerOffenseStats.crossbowElementaDmg = (playerOffenseStats.crossbowElementaDmg * (1 + bonusDmgMultCrossbow) + attackPowerCrossbow.valueBase) * attackPowerCrossbow.valueMultiplicative;
 		}
 		
 		return playerOffenseStats;
@@ -7900,16 +9112,20 @@ statemachine class W3PlayerWitcher extends CR4Player
 	{
 		var damage, durRatio, durMod, itemMod : float;
 		var repairObjectBonus, min, max : SAbilityAttributeValue;
+		var aerondight : W3Effect_Aerondight; //modSigns
+		var phantomWeapon : W3Effect_PhantomWeapon; //modSigns
 		
-		durMod = 0;
+		//durMod = 0;
+		durMod = 1; //modSigns: zero value effectively removes all non-physical damages from weapon
 		damage = super.GetTotalWeaponDamage(weaponId, damageTypeName, crossbowId);
 		
 		
-		if( IsMutationActive( EPMT_Mutation9 ) && inv.IsItemBolt( weaponId ) && IsDamageTypeAnyPhysicalType( damageTypeName ) )
-		{
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation9', 'damage', min, max);
-			damage += min.valueAdditive;
-		}
+		//modSigns: changed -> moved
+		//if( IsMutationActive( EPMT_Mutation9 ) && inv.IsItemBolt( weaponId ) /*&& IsDamageTypeAnyPhysicalType( damageTypeName )*/ )
+		//{
+		//	theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation9', 'mut9_damage', min, max);
+		//	damage *= 1 + min.valueMultiplicative;
+		//}
 		
 		
 		if(IsPhysicalResistStat(GetResistForDamage(damageTypeName, false)))
@@ -7936,12 +9152,31 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		if( damageTypeName == 'SilverDamage' && inv.ItemHasTag( weaponId, 'Aerondight' ) )
 		{
-			itemMod = inv.GetItemModifierFloat( weaponId, 'PermDamageBoost' );
-			if( itemMod > 0.f )
+			//itemMod = inv.GetItemModifierFloat( weaponId, 'PermDamageBoost' );
+			//if( itemMod > 0.f )
+			//{
+			//	damage += itemMod;
+			//}
+			//modSigns: damage boost per enemy
+			aerondight = (W3Effect_Aerondight)GetBuff(EET_Aerondight);
+			if(aerondight)
+				damage += aerondight.GetDamageBoost();
+		}
+		
+		//modSigns
+		if( damageTypeName == 'SlashingDamage' && inv.ItemHasTag( weaponId, 'PhantomWeapon' ) )
+		{
+			phantomWeapon = (W3Effect_PhantomWeapon)GetBuff(EET_PhantomWeapon);
+			if(phantomWeapon && phantomWeapon.IsFullyCharged())
 			{
-				damage += itemMod;
+				damage += phantomWeapon.GetDamageBoost();
+				//theGame.witcherLog.AddMessage("Phantom dmg boost = " + phantomWeapon.GetDamageBoost());
 			}
 		}
+		
+		//modSigns: Invigoration
+		if( HasBuff(EET_Runeword4) && ( damageTypeName == 'SilverDamage' || damageTypeName == 'SlashingDamage' ) )
+			damage *= 1 + ((W3Effect_Runeword4)GetBuff(EET_Runeword4)).GetDamageBonus();
 		
 		return damage * (durMod + repairObjectBonus.valueMultiplicative);
 	}
@@ -7999,16 +9234,23 @@ statemachine class W3PlayerWitcher extends CR4Player
 		return isInFrenzy;
 	}
 	
-	public function HasRecentlyCountered() : bool
-	{
-		return hasRecentlyCountered;
-	}
-	
-	public function SetRecentlyCountered(counter : bool)
-	{
-		hasRecentlyCountered = counter;
-	}
-	
+	//modSigns: redone to fix a bug
+	//public function HasRecentlyCountered() : bool
+	//{
+	//	return hasRecentlyCountered;
+	//}
+	//
+	//public function SetRecentlyCountered(counter : bool)
+	//{
+	//	hasRecentlyCountered = counter;
+	//}
+	//
+	////modSigns
+	//timer function ResetRecentlyCountered(dt : float, id : int)
+	//{
+	//	hasRecentlyCountered = false;
+	//}
+		
 	timer function CheckBlockedSkills(dt : float, id : int)
 	{
 		var nextCallTime : float;
@@ -8018,7 +9260,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			AddTimer('CheckBlockedSkills', nextCallTime, , , , true);
 	}
 		
-	
+	//modSigns: reworked
 	public function RemoveTemporarySkills()
 	{
 		var i : int;
@@ -8033,6 +9275,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			}
 			
 			tempLearnedSignSkills.Clear();						
+			//theGame.witcherLog.AddMessage("Temp skills removed");
 		}
 		RemoveAbilityAll(SkillEnumToName(S_Sword_s19));
 	}
@@ -8049,14 +9292,16 @@ statemachine class W3PlayerWitcher extends CR4Player
 	}
 	
 	
-	private function AddTemporarySkills()
+	//modSigns: reworked, focus is drained in sign entity
+	public function AddTemporarySkills() : bool
 	{
+		tempLearnedSignSkills.Clear();
 		if(CanUseSkill(S_Sword_s19) && GetStat(BCS_Focus) >= 3)
 		{
-			tempLearnedSignSkills = ((W3PlayerAbilityManager)abilityManager).AddTempNonAlchemySkills();						
-			DrainFocus(GetStat(BCS_Focus));
-			AddAbilityMultiple(SkillEnumToName(S_Sword_s19), GetSkillLevel(S_Sword_s19));			
+			tempLearnedSignSkills = ((W3PlayerAbilityManager)abilityManager).AddTempNonAlchemySkills();
+			AddAbilityMultiple(SkillEnumToName(S_Sword_s19), GetSkillLevel(S_Sword_s19));
 		}
+		return tempLearnedSignSkills.Size();
 	}
 
 	
@@ -8107,7 +9352,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 	}
 	
 	
-	public function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : string, optional forceSkillLevel : int )
+	//modSigns: reworked
+	public function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : string, optional forceSkillLevel : int, optional forceSpellPower : SAbilityAttributeValue )
 	{
 		var level, i, j : int;
 		var atts, damages : array<name>;
@@ -8118,116 +9364,146 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var dmg : float;
 		var min, max : SAbilityAttributeValue;
 		var pos : Vector;
+		var spellPower : SAbilityAttributeValue;
+		var staminaPrc : float;
 		
-		if( forceSkillLevel > 0 )
-		{
+		//forced level (for Flood of Anger)
+		if(forceSkillLevel > 0)
 			level = forceSkillLevel;
-		}
 		else
-		{
 			level = GetSkillLevel(S_Magic_s13);
-		}
+		
+		//forced spell power (for Flood of Anger)
+		if(forceSpellPower.valueMultiplicative > 0)
+			spellPower = forceSpellPower;
+		else
+			spellPower = GetTotalSignSpellPower(S_Magic_4);
 		
 		dm = theGame.GetDefinitionsManager();
 		skillAbilityName = GetSkillAbilityName(S_Magic_s13);
 		
+		//add damage
 		if(level >= 2)
 		{
-			
 			dm.GetAbilityAttributes(skillAbilityName, atts);
-			for(i=0; i<atts.Size(); i+=1)
+			for(i = 0; i < atts.Size(); i += 1)
 			{
 				if(IsDamageTypeNameValid(atts[i]))
-				{
 					damages.PushBack(atts[i]);
-				}
 			}
 		}
 		
+		//find enemies in range
+		//pos = signEntity.GetWorldPosition();
+		//FindGameplayEntitiesInSphere(ents, pos, 3, 1000, '', FLAG_OnlyAliveActors + FLAG_ExcludeTarget + FLAG_Attitude_Hostile + FLAG_Attitude_Neutral + FLAG_TestLineOfSight, this);
+		//modSigns: the above variant doesn't work properly. Use box instead of a sphere.
+		FindGameplayEntitiesInRange(ents, this, 3, 100, , FLAG_OnlyAliveActors + FLAG_ExcludeTarget + FLAG_Attitude_Hostile, this);
 		
-		pos = signEntity.GetWorldPosition();
-		FindGameplayEntitiesInSphere(ents, pos, 3, 1000, '', FLAG_OnlyAliveActors + FLAG_ExcludeTarget + FLAG_Attitude_Hostile + FLAG_Attitude_Neutral + FLAG_TestLineOfSight, this);
-		
-		
-		for(i=0; i<ents.Size(); i+=1)
+		for(i = 0; i < ents.Size(); i += 1)
 		{
+			//debug log
+			//theGame.witcherLog.AddMessage("Quen impulse:");
+			//theGame.witcherLog.AddMessage("Target # " + (i + 1) + ": " + ents[i].GetDisplayName());
+			
+			//init damage action, use spell power and light hit reaction
 			action = new W3DamageAction in theGame;
-			action.Initialize(this, ents[i], signEntity, source, EHRT_Heavy, CPS_SpellPower, false, false, true, false);
+			action.Initialize(this, ents[i], signEntity, source, EHRT_Light, CPS_SpellPower, false, false, true, false);
 			action.SetSignSkill(S_Magic_s13);
 			action.SetCannotReturnDamage(true);
 			action.SetProcessBuffsIfNoDamage(true);
 			
-			
-			if(!isAlternate && level >= 2)
-			{
-				action.SetHitEffect('hit_electric_quen');
-				action.SetHitEffect('hit_electric_quen', true);
-				action.SetHitEffect('hit_electric_quen', false, true);
-				action.SetHitEffect('hit_electric_quen', true, true);
-			}
-			
-			if(level >= 1)
-			{
-				action.AddEffectInfo(EET_Stagger);
-			}
+			//add damages
 			if(level >= 2)
 			{
-				for(j=0; j<damages.Size(); j+=1)
+				for(j = 0; j < damages.Size(); j += 1)
 				{
 					dm.GetAbilityAttributeValue(skillAbilityName, damages[j], min, max);
-					dmg = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-					if( IsSetBonusActive( EISB_Bear_2 ) )
+					//damage scales with ability level
+					dmg = CalculateAttributeValue(GetAttributeRandomizedValue(min, max)) * (level - 1);
+					if( HasGlyphwordActive( 'Glyphword 5 _Stats' ) ) //modSigns
 					{
-						dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Bear_2 ), 'quen_dmg_boost', min, max );
-						dmg *= 1 + min.valueMultiplicative;						
-					}					
-					action.AddDamage(damages[j], dmg);
+						theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Glyphword 5 _Stats', 'glyphword5_dmg_boost', min, max );
+						dmg *= 1 + min.valueMultiplicative;
+					}
+					
+					//debug log
+					//theGame.witcherLog.AddMessage("Quen impulse dmg: " + dmg + " (" + damages[j] + ")");
+					
+					if(dmg > 0)
+					{
+						action.SetHitEffectAllTypes('hit_electric_quen');
+						action.AddDamage(damages[j], dmg);
+					}
 				}
 			}
+			
+			//add knockdown applicator (spell power will affect knockdown chances)
 			if(level == 3)
-			{
 				action.AddEffectInfo(EET_KnockdownTypeApplicator);
-			}
+			//add stagger
+			else if(level >= 1)
+				action.AddEffectInfo(EET_Stagger);
 			
 			theGame.damageMgr.ProcessAction( action );
 			delete action;
 		}
 		
-		
 		if(isAlternate)
 		{
 			signEntity.PlayHitEffect('quen_impulse_explode', signEntity.GetWorldRotation());
 			signEntity.EraseFirstTimeStamp();
-						
 			
 			if(level >= 2)
 			{
-				if( !IsSetBonusActive( EISB_Bear_2 ) )
-				{
-					signEntity.PlayHitEffect('quen_electric_explode', signEntity.GetWorldRotation());
-				}
-				else
-				{
-					signEntity.PlayHitEffect('quen_electric_explode_bear_abl2', signEntity.GetWorldRotation());
-				}
+				//if(IsSetBonusActive( EISB_Bear_2 ))
+				//{
+				//	signEntity.PlayHitEffect('quen_electric_explode_bear_abl2', signEntity.GetWorldRotation());
+				//}
+				//else //ability changed
+				signEntity.PlayHitEffect('quen_electric_explode', signEntity.GetWorldRotation());
 			}
 		}
 		else
 		{
 			signEntity.PlayEffect('lasting_shield_impulse');
-		}		
+		}
+	}
+	
+	//modSigns
+	public function PlayGlyphword5FX(ent : CGameplayEntity)
+	{
+		var template : CEntityTemplate;
+		var component : CComponent;
+		
+		template = (CEntityTemplate)LoadResource('glyphword_5');
+		
+		component = ent.GetComponent('torso3effect');
+		if(component)
+			thePlayer.PlayEffect('reflection_damge', component);
+		else
+			thePlayer.PlayEffect('reflection_damge', ent);
 	}
 
+	//called after both Aard casts, after normal Igni cast, for alt Igni called at the beginning of channeling,
+	//after normal Yrden cast, for alt Yrden - at the end of the channeling, if it wasn't aborted,
+	//after normal Quen cast, for alt Quen - at the beginning of the channeling,
+	//after normal Axii cast, for alt Axii - at the end of the channeling, if it wasn't aborted.
+	//modSigns: alt Igni and alt Quen calls moved to the end of channeling.
 	public function OnSignCastPerformed(signType : ESignType, isAlternate : bool)
 	{
 		var items : array<SItemUniqueId>;
 		var weaponEnt : CEntity;
 		var fxName : name;
 		var pos : Vector;
+		//modSigns: new vars
+		//var abilityName : name;
+		//var abilityCount, maxStack : float;
+		//var min, max : SAbilityAttributeValue;
+		//var addAbility : bool;
 		
 		super.OnSignCastPerformed(signType, isAlternate);
 		
-		if(HasAbility('Runeword 1 _Stats', true) && GetStat(BCS_Focus) >= 1.0f)
+		if(HasRunewordActive('Runeword 1 _Stats') && GetStat(BCS_Focus) >= 1.0f) //modSigns
 		{
 			DrainFocus(1.0f);
 			runewordInfusionType = signType;
@@ -8263,6 +9539,45 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			theGame.GetSurfacePostFX().AddSurfacePostFXGroup( pos, 0.f, 3.f, 2.f, 5.f, 0 );
 		}
+		
+		//modSigns: ancient leshed decoction fix -> decoction changed
+		/*if(HasBuff(EET_Mutagen22) && IsInCombat() && IsThreatened() && !isAlternate)
+		{
+			abilityName = GetBuff(EET_Mutagen22).GetAbilityName();
+			abilityCount = GetAbilityCount(abilityName);
+			
+			if(abilityCount == 0)
+			{
+				addAbility = true;
+			}
+			else
+			{
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen22_max_stack', min, max);
+				maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+				
+				if(maxStack >= 0)
+				{
+					addAbility = (abilityCount < maxStack);
+				}
+				else
+				{
+					addAbility = true;
+				}
+			}
+			
+			if(addAbility)
+			{
+				AddAbility(abilityName, true);
+			}
+		}*/
+		
+		//modSigns
+		if(!HasBuff(EET_GryphonSetBonus) && IsSetBonusActive( EISB_Gryphon_1 ))
+		{
+			AddEffectDefault( EET_GryphonSetBonus, NULL, signType );
+		}
+		
+		//theGame.witcherLog.AddMessage("OnSignCastPerformed: " + signType + "; isAlternate: " + isAlternate); //modSigns: debug
 	}
 	
 	public saved var savedQuenHealth, savedQuenDuration : float;
@@ -8323,20 +9638,30 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var penalty : SAbilityAttributeValue;
 		var penaltyReduction : float;
 		var penaltyReductionLevel : int; 
-		
-		
+		var mutagen : CBaseGameplayEffect; //modSigns
+		var min, max : SAbilityAttributeValue; //modSigns
+
+		//character SP + spell specific skills
 		sp = GetSkillAttributeValue(signSkill, PowerStatEnumToName(CPS_SpellPower), true, true);
 		
-		
+		//skill custom
 		if ( signSkill == S_Magic_s01 )
 		{
-			
-			penaltyReductionLevel = GetSkillLevel(S_Magic_s01) + 1;
+			//wave leveling penalty reduction
+			/*penaltyReductionLevel = GetSkillLevel(S_Magic_s01) + 1;
 			if(penaltyReductionLevel > 0)
 			{
 				penaltyReduction = 1 - penaltyReductionLevel * CalculateAttributeValue(GetSkillAttributeValue(S_Magic_s01, 'spell_power_penalty_reduction', true, true));
 				penalty = GetSkillAttributeValue(S_Magic_s01, PowerStatEnumToName(CPS_SpellPower), false, false);
-				sp += penalty * penaltyReduction;	
+				sp += penalty * penaltyReduction;	//add amount equal to penalty reduction (since full penalty is already applied)
+			}*/
+			//modSigns: fix percentages as they are completely off from what skill description says
+			penaltyReductionLevel = GetSkillLevel(S_Magic_s01) - 1;
+			if(penaltyReductionLevel > 0)
+			{
+				penaltyReduction = penaltyReductionLevel * CalculateAttributeValue(GetSkillAttributeValue(S_Magic_s01, 'spell_power_penalty_reduction', false, false));
+				//penalty was already applied, so we revert it based on penalty reduction and skill level
+				sp.valueMultiplicative += penaltyReduction;
 			}
 		}
 		
@@ -8363,7 +9688,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		ApplyMutation10StatBoost( sp );
+		//ApplyMutation10StatBoost( sp ); //modSigns: reworked
+		
+		//modSigns: prevent negatives
+		sp.valueBase = MaxF(sp.valueBase, 0);
+		sp.valueMultiplicative = MaxF(sp.valueMultiplicative, 0);
+		sp.valueAdditive = MaxF(sp.valueAdditive, 0);
 	
 		return sp;
 	}
@@ -8982,8 +10312,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 	{
 		var min, max : SAbilityAttributeValue; 
 		
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Runeword 10 _Stats', 'stamina', min, max );
-		GainStat(BCS_Stamina, min.valueMultiplicative * GetStatMax(BCS_Stamina));
+		//modSigns
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Runeword 10 _Stats', 'health', min, max );
+		GainStat(BCS_Vitality, min.valueMultiplicative * GetStatMax(BCS_Vitality));
 		PlayEffect('runeword_10_stamina');
 	}
 	
@@ -8992,11 +10323,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var min, max : SAbilityAttributeValue;
 		
 		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Runeword 12 _Stats', 'focus', min, max );
-		GainStat(BCS_Focus, RandRangeF(max.valueAdditive, min.valueAdditive));
+		//GainStat(BCS_Focus, RandRangeF(max.valueAdditive, min.valueAdditive));
+		GainStat(BCS_Focus, min.valueAdditive); //modSigns
 		PlayEffect('runeword_20_adrenaline');	
 	}
 	
-	var runeword10TriggerredOnFinisher, runeword12TriggerredOnFinisher : bool;
+	/*var runeword10TriggerredOnFinisher, runeword12TriggerredOnFinisher : bool;
 	
 	event OnFinisherStart()
 	{
@@ -9004,7 +10336,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		runeword10TriggerredOnFinisher = false;
 		runeword12TriggerredOnFinisher = false;
-	}
+	}*/ //modSigns
 	
 	public function ApplyWitcherHouseBuffs()
 	{
@@ -9098,70 +10430,112 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 	}
 	
-	public function Debug_ClearCharacterDevelopment(optional keepInv : bool)
+	//modSigns
+	public function Debug_RestoreMutagensSpent()
+	{
+		var total : array<int>;
+		
+		total = ((W3PlayerAbilityManager)abilityManager).GetMutationsUsedMutagens();
+		
+		if(total[0] > 0) inv.AddAnItem('Greater mutagen red', total[0]);
+		if(total[1] > 0) inv.AddAnItem('Greater mutagen blue', total[1]);
+		if(total[2] > 0) inv.AddAnItem('Greater mutagen green', total[2]);
+	}
+
+	//modSigns
+	public function Debug_ClearCharacterDevelopment( optional resetLevels : bool )
 	{
 		var template : CEntityTemplate;
 		var entity : CEntity;
 		var invTesting : CInventoryComponent;
-		var i : int;
+		var i, totalExp, currentLevel, totalSkillPoints : int;
 		var items : array<SItemUniqueId>;
 		var abs : array<name>;
-	
-		delete abilityManager;
-		delete levelManager;
-		delete effectManager;
+		var isMutationSystemEnabled : bool;
+		var weaponId : SItemUniqueId;
 		
+		ForceSetStat(BCS_Toxicity, 0);
+		
+		if(GetItemEquippedOnSlot(EES_SilverSword, weaponId)) //fix oils stuck on a sword
+		{
+			if(inv.CanItemHaveOil(weaponId))
+			{
+				inv.RemoveAllOilsFromItem(weaponId);
+				inv.RemoveAllOilAbilitiesFromItem(weaponId);
+			}
+		}
+		
+		if(GetItemEquippedOnSlot(EES_SteelSword, weaponId)) //fix oils stuck on a sword
+		{
+			if(inv.CanItemHaveOil(weaponId))
+			{
+				inv.RemoveAllOilsFromItem(weaponId);
+				inv.RemoveAllOilAbilitiesFromItem(weaponId);
+			}
+		}
+		
+		UnequipItemFromSlot(EES_SilverSword);
+		UnequipItemFromSlot(EES_SteelSword);
+		UnequipItemFromSlot(EES_Bolt);
+		UnequipItemFromSlot(EES_RangedWeapon);
+		UnequipItemFromSlot(EES_Armor);
+		UnequipItemFromSlot(EES_Boots);
+		UnequipItemFromSlot(EES_Pants);
+		UnequipItemFromSlot(EES_Gloves);
+		UnequipItemFromSlot(EES_Petard1);
+		UnequipItemFromSlot(EES_Petard2);
+		UnequipItemFromSlot(EES_Quickslot1);
+		UnequipItemFromSlot(EES_Quickslot2);
+		UnequipItemFromSlot(EES_Potion1);
+		UnequipItemFromSlot(EES_Potion2);
+		UnequipItemFromSlot(EES_Potion3);
+		UnequipItemFromSlot(EES_Potion4);
+		UnequipItemFromSlot(EES_Mask);
+		UnequipItemFromSlot(EES_SkillMutagen1);
+		UnequipItemFromSlot(EES_SkillMutagen2);
+		UnequipItemFromSlot(EES_SkillMutagen3);
+		UnequipItemFromSlot(EES_SkillMutagen4);
+		HorseUnequipItem(EES_HorseBlinders);
+		HorseUnequipItem(EES_HorseSaddle);
+		HorseUnequipItem(EES_HorseBag);
+		HorseUnequipItem(EES_HorseTrophy);
+		
+		currentLevel = levelManager.GetLevel();
+		totalExp = levelManager.GetPointsTotal(EExperiencePoint);
+		totalSkillPoints = levelManager.GetPointsTotal(ESkillPoint);
+		isMutationSystemEnabled = ((W3PlayerAbilityManager)abilityManager).IsMutationSystemEnabled();
+		
+		Debug_RestoreMutagensSpent();
 		
 		GetCharacterStats().GetAbilities(abs, false);
-		for(i=0; i<abs.Size(); i+=1)
+		for(i = 0; i < abs.Size(); i+=1)
 			RemoveAbility(abs[i]);
-			
 		
 		abs.Clear();
 		GetCharacterStatsParam(abs);		
-		for(i=0; i<abs.Size(); i+=1)
+		for(i = 0; i < abs.Size(); i +=1 )
 			AddAbility(abs[i]);
-					
 		
-		levelManager = new W3LevelManager in this;			
+		delete levelManager;
+		levelManager = new W3LevelManager in this;
 		levelManager.Initialize();
-		levelManager.PostInit(this, false, true);		
-						
+		levelManager.PostInit(this, false, true);
 		
-		AddAbility('GeraltSkills_Testing');
-		SetAbilityManager();		
+		if(!resetLevels)
+		{
+			levelManager.AddPoints(EExperiencePoint, totalExp, false, true);
+			levelManager.AddPoints(ESkillPoint, Max(0, totalSkillPoints - levelManager.GetPointsTotal(ESkillPoint)), false);
+		}
+		
+		delete abilityManager;
+		SetAbilityManager();
 		abilityManager.Init(this, GetCharacterStats(), false, theGame.GetDifficultyMode());
 		
+		delete effectManager;
 		SetEffectManager();
 		
-		abilityManager.PostInit();						
-		
-		
-		
-		
-		
-		if(!keepInv)
-		{
-			inv.RemoveAllItems();
-		}		
-		
-		
-		template = (CEntityTemplate)LoadResource("geralt_inventory_release");
-		entity = theGame.CreateEntity(template, Vector(0,0,0));
-		invTesting = (CInventoryComponent)entity.GetComponentByClassName('CInventoryComponent');
-		invTesting.GiveAllItemsTo(inv, true);
-		entity.Destroy();
-		
-		
-		inv.GetAllItems(items);
-		for(i=0; i<items.Size(); i+=1)
-		{
-			if(!inv.ItemHasTag(items[i], 'NoDrop'))			
-				EquipItem(items[i]);
-		}
-			
-		
-		Debug_GiveTestingItems(0);
+		abilityManager.PostInit();
+		((W3PlayerAbilityManager)abilityManager).MutationSystemEnable(isMutationSystemEnabled);
 	}
 	
 	function Debug_BearSetBonusQuenSkills()
@@ -9259,10 +10633,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	public function CanSprint( speed : float ) : bool
 	{
-		if( !super.CanSprint( speed ) )
+		/*if( !super.CanSprint( speed ) )
 		{
 			return false;
-		}		
+		}		*/ //modSings
+		if(theGame.GetEngineTimeAsSeconds() - blockSprintTimestamp < 2) //modSigns
+		{
+			return false;
+		}
 		if( rangedWeapon && rangedWeapon.GetCurrentStateName() != 'State_WeaponWait' )
 		{
 			if ( this.GetPlayerCombatStance() ==  PCS_AlertNear )
@@ -9276,11 +10654,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( GetCurrentStateName() != 'Swimming' && GetStat(BCS_Stamina) <= 0 )
 		{
 			SetSprintActionPressed(false,true);
+			blockSprintTimestamp = theGame.GetEngineTimeAsSeconds(); //modSings
 			return false;
 		}
 		
-		return true;
+		return super.CanSprint( speed ); //modSigns: moved here
 	}
+	
+	var blockSprintTimestamp : float; //modSings
 	
 	public function ManageSleeping()
 	{
@@ -9320,7 +10701,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	{
 		if( super.PerformParryCheck( parryInfo ) )
 		{
-			GainAdrenalineFromPerk21( 'parry' );
+			//GainAdrenalineFromPerk21( 'parry' ); //modSigns
 			return true;
 		}
 		return false;
@@ -9332,7 +10713,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		if( super.PerformCounterCheck( parryInfo ) )
 		{
-			GainAdrenalineFromPerk21( 'counter' );
+			//GainAdrenalineFromPerk21( 'counter' ); //modSigns
 			
 			isInFistFight = FistFightCheck( parryInfo.target, parryInfo.attacker, fistFightCheck );
 			
@@ -9347,7 +10728,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		return false;
 	}
 	
-	public function GainAdrenalineFromPerk21( n : name )
+	/*public function GainAdrenalineFromPerk21( n : name )
 	{
 		var perkStats, perkTime : SAbilityAttributeValue;
 		var targets	: array<CActor>;
@@ -9369,6 +10750,30 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			AddEffectDefault( EET_Perk21InternalCooldown, this, "Perk21", false );
 		}	
+	}*/ //modSigns
+	
+	public function Perk21GainStamina(action : name) //modSigns
+	{
+		var min, max : SAbilityAttributeValue;
+		
+		if(!HasBuff(EET_Perk21InternalCooldown) || action == 'kill')
+		{
+			switch(action)
+			{
+				case 'kill':
+					theGame.GetDefinitionsManager().GetAbilityAttributeValue('perk_21', 'stamina_kill', min, max);
+					GainStat(BCS_Stamina, min.valueMultiplicative * GetStatMax(BCS_Stamina));
+					break;
+				case 'crit':
+				case 'counter':
+					theGame.GetDefinitionsManager().GetAbilityAttributeValue('perk_21', 'stamina_other', min, max);
+					GainStat(BCS_Stamina, min.valueMultiplicative * GetStatMax(BCS_Stamina));
+					break;
+				default:
+					break;
+			}
+			AddEffectDefault(EET_Perk21InternalCooldown, this, "Perk21");
+		}
 	}
 	
 	timer function FistFightCounterTimer( dt : float, id : int )
@@ -9485,28 +10890,106 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	
 	
+	//modSigns: fix equipped, only once
+	private function RecalcSetItemsEquipped()
+	{
+		var slotsToCheck : array<EEquipmentSlots>;
+		var setType : EItemSetType;
+		var item : SItemUniqueId;
+		var i : int;
+		
+		for(i = 0; i < amountOfSetPiecesEquipped.Size(); i += 1)
+			amountOfSetPiecesEquipped[i] = 0;
+		
+		slotsToCheck.PushBack(EES_Armor);
+		slotsToCheck.PushBack(EES_Boots);
+		slotsToCheck.PushBack(EES_Pants);
+		slotsToCheck.PushBack(EES_Gloves);
+		slotsToCheck.PushBack(EES_SilverSword);
+		slotsToCheck.PushBack(EES_SteelSword);
+	
+		for(i = 0; i < slotsToCheck.Size(); i += 1)
+		{
+			if(GetItemEquippedOnSlot(slotsToCheck[i], item) && inv.ItemHasTag(item, 'SetBonusPiece'))
+			{
+				setType = CheckSetType( item );
+				amountOfSetPiecesEquipped[ setType ] += 1;
+				ManageSetBonusesSoundbanks( setType );
+			}
+		}
+	}
+	
+	//modSigns: minor sets added
 	public function IsSetBonusActive( bonus : EItemSetBonus ) : bool
 	{
 		switch(bonus)
 		{
-			case EISB_Lynx_1:			return amountOfSetPiecesEquipped[ EIST_Lynx ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
-			case EISB_Lynx_2:			return amountOfSetPiecesEquipped[ EIST_Lynx ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
-			case EISB_Gryphon_1:		return amountOfSetPiecesEquipped[ EIST_Gryphon ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
-			case EISB_Gryphon_2:		return amountOfSetPiecesEquipped[ EIST_Gryphon ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
-			case EISB_Bear_1:			return amountOfSetPiecesEquipped[ EIST_Bear ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
-			case EISB_Bear_2:			return amountOfSetPiecesEquipped[ EIST_Bear ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
-			case EISB_Wolf_1:			return amountOfSetPiecesEquipped[ EIST_Wolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
-			case EISB_Wolf_2:			return amountOfSetPiecesEquipped[ EIST_Wolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
-			case EISB_RedWolf_1:		return amountOfSetPiecesEquipped[ EIST_RedWolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
-			case EISB_RedWolf_2:		return amountOfSetPiecesEquipped[ EIST_RedWolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
-			case EISB_Vampire:			return amountOfSetPiecesEquipped[ EIST_Vampire ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+			case EISB_Lynx_1:
+				return amountOfSetPiecesEquipped[ EIST_Lynx ] + amountOfSetPiecesEquipped[ EIST_Lynx_Minor ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+			case EISB_Lynx_2:
+				return amountOfSetPiecesEquipped[ EIST_Lynx ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
+			case EISB_Gryphon_1:
+				return amountOfSetPiecesEquipped[ EIST_Gryphon ] + amountOfSetPiecesEquipped[ EIST_Gryphon_Minor ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+			case EISB_Gryphon_2:
+				return amountOfSetPiecesEquipped[ EIST_Gryphon ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
+			case EISB_Bear_1:
+				return amountOfSetPiecesEquipped[ EIST_Bear ] + amountOfSetPiecesEquipped[ EIST_Bear_Minor ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+			case EISB_Bear_2:
+				return amountOfSetPiecesEquipped[ EIST_Bear ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
+			case EISB_Wolf_1:
+				return amountOfSetPiecesEquipped[ EIST_Wolf ] + amountOfSetPiecesEquipped[ EIST_Wolf_Minor ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+			case EISB_Wolf_2:
+				return amountOfSetPiecesEquipped[ EIST_Wolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
+			case EISB_RedWolf_1:
+				return amountOfSetPiecesEquipped[ EIST_RedWolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+			case EISB_RedWolf_2:
+				return amountOfSetPiecesEquipped[ EIST_RedWolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
+			case EISB_Vampire:
+				return amountOfSetPiecesEquipped[ EIST_Vampire ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+			//modSigns
+			case EISB_Viper:
+				return amountOfSetPiecesEquipped[ EIST_Viper ] >= GetNumItemsRequiredForSetActivation(EIST_Viper);
+			case EISB_KaerMorhen:
+				return amountOfSetPiecesEquipped[ EIST_KaerMorhen ] >= GetNumItemsRequiredForSetActivation(EIST_KaerMorhen);
 			default:					return false;
 		}
 	}
 	
+	//modSigns: minor sets
 	public function GetSetPartsEquipped( setType : EItemSetType ) : int
 	{
+		switch( setType )
+		{
+			case EIST_Lynx:
+			case EIST_Lynx_Minor:
+				return amountOfSetPiecesEquipped[ EIST_Lynx ] + amountOfSetPiecesEquipped[ EIST_Lynx_Minor ];
+			case EIST_Gryphon:
+			case EIST_Gryphon_Minor:
+				return amountOfSetPiecesEquipped[ EIST_Gryphon ] + amountOfSetPiecesEquipped[ EIST_Gryphon_Minor ];
+			case EIST_Bear:
+			case EIST_Bear_Minor:
+				return amountOfSetPiecesEquipped[ EIST_Bear ] + amountOfSetPiecesEquipped[ EIST_Bear_Minor ];
+			case EIST_Wolf:
+			case EIST_Wolf_Minor:
+				return amountOfSetPiecesEquipped[ EIST_Wolf ] + amountOfSetPiecesEquipped[ EIST_Wolf_Minor ];
+			default:
+				return amountOfSetPiecesEquipped[ setType ];
+		}
+	}
+	
+	//modSigns
+	public function GetSetPartsEquippedRaw( setType : EItemSetType ) : int
+	{
 		return amountOfSetPiecesEquipped[ setType ];
+	}
+	
+	//modSigns
+	public function HasMixedSetsEquipped() : bool
+	{
+		return	amountOfSetPiecesEquipped[ EIST_Lynx ] > 0 && amountOfSetPiecesEquipped[ EIST_Lynx_Minor ] > 0 ||
+				amountOfSetPiecesEquipped[ EIST_Gryphon ] > 0 && amountOfSetPiecesEquipped[ EIST_Gryphon_Minor ] > 0 ||
+				amountOfSetPiecesEquipped[ EIST_Bear ] > 0 && amountOfSetPiecesEquipped[ EIST_Bear_Minor ] > 0 ||
+				amountOfSetPiecesEquipped[ EIST_Wolf ] > 0 && amountOfSetPiecesEquipped[ EIST_Wolf_Minor ] > 0;
 	}
 	
 	protected function UpdateItemSetBonuses( item : SItemUniqueId, increment : bool )
@@ -9518,7 +11001,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( !inv.IsIdValid( item ) || !inv.ItemHasTag(item, theGame.params.ITEM_SET_TAG_BONUS ) )  
 		{
 			
-			if( !IsSetBonusActive( EISB_Wolf_1 ) )
+			if( !IsSetBonusActive( EISB_Wolf_2 ) ) //modSigns
 			{
 				if( GetItemEquippedOnSlot( EES_SteelSword, id ) )
 				{
@@ -9539,7 +11022,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			amountOfSetPiecesEquipped[ setType ] += 1;
 			
-			if( amountOfSetPiecesEquipped[ setType ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS && ShouldProcessTutorial( 'TutorialSetBonusesUnlocked' ) && theGame.GetTutorialSystem().uiHandler && theGame.GetTutorialSystem().uiHandler.GetCurrentStateName() == 'SetItemsUnlocked' )
+			//modSigns
+			if( GetSetPartsEquipped(setType) >= GetNumItemsRequiredForSetActivation(setType) && ShouldProcessTutorial( 'TutorialSetBonusesUnlocked' ) && theGame.GetTutorialSystem().uiHandler && theGame.GetTutorialSystem().uiHandler.GetCurrentStateName() == 'SetItemsUnlocked' )
 			{
 				tutorialStateSets = ( W3TutorialManagerUIHandlerStateSetItemsUnlocked )theGame.GetTutorialSystem().uiHandler.GetCurrentState();
 				tutorialStateSets.OnSetBonusCompleted();
@@ -9551,13 +11035,15 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if( setType != EIST_Vampire && amountOfSetPiecesEquipped[ setType ] == theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS )
+		//modSigns
+		//if( setType < EIST_Viper && amountOfSetPiecesEquipped[ setType ] == theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS )
+		if( IsSetBonusActive(EISB_Lynx_2) || IsSetBonusActive(EISB_Gryphon_2) || IsSetBonusActive(EISB_Bear_2) || IsSetBonusActive(EISB_Wolf_2) || IsSetBonusActive(EISB_RedWolf_2) )
 		{
 			theGame.GetGamerProfile().AddAchievement( EA_ReadyToRoll );
 		}
 		
 		
-		if( !IsSetBonusActive( EISB_Wolf_1 ) )
+		if( !IsSetBonusActive( EISB_Wolf_2 ) ) //modSigns
 		{
 			if( GetItemEquippedOnSlot( EES_SteelSword, id ) )
 			{
@@ -9580,7 +11066,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var l_i				: int;
 		
 		
-		if( setType == EIST_Lynx )
+		if( setType == EIST_Lynx || setType == EIST_Lynx_Minor ) //modSigns
 		{
 			
 			if( HasBuff( EET_LynxSetBonus ) && !IsSetBonusActive( EISB_Lynx_1 ) )
@@ -9611,6 +11097,19 @@ statemachine class W3PlayerWitcher extends CR4Player
 			else
 			{
 				RemoveBuff( EET_GryphonSetBonusYrden );
+			}
+		}
+		
+		//modSigns
+		else if( setType == EIST_KaerMorhen )
+		{
+			if( !IsSetBonusActive(EISB_KaerMorhen) && HasBuff(EET_KaerMorhenSetBonus) )
+			{
+				RemoveBuff(EET_KaerMorhenSetBonus);
+			}
+			else if( IsSetBonusActive(EISB_KaerMorhen) && !HasBuff(EET_KaerMorhenSetBonus) && IsInCombat() )
+			{
+				AddEffectDefault(EET_KaerMorhenSetBonus, this, "KaerMorhenSetBonus");
 			}
 		}
 	}
@@ -9656,6 +11155,32 @@ statemachine class W3PlayerWitcher extends CR4Player
 			return EIST_Viper;
 		}
 		else
+		//modSigns
+		if( dm.ItemHasTag( itemName, theGame.params.ITEM_SET_TAG_KAER_MORHEN ) )
+		{
+			return EIST_KaerMorhen;
+		}
+		else
+		if( dm.ItemHasTag( itemName, theGame.params.ITEM_SET_TAG_LYNX_MINOR ) )
+		{
+			return EIST_Lynx_Minor;
+		}
+		else
+		if( dm.ItemHasTag( itemName, theGame.params.ITEM_SET_TAG_GRYPHON_MINOR ) )
+		{
+			return EIST_Gryphon_Minor;
+		}
+		else
+		if( dm.ItemHasTag( itemName, theGame.params.ITEM_SET_TAG_BEAR_MINOR ) )
+		{
+			return EIST_Bear_Minor;
+		}
+		else
+		if( dm.ItemHasTag( itemName, theGame.params.ITEM_SET_TAG_WOLF_MINOR ) )
+		{
+			return EIST_Wolf_Minor;
+		}
+		else
 		{
 			return EIST_Undefined;
 		}
@@ -9684,6 +11209,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 				case theGame.params.ITEM_SET_TAG_RED_WOLF:
 				case theGame.params.ITEM_SET_TAG_VAMPIRE:
 				case theGame.params.ITEM_SET_TAG_VIPER:
+				//modSigns
+				case theGame.params.ITEM_SET_TAG_KAER_MORHEN:
+				case theGame.params.ITEM_SET_TAG_LYNX_MINOR:
+				case theGame.params.ITEM_SET_TAG_GRYPHON_MINOR:
+				case theGame.params.ITEM_SET_TAG_BEAR_MINOR:
+				case theGame.params.ITEM_SET_TAG_WOLF_MINOR:
 					setType = SetItemNameToType( tags[i] );
 					stopLoop = true;
 					break;
@@ -9735,15 +11266,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 	{
 		var setBonus : EItemSetBonus;
 		
-		if( amountOfSetPiecesEquipped[ setType ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS )
-		{
-			isActive1 = true;			
-		}
-		
-		if( amountOfSetPiecesEquipped[ setType ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS )
-		{
-			isActive2 = true;
-		}
+		//modSigns
+		isActive1 = (GetSetPartsEquipped(setType) >= GetNumItemsRequiredForSetActivation(setType));
+		isActive2 = (amountOfSetPiecesEquipped[ setType ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS);
 		
 		setBonus = ItemSetTypeToItemSetBonus( setType, 1 );
 		desc1 = GetSetBonusTooltipDescription( setBonus );
@@ -9766,6 +11291,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 				case EIST_Wolf: 			setBonus = EISB_Wolf_1;		break;
 				case EIST_RedWolf: 			setBonus = EISB_RedWolf_1;	break;
 				case EIST_Vampire:			setBonus = EISB_Vampire;	break;
+				//modSigns
+				case EIST_Viper:			setBonus = EISB_Viper;		break;
+				case EIST_KaerMorhen:		setBonus = EISB_KaerMorhen;	break;
+				case EIST_Lynx_Minor:		setBonus = EISB_Lynx_1;		break;
+				case EIST_Gryphon_Minor:	setBonus = EISB_Gryphon_1;	break;
+				case EIST_Bear_Minor:		setBonus = EISB_Bear_1;		break;
+				case EIST_Wolf_Minor:		setBonus = EISB_Wolf_1;		break;
 			}
 		}
 		else
@@ -9778,6 +11310,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 				case EIST_Wolf: 			setBonus = EISB_Wolf_2;		break;
 				case EIST_RedWolf: 			setBonus = EISB_RedWolf_2;	break;
 				case EIST_Vampire:			setBonus = EISB_Undefined;	break;
+				//modSigns
+				case EIST_Viper:			setBonus = EISB_Undefined;	break;
+				case EIST_KaerMorhen:		setBonus = EISB_Undefined;	break;
+				case EIST_Lynx_Minor:		setBonus = EISB_Undefined;	break;
+				case EIST_Gryphon_Minor:	setBonus = EISB_Undefined;	break;
+				case EIST_Bear_Minor:		setBonus = EISB_Undefined;	break;
+				case EIST_Wolf_Minor:		setBonus = EISB_Undefined;	break;
 			}
 		} 
 	
@@ -9791,6 +11330,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var dm			: CDefinitionsManagerAccessor;
 		var min, max 	: SAbilityAttributeValue;
 		var tempString	: string;
+		var tmpVal		: float; //modSigns
 		
 		switch( bonus )
 		{
@@ -9800,11 +11340,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 			case EISB_Gryphon_2:		tempString = "skill_desc_gryphon_set_ability2"; break;
 			case EISB_Bear_1:			tempString = "skill_desc_bear_set_ability1"; break;
 			case EISB_Bear_2:			tempString = "skill_desc_bear_set_ability2"; break;
-			case EISB_Wolf_1:			tempString = "skill_desc_wolf_set_ability2"; break;
-			case EISB_Wolf_2:			tempString = "skill_desc_wolf_set_ability1"; break;
+			case EISB_Wolf_1:			tempString = "skill_desc_wolf_set_ability1"; break;
+			case EISB_Wolf_2:			tempString = "skill_desc_wolf_set_ability2"; break;
 			case EISB_RedWolf_1:		tempString = "skill_desc_red_wolf_set_ability1"; break;
 			case EISB_RedWolf_2:		tempString = "skill_desc_red_wolf_set_ability2"; break;
 			case EISB_Vampire:			tempString = "skill_desc_vampire_set_ability1"; break;
+			//modSigns
+			case EISB_Viper:			tempString = "skill_desc_viper_set_ability1"; break;
+			case EISB_KaerMorhen:		tempString = "skill_desc_kaer_morhen_set_ability1"; break;
 			default:					tempString = ""; break;
 		}
 		
@@ -9813,48 +11356,72 @@ statemachine class W3PlayerWitcher extends CR4Player
 		switch( bonus )
 		{
 		case EISB_Lynx_1:
-			dm.GetAbilityAttributeValue( 'LynxSetBonusEffect', 'duration', min, max );
-			arrString.PushBack( FloatToString( min.valueAdditive ) );
-			dm.GetAbilityAttributeValue( 'LynxSetBonusEffect', 'lynx_dmg_boost', min, max );
+			dm.GetAbilityAttributeValue( 'LynxSetBonusEffect', 'lynx_ap_boost', min, max );
 			arrString.PushBack( FloatToString( min.valueAdditive * 100 ) ); 
-			arrString.PushBack( FloatToString( min.valueAdditive * 100 * amountOfSetPiecesEquipped[ EIST_Lynx ] ) );
+			arrString.PushBack( FloatToString( min.valueAdditive * 100 * GetSetPartsEquipped( EIST_Lynx ) ) );
+			dm.GetAbilityAttributeValue( 'LynxSetBonusEffect', 'lynx_boost_max', min, max );
+			arrString.PushBack( FloatToString( min.valueAdditive * 100 ) ); 
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;
 		case EISB_Lynx_2:
-			dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Lynx_2 ), 'lynx_2_dmg_boost', min, max );
-			arrString.PushBack( FloatToString( min.valueAdditive * 100 ) );
-			
-			dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Lynx_2 ), 'lynx_2_adrenaline_cost', min, max );
-			arrString.PushBack( FloatToString( min.valueAdditive ) );
-			
+			//modSigns: changed
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;
 		case EISB_Gryphon_1:
+			//modSigns: new mechanic
+			dm.GetAbilityAttributeValue( 'GryphonSetBonusEffect', 'gryphon_tier1_bonus', min, max );
+			arrString.PushBack( FloatToString( min.valueAdditive * 100 ) ); 
+			arrString.PushBack( FloatToString( min.valueAdditive * 100 * GetSetPartsEquipped( EIST_Gryphon ) ) );
 			dm.GetAbilityAttributeValue( 'GryphonSetBonusEffect', 'duration', min, max );
 			arrString.PushBack( FloatToString( min.valueAdditive ) );
-			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString ); 
+			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;		
 		case EISB_Gryphon_2:
 			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'trigger_scale', min, max );
 			arrString.PushBack( FloatToString( ( min.valueAdditive - 1 )* 100) );
-			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'staminaRegen', min, max );
-			arrString.PushBack( FloatToString( min.valueMultiplicative * 100) );
+			//dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'staminaRegen', min, max ); //modSigns: removed
+			//arrString.PushBack( FloatToString( min.valueMultiplicative * 100) );
 			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'spell_power', min, max );
 			arrString.PushBack( FloatToString( min.valueMultiplicative * 100) );
-			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'gryphon_set_bns_dmg_reduction', min, max );
+			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'slashing_resistance_perc', min, max );
 			arrString.PushBack( FloatToString( min.valueAdditive * 100) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;
-		case EISB_Bear_1:
-			dm.GetAbilityAttributeValue( 'setBonusAbilityBear_1', 'quen_reapply_chance', min, max );
-			arrString.PushBack( FloatToString( min.valueMultiplicative * 100 ) );
-			
-			arrString.PushBack( FloatToString( min.valueMultiplicative * 100 * amountOfSetPiecesEquipped[ EIST_Bear ] ) );
+		case EISB_Bear_1: //modSigns: full set redesign
+			dm.GetAbilityAttributeValue( 'setBonusAbilityBear_1', 'bonus_focus_gain', min, max );
+			arrString.PushBack( NoTrailZeros( CalculateAttributeValue(min) ) );
+			arrString.PushBack( NoTrailZeros( CalculateAttributeValue(min) * GetSetPartsEquipped( EIST_Bear ) ) );
+			dm.GetAbilityAttributeValue( 'setBonusAbilityBear_1', 'attack_power', min, max );
+			arrString.PushBack( NoTrailZeros( min.valueMultiplicative * 100 ) );
+			arrString.PushBack( NoTrailZeros( min.valueMultiplicative * 100 * GetSetPartsEquipped( EIST_Bear ) ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;
-		case EISB_Bear_2:
-			dm.GetAbilityAttributeValue( 'setBonusAbilityBear_2', 'quen_dmg_boost', min, max );
-			arrString.PushBack( FloatToString( min.valueMultiplicative * 100 ) );
+		case EISB_Bear_2: //modSigns: full set redesign
+			dm.GetAbilityAttributeValue( 'setBonusAbilityBear_2', 'stamina_attack', min, max );
+			arrString.PushBack( NoTrailZeros( CalculateAttributeValue(min) * 100 ) );
+			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			break;
+		//modSigns
+		case EISB_Wolf_1:
+			dm.GetAbilityAttributeValue( 'SetBonusAbilityWolf_1', 'per_piece_oil_bonus', min, max );
+			arrString.PushBack( RoundMath( CalculateAttributeValue(min) * 100 ) );
+			arrString.PushBack( RoundMath( CalculateAttributeValue(min) * 100 * GetSetPartsEquipped( EIST_Wolf ) ) );
+			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			break;
+		case EISB_Wolf_2:
+			dm.GetAbilityAttributeValue( 'SetBonusAbilityWolf_2', 'per_oil_crit_chance_bonus', min, max );
+			arrString.PushBack( FloatToString( CalculateAttributeValue(min) * 100 ) );
+			dm.GetAbilityAttributeValue( 'SetBonusAbilityWolf_2', 'per_oil_crit_power_bonus', min, max );
+			arrString.PushBack( FloatToString( CalculateAttributeValue(min) * 100 ) );
+			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			break;
+		case EISB_RedWolf_1:
+			dm.GetAbilityAttributeValue( 'setBonusAbilityRedWolf_1', 'per_redwolf_piece_crit_chance_bonus', min, max );
+			arrString.PushBack( FloatToString( CalculateAttributeValue(min) * 100 ) );
+			arrString.PushBack( FloatToString( CalculateAttributeValue(min) * 100 * GetSetPartsEquipped( EIST_RedWolf ) ) );
+			dm.GetAbilityAttributeValue( 'setBonusAbilityRedWolf_1', 'per_redwolf_piece_crit_power_bonus', min, max );
+			arrString.PushBack( FloatToString( CalculateAttributeValue(min) * 100 ) );
+			arrString.PushBack( FloatToString( CalculateAttributeValue(min) * 100 * GetSetPartsEquipped( EIST_RedWolf ) ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;
 		case EISB_RedWolf_2:
@@ -9865,7 +11432,22 @@ statemachine class W3PlayerWitcher extends CR4Player
 		case EISB_Vampire:
 			dm.GetAbilityAttributeValue( 'setBonusAbilityVampire', 'life_percent', min, max );
 			arrString.PushBack( FloatToString( min.valueAdditive ) );
-			arrString.PushBack( FloatToString( min.valueAdditive * amountOfSetPiecesEquipped[ EIST_Vampire ] ) );
+			arrString.PushBack( FloatToString( min.valueAdditive * GetSetPartsEquipped( EIST_Vampire ) ) );
+			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			break;
+		//modSigns
+		case EISB_Viper:
+			dm.GetAbilityAttributeValue( 'setBonusAbilityViper_1', 'per_viper_piece_poison_healing_rate', min, max );
+			arrString.PushBack( FloatToString( CalculateAttributeValue(min) * 100 ) );
+			arrString.PushBack( FloatToString( CalculateAttributeValue(min) * 100 * GetSetPartsEquipped( EIST_Viper ) ) );
+			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			break;
+		case EISB_KaerMorhen:
+			dm.GetAbilityAttributeValue( 'KaerMorhenSetBonusEffect', 'staminaRegen', min, max );
+			tmpVal = CalculateAttributeValue(min);
+			arrString.PushBack( FloatToString( tmpVal ) );
+			dm.GetAbilityAttributeValue( 'KaerMorhenSetBonusEffect', 'maxStacks', min, max );
+			arrString.PushBack( FloatToString( tmpVal * CalculateAttributeValue(min) ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;
 		default:
@@ -9875,9 +11457,27 @@ statemachine class W3PlayerWitcher extends CR4Player
 		return finalString;
 	}
 	
+	//modSigns
+	public function LoadCurrentSetBonusSoundbank()
+	{
+		if(IsSetBonusActive(EISB_Lynx_1) || IsSetBonusActive(EISB_Lynx_2))
+		{
+			LoadSetBonusSoundBank( "ep2_setbonus_lynx.bnk" );
+		}
+		if(IsSetBonusActive(EISB_Gryphon_1) || IsSetBonusActive(EISB_Gryphon_2))
+		{
+			LoadSetBonusSoundBank( "ep2_setbonus_gryphon.bnk" );
+		}
+		//if(IsSetBonusActive(EISB_Bear_1) || IsSetBonusActive(EISB_Bear_2))
+		//{
+			LoadSetBonusSoundBank( "ep2_setbonus_bear.bnk" );
+		//} //should always be loaded as it's used by regular Quen now!
+	}
+	
 	public function ManageSetBonusesSoundbanks( setType : EItemSetType )
 	{
-		if( amountOfSetPiecesEquipped[ setType ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS )
+		//modSigns
+		if( GetSetPartsEquipped(setType) >= GetNumItemsRequiredForSetActivation(setType) )
 		{
 			switch( setType )
 			{
@@ -9913,12 +11513,19 @@ statemachine class W3PlayerWitcher extends CR4Player
 	{
 		var healthMax		: float;
 		var healthToReg		: float;
+		var healthPrc		: float; //modSigns
+		var min, max		: SAbilityAttributeValue; //modSigns
 		
 		healthMax = GetStatMax( BCS_Vitality );
 		
-		healthToReg = ( amountOfSetPiecesEquipped[ EIST_Vampire ] * healthMax ) / 100;
+		//modSigns: whoever decided that assuming no one will ever change xml values
+		//should be thrown to harpies
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'setBonusAbilityVampire', 'life_percent', min, max );
+		healthPrc = min.valueAdditive;
+
+		healthToReg = ( healthPrc * GetSetPartsEquipped(EIST_Vampire) * healthMax ) / 100;
 		
-		PlayEffect('drain_energy_caretaker_shovel');
+		//PlayEffect('drain_energy_caretaker_shovel');
 		GainStat( BCS_Vitality, healthToReg );
 	}
 	
@@ -9944,7 +11551,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		newQuen = (W3QuenEntity)theGame.CreateEntity( GetSignTemplate( ST_Quen ), GetWorldPosition(), GetWorldRotation() );
 		newQuen.Init( signOwner, GetSignEntity( ST_Quen ), true );
-		newQuen.freeFromBearSetBonus = true;
+		newQuen.freeCast = true; //modSigns
 		newQuen.OnStarted();
 		newQuen.OnThrowing();
 		newQuen.OnEnded();
@@ -9952,6 +11559,72 @@ statemachine class W3PlayerWitcher extends CR4Player
 		m_quenReappliedCount += 1;
 		
 		RemoveTimer( 'BearSetBonusQuenReapply');
+	}
+	
+	//modSigns: gryphon set tier 1 bonus
+	public function GetGryphonSetTier1Bonus() : float
+	{
+		var abl			: SAbilityAttributeValue;
+		
+		abl = GetAttributeValue( 'gryphon_tier1_bonus' );
+		return abl.valueAdditive * GetSetPartsEquipped( EIST_Gryphon );
+	}
+	
+	//modSigns: griffin school perk bonus
+	public function GetPerk6StaminaCostReduction() : float
+	{
+		var abl			: SAbilityAttributeValue;
+		var bonus		: float;
+		
+		abl = GetAttributeValue('perk_6_stamina_cost_reduction');
+		bonus = abl.valueMultiplicative;
+		bonus = ClampF(bonus, 0, 1);
+		
+		//theGame.witcherLog.AddMessage("stamina reduction bonus: " + bonus);
+		
+		return bonus;
+	}
+	
+	//modSigns
+	timer function GiveStandAloneEP1Items(dt : float, timerId : int)
+	{
+		var items : array<SItemUniqueId>;
+		
+		if( inv )
+		{			
+			inv.GetAllItems(items);
+			if( items.Size() <= 0 )
+				return;
+		}
+		else
+			return;
+		
+		StandaloneEp1_1();
+		
+		FactsAdd("standalone_ep1_inv", 1);
+			
+		RemoveTimer('GiveStandAloneEP1Items');
+	}
+	
+	//modSigns
+	timer function GiveStandAloneEP2Items(dt : float, timerId : int)
+	{
+		var items : array<SItemUniqueId>;
+		
+		if( inv )
+		{			
+			inv.GetAllItems(items);
+			if( items.Size() <= 0 )
+				return;
+		}
+		else
+			return;
+		
+		StandaloneEp2_1();
+		
+		FactsAdd("standalone_ep2_inv", 1);
+			
+		RemoveTimer('GiveStandAloneEP2Items');
 	}
 	
 	public final function StandaloneEp1_1()
@@ -9991,24 +11664,26 @@ statemachine class W3PlayerWitcher extends CR4Player
 		levelManager.SetFreeSkillPoints(levelManager.GetLevel() - 1 + 11);	
 		
 		
-		inv.AddAnItem('Mutagen red', 4);
-		inv.AddAnItem('Mutagen green', 4);
-		inv.AddAnItem('Mutagen blue', 4);
+		//modSigns
+		inv.AddAnItem('Greater mutagen red', 1);
+		inv.AddAnItem('Greater mutagen green', 1);
+		inv.AddAnItem('Greater mutagen blue', 1);
+		inv.AddAnItem('Mutagen red', 2);
+		inv.AddAnItem('Mutagen green', 2);
+		inv.AddAnItem('Mutagen blue', 2);
 		inv.AddAnItem('Lesser mutagen red', 2);
 		inv.AddAnItem('Lesser mutagen green', 2);
 		inv.AddAnItem('Lesser mutagen blue', 2);
-		inv.AddAnItem('Greater mutagen green', 1);
-		inv.AddAnItem('Greater mutagen blue', 2);
 		
 		
-		startingMoney = 40000;
+		startingMoney = 4000;
 		if(GetMoney() > startingMoney)
 		{
 			RemoveMoney(GetMoney() - startingMoney);
 		}
 		else
 		{
-			AddMoney( 40000 - GetMoney() );
+			AddMoney( 4000 - GetMoney() );
 		}
 		
 		
@@ -10040,12 +11715,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem('Torch', 1, true, true, false);
 		
 		
+		//modSigns
 		quantityLow = 1;
-		randLow = 3;
-		quantityMedium = 4;
-		randMedium = 4;
-		quantityHigh = 8;
-		randHigh = 6;
+		randLow = 2;
+		quantityMedium = 2;
+		randMedium = 2;
+		quantityHigh = 3;
+		randHigh = 2;
 		
 		inv.AddAnItem('Alghoul bone marrow',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Amethyst dust',quantityLow+RandRange(randLow));
@@ -10053,13 +11729,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem('Arachas venom',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Basilisk hide',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Basilisk venom',quantityLow+RandRange(randLow));
-		inv.AddAnItem('Bear pelt',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Berserker pelt',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Coal',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Cotton',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Dark iron ingot',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Dark iron ore',quantityLow+RandRange(randLow));
-		inv.AddAnItem('Deer hide',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Diamond dust',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Draconide leather',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Drowned dead tongue',quantityLow+RandRange(randLow));
@@ -10070,12 +11744,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem('Endriag chitin plates',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Endriag embryo',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Ghoul blood',quantityMedium+RandRange(randMedium));
-		inv.AddAnItem('Goat hide',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Hag teeth',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Hardened leather',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Hardened timber',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Harpy feathers',quantityMedium+RandRange(randMedium));
-		inv.AddAnItem('Horse hide',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Iron ore',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Leather straps',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Leather',quantityHigh+RandRange(randHigh));
@@ -10087,9 +11759,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem('Nekker heart',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Oil',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Phosphorescent crystal',quantityLow+RandRange(randLow));
-		inv.AddAnItem('Pig hide',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Pure silver',quantityMedium+RandRange(randMedium));
-		inv.AddAnItem('Rabbit pelt',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Rotfiend blood',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Sapphire dust',quantityLow+RandRange(randLow));
 		inv.AddAnItem('Silk',quantityHigh+RandRange(randHigh));
@@ -10097,7 +11767,6 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem('Silver ore',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Specter dust',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Steel ingot',quantityHigh+RandRange(randHigh));
-		inv.AddAnItem('Steel plate',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('String',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Thread',quantityHigh+RandRange(randHigh));
 		inv.AddAnItem('Timber',quantityHigh+RandRange(randHigh));
@@ -10105,20 +11774,18 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem('Venom extract',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Water essence',quantityMedium+RandRange(randMedium));
 		inv.AddAnItem('Wolf liver',quantityHigh+RandRange(randHigh));
-		inv.AddAnItem('Wolf pelt',quantityMedium+RandRange(randMedium));
-		
-		inv.AddAnItem('Alcohest', 5);
-		inv.AddAnItem('Dwarven spirit', 5);
+		inv.AddAnItem('Alcohest', 3);
+		inv.AddAnItem('Dwarven spirit', 4);
 	
 		
 		ids.Clear();
 		ids = inv.AddAnItem('Crossbow 5');
 		EquipItem(ids[0]);
 		ids.Clear();
-		ids = inv.AddAnItem('Blunt Bolt', 100);
+		ids = inv.AddAnItem('Blunt Bolt', 20);
 		EquipItem(ids[0]);
-		inv.AddAnItem('Broadhead Bolt', 100);
-		inv.AddAnItem('Split Bolt', 100);
+		inv.AddAnItem('Broadhead Bolt', 20);
+		inv.AddAnItem('Split Bolt', 20);
 		
 		
 		RemoveAllAlchemyRecipes();
@@ -10227,7 +11894,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem('Full Moon 1');
 		inv.AddAnItem('Maribor Forest 1');
 		inv.AddAnItem('Petris Philtre 1');
-		inv.AddAnItem('White Gull 1', 3);
+		inv.AddAnItem('White Gull 1', 2);
 		inv.AddAnItem('White Honey 2');
 		inv.AddAnItem('White Raffards Decoction 1');
 		
@@ -10238,13 +11905,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem('Mutagen 26');	
 		
 		
-		inv.AddAnItem('weapon_repair_kit_1', 5);
-		inv.AddAnItem('weapon_repair_kit_2', 3);
-		inv.AddAnItem('armor_repair_kit_1', 5);
-		inv.AddAnItem('armor_repair_kit_2', 3);
+		inv.AddAnItem('weapon_repair_kit_1', 3);
+		inv.AddAnItem('weapon_repair_kit_2', 2);
+		inv.AddAnItem('armor_repair_kit_1', 3);
+		inv.AddAnItem('armor_repair_kit_2', 2);
 		
 		
-		quantityMedium = 2;
+		quantityMedium = 1;
 		quantityLow = 1;
 		inv.AddAnItem('Rune stribog lesser', quantityMedium);
 		inv.AddAnItem('Rune stribog', quantityLow);
@@ -10291,9 +11958,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var manager : CWitcherJournalManager;
 		
 		
-		inv.AddAnItem( 'Cows milk', 20 );
+		inv.AddAnItem( 'Cows milk', 5 );
 		ids.Clear();
-		ids = inv.AddAnItem( 'Dumpling', 44 );
+		ids = inv.AddAnItem( 'Dumpling', 5 );
 		EquipItem(ids[0]);
 		
 		
@@ -10442,8 +12109,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		theGame.GetTutorialSystem().RemoveAllQueuedTutorials();
 		
-		
-		FactsAdd('standalone_ep1');
+		if( FactsQuerySum("standalone_ep1") < 1 ) //modSigns
+			FactsAdd("standalone_ep1");
 		FactsRemove("StandAloneEP1");
 		
 		theGame.GetJournalManager().ForceUntrackingQuestForEP1Savegame();
@@ -10489,25 +12156,26 @@ statemachine class W3PlayerWitcher extends CR4Player
 		levelManager.SetFreeSkillPoints( levelManager.GetLevel() - 1 + 11 );	
 		
 		
-		inv.AddAnItem( 'Mutagen red', 4 );
-		inv.AddAnItem( 'Mutagen green', 4 );
-		inv.AddAnItem( 'Mutagen blue', 4 );
-		inv.AddAnItem( 'Lesser mutagen red', 2 );
-		inv.AddAnItem( 'Lesser mutagen green', 2 );
-		inv.AddAnItem( 'Lesser mutagen blue', 2 );
-		inv.AddAnItem( 'Greater mutagen red', 2 );
-		inv.AddAnItem( 'Greater mutagen green', 2 );
-		inv.AddAnItem( 'Greater mutagen blue', 2 );
+		//modSigns
+		inv.AddAnItem('Greater mutagen red', 1);
+		inv.AddAnItem('Greater mutagen green', 1);
+		inv.AddAnItem('Greater mutagen blue', 1);
+		inv.AddAnItem('Mutagen red', 2);
+		inv.AddAnItem('Mutagen green', 2);
+		inv.AddAnItem('Mutagen blue', 2);
+		inv.AddAnItem('Lesser mutagen red', 2);
+		inv.AddAnItem('Lesser mutagen green', 2);
+		inv.AddAnItem('Lesser mutagen blue', 2);
 		
 		
-		startingMoney = 20000;
+		startingMoney = 5000;
 		if( GetMoney() > startingMoney )
 		{
 			RemoveMoney( GetMoney() - startingMoney );
 		}
 		else
 		{
-			AddMoney( 20000 - GetMoney() );
+			AddMoney( 5000 - GetMoney() );
 		}
 		
 		
@@ -10536,12 +12204,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem( 'Torch', 1, true, true, false );
 		
 		
+		//modSigns
 		quantityLow = 1;
-		randLow = 3;
-		quantityMedium = 4;
-		randMedium = 4;
-		quantityHigh = 8;
-		randHigh = 6;
+		randLow = 2;
+		quantityMedium = 2;
+		randMedium = 2;
+		quantityHigh = 3;
+		randHigh = 2;
 		
 		inv.AddAnItem( 'Alghoul bone marrow',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Amethyst dust',quantityLow+RandRange( randLow ) );
@@ -10549,72 +12218,40 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem( 'Arachas venom',quantityLow+RandRange( randLow ) );
 		inv.AddAnItem( 'Basilisk hide',quantityLow+RandRange( randLow ) );
 		inv.AddAnItem( 'Basilisk venom',quantityLow+RandRange( randLow ) );
-		inv.AddAnItem( 'Bear pelt',quantityHigh+RandRange( randHigh ) );
 		inv.AddAnItem( 'Berserker pelt',quantityLow+RandRange( randLow ) );
 		inv.AddAnItem( 'Coal',quantityHigh+RandRange( randHigh ) );
 		inv.AddAnItem( 'Cotton',quantityHigh+RandRange( randHigh ) );
-
-
-		inv.AddAnItem( 'Deer hide',quantityHigh+RandRange( randHigh ) );
 		inv.AddAnItem( 'Diamond dust',quantityLow+RandRange( randLow ) );
-
 		inv.AddAnItem( 'Drowned dead tongue',quantityLow+RandRange( randLow ) );
 		inv.AddAnItem( 'Drowner brain',quantityMedium+RandRange( randMedium ) );
-
-
-
 		inv.AddAnItem( 'Endriag chitin plates',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Endriag embryo',quantityLow+RandRange( randLow ) );
 		inv.AddAnItem( 'Ghoul blood',quantityMedium+RandRange( randMedium ) );
-		inv.AddAnItem( 'Goat hide',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Hag teeth',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Hardened leather',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Hardened timber',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Harpy feathers',quantityMedium+RandRange( randMedium ) );
-		inv.AddAnItem( 'Horse hide',quantityLow+RandRange( randLow ) );
-
-
-
-
-
-
 		inv.AddAnItem( 'Necrophage skin',quantityLow+RandRange( randLow ) );
 		inv.AddAnItem( 'Nekker blood',quantityHigh+RandRange( randHigh ) );
 		inv.AddAnItem( 'Nekker heart',quantityMedium+RandRange( randMedium ) );
-
 		inv.AddAnItem( 'Phosphorescent crystal',quantityLow+RandRange( randLow ) );
-		inv.AddAnItem( 'Pig hide',quantityMedium+RandRange( randMedium ) );
-
-		inv.AddAnItem( 'Rabbit pelt',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Rotfiend blood',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Sapphire dust',quantityLow+RandRange( randLow ) );
-
-
-
 		inv.AddAnItem( 'Specter dust',quantityMedium+RandRange( randMedium ) );
-
-
-
-
-
-
-
 		inv.AddAnItem( 'Water essence',quantityMedium+RandRange( randMedium ) );
 		inv.AddAnItem( 'Wolf liver',quantityHigh+RandRange( randHigh ) );
-		inv.AddAnItem( 'Wolf pelt',quantityMedium+RandRange( randMedium ) );
-		
-		inv.AddAnItem( 'Alcohest', 5 );
-		inv.AddAnItem( 'Dwarven spirit', 5 );
+		inv.AddAnItem( 'Alcohest', 3 );
+		inv.AddAnItem( 'Dwarven spirit', 4 );
 	
 		
 		ids.Clear();
 		ids = inv.AddAnItem( 'Crossbow 5' );
 		EquipItem( ids[0] );
 		ids.Clear();
-		ids = inv.AddAnItem( 'Blunt Bolt', 100 );
+		ids = inv.AddAnItem( 'Blunt Bolt', 20 );
 		EquipItem( ids[0] );
-		inv.AddAnItem( 'Broadhead Bolt', 100 );
-		inv.AddAnItem( 'Split Bolt', 100 );
+		inv.AddAnItem( 'Broadhead Bolt', 20 );
+		inv.AddAnItem( 'Split Bolt', 20 );
 		
 		
 		RemoveAllAlchemyRecipes();
@@ -10726,7 +12363,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem( 'Killer Whale 1' );
 		inv.AddAnItem( 'Maribor Forest 1' );
 		inv.AddAnItem( 'Petris Philtre 2' );
-		inv.AddAnItem( 'White Gull 1', 3 );
+		inv.AddAnItem( 'White Gull 1', 2 );
 		inv.AddAnItem( 'White Honey 2' );
 		inv.AddAnItem( 'White Raffards Decoction 1' );
 		
@@ -10737,13 +12374,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		inv.AddAnItem( 'Mutagen 26' );	
 		
 		
-		inv.AddAnItem( 'weapon_repair_kit_1', 5 );
-		inv.AddAnItem( 'weapon_repair_kit_2', 3 );
-		inv.AddAnItem( 'armor_repair_kit_1', 5 );
-		inv.AddAnItem( 'armor_repair_kit_2', 3 );
+		inv.AddAnItem( 'weapon_repair_kit_1', 3 );
+		inv.AddAnItem( 'weapon_repair_kit_2', 2 );
+		inv.AddAnItem( 'armor_repair_kit_1', 3 );
+		inv.AddAnItem( 'armor_repair_kit_2', 2 );
 		
 		
-		quantityMedium = 2;
+		quantityMedium = 1;
 		quantityLow = 1;
 		inv.AddAnItem( 'Rune stribog lesser', quantityMedium );
 		inv.AddAnItem( 'Rune stribog', quantityLow );
@@ -10790,9 +12427,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var manager : CWitcherJournalManager;
 		
 		
-		inv.AddAnItem( 'Cows milk', 20 );
+		inv.AddAnItem( 'Cows milk', 5 );
 		ids.Clear();
-		ids = inv.AddAnItem( 'Dumpling', 44 );
+		ids = inv.AddAnItem( 'Dumpling', 5 );
 		EquipItem( ids[0] );
 		
 		
@@ -10935,75 +12572,66 @@ statemachine class W3PlayerWitcher extends CR4Player
 		manager.ActivateEntryByScriptTag( 'TutorialTimedChoiceDialog', JS_Active );
 		manager.ActivateEntryByScriptTag( 'TutorialYrden', JS_Active );
 		
+		//modSigns
 		inv.AddAnItem( 'Geralt Shirt', 1 );
-		inv.AddAnItem( 'Thread', 13 );
-		inv.AddAnItem( 'String', 9 );
-		inv.AddAnItem( 'Linen', 4 );
-		inv.AddAnItem( 'Silk', 6 );
-		inv.AddAnItem( 'Nigredo', 3 );
+		inv.AddAnItem( 'Thread', 3 );
+		inv.AddAnItem( 'String', 3 );
+		inv.AddAnItem( 'Linen', 2 );
+		inv.AddAnItem( 'Silk', 1 );
+		inv.AddAnItem( 'Nigredo', 1 );
 		inv.AddAnItem( 'Albedo', 1 );
 		inv.AddAnItem( 'Rubedo', 1 );
 		inv.AddAnItem( 'Rebis', 1 );
-		inv.AddAnItem( 'Dog tallow', 4 );
-		inv.AddAnItem( 'Lunar shards', 3 );
-		inv.AddAnItem( 'Quicksilver solution', 5 );
+		inv.AddAnItem( 'Dog tallow', 3 );
+		inv.AddAnItem( 'Lunar shards', 1 );
+		inv.AddAnItem( 'Quicksilver solution', 1 );
 		inv.AddAnItem( 'Aether', 1 );
-		inv.AddAnItem( 'Optima mater', 3 );
-		inv.AddAnItem( 'Fifth essence', 2 );
-		inv.AddAnItem( 'Hardened timber', 6 );
+		inv.AddAnItem( 'Optima mater', 1 );
+		inv.AddAnItem( 'Fifth essence', 1 );
+		inv.AddAnItem( 'Hardened timber', 2 );
 		inv.AddAnItem( 'Fur square', 1 );
-		inv.AddAnItem( 'Leather straps', 11 ); 
-		inv.AddAnItem( 'Leather squares', 6 ); 
-		inv.AddAnItem( 'Leather', 3 ); 
-		inv.AddAnItem( 'Hardened leather', 14 ); 
-		inv.AddAnItem( 'Chitin scale', 8 ); 
-		inv.AddAnItem( 'Draconide leather', 5 ); 
+		inv.AddAnItem( 'Leather straps', 4 ); 
+		inv.AddAnItem( 'Leather squares', 1 ); 
+		inv.AddAnItem( 'Leather', 2 ); 
+		inv.AddAnItem( 'Hardened leather', 2 ); 
+		inv.AddAnItem( 'Chitin scale', 2 ); 
+		inv.AddAnItem( 'Draconide leather', 1 ); 
 		inv.AddAnItem( 'Infused draconide leather', 0 );
-		inv.AddAnItem( 'Steel ingot', 5 );
+		inv.AddAnItem( 'Steel ingot', 2 );
 		inv.AddAnItem( 'Dark iron ore', 2 );
-		inv.AddAnItem( 'Dark iron ingot', 3 );
-		inv.AddAnItem( 'Dark iron plate', 1 );
-		inv.AddAnItem( 'Dark steel ingot', 10 );
-		inv.AddAnItem( 'Dark steel plate', 6 );
+		inv.AddAnItem( 'Dark iron ingot', 1 );
+		inv.AddAnItem( 'Dark steel ingot', 1 );
 		inv.AddAnItem( 'Silver ore', 2 );
-		inv.AddAnItem( 'Silver ingot', 6 );
-		inv.AddAnItem( 'Meteorite ore', 3 );
-		inv.AddAnItem( 'Meteorite ingot', 3 );
-		inv.AddAnItem( 'Meteorite plate', 2 );
-		inv.AddAnItem( 'Meteorite silver ingot', 6 );
-		inv.AddAnItem( 'Meteorite silver plate', 5 );
-		inv.AddAnItem( 'Orichalcum ingot', 0 );
-		inv.AddAnItem( 'Orichalcum plate', 1 );
-		inv.AddAnItem( 'Dwimeryte ingot', 6 );
-		inv.AddAnItem( 'Dwimeryte plate', 5 );
-		inv.AddAnItem( 'Dwimeryte enriched ingot', 0 );
-		inv.AddAnItem( 'Dwimeryte enriched plate', 0 );
-		inv.AddAnItem( 'Emerald dust', 0 );
-		inv.AddAnItem( 'Ruby dust', 4 );
-		inv.AddAnItem( 'Ruby', 2 );
-		inv.AddAnItem( 'Ruby flawless', 1 );
-		inv.AddAnItem( 'Sapphire dust', 0 );
-		inv.AddAnItem( 'Sapphire', 0 );
-		inv.AddAnItem( 'Monstrous brain', 8 );
-		inv.AddAnItem( 'Monstrous blood', 14 );
-		inv.AddAnItem( 'Monstrous bone', 9 );
-		inv.AddAnItem( 'Monstrous claw', 14 );
-		inv.AddAnItem( 'Monstrous dust', 9 );
-		inv.AddAnItem( 'Monstrous ear', 5 );
-		inv.AddAnItem( 'Monstrous egg', 1 );
-		inv.AddAnItem( 'Monstrous eye', 10 );
-		inv.AddAnItem( 'Monstrous essence', 7 );
-		inv.AddAnItem( 'Monstrous feather', 8 );
-		inv.AddAnItem( 'Monstrous hair', 12 );
-		inv.AddAnItem( 'Monstrous heart', 7 );
-		inv.AddAnItem( 'Monstrous hide', 4 );
-		inv.AddAnItem( 'Monstrous liver', 5 );
+		inv.AddAnItem( 'Silver ingot', 2 );
+		inv.AddAnItem( 'Meteorite ore', 2 );
+		inv.AddAnItem( 'Meteorite ingot', 1 );
+		inv.AddAnItem( 'Meteorite silver ingot', 1 );
+		inv.AddAnItem( 'Dwimeryte ingot', 2 );
+		inv.AddAnItem( 'Emerald dust', 2 );
+		inv.AddAnItem( 'Ruby dust', 2 );
+		inv.AddAnItem( 'Ruby', 1 );
+		inv.AddAnItem( 'Sapphire dust', 2 );
+		inv.AddAnItem( 'Sapphire', 1 );
+		inv.AddAnItem( 'Monstrous brain', 4 );
+		inv.AddAnItem( 'Monstrous blood', 3 );
+		inv.AddAnItem( 'Monstrous bone', 4 );
+		inv.AddAnItem( 'Monstrous claw', 3 );
+		inv.AddAnItem( 'Monstrous dust', 3 );
+		inv.AddAnItem( 'Monstrous ear', 4 );
+		inv.AddAnItem( 'Monstrous egg', 2 );
+		inv.AddAnItem( 'Monstrous eye', 2 );
+		inv.AddAnItem( 'Monstrous essence', 3 );
+		inv.AddAnItem( 'Monstrous feather', 4 );
+		inv.AddAnItem( 'Monstrous hair', 3 );
+		inv.AddAnItem( 'Monstrous heart', 2 );
+		inv.AddAnItem( 'Monstrous hide', 3 );
+		inv.AddAnItem( 'Monstrous liver', 2 );
 		inv.AddAnItem( 'Monstrous plate', 1 );
-		inv.AddAnItem( 'Monstrous saliva', 6 );
-		inv.AddAnItem( 'Monstrous stomach', 3 );
-		inv.AddAnItem( 'Monstrous tongue', 5 );
-		inv.AddAnItem( 'Monstrous tooth', 9 );
-		inv.AddAnItem( 'Venom extract', 0 );
+		inv.AddAnItem( 'Monstrous saliva', 4 );
+		inv.AddAnItem( 'Monstrous stomach', 2 );
+		inv.AddAnItem( 'Monstrous tongue', 2 );
+		inv.AddAnItem( 'Monstrous tooth', 3 );
+		inv.AddAnItem( 'Venom extract', 1 );
 		inv.AddAnItem( 'Siren vocal cords', 1 );
 		
 		
@@ -11016,7 +12644,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		theGame.GetTutorialSystem().RemoveAllQueuedTutorials();
 		
 		
-		FactsAdd( 'standalone_ep2' );
+		if( FactsQuerySum("standalone_ep2") < 1 ) //modSigns
+			FactsAdd("standalone_ep2");
 		FactsRemove( "StandAloneEP2" );
 		
 		theGame.GetJournalManager().ForceUntrackingQuestForEP1Savegame();

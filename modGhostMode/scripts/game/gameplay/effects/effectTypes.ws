@@ -301,9 +301,27 @@ EET_Unused1,
 	EET_ToxicityVenom,
 	EET_BasicQuen,
 	
-	
-EET_EffectTypesSize,
-EET_ForceEnumTo16Bit = 10000
+	//modSigns
+	EET_UndyingSkillImmortal,
+	EET_UndyingSkillCooldown,
+	EET_WhirlCooldown,
+	EET_RendCooldown,
+	EET_AardCooldown,
+	EET_IgniCooldown,
+	EET_YrdenCooldown,
+	EET_QuenCooldown,
+	EET_AxiiCooldown,
+	EET_DimeritiumEffect,
+	EET_Perk13Effect,
+	EET_KaerMorhenSetBonus,
+	EET_MeltArmorDebuff,
+	EET_MeltArmorTimer,
+	EET_PhantomWeapon,
+	EET_Runeword4,
+	EET_Runeword11,
+	EET_MutationTrigger,
+	EET_EffectTypesSize,
+	EET_ForceEnumTo16Bit = 10000
 }
 
 
@@ -372,15 +390,40 @@ struct SBuffPauseLock
 };
 
 
-function ModifyHitSeverityBuff(target : CActor, type : EEffectType) : EEffectType
+/*function AvoidBurnCS(target : CActor) : bool //modSigns
 {
-	var severityReduction, severity : int;
-	var npc : CNewNPC;
-	var witcher : W3PlayerWitcher;
-	var quenEntity : W3QuenEntity;
-
-	severityReduction = RoundMath(CalculateAttributeValue(target.GetAttributeValue('hit_severity')));
+	var chance : int;
+	
+	chance = RoundMath(CalculateAttributeValue(target.GetAttributeValue('avoid_burn_critical_state_chance')));
+	
+	if(RandF() < chance)
+	{
+		return true;
+	}
 		
+	return false;
+}*/
+		
+//modSigns: reworked
+function ModifyKnockdownSeverity(target : CActor, attacker : CGameplayEntity, type : EEffectType) : EEffectType //only used by knockdown applicator
+{
+	var /*severityReduction,*/ severity : int;
+	var npcTarget : CNewNPC;
+	var witcherTarget, witcherAttacker : W3PlayerWitcher;
+	//var quenEntity : W3QuenEntity;
+
+	npcTarget = (CNewNPC)target;
+	witcherTarget = (W3PlayerWitcher)target;
+	witcherAttacker = (W3PlayerWitcher)attacker;
+	
+	//force knockdown for weak to Aard and flying enemies
+	if(target.HasAbility('WeakToAard') || (npcTarget && npcTarget.IsFlying()))
+	{
+		if((W3MonsterHuntNPC)npcTarget)
+			return EET_Knockdown;
+		else
+			return EET_HeavyKnockdown;
+	}
 	
 	switch(type)
 	{
@@ -388,41 +431,67 @@ function ModifyHitSeverityBuff(target : CActor, type : EEffectType) : EEffectTyp
 		case EET_Knockdown :		severity = 3; break;
 		case EET_LongStagger : 		severity = 2; break;
 		case EET_Stagger :			severity = 1; break;
-		default :					severity = 0; break;
+		default :					return EET_Undefined; //no need to process further
 	}
 	
+	//modSigns: debug
+	//theGame.witcherLog.AddMessage("hit severity = " + severity);
 	
-	severity -= severityReduction;
+	//severityReduction = RoundMath(CalculateAttributeValue(target.GetAttributeValue('hit_severity'))); //modSigns
+	//severity -= severityReduction;
 	
-	
-	if(target.HasAlternateQuen())		
+	//increase severity if stamina is low
+	if(target.GetStaminaPercents() < 0.3)
 	{
-		if( (CNewNPC)target )
+		severity += 1;
+		if( target.GetStaminaPercents() < 0.1 )
 		{
-			
-			severity -= 1;
-		}
-		else
-		{
-			
-			witcher = (W3PlayerWitcher)target;
-			if(witcher)
-			{
-				quenEntity = (W3QuenEntity)witcher.GetCurrentSignEntity();
-				if(quenEntity.GetBlockedAllDamage())
-				{
-					severity -= 1;
-				}
-			}
+			severity += 1;
 		}
 	}
 	
+	//decrease severity if target has Quen
+	//handled in effect manager
+	//if(target.HasAlternateQuen())
+	//{
+	//	if(npcTarget)
+	//	{
+	//		severity -= 1;
+	//	}
+	//	else if(witcherTarget)
+	//	{
+	//		quenEntity = (W3QuenEntity)witcherTarget.GetCurrentSignEntity();
+	//		if(quenEntity.GetBlockedAllDamage())
+	//		{
+	//			severity -= 1;
+	//		}
+	//	}
+	//}
 	
-	if(severity == 4 && target.IsImmuneToBuff(EET_HeavyKnockdown))		severity = 3;
+	//decrease severity if target has shield
+	if(npcTarget && npcTarget.IsShielded(attacker) && severity > 2)
+	{
+		severity -= 2;
+	}
+	
+	//decrease severity if target is a huge monster
+	if(target.HasAbility('mon_type_huge') && severity > 2)
+	{
+		severity -= 2;
+	}
+	
+	//apply severity reduction from immunities
+	if(severity >= 4 && target.IsImmuneToBuff(EET_HeavyKnockdown))		severity = 3;
 	if(severity == 3 && target.IsImmuneToBuff(EET_Knockdown))			severity = 2;
 	if(severity == 2 && target.IsImmuneToBuff(EET_LongStagger))			severity = 1;
 	if(severity == 1 && target.IsImmuneToBuff(EET_Stagger))				severity = 0;
-			
+	
+	//deny heavy knockdown for contract monsters
+	if((W3MonsterHuntNPC)target && severity >= 4)
+		severity = 3;
+	
+	//modSigns: debug
+	//theGame.witcherLog.AddMessage("hit severity = " + severity);
 	
 	if(severity >= 4)
 		return EET_HeavyKnockdown;
@@ -500,6 +569,7 @@ function IsNegativeEffectType(type : EEffectType) : bool
 		case EET_Drunkenness :
 		case EET_OverEncumbered :
 		case EET_SilverDust :
+		case EET_DimeritiumEffect : //modSigns
 		case EET_Slowdown :
 		case EET_SlowdownFrost :
 		case EET_AxiiGuardMe :

@@ -207,7 +207,7 @@ class W3LevelManager
 	}
 		
 	
-	public function AddPoints(type : ESpendablePointType, amount : int, show : bool )
+	public function AddPoints(type : ESpendablePointType, amount : int, show : bool, optional ignoreNGP : bool ) //modSigns
 	{
 		var total : int;
 		var arrInt : array<int>;
@@ -232,7 +232,7 @@ class W3LevelManager
 		if(type == EExperiencePoint)
 		{
 			
-			if ( FactsQuerySum("NewGamePlus") > 0 )
+			if ( FactsQuerySum("NewGamePlus") > 0 && !ignoreNGP ) //modSigns
 			{
 				if ( theGame.params.GetNewGamePlusLevel() - theGame.params.NEW_GAME_PLUS_MIN_LEVEL > 0 )
 				{
@@ -240,7 +240,7 @@ class W3LevelManager
 				}
 			}
 			
-			if(FactsQuerySum("NewGamePlus") > 0 && GetLevel() < 50 + extraLevels)
+			if(FactsQuerySum("NewGamePlus") > 0 && !ignoreNGP && GetLevel() < 50 + extraLevels) //modSigns
 			{
 				points[type].free += amount;
 				amount *= 2;

@@ -115,6 +115,9 @@ class W3BoulderProjectile extends W3AdvancedProjectile
 	
 	private var projectileHitGround : bool;
 	
+	default projDMG = 200.f;			//modSigns
+	default projEfect = EET_Stagger;	//modSigns
+	
 	event OnProjectileInit()
 	{
 		this.PlayEffect(initFxName);
@@ -217,6 +220,31 @@ class W3BoulderProjectile extends W3AdvancedProjectile
 			}
 		}
 		DeactivateProjectile();
+	}
+	
+	//modSigns: copy of env proj
+	event OnAardHit( sign : W3AardProjectile )
+	{
+		var rigidMesh		 	: CMeshComponent;
+		var randAngleOffset 	: float;
+		
+		super.OnAardHit(sign);
+		
+		StopProjectile();
+		
+		rigidMesh = (CMeshComponent)this.GetComponentByClassName('CRigidMeshComponent');
+		
+		if ( rigidMesh )
+		{
+			rigidMesh.SetEnabled( true );
+		}
+		else
+		{
+			randAngleOffset = RandRangeF( 10, -10 );
+			this.bounceOfVelocityPreserve = 0.7;
+			this.BounceOff( VecFromHeading( thePlayer.GetHeading() + randAngleOffset ),this.GetWorldPosition() );
+			this.Init( thePlayer );
+		}
 	}
 }
 
@@ -337,6 +365,9 @@ class W3ElementalIfrytProjectile extends W3TraceGroundProjectile
 	private var action : W3DamageAction;
 	
 	
+	default projDMG = 200.f;			//modSigns
+	default projEfect = EET_Burning;	//modSigns
+	
 	event OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
 	{
 		
@@ -357,8 +388,8 @@ class W3ElementalIfrytProjectile extends W3TraceGroundProjectile
 		{
 			action = new W3DamageAction in this;
 			action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Light,CPS_SpellPower,false,true,false,false);
-			action.AddDamage(theGame.params.DAMAGE_NAME_FIRE, 200.f );		
-			action.AddEffectInfo(EET_Burning, 2.0);
+			action.AddDamage(theGame.params.DAMAGE_NAME_FIRE, projDMG ); //modSigns
+			action.AddEffectInfo(projEfect, 3.0); //modSigns
 			action.SetCanPlayHitParticle(false);
 			theGame.damageMgr.ProcessAction( action );
 			collidedEntities.PushBack(victim);
@@ -375,6 +406,9 @@ class W3ElementalIfrytProjectile extends W3TraceGroundProjectile
 class W3EredinFrostProjectile extends W3TraceGroundProjectile
 {
 	private var action : W3DamageAction;
+	
+	default projDMG = 200.f;				//modSigns
+	default projEfect = EET_SlowdownFrost;	//modSigns
 	
 	
 	event OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
@@ -398,7 +432,7 @@ class W3EredinFrostProjectile extends W3TraceGroundProjectile
 			action = new W3DamageAction in this;
 			action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Heavy,CPS_SpellPower,false,true,false,false);
 			action.AddDamage(theGame.params.DAMAGE_NAME_FROST, projDMG );
-			action.AddEffectInfo( projEfect, 2.0 );
+			action.AddEffectInfo( projEfect, 3.0 ); //modSigns
 			action.SetCanPlayHitParticle(false);
 			theGame.damageMgr.ProcessAction( action );
 			collidedEntities.PushBack(victim);
@@ -416,6 +450,8 @@ class W3ElementalDaoProjectile extends W3TraceGroundProjectile
 {
 	private var action : W3DamageAction;
 	
+	default projDMG = 200.f;			//modSigns
+	default projEfect = EET_Knockdown;	//modSigns
 	
 	event OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
 	{
@@ -437,8 +473,8 @@ class W3ElementalDaoProjectile extends W3TraceGroundProjectile
 		{
 			action = new W3DamageAction in this;
 			action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_None,CPS_AttackPower,false,true,false,false);
-			action.AddEffectInfo(EET_Knockdown);
-			action.AddDamage(theGame.params.DAMAGE_NAME_ELEMENTAL, 200.f );	
+			action.AddEffectInfo(projEfect); //modSigns
+			action.AddDamage(theGame.params.DAMAGE_NAME_ELEMENTAL, projDMG ); //modSigns
 			theGame.damageMgr.ProcessAction( action );
 			collidedEntities.PushBack(victim);
 			if ( deactivateOnCollisionWithVictim )
@@ -460,6 +496,9 @@ class W3StoneProjectile extends W3AdvancedProjectile
 	
 	private autobind comp : CMeshComponent = single;
 
+	default projDMG = 200.f;			//modSigns
+	default projEfect = EET_Knockdown;	//modSigns
+	
 	event OnProjectileInit()
 	{
 		this.PlayEffect(initFxName);
@@ -489,8 +528,8 @@ class W3StoneProjectile extends W3AdvancedProjectile
 		{
 			action = new W3DamageAction in this;
 			action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_None,CPS_AttackPower,false,true,false,false);
-			action.AddEffectInfo(EET_Knockdown);
-			action.AddDamage(theGame.params.DAMAGE_NAME_BLUDGEONING, 200.f );		
+			action.AddEffectInfo(projEfect); //modSigns
+			action.AddDamage(theGame.params.DAMAGE_NAME_BLUDGEONING, projDMG ); //modSigns
 			theGame.damageMgr.ProcessAction( action );
 			collidedEntities.PushBack(victim);
 			isActive = false;
@@ -536,6 +575,31 @@ class W3StoneProjectile extends W3AdvancedProjectile
 		comp.SetRotation( rot );
 		
 	}
+	
+	//modSigns: copy of env proj
+	event OnAardHit( sign : W3AardProjectile )
+	{
+		var rigidMesh		 	: CMeshComponent;
+		var randAngleOffset 	: float;
+		
+		super.OnAardHit(sign);
+		
+		StopProjectile();
+		
+		rigidMesh = (CMeshComponent)this.GetComponentByClassName('CRigidMeshComponent');
+		
+		if ( rigidMesh )
+		{
+			rigidMesh.SetEnabled( true );
+		}
+		else
+		{
+			randAngleOffset = RandRangeF( 10, -10 );
+			this.bounceOfVelocityPreserve = 0.7;
+			this.BounceOff( VecFromHeading( thePlayer.GetHeading() + randAngleOffset ),this.GetWorldPosition() );
+			this.Init( thePlayer );
+		}
+	}
 }
 
 class W3EnvironmentProjectile extends W3AdvancedProjectile
@@ -549,6 +613,9 @@ class W3EnvironmentProjectile extends W3AdvancedProjectile
 	
 	private autobind comp : CMeshComponent = single;
 
+	default projDMG = 200.f;			//modSigns
+	default projEfect = EET_Stagger;	//modSigns
+	
 	event OnProjectileInit()
 	{
 		this.PlayEffect(initFxName);
@@ -579,8 +646,8 @@ class W3EnvironmentProjectile extends W3AdvancedProjectile
 		{
 			action = new W3DamageAction in this;
 			action.Initialize(( CGameplayEntity )caster, victim, this, caster.GetName(), EHRT_None, CPS_AttackPower, false, true, false, false );
-			action.AddEffectInfo( EET_Stagger );
-			action.AddDamage( theGame.params.DAMAGE_NAME_BLUDGEONING, 200.f );		
+			action.AddEffectInfo( projEfect ); //modSigns
+			action.AddDamage( theGame.params.DAMAGE_NAME_BLUDGEONING, projDMG ); //modSigns
 			theGame.damageMgr.ProcessAction( action );
 			collidedEntities.PushBack(victim);
 			if ( IsNameValid( onCollisionFxName ))
@@ -749,7 +816,7 @@ class WebLineProjectile extends PoisonProjectile
 		var customDamageValuePerSec : SAbilityAttributeValue;
 		var player : W3PlayerWitcher;
 		var quen : W3QuenEntity;
-		var damageData : W3DamageAction;
+		//var damageData : W3DamageAction; //modSigns
 
 		if ( victim != thePlayer )
 			return;
@@ -769,9 +836,10 @@ class WebLineProjectile extends PoisonProjectile
 
 		if ( victim == thePlayer && quen )
 		{
-			damageData =  new W3DamageAction in this;
-			damageData.attacker = (CGameplayEntity)caster;
-			quen.OnTargetHit( damageData );
+			//damageData =  new W3DamageAction in this;
+			//damageData.attacker = (CGameplayEntity)caster;
+			//quen.OnTargetHit( damageData ); //modSigns: removed, zero damage, nothing to reduce
+			quen.ShowHitFX(); //modSigns: play FX
 			
 			if ( !((W3PlayerWitcher)thePlayer).IsCurrentSignChanneled() )
 			{
@@ -886,7 +954,7 @@ class PoisonProjectile extends W3AdvancedProjectile
 		action = new W3DamageAction in theGame;
 		action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Light,CPS_SpellPower,false,true,false,false);
 		action.AddDamage(theGame.params.DAMAGE_NAME_POISON, projDMG );
-		action.AddEffectInfo(EET_Poison, 2.0);
+		action.AddEffectInfo(projEfect, 3.0); //modSigns
 		action.SetCanPlayHitParticle(false);
 		theGame.damageMgr.ProcessAction( action );
 		delete action;
@@ -1070,59 +1138,61 @@ class DebuffProjectile extends W3AdvancedProjectile
 				( (CActor)victim ).SignalGameplayEvent( sendGameplayEventToVicitm );
 			}
 			
-			
-			
-			action = new W3DamageAction in this;
-			action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),hitReactionType,CPS_AttackPower, false, true, false, false);
-			if ( this.projDMG > 0 )
+			//modSigns: HaklandMage triple damage hack
+			if(!((CNewNPC)caster && ((CNewNPC)caster).HaklandMageDebuffProjectileHack()))
 			{
+				action = new W3DamageAction in this;
+				action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),hitReactionType,CPS_AttackPower, false, true, false, false);
+				if ( this.projDMG > 0 )
+				{
+					
+						if ( ignoreArmor )
+							action.SetIgnoreArmor(true);
+						action.AddDamage(damageTypeName, projDMG );
+				}
 				
-					if ( ignoreArmor )
-						action.SetIgnoreArmor(true);
-					action.AddDamage(damageTypeName, projDMG );
-			}
-			
-			if ( customDuration > 0 && (CActor)victim )
-			{
-				if ( !destroyQuen && (W3PlayerWitcher)victim && (((W3PlayerWitcher)victim).IsQuenActive( false ) || ((W3PlayerWitcher)victim).IsQuenActive( true )) ) {}
+				if ( customDuration > 0 && (CActor)victim )
+				{
+					if ( !destroyQuen && (W3PlayerWitcher)victim && (((W3PlayerWitcher)victim).IsQuenActive( false ) || ((W3PlayerWitcher)victim).IsQuenActive( true )) ) {}
+					else
+					{
+						params.effectType = debuffType;
+						params.creator = NULL;
+						params.sourceName = "debuff_projectile";
+						params.duration = customDuration;
+						
+						((CActor)victim).AddEffectCustom(params);
+					}
+				}
 				else
 				{
-					params.effectType = debuffType;
-					params.creator = NULL;
-					params.sourceName = "debuff_projectile";
-					params.duration = customDuration;
-					
-					((CActor)victim).AddEffectCustom(params);
+					action.AddEffectInfo(debuffType);
+					action.SetProcessBuffsIfNoDamage(applyDebuffIfNoDmgWasDealt);
 				}
-			}
-			else
-			{
-				action.AddEffectInfo(debuffType);
-				action.SetProcessBuffsIfNoDamage(applyDebuffIfNoDmgWasDealt);
-			}
-			
-			action.SetCanPlayHitParticle(false);
-			theGame.damageMgr.ProcessAction( action );
-			if ( signalDamageInstigatedEvent )
-			{
-				((CActor)caster).SignalGameplayEventParamObject( 'DamageInstigated', action );
-			}
-			if ( destroyQuen && ((W3PlayerWitcher)victim).IsQuenActive( false ) )
-			{
-				((W3PlayerWitcher)victim).FinishQuen( false );
-			}
-			
-			delete action;
-			
-			
-			if ( applyDebuffIfNoDmgWasDealt )
-				victim.PlayEffect(specialFxOnVictimName);
-			
-			if ( bounceOnVictimHit )
-			{
-				this.BounceOff(normal,pos);
-				this.Init(victim);				
-				return true;
+				
+				action.SetCanPlayHitParticle(false);
+				theGame.damageMgr.ProcessAction( action );
+				if ( signalDamageInstigatedEvent )
+				{
+					((CActor)caster).SignalGameplayEventParamObject( 'DamageInstigated', action );
+				}
+				if ( destroyQuen && ((W3PlayerWitcher)victim).IsQuenActive( false ) )
+				{
+					((W3PlayerWitcher)victim).FinishQuen( false );
+				}
+				
+				delete action;
+				
+				
+				if ( applyDebuffIfNoDmgWasDealt )
+					victim.PlayEffect(specialFxOnVictimName);
+				
+				if ( bounceOnVictimHit )
+				{
+					this.BounceOff(normal,pos);
+					this.Init(victim);				
+					return true;
+				}
 			}
 			
 			collidedEntities.PushBack(victim);
@@ -1226,7 +1296,7 @@ class W3FireballProjectile extends W3AdvancedProjectile
 		}
 		
 		action.AddDamage(theGame.params.DAMAGE_NAME_FIRE, projDMG );
-		action.AddEffectInfo(EET_Burning, 2.0);
+		action.AddEffectInfo(projEfect, 3.0); //modSigns
 		action.SetCanPlayHitParticle(false);
 		theGame.damageMgr.ProcessAction( action );
 		delete action;
@@ -1300,6 +1370,10 @@ class W3DracolizardFireball extends W3FireballProjectile
 	editable var destroyAfter		: float;
 	editable var surfaceFX 			: SFXSurfacePostParams;
 	
+	default projDMG = 200.f;			//modSigns
+	default projEfect = EET_Burning;	//modSigns
+	default burningDur = 3.f;			//modSigns
+	
 	protected function PlayCollisionEffect( optional victim : CGameplayEntity)
 	{
 		if ( victim == thePlayer && thePlayer.GetCurrentlyCastSign() == ST_Quen && ((W3PlayerWitcher)thePlayer).IsCurrentSignChanneled() )
@@ -1362,7 +1436,7 @@ class W3DracolizardFireball extends W3FireballProjectile
 		}
 		
 		action.AddDamage(theGame.params.DAMAGE_NAME_FIRE, projDMG );
-		action.AddEffectInfo(EET_Burning, burningDur );
+		action.AddEffectInfo(projEfect, burningDur ); //modSigns
 		action.SetCanPlayHitParticle(false);
 		theGame.damageMgr.ProcessAction( action );
 		delete action;
@@ -1500,6 +1574,9 @@ class W3MeteorProjectile extends W3FireballProjectile
 
 class W3IceMeteorProjectile extends W3MeteorProjectile
 {
+	default projDMG = 200.f;				//modSigns
+	default projEfect = EET_SlowdownFrost;	//modSigns
+	
 	protected function DealDamageToVictim( victim : CGameplayEntity )
 	{
 		var action : W3DamageAction;
@@ -1507,7 +1584,7 @@ class W3IceMeteorProjectile extends W3MeteorProjectile
 		action = new W3DamageAction in theGame;
 		action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Heavy,CPS_SpellPower,false,true,false,false);
 		action.AddDamage(theGame.params.DAMAGE_NAME_FROST, projDMG );
-		action.AddEffectInfo(EET_SlowdownFrost, 2.0);
+		action.AddEffectInfo(projEfect, 3.0); //modSigns
 		action.SetCanPlayHitParticle(false);
 		theGame.damageMgr.ProcessAction( action );
 		delete action;
@@ -1519,6 +1596,9 @@ class W3IceMeteorProjectile extends W3MeteorProjectile
 
 class W3LightningStrikeProjectile extends W3MeteorProjectile
 {
+	default projDMG = 200.f;			//modSigns
+	default projEfect = EET_Paralyzed;	//modSigns
+	
 	protected function DealDamageToVictim( victim : CGameplayEntity )
 	{
 		var action : W3DamageAction;
@@ -1526,7 +1606,7 @@ class W3LightningStrikeProjectile extends W3MeteorProjectile
 		action = new W3DamageAction in this;
 		action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Light,CPS_SpellPower,false,true,false,false);
 		action.AddDamage(theGame.params.DAMAGE_NAME_SHOCK , projDMG );
-		action.AddEffectInfo(EET_Paralyzed, 2.0);
+		action.AddEffectInfo(projEfect, 3.0); //modSigns
 		action.SetCanPlayHitParticle(false);
 		theGame.damageMgr.ProcessAction( action );
 		delete action;
@@ -1594,7 +1674,7 @@ class W3LightningBoltProjectile extends W3AdvancedProjectile
 		action = new W3DamageAction in this;
 		action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Light,CPS_SpellPower,false,true,false,false);
 		action.AddDamage(theGame.params.DAMAGE_NAME_SHOCK , projDMG );
-		action.AddEffectInfo(EET_Paralyzed, 2.0);
+		action.AddEffectInfo(projEfect, 3.0); //modSigns
 		action.SetCanPlayHitParticle(false);
 		theGame.damageMgr.ProcessAction( action );
 		delete action;
@@ -1660,7 +1740,7 @@ class W3IceSpearProjectile extends W3AdvancedProjectile
 	
 	default projDMG = 40.f;
 	default projEfect = EET_SlowdownFrost;
-	default customDuration = 2.0;
+	default customDuration = 3.0;			//modSigns
 		
 
 	event OnProjectileInit()

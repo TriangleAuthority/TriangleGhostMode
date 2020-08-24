@@ -60,6 +60,9 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 		var hasRunword5 : bool;
 		var oilEffect : W3Effect_Oil;
 		var aerondightEffect	: W3Effect_Aerondight;
+		var phantomWeapon		: W3Effect_PhantomWeapon; //modSigns
+		var runeword4			: W3Effect_Runeword4; //modSigns
+		var runeword11			: W3Effect_Runeword11; //modSigns
 		var effectType : EEffectType;
 
 		if ( !CanTick( timeDelta ) )
@@ -151,6 +154,15 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 							duration		= aerondightEffect.GetCurrentCount();
 						}
 					}
+					else if( effectType == EET_PhantomWeapon ) //modSigns
+					{
+						phantomWeapon = (W3Effect_PhantomWeapon)effectArray[i];
+						if( phantomWeapon )
+						{
+							initialDuration = phantomWeapon.GetMaxCount();
+							duration		= phantomWeapon.GetCurrentCount();
+						}
+					}
 					else if( effectType == EET_BasicQuen )
 					{
 						
@@ -167,11 +179,11 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 						duration = ( ( W3Effect_Mutation4 ) effectArray[i] ).GetStacks();
 						initialDuration = duration;
 					}
-					else if( effectType == EET_Mutation5 )
-					{						
-						duration = ( ( W3Effect_Mutation5 ) effectArray[i] ).GetStacks();
-						initialDuration = ( ( W3Effect_Mutation5 ) effectArray[i] ).GetMaxStacks();
-					}
+					//else if( effectType == EET_Mutation5 )
+					//{						
+					//	duration = ( ( W3Effect_Mutation5 ) effectArray[i] ).GetStacks();
+					//	initialDuration = ( ( W3Effect_Mutation5 ) effectArray[i] ).GetMaxStacks();
+					//} //modSigns
 					else if( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff )
 					{	
 						
@@ -181,6 +193,54 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 					{						
 						duration = ( ( W3Effect_Mutation10 ) effectArray[i] ).GetStacks();
 						initialDuration = duration;
+					}
+					//this stuff should be handled by the effects themselves...
+					else if( effectType == EET_LynxSetBonus ) //modSigns
+					{
+						duration = ( ( W3Effect_LynxSetBonus ) effectArray[i] ).GetStacks();
+						initialDuration = ( ( W3Effect_LynxSetBonus ) effectArray[i] ).GetMaxStacks();
+					}
+					else if( effectType == EET_Runeword4 ) //modSigns
+					{
+						runeword4 = (W3Effect_Runeword4)effectArray[i];
+						if( runeword4 )
+						{
+							initialDuration = runeword4.GetMaxStacks();
+							duration		= runeword4.GetStacks();
+						}
+					}
+					else if( effectType == EET_Runeword11 ) //modSigns
+					{
+						runeword11 = (W3Effect_Runeword11)effectArray[i];
+						if( runeword11 )
+						{
+							initialDuration = runeword11.GetMaxStacks();
+							duration		= runeword11.GetStacks();
+						}
+					}
+					else if( effectType == EET_Mutagen01 ) //modSigns
+					{
+						extraValue = ( ( W3Mutagen01_Effect ) effectArray[i] ).GetStacks();
+					}
+					else if( effectType == EET_Mutagen05 ) //modSigns
+					{
+						extraValue = ( ( W3Mutagen05_Effect ) effectArray[i] ).GetStacks();
+					}
+					else if( effectType == EET_Mutagen15 ) //modSigns
+					{
+						extraValue = ( ( W3Mutagen15_Effect ) effectArray[i] ).GetStacks();
+					}
+					else if( effectType == EET_Mutagen10 ) //modSigns
+					{
+						extraValue = ( ( W3Mutagen10_Effect ) effectArray[i] ).GetStacks();
+					}
+					else if( effectType == EET_Mutagen17 ) //modSigns
+					{
+						extraValue = ( ( W3Mutagen17_Effect ) effectArray[i] ).GetStacks();
+					}
+					else if( effectType == EET_Mutagen22 ) //modSigns
+					{
+						extraValue = ( ( W3Mutagen22_Effect ) effectArray[i] ).GetStacks();
 					}
 					
 					if(_currentEffects.Size() < i+1-offset)
@@ -260,10 +320,13 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 		var i 						: int;
 		var oilEffect				: W3Effect_Oil;
 		var aerondightEffect		: W3Effect_Aerondight;
+		var phantomWeapon			: W3Effect_PhantomWeapon; //modSigns
+		var runeword4				: W3Effect_Runeword4; //modSigns
+		var runeword11				: W3Effect_Runeword11; //modSigns
 		var buffDisplayLimit		: int = 16;
 		var mut3Buff 				: W3Effect_Mutation3;
 		var mut4Buff 				: W3Effect_Mutation4;
-		var mut5Buff 				: W3Effect_Mutation5;
+		//var mut5Buff 				: W3Effect_Mutation5;
 		var effectType				: EEffectType;
 		var mut7Buff 				: W3Mutation7BaseEffect;
 		var mut10Buff 				: W3Effect_Mutation10;
@@ -296,17 +359,17 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 					
 					format = 0;
 				}
-				else if ( effectType == EET_Oil || effectType == EET_Aerondight )
+				else if ( effectType == EET_Oil || effectType == EET_Aerondight || effectType == EET_PhantomWeapon || effectType == EET_Mutation4 || effectType == EET_Mutation10 ) //modSigns
 				{
 					
 					format = 1;
 				}
-				else if ( effectType == EET_Mutation3 || effectType == EET_Mutation4 || effectType == EET_Mutation5 || effectType == EET_Mutation10 )
+				else if ( effectType == EET_Mutation3 /*|| effectType == EET_Mutation4*/ /*|| effectType == EET_Mutation5*/ /*|| effectType == EET_Mutation10*/ || effectType == EET_LynxSetBonus || effectType == EET_Runeword4 || effectType == EET_Runeword11 ) //modSigns
 				{
 					
 					format = 2;
 				}
-				else if ( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff || effectType == EET_BasicQuen )
+				else if ( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff || effectType == EET_BasicQuen || effectType == EET_Mutagen01 || effectType == EET_Mutagen05 || effectType == EET_Mutagen10 || effectType == EET_Mutagen15 || effectType == EET_Mutagen17 || effectType == EET_Mutagen22 ) //modSigns
 				{
 					
 					format = 4;
@@ -343,6 +406,15 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 						l_flashObject.SetMemberFlashNumber("initialDuration", aerondightEffect.GetMaxCount()	 * 1.0 );
 					}
 				}
+				else if( effectType == EET_PhantomWeapon ) //modSigns
+				{
+					phantomWeapon = (W3Effect_PhantomWeapon)_currentEffects[i];
+					if( phantomWeapon )
+					{
+						l_flashObject.SetMemberFlashNumber("duration",        phantomWeapon.GetCurrentCount() * 1.0 );
+						l_flashObject.SetMemberFlashNumber("initialDuration", phantomWeapon.GetMaxCount()	 * 1.0 );
+					}
+				}
 				
 				
 				else if( effectType == EET_Mutation3 )
@@ -357,12 +429,12 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 					l_flashObject.SetMemberFlashNumber("duration", 			mut4Buff.GetStacks() );
 					l_flashObject.SetMemberFlashNumber("initialDuration", 	mut4Buff.GetStacks() );
 				}
-				else if( effectType == EET_Mutation5 )
-				{						
-					mut5Buff = ( W3Effect_Mutation5 ) _currentEffects[i];						
-					l_flashObject.SetMemberFlashNumber("duration", 			mut5Buff.GetStacks() );
-					l_flashObject.SetMemberFlashNumber("initialDuration", 	mut5Buff.GetStacks() );
-				}
+				//else if( effectType == EET_Mutation5 )
+				//{						
+				//	mut5Buff = ( W3Effect_Mutation5 ) _currentEffects[i];						
+				//	l_flashObject.SetMemberFlashNumber("duration", 			mut5Buff.GetStacks() );
+				//	l_flashObject.SetMemberFlashNumber("initialDuration", 	mut5Buff.GetStacks() );
+				//} //modSigns
 				
 				
 				else if( effectType == EET_Mutation10 )
@@ -370,6 +442,29 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 					mut10Buff = ( W3Effect_Mutation10 ) _currentEffects[i];						
 					l_flashObject.SetMemberFlashNumber("duration", 			mut10Buff.GetStacks() );
 					l_flashObject.SetMemberFlashNumber("initialDuration", 	mut10Buff.GetStacks() );
+				}
+				else if( effectType == EET_LynxSetBonus ) //modSigns
+				{
+					l_flashObject.SetMemberFlashNumber("duration", 			( ( W3Effect_LynxSetBonus ) _currentEffects[i] ).GetStacks() );
+					l_flashObject.SetMemberFlashNumber("initialDuration", 	( ( W3Effect_LynxSetBonus ) _currentEffects[i] ).GetMaxStacks() );
+				}
+				else if( effectType == EET_Runeword4 ) //modSigns
+				{
+					runeword4 = (W3Effect_Runeword4)_currentEffects[i];
+					if( runeword4 )
+					{
+						l_flashObject.SetMemberFlashNumber("duration",        runeword4.GetStacks() );
+						l_flashObject.SetMemberFlashNumber("initialDuration", runeword4.GetMaxStacks() );
+					}
+				}
+				else if( effectType == EET_Runeword11 ) //modSigns
+				{
+					runeword11 = (W3Effect_Runeword11)_currentEffects[i];
+					if( runeword11 )
+					{
+						l_flashObject.SetMemberFlashNumber("duration",        runeword11.GetStacks() );
+						l_flashObject.SetMemberFlashNumber("initialDuration", runeword11.GetMaxStacks() );
+					}
 				}
 				else if ( (W3RepairObjectEnhancement)_currentEffects[i] && GetWitcherPlayer().HasRunewordActive('Runeword 5 _Stats') )
 				{

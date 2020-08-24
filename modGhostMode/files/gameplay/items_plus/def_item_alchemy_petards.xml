@@ -19,10 +19,11 @@
 			-->
 			
       <ability name="default_bomb_stats">
-        <weight type="base" min="0" />
+        <weight type="base" min="0.1" />
       </ability>
 	  	  
-      <!-- DANCING STAR -->
+      <!-- DANCING STAR: modSigns -->
+	  <!-- has both impact and loop effects: damage on impact, !!continuous!! burning application inside the affected area -->
       <ability name="DancingStar_1_impact">
         <tags>PetardImpactParams</tags>
         <FireDamage type="add" min="100" max="100" />
@@ -33,12 +34,12 @@
       <ability name="DancingStar_1_loop">
         <tags>PetardLoopParams</tags>
         <BurningEffect_DancingStar_1 is_ability="true" />
-        <duration type="add" min="4" max="4" />
+        <duration type="add" min="3" max="3" />
       </ability>
 	  
       <ability name="DancingStar_2_impact">
         <tags>PetardImpactParams</tags>
-        <FireDamage type="add" min="200" max="200" />
+        <FireDamage type="add" min="150" max="150" />
         <ammo type="add" min="3" />
         <DancingStar_3_impact is_ability="true" />
         <level type="add" min="2" />
@@ -47,12 +48,12 @@
       <ability name="DancingStar_2_loop">
         <tags>PetardLoopParams</tags>
         <BurningEffect_DancingStar_2 is_ability="true" />
-        <duration type="add" min="7" max="7" />
+        <duration type="add" min="4" max="4" />
       </ability>
 	  
       <ability name="DancingStar_3_impact">
         <tags>PetardImpactParams</tags>
-        <FireDamage type="add" min="300" max="300" />
+        <FireDamage type="add" min="200" max="200" />
         <ammo type="add" min="4" />
         <DancingStar_2_impact is_ability="true" />
         <level type="add" min="3" />
@@ -61,10 +62,11 @@
       <ability name="DancingStar_3_loop">
         <tags>PetardLoopParams</tags>
         <BurningEffect_DancingStar_3 is_ability="true" />
-        <duration type="add" min="10" max="10" />
+        <duration type="add" min="5" max="5" />
       </ability>
 	  
-      <!-- DEVILS PUFFBALL -->
+      <!-- DEVILS PUFFBALL: modSigns -->
+	  <!-- has both impact and loop effects: damage on impact, !!continuous!! poisoning application inside the affected area -->
       <ability name="DevilsPuffball_1_impact">
         <tags>PetardImpactParams</tags>
         <PoisonDamage type="add" min="100" max="100" />
@@ -75,12 +77,12 @@
       <ability name="DevilsPuffball_1_loop">
         <tags>PetardLoopParams</tags>
         <PoisonEffect_DevilsPuffball_1 is_ability="true" />
-        <duration type="add" min="10" max="10" />
+        <duration type="add" min="3" max="3" />
       </ability>
 	  
       <ability name="DevilsPuffball_2_impact">
         <tags>PetardImpactParams</tags>
-        <PoisonDamage type="add" min="200" max="200" />
+        <PoisonDamage type="add" min="150" max="150" />
         <ammo type="add" min="3" />
         <DevilsPuffball_3_impact is_ability="true" />
         <level type="add" min="2" />
@@ -89,12 +91,12 @@
       <ability name="DevilsPuffball_2_loop">
         <tags>PetardLoopParams</tags>
         <PoisonEffect_DevilsPuffball_2 is_ability="true" />
-        <duration type="add" min="30" max="30" />
+        <duration type="add" min="4" max="4" />
       </ability>
 	  
       <ability name="DevilsPuffball_3_impact">
         <tags>PetardImpactParams</tags>
-        <PoisonDamage type="add" min="300" max="300" />
+        <PoisonDamage type="add" min="200" max="200" />
         <ammo type="add" min="4" />
         <DevilsPuffball_2_impact is_ability="true" />
         <level type="add" min="3" />
@@ -103,10 +105,10 @@
       <ability name="DevilsPuffball_3_loop">
         <tags>PetardLoopParams</tags>
         <PoisonEffect_DevilsPuffball_3 is_ability="true" />
-        <duration type="add" min="30" max="30" />
+        <duration type="add" min="5" max="5" />
       </ability>
 	  
-      <!-- DRAGONS DREAM -->
+      <!-- DRAGONS DREAM: modSigns - duration and damages changed -->
       <ability name="DragonsDream_1">
         <tags>PetardLoopParams</tags>
         <FireDamage type="add" min="300" max="300" />
@@ -118,130 +120,65 @@
 	  
       <ability name="DragonsDream_2">
         <tags>PetardLoopParams</tags>
-        <FireDamage type="add" min="450" max="450" />
-        <duration type="add" min="30" max="30" />
+        <FireDamage type="add" min="400" max="400" />
+        <duration type="add" min="20" max="20" />
         <ammo type="add" min="3" />
         <DragonsDream_3 is_ability="true" />
         <level type="add" min="2" />
 		<burning_chance min="0.5" type="add" />
+		<desc_burningchance_mult min="0.5" type="add" />
 		<quality type="add" min="3" max="3"/>
       </ability>
 	  
       <ability name="DragonsDream_3">
         <tags>PetardLoopParams</tags>
-        <FireDamage type="add" min="600" max="600" />
-        <duration type="add" min="30" max="30" />
+        <FireDamage type="add" min="500" max="500" />
+        <duration type="add" min="25" max="25" />
         <ammo type="add" min="4" />
         <DragonsDream_2 is_ability="true" />
         <level type="add" min="3" />
-		<burning_chance min="0.5" type="add" />
-		<explosionFireDamage type="add" min="20" />
+		<burning_chance min="0.75" type="add" />
+		<desc_burningchance_mult min="0.75" type="add" />
+		<explosionFireDamage type="add" min="500" />
 		<quality type="add" min="4" max="4"/>
       </ability>
 	  
-      <!-- Dwimeritium BOMB -->
+      <!-- Dwimeritium BOMB: modSigns - changed -->
       <ability name="DwimeritiumBomb_1">
         <tags>PetardLoopParams</tags>
-        <duration type="add" min="15" />
-        <magic_1 is_ability="true" />
-        <magic_2 is_ability="true" />
-        <magic_3 is_ability="true" />
-        <magic_4 is_ability="true" />
-        <magic_5 is_ability="true" />
-        <magic_s1 is_ability="true" />
-        <magic_s2 is_ability="true" />
-        <magic_s3 is_ability="true" />
-        <magic_s4 is_ability="true" />
-        <magic_s5 is_ability="true" />
-		<Doppelganger is_ability="true" />
-		<Fireball is_ability="true" />
-		<Flashstep is_ability="true" />
-		<Magical is_ability="true" />
-		<SwarmTeleport is_ability="true" />
-		<SwarmShield is_ability="true" />
-		<Teleport is_ability="true" />
-		<Wave is_ability="true" />
-		<Frost is_ability="true" />
-		<GroundSlam is_ability="true" />
-		<SpawnArena is_ability="true" />
-		<ThrowFire is_ability="true" />
-		<ablSignAttacks is_ability="true" />
+        <duration type="add" min="5" />
         <ammo type="add" min="2" />
+        <DimeritiumEffect_Level1 is_ability="true" />
 		<quality type="add" min="2" max="2"/>
 		<level type="add" min="1" />
       </ability>
 	  
       <ability name="DwimeritiumBomb_2">
         <tags>PetardLoopParams</tags>
-        <duration type="add" min="30" />
-        <magic_1 is_ability="true" />
-        <magic_2 is_ability="true" />
-        <magic_3 is_ability="true" />
-        <magic_4 is_ability="true" />
-        <magic_5 is_ability="true" />
-        <magic_s1 is_ability="true" />
-        <magic_s2 is_ability="true" />
-        <magic_s3 is_ability="true" />
-        <magic_s4 is_ability="true" />
-        <magic_s5 is_ability="true" />
-		<Doppelganger is_ability="true" />
-		<Fireball is_ability="true" />
-		<Flashstep is_ability="true" />
-		<Magical is_ability="true" />
-		<SwarmTeleport is_ability="true" />
-		<SwarmShield is_ability="true" />
-		<Teleport is_ability="true" />
-		<Wave is_ability="true" />
-		<Frost is_ability="true" />
-		<GroundSlam is_ability="true" />
-		<SpawnArena is_ability="true" />
-		<ThrowFire is_ability="true" />
-		<ablSignAttacks is_ability="true" />
+        <duration type="add" min="10" />
         <ammo type="add" min="3" />
         <DwimeritiumBomb_3 is_ability="true" />
         <level type="add" min="2" />
+        <DimeritiumEffect_Level2 is_ability="true" />
 		<quality type="add" min="3" max="3"/>
       </ability>
 	  
       <ability name="DwimeritiumBomb_3">
         <tags>PetardLoopParams</tags>
-        <duration type="add" min="30" />
-        <magic_1 is_ability="true" />
-        <magic_2 is_ability="true" />
-        <magic_3 is_ability="true" />
-        <magic_4 is_ability="true" />
-        <magic_5 is_ability="true" />
-        <magic_s1 is_ability="true" />
-        <magic_s2 is_ability="true" />
-        <magic_s3 is_ability="true" />
-        <magic_s4 is_ability="true" />
-        <magic_s5 is_ability="true" />
-		<Doppelganger is_ability="true" />
-		<Fireball is_ability="true" />
-		<Flashstep is_ability="true" />
-		<Magical is_ability="true" />
-		<SwarmTeleport is_ability="true" />
-		<SwarmShield is_ability="true" />
-		<Teleport is_ability="true" />
-		<Wave is_ability="true" />
-		<Frost is_ability="true" />
-		<GroundSlam is_ability="true" />
-		<SpawnArena is_ability="true" />
-		<ThrowFire is_ability="true" />
-		<ablSignAttacks is_ability="true" />
+        <duration type="add" min="15" />
         <ammo type="add" min="4" />
         <DwimeritiumBomb_2 is_ability="true" />
         <level type="add" min="3" />
-		<duration_out_of_cloud type="add" min="5" />
+        <DimeritiumEffect_Level3 is_ability="true" />
 		<quality type="add" min="4" max="4"/>
       </ability>
 	  	  
-      <!-- GRAPESHOT -->
+      <!-- GRAPESHOT: modSigns - damages changed -->
       <ability name="Grapeshot_1">
         <tags>PetardImpactParams</tags>
-        <PhysicalDamage type="add" min="350" max="350" />
-        <SilverDamage type="add" min="350" max="350" />
-        <FireDamage type="add" min="5" />
+        <PhysicalDamage type="add" min="300" max="300" />
+        <SilverDamage type="add" min="300" max="300" />
+        <FireDamage type="add" min="50" />
         <StaggerEffect is_ability="true" />
         <ammo type="add" min="2" />
 		<quality type="add" min="2" max="2"/>
@@ -250,9 +187,9 @@
 	  
       <ability name="Grapeshot_2">
         <tags>PetardImpactParams</tags>
-        <PhysicalDamage type="add" min="700" max="700" />
-        <SilverDamage type="add" min="700" max="700" />
-        <FireDamage type="add" min="10" />
+        <PhysicalDamage type="add" min="400" max="400" />
+        <SilverDamage type="add" min="400" max="400" />
+        <FireDamage type="add" min="100" />
         <StaggerEffect is_ability="true" />
         <ammo type="add" min="3" />
         <Grapeshot_3 is_ability="true" />
@@ -262,15 +199,15 @@
 	  
       <ability name="Grapeshot_3">
         <tags>PetardImpactParams</tags>
-        <PhysicalDamage type="add" min="900" max="900" />
-        <SilverDamage type="add" min="900" max="900" />
-        <FireDamage type="add" min="10" />
+        <PhysicalDamage type="add" min="500" max="500" />
+        <SilverDamage type="add" min="500" max="500" />
+        <FireDamage type="add" min="150" />
         <StaggerEffect is_ability="true" />
         <ammo type="add" min="4" />
         <Grapeshot_2 is_ability="true" />
         <level type="add" min="3" />
 		<quality type="add" min="4" max="4"/>
-		<ignoreArmor />
+		<!-- <ignoreArmor /> -->
       </ability>
 	  
       <!-- SAMUM -->
@@ -280,8 +217,8 @@
         <ammo type="add" min="2" />
 		<quality type="add" min="2" max="2"/>
 		<level type="add" min="1" />
-		<BiesHypnosis is_ability="true" />
-		<Hypnosis is_ability="true" />
+		<!-- <BiesHypnosis is_ability="true" /> -->
+		<!-- <Hypnosis is_ability="true" /> -->
       </ability>
 	  
       <ability name="Samum_2">
@@ -291,8 +228,8 @@
         <Samum_3 is_ability="true" />
         <level type="add" min="2" />
 		<quality type="add" min="3" max="3"/>
-		<BiesHypnosis is_ability="true" />
-		<Hypnosis is_ability="true" />
+		<!-- <BiesHypnosis is_ability="true" /> -->
+		<!-- <Hypnosis is_ability="true" /> -->
       </ability>
 	  
       <ability name="Samum_3">
@@ -301,10 +238,10 @@
         <BlindnessEffect_Samum_3 is_ability="true" />
         <Samum_2 is_ability="true" />
         <level type="add" min="3" />
-		<critical_hit_chance type="add" min="1" />
+		<!-- <critical_hit_chance type="add" min="1" /> --> <!-- modSigns: moved to the effect itself -->
 		<quality type="add" min="4" max="4"/>
-		<BiesHypnosis is_ability="true" />
-		<Hypnosis is_ability="true" />
+		<!-- <BiesHypnosis is_ability="true" /> -->
+		<!-- <Hypnosis is_ability="true" /> -->
       </ability>
 	  
       <!-- SILVER DUST BOMB -->
@@ -314,7 +251,6 @@
         <SilverDustEffect_Level1 is_ability="true" />
 		<quality type="add" min="2" max="2"/>
 		<level type="add" min="1" />
-		<Hypnosis is_ability="true" />
       </ability>
       <ability name="SilverDustBomb_2">
         <tags>PetardImpactParams</tags>       
@@ -323,7 +259,6 @@
         <level type="add" min="2" />
         <SilverDustEffect_Level2 is_ability="true" />
 		<quality type="add" min="3" max="3"/>
-		<Hypnosis is_ability="true" />
       </ability>
       <ability name="SilverDustBomb_3">
         <tags>PetardImpactParams</tags>        
@@ -332,17 +267,14 @@
         <level type="add" min="3" />
         <SilverDustEffect_Level3 is_ability="true" />
 		<quality type="add" min="4" max="4"/>
-		<Hypnosis is_ability="true" />
       </ability>
 	  
       <!-- WHITE FROST -->
       <ability name="WhiteFrost_1_impact">
         <tags>PetardImpactParams</tags>
-        <ThrowStone is_ability="true" />
         <MudTeleport is_ability="true" />
         <MudAttack is_ability="true" />
         <Burrow is_ability="true" />
-        <DustCloud is_ability="true" />
         <FrozenEffect_WhiteFrost1 is_ability="true" />
         <ammo type="add" min="2" />
 		<quality type="add" min="2" max="2"/>
@@ -355,11 +287,9 @@
       </ability>
       <ability name="WhiteFrost_2_impact">
         <tags>PetardImpactParams</tags>
-        <ThrowStone is_ability="true" />
         <MudTeleport is_ability="true" />
         <MudAttack is_ability="true" />
         <Burrow is_ability="true" />
-        <DustCloud is_ability="true" />
         <FrozenEffect_WhiteFrost2 is_ability="true" />
         <ammo type="add" min="3" />
         <WhiteFrost_3_impact is_ability="true" />
@@ -373,11 +303,9 @@
       </ability>
       <ability name="WhiteFrost_3_impact">
         <tags>PetardImpactParams</tags>
-        <ThrowStone is_ability="true" />
         <MudTeleport is_ability="true" />
         <MudAttack is_ability="true" />
         <Burrow is_ability="true" />
-        <DustCloud is_ability="true" />
         <FrozenEffect_WhiteFrost3 is_ability="true" />
         <ammo type="add" min="4" />
         <WhiteFrost_2_impact is_ability="true" />

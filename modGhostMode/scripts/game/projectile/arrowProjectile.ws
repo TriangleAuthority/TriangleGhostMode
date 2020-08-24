@@ -66,6 +66,8 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 		var arrowSize 		: Vector;
 		var hitPos 			: Vector;
 		
+		var attackPower		: SAbilityAttributeValue; //modSigns
+		
 		if ( yrdenAlternate )
 		{
 			return true;
@@ -77,7 +79,7 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 		{
 			return true;
 		}
-		
+			
 		if(collidingComponent)
 			victim = (CGameplayEntity)collidingComponent.GetEntity();
 		
@@ -85,6 +87,9 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 			RemoveTimer( 'CheckIfInfWaterLoop' );
 		
 		super.OnProjectileCollision(pos, normal, collidingComponent, hitCollisionsGroups, actorIndex, shapeIndex);
+		
+		if(!victim && thePlayer.HasAbility('sq108_heavy_armor _Stats', true)) //modSigns: fix quest arrow bug
+			victim = thePlayer;
 		
 		if( collidingComponent && !hitCollisionsGroups.Contains( 'Static' ) )
 		{	
@@ -99,7 +104,9 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 			}
 			
 		}
-		else if ( hitCollisionsGroups.Contains( 'Terrain' ) || hitCollisionsGroups.Contains( 'Static' ) )
+		//else if ( hitCollisionsGroups.Contains( 'Terrain' ) || hitCollisionsGroups.Contains( 'Static' ) )
+		//W3EE: collisions fix
+		else if ( hitCollisionsGroups.Contains( 'Terrain' ) || hitCollisionsGroups.Contains( 'Static' ) || hitCollisionsGroups.Contains( 'Debris' ) || hitCollisionsGroups.Contains( 'Destructible' ) || hitCollisionsGroups.Contains( 'RigidBody' ) || hitCollisionsGroups.Contains( 'Foliage' ) || hitCollisionsGroups.Contains( 'Door' ) || hitCollisionsGroups.Contains( 'Platforms' ) || hitCollisionsGroups.Contains( 'Fence' ) )
 		{
 			StopProjectile();
 			isActive = false;
@@ -175,7 +182,7 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 			{
 				isRolling = true;
 			}
-			else if(thePlayer.HasAbility( 'Glyphword 1 _Stats', true ))
+			/*else if((W3PlayerWitcher)thePlayer && ((W3PlayerWitcher)thePlayer).HasGlyphwordActive( 'Glyphword 1 _Stats' )) //modSigns
 			{
 				
 				thePlayer.PlayEffect('glyphword_reflection');
@@ -202,22 +209,24 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 					this.SoundEvent( "cmb_arrow_bounce" );
 					bounce = true;
 				}
-			}
-			else if(thePlayer.CanParryAttack() && thePlayer.CanUseSkill(S_Sword_s10))
-			{			
-				
+			}*/ //modSigns: moved
+			//else if(thePlayer.CanParryAttack() && thePlayer.CanUseSkill(S_Sword_s10) || (W3PlayerWitcher)thePlayer && ((W3PlayerWitcher)thePlayer).HasGlyphwordActive( 'Glyphword 1 _Stats' )) //modSigns
+			//modSigns: can parry arrows by default
+			else if ( thePlayer.CanParryAttack() )
+			{
 				parryInfo = thePlayer.ProcessParryInfo(((CActor)caster),((CActor)victim),AST_Jab,ASD_NotSet,'attack_light',((CActor)caster).GetInventory().GetItemFromSlot('l_weapon'), true);
 				if ( thePlayer.PerformParryCheck(parryInfo) )
 				{
-					if ( thePlayer.CheckCounterSpamming( (CActor)caster ) && thePlayer.GetSkillLevel(S_Sword_s10) > 1 )
+					//modSigns: can counter/reflect arrows starting with level 1 of the new deflect skill
+					if ( thePlayer.CheckCounterSpamming( (CActor)caster ) && thePlayer.CanUseSkill(S_Sword_s10) )
 					{
 						casterPos = caster.GetWorldPosition();
 						casterPos.Z += 1.5;
 						this.Init(thePlayer);
-						if ( thePlayer.GetSkillLevel(S_Sword_s10) == 3 )
+						/*if ( thePlayer.GetSkillLevel(S_Sword_s10) == 3 )
 						{
 							this.projDMG *= 1 + CalculateAttributeValue( thePlayer.GetSkillAttributeValue(S_Sword_s10, 'damage_increase', false, true) );
-						}
+						}*/ //modSigns: moved to damage manager processor
 						this.ShootProjectileAtPosition(2,projSpeed*0.7,casterPos);
 						ActivateTrail('arrow_trail_red');
 						isBouncedArrow = true;
@@ -230,6 +239,15 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 				}
 			}
 			
+			//modSigns
+			if(!bounce && (W3PlayerWitcher)thePlayer && ((W3PlayerWitcher)thePlayer).HasGlyphwordActive( 'Glyphword 1 _Stats' ))
+			{
+				thePlayer.PlayEffect('glyphword_reflection');
+				template = (CEntityTemplate)LoadResource('glyphword_1');
+				theGame.CreateEntity(template, GetWorldPosition(), thePlayer.GetWorldRotation(), , , true);
+				this.SoundEvent( "cmb_arrow_bounce" );
+				bounce = true;
+			}
 			
 			if(!bounce)
 			{
@@ -240,6 +258,16 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 				{
 					FactsAdd("sq108_arrow_deflected");
 					thePlayer.PlayEffect( 'bolt_bump' );
+				}
+			}
+			
+			//modSigns: bounce arrow ability
+			if( !bounce && (W3PlayerWitcher)thePlayer )
+			{
+				if( RandF() < CalculateAttributeValue(((W3PlayerWitcher)thePlayer).GetAttributeValue('q108_bounce_arrows')) )
+				{
+					thePlayer.PlayEffect( 'bolt_bump' );
+					bounce = true;
 				}
 			}
 			
@@ -597,7 +625,17 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 		var action : W3DamageAction;
 		var victimTags, attackerTags : array<name>;
 		var none 		: SAbilityAttributeValue;
+		var heldWeaponPiercingDmg, heldWeaponSilverDmg : float; //modSigns
 		
+		//modSigns: proper bow/crossbow damage
+		heldWeaponPiercingDmg = GetHeldWeaponDamage( theGame.params.DAMAGE_NAME_PIERCING );
+		heldWeaponSilverDmg = GetHeldWeaponDamage( theGame.params.DAMAGE_NAME_SILVER );
+		if( heldWeaponPiercingDmg > 0 )
+			projDMG = heldWeaponPiercingDmg;
+		if( heldWeaponSilverDmg > 0 )
+			projSilverDMG = heldWeaponSilverDmg;
+		
+		//damage is hardcoded in w2ent: items/weapons/projectiles
 		action = new W3DamageAction in this;
 		action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Light,CPS_AttackPower,false,true,false,false);				
 		if( isOnFire )		
@@ -611,6 +649,10 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 			action.AddDamage(theGame.params.DAMAGE_NAME_PIERCING, projDMG );
 			action.AddDamage(theGame.params.DAMAGE_NAME_SILVER, projSilverDMG );
 		}
+		
+		//theGame.witcherLog.AddMessage("NPC: " + ((CNewNPC)caster).GetDisplayName());
+		//theGame.witcherLog.AddMessage("projDMG: " + projDMG);
+		//theGame.witcherLog.AddMessage("projSilverDMG: " + projSilverDMG);
 			
 		if( this.projEfect != EET_Undefined )
 		{
@@ -638,6 +680,32 @@ class W3ArrowProjectile extends W3AdvancedProjectile
 		attackerTags = caster.GetTags();
 		
 		AddHitFacts( victimTags, attackerTags, "_arrow_hit" );
+	}
+	
+	function GetHeldWeaponDamage( damageTypeName : name ) : float
+	{
+		var itemCategory : name;
+		var heldWeapons : array <SItemUniqueId>;
+		var i : int;
+		var inv : CInventoryComponent;
+		var actorAttacker : CActor;
+		
+		actorAttacker = (CActor)caster;
+		
+		if( !actorAttacker )
+			return 0;
+		
+		inv = actorAttacker.GetInventory();
+		heldWeapons = inv.GetHeldWeapons();
+		for( i = 0; i < heldWeapons.Size(); i += 1 )
+		{
+			itemCategory = inv.GetItemCategory( heldWeapons[i] );
+			if( itemCategory == 'bow' || itemCategory == 'crossbow' )
+			{
+				return actorAttacker.GetTotalWeaponDamage( heldWeapons[i], damageTypeName, GetInvalidUniqueId() );
+			}
+		}
+		return 0;
 	}
 	
 	public function SetShouldBeAttachedToVictim( val : bool )	{ shouldBeAttachedToVictim = val; }

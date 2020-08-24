@@ -12,16 +12,25 @@ class W3Potion_WhiteHoney extends CBaseGameplayEffect
 	default effectType = EET_WhiteHoney;
 	
 	
+	//modSigns begin
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
+	{
+		super.OnEffectAdded(customParams);
+		CleanupToxicity();
+	}
+	
+	public function CumulateWith(effect: CBaseGameplayEffect)
+	{
+		super.CumulateWith(effect);
+		CleanupToxicity();
+	}
+	
+	function CleanupToxicity()
 	{
 		var exceptions : array<CBaseGameplayEffect>;
 		var wolf : CBaseGameplayEffect;
 		
-		super.OnEffectAdded(customParams);
-		
-		
 		target.ForceSetStat(BCS_Toxicity, 0);
-		
 		
 		exceptions.PushBack(this);
 		wolf = thePlayer.GetBuff(EET_WolfHour);
@@ -30,4 +39,5 @@ class W3Potion_WhiteHoney extends CBaseGameplayEffect
 			
 		thePlayer.RemoveAllPotionEffects(exceptions);
 	}
+	//modSigns end
 }

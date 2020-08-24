@@ -10,8 +10,17 @@ class W3Mutagen14_Effect extends W3Mutagen_Effect
 {
 	default effectType = EET_Mutagen14;
 	default dontAddAbilityOnTarget = true;
-
-	event OnEffectAdded(optional customParams : W3BuffCustomParams)
+	
+	//modSigns
+	public function GetMutagen14Bonus() : float
+	{
+		var min, max : SAbilityAttributeValue;
+		
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen14_bonus', min, max);
+		return CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+	}
+	
+	/*event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
 		super.OnEffectAdded(customParams);
 		
@@ -24,5 +33,5 @@ class W3Mutagen14_Effect extends W3Mutagen_Effect
 		GetWitcherPlayer().RemoveTimer('Mutagen14Timer');
 		
 		super.OnEffectRemoved();
-	}
+	}*/
 }

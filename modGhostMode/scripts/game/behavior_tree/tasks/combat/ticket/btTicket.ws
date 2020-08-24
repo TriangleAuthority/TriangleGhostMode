@@ -148,14 +148,16 @@ abstract class CTicketBaseAlgorithm extends ITicketAlgorithmScript
 		
 		morale = owner.GetStatPercents(BCS_Morale);
 		if( morale != -1 && morale < 1.f )
+		{
+			//theGame.witcherLog.AddMessage("low morale"); //debug
 			return false;
+		}
 		
 		
 		if ( owner == thePlayer.GetTarget() && thePlayer.IsInCombatAction_Attack() && !thePlayer.GetBIsInputAllowed() )
 		{
 			return false;
 		}
-		
 		
 		if ( target != thePlayer && !target.GetGameplayVisibility() )
 		{
@@ -271,6 +273,17 @@ class CTicketAttackAlgorithm extends CTicketBaseAlgorithm
 	default activationBonus = 5;
 	default threatLevelBonus = 2;
 	
+	final function ShouldAskForTicket() : bool //modSigns
+	{
+		var owner : CActor = GetActor();
+		
+		if(owner.shouldWaitForStaminaRegen)
+		{
+			return false;
+		}
+		return super.ShouldAskForTicket();
+	}
+	
 	public function CalculateTicketImportance() : float
 	{
 		var importance 			: float = 100.f;
@@ -353,6 +366,17 @@ class CTicketAlgorithmMelee extends ITicketAlgorithmScript
 	public var vicinityMin 				: float;
 	public var inTargetBackBonus 		: float;
 	
+	final function ShouldAskForTicket() : bool //modSigns
+	{
+		var owner : CActor = GetActor();
+		
+		if(owner.shouldWaitForStaminaRegen)
+		{
+			return false;
+		}
+		return true;
+	}
+	
 	public function CalculateTicketImportance() : float
 	{
 		var npc					: CNewNPC = GetNPC();
@@ -369,6 +393,9 @@ class CTicketAlgorithmMelee extends ITicketAlgorithmScript
 		var vicinityPercentage 	: float;
 		var isInTargetBack		: int;
 		var isHuman				: bool;
+		
+		if ( !ShouldAskForTicket() ) //modSigns
+			return 0;
 		
 		if ( npc.IsHuman() )
 		{

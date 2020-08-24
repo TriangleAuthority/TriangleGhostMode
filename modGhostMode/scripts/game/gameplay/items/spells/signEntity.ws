@@ -16,6 +16,8 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 	editable  	var friendlyCastEffect	: name;
 	protected		var cachedCost			: float;
 	protected 	var usedFocus			: bool;
+	protected 	var usedFoA				: bool; //modSigns
+	protected	var foaMult				: float; //modSigns
 	
 	public function GetSignType() : ESignType
 	{
@@ -40,7 +42,7 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		{
 			OnThrowing();
 		}
-		else if( eventName == 'cast_end' )
+		else if( eventName == 'cast_end' ) //Aaard: alternate only, Axii: both, Igni: neither, Quen: neither, Yrden: neither
 		{
 			OnEnded();
 		}
@@ -60,14 +62,14 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		return true;
 	}
 	
+	//modSigns: redone
 	public function Init( inOwner : W3SignOwner, prevInstance : W3SignEntity, optional skipCastingAnimation : bool, optional notPlayerCast : bool ) : bool
 	{
-		var player : CR4Player;
-		var focus : SAbilityAttributeValue;
 		var witcher: W3PlayerWitcher;
 		
 		owner = inOwner;
 		fireMode = 0;
+		InitFoA(notPlayerCast); //modSigns
 		GetSignStats();
 		
 		if ( skipCastingAnimation || owner.InitCastSign( this ) )
@@ -85,19 +87,6 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			}
 			
 			
-			player = (CR4Player)owner.GetPlayer();
-			if(player && !notPlayerCast && player.CanUseSkill(S_Perk_10))
-			{
-				focus = player.GetAttributeValue('focus_gain');
-				
-				if ( player.CanUseSkill(S_Sword_s20) )
-				{
-					focus += player.GetSkillAttributeValue(S_Sword_s20, 'focus_gain', false, true) * player.GetSkillLevel(S_Sword_s20);
-				}
-				player.GainStat(BCS_Focus, 0.1f * (1 + CalculateAttributeValue(focus)) );	
-			}
-			
-			
 			witcher = (W3PlayerWitcher) owner.GetPlayer();
 			if( witcher && !notPlayerCast )
 			{
@@ -108,6 +97,11 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 				else if( witcher.IsMutationActive( EPMT_Mutation6 ) )
 				{
 					theGame.MutationHUDFeedback( MFT_PlayOnce );
+				}
+				//modSigns
+				else if( witcher.IsMutationActive( EPMT_Mutation10 ) )
+				{
+					witcher.PlayEffect( 'mutation_10_energy' );
 				}
 			}
 			
@@ -120,6 +114,35 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			Destroy();
 			return false;
 		}
+	}
+	
+	function InitFoA(notPlayerCast : bool) //modSigns
+	{
+		var witcher: W3PlayerWitcher;
+		
+		foaMult = 1;
+		SetUsedFoA(false);
+		
+		witcher = (W3PlayerWitcher)owner.GetPlayer();
+		
+		if(!witcher || notPlayerCast)
+			return;
+		
+		if(witcher.AddTemporarySkills())
+		{
+			foaMult = 3;
+			SetUsedFoA(true);
+		}
+	}
+	
+	function CleanUpFoA() //modSigns
+	{
+		var witcher: W3PlayerWitcher;
+		
+		witcher = (W3PlayerWitcher)owner.GetPlayer();
+		
+		if(witcher && GetUsedFoA())
+			witcher.RemoveTemporarySkills();
 	}
 	
 	public final function PlayMutation1CastFX()
@@ -191,14 +214,11 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 	}
 	
 	
+	//OnEnded is called to process animations (!!!) and some child classes override it!
+	//modSigns: redone
 	event OnEnded(optional isEnd : bool)
 	{
 		var witcher : W3PlayerWitcher;
-		var abilityName : name;
-		var abilityCount, maxStack : float;
-		var min, max : SAbilityAttributeValue;
-		var addAbility : bool;
-		var mutagen17 : W3Mutagen17_Effect;
 
 		var camHeading : float;
 		
@@ -216,51 +236,8 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			witcher.ResetLastAxisInputIsMovement();
 		}
 		
-		
-		witcher = (W3PlayerWitcher)owner.GetActor();
-		if(witcher && witcher.HasBuff(EET_Mutagen17))
-		{
-			 mutagen17 = (W3Mutagen17_Effect)witcher.GetBuff(EET_Mutagen17);
-			 if(mutagen17.HasBoost())
-			 {
-				mutagen17.ClearBoost();
-			 }
-		}		
-		
-		
-		if(witcher && witcher.HasBuff(EET_Mutagen22) && witcher.IsInCombat() && witcher.IsThreatened())
-		{
-			abilityName = witcher.GetBuff(EET_Mutagen22).GetAbilityName();
-			abilityCount = witcher.GetAbilityCount(abilityName);
-			
-			if(abilityCount == 0)
-			{
-				addAbility = true;
-			}
-			else
-			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen22_max_stack', min, max);
-				maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-				
-				if(maxStack >= 0)
-				{
-					addAbility = (abilityCount < maxStack);
-				}
-				else
-				{
-					addAbility = true;
-				}
-			}
-			
-			if(addAbility)
-			{
-				witcher.AddAbility(abilityName, true);
-			}
-		}
-		
 		CleanUp();
 	}
-
 	
 	
 	
@@ -310,8 +287,9 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		
 	protected function CleanUp()
 	{	
-		owner.RemoveTemporarySkills();
-		
+		//owner.RemoveTemporarySkills();
+		owner.GetPlayer().ResetRawPlayerHeading(); //this is what that function above actually does
+		CleanUpFoA(); //modSigns
 		
 		if( (W3PlayerWitcher)owner.GetPlayer() && GetWitcherPlayer().IsMutationActive( EPMT_Mutation1 ) )
 		{
@@ -329,6 +307,15 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		usedFocus = b;
 	}
 			
+	public function GetUsedFoA() : bool
+	{
+		return usedFoA;
+	}
+	
+	public function SetUsedFoA( b : bool )
+	{
+		usedFoA = b;
+	}
 	
 	function Attach( optional toSlot : bool, optional toWeaponSlot : bool )
 	{		
@@ -521,44 +508,38 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		}
 	}
 	
+	//modSigns: redone
 	public function ManagePlayerStamina()
 	{
 		var l_player			: W3PlayerWitcher;
 		var l_cost, l_stamina	: float;
-		var l_gryphonBuff		: W3Effect_GryphonSetBonus;
 		
 		l_player = owner.GetPlayer();
 		
-		l_gryphonBuff = (W3Effect_GryphonSetBonus)l_player.GetBuff( EET_GryphonSetBonus );
-		l_gryphonBuff.SetWhichSignForFree( this );
+		//theGame.witcherLog.AddMessage("Cast sign: " + GetWitcherPlayer().GetCurrentlyCastSign());
+		//theGame.witcherLog.AddMessage("Perk 9 active = " + l_player.CanUseSkill( S_Perk_09 ));
+		//theGame.witcherLog.AddMessage("Has adrenaline = " + (l_player.GetStat(BCS_Focus) >= 1));
 		
-		if( !l_gryphonBuff || l_gryphonBuff.GetWhichSignForFree() != this )
+		//focus cast has a priority over stamina cast
+		if( l_player.CanUseSkill( S_Perk_09 ) && l_player.GetStat(BCS_Focus) >= 1 )
 		{
-			if( l_player.CanUseSkill( S_Perk_09 ) )
-			{
-				l_cost = l_player.GetStaminaActionCost(ESAT_Ability, SkillEnumToName( skillEnum ), 0);
-				l_stamina = l_player.GetStat(BCS_Stamina, true);
-				
-				if( l_cost > l_stamina )
-				{
-					l_player.DrainFocus(1);
-					SetUsedFocus( true );
-				}
-				else
-				{
-					l_player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( skillEnum ) );
-				}
-			}
-			else
-			{
-				l_player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( skillEnum ) );
-			}
-		}		
+			l_player.DrainFocus( 1 * foaMult ); //flood of anger multiplies the cost
+			SetUsedFocus( true );
+			//theGame.witcherLog.AddMessage("Adrenaline cast.");
+		}
+		else
+		{
+			l_player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( skillEnum ) );
+			SetUsedFocus( false );
+			if(usedFoA) //flood of anger cost
+				l_player.DrainFocus( 1 * foaMult );
+			//theGame.witcherLog.AddMessage("Stamina cast.");
+		}
 	}
 	
-	public function ManageGryphonSetBonusBuff()
+	public function ManageGryphonSetBonusBuff() //modSigns: no longer used
 	{
-		var l_player		: W3PlayerWitcher;
+		/*var l_player		: W3PlayerWitcher;
 		var l_gryphonBuff	: W3Effect_GryphonSetBonus;
 		
 		l_player = owner.GetPlayer();
@@ -571,6 +552,71 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		else if( l_gryphonBuff && l_gryphonBuff.GetWhichSignForFree() == this )
 		{
 			l_player.RemoveBuff( EET_GryphonSetBonus, false, "gryphonSetBonus" );
+		}*/
+	}
+	
+	//modSigns
+	//private var accFocus : float;
+	public function ManageFocusGain(cost : float, dt : float)
+	{
+		var player : CR4Player;
+		var focus : SAbilityAttributeValue;
+		var amount : float;
+		var currSign : ESignType;
+		
+		currSign = GetSignType();
+		
+		//debug
+		//theGame.witcherLog.AddMessage("ManageFocusGain. Sign: " + currSign);
+
+		player = (CR4Player)owner.GetPlayer();
+
+		if(player && player.IsInCombat() && player.CanUseSkill(S_Perk_11) && !usedFocus && !usedFoA)
+		{
+			focus = player.GetAttributeValue('focus_gain');
+			
+			if(player.CanUseSkill(S_Sword_s20))
+			{
+				focus += player.GetSkillAttributeValue(S_Sword_s20, 'focus_gain', false, true) * player.GetSkillLevel(S_Sword_s20);
+			}
+			
+			amount = 0.1f * (1 + CalculateAttributeValue(focus));
+			if(IsAlternateCast() && currSign != ST_Aard) //scale focus gain for alt casts, Aard alt cast is NOT per second!
+			{
+				//if(currSign == ST_Igni) //igni adds adrenaline per second
+				//{
+				//	amount *= dt;
+				//}
+				//else //other signs add adrenaline per stamina spent
+				//{
+				//	amount *= cost / player.GetStatMax(BCS_Stamina);
+				//}
+				
+				if(currSign == ST_Quen)
+				{
+					amount *= cost / ((W3PlayerAbilityManager)player.GetAbilityManager()).GetSkillStaminaUseCost(S_Magic_4);
+				}
+				else
+				{
+					amount *= dt;
+				}
+			}
+			
+			//modSigns: new mutation7 (Adrenaline Rush)
+			if(player.HasBuff(EET_Mutation7Buff))
+				amount *= 2;
+			else if(player.HasBuff(EET_Mutation7Debuff))
+				amount /= 2;
+			
+			//debug
+			//accFocus += amount;
+			//theGame.witcherLog.AddMessage("Is alt: " + IsAlternateCast());
+			//theGame.witcherLog.AddMessage("Cost: " + cost);
+			//theGame.witcherLog.AddMessage("dt: " + dt);
+			//theGame.witcherLog.AddMessage("Focus gained: " + amount);
+			//theGame.witcherLog.AddMessage("Accumulated focus: " + accFocus);
+			
+			player.GainStat(BCS_Focus, amount);
 		}
 	}
 }
@@ -649,7 +695,7 @@ state BaseCast in W3SignEntity
 	event OnThrowing()
 	{		
 		var l_player : W3PlayerWitcher;
-		var l_gryphonBuff : W3Effect_GryphonSetBonus;
+		//var l_gryphonBuff : W3Effect_GryphonSetBonus; //modSigns: no longer used
 		
 		l_player = caster.GetPlayer();
 		
@@ -658,12 +704,12 @@ state BaseCast in W3SignEntity
 			FactsAdd("ach_sign", 1, 4 );		
 			theGame.GetGamerProfile().CheckLearningTheRopes();
 			
-			l_gryphonBuff = (W3Effect_GryphonSetBonus)l_player.GetBuff( EET_GryphonSetBonus );
+			/*l_gryphonBuff = (W3Effect_GryphonSetBonus)l_player.GetBuff( EET_GryphonSetBonus );
 			
 			if( l_gryphonBuff && !l_gryphonBuff.GetWhichSignForFree() )
 			{
 				l_gryphonBuff.SetWhichSignForFree( parent );
-			}
+			}*/
 			
 		}
 		return true;
@@ -677,13 +723,13 @@ state BaseCast in W3SignEntity
 	
 	event OnSignAborted( optional force : bool )
 	{
-		var l_gryphonBuff	: W3Effect_GryphonSetBonus;
+		//var l_gryphonBuff	: W3Effect_GryphonSetBonus; //modSigns: no longer used
 		
-		l_gryphonBuff = (W3Effect_GryphonSetBonus)caster.GetActor().GetBuff( EET_GryphonSetBonus );
+		/*l_gryphonBuff = (W3Effect_GryphonSetBonus)caster.GetActor().GetBuff( EET_GryphonSetBonus );
 		if( l_gryphonBuff )
 		{
 			l_gryphonBuff.SetWhichSignForFree( NULL );
-		}
+		}*/
 		
 		parent.CleanUp();
 		parent.StopAllEffects();
@@ -718,11 +764,14 @@ state NormalCast in W3SignEntity extends BaseCast
 
 state Channeling in W3SignEntity extends BaseCast
 {
+	var normalCastCost : float; //modSigns
+
 	event OnEnterState( prevStateName : name )
 	{
 		
 		super.OnEnterState( prevStateName );
 		parent.cachedCost = -1.0f;
+		normalCastCost = -1.0f; //modSigns
 		
 		theGame.GetBehTreeReactionManager().CreateReactionEventIfPossible( parent.owner.GetActor(), 'CastSignAction', -1, 8.0f, 0.2f, -1, true );
 		theGame.GetBehTreeReactionManager().CreateReactionEventIfPossible( parent, 'CastSignActionFar', -1, 30.0f, -1.f, -1, true );
@@ -747,6 +796,7 @@ state Channeling in W3SignEntity extends BaseCast
 		var player : CR4Player;
 		var stamina : float;
 		
+		//alt casting initial cost (NOT per second), zero for all the alt signs
 		if( super.OnThrowing() )
 		{
 			actor = caster.GetActor();
@@ -762,13 +812,24 @@ state Channeling in W3SignEntity extends BaseCast
 				stamina = player.GetStat(BCS_Stamina);
 			}
 			
-			actor.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
-			actor.StartStaminaRegen();
-			actor.PauseStaminaRegen( 'SignCast' );
+			if( player && player.CanUseSkill(S_Perk_09) && player.GetStat(BCS_Focus) >= 1 )
+			{
+				if( parent.cachedCost > 0 )
+				{
+					player.DrainFocus( 1 * parent.foaMult ); //flood of anger cost multiplier
+				}
+				parent.SetUsedFocus( true );
+			}
+			else
+			{
+				actor.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
+				actor.StartStaminaRegen();
+				actor.PauseStaminaRegen( 'SignCast' );
+				parent.SetUsedFocus( false );
+				if(parent.GetUsedFoA()) //flood of anger cost
+					player.DrainFocus( 1 * parent.foaMult );
+			}
 			
-			if(player && ( parent.cachedCost > stamina ) && ( player.CanUseSkill( S_Perk_10 ) ) )
-				player.DrainFocus( 1 );
-				
 			return true;
 		}
 		
@@ -780,8 +841,9 @@ state Channeling in W3SignEntity extends BaseCast
 		return true;
 	}
 	
-	
-	function Update() : bool
+	//called when channeling all signs EXCEPT aard
+	//modSigns: redone
+	function Update(dt : float) : bool
 	{
 		var multiplier, stamina, leftStaminaCostPerc, leftStaminaCost : float;
 		var player : CR4Player;
@@ -807,16 +869,18 @@ state Channeling in W3SignEntity extends BaseCast
 			}
 			else
 			{
-				if(player.CanUseSkill(S_Perk_09))
+				if(player.CanUseSkill(S_Perk_09) && parent.usedFocus)
 				{
-					if(player.GetStat( BCS_Stamina ) <= 0 && player.GetStat(BCS_Focus) <= 0)
-						stop = true;
-					else
-						stop = false;
+					stop = (player.GetStat(BCS_Focus) <= 0); //casting with adrenaline
 				}
 				else
 				{
 					stop = (player.GetStat( BCS_Stamina ) <= 0);
+				}
+				//hack for alt signs: don't stop alt yrden and alt axii
+				if( parent.skillEnum == S_Magic_s03 || parent.skillEnum == S_Magic_s05 )
+				{
+					stop = false;
 				}
 			}
 		}		
@@ -841,6 +905,7 @@ state Channeling in W3SignEntity extends BaseCast
 				theGame.VibrateControllerLight();	
 			}
 			
+			//calculate channeling cost
 			
 			reductionCounter = caster.GetSkillLevel(virtual_parent.skillEnum) - 1;
 			multiplier = 1;
@@ -850,30 +915,34 @@ state Channeling in W3SignEntity extends BaseCast
 				multiplier = 1 - costReduction.valueMultiplicative;
 			}
 			
-			
-			if (!(virtual_parent.GetSignType() == ST_Quen && caster.CanUseSkill(S_Magic_s04) && multiplier == 0))
+			if(player)
 			{
-				if(player)
-				{
-					if( parent.cachedCost <= 0.0f )
-					{	
-						parent.cachedCost = multiplier * player.GetStaminaActionCost( ESAT_Ability, SkillEnumToName( parent.skillEnum ), theTimer.timeDelta );
-					}
+				if( parent.cachedCost <= 0.0f )
+				{	
+					parent.cachedCost = multiplier * player.GetStaminaActionCost( ESAT_Ability, SkillEnumToName( parent.skillEnum ), dt );
+				}
+			
+				stamina = player.GetStat(BCS_Stamina);
+				//leftStaminaCostPerc = parent.cachedCost / player.GetStatMax(BCS_Stamina);
 				
-					stamina = player.GetStat(BCS_Stamina);
+				if(normalCastCost <= 0.0f) //base cast cost
+				{
+					normalCastCost = ((W3PlayerAbilityManager)player.GetAbilityManager()).GetSkillStaminaUseCost(GetBaseSignSkill(parent.skillEnum));
+					if(normalCastCost <= 0.0f)
+						normalCastCost = player.GetStatMax(BCS_Stamina);
 				}
 				
-				if(multiplier > 0.f)
-					caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ), theTimer.timeDelta, multiplier );
-				
-				if(player && parent.cachedCost > stamina)
-				{
-					leftStaminaCost = parent.cachedCost - stamina;
-					leftStaminaCostPerc = leftStaminaCost / player.GetStatMax(BCS_Stamina);
-										
-					
-					player.DrainFocus(leftStaminaCostPerc);
-				}
+				leftStaminaCostPerc = parent.cachedCost / normalCastCost;
+			}
+			
+			//casting with adrenaline
+			if(player && player.CanUseSkill(S_Perk_09) && parent.usedFocus)
+			{
+				player.DrainFocus( MinF(player.GetStat(BCS_Focus), leftStaminaCostPerc * parent.foaMult) ); //flood of anger cost multiplier
+			}
+			else if(multiplier > 0.f)
+			{
+				caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ), dt, multiplier );
 			}
 			caster.OnProcessCastingOrientation( true );
 		}
@@ -884,7 +953,8 @@ state Channeling in W3SignEntity extends BaseCast
 	{
 		var currentInputContext : name;
 		
-		if ( theInput.GetActionValue( 'CastSignHold' ) > 0.f )
+		//if ( theInput.GetActionValue( 'CastSignHold' ) > 0.f )
+		if ( TestCastSignHold() ) //modSigns
 		{
 			return false;
 		}

@@ -68,25 +68,31 @@ abstract class W3CriticalEffect extends CBaseGameplayEffect
 			OnUpdate(deltaTime);	
 		}
 		
-		
-		
-		
-		if(timeLeft <= 0 && !timeEndedHandled)
+		//modSigns
+		if(duration != -1 && timeLeft <= 0 && isActive)
 		{
-			target.SignalGameplayEvent('DisableFinisher');
-			timeEndedHandled = true;
-		
-			
-			if(isActive && this == target.GetCurrentlyAnimatedCS())
-			{				
-				target.RequestCriticalAnimStop();
-			}
-			else
-			{
-				LogCritical("Deactivating not animated CS <<" + criticalStateType + ">>");
-				isActive = false;			
-			}
+			isActive = false;
 		}
+		
+		
+		
+		
+		//if(timeLeft <= 0 && !timeEndedHandled)
+		//{
+		//	target.SignalGameplayEvent('DisableFinisher');
+		//	timeEndedHandled = true;
+		//
+		//	
+		//	if(isActive && this == target.GetCurrentlyAnimatedCS())
+		//	{				
+		//		target.RequestCriticalAnimStop();
+		//	}
+		//	else
+		//	{
+		//		LogCritical("Deactivating not animated CS <<" + criticalStateType + ">>");
+		//		isActive = false;			
+		//	}
+		//}
 	}
 	
 	public function GetCriticalStateType() : ECriticalStateType			{return criticalStateType;}	

@@ -242,8 +242,14 @@ latent storyscene function ShowMeGoods( player: CStoryScenePlayer, merchantTag :
 	}
 	
 	shopInventory = shopOwner.GetInventory();
+	
 	if( shopInventory )
 	{
+		//modSigns
+		if( merchantTag == 'sq108_blacksmith_woman' )
+		{
+			shopInventory.AddMasterArmorerItems();
+		}
 		shopInventory.AutoBalanaceItemsWithPlayerLevel();
 	}
 		

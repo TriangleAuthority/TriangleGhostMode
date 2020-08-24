@@ -18,81 +18,82 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 	default isPositive = false;
 	
 	
+	//modSigns: redone
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
-		var aardPower	: float;
-		var tags : array<name>;
-		var i : int;
-		var appliedType : EEffectType;
-		var null : SAbilityAttributeValue;
-		var npc : CNewNPC;
-		var params : SCustomEffectParams;
-		var min, max : SAbilityAttributeValue;
+		var appliedType			: EEffectType;
+		var sp, abl				: SAbilityAttributeValue;
+		var params				: SCustomEffectParams;
+		var witcher				: W3PlayerWitcher;
+		var rawSP, aardPower	: float;
+		var chance, startingChance : float;
 		
 		if(isOnPlayer)
 		{
 			thePlayer.OnRangedForceHolster( true, true, false );
 		}
 		
-		
-		if(effectValue.valueMultiplicative + effectValue.valueAdditive > 0)		
-			aardPower = effectValue.valueMultiplicative * ( 1 - resistance ) / (1 + effectValue.valueAdditive/100);
+		//determine sign power: effectValue for environment, power stat for NPCs
+		if(effectValue.valueMultiplicative + effectValue.valueAdditive > 0)
+			sp = effectValue;
 		else
-			aardPower = creatorPowerStat.valueMultiplicative * ( 1 - resistance ) / (1 + creatorPowerStat.valueAdditive/100);
+			sp = creatorPowerStat;
+		//raw sign power
+		rawSP = sp.valueMultiplicative;
+		//theGame.witcherLog.AddMessage("Raw sign power: " + rawSP);
+		//sign power reduced by point resistance
+		aardPower = SignPowerStatToPowerBonus(MaxF(0.0, rawSP - resistancePts/100));
+		//theGame.witcherLog.AddMessage("Aard power: " + aardPower);
+		//50% base chance and at least 10% chance after chance reduction by prc resistance
+		//0% to 100% final chance
+		witcher = (W3PlayerWitcher)GetCreator();
+		if(witcher)
+			startingChance = CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Magic_1, 'starting_knockdown_chance', false, false));
+		else
+			startingChance = 0.5;
+		chance = ClampF(startingChance * (1 + aardPower) * (1 - resistance), 0.1, 1.0);
 		
+		//Metamorphosis new bonus
+		if(witcher && witcher.IsMutationActive(EPMT_Mutation12))
+			chance *= MaxF(1.0f, 1.0f + witcher.Mutation12GetBonus());
 		
-		npc = (CNewNPC)target;
-		if(npc && npc.HasShieldedAbility() )
+		//theGame.witcherLog.AddMessage("Knockdown chance: " + chance);
+		//first we roll for knockdown/stagger
+		if(RandF() < chance)
 		{
-			if ( npc.IsShielded(GetCreator()) )
+			//now we roll for heavy knockdown
+			//base heavy knockdown chance is 15% plus up to 15% from Aard Power skill
+			chance = 0.15;
+			//theGame.witcherLog.AddMessage("Sign cast: " + witcher.GetCurrentlyCastSign());
+			if(witcher && witcher.GetCurrentlyCastSign() == ST_Aard && witcher.CanUseSkill(S_Magic_s12))
 			{
-				if ( aardPower >= 1.2 )
-					appliedType = EET_LongStagger;
-				else
-					appliedType = EET_Stagger;
+				//theGame.witcherLog.AddMessage("Casting aard!");
+				abl = witcher.GetSkillAttributeValue(S_Magic_s12, 'heavy_knockdown_chance_bonus', false, false);
+				chance += abl.valueMultiplicative * witcher.GetSkillLevel(S_Magic_s12);
 			}
+			//theGame.witcherLog.AddMessage("Heavy knockdown chance: " + chance);
+			if(RandF() < chance)
+				appliedType = EET_HeavyKnockdown;
 			else
-			{
-				if ( aardPower >= 1.2 )
-					appliedType = EET_Knockdown;
-				if ( aardPower >= 1.0 )
-					appliedType = EET_LongStagger;
-				else
-					appliedType = EET_Stagger;
-			}
+				appliedType = EET_Knockdown;
 		}
-		else if ( target.HasAbility( 'mon_type_huge' ) )
+		else
 		{
-			if ( aardPower >= 1.2 )
+			//now we roll for long stagger
+			chance = 0.66;
+			//theGame.witcherLog.AddMessage("Long stagger chance: " + chance);
+			if(RandF() < chance)
 				appliedType = EET_LongStagger;
 			else
 				appliedType = EET_Stagger;
 		}
-		else if ( target.HasAbility( 'WeakToAard' ) )
-		{
-			appliedType = EET_Knockdown;
-		}
-		else if( aardPower >= 1.2 )
-		{
-			appliedType = EET_HeavyKnockdown;
-		}
-		else if( aardPower >= 0.95 )
-		{
-			appliedType = EET_Knockdown;
-		}
-		else if( aardPower >= 0.75 )
-		{
-			appliedType = EET_LongStagger;
-		}
-		else
-		{
-			appliedType = EET_Stagger;
-		}
+		//theGame.witcherLog.AddMessage("Severity: " + appliedType);
+		//modify severity: here we check for weak to Aard ability, flying monsters,
+		//huge monsters, shields, Quen, immunities, stamina, bosses
+		appliedType = ModifyKnockdownSeverity(target, GetCreator(), appliedType);
+		//theGame.witcherLog.AddMessage("Modified severity: " + appliedType);
 		
-		
-		appliedType = ModifyHitSeverityBuff(target, appliedType);
-		
-		
+		//set up custom effect params
 		params.effectType = appliedType;
 		params.creator = GetCreator();
 		params.sourceName = sourceName;
@@ -102,9 +103,8 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 		params.duration = customDuration;
 		params.effectValue = customEffectValue;	
 		
+		//apply effect
 		target.AddEffectCustom(params);
-		
-		
 		
 		isActive = true;
 		duration = 0;

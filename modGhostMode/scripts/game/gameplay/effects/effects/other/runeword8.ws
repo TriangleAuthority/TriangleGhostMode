@@ -14,10 +14,17 @@ class W3Effect_Runeword8 extends CBaseGameplayEffect
 		var val : SAbilityAttributeValue;
 		var toxicity : W3Effect_Toxicity;
 		
+		if(!((W3PlayerWitcher)target))
+		{
+			isActive = false;
+			return false;
+		}
+	
 		target.AddAbility('Runeword 8 Regen');
-		target.AddEffectDefault(EET_AdrenalineDrain, NULL, "runeword8");
+		//target.AddEffectDefault(EET_AdrenalineDrain, NULL, "runeword8");
 
-		val = target.GetAttributeValue('focus_drain');
+		//val = target.GetAttributeValue('focus_drain');
+		val = ((W3PlayerWitcher)target).GetAbilityAttributeValue('Runeword 8 Regen', 'focus_drain');
 		focusDrainPerSec = val.valueMultiplicative;
 		
 		CalculateDuration();
@@ -31,9 +38,14 @@ class W3Effect_Runeword8 extends CBaseGameplayEffect
 	
 	event OnUpdate(dt : float)
 	{
+		var drainVal : float; //modSigns
+		
 		super.OnUpdate(dt);
 		
+		drainVal = dt * focusDrainPerSec;
+		((CR4Player)target).DrainFocus(drainVal);
 		timeLeft = target.GetStatPercents(BCS_Focus) * initialDuration;
+		timeLeft = MaxF(timeLeft, 0);
 	}
 	
 	event OnEffectRemoved()

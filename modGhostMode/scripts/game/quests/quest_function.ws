@@ -461,7 +461,7 @@ latent quest function SetupTrophySceneQuest( monsterTag : name, offset : float)
 
 latent quest function ProcessMonsterHuntTrophyQuest( trophyName : name, dontTeleportHorse : bool)
 {
-	var playerHorse			 : CNewNPC;
+	/*var playerHorse			 : CNewNPC;
 	var playerPosition 		 : Vector;
 	var newPosition			 : Vector;
 	var playerRotation 		 : EulerAngles;
@@ -510,7 +510,7 @@ latent quest function ProcessMonsterHuntTrophyQuest( trophyName : name, dontTele
 		}
 	}
 	
-	Sleep(0.5f);
+	Sleep(0.5f);*/ //modSigns: remove horse teleporting and trophy auto-equipping on looting a trophy
 }
 
 quest function AlwaysDisplayWolfHead( display : bool )
@@ -5288,30 +5288,12 @@ quest function Q001_EquipFood()
 	}
 }
 
-quest function SetGeraltLevelHandsOn()
+quest function SetGeraltLevelHandsOn() //modSigns
 {
 	var iID : array<SItemUniqueId>;
-	var lm : W3PlayerWitcher;
-	var exp, prevLvl, currLvl : int;
 	var level : int = 15;
 	
-	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
-	
-	lm = GetWitcherPlayer();
-	prevLvl = lm.GetLevel();
-	currLvl = lm.GetLevel();
-		
-	while(currLvl < level)
-	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false);
-		currLvl = lm.GetLevel();
-		
-		if(prevLvl == currLvl)
-			break;				
-		
-		prevLvl = currLvl;
-	}		
+	resetLevels_internal(level);
 	
 	GetWitcherPlayer().AddSkill(S_Sword_s21);
 	GetWitcherPlayer().AddSkill(S_Sword_s21);
@@ -5337,10 +5319,14 @@ quest function SetGeraltLevelHandsOn()
 	GetWitcherPlayer().EquipItem(iID[0]);
 	iID = GetWitcherPlayer().inv.AddAnItem('Silver sword 2', 1);
 	GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Pants 02', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Gloves 04', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Boots 04', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Lynx Armor 1', 1); GetWitcherPlayer().EquipItem(iID[0]);
+	iID = GetWitcherPlayer().inv.AddAnItem('Pants 02', 1);
+	GetWitcherPlayer().EquipItem(iID[0]);
+	iID = GetWitcherPlayer().inv.AddAnItem('Gloves 04', 1);
+	GetWitcherPlayer().EquipItem(iID[0]);
+	iID = GetWitcherPlayer().inv.AddAnItem('Boots 04', 1);
+	GetWitcherPlayer().EquipItem(iID[0]);
+	iID = GetWitcherPlayer().inv.AddAnItem('Lynx Armor 1', 1);
+	GetWitcherPlayer().EquipItem(iID[0]);
 	
 	iID =  GetWitcherPlayer().inv.GetItemsByName( 'Long Steel Sword' );
 	GetWitcherPlayer().inv.RemoveItem( iID[0] );
@@ -5402,39 +5388,10 @@ quest function SetGeraltLevelHandsOn()
 }
 
 
-quest function SetGeraltLevel( level : int, path : EGeraltPath )
+quest function SetGeraltLevel( level : int, path : EGeraltPath ) //modSigns
 {
-	var iID : array<SItemUniqueId>;
-	var lm : W3PlayerWitcher;
-	var exp, prevLvl, currLvl : int;
-	
-	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
-	
-	
-	lm = GetWitcherPlayer();
-	prevLvl = lm.GetLevel();
-	currLvl = lm.GetLevel();
-		
-	while(currLvl < level)
-	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false);
-		currLvl = lm.GetLevel();
-		
-		if(prevLvl == currLvl)
-			break;				
-		
-		prevLvl = currLvl;
-	}		
-	
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen steel sword', 1);
-	GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen silver sword', 1);
-	GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen Pants', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen Gloves', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen Boots', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen Armor', 1); GetWitcherPlayer().EquipItem(iID[0]);
+	resetLevels_internal(level);
+	addAutogenEquipment_internal();
 }
 
 quest function DestroyEntity( entityTag : name )

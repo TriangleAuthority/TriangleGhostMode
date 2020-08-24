@@ -46,19 +46,30 @@ class BTTaskManageDjinnRage extends IBehTreeTask
 		
 		while ( true )
 		{
-			if ( m_inRageState && GetLocalTime() >= m_enterRageTimeStamp + calmDownCooldown )
+			//modSigns: dimeritium bomb
+			if(l_owner.HasBuff(EET_DimeritiumEffect))
 			{
-				RemoveRageState();
+				if(m_inRageState)
+					RemoveRageState();
+				if(!m_inWeakenedState)
+					EnterWeakenedState();
 			}
-			
-			if ( !m_inWeakenedState && l_owner.HasBuff( EET_Confusion ) || l_owner.HasBuff( EET_AxiiGuardMe ) )
+			else
 			{
-				RemoveRageState();
-				EnterWeakenedState();
+				if ( m_inRageState && GetLocalTime() >= m_enterRageTimeStamp + calmDownCooldown )
+				{
+					RemoveRageState();
+				}
+				
+				if ( !m_inWeakenedState && l_owner.HasBuff( EET_Confusion ) || l_owner.HasBuff( EET_AxiiGuardMe ) )
+				{
+					RemoveRageState();
+					EnterWeakenedState();
+				}
+				
+				if ( m_inWeakenedState && !m_isInYrden && GetLocalTime() >= m_enterWeakendTimeStamp + calmDownCooldown )
+					RemoveWeakenedState();
 			}
-			
-			if ( m_inWeakenedState && !m_isInYrden && GetLocalTime() >= m_enterWeakendTimeStamp + calmDownCooldown )
-				RemoveWeakenedState();
 			
 			SleepOneFrame();
 		}
@@ -151,13 +162,13 @@ class BTTaskManageDjinnRage extends IBehTreeTask
 		}
 		else if ( removeWeakenedStateOnCounter && ( eventName == 'LaunchCounterAttack' || eventName == 'HitReactionTaskCompleted' ) )
 		{
-			if ( !m_isInYrden )
+			if ( !m_isInYrden && !l_owner.HasBuff(EET_DimeritiumEffect) ) //modSigns
 				RemoveWeakenedState();
 			return true;
 		}
 		else if ( eventName == 'IgniHitReceived' )
 		{
-			if ( !m_isInYrden && !l_owner.HasBuff( EET_Confusion ) && !l_owner.HasBuff( EET_AxiiGuardMe ) )
+			if ( !m_isInYrden && !l_owner.HasBuff( EET_Confusion ) && !l_owner.HasBuff( EET_AxiiGuardMe ) && !l_owner.HasBuff(EET_DimeritiumEffect) ) //modSigns
 			{
 				EnterRageState();
 				l_owner.PlayEffectSingle( playFXOnIgniHit );
@@ -167,7 +178,7 @@ class BTTaskManageDjinnRage extends IBehTreeTask
 		}
 		else if ( eventName == 'AardHitReceived' )
 		{
-			if ( !m_isInYrden && !l_owner.HasBuff( EET_Confusion ) && !l_owner.HasBuff( EET_AxiiGuardMe ) )
+			if ( !m_isInYrden && !l_owner.HasBuff( EET_Confusion ) && !l_owner.HasBuff( EET_AxiiGuardMe ) && !l_owner.HasBuff(EET_DimeritiumEffect) ) //modSigns
 			{
 				EnterRageState();
 				l_owner.PlayEffectSingle( playFXOnAardHit );

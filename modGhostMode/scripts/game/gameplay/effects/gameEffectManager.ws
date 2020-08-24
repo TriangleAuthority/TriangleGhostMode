@@ -339,6 +339,22 @@ class W3GameEffectManager
 			case EET_ToxicityVenom :			effects[effect] = new W3Effect_ToxicityVenom in this;				break;
 			case EET_BasicQuen :				effects[effect] = new W3Effect_BasicQuen in this;					break;
 			
+			//modSigns
+			case EET_UndyingSkillImmortal :		effects[effect] = new W3Effect_UndyingSkillImmortal in this;		break;
+			case EET_UndyingSkillCooldown :		effects[effect] = new W3Effect_UndyingSkillCooldown in this;		break;
+			case EET_WhirlCooldown :			effects[effect] = new W3Effect_WhirlCooldown in this;				break;
+			case EET_RendCooldown :				effects[effect] = new W3Effect_RendCooldown in this;				break;
+			case EET_AardCooldown :				effects[effect] = new W3Effect_AardCooldown in this;				break;
+			case EET_IgniCooldown :				effects[effect] = new W3Effect_IgniCooldown in this;				break;
+			case EET_YrdenCooldown :			effects[effect] = new W3Effect_YrdenCooldown in this;				break;
+			case EET_QuenCooldown :				effects[effect] = new W3Effect_QuenCooldown in this;				break;
+			case EET_AxiiCooldown :				effects[effect] = new W3Effect_AxiiCooldown in this;				break;
+			case EET_DimeritiumEffect:			effects[effect] = new W3Effect_DimeritiumEffect in this; 			break;
+			case EET_Perk13Effect:				effects[effect] = new W3Effect_Perk13Effect in this;	 			break;
+			case EET_KaerMorhenSetBonus :		effects[effect] = new W3Effect_KaerMorhenSetBonus in this;			break;
+			case EET_MeltArmorDebuff :			effects[effect] = new W3Effect_MeltArmorDebuff in this;				break;
+			case EET_MeltArmorTimer :			effects[effect] = new W3Effect_MeltArmorTimer in this;				break;
+			case EET_MutationTrigger :			effects[effect] = new W3Potion_MutationTrigger in this;				break;
 			
 			case EET_Fact : 					effects[effect] = new W3Potion_Fact in this;						break;
 			
@@ -398,6 +414,12 @@ class W3GameEffectManager
 			case EET_Mutagen26 : 				effects[effect] = new W3Mutagen26_Effect in this;					break;
 			case EET_Mutagen27 : 				effects[effect] = new W3Mutagen27_Effect in this;					break;
 			case EET_Mutagen28 : 				effects[effect] = new W3Mutagen28_Effect in this;					break;
+			
+			
+			//modSigns
+			case EET_PhantomWeapon :			effects[effect] = new W3Effect_PhantomWeapon in this;				break;
+			case EET_Runeword4 :				effects[effect] = new W3Effect_Runeword4 in this;					break;
+			case EET_Runeword11 :				effects[effect] = new W3Effect_Runeword11 in this;					break;
 			
 			
 			case EET_Acid :						effects[effect] = new W3Effect_Acid in this;						break;
@@ -728,6 +750,23 @@ function HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part1(effectName : name, out
 		case "ToxicityVenomEffect" :						type = EET_ToxicityVenom;				break;
 		case "BasicQuenEffect" : 							type = EET_BasicQuen;					break;
 		
+
+		//modSigns:
+		case "UndyingSkillImmortalEffect" :					type = EET_UndyingSkillImmortal;		break;
+		case "UndyingSkillCooldownEffect" :					type = EET_UndyingSkillCooldown;		break;
+		case "WhirlCooldownEffect" :						type = EET_WhirlCooldown;				break;
+		case "RendCooldownEffect" :							type = EET_RendCooldown;				break;
+		case "AardCooldownEffect" :							type = EET_AardCooldown;				break;
+		case "IgniCooldownEffect" :							type = EET_IgniCooldown;				break;
+		case "YrdenCooldownEffect" :						type = EET_YrdenCooldown;				break;
+		case "QuenCooldownEffect" :							type = EET_QuenCooldown;				break;
+		case "AxiiCooldownEffect" :							type = EET_AxiiCooldown;				break;
+		case "DimeritiumEffect" : 							type = EET_DimeritiumEffect; 			break;
+		case "Perk13Effect" : 								type = EET_Perk13Effect;	 			break;
+		case "KaerMorhenSetBonusEffect" :					type = EET_KaerMorhenSetBonus;			break;
+		case "MeltArmorDebuff" :							type = EET_MeltArmorDebuff;				break;
+		case "MeltArmorTimer" :								type = EET_MeltArmorTimer;				break;
+		case "MutationTriggerEffect" :						type = EET_MutationTrigger;				break;
 		
 		case "StaggerAuraEffect" : 							type = EET_StaggerAura; 				break;
 		case "FireAuraEffect" : 							type = EET_FireAura; 					break;
@@ -786,6 +825,12 @@ function HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part2(effectName : name, out
 		case "Mutagen26Effect" : type = EET_Mutagen26; break;
 		case "Mutagen27Effect" : type = EET_Mutagen27; break;
 		case "Mutagen28Effect" : type = EET_Mutagen28; break;
+		
+		
+		//modSigns
+		case "PhantomWeaponEffect" :						type = EET_PhantomWeapon;				break;
+		case "Runeword4Effect" :							type = EET_Runeword4;					break;
+		case "Runeword11Effect" :							type = EET_Runeword11;					break;
 		
 		
 		case "AcidEffect" :									type = EET_Acid;						break;
@@ -925,6 +970,23 @@ function EffectTypeToName(effectType : EEffectType) : name
 		case EET_ToxicityVenom :						return 'ToxicityVenomEffect';
 		case EET_BasicQuen :							return 'BasicQuenEffect';
 		
+
+		//modSigns:
+		case EET_UndyingSkillImmortal :					return 'UndyingSkillImmortalEffect';
+		case EET_UndyingSkillCooldown :					return 'UndyingSkillCooldownEffect';
+		case EET_WhirlCooldown :						return 'WhirlCooldownEffect';
+		case EET_RendCooldown :							return 'RendCooldownEffect';
+		case EET_AardCooldown :							return 'AardCooldownEffect';
+		case EET_IgniCooldown :							return 'IgniCooldownEffect';
+		case EET_YrdenCooldown :						return 'YrdenCooldownEffect';
+		case EET_QuenCooldown :							return 'QuenCooldownEffect';
+		case EET_AxiiCooldown :							return 'AxiiCooldownEffect';
+		case EET_DimeritiumEffect :						return 'DimeritiumEffect';
+		case EET_Perk13Effect :							return 'Perk13Effect';
+		case EET_KaerMorhenSetBonus:					return 'KaerMorhenSetBonusEffect';
+		case EET_MeltArmorDebuff :						return 'MeltArmorDebuff';
+		case EET_MeltArmorTimer :						return 'MeltArmorTimer';
+		case EET_MutationTrigger :						return 'MutationTriggerEffect';
 		
 		case EET_StaggerAura : 							return 'StaggerAuraEffect';
 		case EET_FireAura : 							return 'FireAuraEffect';
@@ -959,6 +1021,14 @@ function EffectTypeToName(effectType : EEffectType) : name
 		case EET_Mutagen26 : 							return 'Mutagen26Effect';
 		case EET_Mutagen27 : 							return 'Mutagen27Effect';
 		case EET_Mutagen28 : 							return 'Mutagen28Effect';
+		
+		
+		//modSigns
+		case EET_PhantomWeapon :						return 'PhantomWeaponEffect';
+		case EET_Runeword4 :							return 'Runeword4Effect';
+		case EET_Runeword11 :							return 'Runeword11Effect';
+		
+		
 		case EET_WellRested :							return 'WellRestedEffect';
 		case EET_BookshelfBuff :						return 'BookshelfBuffEffect';
 		case EET_PolishedGenitals :						return 'PolishedGenitalsEffect';

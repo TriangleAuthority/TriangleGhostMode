@@ -120,14 +120,14 @@ statemachine class WeaponHolster
 			return;
 		}
 		
-		DischargePhantomWeapon();
+		//DischargePhantomWeapon(); //modSigns
 		OnEquipMeleeWeapon( curWeapon, ignoreActionLock, true, forceHolster );
 	}
 	
 	
 	event OnForcedHolsterWeapon()
 	{
-		DischargePhantomWeapon();
+		//DischargePhantomWeapon(); //modSigns
 		SetCurrentMeleWeapon( PW_None );
 		UpdateBehGraph();
 	}
@@ -315,11 +315,11 @@ statemachine class WeaponHolster
 		}
 	}
 	
-	protected function DischargePhantomWeapon()
-	{
-		if( thePlayer.GetPhantomWeaponMgr() )
-			thePlayer.GetPhantomWeaponMgr().DischargeWeapon();
-	}
+	//protected function DischargePhantomWeapon()
+	//{
+	//	if( thePlayer.GetPhantomWeaponMgr() )
+	//		thePlayer.GetPhantomWeaponMgr().DischargeWeapon();
+	//} //modSigns
 	
 	
 	
@@ -510,7 +510,10 @@ state SelectingWeapon in WeaponHolster
 		if( weaponType == PW_Steel || weaponType == PW_Silver )
 		{
 			thePlayer.ResumeOilBuffs( weaponType == PW_Steel );
-			thePlayer.PlayRuneword4FX(weaponType);
+			//thePlayer.PlayRuneword4FX(weaponType);
+			//modSigns
+			if(thePlayer.HasBuff(EET_Runeword4))
+				((W3Effect_Runeword4)thePlayer.GetBuff(EET_Runeword4)).PlayRuneword4FX();
 			
 			thePlayer.GetBuff( EET_LynxSetBonus ).Resume( 'drawing weapon' );
 		}
@@ -518,6 +521,11 @@ state SelectingWeapon in WeaponHolster
 		if( weaponType == PW_Silver )
 		{
 			thePlayer.ManageAerondightBuff( true );
+		}
+
+		if( weaponType == PW_Steel ) //modSigns
+		{
+			thePlayer.ManageIrisBuff( true );
 		}
 
 		if ( parent.GetCurrentMeleeWeapon() != weaponType || weaponType == PW_Fists || weaponType == PW_None )
@@ -676,7 +684,7 @@ state SelectingWeapon in WeaponHolster
 		
 		SignalHolsterSwordAction();
 		
-		parent.DischargePhantomWeapon();
+		//parent.DischargePhantomWeapon(); //modSigns
 		
 		thePlayer.SetBehaviorVariable( 'holsterReadyToSkip', 1.0f, true );
 		thePlayer.SetBehaviorVariable( 'playerWeaponLatent', thePlayer.GetBehaviorVariable( 'playerWeapon' ) );

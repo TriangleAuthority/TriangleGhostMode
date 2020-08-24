@@ -17,6 +17,10 @@ class CBTCondSwarmShieldAvailable extends IBehTreeTask
 		var owner 	: CNewNPC = GetNPC();
 		var lairEntities : array<CGameplayEntity>;
 		
+		//modSigns
+		//if(owner.HasBuff(EET_Burning) || owner.swarmsUnavailable)
+		//	return false;
+		
 		if ( !lair )
 		{
 			FindGameplayEntitiesInRange( lairEntities, GetActor(), 150, 1, 'SwarmMasterLair' );

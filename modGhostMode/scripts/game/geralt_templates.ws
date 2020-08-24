@@ -3,41 +3,67 @@
 /** 	THE WITCHER® is a trademark of CD PROJEKT S. A.
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski.
 /***********************************************************************/
-exec function fb2(level : int, optional path : name)
-{	
-	var iID : array<SItemUniqueId>;
-	var lm : W3PlayerWitcher;
-	var exp, prevLvl, currLvl : int;
+exec function cleanupInv(optional level : int) //modSigns
+{
+	GetWitcherPlayer().inv.RemoveAllItems();
+}
+
+exec function resetLevels(optional level : int) //modSigns
+{
+	resetLevels_internal(level);
+}
+
+function resetLevels_internal(optional level : int) //modSigns
+{
+	var lm : W3LevelManager;
 	
-	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
-	
-	
-	lm = GetWitcherPlayer();
-	prevLvl = lm.GetLevel();
-	currLvl = lm.GetLevel();
-		
-	while(currLvl < level)
+	GetWitcherPlayer().Debug_ClearCharacterDevelopment(level > 0);
+	lm = GetWitcherPlayer().levelManager;
+	if(level > 0)
 	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false); 
-		
-		currLvl = lm.GetLevel();
-		
-		if(prevLvl == currLvl)
-			break;				
-		
-		prevLvl = currLvl;
-	}		
+		lm.AddPoints(EExperiencePoint, lm.GetTotalExpForGivenLevel(level), false, true);
+	}
+}
+
+exec function addAutogenEquipment() //modSigns
+{
+	addAutogenEquipment_internal();
+}
+
+function addAutogenEquipment_internal() //modSigns
+{
+	var iID : array<SItemUniqueId>;
+	var witcher : W3PlayerWitcher;
+	var inv : CInventoryComponent;
 	
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen steel sword', 1);
-	GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen silver sword', 1);
-	GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen Pants', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen Gloves', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen Boots', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	iID = GetWitcherPlayer().inv.AddAnItem('Autogen Armor', 1); GetWitcherPlayer().EquipItem(iID[0]);
-	
+	witcher = GetWitcherPlayer();
+	inv = GetWitcherPlayer().GetInventory();
+
+	iID = inv.AddAnItem('Autogen steel sword', 1);
+	witcher.EquipItem(iID[0]);
+	iID = inv.AddAnItem('Autogen silver sword', 1);
+	witcher.EquipItem(iID[0]);
+	iID = inv.AddAnItem('Autogen Pants', 1);
+	witcher.EquipItem(iID[0]);
+	iID = inv.AddAnItem('Autogen Gloves', 1);
+	witcher.EquipItem(iID[0]);
+	iID = inv.AddAnItem('Autogen Boots', 1);
+	witcher.EquipItem(iID[0]);
+	iID = inv.AddAnItem('Autogen Armor', 1);
+	witcher.EquipItem(iID[0]);
+}
+
+exec function fb1() //modSigns
+{
+	resetLevels_internal(1);
+	GetWitcherPlayer().inv.RemoveAllItems();
+	GetWitcherPlayer().AddTimer('GiveStartingItems', 1, true, , , true);
+}
+
+exec function fb2(optional level : int) //modSigns
+{
+	resetLevels_internal(level);
+	addAutogenEquipment_internal();
 }
 
 exec function GetExpPoints(points : int)
@@ -50,51 +76,19 @@ exec function fb3 (optional level :int, optional path : name, optional clearInv 
 	fb3_internal( level, path, clearInv );
 }
 
-function fb3_internal(optional level :int, optional path : name, optional clearInv : bool)
-{	
-	var iID : array<SItemUniqueId>;
-	var lm : W3PlayerWitcher;
-	var exp, prevLvl, currLvl : int;
-	
-	GetWitcherPlayer().Debug_ClearCharacterDevelopment(true);
+function fb3_internal(optional level :int, optional path : name, optional clearInv : bool) //modSigns
+{
+	resetLevels_internal(level);
 
 	if(clearInv)
 	{
 		GetWitcherPlayer().GetInventory().RemoveAllItems();
 	}	
 	
-	if(!level)
-	{
-		level = 30;
-	}	
-	lm = GetWitcherPlayer();
-	prevLvl = lm.GetLevel();
-	currLvl = lm.GetLevel();
-		
-	while(currLvl < level)
-	{
-		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false); 
-		
-		currLvl = lm.GetLevel();
-		
-		if(prevLvl == currLvl)
-			break;				
-		
-		prevLvl = currLvl;
-	}		
-	iID.Clear();
-	iID = lm.inv.AddAnItem('Autogen steel sword', 1); 	lm.EquipItem(iID[0]);
-	iID = lm.inv.AddAnItem('Autogen silver sword', 1);	lm.EquipItem(iID[0]);
-	iID = lm.inv.AddAnItem('Autogen Pants', 1); 		lm.EquipItem(iID[0]);
-	iID = lm.inv.AddAnItem('Autogen Gloves', 1); 		lm.EquipItem(iID[0]);
-	iID = lm.inv.AddAnItem('Autogen Boots', 1); 		lm.EquipItem(iID[0]);
-	iID = lm.inv.AddAnItem('Autogen Armor', 1); 		lm.EquipItem(iID[0]);
+	addAutogenEquipment_internal();
 	
 	switch ( path )
 	{
-		default:		Ep1_sword(); break;
-		case '':		Ep1_sword(); break;
 		case 'sword': 	Ep1_sword(); break;
 		case 'swords': 	Ep1_sword(); break;
 		case 'sign': 	Ep1_signs(); break;
@@ -102,13 +96,14 @@ function fb3_internal(optional level :int, optional path : name, optional clearI
 		case 'alchemy': Ep1_alchemy(); break;
 		case 'bombs': 	Ep1_alchemy(); break;
 		case 'bomb': 	Ep1_alchemy(); break;
+		case '':		Ep1_sword(); break;
+		default:		Ep1_sword(); break;
 	}
 	
-	
-	lm.inv.AddAnItem('Greater mutagen red', 14);
-	lm.inv.AddAnItem('Greater mutagen green', 11);
-	lm.inv.AddAnItem('Greater mutagen blue', 11);
-	lm.AddPoints(ESkillPoint, 60, true);
+	GetWitcherPlayer().inv.AddAnItem('Greater mutagen red', 15);
+	GetWitcherPlayer().inv.AddAnItem('Greater mutagen green', 15);
+	GetWitcherPlayer().inv.AddAnItem('Greater mutagen blue', 15);
+	GetWitcherPlayer().AddPoints(ESkillPoint, 60, true);
 }
 
 function Ep1_sword()

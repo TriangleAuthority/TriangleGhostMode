@@ -15,7 +15,7 @@ import abstract class W3AbilityManager extends IScriptable
 	import saved var usedDifficultyMode : EDifficultyMode;					
 	import var difficultyAbilities : array< array< name > >;				
 	import var ignoresDifficultySettings : bool;							
-	private var overhealBonus : float;
+	//private var overhealBonus : float;
 	
 	protected var isInitialized : bool;										
 	default isInitialized = false;											
@@ -167,7 +167,7 @@ import abstract class W3AbilityManager extends IScriptable
 	public function GetAttributeValue(attributeName : name, optional tags : array<name>) : SAbilityAttributeValue
 	{
 		var val : SAbilityAttributeValue;
-	
+
 		if(CheckForbiddenAttribute(attributeName))
 		{
 			val.valueBase = -9999;
@@ -178,6 +178,7 @@ import abstract class W3AbilityManager extends IScriptable
 		
 		return GetAttributeValueInternal(attributeName, tags);
 	}
+	
 	
 	public function GetAbilityAttributeValue(abilityName : name, attributeName : name) : SAbilityAttributeValue
 	{
@@ -193,7 +194,12 @@ import abstract class W3AbilityManager extends IScriptable
 		
 		return charStats.GetAbilityAttributeValue(attributeName, abilityName);
 	}
-		
+
+	//modSigns
+	public function GetAttributeValueUnsafe(attributeName : name, optional tags : array<name>) : SAbilityAttributeValue
+	{
+		return GetAttributeValueInternal(attributeName, tags);
+	}
 	
 	
 	
@@ -343,7 +349,7 @@ import abstract class W3AbilityManager extends IScriptable
 		}
 		
 		
-		if(stat == CDS_DoTBurningDamageRes || stat == CDS_DoTPoisonDamageRes || stat == CDS_DoTBleedingDamageRes)
+		/*if(stat == CDS_DoTBurningDamageRes || stat == CDS_DoTPoisonDamageRes || stat == CDS_DoTBleedingDamageRes)
 		{
 			if(owner.HasBuff(EET_Mutagen20))
 			{
@@ -353,7 +359,7 @@ import abstract class W3AbilityManager extends IScriptable
 				charPts = charPts + pts;
 				charPerc = charPerc + prc;
 			}
-		}
+		}*/ //modSigns
 		
 		points = CalculateAttributeValue(charPts);
 		percents = MinF(1, CalculateAttributeValue(charPerc));		
@@ -379,6 +385,10 @@ import abstract class W3AbilityManager extends IScriptable
 			if( stat == BCS_Vitality )
 			{
 				OnVitalityChanged();				
+			}
+			else if( stat == BCS_Stamina ) //modSigns
+			{
+				OnStaminaChanged();
 			}
 			else if( stat == BCS_Toxicity )
 			{
@@ -441,19 +451,38 @@ import abstract class W3AbilityManager extends IScriptable
 	
 	public function DrainStamina(action : EStaminaActionType, optional fixedCost : float, optional fixedDelay : float, optional abilityName : name, optional dt : float, optional costMult : float) : float
 	{
-		var cost, delay : float;
+		var cost, delay/*, savedStamina*/ : float; //modSigns
+		//var usedFocusOnly : bool; //modSigns
+		var signEnt : W3SignEntity; //modSigns
 
 		GetStaminaActionCost(action, cost, delay, fixedCost, fixedDelay, abilityName, dt, costMult);
 		
 		
 		if(cost > 0)
 		{
+			//savedStamina = owner.GetStat(BCS_Stamina); //modSigns: actual stamina spent
 			InternalReduceStat(BCS_Stamina, cost);
 			owner.StartStaminaRegen();
+			//modSigns: Perk_10 - use adrenaline to pay the cost
+			/*if( cost > savedStamina && owner.CheckPerk10Activation(action) )
+			{
+				thePlayer.DrainFocus((cost - savedStamina)*owner.GetStatMax(BCS_Focus)/owner.GetStatMax(BCS_Stamina));
+				if( savedStamina == 0.f )
+				{
+					usedFocusOnly = true;
+				}
+				owner.PauseFocusGain( true );
+				owner.AddTimer( 'ResumeFocusGain', 1.f );
+			}*/
+		}
+		
+		if(owner == GetWitcherPlayer()) //modSigns
+		{
+			gmModStaminaDelay(delay);
 		}
 		
 		
-		if(delay > 0)
+		if(delay > 0 /*&& !usedFocusOnly*/) //modSigns: allow stamina regen if using focus
 		{
 			if(IsNameValid(abilityName))
 				owner.PauseStaminaRegen( abilityName, delay );
@@ -461,9 +490,17 @@ import abstract class W3AbilityManager extends IScriptable
 				owner.PauseStaminaRegen( StaminaActionTypeToName(action), delay );
 		}
 		
+		//modSigns
+		if(owner == thePlayer)
+			thePlayer.CheckForLowStamina();
+		else
+			owner.CheckShouldWaitForStaminaRegen();
+		
+		if(cost > 0) //modSigns
+			OnStaminaChanged();
+		
 		return cost;
 	}
-	
 	
 	public function GetStaminaActionCost(action : EStaminaActionType, out cost : float, out delay : float, optional fixedCost : float, optional fixedDelay : float, optional abilityName : name, optional dt : float, optional costMult : float)
 	{
@@ -594,8 +631,8 @@ import abstract class W3AbilityManager extends IScriptable
 	public function GainStat( stat : EBaseCharacterStats, amount : float )
 	{
 		var statWithoutLock, statWithLock, lock, max : float;
-		var hadOverheal : bool;
-		var mi, ma : SAbilityAttributeValue;
+		//var hadOverheal : bool;
+		//var mi, ma : SAbilityAttributeValue;
 		
 		statWithoutLock = GetStat(stat, true);
 		statWithLock = GetStat(stat, false);
@@ -609,17 +646,37 @@ import abstract class W3AbilityManager extends IScriptable
 			OnVitalityChanged();
 			if ( (W3PlayerAbilityManager)this && owner == GetWitcherPlayer() && GetWitcherPlayer().HasRunewordActive('Runeword 4 _Stats') && GetWitcherPlayer().IsInCombat() && (statWithoutLock + amount) > max )
 			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue('Runeword 4 _Stats', 'max_bonus', mi, ma);				
-				hadOverheal = (overhealBonus > (0.005 * GetStatMax(BCS_Vitality)));
-				overhealBonus += (statWithoutLock + amount) - GetStatMax(stat);
-				overhealBonus = MinF(overhealBonus, max * ma.valueMultiplicative);
-				thePlayer.PlayRuneword4FX();				
+				//theGame.GetDefinitionsManager().GetAbilityAttributeValue('Runeword 4 _Stats', 'max_bonus', mi, ma);				
+				//hadOverheal = (overhealBonus > (0.005 * GetStatMax(BCS_Vitality)));
+				//overhealBonus += (statWithoutLock + amount) - GetStatMax(stat);
+				//overhealBonus = MinF(overhealBonus, max * ma.valueMultiplicative);
+				//thePlayer.PlayRuneword4FX();				
+				//modSigns
+				if(!thePlayer.HasBuff(EET_Runeword4))
+					thePlayer.AddEffectDefault(EET_Runeword4, NULL, "");
+				((W3Effect_Runeword4)thePlayer.GetBuff(EET_Runeword4)).IncOverhealBonus((statWithoutLock + amount) - GetStatMax(stat));
 			}
 		}
 		else if( stat == BCS_Toxicity )
 			OnToxicityChanged();
+		else if( stat == BCS_Stamina ) //modSigns
+			OnStaminaChanged();
 		else if( stat == BCS_Focus )
+		{
+			//theGame.witcherLog.AddMessage("focus gain: " + amount);
 			OnFocusChanged();
+			//modSigns
+			if((W3PlayerAbilityManager)this && owner == GetWitcherPlayer() && GetWitcherPlayer().IsInCombat() && (statWithoutLock + amount) > max)
+			{
+				//Prolongation
+				if(GetWitcherPlayer().HasRunewordActive('Runeword 11 _Stats'))
+				{
+					if(!thePlayer.HasBuff(EET_Runeword11))
+						thePlayer.AddEffectDefault(EET_Runeword11, NULL, "");
+					((W3Effect_Runeword11)thePlayer.GetBuff(EET_Runeword11)).IncBonusAdrenaline((statWithoutLock + amount) - GetStatMax(stat));
+				}
+			}
+		}
 		else if( stat == BCS_Essence )
 			OnEssenceChanged();
 	}
@@ -634,6 +691,7 @@ import abstract class W3AbilityManager extends IScriptable
 	
 	
 	protected function OnVitalityChanged();
+	protected function OnStaminaChanged(); //modSigns
 	protected function OnEssenceChanged();
 	protected function OnToxicityChanged();
 	protected function OnFocusChanged();
@@ -650,8 +708,12 @@ import abstract class W3AbilityManager extends IScriptable
 	{
 		if( abilityName == 'Runeword 4 _Stats' )
 		{
-			ResetOverhealBonus();
+			//ResetOverhealBonus();
+			//modSigns
+			thePlayer.RemoveBuff(EET_Runeword4);
 		}
+		if( abilityName == 'Runeword 1 _Stats' ) //modSigns
+			thePlayer.RemoveBuff(EET_Runeword11);
 		
 		OnAbilityChanged( abilityName );
 	}
@@ -685,6 +747,9 @@ import abstract class W3AbilityManager extends IScriptable
 			usedDifficultyMode = EDM_NotSet;
 		}
 		
+		//if(owner == thePlayer)
+		//	theGame.witcherLog.AddMessage("abilityName = " + abilityName);
+		
 		for(i=0; i<size; i+=1)
 		{					
 			attribute = atts[ i ];
@@ -694,7 +759,8 @@ import abstract class W3AbilityManager extends IScriptable
 				continue;
 			}
 		
-			
+			//if(owner == thePlayer)
+			//	theGame.witcherLog.AddMessage("attribute[" + i + "] = " + attribute);
 			
 			stat = StatNameToEnum( attribute );
 			if(stat != BCS_Undefined)
@@ -764,6 +830,15 @@ import abstract class W3AbilityManager extends IScriptable
 				{
 					owner.StartEssenceRegen();
 				}
+				//modSigns begin
+				else if( stat == CRS_Vitality )
+					owner.StartVitalityRegen();
+				else if( stat == CRS_Stamina )
+					owner.StartStaminaRegen();
+				//modSigns end
+				
+				//if(owner == thePlayer)
+				//	theGame.witcherLog.AddMessage("stat = " + stat);
 			}
 			
 			
@@ -800,16 +875,17 @@ import abstract class W3AbilityManager extends IScriptable
 	
 	
 	
-	public final function GetOverhealBonus() : float
-	{
-		return overhealBonus;
-	}
-	
-	public final function ResetOverhealBonus()
-	{
-		overhealBonus = 0;
-		thePlayer.StopEffect('runeword_4');
-	}
+	//public final function GetOverhealBonus() : float
+	//{
+	//	return overhealBonus;
+	//}
+	//
+	//public final function ResetOverhealBonus()
+	//{
+	//	overhealBonus = 0;
+	//	thePlayer.StopEffect('runeword_4');
+	//	thePlayer.RemoveBuff(EET_Runeword4); //modSigns
+	//}
 	
 	
 	

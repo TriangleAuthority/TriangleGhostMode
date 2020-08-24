@@ -7,7 +7,9 @@
 
 
 
-class W3Effect_WellFed extends W3RegenEffect
+//modSigns: boosts existing autoregen effect instead of adding another one
+//to avoid conflicts.
+class W3Effect_WellFed extends CBaseGameplayEffect
 {
 	default effectType = EET_WellFed;
 	default isPositive = true;
@@ -27,7 +29,10 @@ class W3Effect_WellFed extends W3RegenEffect
 	
 	event OnPerk15Unequipped()
 	{
-		SetTimeLeft( initialDuration );
+		var timeLeftPrc : float; //modSigns
+		
+		timeLeftPrc = timeLeft / duration; //modSigns
+		SetTimeLeft( initialDuration * timeLeftPrc ); //modSigns
 		duration = initialDuration;
 	}
 	
@@ -40,10 +45,11 @@ class W3Effect_WellFed extends W3RegenEffect
 		if( isOnPlayer && GetWitcherPlayer() )
 		{	
 			
-			if( GetWitcherPlayer().CanUseSkill( S_Perk_15 ) )
+			//modSigns: mechanic changed
+			if( sourceName == "alcohol" && GetWitcherPlayer().CanUseSkill( S_Perk_15 ) )
 			{
-				min = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_15, 'duration', false, false );
-				duration = min.valueAdditive;
+				min = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_15, 'duration_bonus', false, false );
+				duration *= 1 + min.valueMultiplicative;
 			}
 			if( GetWitcherPlayer().HasRunewordActive( 'Runeword 6 _Stats' ) )
 			{

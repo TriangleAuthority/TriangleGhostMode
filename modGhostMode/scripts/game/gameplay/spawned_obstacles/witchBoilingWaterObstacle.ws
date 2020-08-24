@@ -114,7 +114,7 @@ class W3WitchBoilingWaterObstacle extends W3DurationObstacle
 					if ( simpleDamageAction )
 					{
 						l_damage = new W3DamageAction in this;
-						l_damage.Initialize( summoner, l_actor, summoner, summoner.GetName(), hitReactionType, CPS_Undefined, false, false, false, true );
+						l_damage.Initialize( summoner, l_actor, summoner, summoner.GetName(), hitReactionType, CPS_AttackPower, false, false, false, true ); //modSigns: CPS_AttackPower
 						l_damage.AddDamage( theGame.params.DAMAGE_NAME_PHYSICAL, damageValue );
 						theGame.damageMgr.ProcessAction( l_damage );
 						delete l_damage;

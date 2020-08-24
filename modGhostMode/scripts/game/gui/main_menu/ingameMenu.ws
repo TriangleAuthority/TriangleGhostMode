@@ -115,6 +115,15 @@ class CR4IngameMenu extends CR4MenuBase
 	protected var hasChangedOption		: bool;
 	default hasChangedOption = false;
 	
+	protected var gmHasChangedScalingOption : bool; //modSigns
+	default gmHasChangedScalingOption = false;
+	protected var gmHasChangedQuestLevelsOption : bool; //modSigns
+	default gmHasChangedQuestLevelsOption = false;
+	protected var gmHasChangedGameplayOption : bool; //modSigns
+	default gmHasChangedGameplayOption = false;
+	protected var gmHasChangedQoLOption : bool; //modSigns
+	default gmHasChangedQoLOption = false;
+	
 	private var ignoreInput				: bool;
 	default ignoreInput = false;
 	
@@ -869,6 +878,16 @@ class CR4IngameMenu extends CR4MenuBase
 		hasChangedOption = true;
 		IngameMenu_ChangePresetValue(groupId, targetPresetIndex, this);
 		
+		//modSigns
+		if (groupId == 'GMScalingOptions')
+			gmHasChangedScalingOption = true;
+		if (groupId == 'GMExpOptions')
+			gmHasChangedQuestLevelsOption = true;
+		if (groupId == 'GMGameplayOptions')
+			gmHasChangedGameplayOption = true;
+		if (groupId == 'GMQOLOptions')
+			gmHasChangedQoLOption = true;
+		
 		if (groupId == 'Rendering' && !isMainMenu)
 		{
 			m_fxForceBackgroundVis.InvokeSelfOneArg(FlashArgBool(true));
@@ -907,6 +926,18 @@ class CR4IngameMenu extends CR4MenuBase
 			isValid = optionValue;
 			m_fxSetHardwareCursorOn.InvokeSelfOneArg(FlashArgBool(isValid));
 		}
+		
+		//modSigns
+		if (groupId == NameToFlashUInt('GMScalingOptions')) //for whatever reason this doesn't work
+			gmHasChangedScalingOption = true;
+		if (gmIsScalingOption(optionName))
+			gmHasChangedScalingOption = true;
+		if (optionName == 'GMNoQuestLevels')
+			gmHasChangedQuestLevelsOption = true;
+		if (gmIsGameplayOption(optionName))
+			gmHasChangedGameplayOption = true;
+		if (gmIsQoLOption(optionName))
+			gmHasChangedQoLOption = true;
 		
 		if (optionName == 'SwapAcceptCancel')
 		{
@@ -1164,11 +1195,38 @@ class CR4IngameMenu extends CR4MenuBase
 		m_fxUpdateOptionValue.InvokeSelfTwoArgs(FlashArgUInt(NameToFlashUInt('GameDifficulty')), FlashArgString(difficultyIndexAsString));
 	}
 	
+	//modSigns
+	protected function gmUserSettings()
+	{
+		//theGame.witcherLog.AddMessage("gmHasChangedScalingOption = " + gmHasChangedScalingOption);
+		if(gmHasChangedScalingOption)
+		{
+			gmHasChangedScalingOption = false;
+			theGame.gmUserSettingsScaling();
+		}
+		if(gmHasChangedQuestLevelsOption)
+		{
+			gmHasChangedQuestLevelsOption = false;
+			theGame.gmUserSettingsQuestLevels();
+		}
+		if(gmHasChangedGameplayOption)
+		{
+			gmHasChangedGameplayOption = false;
+			theGame.gmUserSettingsGameplay();
+		}
+		if(gmHasChangedQoLOption)
+		{
+			gmHasChangedQoLOption = false;
+			theGame.gmUserSettingsQoL();
+		}
+	}
+	
 	protected function SaveChangedSettings()
 	{
 		if (hasChangedOption)
 		{
 			hasChangedOption = false;
+			gmUserSettings(); //modSigns
 			theGame.SaveUserSettings();
 		}
 	}

@@ -996,7 +996,7 @@ state CombatSword in W3PlayerWitcher extends Combat
 		var actor 					: CActor;
 		var playerToTargetHeading, staminaCostPerSec	: float;
 		var newTarget : CActor;
-		var mutagen : W3Mutagen21_Effect;
+		//var mutagen : W3Mutagen21_Effect; //modSigns - hack removed
 	
 		if ( !thePlayer.IsCombatMusicEnabled() && enableAttack && 
 			( !isLightAttack && !thePlayer.CanAttackWhenNotInCombat( EBAT_SpecialAttack_Heavy, false, newTarget ) ) )
@@ -1043,11 +1043,11 @@ state CombatSword in W3PlayerWitcher extends Combat
 					
 					parent.ResumeStaminaRegen('WhirlSkill');
 					
-					if(thePlayer.HasBuff(EET_Mutagen21) && enableAttack)
+					/*if(thePlayer.HasBuff(EET_Mutagen21) && enableAttack) //modSigns - hack removed
 					{
 						mutagen = (W3Mutagen21_Effect)thePlayer.GetBuff(EET_Mutagen21);
 						mutagen.Heal();
-					}
+					}*/
 				}
 					
 				PerformSpecialAttackLight( enableAttack );
@@ -1067,17 +1067,19 @@ state CombatSword in W3PlayerWitcher extends Combat
 					}
 					
 					parent.AddTimer('SpecialAttackHeavySustainCost', 0.001, true);
-					parent.DrainStamina(ESAT_Ability, 0, 0, parent.GetSkillAbilityName(S_Sword_s02));
+					//parent.DrainStamina(ESAT_Ability, 0, 0, parent.GetSkillAbilityName(S_Sword_s02)); //modSigns
 				}
 				else
 				{
 					parent.RemoveTimer('SpecialAttackHeavySustainCost');
 					
-					if(thePlayer.HasBuff(EET_Mutagen21))
+					parent.ResumeStaminaRegen('RendSkill'); //modSigns
+
+					/*if(thePlayer.HasBuff(EET_Mutagen21)) //modSigns - hack removed
 					{
 						mutagen = (W3Mutagen21_Effect)thePlayer.GetBuff(EET_Mutagen21);
 						mutagen.Heal();
-					}
+					}*/
 				}
 					
 				PerformSpecialAttackHeavy( enableAttack );
@@ -1125,6 +1127,7 @@ state CombatSword in W3PlayerWitcher extends Combat
 				parent.SetBehaviorVariable( 'isPerformingSpecialAttack', 0.f );
 				parent.RemoveCustomOrientationTarget( 'SpecialAttackLight' );
 				parent.RemoveTimer( 'UpdateSpecialAttackLightHeading' );
+				thePlayer.AddEffectDefault(EET_WhirlCooldown, NULL, "WhirlCooldown"); //modSigns
 			}
 		}
 	}
@@ -1145,6 +1148,7 @@ state CombatSword in W3PlayerWitcher extends Combat
 	{	
 		var playerToTargetDist 			: float;
 		var completeSpecialAttackTime	: float;
+		var rendCost, rendDelay			: float; //modSigns
 		
 		if ( parent.GetBehaviorVariable( 'isPerformingSpecialAttack' ) == 0.f )
 		{
@@ -1170,6 +1174,19 @@ state CombatSword in W3PlayerWitcher extends Combat
 			{
 				parent.SetBehaviorVariable( 'isPerformingSpecialAttack', 0.f );
 				parent.RemoveCustomOrientationTarget( 'SpecialAttackHeavy' );
+				thePlayer.AddEffectDefault(EET_RendCooldown, NULL, "RendCooldown"); //modSigns
+					
+				//modSigns
+				rendCost = parent.GetRendStaminaCost(0.5f);
+				rendDelay = parent.GetStaminaActionDelay(ESAT_Ability, parent.GetSkillAbilityName(S_Sword_s02));
+				//theGame.witcherLog.AddMessage("Rend: GetSpecialAttackTimeRatio = " + parent.GetSpecialAttackTimeRatio());
+				//theGame.witcherLog.AddMessage("Rend: stamina cost = " + rendCost);
+				//theGame.witcherLog.AddMessage("Rend: stamina delay = " + rendDelay);
+				if(parent.GetSpecialAttackTimeRatio() < rendCost/parent.GetStatMax(BCS_Stamina))
+				{
+					parent.DrainStamina(ESAT_FixedValue, rendCost - parent.GetSpecialAttackTimeRatio() * parent.GetStatMax(BCS_Stamina), rendDelay);
+					//theGame.witcherLog.AddMessage("Rend time too low, drain stamina for heavy attack: " + (rendCost - parent.GetSpecialAttackTimeRatio() * parent.GetStatMax(BCS_Stamina)));
+				}
 			}
 		}
 	}

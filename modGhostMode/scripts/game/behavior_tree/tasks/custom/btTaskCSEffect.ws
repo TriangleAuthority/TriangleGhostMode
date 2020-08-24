@@ -447,25 +447,22 @@ class CBehTreeTaskCSEffect extends IBehTreeTask
 	
 	
 	
+	//modSigns: heavy knockdown finishers only
 	final function ShouldEnableFinisher() : bool
 	{
 		var actor : CActor;
 		actor = GetActor();
 		
-		if( CSType != ECST_HeavyKnockdown && CSType != ECST_Knockdown && CSType != ECST_Ragdoll && forceFinisherActivation == false )
+		/*if( CSType != ECST_HeavyKnockdown && CSType != ECST_Knockdown && CSType != ECST_Ragdoll && forceFinisherActivation == false )
 		{			
 			return false;
-		}
+		}*/
 		
-		if ( GetWitcherPlayer() && GetAttitudeBetween( actor, thePlayer ) == AIA_Hostile && actor.IsVulnerable() && actor.GetComponent( "Finish" ) )
+		if( (CSType == ECST_HeavyKnockdown || forceFinisherActivation) && GetWitcherPlayer() && GetAttitudeBetween( actor, thePlayer ) == AIA_Hostile && actor.IsVulnerable() && actor.GetComponent( "Finish" ) )
 		{
-			if( actor.HasAbility('ResistFinisher') &&  actor.GetHealthPercents() > 0.2f )
-			{
-				return false;
-			};
-			
 			return true;
 		}
+		
 		return false;
 	}
 	
@@ -1210,11 +1207,11 @@ class CBehTreeTaskCSEffect extends IBehTreeTask
 		else if ( eventName == 'DisableFinisher' )
 		{
 			
-			if( !npc.HasAbility('mon_siren_base') )
-			{
-				finisherDisabled = true;
-				DisableFinisher();
-			}
+			//if( !npc.HasAbility('mon_siren_base') )
+			//{
+			//	finisherDisabled = true;
+			//	DisableFinisher();
+			//}
 			return true;
 		}
 		else if ( eventName == 'EnableFinisher' )

@@ -47,7 +47,8 @@ statemachine class W3ReplacerCiri extends W3Replacer
 		
 		SetBehaviorVariable( 'test_ciri_replacer', 1.0f);
 		
-		this.DrainStamina(ESAT_FixedValue, 99.f);
+		//this.DrainStamina(ESAT_FixedValue, 99.f);
+		abilityManager.DrainStamina(ESAT_FixedValue, 99.f); //modSigns
 		this.AddEffectDefault(EET_StaminaDrain, this, this.GetName());
 		
 		isInitialized = true;
@@ -76,8 +77,40 @@ statemachine class W3ReplacerCiri extends W3Replacer
 			this.AddAbility( 'Ciri_CombatRegen' );
 		}
 		
-		
 		theGame.GameplayFactsRemove( "PlayerIsGeralt" );
+		
+		CheckCiriAbilities(); //modSigns
+	}
+	
+	//modSigns
+	private function CheckCiriAbilities()
+	{
+		var journalManager : CWitcherJournalManager;
+		var journalEntry : CJournalBase;
+		var entryStatus : EJournalStatus;
+		var isActive : bool;
+		
+		//Ciri Story: Novigrad
+		journalManager = theGame.GetJournalManager();
+		journalEntry = journalManager.GetEntryByString("Q302 Ciri - Rescuing Dudu DC58A7F2-49D51834-AC99B3A6-6106D4CC");
+		entryStatus = journalManager.GetEntryStatus(journalEntry);
+		isActive = (entryStatus == JS_Active);
+		journalEntry = journalManager.GetEntryByString("Q305 Ciri - chase to the temple 12B8D11E-4BF80285-D48C5CAF-A75A0887");
+		entryStatus = journalManager.GetEntryStatus(journalEntry);
+		isActive = (isActive || (entryStatus == JS_Active));
+		if(isActive && !HasAbility('Ciri_Q305'))
+			AddAbility('Ciri_Q305');
+		else if(!isActive && HasAbility('Ciri_Q305'))
+			RemoveAbility('Ciri_Q305');
+
+		//Ciri Story: Skellige
+		journalEntry = journalManager.GetEntryByString("Q205 Ciri - safe heaven");
+		entryStatus = journalManager.GetEntryStatus(journalEntry);
+		isActive = (entryStatus == JS_Active);
+		if(isActive && !HasAbility('Ciri_Q205'))
+			AddAbility('Ciri_Q205');
+		else if(!isActive && HasAbility('Ciri_Q205'))
+			RemoveAbility('Ciri_Q205');
 	}
 	
 	public function IsInitialized() : bool
@@ -157,7 +190,7 @@ statemachine class W3ReplacerCiri extends W3Replacer
 				{
 					case BS_Pressed :
 					{
-						DrainStamina(ESAT_LightAttack);
+						//DrainStamina(ESAT_LightAttack); //modSigns
 						if ( this.HasAbility('Ciri_Rage') )
 							actionResult = this.OnPerformDashAttack();
 						else
@@ -177,7 +210,7 @@ statemachine class W3ReplacerCiri extends W3Replacer
 				{
 					case BS_Released :
 					{
-						DrainStamina(ESAT_HeavyAttack);
+						//DrainStamina(ESAT_HeavyAttack); //modSigns
 						if ( this.HasAbility('Ciri_Rage') )
 							actionResult = this.OnPerformDashAttack();
 						else
@@ -188,7 +221,7 @@ statemachine class W3ReplacerCiri extends W3Replacer
 					{
 						if ( this.GetCurrentStateName() == 'CombatFists' )
 						{
-							DrainStamina(ESAT_HeavyAttack);
+							//DrainStamina(ESAT_HeavyAttack); //modSigns
 							if ( this.HasAbility('Ciri_Rage') )
 							actionResult = this.OnPerformDashAttack();
 						else
@@ -516,6 +549,7 @@ statemachine class W3ReplacerCiri extends W3Replacer
 	{
 		super.OnCombatStart();
 		
+		CheckCiriAbilities(); //modSigns
 		
 		this.RemoveAllBuffsOfType(EET_StaminaDrain);
 		this.AddEffectDefault(EET_AutoStaminaRegen, this, this.GetName());
@@ -647,10 +681,10 @@ statemachine class W3ReplacerCiri extends W3Replacer
 	
 	public function DrainResourceForSpecialAttack()
 	{
-		DrainStamina(ESAT_FixedValue, 100.f);
+		abilityManager.DrainStamina(ESAT_FixedValue, 100.f); //modSigns
 	}
 	
-	public function DrainResourceForDodge()
+	/*public function DrainResourceForDodge()
 	{
 		DrainStamina(ESAT_FixedValue, GetStatMax(BCS_Stamina)/10);
 	}
@@ -658,7 +692,7 @@ statemachine class W3ReplacerCiri extends W3Replacer
 	public function DrainResourceForDash()
 	{
 		DrainStamina(ESAT_FixedValue, GetStatMax(BCS_Stamina)/5);
-	}
+	}*/ //unused
 	
 	public function HasStaminaForDash( optional dontPlaySound : bool ) : bool
 	{
@@ -696,9 +730,27 @@ statemachine class W3ReplacerCiri extends W3Replacer
 		return res;
 	}
 	
-	public function HasStaminaToParry( attActionName : name ) : bool
+	//modSigns
+	public function HasStaminaToParry( attActionName : name, optional mult : float ) : bool
 	{
 		return true;
+	}
+	
+	//modSigns
+	public function HasStaminaToCounter( attActionName : name, optional mult : float ) : bool
+	{
+		return true;
+	}
+	
+	//modSigns
+	public function HasStaminaToUseAction( action : EStaminaActionType, optional abilityName : name, optional dt :float, optional multiplier : float ) : bool
+	{
+		return true;
+	}
+	
+	//modSigns
+	public function DrainStamina(action : EStaminaActionType, optional fixedCost : float, optional fixedDelay : float, optional abilityName : name, optional dt : float, optional costMult : float)
+	{
 	}
 	
 	public function SmartSetVisible( toggle : bool )
@@ -880,16 +932,17 @@ statemachine class W3ReplacerCiri extends W3Replacer
 		super.SetAttackData( data );
 	}
 	
-	function ReduceDamage(out damageData : W3DamageAction)
+	//modSigns: renamed to DodgeDamage as it only processes dodging
+	function DodgeDamage(out damageData : W3DamageAction)
 	{
 		var actorAttacker : CActor;
-		var quen : W3QuenEntity;
+		//var quen : W3QuenEntity;
 		
-		super.ReduceDamage(damageData);
+		super.DodgeDamage(damageData);
 		
 		
-		if(!damageData.DealsAnyDamage())
-			return;
+		//if(!damageData.DealsAnyDamage())
+		//	return;
 		
 		actorAttacker = (CActor)damageData.attacker;
 		
@@ -900,16 +953,18 @@ statemachine class W3ReplacerCiri extends W3Replacer
 			{
 				
 				
-				if(	( AbsF(AngleDistance(evadeHeading, actorAttacker.GetHeading())) < 150 ) )
-				{
+				//if(	( AbsF(AngleDistance(evadeHeading, actorAttacker.GetHeading())) < 150 ) )
+				//{
 					if ( theGame.CanLog() )
 					{
 						LogDMHits("W3ReplacerCiri.ReduceDamage: Attack dodged by Ciri - no damage done", damageData);
 					}
 					damageData.SetAllProcessedDamageAs(0);
 					damageData.SetWasDodged();
+					damageData.ClearEffects(); //modSigns
+					damageData.SetHitAnimationPlayType(EAHA_ForceNo); //modSigns
 					GainResource();
-				}
+				//} //modSigns: no angle restrictions for Ciri
 			}
 		}
 	}

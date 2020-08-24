@@ -73,6 +73,11 @@ statemachine abstract import class CR4Player extends CPlayer
 	public var counterCollisionGroupNames : array<name>;
 	
 	public saved	var lastInstantKillTime				: GameTime;
+	public			var castSignHoldTimestamp			: float; //modSigns
+	public function SetCastSignHoldTimestamp(ts : float) //modSigns
+	{
+		castSignHoldTimestamp = ts;
+	}
 	
 	
 	private 		var noSaveLockCombatActionName		: string;		default	noSaveLockCombatActionName	= 'combat_action';	
@@ -218,7 +223,7 @@ statemachine abstract import class CR4Player extends CPlayer
 	default upscaledTooltipState = false;
 	
 	
-	private var phantomWeaponMgr : CPhantomWeaponManager;
+	//private var phantomWeaponMgr : CPhantomWeaponManager; //modSigns
 	
 	
 
@@ -615,6 +620,8 @@ statemachine abstract import class CR4Player extends CPlayer
 			ClearBlockedSlots();
 		}
 		
+		gmLoadDefaultSettings(); //modSigns
+		
 		((CR4PlayerStateSwimming)this.GetState('Swimming')).OnParentSpawned();
 		
 		
@@ -630,11 +637,11 @@ statemachine abstract import class CR4Player extends CPlayer
 		}
 		
 		
-		this.GetInventory().GetItemEquippedOnSlot( EES_SteelSword, item );
-		if( this.GetInventory().ItemHasTag( item, 'PhantomWeapon' ) )
-		{
-			this.InitPhantomWeaponMgr();
-		}
+		//this.GetInventory().GetItemEquippedOnSlot( EES_SteelSword, item );
+		//if( this.GetInventory().ItemHasTag( item, 'PhantomWeapon' ) )
+		//{
+		//	this.InitPhantomWeaponMgr();
+		//} //modSigns
 
 		
 		if(FactsQuerySum("mq3036_fact_done") > 0)
@@ -921,11 +928,24 @@ statemachine abstract import class CR4Player extends CPlayer
 		var i : int;
 		var oils : array< W3Effect_Oil >;
 		
-		oils = inv.GetOilsAppliedOnItem( id );
-		
-		for( i=0; i<oils.Size(); i+=1 )
+		//modSigns: condition moved here from damage manager
+		if(inv.ItemHasAnyActiveOilApplied(id) && (!CanUseSkill(S_Alchemy_s06) || GetSkillLevel(S_Alchemy_s06) < 3))
 		{
-			oils[ i ].ReduceAmmo();
+			oils = inv.GetOilsAppliedOnItem( id );
+			
+			for( i=0; i<oils.Size(); i+=1 )
+			{
+				oils[ i ].ReduceAmmo();
+				//modSigns
+				if( oils[ i ].GetAmmoCurrentCount() < 1 )
+					RemoveEffect( oils[ i ] );
+			}
+			
+			//modSigns: moved here from damage manager
+			if(oils.Size() > 0 && ShouldProcessTutorial('TutorialOilAmmo'))
+			{
+				FactsAdd("tut_used_oil_in_combat");
+			}
 		}
 	}
 	
@@ -992,6 +1012,14 @@ statemachine abstract import class CR4Player extends CPlayer
 		var aerondight		: W3Effect_Aerondight;
 		var item			: SItemUniqueId;
 		
+		//modSigns: remove Aerondight buff if not in combat
+		if( !IsInCombat() )
+		{
+			if( HasBuff( EET_Aerondight ) )
+				RemoveBuff( EET_Aerondight );
+			return;
+		}
+		
 		item = inv.GetCurrentlyHeldSword();
 		
 		if( inv.ItemHasTag( item, 'Aerondight' ) )
@@ -1012,6 +1040,43 @@ statemachine abstract import class CR4Player extends CPlayer
 			else
 			{
 				aerondight.Pause( 'ManageAerondightBuff' );
+			}
+		}
+	}
+	
+	//modSigns
+	public final function ManageIrisBuff( apply : bool )
+	{
+		var phantomWeapon	: W3Effect_PhantomWeapon;
+		var item			: SItemUniqueId;
+		
+		if( !IsInCombat() )
+		{
+			if( HasBuff( EET_PhantomWeapon ) )
+				RemoveBuff( EET_PhantomWeapon );
+			return;
+		}
+		
+		item = inv.GetCurrentlyHeldSword();
+		
+		if( inv.ItemHasTag( item, 'PhantomWeapon' ) )
+		{
+			phantomWeapon = (W3Effect_PhantomWeapon)GetBuff( EET_PhantomWeapon );
+			
+			if( apply )
+			{
+				if( !phantomWeapon )
+				{
+					AddEffectDefault( EET_PhantomWeapon, this, "PhantomWeapon" );
+				}
+				else
+				{
+					phantomWeapon.Resume( 'ManageIrisBuff' );
+				}
+			}
+			else
+			{
+				phantomWeapon.Pause( 'ManageIrisBuff' );
 			}
 		}
 	}
@@ -1053,13 +1118,13 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		if( !existingOil )
 		{
-			if( !GetWitcherPlayer() || !GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_1 ) )
+			if( !GetWitcherPlayer() || !GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_2 ) ) //modSigns
 			{
 				inv.RemoveAllOilsFromItem( usedOnItem );
 			}
 			else
 			{
-				dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_1 ), 'max_oils_count', min, max );
+				dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Wolf_2 ), 'max_oils_count', min, max ); //modSigns
 				if( inv.GetActiveOilsAppliedOnItemCount( usedOnItem ) >= CalculateAttributeValue( max ) )
 				{
 					inv.RemoveOldestOilFromItem( usedOnItem );
@@ -1452,6 +1517,8 @@ statemachine abstract import class CR4Player extends CPlayer
 	{
 		super.OnDeath( damageAction );
 		
+		StopLowStaminaSFX(); //modSigns
+		
 		RemoveTimer('RequestCriticalAnimStart');
 		
 		EnableFindTarget( false );
@@ -1545,12 +1612,12 @@ statemachine abstract import class CR4Player extends CPlayer
 	
 	protected function PerformCounterCheck(parryInfo: SParryInfo) : bool
 	{
-		var mult 						: float;
+		var attType						: float; //modSigns
 		var parryType					: EParryType;
-		var validCounter, useKnockdown 	: bool;
+		var validCounter, useKnockdown, sword_s11_knockdown : bool;
 		var slideDistance, duration 	: float;
 		var playerToTargetRot			: EulerAngles;
-		var zDifference, mutation8TriggerHP : float;
+		var zDifference/*, mutation8TriggerHP*/ : float;
 		var effectType 					: EEffectType;
 		var repelType					: EPlayerRepelType = PRT_Random;
 		var params						: SCustomEffectParams;
@@ -1567,6 +1634,8 @@ statemachine abstract import class CR4Player extends CPlayer
 		var hitNormal					: Vector;
 		var min, max					: SAbilityAttributeValue;
 		var npc 						: CNewNPC;
+		//var xmlStaminaDamage 			: float;
+		//var xmlStaminaDamageName		: name = 'stamina_damage' ; //modSigns: this is bullshit and was never used properly
 		
 		if(ShouldProcessTutorial('TutorialDodge') || ShouldProcessTutorial('TutorialCounter'))
 		{
@@ -1574,11 +1643,24 @@ statemachine abstract import class CR4Player extends CPlayer
 			FactsRemove("tut_fight_slomo_ON");
 		}
 		
-		if ( !parryInfo.canBeParried || parryInfo.attacker.HasAbility( 'CannotBeCountered' ) )
-			return false;
-		
+		//modSigns: removed parry dependency - countering is now independent of parrying
+		//if( !parryInfo.canBeParried || parryInfo.attacker.HasAbility( 'CannotBeCountered' ) )
+		//	return false;
+			
 		fistFightCheck = FistFightCheck( parryInfo.target, parryInfo.attacker, fistFightCounter );
 		
+		//if( this.IsInFistFightMiniGame() && fistFightCounter )
+		//{
+		//	if ( IsNameValid(xmlStaminaDamageName) )
+		//		xmlStaminaDamage = CalculateAttributeValue(parryInfo.attacker.GetAttributeValue( xmlStaminaDamageName ));
+		//}
+		
+		//modSigns: stamina check
+		if( !HasStaminaToCounter(parryInfo.attackActionName) )
+		{
+			return false;
+		}
+			
 		if( ParryCounterCheck() && parryInfo.targetToAttackerAngleAbs < theGame.params.PARRY_HALF_ANGLE && fistFightCheck )
 		{
 			
@@ -1598,6 +1680,14 @@ statemachine abstract import class CR4Player extends CPlayer
 				SetBehaviorVariable( 'counter', (float)validCounter);			
 				this.SetBehaviorVariable( 'combatActionType', (int)CAT_Parry );
 				
+				//modSigns: no additional multipliers for countering
+				DrainStamina(ESAT_Counterattack, 0, 0, '', 0);
+				
+				//modSigns: new perk 21 ability
+				if(GetWitcherPlayer() && CanUseSkill(S_Perk_21))
+				{
+					GetWitcherPlayer().Perk21GainStamina('counter');
+				}
 				
 				if ( !fistFightCounter )
 				{
@@ -1608,119 +1698,135 @@ statemachine abstract import class CR4Player extends CPlayer
 					if( GetWitcherPlayer().IsMutationActive( EPMT_Mutation8 ) )
 					{
 						isMutation8 = true;
-						theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation8', 'hp_perc_trigger', min, max );
-						mutation8TriggerHP = min.valueMultiplicative;
+						//theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation8', 'hp_perc_trigger', min, max );
+						//mutation8TriggerHP = min.valueMultiplicative; //checked in Mutation8RepelToFinisherImmune
 					}
 					
 					
 					
 					npc = (CNewNPC)parryInfo.attacker;
+					attType = npc.GetBehaviorVariable( 'AttackType' ); //modSigns
 					
+					repelType = PRT_Random; //modSigns
 					
-					if ( parryInfo.attacker.HasAbility('mon_gravehag') )
-					{
-						repelType = PRT_Slash;
-						parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, 'ReflexParryPerformed');
-						
-					}
-					else if ( npc && !npc.IsHuman() && !npc.HasTag( 'dettlaff_vampire' ) )
-					{
-						repelType = PRT_SideStepSlash;
-					}
-					else if ( weaponTags.Contains('spear2h') )
-					{
-						repelType = PRT_SideStepSlash;
-						parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, "ReflexParryPerformed");
-						parryInfo.attacker.SignalGameplayEvent( 'SpearDestruction');
-					}
-					else if( isMutation8 && npc && !npc.IsImmuneToMutation8Finisher() )
+					//modSigns: Deadly Counter
+					if ( isMutation8 && npc && !npc.Mutation8RepelToFinisherImmune() )
 					{
 						repelType = PRT_RepelToFinisher;
 						npc.AddEffectDefault( EET_CounterStrikeHit, this, "ReflexParryPerformed" );
-						
-						
-						SetTarget( npc, true );
-						
-						PerformFinisher( 0.f, 0 );
+						SetTarget(npc, true);
+						PerformFinisher(0.f, 0);
 					}
 					else
 					{
-						
-						thisPos = this.GetWorldPosition();
-						attackerPos = parryInfo.attacker.GetWorldPosition();
-						playerToTargetRot = VecToRotation( thisPos - attackerPos );
-						zDifference = thisPos.Z - attackerPos.Z;
-						
-						if ( playerToTargetRot.Pitch < -5.f && zDifference > 0.35 )
+						//modSigns: only tongue attacks get special counter
+						if ( parryInfo.attacker.HasAbility('mon_gravehag') && (attType == 6 || attType == 19) && parryInfo.attacker.HasAbility('TongueAttack') )
 						{
-							repelType = PRT_Kick;
-							
-							ragdollTarget = parryInfo.attacker;
-							AddTimer( 'ApplyCounterRagdollTimer', 0.3 );
+							repelType = PRT_Slash;
+							parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, 'ReflexParryPerformed');
+						}
+						else if ( npc && !npc.IsHuman() && !npc.HasTag( 'dettlaff_vampire' ) )
+						{
+							repelType = PRT_SideStepSlash;
+						}
+						//else if ( weaponTags.Contains('spear2h') )
+						//{
+						//	repelType = PRT_SideStepSlash;
+						//	//parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, "ReflexParryPerformed");
+						//	parryInfo.attacker.SignalGameplayEvent( 'SpearDestruction');
+						//} // not working anyway
+						//else if( isMutation8 && npc && !npc.IsImmuneToMutation8Finisher() )
+						//{
+						//	repelType = PRT_RepelToFinisher;
+						//	npc.AddEffectDefault( EET_CounterStrikeHit, this, "ReflexParryPerformed" );
+						//	
+						//	SetTarget( npc, true );
+						//	
+						//	PerformFinisher( 0.f, 0 );
+						//} //moved
+						//modSigns
+						else if ( npc.IsHuman() && (npc.HasAbility('SkillTwoHanded') || npc.HasAbility('sq701_tournament_npcs')) )
+						{
+							repelType = PRT_SideStepSlash;
 						}
 						else
 						{
-							useKnockdown = false;
-							if ( CanUseSkill(S_Sword_s11) )
-							{
-								if( GetSkillLevel(S_Sword_s11) > 1 && RandRangeF(3,0) < GetWitcherPlayer().GetStat(BCS_Focus) )
-								{
-									duration = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s11, 'duration', false, true));
-									useKnockdown = true;
-								}
-							}
-							else if ( parryInfo.attacker.IsHuman() )
-							{ 
-								
-								tracePosStart = parryInfo.attacker.GetWorldPosition();
-								tracePosStart.Z += 1.f;
-								playerToAttackerVector = VecNormalize( parryInfo.attacker.GetWorldPosition() -  parryInfo.target.GetWorldPosition() );
-								tracePosEnd = ( playerToAttackerVector * 0.75f ) + ( playerToAttackerVector * parryInfo.attacker.GetRadius() ) + parryInfo.attacker.GetWorldPosition();
-								tracePosEnd.Z += 1.f;
-
-								if ( !theGame.GetWorld().StaticTrace( tracePosStart, tracePosEnd, hitPos, hitNormal, counterCollisionGroupNames ) )
-								{
-									tracePosStart = tracePosEnd;
-									tracePosEnd -= 3.f;
-									
-									if ( !theGame.GetWorld().StaticTrace( tracePosStart, tracePosEnd, hitPos, hitNormal, counterCollisionGroupNames ) )
-										useKnockdown = true;
-								}
-							}
+							thisPos = this.GetWorldPosition();
+							attackerPos = parryInfo.attacker.GetWorldPosition();
+							playerToTargetRot = VecToRotation( thisPos - attackerPos );
+							zDifference = thisPos.Z - attackerPos.Z;
 							
-							if(useKnockdown && (!parryInfo.attacker.IsImmuneToBuff(EET_HeavyKnockdown) || !parryInfo.attacker.IsImmuneToBuff(EET_Knockdown)))
+							if ( playerToTargetRot.Pitch < -5.f && zDifference > 0.35 )
 							{
-								if(!parryInfo.attacker.IsImmuneToBuff(EET_HeavyKnockdown))
-								{
-									params.effectType = EET_HeavyKnockdown;
-								}
-								else
-								{
-									params.effectType = EET_Knockdown;
-								}
-								
 								repelType = PRT_Kick;
-								params.creator = this;
-								params.sourceName = "ReflexParryPerformed";
-								params.duration = duration;
 								
-								parryInfo.attacker.AddEffectCustom(params);
+								ragdollTarget = parryInfo.attacker;
+								AddTimer( 'ApplyCounterRagdollTimer', 0.3 );
 							}
 							else
 							{
-								parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, "ReflexParryPerformed");
+								useKnockdown = false;
+								if ( parryInfo.attacker.IsHuman() )
+								{ 
+									tracePosStart = parryInfo.attacker.GetWorldPosition();
+									tracePosStart.Z += 1.f;
+									playerToAttackerVector = VecNormalize( parryInfo.attacker.GetWorldPosition() -  parryInfo.target.GetWorldPosition() );
+									tracePosEnd = ( playerToAttackerVector * 0.75f ) + ( playerToAttackerVector * parryInfo.attacker.GetRadius() ) + parryInfo.attacker.GetWorldPosition();
+									tracePosEnd.Z += 1.f;
+	
+									if ( !theGame.GetWorld().StaticTrace( tracePosStart, tracePosEnd, hitPos, hitNormal, counterCollisionGroupNames ) )
+									{
+										tracePosStart = tracePosEnd;
+										tracePosEnd -= 3.f;
+										
+										if ( !theGame.GetWorld().StaticTrace( tracePosStart, tracePosEnd, hitPos, hitNormal, counterCollisionGroupNames ) )
+										{
+											useKnockdown = true;
+										}
+									}
+								}
+							}
+						}
+						
+						parryInfo.attacker.GetInventory().PlayItemEffect(parryInfo.attackerWeaponId, 'counterattack');
+						
+						if ( repelType == PRT_Random )
+							if ( RandRange(100) > 50 )
+								repelType = PRT_Bash;
+							else
+								repelType = PRT_Kick;
+						
+						//modSigns
+						if ( useKnockdown || CanUseSkill(S_Sword_s11) && GetSkillLevel(S_Sword_s11) >= 3 && GetStat(BCS_Focus) >= 1.0 && RandF() < GetStat(BCS_Focus)*CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s11, 's11_knockdown_chance', false, true)) )
+						{
+							duration = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s11, 'duration', false, true));
+							if(!parryInfo.attacker.IsImmuneToBuff(EET_HeavyKnockdown) || !parryInfo.attacker.IsImmuneToBuff(EET_Knockdown))
+							{
+								if(!parryInfo.attacker.IsImmuneToBuff(EET_HeavyKnockdown))
+									params.effectType = EET_HeavyKnockdown;
+								else
+									params.effectType = EET_Knockdown;
+								params.creator = this;
+								params.sourceName = "ReflexParryPerformed";
+								params.duration = duration;
+								parryInfo.attacker.AddEffectCustom(params);
+								repelType = PRT_Kick;
+								useKnockdown = true;
+							}
+							else
+								useKnockdown = false;
+						}
+						
+						if( !useKnockdown && (repelType == PRT_Kick || repelType == PRT_Bash ) )
+						{
+							parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, "ReflexParryPerformed");
+							//modSigns: Lynx tier 1 power bonus - preserve the delay, but don't increase the bonus on human counters
+							if( (W3PlayerWitcher)this && this.HasBuff( EET_LynxSetBonus ) )
+							{
+								((W3Effect_LynxSetBonus)this.GetBuff( EET_LynxSetBonus )).ResetDecay();
 							}
 						}
 					}
-					
-					parryInfo.attacker.GetInventory().PlayItemEffect(parryInfo.attackerWeaponId, 'counterattack');
-					
-					
-					if ( repelType == PRT_Random )
-						if ( RandRange(100) > 50 )
-							repelType = PRT_Bash;
-						else
-							repelType = PRT_Kick;
 					
 					this.SetBehaviorVariable( 'repelType', (int)repelType );
 					parryInfo.attacker.SetBehaviorVariable( 'repelType', (int)repelType );
@@ -1744,12 +1850,6 @@ statemachine abstract import class CR4Player extends CPlayer
 				AddTimer( 'SetCounterRotation', 0.2f );
 				
 				IncreaseUninterruptedHitsCount();	
-				
-				
-				if(IsHeavyAttack(parryInfo.attackActionName))
-					mult = theGame.params.HEAVY_STRIKE_COST_MULTIPLIER;
-					
-				DrainStamina(ESAT_Counterattack, 0, 0, '', 0, mult);
 				
 				theGame.GetGamerProfile().IncStat(ES_CounterattackChain);
 				
@@ -1984,6 +2084,8 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		UnblockAction(EIAB_OpenMeditation, 'InCombat');
 		UnblockAction(EIAB_HighlightObjective, 'InCombat');
+		
+		ResumeStaminaRegen( 'IsPerformingFinisher' ); //modSigns
 	}
 	
 	event OnReactToBeingHit( damageAction : W3DamageAction )
@@ -2819,6 +2921,11 @@ statemachine abstract import class CR4Player extends CPlayer
 				ManageAerondightBuff( false );
 			}
 			
+			if( category == 'steelsword' ) //modSigns
+			{
+				ManageIrisBuff( false );
+			}
+			
 			GetBuff( EET_LynxSetBonus ).Pause( 'drawing weapon' );
 			
 			PauseOilBuffs( category == 'steelsword' );
@@ -3441,25 +3548,25 @@ statemachine abstract import class CR4Player extends CPlayer
 	
 	event OnAnimEvent_pad_vibration( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo )
 	{
-		var witcher : W3PlayerWitcher;
+		//var witcher : W3PlayerWitcher;
 		
 		theGame.VibrateControllerHard();
 		
 		
-		witcher = GetWitcherPlayer();
+		/*witcher = GetWitcherPlayer();
 		if(isInFinisher && witcher)
 		{
-			if(HasAbility('Runeword 10 _Stats', true) && !witcher.runeword10TriggerredOnFinisher && ((bool)theGame.GetInGameConfigWrapper().GetVarValue('Gameplay', 'AutomaticFinishersEnabled')) == true)
+			if(witcher.HasRunewordActive('Runeword 10 _Stats') && !witcher.runeword10TriggerredOnFinisher && ((bool)theGame.GetInGameConfigWrapper().GetVarValue('Gameplay', 'AutomaticFinishersEnabled')) == true) //modSigns
 			{				
 				witcher.Runeword10Triggerred();
 				witcher.runeword10TriggerredOnFinisher = true;
 			}
-			else if(HasAbility('Runeword 12 _Stats', true) && !witcher.runeword12TriggerredOnFinisher)
+			else if(witcher.HasRunewordActive('Runeword 12 _Stats') && !witcher.runeword12TriggerredOnFinisher) //modSigns
 			{
 				witcher.Runeword12Triggerred();
 				witcher.runeword12TriggerredOnFinisher = true;
 			}
-		}
+		}*/ //modSigns
 	}
 	
 	
@@ -3661,13 +3768,13 @@ statemachine abstract import class CR4Player extends CPlayer
 	{
 		if( val == true )
 		{
-			GeraltMaxHealth = thePlayer.GetStatMax(BCS_Vitality);
-			ClampGeraltMaxHealth( 2000 );
+			//GeraltMaxHealth = thePlayer.GetStatMax(BCS_Vitality);
+			//ClampGeraltMaxHealth( 2000 ); //modSigns
 			SetHealthPerc( 100 );
 		}
 		else
 		{
-			ClampGeraltMaxHealth( GeraltMaxHealth );
+			//ClampGeraltMaxHealth( GeraltMaxHealth ); //modSigns
 			SetHealthPerc( 100 );
 		}
 		
@@ -4932,7 +5039,8 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		time = 0.01f;
 	
-		if ( theInput.GetActionValue( 'CastSignHold' ) == 1.f )
+		//if ( theInput.GetActionValue( 'CastSignHold' ) == 1.f )
+		if ( TestCastSignHold() ) //modSigns
 		{
 			actionType = 0;
 			if ( moveTarget )
@@ -4994,7 +5102,7 @@ statemachine abstract import class CR4Player extends CPlayer
 	
 	timer function DelayOrientationChangeTimer( time : float , id : int)
 	{	
-		if ( ( actionType == 0 && theInput.GetActionValue( 'CastSignHold' ) == 0.f ) 
+		if ( ( actionType == 0 && /*theInput.GetActionValue( 'CastSignHold' ) == 0.f*/ TestCastSignHold() /* modSigns */ ) 
 			|| ( actionType == 2 && theInput.GetActionValue( 'SpecialAttackHeavy' ) == 0.f )
 			|| ( actionType == 3 && theInput.GetActionValue( 'ThrowItemHold' ) == 0.f )
 			|| ( actionType == 1 && !IsGuarded() )
@@ -5067,39 +5175,40 @@ statemachine abstract import class CR4Player extends CPlayer
 		}
 	}
 	
-	public final function PlayRuneword4FX(optional weaponType : EPlayerWeapon)
-	{
-		var hasSwordDrawn : bool;
-		var sword : SItemUniqueId;
-		
-		
-		
-		
-		if(abilityManager.GetOverhealBonus() > (0.005 * GetStatMax(BCS_Vitality)))
-		{
-			hasSwordDrawn = HasAbility('Runeword 4 _Stats', true);
-			
-			if(!hasSwordDrawn && GetWitcherPlayer())			
-			{
-				if(weaponType == PW_Steel)
-				{
-					if(GetWitcherPlayer().GetItemEquippedOnSlot(EES_SteelSword, sword))
-						hasSwordDrawn = inv.ItemHasAbility(sword, 'Runeword 4 _Stats');
-				}
-				else if(weaponType == PW_Silver)
-				{
-					if(GetWitcherPlayer().GetItemEquippedOnSlot(EES_SilverSword, sword))
-						hasSwordDrawn = inv.ItemHasAbility(sword, 'Runeword 4 _Stats');
-				}
-			}
-			
-			if(hasSwordDrawn)
-			{
-				if(!IsEffectActive('runeword_4', true))
-					PlayEffect('runeword_4');
-			}
-		}
-	}
+	//public final function PlayRuneword4FX(optional weaponType : EPlayerWeapon)
+	//{
+	//	var hasSwordDrawn : bool;
+	//	var sword : SItemUniqueId;
+	//	
+	//	
+	//	
+	//	
+	//	if(abilityManager.GetOverhealBonus() > (0.005 * GetStatMax(BCS_Vitality)))
+	//	{
+	//		/*hasSwordDrawn = HasAbility('Runeword 4 _Stats', true);
+	//		
+	//		if(!hasSwordDrawn && GetWitcherPlayer())			
+	//		{
+	//			if(weaponType == PW_Steel)
+	//			{
+	//				if(GetWitcherPlayer().GetItemEquippedOnSlot(EES_SteelSword, sword))
+	//					hasSwordDrawn = inv.ItemHasAbility(sword, 'Runeword 4 _Stats');
+	//			}
+	//			else if(weaponType == PW_Silver)
+	//			{
+	//				if(GetWitcherPlayer().GetItemEquippedOnSlot(EES_SilverSword, sword))
+	//					hasSwordDrawn = inv.ItemHasAbility(sword, 'Runeword 4 _Stats');
+	//			}
+	//		}
+	//		
+	//		if(hasSwordDrawn)*/
+	//		if(GetWitcherPlayer().HasRunewordActive('Runeword 4 _Stats')) //modSigns
+	//		{
+	//			if(!IsEffectActive('runeword_4', true))
+	//				PlayEffect('runeword_4');
+	//		}
+	//	}
+	//}
 	
 	timer function DelayedSnapToNavMesh( dt : float, id : int)
 	{
@@ -5157,7 +5266,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		}
 		if ( !IsSwimming() )
 		{
-			if ( ShouldUseStaminaWhileSprinting() && !GetIsSprinting() && !IsInCombat() && GetStatPercents(BCS_Stamina) <= 0.9 )
+			if ( ShouldUseStaminaWhileSprinting() && !GetIsSprinting() && !IsInCombat() && GetStat(BCS_Stamina) <= 0 ) //modSigns
 			{
 				return false;
 			}
@@ -8204,7 +8313,8 @@ statemachine abstract import class CR4Player extends CPlayer
 		super.ReduceDamage(damageData);
 		
 		
-		if(damageData.attacker == this && (damageData.GetBuffSourceName() == "petard" || (W3Petard)damageData.causer) )
+		//modSigns: make Perk_16 more valuable
+		/*if(damageData.attacker == this && (damageData.GetBuffSourceName() == "petard" || (W3Petard)damageData.causer) )
 		{
 			if ( theGame.CanLog() )
 			{
@@ -8212,7 +8322,7 @@ statemachine abstract import class CR4Player extends CPlayer
 			}
 			damageData.processedDmg.vitalityDamage = damageData.processedDmg.vitalityDamage / 2;
 			damageData.processedDmg.essenceDamage = damageData.processedDmg.essenceDamage / 2;
-		}
+		}*/
 	}
 	
 	
@@ -8224,24 +8334,47 @@ statemachine abstract import class CR4Player extends CPlayer
 		var i : int;
 		var holdsCrossbow : bool;
 		var critVal : SAbilityAttributeValue;
+		var weaponId : SItemUniqueId; //modSigns
 		
 		critChance = 0;
-		
 		
 		if( FactsQuerySum( 'debug_fact_critical_boy' ) > 0 )
 		{
 			critChance += 1;
 		}
 		
-		if( IsInState( 'HorseRiding' ) && ( ( CActor )GetUsedVehicle() ).GetMovingAgentComponent().GetRelativeMoveSpeed() >= 4.0 )
-		{
-			critChance += 1;
-		}
-		
-		
 		critChance += CalculateAttributeValue( GetAttributeValue( theGame.params.CRITICAL_HIT_CHANCE ) );
 		
+		//if( target && target.HasBuff( EET_Confusion ) )
+		//{
+		//	critChance += ( ( W3ConfuseEffect )target.GetBuff( EET_Confusion ) ).GetCriticalHitChanceBonus();
+		//} //moved to damage manager
 		
+		//modSigns: non-crossbow shots
+		if( !isBolt )
+		{
+			if( IsInState( 'HorseRiding' ) && ( ( CActor )GetUsedVehicle() ).GetMovingAgentComponent().GetRelativeMoveSpeed() >= 4.0 )
+			{
+				critChance += 1;
+			}
+			
+			if( isHeavyAttack && CanUseSkill( S_Sword_s08 ) )
+			{
+				critChance += CalculateAttributeValue( GetSkillAttributeValue( S_Sword_s08, theGame.params.CRITICAL_HIT_CHANCE, false, true ) ) * GetSkillLevel( S_Sword_s08 );
+			}
+			else if( isLightAttack && CanUseSkill( S_Sword_s17 ) )
+			{
+				critChance += CalculateAttributeValue( GetSkillAttributeValue( S_Sword_s17, theGame.params.CRITICAL_HIT_CHANCE, false, true ) ) * GetSkillLevel( S_Sword_s17 );
+			}
+		
+			weaponId = inv.GetCurrentlyHeldSword();
+			if( isHeavyAttack || isLightAttack ) //modSigns
+			{
+				critChance += CalculateAttributeValue( inv.GetOilCriticalChanceBonus( weaponId, victimMonsterCategory ) );
+			}
+		}
+		
+		//remove crit chance from swords held if attacking with crossbow and vice versa
 		weapons = inv.GetHeldWeapons();
 		for( i=0; i<weapons.Size(); i+=1 )
 		{			
@@ -8250,29 +8383,7 @@ statemachine abstract import class CR4Player extends CPlayer
 			{
 				critVal = inv.GetItemAttributeValue( weapons[i], theGame.params.CRITICAL_HIT_CHANCE );
 				critChance -= CalculateAttributeValue( critVal );
-			}			
-		}
-		
-		
-		if( isHeavyAttack && CanUseSkill( S_Sword_s08 ) )
-		{
-			critChance += CalculateAttributeValue( GetSkillAttributeValue( S_Sword_s08, theGame.params.CRITICAL_HIT_CHANCE, false, true ) ) * GetSkillLevel( S_Sword_s08 );
-		}
-		else if( isLightAttack && CanUseSkill( S_Sword_s17 ) )
-		{
-			critChance += CalculateAttributeValue( GetSkillAttributeValue( S_Sword_s17, theGame.params.CRITICAL_HIT_CHANCE, false, true ) ) * GetSkillLevel( S_Sword_s17 );
-		}
-	
-		if( target && target.HasBuff( EET_Confusion ) )
-		{
-			critChance += ( ( W3ConfuseEffect )target.GetBuff( EET_Confusion ) ).GetCriticalHitChanceBonus();
-		}
-		
-		
-		oilChanceAttribute = MonsterCategoryToCriticalChanceBonus( victimMonsterCategory );
-		if( IsNameValid( oilChanceAttribute ) )
-		{
-			critChance += CalculateAttributeValue( GetAttributeValue( oilChanceAttribute ) );
+			}
 		}
 	
 		return critChance;
@@ -8283,17 +8394,27 @@ statemachine abstract import class CR4Player extends CPlayer
 	{
 		var bonus, oilBonus : SAbilityAttributeValue;
 		var vsAttributeName : name;
+		var weapons : array< SItemUniqueId >;
+		var i : int;
+		var isBolt, holdsCrossbow : bool;
 	
 		bonus = super.GetCriticalHitDamageBonus(weaponId, victimMonsterCategory, isStrikeAtBack);
 		
+		//modSigns: oil ammo percentage
+		bonus += inv.GetOilCriticalDamageBonus( weaponId, victimMonsterCategory );
 		
-		if( inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) )
-		{
-			vsAttributeName = MonsterCategoryToCriticalDamageBonus(victimMonsterCategory);
-			oilBonus = inv.GetItemAttributeValue(weaponId, vsAttributeName);
-			bonus += oilBonus;
+		//remove crit bonus from swords held if attacking with crossbow and vice versa
+		isBolt = inv.IsItemCrossbow( weaponId ) || inv.IsItemBolt( weaponId );
+		weapons = inv.GetHeldWeapons();
+		for( i = 0; i < weapons.Size(); i += 1 )
+		{			
+			holdsCrossbow = ( inv.IsItemCrossbow( weapons[i] ) || inv.IsItemBolt( weapons[i] ) );
+			if( holdsCrossbow != isBolt )
+			{
+				bonus -= inv.GetItemAttributeValue( weapons[i], theGame.params.CRITICAL_HIT_DAMAGE_BONUS );
+			}
 		}
-		
+	
 		return bonus;
 	}
 	
@@ -8434,25 +8555,23 @@ statemachine abstract import class CR4Player extends CPlayer
 	
 	
 	
-	
+	//modSigns: reworked
 	function PerformParryCheck( parryInfo : SParryInfo) : bool
 	{
-		var mult 					: float;
+		var mult					: float;
 		var parryType 				: EParryType;
 		var parryDir 				: EPlayerParryDirection;
 		var parryHeading			: float;
 		var fistFightParry 			: bool;
 		var action					: W3DamageAction;
-		var xmlStaminaDamage 		: float;
-		var xmlStaminaDamageName	: name = 'stamina_damage' ;
+		//var xmlStaminaDamage 		: float;
+		//var xmlStaminaDamageName	: name = 'stamina_damage' ; //modSigns: this one was never used properly
 		var counter 				: int;
 		var onHitCounter 			: SAbilityAttributeValue;
-		
 
-
-		
-		if(CanParryAttack() &&  FistFightCheck( parryInfo.target, parryInfo.attacker, fistFightParry ) )
-		{	
+		//if the player is guarded, if not - nothing happens
+		if( CanParryAttack() && FistFightCheck( parryInfo.target, parryInfo.attacker, fistFightParry ) )
+		{
 			parryHeading = GetParryHeading( parryInfo, parryDir ) ;
 			
 			SetBehaviorVariable( 'parryDirection', (float)( (int)( parryDir ) ) );
@@ -8461,30 +8580,48 @@ statemachine abstract import class CR4Player extends CPlayer
 			
 			if ( IsInCombatActionFriendly() )
 				RaiseEvent('CombatActionFriendlyEnd');
+				
+			//multiplier for parrying heavy and superheavy attacks
+			if( IsSuperHeavyAttack( parryInfo.attackActionName ) )
+				mult = theGame.params.SUPERHEAVY_STRIKE_COST_MULTIPLIER;
+			else if( IsHeavyAttack( parryInfo.attackActionName ) )
+				mult = theGame.params.HEAVY_STRIKE_COST_MULTIPLIER;
+			else
+				mult = 0.0f;
 			
-			if ( HasStaminaToParry(parryInfo.attackActionName) )
+			//allow to parry with not enough stamina, but make it a partial parry
+			if(!HasStaminaToParry(parryInfo.attackActionName, mult))
 			{
+				SoundEvent("gui_no_stamina");
+				parryingWithNotEnoughStamina = true;
+			}
+			else
+				parryingWithNotEnoughStamina = false;
+			
+			//if ( HasStaminaToParry(parryInfo.attackActionName, mult) )
+			//{
 				this.SetBehaviorVariable( 'combatActionType', (int)CAT_Parry );
 				
 				if ( parryInfo.targetToAttackerDist > 3.f && !bLAxisReleased && !thePlayer.IsCiri() )
 				{
-					if ( !RaiseForceEvent( 'PerformParryOverlay' ) )
-						return false;
-					else
+					if ( RaiseForceEvent( 'PerformParryOverlay' ) )
 					{
 						ClearCustomOrientationInfoStack();
 						IncDefendCounter();
 					}
+					else
+						return false;
 				}
 				else
 				{
-					counter = GetDefendCounter();
+					//modSigns: parry has stamina cost, no need for this (unused) ability
+					/*counter = GetDefendCounter();
 					onHitCounter = parryInfo.attacker.GetAttributeValue( 'break_through_parry_on_hit_counter' );
 					if ( onHitCounter.valueBase > 0 && counter == onHitCounter.valueBase )
 					{
 						AddEffectDefault( EET_Stagger, parryInfo.attacker, "Break through parry" );
 					}
-					else if ( RaiseForceEvent( 'PerformParry' ) )
+					else*/ if ( RaiseForceEvent( 'PerformParry' ) )
 					{
 						OnCombatActionStart();
 						ClearCustomOrientationInfoStack();
@@ -8495,42 +8632,49 @@ statemachine abstract import class CR4Player extends CPlayer
 					else
 						return false;
 				}
-			}
-			else
-			{
-				AddEffectDefault(EET_Stagger, parryInfo.attacker, "Parry");
-				return true;
-			}
+
+				DrainStamina(ESAT_Parry, 0, 0, '', 0, mult);
+			//}
+			//else
+			//{
+			//	//not enough stamina, adding stagger
+			//	AddEffectDefault(EET_Stagger, parryInfo.attacker, "Parry");
+			//	return false;
+			//}
 			
+			//on trying to parry weapon with fists
 			if ( parryInfo.attacker.IsWeaponHeld( 'fist' ) && !parryInfo.target.IsWeaponHeld( 'fist' ) )
 			{
 				parryInfo.attacker.ReactToReflectedAttack(parryInfo.target);
+				return false;
 			}
-			else 
+			else
 			{
-				if ( this.IsInFistFightMiniGame() && fistFightParry )
-				{
-					if ( IsNameValid(xmlStaminaDamageName) )
-					{
-						xmlStaminaDamage = CalculateAttributeValue(parryInfo.attacker.GetAttributeValue( xmlStaminaDamageName ));
-						DrainStamina(ESAT_FixedValue, xmlStaminaDamage);
-					}
-				}
-				else
-				{
-					DrainStamina(ESAT_Parry, 0, 0, '', 0, mult);
-				}
 				if(IsLightAttack(parryInfo.attackActionName))
 					parryInfo.target.PlayEffectOnHeldWeapon('light_block');
 				else
 					parryInfo.target.PlayEffectOnHeldWeapon('heavy_block');
 			}
+
 			return true;
 		}			
 		
 		return false;
 	}
-		
+	
+	//modSigns
+	protected var parryingWithNotEnoughStamina : bool;
+	
+	public function IsParryingWithNotEnoughStamina() : bool
+	{
+		return parryingWithNotEnoughStamina;
+	}
+	
+	public function SetIsParryingWithNotEnoughStamina(b : bool)
+	{
+		parryingWithNotEnoughStamina = b;
+	}
+	
 	protected function GetParryHeading( parryInfo : SParryInfo, out parryDir : EPlayerParryDirection ) : float
 	{
 		var targetToAttackerHeading 		: float;
@@ -8696,6 +8840,7 @@ statemachine abstract import class CR4Player extends CPlayer
 			this.AddBuffImmunity( EET_KnockdownTypeApplicator, 'Roll', false );
 			this.AddBuffImmunity( EET_Knockdown, 'Roll', false );
 			this.AddBuffImmunity( EET_HeavyKnockdown, 'Roll', false );
+			this.AddBuffImmunity( EET_LongStagger, 'Roll', false ); //modSigns
 			this.AddBuffImmunity( EET_Stagger, 'Roll', false );
 		}
 		else
@@ -8704,6 +8849,7 @@ statemachine abstract import class CR4Player extends CPlayer
 			this.RemoveBuffImmunity( EET_KnockdownTypeApplicator, 'Roll' );
 			this.RemoveBuffImmunity( EET_Knockdown, 'Roll' );
 			this.RemoveBuffImmunity( EET_HeavyKnockdown, 'Roll' );
+			this.RemoveBuffImmunity( EET_LongStagger, 'Roll' ); //modSigns
 			this.RemoveBuffImmunity( EET_Stagger, 'Roll' );
 		}
 	}
@@ -8804,9 +8950,28 @@ statemachine abstract import class CR4Player extends CPlayer
 			}
 		}
 		
+		//theGame.witcherLog.AddMessage("animData.attackName = " + animData.attackName);
+		//theGame.witcherLog.AddMessage("attackAnimationName = " + attackAnimationName);
+		
+		//modSigns: drain stamina for light and heavy attacks, skip finishers
+		if(!IsPerformingFinisher())
+		{
+			if(animData.attackName == 'attack_light')
+				DrainStamina(ESAT_LightAttack);
+			if(animData.attackName == 'attack_heavy')
+				DrainStamina(ESAT_HeavyAttack);
+		}
+		
 		super.DoAttack(animData, weaponId, parried, countered, parriedBy, attackAnimationName, hitTime);
 	}
 	
+	public function CheckForLowStamina() //modSigns
+	{
+	}
+	
+	public function StopLowStaminaSFX() //modSigns
+	{
+	}
 	
 	
 	private var confirmCombatStanceTimeStamp : float;
@@ -9255,6 +9420,29 @@ statemachine abstract import class CR4Player extends CPlayer
 		var canAttackTarget	: CGameplayEntity;
 		var target : CActor;
 		
+		//modSigns: check for stamina
+		var hasResources : bool;
+		if (this == GetWitcherPlayer())
+		{
+			switch ( action )
+			{
+				case EBAT_LightAttack:
+					hasResources = HasStaminaToUseAction(ESAT_LightAttack);
+					break;
+				case EBAT_HeavyAttack:
+					hasResources = HasStaminaToUseAction(ESAT_HeavyAttack);
+					break;
+				default:
+					hasResources = true;
+					break;
+			}
+			if (!hasResources)
+			{
+				thePlayer.SoundEvent("gui_no_stamina");
+				return;
+			}
+		}
+		
 		
 		if ( !IsCombatMusicEnabled() )
 		{
@@ -9460,7 +9648,7 @@ statemachine abstract import class CR4Player extends CPlayer
 						
 							
 							
-							DrainStamina(ESAT_LightAttack);
+							//DrainStamina(ESAT_LightAttack); //modSigns -> moved
 							
 							
 							thePlayer.BreakPheromoneEffect();
@@ -9489,7 +9677,7 @@ statemachine abstract import class CR4Player extends CPlayer
 						
 							
 							
-							DrainStamina(ESAT_HeavyAttack);
+							//DrainStamina(ESAT_HeavyAttack); //modSigns -> moved
 							
 							
 							
@@ -9507,7 +9695,7 @@ statemachine abstract import class CR4Player extends CPlayer
 							
 								
 								
-								DrainStamina(ESAT_HeavyAttack);
+								//DrainStamina(ESAT_HeavyAttack); //modSigns -> moved
 								
 								
 								
@@ -9778,6 +9966,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		UnblockAction( EIAB_Crossbow, 'SpecialAttack' );
 		
 		ResumeStaminaRegen('WhirlSkill');
+		ResumeStaminaRegen('RendSkill'); //modSigns
 		
 		if ( GetBehaviorVariable( 'combatActionType' ) == (int)CAT_SpecialAttack && GetBehaviorVariable( 'isPerformingSpecialAttack' ) == 1.f )
 		{
@@ -9788,14 +9977,12 @@ statemachine abstract import class CR4Player extends CPlayer
 				ProcessCombatActionBuffer();		
 				
 				((W3PlayerWitcherStateCombatFists) GetState('Combat')).ResetTimeToEndCombat();
-				
 			}
 			else if( GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Heavy )
 			{	
 				SetAttackActionName(SkillEnumToName(S_Sword_s02));
 				PushCombatActionOnBuffer( EBAT_SpecialAttack_Heavy, BS_Released );
 				ProcessCombatActionBuffer();
-				
 			}
 		}
 	}	
@@ -10307,14 +10494,20 @@ statemachine abstract import class CR4Player extends CPlayer
 		var defaultReward : SRewardMultiplier;
 		var i 			  : int;
 		
+		//modSigns: debug
+		//theGame.witcherLog.AddMessage("rewardName = " + rewardName);
 		for(i = 0; i < rewardsMultiplier.Size(); i += 1 )
 		{
 			if( rewardsMultiplier[i].rewardName == rewardName )
 			{
+				//modSigns: debug
+				//theGame.witcherLog.AddMessage("reward found");
 				return rewardsMultiplier[i];
 			}
 		}
 		
+		//modSigns: debug
+		//theGame.witcherLog.AddMessage("reward not found");
 		defaultReward.rewardName = rewardName;
 		defaultReward.rewardMultiplier = 1.0;
 		defaultReward.isItemMultiplier = false;
@@ -10353,16 +10546,23 @@ statemachine abstract import class CR4Player extends CPlayer
 		var i : int;
 		var rewardMultiplier : SRewardMultiplier;
 		
+		//modSigns: debug
+		//theGame.witcherLog.AddMessage("rewardName = " + rewardName);
+		//theGame.witcherLog.AddMessage("value = " + value);
 		for(i = 0; i < rewardsMultiplier.Size(); i += 1 )
 		{
 			if( rewardsMultiplier[i].rewardName == rewardName )
 			{
+				//modSigns: debug
+				//theGame.witcherLog.AddMessage("reward updated");
 				rewardsMultiplier[i].rewardMultiplier = value;
 				rewardsMultiplier[i].isItemMultiplier = isItemMultiplier;
 				return;
 			}
 		}
 		
+		//modSigns: debug
+		//theGame.witcherLog.AddMessage("reward added");
 		rewardMultiplier.rewardName = rewardName;
 		rewardMultiplier.rewardMultiplier = value;
 		rewardMultiplier.isItemMultiplier = isItemMultiplier;
@@ -10532,6 +10732,11 @@ statemachine abstract import class CR4Player extends CPlayer
 	
 	public final function HasRequiredLevelToEquipItem(item : SItemUniqueId) : bool
 	{
+		//CiriCSfix
+		if(thePlayer.IsCiri())
+		return true;
+		//CiriCSfix
+		
 		if(HasBuff(EET_WolfHour))
 		{
 			if((inv.GetItemLevel(item) - 2) > GetLevel() )
@@ -10601,17 +10806,22 @@ statemachine abstract import class CR4Player extends CPlayer
 			{
 				params.effectType = buffs[i].effectType;
 				params.creator = this;
-				params.sourceName = "edible";
+				//modSigns
+				if(inv.ItemHasTag(itemId, 'Alcohol'))
+					params.sourceName = "alcohol";
+				else
+					params.sourceName = "edible";
 				params.customAbilityName = buffs[i].effectAbilityName;
 				AddEffectCustom(params);
 			}
 			
-			
-			if ( inv.ItemHasTag(itemId, 'Alcohol') )
+			//custom hack - modSigns: add uncooked tag
+			if(!CanUseSkill(S_Perk_15) && (inv.ItemHasTag(itemId, 'Alcohol') || inv.ItemHasTag(itemId, 'Uncooked')))
 			{
 				potionToxicity = CalculateAttributeValue(inv.GetItemAttributeValue(itemId, 'toxicity'));
-				abilityManager.GainStat(BCS_Toxicity, potionToxicity );				
-				AddEffectDefault(EET_Drunkenness, NULL, inv.GetItemName(itemId));
+				abilityManager.GainStat(BCS_Toxicity, potionToxicity );
+				if(inv.ItemHasTag(itemId, 'Alcohol')) //modSigns
+					AddEffectDefault(EET_Drunkenness, NULL, inv.GetItemName(itemId));
 			}
 			PlayItemConsumeSound( itemId );
 		}
@@ -10628,6 +10838,19 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		return true;
 	}
+	
+	//modSigns begin
+	//public function ToxicityThresholdPrcToPts(prc : float) : float
+	//{
+	//	var toxicityThreshold, toxicityRange, toxicityOffset : float; //modSigns
+	//	
+	//	toxicityOffset = GetStat(BCS_Toxicity, false) - GetStat(BCS_Toxicity, true);
+	//	toxicityRange = GetStatMax(BCS_Toxicity) - toxicityOffset;
+	//	toxicityThreshold = toxicityOffset + toxicityRange * prc;
+	//	
+	//	return toxicityThreshold;
+	//}
+	//modSigns end
 	
 	public function MountVehicle( vehicleEntity : CEntity, mountType : EVehicleMountType, optional vehicleSlot : EVehicleSlot )
 	{
@@ -10669,7 +10892,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		var ret : bool;
 		
 		ret = super.HasStaminaToUseAction(action, abilityName, dt, multiplier);
-	
+		
 		if(!ret)
 		{
 			SetCombatActionHeading( GetHeading() );
@@ -10683,7 +10906,6 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		return ret;
 	}
-		
 	
 	timer function AbilityManager_FloorStaminaSegment(dt : float, id : int)
 	{
@@ -10869,19 +11091,20 @@ statemachine abstract import class CR4Player extends CPlayer
 	
 		cost = GetSkillStaminaUseCost(skill, perSec);
 		
-		ret = ( CanUseSkill(skill) && (abilityManager.GetStat(BCS_Stamina, signHack) >= cost) );
+		ret = ( CanUseSkill(skill) && (abilityManager.GetStat(BCS_Stamina, signHack) >= cost) )
+				|| ( IsSkillSign(skill) && CanUseSkill(S_Perk_09) && GetStat(BCS_Focus) >= 1 ); //modSigns
 		
 		
-		if(!ret && IsSkillSign(skill) && CanUseSkill(S_Perk_09) && GetStat(BCS_Focus) >= 1)
+		/*if(!ret && IsSkillSign(skill) && CanUseSkill(S_Perk_09) && GetStat(BCS_Focus) >= 1)
 		{
 			ret = true;
-		}
+		}*/
 			
 		
-		if( !ret && IsSkillSign( skill ) && GetWitcherPlayer().HasBuff( EET_GryphonSetBonus ) )
+		/*if( !ret && IsSkillSign( skill ) && GetWitcherPlayer().HasBuff( EET_GryphonSetBonus ) ) //modSigns: no longer used
 		{
 			ret = true;
-		}
+		}*/
 		
 		if(!ret)
 		{
@@ -11190,6 +11413,12 @@ statemachine abstract import class CR4Player extends CPlayer
 		if(sup)
 			return true;
 			
+		if(attackName == 'attack_light_special') //modSigns
+			return true;
+		
+		if(attackName == 'counter_attack_light') //modSigns
+			return true;
+		
 		skill = SkillNameToEnum(attackName);
 		
 		return skill == S_Sword_1 || skill == S_Sword_s01;
@@ -11370,7 +11599,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 	}
 	
-	public function ReactToReflectedAttack( target : CGameplayEntity)
+	public function ReactToReflectedAttack( target : CGameplayEntity )
 	{
 		
 		var hp, dmg : float;
@@ -11987,6 +12216,8 @@ statemachine abstract import class CR4Player extends CPlayer
 		PlayFinisherCameraAnimation( theGame.GetSyncAnimManager().GetFinisherCameraAnimName() );
 		this.AddAnimEventCallback('SyncEvent','OnFinisherAnimEvent_SyncEvent');
 		SetImmortalityMode( AIM_Invulnerable, AIC_SyncedAnim );
+		
+		PauseStaminaRegen( 'IsPerformingFinisher' ); //modSigns
 	}
 	
 	public function IsPerformingFinisher() : bool
@@ -12050,6 +12281,8 @@ statemachine abstract import class CR4Player extends CPlayer
 		SetImmortalityMode( AIM_None, AIC_SyncedAnim );
 		theGame.RemoveTimeScale( 'AnimEventSlomoMo' );
 		AddTimer( 'FinisherEndEnableCamera', 0.5f );
+		
+		ResumeStaminaRegen( 'IsPerformingFinisher' ); //modSigns
 		
 		OnCombatActionEnd();
 		OnCombatActionEndComplete();
@@ -13476,13 +13709,13 @@ statemachine abstract import class CR4Player extends CPlayer
 				}
 				
 				
-				if(npc && inv.GetItemName(attackAction.GetWeaponId()) == 'PC Caretaker Shovel')
+				/*if(npc && inv.GetItemName(attackAction.GetWeaponId()) == 'PC Caretaker Shovel')
 				{
 					
 					lifeLeech = CalculateAttributeValue(inv.GetItemAttributeValue(attackAction.GetWeaponId() ,'lifesteal'));
 					if (npc.UsesVitality())
 						lifeLeech *= action.processedDmg.vitalityDamage;
-					else if (UsesEssence())
+					else if (UsesEssence()) //modSigns: incorrect, checks the player instead of npc
 						lifeLeech *= action.processedDmg.essenceDamage;
 					else
 						lifeLeech = 0;
@@ -13493,7 +13726,7 @@ statemachine abstract import class CR4Player extends CPlayer
 						PlayEffect('drain_energy_caretaker_shovel');		
 						GainStat(BCS_Vitality, lifeLeech);
 					}
-				}
+				}*/ //modSigns: moved to actor class
 			}
 		}
 	}
@@ -14581,39 +14814,39 @@ statemachine abstract import class CR4Player extends CPlayer
 	
 	
 	
-	public function InitPhantomWeaponMgr()
-	{
-		if( !phantomWeaponMgr )
-		{
-			phantomWeaponMgr = new CPhantomWeaponManager in this;
-			phantomWeaponMgr.Init( this.GetInventory() );
-		}
-	}
+	//public function InitPhantomWeaponMgr()
+	//{
+	//	if( !phantomWeaponMgr )
+	//	{
+	//		phantomWeaponMgr = new CPhantomWeaponManager in this;
+	//		phantomWeaponMgr.Init( this.GetInventory() );
+	//	}
+	//} //modSigns
 	
-	public function DestroyPhantomWeaponMgr()
-	{
-		if( phantomWeaponMgr )
-		{
-			delete phantomWeaponMgr;
-		}
-	}
+	//public function DestroyPhantomWeaponMgr()
+	//{
+	//	if( phantomWeaponMgr )
+	//	{
+	//		delete phantomWeaponMgr;
+	//	}
+	//} //modSigns
 	
-	public function GetPhantomWeaponMgr() : CPhantomWeaponManager
-	{
-		if( phantomWeaponMgr )
-		{
-			return phantomWeaponMgr;
-		}
-		else
-		{
-			return NULL;
-		}
-	}
+	//public function GetPhantomWeaponMgr() : CPhantomWeaponManager
+	//{
+	//	if( phantomWeaponMgr )
+	//	{
+	//		return phantomWeaponMgr;
+	//	}
+	//	else
+	//	{
+	//		return NULL;
+	//	}
+	//} //modSigns
 	
-	public timer function DischargeWeaponAfter( td : float, id : int )
-	{
-		GetPhantomWeaponMgr().DischargeWeapon();
-	}
+	//public timer function DischargeWeaponAfter( td : float, id : int )
+	//{
+	//	GetPhantomWeaponMgr().DischargeWeapon();
+	//} //modSigns
 	
 	
 	
@@ -14629,6 +14862,11 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		if( combatTarget )
 		{
+			//modSigns: drain health before initiating kill action so the huge damage from
+			//the action won't be attributed to the player
+			//if(combatTarget.UsesVitality()) combatTarget.DrainVitality(combatTarget.GetStat(BCS_Vitality) - 1);
+			//else if(combatTarget.UsesEssence()) combatTarget.DrainEssence(combatTarget.GetStat(BCS_Essence) - 1);
+			//and now the kill action
 			combatTarget.Kill( 'AutoFinisher', false, thePlayer );
 			thePlayer.SetFinisherVictim( combatTarget );
 			forcedFinisherVictim = combatTarget;

@@ -530,7 +530,7 @@ statemachine import class W3HorseComponent extends CVehicleComponent
 		
 		horseActor 	= (CActor)GetEntity();
 
-		return !horseActor.HasAbility( 'HorseAxiiBuff' ) && !horseActor.HasBuff( EET_Confusion ) && !horseActor.HasBuff( EET_AxiiGuardMe ) && !horseActor.HasAbility( 'DisableHorsePanic' ) && !thePlayer.HasBuff( EET_Mutagen25 );
+		return !horseActor.HasAbility( 'HorseAxiiBuff' ) && !horseActor.HasBuff( EET_Confusion ) && !horseActor.HasBuff( EET_AxiiGuardMe ) && !horseActor.HasAbility( 'DisableHorsePanic' ) /*&& !thePlayer.HasBuff( EET_Mutagen25 )*/ /* modSigns */;
 	}
 	
 	private function ResetPanicUpdate()

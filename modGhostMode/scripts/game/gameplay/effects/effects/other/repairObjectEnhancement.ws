@@ -9,7 +9,7 @@
 abstract class W3RepairObjectEnhancement extends CBaseGameplayEffect
 {
 	protected var usesPerkBonus : bool;
-	protected var durUpdates : bool;
+	//protected var durUpdates : bool; //modSigns
 	
 	default isPositive = true;
 	default isNeutral = false;
@@ -31,18 +31,28 @@ abstract class W3RepairObjectEnhancement extends CBaseGameplayEffect
 			if( isActive && pauseCounters.Size() == 0)
 			{
 				timeActive += dt;	
+				timeLeft -= dt; //modSigns
 			}
 			
-			timeLeft = 0.f;
-			durUpdates = false;
-			return;
+			//timeLeft = 0.f; //modSigns
+			//durUpdates = false; //modSigns
+			//return; //modSigns
 		}
-		else if(!durUpdates)
+		else //if(!durUpdates) //modSigns
 		{
-			timeLeft = duration - timeActive;
-			durUpdates = true;
+			//timeLeft = duration - timeActive; //modSigns
+			//durUpdates = true; //modSigns
+			super.OnTimeUpdated(dt);
 		}
 		
-		super.OnTimeUpdated(dt);
+		//super.OnTimeUpdated(dt); //modSigns
+	}
+	
+	//modSigns
+	event OnEffectRemoved()
+	{
+		super.OnEffectRemoved();
+		if(isOnPlayer && GetWitcherPlayer().HasRunewordActive('Runeword 5 _Stats'))
+			thePlayer.AddEffectDefault(effectType, GetCreator(), sourceName);
 	}
 }

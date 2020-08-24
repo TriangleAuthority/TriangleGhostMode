@@ -153,6 +153,11 @@ class TaskTeleportAction extends IBehTreeTask
 	{
 		var currTime : float = GetLocalTime();
 		
+		if(GetNPC().HasAbility('Specter') && GetNPC().HasBuff(EET_SilverDust)) //modSigns
+		{
+			return false;
+		}
+		
 		if ( useCombatTarget && !GetCombatTarget() )
 		{
 			return false;
@@ -176,8 +181,8 @@ class TaskTeleportAction extends IBehTreeTask
 		var npc 			: CNewNPC = GetNPC();
 		var newPosition 	: Vector;
 		var res 			: bool;
-		var node 			: CNode; 
-		
+		var node 			: CNode;
+
 		if( dontTeleportOutsideGuardArea )
 		{
 			guardArea = npc.GetGuardArea();
@@ -737,6 +742,11 @@ class CBTTaskTeleport extends TaskTeleportAction
 	{
 		var currTime : float = GetLocalTime();
 		
+		if(GetNPC().HasAbility('Specter') && GetNPC().HasBuff(EET_SilverDust)) //modSigns
+		{
+			return false;
+		}
+		
 		super.IsAvailable();
 		
 		if ( isActive )
@@ -786,7 +796,6 @@ class CBTTaskTeleport extends TaskTeleportAction
 		var ticketR 			: SMovementAdjustmentRequestTicket;
 		var movementAdjustor	: CMovementAdjustor;
 		var heading 			: float;
-		
 		
 		if ( IsNameValid( activationEventName ) )
 		{
@@ -1355,6 +1364,11 @@ class CBTTaskTeleportDecorator extends CBTTaskTeleport
 	
 	function IsAvailable() : bool
 	{
+		if(GetNPC().HasAbility('Specter') && GetNPC().HasBuff(EET_SilverDust)) //modSigns
+		{
+			return false;
+		}
+		
 		super.IsAvailable();
 		
 		return true;

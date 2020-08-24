@@ -190,7 +190,9 @@ enum EItemSetBonus
 	EISB_Wolf_2,			
 	EISB_RedWolf_1,			
 	EISB_RedWolf_2,			
-	EISB_Vampire			
+	EISB_Vampire,
+	EISB_Viper, //modSigns
+	EISB_KaerMorhen //modSigns
 }
 
 enum EItemSetType
@@ -202,7 +204,13 @@ enum EItemSetType
 	EIST_Wolf,
 	EIST_RedWolf,
 	EIST_Vampire,
-	EIST_Viper
+	EIST_Viper,
+	EIST_KaerMorhen,
+	//modSigns
+	EIST_Lynx_Minor,
+	EIST_Gryphon_Minor,
+	EIST_Bear_Minor,
+	EIST_Wolf_Minor
 }
 
 function SetItemNameToType( nam : name ) : EItemSetType
@@ -216,6 +224,12 @@ function SetItemNameToType( nam : name ) : EItemSetType
 		case theGame.params.ITEM_SET_TAG_RED_WOLF : 		return EIST_RedWolf ;
 		case theGame.params.ITEM_SET_TAG_VAMPIRE :			return EIST_Vampire ;
 		case theGame.params.ITEM_SET_TAG_VIPER : 			return EIST_Viper;
+		//modSigns
+		case theGame.params.ITEM_SET_TAG_KAER_MORHEN :		return EIST_KaerMorhen;
+		case theGame.params.ITEM_SET_TAG_LYNX_MINOR :		return EIST_Lynx_Minor;
+		case theGame.params.ITEM_SET_TAG_GRYPHON_MINOR :	return EIST_Gryphon_Minor;
+		case theGame.params.ITEM_SET_TAG_BEAR_MINOR :		return EIST_Bear_Minor;
+		case theGame.params.ITEM_SET_TAG_WOLF_MINOR :		return EIST_Wolf_Minor;
 		default: 											return EIST_Undefined;
 	}
 }
@@ -227,12 +241,33 @@ function GetSetBonusAbility( setBonus : EItemSetBonus ) : name
 		case EISB_Lynx_2:				return 'setBonusAbilityLynx_2';
 		case EISB_Bear_1:				return 'setBonusAbilityBear_1';
 		case EISB_Bear_2:				return 'setBonusAbilityBear_2';
+		case EISB_RedWolf_1:			return 'setBonusAbilityRedWolf_1'; //modSigns
 		case EISB_RedWolf_2:			return 'setBonusAbilityRedWolf_2';
 		case EISB_Wolf_1:				return 'SetBonusAbilityWolf_1';
+		//modSigns
+		case EISB_Wolf_2:				return 'SetBonusAbilityWolf_2';
+		case EISB_Gryphon_1:			return 'SetBonusAbilityGryphon_1';
 		default: 						return '';
 	}
 }
 
+//modSigns
+function GetNumItemsRequiredForSetActivation( setType : EItemSetType ) : int
+{
+	return theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+}
+
+//modSigns
+function GetNumItemsRequiredForFullSet( setType : EItemSetType ) : int
+{
+	switch( setType )
+	{
+		case EIST_KaerMorhen:
+			return 4;
+		default:
+			return theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
+	}
+}
 
 function SkillNameToEnum(n : name) : ESkill
 {

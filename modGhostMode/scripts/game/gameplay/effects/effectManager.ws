@@ -259,6 +259,7 @@ class W3EffectManager
 		var effectValue, null : SAbilityAttributeValue;
 		
 		effectValue = owner.GetAttributeValue( RegenStatEnumToName(regenStat) );	
+		gmModRegenValue(RegenStatEnumToName(regenStat), effectValue); //modSigns
 		autoName = EffectTypeToName(effectType);		
 		
 		if(!autoEffects.Contains(autoName) && effectValue != null)
@@ -669,7 +670,7 @@ class W3EffectManager
 	{
 		var signEffects : array < CBaseGameplayEffect >;
 		var npcOwner : CNewNPC;
-		var mutagen : W3Mutagen13_Effect;
+		//var mutagen : W3Mutagen13_Effect;
 		var i : int;
 		var effectType : EEffectType;
 		
@@ -699,11 +700,11 @@ class W3EffectManager
 		}
 		
 		
-		mutagen = (W3Mutagen13_Effect)owner.GetBuff(EET_Mutagen13);
-		if(mutagen && mutagen.IsEffectTypeAffected(effectType))
-		{					
-			effect.SetTimeLeft(mutagen.GetForcedDuration());
-		}		
+		//mutagen = (W3Mutagen13_Effect)owner.GetBuff(EET_Mutagen13);
+		//if(mutagen && mutagen.IsEffectTypeAffected(effectType))
+		//{					
+		//	effect.SetTimeLeft(mutagen.GetForcedDuration());
+		//} //modSigns: changed
 	}
 	
 	
@@ -752,10 +753,11 @@ class W3EffectManager
 		var npc : CNewNPC;
 		var actorCreator : CActor;
 		var action : W3DamageAction;
-		var hasQuen : bool;
+		var hasQuen, hasAltQuen : bool; //modSigns
 		var damages : array<SRawDamage>;
 		var forceOnNpc : bool;
 		var npcStorage : CBaseAICombatStorage;
+		var quen : W3QuenEntity; //modSigns
 		
 		
 		if(effectType == EET_Undefined)
@@ -793,10 +795,17 @@ class W3EffectManager
 			}
 		}
 		
+		/*if( (W3MonsterHuntNPC)owner ) //modSigns: no knocking down monster hunt monsters
+		{
+			if(effectType == EET_Knockdown || effectType == EET_HeavyKnockdown)
+			{
+				effectType = EET_LongStagger;
+			}
+		}*/ //removed, mh monsters can't be finished off instead
 		
 		if( owner == thePlayer && thePlayer.HasBuff( EET_Mutagen08 ) )
 		{
-			if( effectType == EET_Knockdown )
+			if( effectType == EET_Knockdown || effectType == EET_HeavyKnockdown ) //modSigns: heavy knockdown added
 			{
 				LogEffects( "EffectManager.InternalAddEffect: changing EET_Knockdown to EET_Stagger due to Mutagen 8 in effect" );
 				effectType = EET_Stagger;
@@ -808,22 +817,53 @@ class W3EffectManager
 			}
 		}
 		
+		//modSigns: non-player Quen
+		if( owner != thePlayer && owner.HasAlternateQuen() )
+		{
+			if(effectType == EET_Knockdown || effectType == EET_HeavyKnockdown)
+			{
+				owner.FinishQuen(false);
+				return EI_Deny;
+			}
+			else if(effectType == EET_Stagger || effectType == EET_LongStagger)
+			{
+				return EI_Deny;
+			}
+		}
 		
-		if( ((W3PlayerWitcher)owner) && GetWitcherPlayer().IsAnyQuenActive())
+		//modSigns: quen denies stagger, alt quen denies knockdown
+		if( ((W3PlayerWitcher)owner) && ((W3PlayerWitcher)owner).IsAnyQuenActive() )
 		{
 			hasQuen = true;
+			hasAltQuen = owner.HasAlternateQuen();
+			quen = (W3QuenEntity)GetWitcherPlayer().GetSignEntity(ST_Quen);
 			
-			if(effectType == EET_Stagger || effectType == EET_LongStagger || effectType == EET_CounterStrikeHit)
+			if(hasAltQuen)
 			{
-				GetWitcherPlayer().FinishQuen(false);
+				if(effectType == EET_Knockdown || effectType == EET_HeavyKnockdown)
+				{
+					quen.ShowHitFX(); //play FX
+					owner.FinishQuen(false);
+					LogEffects("EffectManager.InternalAddEffect: Geralt has active alt quen so it breaks and we don't knockdown.");
+					return EI_Deny;
+				}
+				else if(effectType == EET_Stagger || effectType == EET_LongStagger || effectType == EET_CounterStrikeHit)
+				{
+					quen.ShowHitFX(); //play FX
+					LogEffects("EffectManager.InternalAddEffect: Geralt has active alt quen so we don't stagger.");
+					return EI_Deny;
+				}
+			}
+			else if(effectType == EET_Stagger || effectType == EET_LongStagger || effectType == EET_CounterStrikeHit)
+			{
+				quen.ShowHitFX(); //play FX
+				owner.FinishQuen(false);
 				LogEffects("EffectManager.InternalAddEffect: Geralt has active quen so it breaks and we don't stagger.");
 				return EI_Deny;
 			}
 		}
 		
-		
-		
-		
+		//why? lack of animation?
 		if( owner == thePlayer && effectType == EET_HeavyKnockdown )
 		{
 			LogEffects( "EffectManager.InternalAddEffect: changing EET_HeavyKnockdown to EET_Knockdown, general rule for player character" );
@@ -906,9 +946,11 @@ class W3EffectManager
 			}
 			
 			
-			if( (hasQuen || (((W3PlayerWitcher)owner) && FactsQuerySum("player_had_quen") > 0)) && IsDoTEffect(effect))
+			//modSigns: quen denies DoT when active, DoTs do not end alt quen
+			//if( (hasQuen || (((W3PlayerWitcher)owner) && FactsQuerySum("player_had_quen") > 0)) && IsDoTEffect(effect))
+			if( hasQuen && IsDoTEffect(effect) ) //modSigns
 			{
-				FactsRemove("player_had_quen");
+				/*FactsRemove("player_had_quen");
 				
 				if((W3DamageOverTimeEffect)effect)
 					damages = ((W3DamageOverTimeEffect)effect).GetDamages();
@@ -932,8 +974,20 @@ class W3EffectManager
 				delete action;
 				
 				LogEffects("EffectManager.InternalAddEffect: applying DoT when having quen: dealing 0.1s of damage and aborting");
+				
+				GetWitcherPlayer().FinishQuen(false);*/
+				
+				//modSigns: play FX - check if quen is active as it might have been removed by stagger/knockdown code above
+				if(((W3PlayerWitcher)owner).IsAnyQuenActive())
+				{
+					quen.ShowHitFX();
+					if(!hasAltQuen)
+						owner.FinishQuen(false);
+				}
+				
 				return EI_Deny;
 			}
+				
 			
 			
 			if(effect.GetDurationLeft() == 0)
@@ -944,11 +998,11 @@ class W3EffectManager
 			}
 			
 			
-			if(signEffect && (effectType == EET_Confusion || effectType == EET_Hypnotized) && creat == thePlayer && thePlayer.CanUseSkill(S_Magic_s17) && thePlayer.GetSkillLevel(S_Magic_s17) == 3 && effect.GetDurationLeft() < CalculateAttributeValue(thePlayer.GetSkillAttributeValue(S_Magic_s17, 'duration_to_force_stagger', false, true)) )
-			{				
-				LogEffects("EffectManager.InternalAddEffect: Axii effect is blocked, will be stagger from S_Magic_s17 skill");
-				return EI_Deny;
-			}
+			//if(signEffect && (effectType == EET_Confusion || effectType == EET_Hypnotized) && creat == thePlayer && thePlayer.CanUseSkill(S_Magic_s17) && thePlayer.GetSkillLevel(S_Magic_s17) == 3 && effect.GetDurationLeft() < CalculateAttributeValue(thePlayer.GetSkillAttributeValue(S_Magic_s17, 'duration_to_force_stagger', false, true)) )
+			//{				
+			//	LogEffects("EffectManager.InternalAddEffect: Axii effect is blocked, will be stagger from S_Magic_s17 skill");
+			//	return EI_Deny;
+			//} //modSigns
 			
 			
 			if( theGame.effectMgr.CheckInteractionWith(this, effect, effects, overridenEffectsIdxs, cumulateIdx) )
@@ -1413,11 +1467,12 @@ class W3EffectManager
 			
 			if(signEntity)
 			{
-				applyBuff = GetSignApplyBuffTest(signEntity.GetSignType(), effectInfos[i].effectType, attackerPowerStatValue, signEntity.IsAlternateCast(), (CActor)action.attacker, action.GetBuffSourceName() );
+				applyBuff = GetSignApplyBuffTest(signEntity.GetSignType(), effectInfos[i].effectType, attackerPowerStatValue, signEntity.IsAlternateCast(), (CActor)action.attacker);
 			}
 			else
 			{
-				applyBuff = GetNonSignApplyBuffTest(effectInfos[i].applyChance);
+				//modSigns: pass resistance for checking
+				applyBuff = GetNonSignApplyBuffTest(effectInfos[i].applyChance, effectInfos[i].effectType, (CActor)action.attacker);
 			}
 			
 			if(applyBuff)
@@ -1425,15 +1480,17 @@ class W3EffectManager
 				
 				ret = InternalAddEffect(effectInfos[i].effectType, action.attacker, action.GetBuffSourceName(), effectInfos[i].effectDuration, effectInfos[i].effectCustomValue, effectInfos[i].effectAbilityName, effectInfos[i].customFXName, signEntity, attackerPowerStatValue, effectInfos[i].effectCustomParam );
 			}
-			else
+			/*else //modSigns - removed
 			{
-				
-				if( signEntity && signEntity.GetSignType() == ST_Aard )
+				//from sign and failed chance test
+				if(signEntity && (signEntity.GetSignType() == ST_Aard || signEntity.GetSignType() == ST_Igni))
 				{
-					
+					//modSigns: Igni and Aard always give stagger at least
 					ret = InternalAddEffect(EET_Stagger, action.attacker, action.GetBuffSourceName(), effectInfos[i].effectDuration, effectInfos[i].effectCustomValue, effectInfos[i].customFXName, effectInfos[i].effectAbilityName, signEntity, attackerPowerStatValue, effectInfos[i].effectCustomParam );
+					//combat log
+					//theGame.witcherLog.AddCombatMessage("Stagger from failed sign effect", action.attacker, owner);
 				}
-			}
+			}*/
 			
 			if ( theGame.CanLog() )
 			{
@@ -1466,81 +1523,93 @@ class W3EffectManager
 		return retB;
 	}
 	
-	
-	private final function GetNonSignApplyBuffTest(applyChance : float) : bool
+	//Does a test whether non-sign source will apply the buff or not
+	//modSigns: function is rewritten to apply resistances to effect chance
+	private final function GetNonSignApplyBuffTest(applyChance : float, effectType : EEffectType, actorAttacker : CActor) : bool
 	{
-		return RandF() < applyChance;
+		var resPt, resPrc, chance : float;
+		var witcher : W3PlayerWitcher;
+		
+		if(!IsNegativeEffectType( effectType )) // only negative effects are checked against resistance
+			return RandF() < applyChance;
+		
+		owner.GetResistValue(theGame.effectMgr.GetBuffResistStat(effectType), resPt, resPrc);
+		chance = MaxF(0, applyChance * (1 - resPrc));
+		
+		//Metamorphosis new bonus
+		witcher = (W3PlayerWitcher)actorAttacker;
+		if(witcher && witcher.IsMutationActive(EPMT_Mutation12))
+			chance *= MaxF(1.0f, 1.0f + witcher.Mutation12GetBonus());
+		
+		//debug log
+		/*theGame.witcherLog.AddMessage("Non-sign apply buff test:");
+		theGame.witcherLog.AddMessage("Effect type: " + NameToString(EffectTypeToName(effectType)));
+		theGame.witcherLog.AddMessage("Buff resist %: " + FloatToString(resPrc));
+		theGame.witcherLog.AddMessage("Raw chance: " + FloatToString(applyChance));
+		theGame.witcherLog.AddMessage("Chance: " + FloatToString(chance));*/
+	
+		return RandF() < chance;
 	}
 	
-	
-	private final function GetSignApplyBuffTest(signType : ESignType, effectType : EEffectType, powerStatValue : SAbilityAttributeValue, isAlternate : bool, caster : CActor, sourceName : string ) : bool
+	//Does a test whether sign will apply the buff or not
+	//modSigns: function is rewritten, calculations are significantly altered
+	private final function GetSignApplyBuffTest(signType : ESignType, effectType : EEffectType, powerStatValue : SAbilityAttributeValue, isAlternate : bool, caster : CActor) : bool
 	{
-		var sp, res, chance, tempF : float;
+		var resPt, res, chance, tempF, rawChance, bonusChance : float;
 		var chanceBonus : SAbilityAttributeValue;
 		var witcher : W3PlayerWitcher;
-
 		
-		witcher = (W3PlayerWitcher)caster;
-		if(witcher && witcher.GetPotionBuffLevel(EET_PetriPhiltre) == 3)
+		//everything, but regular Igni is handled by signs and effects
+		if(signType != ST_Igni || isAlternate)
+		{
 			return true;
-	
+		}
+		/*if(signType == ST_Quen && effectType == EET_KnockdownTypeApplicator && owner.HasAbility('WeakToAard'))
+		{
+			return true;
+		}*/
 		
-		sp = powerStatValue.valueMultiplicative;
-		owner.GetResistValue(theGame.effectMgr.GetBuffResistStat(effectType), tempF, res);
-		chance = sp / theGame.params.MAX_SPELLPOWER_ASSUMED - res;
+		//this is for regular Igni cast only (alt cast has 100% burning chance)
 		
-		if( signType == ST_Yrden || signType == ST_Axii || sourceName == "mutation11" )
+		owner.GetResistValue(theGame.effectMgr.GetBuffResistStat(effectType), resPt, res);
+
+		rawChance = 0.5; //for NPCs
+		bonusChance = 0;
+		witcher = (W3PlayerWitcher)caster;
+		if(witcher) //modSigns: igni burn chance for witcher caster
 		{
-			chance = 1;
+			rawChance = CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Magic_2, 'initial_burn_chance', false, true));
+			if(witcher.CanUseSkill(S_Magic_s09))
+				bonusChance = CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Magic_s09, 'chance_bonus', false, true)) * witcher.GetSkillLevel(S_Magic_s09);
+			if(witcher.HasGlyphwordActive('Glyphword 7 _Stats'))
+				bonusChance += CalculateAttributeValue(witcher.GetAbilityAttributeValue('Glyphword 7 _Stats', 'glyphword7_burnchance_debuff'));
 		}
-		else if(signType == ST_Igni)
+		
+		//level 3 petri philtre gives +100% to bonus chance
+		/*if(witcher && witcher.GetPotionBuffLevel(EET_PetriPhiltre) == 3)
 		{
-			if(witcher)
-			{
-				if(witcher.CanUseSkill(S_Magic_s09))
-				{
-					chanceBonus = witcher.GetSkillAttributeValue(S_Magic_s09, 'chance_bonus', false, true);
-					chance += chance * chanceBonus.valueMultiplicative * witcher.GetSkillLevel(S_Magic_s09) + chanceBonus.valueAdditive * witcher.GetSkillLevel(S_Magic_s09);
-				}			
-				if(witcher.CanUseSkill(S_Perk_03))
-					chance += CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Perk_03, 'burning_chance', false, true));
-			}
-		}
-		else if(signType == ST_Quen && effectType == EET_KnockdownTypeApplicator)
-		{
-			witcher = (W3PlayerWitcher)caster;
-			if(witcher)
-			{
-				chanceBonus = witcher.GetSkillAttributeValue(S_Magic_s13, 'chance_multiplier', false, true);
-				chance *= CalculateAttributeValue(chanceBonus);
-			}
-			if( owner.HasAbility('WeakToAard') )
-			{
-				chance = 1;
-			}
-		}
-		else if( signType == ST_Aard && owner.HasAbility('WeakToAard') )
-		{
-			chance = 1;
-		}
-				
-		chance = ClampF(chance, 0, 1);
-			
-		LogEffects("Buff <<" + effectType + ">> is from sign, chance = " + NoTrailZeros(100*chance) + "%, spell_power = " + NoTrailZeros(sp) + ", resist=" + NoTrailZeros(res));		
-		if(RandF() >= chance)
-		{
-			if ( theGame.CanLog() )
-			{
-				LogEffects("Sign buff chance failed - no effect applied");
-			}
-			return false;
-		}
-		else
+			bonusChance += 0.5;
+		}*/
+		
+		chance = MaxF(0, (rawChance + bonusChance) * (1 - res));
+		
+		//Metamorphosis new bonus
+		if(witcher && witcher.IsMutationActive(EPMT_Mutation12))
+			chance *= MaxF(1.0f, 1.0f + witcher.Mutation12GetBonus());
+		
+		//debug log
+		//theGame.witcherLog.AddMessage("Raw + bonus chance: " + FloatToString(rawChance + bonusChance));
+		//theGame.witcherLog.AddMessage("Effect chance: " + FloatToString(chance));
+
+		LogEffects("Buff <<" + effectType + ">> is from sign, chance = " + NoTrailZeros(100*chance) + "%, spell_power = " + NoTrailZeros(powerStatValue.valueMultiplicative) + ", resist=" + NoTrailZeros(res));
+
+		if(RandF() < chance)
 		{
 			LogEffects("Sign buff chance succeeded!");
+			return true;
 		}
-		
-		return true;
+		LogEffects("Sign buff chance failed - no effect applied");
+		return false;
 	}
 	
 	
@@ -1673,6 +1742,34 @@ class W3EffectManager
 				ResumeEffects(regenEffect.GetEffectType(), sourceName);
 		}
 	}
+	
+	//modSigns begin
+	public final function PauseAllDoTEffects(sourceName : name, optional singleLock : bool, optional duration : float, optional useMaxDuration : bool)
+	{
+		var i : int;
+		var dotEffect : W3DamageOverTimeEffect;
+	
+		for(i=0; i<effects.Size(); i+=1)
+		{
+			dotEffect = (W3DamageOverTimeEffect)effects[i];
+			if(dotEffect)
+				PauseEffects(dotEffect.GetEffectType(), sourceName, singleLock, duration, useMaxDuration);
+		}
+	}
+	
+	public final function ResumeAllDoTEffects(sourceName : name)
+	{
+		var i : int;
+		var dotEffect : W3DamageOverTimeEffect;
+	
+		for(i=0; i<effects.Size(); i+=1)
+		{
+			dotEffect = (W3DamageOverTimeEffect)effects[i];
+			if(dotEffect)
+				ResumeEffects(dotEffect.GetEffectType(), sourceName);
+		}
+	}
+	//modSigns end
 	
 	
 	private final function ResumeAllBuffsForced()

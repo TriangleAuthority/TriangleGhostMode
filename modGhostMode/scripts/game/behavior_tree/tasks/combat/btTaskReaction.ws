@@ -91,7 +91,7 @@ class CBTTaskReaction extends IBehTreeTask
 		}
 		else
 		{
-			if( !ChooseAndCheckDodge() )
+			if( ChooseAndCheckDodge() ) //modSigns
 			{
 				if( npc.RaiseForceEvent( 'Dodge' ) )
 				{
@@ -108,6 +108,10 @@ class CBTTaskReaction extends IBehTreeTask
 	{
 		var npc : CNewNPC = GetNPC();
 		var dodgeChance : int;
+		
+		//modSigns
+		if ( npc.HasBuff(EET_CounterStrikeHit) )
+			return false;
 		
 		if( !Time2Dodge )
 		{
@@ -150,10 +154,11 @@ class CBTTaskReaction extends IBehTreeTask
 	
 	function OnGameplayEvent( eventName : name ) : bool
 	{
-		var npc : CNewNPC;
-		if ( eventName == 'Time2Dodge' && (nextReactionTime < GetLocalTime()) )
+		var npc : CNewNPC = GetNPC();
+		//modSigns
+		if ( eventName == 'Time2Dodge' && (nextReactionTime < GetLocalTime()) && !npc.HasBuff(EET_CounterStrikeHit) )
 		{
-			npc = GetNPC();
+			//npc = GetNPC();
 			Time2Dodge = true;
 			dodgeType = this.GetEventParamInt(-1);
 			return true;

@@ -7,7 +7,9 @@
 
 
 
-class W3Effect_Edible extends W3RegenEffect
+//modSigns: boosts existing autoregen effect instead of adding another one
+//to avoid conflicts.
+class W3Effect_Edible extends CBaseGameplayEffect
 {
 	default effectType = EET_Edible;
 	default isPositive = true;

@@ -7,39 +7,64 @@ class W3Effect_Mutation7Buff extends W3Mutation7BaseEffect
 {
 	default effectType = EET_Mutation7Buff;
 	default isPositive = true;
-	default isSonarIncreasing = false;
-	default enemyFlashFX = 'debuff';
+	//default isSonarIncreasing = false;
+	//default enemyFlashFX = 'debuff';
+	
+	private var accumulatedFocusPts : int; //modSigns
 	
 	event OnEffectAdded( customParams : W3BuffCustomParams )
 	{
+		var fxEntity : CEntity;
+		
 		super.OnEffectAdded( customParams );
 		
-		target.AddAbilityMultiple( 'Mutation7Buff', actorsCount - 1 );
+		//target.AddAbilityMultiple( 'Mutation7Buff', actorsCount - 1 );
+		//modSigns
+		accumulatedFocusPts = 0;
+		savedFocusPts = FloorF(target.GetStat(BCS_Focus));
+		target.AddAbilityMultiple( 'Mutation7Buff', savedFocusPts );
+		
+		fxEntity = target.CreateFXEntityAtPelvis( 'mutation7_flash', false );
+		fxEntity.PlayEffect( 'buff' );
+		fxEntity.DestroyAfter( 10.f );
+		target.PlayEffect( 'mutation_7_baff' );				
 		target.SoundEvent( 'ep2_mutations_07_berserk_buff' );
 	}
 	
 	event OnUpdate(deltaTime : float)
 	{
-		var fxEntity : CEntity;
+		//modSigns
+		var curFocus : int = FloorF(target.GetStat(BCS_Focus));
 		
-		if( timeActive <= 1.f )
+		if(curFocus < savedFocusPts)
+			target.RemoveAbilityMultiple( 'Mutation7Buff', savedFocusPts - curFocus );
+		else if(curFocus > savedFocusPts)
 		{
-			scale = MinF( timeActive / 1.f, 1.f );
-			scale = 15.f - 14.f * scale;
+			target.AddAbilityMultiple( 'Mutation7Buff', curFocus - savedFocusPts );
+			accumulatedFocusPts += curFocus - savedFocusPts;
 		}
-		else
-		{
-			if( sonarEntity )
-			{
-				fxEntity = target.CreateFXEntityAtPelvis( 'mutation7_flash', false );
-				fxEntity.PlayEffect( 'buff' );
-				fxEntity.DestroyAfter( 10.f );
-				
-				target.PlayEffect( 'mutation_7_baff' );				
-			}
-		}
-		
-		super.OnUpdate( deltaTime );
+		savedFocusPts = curFocus;
+	
+		//var fxEntity : CEntity;
+		//
+		//if( timeActive <= 1.f )
+		//{
+		//	scale = MinF( timeActive / 1.f, 1.f );
+		//	scale = 15.f - 14.f * scale;
+		//}
+		//else
+		//{
+		//	if( sonarEntity )
+		//	{
+		//		fxEntity = target.CreateFXEntityAtPelvis( 'mutation7_flash', false );
+		//		fxEntity.PlayEffect( 'buff' );
+		//		fxEntity.DestroyAfter( 10.f );
+		//		
+		//		target.PlayEffect( 'mutation_7_baff' );				
+		//	}
+		//}
+		//
+		//super.OnUpdate( deltaTime );
 	}
 	
 	event OnEffectAddedPost()
@@ -48,7 +73,7 @@ class W3Effect_Mutation7Buff extends W3Mutation7BaseEffect
 		
 		super.OnEffectAddedPost();
 		
-		theGame.MutationHUDFeedback( MFT_PlayRepeat );
+		//theGame.MutationHUDFeedback( MFT_PlayRepeat );
 		
 		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation7Buff', 'attack_power', min, max );
 		apBonus = min.valueMultiplicative;
@@ -56,24 +81,24 @@ class W3Effect_Mutation7Buff extends W3Mutation7BaseEffect
 	
 	event OnEffectRemoved()
 	{
-		var tempBuff		: W3Effect_Mutation7Debuff;
+		//var tempBuff		: W3Effect_Mutation7Debuff;
 		var params 			: SCustomEffectParams;
 		var mut7Params 		: W3Mutation7DebuffParams;
 	
+		target.RemoveAbilityAll( 'Mutation7Buff' );
+		target.StopEffect( 'mutation_7_baff' );
+		
 		if( target.IsInCombat() )
 		{
 			mut7Params = new W3Mutation7DebuffParams in theGame;
-			mut7Params.actorsCount = actorsCount;
-		
+			mut7Params.savedFocusPts = accumulatedFocusPts; //modSigns
+			
 			params.buffSpecificParams = mut7Params;
 			params.creator = target;
 			params.effectType = EET_Mutation7Debuff;
-			params.sourceName = "Combat ended - mutation 7";
+			params.sourceName = "Mutation 7 debuff phase"; //modSigns
 			target.AddEffectCustom( params );
 		}
-		
-		target.RemoveAbilityAll( 'Mutation7Buff' );
-		target.StopEffect( 'mutation_7_baff' );
 		
 		super.OnEffectRemoved();		
 	}

@@ -38,16 +38,19 @@ import abstract class CActor extends CGameplayEntity
 	private 			var droppedItems				: array<SDroppedItem>;		
 	private 			var wasDefeatedFromFistFight	: bool;						
 	protected			var isCurrentlyDodging			: bool;						
+	protected			var bWasCountered				: bool; //modSigns
 	private				var combatStartTime				: float;					
 	private				var combatPartStartTime			: float;					
 	private				var collisionDamageTimestamp  	: float;					
 	private				var	lastWasAttackedTime			: float;
 	private				var lastWasHitTime				: float;
 	private				var lowerGuardTime				: float;
+	private				var lastAttackTime				: float; //modSigns
 	private 			var knockedUncounscious			: bool;
 	private 			var isGameplayVisible			: bool;
 	private				var lastBreathTime				: float;
 	protected 			var isRecoveringFromKnockdown   : bool;
+	private				var isFocusGainPaused			: bool; //modSigns
 	
 	private 			var hitCounter 					: int;		default hitCounter = 0;
 	private 			var totalHitCounter 			: int;		default totalHitCounter = 0;
@@ -133,47 +136,75 @@ import abstract class CActor extends CGameplayEntity
 	
 	public function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, crossbowId : SItemUniqueId) : float
 	{
-		var excessiveDamage : SAbilityAttributeValue;
+		var weaponDamage : SAbilityAttributeValue;
 		var i : int;
-		var weapons : array<SItemUniqueId>;
+		//var weapons : array<SItemUniqueId>;
 		var inv : CInventoryComponent;
-		var n : name;		
+		//var n : name;		
 		var damage : float;
 		
-		excessiveDamage = GetAttributeValue(damageTypeName);		
 		inv = GetInventory();
-		weapons = inv.GetAllWeapons();
+
+		//For whatever reason damage attribute value is increased each time NPC
+		//respawns by some twisted internal engine logic.
+		//(probably related to how the shitty abilities system work - adding
+		//weapon abilities OnHold, but possibly never removing them on respawn)
+		//This means GetAttributeValue(damageTypeName) returns progressively more
+		//damage until the player reloads a game via menu.
+		//Since damage values are weapon-only properties, it's safe to take them
+		//directly from the weapon itself, without trying to dance around
+		//this shitty ability system.
 		
-		for(i=0; i<weapons.Size(); i+=1)
-		{
-			n = inv.GetItemName(weapons[i]);		
-			
-			if(!inv.IsItemHeld(weapons[i]))
-				continue;
-				
-			
-			if(weapons[i] == weaponId)
-				continue;
-				
-			
-			if(inv.IsItemBolt(weaponId) && weapons[i] == crossbowId)
-				continue;
-			
-			excessiveDamage -= inv.GetItemAttributeValue(weapons[i], damageTypeName);
-		}
+		//This code is NOT used for vanilla NPC archers! Arrow/bolt damage is
+		//hardcoded inside projectile w2ent and ignores weapon damage values!
+		//However, it IS used by GM archers!
 		
+		//This code IS used by the player!
 		
+		weaponDamage = inv.GetItemAttributeValue(weaponId, damageTypeName);
 		
+		//This should be in default weapon attributes, but for whatever
+		//f...ing reason it's on actor and not on the item itself.
+		weaponDamage.valueMultiplicative = 1.0;
 		
+		//This code is the very definition of shit.
+		//Sorry, CDPR guys, but f...ing GetWeaponDamage method should
+		//return f...ing weapon damage! As f...ing simple as that!
 		
-		if(!inv.IsItemHeld(weaponId) && !inv.IsItemBolt(weaponId))
-		{
-			excessiveDamage += inv.GetItemAttributeValue(weaponId, damageTypeName);
-		}
+		//Here they dance around the situation where Geralt fires the
+		//crossbow while holding a sword - since weapon abilities are added
+		//OnHold, GetAttributeValue returns the summary value for the sword
+		//and the bolt, so they remove the sword damage from the resulting
+		//damage.
 		
-		damage = CalculateAttributeValue(excessiveDamage);
+		//And if an item isn't held, they add its damage directly.
+		//F...ing amazing!
 		
-		return damage;		
+		//excessiveDamage = GetAttributeValue(damageTypeName);
+		//weapons = inv.GetAllWeapons();
+		//for( i = 0; i < weapons.Size(); i += 1 )
+		//{
+		//	n = inv.GetItemName(weapons[i]);
+		//	if(!inv.IsItemHeld(weapons[i]))
+		//		continue;
+		//	if(weapons[i] == weaponId)
+		//		continue;
+		//	if(inv.IsItemBolt(weaponId) && weapons[i] == crossbowId)
+		//		continue;
+		//	excessiveDamage -= inv.GetItemAttributeValue(weapons[i], damageTypeName);
+		//}
+		//if( !inv.IsItemHeld(weaponId) && !inv.IsItemBolt(weaponId) )
+		//{
+		//	excessiveDamage += inv.GetItemAttributeValue(weaponId, damageTypeName);
+		//}
+		
+		damage = CalculateAttributeValue(weaponDamage);
+		
+		//theGame.witcherLog.AddMessage("NPC: " + GetDisplayName());
+		//theGame.witcherLog.AddMessage("damage type: " + damageTypeName);
+		//theGame.witcherLog.AddMessage("damage: " + damage);
+		
+		return damage;
 	}
 
 	public function GetAttributeValue(attributeName : name, optional tags : array<name>, optional ignoreDeath : bool) : SAbilityAttributeValue
@@ -1610,7 +1641,9 @@ import abstract class CActor extends CGameplayEntity
 		
 		theGame.GetMonsterParamsForActor(this, monsterCategory, temp2, temp3, canBeTargeted, temp4);
 		
-		if ( monsterCategory == MC_Human )
+		//modSigns: Olgierd Ethereal is in a specter category now, but he has to still appear as human
+		//Succubi are hybrinds now, but they also should still appear as humans.
+		if ( monsterCategory == MC_Human || HasTag( 'ethereal' ) || HasAbility( 'ConHumanoidMonster' ) )
 			cachedIsHuman = 1;
 		else
 			cachedIsHuman = 0;
@@ -1686,6 +1719,27 @@ import abstract class CActor extends CGameplayEntity
 		return cachedIsAnimal;
 	}
 	
+	//modSigns
+	private var cachedIsBeast : int;	default cachedIsBeast = -1;
+	public function IsBeast() : bool
+	{
+		var monsterCategory : EMonsterCategory;
+		var tmpName : name;
+		var tmpBool : bool;
+		
+		if ( cachedIsBeast != -1 )
+			return cachedIsBeast > 0;
+		
+		theGame.GetMonsterParamsForActor(this, monsterCategory, tmpName, tmpBool, tmpBool, tmpBool);
+		
+		if ( monsterCategory == MC_Beast )
+			cachedIsBeast = 1;
+		else
+			cachedIsBeast = 0;
+		
+		return cachedIsBeast;
+	}
+	
 	private var cachedIsVampire : int;	default cachedIsVampire = -1;
 	public function IsVampire() : bool
 	{
@@ -1704,6 +1758,27 @@ import abstract class CActor extends CGameplayEntity
 			cachedIsVampire = 0;
 		
 		return cachedIsVampire;
+	}
+	
+	//modSigns
+	private var cachedIsSpecter : int;	default cachedIsSpecter = -1;
+	public function IsSpecter() : bool
+	{
+		var monsterCategory : EMonsterCategory;
+		var tmpName : name;
+		var tmpBool : bool;
+		
+		if ( cachedIsSpecter != -1 )
+			return cachedIsSpecter > 0;
+		
+		theGame.GetMonsterParamsForActor(this, monsterCategory, tmpName, tmpBool, tmpBool, tmpBool);
+		
+		if ( monsterCategory == MC_Specter )
+			cachedIsSpecter = 1;
+		else
+			cachedIsSpecter = 0;
+		
+		return cachedIsSpecter;
 	}
 	
 	protected function SetAbilityManager();
@@ -1782,14 +1857,16 @@ import abstract class CActor extends CGameplayEntity
 	
 	
 
-	public function HasStaminaToParry( attActionName : name ) : bool
+	//modSigns
+	public function HasStaminaToParry( attActionName : name, optional mult : float ) : bool
 	{
-		var multiplier : float;
+		return HasStaminaToUseAction( ESAT_Parry, '', 0, mult );
+	}
 	
-		if( IsHeavyAttack( attActionName ) )
-			multiplier = theGame.params.HEAVY_STRIKE_COST_MULTIPLIER;
-			
-		return HasStaminaToUseAction( ESAT_Parry, '', 0, multiplier );
+	//modSigns
+	public function HasStaminaToCounter( attActionName : name, optional mult : float ) : bool
+	{
+		return HasStaminaToUseAction( ESAT_Counterattack, '', 0, mult );
 	}
 	
 	public function CanParryAttack() : bool
@@ -1797,10 +1874,10 @@ import abstract class CActor extends CGameplayEntity
 		return bParryEnabled && IsGuarded();
 	}
 	
-	public function CanCounterParryAttack(attActionName : name ) : bool
+	/*public function CanCounterParryAttack(attActionName : name ) : bool
 	{
 		return CanParryAttack() && CanPerformCounter() && HasStaminaToParry(attActionName);
-	}
+	}*/ //unused
 	
 	public function FistFightCheck( target, attacker : CActor, out bothUsingFists : bool ) : bool
 	{
@@ -1971,6 +2048,27 @@ import abstract class CActor extends CGameplayEntity
 	
 	public final function IsCurrentlyDodging() : bool				{return isCurrentlyDodging;}
 	
+	//modSigns begin
+	public function WasCountered() : bool
+	{
+		return bWasCountered;
+	}
+	
+	public function SetWasCountered(counter : bool)
+	{
+		bWasCountered = counter;
+		if(bWasCountered)
+			AddTimer('ResetWasCountered', 3.0, , , , , true); //override existing timer
+		else
+			RemoveTimer('ResetWasCountered');
+	}
+	
+	timer function ResetWasCountered(dt : float, id : int)
+	{
+		bWasCountered = false;
+	}
+	//modSigns end
+	
 	public final function SetParryEnabled( flag : bool )
 	{
 		bParryEnabled = flag;
@@ -2075,6 +2173,23 @@ import abstract class CActor extends CGameplayEntity
 	
 	
 	
+	
+	//modSigns
+	public function IsFocusGainPaused() : bool
+	{
+		return isFocusGainPaused;
+	}
+	
+	public function PauseFocusGain(val : bool)
+	{
+		isFocusGainPaused = val;
+	}
+	
+	timer function ResumeFocusGain(delta : float, id : int)
+	{
+		isFocusGainPaused = false;
+		RemoveTimer('ResumeFocusGain');
+	}
 	
 	public function DrainStamina(action : EStaminaActionType, optional fixedCost : float, optional fixedDelay : float, optional abilityName : name, optional dt : float, optional costMult : float)
 	{
@@ -2201,10 +2316,37 @@ import abstract class CActor extends CGameplayEntity
 				
 			cost = multiplier * GetStaminaActionCost( action, abilityName, dt );
 			ret = (GetStat(BCS_Stamina) >= cost);			
+			//modSigns: full focus bar equals to full stamina bar -> perk changed
+			/*if( !ret && CheckPerk10Activation(action) )
+			{
+				ret = ((GetStat(BCS_Stamina) + GetStat(BCS_Focus)*GetStatMax(BCS_Stamina)/GetStatMax(BCS_Focus)) >= cost);
+			}*/
 		}
 
 		return ret;
 	}
+	
+	/*public function CheckPerk10Activation(action : EStaminaActionType) : bool
+	{
+		if( this != thePlayer || !thePlayer.CanUseSkill(S_Perk_10) )
+			return false;
+	
+		if( action == ESAT_LightAttack ||
+			action == ESAT_HeavyAttack ||
+			action == ESAT_UsableItem ||
+			action == ESAT_Parry ||
+			action == ESAT_Counterattack ||
+			action == ESAT_Dodge ||
+			action == ESAT_Roll ||
+			action == ESAT_Evade ||
+			action == ESAT_Sprint ||
+			action == ESAT_Jump )
+		{
+			return true;
+		}
+		
+		return false;
+	}*/ //modSigns: moved
 	
 	
 	public function GetStaminaActionCost(action : EStaminaActionType, optional abilityName : name, optional dt :float) : float
@@ -2379,11 +2521,14 @@ import abstract class CActor extends CGameplayEntity
 		var lifeLeech, health, stamina : float;
 		var wasAlive : bool;
 		var hudModuleDamageType : EFloatingValueType;
+		var cost, addDamage : float; //modSigns
 		
 		playerAttacker = (CPlayer)action.attacker;
 		wasAlive = IsAlive();
 		
 		
+		//at this point EET_Frozen buff is removed by damage manager and wasFrozen
+		//is set to true instead in damage action, so this won't work ever
 		buffs = GetBuffs(EET_Frozen);
 		for(i=0; i<buffs.Size(); i+=1)
 		{
@@ -2399,10 +2544,44 @@ import abstract class CActor extends CGameplayEntity
 				break;
 			}
 		}
-	
+		
+		//modSigns: LastBreath frozen kill
+		if(HasAbility('LastBreath') && action.GetWasFrozen())
+		{
+			if(action.processedDmg.vitalityDamage > 0 && UsesVitality())
+			{
+				if(GetStat(BCS_Vitality) - action.processedDmg.vitalityDamage <= 0)
+					AddTag('ExplodeNoDamage');
+			}
+			else if(action.processedDmg.essenceDamage > 0 && UsesEssence())
+			{
+				if(GetStat(BCS_Essence) - action.processedDmg.essenceDamage <= 0)
+					AddTag('ExplodeNoDamage');
+			}
+		}
+		
+		//modSigns: immortal actors can't die
+		if(!action.GetIgnoreImmortalityMode())
+		{
+			if( IsImmortal() )
+			{
+				if( theGame.CanLog() )
+				{
+					LogDMHits("CActor.OnTakeDamage: victim is Immortal, clamping damage", action );
+				}
+				action.processedDmg.vitalityDamage = ClampF(action.processedDmg.vitalityDamage, 0, GetStat(BCS_Vitality) - 1);
+				action.processedDmg.essenceDamage  = ClampF(action.processedDmg.essenceDamage, 0, GetStat(BCS_Essence) - 1);
+			}
+		}
+		
+		//modSigns: moved here from ReduceDamage
+		if(((CActor)action.attacker) && action.DealsAnyDamage() )
+			((CActor)action.attacker).SignalGameplayEventParamObject( 'DamageInstigated', action );
+		
 		if(action.processedDmg.vitalityDamage > 0 && UsesVitality())
 		{
-			DrainVitality(action.processedDmg.vitalityDamage);
+			if(!action.GetMutation5Triggered()) //modSigns: a little bit dirty, but I don't want to redo all the damage logic
+				DrainVitality(action.processedDmg.vitalityDamage);
 			action.SetDealtDamage();
 		}
 		if(action.processedDmg.essenceDamage > 0 && UsesEssence())
@@ -2442,11 +2621,11 @@ import abstract class CActor extends CGameplayEntity
 		}
 		
 		
-		if(action.attacker && !action.IsDoTDamage() && wasAlive && action.GetDTCount() > 0 && !action.GetUnderwaterDisplayDamageHack())
-		{
-			theGame.witcherLog.CacheCombatDamageMessage(action.attacker, this, action.GetDamageDealt());
-			theGame.witcherLog.AddCombatDamageMessage(action.DealtDamage());
-		}
+		//if(action.attacker && !action.IsDoTDamage() && wasAlive && action.GetDTCount() > 0 && !action.GetUnderwaterDisplayDamageHack())
+		//{
+		//	theGame.witcherLog.CacheCombatDamageMessage(action.attacker, this, action.GetDamageDealt());
+		//	theGame.witcherLog.AddCombatDamageMessage(action.DealtDamage());
+		//} //modSigns: moved below
 			
 		
 		if(playerAttacker)
@@ -2464,7 +2643,31 @@ import abstract class CActor extends CGameplayEntity
 					lifeLeech = 0;
 				
 				thePlayer.GainStat(BCS_Vitality, lifeLeech);
-			}			
+			}
+			//modSigns: Caretaker shovel
+			if((W3Action_Attack)action && thePlayer.inv.GetItemName(((W3Action_Attack)action).GetWeaponId()) == 'PC Caretaker Shovel')
+			{
+				lifeLeech = CalculateAttributeValue(thePlayer.inv.GetItemAttributeValue(((W3Action_Attack)action).GetWeaponId() ,'lifesteal'));
+				if(UsesVitality())
+					lifeLeech *= action.processedDmg.vitalityDamage;
+				else if (UsesEssence())
+					lifeLeech *= action.processedDmg.essenceDamage;
+				else
+					lifeLeech = 0;
+					
+				if(lifeLeech > 0)
+				{
+					thePlayer.inv.PlayItemEffect(((W3Action_Attack)action).GetWeaponId(), 'stab_attack');
+					thePlayer.PlayEffect('drain_energy_caretaker_shovel');
+					thePlayer.GainStat(BCS_Vitality, lifeLeech);
+				}
+			}
+			//modSigns: Vampire set
+			if( ((W3PlayerWitcher)thePlayer).IsSetBonusActive( EISB_Vampire ) && !((W3PlayerWitcher)thePlayer).IsInFistFight() )
+			{
+				if( action.DealsAnyDamage() && !action.IsDoTDamage() )
+					((W3PlayerWitcher)thePlayer).VampiricSetAbilityRegeneration();
+			}
 		}
 		
 		
@@ -2472,31 +2675,53 @@ import abstract class CActor extends CGameplayEntity
 		{
 			attackName = ((W3Action_Attack)action).GetAttackName();
 		
-			
-			if ( thePlayer.HasBuff(EET_Mutagen04) && action.DealsAnyDamage() && thePlayer.IsHeavyAttack(attackName) && thePlayer.GetStat(BCS_Stamina) > 0)
+			// modSigns: damage is proportional to stamina spent
+			if(thePlayer.HasBuff(EET_Mutagen04) && action.DealsAnyDamage() && action.IsActionMelee())
 			{
-				mutagen = thePlayer.GetBuff(EET_Mutagen04);
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue(mutagen.GetAbilityName(), 'staminaCostPerc', min, max);
-				stamina = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-				stamina *= thePlayer.GetStat(BCS_Stamina);
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue(mutagen.GetAbilityName(), 'healthReductionPerc', min, max);
-				health = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-				if (UsesVitality())
+				if(thePlayer.IsDoingSpecialAttack(true))
+					cost = thePlayer.GetSpecialAttackTimeRatio() * thePlayer.GetStatMax(BCS_Stamina);
+				else if(thePlayer.IsDoingSpecialAttack(false))
+					cost = GetWitcherPlayer().GetWhirlStaminaCost(0.25); //around 4 hits per second
+				else if(thePlayer.IsHeavyAttack(attackName))
+					cost = thePlayer.GetStaminaActionCost(ESAT_HeavyAttack);
+				else
+					cost = thePlayer.GetStaminaActionCost(ESAT_LightAttack);
+				health = ((W3Mutagen04_Effect)thePlayer.GetBuff(EET_Mutagen04)).GetHealthReductionPrc(cost);
+				if(UsesVitality())
 				{
 					health *= GetStat(BCS_Vitality);
-					DrainVitality(health);					
-					thePlayer.DrainStamina(ESAT_FixedValue, stamina, 0.5f);
+					DrainVitality(health);
 				}
-				else if (UsesEssence())
+				else if(UsesEssence())
 				{
 					health *= GetStat(BCS_Essence);
-					DrainEssence(health);					
-					thePlayer.DrainStamina(ESAT_FixedValue, stamina, 0.5f);
+					DrainEssence(health);
 				}
+				else
+					health = 0;
 				
 				if(health > 0)
 					action.SetDealtDamage();
+				
+				addDamage = health;
+				
+				//theGame.witcherLog.AddMessage("cost = " + cost);
+				//theGame.witcherLog.AddMessage("health reduction prc = " + ((W3Mutagen04_Effect)thePlayer.GetBuff(EET_Mutagen04)).GetHealthReductionPrc(cost) * 100 + " %");
+				//theGame.witcherLog.AddMessage("health = " + health);
 			}
+		}
+		
+		//modSigns: moved here
+		if(action.attacker && !action.IsDoTDamage() && wasAlive && action.GetDTCount() > 0 && !action.GetUnderwaterDisplayDamageHack())
+		{
+			theGame.witcherLog.CacheCombatDamageMessage(action.attacker, this, action.GetDamageDealt() + addDamage);
+			theGame.witcherLog.AddCombatDamageMessage(action.DealtDamage());
+		}
+		
+		//modSigns: mutagen16 new ability
+		if(HasBuff(EET_Mutagen16))
+		{
+			((W3Mutagen16_Effect)GetBuff(EET_Mutagen16)).Mutagen16ModifyHitAnim(action);
 		}
 		
 		
@@ -2509,6 +2734,13 @@ import abstract class CActor extends CGameplayEntity
 			
 			
 			OnDeath( action );
+		}
+		//modSigns
+		else if(!(action.IsDoTDamage() && (CBaseGameplayEffect)action.causer))
+		{
+			//theGame.witcherLog.AddMessage("stamina regen paused, hit severity = " + GetHitSeverityFromDamageData(action));
+			if(!HasTag('HideHealthBarModule')) //no regen pause for bosses
+				DrainStamina(ESAT_FixedValue, 0.0, 1.0 * GetHitSeverityFromDamageData(action) / 4.0); //delay stamina regen
 		}
 		
 		
@@ -2551,7 +2783,7 @@ import abstract class CActor extends CGameplayEntity
 	{
 		hitCounter += 1;
 		totalHitCounter += 1;
-		AddTimer('ResetHitCounter',2.0,false);
+		AddTimer('ResetHitCounter',2.5,false); //modSigns: increased
 	}
 	
 	public timer function ResetHitCounter( deta : float , id : int)
@@ -2571,7 +2803,7 @@ import abstract class CActor extends CGameplayEntity
 	{
 		defendCounter += 1;
 		totalDefendCounter += 1;
-		AddTimer('ResetDefendCounter',2.0,false);
+		AddTimer('ResetDefendCounter',2.5,false); //modSigns: increased
 	}
 	
 	public timer function ResetDefendCounter( deta : float , id : int)
@@ -2580,10 +2812,12 @@ import abstract class CActor extends CGameplayEntity
 	}
 	
 	
-	public function ReactToReflectedAttack( target : CGameplayEntity)
+	public function ReactToReflectedAttack( target : CGameplayEntity )
 	{
 		var hp, dmg : float;
 		var action : W3DamageAction;
+		
+		//theGame.witcherLog.AddMessage("ReactToReflectedAttack"); //modSigns: debug
 		
 		action = new W3DamageAction in this;
 		action.Initialize(target,this,NULL,'',EHRT_Reflect,CPS_AttackPower,true,false,false,false);
@@ -3523,6 +3757,8 @@ import abstract class CActor extends CGameplayEntity
 		this.SignalGameplayEvent('DisableFinisher');
 			
 		this.SignalGameplayEventParamInt('StoppingEffect', (int)critType);
+		
+		//theGame.witcherLog.AddMessage("StoppingEffect: " + critType);
 	}
 	
 	
@@ -3830,6 +4066,13 @@ import abstract class CActor extends CGameplayEntity
 		var criticalStatesToResist, resistCriticalStateChance, resistCriticalStateMultiplier : float;
 		var mac : CMovingAgentComponent;
 		
+		//modSigns: skip mutation 7 debuff effect
+		if(effect == EET_Mutation7Debuff)
+			return false;
+		//modSigns: skip cooldowns
+		if(effect == EET_WhirlCooldown || effect == EET_RendCooldown || effect == EET_AardCooldown || effect == EET_IgniCooldown || effect == EET_YrdenCooldown || effect == EET_QuenCooldown || effect == EET_AxiiCooldown)
+			return false;
+		
 		mac = GetMovingAgentComponent();
 		
 		if ( mac && mac.IsEntityRepresentationForced() == 512 && !IsUsingVehicle() ) 
@@ -3892,10 +4135,31 @@ import abstract class CActor extends CGameplayEntity
 		}
 	}
 	
+	//modSigns: removeIfPresent fix
 	protected saved var isImmuneToNegativeBuffs : bool;
 	public function AddBuffImmunity_AllNegative(source : name, removeIfPresent : bool)
 	{
+		var i, size : int;
+		var potion, positive, neutral, negative, immobilize, confuse, damage : bool;
+		
 		isImmuneToNegativeBuffs = true;
+		
+		size = (int)EET_EffectTypesSize;
+		
+		for( i=0; i<size; i+=1 )
+		{
+			//modSigns: skip mutation 7 debuff effect
+			if(i == (int)EET_Mutation7Debuff)
+				continue;
+			//modSigns: skip cooldowns
+			if(i == (int)EET_WhirlCooldown || i == (int)EET_RendCooldown || i == (int)EET_AardCooldown || i == (int)EET_IgniCooldown || i == (int)EET_YrdenCooldown || i == (int)EET_QuenCooldown || i == (int)EET_AxiiCooldown)
+				continue;
+		
+			theGame.effectMgr.GetEffectTypeFlags(i, potion, positive, neutral, negative, immobilize, confuse, damage);
+		
+			if( negative )
+				AddBuffImmunity(i, source, removeIfPresent);
+		}
 	}
 		
 	public function AddBuffImmunity(effect : EEffectType, source : name, removeBuffIfPresent : bool)
@@ -3962,9 +4226,23 @@ import abstract class CActor extends CGameplayEntity
 		}
 	}
 	
+	//modSigns: removeIfPresent fix
 	public function RemoveBuffImmunity_AllNegative(optional source : name)
 	{
+		var i, size : int;
+		var potion, positive, neutral, negative, immobilize, confuse, damage : bool;
+		
 		isImmuneToNegativeBuffs = false;
+		
+		size = (int)EET_EffectTypesSize;
+		
+		for( i=0; i<size; i+=1 )
+		{
+			theGame.effectMgr.GetEffectTypeFlags(i, potion, positive, neutral, negative, immobilize, confuse, damage);
+		
+			if( negative )
+				RemoveBuffImmunity(i, source);
+		}
 	}
 	
 	public function RemoveBuffImmunity(effect : EEffectType, optional source : name)
@@ -4010,6 +4288,14 @@ import abstract class CActor extends CGameplayEntity
 				buffRemovedImmunities.PushBack(immunity);
 			}
 		}
+	}
+	
+	//modSigns: remove golden oriole lvl 3 temp poison immunity
+	timer function RemoveGoldenOriolePoisonImmunity(time : float, id : int)
+	{
+		RemoveBuffImmunity(EET_Poison, 'GoldenOrioleTempPoisonImmunity');
+		RemoveBuffImmunity(EET_PoisonCritical, 'GoldenOrioleTempPoisonImmunity');
+		//theGame.witcherLog.AddMessage("Golden Oriole immunity removed!");
 	}
 	
 	public final function SetIsRecoveringFromKnockdown()
@@ -4802,6 +5088,17 @@ import abstract class CActor extends CGameplayEntity
 		
 		
 		
+		if( FactsQuerySum( "modSigns_debug_preattack" ) > 0 ) //modSigns: debug
+		{
+			theGame.witcherLog.AddMessage("!!!!!!!!!OnPreAttackEvent!!!!!!!!!");
+			theGame.witcherLog.AddMessage("animEventName = " + animEventName);
+			theGame.witcherLog.AddMessage("animName = " + GetAnimNameFromEventAnimInfo(animInfo));
+			theGame.witcherLog.AddMessage("attackName = " + data.attackName);
+			theGame.witcherLog.AddMessage("rangeName = " + data.rangeName);
+			theGame.witcherLog.AddMessage("canBeDodged = " + data.canBeDodged);
+			theGame.witcherLog.AddMessage("Can_Parry_Attack = " + data.Can_Parry_Attack);
+		}
+			
 		if(animEventType == AET_DurationStart)
 		{
 			ignoreAttack = false;
@@ -4875,6 +5172,15 @@ import abstract class CActor extends CGameplayEntity
 		}
 		
 		parriedBy = TestParryAndCounter(data, weaponId, parried, countered);
+		if( FactsQuerySum( "modSigns_debug_preattack" ) > 0 ) //modSigns: debug
+		{
+			theGame.witcherLog.AddMessage("!!!!!!!!!PreAttackParry!!!!!!!!!");
+			theGame.witcherLog.AddMessage("animName = " + GetAnimNameFromEventAnimInfo(animInfo));
+			theGame.witcherLog.AddMessage("attackName = " + data.attackName);
+			theGame.witcherLog.AddMessage("weaponId = " + GetInventory().GetItemName(weaponId));
+			theGame.witcherLog.AddMessage("parried = " + parried);
+			theGame.witcherLog.AddMessage("countered = " + countered);
+		}
 		if ( parried || countered )
 		{
 			DoAttack(data, weaponId, parried, countered, parriedBy, GetAnimNameFromEventAnimInfo( animInfo ), GetLocalAnimTimeFromEventAnimInfo( animInfo ));
@@ -5215,14 +5521,15 @@ import abstract class CActor extends CGameplayEntity
 			else
 				levelDiff = GetLevel() - actor.GetLevel();
 			
-			if( thePlayer.IsInFistFightMiniGame() || levelDiff < theGame.params.LEVEL_DIFF_DEADLY && (!playerTarget || playerTarget.IsActionAllowed(EIAB_Counter)) )
+			//modSigns: can parry and counter deadly enemies
+			if( thePlayer.IsInFistFightMiniGame() || /*levelDiff < theGame.params.LEVEL_DIFF_DEADLY &&*/ (!playerTarget || playerTarget.IsActionAllowed(EIAB_Counter)) )
 				countered = actor.PerformCounterCheck(parryInfo);
 				
 			if(!countered)
 			{
-				if( thePlayer.IsInFistFightMiniGame() || levelDiff < theGame.params.LEVEL_DIFF_DEADLY && (!playerTarget || playerTarget.IsActionAllowed(EIAB_Parry)) )
+				if( thePlayer.IsInFistFightMiniGame() || /*levelDiff < theGame.params.LEVEL_DIFF_DEADLY &&*/ (!playerTarget || playerTarget.IsActionAllowed(EIAB_Parry)) )
 				{
-					if ( !thePlayer.IsInFistFightMiniGame() && levelDiff >= theGame.params.LEVEL_DIFF_HIGH )
+					/*if ( !thePlayer.IsInFistFightMiniGame() && levelDiff >= theGame.params.LEVEL_DIFF_HIGH )
 					{
 						chanceToFailParry = CalculateAttributeValue(actor.GetAttributeValue('chance_to_fail_parry_per_level_diff'));
 						if ( chanceToFailParry > 0 )
@@ -5231,12 +5538,12 @@ import abstract class CActor extends CGameplayEntity
 							if( RandRange(100) < chanceToFailParry )
 								parryInfo.canBeParried = false;
 						}
-					}
+					}*/ //modSigns
 
 					parried = actor.PerformParryCheck(parryInfo);
 				}
 			}
-			else if(playerTarget && data.Can_Parry_Attack)
+			else if(playerTarget /*&& data.Can_Parry_Attack*/) //modSigns
 			{
 				FactsAdd("ach_counter", 1, 4 );
 				theGame.GetGamerProfile().CheckLearningTheRopes();
@@ -5279,24 +5586,45 @@ import abstract class CActor extends CGameplayEntity
 	{
 		var i : int;		
 		var weaponEntity : CItemEntity;
+		var phantomWeapon : W3Effect_PhantomWeapon; //modSigns
 		
-		phantomStrike = false;
 		weaponEntity = GetInventory().GetItemEntityUnsafe(weaponId);
 		
+		//theGame.witcherLog.AddMessage("animData.attackName = " + animData.attackName);
+		//theGame.witcherLog.AddMessage("attackAnimationName = " + attackAnimationName);
+		
+		//modSigns: check if should perform phantom strike
+		phantomStrike = false;
+		phantomWeapon = (W3Effect_PhantomWeapon)GetBuff( EET_PhantomWeapon );
+		if( GetInventory().ItemHasTag( weaponId, 'PhantomWeapon' ) && IsHeavyAttack( attackActionName ) )
+		{
+			if( this == thePlayer )
+			{
+				if(phantomWeapon && phantomWeapon.IsFullyCharged())
+				{
+					phantomStrike = true;
+				}
+			}
+			else
+			{
+				phantomStrike = true;
+			}
+		}
 		
 		for(i=0; i<hitTargets.Size(); i+=1)
 		{				
 			Attack(hitTargets[i], animData, weaponId, parried, countered, parriedBy, attackAnimationName, hitTime, weaponEntity);
 		}
 		
-		if( GetInventory().ItemHasTag( weaponId, 'PhantomWeapon' ) )
-		{	
-			if( this == thePlayer && IsLightAttack( attackActionName ) && hitTargets.Size() )
+		//if( GetInventory().ItemHasTag( weaponId, 'PhantomWeapon' ) )
+		//{	
+			//modSigns: moved to player witcher, OnProcessActionPost
+			/*if( this == thePlayer && IsLightAttack( attackActionName ) && hitTargets.Size() )
 			{	
 				thePlayer.GetPhantomWeaponMgr().IncrementHitCounter();
 				attackActionName = '';
 			}
-			else if( IsHeavyAttack( attackActionName ) )
+			else*/ if( /*IsHeavyAttack( attackActionName )*/ phantomStrike ) //modSigns
 			{
 				AddTimer('PhantomWeapon', 0.0);
 				phantomWeaponHitTime = hitTime + 0.0;
@@ -5312,11 +5640,11 @@ import abstract class CActor extends CGameplayEntity
 			{
 				attackActionName = '';
 			}
-		}
-		else
-		{		
-			attackActionName = '';
-		}
+		//}
+		//else
+		//{		
+		//	attackActionName = '';
+		//}
 		
 		
 		hitTargets.Clear();
@@ -5338,34 +5666,49 @@ import abstract class CActor extends CGameplayEntity
 	{
 		var i : int;		
 		var weaponEntity : CItemEntity;
+		//var phantomWeapon : W3Effect_PhantomWeapon; //modSigns
 		
 		weaponEntity = GetInventory().GetItemEntityUnsafe(phantomWeaponWeaponId);
+		//phantomWeapon = (W3Effect_PhantomWeapon)GetBuff( EET_PhantomWeapon ); //modSigns
+		
+		//if( this == thePlayer )
+		//{
+		//	//if( thePlayer.GetPhantomWeaponMgr().IsWeaponCharged() )
+		//	//	phantomStrike = true;
+		//	//modSigns
+		//	if(phantomWeapon && phantomWeapon.IsFullyCharged())
+		//	{
+		//		phantomStrike = true;
+		//		AddAbility( 'ForceDismemberment' );
+		//	}
+		//}
+		//else
+		//{
+		//	phantomStrike = true;
+		//}
 		
 		if( this == thePlayer )
 		{
-			if( thePlayer.GetPhantomWeaponMgr().IsWeaponCharged() )
-				phantomStrike = true;
-		}
-		else
-		{
-			phantomStrike = true;
+			AddAbility( 'ForceDismemberment' );
 		}
 		
+		//if( phantomStrike ) //modSigns
+		//{
+			for(i=0; i<phantomWeaponHitTargets.Size(); i+=1)
+			{	
+				
+				phantomWeaponHitTargets[i].AddAbility( 'DisableFinishers', true );
+				phantomWeaponHitTargets[i].AddAbility( 'DisableDismemberment', true );
+				
+				Attack(phantomWeaponHitTargets[i], phantomWeaponAnimData, phantomWeaponWeaponId, phantomWeaponParried, phantomWeaponCountered, phantomWeaponParriedBy, phantomWeaponAttackAnimationName, phantomWeaponHitTime, weaponEntity);
+				
+				phantomWeaponHitTargets[i].RemoveAbility( 'DisableFinishers' );
+				phantomWeaponHitTargets[i].RemoveAbility( 'DisableDismemberment' );
+			}
 		
-		for(i=0; i<phantomWeaponHitTargets.Size(); i+=1)
-		{	
-			
-			phantomWeaponHitTargets[i].AddAbility( 'DisableFinishers', true );
-			phantomWeaponHitTargets[i].AddAbility( 'DisableDismemberment', true );
-			
-			Attack(phantomWeaponHitTargets[i], phantomWeaponAnimData, phantomWeaponWeaponId, phantomWeaponParried, phantomWeaponCountered, phantomWeaponParriedBy, phantomWeaponAttackAnimationName, phantomWeaponHitTime, weaponEntity);
-			
-			phantomWeaponHitTargets[i].RemoveAbility( 'DisableFinishers' );
-			phantomWeaponHitTargets[i].RemoveAbility( 'DisableDismemberment' );
-		}
-		
-		if( !phantomWeaponCountered && phantomWeaponHitTargets.Size() && phantomWeaponParried )
-			PlayEffectOnHeldWeapon( 'special_attack_block' );
+			if( !phantomWeaponCountered && phantomWeaponHitTargets.Size() && phantomWeaponParried )
+				PlayEffectOnHeldWeapon( 'special_attack_block' );
+		//}
 		
 		AddTimer('PostAttackDebugRangeClear', 1);
 		attackActionName = '';
@@ -5395,6 +5738,9 @@ import abstract class CActor extends CGameplayEntity
 	protected function PrepareAttackAction( hitTarget : CGameplayEntity, animData : CPreAttackEventData, weaponId : SItemUniqueId, parried : bool, countered : bool, parriedBy : array<CActor>, attackAnimationName : name, hitTime : float, weaponEntity : CItemEntity, out attackAction : W3Action_Attack) : bool
 	{
 		var actor : CActor;
+		var npc : CNewNPC; //modSigns
+		var canDodge : bool; //modSigns
+		var attackSrc : string; //modSigns
 	
 		if(!hitTarget)
 			return false;
@@ -5403,8 +5749,19 @@ import abstract class CActor extends CGameplayEntity
 		
 		if ( animData.hitFX == 'basedOnWeapon' )
 			ChangeHitFxBasedOnWeapon(animData, weaponId);
+		
+		if ( phantomStrike ) //modSigns
+		{
+			canDodge = false;
+			attackSrc = "PhantomWeapon";
+		}
+		else
+		{
+			canDodge = animData.canBeDodged;
+			attackSrc = GetName();
+		}
 			
-		attackAction.Init( this, hitTarget, NULL, weaponId, animData.attackName, GetName(), animData.hitReactionType, animData.Can_Parry_Attack, animData.canBeDodged, attackActionName, animData.swingType, animData.swingDir, true, false, false, false, animData.hitFX, animData.hitBackFX, animData.hitParriedFX, animData.hitBackParriedFX);
+		attackAction.Init( this, hitTarget, NULL, weaponId, animData.attackName, attackSrc, animData.hitReactionType, animData.Can_Parry_Attack, canDodge, attackActionName, animData.swingType, animData.swingDir, true, false, false, false, animData.hitFX, animData.hitBackFX, animData.hitParriedFX, animData.hitBackParriedFX); //modSigns
 		
 		attackAction.SetAttackAnimName(attackAnimationName);
 		attackAction.SetHitTime(hitTime);
@@ -5429,6 +5786,12 @@ import abstract class CActor extends CGameplayEntity
 		}
 		
 		
+		/*if ( attackAction.IsParried() && attackAction.attacker.HasAbility('ReflectOnBeingParried') )
+		{
+			((CActor)attackAction.attacker).SetCanPlayHitAnim( true );
+			ReactToReflectedAttack(attackAction.victim);
+		}*/
+		
 		if ( attackAction.IsParried() && attackAction.attacker.HasAbility('ReflectOnBeingParried') )
 		{
 			((CActor)attackAction.attacker).SetCanPlayHitAnim( true );
@@ -5443,11 +5806,11 @@ import abstract class CActor extends CGameplayEntity
 			
 			if( attackAction.attacker == thePlayer )
 			{
-				thePlayer.GetPhantomWeaponMgr().DischargeWeapon( true );
-				attackAction.AddEffectInfo( EET_HeavyKnockdown );
-				
-				if( ((CNewNPC)attackAction.victim).IsShielded( NULL ) )
-					((CNewNPC)attackAction.victim).ProcessShieldDestruction();
+				//modSigns: process phantom strike
+				npc = (CNewNPC)attackAction.victim;
+				if( npc && npc.IsShielded( thePlayer ) )
+					npc.ProcessShieldDestruction();
+				attackAction.AddEffectInfo( EET_Stagger );
 			}
 			else
 			{
@@ -5500,6 +5863,24 @@ import abstract class CActor extends CGameplayEntity
 		}
 	}
 	
+	//modSigns: separate function for dodge
+	function DodgeDamage(out damageData : W3DamageAction)
+	{
+		if(this != thePlayer && IsCurrentlyDodging() && damageData.CanBeDodged() &&
+			( VecDistanceSquared(this.GetWorldPosition(),damageData.attacker.GetWorldPosition()) > 1.7
+				|| this.HasAbility( 'IgnoreDodgeMinimumDistance' ) ))
+		{
+			if ( theGame.CanLog() )
+			{
+				LogDMHits("Non-player character dodge - no damage dealt", damageData);
+			}
+			damageData.SetWasDodged();
+			damageData.SetAllProcessedDamageAs(0);
+			damageData.ClearEffects();
+			damageData.SetHitAnimationPlayType(EAHA_ForceNo);
+		}
+	}
+	
 	public function ReduceDamage( out damageData : W3DamageAction )
 	{
 		var actorAttacker 			: CActor;
@@ -5519,61 +5900,66 @@ import abstract class CActor extends CGameplayEntity
 		var minDamage				: float;
 		var i						: int;
 		var dmgTypes 				: array< SRawDamage >;
-		var hasPoisonDamage			: bool;
+		//var hasPoisonDamage			: bool;
+		var mutagen28dmgMult		: float; //modSigns
+		var maxAllowedDmg, minAllowedDmg, dmg : float; //modSigns
 		
 		canLog = theGame.CanLog();
+		
+		actorAttacker = (CActor)damageData.attacker; //modSigns
 			
 		
 		
 		
-		if( damageData.victim == thePlayer && !damageData.IsDoTDamage() )
-		{
-			damageData.GetDTs( dmgTypes );
-			
-			
-			for( i=0; i<dmgTypes.Size(); i+=1 )
-			{
-				if( dmgTypes[i].dmgType == theGame.params.DAMAGE_NAME_DIRECT )
-				{
-					dmgTypes.EraseFast( i );
-					break;
-				}
-			}
-			
-			if( dmgTypes.Size() > 0 )
-			{
-				hasPoisonDamage = false;
-				for( i=0; i<dmgTypes.Size(); i+=1 )
-				{
-					if( dmgTypes[ i ].dmgType == theGame.params.DAMAGE_NAME_POISON )
-					{
-						hasPoisonDamage = true;
-						break;
-					}
-				}
-			
-				if( !( hasPoisonDamage && this == GetWitcherPlayer() && HasBuff( EET_GoldenOriole ) && GetWitcherPlayer().GetPotionBuffLevel( EET_GoldenOriole ) == 3) )
-				{
-					minDamage = 0;
-					for( i=0; i<dmgTypes.Size(); i+=1 )
-					{
-						if( DamageHitsVitality( dmgTypes[ i ].dmgType ) )
-						{
-							minDamage += dmgTypes[ i ].dmgVal;
-						}
-					}
-					minDamage *= 0.05;
-					if(minDamage < 1)
-					{
-						minDamage = 1;
-					}	
-					if( damageData.processedDmg.vitalityDamage < minDamage )
-					{
-						damageData.processedDmg.vitalityDamage = minDamage;
-					}
-				}
-			}
-		}
+		//if( damageData.victim == thePlayer && !damageData.IsDoTDamage() )
+		//{
+		//	damageData.GetDTs( dmgTypes );
+		//	
+		//	
+		//	for( i=0; i<dmgTypes.Size(); i+=1 )
+		//	{
+		//		if( dmgTypes[i].dmgType == theGame.params.DAMAGE_NAME_DIRECT )
+		//		{
+		//			dmgTypes.EraseFast( i );
+		//			break;
+		//		}
+		//	}
+		//	
+		//	if( dmgTypes.Size() > 0 )
+		//	{
+		//		//modSigns: no immunity on Golden Oriole
+		//		//hasPoisonDamage = false;
+		//		//for( i=0; i<dmgTypes.Size(); i+=1 )
+		//		//{
+		//		//	if( dmgTypes[ i ].dmgType == theGame.params.DAMAGE_NAME_POISON )
+		//		//	{
+		//		//		hasPoisonDamage = true;
+		//		//		break;
+		//		//	}
+		//		//}
+		//	
+		//		//if( !( hasPoisonDamage && this == GetWitcherPlayer() && HasBuff( EET_GoldenOriole ) && GetWitcherPlayer().GetPotionBuffLevel( EET_GoldenOriole ) == 3) )
+		//		//{
+		//			minDamage = 0;
+		//			for( i=0; i<dmgTypes.Size(); i+=1 )
+		//			{
+		//				if( DamageHitsVitality( dmgTypes[ i ].dmgType ) )
+		//				{
+		//					minDamage += dmgTypes[ i ].dmgVal;
+		//				}
+		//			}
+		//			minDamage *= 0.05;
+		//			if(minDamage < 1)
+		//			{
+		//				minDamage = 1;
+		//			}	
+		//			if( damageData.processedDmg.vitalityDamage < minDamage )
+		//			{
+		//				damageData.processedDmg.vitalityDamage = minDamage;
+		//			}
+		//		//}
+		//	}
+		//} //modSigns: why?!?!
 		
 		
 		if(damageData.IsActionRanged() && damageData.attacker == thePlayer && (W3BoltProjectile)(damageData.causer) )
@@ -5598,6 +5984,8 @@ import abstract class CActor extends CGameplayEntity
 			}
 		}
 		
+		
+		ModifyHitSeverityReactionFromDamage( damageData ); //modSigns
 		
 		thisNPC = (CNewNPC)this;
 		if( thisNPC && damageData.attacker == thePlayer && !HasBuff(EET_AxiiGuardMe) &&
@@ -5626,9 +6014,9 @@ import abstract class CActor extends CGameplayEntity
 			return;
 		}
 		
-		
-		if(!damageData.DealsAnyDamage() && damageData.GetBuffSourceName() != "Mutation4")
-			return;
+		//modSigns
+		//if(!damageData.DealsAnyDamage() && damageData.GetBuffSourceName() != "Mutation4")
+		//	return;
 		
 		
 		if(damageData.IsActionMelee() && HasAbility( 'CannotBeAttackedFromAllSides' ) )
@@ -5657,43 +6045,45 @@ import abstract class CActor extends CGameplayEntity
 		}
 		
 		
-		if(damageData.IsActionMelee() && HasAbility( 'VulnerableFromFront' ) && !IsAttackerAtBack(damageData.attacker) )
-		{
-			if ( canLog )
-			{
-				LogDMHits("CActor.ReduceDamage: victim attacked from front and vulnerable to this type of strike - attack will ignor armor", damageData );
-			}
-			damageData.SetIgnoreArmor( true );
-			damageData.SetPointResistIgnored( true );
-			return;
-		}
+		//modSigns: armor is already processed at this point, code makes no sense.
+		//moved to damage manager, ProcessDamageIncrease
+		//if(damageData.IsActionMelee() && HasAbility( 'VulnerableFromFront' ) && !IsAttackerAtBack(damageData.attacker) )
+		//{
+		//	if ( canLog )
+		//	{
+		//		LogDMHits("CActor.ReduceDamage: victim attacked from front and vulnerable to this type of strike - attack will ignor armor", damageData );
+		//	}
+		//	damageData.SetIgnoreArmor( true );
+		//	//damageData.SetPointResistIgnored( true ); //modSigns
+		//	return;
+		//}
 		
 		
 		
-		if( this.HasAbility( 'EredinInvulnerable' ) && damageData.IsActionWitcherSign() )
-		{
-			if ( canLog )
-			{
-				LogDMHits("CActor.ReduceDamage: victim has EredinInvulnerable ability - no damage will be done", damageData );
-			}
-			damageData.SetAllProcessedDamageAs(0);
-			return;
-		}
+		//if( this.HasAbility( 'EredinInvulnerable' ) && damageData.IsActionWitcherSign() )
+		//{
+		//	if ( canLog )
+		//	{
+		//		LogDMHits("CActor.ReduceDamage: victim has EredinInvulnerable ability - no damage will be done", damageData );
+		//	}
+		//	damageData.SetAllProcessedDamageAs(0);
+		//	return;
+		//} //modSigns: make Eredin vulnerable to witcher signs
 		
 		
-		if(this != thePlayer && IsCurrentlyDodging() && damageData.CanBeDodged() && ( VecDistanceSquared(this.GetWorldPosition(),damageData.attacker.GetWorldPosition()) > 1.7 
-			|| this.HasAbility( 'IgnoreDodgeMinimumDistance' ) ))
-		{
-			if ( canLog )
-			{
-				LogDMHits("Non-player character dodge - no damage dealt", damageData);
-			}
-			damageData.SetWasDodged();
-			damageData.SetAllProcessedDamageAs(0);
-			damageData.ClearEffects();
-			damageData.SetHitAnimationPlayType(EAHA_ForceNo);
-			return;
-		}
+		//if(this != thePlayer && IsCurrentlyDodging() && damageData.CanBeDodged() && ( VecDistanceSquared(this.GetWorldPosition(),damageData.attacker.GetWorldPosition()) > 1.7 
+		//	|| this.HasAbility( 'IgnoreDodgeMinimumDistance' ) ))
+		//{
+		//	if ( canLog )
+		//	{
+		//		LogDMHits("Non-player character dodge - no damage dealt", damageData);
+		//	}
+		//	damageData.SetWasDodged();
+		//	damageData.SetAllProcessedDamageAs(0);
+		//	damageData.ClearEffects();
+		//	damageData.SetHitAnimationPlayType(EAHA_ForceNo);
+		//	return;
+		//} //modSigns: moved to separate function
 		
 		
 		if(this != thePlayer && FactsDoesExist("debug_fact_weak"))
@@ -5713,8 +6103,8 @@ import abstract class CActor extends CGameplayEntity
 		
 		if(damageData.IsParryStagger())
 		{
-			actorAttacker = (CActor)damageData.attacker;
-			
+			//modSigns: reworked
+			/*actorAttacker = (CActor)damageData.attacker;
 			if ( ((CMovingPhysicalAgentComponent)( actorAttacker ).GetMovingAgentComponent()).GetCapsuleHeight() > 2.f )
 				mult = theGame.params.PARRY_STAGGER_REDUCE_DAMAGE_LARGE;
 			else if ( actorAttacker.GetRadius() > 0.6 )
@@ -5724,8 +6114,23 @@ import abstract class CActor extends CGameplayEntity
 			else if ( actorAttacker.HasAbility( 'mon_troll_base' ) )
 				mult = theGame.params.PARRY_STAGGER_REDUCE_DAMAGE_LARGE;
 			else
-				mult = theGame.params.PARRY_STAGGER_REDUCE_DAMAGE_SMALL;
+				mult = theGame.params.PARRY_STAGGER_REDUCE_DAMAGE_SMALL;*/
 			
+			//base partial parry/counter damage reduction
+			mult = 1 - theGame.params.PARRY_STAGGER_REDUCE_DAMAGE;
+			
+			//deflection skill new mechanic
+			if(this == thePlayer && thePlayer.CanUseSkill(S_Sword_s10))
+				mult -= CalculateAttributeValue(thePlayer.GetSkillAttributeValue(S_Sword_s10, 's10_damage_reduction', false, false)) * thePlayer.GetSkillLevel(S_Sword_s10);
+			
+			mult = ClampF(mult, 0, 1);
+			
+			//modSigns: debug
+			if( FactsQuerySum( "modSigns_debug_reduce_damage" ) > 0 )
+			{
+				theGame.witcherLog.AddMessage("Stagger-Parry, reducing damage by " + NoTrailZeros((1-mult)*100) + "%");
+			}
+		
 			damageData.MultiplyAllDamageBy(mult);
 			
 			if ( canLog )
@@ -5737,7 +6142,8 @@ import abstract class CActor extends CGameplayEntity
 		{
 			
 			attackAction = (W3Action_Attack)damageData;
-			if(attackAction && damageData.IsActionMelee() && attackAction.CanBeParried() && (attackAction.IsParried() || attackAction.IsCountered()))
+			//CanBeParried is covered by IsParryStagger
+			if(attackAction && damageData.IsActionMelee() && /*attackAction.CanBeParried() &&*/ (attackAction.IsParried() || attackAction.IsCountered()))
 			{
 				arrStr.PushBack(GetDisplayName());
 				if(attackAction.IsParried())
@@ -5762,7 +6168,7 @@ import abstract class CActor extends CGameplayEntity
 			}
 		}
 		
-		actorAttacker = (CActor)damageData.attacker;
+		//actorAttacker = (CActor)damageData.attacker; //modSigns: moved on top
 		
 		
 		if((CPlayer)actorAttacker && !((CPlayer)damageData.victim) && FactsQuerySum('player_is_the_boss') > 0)
@@ -5797,48 +6203,68 @@ import abstract class CActor extends CGameplayEntity
 		
 		
 		
+		//modSigns: new mutagen28 ability
 		if( HasAbility( 'ShadowFormActive' ) )
 		{
-			if ( canLog )
+			if(actorAttacker == thePlayer && thePlayer.HasBuff(EET_Mutagen28))
 			{
-				LogDMHits("CActor.ReduceDamage: victim has ShadowFormActive ability - damage reduced to 10% of base", damageData );
-			}
-			damageData.processedDmg.vitalityDamage *= 0.1f;
-			damageData.processedDmg.essenceDamage *= 0.1f;
-			damageData.SetCanPlayHitParticle( false );
-			theGame.witcherLog.CombatMessageAddGlobalDamageMult(0.1f);
-		}
-
-		
-		
-		if( actorAttacker && HasAbility( 'IceArmor' ) && !actorAttacker.HasAbility( 'Ciri_Rage' ) )
-		{
-			if ( theGame.GetDifficultyMode() == EDM_Easy )
-			{
-				if ( canLog )
-				{
-					LogDMHits("CActor.ReduceDamage: victim has IceArmor ability - damage reduced by 5%", damageData );
-				}
-				damageData.processedDmg.vitalityDamage *= 0.95f;
-				damageData.processedDmg.essenceDamage *= 0.95f;
-				theGame.witcherLog.CombatMessageAddGlobalDamageMult(0.95f);
+				mutagen28dmgMult = ((W3Mutagen28_Effect)thePlayer.GetBuff(EET_Mutagen28)).GetDmgMultiplier();
 			}
 			else
 			{
-				if ( canLog )
-				{
-					LogDMHits("CActor.ReduceDamage: victim has IceArmor ability - damage reduced by 50%", damageData );
-				}
-				damageData.processedDmg.vitalityDamage *= 0.5f;
-				damageData.processedDmg.essenceDamage *= 0.5f;
-				theGame.witcherLog.CombatMessageAddGlobalDamageMult(0.5f);
+				mutagen28dmgMult = 0.1f;
+				damageData.SetCanPlayHitParticle( false );
 			}
+			if ( canLog )
+			{
+				LogDMHits("CActor.ReduceDamage: victim has ShadowFormActive ability - damage reduced to a percentage of base", damageData );
+			}
+			damageData.processedDmg.vitalityDamage *= mutagen28dmgMult;
+			damageData.processedDmg.essenceDamage *= mutagen28dmgMult;
+			theGame.witcherLog.CombatMessageAddGlobalDamageMult(mutagen28dmgMult);
+			//theGame.witcherLog.AddMessage("ShadowFormActive, increasing dmg dealt: mutagen28dmgMult = " + mutagen28dmgMult);
+		}
+		if( actorAttacker.HasAbility( 'ShadowFormActive' ) )
+		{
+			if(this == thePlayer && HasBuff(EET_Mutagen28))
+			{
+				mutagen28dmgMult = ((W3Mutagen28_Effect)thePlayer.GetBuff(EET_Mutagen28)).GetDmgReduction();
+				damageData.processedDmg.vitalityDamage *= mutagen28dmgMult;
+				damageData.processedDmg.essenceDamage *= mutagen28dmgMult;
+			}
+			//theGame.witcherLog.AddMessage("ShadowFormActive, reducing dmg received: mutagen28dmgMult = " + mutagen28dmgMult);
 		}
 
 		
 		
+		//if( actorAttacker && HasAbility( 'IceArmor' ) && !actorAttacker.HasAbility( 'Ciri_Rage' ) )
+		//{
+		//	if ( theGame.GetDifficultyMode() == EDM_Easy )
+		//	{
+		//		if ( canLog )
+		//		{
+		//			LogDMHits("CActor.ReduceDamage: victim has IceArmor ability - damage reduced by 5%", damageData );
+		//		}
+		//		damageData.processedDmg.vitalityDamage *= 0.95f;
+		//		damageData.processedDmg.essenceDamage *= 0.95f;
+		//		theGame.witcherLog.CombatMessageAddGlobalDamageMult(0.95f);
+		//	}
+		//	else
+		//	{
+		//		if ( canLog )
+		//		{
+		//			LogDMHits("CActor.ReduceDamage: victim has IceArmor ability - damage reduced by 50%", damageData );
+		//		}
+		//		damageData.processedDmg.vitalityDamage *= 0.5f;
+		//		damageData.processedDmg.essenceDamage *= 0.5f;
+		//		theGame.witcherLog.CombatMessageAddGlobalDamageMult(0.5f);
+		//	}
+		//} //modSigns: moved to damage manager
+
 		
-		if( HasAbility( 'LastBreath' ) )
+		
+		
+		if( HasAbility( 'LastBreath' ) && !damageData.GetWasFrozen() ) //modSigns
 		{
 			l_threshold 	= CalculateAttributeValue( GetAttributeValue('lastbreath_threshold') );
 			if( l_threshold == 0 ) l_threshold = 0.25f;
@@ -5880,13 +6306,34 @@ import abstract class CActor extends CGameplayEntity
 			}
 		}
 		
-		if(damageData.victim != thePlayer)
+		//modSigns: dirty hack, controlled damage to allies
+		if( this != thePlayer && GetAttitudeBetween(this, thePlayer) == AIA_Friendly && GetAttitudeBetween(actorAttacker, thePlayer) == AIA_Hostile )
 		{
+			if( HasBuff( EET_AxiiGuardMe ) ) //axiied allies receive more damage
+			{
+				maxAllowedDmg = MaxF(20, 0.15 * GetMaxHealth());
+				minAllowedDmg = MaxF(10, 0.10 * GetMaxHealth());
+			}
+			else //generic quest allies receive less damage
+			{
+				maxAllowedDmg = MaxF(20, 0.02 * GetMaxHealth());
+				minAllowedDmg = MaxF(10, 0.01 * GetMaxHealth());
+			}
+			//hack of all hacks!
+			dmg = RandRangeF(maxAllowedDmg, minAllowedDmg);
+			damageData.processedDmg.vitalityDamage = dmg;
+			damageData.processedDmg.essenceDamage = dmg;
+		}
+			
+		//DamageInstigated event moved to more appropriate place, dancing around
+		//parent/child calls removed
+		//if(damageData.victim != thePlayer)
+		//{
 			
 			if(!damageData.GetIgnoreImmortalityMode())
 			{
-				if(!((W3PlayerWitcher)this))
-					Log("");
+				//if(!((W3PlayerWitcher)this))
+				//	Log("");
 				
 				
 				if( IsInvulnerable() )
@@ -5896,31 +6343,31 @@ import abstract class CActor extends CGameplayEntity
 						LogDMHits("CActor.ReduceDamage: victim Invulnerable - no damage will be dealt", damageData );
 					}
 					damageData.SetAllProcessedDamageAs(0);
-					return;
+					//return;
 				}
 				
-				if(actorAttacker && damageData.DealsAnyDamage() )
-					actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
+				//if(actorAttacker && damageData.DealsAnyDamage() )
+				//	actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
 				
 				
-				if( IsImmortal() )
-				{
-					if ( canLog )
-					{
-						LogDMHits("CActor.ReduceDamage: victim is Immortal, clamping damage", damageData );
-					}
-					damageData.processedDmg.vitalityDamage = ClampF(damageData.processedDmg.vitalityDamage, 0, GetStat(BCS_Vitality)-1 );
-					damageData.processedDmg.essenceDamage  = ClampF(damageData.processedDmg.essenceDamage, 0, GetStat(BCS_Essence)-1 );
-					return;
-				}
+				//if( IsImmortal() )
+				//{
+				//	if ( canLog )
+				//	{
+				//		LogDMHits("CActor.ReduceDamage: victim is Immortal, clamping damage", damageData );
+				//	}
+				//	damageData.processedDmg.vitalityDamage = ClampF(damageData.processedDmg.vitalityDamage, 0, GetStat(BCS_Vitality)-1 );
+				//	damageData.processedDmg.essenceDamage  = ClampF(damageData.processedDmg.essenceDamage, 0, GetStat(BCS_Essence)-1 );
+				//	return;
+				//} //modSigns: moved to OnTakeDamage
 			}
-			else
-			{
-				
-				if(actorAttacker && damageData.DealsAnyDamage() )
-					actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
-			}
-		}
+			//else
+			//{
+			//	
+			//	if(actorAttacker && damageData.DealsAnyDamage() )
+			//		actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
+			//}
+		//}
 	}
 	
 	
@@ -5932,6 +6379,21 @@ import abstract class CActor extends CGameplayEntity
 	public function GetDelaySinceLastHit() : float
 	{
 		return theGame.GetEngineTimeAsSeconds() - lastWasHitTime;
+	}
+	
+	public function GetDelaySinceLastAttack() : float //modSigns
+	{
+		return theGame.GetEngineTimeAsSeconds() - lastAttackTime;
+	}
+	
+	public var shouldWaitForStaminaRegen : bool; //modSigns
+
+	public function CheckShouldWaitForStaminaRegen() //modSigns
+	{
+		if(GetStatPercents(BCS_Stamina) < 0.1 && !shouldWaitForStaminaRegen)
+			shouldWaitForStaminaRegen = true;
+		if(GetStatPercents(BCS_Stamina) > 0.334 && shouldWaitForStaminaRegen)
+			shouldWaitForStaminaRegen = false;
 	}
 	
 	public function IsAttacked( optional byPlayer : bool ) : void
@@ -6648,6 +7110,8 @@ import abstract class CActor extends CGameplayEntity
 				GetInventory().PlayItemEffect( attackAction.GetWeaponId(), bloodTrailParam.GetEffectName() );
 			}
 		}		
+		//modSigns
+		lastAttackTime = theGame.GetEngineTimeAsSeconds();
 	}
 	
 	event OnHitActionReaction( attacker : CActor, weaponName : name )
@@ -6950,7 +7414,14 @@ import abstract class CActor extends CGameplayEntity
 	
 	public function IsHuge() : bool
 	{
-		return HasAbility( 'mon_type_huge' );
+		//return HasAbility( 'mon_type_huge' );
+		//modSigns: the cake is a lie
+		return (GetCapsuleHeight() > 2.0f);
+	}
+	
+	public function GetCapsuleHeight() : float //modSigns
+	{
+		return ((CMovingPhysicalAgentComponent)GetMovingAgentComponent()).GetCapsuleHeight();
 	}
 	
 	public function CreateFXEntityAtPelvis( resourceName : name, attach : bool ) : CEntity

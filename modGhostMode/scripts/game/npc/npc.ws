@@ -35,6 +35,7 @@ statemachine import class CNewNPC extends CActor
 	editable var RemainsTags 		: array<name>;		hint RemainsTags="If set then the NPC's remains will be tagged with given tags";
 	editable var level 				: int;				default level = 1;
 	var currentLevel		: int;
+	var currentNGPLevel		: int; //modSigns
 	editable saved var levelFakeAddon     : int;				default levelFakeAddon = 0;
 	private	 saved var newGamePlusFakeLevelAddon : bool;		default newGamePlusFakeLevelAddon = false;
 	private	 saved var xmlLevel		: SAbilityAttributeValue;
@@ -167,6 +168,9 @@ statemachine import class CNewNPC extends CActor
 	
 	private var deathTimestamp : float;
 	
+	private saved var savedRandomLevel				: int; default savedRandomLevel = -1; //modSigns: for random scaling
+	private var animSpeedMult						: int; default animSpeedMult = -1; //modSigns
+	
 	event OnGameDifficultyChanged( previousDifficulty : int, currentDifficulty : int )
 	{
 		if ( HasAbility('difficulty_CommonEasy') ) RemoveAbility('difficulty_CommonEasy');
@@ -194,10 +198,10 @@ statemachine import class CNewNPC extends CActor
 		AddTimer('AddLevelBonuses', 0.1, true, false, , true);
 	}
 	
-	event OnLevelUpscalingChanged()
+	event OnLevelUpscalingChanged() //modSigns: remove vanilla upscaling
 	{
-		levelBonusesComputedAtPlayerLevel = -1;
-		AddTimer('AddLevelBonuses', RandRangeF(0.05,0.2), true, false, , true);
+		/*levelBonusesComputedAtPlayerLevel = -1; 
+		AddTimer('AddLevelBonuses', RandRangeF(0.05,0.2), true, false, , true);*/
 	}
 	
 	timer function ResetTalkInteractionFlag( td : float , id : int)
@@ -227,6 +231,9 @@ statemachine import class CNewNPC extends CActor
 		{
 			ResetCombatStartTime();
 			ResetCombatPartStartTime();
+
+            // fix for sorceress hand fx remaining active after combat
+            StopEffectIfActive('hand_fx'); // All credits to Flash and MrWheyne
 		}		
 	}
 	
@@ -297,14 +304,14 @@ statemachine import class CNewNPC extends CActor
 			{
 				levelDiff = GetLevel() - witcher.GetLevel();
 				
-				if ( levelDiff < theGame.params.LEVEL_DIFF_DEADLY )
+				//if ( levelDiff < theGame.params.LEVEL_DIFF_DEADLY ) //modSigns
 					this.SetDodgeFeedback( true );
 			}
 			
-			if ( IsCountering() )
+			//modSigns: Frenzy
+			if(GetTarget() == witcher && witcher.CanUseSkill(S_Alchemy_s16) && witcher.GetStat(BCS_Toxicity) > 0)
 			{
-				
-				if(GetTarget() == witcher && ( thePlayer.IsActionAllowed(EIAB_Dodge) || thePlayer.IsActionAllowed(EIAB_Roll) ) && witcher.GetStat(BCS_Toxicity) > 0 && witcher.CanUseSkill(S_Alchemy_s16))
+				if(IsCountering() /*|| witcher.IsAttackerAtBack(this)*/)
 					witcher.StartFrenzy();
 			}
 		}
@@ -428,7 +435,6 @@ statemachine import class CNewNPC extends CActor
 				}
 			}
 		}
-		
 		
 		if( npcGroupType == ENGT_Guard )
 		{
@@ -566,43 +572,34 @@ statemachine import class CNewNPC extends CActor
 		if(HasAbility('_canBeFollower') && theGame.GetDifficultyMode() != EDM_Hardcore) 
 			RemoveAbility('_canBeFollower');
 		
-		
-			
-			
-		
-		if( (FactsQuerySum("NewGamePlus") > 0 || (!HasAbility('NoAdaptBalance') && currentLevel > 1 ) ) )
+		//modSigns
+		ManageNGPLevels();
+	}
+	
+	//modSigns
+	protected function ManageNGPLevels()
+	{
+		//modSigns: fake levels are removed, no more dancing around fake bonuses is needed
+		//do nod add NG+ level for Ciri
+		currentNGPLevel = 0;
+		if( !HasAbility('NoAdaptBalance') && !((W3ReplacerCiri)thePlayer) )
 		{
-			
-			
-			if ( theGame.IsActive() )
+			if( theGame.IsActive() )
 			{
-				if(  ( ( FactsQuerySum("NewGamePlus") > 0 ) && !HasTag('animal') ))
+				if( ( ( FactsQuerySum("NewGamePlus") > 0 ) && !HasTag('animal') ) ) //all but animals
 				{
-					if( !HasAbility('NPCDoNotGainBoost') && !HasAbility('NewGamePlusFakeLevel') )
+					//modSigns: NGP upscale
+					if( !HasAbility('NPCDoNotGainBoost') )
 					{
-						currentLevel += theGame.params.GetNewGamePlusLevel();
-						if ( currentLevel > ( theGame.params.GetPlayerMaxLevel() + 5 ) ) 
-						{
-							currentLevel = theGame.params.GetPlayerMaxLevel() + 5;
-						}
-					}
-					else if ( !HasAbility('NPCDoNotGainNGPlusLevel') )
-					{
-						newGamePlusFakeLevelAddon = true;
-					}
-					
-					
-				}
-				else
-				{
-					
-					if ( ( theGame.GetDifficultyMode() == EDM_Easy || theGame.GetDifficultyMode() == EDM_Medium ) && playerLevel == 1 && npcGroupType != ENGT_Guard && !HasAbility('PrologModifier'))
-					{
-						AddAbility('PrologModifier');
+						currentNGPLevel = theGame.params.GetNewGamePlusLevel();
+						currentLevel = level + currentNGPLevel;
 					}
 				}
-			}	
-		}		
+			}
+		}
+		//modSigns: just in case
+		levelFakeAddon = 0;
+		newGamePlusFakeLevelAddon = false;
 	}
 	
 	protected function SetAbilityManager()
@@ -620,8 +617,16 @@ statemachine import class CNewNPC extends CActor
 	public function  SetLevel ( _level : int )
 	{
 		currentLevel = _level;
-		levelBonusesComputedAtPlayerLevel = -1;
+		savedRandomLevel = -1; //modSigns
+		levelBonusesComputedAtPlayerLevel = 0; //modSigns
 		AddTimer('AddLevelBonuses', 0.1, true, false, , true);
+	}
+	
+	//modSigns
+	public function ResetLevel()
+	{
+		levelBonusesComputedAtPlayerLevel = -1;
+		AddTimer('AddLevelBonuses', RandRangeF(0.05,0.2), true, false, , true);
 	}
 	
 	private function SetThreatLevel()
@@ -985,7 +990,7 @@ statemachine import class CNewNPC extends CActor
 			{
 				
 				SetBehaviorVariable( 'parryAttackType', (int)PAT_Heavy );
-			
+				
 				if( isHeavy )
 					SignalGameplayEventParamInt( 'ParryStagger', 1 );
 				else
@@ -1033,7 +1038,8 @@ statemachine import class CNewNPC extends CActor
 		
 		
 		actorVictim = (CActor)action.victim;
-		if(HasBuff(EET_AxiiGuardMe) && (thePlayer.HasAbility('Glyphword 14 _Stats', true) || thePlayer.HasAbility('Glyphword 18 _Stats', true)) && action.DealtDamage())
+		//modSigns: Possession only
+		if(HasBuff(EET_AxiiGuardMe) && GetWitcherPlayer().HasGlyphwordActive('Glyphword 18 _Stats') && action.DealtDamage())
 		{
 			time = CalculateAttributeValue(thePlayer.GetAttributeValue('increas_duration'));
 			gameplayEffect = GetBuff(EET_AxiiGuardMe);
@@ -1104,206 +1110,386 @@ statemachine import class CNewNPC extends CActor
 	}
 	
 	
-	
-	
-	var fistFightForcedFromQuest : bool; 
-	
-	timer function AddLevelBonuses (dt : float, id : int)
+	//modSigns: remove level bonuses
+	function RemoveAllLevelBonuses()
 	{
-		var ciriEntity  		: W3ReplacerCiri;
-		var ignoreLowLevelCheck : bool;
-		var lvlDiff 			: int;
-		var npcLevel 			: int;
-		var ngpLevel 			: int;
-		var i 					: int;
-		var playerLevel			: int;
-		var stats				: CCharacterStats;
-		var npcGroupType		: ENPCGroupType;
+		var savedHealthPerc : float;
 		
-		RemoveTimer( 'AddLevelBonuses' );
-		
-		playerLevel = thePlayer.GetLevel();
-		
-		
-		if ( levelBonusesComputedAtPlayerLevel == playerLevel && !fistFightForcedFromQuest )
-		{ 
-			return;
-		}
-		stats = GetCharacterStats();
-		
-		
-		levelBonusesComputedAtPlayerLevel = playerLevel;
-		
-		ciriEntity = (W3ReplacerCiri)thePlayer;
-		npcLevel = currentLevel;
-		npcGroupType = GetNPCType();
-		ignoreLowLevelCheck = thePlayer.GetEnemyUpscaling() && ( npcGroupType == ENGT_Enemy || npcGroupType == ENGT_Quest );
-		
-		if ( npcGroupType != ENGT_Guard && !ignoreLowLevelCheck && npcLevel + (int)CalculateAttributeValue( GetAttributeValue( 'level',,true ) ) <= 2 ) return;
-		if ( stats.HasAbilityWithTag('Boss') && !ciriEntity )
+		//save current health perc
+		if(GetStatMax( BCS_Vitality ) > 0)
+			savedHealthPerc = GetStatPercents( BCS_Vitality );
+		else if(GetStatMax( BCS_Essence ) > 0)
+			savedHealthPerc = GetStatPercents( BCS_Essence );
+		//remove health modifiers (old mod version, just in case)
+		RemoveAbilityAll('ModSignsAdditionalEssence');
+		RemoveAbilityAll('ModSignsAdditionalVitality');
+		RemoveAbilityAll('ModSignsAdditionalEssenceNegative');
+		RemoveAbilityAll('ModSignsAdditionalVitalityNegative');
+		//remove health modifiers
+		RemoveAbilityAll('ModSignsAdditionalHealth');
+		RemoveAbilityAll('ModSignsAdditionalHealthNegative');
+		RemoveAbilityAll('ModSignsMaxHealthNegative');
+		//remove damage modifiers
+		RemoveAbilityAll('ModSignsAdditionalDamage');
+		RemoveAbilityAll('ModSignsAdditionalDamageNegative');
+		//level up abilities
+		RemoveAbility(theGame.params.ENEMY_BONUS_DEADLY);
+		RemoveBuffImmunity(EET_Blindness, 'DeadlyEnemy');
+		RemoveBuffImmunity(EET_WraithBlindness, 'DeadlyEnemy');
+		RemoveAbility(theGame.params.ENEMY_BONUS_HIGH);
+		RemoveAbility(theGame.params.ENEMY_BONUS_LOW);
+		RemoveAbility(theGame.params.MONSTER_BONUS_DEADLY);
+		RemoveBuffImmunity(EET_Blindness, 'DeadlyEnemy');
+		RemoveBuffImmunity(EET_WraithBlindness, 'DeadlyEnemy');
+		RemoveAbility(theGame.params.MONSTER_BONUS_HIGH);
+		RemoveAbility(theGame.params.MONSTER_BONUS_LOW);
+		RemoveAbilityAll('AnimalLevelBonus');
+		RemoveAbilityAll(theGame.params.ENEMY_BONUS_PER_LEVEL);
+		RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP_ARMORED);
+		RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_ARMORED);
+		RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP);
+		RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL);
+		//displayed level
+		RemoveAbilityAll('DisplayedLevelAbl');
+		//Ciri specific
+		RemoveAbility('CiriHardcoreDebuffHuman');
+		RemoveAbility('CiriHardcoreDebuffMonster');
+		//recalculate max health
+		if(GetStatMax( BCS_Vitality ) > 0)
 		{
-			if ( thePlayer.GetEnemyUpscaling() && npcLevel < playerLevel )
-			{
-				stats.AddAbilityMultiple( theGame.params.BOSS_NGP_BONUS, playerLevel - npcLevel );
-			}
-			else if ( FactsQuerySum( "NewGamePlus" ) > 0 && theGame.params.NewGamePlusLevelDifference() > 0 )
-			{
-				stats.AddAbilityMultiple( theGame.params.BOSS_NGP_BONUS, theGame.params.NewGamePlusLevelDifference() );
-				return ;
-			}
+			UpdateStatMax(BCS_Vitality);
+			ForceSetStat(BCS_Vitality, GetStatMax(BCS_Vitality)*savedHealthPerc);
 		}
-		
-		if ( stats.HasAbility( 'NPCDoNotGainBoost' ) ) return;
-		
-		
-		
-		
-		if ( !ciriEntity && thePlayer.GetEnemyUpscaling() && npcLevel + levelFakeAddon < playerLevel
-			&& !stats.HasAbility( 'fistfight_minigame' ) && !fistFightForcedFromQuest )
+		else if(GetStatMax( BCS_Essence ) > 0)
 		{
-			
-			npcLevelToUpscaledLevelDifference = playerLevel - npcLevel;
-			if ( xmlLevel.valueAdditive != npcLevel )
-			{
-				npcLevel = playerLevel - (int)xmlLevel.valueAdditive + 1 - levelFakeAddon;
-			}
+			UpdateStatMax(BCS_Essence);
+			ForceSetStat(BCS_Essence, GetStatMax(BCS_Essence)*savedHealthPerc);
+		}
+	}
+	
+	function CheckConstitutionAbility() //modSigns: fix multiple constitution abilities
+	{
+		if( HasAbility('ConHumanoidMonster') )
+		{
+			RemoveAbility('ConDefault');
+			RemoveAbility('ConAthletic');
+		}
+		else if( HasAbility('ConAthletic') && HasAbility('ConDefault') )
+		{
+			RemoveAbility('ConDefault');
+		}
+	}
+	
+	function ModSignsAddBonuses() //modSigns: additional menu configurable bonuses
+	{
+		var ablNum : int;
+		var savedHealthPerc, healthMult, damageMult : float;
+		
+		//save current health perc
+		if(GetStatMax( BCS_Vitality ) > 0)
+			savedHealthPerc = GetStatPercents( BCS_Vitality );
+		else if(GetStatMax( BCS_Essence ) > 0)
+			savedHealthPerc = GetStatPercents( BCS_Essence );
+		//add more health based on menu settings
+		healthMult = theGame.params.GetEnemyHealthMult();
+		//additional health for bosses
+		if(HasTag('HideHealthBarModule'))
+		{
+			healthMult += theGame.params.GetBossHealthMult();
+			//theGame.witcherLog.AddMessage("healthMult = " + healthMult);
+		}
+		if(healthMult > 0)
+		{
+			ablNum = RoundMath(healthMult * 10);
+			AddAbilityMultiple('ModSignsAdditionalHealth', ablNum);
+		}
+		else if(healthMult < 0)
+		{
+			ablNum = RoundMath(-1 * healthMult * 10);
+			if(ablNum > 9)
+				AddAbility('ModSignsMaxHealthNegative');
 			else
-			{
-				npcLevel = playerLevel - levelFakeAddon;
-			}
+				AddAbilityMultiple('ModSignsAdditionalHealthNegative', ablNum);
+		}
+		//recalculate max health
+		if(GetStatMax( BCS_Vitality ) > 0)
+		{
+			UpdateStatMax(BCS_Vitality);
+			ForceSetStat(BCS_Vitality, GetStatMax(BCS_Vitality)*savedHealthPerc);
+		}
+		else if(GetStatMax( BCS_Essence ) > 0)
+		{
+			UpdateStatMax(BCS_Essence);
+			ForceSetStat(BCS_Essence, GetStatMax(BCS_Essence)*savedHealthPerc);
+		}
+		//add more damage based on menu settings
+		damageMult = theGame.params.GetEnemyDamageMult();
+		//additional damage for bosses
+		if(HasTag('HideHealthBarModule'))
+		{
+			damageMult += theGame.params.GetBossDamageMult();
+			//theGame.witcherLog.AddMessage("damageMult = " + damageMult);
+		}
+		if(damageMult > 0)
+		{
+			ablNum = RoundMath(damageMult * 10);
+			AddAbilityMultiple('ModSignsAdditionalDamage', ablNum);
+		}
+		else if(damageMult < 0)
+		{
+			ablNum = RoundMath(-1 * damageMult * 10);
+			AddAbilityMultiple('ModSignsAdditionalDamageNegative', ablNum);
+		}
+	}
+	
+	function InternalAddLevelBonuses() //modSigns
+	{
+		var numAbls, lvlDiff : int;
+		var ciriEntity  : W3ReplacerCiri;
+		var savedHealthPerc, dLvl, dAbs : float;
+	
+		lvlDiff = currentLevel - thePlayer.GetLevel();
+		ciriEntity = (W3ReplacerCiri)thePlayer;
+		//save current health perc
+		if(GetStatMax( BCS_Vitality ) > 0)
+		{
+			savedHealthPerc = GetStatPercents( BCS_Vitality );
+		}
+		else if(GetStatMax( BCS_Essence ) > 0)
+		{
+			savedHealthPerc = GetStatPercents( BCS_Essence );
+		}
+		//add generic displayed level ability
+		AddAbilityMultiple('DisplayedLevelAbl', currentLevel - 1);
+		//non-linear (actually linear, but progressive :)) levelup
+		if(theGame.params.GetNonlinearLevelup())
+		{
+			dLvl = theGame.params.GetNonlinearLevelDelta();
+			dAbs = theGame.params.GetNonlinearAbilitiesDelta();
+			if(dLvl > 0 && currentLevel > dLvl)
+				numAbls = RoundMath((1 + dAbs/dLvl) * currentLevel - dAbs);
+			else
+				numAbls = currentLevel;
+			numAbls -= 1;
 		}
 		else
+			numAbls = currentLevel - 1;
+		//add level up abilities
+		if ( ( HasAbility('mon_wolf_base') || HasAbility('mon_boar_base') || HasAbility('mon_boar_ep2_base') ) && GetStatMax( BCS_Vitality ) > 0 )
 		{
-			npcLevelToUpscaledLevelDifference = 0;
+			AddAbilityMultiple('AnimalLevelBonus', numAbls);
 		}
-		
-		if ( stats.HasAbility(theGame.params.ENEMY_BONUS_DEADLY) ) stats.RemoveAbility(theGame.params.ENEMY_BONUS_DEADLY); else
-		if ( stats.HasAbility(theGame.params.ENEMY_BONUS_HIGH) ) stats.RemoveAbility(theGame.params.ENEMY_BONUS_HIGH); else
-		if ( stats.HasAbility(theGame.params.ENEMY_BONUS_LOW) ) stats.RemoveAbility(theGame.params.ENEMY_BONUS_LOW); else
-		if ( stats.HasAbility(theGame.params.MONSTER_BONUS_DEADLY) ) stats.RemoveAbility(theGame.params.MONSTER_BONUS_DEADLY); else
-		if ( stats.HasAbility(theGame.params.MONSTER_BONUS_HIGH) ) stats.RemoveAbility(theGame.params.MONSTER_BONUS_HIGH); else
-		if ( stats.HasAbility(theGame.params.MONSTER_BONUS_LOW) ) stats.RemoveAbility(theGame.params.MONSTER_BONUS_LOW);
-		stats.RemoveAbilityAll(theGame.params.ENEMY_BONUS_PER_LEVEL);
-		stats.RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP_ARMORED);
-		stats.RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP);
-		stats.RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_ARMORED );
-		stats.RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL);
-		
-		if ( IsHuman() && GetStat( BCS_Essence, true ) < 0 )
+		else if ( GetStatMax( BCS_Vitality ) > 0 ) //humans and vitality based monsters
 		{
-			if ( npcGroupType != ENGT_Guard )
+			AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, numAbls);
+			if ( ciriEntity )
 			{
-				if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_PER_LEVEL) )
-				{
-					stats.AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, npcLevel-1);
-				}
-		    }
-			else
-		    {
-				if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_PER_LEVEL) ) 
-				{
-					stats.AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, 1 + GetWitcherPlayer().GetLevel() + RandRange( 13, 11 ) );
-					if ( FactsQuerySum("NewGamePlus") > 0 )
-					{
-						stats.AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, RandRange( 13, 11 ) );
-					}
-				}
-		    }
-		    
-			if ( thePlayer.IsCiri() && theGame.GetDifficultyMode() == EDM_Hardcore && !stats.HasAbility('CiriHardcoreDebuffHuman') )
-			{
-				stats.AddAbility('CiriHardcoreDebuffHuman');
+				if(theGame.GetDifficultyMode() == EDM_Hardcore) AddAbility('CiriHardcoreDebuffHuman');
 			}
-		    
-			if ( !ciriEntity ) 
+			else if ( GetAttitudeBetween(this, thePlayer) == AIA_Hostile ) //add level diff abilities
 			{
-				lvlDiff = (int)CalculateAttributeValue( GetAttributeValue( 'level',,true ) ) - playerLevel;
-				if ( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) { if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_DEADLY) )
+				//level diff bonuses currently just add 50% to DoT resists
+				//but bosses already have 50% DoT resists, so there's no need adding anything on top
+				if( !HasTag('HideHealthBarModule') )
 				{
-					stats.AddAbility(theGame.params.ENEMY_BONUS_DEADLY, true); AddBuffImmunity(EET_Blindness, 'DeadlyEnemy', true);
-					AddBuffImmunity(EET_WraithBlindness, 'DeadlyEnemy', true); }
-				}	
-				else if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )
-				{
-					if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_HIGH) )
-					{
-						stats.AddAbility(theGame.params.ENEMY_BONUS_HIGH, true);
-					}
+					if( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) // deadly enemies
+						AddAbility(theGame.params.ENEMY_BONUS_DEADLY, true);
+					else if( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH ) // high level enemies
+						AddAbility(theGame.params.ENEMY_BONUS_HIGH, true);
 				}
-				else if ( lvlDiff > -theGame.params.LEVEL_DIFF_HIGH )
+			}
+		}
+		else if ( GetStatMax( BCS_Essence ) > 0 ) //essence based monsters
+		{
+			if ( CalculateAttributeValue(GetTotalArmor()) > 0.f ) //armored monsters
+			{
+				if ( GetIsMonsterTypeGroup() )
 				{
+					AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP_ARMORED, numAbls);
 				}
 				else
 				{
-					if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_LOW) )
-					{
-						stats.AddAbility(theGame.params.ENEMY_BONUS_LOW, true);
-					}
-				}
-			}	 
-		} 
-		else
-		{
-			if ( GetStat( BCS_Vitality, true ) > 0 ) 
-			{
-				if ( !ciriEntity ) 
-				{
-					lvlDiff = (int)CalculateAttributeValue( GetAttributeValue( 'level',,true ) ) - playerLevel;
-					if 		( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) { if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_DEADLY) ) { stats.AddAbility(theGame.params.ENEMY_BONUS_DEADLY, true); AddBuffImmunity(EET_Blindness, 'DeadlyEnemy', true); AddBuffImmunity(EET_WraithBlindness, 'DeadlyEnemy', true); } }	
-					else if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )  { if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_HIGH) ) stats.AddAbility(theGame.params.ENEMY_BONUS_HIGH, true);}
-					else if ( lvlDiff > -theGame.params.LEVEL_DIFF_HIGH )  { }
-					else 					  { if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_LOW) ) stats.AddAbility(theGame.params.ENEMY_BONUS_LOW, true); }
-					
-					if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_PER_LEVEL) ) stats.AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, npcLevel-1);
+					AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_ARMORED, numAbls);
 				}
 			}
-			else
+			else //unarmored monsters
 			{
-				
-				if(	!stats.HasAbility(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP_ARMORED) &&
-					!stats.HasAbility(theGame.params.MONSTER_BONUS_PER_LEVEL_ARMORED) &&
-					!stats.HasAbility(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP) &&
-					!stats.HasAbility(theGame.params.MONSTER_BONUS_PER_LEVEL)
-				)
-				{				
-					if ( CalculateAttributeValue(GetTotalArmor()) > 0.f )
-					{
-						if ( GetIsMonsterTypeGroup() )
-						{
-							stats.AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP_ARMORED, npcLevel-1);
-						}
-						else
-						{
-							stats.AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_ARMORED, npcLevel-1);
-						}
-					}
-					else
-					{
-						if ( GetIsMonsterTypeGroup() )
-						{
-							stats.AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP, npcLevel-1);
-						}
-						else
-						{
-							stats.AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL, npcLevel-1);
-						}
-					}
-				}
-				
-				if ( thePlayer.IsCiri() && theGame.GetDifficultyMode() == EDM_Hardcore && !stats.HasAbility('CiriHardcoreDebuffMonster') ) stats.AddAbility('CiriHardcoreDebuffMonster');
-					
-				if ( !ciriEntity ) 
+				if ( GetIsMonsterTypeGroup() )
 				{
-					lvlDiff = (int)CalculateAttributeValue(GetAttributeValue('level',,true)) - playerLevel;
-					if 		( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) { if ( !stats.HasAbility(theGame.params.MONSTER_BONUS_DEADLY) ) { stats.AddAbility(theGame.params.MONSTER_BONUS_DEADLY, true); AddBuffImmunity(EET_Blindness, 'DeadlyEnemy', true); AddBuffImmunity(EET_WraithBlindness, 'DeadlyEnemy', true); } }	
-					else if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )  { if ( !stats.HasAbility(theGame.params.MONSTER_BONUS_HIGH) ) stats.AddAbility(theGame.params.MONSTER_BONUS_HIGH, true); }
-					else if ( lvlDiff > -theGame.params.LEVEL_DIFF_HIGH )  { }
-					else 					  { if ( !stats.HasAbility(theGame.params.MONSTER_BONUS_LOW) ) stats.AddAbility(theGame.params.MONSTER_BONUS_LOW, true); }		
+					AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP, numAbls);
 				}
-			}	 
-			
+				else
+				{
+					AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL, numAbls);
+				}
+			}
+			if ( ciriEntity )
+			{
+				if ( theGame.GetDifficultyMode() == EDM_Hardcore ) AddAbility('CiriHardcoreDebuffMonster');
+			}
+			else if ( GetAttitudeBetween(this, thePlayer) == AIA_Hostile ) //add level diff abilities
+			{
+				//level diff bonuses currently just add 50% to DoT resists
+				//but bosses already have 50% DoT resists, so there's no need adding anything on top
+				if( !HasTag('HideHealthBarModule') )
+				{
+					if( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) // deadly enemies
+						AddAbility(theGame.params.MONSTER_BONUS_DEADLY, true);
+					else if( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH ) // high level enemies
+						AddAbility(theGame.params.MONSTER_BONUS_HIGH, true);
+				}
+			}
+		}
+		//recalculate max health
+		if(GetStatMax( BCS_Vitality ) > 0)
+		{
+			UpdateStatMax(BCS_Vitality);
+			ForceSetStat(BCS_Vitality, GetStatMax(BCS_Vitality)*savedHealthPerc);
+		}
+		else if(GetStatMax( BCS_Essence ) > 0)
+		{
+			UpdateStatMax(BCS_Essence);
+			ForceSetStat(BCS_Essence, GetStatMax(BCS_Essence)*savedHealthPerc);
+		}
+	}
+	
+	var fistFightForcedFromQuest : bool; 
+	
+	//modSigns: reworked
+	timer function AddLevelBonuses (dt : float, id : int)
+	{
+		var playerLevel, scalingType, minLevel, maxLevel: int;
+		var savedHealthPerc : float;
+		var templatePath : string;
+	
+		RemoveTimer('AddLevelBonuses');
+		
+		playerLevel = thePlayer.GetLevel();
+		
+		if(levelBonusesComputedAtPlayerLevel == playerLevel && !fistFightForcedFromQuest)
+			return;
+		
+		if(levelBonusesComputedAtPlayerLevel == -1 || fistFightForcedFromQuest)
+		{
+			currentLevel = level + currentNGPLevel; //reset and recalculate current level
+			savedRandomLevel = -1;
+			//theGame.witcherLog.AddMessage(GetDisplayName() + " - reset current level");
+		}
+
+		levelBonusesComputedAtPlayerLevel = playerLevel;
+		fistFightForcedFromQuest = false;
+		
+		if( HasAbility('mon_cyclops') && HasAbility('ablIgnoreSigns') )
+			RemoveAbilityAll('ablIgnoreSigns');
+		
+		if( HasAbility('mon_arachas_base') )
+			animSpeedMult = SetAnimationSpeedMultiplier(0.75, animSpeedMult);
+		
+		//dlc7 nekker warrior level fix
+		if( HasTag('sq107_monster_heavy') )
+		{
+			level = 8;
+			currentLevel = level + currentNGPLevel;
 		}
 		
+		templatePath = GetReadableName();
+		
+		if( IsHuman() && ( StrEndsWith( templatePath, "nilfgaardian_deserter_bow.w2ent" ) || StrEndsWith( templatePath, "nilfgaardian_deserter_shield.w2ent" ) || StrEndsWith( templatePath, "nilfgaardian_deserter_sword_hard.w2ent" ) ) )
+		{
+			if( IsAtLWGR13( this ) )
+			{
+				level = 7;
+				currentLevel = level + currentNGPLevel;
+			}
+		}
+		
+		CheckConstitutionAbility(); //check for duplicated constitution ability
+		
+		RemoveAllLevelBonuses(); //remove all previously added bonuses
+		
+		LazyArmorFix(this); //modFix: add missing armor abilities
+
+		//if((W3PlayerWitcher)thePlayer) //for Geralt only
+			ModSignsAddBonuses(); //health/damage modifiers
+		
+		if ( HasAbility('NPCDoNotGainBoost') )
+		{
+			return;
+		}
+		
+		//guards are level 80 by default, need to bring them down to player's level before scaling
+		if( GetNPCType() == ENGT_Guard )
+			currentLevel = playerLevel;
+		
+		//level scaling
+		if((W3PlayerWitcher)thePlayer) //for Geralt only
+		{
+			//upscale and/or downscale enemies based on menu settings
+			scalingType = theGame.params.GetEnemyScalingOption();
+			//skip BaW banshee summons
+			if(HasAbility('banshee_summons'))
+			{
+				scalingType = -1;
+			}
+			//animals
+			if(theGame.params.GetNoAnimalUpscaling() && (IsAnimal() || IsBeast()) && GetStat( BCS_Vitality, true ) > 0)
+			{
+				if(currentLevel*2 > playerLevel && scalingType > 0)
+					currentLevel = Max(1, playerLevel/2);
+				scalingType = -1;
+			}
+			//others
+			switch(scalingType)
+			{
+				case 1: /*upscale*/
+					if(currentLevel <  playerLevel)
+						currentLevel = playerLevel;
+					break;
+				case 2: /*match*/
+					if(currentLevel != playerLevel)
+						currentLevel = playerLevel;
+					break;
+				case 3: /*soft*/
+					//soft leveling: upscale "gray" enemies to be no more than 6 levels below player level
+					if(currentLevel < playerLevel - 6)
+						currentLevel = playerLevel - 6;
+					break;
+				case 4: /*random*/
+				case 5: /*random, no downscaling*/
+					//theGame.witcherLog.AddMessage("name = " + GetDisplayName());
+					//theGame.witcherLog.AddMessage("currentLevel = " + currentLevel);
+					//theGame.witcherLog.AddMessage("savedRandomLevel = " + savedRandomLevel);
+                    minLevel = Max(1, playerLevel + theGame.params.GetRandomScalingMinLevel());
+                    maxLevel = Max(minLevel, playerLevel + theGame.params.GetRandomScalingMaxLevel());
+					if( savedRandomLevel == -1 || savedRandomLevel < minLevel || savedRandomLevel > maxLevel )
+					{
+						savedRandomLevel = RandRange(maxLevel + 1, minLevel);
+						if( scalingType == 5 && savedRandomLevel < currentLevel ) //no downscaling
+							savedRandomLevel = currentLevel;
+					}
+					currentLevel = savedRandomLevel;
+					break;
+				default:
+					break;
+			}
+		}
+		//upscale guards if allowed
+		if( GetNPCType() == ENGT_Guard )
+		{
+			if( currentLevel < playerLevel )
+				currentLevel = playerLevel;
+			if( !theGame.params.GetNoAdditionalLevelsForGuards() )
+				currentLevel += theGame.params.LEVEL_DIFF_DEADLY + 1;
+		}
+		//just in case
+		currentLevel = Max(1, currentLevel);
+		//lvl 1 enemies have no additional abilities
+		if( currentLevel < 2 )
+		{
+			return;
+		}
+		//add levelup abilities
+		InternalAddLevelBonuses();
 	}
 	
 	public function SetParentEncounter( encounter : CEncounter )
@@ -1319,10 +1505,10 @@ statemachine import class CNewNPC extends CActor
 	public function GainStat( stat : EBaseCharacterStats, amount : float )
 	{
 		
-		if(stat == BCS_Panic && IsHorse() && thePlayer.GetUsedVehicle() == this && thePlayer.HasBuff(EET_Mutagen25))
+		/*if(stat == BCS_Panic && IsHorse() && thePlayer.GetUsedVehicle() == this && thePlayer.HasBuff(EET_Mutagen25))
 		{
 			return;
-		}
+		}*/ //modSigns: reworked
 		
 		super.GainStat(stat, amount);
 	}
@@ -1330,10 +1516,10 @@ statemachine import class CNewNPC extends CActor
 	public function ForceSetStat(stat : EBaseCharacterStats, val : float)
 	{
 		
-		if(stat == BCS_Panic && IsHorse() && thePlayer.GetUsedVehicle() == this && thePlayer.HasBuff(EET_Mutagen25) && val >= GetStat(BCS_Panic))
+		/*if(stat == BCS_Panic && IsHorse() && thePlayer.GetUsedVehicle() == this && thePlayer.HasBuff(EET_Mutagen25) && val >= GetStat(BCS_Panic))
 		{
 			return;
-		}
+		}*/ //modSigns: reworked
 		
 		super.ForceSetStat(stat, val);
 	}
@@ -1402,10 +1588,50 @@ statemachine import class CNewNPC extends CActor
 		ForceVulnerableImmortalityMode();
 		if ( !thePlayer.IsFistFightMinigameToTheDeath() )
 			SetImmortalityMode(AIM_Unconscious, AIC_Fistfight);
-		if(FactsQuerySum("NewGamePlus") > 0)
-		{FistFightNewGamePlusSetup();}
+		ValidateFistfighterAbilities(); //modSigns: fix multiple abilities bug
 		FistFightHealthSetup();
+		RemoveFistFightLevelDiff(); //modSigns: remove unused abls
+	}
+	
+	//modSigns: fix multiple abilities bug
+	function ValidateFistfighterAbilities()
+	{
+		if( HasAbility( 'SkillFistsEasy' ) )
+		{
+			RemoveAbilityAll( 'SkillFistsMedium' );
+			RemoveAbilityAll( 'SkillFistsHard' );
+		}
+		else if( HasAbility( 'SkillFistsMedium' ) )
+		{
+			RemoveAbilityAll( 'SkillFistsHard' );
+		}
 		
+		if( HasAbility( 'StatsFistsTutorial' ) )
+		{
+			RemoveAbilityAll( 'StatsFistsEasy' );
+			RemoveAbilityAll( 'StatsFistsMedium' );
+			RemoveAbilityAll( 'StatsFistsHard' );
+		}
+		else if( HasAbility( 'StatsFistsEasy' ) )
+		{
+			RemoveAbilityAll( 'StatsFistsMedium' );
+			RemoveAbilityAll( 'StatsFistsHard' );
+		}
+		else if( HasAbility( 'StatsFistsMedium' ) )
+		{
+			RemoveAbilityAll( 'StatsFistsHard' );
+		}
+		//modSigns: sergeant old saves compatibility, remove mixed up abilities and skills
+		if(HasAbility('qSergeantFistFIght'))
+		{
+			if(HasAbility('SkillBrigand') && HasAbility('SkillOfficer'))
+				RemoveAbilityAll('SkillBrigand');
+			if(HasAbility('NPCDoNotGainBoost'))
+			{
+				RemoveAbilityAll('NPCDoNotGainBoost');
+				ResetLevel();
+			}
+		}
 	}
 	
 	event OnEndFistfightMinigame()
@@ -1464,7 +1690,7 @@ statemachine import class CNewNPC extends CActor
 		SetHealthPerc( 100 );
 	}
 	
-	private function FistFightNewGamePlusSetup()
+	/*private function FistFightNewGamePlusSetup() //modSigns: remove NGP/fake levels dancing around
 	{
 		if ( HasAbility( 'NPCLevelBonus' ) )
 		{
@@ -1473,9 +1699,9 @@ statemachine import class CNewNPC extends CActor
 			currentLevel -= theGame.params.GetNewGamePlusLevel();
 			RecalcLevel(); 
 		}
-	}
+	}*/
 	
-	private function ApplyFistFightLevelDiff()
+	/*private function ApplyFistFightLevelDiff() //modSigns: remove level diff debuff/buff
 	{
 		var lvlDiff 	: int;
 		var i 			: int;
@@ -1539,12 +1765,13 @@ statemachine import class CNewNPC extends CActor
 			AddAbilityMultiple(theGame.params.ENEMY_BONUS_FISTFIGHT_HIGH, 5);
 		else if ( lvlDiff > 0  )
 			AddAbilityMultiple(theGame.params.ENEMY_BONUS_FISTFIGHT_HIGH, lvlDiff);
-	}
+	}*/
 	
 	private function RemoveFistFightLevelDiff()
 	{
-		RemoveAbilityMultiple(theGame.params.ENEMY_BONUS_FISTFIGHT_LOW, 5);
-		RemoveAbilityMultiple(theGame.params.ENEMY_BONUS_FISTFIGHT_HIGH, 5);
+		//modSigns
+		RemoveAbilityAll(theGame.params.ENEMY_BONUS_FISTFIGHT_LOW);
+		RemoveAbilityAll(theGame.params.ENEMY_BONUS_FISTFIGHT_HIGH);
 	}
 
 	
@@ -1809,6 +2036,7 @@ statemachine import class CNewNPC extends CActor
 		var node							: CNode;
 		var boltCauser						: W3ArrowProjectile;
 		var yrdenCauser 					: W3YrdenEntityStateYrdenShock;
+		var burningCauser					: W3Effect_Burning; //modSigns
 		var attackAction					: W3Action_Attack;
 		
 		damaveValue 				 = damageAction.GetDamageDealt();
@@ -1817,18 +2045,34 @@ statemachine import class CNewNPC extends CActor
 		healthLossToForceLand_perc 	 = GetAttributeValue( 'healthLossToForceLand_perc' );
 		
 		
-		if( percentageLoss >= healthLossToForceLand_perc.valueBase && ( GetCurrentStance() == NS_Fly || ( !IsUsingVehicle() && GetCurrentStance() != NS_Swim && !((CMovingPhysicalAgentComponent) GetMovingAgentComponent()).IsOnGround()) ) && !(damageAction.IsDoTDamage() && !damageAction.DealsAnyDamage()) )
-		{
+		//modSigns
+		//if( !((CBaseGameplayEffect)damageAction.causer) && IsFlying() && percentageLoss >= CalculateAttributeValue(healthLossToForceLand_perc) )
+		//if( percentageLoss >= healthLossToForceLand_perc.valueBase && ( GetCurrentStance() == NS_Fly || ( !IsUsingVehicle() && GetCurrentStance() != NS_Swim && !((CMovingPhysicalAgentComponent) GetMovingAgentComponent()).IsOnGround()) ) && !(damageAction.IsDoTDamage() && !damageAction.DealsAnyDamage()) )
+		//{
 			
-			if( !((CBaseGameplayEffect) damageAction.causer ) )
-			{
-				damageAction.AddEffectInfo(	EET_Knockdown);
-			}
-		}
-		
+			//if( !((CBaseGameplayEffect) damageAction.causer ) )
+			//{
+				//theGame.witcherLog.AddMessage("NPC force landing");
+				//damageAction.AddEffectInfo(	EET_KnockdownTypeApplicator ); //modSigns
+				//if(!HasAbility('mon_type_huge'))
+				//	DrainStamina(ESAT_FixedValue, GetStat(BCS_Stamina), 1.0); //modSigns: drain stamina
+			//}
+		//}
 		
 		boltCauser = (W3ArrowProjectile)( damageAction.causer );
 		yrdenCauser = (W3YrdenEntityStateYrdenShock)( damageAction.causer );
+		burningCauser = (W3Effect_Burning)( damageAction.causer );
+		
+		//modSigns
+		if( IsFlying() && ( ( damageAction.DealsAnyDamage() && !damageAction.IsDoTDamage() ) || boltCauser || yrdenCauser || burningCauser ) )
+		{
+			//if( burningCauser )
+			//	RemoveAllBuffsOfType( EET_Burning );
+			damageAction.AddEffectInfo(	EET_KnockdownTypeApplicator );
+			damageAction.SetProcessBuffsIfNoDamage( true );
+			//theGame.witcherLog.AddMessage("Forced landing!");
+		}
+		
 		if( boltCauser || yrdenCauser )
 		{
 			if( HasAbility( 'AdditiveHits' ) )
@@ -1881,12 +2125,12 @@ statemachine import class CNewNPC extends CActor
 		
 		
 		witcher = GetWitcherPlayer();
-		if ( damageAction.attacker == witcher && HasBuff( EET_AxiiGuardMe ) )
+		/*if ( damageAction.attacker == witcher && HasBuff( EET_AxiiGuardMe ) )
 		{
 			
 			if(!witcher.CanUseSkill(S_Magic_s05) || witcher.GetSkillLevel(S_Magic_s05) < 3)
 				RemoveBuff(EET_AxiiGuardMe, true);
-		}
+		}*/ //modSigns: removed
 		
 		if(damageAction.attacker == thePlayer && damageAction.DealsAnyDamage() && !damageAction.IsDoTDamage())
 		{
@@ -1955,17 +2199,12 @@ statemachine import class CNewNPC extends CActor
 		var currentLevel : int;
 		var ciriEntity  : W3ReplacerCiri;
 		
-		currentLevel = GetLevel() + levelFakeAddon;
+		currentLevel = GetLevel(); //modSigns: fake levels removed
 		
-		if ( newGamePlusFakeLevelAddon )
-		{
-			currentLevel += theGame.params.GetNewGamePlusLevel();
-		}
-		
-		if ( currentLevel > ( theGame.params.GetPlayerMaxLevel() + 5 ) ) 
-		{
-			currentLevel = theGame.params.GetPlayerMaxLevel() + 5;
-		}		
+		//if ( currentLevel > ( theGame.params.GetPlayerMaxLevel() + 5 ) ) 
+		//{
+		//	currentLevel = theGame.params.GetPlayerMaxLevel() + 5;
+		//} //modSigns
 		lvlDiff = currentLevel - thePlayer.GetLevel();
 			
 		if( GetAttitude( thePlayer ) != AIA_Hostile )
@@ -1985,12 +2224,12 @@ statemachine import class CNewNPC extends CActor
 		}
 
 		
-		 if ( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY )
+		/*if ( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) //modSigns
 		{
 			strLevel = "";
 			return "deadlyLevel";
 		}	
-		else if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )
+		else*/ if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )
 		{
 			strLevel = "<font color=\"#FF1919\">" + currentLevel + "</font>"; 
 			return "highLevel";
@@ -2221,142 +2460,50 @@ statemachine import class CNewNPC extends CActor
 		
 	}
 	
-	
+	//modSigns: reworked
 	public function CalculateExperiencePoints(optional skipLog : bool) : int
 	{
-		var finalExp : int;
-		var exp : float;
-		var lvlDiff : int;
-		var modDamage, modArmor, modVitality, modOther : float;
-		var stats : CCharacterStats;
+		var finalExp				: int;
+		var exp, expModifier		: float;
+		var lvlDiff, playerLevel	: int;
+		var enemyType				: EEnemyType;
 		
-		if ( grantNoExperienceAfterKill || HasAbility('Zero_XP' ) || GetNPCType() == ENGT_Guard ) return 0;
+		if(grantNoExperienceAfterKill || HasAbility('Zero_XP'))
+			return 0;
 		
-		modDamage = CalculateAttributeValue(GetAttributeValue('RendingDamage',,true));
-		modDamage += CalculateAttributeValue(GetAttributeValue('BludgeoningDamage',,true));
-		modDamage += CalculateAttributeValue(GetAttributeValue('FireDamage',,true));
-		modDamage += CalculateAttributeValue(GetAttributeValue('ElementalDamage',,true));
-		modDamage += CalculateAttributeValue(GetPowerStatValue(CPS_AttackPower, , true));
-		modDamage *= 5;
-		
-		modArmor = CalculateAttributeValue(GetTotalArmor()) * 100;
-		
-		modVitality = GetStatMax(BCS_Essence) + 3 * GetStatMax(BCS_Vitality);
-		
-		stats = GetCharacterStats();
+		if(GetNPCType() == ENGT_Guard)
+		{
+			GetWitcherPlayer().IncKills(EENT_HUMAN);
+			return 0;
+		}
 
-		if ( stats.HasAbility('AcidSpit' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Aggressive' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Charge' ) ) modOther = modOther + 3;
-		if ( stats.HasAbility('ContactBlindness' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('ContactSlowdown' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Cursed' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('BurnIgnore' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('DamageBuff' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Draconide' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Fireball' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Flashstep' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Flying' ) ) modOther = modOther + 10;
-		if ( stats.HasAbility('Frost' ) ) modOther = modOther + 4;
-		if ( stats.HasAbility('EssenceRegen' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Gargoyle' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Hypnosis' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('IceArmor' ) ) modOther = modOther + 5;
-		if ( stats.HasAbility('InstantKillImmune' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('JumpAttack' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Magical' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('MistForm' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('MudTeleport' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('MudAttack' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('PoisonCloud' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('PoisonDeath' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Rage' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Relic' ) ) modOther = modOther + 5;
-		if ( stats.HasAbility('Scream' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Shapeshifter' ) ) modOther = modOther + 5;
-		if ( stats.HasAbility('Shout' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Spikes' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('StaggerCounter' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('StinkCloud' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Summon' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Tail' ) ) modOther = modOther + 5;
-		if ( stats.HasAbility('Teleport' ) ) modOther = modOther + 5;
-		if ( stats.HasAbility('Thorns' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Throw' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('ThrowFire' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('ThrowIce' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Vampire' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('Venom' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('VitalityRegen' ) ) modOther = modOther + 5;
-		if ( stats.HasAbility('Wave' ) ) modOther = modOther + 2;
-		if ( stats.HasAbility('WeakToAard' ) ) modOther = modOther - 2;
-		if ( stats.HasAbility('TongueAttack' ) ) modOther = modOther + 2;
+		enemyType = GetEnemyTypeByAbility(this);
+		exp = (float)GetExpByEnemyType(enemyType);
 		
-		exp = ( modDamage + modArmor + modVitality + modOther ) / 99;
+		//exp for monster hunt monsters
+		if((W3MonsterHuntNPC)this)
+			exp = 15;
 		
-		if( thePlayer.GetEnemyUpscaling() && npcLevelToUpscaledLevelDifference > 0 ) currentLevel -= npcLevelToUpscaledLevelDifference;
-		if( FactsQuerySum("NewGamePlus") > 0 ) currentLevel -= theGame.params.GetNewGamePlusLevel();
-		
-		if  ( IsHuman() ) 
+		expModifier = 1.0f;
+		playerLevel = thePlayer.GetLevel();
+		if(FactsQuerySum("NewGamePlus") > 0)
 		{
-			if ( exp > 1 + ( currentLevel * 2 ) ) { exp = 1 + ( currentLevel * 2 ); }
-		} else
-		{
-			if ( exp > 5 + ( currentLevel * 4 ) ) { exp = 5 + ( currentLevel * 4 ); } 
+			playerLevel -= theGame.params.GetNewGamePlusLevel();
+			currentLevel -= theGame.params.GetNewGamePlusLevel();
 		}
-				
-		
-		exp += 1;
-		
-		if( ( FactsQuerySum("NewGamePlus") > 0 ) )
+		if(theGame.params.GetFixedExp() == false)
 		{
-			if ( thePlayer.GetLevel() - theGame.params.GetNewGamePlusLevel() < 30 ) exp = ( exp / 4 ); else exp = ( exp / 2 );
-		}
-		else if ( thePlayer.GetLevel() < 30 ) exp = ( exp / 4 ); else exp = ( exp / 2 );
-				
-		
-		
-		if( ( FactsQuerySum("NewGamePlus") > 0 ) )
-			lvlDiff = currentLevel - thePlayer.GetLevel() + theGame.params.GetNewGamePlusLevel();
-		else
 			lvlDiff = currentLevel - thePlayer.GetLevel();
-		if 		( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) { exp = 25 + exp * 1.5; }	
-		else if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )  { exp = exp * 1.05; }
-		else if ( lvlDiff > -theGame.params.LEVEL_DIFF_HIGH )  { }
-		else { exp = 2; }
-		
-		
-		if ( (FactsQuerySum("NewGamePlus") > 0 && thePlayer.GetLevel() >= (35 + theGame.params.GetNewGamePlusLevel()) ) || (FactsQuerySum("NewGamePlus") < 1 && thePlayer.GetLevel() >= 35) )
-		{
-			if ( thePlayer.GetLevel() < 45 || lvlDiff < 0 )
-				exp = exp * (1 + lvlDiff * theGame.params.LEVEL_DIFF_XP_MOD);
-			exp /= 2;
-			if (exp < 2) exp = 2;
+			expModifier = 1 + lvlDiff * theGame.params.LEVEL_DIFF_XP_MOD;
+			expModifier = ClampF(expModifier, 0, theGame.params.MAX_XP_MOD);
+			expModifier *= GetWitcherPlayer().GetExpModifierByEnemyType(enemyType);
 		}
 		
-		if ( exp > 50 ) exp = 50; 
-		if ( theGame.GetDifficultyMode() == EDM_Easy ) exp = exp * 1.2; else
-		if ( theGame.GetDifficultyMode() == EDM_Hard ) exp = exp * 0.9; else
-		if ( theGame.GetDifficultyMode() == EDM_Hardcore ) exp = exp * 0.8;
-		finalExp = RoundF( exp );
+		finalExp = RoundF( exp * expModifier );
+		//always get at least 1 exp
+		finalExp = Max(1, finalExp);
 		
-		if(!skipLog)
-		{
-			LogStats("--------------------------------");
-			LogStats("-      [CALCULATED EXP]        -");
-			LogStats("- base, without difficulty and -");
-			LogStats("-   level difference bonuses   -");
-			LogStats("--------------------------------");
-			LogStats(" -> for entity : " + GetName());
-			LogStats("--------------------------------");
-			LogStats("* modDamage : " + modDamage);
-			LogStats("* modArmor : " + modArmor);
-			LogStats("* modVitality : " + modVitality);
-			LogStats("+ modOther : " + modOther);
-			LogStats("--------------------------------");
-			LogStats(" BASE EXPERIENCE POINTS = [ " + finalExp + " ]");
-			LogStats("--------------------------------");
-		}
+		GetWitcherPlayer().IncKills(enemyType);
 		
 		return finalExp;
 	}
@@ -2399,12 +2546,40 @@ statemachine import class CNewNPC extends CActor
 		var act 											: W3DamageAction;
 		var burningCauser 									: W3Effect_Burning;
 		var vfxEnt 											: W3VisualFx;
-		var aerondight										: W3Effect_Aerondight;
+		//var aerondight										: W3Effect_Aerondight;
+		
+		var arrInt											: array<int>; //modSigns
+		var pts, prc										: float; //modSigns
 
 		ciriEntity = (W3ReplacerCiri)thePlayer;
 		witcher = GetWitcherPlayer();
 		
 		deathTimestamp = theGame.GetEngineTimeAsSeconds();
+		
+		//modSigns
+		//theGame.witcherLog.AddMessage("NPC on death. Src = " + damageAction.GetBuffSourceName());
+		//theGame.witcherLog.AddMessage("NPC on death. Attacker = " + damageAction.attacker);
+		//theGame.witcherLog.AddMessage("NPC on death. Attacker is witcher = " + (damageAction.attacker == GetWitcherPlayer()));
+		//theGame.witcherLog.AddMessage("NPC on death. Causer = " + damageAction.causer);
+		//theGame.witcherLog.AddMessage("NPC on death. Is sign = " + damageAction.IsActionWitcherSign());
+		if(damageAction.attacker == GetWitcherPlayer() && (damageAction.IsActionMelee() || damageAction.IsActionRanged() || damageAction.IsActionWitcherSign() || damageAction.GetBuffSourceName() == "Kill" || damageAction.GetBuffSourceName() == "Finisher" || damageAction.GetBuffSourceName() == "AutoFinisher"))
+		{
+			//modSigns: new perk 21 ability
+			if(thePlayer.CanUseSkill(S_Perk_21))
+			{
+				GetWitcherPlayer().Perk21GainStamina('kill');
+			}
+		
+			//modSigns: make runewords 10 and 12 more useful
+			if(GetWitcherPlayer().HasRunewordActive('Runeword 10 _Stats'))
+				GetWitcherPlayer().Runeword10Triggerred();
+			if(GetWitcherPlayer().HasRunewordActive('Runeword 12 _Stats'))
+				GetWitcherPlayer().Runeword12Triggerred();
+			
+			//modSigns: new mutation3 (Bloodbath effect)
+			if(thePlayer.HasBuff(EET_Mutation3))
+				((W3Effect_Mutation3)thePlayer.GetBuff(EET_Mutation3)).ManageMutation3Bonus(damageAction);
+		}
 		
 		
 		if( damageAction.GetBuffSourceName() == "Mutation 6" )
@@ -2413,12 +2588,10 @@ statemachine import class CNewNPC extends CActor
 			AddTimer( 'StopMutation6FX', 3.f );
 		}
 		
-		if ( (thePlayer.HasAbility('Glyphword 10 _Stats', true) || thePlayer.HasAbility('Glyphword 18 _Stats', true)) && (HasBuff(EET_AxiiGuardMe) || HasBuff(EET_Confusion)) )
+		//modSigns: Possession only
+		if ( GetWitcherPlayer().HasGlyphwordActive('Glyphword 18 _Stats') && (HasBuff(EET_AxiiGuardMe) || HasBuff(EET_Confusion)) )
 		{
-			if(thePlayer.HasAbility('Glyphword 10 _Stats', true))
-				abilityName = 'Glyphword 10 _Stats';
-			else
-				abilityName = 'Glyphword 18 _Stats';
+			abilityName = 'Glyphword 18 _Stats';
 				
 			min = thePlayer.GetAbilityAttributeValue(abilityName, 'glyphword_range');
 			FindGameplayEntitiesInRange(entities, this, CalculateAttributeValue(min), 10,, FLAG_OnlyAliveActors + FLAG_ExcludeTarget, this); 	
@@ -2428,8 +2601,21 @@ statemachine import class CNewNPC extends CActor
 			{
 				if ( entities[i] == thePlayer.GetHorseWithInventory() || entities[i] == thePlayer || !IsRequiredAttitudeBetween(thePlayer, entities[i], true) )
 					continue;
+				
+				//modSigns: skip already affected targets
+				if ( ((CActor)entities[i]).HasBuff(EET_AxiiGuardMe) || ((CActor)entities[i]).HasBuff(EET_Confusion) )
+					continue;
+				
+				//modSigns: skip immune targets
+				if ( HasBuff(EET_AxiiGuardMe) && ((CActor)entities[i]).IsImmuneToBuff(EET_AxiiGuardMe) || HasBuff(EET_Confusion) && ((CActor)entities[i]).IsImmuneToBuff(EET_Confusion) )
+					continue;
+				
+				//modSigns: skip targets with 100% will resistance
+				((CActor)entities[i]).GetResistValue(CDS_WillRes, pts, prc);
+				if ( prc >= 1.0 )
+					continue;
 					
-				if ( VecDistance2D(this.GetWorldPosition(), entities[i].GetWorldPosition()) < minDist)
+				if ( VecDistance2D(this.GetWorldPosition(), entities[i].GetWorldPosition()) < minDist )
 				{
 					minDist = VecDistance2D(this.GetWorldPosition(), entities[i].GetWorldPosition());
 					targetEntity = (CActor)entities[i];
@@ -2548,9 +2734,16 @@ statemachine import class CNewNPC extends CActor
 					bonusExp = thePlayer.GetAttributeValue('human_exp_bonus_when_fatal');
 				}				
 				
-				expPoints = RoundMath( expPoints * (1 + CalculateAttributeValue(bonusExp)) );
-				
-				witcher.AddPoints(EExperiencePoint, RoundF( expPoints * theGame.expGlobalMod_kills ), false );
+				//modSigns
+				expPoints = RoundMath( expPoints * (1 + CalculateAttributeValue(bonusExp)) * theGame.expGlobalMod_kills );
+				expPoints = Max(1, expPoints);
+				//modSigns: final exp modifier
+				if( theGame.params.GetMonsterExpModifier() != 0 )
+					expPoints = RoundMath(expPoints * (1 + theGame.params.GetMonsterExpModifier()));
+				GetWitcherPlayer().AddPoints(EExperiencePoint, expPoints, false );
+				//modSigns: show exp given
+				arrInt.PushBack(expPoints);
+				theGame.witcherLog.AddMessage( GetLocStringByKeyExtWithParams("hud_combat_log_gained_experience", arrInt) );
 			}			
 		}
 				
@@ -2597,40 +2790,43 @@ statemachine import class CNewNPC extends CActor
 		{
 			theGame.GetMonsterParamsForActor(this, monsterCategory, tmpName, tmpBool, tmpBool, tmpBool);
 			
+			if(thePlayer.HasBuff(EET_Mutagen13)) //modSigns
+				((W3Mutagen13_Effect)thePlayer.GetBuff(EET_Mutagen13)).ManageMutagen13Bonus();
 			
 			if(thePlayer.HasBuff(EET_Mutagen18))
 			{
+				((W3Mutagen18_Effect)thePlayer.GetBuff(EET_Mutagen18)).ManageMutagen18Bonus(); //modSigns
 				
-				
-				if(monsterCategory != MC_Animal || IsRequiredAttitudeBetween(this, thePlayer, true))
-				{			
-					abilityName = thePlayer.GetBuff(EET_Mutagen18).GetAbilityName();
-					abilityCount = thePlayer.GetAbilityCount(abilityName);
-					
-					if(abilityCount == 0)
-					{
-						addAbility = true;
-					}
-					else
-					{
-						theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen18_max_stack', min, max);
-						maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-						
-						if(maxStack >= 0)
-						{
-							addAbility = (abilityCount < maxStack);
-						}
-						else
-						{
-							addAbility = true;
-						}
-					}
-					
-					if(addAbility)
-					{
-						thePlayer.AddAbility(abilityName, true);
-					}
-				}
+				//modSigns: changed
+				//if(monsterCategory != MC_Animal || IsRequiredAttitudeBetween(this, thePlayer, true))
+				//{			
+				//	abilityName = thePlayer.GetBuff(EET_Mutagen18).GetAbilityName();
+				//	abilityCount = thePlayer.GetAbilityCount(abilityName);
+				//	
+				//	if(abilityCount == 0)
+				//	{
+				//		addAbility = true;
+				//	}
+				//	else
+				//	{
+				//		theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen18_max_stack', min, max);
+				//		maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+				//		
+				//		if(maxStack >= 0)
+				//		{
+				//			addAbility = (abilityCount < maxStack);
+				//		}
+				//		else
+				//		{
+				//			addAbility = true;
+				//		}
+				//	}
+				//	
+				//	if(addAbility)
+				//	{
+				//		thePlayer.AddAbility(abilityName, true);
+				//	}
+				//}
 			}
 			
 			
@@ -2653,10 +2849,10 @@ statemachine import class CNewNPC extends CActor
 			}
 			
 			
-			if( witcher.IsSetBonusActive( EISB_Vampire ) && !witcher.IsInFistFight() && !WillBeUnconscious() )
-			{
-				witcher.VampiricSetAbilityRegeneration();
-			}
+			//if( witcher.IsSetBonusActive( EISB_Vampire ) && !witcher.IsInFistFight() && !WillBeUnconscious() )
+			//{
+			//	witcher.VampiricSetAbilityRegeneration();
+			//} //modSigns: changed
 			
 			if(!HasTag('AchievementKillDontCount'))
 			{
@@ -2773,7 +2969,7 @@ statemachine import class CNewNPC extends CActor
 		OnDeathMutation2( damageAction );		
 		
 		
-		if(damageAction.attacker == thePlayer && thePlayer.HasAbility('Glyphword 20 _Stats', true) && damageAction.GetBuffSourceName() != "Glyphword 20")
+		if(damageAction.attacker == thePlayer && GetWitcherPlayer().HasGlyphwordActive('Glyphword 20 _Stats') && damageAction.GetBuffSourceName() != "Glyphword 20") //modSigns
 		{
 			burningCauser = (W3Effect_Burning)damageAction.causer;			
 			
@@ -2812,7 +3008,7 @@ statemachine import class CNewNPC extends CActor
 							act.AddDamage(damages[j].dmgType, damages[j].dmgVal);
 						}
 						
-						act.AddEffectInfo(EET_Burning, , , , , 0.5f);
+						act.AddEffectInfo(EET_Burning);//, , , , , 0.5f); //modSigns - 100% burning chance
 						
 						theGame.damageMgr.ProcessAction(act);
 						delete act;
@@ -2848,25 +3044,26 @@ statemachine import class CNewNPC extends CActor
 				weaponID = thePlayer.inv.GetCurrentlyHeldSword();
 			}
 			
-			if( damageAction.attacker.GetInventory().ItemHasTag( weaponID, 'Aerondight' ) )
-			{
-				aerondight = (W3Effect_Aerondight)thePlayer.GetBuff( EET_Aerondight );
-				
-				if( aerondight )				
-				{
-					if( aerondight.IsFullyCharged() )
-					{
-						if( aerondight.DischargeAerondight() )
-						{
-							PlayEffect( 'hit_electric_quen' );
-						}
-					}
-					else if( isFinisher )
-					{
-						aerondight.IncreaseAerondightCharges( theGame.params.ATTACK_NAME_LIGHT );
-					}
-				}
-			}
+			//modSigns: redone
+			//if( damageAction.attacker.GetInventory().ItemHasTag( weaponID, 'Aerondight' ) )
+			//{
+			//	aerondight = (W3Effect_Aerondight)thePlayer.GetBuff( EET_Aerondight );
+			//	
+			//	if( aerondight )				
+			//	{
+			//		if( aerondight.IsFullyCharged() )
+			//		{
+			//			if( aerondight.DischargeAerondight() )
+			//			{
+			//				PlayEffect( 'hit_electric_quen' );
+			//			}
+			//		}
+			//		else if( isFinisher )
+			//		{
+			//			aerondight.IncreaseAerondightCharges( theGame.params.ATTACK_NAME_LIGHT );
+			//		}
+			//	}
+			//}
 		}		
 	}
 	
@@ -2937,6 +3134,64 @@ statemachine import class CNewNPC extends CActor
 		var min, max : SAbilityAttributeValue;
 		var str : string;
 		
+		//if( !IsHuman() || !IsAlive() || !IsRequiredAttitudeBetween( thePlayer, this, true ) )
+		//{
+		//	return true;
+		//}
+		//
+		//if( HasAbility( 'SkillBoss' ) )
+		//{
+		//	return true;
+		//}
+		//if( HasAbility( 'Boss' ) )
+		//{
+		//	return true;
+		//}
+		//if( HasAbility( 'InstantKillImmune' ) )
+		//{
+		//	return true;
+		//}
+		//if( HasTag( 'olgierd_gpl' ) )
+		//{
+		//	return true;
+		//}
+		//if( HasAbility( 'DisableFinishers' ) )
+		//{
+		//	return true;
+		//}
+		//if( HasTag( 'Mutation8CounterImmune' ) )
+		//{
+		//	return true;
+		//} //modSigns
+		
+		if( !IsAlive() || !IsRequiredAttitudeBetween( thePlayer, this, true ) )
+		{
+			return true;
+		}
+		
+		if( WillBeUnconscious() )
+		{
+			return true;
+		}
+		
+		str = GetName();
+		if( StrStartsWith( str, "rosa_var_attre" ) )
+		{
+			return true;
+		}
+				
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation8', 'hp_perc_trigger', min, max );
+		if( GetHealthPercents() > min.valueMultiplicative )
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	//modSigns
+	public function Mutation8RepelToFinisherImmune() : bool
+	{
 		if( !IsHuman() || !IsAlive() || !IsRequiredAttitudeBetween( thePlayer, this, true ) )
 		{
 			return true;
@@ -2967,33 +3222,49 @@ statemachine import class CNewNPC extends CActor
 			return true;
 		}
 		
-		if( WillBeUnconscious() )
-		{
-			return true;
-		}
-		
-		str = GetName();
-		if( StrStartsWith( str, "rosa_var_attre" ) )
-		{
-			return true;
-		}
-				
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation8', 'hp_perc_trigger', min, max );
-		if( GetHealthPercents() > min.valueMultiplicative )
-		{
-			return true;
-		}
-		
-		return false;
+		return IsImmuneToMutation8Finisher();
 	}
+	
+	//modSigns begin
+	public var haklandMageHack : float;
+	
+	public function HaklandMageDebuffProjectileHack() : bool
+	{
+		var ret : bool;
+		if(HasAbility('HaklandMage'))
+		{
+			if(theGame.GetEngineTimeAsSeconds() - haklandMageHack < 3.0)
+				ret = true;
+			haklandMageHack = theGame.GetEngineTimeAsSeconds();
+		}
+		return ret;
+	}
+	
+	/*public var swarmsUnavailable : bool;
+	
+	timer function ResetSwarms( dt : float , id : int)
+	{
+		swarmsUnavailable = false;
+	}*/
+	//modSigns end
 	
 	event OnFireHit(source : CGameplayEntity)
 	{	
 		super.OnFireHit(source);
 		
+		//swarmsUnavailable = true; //modSigns
+		//AddTimer('ResetSwarms', 5.0f, false, , , , true); //modSigns
+		
 		if ( HasTag('animal') )
 		{
 			Kill( 'Animal hit by fire', source );
+		}
+		
+		if ( HasAbility( 'IceArmor') ) //modSigns
+		{
+			this.RemoveAbility( 'IceArmor' );
+			this.StopEffect( 'ice_armor' );
+			this.PlayEffect( 'ice_armor_hit' );
 		}
 		
 		if ( !IsAlive() && IsInAgony() )
@@ -3007,7 +3278,10 @@ statemachine import class CNewNPC extends CActor
 	
 	event OnAardHit( sign : W3AardProjectile )
 	{
-		var staminaDrainPerc : float;		
+		//var staminaDrainPerc : float;		//modSigns
+		
+		//swarmsUnavailable = true; //modSigns
+		//AddTimer('ResetSwarms', 5.0f, false, , , , true); //modSigns
 		
 		SignalGameplayEvent( 'AardHitReceived' );
 		
@@ -3040,12 +3314,13 @@ statemachine import class CNewNPC extends CActor
 		}
 		
 		
-		staminaDrainPerc = sign.GetStaminaDrainPerc();
+		/*staminaDrainPerc = sign.GetStaminaDrainPerc(); //modSigns: moved to sign projectile
 		if(IsAlive() && staminaDrainPerc > 0.f && IsRequiredAttitudeBetween(this, sign.GetCaster(), true))
 		{
-			DrainStamina(ESAT_FixedValue, staminaDrainPerc * GetStatMax(BCS_Stamina));
-			
-		}
+			DrainStamina(ESAT_FixedValue, staminaDrainPerc * GetStatMax(BCS_Stamina), 1); //modSigns: delay added
+			//modSigns: debug
+			//theGame.witcherLog.AddMessage("Stamina drained = " + GetStat(BCS_Stamina));
+		}*/
 		
 		if ( !IsAlive() && deathTimestamp + 0.2 < theGame.GetEngineTimeAsSeconds() )
 		{
@@ -3214,8 +3489,6 @@ statemachine import class CNewNPC extends CActor
 	
 	timer function Tick(deltaTime : float, id : int)
 	{
-		
-		
 	}
 	
 	private function UpdateBumpCollision()
@@ -4083,10 +4356,10 @@ statemachine import class CNewNPC extends CActor
 	
 	
 	
-	timer function RemoveMutation4BloodDebuff( dt : float, id : int )
-	{
-		RemoveAbility( 'Mutation4BloodDebuff' );
-	}
+	//timer function RemoveMutation4BloodDebuff( dt : float, id : int )
+	//{
+	//	RemoveAbility( 'Mutation4BloodDebuff' );
+	//} //modSigns: moved to acid effect
 	
 	function IsShielded( target : CNode ) : bool
 	{
@@ -4140,8 +4413,10 @@ statemachine import class CNewNPC extends CActor
 		if( HasTag( 'imlerith' ) )
 			return;
 			
+		SetBehaviorVariable( 'bShieldUp', 0.f ); //modSigns
+		DisableHitAnimFor( 2.0f ); //modSigns
 		SetBehaviorVariable( 'bShieldbreak', 1.0 );
-		AddEffectDefault( EET_Stagger, thePlayer, "ParryStagger" );
+		//AddEffectDefault( EET_Stagger, thePlayer, "ParryStagger" ); //modSigns
 		shield = GetInventory().GetItemEntityUnsafe( GetInventory().GetItemFromSlot( 'l_weapon' ) );
 		ToggleEffectOnShield( 'heavy_block', true );
 		DropItemFromSlot( 'l_weapon', true );
@@ -4553,10 +4828,10 @@ statemachine import class CNewNPC extends CActor
 	event OnTakeDamage( action : W3DamageAction )
 	{
 		var i : int;
-		var abilityName : name;
-		var abilityCount, maxStack : float;
+		//var abilityName : name;
+		//var abilityCount, maxStack : float;
 		var min, max : SAbilityAttributeValue;
-		var addAbility : bool;
+		//var addAbility : bool;
 		var witcher : W3PlayerWitcher;
 		var attackAction : W3Action_Attack;
 		var gameplayEffects : array<CBaseGameplayEffect>;
@@ -4564,6 +4839,8 @@ statemachine import class CNewNPC extends CActor
 		var hud : CR4ScriptedHud;
 		var ent : CEntity;
 		var weaponId : SItemUniqueId;
+		var dur : float; //modSigns
+		var updHUD : bool; //modSigns
 
 		super.OnTakeDamage(action);
 		
@@ -4571,60 +4848,68 @@ statemachine import class CNewNPC extends CActor
 		if(action.IsActionMelee() && action.DealsAnyDamage())
 		{
 			witcher = (W3PlayerWitcher)action.attacker;
-			if(witcher && witcher.HasBuff(EET_Mutagen10))
-			{
-				abilityName = thePlayer.GetBuff(EET_Mutagen10).GetAbilityName();
-				abilityCount = thePlayer.GetAbilityCount(abilityName);
-				
-				if(abilityCount == 0)
-				{
-					addAbility = true;
-				}
-				else
-				{
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen10_max_stack', min, max);
-					maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-					
-					if(maxStack >= 0)
-					{
-						addAbility = (abilityCount < maxStack);
-					}
-					else
-					{
-						addAbility = true;
-					}
-				}
-				
-				if(addAbility)
-				{
-					thePlayer.AddAbility(abilityName, true);
-				}
-			}
+			//if(witcher && witcher.HasBuff(EET_Mutagen10))
+			//{
+			//	abilityName = thePlayer.GetBuff(EET_Mutagen10).GetAbilityName();
+			//	abilityCount = thePlayer.GetAbilityCount(abilityName);
+			//	
+			//	if(abilityCount == 0)
+			//	{
+			//		addAbility = true;
+			//	}
+			//	else
+			//	{
+			//		theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen10_max_stack', min, max);
+			//		maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+			//		
+			//		if(maxStack >= 0)
+			//		{
+			//			addAbility = (abilityCount < maxStack);
+			//		}
+			//		else
+			//		{
+			//			addAbility = true;
+			//		}
+			//	}
+			//	
+			//	if(addAbility)
+			//	{
+			//		thePlayer.AddAbility(abilityName, true);
+			//	}
+			//} //modSigns: changed
 			
 			attackAction = (W3Action_Attack)action;
 
-			if ( witcher && attackAction && attackAction.attacker == witcher )
-			{
-				if ( !attackAction.IsParried() && !attackAction.IsCountered() )
-				{
-					if ( witcher.HasAbility( 'Runeword 11 _Stats', true ) )
-					{
-						gameplayEffects = witcher.GetPotionBuffs();
-						theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Runeword 11 _Stats', 'duration', min, max );
-						
-						for ( i = 0; i < gameplayEffects.Size(); i+=1 )
-						{
-							gameplayEffects[i].SetTimeLeft( gameplayEffects[i].GetTimeLeft() + min.valueAdditive );
-							
-							hud = (CR4ScriptedHud)theGame.GetHud();
-							if (hud)
-							{
-								hud.ShowBuffUpdate();
-							}
-						}
-					}
-				}
-			}
+			//if ( witcher && attackAction && attackAction.attacker == witcher )
+			//{
+			//	if ( !attackAction.IsParried() && !attackAction.IsCountered() )
+			//	{
+			//		if ( witcher.HasRunewordActive('Runeword 11 _Stats') ) //modSigns
+			//		{
+			//			gameplayEffects = witcher.GetPotionBuffs();
+			//			
+			//			//modSigns
+			//			theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Runeword 11 _Stats', 'duration', min, max );
+			//			
+			//			for ( i = 0; i < gameplayEffects.Size(); i+=1 )
+			//			{
+			//				if(gameplayEffects[i].GetEffectType() == EET_WhiteHoney || gameplayEffects[i].GetEffectType() == EET_WhiteRaffardDecoction)
+			//					continue;
+			//				
+			//				dur = MinF(gameplayEffects[i].GetTimeLeft() + min.valueAdditive, gameplayEffects[i].GetInitialDuration());
+			//				gameplayEffects[i].SetTimeLeft(dur);
+			//				updHUD = true;
+			//			}
+			//			
+			//			if(updHUD)
+			//			{
+			//				hud = (CR4ScriptedHud)theGame.GetHud();
+			//				if (hud)
+			//					hud.ShowBuffUpdate();
+			//			}
+			//		}
+			//	}
+			//}
 		}
 		
 		if(action.IsActionMelee())
@@ -4643,6 +4928,17 @@ statemachine import class CNewNPC extends CActor
 				}
 			}
 		}
+		
+		//supercharged glyphs FX
+		if( (W3PlayerWitcher)action.attacker && action.DealsAnyDamage() && !(action.IsDoTDamage() && (CBaseGameplayEffect)action.causer) )
+		{
+			if( HasBuff(EET_YrdenHealthDrain) )
+				((W3Effect_YrdenHealthDrain)GetBuff(EET_YrdenHealthDrain)).PlayFX();
+		}
+		
+		//modSigns: new mutation3 (Bloodbath effect) -> moved to on death
+		//if((W3PlayerWitcher)action.attacker && thePlayer.HasBuff(EET_Mutation3))
+		//	((W3Effect_Mutation3)thePlayer.GetBuff(EET_Mutation3)).ManageMutation3Bonus(action);
 	}
 	
 	public function GetInteractionData( out actionName : name, out text : string ) : bool

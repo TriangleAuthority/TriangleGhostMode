@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserConfig>
+   
+    <Group id="GMScalingOptions" displayName="Mods.ghost_mode.gm_scaling_options">
+		<PresetsArray>
+			<Preset id="0" displayName="gm_recommended">
+				<Entry varId="GMScaling" value="3"/>
+				<Entry varId="GMRandomScalingMinLevel" value="0"/>
+				<Entry varId="GMRandomScalingMaxLevel" value="0"/>
+				<Entry varId="GMNonlinearLevelup" value="false"/>
+				<Entry varId="GMNonlinearLevelDelta" value="0"/>
+				<Entry varId="GMNonlinearAbilitiesDelta" value="0"/>
+				<Entry varId="GMNoAnimalUpscaling" value="false"/>
+				<Entry varId="GMNoAddLevelsGuards" value="false"/>
+				<Entry varId="GMHealthMultiplier" value="0"/>
+				<Entry varId="GMDamageMultiplier" value="0"/>
+				<Entry varId="GMBossHealthMultiplier" value="0"/>
+				<Entry varId="GMBossDamageMultiplier" value="0"/>
+			</Preset>
+			<Preset id="1" displayName="gm_hardcore">
+				<Entry varId="GMScaling" value="1"/>
+				<Entry varId="GMRandomScalingMinLevel" value="0"/>
+				<Entry varId="GMRandomScalingMaxLevel" value="0"/>
+				<Entry varId="GMNonlinearLevelup" value="true"/>
+				<Entry varId="GMNonlinearLevelDelta" value="10"/>
+				<Entry varId="GMNonlinearAbilitiesDelta" value="5"/>
+				<Entry varId="GMNoAnimalUpscaling" value="false"/>
+				<Entry varId="GMNoAddLevelsGuards" value="false"/>
+				<Entry varId="GMHealthMultiplier" value="0.5"/>
+				<Entry varId="GMDamageMultiplier" value="0.5"/>
+				<Entry varId="GMBossHealthMultiplier" value="0.5"/>
+				<Entry varId="GMBossDamageMultiplier" value="0.5"/>
+			</Preset>
+			<Preset id="2" displayName="gm_turn_off">
+				<Entry varId="GMScaling" value="0"/>
+				<Entry varId="GMRandomScalingMinLevel" value="0"/>
+				<Entry varId="GMRandomScalingMaxLevel" value="0"/>
+				<Entry varId="GMNonlinearLevelup" value="false"/>
+				<Entry varId="GMNonlinearLevelDelta" value="0"/>
+				<Entry varId="GMNonlinearAbilitiesDelta" value="0"/>
+				<Entry varId="GMNoAnimalUpscaling" value="false"/>
+				<Entry varId="GMNoAddLevelsGuards" value="false"/>
+				<Entry varId="GMHealthMultiplier" value="0"/>
+				<Entry varId="GMDamageMultiplier" value="0"/>
+				<Entry varId="GMBossHealthMultiplier" value="0"/>
+				<Entry varId="GMBossDamageMultiplier" value="0"/>
+			</Preset>
+		</PresetsArray>
+        <VisibleVars>
+            <Var id="Virtual_GMScaling" displayName="gm_enemies_scaling" displayType="OPTIONS">
+				<OptionsArray>
+					<Option id="0" displayName="gm_es_none">
+						<Entry varId="GMScaling" value="0"/>
+					</Option>
+					<Option id="1" displayName="gm_es_upscale">
+						<Entry varId="GMScaling" value="1"/>
+					</Option>
+					<Option id="2" displayName="gm_es_match">
+						<Entry varId="GMScaling" value="2"/>
+					</Option>
+					<Option id="3" displayName="gm_es_soft">
+						<Entry varId="GMScaling" value="3"/>
+					</Option>
+					<Option id="4" displayName="gm_es_random">
+						<Entry varId="GMScaling" value="4"/>
+					</Option>
+					<Option id="5" displayName="gm_es_random_no_down">
+						<Entry varId="GMScaling" value="5"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+            <Var id="GMRandomScalingMinLevel" displayName="gm_rnd_scaling_min_slider" displayType="SLIDER;-12;12;24"/>
+            <Var id="GMRandomScalingMaxLevel" displayName="gm_rnd_scaling_max_slider" displayType="SLIDER;-12;12;24"/>
+            <Var id="GMNonlinearLevelup" displayName="gm_nonlinear_levelup_toggle" displayType="TOGGLE"/>
+            <Var id="GMNonlinearLevelDelta" displayName="gm_nonlinear_level_delta_slider" displayType="SLIDER;0;20;20"/>
+            <Var id="GMNonlinearAbilitiesDelta" displayName="gm_nonlinear_abs_delta_slider" displayType="SLIDER;0;20;20"/>
+            <Var id="GMNoAddLevelsGuards" displayName="gm_no_add_levels_guards" displayType="TOGGLE"/>
+            <Var id="GMNoAnimalUpscaling" displayName="gm_no_animal_upscaling_toggle" displayType="TOGGLE"/>
+            <Var id="GMHealthMultiplier" displayName="gm_health_multiplier" displayType="SLIDER;-1;5;60"/>
+            <Var id="GMDamageMultiplier" displayName="gm_damage_multiplier" displayType="SLIDER;-1;5;60"/>
+            <Var id="GMBossHealthMultiplier" displayName="gm_boss_health_multiplier" displayType="SLIDER;-1;5;60"/>
+            <Var id="GMBossDamageMultiplier" displayName="gm_boss_damage_multiplier" displayType="SLIDER;-1;5;60"/>
+        </VisibleVars>
+    </Group>
+	
+    <Group id="GMExpOptions" displayName="Mods.ghost_mode.gm_exp_options">
+		<PresetsArray>
+			<Preset id="0" displayName="gm_default">
+				<Entry varId="GMNoQuestLevels" value="false"/>
+				<Entry varId="GMUseXMLExp" value="false"/>
+				<Entry varId="GMQuestExpModifier" value="0"/>
+				<Entry varId="GMMonsterExpModifier" value="0"/>
+			</Preset>
+		</PresetsArray>
+        <VisibleVars>
+            <Var id="GMNoQuestLevels" displayName="gm_no_quest_levels_toggle" displayType="TOGGLE"/>
+            <Var id="GMUseXMLExp" displayName="gm_use_xml_exp_toggle" displayType="TOGGLE" />
+            <Var id="GMQuestExpModifier" displayName="gm_quest_exp_slider" displayType="SLIDER;-1;1;200"/>
+            <Var id="GMMonsterExpModifier" displayName="gm_monster_exp_slider" displayType="SLIDER;-1;1;200"/>
+        </VisibleVars>
+    </Group>
+	
+    <Group id="GMGameplayOptions" displayName="Mods.ghost_mode.gm_gameplay_options">
+		<PresetsArray>
+			<Preset id="0" displayName="gm_recommended">
+				<Entry varId="GMSinkBoat" value="true"/>
+				<Entry varId="GMSinkBoatOverEnc" value="20"/>
+				<Entry varId="GMEncumbranceMultiplier" value="0"/>
+				<Entry varId="GMArmorRegenPenalty" value="false"/>
+				<Entry varId="GMCombatStaminaRegen" value="0"/>
+				<Entry varId="GMOutOfCombatStaminaRegen" value="0"/>
+				<Entry varId="GMCombatVitalityRegen" value="0"/>
+				<Entry varId="GMOutOfCombatVitalityRegen" value="0"/>
+				<Entry varId="GMAgilityStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMMeleeStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMSignStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMStaminaDelay" value="0"/>
+				<Entry varId="GMMeleeSpecialCooldown" value="7.5"/>
+				<Entry varId="GMSignCooldown" value="5"/>
+				<Entry varId="GMAltSignCooldown" value="7.5"/>
+				<Entry varId="GMVersion" value="4.0"/>
+			</Preset>
+			<Preset id="1" displayName="gm_old_ver">
+				<Entry varId="GMSinkBoat" value="false"/>
+				<Entry varId="GMSinkBoatOverEnc" value="0"/>
+				<Entry varId="GMEncumbranceMultiplier" value="0"/>
+				<Entry varId="GMArmorRegenPenalty" value="true"/>
+				<Entry varId="GMCombatStaminaRegen" value="-5"/>
+				<Entry varId="GMOutOfCombatStaminaRegen" value="0"/>
+				<Entry varId="GMCombatVitalityRegen" value="1"/>
+				<Entry varId="GMOutOfCombatVitalityRegen" value="1"/>
+				<Entry varId="GMAgilityStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMMeleeStaminaCostMultiplier" value="-1"/>
+				<Entry varId="GMSignStaminaCostMultiplier" value="1.5"/>
+				<Entry varId="GMStaminaDelay" value="0"/>
+				<Entry varId="GMMeleeSpecialCooldown" value="0"/>
+				<Entry varId="GMSignCooldown" value="0"/>
+				<Entry varId="GMAltSignCooldown" value="0"/>
+				<Entry varId="GMVersion" value="4.0"/>
+			</Preset>
+			<Preset id="2" displayName="gm_turn_off">
+				<Entry varId="GMSinkBoat" value="false"/>
+				<Entry varId="GMSinkBoatOverEnc" value="0"/>
+				<Entry varId="GMEncumbranceMultiplier" value="0"/>
+				<Entry varId="GMArmorRegenPenalty" value="false"/>
+				<Entry varId="GMCombatStaminaRegen" value="0"/>
+				<Entry varId="GMOutOfCombatStaminaRegen" value="0"/>
+				<Entry varId="GMCombatVitalityRegen" value="0"/>
+				<Entry varId="GMOutOfCombatVitalityRegen" value="0"/>
+				<Entry varId="GMAgilityStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMMeleeStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMSignStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMStaminaDelay" value="0"/>
+				<Entry varId="GMMeleeSpecialCooldown" value="0"/>
+				<Entry varId="GMSignCooldown" value="0"/>
+				<Entry varId="GMAltSignCooldown" value="0"/>
+				<Entry varId="GMVersion" value="4.0"/>
+			</Preset>
+		</PresetsArray>
+        <VisibleVars>
+            <Var id="GMSinkBoat" displayName="gm_sink_boat_toggle" displayType="TOGGLE"/>
+            <Var id="GMSinkBoatOverEnc" displayName="gm_sink_boat_slider" displayType="SLIDER;0;100;100"/>
+            <Var id="GMEncumbranceMultiplier" displayName="gm_encumbrance_slider" displayType="SLIDER;0;100;100"/>
+            <Var id="GMArmorRegenPenalty" displayName="gm_armor_reg_penalty" displayType="TOGGLE"/>
+            <Var id="GMCombatStaminaRegen" displayName="gm_cbtsreg" displayType="SLIDER;-15;85;100"/>
+            <Var id="GMOutOfCombatStaminaRegen" displayName="gm_ocbtsreg" displayType="SLIDER;-100;0;100"/>
+            <Var id="GMCombatVitalityRegen" displayName="gm_cbtvreg" displayType="SLIDER;0;1000;1000"/>
+            <Var id="GMOutOfCombatVitalityRegen" displayName="gm_ocbtvreg" displayType="SLIDER;0;1000;1000"/>
+            <Var id="GMAgilityStaminaCostMultiplier" displayName="gm_ascost" displayType="SLIDER;-1;5;60"/>
+            <Var id="GMMeleeStaminaCostMultiplier" displayName="gm_mscost" displayType="SLIDER;-1;5;60"/>
+            <Var id="GMSignStaminaCostMultiplier" displayName="gm_sscost" displayType="SLIDER;-1;3;40"/>
+            <Var id="GMStaminaDelay" displayName="gm_stdelay" displayType="SLIDER;-1;5;60"/>
+            <Var id="GMMeleeSpecialCooldown" displayName="gm_mcooldown" displayType="SLIDER;0;30;60"/>
+            <Var id="GMSignCooldown" displayName="gm_scooldown" displayType="SLIDER;0;30;60"/>
+            <Var id="GMAltSignCooldown" displayName="gm_ascooldown" displayType="SLIDER;0;30;60"/>
+			<Var id="GMVersion" displayName="gm_version" displayType="SLIDER;0;50;50000" visibilityCondition="hideAlways"/>
+        </VisibleVars>
+    </Group>
+	
+    <Group id="GMQOLOptions" displayName="Mods.ghost_mode.gm_qol_options">
+		<PresetsArray>
+			<Preset id="0" displayName="gm_recommended">
+				<Entry varId="GMSignInstantCast" value="true"/>
+				<Entry varId="GMLowStaminaSFX" value="50"/>
+				<Entry varId="GMLowStaminaSFXVolume" value="100"/>
+				<Entry varId="GMLowStaminaSFXDynamicVolume" value="true"/>
+				<Entry varId="GMLowStaminaSFXRate" value="0"/>
+				<Entry varId="GMLowStaminaSFXDynamicRate" value="true"/>
+			</Preset>
+			<Preset id="1" displayName="gm_turn_off">
+				<Entry varId="GMSignInstantCast" value="false"/>
+				<Entry varId="GMLowStaminaSFX" value="0"/>
+				<Entry varId="GMLowStaminaSFXVolume" value="0"/>
+				<Entry varId="GMLowStaminaSFXDynamicVolume" value="false"/>
+				<Entry varId="GMLowStaminaSFXRate" value="0"/>
+				<Entry varId="GMLowStaminaSFXDynamicRate" value="false"/>
+			</Preset>
+		</PresetsArray>
+        <VisibleVars>
+            <Var id="GMSignInstantCast" displayName="gm_sign_instant_cast_toggle" displayType="TOGGLE"/>
+            <Var id="GMLowStaminaSFX" displayName="gm_lowstamsfx" displayType="SLIDER;0;100;100"/>
+            <Var id="GMLowStaminaSFXVolume" displayName="gm_lowstamsfx_vol" displayType="SLIDER;0;100;100"/>
+            <Var id="GMLowStaminaSFXDynamicVolume" displayName="gm_lowstamsfx_dynvol" displayType="TOGGLE"/>
+            <Var id="GMLowStaminaSFXRate" displayName="gm_lowstamsfx_rate" displayType="SLIDER;0;100;100"/>
+            <Var id="GMLowStaminaSFXDynamicRate" displayName="gm_lowstamsfx_dynrate" displayType="TOGGLE"/>
+        </VisibleVars>
+    </Group>
+</UserConfig>

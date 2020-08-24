@@ -609,6 +609,10 @@ class CR4MapMenu extends CR4MenuBase
 				l_flashObject.SetMemberFlashString( "type",     NameToString( pin.visibleType ) + GetPinTypePostfix( pin ) );
 				l_flashObject.SetMemberFlashString( "filteredType", NameToString( pin.visibleType ) );
 				l_flashObject.SetMemberFlashNumber( "radius",	pin.visibleRadius );
+				//modSigns: debug
+				if( FactsQuerySum( "modSigns_debug_labels" ) > 0 )
+					l_flashObject.SetMemberFlashBool( "isFastTravel", true );
+				else
 				l_flashObject.SetMemberFlashBool(   "isFastTravel",	pin.type == 'RoadSign' || pin.type == 'Harbor' );
 				l_flashObject.SetMemberFlashBool(   "isQuest",	commonMapManager.IsQuestPinType( pin.type ) );
 				l_flashObject.SetMemberFlashBool(   "isPlayer",	false );
@@ -841,6 +845,12 @@ class CR4MapMenu extends CR4MenuBase
 				break;
 		}
 		
+		//modSigns: debug
+		if( FactsQuerySum( "modSigns_debug_labels" ) > 0 )
+		{
+			description = label + description;
+			label = targetPin.tag;
+		}
 		dataObject.SetMemberFlashString( "label", label );
 		dataObject.SetMemberFlashString( "description", description );
 	}

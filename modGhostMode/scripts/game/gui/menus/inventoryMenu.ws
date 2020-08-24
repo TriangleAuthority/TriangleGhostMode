@@ -312,6 +312,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		else
 		{
 			_defaultInventoryState = IMS_Player;
+			FixQuestItems(); //modSigns
 		}
 		
 		defaultTab = SetInitialTabNewFlags( hasNewItems );
@@ -2246,6 +2247,53 @@ class CR4InventoryMenu extends CR4MenuBase
 	}
 	
 	
+	public function UpdateFace() //modSigns: razor shaving
+	{
+		PlayPaperdollAnimation( 'armor' );
+		UpdateGuiSceneEntityItems();
+	}
+	
+	public function PlayerDismantleItem(currentItemId : SItemUniqueId) //modSigns: dismantle kits
+	{
+		var isAlchemy, isCrafting : bool;
+		var invComp : CInventoryComponent;
+		
+		invComp = _playerInv.GetInventoryComponent();
+	
+		if(!invComp.ItemHasRecyclingParts(currentItemId))
+			return;
+			
+		isAlchemy = invComp.IsItemAlchemyIngredient(currentItemId);
+		isCrafting = invComp.IsItemCraftingIngredient(currentItemId) || invComp.IsItemJunk(currentItemId);
+		
+		if(!isAlchemy && !isCrafting)
+			return;
+		
+		if(isAlchemy && invComp.GetItemQuantityByName('alchemy_dismantle_kit_1') < 1)
+			return;
+
+		if(isCrafting && invComp.GetItemQuantityByName('gear_dismantle_kit_1') < 1)
+			return;
+		
+		invComp.RecycleItem(currentItemId, ECL_Arch_Master);
+
+		if(isAlchemy)
+			invComp.RemoveItemByName('alchemy_dismantle_kit_1', 1);
+		else if(isCrafting)
+			invComp.RemoveItemByName('gear_dismantle_kit_1', 1);
+	
+		UpdateItemsCounter();
+		UpdatePlayerStatisticsData();
+		UpdateEncumbranceInfo();
+		PopulateTabData(InventoryMenuTab_Weapons);
+		PopulateTabData(InventoryMenuTab_Potions);
+		PopulateTabData(InventoryMenuTab_Ingredients);
+		PopulateTabData(InventoryMenuTab_QuestItems);
+		PopulateTabData(InventoryMenuTab_Default);
+		PopulateTabData(InventoryMenuTab_Books);
+	}
+	
+	
 	private function PlayPaperdollAnimation( category : name ):void
 	{
 		if (m_player)
@@ -2329,7 +2377,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		return UnequipItem(item, moveToIndex);
 	}
 	
-	public function UnequipItem( item : SItemUniqueId, moveToIndex : int ) : bool
+	public function UnequipItem( item : SItemUniqueId, moveToIndex : int, optional forceUnequip : bool ) : bool
 	{
 		var forceInvAllUpdate : bool;
 		var isSetBonusActive  : bool;
@@ -2346,7 +2394,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		
 		forceInvAllUpdate = false;
 		
-		if (thePlayer.IsInCombat())
+		if (thePlayer.IsInCombat() && !forceUnequip) //modSigns
 		{
 			showNotification(GetLocStringByKeyExt("menu_cannot_perform_action_combat"));
 			OnPlaySoundEvent("gui_global_denied");
@@ -4021,7 +4069,15 @@ class CR4InventoryMenu extends CR4MenuBase
 			{
 				InventoryRemoveItem(itemId);
 			}
-			PaperdollUpdateItem(curItemInSlot);
+			//modSigns: properly unequip item if level is higher than can be equipped
+			if( !thePlayer.HasRequiredLevelToEquipItem( curItemInSlot ) )
+			{
+				UnequipItem( curItemInSlot, -1, true );
+			}
+			else
+			{
+				PaperdollUpdateItem(curItemInSlot);
+			}
 		}
 		else
 		{

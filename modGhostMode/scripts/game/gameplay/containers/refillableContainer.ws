@@ -87,9 +87,13 @@ class W3RefillableContainer extends W3Container
 		var oldItems : array<SItemUniqueId>;
 		var oldItemsCounts : array<int>;
 		var herbBonusChance : float;
+		var isBalisse : bool; //modSigns: balisse fix
+		
+		isBalisse = StrEndsWith( GetReadableName(), "balisse_fruit.w2ent" ); //modSigns: balisse fix
 		
 		inv = GetInventory();
-		if ( inv && inv.IsLootRenewable() )
+		
+		if ( inv && ( inv.IsLootRenewable() || isBalisse ) )
 		{
 			if( inv.IsReadyToRenew() )
 			{
@@ -112,6 +116,10 @@ class W3RefillableContainer extends W3Container
 			}
 			
 			inv.UpdateLoot();
+			
+			if( isBalisse && inv.IsEmpty() ) //modSigns: balisse fix
+				inv.AddAnItem('Balisse fruit', 1);
+			
 			checkedForBonusMoney = false;
 			checkedForBonusHerbs = false;
 			

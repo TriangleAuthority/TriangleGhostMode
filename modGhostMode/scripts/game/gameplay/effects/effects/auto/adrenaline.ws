@@ -37,7 +37,7 @@ class W3Effect_AdrenalineDrain extends CBaseGameplayEffect
 		var buff : W3Effect_Toxicity;
 		
 		
-		if(target.IsInCombat() && !target.HasBuff(EET_Runeword8))
+		if(target.IsInCombat() || target.HasBuff(EET_Runeword8)) //modSigns
 			isActive = false;
 			
 		drainVal = dt * (effectValue.valueAdditive + (target.GetStatMax(BCS_Focus) + effectValue.valueBase) * effectValue.valueMultiplicative);

@@ -2,62 +2,77 @@
 <redxml>
   <definitions>
     <abilities>
-                  <!-- Foodie -->
+          <!-- Foodie: modSigns - changed -->
           <ability name="perk_15">
             <tags>perk_15</tags>
-            <duration type="add" min="1200"/>
+            <duration_bonus type="mult" min="1.0"/>
           </ability>
 
                        <!-- Pyromaniac -->
           <ability name="perk_20">
             <tags>perk_20</tags>
             <stack_multiplier type="mult" min="0.5"/>
-            <dmg_multiplier type="mult" min="2" />
+            <dmg_multiplier type="mult" min="1.0" />
           </ability>
 
-          <!-- DEFENSE -->
+          <!-- DEFENSE: modSigns - redone -->
           <ability name="perk_21">
               <tags>perk_21</tags>
-              <parry type="add" min="0.1" />
-              <counter type="add" min="0.4" />
-              <dodge type="add" min="0.3" />
-              <roll type="add" min="0.2" />
-              <perk21Time type="add" min="5" />
+              <!-- <parry type="add" min="0.1" />
+              <counter type="add" min="0.2" />
+              <dodge type="add" min="0.1" />
+              <roll type="add" min="0.1" />
+              <perk21Time type="add" min="5" /> -->
+              <stamina_kill type="mult" min="0.15" />
+              <stamina_other type="mult" min="0.05" />
           </ability>
 
           <!-- ######################### ITEM SET BONUS ABILITIES ######################## -->
-          <ability name="setBonusAbilityBear_1">
+          <ability name="setBonusAbilityBear_1"> <!-- modSigns -->
               <tags>setBonusAbilityBear_1</tags>
-              <quen_reapply_chance type="mult" min="0.05" />
+              <bonus_focus_gain type="add" min="0.035" /> <!-- points per piece -->
+			  <attack_power type="mult" min="0.035" /> <!-- granted per each focus point per piece -->
           </ability>
 
+          <ability name="setBonusAbilityBear_2"> <!-- modSigns -->
+			  <tags>setBonusAbilityBear_2</tags>
+			  <stamina_attack type="add" min="0.334" /> <!-- attack cost prc restored -->
+          </ability>
+
+          <ability name="setBonusAbilityRedWolf_1"> <!-- modSigns -->
+              <tags>setBonusAbilityRedWolf_1</tags>
+			  <per_redwolf_piece_crit_chance_bonus type="add" min="0.05" />
+			  <per_redwolf_piece_crit_power_bonus type="add" min="0.10" />
+          </ability>
 
           <ability name="setBonusAbilityRedWolf_2">
               <tags>setBonusAbilityRedWolf_2</tags>
               <amount type="add" min="1" />
-            </ability>
-
-          <ability name="setBonusAbilityBear_2">
-            <tags>setBonusAbilityBear_2</tags>
-            <quen_dmg_boost type="mult" min="2.0"/>
           </ability>
 
-          <ability name="setBonusAbilityLynx_2">
-            <tags>setBonusAbilityBear_2</tags>
-            <lynx_2_dmg_boost type="add" min="0.50"/>
-            <lynx_2_stun_duration type="add" min="3" />
-			<lynx_2_adrenaline_cost type="add" min="1" />
+          <ability name="setBonusAbilityLynx_2"> <!-- modSigns: no longer used -->
+            <tags>setBonusAbilityLynx_2</tags>
+            <!-- <lynx_2_dmg_boost type="add" min="0.50"/> -->
+            <!-- <lynx_2_stun_duration type="add" min="3" /> -->
+			<!-- <lynx_2_adrenaline_cost type="add" min="1" /> -->
           </ability>
 
           <ability name="setBonusAbilityVampire">
             <tags>setBonusAbilityVampire</tags>
-            <life_percent type="add" min="1"/>
+            <life_percent type="add" min="0.5"/> <!-- modSigns -->
           </ability>
 		
-		<ability name="SetBonusAbilityWolf_1">
-			<tags>SetBonusAbilityWolf_1</tags>
-			<max_oils_count type="add" min="3" />
-		</ability>
+		  <ability name="SetBonusAbilityWolf_1"> <!-- modSigns -->
+		  	<tags>SetBonusAbilityWolf_1</tags>
+		  	<per_piece_oil_bonus type="add" min="0.167" />
+		  </ability>
+		  
+		  <ability name="SetBonusAbilityWolf_2"> <!-- modSigns -->
+		  	<tags>SetBonusAbilityWolf_2</tags>
+		  	<max_oils_count type="add" min="3" />
+		  	<per_oil_crit_chance_bonus type="add" min="0.05" />
+		  	<per_oil_crit_power_bonus type="add" min="0.10" />
+		  </ability>
 
     </abilities>
   </definitions>

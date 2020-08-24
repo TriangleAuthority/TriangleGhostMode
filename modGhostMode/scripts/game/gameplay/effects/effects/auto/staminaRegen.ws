@@ -15,6 +15,8 @@ class W3Effect_AutoStaminaRegen extends W3AutoRegenEffect
 		default regenStat = CRS_Stamina;	
 		default effectType = EET_AutoStaminaRegen;
 		default regenModeIsCombat = true;		
+		
+	private var wasLoaded : bool; //modSigns
 	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
@@ -31,10 +33,17 @@ class W3Effect_AutoStaminaRegen extends W3AutoRegenEffect
 		super.OnLoad(t, eff);
 		if(isOnPlayer)
 			cachedPlayer = (CR4Player)target;
+		wasLoaded = true; //modSigns
 	}
 	
 	event OnUpdate(dt : float)
 	{
+		if(wasLoaded) //modSigns
+		{
+			SetEffectValue();
+			wasLoaded = false;
+		}
+		
 		if(isOnPlayer)
 		{
 			
@@ -52,17 +61,31 @@ class W3Effect_AutoStaminaRegen extends W3AutoRegenEffect
 			
 			if ( cachedPlayer.IsInCombat() )
 			{
-				if ( thePlayer.IsGuarded() )
-					effectValue = target.GetAttributeValue( 'staminaRegenGuarded' );
-				else
-				{
-					attributeName = RegenStatEnumToName(regenStat);
-					SetEffectValue();
-				}
+				//if ( thePlayer.IsGuarded() )
+				//	effectValue = target.GetAttributeValue( 'staminaRegenGuarded' );
+				//else
+				//{
+				//	attributeName = RegenStatEnumToName(regenStat);
+				//	SetEffectValue();
+				//}
+				//modSigns: stamina regen when guarded is 50% of the normal one - see SetEffectValue
+				attributeName = RegenStatEnumToName(regenStat);
+				SetEffectValue();
 			}
 		}
-
+		
 		super.OnUpdate( dt );
+		
+		//modSigns begin
+		if( isOnPlayer )
+		{
+			((CR4Player)target).CheckForLowStamina();
+		}
+		else
+		{
+			target.CheckShouldWaitForStaminaRegen();
+		}
+		//modSigns end
 		
 		if( target.GetStatPercents( BCS_Stamina ) >= 1.0f )
 		{
@@ -73,5 +96,15 @@ class W3Effect_AutoStaminaRegen extends W3AutoRegenEffect
 	protected function SetEffectValue()
 	{
 		effectValue = target.GetAttributeValue(attributeName);
+		if(isOnPlayer && GetWitcherPlayer()) //modSigns
+		{
+			gmModRegenValue(attributeName, effectValue);
+			//modSigns: stamina regen when guarded is 50% of the normal one
+			if(GetWitcherPlayer().IsGuarded())
+			{
+				effectValue.valueAdditive *= 0.5;
+				effectValue.valueMultiplicative *= 0.5;
+			}
+		}
 	}
 }

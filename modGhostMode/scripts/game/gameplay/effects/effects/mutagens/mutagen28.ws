@@ -6,13 +6,35 @@
 
 
 
-
+//modSigns: redone
 class W3Mutagen28_Effect extends W3Mutagen_Effect
 {
 	default effectType = EET_Mutagen28;
-	default dontAddAbilityOnTarget = true;
+	//default dontAddAbilityOnTarget = true;
+	var dmgMult : float;
+	var dmgRed : float;
 	
-	public function GetMonsterDamageBonus(mc : EMonsterCategory) : SAbilityAttributeValue
+	public function GetDmgMultiplier() : float
+	{
+		//always lazy
+		if(dmgMult <= 0)
+		{
+			dmgMult = CalculateAttributeValue(thePlayer.GetAbilityAttributeValue('Mutagen28Effect', 'mutagen28_dmg_mult'));
+		}
+		return dmgMult;
+	}
+	
+	public function GetDmgReduction() : float
+	{
+		//always lazy
+		if(dmgRed <= 0)
+		{
+			dmgRed = CalculateAttributeValue(thePlayer.GetAbilityAttributeValue('Mutagen28Effect', 'mutagen28_dmg_reduction'));
+		}
+		return dmgRed;
+	}
+	
+	/*public function GetMonsterDamageBonus(mc : EMonsterCategory) : SAbilityAttributeValue
 	{
 		var min, max : SAbilityAttributeValue;
 		var attName : name;
@@ -64,5 +86,5 @@ class W3Mutagen28_Effect extends W3Mutagen_Effect
 				bonusResist = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
 			}
 		}
-	}
+	}*/
 }

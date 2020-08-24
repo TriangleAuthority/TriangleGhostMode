@@ -121,6 +121,8 @@ abstract class CBTTaskCastSign extends CBTTaskAttack
 
 abstract class CBTTaskCastSignDef extends CBTTaskPlayAnimationEventDecoratorDef
 {
+	default xmlStaminaCostName = ''; //modSigns: stamina is drained by sign entity, removing task stamina cost/drain
+	default drainStaminaOnUse  = false; //modSigns
 };
 
 
@@ -295,12 +297,15 @@ class CBTTaskCastQuen extends CBTTaskCastSign
 		
 		if ( data.isActionMelee )
 		{
-			params.effectType = EET_Stagger;
-			params.creator = GetActor();
-			params.sourceName = "quen";
-			params.duration = 0.1;
-			
-			((CActor)data.attacker).AddEffectCustom( params );
+			//theGame.witcherLog.AddMessage("NPC Quen stagger");
+			//params.effectType = EET_Stagger;
+			//params.creator = GetActor();
+			//params.sourceName = "quen";
+			//params.duration = 0.1;
+			//
+			//((CActor)data.attacker).AddEffectCustom( params );
+			//modSigns: changed to default stagger
+			((CActor)data.attacker).AddEffectDefault( EET_Stagger, GetActor(), "quen", true );
 		}
 		
 		
@@ -310,6 +315,8 @@ class CBTTaskCastQuen extends CBTTaskCastSign
 	{
 		var npc 	: CNewNPC = GetNPC();
 		var data 	: CDamageData;
+		
+		//theGame.witcherLog.AddMessage("OnGameplayEvent: " + eventName);
 		
 		if ( eventName == 'BeingHit' && shieldActive )
 		{
@@ -334,6 +341,7 @@ class CBTTaskCastQuen extends CBTTaskCastSign
 	
 	function OnListenedGameplayEvent( eventName : CName ) : bool
 	{
+		//theGame.witcherLog.AddMessage("OnListenedGameplayEvent: " + eventName);
 		PlayHitEffect();
 		super.Throw();
 		return true;
@@ -398,6 +406,16 @@ class CBTTaskCastQuenDef extends CBTTaskCastSignDef
 	editable var completeAfterHit : bool;
 	editable var alternateFireMode : bool;
 	editable var processQuenOnCounterActivation : bool;
+	
+	//modSigns: remove quen task cost as stamina is drained by sign entity
+	function OnSpawn( task : IBehTreeTask )
+	{
+		var thisTask : CBTTaskCastQuen;
+		
+		thisTask = (CBTTaskCastQuen)task;
+		thisTask.xmlStaminaCostName = '';
+		thisTask.drainStaminaOnUse = false;
+	}
 	
 	function InitializeEvents()
 	{

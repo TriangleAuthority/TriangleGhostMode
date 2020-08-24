@@ -3,107 +3,108 @@
 	<definitions>
 		<abilities>
 			<!-- ######################## Geralt DLC5 armor stats ######################## -->
+			<!-- lvl 8 medium gear: same as relic variant, but with no upgrade slots -->
 			<ability name="DLC5 Nilfgaardian Armor _Stats">
 			<tags></tags>
-				<armor type="base" always_random="false" min="80" max="80"/>
-				<slashing_resistance_perc type="base" always_random="false" min="0.30" max="0.30"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.25" max="0.25"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.25" max="0.25"/>
-				<rending_resistance_perc type="base" always_random="false" min="0.1" max="0.1"/>
-				<elemental_resistance_perc type="base" always_random="false" min="0.05" max="0.05"/>
-				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="12" />
+				<weight							type="base"	min="13.5"				/>
+				<quality						type="add"	min="4"		max="4"		/>
+				<armor							type="base"	min="65"	max="65"	/>
+				<slashing_resistance_perc		type="base"	min="0.14"				/>
+				<piercing_resistance_perc		type="base"	min="0.06"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.06"				/>
+				<rending_resistance_perc		type="base" min="0.14"				/>
+				<elemental_resistance_perc		type="base" min="0.14"				/>
 			</ability>
 			
 			<ability name="DLC5 Nilfgaardian Boots _Stats">
 			<tags></tags>
-				<armor type="base" always_random="false" min="27" max="27"/>
-				<slashing_resistance_perc type="base" always_random="false" min="0.03" max="0.03"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.03" max="0.03"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.03" max="0.03"/>
-				<rending_resistance_perc type="base" always_random="false" min="0.01" max="0.01"/>
-				<elemental_resistance_perc type="base" always_random="false" min="0.01" max="0.01"/>
-				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight 						type="base" min="4.5"				/>
+				<quality 						type="add"	min="4"					/>
+				<armor 							type="base" min="21"				/>
+				<slashing_resistance_perc		type="base"	min="0.06"				/>
+				<piercing_resistance_perc		type="base"	min="0.04"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+				<rending_resistance_perc		type="base"	min="0.06"				/>
+				<elemental_resistance_perc		type="base"	min="0.06"				/>
 			</ability>
 			
 			<ability name="DLC5 Nilfgaardian Gloves _Stats">
 			<tags></tags>
-				<armor type="base" always_random="false" min="23" max="23"/>
-				<slashing_resistance_perc type="base" always_random="false" min="0.02" max="0.02"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.02" max="0.02"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.02" max="0.02"/>
-				<rending_resistance_perc type="base" always_random="false" min="0.01" max="0.01"/>
-				<elemental_resistance_perc type="base" always_random="false" min="0.01" max="0.01"/>
-				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="3.5" 				/>
+				<quality						type="add"	min="4"					/>
+				<armor 							type="base"	min="17"				/>
+				<slashing_resistance_perc		type="base"	min="0.05"				/>
+				<piercing_resistance_perc		type="base"	min="0.03"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
+				<rending_resistance_perc		type="base"	min="0.05"				/>
+				<elemental_resistance_perc		type="base"	min="0.05"				/>
 			</ability>
 			
 			<ability name="DLC5 Nilfgaardian Pants _Stats">
 			<tags></tags>
-				<armor type="base" always_random="false" min="27" max="27"/>
-				<slashing_resistance_perc type="base" always_random="false" min="0.1" max="0.1"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.1" max="0.1"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.1" max="0.1"/>
-				<rending_resistance_perc type="base" always_random="false" min="0.03" max="0.03"/>
-				<elemental_resistance_perc type="base" always_random="false" min="0.03" max="0.03"/>
-				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="3.5"				/>
+				<quality						type="add"	min="4"					/>
+				<armor							type="base"	min="21"				/>
+				<slashing_resistance_perc		type="base"	min="0.07"				/>
+				<piercing_resistance_perc		type="base"	min="0.04"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+				<rending_resistance_perc		type="base" min="0.07"				/>
+				<elemental_resistance_perc		type="base" min="0.07"				/>
 			</ability>
 			
 			<!-- ######################## New Game+ Geralt DLC5 armor stats ######################## -->
 			<ability name="NGP DLC5 Nilfgaardian Armor _Stats">
 			<tags></tags>
-				<armor type="base" always_random="false" min="230" max="230"/>
-				<slashing_resistance_perc type="base" always_random="false" min="0.35" max="0.35"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.30" max="0.30"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.30" max="0.30"/>
-				<rending_resistance_perc type="base" always_random="false" min="0.15" max="0.15"/>
-				<elemental_resistance_perc type="base" always_random="false" min="0.10" max="0.10"/>
-				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="12" />
+				<weight							type="base"	min="13.5"				/>
+				<quality						type="add"	min="4"		max="4"		/>
+				<armor							type="base"	min="215"	max="215"	/>
+				<slashing_resistance_perc		type="base"	min="0.14"				/>
+				<piercing_resistance_perc		type="base"	min="0.06"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.06"				/>
+				<rending_resistance_perc		type="base" min="0.14"				/>
+				<elemental_resistance_perc		type="base" min="0.14"				/>
 			</ability>
 			
 			<ability name="NGP DLC5 Nilfgaardian Boots _Stats">
 			<tags></tags>
-				<armor type="base" always_random="false" min="87" max="87"/>
-				<slashing_resistance_perc type="base" always_random="false" min="0.08" max="0.08"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.08" max="0.08"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.08" max="0.08"/>
-				<rending_resistance_perc type="base" always_random="false" min="0.06" max="0.06"/>
-				<elemental_resistance_perc type="base" always_random="false" min="0.06" max="0.06"/>
-				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight 						type="base" min="4.5"				/>
+				<quality 						type="add"	min="4"					/>
+				<armor 							type="base" min="81"				/>
+				<slashing_resistance_perc		type="base"	min="0.06"				/>
+				<piercing_resistance_perc		type="base"	min="0.04"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+				<rending_resistance_perc		type="base"	min="0.06"				/>
+				<elemental_resistance_perc		type="base"	min="0.06"				/>
 			</ability>
 			
 			<ability name="NGP DLC5 Nilfgaardian Gloves _Stats">
 			<tags></tags>
-				<armor type="base" always_random="false" min="83" max="83"/>
-				<slashing_resistance_perc type="base" always_random="false" min="0.07" max="0.07"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.07" max="0.07"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.07" max="0.07"/>
-				<rending_resistance_perc type="base" always_random="false" min="0.06" max="0.06"/>
-				<elemental_resistance_perc type="base" always_random="false" min="0.06" max="0.06"/>
-				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="3.5" 				/>
+				<quality						type="add"	min="4"					/>
+				<armor 							type="base"	min="77"				/>
+				<slashing_resistance_perc		type="base"	min="0.05"				/>
+				<piercing_resistance_perc		type="base"	min="0.03"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
+				<rending_resistance_perc		type="base"	min="0.05"				/>
+				<elemental_resistance_perc		type="base"	min="0.05"				/>
 			</ability>
 			
 			<ability name="NGP DLC5 Nilfgaardian Pants _Stats">
 			<tags></tags>
-				<armor type="base" always_random="false" min="87" max="87"/>
-				<slashing_resistance_perc type="base" always_random="false" min="0.15" max="0.15"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.15" max="0.1"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.15" max="0.15"/>
-				<rending_resistance_perc type="base" always_random="false" min="0.08" max="0.08"/>
-				<elemental_resistance_perc type="base" always_random="false" min="0.08" max="0.08"/>
-				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="3.5"				/>
+				<quality						type="add"	min="4"					/>
+				<armor							type="base"	min="81"				/>
+				<slashing_resistance_perc		type="base"	min="0.07"				/>
+				<piercing_resistance_perc		type="base"	min="0.04"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+				<rending_resistance_perc		type="base" min="0.07"				/>
+				<elemental_resistance_perc		type="base" min="0.07"				/>
 			</ability>
 			
 			<!-- ######################## Geralt DLC5 horse items stats ######################## -->
 			<ability name="DLC5 Nilfgaardian HorseBag _Stats">
 				<tags>HorseBag1</tags>
-				<encumbrance type="add" always_random="false" min="70" max="70" />
+				<encumbrance type="add" always_random="false" min="60" max="60" />
 				<weight type="base" min="1"/>
 			</ability>
 			
@@ -129,7 +130,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_armor_64x64.png"
 				localisation_key_name = "item_name_nilfgaardian_armour_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price="100"
+				price="334"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -139,6 +140,9 @@
 					<a>DLC5 Nilfgaardian Armor _Stats</a>
 					<a>Default armor _Stats</a>
 				</base_abilities>		
+				<recycling_parts>				<parts count="1">Leather</parts>
+												<parts count="1">Dark steel plate</parts>
+				</recycling_parts> 
 				<variants>
 					<variant equip_template="t_01a_mg__nilfgaardian" category="gloves"></variant>
 				</variants>
@@ -156,7 +160,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_boots_64x128.png"
 				localisation_key_name="item_name_nilfgaardian_boots_dlc"
 				localisation_key_description="item_category_medium_armor_description"
-				price="15" 
+				price="95" 
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -164,6 +168,9 @@
 					<a>DLC5 Nilfgaardian Boots _Stats</a>
 					<a>Default armor _Stats</a>
 				</base_abilities>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+												<parts count="1">Dark steel ingot</parts>
+				</recycling_parts> 
 			</item>
 			
 			<!-- DLC 5 gloves -->
@@ -177,7 +184,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_gloves_64x128.png"
 				localisation_key_name = "item_name_nilfgaardian_gloves_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price="25"
+				price="95"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -185,6 +192,9 @@
 					<a>DLC5 Nilfgaardian Gloves _Stats</a>
 					<a>Default armor _Stats</a>
 				</base_abilities>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+												<parts count="1">Dark steel ingot</parts>
+				</recycling_parts> 
 			</item>
 			
 			<!-- DLC 5 pants -->
@@ -197,7 +207,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_legs_64x128.png"
 				localisation_key_name = "item_name_nilfgaardian_pants_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price = "50"
+				price = "126"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -205,6 +215,10 @@
 					<a>DLC5 Nilfgaardian Pants _Stats</a>
 					<a>Default armor _Stats</a>
 				</base_abilities>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+												<parts count="1">Linen</parts>
+												<parts count="1">Dark steel ingot</parts>
+				</recycling_parts> 
 				<collapse>
 					<category_cond name="armor" collapse="true"/>
 					<item_cond name="Body torso wet" collapse="false"/>
@@ -228,7 +242,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_armor_64x64.png"
 				localisation_key_name = "item_name_nilfgaardian_armour_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price="236"
+				price="334"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -238,15 +252,12 @@
 					<a>NGP DLC5 Nilfgaardian Armor _Stats</a>
 					<a>Default armor _Stats</a>
 				</base_abilities>		
+				<recycling_parts>				<parts count="1">Leather</parts>
+												<parts count="1">Dark steel plate</parts>
+				</recycling_parts> 
 				<variants>
 					<variant equip_template="t_01a_mg__nilfgaardian" category="gloves"></variant>
 				</variants>
-				<recycling_parts>				<parts count="5">Linen</parts>
-												<parts count="2">Hardened leather</parts>
-												<parts count="2">Leather squares</parts>
-												<parts count="2">Rope</parts>
-												<parts count="1">String</parts>
-				</recycling_parts> 
 			</item>
 			
 			<!-- New Game+ DLC 5 boots -->
@@ -261,7 +272,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_boots_64x128.png"
 				localisation_key_name="item_name_nilfgaardian_boots_dlc"
 				localisation_key_description="item_category_medium_armor_description"
-				price="102" 
+				price="95" 
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -269,11 +280,9 @@
 					<a>NGP DLC5 Nilfgaardian Boots _Stats</a>
 					<a>Default armor _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather</parts>
-												<parts count="3">Leather squares</parts>
-												<parts count="3">Thread</parts>
-												<parts count="1">Oil</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+												<parts count="1">Dark steel ingot</parts>
+				</recycling_parts> 
 			</item>
 			
 			<!-- New Game+ DLC 5 gloves -->
@@ -287,7 +296,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_gloves_64x128.png"
 				localisation_key_name = "item_name_nilfgaardian_gloves_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price="88"
+				price="95"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -295,11 +304,9 @@
 					<a>NGP DLC5 Nilfgaardian Gloves _Stats</a>
 					<a>Default armor _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Leather</parts>
-												<parts count="1">Thread</parts>
-												<parts count="2">Cotton</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+												<parts count="1">Dark steel ingot</parts>
+				</recycling_parts> 
 			</item>
 			
 			<!-- New Game+ DLC 5 pants -->
@@ -312,7 +319,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_legs_64x128.png"
 				localisation_key_name = "item_name_nilfgaardian_pants_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price = "73"
+				price = "126"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -329,18 +336,17 @@
 				<variants>
 					<variant equip_template="l_01a_mg__nilfgaardian" category="boots"></variant>
 				</variants>
-				<recycling_parts>				<parts count="2">Linen</parts>
-												<parts count="1">Leather squares</parts>
-												<parts count="1">Timber</parts>
-												<parts count="2">Leather straps</parts>
-												<parts count="3">String</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+												<parts count="1">Linen</parts>
+												<parts count="1">Dark steel ingot</parts>
+				</recycling_parts> 
 			</item>
 			
 			<!-- ######################## Geralt DLC5 horse items stats ######################## -->
 			<item name="DLC5 Nilfgaardian HorseBag"
 				category="horse_bag"
 				price = "175"
+				weight = "1.1"
 				stackable="1"
 				equip_template="i_01_hd__bags_nilfgaard"
 				grid_size = "2"
@@ -358,6 +364,7 @@
 			<item name="DLC5 Nilfgaardian HorseBlinders"
 				category="horse_blinder"
 				price = "125"
+				weight = "0.2"
 				stackable="1"
 				equip_template="c_01_hd__champron_nilfgaard"
 				grid_size = "2"
@@ -374,6 +381,7 @@
 			<item name="DLC5 Nilfgaardian HorseSaddle"
 				category="horse_saddle"
 				price = "250"
+				weight = "8"
 				stackable="1"
 				equip_template="s_01_hd__saddle_nilfgaard"
 				grid_size = "2"

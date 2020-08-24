@@ -78,40 +78,50 @@ abstract class W3CriticalDOTEffect extends W3DamageOverTimeEffect
 				return;
 		}
 		
-		
-		
-		
-		if(timeLeft <= 0 && !timeEndedHandled)
+		//modSigns
+		if(duration != -1 && timeLeft <= 0 && isActive)
 		{
-			timeEndedHandled = true;
-			target.SignalGameplayEvent('DisableFinisher');
-			
-			if(isOnPlayer)
-				LogCriticalPlayer("CriticalDOT.OnTimeUpdated() | " + this + " - timeout");
-			
-			
-			if(isActive && this == target.GetCurrentlyAnimatedCS())
-			{				
-				target.RequestCriticalAnimStop();
-			}
-			else
-			{
-				LogCritical("Deactivating not animated CS <<" + criticalStateType + ">>");
-				
-				if(isOnPlayer)
-					LogCriticalPlayer("CriticalDOT.OnTimeUpdated() | " + this + " - deactivating as it's not animated currently");
-				
-				isActive = false;			
-			}
-		}
-		else if(timeLeft <= 0 && !target.IsAlive())
-		{
-			
-			if(isOnPlayer)
-				LogCriticalPlayer("CriticalDOT.OnTimeUpdated() | " + this + " - isAlive set to false as target is dead");
-				
 			isActive = false;
 		}
+		
+		
+		
+		
+		//if(timeLeft <= 0 && !timeEndedHandled)
+		//{
+		//	timeEndedHandled = true;
+		//	target.SignalGameplayEvent('DisableFinisher');
+		//	
+		//	if(isOnPlayer)
+		//		LogCriticalPlayer("CriticalDOT.OnTimeUpdated() | " + this + " - timeout");
+		//	
+		//	
+		//	if(isActive && this == target.GetCurrentlyAnimatedCS())
+		//	{				
+		//		target.RequestCriticalAnimStop();
+		//	}
+		//	else
+		//	{
+		//		LogCritical("Deactivating not animated CS <<" + criticalStateType + ">>");
+		//		
+		//		if(isOnPlayer)
+		//			LogCriticalPlayer("CriticalDOT.OnTimeUpdated() | " + this + " - deactivating as it's not animated currently");
+		//		
+		//		isActive = false;			
+		//	}
+		//}
+		//else if(timeLeft <= 0 && !target.IsAlive())
+		//{
+		//	
+		//	if(isOnPlayer)
+		//		LogCriticalPlayer("CriticalDOT.OnTimeUpdated() | " + this + " - isAlive set to false as target is dead");
+		//		
+		//	isActive = false;
+		//}
+		//else if(timeLeft <= -1) //modSigns: RequestCriticalAnimStop is most probably failed
+		//{
+		//	isActive = false;
+		//}
 	}
 	
 	public function GetCriticalStateType() : ECriticalStateType			{return criticalStateType;}	
@@ -139,11 +149,11 @@ abstract class W3CriticalDOTEffect extends W3DamageOverTimeEffect
 		
 		params = (W3BuffDoTParams)customParams;
 		
-		if( params && params.isPerk20Active )
+		/*if( params && params.isPerk20Active )
 		{
 			perk20Bonus = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_20, 'dmg_multiplier', false, false);
 			effectValue.valueAdditive *= ( 1 + perk20Bonus.valueMultiplicative );
-		}
+		}*/ //modSigns: moved to base DoT effect
 			
 		
 		super.OnEffectAdded(customParams);

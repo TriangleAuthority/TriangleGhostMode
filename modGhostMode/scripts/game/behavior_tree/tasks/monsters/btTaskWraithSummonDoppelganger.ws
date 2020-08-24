@@ -29,6 +29,16 @@ class CBTTaskWraithSummonDoppelganger extends CBTTaskPlayAnimationEventDecorator
 	private var m_createEntityHelper		: CCreateEntityHelper;
 	
 	
+	/*function IsAvailable() : bool //modSigns
+	{
+		if( GetNPC().HasBuff(EET_SilverDust) )
+		{
+			return false;
+		}
+		
+		return super.IsAvailable();
+	}*/
+	
 	function Initialize()
 	{		
 		m_createEntityHelper = new CCreateEntityHelper in this;

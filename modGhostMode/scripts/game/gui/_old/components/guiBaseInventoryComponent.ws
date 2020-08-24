@@ -741,59 +741,87 @@ abstract class W3GuiBaseInventoryComponent
 		var maxWeightAttribute 	: SAbilityAttributeValue;
 		var minQuality 			: int;
 		var maxQuality 			: int;
+		var itemDesc			: string; //modSigns
+		var itemQuantity		: int; //modSigns
+		var fontColor	 		: string; //modSigns
 		
 		htmlNewline = "&#10;";
+		finalString = "";
 		
 		recipe = getAlchemyRecipeFromName(_inv.GetItemName(item));
 		dm = theGame.GetDefinitionsManager();
 		craftedItemName = recipe.cookedItemName;
 		_inv.GetItemStatsFromName(craftedItemName, attributes);
+		_inv.GetPotionAttributesByName(craftedItemName, attributes); //modSigns
+		_inv.GetBombAttributesForTooltipByName(craftedItemName, attributes); //modSigns
 		_inv.GetItemQualityFromName(craftedItemName, minQuality, maxQuality);
 		dm.GetItemAttributeValueNoRandom(craftedItemName, true, 'weight', minWeightAttribute, maxWeightAttribute);
 		itemType = dm.GetFilterTypeByItem(craftedItemName);
 		
-		finalString = GetLocStringByKeyExt("panel_crafting_book_start") + ":" + htmlNewline;
-		finalString += GetItemRarityDescriptionFromInt(minQuality) + htmlNewline;
-		
-		finalString += "<font color=\"#C4B7AA\">" + GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(craftedItemName)) + "</font>" + htmlNewline;
+		//finalString = GetLocStringByKeyExt("panel_crafting_book_start") + ":" + htmlNewline;
+		//finalString += GetItemRarityDescriptionFromInt(minQuality) + htmlNewline;
+		//finalString += "<font color=\"#C4B7AA\">" + GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(craftedItemName)) + "</font>:" + htmlNewline;
 		
 		tempString = GetLocStringByKeyExt(GetFilterTypeName( itemType )) + " / " + GetLocStringByKeyExt("item_category_" + dm.GetItemCategory(craftedItemName));
-		finalString += "<font color=\"#FF8832\">" + tempString + "</font>" + htmlNewline;
+		finalString += "<font color=\"#FF8832\">" + tempString + "</font>";
+		finalString += htmlNewline + GetItemRarityDescriptionFromInt(minQuality);
 		
-		finalString += htmlNewline;
-		finalString += "<font color=\"#C49560\">" + GetLocStringByKeyExt(_inv.GetItemLocalizedDescriptionByName(craftedItemName)) + "</font>" + htmlNewline;
-		
-		finalString += htmlNewline;
-		for (i = 0; i < attributes.Size(); i += 1)
+		if (attributes.Size() > 0) //modSigns
 		{
-			
-			color = attributes[i].attributeColor;
-			tempString = "<font color=\"#" + color + "\">";
-			tempString += attributes[i].attributeName + ": ";
-			if( attributes[i].percentageValue )
+			finalString += htmlNewline; //separator
+			for (i = 0; i < attributes.Size(); i += 1)
 			{
-				tempString += NoTrailZeros(attributes[i].value * 100 ) +" %";
+				
+				color = attributes[i].attributeColor;
+				tempString = htmlNewline + "<font color=\"#" + color + "\">";
+				//tempString += attributes[i].attributeName + ": ";
+				if( attributes[i].percentageValue )
+				{
+					tempString += NoTrailZeros(attributes[i].value * 100 ) +" %";
+				}
+				else
+				{
+					tempString += NoTrailZeros(attributes[i].value);
+				}
+				tempString += " " + attributes[i].attributeName;
+				tempString += "</font>";
+				finalString += tempString;
 			}
-			else
-			{
-				tempString += NoTrailZeros(attributes[i].value);
-			}
-			tempString += "</font>" + htmlNewline;
-			finalString += tempString;
 		}
 		
-		if (minWeightAttribute.valueBase > 0)
-		{
-			finalString += htmlNewline + GetLocStringByKeyExt("attribute_name_weight") + ": " + NoTrailZeros(minWeightAttribute.valueBase) + htmlNewline;
-		}
+		//if (minWeightAttribute.valueBase > 0)
+		//{
+		//	finalString += htmlNewline + GetLocStringByKeyExt("attribute_name_weight") + ": " + NoTrailZeros(minWeightAttribute.valueBase) + htmlNewline;
+		//}
 		
-		finalString += GetLocStringByKeyExt("panel_crafting_ingredients_start") + ":" + htmlNewline;
+		//modSigns
+		if(dm.ItemHasTag(craftedItemName, 'Mutagen'))
+			_inv.FillInMutagenDescriptionByName(craftedItemName, itemDesc);
+		else
+			itemDesc = GetLocStringByKeyExt(_inv.GetItemLocalizedDescriptionByName(craftedItemName));
+		
+		finalString += htmlNewline; //separator
+		finalString += htmlNewline + "<font color=\"#C49560\">" + itemDesc + "</font>";
+		
+		finalString += htmlNewline; //separator
+		finalString += htmlNewline + GetLocStringByKeyExt("panel_crafting_ingredients_start") + ":";
 		
 		for (i = 0; i < recipe.requiredIngredients.Size(); i += 1)
 		{
 			currentIngredient = recipe.requiredIngredients[i];
-			tempString = GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(currentIngredient.itemName));
-			finalString += currentIngredient.quantity + "x " + tempString + htmlNewline;
+			//tempString = GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(currentIngredient.itemName));
+			//finalString += currentIngredient.quantity + "x " + tempString + htmlNewline;
+			//modSigns
+			itemQuantity = thePlayer.inv.GetItemQuantityByName(currentIngredient.itemName);
+			if(currentIngredient.quantity > itemQuantity)
+			{
+				fontColor = "<font color=\"#FF0000\">";
+			}
+			else
+			{
+				fontColor = "<font color=\"#00FF00\">";
+			}
+			finalString += htmlNewline + fontColor + itemQuantity + " / " + currentIngredient.quantity + " " + GetLocStringByKeyExt( _inv.GetItemLocalizedNameByName(currentIngredient.itemName ) ) + "</font>";
 		}
 		
 		return finalString;
@@ -816,6 +844,10 @@ abstract class W3GuiBaseInventoryComponent
 		var minQuality 			: int;
 		var maxQuality 			: int;
 		var itemType 			: EInventoryFilterType;
+		//var category			: name; //modSigns
+		//var numRndAbls			: int; //modSigns
+		var itemQuantity		: int; //modSigns
+		var fontColor	 		: string; //modSigns
 		
 		var delimiter			: string;
 		var prefix				: string;
@@ -835,6 +867,8 @@ abstract class W3GuiBaseInventoryComponent
 		}
 		
 		htmlNewline = "&#10;";
+		finalString = "";
+		
 		dm = theGame.GetDefinitionsManager();
 		craftingSchematic = getCraftingSchematicFromName(_inv.GetItemName(item));
 		craftedItemName = craftingSchematic.craftedItemName;
@@ -843,63 +877,104 @@ abstract class W3GuiBaseInventoryComponent
 		itemType = dm.GetFilterTypeByItem(craftedItemName);
 		dm.GetItemAttributeValueNoRandom(craftedItemName, true, 'weight', minWeightAttribute, maxWeightAttribute);
 		
-		finalString = GetLocStringByKeyExt("panel_crafting_book_start") + htmlNewline;
-		
-		finalString += "<font color=\"#C4B7AA\">" + GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(craftedItemName)) + "</font>" + htmlNewline;
-		finalString += GetItemRarityDescriptionFromInt(minQuality) + htmlNewline;
+		//finalString = GetLocStringByKeyExt("panel_crafting_book_start") + htmlNewline;
+		//finalString += "<font color=\"#C4B7AA\">" + GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(craftedItemName)) + "</font>" + htmlNewline;
+		//finalString += GetItemRarityDescriptionFromInt(minQuality) + htmlNewline;
 		
 		tempString = GetLocStringByKeyExt(GetFilterTypeName( itemType )) + " / " + GetLocStringByKeyExt("item_category_" + dm.GetItemCategory(craftedItemName));
-		finalString += "<font color=\"#FF8832\">" + tempString + "</font>" + htmlNewline;
+		finalString += "<font color=\"#FF8832\">" + tempString + "</font>";
+		finalString += htmlNewline + GetItemRarityDescriptionFromInt(minQuality);
 		
-		finalString += htmlNewline;
-		finalString += "<font color=\"#C49560\">" + GetLocStringByKeyExt(_inv.GetItemLocalizedDescriptionByName(craftedItemName)) + "</font>" + htmlNewline;
+		if (attributes.Size() > 0) //modSigns
+		{
+			finalString += htmlNewline; //separator
+			for (i = 0; i < attributes.Size(); i += 1)
+			{
+				
+				color = attributes[i].attributeColor;
+				tempString = htmlNewline + "<font color=\"#" + color + "\">";
+				//tempString += (attributes[i].attributeName + delimiter);
+				if( attributes[i].percentageValue )
+				{
+					tempString += (NoTrailZeros(attributes[i].value * 100 ) +"%" + prefix);
+				}
+				else
+				{
+					tempString += (NoTrailZeros(attributes[i].value) + prefix);
+				}
+				tempString += " " + attributes[i].attributeName;
+				tempString += "</font>";
+				finalString += tempString;
+			}
+		}
 		
-		finalString += htmlNewline;
-		finalString += _inv.GetItemLevelColor( theGame.GetDefinitionsManager().GetItemLevelFromName( craftedItemName ) ) + GetLocStringByKeyExt( 'panel_inventory_item_requires_level' ) + " " + theGame.GetDefinitionsManager().GetItemLevelFromName( craftedItemName ) + "</font><br>"; 
+		//if (maxQuality > 1 && maxQuality < 4) 
+		//{
+		//	if (minQuality != maxQuality)
+		//	{
+		//		finalString += ("<font color=\"#AAFFFC\">" + GetLocStringByKeyExt("panel_crafting_number_random_attributes") + delimiter +  (minQuality - 1)  + " - " + (maxQuality-1) + prefix + " </font>" + htmlNewline);
+		//	}
+		//	else
+		//	{
+		//		finalString += ("<font color=\"#AAFFFC\">" + GetLocStringByKeyExt("panel_crafting_number_random_attributes") + delimiter + (minQuality - 1)  + prefix + " </font>" + htmlNewline);
+		//	}
+		//} //modSigns
+		
+		//modSigns: show random abilities -> crafted items now have fixed abilities, removed
+		//category = dm.GetItemCategory(craftedItemName);
+		//numRndAbls = 0;
+		//if( category == 'armor' )
+		//{
+		//	if(minQuality == 4)
+		//		numRndAbls = 1;
+		//	else
+		//		numRndAbls = minQuality;
+		//}
+		//else if( category == 'steelsword' || category == 'silversword' )
+		//{
+		//	if(minQuality < 4)
+		//		numRndAbls = minQuality;
+		//}
+		//else if( category == 'gloves' || category == 'pants' || category == 'boots' )
+		//{
+		//	if(minQuality > 1 && minQuality < 4)
+		//		numRndAbls = minQuality - 1;
+		//}
+		//if( numRndAbls > 0 )
+		//{
+		//	finalString += ("<font color=\"#AAFFFC\">" + GetLocStringByKeyExt("panel_crafting_number_random_attributes") + delimiter + numRndAbls + prefix + " </font>" + htmlNewline);
+		//}
+		
+		//if (minWeightAttribute.valueBase > 0)
+		//{
+		//	finalString += (htmlNewline + GetLocStringByKeyExt("attribute_name_weight") + delimiter + NoTrailZeros(minWeightAttribute.valueBase) + prefix + htmlNewline);
+		//}
+		
+		finalString += htmlNewline; //separator
+		finalString += htmlNewline + "<font color=\"#C49560\">" + GetLocStringByKeyExt(_inv.GetItemLocalizedDescriptionByName(craftedItemName)) + "</font>";
+		
+		finalString += htmlNewline; //separator
+		finalString += htmlNewline + _inv.GetItemLevelColor( theGame.GetDefinitionsManager().GetItemLevelFromName( craftedItemName ) ) + GetLocStringByKeyExt( 'panel_inventory_item_requires_level' ) + ": " + theGame.GetDefinitionsManager().GetItemLevelFromName( craftedItemName ) + "</font>"; 
 
-		finalString += htmlNewline;
-		for (i = 0; i < attributes.Size(); i += 1)
-		{
-			
-			color = attributes[i].attributeColor;
-			tempString = "<font color=\"#" + color + "\">";
-			tempString += (attributes[i].attributeName + delimiter);
-			if( attributes[i].percentageValue )
-			{
-				tempString += (NoTrailZeros(attributes[i].value * 100 ) +" %" + prefix);
-			}
-			else
-			{
-				tempString += (NoTrailZeros(attributes[i].value) + prefix);
-			}
-			tempString += "</font>" + htmlNewline;
-			finalString += tempString;
-		}
-		
-		if (maxQuality > 1 && maxQuality < 4) 
-		{
-			if (minQuality != maxQuality)
-			{
-				finalString += ("<font color=\"#AAFFFC\">" + GetLocStringByKeyExt("panel_crafting_number_random_attributes") + delimiter +  (minQuality - 1)  + " - " + (maxQuality-1) + prefix + " </font>" + htmlNewline);
-			}
-			else
-			{
-				finalString += ("<font color=\"#AAFFFC\">" + GetLocStringByKeyExt("panel_crafting_number_random_attributes") + delimiter + (minQuality - 1)  + prefix + " </font>" + htmlNewline);
-			}
-		}
-		
-		if (minWeightAttribute.valueBase > 0)
-		{
-			finalString += (htmlNewline + GetLocStringByKeyExt("attribute_name_weight") + delimiter + NoTrailZeros(minWeightAttribute.valueBase) + prefix + htmlNewline);
-		}
-		
-		finalString += GetLocStringByKeyExt("panel_crafting_ingredients_start") + htmlNewline;
+		finalString += htmlNewline; //separator
+		finalString += htmlNewline + GetLocStringByKeyExt("panel_crafting_ingredients_start") + ":";
 		
 		for (i = 0; i < craftingSchematic.ingredients.Size(); i += 1)
 		{
 			currentIngredient = craftingSchematic.ingredients[i];
-			tempString = GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(currentIngredient.itemName));
-			finalString += currentIngredient.quantity + "x " + tempString + htmlNewline;
+			//tempString = GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(currentIngredient.itemName));
+			//finalString += currentIngredient.quantity + "x " + tempString + htmlNewline;
+			//modSigns
+			itemQuantity = thePlayer.inv.GetItemQuantityByName(currentIngredient.itemName);
+			if(currentIngredient.quantity > itemQuantity)
+			{
+				fontColor = "<font color=\"#FF0000\">";
+			}
+			else
+			{
+				fontColor = "<font color=\"#00FF00\">";
+			}
+			finalString += htmlNewline + fontColor + itemQuantity + " / " + currentIngredient.quantity + " " + GetLocStringByKeyExt( _inv.GetItemLocalizedNameByName(currentIngredient.itemName ) ) + "</font>";
 		}
 		
 		return finalString;

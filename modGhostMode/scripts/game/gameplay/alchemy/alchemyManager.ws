@@ -249,6 +249,8 @@ class W3AlchemyManager
 		}
 		else
 		{
+			if( recipe.cookedItemType == EACIT_Edibles ) //modSigns: quantity for edibles
+				quantity = recipe.cookedItemQuantity;
 			ids = thePlayer.inv.AddAnItem(recipe.cookedItemName, quantity);
 			if(isSingletonItem)
 			{

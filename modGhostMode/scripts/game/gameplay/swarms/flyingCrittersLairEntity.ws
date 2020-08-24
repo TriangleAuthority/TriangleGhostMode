@@ -225,16 +225,22 @@ import class CFlyingCrittersLairEntityScript  extends CFlyingCrittersLairEntity
 			xmlDamageModifier = CalculateAttributeValue( ((CActor)m_birdMaster).GetAttributeValue( 'swarm_attack_damage_vitality' ));
 			damage = xmlDamageModifier * boidCount * deltaTime;
 			
+			//theGame.witcherLog.AddMessage("Bird swarm hits. Dmg = " + damage); //modSigns: debug
+			//theGame.witcherLog.AddMessage("XML damage = " + xmlDamageModifier); //modSigns: debug
+			//theGame.witcherLog.AddMessage("boidCount = " + boidCount); //modSigns: debug
+			//theGame.witcherLog.AddMessage("deltaTime = " + deltaTime); //modSigns: debug
+			
 			if( damage > 0 )
 			{
 				action = new W3DamageAction in this;
-				action.Initialize( this, (CGameplayEntity)entity, this, this.GetName()+"_"+"root_projectile", EHRT_None, CPS_AttackPower,false,false,false,true);
+				action.Initialize( this, (CGameplayEntity)entity, this, this.GetName()+"_"+"root_projectile", EHRT_None, CPS_Undefined,false,false,false,true);
 				action.AddDamage(theGame.params.DAMAGE_NAME_RENDING, damage );
 				
 				
 				
 				LogCritical("About to apply new swarm effect");
 				action.AddEffectInfo(EET_Swarm);
+				action.SetIgnoreArmor(true); //modSigns
 				
 				theGame.damageMgr.ProcessAction( action );
 				delete action;

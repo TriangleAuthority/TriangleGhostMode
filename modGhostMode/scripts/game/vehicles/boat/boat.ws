@@ -15,7 +15,7 @@ import class W3Boat extends CGameplayEntity
 	
 	private saved var canBeDestroyed : bool;		default canBeDestroyed = true;
 	private var needEnableInteractions: bool;		default needEnableInteractions = false;
-
+	
 	event OnStreamOut()
 	{
 		if(theGame.IsBoatMarkedForDestroy(this))
@@ -49,16 +49,35 @@ import class W3Boat extends CGameplayEntity
 				
 				if( !HasDrowned() )
 				{
-					needEnableInteractions = true;
-					
-					if( mountInteractionComp )
-						mountInteractionComp.SetEnabled( true );
-					if( mountInteractionCompPassenger && boatComp.user )	
-						mountInteractionCompPassenger.SetEnabled( true );
+					//modSigns: sink the boat if over encumbrance is too big
+					if( theGame.params.GetBoatSinkOption() && boatComp && theGame.GetLoadGameProgress() == 0 && GetCanBeDestroyed() && CheckPlayerEncumbrance((W3PlayerWitcher)player) )
+					{
+						boatComp.TriggerDrowning( player.GetWorldPosition() );
+						SetHasDrowned( true );
+						SoundEvent( "boat_sinking" );
+						thePlayer.DisplayHudMessage( GetLocStringByKeyExt( "gm_geralt_too_heavy" ) );
+					}
+					else
+					{
+						needEnableInteractions = true;
+						
+						if( mountInteractionComp )
+							mountInteractionComp.SetEnabled( true );
+						if( mountInteractionCompPassenger && boatComp.user )	
+							mountInteractionCompPassenger.SetEnabled( true );
+					}
 				}
 			}
 		}
 	}	
+	
+	function CheckPlayerEncumbrance(witcher : W3PlayerWitcher) : bool //modSigns
+	{
+		var tmpBool : bool;
+		if( !witcher || !witcher.HasBuff(EET_OverEncumbered) )
+			return false;
+		return ClampF(witcher.GetEncumbrance()/witcher.GetMaxRunEncumbrance(tmpBool) - 1, 0, 1) * 100 > theGame.params.GetBoatSinkOverEncumbranceOption();
+	}
 	
 	event OnAreaExit( area : CTriggerAreaComponent, activator : CComponent )
 	{

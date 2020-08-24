@@ -23,11 +23,11 @@ class W3Effect_Slowdown extends CBaseGameplayEffect
 	default effectType = EET_Slowdown;
 	default attributeName = 'slowdown';
 	
+	//modSigns
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
 		var dm : CDefinitionsManagerAccessor;
 		var min, max : SAbilityAttributeValue;
-		var prc, pts : float;
 		
 		super.OnEffectAdded(customParams);
 		
@@ -39,15 +39,34 @@ class W3Effect_Slowdown extends CBaseGameplayEffect
 		dm.GetAbilityAttributeValue(abilityName, 'decay_delay', min, max);
 		decayDelay = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
 		
-		
-		slowdown = CalculateAttributeValue(effectValue);
-		target.GetResistValue(CDS_ShockRes, pts, prc);
-		slowdown = slowdown * (1 - ClampF(prc, 0, 1) );
-		
-		slowdownCauserId = target.SetAnimationSpeedMultiplier( 1 - slowdown );
+		RecalcSlowdown(); //modSigns
 		delayTimer = 0;
 	}
 	
+	//modSigns
+	public function ResetSlowdownEffect(newVal : SAbilityAttributeValue)
+	{
+		effectValue = newVal;
+		RecalcSlowdown();
+		timeLeft = initialDuration;
+		delayTimer = 0;
+	}
+	
+	//modSigns
+	private function RecalcSlowdown()
+	{
+		slowdown = ClampF(CalculateAttributeValue(effectValue), 0, 1);
+		
+		//debug log
+		//theGame.witcherLog.AddMessage("Slowdown prc: " + slowdown * 100);
+		
+		if(slowdownCauserId)
+		{
+			target.ResetAnimationSpeedMultiplier(slowdownCauserId);
+		}
+		
+		slowdownCauserId = target.SetAnimationSpeedMultiplier(1 - slowdown);
+	}
 	
 	event OnUpdate(dt : float)
 	{
@@ -72,11 +91,11 @@ class W3Effect_Slowdown extends CBaseGameplayEffect
 		super.OnUpdate(dt);
 	}
 	
-	public function CumulateWith(effect: CBaseGameplayEffect)
+	/*public function CumulateWith(effect: CBaseGameplayEffect)
 	{
 		super.CumulateWith(effect);
 		delayTimer = 0;
-	}
+	}*/
 	
 	event OnEffectRemoved()
 	{

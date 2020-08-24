@@ -5,8 +5,9 @@
 /***********************************************************************/
 class W3Effect_Mutation4 extends CBaseGameplayEffect
 {
+	//modSigns: redone
 	private var bonusPerPoint : float;
-	private var dotDuration : float;
+	//private var dotDuration : float;
 	
 	default effectType = EET_Mutation4;
 	default isPositive = true;
@@ -18,9 +19,9 @@ class W3Effect_Mutation4 extends CBaseGameplayEffect
 		super.OnEffectAddedPost();
 		
 		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'AcidEffect', 'DirectDamage', min, max );
-		bonusPerPoint = 100 * min.valueAdditive;
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'AcidEffect', 'duration', min, max );
-		dotDuration = min.valueAdditive;
+		bonusPerPoint = min.valueAdditive;
+		//theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'AcidEffect', 'duration', min, max );
+		//dotDuration = min.valueAdditive;
 	}
 	
 	public function GetStacks() : int
@@ -29,7 +30,7 @@ class W3Effect_Mutation4 extends CBaseGameplayEffect
 		var advancedMaths : float;	
 		
 		tox = target.GetStat( BCS_Toxicity );
-		advancedMaths = bonusPerPoint * tox * dotDuration;
-		return RoundMath( MaxF( bonusPerPoint * dotDuration, advancedMaths ) );
+		advancedMaths = bonusPerPoint * tox /** dotDuration*/;
+		return RoundMath( advancedMaths /*MaxF( bonusPerPoint * dotDuration, advancedMaths )*/ );
 	}
 }

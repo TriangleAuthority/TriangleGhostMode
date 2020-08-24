@@ -14,6 +14,26 @@ class W3BlindnessEffect extends W3CriticalEffect
 	default attachedHandling 	= ECH_Abort;
 	default onHorseHandling 	= ECH_Abort;
 	
+	default dontAddAbilityOnTarget = true; //modSigns: since the ability contains critical_hit_chance buff for the player and not for the affected NPC
+	private var critBonus : float; //modSigns
+	
+	public function GetCritChanceBonus() : float //modSigns
+	{
+		return critBonus;
+	}
+	
+	private function CacheCritChanceBonus() //modSigns
+	{
+		var dm : CDefinitionsManagerAccessor;
+		var min, max : SAbilityAttributeValue;
+		
+		//theGame.witcherLog.AddMessage("abilityName: " + abilityName);
+	
+		dm = theGame.GetDefinitionsManager();		
+		dm.GetAbilityAttributeValue(abilityName, 'critical_hit_chance', min, max);
+		critBonus = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+	}
+	
 	public function CacheSettings()
 	{
 		super.CacheSettings();
@@ -40,6 +60,8 @@ class W3BlindnessEffect extends W3CriticalEffect
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
 		super.OnEffectAdded(customParams);
+		
+		CacheCritChanceBonus(); //modSigns
 		
 		if(isOnPlayer)
 		{

@@ -80,12 +80,18 @@ abstract class W3DamageOverTimeEffect extends CBaseGameplayEffect
 			isEnvironment = params.isEnvironment;
 		}
 		
-		if( params.isPerk20Active )
+		/*if( params.isPerk20Active )
 		{
 			perk20Bonus = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_20, 'dmg_multiplier', false, false);
 			effectValue = effectValue * ( 1 + perk20Bonus.valueMultiplicative );
-		}
+		}*/ //modSigns: multiplying the whole shit! even percentages! crazy!
 			
+		if( params && params.isPerk20Active ) //modSigns: only additive value should be multiplied
+		{
+			perk20Bonus = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_20, 'dmg_multiplier', false, false);
+			effectValue.valueAdditive *= ( 1 + perk20Bonus.valueMultiplicative );
+		}
+		
 		AddHealthRegenReductionBuff();		
 		
 		super.OnEffectAdded(customParams);
@@ -126,9 +132,13 @@ abstract class W3DamageOverTimeEffect extends CBaseGameplayEffect
 		AddHealthRegenReductionBuff();
 	}
 	
-	
+	//modSigns: just some vars for logging
+	private var cumulDt : float; default cumulDt = 0;
+	private var cumulDmgDt : float; default cumulDmgDt = 0;
+
 	event OnUpdate(dt : float)
 	{	
+		var resistPoints, resistPercents : float; //modSigns: resistance for logging
 		var dmg, maxVit, maxEss : float;
 		var i : int;
 		
@@ -137,10 +147,14 @@ abstract class W3DamageOverTimeEffect extends CBaseGameplayEffect
 		if(!target.IsAlive())
 			return true;
 		
+		if(!isActive || duration != -1 && timeLeft <= 0) //modSigns
+			return true;
 		
 		maxVit = target.GetStatMax( BCS_Vitality);
 		maxEss = target.GetStatMax( BCS_Essence);
 		
+		cumulDt += dt; //modSigns: for logging
+				
 		for(i=0; i<damages.Size(); i+=1)
 		{
 			dmg = CalculateDamage(i, maxVit, maxEss, dt);
@@ -152,6 +166,30 @@ abstract class W3DamageOverTimeEffect extends CBaseGameplayEffect
 			else
 			{
 				effectManager.CacheDamage(damages[i].damageTypeName, dmg, GetCreator(), this, dt, true, powerStatType, isEnvironment);		
+				cumulDmgDt += dmg; //modSigns: for logging
+				if( FactsQuerySum( "modSigns_debug_dot" ) > 0 )
+				{
+					if(cumulDt >= 1.0) //modSigns: debug log
+					{
+						target.GetResistValue(damages[i].resistance, resistPoints, resistPercents);
+						theGame.witcherLog.AddMessage("DoT raw damage:");
+						theGame.witcherLog.AddMessage("Target: " + target.GetDisplayName());
+						if(damages.Size() > 1)
+							theGame.witcherLog.AddMessage("Dmg idx: " + IntToString(i));
+						theGame.witcherLog.AddMessage("Dmg type: " + NameToString(damages[i].damageTypeName));
+						theGame.witcherLog.AddMessage("Resist type: " + damages[i].resistance);
+						theGame.witcherLog.AddMessage("Resist pts: " + FloatToString(resistPoints));
+						theGame.witcherLog.AddMessage("Resist %: " + FloatToString(resistPercents));
+						if(maxVit > 0)
+							theGame.witcherLog.AddMessage("Max vit: " + FloatToString(maxVit));
+						if(maxEss > 0)
+							theGame.witcherLog.AddMessage("Max ess: " + FloatToString(maxEss));
+						theGame.witcherLog.AddMessage("Mult: " + FloatToString(effectValue.valueMultiplicative));
+						theGame.witcherLog.AddMessage("Add: " + FloatToString(effectValue.valueAdditive));
+						theGame.witcherLog.AddMessage("Time: " + FloatToString(cumulDt));
+						theGame.witcherLog.AddMessage("Raw dmg: " + FloatToString(cumulDmgDt));
+					}
+				}
 			}
 			
 			
@@ -160,22 +198,30 @@ abstract class W3DamageOverTimeEffect extends CBaseGameplayEffect
 			else if(effectValue.valueMultiplicative == 1)
 				LogAssert(false, "W3DamageOverTimeEffect.OnUpdate: effect <<" + this + ">> has valueMultiplicative set to 1 which results in 100% MAX HP damage /sec!!!!!");
 		}
+		
+		if(cumulDt >= 1.0) // modSigns: for logging
+		{
+			cumulDt = 0;
+			cumulDmgDt = 0;
+		}
 	}
 	
 	protected function CalculateDamage(arrayIndex : int, maxVit : float, maxEss : float, dt : float) : float
 	{
 		var dmg, dmgV, dmgE : float;
 		
-		if(damages[arrayIndex].hitsVitality)
+		if(damages[arrayIndex].hitsVitality && target.UsesVitality()) //modSigns
 		{
 			dmgV = MaxF(0, dt * (effectValue.valueAdditive + (effectValue.valueMultiplicative * maxVit) ));
 		}
-		if(damages[arrayIndex].hitsEssence)
+		if(damages[arrayIndex].hitsEssence && target.UsesEssence()) //modSigns
 		{
 			dmgE = MaxF(0, dt * (effectValue.valueAdditive + (effectValue.valueMultiplicative * maxEss) ));
 		}
 		
-		dmg = MaxF(dmgE, dmgV);	
+		dmg = MaxF(dmgE, dmgV);	//if hits both
+		dmg = MaxF(dt, dmg); //modSigns: at least 1 dmg per second
+		
 		return dmg;
 	}
 	
