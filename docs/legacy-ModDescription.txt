@@ -1,0 +1,294 @@
+Ghost Mode v4.0 by wghost81 aka Wasteland Ghost
+===============================================
+
+The mod focuses on improving overall gameplay by fixing bugged and over/underpowered skills,
+balancing of crafting, loot and economy while still keeping the game as close to vanilla as
+possible.
+
+Since v3.0 the mod offers stamina based combat, i.e. all your combat actions require stamina
+to perform. In my opinion, it allows for deeper and more balanced gameplay, but if you think
+that this feature doesn't fit your playstyle, you can disable it in mod's options and switch
+to vanilla stamina rules.
+
+For more detailed information on the changes in the mod refer to FullChangelist.txt.
+
+ABOUT THE MOD
+=============
+
+Ghost Mode is an overhaul mod that alters almost every aspect of the gameplay: from combat
+and damage to loot and economy.
+
+The mod aims to create more challenging and balanced experience, while not deviating too far
+from vanilla system and principles, i.e. all game basics remain roughly the same.
+
+Vanilla game has lots and lots of gameplay issues: skills not working as intended or not
+working at all, descriptions being wrong, decoctions not doing what they're supposed to do,
+quest levels and experience being weirdly distributed, etc. Large portion of the mod is
+dedicated to resolving these issues: fixing bugged skills and items, providing better
+descriptions, tweaking useless and overpowered skills and items to be more balanced, changing
+loot so dimeritium plate can no longer be found inside poor peasant's shack, etc.
+
+The mod supports all DLCs, but doesn't require them to function properly.
+
+The mod supports standalone DLC playthroughs, but since those are technically save files made
+with vanilla version of the game, you will need to use cleardevelop console command to reset
+the character and rebuild skill trees.
+
+NG+ is supported, but not recommended as the game itself was not created with NG+ in mind. So
+if you seek challenge, NG+ is not what you want.
+
+Starting a new game is highly recommended both to avoid problems and to get used to mod
+changes. Starting from existing vanilla save is possible, but some of your equipment might
+get weird stats after installing the mod (newly found/crafted equipment will have proper
+stats). Starting from another overhaul mod is not recommended, especially if the mod changes
+skill tree and/or experience curve - this will result in broken skills and leveling. You can
+fix character development issues for vanilla/modded saves with cleardevelop (console command),
+but items you will need to craft again/re-spawn with console.
+
+MOD CHANGES BY CATEGORY
+=======================
+
+1. New damage formula and combat changes
+
+How damage is calculated affects all the other combat related gameplay aspects: from weapons
+and armors to skills and bonuses. An issue with vanilla formula is that there's nothing that
+can counter damage increase from attack power: bigger sword damage multiplied by bigger
+attack power results in fast snowballing into massive damage dealt to any enemy in the game.
+And it also results in useless skills (like strong attacks), upgrades (like armor penetration)
+and item stats (like armor value).
+
+New damage formula was implemented in the mod to fix the snowballing problem: you now need to
+penetrate enemy armor first for your attack power bonuses to start taking effect. This works
+both sides, so higher difficulties enemy attack bonuses don't render armor value useless.
+
+To complement this change a set of other modifications was introduced:
+- strong attacks deal more damage and have armor penetration bonus, as a result, strong
+  attacks work better against armored enemies and hit harder in general;
+- enemy types are more distinct in terms of armor and resistances, some enemies are very hard
+  to deal with using light attacks only, because light attacks won't be able to penetrate
+  their armor;
+- enemies have better chances do dodge strong attacks, overall AI handling of dodging was
+  improved, making it more consistent, an ability to dodge different types of attack differs
+  depending on enemy type;
+- player armor classes were redone, so light armor has smaller resistances, medium armor has
+  average resistances and heavy armor has bigger resistances to all types of damage;
+- armor value still depends on armor level like in vanilla and it's now more meaningful
+  because of its considerably bigger effect on damage taken;
+- all combat actions require stamina to perform (configurable via in-game mod menu), stamina
+  cost for sign casting is reduced compared to vanilla;
+- cooldown mechanic was introduced for signs (configurable via in-game mod menu);
+- heavy armors have stamina penalties for certain combat actions per piece, light armors have
+  stamina bonuses for melee combat;
+- being over encumbered adds severe penalties to sprinting, rolling and dodging actions,
+  depending on how big your over encumbrance is;
+- defense techniques (dodging/rolling, parrying and countering) were reworked, see the in-game
+  description of corresponding skill for details;
+- armor sets were introduced for generic (non-witcher) armors: wearing all four pieces of a
+  certain armor type gives you additional bonuses;
+- if you have Blood and Wine DLC, non-grandmaser witcher sets will grant you minor bonuses of
+  corresponding grandmaster sets; grandmaster set bonuses were completely reworked;
+- AI stamina management was reworked, so all AI actions now have stamina cost and you can now
+  actually cause opponents to run out of stamina;
+- combat is more dynamic and effects that stunlock your enemies have lesser duration to
+  prevent issues like infinite burning stunlock with Igni;
+- signs were rebalanced in terms of numbers, calculations and power to fix numerous issues
+  with overpowered and useless skills;
+- AI combat behavior was tweaked to make it react better to player actions;
+- level up AI bonuses were changed to make NPC progression work better, level difference
+  bonuses were removed;
+- game difficulties were reworked, so Blood and Broken Bones is now hard and Death Match is
+  deadly;
+- optional enemy scaling was introduced, numerous issues with levels were fixed, so using
+  scaling won't result in ridiculously hard enemies anymore (like rats or D'Jinn in vanilla).
+
+2. Consistent wording and better descriptions
+
+There is a huge issue with wording of gameplay terms in vanilla: the exact same thing can be
+called by three different names. Another issue is that many descriptions are rather vague and
+some are even incorrect.
+
+The mod changes many of the texts in game to use consistent wording and provide more precise
+description and numbers. Almost every skill description was changed, as well as many
+descriptions for decoctions and other alchemy items.
+
+3. Alchemy and ranged combat
+
+Almost all alchemy recipes were redone for better consistency and more ingredients variety, a
+lot of bugs and inconsistencies with alchemy items were fixed.
+
+Recipes for various types of strong alcohol were added to alchemists, so you can now brew
+mahakaman spirit or mandrake cordial yourself (very useful if you play with Preparations mod).
+
+Cooking recipes were introduced into the game: you can now cook different meals using alchemy
+menu after you buy recipes from innkeepers and gather all the ingredients. Food types were
+reworked and separate "well hydrated" effect was restored, so you can drink and eat at the
+same time again.
+
+Decoctions were reworked completely to offer more unique and interesting bonuses and to create
+synergies with different builds.
+
+Bombs are more consistent and reliable now with their effect: their damage over time effects
+now reduce a percentage of enemy health, as all the other similar effects do. Non-aimed bomb
+throws now suffer from 50% penalty to attack power. When destroying a monster nest, the game
+now tries to use the bomb you have selected first instead of always preferring Dancing Star
+bomb. Damage from player's own bombs is no longer halved.
+
+Crossbows and crossbow bolts were reworked for better damage and better additional effects.
+Non-aimed crossbow shots also suffer from 50% attack power penalty same as bombs, headshots
+go through armor and have additional 50% critical hit chance. Damage from player's own bolts
+is no longer halved.
+
+Meditation and refilling of alchemy items are unchanged, but the mod is fully compatible with
+Preparations mod and is balanced for playing with Preparations using default refill option
+(refilling with base ingredient). Other aspects of Preparations are also accounted for - like
+no eating/drinking in combat or no applying oils in combat. Using Preparations makes
+meditation and alchemy/skill management more immersive, so it's highly recommended to install
+it along this mod.
+
+4. Economy, looting and crafting
+
+Prices are a big issue in vanilla game: when you're charged with astronomical sum for some
+basic sword or crafting component you rarely even buy anything. On top of that there's loot
+system that generates rare and expensive ingredients like dimeritium plate inside a regular
+crate in some poor man's house. Ingredients having zero weight take it even further as you
+can loot virtually everything, so you never run out of crafting components or money.
+
+The mod makes several adjustments to improve this system:
+- merchant price modifiers were changed, so items no longer have 400% extra charge;
+- loot tables were completely reworked to not have rare and expensive ingredients or magical
+  items everywhere - they can still be found, but only at alchemy labs or inside treasure
+  chests;
+- all items have weight, so you can't carry hundreds of swords and armor anymore;
+- due to changes to alchemy recipes and crafting schematics you won't need as many ingredients
+  as in vanilla and due to changes to loot system you won't get that many of them anyway, so
+  weight limitation won't create issues with alchemy and crafting;
+- you are no longer able to gallop and fast-travel while overencumbered;
+- merchant inventories were also reworked: more common items, generic food and alcohol were
+  added as well as empty bottles (to support new cooking recipes and Preparations mod);
+- negotiating monster contract price can now increase your reward up to 70% (if you're very
+  lucky, average number will be around 30%);
+- rare monster parts cost more than generic alchemy ingredients, so you can kill monsters and
+  sell these ingredients for money.
+
+Crafting was completely reworked and shifted much earlier into the game:
+- crafted item bonuses are no longer random: no matter the quality, all crafted items have
+  fixed set of characteristics you can view immediately while buying corresponding schematic;
+- crafting schematics are more consistent now: you don't need monster parts to craft generic
+  human weapon or armor, but witcher sets require a lot of rare materials;
+- you now have wider variety of weapons and armors to craft early game;
+- Lindenvale blacksmith now has journeyman level, so you can craft different swords early on
+  without a need to go all the way to Oxenfurt (good for those not using fast travel).
+
+5. Items and equipment
+
+Witcher sets are the best looking ones and have the most powerful bonuses in vanilla game
+(except for some relic items in HoS and BaW). This creates an issue with exploring and
+treasures when everything you find is far more worse than set items. There also is an issue
+with monster hunt trophies giving you useless and repetitive bonuses.
+
+To address these issues all equipment and trophies (as well as many other items) were
+completely redone:
+- generic items were given better bonuses, which are still random; higher level items get
+  bigger bonuses, making them competitive to items you can craft or set items;
+- relic items were also given better bonuses and items themselves were spread better
+  throughout the game, so better relic swords and armors are available for higher level
+  player;
+- trophies were completely redone: all of them are now unique and provide useful bonuses which
+  are related to abilities of a creature the trophy comes from;
+- loot leveling system was improved so higher level players won't get items with a very low
+  level;
+- special DLC items were reworked for better balance;
+- durability penalties were redone, so they now have more impact on the game, especially on
+  higher levels;
+- you can now buy special master tools after completing master armorer's and master
+  blacksmith's quests: this tool restores 100% durability and increases item level by one when
+  used;
+- dismantle kits were added to armorers/blacksmiths and alchemists/herbalists that allow the
+  player to dismantle items from the inventory;
+- razor can now be used for shaving.
+
+6. Quests, experience and rewards
+
+There are numerous issues with quest levels and experience/reward amounts in vanilla game:
+levels are inconsistent, player tends to quickly overlevel the content, you can get huge
+amount of experience just for reading a book and almost nothing for completing a long
+difficult quest, some rewards have fixed level and are useless at the point you get them, etc.
+
+All these issues are dealt with in the mod:
+- quest levels were tweaked to spread them better throughout the game, some quests were
+  shifted later into the game, because you can indeed complete them later story wise;
+- experience tables were redone for more consistency, huge spikes like 4000 exp points at once
+  were replaced with more reasonable rewards;
+- main amount of experience still comes from the main quest, as it is somewhat time sensitive
+  (at least story wise);
+- another source of experience comes from monster contracts;
+- side quests and minor quests give little experience: they mostly give you either another
+  piece of the story or some reward like items or money;
+- optional quests like horse races, fistfights and gwent give less experience and more
+  items/money;
+- combat experience was reworked, common monsters give little amount of exp, while bigger and
+  unique monsters give more;
+- you get progressively less experience for killing monsters of the same type;
+- both quest and combat experience are adjusted by player level and quest/opponent level
+  difference: you get progressively more (up to 150%) experience for higher level
+  quests/opponents and progressively less (up to 0%) for lower level quests/opponents;
+- you always get at least 5 exp points for completing a quest and at least 1 exp point for
+  killing an enemy;
+- difficulty modifiers were removed as they are no longer needed anyway because of experience
+  table changes, you will no longer get massively overleveled when playing on lower
+  difficulties or using fixed experience option;
+- options for fixed quest and combat experience and for removing quest levels entirely were
+  introduced as well as sliders for increasing/decreasing quest and combat experience;
+- reward items for important quests were changed to have better bonuses and to autolevel to
+  player level;
+- additional unique diagrams of all three armor classes were added to master armorer, free
+  reward armor was changed to match the one you help to test during the quest.
+
+7. UI changes
+
+QoL and fixes:
+- kill count per enemy type can now be seen in new tab of bestiary menu;
+- some mixed up inventory icons for boots, gloves and swords were fixed;
+- extended descriptions for books, keys, quest items, etc. were restored.
+
+Character statistic menu was also altered to show more data:
+- sword damage now shows damage per hit instead of average damage per second;
+- more detailed stats about attack power, critical hits, etc. are now displayed for swords;
+- adrenaline gain is now displayed in stats;
+- more stats are displayed for crossbows;
+- more stats are displayed for each sign, signs section was divided into two to fit all the
+  data;
+- sign intensity now shows your base intensity and not average sign intensity for all signs,
+  individual sign intensities a shown in detailed stats;
+- more stats are displayed for each skill, even for base ones, so make sure you read them;
+- stamina costs for actions are now displayed in stats.
+
+8. Mod customization options
+
+Enemy scaling, damage and health, quest levels, experience and some other options are
+available from the menu. For more detailed information on those refer to FullChangelist.txt.
+
+9. Your very own difficulty mode
+
+In vanilla difficulty modes differ by AI bonuses to health and damage and by quest and combat
+experience bonuses/penalties, AI combat behavior is the same on all difficulties. In the mod
+both quest and combat experience were completely reworked (see above), so vanilla
+bonuses/penalties no longer exist. This leaves AI bonuses to health and damage, which you can
+configure yourself using mod options.
+
+In the mod Normal difficulty (Story and Swords) does not have any difficulty modifiers for
+enemy health and damage, so you can use it as a base to create your own custom difficulty
+mode:
+1. All enemies already have their base health, damage and resistances set up on per enemy
+   type basis with additional tweaks for special enemies like monster hunt monsters and
+   bosses.
+2. By increasing or decreasing additional damage and health you can fine tune the combat to
+   your liking. For example, decreasing enemy health (about -50%) while simultaneously
+   increasing their damage (300-400%) will result in very fast paced, but also very deadly
+   combat as even slightest mistake will make you killed. Leaving health as it is while
+   slightly increasing damage (by 50-100%) will result in more slow paced and less brutal,
+   but still challenging combat.
+3. By increasing or decreasing quest and combat experience you can speed up or slow down your
+   level up rate. Since experience gain rate is balanced for existing quest levels, these
+   options are only recommended to use if you have both enemy scaling and fixed experience
+   options turned on.

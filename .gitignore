@@ -1,0 +1,4 @@
+build/
+
+# rw3d_cli (downloaded release, see docs/game-automation.md)
+tools/rw3d/

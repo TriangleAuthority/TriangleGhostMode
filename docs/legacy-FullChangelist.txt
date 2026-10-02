@@ -1,0 +1,1256 @@
+Ghost Mode v4.0 by wghost81 aka Wasteland Ghost
+===============================================
+
+Known bugs
+==========
+
+Reloading from new checkpoints during lifting a curse from botchling phase of Baron's quest
+will cause the botchling to disappear. The bug is strictly visual and Axiing him still works
+(technically you Axii the baron and not him anyway). The botchling will reappear once you
+reach the destination.
+
+New mastercrafted kits for leveling up weapons and armors can in fact be applied to items at
+100% durability: press E (use) and select and item to do so. Drag and drop only works if the
+durability is less than 100%.
+
+Igni Firestream appears to be damaging out of range enemies that are positioned behind the
+current target - the bug is strictly visual, you see the floating damage numbers, but their
+health is not in fact decreased (vanilla bug).
+
+Price modifiers for certain Blood and Wine quest are not applied (vanilla bug).
+
+Certain merchants in Blood and Wine don't have price modifiers (vanilla bug).
+
+If you encounter a rare vanilla bug with HP regen being blocked after a fistfight minigame,
+save and reload to fix the problem.
+
+The mod should fix the problem with oils being stuck on a blade forever, but if you have it
+on your older save (vanilla or older mod version), just drop the affected sword and pick it
+up to have its stats fixed.
+
+Bugfixes
+========
+
+Fixes by other modders included in Ghost Mode:
+- Alt Aard water ripple fix by erxv - water ripples from alt Aard cast.
+- Ciri cutscene sword fix by Polakowicz - Ciri no longer has two swords in cutscenes.
+- Generic Merchants Fix by Wolfmark - resolves a problem with some generic merchants not
+  showing their goods.
+- Fixed mixed up inventory icons for boots, gloves and swords. (original idea by FreeSergey,
+  reworked for the mod)
+- Restored extended items descriptions for books, keys, quest items, etc. (original idea by
+  FreeSergey, implementation reworked for the mod)
+- w2ent fixes by KoalaNalle (spiders no longer being specters, etc).
+- A fix for a bug with sorceress hand fx remaining active after combat (all credits to Flash
+  and MrWheyne).
+- A fix for a bug with NPC projectiles ignoring certain solid obstacles like trees (credits
+  to Reaper).
+
+Irrelevant vanilla bugs:
+- All vanilla bugs related to decoctions, enchantments and mutations are irrelevant for the
+  mod as those were reworked, tweaked and either redone or fixed in the process.
+- Delayed Recovery bugs are irrelevant as it was removed from the game since v4.0 of the mod.
+- Most of the vanilla skill related bugs are irrelevant, because most of the skills were
+  either tweaked or reworked and their code was either rewritten or fixed in the process.
+
+Fixes by the mod:
+- Fixed Aard Wave skill penalty calculations.
+- Fixed Axii Delusion/Puppet interaction bug.
+- Fixed an issue with Quen Exploding Shield being sometimes unable to find enemies in range.
+- Fixed Undying skill not working properly.
+- Fixed multiple issues with Flood of Anger skill not working properly for many of the signs
+  and alternative cast modes.
+- Fixed a bug with Flood of Anger where bonus skills were deactivated before they were
+  actually used, if you press sign casting button before the current combat action (like
+  dodge or attack) is fully finished.
+- Inconsistent dodge registration bug is fixed (also fixed in one of the latest vanilla
+  patches).
+- Crit damage bonus for Hunter Instinct calculations were fixed.
+- Northern Wind bomb bugs and inconsistencies were fixed.
+- Fixed a bug with oils being permanently stuck on a sword when it is transferred to another
+  inventory.
+- Fixed a bug with additional sword damages (like fire and frost) not being actually applied
+  to a target.
+- Fixed a bug with humans not actually using armor abilities - all of them had zero armor.
+- Fixed a bug with some of the Wild Hunt bosses attacks not adding frost slowdown effect
+  properly.
+- Fixed a bug with chorts and fiends not attacking the player.
+- Fixed a bug with Glyph of Warding and Glyph of Binding not giving proper resistance.
+- Fixed a bug with Euphoria mutation not being triggered properly on combat start and another
+  bug with it being triggered out of combat after drinking a decoction.
+- Fixed a bug with Euphoria bonus being applied twice, resulting in insane damage multipliers
+  (irrelevant since v4.0).
+- Fixed a bug with skills permanently stuck in locked additional slots after 1.22 patch.
+- Fixed a bug with being able to place any type of skill to any type of additional skill slot
+  by swapping.
+- Fixed a bug with wearable feather from Vivienne not equipping properly.
+- Fixed a bug with shop UI tooltip description for recipes: you can actually see the
+  components needed to craft an item when buying a recipe.
+- Fixed an issue with UI not taking into account multiplicative HP regen and only
+  displaying additive HP regen.
+- Fixed an issue with tooltips for potions and bombs in alchemy menu and shops: all the
+  effects are now properly displayed.
+- Fixed an issue with Etherals being humans and not specters.
+- Fixed sign casting effect being missing in some cases for Rotation Igni enchantment.
+- Fixed a bug with Whirl not being considered a light attack by the game, thus preventing
+  light attack bonuses from being applied to it.
+- Fixed an issue with Succubi being humans instead of hybrids.
+- Fixed an issue with Dopplers being humans instead of relics.
+- Fixed an issue with Cave of Dreams visions being humans instead of specters.
+- Fixed an issue with Everec family ghosts being humans instead of specters.
+- Caretaker's weapon now uses proper HoS shovel ability instead of base game shovel ability.
+- Tourney's champion in B&W now has the proper human category (instead of magical).
+- Fixed a lot (and I mean A LOT) of mixed up abilities, enemy types, etc in Blood and Wine.
+- Fixed an inconsistency with runes/glyphs and weapon/armor bonuses shown in tooltips.
+  Now only base item bonuses should be shown with additional bonuses listed separately.
+- Fixed a bug with witcher set bonus description not being shown for items in stash.
+- Missing silver-to-steel transition animation fixed for swords that had such a problem (like
+  Negotiator crafted).
+- Metabolism Boosts: fixed a bug with adrenaline not being drained after toxicity is reduced
+  by the perk. Fixed a bug with reduction not being accounted for while checking for available
+  toxicity to drink a potion.
+- Fixed a bug with Doppler decoction not adding crit power bonus.
+- Fixed a bug with Ciri being vulnerable during her special attack.
+- Fixed a bug with Swallow and Tawny Owl causing numerous bugs with regen values.
+- Fixed a bug in ability manager causing numerous issues with stamina and vitality regen
+  bonuses.
+- Fixed a bug with Yrden Turret hitting out-of-range targets.
+- Fixed a bug with second, third, etc White Honey charges doing nothing when repeatedly
+  consuming potions and removing their effects with White Honey directly from the inventory.
+- Fixed a bug with rarity colors for some of the components in crafting menu.
+- Fixed a bug with decoctions not triggering overdose damage.
+- Fixed a bug with decoctions not triggering overdose visuals for Wolf Head HUD module.
+- Fixed a bug with toxicity critical effect (green screen border) being triggered on 50%
+  toxicity and not on actual overdose.
+- Fixed a bug with White Raffard potion healing more health percentage than intended: it was
+  actually multiplying player's max vitality when consumed by 35/60/100% and then healing
+  35/60/100% of multiplied vitality.
+- Fixed a bug with White Raffard potion second dose doing nothing when consumed immediately
+  after the first one.
+- Fixed missing descriptions for slowdown and breath attributes in alchemy menu (for Blizzard
+  and Killer Whale potions respectively).
+- Fixed numerous issues with Character stats menu not displaying various buffs and debuffs
+  properly.
+- Fixed a bug with sound banks for mutations not being properly loaded after restarting the
+  game.
+- Fixed different AoE radius for the same AoE attack for different Dao instances.
+- Added missing "Meteorytowa plyta" ingredient name to Polish localization.
+- Fixed an incorrect translation for "Hunter Instinct" skill description in Russian.
+- Fixed a rare bug with HP regen being blocked by fistfight minigame and never unblocked
+  again (at least not until another minigame). The true reason of the issue is unknown as the
+  code appears to be correct, but saving and reloading a game should now restart HP regen
+  properly.
+- Fixed a bug with effect duration math, causing various bugs with modded effects.
+- Fixed a bug with arrow not bouncing off Geralt when testing Yoana's new armor.
+- Fixed a bug with Nekker Warrior decoction recipe not being present in random loot.
+- Fixed a bug with Aard Shockwave and Piercing Cold interaction resulting in Shockwave damage
+  not being applied in some cases.
+- Fixed a bug with incorrect bonus calculation for Synergy skill - the bonus was added for
+  linked abilities, but not for the mutagen itself.
+- Fixed numerous bugs with quest items being stuck in the inventory after completing
+  corresponding quests.
+- Evil Keira and evil Geralt doppelgangers during Wandering in the Dark quest are now using
+  essence and not vitality and have a specter category.
+- Fixed a bug with NPC becoming invulnerable after dropping a shield.
+- Fixed a bug with recently countered flag never being reset if your counterattack missed or
+  if you didn't follow the repel move with an actual attack.
+- Fixed an issue with countering multiple enemies simultaneously where only the first counter
+  was considered as an actual counter.
+- Fixed a bug with toxicity effects on player's face not being properly updated when Quen
+  is active as well as a bug with toxicity visuals being removed after fast travel.
+- Crossbow: fixed an issue with the last bolt in stack not being processed properly.
+- Fixed a bug that made explosive bolts deal damage to the same target up to three times (and
+  give up to x3 Adrenaline).
+- Tier 3 Blizzard ability (don't spend stamina if slo-mo is active and 3 adrenaline points are
+  available) now properly activates only when 3 AP are available and not just 1 AP.
+- Fixed a bug with Preservation being removed after cutscenes.
+- Fixed an issue with Euphoria fx being triggered several times per second when casting alt
+  signs. Now it triggers once per cast at the beginning of casting animation.
+- The UI no longer improperly shows instant kill chance as a sum of silver and steel sword
+  chances. It now shows the max value.
+- Fixed a bug with inability to finish off sirens - it was an incorrect animation name for
+  Geralt action.
+- Fixed a bug with DoT effects being able to continue indefinitely if the corresponding
+  critical state animation is interrupted incorrectly.
+- Fixed a bug with oil charges being reduced when performing a finisher even at level 3 of
+  Fixative skill.
+- Fixed an issue with pheromone potions not playing the appropriate sound when consumed.
+- Fixed an issue with pops antidote potion not playing the appropriate sound when consumed.
+- Fixed an issue with skill bonuses not being calculated properly for certain skills when
+  swapping already equipped skills in a certain order.
+- Fixed an issue with sign casting not being properly aborted when the player gets caught into
+  a spider web.
+- Fixed an issue with some of the B&W relic sword schematics having witcher set color.
+- I'm fairly sure there was something else...
+
+Damage formula
+==============
+
+(unnecessary details aside)
+Vanilla:
+damage = (weapon_damage * attack_power - armor) * (1 - damage_resistance)
+Modded:
+damage = (weapon_damage - armor) * attack_power * (1 - damage_resistance)
+
+The place at which Armor is subtracted makes the biggest difference: now you need to actually
+penetrate enemy's Armor with your weapon to deal any damage. With Attack Power increasing
+weapon damage directly in vanilla, Armor very quickly becomes irrelevant along with Strong
+Attacks, Armor Piercing stats and runes, etc. With the new formula in the mod, Fast Attacks
+can do nothing if they can't get through Armor so you either need to go for Armor Piercing
+or switch to Strong Attacks/use other means to negate/ignore Armor.
+
+The descriptions for skills and buffs all follow the same set of rules:
+- If something increases your weapon damage, it increases your base damage value and helps
+  with penetrating enemy's Armor;
+- If something increases your Attack Power, it modifies the damage that got through Armor;
+- If something increases you Armor Penetration, it doesn't directly increase you damage,
+  but rather decrease enemy's Armor value;
+- If something decreases enemy's damage resistance, it prevents an enemy from reducing the
+  damage you can potentially deal to them;
+- If something decreases or increases the damage received (or the final damage dealt), then
+  it modifies the final damage value after all the Armor, Attack Power bonuses and resistances
+  were applied.
+
+Stamina changes
+===============
+
+Since v3.0 the mod introduces stamina based combat. However, if you don't like this type of
+combat and think that TW3 is better with vanilla stamina, you can switch the feature off in
+mod's options.
+
+There is now an audio cue to indicate low stamina - effect strength and low stamina threshold
+are configurable in options. Makes it much easier to track your stamina in the heat of the
+combat. (configurable, can be switched off)
+
+Each action in combat has stamina cost attached to it (configurable) - if you don't have
+enough stamina, you won't be able to perform that action. Exception - parrying. You can parry
+with low stamina, but your parry will be reduced to partial.
+
+Base stamina cost for signs was reduced to 40 points (configurable in options). Cooldown was
+introduced for signs (5 sec for normal and 7.5 sec for alternative cast, configurable, can be
+turned off completely).
+
+Medium armor is stamina-neutral, light armor (and no armor) reduces stamina costs for melee
+actions (signs are unchanged), heavy armor increases stamina costs for all actions, including
+signs.
+
+There are items, skills and potions that increase your stamina regen/decrease stamina costs.
+
+Default stamina regen rate is bigger than vanilla - 15 points/sec instead of 10 points/sec
+(configurable). Stamina regen when guarded is now 50% of the normal value (was a fixed value
+unaffected by buffs in vanilla).
+
+Armor stamina regen bonuses and penalties are removed (can still be turned on in options).
+
+All actions pause stamina regen for 1 sec (configurable). Getting damaged pauses stamina regen
+for 1 sec or less - depending on damage severity.
+
+The same logic is also applied to NPCs.
+
+Skill changes
+=============
+
+Passive skills bonuses (adrenaline gain, stamina regen, potion duration) were removed from
+the game.
+
+Almost all the descriptions for skills and perks in-game were changed for clarity and to
+reflect mod changes, so read them carefully.
+
+(all the numbers in descriptions below correspond to fully developed skills)
+
+Swords:
+- Fast Attack: unchanged, high dps attack, no armor penetration.
+    * Muscle Memory (5/5): +25% Attack Power, +15% Adrenaline gain for fast attacks.
+	* Whirl (5/5): is now tier 2 skill. Spinning attack that strikes all foes in the
+	  surrounding area. Maintaining the attack consumes 20 Stamina. During the attack
+	  Adrenaline is drained at a speed of 0.2 pts/sec. While performing the attack at
+	  non-zero Adrenaline, Attack Power is increased by 5% per additional attacker (max.
+	  25%) and damage received is decreased by 50%.
+	* Precise Blows (5/5): +10% to critical hit chance, +75% to critical hit power for fast
+	  attacks.
+	* Crippling Strikes (5/5): +25% chance to inflict bleeding, effect force and duration are
+	  the same as for other sources; while bleeding, enemies take 25% more damage from fast
+	  attacks.
+- Strong Attack: slow attack, +50% to weapon damage, +200 to armor penetration.
+    * Strength Training (5/5): +25% Attack Power, +15% Adrenaline gain for strong attacks.
+	* Rend (5/5): is now tier 2 skill; ignores armor (but not resistances) and cannot be
+	  blocked (goes through shields as well); at the cost of 3 adrenaline points creates a
+	  shockwave that damages and knock backs all the enemies in a 3-yard radius; increases
+	  weapon damage by 50% and critical hit chance by 100%; each adrenaline point increases
+	  weapon damage by another 50%, each stamina point spent on charging the attack increases
+	  weapon damage by another 1%.
+	* Crushing Blows (5/5): +10% to critical hit chance, +75% to critical hit power for
+	  strong attacks.
+	* Sunder Armor (5/5): unchanged, reduces enemy damage resistances by 25%.
+- Defense: description improved; partial parry explanation added - reduces damage taken by
+  50% and prevents bleeding; partial counter allowed - can counter heavy attacks, but you
+  will still get damage and all the negative effects; roll and dodge difference explanation
+  added; can now parry (but not reflect) arrows by default, no additional skill is required;
+  counters have no damage penalty and grant +25% to critical hit chance; counters are now
+  considered a light attack, so all the light attacks bonuses are applied to them.
+    * Deflection (3/3): replaces Arrow Deflection; reduces damage taken from partial parries
+	  and counters by additional 30% (down to 20%); allows to reflect back arrows with 100%
+	  bonus to damage; decreases parry cost by 50% when fighting multiple enemies.
+	* Fleet Footed (5/5): decreases graze damage while dodging by 50%.
+	* Counterattack (3/3): +100% to counter power and +70% (70+25+5=100% overall) to critical
+	  hit chance; each Adrenaline Point grants 5% knockdown chance when countering (Adrenaline
+	  is not drained).
+	* Deadly Precision (3/3): +3% per adrenaline point to instant kill chance, doesn't work
+	  with Whirl, only works on counters.
+- Marksmanship: non-aimed shots now deal 50% less damage.
+    * Lightning Reflexes (3/3): +45% to slowdown while aiming.
+	* Steady Shot (5/5): +50 pts to crossbow base damage.
+	* Anatomical Knowledge (5/5): +25% to critical hit chance, +75% to critical hit power for
+	  crossbow shots.
+	* Crippling Shot (5/5): critical hits with crossbow disable monster special abilities for
+	  25 sec.
+- Battle Trance: adrenaline is now only generated while actually dealing damage to enemies,
+  adrenaline loss when taking damage is increased and depends on a percentage of damage taken
+  relative to Geralt's max health.
+    * Resolve (5/5): -100% to adrenaline point loss upon damage.
+	* Undying (5/5): now actually works, once per 120 sec prevents death and grants increased
+	  health regeneration and invulnerability for 5 sec (25% of vitality per each adrenaline
+	  point is restored after 5 sec).
+	* Razor Focus (5/5): description changed for clarity - makes it so you always have at
+	  least 1.25 adrenaline point when entering combat (i.e. if you already have more points,
+	  nothing will be added), the bonus is now increases with each level of the skill (0.25
+	  points per level); increases adrenaline gain by 25%.
+	* Flood of Anger (5/5): now actually works, adds +250% to Sign Intensity, if used together
+	  with Rage Management, adrenaline is not consumed immediately, but adrenaline cost for
+	  casting a sign is tripled instead.
+
+Signs:
+- Aard: can trigger stagger, long stagger, knockdown or heavy knockdown; heavy knockdown
+  enables finisher move; first, stagger vs knockdown is rolled and from there long stagger or
+  heavy knockdown is rolled; Sign Intensity increases knockdown chances; knockdown chance
+  starts at 33% and goes up to 99% at 500% Sign Intensity. Enemies can resist Aard effects
+  decreasing knockdown chances and Aard damage (force resistance).
+    * Far-reaching Aard (3/3): unchanged, increases Aard range by 3 yards.
+    * Aard Sweep (3/3): Aard strikes in 360 deg, Sign Intensity penalties are 40% for level 1,
+      20% for level 2 and zero for level 3 of the skill.
+	* Aard Intensity (5/5): +15% to base heavy knockdown chance.
+	* Shock Wave (5/5): Aard deals 300 points of damage, damage scales with Sign Intensity.
+- Igni: deals 150 points of damage (damage scales with Sign intensity) and has 33% burning
+  chance; burning chance, duration and damage do not depend on Sign Intensity. Enemies can
+  resist burning, decreasing its chances (burning resistance), and Igni damage (fire
+  resistance).
+    * Melt Armor (5/5): Igni hit now also decreases enemy Armor by 10 point(s) and enemy Damage
+      Resistances by 1% (scales with Sign Intensity, final values for SI=500% are 150/15%) for
+	  15 sec. Subsequently applied effects do not cumulate. Melt Armor effect now applies
+	  before the damage is dealt, so it acts as damage reduction for Igni casts themselves.
+    * Firestream (3/3): deals 100 points of damage per second (scales with Sign Intensity)
+	  and inflicts burning; burning strength and duration are the same as for other sources.
+	* Igni Intensity (5/5): +150 to regular Igni damage and +75/sec to Firestream damage
+	  (bonuses scale with Sign Intensity).
+	* Pyromaniac (5/5): +25% to burning chance.
+- Yrden: magic trap that slows down enemies by 25% (up to 75% max at 500% Sign Intensity),
+  last for 7.5 sec; the trap decays as the time passes - i.e. the longer it persists, the
+  less effective it becomes. Enemies can resist slowdown, decreasing the percentage, and
+  Turret damage (shock resistance). No longer slows down critical state (burning, knockdown,
+  etc) animations.
+    * Sustained Glyphs (3/3): no longer affects Yrden Turret, adds 30% to Magic Trap radius,
+	  100% to trap duration and allows to place an additional trap.
+	* Magic Turret (3/3): deals 100 points of damage (scales with Sign Intensity) in a
+	  14-yard radius; ignores enemy armor (but not resistances); destroys projectiles passing
+	  through the area of effect; lasts for 15 secs.
+	* Yrden Intensity (5/5): +150 to Magic Turret damage (scales with Sign Intensity).
+	* Supercharged Glyphs (5/5): enemies inside Magic Trap receive 25% more damage.
+- Quen: fully redone, no longer decreases the damage left after it was reduced by the armor
+  and resistances - now it's an actual shield that works before any damage modifiers are
+  applied, i.e. it reduces weapon damage (see the damage formula above). Quen base damage
+  absorption is 250 (scales with Sign Intensity), shield duration is 30 s. Prevents stagger,
+  burning, poison and bleeding and then breaks. No longer removes all the negative DoTs when
+  cast (burning, poison, bleeding).
+    * Exploding Shield (3/3): damages and knocks back enemies when it breaks. Deals 60 damage
+	  (scales with Sign Intensity).
+	* Active Shield (3/3): blocks 100% more damage than the regular shield; prevents stagger,
+      burning, poison and bleeding effects without breaking. Prevents knockdown and breaks.
+	  Heals 100% of damage absorbed (increases with skill level).
+    * Quen Intensity (5/5): +150 to base damage absorption (scales with Sign Intensity).
+	* Quen Discharge (5/5): returns 25% of damage absorbed back to the attacker.
+- Axii: failed Axii attempts now stagger the enemy by default, no additional skills are
+  needed. Critical chance against confused enemy is increased by 25% (confusion grants no
+  bonuses in vanilla). Base Confusion duration is 5 sec (scales with Sign Intensity).
+  Confused enemies can be instant killed with 1% chance (depends on Sign Intensity and damage
+  dealt by an attack relative to the percentage of health left on the victim).
+    * Delusion (3/3): casting Axii now slows down time similar to how it happens when aiming
+	  a crossbow or a bomb, Delusion now increases the slowdown by 45% and increases a chance
+	  to critically hit a confused opponent by 75%. Increases Axii effectiveness in dialogs.
+    * Puppet (3/3): turns an enemy into an ally for 20 sec and adds +100% to its attack power.
+	  Effect duration scales with Sign Intensity.
+	* Axii Intensity (5/5): increases Confusion and Puppet duration by 50%.
+	* Domination (3/3): Axii can be cast upon two opponents at the same time.
+
+Alchemy: overdose threshold equals to 75% of max toxicity, you can no longer increase it with
+skills. Default toxicity decay rate is 0.25 points/sec both in and out of combat. Overdose
+damage equals to 0.5% of Geralt's max Vitality per second.
+- Brewing: affects potions (but not decoctions).
+    * Refreshment (3/3): each potion imbibed restores 30% Stamina.
+	* Restoration (3/3): each potion imbibed heals 15% of max Vitality.
+	* Prolonged Effects (5/5): increases potion duration time by 100%.
+	* Expert Brewer (5/5): decreases potion toxicity by 5 points.
+- Oil Preparation: effectiveness decreases with oil rubbing off the blade (down to 50% of the
+  original bonus values).
+    * Poisoned Blades (5/5): +15% to poison chance, additional 5% for enhanced or 10% for
+	  superior oil. Chances decrease with oil rubbing off the blade.
+	* Protective Coating (5/5): reduces the damage taken from corresponding enemy type by 15%,
+	  enhanced oil increases the bonus by 5%, superior - by 10%. The bonus decreases with oil
+	  rubbing off the blade.
+    * Fixative (3/3): increases oil charges on a blade by 33% per skill level, at level 3 of
+	  the skill oils no longer wear off.
+    * Hunter Instinct (5/5): Critical hit power against the targeted enemy type is increased
+	  by 33.4% for each Adrenaline Point available (up to 100% max, adrenaline is not drained).
+- Bomb Creation: non-aimed bombs deal 50% less damage. Bomb damage is unaffected by attack
+  power and fully depends on skills and perks.
+    * Steady Aim (3/3): +45% to slowdown while aiming bombs.
+    * Pyrotechnic (5/5): +250 damage to all bomb types.
+	* Efficiency (5/5): +5 to max number of bombs of each type.
+	* Cluster bombs (5/5): bombs separate into 6 fragments upon detonation, each fragments
+      deals as much damage as one bomb.
+- Mutation:
+    * Acquired Tolerance (5/5): Every known level 1, 2 and 3 potion, bomb and oil formula,
+      alchemy substance and mutagen decoction formula increases maximum Toxicity by 1 point,
+	  up to +150 points max. (the limit is +50/+100/+150 for levels 1/2/3 of the skill
+	  respectively)
+    * Tissue Transmutation (5/5): +10 to max vitality for each point of toxicity offset added
+	  by a consumed decoction for the duration of that decoction.
+    * Adaptation (5/5): decreases decoction toxicity by 20%.
+	* Synergy (5/5): +50% to mutagen bonus.
+- Trial of the Grasses:
+    * Frenzy (5/5): 75% time slowdown for 1.5 sec if an enemy begins a counterattack; when
+	  overdosed, Attack Power and Sign Intensity are increased by 25%.
+	* Endure Pain (5/5): +50% to max Vitality when overdosed.
+	* Fast Metabolism (5/5): toxicity drops faster by 1.25 points/sec.
+	* Killing Spree (5/5): if toxicity is above zero, each opponent killed adds 25% to
+	  critical hit chance for the duration of the fight.
+
+Generic skills aka Perks:
+    * Sun and Stars: +10/sec to Vitality regeneration in combat during the day, +5/sec to
+	  Stamina regeneration in combat at night.
+	* Survival instinct: +750 to base Vitality.
+	* Cat School Techniques: +5% to critical hit chance and +20% to critical hit power for
+	  each piece of light armor equipped.
+	* Griffin School Techniques: +5% to Sign Intensity and -5% to sign casting stamina cost
+	  for each piece of medium armor equipped.
+	* Bear School Techniques: +7.5% to max Vitality and +0.025 points to adrenaline gain for
+	  each piece of heavy armor equipped.
+	* Cold Blood: generates the same amount of Adrenaline Points as when using swords for
+	  each bolt that hits the target. For split bolts Adrenaline gain is divided between
+	  projectiles, i.e. each gives 1/3 of normal pts.
+	* Rage Management: can cast signs with Adrenaline, Adrenaline casting has a priority
+	  over stamina casting, i.e. if you have Adrenaline available, it will be consumed
+	  instead of Stamina.
+	* Adrenaline Burst: +5% to Adrenaline gain, -10% to melee actions stamina cost per each
+	  adrenaline point available (Adrenaline is not consumed).
+	* Focus: +15% to Sign Intensity per each Adrenaline Point available (Adrenaline is not
+	  consumed), signs generate adrenaline when cast - the same amount you get for hitting an
+	  enemy with a sword. For alternate sign casts Adrenaline is generated per second (for
+	  Quen it's generated per stamina spent).
+	* Metabolic Control: +40 to max Toxicity.
+	* Metabolism Boost: -33% to potion (but not decoction) toxicity per each adrenaline point,
+	  adrenaline is consumed after drinking a potion.
+	* Trick Shot: unchanged, allows to fire one additional bolt before reloading.
+	* Advanced Pyrotechnics: +0.1 points to adrenaline for dealing damage with bombs (the
+	  number does not depend on any other bonuses). For Cluster Bombs Adrenaline gain is now
+	  divided by the number of fragments.
+	* Battle Frenzy: replaces +10% to Attack Power Battle Trance effect with +10% to critical
+	  hit chance per each adrenaline point available (adrenaline is not consumed).
+	* Strong Back: +40 to carry weight.
+	* Gorged on Power: unchanged, Place of Power bonus lasts indefinitely, but only one such
+	  bonus can be active at a given time.
+	* Connoisseur: replaces Gourmet, +100% to effect duration from alcoholic beverages, drunken
+	  effect from alcohol is removed, toxicity from alcohol and raw food is removed.
+	* In Combat's Fires: -50% to damage from own bombs and bolts, effects from own bombs and
+	  bombs are ignored. (by default you get 100% damage from your own bombs/bolts in the mod)
+	* Heavy Artillery: +100% to base bomb damage, -50% to the number of bombs in a stack.
+	* Attack is the Best Defense: killing an enemy restores 15 points of stamina (no cooldown),
+	  critical hits and counters restore 5 points of stamina (2.5 sec cooldown).
+
+General player abilities
+========================
+
+- Passive attack and sign power bonuses were removed from Geralt's levelups: each level now
+  adds 50 points to base Geralt's health - and nothing more.
+- Default health regen for Geralt in and out of combat is now zero.
+- Headshots and backstabs add 25% to Attack Power (was zero).
+- Now you only gain adrenaline for actually dealing the damage.
+- Adrenaline loss on damage scaling changed: now you lose 0.01 point of Adrenaline per
+  1% of health lost, resulting in 1 point lost on 100% health lost.
+- Player health is no longer forced to 2000 during fistfight mini-games - actual health is
+  used instead.
+
+Horse combat
+============
+
+- Attacking from horse no longer drains 100% stamina.
+- Attacks from horseback drain lightAttackCost*3 stamina.
+- All the attacks from horseback are considered heavy (same as vanilla).
+- Bonus damage when attacking from horseback now depends on weapon damage.
+- Higher speed means higher bonus damage: up to x2 when attacking at full speed.
+- Attacking at maximum speed adds knockdown to the attack.
+
+Dodging, parrying and countering
+================================
+
+In-game description:
+Wolf School defensive techniques: parry, counter, dodge. Successful parry, counter and dodge
+reduce damage taken to zero and prevent all negative effects. Successful countering grants
+additional 25% chance to critical hit. Partial parry reduces damage taken by 50% and prevents
+bleeding. Rolling grants immunity to all knockdown and stagger effects and allows to dodge
+arrows. Some of the attacks cannot be dodged. Arrows can be parried.
+
+Dodging/rolling costs stamina and is NOT intended for moving around the battleground! Move
+normally or use sprinting, but do not spam dodge button to just get closer to an enemy or get
+away from it.
+
+Geralt can now initiate sprinting with any percent of stamina left. You can still sprint for
+3 seconds for free if you have 100% stamina, same as vanilla.
+
+Dodging works similar to vanilla:
+- if an attack can be dodged and you're not dodging toward the attacker, you will avoid the
+  damage completely;
+- if an attack cannot be dodged and you're inside its hitbox - you will get hit no matter
+  what;
+- dodging safe angle is down to 120 degrees (was 150 in vanilla), you can increase it with
+  light armor bonus (+30 deg to safe angle);
+- dodging angle is the angle distance between attack direction and dodge direction, it goes
+  from zero (when dodging directly away from the attack) to 180 deg (when dodging directly
+  toward the attacker), so the bigger the number is - the better;
+- Fleet Footed reduces the damage taken while dodging (aka graze damage) by 10% per skill
+  level; it doesn't matter if the attack can or cannot be dodged - if you are dodging or
+  rolling, any damage you take is reduced.
+
+Parrying:
+- parrying at attack reduces the damage to zero and prevents all the negative effects;
+- light attacks can always be parried, same as vanilla;
+- heavy attacks that don't have knockdown effect (golem's AoE, etc) can be parried partially:
+  the damage is reduced by 50%, bleeding effect is prevented - this is called a partial parry;
+- you can parry (but not counter) with not enough stamina: this will reduce the parry to
+  partial parry and drain your remaining stamina;
+- parrying a heavy attack drains more stamina than parrying a light one.
+
+Countering:
+- all the light attacks can be countered, same as vanilla;
+- partial counters work the same as partial parries;
+- counter is now considered a light attack, so all the light attack bonuses apply;
+- unlike vanilla, countering grants you bonuses and not penalties - your damage on counters
+  is not reduced, it stays the same as your normal light attack, and you get +25% to critical
+  hit chance;
+- Counterattack skill improves your counters by increasing attack power and crit chance and
+  by adding knockdown.
+
+Armor
+=====
+
+Each armor piece has two basic properties: Armor value (see the damage formula above) and
+resistances. Armor value is defined by item level: higher level means more Armor. Resistances
+are defined by armor class.
+
+There are now three distinct classes of armor in the game:
+- Light armor: offers high mobility (-30% to melee actions stamina cost when wearing all 4
+  pieces), but close to zero protection (very low resistances).
+- Medium armor: no stamina penalties or bonuses, offers medium protection (medium
+  resistances).
+- Heavy armor: low mobility (+50% to melee actions stamina cost when wearing all 4 pieces),
+  casting a sign also costs 50% more (+12.5% penalty per piece), very good protection (high
+  resistances).
+
+By default there are no stamina regen bonuses/penalties for light/heavy armor in the mod, but
+there's an option to turn them on.
+
+The mod introduces set bonuses for wearing a full set (4 items) of generic (non-witcher)
+light/medium/heavy armor:
+- Light set bonus: +30 deg to safe angle distance while dodging.
+- Medium set bonus: +0.25 points/sec to toxicity regen rate.
+- Heavy set bonus: +10% to all damage resistances.
+
+Witcher sets do not grant generic bonuses, but have their specific bonuses instead. All tiers
+of witcher sets have access to the minor set bonus and grandmaster sets also grant full set
+bonus for having all 6 pieces equipped.
+
+Minor witcher set bonuses (activated when you have at least 3 pieces equipped):
+- Kaer Morhen set: new set introduced by the mod, it's an upgrade to starting items available
+  from the beginning of the game. The set starts at level 2 and can be upgraded to levels 9,
+  19 and 27. Set bonus: Stamina regeneration rate is increased by 1 for each additional
+  enemy in combat (up to +5 max). The set contains 4 pieces of armor and no swords.
+- Griffin set: Casting a sign reduces stamina cost of all the subsequent actions taken by 5%
+  for each piece of the set (-30% for all 6 pieces). Lasts for 2.5 sec.
+- Feline (Cat) set: Chained fast hits add +2.5% to Attack Power for each piece of the set
+  (+15% for all 6 pieces), up to +60% max. Finishing a chain of fast hits with a strong hit
+  discharges the sword doubling the current Attack Power bonus. The bonus resets when the
+  chain of hits stops and at the end of the combat.
+- Ursine (Bear) set: taking damage increases your adrenaline (0.035 per piece, 0.21 max), you
+  get additional bonus to attack power for adrenaline on top of the ones you might have from
+  skills (+3.5% per piece, +21% max per adrenaline point).
+- Wolven set: Each piece increases the effectiveness of an oil applied to a sword by 16.7%
+  (up to 100%). So with a tier 3 oil that has +25% to Attack Power, +5% to critical hit chance
+  and +25% to critical hit power, having all 6 pieces of the set equipped will up those
+  numbers to +50%, +10% and +50% respectively, doubling the bonuses you get from applying
+  oils.
+- Viper set: Grants poison immunity. Poisons heal by 10% of poison damage for each set piece
+  equipped (up to 60% for all 6 pieces).
+- Manticore set: Bombs are thrown without any delay and can deal critical damage. Each set
+  piece increases bomb critical hit chance by 5% (30% for all 6 pieces) and bomb critical hit
+  power by 10% (60% for all 6 pieces).
+
+Full witcher set bonuses (activated when you have all 6 items equipped, only available for
+grandmaster upgrades):
+- Griffin set: The size of Yrden traps is increased by 40%. While you are within an Yrden
+  trap, Sign Intensity is increased by 50% and damage resistance is increased by 15%.
+- Feline (Cat) set: Critical hits with a sword double Adrenaline gained.
+- Ursine (Bear) set: Damage dealt with a strong attack restores 33.4% stamina spent on that
+  attack.
+- Wolven set: Up to three different oils can be applied to a sword at a time. Each oil applied
+  to a sword increases critical hit chance by 5% and critical hit power by 10%.
+- Manticore set: The maximum number of charges for each alchemy item is increased by 1.
+
+Special non-witcher sets:
+- Tesham Mutna set: Dealing damage in combat heals 0.5% of maximum Vitality for each piece of
+  the set (3% max).
+
+You can level up your armors with mastercrafted kits. These are available at Yoanna (after you
+complete her personal quest), enchanter (HoS) and grandmaster (B&W).
+
+Swords
+======
+
+Steel swords/secondary weapons use slashing damage and silver swords use silver damage.
+Slashing/silver damage is defined by item level - the bigger the level is, the bigger the
+damage gets. Weapons can have additional damages like piercing, bludgeoning, fire or poison,
+but their main damage is always slashing for steel weapons and silver for silver weapons no
+matter what.
+
+All types of damage are processed separately. This means that if your sword has slashing and
+fire damages, both of those damages are reduced by victim's armor and resistances (resistances
+are damage type dependent) and increased by your bonuses.
+
+Damage over time (DoT) is not reduced by armor, but it can be reduced by victim's resistances
+to this specific DoT.
+
+Random weapons get additional bonuses depending on their quality and level: bigger quality
+means more bonuses, bigger level means bigger values on bonuses.
+
+You can level up your weapons with mastercrafted kits. These are available at Hattori (after
+you complete his personal quest), enchanter (HoS) and grandmaster (B&W).
+
+Special swords:
+- Iris (steel, HoS): Dealing damage with attacks charges the sword with energy. When attacking
+  with the fully charged sword, weapon damage is increased by 5% of the attacker's Vitality
+  (if the attack is successful, Vitality is drained). A strong attack with the fully charged
+  sword spawns a phantom copy of the sword that deals additional damage, which goes through
+  shields, blocks and Armor and ignores damage resistances. Hits to fully charge the sword: 4.
+  Charges decay over time (one per 6 sec.) and reset when Geralt takes damage. Fully charged
+  sword discharges in 6 sec. or after a strong attack.
+- Aerondight (silver, B&W): While in combat, weapon damage increases by 10 points per enemy.
+  Each successful hit charges the sword. Fully charged sword discharges on successful hit,
+  dealing critical damage with 100% Attack Power bonus and ignoring Armor and damage
+  resistances. Sword discharge also damages and staggers all the surrounding enemies.
+  Hits to fully charge the sword: 4. Charges decay over time (one per 6 sec.) and reset when
+  Geralt takes damage.
+
+Crafting
+========
+
+- Crafting was shifted earlier into the game, items require less of the same ingredient to
+  craft (1-2 usually).
+- Generic human items do not require magical and monster components.
+- Witcher gear, glyphs and runes require magical and monster components.
+- Crafted items now have non-random bonuses.
+
+Crossbow
+========
+
+You can how have a decent crossbow build, if you invest into crossbow skills. If not, it's
+still a utility weapon to bring down flying enemies and apply special effects from bolts.
+
+- Non-aimed shots deal 50% less damage.
+- Damage from player's own bolts is no longer halved.
+- Bolts and crossbows are reworked, damage and effects tweaked.
+- Explosion range on explosive bolts decreased from 5 to 3.
+- Headshots ignore armor and resistances and add 50% to crit chance.
+- Bolts no longer cost a fortune, you can sell them and buy them for a reasonable price, but
+  you can't dismantle them. Crafting price is roughly the same.
+
+Alchemy
+=======
+
+Alchemy is now vital on higher difficulties to buff your character in combat and/or control
+groups of enemies.
+
+Potions, bombs and especially decoctions were reworked to be more useful.
+
+Alchemy recipes were altered for more ingredients diversity. New recipes were added for
+brewing alcohol.
+
+You can now buy all the alchemy recipes and rare ingredients (like doppler or succubus
+mutagen) from master alchemist after completing his quest.
+
+You can now dismantle alchemy items yourself from the inventory with the new Alchemy dismantle
+kit (can be bought from alchemists/herbalists): select an item you want to dismantle in your
+inventory and press E (your key for "use" action).
+
+You can now dismantle named mutagens for their generic versions at crafters or with dismantle
+kits.
+
+Bombs (tier 1/2/3):
+- Bombs are only upgraded through skills and perks, their damage never scales with anything.
+- Non-aimed bombs deal 50% less damage.
+- Damage from player's own bombs is no longer halved.
+- Active equipped bomb is now used to destroy monster nest (if valid, if not - vanilla
+  algorithm is used).
+- Fixed numerous inconsistencies with bombs and their effects, descriptions should be more
+  clear now, damages should be more consistent.
+- Grapeshot: damage. Deals 300/400/500 points of physical/silver damage and 50/100/150 points
+  of fire damage; tier 3 destroys shields.
+- Dancing Star: utility – small amount of damage, stunlocks, giving the player a chance to
+  regen their hp/stamina and reposition. Deals 100/150/200 fire damage on impact, creates a
+  fire cloud for 3/4/5 sec, applies burning effect to everything inside the cloud.
+- Devil's Puffball: utility – small amount of damage, blocks regen abilities of enemies like
+  werewolfs. Deals 100/150/200 poison damage on impact, creates a poison cloud for 3/4/5 sec,
+  applies poison effect to everything inside the cloud.
+- Dragon's Dream: damage + utility – moderate damage, high burning chance. Releases a cloud of
+  gas that explodes when ignited, the cloud lasts for 15/20/25 sec; deals 300/400/500 points
+  of damage when explodes and has a 0/50/75% chance to ignite enemies; tier 3: enemies killed
+  by the bomb explode and deal 500 points of damage to the nearby creatures.
+- White Frost (Northern Wind): utility – stunlocks, increases damage dealt. Freezes enemies
+  for 4/5/6 sec; frozen enemies receive 25/35/50% more damage; Aard damages frozen enemies
+  even if you don't have damage skill; DoT effects are paused when frozen; killing a frozen
+  rotfiend now prevents the explosion; freezing a rotfiend that is about to explode also stops
+  the explosion.
+- Samum: utility – stunlocks, increases critical chance against the affected enemy. 6 sec
+  duration; blinds the opponents; adds 50/75/100% to critical hit chance.
+- Silver Dust (Moon Dust): utility – blocks abilities like hp regen. Blocks or weakens
+  transformation and regeneration abilities of monsters for 20/30/40 sec (night/noonwraiths
+  can still use doppelgangers to regenerate, but at a much lower rate).
+- Dimeritium Bomb: utility – weakens magic creatures (mages, golems, etc), allowing to deal
+  increased damage. Blocks witcher signs and magic monsters' abilities for 20/30/40 sec;
+  -30/40/50% to damage for high mages (their magic abilities are not blocked by the bomb);
+  -50/75/100 to Armor and -5/10/15% to damage resistance for magic creatures (golems,
+  elementals, etc); closes Wild Hunt portals (same as vanilla).
+
+Potions (tier 1/2/3):
+- Potions (but not decoctions) now stack, i.e. drinking the same potion several times
+  extends effect duration instead of overriding it.
+- You can no longer drink potions while doing special sword attacks or channeling signs.
+- Drinking White Raffard no longer removes Swallow effect.
+- Both White Raffard's and Swallow potions now stop bleeding and Swallow potion also grants
+  bleeding resistance bonus.
+- Bear and Nekker pheromone potions restored. Buy from Pellar, Otto Bamber (Oxenfurt,
+  Herbalist's Hut), druids and master alchemist.
+- Finisher animation is now disabled when Blizzard potion slow motion is active.
+- Pheromones, Pops Antidote: 10 toxicity.
+- Killer Whale: 10 toxicity, 180 sec duration, 3 charges. More breath and better vision while
+  diving.
+- Cat: 10 toxicity, 240/360/480 sec duration, 3/4/5 charges. Enhances vision in dark places:
+  +25 to range of vision. Tier 3: grants immunity to Hypnotized effect.
+- Golden Oriole: 15 toxicity, 60/90/120 sec duration, 3/4/5 charges. No more poison immunity,
+  adds 20/35/50% resistance to poison instead. Heals poisoned status when imbibed. Tier 3:
+  grants poison immunity for 5 sec.
+  Note: it is still possible to achieve 100% poison resistance with wyvern trophy (+25% poison
+  resistance) and certain armors. Viper set still grants full immunity and healing when its
+  bonus is active.
+- Swallow: 15 toxicity, 60 sec duration, 3/4/5 charges. Vitality regen: +40/65/80 per sec.
+  Tier 3: health regen is no longer paused on hit. Now also adds 20/35/50% resistance to
+  bleeding and heals bleeding status when imbibed.
+- Tawny Owl: 15 toxicity, 60 sec duration, 3/4/5 charges. Stamina regen: +5/8/10% per sec.
+  Tier 3: never expires at night.
+- Thunderbolt: 20 toxicity, 60/120/180 sec duration, 3/4/5 charges. Attack Power: +25/30/35%.
+  Tier 3: +100% to critical chance during storms.
+- Petri Philtre: 20 toxicity, 60/120/180 sec duration, 3/4/5 charges. Increases Sign Intesity:
+  +25/30/35%. Tier 3: special effects from signs last longer by 1/3.
+- Maribor Forest: 20 toxicity, 60/120/180 sec duration, 3/4/5 charges. Adrenaline gain:
+  15/20/25%. Tier 3: grants 1 adrenaline point when consumed.
+- Blizzard: 25 toxicity, 30 sec duration, 2/3/4 charges. Slows down time after killing an
+  enemy: 50/65/75%.
+- White Raffard: 25 toxicity, 2 charges. Heals 35/60/100% of Vitality. Tier 3: grants immunity
+  for 3 sec. No longer removes Swallow effect when imbibed. Heals bleeding status.
+- Black Blood: 30 toxicity, 60/90/120 sec duration, 3/4/5 charges. Returns damage to vampires
+  and necrophages: 10/15/20%. Tier 2 adds stagger, tier 3 adds bleeding. 
+- Full Moon: 30 toxicity, 90/120/150 sec duration, 3/4/5 charges. Increases Vitality:
+  +900/1300/1700. Tier 3: heals by amount of current toxicity when consumed.
+
+Decoctions:
+- All of the decoctions were reworked. Some retain the vanilla idea behind their effect, some
+  were redone from scratch, because they were useless.
+- All decoctions have 70 toxicity.
+- Katakan decoction: Non-critical damage dealt with a sword increases critical chance of
+  subsequent attacks by 5% (max 25%). When at max bonus, receive additional 50% to Critical
+  hit power. Resets on successful critical hit and at the end of the combat.
+- Arachas decoction: When enemies damage you in melee combat, they get an Acid effect that
+  reduces their Damage Resistance by 1% (max 10%).
+- Cockatrice decoction: All bombs and potions (but not decoctions) can be used one additional
+  time.
+- ArchGriffin decoction: All your melee attacks cost 50% more Stamina. Successful melee
+  attack additionally reduces victim's health by 0.1% of its current value per each Stamina
+  point spent on the attack.
+- Water Hag decoction: Dealing melee damage to enemies increases your Attack Power by 10%
+  (max 100%). Getting hit decreases the bonus proportional to damage received: 0.5% per 1%
+  of health lost. Resets at the end of the combat.
+- Nightwraith decoction: Increases Geralt's base Vitality by 50 points with each foe killed.
+  (Not removed at the end of the combat.)
+- Ekimmara decoction: Regenerates Vitality by 10% of the damage dealt to an enemy.
+- Chort decoction: Grants immunity to stagger. Reduces knockdown to stagger.
+- Foglet decoction: Each Lesser Blue Mutagen equipped increases base damage dealt with signs
+  by 10 points. Blue Mutagen increases the bonus to 17.5 and Greater Blue Mutagen - to 25.
+- Wyvern decoction: Casting a sign increases your melee Attack Power by 16.7% (max 50%).
+  Resets after dealing melee damage and at the end of the combat.
+- Doppler decoction: +50% to crit damage multiplier when attacking from behind.
+- Troll decoction: Gain +100 to non-combat Vitality regeneration and +20 to combat Vitality
+  regeneration. When your Stamina is at 33% and below, gain another +80 to combat Vitality
+  regeneration.
+- Noonwraith decoction: When you kill a foe, gain +1 to combat Stamina regeneration per each
+  alive enemy nearby. Max bonus cannot exceed +10. Resets at the end of the combat.
+- Succubus decoction: Enemies controlled by Axii Puppet deal 50% more damage.
+- Alghoul decoction: Dealing melee damage to enemies increases your Adrenaline Gain by 10%
+  (max 50%). Getting hit decreases the bonus proportional to damage received: 0.5% per 1% of
+  health lost. Resets at the end of the combat.
+- Fiend decoction: Avoid hit stagger if damage received is less than 15% of your maximum
+  health.
+- Forktail decoction: Damage dealt with a melee weapon increases Sign Power by 10% (max 50%).
+  Resets after casting a sign and at the end of the combat.
+- Grave Hag decoction: When you kill a foe, gain +5 to Vitality regeneration per each alive
+  enemy nearby. Max bonus cannot exceed +50. Resets at the end of the combat.
+- Wraith decoction: When the witcher is attacked from behind, normal Quen gets activated and
+  reduces the damage. When hostile specters are around, Quen Power is increased by 50%.
+- Elemental decoction: Adds 50% resistance to bleeding, burning, poison effects and to fire
+  and poison damage.
+- Ekhidna decoction: Regenerates Vitality by 0.1% for each point of Stamina spent. Works
+  only while in combat.
+- Ancient Leshen decoction: Casting a Sign in combat increases your Sign Power by 10% (max
+  50%). Getting hit decreases the bonus proportional to damage received: 0.5% per 1% of
+  health lost. Resets at the end of the combat.
+- Basilisk decoction: Each Lesser Green Mutagen equipped increases your Vitality regeneration
+  rate by 4/sec. Green Mutagen increases the bonus to 8/sec and Greater Green Mutagen - to
+  16/sec.
+- Werewolf decoction: Gain +50% to Attack and Sign Power, +5/s to Stamina regeneration and
+  +25% to Adrenaline gain while your health is at 20% or lower. Resets when you regain your
+  health and at the end of the combat. 10 sec cooldown.
+- Nekker Warrior decoction: Each Lesser Red Mutagen equipped decreases melee action stamina
+  cost by 2.5%. Red Mutagen increases the bonus to 3.75% and Greater Red Mutagen - to 5%.
+- Leshen decoction: Returns 25% of damage taken to damage dealer.
+- Griffin decoction: Getting hit more than once within 1 sec makes you immune to damage for
+  the next 2 sec.
+- Reliever's decoction: Damage dealt to enemies in spectral form is increased from 10% to 60%
+  of normal damage. Damage taken from enemies in spectral form is reduced by 50%.
+
+Edibles
+=======
+
+- Cooking recipes added: can be bought from innkeepers (original idea by FreeSergey, recipes
+  by delamer, used with his permission).
+- Food and drinks reworked in terms of quality and availability in loot and shops.
+- Well hydrated separate effect was restored.
+- Well fed and well hydrated effects have fixed 60 sec duration for all tiers.
+- Food of tier 1/2/3 now restore 10/20/30 hp/sec out of combat and 1/5/10 hp/sec in combat.
+  Drinks now restore 5/10/20 hp/sec out of combat, 1/5/10 hp/sec in combat and 1/2/3 stamina/sec.
+
+Effects
+=======
+
+- Damage over time (DoT) effects reworked to deal approximately the same amount of total
+  damage.
+- Bleeding effect: -1% hp/sec for 8 seconds, blocks hp regen.
+- Bleeding effect from tracking bolt: -0.5% hp/sec for 16 seconds, blocks hp regen.
+- Burning effect: -2.7% hp/sec for 3 seconds, blocks hp regen, stunlocks.
+- Poison effect: -1.6%  hp/sec for 5 seconds, blocks hp regen.
+- Frozen effect now also pauses all DoT effects.
+- Enhanced armor effect: 30 min duration, +5% to damage resistances.
+- Enhanced weapon effect: 30 min duration, 10 to armor penetration, +5% to armor reduction.
+- Enhanced Sign effects: 30 min duration, +20% to corresponding Sign Intensity.
+
+Other items
+===========
+
+- Dismantle kits were added to armorers/blacksmiths and alchemists/herbalists that allow the
+  player to dismantle items from the inventory.
+- Geralt can now use razor in his inventory to shave himself (original idea by Murzinio, used
+  with author's permission).
+- Missing lore books from Witcher Book Collection mod by KasparsBITELV were added with
+  author's permission.
+
+Trophies
+========
+
+- All trophies now have individual bonuses:
+  * Noonwraith (lvl 2, prologue): +5% to Sign Intensity
+  * Gryphon (lvl 3, prologue): +5% to Attack Power
+  * Wyvern (lvl 7, No Man's Land): +5% to stamina regen speed
+  * Cockatrice (lvl 8, No Man's Land): +10% to Aard Intensity
+  * Nightwraith (lvl 10, No Man's Land): +10% to Yrden Intensity
+  * Gravehag (lvl 10, No Man's Land): +5% to Focus gain
+  * Fogling (lvl 12, No Man's Land): +10% to Quen Intensity
+  * Czart (lvl 20, No Man's Land): +25% to critical hit power
+  * Ekimma (lvl 22, No Man's Land): +15% to critical hit chance
+  * Wyvern (lvl 23, No Man's Land): +25% to poison resistance
+  * Gryphon_sq108 (lvl 24, No Man's Land): +15% to Attack Power
+  * Arachas (lvl 33, No Man's Land): +40 to max toxicity
+  * Doppler (lvl 13, Novigrad): +25% to bonus money
+  * Wild Hunt Minion (lvl 14, Novigrad): +25% to frost resistance
+  * Succubus (lvl 15, Novigrad): +10% to Axii Intensity
+  * Noonwraith_mh308 (lvl 16, Novigrad): +5 to Vitality regen
+  * Dao (lvl 24, Novigrad): +40 to armor reduction
+  * Leshy (lvl 25, Novigrad): +10% to armor reduction
+  * Katakan (lvl 26, Novigrad): +15% to Quen Intensity
+  * Gryphon (lvl 35, Novigrad): +15% to Igni Intensity
+  * Nekker Warrior (lvl 16, Sellige): +5% to resistance against monsters
+  * Wraith (lvl 17, Sellige): +5% to resistance against magic creatures
+  * Water Hag (lvl 18, Sellige): +20% to potion duration
+  * Lamia (lvl 19, Sellige): +25% to bleeding resistance
+  * Leshy (lvl 22, Sellige): +10% to Sign Intensity
+  * Forktail (lvl 28, Sellige): +25% to burning resistance
+  * Fiend (lvl 29, Sellige): +35% to critical hit power
+  * Cave Troll (DLC): +500 to Vitality
+  * Cyclop (lvl 35, DLC): +15% to bludgeoning resistance
+  * Camerlengo (lvl 37, DLC): +15% to piercing resistance
+  * Dracolizard (lvl 38, DLC): +20% to Igni Intensity
+  * Wight (lvl 39, DLC): +20 to max encumbrance
+  * Spriggan (lvl 45, DLC): +100% to bonus herbs
+  * White Basilisk (lvl 46, DLC): +10% to stamina regen speed
+  * Garkain (lvl 47, DLC): +20% to Axii Intensity
+  * Sharley Matriarch (lvl 48, DLC): +60 to armor reduction
+- Trophies are no longer auto-equipped when you loot them.
+
+Loot
+====
+
+- Free ingredients and upgrades were removed from easily accessible places.
+- Loot tables are area-dependent, so mines have coal and ore, reach houses have silver and
+  jewelry, etc.
+- Merchants no longer sell monster parts.
+
+Weight
+======
+
+- All items have weight.
+- Swords and armors (especially heavy armors) have the biggest weight, so you won't be able
+  to carry much of these. Some weights might seem unrealistic and I'd rather implement
+  inventory space restriction myself, but right now weight looks like the only way to somehow
+  balance the economy.
+- In general, alchemy items and ingredients have small weight, but some of the ingredients,
+  like monster hides, weight more.
+- You won't need to carry as much items as in vanilla because of changes to crafting and loot.
+- Fast-travel and galloping while over-encumbered were disabled.
+- Over encumbrance adds penalties to stamina cost for all actions.
+- If your over encumbrance is too big (20% over the limit), the boat you're trying to board
+  will sink (off by default, can be tweaked in options).
+  
+Money and economy
+=================
+
+- Double randomization in monster hunt price negotiation dialog was removed and now you can
+  get up to 70% more reward if you're lucky. It's still random, but you should be getting
+  about 30% more money overall.
+- Prices were significantly reworked.
+- Price modifiers were altered, so you are no longer charged an astronomical sum for generic
+  sword or a piece of wood.
+
+Enchantments
+============
+
+Enchanter upgrades cost reduced to 3000/6000/9000 crowns for levels 1/2/3 respectively.
+Most of the rune/glyphwords were tweaked, their descriptions were made more clear. Some of
+the rune/glyphwords were redone from scratch.
+Crafting schematics were redone for both runewords and glyphwords to make them more diverse
+and to fit the new tweaks more.
+
+Runewords:
+- Level 1:
+  * Preservation: Armorer’s Table and Grindstone bonuses never expire.
+  * Dumplings: Any edible consumed lasts longer by 100%, but tastes like pierogi.
+  * Elation: Killing an enemy gives 0.25 Adrenaline Points.
+- Level 2:
+  * Severance: Increases the range of Whirl by 1.1 yards and Rend by 1.9 yards. Final damage
+    dealt by these attacks is decreased by 33.3%.
+  * Placation: Once they reach their maximum level, Adrenaline Points steadily decline until
+    they reach zero at a rate of 0.3 points per sec. During this time Vitality regenerates
+	faster by 5%/sec, Stamina regenerates faster by 5%/sec, and Toxicity declines faster by
+	5 points/sec.
+  * Rejuvenation: Killing an enemy heals 15% of maximum Vitality.
+- Level 3:
+  * Replenishment: After you cast a Sign, an Adrenaline Point is consumed and your next sword
+    attack is charged with the power of that Sign. Aard: knockdown (chances depend on Attack
+	Power). Igni: 100% of your weapon damage is added as Fire damage (scales with Attack
+	Power). Yrden: slowdown effect is applied for 5 sec. Quen: heals Geralt for 50% of damage
+	dealt. Axii: confusion effect is applied for 5 sec.
+  * Invigoration: When at maximum Vitality, additional Vitality regeneration increases your
+    weapon damage by 2% per 1% of excess Vitality gained (up to +50%). Works only in combat.
+	Resets on damage taken and damage dealt.
+  * Prolongation: Excess Adrenaline generated slows down potion expiration timer by 0.5% per
+    1% of excess Adrenaline (3 points = 100%). Max bonus cannot exceed 50%. The bonus resets
+	when you lose Adrenaline and at the end of the combat.
+
+Glyphwords:
+- Level 1:
+  * Deflection: Armor deflects all arrows.
+  * Heft: All damaging melee actions (except for special attacks) cost 20% more Stamina, but
+    deal 20% more damage.
+  * Depletion: Hitting enemies with Aard reduces their Stamina by 50%, which also increases
+    knockdown and heavy knockdown chances.
+  * Ignition: Enemies set alight with Igni have a 50% chance to ignite other enemies within a
+    2 yard radius.
+  * Beguilement: Each enemy affected by Axii Confusion adds 25% to your critical hit chance
+    and critical hit power (up to 100%).
+- Level 2:
+  * Balance: Casting a Sign costs 20% less Stamina, but all melee actions (except for special
+    attacks) cost 20% more Stamina.
+  * Rotation: Igni's basic attack strikes all opponents in a 360-degree radius and deals 150
+    more damage (scales with Sign Intensity). Burning chance is decreased by 33%.
+  * Usurpation: Each enemy controlled by Axii Puppet adds 25% to your Attack Power and Sign
+    Intensity (up to 100%).
+  * Entanglement: When Yrden Magic Turret hits an enemy, an Yrden Magic Trap is placed at that
+    position. Size, duration and slowdown for such a trap are unaffected by Yrden Intensity and
+    upgrades and limited to 2.5 yards, 5 sec and 35% respectively.
+  * Protection: When you enter combat, you will automatically get a Quen shield without using
+    any Stamina and with 100% bonus to Sign Power.
+- Level 3:
+  * Levity: All melee actions (except for special attacks) cost 20% less Stamina, but all
+    Signs cost 20% more Stamina.
+  * Retribution: Damage dealt by Quen Discharge and Exploding Shield is increased by 100%.
+  * Possession: When an opponent influenced by Axii dies, the effect transfers to a nearby
+    target. The effect's duration increases by 2 seconds for each blow the affected target
+	lands.
+  * Eruption: Foes killed by Igni (burning or fire) explode dealing 300 damage to other
+    enemies within a 3-yard radius and igniting them. Damage scales with Sign Intensity.
+
+Runes:
+- Pierog rune gives +5 normal vitality regen and Tvarog rune gives +5 combat vitality regen
+  (was no bonus).
+- Glyph of Mending regen buffed to 3/4/5.
+- Glyph of Warding bonus changed to Quen chance on projectile: 3/4/5%.
+
+Mutations
+=========
+
+- Magic Sensibilities: Signs can deliver Critical Hits. Critical chance and damage scale with
+  Sign Intensity. Opponents killed by critical hits from Signs explode. [Starting crit chance
+  and bonus (SI=0) are now 5% and 25% respectively. They can go up to 85% and 400% at SI=500%
+  - sign intensity to power bonus conversion formula is the same as for all the other sign
+  effects in the mod.]
+- Deadly Counter: Countering an enemy when their health is at 15% or less kills them and
+  triggers a finisher or dismemberment. Each adrenaline point increases the damage dealt when
+  countering by 33% (up to +100% max).
+- Toxic Blood: Turns the blood of the witcher into a highly caustic acid. Toxicity Decay Rate
+  is decreased by 50%. Whenever you take melee damage, your blood causes the attacker to lose
+  1.5 point(s) of their health for every 1 point in your Toxicity level per second. The effect
+  lasts 5 sec. Slows down the attacker's stamina regeneration by 10%.
+- Piercing Cold: Aard gains a 30% chance to freeze opponents, and if the blast also knocks them
+  down it will kill them instantly. Enemies who escape the freezing take 250 damage instead
+  (scales with Sign Intensity).
+- Bloodbath: Each fatal blow of your sword triggers a finisher or dismemberment. Upon entering
+  combat you immediately get a bonus to your Attack Power for each skill equipped: +10% for a
+  combat skill, +5% for any other skill. Getting hit decreases the bonus by 0.5% per 1% of
+  health lost. Killing an enemy fully restores the bonus and adds +20% more on top of it. Max
+  bonus: 250%. Resets at the end of the combat.
+- Euphoria: Increases Vitality drain on overdosing by 0.75% for every 1 point in your Toxicity
+  level. The amount of Vitality you lose when overdosing is added to your base weapon and Sign
+  damage.
+- Mutated Skin: When you are about to take damage your skin absorbs and redistributes that
+  damage over time instead: 5 sec per each Adrenaline Point you have (up to 15 sec max, at
+  least 1 point is required to trigger the mutation). During this period your Adrenaline is
+  drained at a speed of 1 pt per 5 sec. If your Adrenaline reaches zero before the effect ends,
+  all the remaining damage will be dealt at once.
+- Cat Eyes: Crossbow bolts deal 100% more base damage and will pierce and either stun or knock
+  down opponents. Opponents at full health lose 15% of their health when shot. If at non-zero
+  toxicity, time slows down by additional 25% when aiming with a crossbow.
+- Conductors of Magic: When drawn, magic, relic and witcher swords increase base Sign damage by
+  30% of their own base damage.
+- Adrenaline Rush: While in combat you alternate between two states: Rush state that doubles
+  your Adrenaline gain for 30 sec and gives additional +50% to Attack Power and Sign Intensity
+  per Adrenaline Point and Recovery state that halves your Adrenaline gain for 30 sec and gives
+  -50% to the same characteristics for each Adrenaline point gained during the Rush state.
+- Metamorphosis: Allows to imbibe up to 3 decoctions with no toxicity cost. Each free decoction
+  imbibed increases your chances to apply critical effects with both swords and Signs by 10%
+  (effect chance increases by 1.3 times max). Witcher Senses help you see better in dark places.
+- Second Life -> Life Leech: Requires Mutation Catalyst potion to activate. Drains the life out
+  of up to three surrounding enemies healing the witcher in the process. Drain rate is a sum of
+  your weapon damage, Attack Power and Sign Intensity multiplied by Adrenaline Points and
+  divided by the number of enemies. The effect lasts for 6 sec and can only be activated once
+  per 90 sec.
+- Mutation Catalyst: This potion serves as a catalyst to activate the Life Leech mutation.
+  You get the recipe after researching Life Leech. If you load a save with Life Leech already
+  researched, the recipe is added automatically.
+  (Behaves as a regular potion and is a subject to all the corresponding buffs for potions you
+  might have.)
+
+Experience
+==========
+
+- Experience tables were reworked, difficulty dependent modifiers were removed. Experience
+  scaling is now smooth: you get progressively less experience for lower level quests and
+  more experience for higher level quests.
+- Experience for kills was reworked, you get progressively less experience for killing
+  monsters of the same type.
+- You always get at least 5 XP for quests and at least 1 XP for monsters.
+- Smooth experience adjustment means that you can can now get more experience for higher
+  level quests, so they're now worth the trouble.
+- Quest levels were tweaked so they make more sense (especially for Novigrad and Skellige
+  where completing level 14 quest could result in next quest being level 9).
+- Some of the side quests related to main quest were moved later into the game, because they
+  can indeed be completed later and to spread experience and quests a bit.
+
+AI
+==
+
+- Some of the bestiary entries tweaked to better reflect weaknesses of different monsters.
+- Melee hit reaction severity reduction implemented for huge enemies (kind of a poise system
+  for NPCs): the bigger they are, the less severe their hit reaction is.
+- Golems are now immune to hit stagger, i.e. getting hit won't interrupt their actions.
+- Monster hunt monsters are now immune to instant kill moves.
+- Individual monster armor and resistances changed significantly, armored monsters are indeed
+  armored and you need to deal with it. Armor penetration bonuses are now useful.
+- Removed 87.5% of fire resistance from humans.
+- Added different resistances to human armor.
+- Damage values for NPC weapons tweaked (group enemies deal less damage in general).
+- Health values for NPCs tweaked: group enemies have less health, contract monsters and bosses
+  have more health.
+- Levelup bonuses for NPCs redone: NPCs get slight flat increase in both health and damage and
+  also percentage increase in health and damage. As a result, both armor and resistances are
+  defined by enemy type alone, so you always deal full damage to enemies with zero armor and
+  zero resistances regardless of their level and your weapon level. And when enemies level up,
+  they won't end up having roughly the same health and dealing roughly the same damage as it
+  was before: different enemy types will maintain their health and damage differences.
+- Bonuses for deadly (aka "red skull") enemies were removed.
+- Removed ??? from deadly enemies, now they just show their level normally.
+- AI combat parameters were tweaked to make them react better to player actions.
+- Stamina is now properly checked and drained for all types of attack and defense actions.
+- AI should be better at dodging.
+- Adjusted AI targeting priorities, so they will now attack enemies who are dealing damage to
+  them first and will not prioritize the player that much - makes Axii Puppet more useful.
+- Changed how damage is calculated for allied NPCs: both dealt and received.
+- Cyclops no longer ignore Axii Confusion effect.
+- Killing a frozen rotfiend now prevents the explosion. Freezing a rotfiend that is about to
+  explode also stops the explosion.
+- Wild Hunt minions, warriors and bosses now deal additional frost damage. You can counter
+  this damage partially with better armor, monster hunt trophy (+50% resistance to frost) or
+  with better dodging.
+- Wild Hunt ice armor mechanic changed: it now adds 30% to all resistances instead of halving
+  all damages. This means it can now be countered with resistance reduction and Igni is no
+  longer mandatory on higher difficulties.
+- Wild Hunt ice armor can now be removed by any fire damage and not just by Igni hit.
+- Djinn rage and weakened bonuses tweaked: instead of +100%/-100% to stamina regen/sec,
+  they're now +10%/-10% to stamina regen and +50%/-50% to attack power.
+- Added -15% to damage resistances to weakened state (special enemies like Olgierd when you
+  counter their special attacks or do some specific things).
+- Caretaker's healing rate now depends on how much damage he deals, i.e. you can tank him
+  with heavy build now. He still gets full heal from killing shades, though.
+
+Difficulty modes
+================
+
+- Removed vanilla difficulty level restrictions for Ciri (the game is always easy or normal
+  for her in vanilla). Ciri health, armor and damage tweaked accordingly.
+- Experience gained no longer depends on difficulty level.
+- Stamina regen for AI no longer boosted for DM.
+- Difficulties:
+  * Easy (Story): -50% to enemy health, -25% to enemy damage.
+  * Normal (Sword and Story): no modifiers.
+  * Hard (Blood and Broken Bones): +100% to enemy health, +100% to enemy damage.
+  * Hardcore (Death Match): +150% to enemy health, +250% to enemy damage.
+- New harcore difficulty preset added to GM options: increases the number of bonuses enemies
+  get per level, makes mid to end game enemies tougher. Can be used with any base game
+  difficulty mode.
+- Note that vanilla scaling option is irrelevant with the mod.
+
+UI
+==
+
+- Character stats menu was altered to show detailed sign infos. Common sign power now shows
+  only base value and individual sign power stats show sign power with all modifiers. All
+  damages, durations and chances are raw values, when applied to actual target they can be
+  reduced to zero by target's resistance!
+- Sword stats now show average damage per hit and not theoretical damage per second.
+- Attack power and critical hit power stats were added to sword damage sections.
+- Adrenaline gain stat was added to miscellaneous section of character stats.
+- More stats were added for Toxicity section of character stats.
+- Stamina section of character stats menu now shows stamina costs for all actions.
+- Almost all skill descriptions were altered to show more data.
+- Kill count statistic is now available from bestiary menu.
+- Changed some of the loading screen tips and tutorials to reflect GM's changes.
+- Extended recipe/schematic descriptions should be structured better now ('E' when buying
+  an item).
+
+Keep in mind that main damage related bonuses from swords (attack power, crit chance, crit
+power, effects) are shown when the sword is sheathed, but all the other bonuses (like sign
+power) are only shown when the sword is unsheathed.
+
+Mod options
+===========
+
+- Vanilla scaling option is irrelevant with the mod.
+- Default settings for Gameplay are now automatically loaded if you haven't set them up in
+  the menu manually (with presets or sliders). If you're updating from the previous mod
+  version, make sure to re-apply your personal Gameplay settings after loading a save.
+- Enemy scaling presets: recommended - enables soft upscaling for low level enemies (-6
+  levels from Geralt); hardcore - enables upscaling (i.e. all the low level enemies will be
+  upscaled to match Geralt's level, higher level enemies won't change), adds more health and
+  damage and enables progressive scaling for enemies; off - no scaling.
+- Enemy scaling:
+    * None - off, default levels are used.
+	* Upscale - low level enemies are upscaled to match Geralt's level, high level enemies
+	  use default levels.
+	* Match - all enemies are upscaled/downscaled to match Geralt's level.
+	* Soft upscaling - enemies that are 7+ levels below Geralt are upscaled to be exactly 6
+	  levels below Geralt.
+	* Random - default levels are ignored, enemies are assigned a random level based on
+	  min/max boundaries set (see below).
+	* Random no downscaling - low level enemies are assigned a random level based on min/max
+	  boundaries set (see below), high level enemies use default levels.
+- Random scaling (lower bound) relative to player level: used to define min level value for
+  Random/Random no downscaling enemy scaling option (see above).
+- Random scaling (upper bound) relative to player level: used to define max level value for
+  Random/Random no downscaling enemy scaling option (see above).
+- Use progressive level bonuses: enables progressive levelups for enemies. This means that
+  instead of 1 bonus ability per 1 level enemies get more abilities per level as the game
+  progresses.
+- Level delta (LD): used with progressive levelups.
+- Abilities per level delta (AD): used with progressive levelups.
+- Progressive levelup formula: if current enemy level is lower than LD, nothing happens; else
+  numberOfAbilities = (1 + AD/LD) * currentLevel - AD.
+- Basically, LD and AD define the linear function slope for calculating the number of bonus
+  abilities per level. (Bonus abilities define health and damage bonuses for NPCs per level).
+- No additional levels for guards: disable additional levels for guards.
+- Do not upscale animals: disable upscaling for animals.
+- Enemy health/damage modifier: additional health and damage modifiers for enemies.
+- Additional health/damage modifiers for bossed.
+- Final health/damage formula: HP*(1 + difficultyModifier + enemyModifier + bossModifier).
+  I.e. modifiers are additive, bosses use both generic enemy modifier and boss modifier.
+- Experience presets: default - everything zero and off.
+- Disable quest levels: disables levels for quests, affects the numbers displayed in UI and
+  quest XP gain; doesn't affect NPC levels are those are independent from quest levels
+  internally.
+- Fixed experience for quests and combat: disables smooth experience scaling and progressive
+  experience for kills, the amount of exp rewarded is always the same and is define by quest
+  settings and monster type.
+- Quest/combat experience modifiers: allow to reduce or increase the amount of exp gained
+  from quests/combat. The formula: XP*(1 + modifier).
+- Gameplay presets: recommended - enables boat sinking if overencumbered and cooldown for
+  signs and special sword attacks; vanilla(ish) - restores stamina management to vanilla(ish)
+  logic, i.e. melee has zero cost, signs drain 100% stamina; off - all zero and off.
+- Sink the boat if overencumbered: enables boat sinking if Geralt is overencumbered.
+- Overencumbrance threshold to sink the boat (%): defines overencumbrance threshold in
+  percents relative to max carry weight at which boat sinking happens.
+- Reduce item encumbrance (%): reduces item weight for all the items in percents.
+- Enable stamina regen penalty for armors: enables vanilla logic for stamina regen penalty.
+- Combat/Out of combat stamina regen (additional): allows to additionally increase/decrease
+  stamina regen in/out of combat (relative to default values).
+- Combat/Out of combat vitality regen (additional): allows to additionally increase/decrease
+  vitality regen in/out of combat (relative to default values).
+- Sprint/Jump/Melee/Sign action cost modifiers: stamina cost modifiers for corresponding
+  actions. The formula: cost*(1 + modifier).
+- Stamina regen delay (additional): allows to additionally increase/decrease stamina regen
+  delay (relative to the default value).
+- Melee special cooldown (seconds): cooldown time for Whirl and Rend skills.
+- Sign cooldown (seconds): cooldown time for Signs.
+- Alternate sign cooldown (seconds): cooldown time for alternative Sign casting modes.
+- QoL presets: recommended - enables sign instant casting and low stamina sfx; off - turns
+  off sign instant casting and low stamina sfx.
+- Instant sign casting with select key: allows to instantly cast a sign when corresponding
+  sign selection key is pressed (3-7 by default).
+- Low stamina sfx threshold (percents): threshold stamina value at which low stamina sfx
+  (heartbeat) starts playing.
+- Low stamina sfx volume: heartbeat volume.
+- Use dynamic low stamina sfx volume: heartbeat gets louder when stamina gets closer to
+  zero.
+- Low stamina sfx rate: heartbeat rate.
+- Use dynamic low stamina sfx rate: heartbeat rate increases when stamina gets closer to
+  zero.
