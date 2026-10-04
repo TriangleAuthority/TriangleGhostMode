@@ -4,7 +4,11 @@ Porting the Witcher 3 mod Ghost Mode from the legacy game (1.32) to game version
 
 Read [README.md](README.md) for the project's purpose and branch layout, then [docs/README.md](docs/README.md), which indexes the rest (repository workflow, 5.x changes, per-file port status, binary files, tools).
 
+To see where the port stands and what to do next, start at [docs/features/README.md](docs/features/README.md#where-the-port-stands).
+
 Before writing or changing mod code, read [docs/development.md](docs/development.md): how to make changes on 5.x (script annotations such as `@wrapMethod`/`@replaceMethod`, XML overrides with `on_conflict` through a DLC, DLC mounters), the project's conventions, and the build, compile-check and in-game test loop. Port work follows [docs/feature-mapping.md](docs/feature-mapping.md): small steps, each verified in game.
+
+**Ghost Mode supports both of 5.x's skill trees** (the classic tree, behind a hidden setting, and the new one). Anything that touches skills is ported, and tested, for both; see [docs/feature-mapping.md](docs/feature-mapping.md#two-skill-trees).
 
 To launch the game, run something in it or test in game, use the `w3-game-automation` skill (`.claude/skills/w3-game-automation/`): `tools/game.py` drives the game without key presses or screenshots. Details in [docs/game-automation.md](docs/game-automation.md).
 

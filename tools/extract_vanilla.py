@@ -32,9 +32,9 @@ import shutil
 import struct
 import sys
 
+from paths import game_dir
 from to_utf8 import convert_tree
 
-STEAM = r"<Steam library>\steamapps\common"
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MOD_FILES = os.path.join(REPO, "modGhostMode", "files")
 
@@ -118,8 +118,9 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("out")
     ap.add_argument("--utf8", action="store_true", help="convert UTF-16/BOM text files to plain UTF-8")
-    ap.add_argument("--game", default=os.path.join(STEAM, "The Witcher 3"))
+    ap.add_argument("--game", help="game install folder (default: W3_GAME_DIR or Steam's, see paths.py)")
     args = ap.parse_args()
+    args.game = args.game or str(game_dir())
 
     out = os.path.abspath(args.out)
     wanted = mod_overridden_paths()

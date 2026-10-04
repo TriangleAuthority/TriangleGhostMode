@@ -34,7 +34,8 @@ import struct
 import sys
 from pathlib import Path
 
-GAME = Path(r"<Steam library>\steamapps\common\The Witcher 3")
+from paths import game_dir
+
 VERSION = 164  # 5.0's string tables; legacy (1.32) used 162
 
 # language: (key, magic). key1 = key >> 16 is written after the version, key2 = key & 0xffff
@@ -218,7 +219,7 @@ def write_csv(path: Path, lang: str, strings: list[tuple[int, str]], keys: list[
 def selftest() -> None:
     """Decode the game's own string tables and re-encode them; they must match byte for byte."""
     failed = False
-    for f in sorted((GAME / "content" / "content0").glob("*.w3strings")):
+    for f in sorted((game_dir() / "content" / "content0").glob("*.w3strings")):
         data = f.read_bytes()
         try:
             lang, version, strings, keys = decode(data, f.stem.lower())

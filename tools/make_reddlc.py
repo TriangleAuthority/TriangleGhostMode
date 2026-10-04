@@ -13,10 +13,13 @@ against the REDkit depot).
 
 Usage:
     python tools/make_reddlc.py <out.reddlc> --id dlc_ghostmode --xml dlc\dlcghostmode\data\gameplay\abilities\
+        --xml-ngplus dlc\dlcghostmode\data\gameplay\abilities_plus\
     python tools/make_reddlc.py --selftest
 
---xml may be given several times; each becomes a CR4DefinitionsDLCMounter. A path
-ending in a backslash mounts every XML file in that folder.
+--xml may be given several times; each becomes a CR4DefinitionsDLCMounter. --xml-ngplus
+likewise becomes a CR4DefinitionsNGPlusDLCMounter, which loads New Game+ definitions (vanilla
+DLCs mount their abilities_plus\ and items_plus\ folders this way). A path ending in a
+backslash mounts every XML file in that folder.
 """
 import argparse
 import struct
@@ -24,7 +27,8 @@ import sys
 import zlib
 from pathlib import Path
 
-DEPOT = Path(r"<Steam library>\steamapps\common\The Witcher 3 REDkit\r4data")
+from paths import redkit_dir
+
 CR2W_VERSION = 164
 HEADER_CRC_FILL = 0xDEADBEEF  # the header CRC is computed with this in its own field
 
@@ -156,9 +160,11 @@ def write_cr2w(chunks: list[Chunk], timestamp: int = 0, build: int = 0) -> bytes
     return bytes(header) + bytes(strings) + names_table + props_table + bytes(chunks_table) + b"".join(chunk_data)
 
 
-def dlc_definition(dlc_id: str, xml_paths: list[str]) -> list[Chunk]:
-    mounters = [Chunk("CR4DefinitionsDLCMounter", [("definitionXmlFilePath", "String", p)], parent=1, flags=8)
-                for p in xml_paths]
+def dlc_definition(dlc_id: str, xml_paths: list[str], ngplus_paths: list[str] = ()) -> list[Chunk]:
+    mounters = [Chunk(cls, [("definitionXmlFilePath", "String", p)], parent=1, flags=8)
+                for cls, paths in (("CR4DefinitionsDLCMounter", xml_paths),
+                                   ("CR4DefinitionsNGPlusDLCMounter", ngplus_paths))
+                for p in paths]
     root = Chunk("CDLCDefinition", [
         ("id", "CName", dlc_id),
         ("mounters", "array:2,0,ptr:IGameplayDLCMounter", list(range(2, 2 + len(mounters)))),
@@ -170,7 +176,7 @@ def dlc_definition(dlc_id: str, xml_paths: list[str]) -> list[Chunk]:
 
 def selftest() -> None:
     """Rebuild vanilla dlc8.reddlc and compare, ignoring timestamp, build and header CRC."""
-    path = DEPOT / "dlc" / "dlc8" / "dlc8.reddlc"
+    path = redkit_dir() / "r4data" / "dlc" / "dlc8" / "dlc8.reddlc"
     vanilla = path.read_bytes()
     chunks = [
         Chunk("CDLCDefinition", [
@@ -198,6 +204,7 @@ def main() -> None:
     ap.add_argument("out", nargs="?", type=Path, help="output .reddlc file")
     ap.add_argument("--id", help="DLC id (a CName), e.g. dlc_ghostmode")
     ap.add_argument("--xml", action="append", default=[], help="definitions XML file or folder (depot path)")
+    ap.add_argument("--xml-ngplus", action="append", default=[], help="New Game+ definitions XML file or folder (depot path)")
     ap.add_argument("--selftest", action="store_true", help="rebuild a vanilla .reddlc and compare")
     args = ap.parse_args()
     if args.selftest:
@@ -206,7 +213,7 @@ def main() -> None:
     if not args.out or not args.id or not args.xml:
         ap.error("out, --id and at least one --xml are required")
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_bytes(write_cr2w(dlc_definition(args.id, args.xml)))
+    args.out.write_bytes(write_cr2w(dlc_definition(args.id, args.xml, args.xml_ngplus)))
     print(f"wrote {args.out}")
 
 

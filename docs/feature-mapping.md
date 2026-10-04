@@ -4,6 +4,10 @@ The goal is a record of **which changes in Ghost Mode are responsible for which 
 
 This doc defines the method, the format, and how porting proceeds: in small steps, each run in the game before the next. The map itself lives in `docs/features/` (see [Layout](#layout)).
 
+## Legacy behaviour first
+
+The first version of the port reproduces legacy Ghost Mode's behaviour, which was tested thoroughly for balance (decision 2026-10-03, project owner). Where 5.x lets the port express a rule better (a cleaner hook, a generic mechanism instead of a special case), it may, as long as the behaviour stays legacy's. A deviation needs a good reason: a 5.x change that would otherwise defeat the rule's intent (e.g. STAM-09 targets 5.x's Whirl, `sword_s35`, because legacy's no longer exists in the skill tree), or a defect that keeps the feature from working. Gaps and side effects legacy had stay; possible improvements are recorded in the feature entry under **Later** for after the first version.
+
 ## Why files are the wrong unit
 
 [5.x-file-status.md](5.x-file-status.md) tracks files, but a file is not a feature. `playerWitcher.ws` or `geralt_skills.xml` each hold dozens of unrelated Ghost Mode changes. A single feature, such as sign cooldowns, spans scripts, XML, the options menu and localization at once.
@@ -44,6 +48,7 @@ In the game data, folders named `*_plus` that have a sibling without the suffix 
 For the map:
 
 - Legacy Ghost Mode changed **153 files in `*_plus` folders**. Their units are flagged in the inventory (`ngplus` column in `units.csv`) and attributed to the same features as their regular-game counterparts.
+- On 5.x, Ghost Mode's DLC carries the NG+ counterparts as generated copies of its XML, scaled by this rule (`tools/gen_ngplus.py`; see [development.md](development.md#fine-grained-xml-overrides-50)).
 - A feature's port includes its NG+ counterpart changes. Its in-game check covers the regular game only, and its entry notes that NG+ is untested.
 - Changes Ghost Mode made only in the NG+ files (with no regular-game counterpart) get a feature of their own, so they are not lost.
 
@@ -61,8 +66,36 @@ Edge cases, decided case by case with a reasonable effort:
 - **The vanilla NG value is 0, or the value is a level or offset rather than a magnitude** (a ratio makes no sense): apply Ghost Mode's difference instead (GM NG+ = vanilla NG+ + (GM NG − vanilla NG)).
 - **Non-numeric changes** (abilities added or removed, tags, categories, loot entries): make the same change in NG+.
 - **Rounding:** round to the precision vanilla uses for that value.
+- **Legacy kept the value in NG+** (legacy Ghost Mode gave it the same value in its NG and NG+ files): keep Ghost Mode's value; legacy behaviour first (project owner, 2026-10-04).
 
 The [balance tables](#balance-tables) show vanilla NG+ and the resulting Ghost Mode NG+ value next to the regular columns, so the scaling can be applied and checked mechanically.
+
+## Two skill trees
+
+**The port supports both of 5.x's skill trees** (decision 2026-10-03, project owner): the classic tree gives the most faithful Ghost Mode, the new tree Ghost Mode's rules adapted to it. Every feature that touches skills is ported to both.
+
+What 5.x has (from its data and scripts; setting the hidden option by script is verified in game, the classic character screen not yet; see [game-automation.md](game-automation.md#skill-trees)):
+
+- **Three kinds of skill.** Each skill is defined once in `geralt_skills.xml` (and the expansions' files): 68 classic-only skills (all of 1.32's, e.g. `sword_s1` Whirl, `sword_s9` Fleet Footed), 52 reworked skills that exist only in the new tree (`isReworked`, e.g. `sword_s35` Whirl, `sword_s36` Fleet Footed), and 28 shared skills used by both trees (`isUnchangedLegacy`: `alchemy_s2` to `s5`, `s8`, `s10` to `s16`, `s18`, `s20`; `magic_s1`, `s3`, `s4`, `s8`, `s11`, `s13`, `s17`, `s19`, `s20`; `sword_s2` Rend, `s16`, `s18`, `s19`, `s20`).
+- **Choosing the tree.** The setting `UseLegacySkillTree` (group `RemasterCombat`, `gameplay.xml`, default off) is hidden from the options screen (`hideAlways`); in the scripts it only decides which character screen opens (`CharacterMenu`, the classic tree, or `CharacterMenuDupe`, the new one). Some runtime rules depend on the skill's kind, not on the setting (e.g. the per-skill passive bonuses go only to reworked and shared skills). Ghost Mode will need its own visible option for the tree.
+- **5.x changed the classic tree too.** Nearly every classic and shared skill went from 5 levels to 3 (Fleet Footed `sword_s9` 5 → 1, `alchemy_s9` and `sword_s13` 3 → 1, `sword_s10` 3 → 2), the points needed per tier dropped by 40% (8/20/28–30 → 6/12/18), and about 40 skills' ability values were raised to fit three levels (e.g. `sword_s9` damage reduction 0.2 → 1.0, `sword_s1` Whirl cost 50 → 75 per second, spell power bonuses 0.05 → 0.1 per level).
+
+What it means for the port:
+
+- **Every feature that touches skills is mapped, ported and tested for both trees.** Its entry names the skills in each tree (**Skill trees** row of the [entry template](#feature-entry-template)); the [audit](#audit-signing-a-feature-off) checks it.
+
+- A Ghost Mode change to a **classic-only** skill applies to the classic tree; the new tree gets the change adapted to its own skill (as STAM-09 did for Whirl, `sword_s35`).
+- A change to a **shared** skill applies to both trees, since both use one definition; where the trees need different rules, the code special-cases on the tree in use.
+- **5.x's changes to the classic tree are kept** (decision 2026-10-03, project owner): its 3 levels, point requirements and raised values stay, for now; see [Progression](#progression). Where Ghost Mode changed a classic skill, its change is adapted to 5.x's version of the skill (e.g. a per-level value spread over 3 levels instead of 5), decided per skill with the SKL mapping.
+- **Ghost Mode gets a visible option for the tree** (decision 2026-10-03, project owner): a toggle in Ghost Mode's menu that sets 5.x's hidden `UseLegacySkillTree`; its default is decided with SKL (OPT-01).
+
+## Progression
+
+Progression (experience, levels, skill points, how fast skills are bought) is a part of the port in its own right, with its own pillar (P10, [pillars.md](features/pillars.md)); legacy reworked it (the changelist's Experience section: smooth experience scaling by level difference, diminishing returns for kills, quest levels re-ordered).
+
+What 5.x changed (from the game data, 2026-10-03; not tested in game): experience and levels are unchanged (`geralt_levelups.xml` identical: the same XP per level, 1 skill point per level up; quest rewards changed gold, not XP, apart from two new small rewards; monster XP code unchanged), but **skills became about a third cheaper**: maxing every skill costs 260 points in 1.32's classic tree, 171 in 5.x's classic tree and 180 in its new tree (3 ranks per skill instead of 5, tier gates 6/12/18 points instead of 8/20/28–30), with stronger ranks. A player levelling at the same speed therefore completes their build sooner. Not checked yet: other skill point sources (places of power), when skill slots unlock, the expansions' reward files.
+
+**For now** (decision 2026-10-03, project owner): Ghost Mode's skill changes are applied to both trees on 5.x's rank counts and point requirements ([Two skill trees](#two-skill-trees)); the pace of progression is examined when the XP area is mapped, and the skill economy revised then if needed.
 
 ## Two layers: pillars and features
 
@@ -132,8 +165,11 @@ Features are grouped into areas that follow the sections of [legacy-FullChangeli
 | `AI` | Enemy AI | `DIFF` | Difficulty modes and enemy scaling |
 | `UI` | UI | `OPT` | Mod options |
 | `DEP` | Shared Imports and Community Patch – Base | `INFRA` | Shared support code |
+| `MISC` | Misfits: anything that fits no area, feature or pillar ([misc.md](features/misc.md)) | | |
 
-Sources for the feature list: the changelist (primary), the 77 original commit subjects in the Ghost Mode 4.1 commit message, `design-docs/` on `legacy-GM`, and any units nobody can attribute (these become new features, marked as undocumented).
+Sources for the feature list: the changelist (primary), the 77 original commit subjects in the Ghost Mode 4.1 commit message, `design-docs/` on `legacy-GM`, and any units nobody can attribute (these become new features, marked as undocumented, or, when they fit no area, entries in the `MISC` bucket, [misc.md](features/misc.md), to be dealt with later).
+
+**Before calling an area mapped, sweep the units for its subject**, not just the changelist: `python tools/unit_sweep.py <keyword> --unattributed` lists every unattributed unit whose Ghost Mode change (master vs `legacy-GM`) touches the keyword, in scripts and XML; attribute or hand off each one, and repeat with the area's other keywords. The STAM area was first mapped from the changelist with 126 units; a sweep for `stamina` (2026-10-02) found 105 more script units and about 900 XML units (NPC abilities, armor items, skills), two missing features (STAM-08 NPC stamina, STAM-09 Whirl and Rend costs) and large gaps in STAM-03 and STAM-06. Units whose change belongs to another area go into a hand-off list in the area file (see [stam.md](features/stam.md#hand-off-to-other-areas)), so that area's mapping starts from it.
 
 ## Layout
 
@@ -181,7 +217,7 @@ Bulk binary changes do not need one row per file: a unit key may use a glob (`fi
 
 ### Feature entry template
 
-Each `<area>.md` has an intro (what Ghost Mode does in this area, and what 5.x changed there), then one entry per feature:
+Each `<area>.md` has an intro (what Ghost Mode does in this area, and what 5.x changed there), then one entry per feature. **Entries state results, briefly.** The table holds short values only; the text explains the feature and its decisions; each slice gets a few lines. Measurements, sample logs and investigations behind a result are kept in working notes outside the repository; the entry keeps the conclusion, so it reads on its own. STAM-08 in [stam.md](features/stam.md) is the reference example.
 
 ```markdown
 ### STAM-01 Stamina cost for light and heavy attacks
@@ -189,28 +225,37 @@ Each `<area>.md` has an intro (what Ghost Mode does in this area, and what 5.x c
 | | |
 |---|---|
 | Kind | system |
-| Pillars | Every combat action costs stamina |
+| Pillars | P2 |
 | 5.x class | overlap |
 | Flags | balance, needs-decision |
-| Depends on | OPT-01 (stamina mode option), INFRA-02 |
-| Port form | annotation (see [development.md](development.md#port-forms)) |
+| Depends on | OPT-01, INFRA-02 |
+| Skill trees | n/a / both: the skills in each tree (classic `sword_s1`, new `sword_s35`; shared skills named once) |
+| Port form | one line: the techniques and where the code lives (see [development.md](development.md#port-forms)) |
 | Port status | not started |
+| Open checks | — (checks not done yet, including the owner's) |
 | Save impact | none (expected) |
 | NG+ counterpart | applied and scaled, untested / none |
-| Verified in game | — (5.x version, date, what was tested) |
 
 **What it does:** player-facing behaviour, and why Ghost Mode wanted it (cite the changelist).
 
-**Implementation:** which units do what. List the key units; the full list is in attribution.csv.
+**Implementation (legacy):** which units do what, in a few lines; the full list is in attribution.csv.
 
 **5.x:** what 5.x does in this area, with evidence (5.x diff, patch notes, in-game test).
 
-**Decision:** port as-is / adapt / drop / redesign, and why. Open questions.
+**Decisions:** port as-is / adapt / drop / redesign, and why; deviations from legacy with their reason ([legacy behaviour first](#legacy-behaviour-first)); who decided and when.
+
+**Slices:**
+
+1. **Name.** What the slice ports. Verified <date> (`gmtest_*` functions; for each check, real action or scripted call): the result in one or two sentences.
+
+**Later:** possible improvements after the first version.
 
 **Balance values:** link to the balance table rows involved.
 ```
 
-Port status values: `not started`, `in progress`, `ported` (committed on `5.x-GM`, not yet run), `verified` (passed the [in-game check](#small-steps-verified-in-game)), `dropped`, `deferred`.
+**Port status:** `not started`, `in progress` (some slices ported and verified), `ported` (every slice ported and verified in game), `signed off` (ported and passed the [audit](#audit-signing-a-feature-off)), `deferred`, `dropped`. Checks still missing, such as a situation no test reached, are listed under **Open checks** instead of holding the status back.
+
+**Checks only the project owner can do** (listening to a sound, judging a visual or the feel of a fight) are open checks marked *waiting for the owner*; they are also listed on the status page ([features/README.md](features/README.md#where-the-port-stands)) until done.
 
 ## Balance tables
 
@@ -250,12 +295,26 @@ Mapping can run ahead, but **porting moves in small steps, and each step is run 
 1. Build, compile-check and install the mod with `tools/build_mod.py` (see [development.md](development.md#build-compile-install)). The compile check runs the game's script compiler without starting the game, so script errors are caught here.
 2. The scripts compile in game too: the game starts without a script compilation error.
 3. The game reaches the main menu, then starts a new game or loads a test save, without crashing. If the step's save impact is `none`, loading an existing save is part of the test. Otherwise apply what it says (e.g. run `cleardevelop`) and confirm that it is enough.
-4. The changed behaviour works, as far as it can be tested at that point (check the feature's "What it does").
-5. A quick check of nearby features ported earlier, to catch regressions.
+4. The changed behaviour works, as far as it can be tested at that point (check the feature's "What it does"), through a `gmtest_*` exec function. Say for each check whether it was a **real action** (input handler, a real cast, a real attack) or a **scripted call** (e.g. `DrainStamina` directly); scripted is fine where it runs the same code path.
+5. When a feature is finished: the regression run, `gmtest_regress()`, in one game session. It runs every check that needs no particular situation, sets up and restores what it needs (options, stamina, spawns), and reports PASS/FAIL per check (see [development.md](development.md#testing-in-game)).
 
-Record the result in the feature entry ("Verified in game") and set its port status to `verified`. If the check fails, fix that step or revert it. Do not build more on top of it.
+Record the result in the feature entry's slice and update its port status. If the check fails, fix that step or revert it. Do not build more on top of it.
 
-Checks that need specific game situations (a certain enemy, a late-game item) get console commands or a dedicated test save, and the run guide records how to set them up, so later checks can repeat them.
+Checks that need specific game situations (a certain enemy, a late-game item) get console commands or a dedicated test save, recorded in [game-automation.md](game-automation.md) so later checks can repeat them.
+
+## Audit: signing a feature off
+
+A feature that is `ported` is audited before it is `signed off`. The audit is done by **a new session that did not port the feature** (decision 2026-10-03, project owner): during the pilot, large parts of features were missed and found only later, while probing other questions (STAM-08 and STAM-09 were found only by a unit sweep, and most of STAM-03's units with them). A reviewer without the porter's assumptions catches what the porter cannot see. The audit comes in addition to the regression run, not instead of it.
+
+The auditor checks, and reports findings rather than fixing them silently:
+
+1. **Both skill trees.** For every skill the feature touches (in its code, XML or tests): the classic tree's skill and the new tree's counterpart are both handled, or the entry says why one is not; no reworked or classic skill ID is hard-coded where the equipped one should be read; shared skills are special-cased where the trees need different rules; the checks ran on both trees. STAM was first ported for the new tree only and missed the classic Whirl and the new tree's alternate Igni and Axii ([follow-ups](features/stam.md#two-skill-trees-follow-ups)).
+2. **Completeness against legacy.** Every unit attributed to the feature (`attribution.csv`) is ported, or dropped, kept for another feature or handed off with a reason in the entry. Re-run `tools/unit_sweep.py` with the feature's keywords for units nobody attributed. Compare the entry's "What it does" with the changelist and with the legacy code: behaviour legacy had that the port lacks is a finding (legacy behaviour first).
+3. **The code.** Read the port on `5.x-GM`: each legacy change has its counterpart, deviations are marked and recorded in the entry with their reason, no leftovers (temporary probes, debug logging, dead code, test-only wrappers outside `tests/`), conventions held (prefixes, feature tags, `//modSigns` markers in replaced bodies), no absolute paths.
+4. **The verification.** The slices' recorded checks cover what the feature does; each check says real or scripted; untested parts are listed as open checks. Run the [regression check](development.md#testing-in-game).
+5. **The docs and notes.** The entry, the status page ([features/README.md](features/README.md#where-the-port-stands)) and the other docs touched say what the code does now; the working notes on the feature are still correct; nothing a reader needs exists only in the working notes.
+
+Findings go to the project owner, who decides what is fixed, accepted or handed off. Fixes go through the usual small steps; when the findings are settled, the entry's port status becomes `signed off`, with the audit's date in the entry.
 
 ## Save compatibility
 
@@ -299,14 +358,22 @@ Run the whole process on one small area before doing the others: mapping (phases
    - how to read logs and use the console
 
    Record the answers in [development.md](development.md), and add build and install scripts to `tools/`.
-2. **Map the pilot area.** Sign cooldowns plus stamina: they touch scripts, XML, the options menu and localization, and 5.x has its own `overloadCooldown.ws` to compare against. Inventory, attribution and 5.x analysis for just this area.
-3. **Port it in slices**, each through the in-game check. For example: the cooldown effect scripts with hard-coded values, then the sign casting hooks, then the options menu entries, then localization, then the stamina costs.
-4. **Review the process.** Update this doc, the entry template and the run guide based on what the pilot showed, then move on to the other areas.
+2. **Map the pilot area.** Sign cooldowns plus stamina: they touch scripts, XML, the options menu and localization, and 5.x has its own `overloadCooldown.ws` to compare against. Inventory, attribution and 5.x analysis for just this area. *Done 2026-10-02:* `tools/change_units.py` built the inventory; [features/stam.md](features/stam.md) maps STAM-01 to STAM-07 (126 units) and [features/opt.md](features/opt.md) the parts of OPT-01 they use. A sweep of every stamina-related unit then completed the mapping (STAM-08 and STAM-09 added, 1068 units).
+3. **Port it in slices**, each through the in-game check. *Done 2026-10-03:* STAM-01 to STAM-09 ported and verified in game (34 commits on `5.x-GM` over two days), with OPT-01's gameplay and QoL groups.
+4. **Review the process.** *Done 2026-10-03.* What the pilot showed, and the changes made:
+   - Small slices verified in game, the fully scripted test loop (`tools/game.py`, `gmtest_*` functions), [legacy behaviour first](#legacy-behaviour-first), the sweep before calling an area mapped, the hand-off list and the status page for session hand-offs worked; kept.
+   - Entries grew into logs (one feature's verification cell reached about 4,800 characters). The [entry template](#feature-entry-template) now keeps the table to short values and records verification per slice; measurements and investigations live in working notes outside the repository.
+   - The status values did not match their use; they are now `not started`, `in progress`, `ported`, `deferred`, `dropped`, with missing checks listed as open checks.
+   - Some checks need the project owner (listening to the heartbeat); they are now a kind of open check, listed on the status page.
+   - The regression check ("a quick check of nearby features") was not done systematically; it is now `gmtest_regress()`, one game session, run when a feature is finished.
+   - Mapping from the changelist missed most units (the stamina sweep found about 80% of the area); the sweep rule is in [Feature IDs and areas](#feature-ids-and-areas). Mapping also deepened during porting (STAM-08's per-mechanism mapping was done when its port started): expect an area's map to be refined slice by slice.
+   - Large parts of features were missed and found later while probing other questions; finished features now get an [audit](#audit-signing-a-feature-off) by a new session before they are signed off.
+   - The "run guide" this method planned was not needed as a separate doc: test setups are in [game-automation.md](game-automation.md), the working agreements in [features/README.md](features/README.md#where-the-port-stands).
 
-After the pilot, mapping of different areas is independent and can be done in parallel. Porting stays sequential in dependency order, one verified step at a time.
+After the pilot, mapping of different areas is independent and can be done in parallel. Porting stays sequential in dependency order, one verified step at a time. The next area is DEF (dodging, parrying, countering; decision 2026-10-03, project owner).
 
 ## Keeping it current
 
 - After a new game release lands on `vanilla-5.x`, re-run `tools/change_units.py`. Features whose units changed in the new release get their 5.x analysis re-checked.
-- When a feature is ported on `5.x-GM`, update its port status and decision in the area file. After it passes the in-game check, set it to `verified` and record the check.
+- When a slice passes the in-game check, record it in the feature's **Slices** and update its port status; when every slice has passed, the status is `ported`; after the audit, `signed off`.
 - The map lives on `master`, like the rest of the docs.

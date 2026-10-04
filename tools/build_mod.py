@@ -25,6 +25,9 @@ only what a branch changes relative to vanilla 5.x and builds a mod from it:
                                              --install copies these into the game's own bin
                                              folder (the game reads menus only from there) and
                                              records them, so a reinstall removes stale ones
+    <out>/<name>/content/soundspc.cache      the Wwise banks: every modGhostMode/sound/*.bnk,
+                                             packed by tools/soundcache.py (sound cache
+                                             format 2, as 5.x's own)
 
 The mod ships the compiled blob, not loose scripts: 5.x applies scope-based overrides
 and enum extensions only from a mod's precompiled.rsblob, and ignores a mod's loose
@@ -33,8 +36,8 @@ With --loose the mod gets the loose scripts instead (annotations and whole-file
 overrides work that way; scope-based overrides and enum extensions do not).
 
 Not handled (the script lists them and stops): anything else outside
-modGhostMode/scripts, modGhostMode/files, modGhostMode/localization and
-modGhostMode/menu.
+modGhostMode/scripts, modGhostMode/files, modGhostMode/localization,
+modGhostMode/menu and modGhostMode/sound.
 
 Usage:
     python tools/build_mod.py --ref pilot-smoke                      # build into build/
@@ -55,15 +58,17 @@ import sys
 from ctypes import wintypes
 from pathlib import Path
 
+import paths
+import soundcache
 import w3strings
 
 REPO = Path(__file__).resolve().parent.parent
-DEFAULT_GAME = Path(r"<Steam library>\steamapps\common\The Witcher 3")
-DEFAULT_REDKIT = Path(r"<Steam library>\steamapps\common\The Witcher 3 REDkit")
 SCRIPTS = "modGhostMode/scripts/"
 FILES = "modGhostMode/files/"
 LOCALIZATION = "modGhostMode/localization/"
 MENU = "modGhostMode/menu/"
+SOUND = "modGhostMode/sound/"
+TESTS = "modGhostMode/scripts/local/gm/tests/"  # gmtest_* exec functions and probes; left out with --release
 MENU_DIR = Path("bin") / "config" / "r4game" / "user_config_matrix" / "pc"
 MARKER = ".built-by-build_mod"  # only folders carrying this are deleted on reinstall
 
@@ -92,21 +97,23 @@ def documents_dir() -> Path:
     return result
 
 
-def collect(base: str, ref: str, out: Path) -> tuple[Path | None, Path | None, list[str], list[str]]:
+def collect(base: str, ref: str, out: Path, release: bool = False) -> tuple[Path | None, Path | None, list[str], list[str], list[str]]:
     """Write what ref changes relative to base into <out>/scripts and <out>/files.
 
-    Also returns the localization CSVs and menu XML files on ref (all of them: vanilla
-    has none).
+    Also returns the localization CSVs, menu XML files and sound banks on ref (all of
+    them: vanilla has none). With release, the in-game test scripts (TESTS) are left out.
     """
     scripts, files, other, deleted = [], [], [], []
     for status, path in changed_paths(base, ref):
         if status == "D":
             deleted.append(path)
         elif path.startswith(SCRIPTS):
+            if release and path.startswith(TESTS):
+                continue
             scripts.append(path)
         elif path.startswith(FILES):
             files.append(path)
-        elif path.startswith(LOCALIZATION) or path.startswith(MENU):
+        elif path.startswith(LOCALIZATION) or path.startswith(MENU) or path.startswith(SOUND):
             pass
         else:
             other.append(path)
@@ -114,6 +121,8 @@ def collect(base: str, ref: str, out: Path) -> tuple[Path | None, Path | None, l
                     if p.endswith(".csv")]
     menus = [p for p in git("ls-tree", "-r", "--name-only", ref, "--", MENU).decode().splitlines()
              if p.endswith(".xml")]
+    banks = [p for p in git("ls-tree", "-r", "--name-only", ref, "--", SOUND).decode().splitlines()
+             if p.endswith(".bnk")]
 
     if deleted:
         print(f"warning: {len(deleted)} file(s) deleted on {ref}; a mod cannot delete game files:")
@@ -124,7 +133,7 @@ def collect(base: str, ref: str, out: Path) -> tuple[Path | None, Path | None, l
         for p in other:
             print(f"  {p}")
         sys.exit(1)
-    if not scripts and not files and not localization and not menus:
+    if not scripts and not files and not localization and not menus and not banks:
         print(f"nothing to build: {ref} changes nothing relative to {base}")
         sys.exit(1)
 
@@ -144,7 +153,7 @@ def collect(base: str, ref: str, out: Path) -> tuple[Path | None, Path | None, l
         for path in paths:
             print(f"  {path[len(prefix):]}")
         result.append(target_dir)
-    return result[0], result[1], localization, menus
+    return result[0], result[1], localization, menus, banks
 
 
 def encode_strings(ref: str, csv_paths: list[str], out: Path) -> Path | None:
@@ -241,9 +250,29 @@ def pack_files(files_dir: Path, redkit: Path, out: Path) -> Path:
     return bundle_dir
 
 
+def pack_sounds(ref: str, bank_paths: list[str], out: Path) -> Path | None:
+    """Pack the branch's Wwise banks into <out>/sound/soundspc.cache."""
+    sound_dir = out / "sound"
+    if sound_dir.exists():
+        shutil.rmtree(sound_dir)
+    if not bank_paths:
+        return None
+    banks_dir = sound_dir / "banks"
+    banks_dir.mkdir(parents=True)
+    banks = []
+    for path in bank_paths:
+        bank = banks_dir / Path(path).name
+        bank.write_bytes(git("cat-file", "blob", f"{ref}:{path}"))
+        banks.append(bank)
+    cache = sound_dir / "soundspc.cache"
+    soundcache.pack(cache, banks)
+    print(f"packed sound banks: {', '.join(b.name for b in banks)}")
+    return cache
+
+
 def assemble(out: Path, name: str, source: str, scripts_dir: Path | None, blob: Path | None,
              bundle_dir: Path | None, strings_dir: Path | None = None, ref: str = "",
-             menus: list[str] | None = None) -> Path:
+             menus: list[str] | None = None, sound_cache: Path | None = None) -> Path:
     """Lay out the mod folder: script blob (or loose scripts), bundles, strings, menus."""
     mod_dir = out / name
     if mod_dir.exists():
@@ -265,6 +294,9 @@ def assemble(out: Path, name: str, source: str, scripts_dir: Path | None, blob: 
         for f in strings_dir.iterdir():
             shutil.copy2(f, content / f.name)
         parts.append("strings")
+    if sound_cache:
+        shutil.copy2(sound_cache, content / sound_cache.name)
+        parts.append("sound banks")
     if menus:
         menu_dir = mod_dir / MENU_DIR
         menu_dir.mkdir(parents=True)
@@ -335,28 +367,32 @@ def main() -> None:
     ap.add_argument("--out", type=Path, default=REPO / "build", help="output directory (default: build/)")
     ap.add_argument("--install", action="store_true", help="copy the built mod into <game>/mods")
     ap.add_argument("--enable", action="store_true", help="with --install: add the mod to mods.settings if missing")
-    ap.add_argument("--game", type=Path, default=DEFAULT_GAME, help="game install directory")
-    ap.add_argument("--redkit", type=Path, default=DEFAULT_REDKIT, help="REDkit install directory (for wcc_lite)")
+    ap.add_argument("--game", type=Path, help="game install directory (default: W3_GAME_DIR or Steam's, see tools/paths.py)")
+    ap.add_argument("--redkit", type=Path, help="REDkit install directory, for wcc_lite (default: W3_REDKIT_DIR or Steam's)")
+    ap.add_argument("--release", action="store_true", help="leave out the in-game test scripts (modGhostMode/scripts/local/gm/tests/): a build to play or publish")
     ap.add_argument("--loose", action="store_true", help="ship loose scripts instead of precompiled.rsblob")
     ap.add_argument("--no-compile", action="store_true", help="with --loose: skip the wcc_lite compile check")
     args = ap.parse_args()
     if args.no_compile and not args.loose:
         ap.error("--no-compile needs --loose (the blob is the compiler's output)")
     out = args.out.resolve()
+    args.game = args.game or paths.game_dir()
+    args.redkit = args.redkit or paths.redkit_dir()
 
-    strings_dir, menus = None, []
+    strings_dir, menus, sound_cache = None, [], None
     if args.scripts:
         scripts_dir, files_dir = copy_scripts(args.scripts.resolve(), out), None
     else:
-        scripts_dir, files_dir, csv_paths, menus = collect(args.base, args.ref, out)
+        scripts_dir, files_dir, csv_paths, menus, bank_paths = collect(args.base, args.ref, out, args.release)
         strings_dir = encode_strings(args.ref, csv_paths, out)
+        sound_cache = pack_sounds(args.ref, bank_paths, out)
     blob = None
     if scripts_dir and not args.no_compile:
         blob = compile_scripts(scripts_dir, args.game, args.redkit, out)
     bundle_dir = pack_files(files_dir, args.redkit, out) if files_dir else None
     source = str(args.scripts) if args.scripts else f"{args.ref} {git('rev-parse', args.ref).decode().strip()}"
     mod_dir = assemble(out, args.name, source, scripts_dir, None if args.loose else blob, bundle_dir, strings_dir,
-                       args.ref, menus)
+                       args.ref, menus, sound_cache)
     if args.install:
         install(mod_dir, args.game)
         check_settings(args.name, args.enable)

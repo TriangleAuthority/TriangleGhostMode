@@ -26,7 +26,15 @@ python tools/game.py log -n 40                # last script log lines (Documents
 python tools/game.py quit                     # exit (~2 s); falls back to closing the window, then killing it
 ```
 
-Other commands: `start` (to the main menu only), `load [SAVE]`, `resume` (close the open menu, e.g. the pause menu), `saves [-n N]` (newest saves). Options: `--timeout S` per step, `--wait MS` for exec functions that log over time (default 500).
+Other commands: `start` (to the main menu only), `load [SAVE]`, `resume` (close the open menu, e.g. the pause menu), `saves [-n N]` (newest saves). Options go after the command: `--timeout S` per step, `exec --wait MS "..."` for exec functions that log over time (default 500).
+
+## Test save and character setup
+
+- Load the test save by name: `python tools/game.py run <save name>` (White Orchard, level 1, starting gear). Without a name, `run` loads the newest save, which may be something else.
+- Build the character and situation a test needs with vanilla exec functions after loading: `setlevel(10)`, `addskillpoints(20)`, `skilleq(S_Sword_s01)`, `additem('<item name>', 1, true)`, `spawn(wolf, 2, 6, true)`, `killall()`, ... The verified list, with argument forms and pitfalls, is in [docs/game-automation.md](../../../docs/game-automation.md#setting-up-geralt-and-the-world).
+- Vanilla debug functions (`logskills()`, `printinv()`, ...) log nothing in the release build. Read state with `modAutomation`'s probes: `autoplayer()`, `autoskills()`, `autoinv()`, `autobuffs()`, `autoattr('<attribute>')`, `autoactors()`.
+- Never use `god()` in stamina tests: it also turns on infinite stamina. Do use it in casting tests in a fight: hits interrupt casts.
+- Player input from a script: `autocast(ST_Igni)` / `autocast(ST_Igni, true)` (held, for alternate casts) and `autocastrelease()`; guarding with `thePlayer.SetGuarded(true)` in a test function. See [Input simulation](../../../docs/game-automation.md#input-simulation).
 
 - A command exits 1 on failure and prints the last log lines; the game stays running for inspection. Read the output, then `status`/`log`, before retrying.
 - **Never retry a non-idempotent exec call blindly**: a call can run even when rw3d_cli reports a timeout. Check the log first.

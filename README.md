@@ -6,6 +6,10 @@ This repository exists to port Ghost Mode to **game version 5.0** (the 2026 "Rem
 
 The goal is to carry over the spirit of Ghost Mode wherever possible. Port what is still compatible or still makes sense, adapt what needs adapting, and drop what 5.0 makes redundant, always following the original vision of the mod.
 
+**First version: legacy behaviour.** Legacy Ghost Mode was tested thoroughly for balance, so the first version of the port reproduces its behaviour, including its rules' limits and side effects, and does not improve on it without a good reason (for example a 5.x change that would otherwise break a rule's intent, or a bug that makes a feature not work). Improvements found along the way are recorded with the feature, for after the first version (decision 2026-10-03). See [docs/feature-mapping.md](docs/feature-mapping.md#legacy-behaviour-first).
+
+**Both skill trees.** 5.x keeps the classic skill tree (hidden setting) beside its new one. The port supports both: the classic tree for the most faithful Ghost Mode, the new tree with Ghost Mode's rules adapted to it (decision 2026-10-03). See [docs/feature-mapping.md](docs/feature-mapping.md#two-skill-trees).
+
 **New Game+: changes carried over and scaled, but not balanced or tested.** The port applies Ghost Mode's changes to the New Game+ data as well, scaling its numbers the way vanilla scales them from a normal game to NG+ (a reasonable effort, not a tuned NG+ experience). Only regular playthroughs are balanced and tested; NG+ is not tested at all, not even for crashes. Extending the port properly to NG+ is left to whoever wants to take it on after the port is done. See [docs/feature-mapping.md](docs/feature-mapping.md#new-game-carried-over-and-scaled-not-balanced-or-tested).
 
 ## How this repository is organised

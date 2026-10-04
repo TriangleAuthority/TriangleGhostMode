@@ -1,0 +1,54 @@
+;meta[language=ru]
+; id      |key(hex)|key(str)| text
+; Ghost Mode strings, ported from legacy Ghost Mode 4.1 (same ids and keys).
+; STAM-01: sign cooldown labels
+2110992402|        |effect_aard_cooldown|Аард недоступен
+2110992403|        |effect_igni_cooldown|Игни недоступен
+2110992404|        |effect_yrden_cooldown|Ирден недоступен
+2110992405|        |effect_quen_cooldown|Квен недоступен
+2110992406|        |effect_axii_cooldown|Аксий недоступен
+; OPT-01: options menu
+2110992001|        |panel_ghost_mode|Ghost Mode
+2110992329|        |panel_gm_gameplay_options|Игровой процесс
+2110992408|        |option_gm_scooldown|Кулдаун знаков (сек.)
+2110992431|        |option_gm_ascooldown|Кулдаун альтернативных знаков (сек.)
+; STAM-04: regen options
+2110992391|        |option_gm_cbtsreg|Реген энергии в бою (прибавляется)
+2110992392|        |option_gm_ocbtsreg|Реген энергии вне боя (прибавляется)
+; STAM-05: armor regen penalty option
+2110992458|        |option_gm_armor_reg_penalty|Включить штраф на восстановление энергии для брони
+; STAM-05: character panel line for the armor regen modifier
+2110992263|        |attribute_name_staminaRegen_armor_mod|Модификатор скорости восстановления энергии
+; STAM-02: Whirl and Rend cooldowns
+2110992400|        |effect_whirl_cooldown|Вихрь недоступен
+2110992401|        |effect_rend_cooldown|Разрыв недоступен
+2110992407|        |option_gm_mcooldown|Кулдаун спецатак с мечом (сек.)
+; STAM-03: stamina cost options
+2110992494|        |option_gm_ascost|Модификатор стоимости спринта/прыжка (энергия)
+2110992395|        |option_gm_mscost|Модификатор стоимости действий в ближнем бою (энергия)
+2110992396|        |option_gm_sscost|Модификатор стоимости знаков (энергия)
+2110992397|        |option_gm_stdelay|Задержка регена энергии (прибавляется, сек.)
+; STAM-03: character panel stamina costs
+2110992409|        |attribute_name_stamina_cost_light|Затраты энергии на быструю атаку
+2110992410|        |attribute_name_stamina_cost_heavy|Затраты энергии на мощную атаку
+2110992411|        |attribute_name_stamina_cost_parry|Затраты энергии на парирование
+2110992412|        |attribute_name_stamina_cost_counter|Затраты энергии на контратаку
+2110992413|        |attribute_name_stamina_cost_dodge|Затраты энергии на уклонение
+2110992414|        |attribute_name_stamina_cost_roll|Затраты энергии на перекат
+2110992415|        |attribute_name_stamina_cost_sprint|Затраты энергии на ускорение
+2110992416|        |attribute_name_stamina_cost_jump|Затраты энергии на прыжок
+2110992417|        |attribute_name_stamina_cost_item|Затраты энергии на исп. предм.
+2110992418|        |attribute_name_stamina_cost_aard|Затраты энергии на Аард
+2110992419|        |attribute_name_stamina_cost_igni|Затраты энергии на Игни
+2110992420|        |attribute_name_stamina_cost_yrden|Затраты энергии на Ирден
+2110992421|        |attribute_name_stamina_cost_quen|Затраты энергии на Квен
+2110992422|        |attribute_name_stamina_cost_axii|Затраты энергии на Аксий
+2110992438|        |attribute_name_stamina_cost_whirl|Затраты энергии на Вихрь
+2110992439|        |attribute_name_stamina_cost_rend|Затраты энергии на Разрыв
+; STAM-07: low-stamina sound options (quality-of-life group)
+2110992441|        |panel_gm_qol_options|Полезное
+2110992442|        |option_gm_lowstamsfx|Порог звукового эффекта для низкого процента энергии
+2110992443|        |option_gm_lowstamsfx_vol|Громкость звукового эффекта для низкого процента энергии
+2110992444|        |option_gm_lowstamsfx_dynvol|Использовать динамическую громкость
+2110992445|        |option_gm_lowstamsfx_rate|Частота звукового эффекта для низкого процента энергии
+2110992446|        |option_gm_lowstamsfx_dynrate|Использовать динамическую частоту

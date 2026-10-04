@@ -28,11 +28,13 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from build_mod import DEFAULT_GAME, documents_dir  # noqa: E402
+from build_mod import documents_dir  # noqa: E402
+from paths import game_dir  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 RW3D = REPO / "tools" / "rw3d" / "rw3d_cli.exe"
-EXE = DEFAULT_GAME / "bin" / "x64_dx12" / "witcher3.exe"
+GAME = game_dir()
+EXE = GAME / "bin" / "x64_dx12" / "witcher3.exe"
 LOG = documents_dir() / "The Witcher 3" / "scriptslog.txt"
 PORT = 37001
 TAG = "[Automation] "
@@ -156,7 +158,7 @@ def cmd_start(args) -> None:
     if game_pids():
         say("already running")
         return
-    if not (DEFAULT_GAME / "mods" / "modAutomation").exists():
+    if not (GAME / "mods" / "modAutomation").exists():
         fail("modAutomation is not installed: python tools/build_mod.py --scripts tools/automation/scripts "
              "--name modAutomation --out build/automation --install --enable")
     LOG.unlink(missing_ok=True)

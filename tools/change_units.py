@@ -206,7 +206,7 @@ def script_units(text: str) -> dict[str, tuple[str, int, str]]:
 
 # -------------------------------------------------------------------- XML --
 
-ID_ATTRS = ("name", "id", "key")
+ID_ATTRS = ("name", "id", "key", "name_name", "iconType_name")
 
 
 def canonical(el: ET.Element) -> str:
