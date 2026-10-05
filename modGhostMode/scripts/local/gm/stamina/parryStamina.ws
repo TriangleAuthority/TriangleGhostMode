@@ -1,10 +1,12 @@
 // STAM-03 slice B: parrying and countering cost stamina, and a parry without enough stamina is
-// a partial parry: Geralt still parries (the damage is blocked) but is staggered, instead of
-// vanilla's stagger without a parry. Parrying a heavy attack costs x1.25 the parry cost
+// a partial parry: Geralt still parries but is hurt and staggered (defense/processAction.ws), instead
+// of vanilla's stagger without a parry. Parrying a heavy attack costs x1.25 the parry cost
 // (HEAVY_STRIKE_COST_MULTIPLIER, staminaCosts.ws), a super-heavy one x1.5; vanilla charged
 // no multiplier on the parry itself. A counter needs enough stamina.
 // Ciri is not affected: her stamina checks always pass (vanilla).
-// See docs/features/stam.md.
+// DEF-05 (in the PerformParryCheck replacement): no break-through stagger, and a parry in a
+// fistfight minigame costs the parry cost (vanilla: the attacker's stamina_damage).
+// See docs/features/stam.md and def.md.
 
 function GMParryCostMult(attacker : CActor, attackName : name) : float
 {
@@ -34,10 +36,7 @@ function PerformParryCheck( parryInfo : SParryInfo) : bool
 	var parryHeading			: float;
 	var fistFightParry 			: bool;
 	var action					: W3DamageAction;
-	var xmlStaminaDamage 		: float;
-	var xmlStaminaDamageName	: name = 'stamina_damage' ;
-	var counter 				: int;
-	var onHitCounter 			: SAbilityAttributeValue;
+	//modSigns: removed xmlStaminaDamage, xmlStaminaDamageName, counter, onHitCounter (DEF-05: their uses are removed below)
 
 	if(CanParryAttack() &&  FistFightCheck( parryInfo.target, parryInfo.attacker, fistFightParry ) )
 	{
@@ -51,11 +50,11 @@ function PerformParryCheck( parryInfo : SParryInfo) : bool
 			RaiseEvent('CombatActionFriendlyEnd');
 
 		//modSigns begin: parry cost multiplier for heavy and super-heavy attacks; without
-		//enough stamina the parry still happens but is partial (see ProcessAction below)
-		mult = GMParryCostMult(parryInfo.attacker, parryInfo.attackActionName);
-		gmParryingWithNotEnoughStamina = !HasStaminaToUseAction(ESAT_Parry, '', 0, mult);
-		if(gmParryingWithNotEnoughStamina)
-			SoundEvent("gui_no_stamina");
+		//enough stamina the parry still happens but is partial (see ProcessAction, defense/processAction.ws)
+		mult = GMParryCostMult(parryInfo.attacker, parryInfo.attackActionName);	//modSigns
+		gmParryingWithNotEnoughStamina = !HasStaminaToUseAction(ESAT_Parry, '', 0, mult);	//modSigns
+		if(gmParryingWithNotEnoughStamina)	//modSigns
+			SoundEvent("gui_no_stamina");	//modSigns
 		//modSigns end
 
 		//modSigns: was "if ( HasStaminaToParry(parryInfo.attackActionName) ) { ... } else { stagger }"
@@ -73,13 +72,8 @@ function PerformParryCheck( parryInfo : SParryInfo) : bool
 		}
 		else
 		{
-			counter = GetDefendCounter();
-			onHitCounter = parryInfo.attacker.GetAttributeValue( 'break_through_parry_on_hit_counter' );
-			if ( onHitCounter.valueBase > 0 && counter == onHitCounter.valueBase )
-			{
-				AddEffectDefault( EET_Stagger, parryInfo.attacker, "Break through parry" );
-			}
-			else if ( RaiseForceEvent( 'PerformParry' ) )
+			//modSigns: removed the break-through stagger (DEF-05: every Nth parry in a row against an attacker with break_through_parry_on_hit_counter staggered)
+			if ( RaiseForceEvent( 'PerformParry' ) )	//modSigns: was else if
 			{
 				OnCombatActionStart();
 				ClearCustomOrientationInfoStack();
@@ -90,6 +84,7 @@ function PerformParryCheck( parryInfo : SParryInfo) : bool
 			else
 				return false;
 		}
+		//modSigns: removed vanilla's else branch (no stamina: stagger instead of parrying)
 
 		if ( parryInfo.attacker.IsWeaponHeld( 'fist' ) && !parryInfo.target.IsWeaponHeld( 'fist' ) )
 		{
@@ -97,18 +92,8 @@ function PerformParryCheck( parryInfo : SParryInfo) : bool
 		}
 		else
 		{
-			if ( this.IsInFistFightMiniGame() && fistFightParry )
-			{
-				if ( IsNameValid(xmlStaminaDamageName) )
-				{
-					xmlStaminaDamage = CalculateAttributeValue(parryInfo.attacker.GetAttributeValue( xmlStaminaDamageName ));
-					DrainStamina(ESAT_FixedValue, xmlStaminaDamage);
-				}
-			}
-			else
-			{
-				DrainStamina(ESAT_Parry, 0, 0, '', 0, mult);
-			}
+			//modSigns: removed the fistfight minigame's drain of the attacker's stamina_damage (DEF-05: a parry costs the parry cost there too)
+			DrainStamina(ESAT_Parry, 0, 0, '', 0, mult);	//modSigns: was in an else branch
 			if(IsLightAttack(parryInfo.attackActionName))
 				parryInfo.target.PlayEffectOnHeldWeapon('light_block');
 			else
@@ -118,36 +103,6 @@ function PerformParryCheck( parryInfo : SParryInfo) : bool
 	}
 
 	return false;
-}
-
-// A partial parry: the parried hit staggers the player (parry-stagger animation, no hit
-// animation, no bleeding), unless it already knocks down or staggers.
-@wrapMethod(W3DamageManagerProcessor)
-function ProcessAction(act : W3DamageAction)
-{
-	var attackAction : W3Action_Attack;
-	var playerVictim : CR4Player;
-	var buffs : array<EEffectType>;
-
-	attackAction = (W3Action_Attack)act;
-	playerVictim = (CR4Player)act.victim;
-	if(playerVictim && attackAction && attackAction.IsActionMelee() && attackAction.IsParried()
-		&& playerVictim.GMIsParryingWithNotEnoughStamina())
-	{
-		act.GetEffectTypes(buffs);
-		if(!buffs.Contains(EET_Knockdown) && !buffs.Contains(EET_HeavyKnockdown)
-			&& !buffs.Contains(EET_Stagger) && !buffs.Contains(EET_LongStagger)
-			&& !buffs.Contains(EET_KnockdownTypeApplicator))
-		{
-			act.SetParryStagger();
-			act.SetHitAnimationPlayType(EAHA_ForceNo);
-			act.SetCanPlayHitParticle(false);
-			act.SetProcessBuffsIfNoDamage(true);
-			act.RemoveBuffsByType(EET_Bleeding);
-			act.AddEffectInfo(EET_Stagger);
-		}
-	}
-	wrappedMethod(act);
 }
 
 // A counter needs enough stamina (vanilla: counters were free).

@@ -5,10 +5,15 @@
 // and lowers the cost of parrying a heavy attack to x1.25 (vanilla x2).
 // See docs/features/stam.md.
 
-// STAM-03: parrying or countering a heavy attack costs x1.25 the parry cost (vanilla x2).
+// Ghost Mode's W3GameParams defaults (a mod declares a class's scope-based override block once).
 import class W3GameParams extends CObject
 {
-	default HEAVY_STRIKE_COST_MULTIPLIER = 1.25;
+	// STAM-03: parrying a heavy attack costs x1.25 the parry cost (vanilla x2; counters: no multiplier, DEF-06's counter.ws).
+	default HEAVY_STRIKE_COST_MULTIPLIER = 1.25;	//modSigns: vanilla 2
+	// DEF-05: a partial parry lets 50% of the damage through, whatever the attacker's size
+	// (legacy PARRY_STAGGER_REDUCE_DAMAGE 0.5; CActor.ReduceDamage multiplies by these).
+	default PARRY_STAGGER_REDUCE_DAMAGE_LARGE = 0.5;	//modSigns: vanilla 0.6
+	default PARRY_STAGGER_REDUCE_DAMAGE_SMALL = 0.5;	//modSigns: vanilla 0.3
 }
 
 function GMIsMeleeStaminaAction(action : EStaminaActionType) : bool

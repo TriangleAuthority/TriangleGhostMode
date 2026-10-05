@@ -12,45 +12,46 @@ function GMModStaminaRegenValue(attributeName : name, out effectValue : SAbility
 		effectValue.valueAdditive += GMGetOptionFloat('GMGameplayOptions', 'GMCombatStaminaRegen');
 }
 
-class W3Effect_AutoStaminaRegen extends W3AutoRegenEffect
+// 5.x body, except: the value is recomputed on every update (so option changes apply at once,
+// in and out of combat), and guarding uses SetEffectValue (50% of normal regen) instead of the
+// staminaRegenGuarded attribute.
+@replaceMethod(W3Effect_AutoStaminaRegen)
+function OnUpdate(dt : float)
 {
-	// 5.x body, except: the value is recomputed on every update (so option changes apply at
-	// once, in and out of combat), and guarding uses SetEffectValue (50% of normal regen)
-	// instead of the staminaRegenGuarded attribute.
-	event OnUpdate(dt : float)
+	if(isOnPlayer)
 	{
-		if(isOnPlayer)
+		if ( regenModeIsCombat != cachedPlayer.IsInCombat() )
 		{
-			if ( regenModeIsCombat != cachedPlayer.IsInCombat() )
-			{
-				regenModeIsCombat = !regenModeIsCombat;
-			}
-			if(regenModeIsCombat)	//modSigns
-				attributeName = RegenStatEnumToName(regenStat);
-			else
-				attributeName = 'staminaOutOfCombatRegen';
-			SetEffectValue();	//modSigns: also when guarded, see SetEffectValue
-		}
-
-		super.OnUpdate( dt );
-
-		if( target.GetStatPercents( BCS_Stamina ) >= 1.0f )
-		{
-			target.StopStaminaRegen();
-		}
+			regenModeIsCombat = !regenModeIsCombat;
+		}	//modSigns: the value is set below, on every update
+		if(regenModeIsCombat)	//modSigns
+			attributeName = RegenStatEnumToName(regenStat);
+		else
+			attributeName = 'staminaOutOfCombatRegen';
+		SetEffectValue();	//modSigns: also when guarded, see SetEffectValue
+		//modSigns: removed vanilla's in-combat block (staminaRegenGuarded while guarded, else SetEffectValue)
 	}
 
-	protected function SetEffectValue()
+	super.OnUpdate( dt );
+
+	if( target.GetStatPercents( BCS_Stamina ) >= 1.0f )
 	{
-		effectValue = target.GetAttributeValue(attributeName);
-		if(isOnPlayer && GetWitcherPlayer())	//modSigns
-		{
-			GMModStaminaRegenValue(attributeName, effectValue);
-			if(GetWitcherPlayer().IsGuarded())
-			{
-				effectValue.valueAdditive *= 0.5;
-				effectValue.valueMultiplicative *= 0.5;
-			}
-		}
+		target.StopStaminaRegen();
 	}
+}
+
+// The regen value with the options; halved while guarding.
+@replaceMethod(W3Effect_AutoStaminaRegen)
+function SetEffectValue()
+{
+	effectValue = target.GetAttributeValue(attributeName);
+	if(isOnPlayer && GetWitcherPlayer())	//modSigns
+	{	//modSigns
+		GMModStaminaRegenValue(attributeName, effectValue);	//modSigns
+		if(GetWitcherPlayer().IsGuarded())	//modSigns
+		{	//modSigns
+			effectValue.valueAdditive *= 0.5;	//modSigns
+			effectValue.valueMultiplicative *= 0.5;	//modSigns
+		}	//modSigns
+	}	//modSigns
 }

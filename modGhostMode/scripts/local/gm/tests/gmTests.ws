@@ -847,11 +847,11 @@ function ProcessAction(act : W3DamageAction)
 	wrappedMethod(act);
 	if(!GMTestProbes())
 		return;
-	if(act.victim == thePlayer && act.IsParryStagger())
+	if(act.victim == thePlayer && act.IsParryStagger() && thePlayer.HasBuff(EET_Stagger))	// the effect, not just the flag
 		thePlayer.GMTestParryCount(0, 0, 1);
 	attack = (W3Action_Attack)act;
 	if(act.victim == thePlayer && attack && attack.IsActionMelee())
-		LogChannel('GMTest', "INFO STAM-03 hit on player: parried=" + attack.IsParried() + " parryStagger=" + act.IsParryStagger()
+		LogChannel('GMTest', "INFO STAM-03 hit on player: parried=" + attack.IsParried() + " parryStagger=" + act.IsParryStagger() + " staggered=" + thePlayer.HasBuff(EET_Stagger)
 			+ " damage=" + FloatToString(act.GetDamageDealt()));
 }
 
@@ -1295,6 +1295,59 @@ exec function gmtest_stam03_chan_b()
 		+ " in " + thePlayer.gmTestChanDrains + " frames, +" + NoTrailZeros(thePlayer.gmTestChanFirst) + " to +" + NoTrailZeros(thePlayer.gmTestChanLast)
 		+ " s; now +" + NoTrailZeros(theGame.GetEngineTimeAsSeconds() - thePlayer.gmTestActStart) + " s, stamina " + NoTrailZeros(thePlayer.GetStat(BCS_Stamina))
 		+ ", focus " + NoTrailZeros(thePlayer.GetStat(BCS_Focus)) + ", casting " + thePlayer.IsCastingSign() + ", sign state " + entityState);
+}
+
+// STAM-03: empties Geralt's stamina in the middle of a held channel (regen paused 30 s) and logs
+// whether the sign is still channelling: the alternate Yrden and Axii keep going (channelStamina.ws).
+exec function gmtest_stam03_chan_empty()
+{
+	var entity : W3SignEntity;
+	var entityState : name;
+
+	thePlayer.DrainStamina(ESAT_FixedValue, thePlayer.GetStatMax(BCS_Stamina), 30);
+	entity = GetWitcherPlayer().GetSignEntity(GetWitcherPlayer().GetEquippedSign());
+	if(entity)
+		entityState = entity.GetCurrentStateName();
+	LogChannel('GMTest', "INFO STAM-03 stamina emptied mid-channel: stamina " + NoTrailZeros(thePlayer.GetStat(BCS_Stamina))
+		+ ", casting " + thePlayer.IsCastingSign() + ", sign state " + entityState);
+}
+
+// Test probe: what an Axii cast applies when it ends (targets, alternate or not, their effects).
+@wrapMethod(W3AxiiEntity)
+function OnEnded(optional isEnd : bool)
+{
+	var i : int;
+
+	wrappedMethod(isEnd);
+	if(GMTestProbes())
+	{
+		LogChannel('GMTest', "INFO Axii OnEnded: alternate " + IsAlternateCast() + ", skill " + skillEnum + ", targets " + targets.Size()
+			+ ", effect " + actionBuffs[0].effectType + " (" + actionBuffs.Size() + " buffs)");
+		for(i = 0; i < targets.Size(); i += 1)
+			LogChannel('GMTest', "INFO Axii OnEnded target " + targets[i].GetDisplayName() + ": puppet " + targets[i].HasBuff(EET_AxiiGuardMe)
+				+ ", confusion " + targets[i].HasBuff(EET_Confusion) + ", immune to puppet " + targets[i].IsImmuneToBuff(EET_AxiiGuardMe));
+	}
+}
+
+@wrapMethod(W3AxiiEntity)
+function OnSignAborted(optional force : bool)
+{
+	if(GMTestProbes())
+		LogChannel('GMTest', "INFO Axii aborted (force " + force + ")");
+	wrappedMethod(force);
+}
+
+// Logs the Axii effects and attitude of every living NPC within 10 m (after an Axii cast).
+exec function gmtest_axii_targets()
+{
+	var actors : array<CActor>;
+	var i : int;
+
+	actors = thePlayer.GetNPCsAndPlayersInRange(10, 20, , FLAG_OnlyAliveActors);
+	for(i = 0; i < actors.Size(); i += 1)
+		if(actors[i] != thePlayer)
+			LogChannel('GMTest', "INFO Axii target " + actors[i].GetDisplayName() + ": puppet (AxiiGuardMe) " + actors[i].HasBuff(EET_AxiiGuardMe)
+				+ ", confusion " + actors[i].HasBuff(EET_Confusion) + ", attitude " + GetAttitudeBetween(thePlayer, actors[i]));
 }
 
 // STAM-06: regen pause after actions. gmtest_stam06() checks every delay through the cost
@@ -2046,6 +2099,9 @@ exec function gmtest_regress()
 	GMTest_stam08_xml();
 	GMTest_stam09();
 	GMTest_stamaudit();
+	GMTest_def03();
+	GMTest_def07();
+	GMTest_annotations();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

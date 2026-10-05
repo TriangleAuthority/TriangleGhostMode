@@ -8,6 +8,14 @@ This doc defines the method, the format, and how porting proceeds: in small step
 
 The first version of the port reproduces legacy Ghost Mode's behaviour, which was tested thoroughly for balance (decision 2026-10-03, project owner). Where 5.x lets the port express a rule better (a cleaner hook, a generic mechanism instead of a special case), it may, as long as the behaviour stays legacy's. A deviation needs a good reason: a 5.x change that would otherwise defeat the rule's intent (e.g. STAM-09 targets 5.x's Whirl, `sword_s35`, because legacy's no longer exists in the skill tree), or a defect that keeps the feature from working. Gaps and side effects legacy had stay; possible improvements are recorded in the feature entry under **Later** for after the first version.
 
+**Every deviation is recorded when it is made**, as a bullet of its own in the feature entry's **Decisions** (project owner, 2026-10-04):
+
+```markdown
+- **Deviation:** what differs from legacy's code or changelist, and why (project owner, 2026-10-04).
+```
+
+A deviation is any behaviour that differs from legacy: a fix of a legacy defect, a 5.x behaviour kept, a rule changed or left out. Implementation differences with the same behaviour are not deviations. Each bullet ends with who decided and when; one the owner has not reviewed says "porter's call, not confirmed by the owner", one that lasts until another area is ported says "temporary, until <area>". Where only running legacy could show how it actually played, the case also goes on the [list to test in legacy](open-questions.md#to-test-in-legacy-ghost-mode). `python tools/deviations.py` lists them all (`--unconfirmed`: those waiting for the owner); `--write` regenerates [features/deviations.md](features/deviations.md) for milestone reviews.
+
 ## Why files are the wrong unit
 
 [5.x-file-status.md](5.x-file-status.md) tracks files, but a file is not a feature. `playerWitcher.ws` or `geralt_skills.xml` each hold dozens of unrelated Ghost Mode changes. A single feature, such as sign cooldowns, spans scripts, XML, the options menu and localization at once.
@@ -77,7 +85,7 @@ The [balance tables](#balance-tables) show vanilla NG+ and the resulting Ghost M
 What 5.x has (from its data and scripts; setting the hidden option by script is verified in game, the classic character screen not yet; see [game-automation.md](game-automation.md#skill-trees)):
 
 - **Three kinds of skill.** Each skill is defined once in `geralt_skills.xml` (and the expansions' files): 68 classic-only skills (all of 1.32's, e.g. `sword_s1` Whirl, `sword_s9` Fleet Footed), 52 reworked skills that exist only in the new tree (`isReworked`, e.g. `sword_s35` Whirl, `sword_s36` Fleet Footed), and 28 shared skills used by both trees (`isUnchangedLegacy`: `alchemy_s2` to `s5`, `s8`, `s10` to `s16`, `s18`, `s20`; `magic_s1`, `s3`, `s4`, `s8`, `s11`, `s13`, `s17`, `s19`, `s20`; `sword_s2` Rend, `s16`, `s18`, `s19`, `s20`).
-- **Choosing the tree.** The setting `UseLegacySkillTree` (group `RemasterCombat`, `gameplay.xml`, default off) is hidden from the options screen (`hideAlways`); in the scripts it only decides which character screen opens (`CharacterMenu`, the classic tree, or `CharacterMenuDupe`, the new one). Some runtime rules depend on the skill's kind, not on the setting (e.g. the per-skill passive bonuses go only to reworked and shared skills). Ghost Mode will need its own visible option for the tree.
+- **Choosing the tree.** The setting `UseLegacySkillTree` (group `RemasterCombat`, `gameplay.xml`, default off) is hidden from the options screen (`hideAlways`); in the scripts it only decides which character screen opens (`CharacterMenu`, the classic tree, or `CharacterMenuDupe`, the new one). Skills of either kind work under either setting; the per-skill passive bonuses go to every equipped skill, classic ones included (from the code: 5.x's function that would limit them to reworked and shared skills has no caller). Ghost Mode will need its own visible option for the tree.
 - **5.x changed the classic tree too.** Nearly every classic and shared skill went from 5 levels to 3 (Fleet Footed `sword_s9` 5 → 1, `alchemy_s9` and `sword_s13` 3 → 1, `sword_s10` 3 → 2), the points needed per tier dropped by 40% (8/20/28–30 → 6/12/18), and about 40 skills' ability values were raised to fit three levels (e.g. `sword_s9` damage reduction 0.2 → 1.0, `sword_s1` Whirl cost 50 → 75 per second, spell power bonuses 0.05 → 0.1 per level).
 
 What it means for the port:
@@ -86,7 +94,7 @@ What it means for the port:
 
 - A Ghost Mode change to a **classic-only** skill applies to the classic tree; the new tree gets the change adapted to its own skill (as STAM-09 did for Whirl, `sword_s35`).
 - A change to a **shared** skill applies to both trees, since both use one definition; where the trees need different rules, the code special-cases on the tree in use.
-- **5.x's changes to the classic tree are kept** (decision 2026-10-03, project owner): its 3 levels, point requirements and raised values stay, for now; see [Progression](#progression). Where Ghost Mode changed a classic skill, its change is adapted to 5.x's version of the skill (e.g. a per-level value spread over 3 levels instead of 5), decided per skill with the SKL mapping.
+- **5.x's changes to the classic tree are kept** (decision 2026-10-03, project owner): its 3 levels, point requirements and raised values stay, for now; see [Progression](#progression). Where Ghost Mode changed a classic skill, its change is adapted to 5.x's version of the skill: a per-level value on a skill cut from 5 levels to 3 is multiplied by 5/3, so level 3 gives legacy's level-5 total (project owner, 2026-10-04); a skill Ghost Mode did not change keeps 5.x's version. New-tree counterparts with the same mechanism get legacy's value at their level 3 ([SKL area decisions](features/skl.md#area-decisions)).
 - **Ghost Mode gets a visible option for the tree** (decision 2026-10-03, project owner): a toggle in Ghost Mode's menu that sets 5.x's hidden `UseLegacySkillTree`; its default is decided with SKL (OPT-01).
 
 ## Progression
@@ -242,7 +250,9 @@ Each `<area>.md` has an intro (what Ghost Mode does in this area, and what 5.x c
 
 **5.x:** what 5.x does in this area, with evidence (5.x diff, patch notes, in-game test).
 
-**Decisions:** port as-is / adapt / drop / redesign, and why; deviations from legacy with their reason ([legacy behaviour first](#legacy-behaviour-first)); who decided and when.
+**Decisions:** port as-is / adapt / drop / redesign, and why; who decided and when.
+
+- **Deviation:** each deviation from legacy as a bullet of its own, with its reason, who decided and when ([legacy behaviour first](#legacy-behaviour-first)).
 
 **Slices:**
 
@@ -370,7 +380,7 @@ Run the whole process on one small area before doing the others: mapping (phases
    - Large parts of features were missed and found later while probing other questions; finished features now get an [audit](#audit-signing-a-feature-off) by a new session before they are signed off.
    - The "run guide" this method planned was not needed as a separate doc: test setups are in [game-automation.md](game-automation.md), the working agreements in [features/README.md](features/README.md#where-the-port-stands).
 
-After the pilot, mapping of different areas is independent and can be done in parallel. Porting stays sequential in dependency order, one verified step at a time. The next area is DEF (dodging, parrying, countering; decision 2026-10-03, project owner).
+After the pilot, mapping of different areas is independent and can be done in parallel. Porting stays sequential in dependency order, one verified step at a time. The second area was DEF (dodging, parrying, countering; decision 2026-10-03, project owner), the third SKL (skills; mapped 2026-10-04).
 
 ## Keeping it current
 

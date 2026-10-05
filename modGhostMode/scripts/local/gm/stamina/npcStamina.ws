@@ -7,15 +7,15 @@
 // Attacks cost the light-attack cost by default (vanilla: free unless the tree names a cost).
 class CBTTaskAttackDef extends CBTTaskPlayAnimationEventDecoratorDef
 {
-	default xmlStaminaCostName = 'light_action_stamina_cost';
-	default drainStaminaOnUse = true;
+	default xmlStaminaCostName = 'light_action_stamina_cost';	//modSigns
+	default drainStaminaOnUse = true;	//modSigns
 }
 
 // Sign casts pay through the sign entity, not the task.
 abstract class CBTTaskCastSignDef extends CBTTaskPlayAnimationEventDecoratorDef
 {
-	default xmlStaminaCostName = '';
-	default drainStaminaOnUse = false;
+	default xmlStaminaCostName = '';	//modSigns
+	default drainStaminaOnUse = false;	//modSigns
 }
 
 // Counterattacks cost the counter cost and need it.
@@ -106,12 +106,14 @@ function GMSettleAttackCharge()
 }
 
 // Vanilla's charge on activation is off for attacks: GMChargeAttack charges them.
+// CBTTaskAttack inherits GetStats (from CBTTaskPlayAnimationEventDecorator), so only a scope
+// override can override it here; @replaceMethod refuses inherited definitions.
 class CBTTaskAttack extends CBTTaskPlayAnimationEventDecorator
 {
 	function GetStats()
 	{
-		super.GetStats();
-		drainStaminaOnUse = false;
+		super.GetStats();	//modSigns
+		drainStaminaOnUse = false;	//modSigns
 	}
 }
 
@@ -223,16 +225,16 @@ function TryToParry(optional counter : bool) : bool
 	var hasStamina : bool;	//modSigns
 
 	if(counter)	//modSigns: the parry or counter cost is needed
-		hasStamina = npc.GMHasStaminaFor('counter_stamina_cost');
-	else
-		hasStamina = npc.GMHasStaminaFor('parry_stamina_cost');
+		hasStamina = npc.GMHasStaminaFor('counter_stamina_cost');	//modSigns
+	else	//modSigns
+		hasStamina = npc.GMHasStaminaFor('parry_stamina_cost');	//modSigns
 
 	if ( isActive && npc.CanParryAttack() && allowParryOverlap && hasStamina )	//modSigns: && hasStamina
 	{
 		LogChannel( 'HitReaction', "Parried" );
 		
 		npc.SignalGameplayEvent('SendBattleCry');
-		
+		//modSigns: removed mult = theGame.params.HEAVY_STRIKE_COST_MULTIPLIER (the parry costs a fixed amount)
 		if ( npc.RaiseEvent('ParryPerform') )
 		{
 			if( counter )
@@ -289,7 +291,7 @@ function CheckCounter() : bool
 function ShouldCounter(isHeavy : bool) : bool
 {
 	var playerTarget : W3PlayerWitcher;
-	
+	//modSigns: removed the unused var temp, temp2 : int
 	if ( GetActor().HasAbility('DisableCounterAttack') )
 		return false;
 	
@@ -301,7 +303,7 @@ function ShouldCounter(isHeavy : bool) : bool
 	if ( isHeavy && !GetActor().HasAbility('ablCounterHeavyAttacks') )
 		return false;
 		
-	return ((CHumanAICombatStorage)combatDataStorage).GetParryCount() >= hitsToCounter && Roll(counterChance)
+	return ((CHumanAICombatStorage)combatDataStorage).GetParryCount() >= hitsToCounter && Roll(counterChance)	//modSigns: the return continues below
 		&& GetActor().GMHasStaminaFor('counter_stamina_cost');	//modSigns: && counter stamina
 }
 

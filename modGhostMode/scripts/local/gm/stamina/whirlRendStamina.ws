@@ -82,14 +82,17 @@ function GMWhirlDrainResources(dt : float)
 @replaceMethod(W3PlayerWitcher)
 function SpecialAttackLightSustainCost(dt : float, id : int)
 {
-	if(abilityManager && abilityManager.IsInitialized() && IsAlive() && GMHasResourcesForWhirl(dt))
+	//modSigns: removed vanilla's local variables (focusPerSec, cost, delay, reduction, skillLevel)
+	if(abilityManager && abilityManager.IsInitialized() && IsAlive() && GMHasResourcesForWhirl(dt))	//modSigns: && the resources
 	{
 		PauseStaminaRegen('WhirlSkill');
-		GMPauseFocusGain(1);
-		GMWhirlDrainResources(dt);
+		GMPauseFocusGain(1);	//modSigns
+		GMWhirlDrainResources(dt);	//modSigns
+		//modSigns: removed vanilla's drain (stamina per Whirl skill, then adrenaline once stamina is empty, ending when both are)
 	}
-	else
+	else	//modSigns: Whirl ends when its resources run out (vanilla: when stamina and adrenaline are both 0)
 	{
+		//modSigns: removed vanilla's adrenaline drain at 0 stamina and its end check
 		OnPerformSpecialAttack(true, false);
 	}
 }
