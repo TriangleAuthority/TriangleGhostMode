@@ -16,6 +16,10 @@ The first version of the port reproduces legacy Ghost Mode's behaviour, which wa
 
 A deviation is any behaviour that differs from legacy: a fix of a legacy defect, a 5.x behaviour kept, a rule changed or left out. Implementation differences with the same behaviour are not deviations. Each bullet ends with who decided and when; one the owner has not reviewed says "porter's call, not confirmed by the owner", one that lasts until another area is ported says "temporary, until <area>". Where only running legacy could show how it actually played, the case also goes on the [list to test in legacy](open-questions.md#to-test-in-legacy-ghost-mode). `python tools/deviations.py` lists them all (`--unconfirmed`: those waiting for the owner); `--write` regenerates [features/deviations.md](features/deviations.md) for milestone reviews.
 
+**Legacy's code against its changelist** (project owner, 2026-10-05). Where they differ, the code is the better guide: the changelist could drift. Every difference is still recorded in [open-questions.md](open-questions.md#legacy-data-vs-changelist), in one of two buckets:
+- **Contradictions:** the changelist states something explicitly and the code does otherwise, e.g. a potion duration. These get special attention: each is brought to the owner.
+- **Omissions:** the code changes something against vanilla that the changelist never mentions. A believable oversight; noted for lookup.
+
 ## Why files are the wrong unit
 
 [5.x-file-status.md](5.x-file-status.md) tracks files, but a file is not a feature. `playerWitcher.ws` or `geralt_skills.xml` each hold dozens of unrelated Ghost Mode changes. A single feature, such as sign cooldowns, spans scripts, XML, the options menu and localization at once.
@@ -94,7 +98,7 @@ What it means for the port:
 
 - A Ghost Mode change to a **classic-only** skill applies to the classic tree; the new tree gets the change adapted to its own skill (as STAM-09 did for Whirl, `sword_s35`).
 - A change to a **shared** skill applies to both trees, since both use one definition; where the trees need different rules, the code special-cases on the tree in use.
-- **5.x's changes to the classic tree are kept** (decision 2026-10-03, project owner): its 3 levels, point requirements and raised values stay, for now; see [Progression](#progression). Where Ghost Mode changed a classic skill, its change is adapted to 5.x's version of the skill: a per-level value on a skill cut from 5 levels to 3 is multiplied by 5/3, so level 3 gives legacy's level-5 total (project owner, 2026-10-04); a skill Ghost Mode did not change keeps 5.x's version. New-tree counterparts with the same mechanism get legacy's value at their level 3 ([SKL area decisions](features/skl.md#area-decisions)).
+- **The trees are separated, and the classic tree becomes legacy Ghost Mode's tree** (direction set by the project owner, 2026-10-05; it replaces the 2026-10-03 decision to keep 5.x's changes to the classic tree and the 2026-10-04 5/3 rule for that tree). The 28 shared skills get per-tree values, levels, layout and descriptions. The classic tree is ported as legacy (legacy's skills, values, maximum levels, layout, descriptions). The new tree is Ghost Mode's experimental tree, balanced against the [player power ledger](features/ledger/README.md). The plan, the technique (a per-tree skill profile applied at runtime) and the first slice are in [balance.md](features/balance.md#two-skill-trees-the-plan). Until the separation slice is done, features already ported (STAM, DEF) keep their per-tree code as it is.
 - **Ghost Mode gets a visible option for the tree** (decision 2026-10-03, project owner): a toggle in Ghost Mode's menu that sets 5.x's hidden `UseLegacySkillTree`; its default is decided with SKL (OPT-01).
 
 ## Progression
@@ -103,7 +107,7 @@ Progression (experience, levels, skill points, how fast skills are bought) is a 
 
 What 5.x changed (from the game data, 2026-10-03; not tested in game): experience and levels are unchanged (`geralt_levelups.xml` identical: the same XP per level, 1 skill point per level up; quest rewards changed gold, not XP, apart from two new small rewards; monster XP code unchanged), but **skills became about a third cheaper**: maxing every skill costs 260 points in 1.32's classic tree, 171 in 5.x's classic tree and 180 in its new tree (3 ranks per skill instead of 5, tier gates 6/12/18 points instead of 8/20/28–30), with stronger ranks. A player levelling at the same speed therefore completes their build sooner. Not checked yet: other skill point sources (places of power), when skill slots unlock, the expansions' reward files.
 
-**For now** (decision 2026-10-03, project owner): Ghost Mode's skill changes are applied to both trees on 5.x's rank counts and point requirements ([Two skill trees](#two-skill-trees)); the pace of progression is examined when the XP area is mapped, and the skill economy revised then if needed.
+**For now:** 5.x's faster skill buying is accepted (project owner, 2026-10-05; rule B10 in [balance.md](features/balance.md)). The classic tree takes legacy's maximum levels and tier points (project owner, 2026-10-05), so B10 applies to the new tree only. The pace of progression is examined when the XP area is mapped, and the skill economy revised then if needed.
 
 ## Two layers: pillars and features
 

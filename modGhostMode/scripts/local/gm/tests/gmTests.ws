@@ -2101,6 +2101,8 @@ exec function gmtest_regress()
 	GMTest_stamaudit();
 	GMTest_def03();
 	GMTest_def07();
+	GMTest_dmg06();
+	GMTest_dmgxml();
 	GMTest_annotations();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }

@@ -15,14 +15,23 @@ Unit lists: [attribution.csv](attribution.csv): 1,416 units attributed to SKL-01
 
 ## Area decisions
 
+**Paused on 2026-10-06 for DMG; resumes after DMG's sign-off (2026-10-07).** The damage formula is in place ([dmg.md](dmg.md)): where a skill's bonus sits (raw damage and its additive pool, attack power, final damage) now decides what its numbers are worth, and DMG's functions host the skill terms SKL ports ([DMG's hand-off](dmg.md#hand-off-to-other-areas)); the test dummy and damage probe ([development.md](../development.md#testing-in-game)) measure them. Where the per-skill pass stopped:
+- **Done** (combat tree, direct analogs): Muscle Memory (D1, D47), Whirl, Crippling Strike (D2); recorded in [SKL-03](#skl-03-fast-attack-branch) and [skl-decisions.md](../skill-trees/skl-decisions.md).
+- **Next:** Strength Training (new tree `sword_s23`: 5.x's combo, +15% raw damage per level on the strong attack after a fast-attack hit). Recommended, not yet decided: keep the mechanism at +45%, add legacy's +15% strong-attack adrenaline gain at level 3.
+- **Raw-damage multipliers, settled with DMG ([DD1](dmg.md#area-decisions), project owner, 2026-10-06):** 5.x's raw-damage multipliers (new Muscle Memory, Strength Training, Three Strikes, Crushing Blow, Anatomical Knowledge, Lightning Reflexes, Catalyst, Resonance, Elemental Attunement, Element of Surprise, the Manticore and Viper perks, Volatile Compound, Potent Sting, High Tolerance, the Wolven set) join legacy's additive raw-damage pool (D4). Exceptions are deliberate, confirmed 2026-10-07 in [DMG-04](dmg.md#dmg-04-additive-raw-damage-pool) (Crippling Strike's bonus is a final-damage multiplier, D2). The 45% chosen for Muscle Memory was set while the rule was open: recheck it as a pool term.
+- **Then:** the rest of the combat tree in the agreed order (Rend, Crushing Blows, Sunder Armor, Deflection, Fleet Footed, Counterattack, Deadly Precision, Lightning Reflexes, Anatomical Knowledge, Crippling Shot and Maiming Shot, Cold Blood, the Battle Trance skills), then the skills legacy replaced or reworked (Steady Shot, Precise Blows' role, Three Strikes); then signs, alchemy, perks.
+
+
+**Direction of 2026-10-05 (project owner):** the trees are separated and the classic tree becomes legacy Ghost Mode's tree, ported with legacy's values and maximum levels. The new tree becomes the experimental tree, balanced against the [ledger](ledger/README.md) under the rules in [balance.md](balance.md). For the classic tree, this replaces the 5/3 rescaling below and most of the per-skill decisions (they become "as legacy"). The new-tree decisions move to the second phase. The entries below still describe the 2026-10-04 state and are re-sorted after the separation slice ([plan](balance.md#two-skill-trees-the-plan)).
+
 Made by the project owner on 2026-10-04 for the whole area:
 
-- **Three-level skills keep legacy's top total.** Where Ghost Mode set a per-level value on a skill that 5.x cut from 5 levels to 3, the per-level value is multiplied by 5/3, so level 3 gives legacy's level-5 total (e.g. Muscle Memory's adrenaline gain 0.03 → 0.05 per level, 15% at level 3). Where Ghost Mode did not change a skill, 5.x's version stays. STAM-09 kept Whirl's per-level cost reduction instead (30% at level 3); it moves to this rule as a [follow-up](stam.md#two-skill-trees-follow-ups).
+- **Three-level skills keep legacy's top total** (now for the new tree only, see above). Where Ghost Mode set a per-level value on a skill that 5.x cut from 5 levels to 3, the per-level value is multiplied by 5/3, so level 3 gives legacy's level-5 total (e.g. Muscle Memory's adrenaline gain 0.03 → 0.05 per level, 15% at level 3). Where Ghost Mode did not change a skill, 5.x's version stays. STAM-09 kept Whirl's per-level cost reduction instead (30% at level 3); it moves to this rule as a [follow-up](stam.md#two-skill-trees-follow-ups).
 - **New-tree counterparts:** where a new-tree skill or perk has the same mechanism as a classic one Ghost Mode changed, it gets legacy's value at its level 3 (a third per level); where the mechanism differs, 5.x's skill stays. Every case is listed in its entry and confirmed with the owner.
 - **Passive path bonuses are removed in both trees** ([SKL-01](#skl-01-skill-system-rules)).
-- **Attack power from Muscle Memory and Strength Training counts once**, with 5.x's values ([SKL-03](#skl-03-fast-attack-branch)).
+- **Muscle Memory's and Strength Training's double-counted attack power is canon** (project owner, 2026-10-06; it replaces "counts once with 5.x's values" of 2026-10-04): legacy was tested and played with it, so the classic tree gives +50% at level 5 (D47), and the description says so ([SKL-03](#skl-03-fast-attack-branch)).
 
-Decisions still open are numbered (D1, D2, …) in the entries and collected in [Decisions waiting for the owner](#decisions-waiting-for-the-owner).
+Decisions are numbered (D1, D2, …) in the entries and kept in [skl-decisions.md](../skill-trees/skl-decisions.md).
 
 ---
 
@@ -48,7 +57,7 @@ Decisions still open are numbered (D1, D2, …) in the entries and collected in 
 
 **5.x:** keeps and extends the passives (above); none of the slot fixes; the level sync only for perk_30, 33 and 35 (`AdjustAbilitiesOnLevelChange`).
 
-**Decisions:** remove the passives in both trees, including 5.x's `survival_vitality` and the potion-duration bomb damage, by zeroing the abilities (covers old saves and both trees), plus the load cleanup (project owner, 2026-10-04). The passive lines in both menus' tooltips go with SKL-19. The level sync ports generically, merged with 5.x's perk_30/33/35 case so nothing is added twice. Open: D43 (slot fixes here or under FIX), D44 (the debug respec).
+**Decisions:** remove the passives in both trees, including 5.x's `survival_vitality` and the potion-duration bomb damage, by zeroing the abilities (covers old saves and both trees), plus the load cleanup (project owner, 2026-10-04). The passive lines in both menus' tooltips go with SKL-19. The level sync ports generically, merged with 5.x's perk_30/33/35 case so nothing is added twice. Open: D43 (slot fixes here or under FIX). D44 decided (2026-10-05): the respec becomes a safe character reset in the mod, extended to 5.x's point bookkeeping and the tree profile ([balance.md](balance.md#two-skill-trees-the-plan)).
 
 ### SKL-02 Skill tree option
 
@@ -70,7 +79,7 @@ Decisions still open are numbered (D1, D2, …) in the entries and collected in 
 
 **5.x:** `UseLegacySkillTree` is hidden and read only in `CR4CommonMenu` (`commonMenu.ws`), where it opens the classic character menu instead of the new one. Skills of either kind can be equipped and work under either setting (`skilleq`, [game-automation.md](../game-automation.md#skill-trees)).
 
-**Decisions:** open: D46 (the default tree).
+**Decisions:** the classic tree is the default (D46, project owner, 2026-10-05).
 
 ### SKL-03 Fast Attack branch
 
@@ -99,7 +108,9 @@ Decisions still open are numbered (D1, D2, …) in the entries and collected in 
 **Decisions:**
 
 - Muscle Memory (classic): 5.x's attack power stays, adrenaline gain 0.05/level (15% at 3). Whirl (both): attack power 0.01667/level per attacker (25% at 3 with 5 attackers), damage reduction 25% at level 1 to 50% at 3 (0.25 + 0.125 per level above 1). Crippling Strikes: chance and bonus 0.08333/level (25% at 3), 8 s, 1% of max health per second, replacing 5.x's. Precise Blows: 5.x's values, crit damage for melee only. Three Strikes `sword_s24`: 5.x's.
-- **Deviation:** Muscle Memory's and Strength Training's attack power counts once, with 5.x's 0.1 per level (+30% at level 3). Legacy's code counted it twice (+50% played where the text said +25%); counters get a light attack's attack power, once (DEF-07 gave them both shares) (project owner, 2026-10-04).
+- **Per-skill decisions of 2026-10-06** (project owner; the bullets above are the 2026-10-04 state, re-sorted later). Muscle Memory: D47 (classic) and D1 (new tree). **Whirl:** the classic `sword_s1` as legacy (5 levels: 50 stamina/s with 15% less per level above 1, 20/s at level 5; +5% attack power per extra attacker, max +25%; −25% to −50% damage taken). The new tree's `sword_s35` matches legacy at its max level: +0.0167 attack power per extra attacker per level (+25% at level 3), damage taken −25% at level 1 to −50% at level 3 (0.25 + 0.125 per level above 1), stamina cost 30% less per level above 1 (20/s at level 3). This ends STAM-09's temporary deviation when ported. **Crippling Strike** (new tree `sword_s29`, D2): a fast-attack crit, Whirl hits included, applies legacy's bleed (1% of max health per second, 8 s, resisted as legacy) and a separate "crippled" condition unique to the skill, lasting 4 s (5.x: a random 3–6 s). Like 5.x's, crippling has no immunity check: it applies to every NPC, bosses included. A bleeding or crippled target takes +30% damage from any source at level 3 (0.1/level). Until DMG is ported it multiplies like 5.x's; with legacy's damage formula it must behave like legacy's Crippling Strikes bonus, a multiplier of final damage after every other bonus. Description: "Critical hits from Fast Attacks cripple enemies, causing them to bleed. Bleeding or crippled enemies take 30% more damage after all other bonuses." This is weaker than legacy's skill (it needs crits; legacy rolls on every fast-attack hit), but the bonus also applies to enemies immune to bleeding (about 20% of non-human enemy types). The classic `sword_s5` is legacy's.
+- Muscle Memory's and Strength Training's attack power plays as legacy's double count: +50% at level 5 in the classic tree, whether the port counts it twice or once at 0.1/level; the description says 50% (project owner, 2026-10-06, D47). New-tree Muscle Memory: D1.
+- **Deviation:** counters get a light attack's attack power (DEF-07 gave them both shares). In legacy's code Muscle Memory does not reach counters at all; the changelist says all light-attack bonuses apply to counters (project owner, 2026-10-04; [to test in legacy](../open-questions.md#to-test-in-legacy-ghost-mode)).
 - Open: D1 (new Muscle Memory s22), D2 (new Crippling Strike s29), D3 (tier swaps).
 
 ### SKL-04 Strong Attack branch
@@ -472,68 +483,7 @@ Decisions still open are numbered (D1, D2, …) in the entries and collected in 
 
 ### Decisions waiting for the owner
 
-Recommendations from the mapping; batch A first (it unblocks DEF-02, DEF-07's and DEF-08's deviations).
-
-**Batch A: sword skills**
-
-| # | Question | Recommendation |
-|---|---|---|
-| D1 | New-tree Muscle Memory `sword_s22` and Strength Training `sword_s23` (5.x: combo damage bonuses): add legacy's adrenaline gain? | Yes, 0.05/level, keeping their 5.x effects |
-| D2 | New-tree Crippling Strike `sword_s29` (crits make the target take +10%/level): add legacy's bleeding? | No, keep 5.x's (already a "cripple → more damage" skill) |
-| D3 | Tier swaps (classic): Whirl tier 2 ↔ Precise Blows tier 3; Rend tier 2 ↔ Crushing Blows tier 3 (Rend is shared, so not gated by points) | Swap Whirl and Precise Blows; Crushing Blows to tier 3; Rend keeps 5.x's dependency |
-| D4 | Strong Attack's +50% and Rend's bonuses go into DMG's additive damage bonus, not ported yet | Separate multipliers until DMG (temporary deviation) |
-| D5 | Deflection `sword_s10` has 2 levels in 5.x (legacy 3) | 2 levels: −15%/level (30% at 2), reflection from level 1, +100% reflected damage and parry cost −50% at level 2; ends DEF-08's deviation |
-| D6 | New Arrow Deflection `sword_s33` | Keep 5.x's (reflection, 15%/level instant kill) and add legacy's partial-parry share and parry cost |
-| D9 | New Counterattack `sword_s31` (after a counter or dodge; its crit is unreachable) | Keep its trigger; give counters legacy's crit (+35% per level above 1) and knockdown |
-| D10 | Deadly Precision `sword_s3` has 2 levels in 5.x; legacy raised it to 3 | 2 levels, 1.5%/level per adrenaline point (3% at 2), counters only |
-| D11 | New Deadly Precision `sword_s30` (any attack arms a 15% instant kill on the next strong attack) | Arm it only on a counter, 5.x's numbers |
-| D12 | Legacy removed the player's instant-kill cooldown for every source | As legacy, for all sources (decide with D6, D11) |
-| D13 | New Cold Blood `sword_s34` (0.3/0.6/1.0 adrenaline per bolt) | Legacy's rule: a third of a sword hit's adrenaline per level, only for damage dealt, split bolts divided |
-| D14 | New Anatomical Knowledge `sword_s26` | Keep 5.x's |
-| D15 | Undying: 5.x fixed it differently (instant heal, 30 s) | Legacy's: 5 s immortality, regen 1.667% per adrenaline point per level per second, 120 s |
-| D16 | Flood of Anger's sign side: legacy's trigger (costs 3 adrenaline, ×3 with Rage Management) or 5.x's supercharged signs | Legacy's, keeping 5.x's supercharged branches only where they do not conflict (decided with the port) |
-| D17 | Steady Shot on `sword_s15`, Cold Blood on `perk_2` (legacy swapped them) | As legacy |
-
-**Batch B: signs**
-
-| # | Question | Recommendation |
-|---|---|---|
-| D18 | 5.x's diminishing returns for repeated Aard and Igni on one enemy | Off for both (cooldowns already prevent spam; it cuts Firestream's burning) |
-| D20 | New Shockwave `magic_s33` (1% of max Vitality per level) | Legacy's Shock Wave: 100 force damage per level, scaling with intensity |
-| D21 | Burn chance bonuses: Melt Armor's (5.x, both trees) and Catalyst's (new tree) | Drop Melt Armor's; keep Catalyst's, added to legacy's 33% |
-| D22 | Quen Discharge: legacy kept 25%, 5.x raised it to 30% | 25% (0.0833/level): legacy changed what it multiplies |
-| D23 | Sustained Glyphs `magic_s10` has 2 levels (legacy made it 3); new `magic_s42` | `s10`: level 1 +50% duration and +30% radius, level 2 +100% and a second trap. `s42`: +33.3% duration and 5.x's +10% range per level, a second trap at level 3, no extra charges |
-| D24 | Puppet: 5.x overrides its duration and multiplies its damage; new Puppetmaster `magic_s31` | Drop both overrides; `s31` gets legacy's Puppet, without 5.x's level-3 "not freed by Geralt's hits" |
-| D25 | Boulders deflected by Aard without a skill: legacy velocity 0.7, 5.x 0.1 | 5.x's |
-| D26 | Axii's target cone: 5.x 270° without line of sight | 5.x's |
-
-**Batch C: alchemy**
-
-| # | Question | Recommendation |
-|---|---|---|
-| D27 | Refreshment (30% stamina per potion) in the new tree, where `alchemy_s1`'s counterpart is High Tolerance `alchemy_s24` | Turn `s24` into Refreshment |
-| D28 | Expert Brewer on 3 levels (legacy −5 toxicity at 5) | −1.667/level (−5 at 3; tooltip with one decimal) |
-| D29 | `alchemy_s3`, `s4`, `s14` are shared: legacy's skills replace 5.x's Delayed Recovery, Side Effects and Adaptability in the new tree too; legacy's tier swaps (s3/s4, s14/s19) | Replace in both trees; drop the tier swaps |
-| D30 | New Hunter Instinct `alchemy_s27` | Legacy's per-adrenaline formula, keeping 5.x's right-oil condition |
-| D31 | Cluster Bombs: fragments and damage per fragment | 2/4/6 fragments, each a full bomb's damage (legacy) |
-| D32 | Efficiency: legacy did not change it (+5 at 5 levels); 5.x +3 at 3 | +3 (unchanged skill: 5.x's) |
-| D33 | Acquired Tolerance: legacy +1 per formula (cap 50/level), 5.x 0.5 | +1 per formula |
-| D34 | Endure Pain: legacy did not change it (+50% at 5 levels); 5.x +30% at 3 | +30% (unchanged skill: 5.x's) |
-
-**Batch D: perks and general**
-
-| # | Question | Recommendation |
-|---|---|---|
-| D37 | Survival Instinct: legacy +750 flat, 5.x +15% | +750 flat |
-| D38 | In Combat's Fires as coded halves Geralt's bomb and bolt damage against enemies too | Only damage Geralt takes (fix of a legacy defect); [to test in legacy](../open-questions.md#to-test-in-legacy-ghost-mode) |
-| D39 | Own bombs in the new tree: legacy removed vanilla's 50% self-damage reduction; the new tree has no In Combat's Fires | As legacy (full self-damage unless `perk_39`) |
-| D40 | Signs generating adrenaline in the new tree: `perk_42` (5.x) or Focus `magic_s38` (as legacy moved it to Focus) | Focus `magic_s38` |
-| D41 | New Gourmand `perk_41` | Replace with Connoisseur (with FOOD) |
-| D42 | Horse Axii still lets Adrenaline Burst pay with adrenaline (a legacy leftover) | Hand to HORSE |
-| D43 | Skill slot bugfixes: SKL-01 or FIX | SKL-01 |
-| D44 | Legacy's debug respec (keeps level, XP and points) | Not in the mod; reuse it in a test function if skill tests need a respec |
-| D45 | Descriptions: one SKL-19 slice or with each skill | With each skill's slice (both menus, all languages); SKL-19 keeps the shared parts and a final check |
-| D46 | Default skill tree for Ghost Mode's toggle | Owner's call |
+SKL's decisions (D1–D52: questions, recommendations, what is decided) are kept in [skl-decisions.md](../skill-trees/skl-decisions.md), next to the skills' texts in both games, with one row per skill of every tree. They are revisited often there; the entries above refer to them by number.
 
 ---
 

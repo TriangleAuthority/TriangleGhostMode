@@ -148,7 +148,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 
 **Decisions:** port the default, without the armor regen modifier (2026-10-02). `FilterAutoBuff` is not needed for stamina. Re-check the rates in the balance pass.
 
-- **Deviation:** with STAM-05's option on, 5.x's own armor calculation applies, not legacy's rework of it (which ignored the Blood and Wine glyphwords' regen and added regen per missing armor piece), and legacy's per-item `staminaRegen_armor_mod` values (e.g. heavy armor −0.10 → −0.30), which matter only with the option on, are not ported; they are attributed here (temporary, until ARM and the glyphwords; porter's call, 2026-10-02, not confirmed by the owner).
+- **Deviation:** with STAM-05's option on, 5.x's own armor calculation applies, not legacy's rework of it (which ignored the Hearts of Stone glyphwords' regen and added regen per missing armor piece), and legacy's per-item `staminaRegen_armor_mod` values (e.g. heavy armor −0.10 → −0.30), which matter only with the option on, are not ported; they are attributed here (temporary, until ARM and the glyphwords; porter's call, 2026-10-02, not confirmed by the owner).
 - **Deviation:** the regen effect recomputes its value on every update, in and out of combat (legacy and vanilla: in combat only), so option changes apply at once (porter's call, not confirmed by the owner).
 - **Deviation:** the character panel's out-of-combat regen line leaves out the armor modifier (legacy showed it), because the effect applies it in combat only (porter's call, not confirmed by the owner).
 
@@ -352,7 +352,7 @@ Detailed measurements, the behaviour-tree analysis of the false starts, and the 
 
 The STAM features were first ported for the new skill tree only. After the decision to support [both trees](../feature-mapping.md#two-skill-trees) (2026-10-03), the counterparts were added and verified the same day: the classic Whirl `sword_s1` (STAM-02, STAM-06, STAM-09; 5.x-GM `2d2b3039`) and the new tree's alternate Igni and Axii, Firestream `magic_s28` and Puppet `magic_s31` (STAM-01, STAM-03, STAM-06; `c5a7317c`). Each entry's **Skill trees** row and slices record them.
 
-**Follow-up (SKL, 2026-10-04):** SKL's [three-level rule](skl.md#area-decisions) keeps legacy's top total on 3-level skills, so Whirl's cost reduction becomes 25% per level above 1 (50% at level 3, legacy 60% at 5); STAM-09's deviation (30% at level 3) ends when SKL-03 ports it.
+**Follow-up (SKL, decided 2026-10-06):** the classic Whirl takes legacy's 5 levels (15% less per level above 1, 20/s at level 5), and the new tree's `sword_s35` matches it at its max level (30% less per level above 1, 20/s at level 3). STAM-09's deviation (30% cut at level 3) ends when SKL-03 ports this ([SKL-03](skl.md#skl-03-fast-attack-branch)).
 
 ### STAM audit (2026-10-03)
 
