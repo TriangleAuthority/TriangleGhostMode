@@ -102,7 +102,7 @@ The builds legacy supports and that must stay viable (B8). Cornerstones are list
 
 ## Mutations
 
-Blood and Wine's late-game progression: research with skill points and mutagens, one active mutation, and extra skill slots. Mapped as the MUT area ([mut.md](mut.md)); what each mutation scales and costs is in the [ledger](ledger/mutations.md), and the mutations at base stats in both tree files. Ghost Mode's cornerstones: Magic Sensibilities (Signs), Bloodbath (sword), Euphoria (alchemy); Adrenaline Rush, Mutated Skin, Deadly Counter and Life Leech run on adrenaline. The mutations are legacy Ghost Mode's in both trees, research costs included (legacy's 29 skill points; MUT's DM1, project owner, 2026-10-11; [how](mut.md#mutations-in-two-trees)). They port after SKL's classic tree.
+Blood and Wine's late-game progression: research with skill points and mutagens, one active mutation, and extra skill slots. Mapped as the MUT area ([mut.md](mut.md)); what each mutation scales and costs is in the [ledger](ledger/mutations.md), and the mutations at base stats in both tree files. Ghost Mode's cornerstones: Magic Sensibilities (Signs), Bloodbath (sword), Euphoria (alchemy); Adrenaline Rush, Mutated Skin, Deadly Counter and Life Leech run on adrenaline. The mutations are legacy Ghost Mode's in both trees, research costs included (legacy's 29 skill points; MUT's DM1, project owner, 2026-10-11; [how](mut.md#mutations-in-two-trees)). They ported after SKL; MUT was signed off 2026-10-17.
 
 ## How a balance-relevant change is made
 

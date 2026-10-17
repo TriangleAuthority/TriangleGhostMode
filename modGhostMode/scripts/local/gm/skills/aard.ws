@@ -59,7 +59,8 @@ function OnEffectAdded(optional customParams : W3BuffCustomParams)
 	else	//modSigns
 		startingChance = 0.5;	//modSigns
 	chance = ClampF(startingChance * (1 + aardPower) * (1 - resistance), 0.1, 1.0);	//modSigns
-	//modSigns: legacy's Mutation 12 bonus to the chance comes with MUT
+	if(witcher)	//modSigns: MUT-13, Metamorphosis
+		chance *= witcher.GMMutation12ChanceMult();	//modSigns
 	if(RandF() < chance)	//modSigns: knockdown, then heavy knockdown
 	{	//modSigns
 		chance = 0.15;	//modSigns

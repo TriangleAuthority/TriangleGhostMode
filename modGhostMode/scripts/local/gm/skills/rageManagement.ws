@@ -187,7 +187,7 @@ function OnEnterState( prevStateName : name )
 }
 
 // 5.x body; changes marked //modSigns. The channels' start cost (Igni, Quen, Axii; the alternate Yrden
-// pays on entering its channel, as legacy).
+// pays on entering its channel, as legacy; Life Leech's free Quen pays nothing, MUT-12).
 @replaceMethod(W3SignEntityStateChanneling)
 function OnThrowing()
 {
@@ -197,6 +197,9 @@ function OnThrowing()
 
 	if( super.OnThrowing() )
 	{
+		if((W3QuenEntity)parent && ((W3QuenEntity)parent).gmFreeCast)	//modSigns: MUT-12, Life Leech's free Quen: no stamina, adrenaline or regen pause
+			return true;	//modSigns
+
 		actor = caster.GetActor();
 		player = (CR4Player)actor;
 

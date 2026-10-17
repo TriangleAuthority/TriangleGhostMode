@@ -163,12 +163,14 @@ function OnLeaveState(nextStateName : name)
 	wrappedMethod(nextStateName);
 }
 
+// Life Leech's free Quen starts no cooldown (MUT-12; legacy skipped it for every alternate Quen while
+// Life Leech or its cooldown was on Geralt).
 @wrapMethod(W3QuenEntityStateQuenChanneled)
 function OnLeaveState(nextStateName : name)
 {
 	var ret : bool;
 
-	if(caster.IsPlayer() && !thePlayer.HasBuff(EET_Mutation11Buff) && !thePlayer.HasBuff(EET_Mutation11Debuff))
+	if(caster.IsPlayer() && !parent.gmFreeCast)
 		GMAddSignCooldown(ST_Quen, true);
 	ret = wrappedMethod(nextStateName);
 	return ret;

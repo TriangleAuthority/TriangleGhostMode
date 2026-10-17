@@ -890,9 +890,6 @@
         <staminaRegen type="mult" min="0.25" max="0.25" />
       </ability>
       <!-- dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml -->
-      <ability name="Mutation4BloodDebuff" on_conflict="extend">
-        <staminaRegen type="mult" always_random="false" min="-0.1" max="-0.1" />
-      </ability>
       <ability name="BloodBuff" on_conflict="extend">
         <staminaRegen type="add" always_random="false" min="20" max="20" />
       </ability>

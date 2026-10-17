@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ghost Mode: MUT-12's Mutation Catalyst (legacy's "Mutation Trigger"): a potion that starts Life
+     Leech, 3 charges, 20 toxicity; its recipe (White Gull, Rubedo, Nigredo, vampire blood). -->
+<redxml>
+  <definitions>
+    <abilities>
+      <ability name="gm_mutation_catalyst_stats">
+        <ammo type="add" min="3" />
+        <quality type="add" min="4" max="4"/>
+        <toxicity min="20" max="20" type="add" />
+        <GMMutationTriggerEffect is_ability="true" />
+      </ability>
+    </abilities>
+    <items>
+      <item name="gm_mutation_catalyst" category="potion" price="100" grid_size="1" ability_slots="0" stackable="1000" icon_path="icons/inventory/potions/de_vries_extract_64x64.png" localisation_key_name="item_name_mutation_trigger" localisation_key_description="item_desc_mutation_trigger">
+        <tags>Potion, SingletonItem, mod_nosale</tags>
+        <base_abilities>
+          <a>gm_mutation_catalyst_stats</a>
+          <a>default_potion_stats</a>
+        </base_abilities>
+      </item>
+      <item category="alchemy_recipe" name="gm_recipe_mutation_catalyst" stackable="100" price="30" weight="0.1" icon_path="icons/inventory/quests/ico_recipe.png" localisation_key_name="item_name_mutation_trigger" localisation_key_description="item_desc_mutation_trigger">
+        <tags>ReadableItem, mod_alchemy</tags>
+        <base_abilities>
+          <a>Magic _Stats</a>
+        </base_abilities>
+      </item>
+    </items>
+  </definitions>
+  <custom>
+    <alchemy_recipes>
+      <recipe name_name="gm_recipe_mutation_catalyst" type_name="GMMutationTriggerEffect" cookedItem_name="gm_mutation_catalyst" cookedItemType="potion" cookedItemQuantity="1" localisation_key_name="item_name_mutation_trigger">
+        <ingredients>
+          <ingredient item_name="White Gull 1" quantity="1" />
+          <ingredient item_name="Rubedo" quantity="1" />
+          <ingredient item_name="Nigredo" quantity="1" />
+          <ingredient item_name="Vampire blood" quantity="1" />
+        </ingredients>
+      </recipe>
+    </alchemy_recipes>
+  </custom>
+</redxml>

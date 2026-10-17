@@ -341,7 +341,7 @@ function GMZeroSubOneDamage( out damageData : W3DamageAction )
 // (5.x: every NPC's raw damage); hits below 1 deal nothing. DD1's exception: Crippling Strike's
 // bonus (5.x: a raw damage multiplier; 5.x's alchemy_s24 is gone, SKL-13). SKL-06: the player's bolts and
 // bombs not thrown from aiming deal half damage. The other areas' terms (Perk 16, Severance,
-// Supercharged Glyphs, Mutation 8, Dimeritium) come with their areas; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
+// Supercharged Glyphs, Dimeritium) come with their areas; Mutation 8 is MUT-06's; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
 @addMethod(W3DamageManagerProcessor)
 function GMProcessDamageModification()
 {
@@ -382,6 +382,15 @@ function GMProcessDamageModification()
 	// Crippling Strikes (SKL-03, both trees): a fast attack on a bleeding enemy (5.x's new-tree crippled
 	// mark is gone, skills/cripplingStrikes.ws)
 	mult = GMCripplingStrikesDamageMult(playerAttacker, attackAction, actorVictim);
+	if( mult != 1 )
+	{
+		action.processedDmg.vitalityDamage *= mult;
+		action.processedDmg.essenceDamage *= mult;
+	}
+
+	// Deadly Counter (MUT-06): a melee hit on a countered enemy, +33.34% per adrenaline point
+	// (mutations/deadlyCounter.ws)
+	mult = GMMutation8DamageMult();
 	if( mult != 1 )
 	{
 		action.processedDmg.vitalityDamage *= mult;

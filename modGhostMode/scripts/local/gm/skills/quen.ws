@@ -665,3 +665,13 @@ function InternalAddEffect(effectType : EEffectType, creat : CGameplayEntity, sr
 	}
 	return wrappedMethod(effectType, creat, srcName, inDuration, customVal, customAbilityName, customFXName, signEffect, powerStatValue, customParams, vibratePadLowFreq, vibratePadHighFreq);
 }
+
+// SKL-11 (found with MUT-10): a save from 5.x play can still carry the player_had_quen fact, which
+// makes 5.x's InternalAddEffect cut the next damage-over-time effect on Geralt to 0.1 s of damage
+// (Ghost Mode no longer sets the fact). Legacy removed it on spawn too.
+@wrapMethod(W3PlayerWitcher)
+function OnSpawned(spawnData : SEntitySpawnData)
+{
+	wrappedMethod(spawnData);
+	FactsRemove("player_had_quen");
+}

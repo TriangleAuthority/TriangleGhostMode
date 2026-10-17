@@ -9,7 +9,7 @@
 // SKL-05: Counterattack's knockdown roll comes after the whole repel chain, as legacy's (also for
 // monsters, two-handed and tournament fighters and slope kicks; not after Mutation 8's finisher), and
 // the ledge trace runs with the skill too; a kick or bash without a knockdown stuns (legacy).
-// Left as 5.x for their areas: Mutation 8 (MUT), the Lynx set (ARM). See docs/features/def.md.
+// Left as 5.x for its area: the Lynx set (ARM). Deadly Counter's repel is MUT-06's (first in the order). See docs/features/def.md.
 
 // DEF-06: the Blood and Wine tournament contestants (sq701) that legacy gave its empty marker
 // ability sq701_tournament_npcs, recognised by their entity templates instead of edited .w2ent
@@ -101,8 +101,7 @@ function PerformCounterCheck(parryInfo: SParryInfo) : bool
 				if( GetWitcherPlayer().IsMutationActive( EPMT_Mutation8 ) )
 				{
 					isMutation8 = true;
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation8', 'hp_perc_trigger', min, max );
-					mutation8TriggerHP = min.valueMultiplicative;
+					//modSigns: removed the health trigger read here (MUT-06: GMMutation8RepelToFinisherImmune checks it)
 				}
 				
 				
@@ -111,8 +110,15 @@ function PerformCounterCheck(parryInfo: SParryInfo) : bool
 				if ( npc )	//modSigns
 					attType = npc.GetBehaviorVariable( 'AttackType' );	//modSigns
 				
+				if( isMutation8 && npc && !npc.GMMutation8RepelToFinisherImmune() )	//modSigns: MUT-06, Deadly Counter first in the repel order (legacy)
+				{	//modSigns
+					repelType = PRT_RepelToFinisher;	//modSigns
+					npc.AddEffectDefault( EET_CounterStrikeHit, this, "ReflexParryPerformed" );	//modSigns
+					SetTarget( npc, true );	//modSigns
+					PerformFinisher( 0.f, 0 );	//modSigns
+				}	//modSigns
 				//modSigns: the Grave Hag's special repel only against her tongue attacks (was any attack)
-				if ( parryInfo.attacker.HasAbility('mon_gravehag') && ( attType == 6 || attType == 19 ) && parryInfo.attacker.HasAbility('TongueAttack') )	//modSigns
+				else if ( parryInfo.attacker.HasAbility('mon_gravehag') && ( attType == 6 || attType == 19 ) && parryInfo.attacker.HasAbility('TongueAttack') )	//modSigns
 				{
 					repelType = PRT_Slash;
 					parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, 'ReflexParryPerformed');
@@ -130,16 +136,7 @@ function PerformCounterCheck(parryInfo: SParryInfo) : bool
 					parryInfo.attacker.SignalGameplayEvent( 'SpearDestruction');
 					((CNewNPC)parryInfo.attacker).ProcessSpearDestruction();
 				}
-				else if( isMutation8 && npc && !npc.IsImmuneToMutation8Finisher() )
-				{
-					repelType = PRT_RepelToFinisher;
-					npc.AddEffectDefault( EET_CounterStrikeHit, this, "ReflexParryPerformed" );
-					
-					
-					SetTarget( npc, true );
-					
-					PerformFinisher( 0.f, 0 );
-				}
+				//modSigns: removed 5.x's Mutation 8 repel here (MUT-06: first in the order, above)
 				else if ( npc && npc.IsHuman() && ( npc.HasAbility('SkillTwoHanded') || GMIsTournamentContestant(npc) ) )	//modSigns: two-handed fighters and the tournament contestants are side-stepped (legacy)
 				{	//modSigns
 					repelType = PRT_SideStepSlash;	//modSigns

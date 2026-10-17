@@ -32,6 +32,7 @@ function Update() : bool
 			return true;
 		}
 		
+		if( (W3QuenEntity)parent && ((W3QuenEntity)parent).gmFreeCast ) { OnEnded(); return false; }	//modSigns: MUT-12, Life Leech's free Quen ends with Life Leech, also with the cast key held (it never costs anything)
 		stop = false;
 		stamina = player.GetStat(BCS_Stamina);
 		if( ShouldStopChanneling() )

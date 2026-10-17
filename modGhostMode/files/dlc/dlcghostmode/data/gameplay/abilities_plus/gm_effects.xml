@@ -89,6 +89,15 @@
         <vitalityRegen type="mult" min="0.016667" max="0.016667" />
         <vitalityCombatRegen type="mult" min="0.016667" max="0.016667" />
       </ability>
+      <!-- MUT-10: Mutated Skin's damage over time (damage and duration set by the script) -->
+      <ability name="GMMutation5Effect">
+        <DirectDamage type="add" min="1" max="1" />
+        <duration type="add" min="1" max="1" />
+      </ability>
+      <!-- MUT-12: the Mutation Catalyst's potion effect (it only starts Life Leech) -->
+      <ability name="GMMutationTriggerEffect">
+        <duration type="add" min="0.01" />
+      </ability>
     </abilities>
   </definitions>
   <custom>
@@ -104,6 +113,8 @@
       <effect name_name="GMMeltArmorDebuffEffect" defaultAbilityName_name="GMMeltArmorDebuffEffect" showOnHUD="0" />
       <effect name_name="GMUndyingImmortalEffect" defaultAbilityName_name="GMUndyingImmortalEffect" iconType_name="GMUndying" showOnHUD="1" effectNameLocalisationKey_name="effect_undying_skill" />
       <effect name_name="GMUndyingCooldownEffect" defaultAbilityName_name="GMUndyingCooldownEffect" iconType_name="GMUndying" showOnHUD="1" effectNameLocalisationKey_name="effect_undying_cooldown" />
+      <effect name_name="GMMutation5Effect" defaultAbilityName_name="GMMutation5Effect" iconType_name="icon_mutation5" showOnHUD="1" effectNameLocalisationKey_name="skill_name_mutation_5" />
+      <effect name_name="GMMutationTriggerEffect" defaultAbilityName_name="GMMutationTriggerEffect" isPotionEffect="1" showOnHUD="0" onStartSound_name="gui_potion_activation" />
     </effects>
     <effect_icons>
       <effect iconType_name="GMAardCooldown" path="icons/Skills/core/magic_1.png" />

@@ -199,16 +199,18 @@ function DrinkPreparedPotion( slotid : EEquipmentSlots, optional itemId : SItemU
 	{
 		mutagenParams = new W3MutagenBuffCustomParams in theGame;
 		mutagenParams.toxicityOffset = toxicityOffset;
+		if( GMMutation12FreeDecoction() )	//modSigns: MUT-13, a free decoction under Metamorphosis (its offset is 0)
+		{	//modSigns
+			potionParams.sourceName = "Mutation12";	//modSigns
+			theGame.MutationHUDFeedback( MFT_PlayOnce );	//modSigns
+		}	//modSigns
 		mutagenParams.potionItemName = inv.GetItemName(item);
 		
 		finalPotionToxicity += 0.001f;
 
 		potionParams.buffSpecificParams = mutagenParams;
 
-		if( IsMutationActive( EPMT_Mutation10 ) && !HasBuff( EET_Mutation10 ) )
-		{
-			AddEffectDefault( EET_Mutation10, this, "Mutation 10" );
-		}
+		//modSigns: removed Euphoria's start on a decoction (MUT-09: only while overdosed)
 	}
 	
 	else
@@ -225,7 +227,8 @@ function DrinkPreparedPotion( slotid : EEquipmentSlots, optional itemId : SItemU
 	
 	potionParams.effectType = effectType;
 	potionParams.creator = this;
-	potionParams.sourceName = "drank_potion";
+	if( potionParams.sourceName != "Mutation12" )	//modSigns: MUT-13
+		potionParams.sourceName = "drank_potion";
 	potionParams.duration = duration;
 	potionParams.customAbilityName = customAbilityName;
 	ret = AddEffectCustom(potionParams);

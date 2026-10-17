@@ -34,6 +34,10 @@ function HACK_NO_MEMORY_TO_COMPILE_CacheEffect_Part1(effect : EEffectType) : boo
 		// SKL-09
 		case EET_GMMeltArmorDebuff :	effects[effect] = new W3GMEffect_MeltArmorDebuff in this;	return true;
 		case EET_GMMeltArmorTimer :	effects[effect] = new W3GMEffect_MeltArmorTimer in this;	return true;
+		// MUT-10
+		case EET_GMMutation5 :	effects[effect] = new W3GMEffect_Mutation5 in this;	return true;
+		// MUT-12
+		case EET_GMMutationTrigger :	effects[effect] = new W3GMPotion_MutationTrigger in this;	return true;
 	}
 	return wrappedMethod(effect);
 }
@@ -59,6 +63,10 @@ function HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part1(effectName : name, out
 		// SKL-09
 		case 'GMMeltArmorDebuffEffect' :	type = EET_GMMeltArmorDebuff;	abilityName = '';	return true;
 		case 'GMMeltArmorTimerEffect' :	type = EET_GMMeltArmorTimer;	abilityName = '';	return true;
+		// MUT-10
+		case 'GMMutation5Effect' :	type = EET_GMMutation5;	abilityName = '';	return true;
+		// MUT-12
+		case 'GMMutationTriggerEffect' :	type = EET_GMMutationTrigger;	abilityName = '';	return true;
 	}
 	return wrappedMethod(effectName, type, abilityName);
 }
@@ -84,16 +92,22 @@ function EffectTypeToName(effectType : EEffectType) : name
 		// SKL-09
 		case EET_GMMeltArmorDebuff :	return 'GMMeltArmorDebuffEffect';
 		case EET_GMMeltArmorTimer :	return 'GMMeltArmorTimerEffect';
+		// MUT-10
+		case EET_GMMutation5 :	return 'GMMutation5Effect';
+		// MUT-12
+		case EET_GMMutationTrigger :	return 'GMMutationTriggerEffect';
 	}
 	return wrappedMethod(effectType);
 }
 
 // STAM-01, STAM-02: Ghost Mode's cooldowns are negative effects but must not be blocked by
-// immunities to negative effects.
+// immunities to negative effects; neither is Adrenaline Rush's Recovery (MUT-07, legacy).
 @wrapMethod(CActor)
 function IsImmuneToBuff(effect : EEffectType) : bool
 {
 	if(GMIsSignCooldown(effect) || GMIsMeleeSpecialCooldown(effect))
+		return false;
+	if(effect == EET_Mutation7Debuff)	// MUT-07: Adrenaline Rush's Recovery (legacy)
 		return false;
 	return wrappedMethod(effect);
 }

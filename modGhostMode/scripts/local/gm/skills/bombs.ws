@@ -73,10 +73,12 @@ function GMClusterFragments() : int
 }
 
 // 5.x body; changes marked //modSigns.
+// MUT-11: Cat Eyes slows time 25% more while aiming the crossbow with any toxicity, down to x0.1 (legacy).
 @replaceMethod(PlayerAimingStateAiming)
 function SloMo()
 {
 	var speed : float;
+	var min, max : SAbilityAttributeValue;	//modSigns
 	
 	if (!(parent.owner))
 		return;
@@ -99,6 +101,12 @@ function SloMo()
 		
 		if(parent.aimType == AT_Bolt && parent.owner.CanUseSkill(S_Sword_s32))
 			speed -= speed * CalculateAttributeValue( ((CR4Player)parent.owner).GetSkillAttributeValue(S_Sword_s32, 'slowdown_mod', false, true) ) * parent.owner.GetSkillLevel(S_Sword_s32);
+		if( ((W3PlayerWitcher)parent.owner) && parent.aimType == AT_Bolt && GetWitcherPlayer().IsMutationActive( EPMT_Mutation9 ) && GetWitcherPlayer().GetStat( BCS_Toxicity, false ) > 0 )	//modSigns: MUT-11, Cat Eyes with toxicity
+		{	//modSigns
+			theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation9', 'mut9_slowdown', min, max );	//modSigns
+			speed -= min.valueAdditive;	//modSigns
+		}	//modSigns
+		speed = MaxF( speed, 0.1 );	//modSigns: legacy's floor
 
 	
 	

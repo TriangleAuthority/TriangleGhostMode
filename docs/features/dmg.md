@@ -144,7 +144,7 @@ Stat registration (audit F4, 5.x-GM `6b90faf5`): `all_NPC_ability` registers wil
 
 **Decisions:** port as legacy; the headshot and backstab rule is GEN's in the changelist, ported here because it is one line of this function.
 
-- **Deviation:** the other areas' terms here stay 5.x's until their areas: Lynx, Bear and Red Wolf (ARM); Aerondight's crit (SWD); Mutation 2's crit formula, Mutation 9's crit damage on bolts (MUT); Mutagen 5's attack power, which legacy removed (ALCH) (temporary, until ARM, SWD, MUT, ALCH). SKL's terms here are ported: Whirl, the Yrden turret's cached intensity, the crit skills melee only, Anatomical Knowledge's crit damage on bolts.
+- **Deviation:** the other areas' terms here stay 5.x's until their areas: Lynx, Bear and Red Wolf (ARM); Aerondight's crit (SWD); (Mutation 2's crit formula and Mutation 9's bolt terms are ported, MUT-03 and MUT-11, 2026-10-17); Mutagen 5's attack power, which legacy removed (ALCH) (temporary, until ARM, SWD, ALCH). SKL's terms here are ported: Whirl, the Yrden turret's cached intensity, the crit skills melee only, Anatomical Knowledge's crit damage on bolts.
 
 
 **Slices:** slice 2, with [DMG-01](#dmg-01-armor-before-attack-power). The 5.x level-ups' additive attack power (+31 at level 10) applies after armor and so ignores it, until GEN removes it from level-ups.
@@ -162,7 +162,7 @@ No crits for damage over time or in non-deadly fights (slice 6a, 5.x-GM `5a615f8
 | Skill trees | both: the pool takes legacy's terms (classic) and 5.x's new-tree multipliers (`sword_s22` to `s26`, `s29`, `s32`, `magic_s35`, `s41`, `perk_27`, `28`, `37`, `44`, `alchemy_s23` to `s26`); SKL dropped or replaced most of these ([follow-ups from SKL](#follow-ups-from-skl)) |
 | Port form | `damage/pool.ws`: `@replaceMethod(W3DamageManagerProcessor) ProcessDamageIncrease` on 5.x's signature (its multipliers as pool terms, the pool handed on in fields), `ProcessNewSkills_Combat` and the four new-tree combat skill functions (their bonuses as pool terms; the pool applied once at the end, `GMPoolApply`); the action's damage types written back (`SetDTs`, so that Quen and other later readers see the pool) with SKL-11, which needs it; XML `gm_damage.xml` (`sword_2`) |
 | Port status | signed off (2026-10-07), except the other areas' terms it hosts (deviations; ported with those areas) |
-| Open checks | the pool terms of other areas: the bomb items' terms, Lynx, Aerondight, Runeword 4, Mutation 8, the Wolven set; the NPC ranged bonus above level 31 being gone. SKL's pool terms are checked in SKL's entries (Rend, Strength Training, Deflection, Steady Shot, Heavy Artillery, Wolf School); the 5.x new-tree terms are gone ([follow-ups from SKL](#follow-ups-from-skl)) |
+| Open checks | the pool terms of other areas: the bomb items' terms, Lynx, Aerondight, Runeword 4, the Wolven set (Mutation 8's is gone with MUT-06); the NPC ranged bonus above level 31 being gone. SKL's pool terms are checked in SKL's entries (Rend, Strength Training, Deflection, Steady Shot, Heavy Artillery, Wolf School); the 5.x new-tree terms are gone ([follow-ups from SKL](#follow-ups-from-skl)) |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
@@ -181,8 +181,8 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 3. **Flat additions stay flat** (they are not multipliers): Anatomical Knowledge `sword_s26` (silver sword damage added to bolts), Netflix set 2 (direct damage), Toxic Shock `alchemy_s23` (adds poison damage equal to 25/50/75% of the hit). Added before the pool like legacy's flat additions, so the pool scales them; Toxic Shock's share is taken of the damage before the pool, so the pool is not counted twice. Anatomical Knowledge's add (D14) and Toxic Shock (D60) are gone with SKL; Netflix set 2 stays.
 4. **Legacy's own exceptions**, kept multiplicative in legacy's code: the underwater crossbow bonus and Mutation 9's bolt damage. Kept as legacy.
 
-- **Deviation:** 5.x's own versions of the terms legacy reworked are pool terms until their areas port legacy's: the Lynx set (legacy: attack power, ARM), Aerondight (legacy: attack power, SWD), Runeword 4's overheal (legacy: an effect, ENCH), Mutation 8 (legacy: final damage, MUT), the Wolven set (ARM) (temporary, until ARM, SWD, ENCH, MUT). SKL's are ported: Heavy Artillery (legacy's), Perk 27 and `alchemy_s25` gone, the potion-duration passive zeroed (SKL-01).
-- **Deviation:** legacy's pool terms and flat additions of other areas are not ported yet: Ghost Mode's `sword_dmg_bonus`/`spell_dmg_bonus` (SWD), Heft and Rotation (ENCH), the frozen target's bonus (EFX; 5.x's separate frost hit stays), `fist_dmg_bonus` (AI), Mutagen 9 and Mutation 10 (ALCH, MUT) (temporary, until those areas).
+- **Deviation:** 5.x's own versions of the terms legacy reworked are pool terms until their areas port legacy's: the Lynx set (legacy: attack power, ARM), Aerondight (legacy: attack power, SWD), Runeword 4's overheal (legacy: an effect, ENCH), the Wolven set (ARM) (temporary, until ARM, SWD, ENCH). Mutation 8's term is gone: legacy's final-damage factor since MUT-06 (2026-10-17). SKL's are ported: Heavy Artillery (legacy's), Perk 27 and `alchemy_s25` gone, the potion-duration passive zeroed (SKL-01).
+- **Deviation:** legacy's pool terms and flat additions of other areas are not ported yet: Ghost Mode's `sword_dmg_bonus`/`spell_dmg_bonus` (SWD), Heft and Rotation (ENCH), the frozen target's bonus (EFX; 5.x's separate frost hit stays), `fist_dmg_bonus` (AI), Mutagen 9 (ALCH) (temporary, until those areas; Mutation 10 came with MUT-09).
 
 **Slices:**
 
@@ -213,7 +213,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 **Decisions:** port as legacy on 5.x's body; the difficulty multiplier's position (final damage, hostile NPCs hitting the player only) is DMG's, its values DIFF's (DD4). Keeping 5.x's additions that are not in the way (Mutagen 28's specter block for ALCH to decide, auto-oil, simulate-only gates, `SetRecentlyDodged`).
 
 - **Deviation:** Golden Oriole's level-3 absorption of poison damage, healing Geralt by it, stays 5.x's in `ProcessActionDamage` (legacy removed it; the Viper set heals from poison instead) (temporary, until ALCH and ARM).
-- **Deviation:** the other areas' final-damage terms are not ported yet: Severance (ENCH), Mutation 8 (MUT, a pool term until then), Dimeritium (ALCH) (temporary, until those areas). SKL's are ported: unaimed bolts and bombs ×0.5, In Combat's Fires, Supercharged Glyphs, Crippling Strikes, Muscle Memory's total damage.
+- **Deviation:** the other areas' final-damage terms are not ported yet: Severance (ENCH), Dimeritium (ALCH) (temporary, until those areas). Mutation 8's is ported (MUT-06, 2026-10-17). SKL's are ported: unaimed bolts and bombs ×0.5, In Combat's Fires, Supercharged Glyphs, Crippling Strikes, Muscle Memory's total damage.
 - **Deviation:** until DIFF ports legacy's difficulty values (`difficulty_Common*`: Normal none, Hard +100%, Hardcore +250%), 5.x's values (+40%, +130%, +230%) apply at legacy's position, final damage (temporary, until DIFF).
 - The sign-damage reduction against Vitality is not in the changelist: an omission, recorded in [open-questions.md](../open-questions.md#legacy-data-vs-changelist).
 
@@ -303,7 +303,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 
 **Decisions:** port as legacy (project owner, 2026-10-06: both are bugs). Reading the item is correct whether or not 5.x still has the respawn growth, so the fix needs no 5.x test first; the slice's check reads an NPC's weapon damage before and after a respawn.
 
-- **Deviation:** the other areas' terms in `W3PlayerWitcher.GetTotalWeaponDamage` stay 5.x's: Mutation 9's bolt damage (legacy moved it, MUT), Aerondight's damage per enemy and the Phantom Weapon's boost (SWD), Runeword 4's damage bonus (ENCH) (temporary, until MUT, SWD, ENCH).
+- **Deviation:** the other areas' terms in `W3PlayerWitcher.GetTotalWeaponDamage` stay 5.x's: Aerondight's damage per enemy and the Phantom Weapon's boost (SWD), Runeword 4's damage bonus (ENCH) (temporary, until SWD, ENCH). Mutation 9's flat bolt damage is gone (MUT-11, 2026-10-17).
 
 **Slices:**
 

@@ -6,7 +6,7 @@
 //   Razor Focus's included); an alternate cast's per second (Quen's per stamina spent, as a share of a
 //   regular cast's cost); none for a cast paid with adrenaline (Rage Management) or under Flood of Anger.
 //   Called for each drain (W3PlayerAbilityManager.DrainStamina, stamina/channelStamina.ws), as legacy's
-//   ManageFocusGain. Adrenaline Rush (Mutation 7) comes with MUT.
+//   ManageFocusGain; Adrenaline Rush (Mutation 7) doubles or halves it (MUT-07).
 // See docs/features/skl.md.
 
 @addMethod(W3SignEntity)
@@ -30,6 +30,7 @@ function GMManageFocusGain(cost : float, dt : float)
 		else
 			amount *= dt;
 	}
+	amount *= player.GMMutation7GainMult();	// MUT-07: Adrenaline Rush
 	player.GainStat(BCS_Focus, amount);
 }
 

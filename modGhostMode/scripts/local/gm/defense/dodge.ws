@@ -168,33 +168,7 @@ function ReduceDamage(out damageData : W3DamageAction)
 	}
 
 	
-	if( IsMutationActive( EPMT_Mutation5 ) && !IsAnyQuenActive() && !damageData.IsDoTDamage() )
-	{
-		focus = GetStat( BCS_Focus );
-		currAdrenaline = FloorF( focus );
-		if( currAdrenaline >= 1 )
-		{
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation5', 'mut5_dmg_red_perc', min, max );
-			adrenReducedDmg = ( currAdrenaline * min.valueAdditive );
-			damageData.processedDmg.vitalityDamage *= 1 - adrenReducedDmg;
-
-			
-			theGame.MutationHUDFeedback( MFT_PlayOnce );
-
-			if( focus >= 3.f )
-			{
-				PlayEffect( 'mutation_5_stage_03' );
-			}
-			else if( focus >= 2.f )
-			{
-				PlayEffect( 'mutation_5_stage_02' );
-			}
-			else
-			{
-				PlayEffect( 'mutation_5_stage_01' );
-			}
-		}
-	}
+	//modSigns: removed Mutated Skin's damage reduction per adrenaline point (MUT-10: the damage is spread over time)
 
 	if(!damageData.IsDoTDamage() && GMIsWhirlingWithAdrenaline())	//modSigns: SKL-03, Whirl: less damage taken while spinning with adrenaline
 		damageData.processedDmg.vitalityDamage *= 1 - GMGetWhirlDamageReduction();	//modSigns

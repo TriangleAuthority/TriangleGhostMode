@@ -1,0 +1,160 @@
+// MUT-14: the HUD's buff list: Toxic Blood's counter (the acid's damage per second) and Euphoria's
+// (the damage added per hit) show as numbers, as legacy's (5.x: percentages). Bloodbath's stays a
+// percentage; Mutated Skin's damage over time is its own effect with a timer (MUT-10). Legacy's other
+// HUD changes in this function (other features' counters) are not ported yet (UI).
+// See docs/features/mut.md.
+
+@replaceMethod(CR4HudModuleBuffs)
+function UpdateBuffs()
+{
+	var l_flashObject			: CScriptedFlashObject;
+	var l_flashArray			: CScriptedFlashArray;
+	var i 						: int;
+	var oilEffect				: W3Effect_Oil;
+	var aerondightEffect		: W3Effect_Aerondight;
+	var buffDisplayLimit		: int = 16;
+	var mut3Buff 				: W3Effect_Mutation3;
+	var mut4Buff 				: W3Effect_Mutation4;
+	var mut5Buff 				: W3Effect_Mutation5;
+	var effectType				: EEffectType;
+	var mut7Buff 				: W3Mutation7BaseEffect;
+	var mut10Buff 				: W3Effect_Mutation10;
+	var buffState				: int;
+	var format					: int;
+	var quenBuff 				: W3Effect_BasicQuen;
+	
+	
+	var isOilInfinite : bool;
+
+	l_flashArray = GetModuleFlashValueStorage()().CreateTempFlashArray();
+	for(i = 0; i < Min(buffDisplayLimit,_currentEffects.Size()); i += 1) 
+	{
+		if(_currentEffects[i].ShowOnHUD() && _currentEffects[i].GetEffectNameLocalisationKey() != "MISSING_LOCALISATION_KEY_NAME" )
+		{
+			if(_currentEffects[i].IsNegative())
+			{
+				buffState = 0;
+			}
+			else if ( _currentEffects[i].IsPositive() )
+			{
+				buffState = 1;
+			}
+			else if ( _currentEffects[i].IsNeutral() )
+			{
+				buffState = 2;
+			}
+
+			effectType = _currentEffects[i].GetEffectType();
+
+			
+			if(thePlayer.IsSkillEquipped( S_Alchemy_s06 ) && GetWitcherPlayer().CanUseSkill(S_Alchemy_s06) && GetWitcherPlayer().GetSkillLevel(S_Alchemy_s06) > 2)
+				isOilInfinite = true;
+			
+			if ( effectType == EET_Oil && isOilInfinite )
+			{
+				
+				format = 0;
+			}
+			else if ( effectType == EET_Oil || effectType == EET_Aerondight || effectType == EET_Mutation4 || effectType == EET_Mutation10 )	//modSigns: MUT-08, MUT-09: Toxic Blood's and Euphoria's counters are damage values, not percentages
+			{
+				
+				format = 1;
+			}
+			else if ( effectType == EET_Mutation3 || effectType == EET_Mutation5 )	//modSigns: MUT-08, MUT-09: Mutation 4 and 10 moved to the counter format
+			{
+				
+				format = 2;
+			}
+			else if ( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff || effectType == EET_BasicQuen || effectType == EET_ConvergenceTheory )
+			{
+				
+				format = 4;
+			}
+			else
+			{
+				
+				format = 3;
+			}				
+			
+			l_flashObject = m_flashValueStorage.CreateTempFlashObject();
+			l_flashObject.SetMemberFlashBool("isVisible",_currentEffects[i].ShowOnHUD());
+			l_flashObject.SetMemberFlashString("iconName",_currentEffects[i].GetIcon());
+			l_flashObject.SetMemberFlashString("title",GetLocStringByKeyExt(_currentEffects[i].GetEffectNameLocalisationKey()));
+			l_flashObject.SetMemberFlashBool("IsPotion",_currentEffects[i].IsPotionEffect());
+			l_flashObject.SetMemberFlashInt("isPositive", buffState);
+			l_flashObject.SetMemberFlashInt("format", format);
+			
+			if ( effectType == EET_Oil )
+			{	
+				oilEffect = (W3Effect_Oil)_currentEffects[i];
+				if ( oilEffect )
+				{
+					
+					if (oilEffect.GetAmmoCurrentCount() > 0 && isOilInfinite)
+					{
+						l_flashObject.SetMemberFlashNumber("duration",        oilEffect.GetAmmoMaxCount() 	  * 1.0 );
+						l_flashObject.SetMemberFlashNumber("initialDuration", oilEffect.GetAmmoMaxCount() 	  * 1.0 );
+						l_flashObject.SetMemberFlashInt("format", 0);
+					}
+					
+					else
+					{
+						l_flashObject.SetMemberFlashNumber("duration",        oilEffect.GetAmmoCurrentCount() * 1.0 );
+						l_flashObject.SetMemberFlashNumber("initialDuration", oilEffect.GetAmmoMaxCount() 	  * 1.0 );
+					}
+				}
+			}
+			else if( effectType == EET_Aerondight )
+			{
+				aerondightEffect = (W3Effect_Aerondight)_currentEffects[i];
+				if( aerondightEffect )
+				{
+					l_flashObject.SetMemberFlashNumber("duration",        aerondightEffect.GetCurrentCount() * 1.0 );
+					l_flashObject.SetMemberFlashNumber("initialDuration", aerondightEffect.GetMaxCount()	 * 1.0 );
+				}
+			}
+			
+			
+			else if( effectType == EET_Mutation3 )
+			{						
+				mut3Buff = ( W3Effect_Mutation3 ) _currentEffects[i];						
+				l_flashObject.SetMemberFlashNumber("duration", 			mut3Buff.GetStacks() );
+				l_flashObject.SetMemberFlashNumber("initialDuration", 	mut3Buff.GetStacks() );
+			}
+			else if( effectType == EET_Mutation4 )
+			{						
+				mut4Buff = ( W3Effect_Mutation4 ) _currentEffects[i];						
+				l_flashObject.SetMemberFlashNumber("duration", 			mut4Buff.GetStacks() );
+				l_flashObject.SetMemberFlashNumber("initialDuration", 	mut4Buff.GetStacks() );
+			}
+			else if( effectType == EET_Mutation5 )
+			{						
+				mut5Buff = ( W3Effect_Mutation5 ) _currentEffects[i];						
+				l_flashObject.SetMemberFlashNumber("duration", 			mut5Buff.GetStacks() );
+				l_flashObject.SetMemberFlashNumber("initialDuration", 	mut5Buff.GetStacks() );
+			}
+			
+			
+			else if( effectType == EET_Mutation10 )
+			{						
+				mut10Buff = ( W3Effect_Mutation10 ) _currentEffects[i];						
+				l_flashObject.SetMemberFlashNumber("duration", 			mut10Buff.GetStacks() );
+				l_flashObject.SetMemberFlashNumber("initialDuration", 	mut10Buff.GetStacks() );
+			}
+			else if ( (W3RepairObjectEnhancement)_currentEffects[i] && GetWitcherPlayer().HasRunewordActive('Runeword 5 _Stats') )
+			{
+				l_flashObject.SetMemberFlashNumber("duration", -1 );
+				l_flashObject.SetMemberFlashNumber("initialDuration", -1 );
+			}
+			else
+			{
+				l_flashObject.SetMemberFlashNumber("duration",_currentEffects[i].GetDurationLeft() );
+				l_flashObject.SetMemberFlashNumber("initialDuration", _currentEffects[i].GetInitialDurationAfterResists());
+			}
+			l_flashArray.PushBackFlashObject(l_flashObject);	
+		}
+	}
+	
+	m_flashValueStorage.SetFlashArray( "hud.buffs", l_flashArray );
+}
+

@@ -167,6 +167,7 @@ All of these are **verified** (pilot slices 1–2): `@addField`, `@addMethod`, `
 
 Rules (from testing and the compiler's messages in `witcher3.exe`):
 
+- **One `@replaceMethod` per function in the whole mod:** a second one, in another file, fails to compile ("@replaceMethod duplicate found for 'PlayerAimingStateAiming::SloMo'", MUT-11): add the change to the existing replacement (`grep -rn "function <name>"` first).
 - **A wrapper calls `wrappedMethod` once:** a second call in the same body does not compile ("Could not find function 'wrappedMethod'", SKL).
 - **WitcherScript has no string-to-name conversion** (`StringToName` does not exist), and a struct member cannot be read from a function's result (`GetMutation(m).progress`: "Parent scope does not come from variable"): assign the result to a local first.
 - **Custom XML attributes read as names must end in `_name`** (`skill_name`, `def_name`, `ability_name`): `GetCustomNodeAttributeValueName` returns nothing for an attribute called `ability` (**verified**, SKL). A DLC's XML can add its own `<skill_definition>` block to `<custom><skills>` and scripts read it (**verified**, SKL).
@@ -201,6 +202,8 @@ New buffs and debuffs (cooldowns, potion effects, ...) need a new `EEffectType` 
 - Register each type in `gmEffectRegistration.ws`: create the object in the wrapped `W3GameEffectManager.HACK_NO_MEMORY_TO_COMPILE_CacheEffect_Part1`, and map name and type in the wrapped global functions `HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part1` and `EffectTypeToName`.
 - An effect works without XML (5.x's own `EET_OverloadCooldown` has none): it then has no HUD icon or label. Override `CalculateDuration` to set the duration in script.
 - Effect names follow the vanilla pattern `<Name>Effect`, with the `GM` prefix: `GMAardCooldownEffect`.
+- **A vanilla effect class cannot get another base class** (a scope-based override must repeat the vanilla `extends`). To turn one into, say, a damage-over-time effect, add a new effect type with its own class (MUT-10: `EET_GMMutation5`, `W3GMEffect_Mutation5 extends W3DamageOverTimeEffect`, for legacy's Mutated Skin) and stop the vanilla type from being added. A damage-over-time effect needs a damage attribute (`DirectDamage`) in its ability, even if the script sets the value (**verified** 2026-10-17).
+- **The `player_had_quen` fact** (5.x) makes `InternalAddEffect` deal 0.1 s of a new damage-over-time effect on Geralt and drop it; Ghost Mode no longer sets the fact and removes it on spawn (SKL-11). A DoT on Geralt that vanishes at once in a test points to it.
 
 ### Choosing a technique
 
@@ -224,7 +227,7 @@ Prefer **one file per vanilla class or system** that Ghost Mode changes, holding
 
 - **Fields of another object cannot be assigned from outside its class**, even `public` ones: `thePlayer.gmCounter += 1` fails with "Expected type 'Int32' to be assignable", `thePlayer.gmField = 1` with "Left hand side is const". Reading works. To change another object's field, give its class a method (`@addMethod`) and call that.
 - Fields default to private; declare fields that other code reads as `public`.
-- **`name` is a type keyword**: a parameter called `name` fails to compile ("unexpected TOKEN_TYPE_NAME"); call it something else. So is `set` ("unexpected TOKEN_SET").
+- **`name` is a type keyword**: a parameter called `name` fails to compile ("unexpected TOKEN_TYPE_NAME"); call it something else. So is `set` ("unexpected TOKEN_SET"), and `enter` ("unexpected TOKEN_ENTER").
 - **A cast cannot follow `!` directly**: `if(!(CActor)x.attacker || ...)` is a syntax error ("unexpected TOKEN_CLASS_TYPE"); assign the cast to a local first.
 - **Backslashes in strings are literal** (`"dlc\bob\data"` as in vanilla's own paths), but avoid a backslash right before the closing quote.
 - **A short-lived flag needs no timer:** store a deadline (`theGame.GetEngineTimeAsSeconds() + 3.0`) and compare it when read (DEF-07's countered flag); not saved, so nothing survives a load.
@@ -277,11 +280,11 @@ This is how Ghost Mode's XML changes are ported: Ghost Mode's DLC contains only 
 
 Each of the DLC's XML files (or folders) is registered with a `CR4DefinitionsDLCMounter` in its `.reddlc` file (see [DLC and mounters](#dlc-and-mounters)). XML files are UTF-8 with BOM, like the 5.0 originals.
 
-A DLC's definitions XML can also add to the `<custom>` sections that sit next to `<definitions>`, e.g. new `<effects>` and `<effect_icons>` entries for mod effects (**verified**, STAM-01: icons, HUD flag and labels of the sign cooldowns come from `dlc\dlcghostmode\data\gameplay\abilities\gm_effects.xml`). Ghost Mode's DLC mounts the whole `dlc\dlcghostmode\data\gameplay\abilities\` folder; add a mounter per folder as other definition types are ported (`make_reddlc.py --xml` once per folder).
+A DLC's definitions XML can also add to the `<custom>` sections that sit next to `<definitions>`, e.g. new `<effects>` and `<effect_icons>` entries for mod effects (**verified**, STAM-01: icons, HUD flag and labels of the sign cooldowns come from `dlc\dlcghostmode\data\gameplay\abilities\gm_effects.xml`). Ghost Mode's DLC mounts the whole `dlc\dlcghostmode\data\gameplay\abilities\` and `items\` folders (and their `_plus` twins); add a mounter per folder as other definition types are ported (`make_reddlc.py --xml` once per folder). New items, their abilities and new alchemy recipes (`<custom><alchemy_recipes>`) load from the DLC's `items\` folder: the alchemy manager finds the recipe and brews it (**verified** 2026-10-17, MUT-12's Mutation Catalyst). An item's `localisation_key_name` is a key for the string tables (`GetItemLocalizedNameByUniqueID` returns the key).
 
 **New Game+:** NG+ reads its definitions from `*_plus` folders, and a DLC adds its own with a `CR4DefinitionsNGPlusDLCMounter` (`make_reddlc.py --xml-ngplus`), as vanilla DLCs mount their `abilities_plus\` and `items_plus\` folders next to `abilities\` and `items\` (same file names). Ghost Mode's DLC mounts `abilities_plus\` with copies of its `abilities\` files that `tools/gen_ngplus.py` generates with the [NG+ rule](feature-mapping.md#ng-numbers); re-run it after changing a file in `abilities\` (`--check` fails when a copy is out of date). In a regular game the NG+ copies are not read (**verified** 2026-10-04: with a build whose NG+ copy gave the wolf a different stamina regen, the regular game used the `abilities\` value). NG+ itself is not tested.
 
-**Abilities defined by the expansions' XML** (`dlc\ep1`, `dlc\bob`; e.g. the perks `perk_13` to `perk_22`): `extend` leaves them without attributes and without tags, probably because Ghost Mode's DLC loads before the expansion's (**verified** 2026-10-15, SKL-18: `perk_22` lost its `GlobalPassiveBonus` tag and was never added to Geralt, `perk_19` was added without its crit chance). Give such an ability whole: `on_conflict="replace"` with its tags and every attribute it needs.
+**Abilities defined by the expansions' XML** (`dlc\ep1`, `dlc\bob`; e.g. the perks `perk_13` to `perk_22`): `extend` leaves them without attributes and without tags, probably because Ghost Mode's DLC loads before the expansion's (**verified** 2026-10-15, SKL-18: `perk_22` lost its `GlobalPassiveBonus` tag and was never added to Geralt, `perk_19` was added without its crit chance). Give such an ability whole: `on_conflict="replace"` with its tags and every attribute it needs. Not every expansion ability is affected: Blood and Wine's `BloodBuff` and `mon_sharley_base` keep their tags and attributes with STAM-08's `extend` (2026-10-17, `gmtest_ability_probe(<ability>, <tag>)` lists an ability's attributes as the game has them); check with it, or give the ability whole.
 
 **Repeated tags** (e.g. `ConGeralt` has three `<staminaRegen>` nodes: `add`, `base`, `mult`): `extend` replaces them **in order**: the first `<staminaRegen>` in the override replaces the first one in the vanilla entry, the second the second, and so on; the rest are kept (**verified**, STAM-04). So to change the Nth occurrence, list all occurrences up to it in vanilla order, copying the unchanged ones:
 
@@ -331,6 +334,8 @@ A mod ships Wwise banks in `<mod>\content\soundspc.cache`, and scripts load and 
 
 - **The bank must be built with Wwise 2023.1** (bank version 150; see [game-5.0-changes.md](game-5.0-changes.md#audio)). Legacy banks (version 88) have to be rebuilt; vgmstream (`vgmstream-cli -o out.wav <bank or .wem>`) decodes their audio to WAV, since no Wwise tool exports audio.
 - **The cache must be format version 2**, written by `python tools/soundcache.py pack <out>\soundspc.cache <bank> ...` ([tools.md](tools.md#project-tools-tools)). Whether the game still reads legacy's version 1 caches is untested (they hold only version 88 banks anyway).
+
+**Loading is asynchronous and counted:** `SoundLoadBank(bank, true)` loads in the background, so `SoundIsBankLoaded` turns true only in a later frame (check in a later exec call); a bank loaded several times (equipping a mutation loads its bank more than once) needs as many `SoundUnloadBank` calls before it reads unloaded (**verified** 2026-10-17, MUT-01).
 
 **Where things live:** the repository holds only the built banks, `modGhostMode/sound/*.bnk` on `5.x-GM`; `tools/build_mod.py` packs them into the mod's `content\soundspc.cache`. The Wwise project, the decoded audio and the WAAPI scripts are kept locally, outside the repository, in a `TGM-audio` folder next to the checkouts (not in git; its README has the rebuild command). Legacy's banks stay recoverable from `legacy-GM` (`tools/soundcache.py extract`, then vgmstream).
 

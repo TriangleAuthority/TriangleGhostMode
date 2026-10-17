@@ -61,6 +61,7 @@ function ProcessActionReaction(wasFrozen : bool, wasAlive : bool)
 	chance = witcher.GMCripplingStrikesValue('sword_s5_chance', true);
 	actorVictim.GetResistValue(theGame.effectMgr.GetBuffResistStat(EET_Bleeding), resPt, resPrc);
 	chance *= MaxF(0, 1 - resPrc);
+	chance *= witcher.GMMutation12ChanceMult();	// MUT-13, Metamorphosis
 	if(RandF() >= chance)
 		return;
 	bleed.effectType = EET_Bleeding;

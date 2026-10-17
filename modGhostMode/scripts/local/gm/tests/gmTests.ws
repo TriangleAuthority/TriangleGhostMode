@@ -2119,6 +2119,7 @@ exec function gmtest_regress()
 	GMTest_skl07_foa_keep();
 	GMTest_skld_effects();
 	GMTest_skl_values();
+	GMTest_mut();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

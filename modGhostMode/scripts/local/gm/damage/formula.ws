@@ -540,10 +540,10 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 
 		if( playerAttacker && action.IsActionWitcherSign() && GetWitcherPlayer().IsMutationActive(EPMT_Mutation2) )
 		{
-			sp = action.GetPowerStatValue();
+			//modSigns: removed the sign's own power stat: powerMod is set (legacy)
 
 			theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation2', 'crit_damage_factor', min, max);
-			criticalDamageBonus.valueAdditive = sp.valueMultiplicative * min.valueMultiplicative;
+			criticalDamageBonus.valueAdditive = min.valueAdditive + GMSignPowerStatToPowerBonus(powerMod.valueMultiplicative) * min.valueMultiplicative;	//modSigns: MUT-03, legacy's formula (intensity to power bonus)
 		}
 		else
 		{

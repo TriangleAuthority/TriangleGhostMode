@@ -47,6 +47,8 @@ function HasFreeToxicityToDrinkPotion( item : SItemUniqueId, effectType : EEffec
 	finalPotionToxicity = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity'));
 	toxicityOffset = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity_offset'));
 	toxicityOffset *= GMAdaptationMult();	//modSigns: SKL-16, Adaptation (legacy)
+	if(GMMutation12FreeDecoction())	//modSigns: MUT-13, a free decoction under Metamorphosis
+		toxicityOffset = 0;	//modSigns
 
 	finalPotionToxicity = GMExpertBrewerCut(effectType, finalPotionToxicity);	//modSigns: Expert Brewer (SKL-13, legacy), potions only
 	finalPotionToxicity = GMMetabolismBoostsCut(effectType, finalPotionToxicity, adrenaline);	//modSigns: Metabolism Boosts in either tree (legacy), not for decoctions
@@ -85,6 +87,8 @@ function ToxicityLowEnoughToDrinkPotion( slotid : EEquipmentSlots, optional item
 	potionToxicity = GMMetabolismBoostsCut(effectType, potionToxicity, adrenaline);	//modSigns: Metabolism Boosts counts (legacy)
 	toxicityOffset = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity_offset'));
 	toxicityOffset *= GMAdaptationMult();	//modSigns: SKL-16, Adaptation (legacy)
+	if(GMMutation12FreeDecoction())	//modSigns: MUT-13, a free decoction under Metamorphosis
+		toxicityOffset = 0;	//modSigns
 
 	if(effectType != EET_WhiteHoney)
 	{

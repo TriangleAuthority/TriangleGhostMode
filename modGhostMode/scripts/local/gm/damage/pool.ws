@@ -37,7 +37,7 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 // Strike's bonus goes to final damage, as does the difficulty multiplier
 // (GMProcessDamageModification). VulnerableFromFront is checked here, before the formula (legacy;
 // 5.x checks it in ReduceDamage, too late). 5.x's own versions of legacy's other terms (Rend, Perk 20,
-// Lynx, Aerondight, Runeword 4, Mutation 8) are pool terms until their areas port legacy's.
+// Lynx, Aerondight, Runeword 4) are pool terms until their areas port legacy's.
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 {
@@ -362,11 +362,11 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 
 		if( playerAttacker.inv.GetItemCategory(sword) == 'steelsword' )
 		{
-			damageVal += playerAttacker.inv.GetItemAttributeValue(sword, theGame.params.DAMAGE_NAME_SLASHING);
+			damageVal.valueBase += GetWitcherPlayer().GetTotalWeaponDamage(sword, theGame.params.DAMAGE_NAME_SLASHING, GetInvalidUniqueId());	//modSigns: MUT-02, the sword's total base damage (legacy)
 		}
 		else if( playerAttacker.inv.GetItemCategory(sword) == 'silversword' )
 		{
-			damageVal += playerAttacker.inv.GetItemAttributeValue(sword, theGame.params.DAMAGE_NAME_SILVER);
+			damageVal.valueBase += GetWitcherPlayer().GetTotalWeaponDamage(sword, theGame.params.DAMAGE_NAME_SILVER, GetInvalidUniqueId());	//modSigns: MUT-02, the sword's total base damage (legacy)
 		}
 		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation1', 'dmg_bonus_factor', min, max);
 
@@ -384,13 +384,25 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	}
 
 
-	npcVictim = (CNewNPC) actorVictim;
-	if( playerAttacker && npcVictim && attackAction && action.IsActionMelee() && GetWitcherPlayer().IsMutationActive( EPMT_Mutation8 ) && ( victimMonsterCategory != MC_Human || npcVictim.IsImmuneToMutation8Finisher() ) && attackAction.GetWeaponId() == GetWitcherPlayer().GetHeldSword() )
-	{
-		dm.GetAbilityAttributeValue( 'Mutation8', 'dmg_bonus', min, max );
 
-		poolAll += min.valueMultiplicative;	//modSigns: additive pool (5.x: a separate multiplier)
-	}
+	npcVictim = (CNewNPC) actorVictim;
+	//modSigns: removed 5.x's Mutation 8 sword damage (MUT-06: legacy's final-damage factor against a countered enemy, GMProcessDamageModification)
+
+	if( playerAttacker && attackAction && attackAction.IsActionRanged() && (W3BoltProjectile)action.causer && !action.IsDoTDamage() && GetWitcherPlayer().IsMutationActive( EPMT_Mutation9 ) )	//modSigns: MUT-11, Cat Eyes doubles a bolt's base damage (legacy)
+	{	//modSigns
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation9', 'mut9_damage', min, max );	//modSigns
+		for( i = 0; i < dmgInfos.Size(); i += 1 )	//modSigns
+			dmgInfos[i].dmgVal *= 1 + min.valueMultiplicative;	//modSigns
+	}	//modSigns
+
+	if( playerAttacker && ( action.IsActionMelee() || action.IsActionWitcherSign() ) && GetWitcherPlayer().IsMutationActive( EPMT_Mutation10 ) && GetWitcherPlayer().HasBuff( EET_Mutation10 ) )	//modSigns: MUT-09, Euphoria adds the overdose drain per second to the base damage (legacy)
+	{	//modSigns
+		damageVal.valueBase = GetWitcherPlayer().GMGetToxicityDamage();	//modSigns
+		if( action.IsDoTDamage() )	//modSigns
+			damageVal.valueBase *= action.GetDoTdt();	//modSigns
+		for( i = 0; i < dmgInfos.Size(); i += 1 )	//modSigns
+			dmgInfos[i].dmgVal += damageVal.valueBase;	//modSigns
+	}	//modSigns
 
 
 	if( playerAttacker && actorVictim && attackAction && action.IsActionMelee() && playerAttacker.inv.ItemHasTag( attackAction.GetWeaponId(), 'Aerondight' ) )

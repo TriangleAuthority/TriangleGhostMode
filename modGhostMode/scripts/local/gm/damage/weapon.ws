@@ -29,7 +29,7 @@ function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, c
 // DMG-08: a sword's extra damage types (fire, frost, ...) at full value: vanilla multiplied every
 // non-physical damage type by 0 + the grindstone bonus ("Fixed a bug with additional sword damages
 // (like fire and frost) not being actually applied to a target", legacy). 5.x's body; the other
-// areas' parts (Mutation 9, Aerondight, Runeword 4) stay 5.x's until MUT, SWD and ENCH.
+// areas' parts (Aerondight, Runeword 4) stay 5.x's until SWD and ENCH; Mutation 9's flat damage is gone (MUT-11).
 @replaceMethod(W3PlayerWitcher)
 function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, crossbowId : SItemUniqueId) : float
 {
@@ -40,11 +40,7 @@ function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, c
 	damage = super.GetTotalWeaponDamage(weaponId, damageTypeName, crossbowId);
 
 
-	if( IsMutationActive( EPMT_Mutation9 ) && inv.IsItemBolt( weaponId ) && IsDamageTypeAnyPhysicalType( damageTypeName ) )
-	{
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation9', 'damage', min, max);
-		damage += min.valueAdditive;
-	}
+	//modSigns: removed Mutation 9's flat bolt damage (MUT-11: legacy doubles the bolt's raw damage, damage/pool.ws)
 
 
 	if(IsPhysicalResistStat(GetResistForDamage(damageTypeName, false)))

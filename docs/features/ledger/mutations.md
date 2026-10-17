@@ -1,6 +1,6 @@
 # Ledger: mutations
 
-What each mutation scales, which build it serves and what it costs, in legacy Ghost Mode and in 5.x. **Unverified:** from the data and the code, not tested in game. The details and the implementation are in [mut.md](../mut.md), and the texts at base stats in the [tree files](../../skill-trees/).
+What each mutation scales, which build it serves and what it costs, in legacy Ghost Mode and in 5.x. From the data and the code; Ghost Mode's column is what the port does, verified in game in both trees (MUT, 2026-10-17). The details and the implementation are in [mut.md](../mut.md), and the texts at base stats in the [tree files](../../skill-trees/).
 
 **When they arrive.** Mutations come with Blood and Wine: late game, and only after the player has the greater mutagens. The research tree, the mutagen costs and the 2/4/8/12 thresholds for the extra skill slots are the same in 1.32, Ghost Mode and 5.x. Ghost Mode cut the skill-point cost of researching all twelve from 53 to 29 (not in the changelist; DM1).
 

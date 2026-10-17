@@ -30,6 +30,9 @@ FILES = [
 ]
 OUT = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/abilities/gm_npc_stamina.xml"
 ABILITY = re.compile(r'<ability\s+name="([^"]+)"[^>]*>(.*?)</ability>', re.S)
+# Abilities another feature gives whole in its own DLC file (an expansion's ability loses its
+# attributes and tags with extend): left out here.
+OWNED = {"Mutation4BloodDebuff": "MUT-08, gm_mutations.xml"}
 NODE = re.compile(r'<([A-Za-z_][\w]*)\b([^>]*?)/>')
 
 
@@ -102,6 +105,9 @@ def main():
                 continue
             if a not in v5:
                 print(f"skip (not in 5.x): {a}")
+                continue
+            if a in OWNED:
+                print(f"skip (given whole by {OWNED[a]}): {a}")
                 continue
             nodes, conflicts = changes(old[a], new[a], v5[a])
             if not nodes:

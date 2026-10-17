@@ -10,7 +10,8 @@
 // - Advanced Pyrotechnics: 0.1 adrenaline per enemy a bomb's impact damages (not damage over time),
 //   unaffected by adrenaline-gain bonuses, divided by Cluster Bombs' fragment count (gm_bomb_focus_gain;
 //   5.x's focus_gain on perk_18, read by its own code, is 0). 5.x's new-tree free bomb (free_bomb 0) and
-//   immunity to Geralt's own bombs are gone. Adrenaline Rush (Mutation 7) comes with MUT.
+//   immunity to Geralt's own bombs are gone. Adrenaline Rush (Mutation 7) doubles or halves the gain
+//   (MUT-07, mutations/adrenalineRush.ws).
 // See docs/features/skl.md.
 
 @addMethod(W3PlayerWitcher)

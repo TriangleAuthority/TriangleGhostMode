@@ -303,6 +303,8 @@ function ProcessOnBeforeHitChecks()
 		chance = playerAttacker.inv.GMOilPoisonChance( weaponId, victimMonsterCategory );	//modSigns: skill and oil level, wearing off
 		actorVictim.GetResistValue( theGame.effectMgr.GetBuffResistStat( EET_Poison ), resPt, resPrc );	//modSigns: resisted (legacy)
 		chance = MaxF( 0, chance * ( 1 - resPrc ) );	//modSigns
+		if( (W3PlayerWitcher)playerAttacker )	//modSigns: MUT-13, Metamorphosis
+			chance *= ((W3PlayerWitcher)playerAttacker).GMMutation12ChanceMult();	//modSigns
 
 
 		if( chance > 0 && RandF() < chance )	//modSigns

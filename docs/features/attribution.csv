@@ -2525,7 +2525,7 @@ scripts/game/gameplay/damage/damageManagerProcessor.ws::W3DamageManagerProcessor
 scripts/game/gameplay/damage/damageManagerProcessor.ws::W3DamageManagerProcessor.CleanupMutation8Finisher,MUT-06,mutation unit (MUT research 2026-10-05)
 scripts/game/gameplay/damage/damageManagerProcessor.ws::W3DamageManagerProcessor.InitializeActionVars,MUT-06 DMG-10,mutation unit (MUT research 2026-10-05)
 scripts/game/gameplay/damage/damageManagerProcessor.ws::W3DamageManagerProcessor.ProcessActionReturnedDamage,MUT-08 DMG-11,mutation unit (MUT research 2026-10-05); DMG: DMG: nothing returned on dodged hits; ENCH: Glyphword 5 disabled
-scripts/game/gameplay/damage/damageManagerProcessor.ws::W3DamageManagerProcessor.ProcessPreHitModifications,MUT-11,mutation unit (MUT research 2026-10-05)
+scripts/game/gameplay/damage/damageManagerProcessor.ws::W3DamageManagerProcessor.ProcessPreHitModifications,MUT-11,"no Mutation 9 change: legacy changed only Runeword 1 here (ENCH; MUT audit F8)"
 scripts/game/gameplay/effects/effectManager.ws::W3EffectManager.GetNonSignApplyBuffTest,MUT-13,mutation unit (MUT research 2026-10-05)
 scripts/game/gameplay/effects/effects/damageOverTime/acidEffect.ws::W3Effect_Acid.OnEffectAdded,MUT-08,mutation unit (MUT research 2026-10-05)
 scripts/game/gameplay/effects/effects/damageOverTime/acidEffect.ws::W3Effect_Acid.OnEffectRemoved,MUT-08,mutation unit (MUT research 2026-10-05)
@@ -2584,7 +2584,7 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.Mutation7CombatStartHackFi
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.Mutation7CombatStartHackFixGo,MUT-07,mutation unit (MUT research 2026-10-05)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnCombatFinished,MUT-05 MUT-06 MUT-07 MUT-08 MUT-09 MUT-10,mutation unit (MUT research 2026-10-05)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnMutation11Triggered,MUT-12,mutation unit (MUT research 2026-10-05)
-scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnSignCastPerformed,MUT-04,"mutation unit (MUT research 2026-10-05); also starts legacy's Gryphon set tier 1 buff: ARM (SKL audit F3 hand-off)"
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnSignCastPerformed,MUT-04,"no mutation change: legacy changed Runeword 1 (ENCH), the Mutagen 22 hook (ALCH) and starts its Gryphon set tier 1 buff (ARM; SKL audit F3 hand-off) (MUT audit F8)"
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnTaskSyncAnim,MUT-08,mutation unit (MUT research 2026-10-05)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.ProcessActionMutation4ReturnedDamage,MUT-08,mutation unit (MUT research 2026-10-05)
 scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.GetMutationsUsedMutagens,MUT-01,mutation unit (MUT research 2026-10-05)

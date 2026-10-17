@@ -77,8 +77,10 @@ function GetSignApplyBuffTest(signType : ESignType, effectType : EEffectType, po
 		if(witcher.GMPyromaniacSkill() != S_SUndefined)	//modSigns: Pyromaniac, either tree
 			bonusChance = CalculateAttributeValue(witcher.GetSkillAttributeValue(witcher.GMPyromaniacSkill(), 'chance_bonus', false, true)) * witcher.GetSkillLevel(witcher.GMPyromaniacSkill());	//modSigns
 	}	//modSigns
-	//modSigns: legacy's Glyphword 7 bonus comes with ENCH, its Mutation 12 bonus with MUT
+	//modSigns: legacy's Glyphword 7 bonus comes with ENCH
 	chance = MaxF(0, (rawChance + bonusChance) * (1 - res));	//modSigns
+	if(witcher)	//modSigns: MUT-13, Metamorphosis
+		chance *= witcher.GMMutation12ChanceMult();	//modSigns
 
 	LogEffects("Buff <<" + effectType + ">> is from sign, chance = " + NoTrailZeros(100*chance) + "%, spell_power = " + NoTrailZeros(powerStatValue.valueMultiplicative) + ", resist=" + NoTrailZeros(res));	//modSigns
 	if(RandF() >= chance)

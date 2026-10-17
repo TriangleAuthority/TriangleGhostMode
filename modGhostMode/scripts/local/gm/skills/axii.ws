@@ -378,7 +378,7 @@ function OnEffectAdded(optional customParams : W3BuffCustomParams)
 //   dismemberment (5.x: a 75% finisher chance on confused or puppeted humans, plus level difference).
 // - Legacy's finisher rules on death: always on a lone enemy, a forced finisher or with Bloodbath, never on
 //   a deadly-level enemy, always on a very low-level one, else the base chance; dismemberment needs a dead
-//   victim but for the instant kill. Legacy's Mutation 8 branches come with MUT.
+//   victim but for the instant kill. Deadly Counter's kill (MUT-06) takes the same paths, mutations/deadlyCounter.ws.
 
 @addField(W3DamageManagerProcessor)
 var gmConfusionInstakillTested : bool;
@@ -417,7 +417,7 @@ function GMGetAxiiInstakillChance() : int
 @addMethod(W3DamageManagerProcessor)
 function GMCanDismemberAliveTarget( victim : CActor ) : bool
 {
-	return ( victim.HasBuff(EET_Confusion) || victim.HasBuff(EET_AxiiGuardMe) )
+	return ( victim.HasBuff(EET_Confusion) || victim.HasBuff(EET_AxiiGuardMe) || gmMutation8Triggered )	// MUT-06, Deadly Counter
 		&& victim.IsVulnerable()
 		&& !victim.HasAbility('DisableDismemberment')
 		&& !victim.HasAbility('InstantKillImmune');
@@ -457,7 +457,7 @@ function ProcessActionReaction(wasFrozen : bool, wasAlive : bool)
 	if(canPerformFinisher && thePlayer.HasBuff(EET_Blizzard) && ((W3Potion_Blizzard)thePlayer.GetBuff(EET_Blizzard)).IsSlowMoActive())	//modSigns: no finishers during Blizzard's slow motion
 		canPerformFinisher = false;	//modSigns
 
-	if( actorVictim.IsAlive() && !canPerformFinisher && !canDismember )	//modSigns
+	if( actorVictim.IsAlive() && !canPerformFinisher && !canDismember && !gmMutation8Triggered )	//modSigns: MUT-06, Deadly Counter's kill too
 	{
 
 		if(!action.IsDoTDamage() && action.DealtDamage())
@@ -509,7 +509,7 @@ function ProcessActionReaction(wasFrozen : bool, wasAlive : bool)
 	else
 	{
 
-		if( actorVictim.IsAlive() && (canPerformFinisher || canDismember) )	//modSigns: the instant kill: the living victim dies first
+		if( actorVictim.IsAlive() && (canPerformFinisher || canDismember || gmMutation8Triggered) )	//modSigns: the instant kill and Deadly Counter (MUT-06): the living victim dies first
 			actorVictim.Kill( 'Finisher', false, thePlayer );	//modSigns
 
 		if( !canPerformFinisher && canDismember )	//modSigns
@@ -760,6 +760,10 @@ function CanDismember( wasFrozen : bool, out dismemberExplosion : bool, out weap
 				dismember = true;
 		}
 
+		else if( gmMutation8Triggered )	//modSigns: MUT-06, Deadly Counter's kill
+		{	//modSigns
+			dismember = true;	//modSigns
+		}	//modSigns
 		else if( !gmConfusionInstakillTested && GMIsAxiiInstakillTarget() )	//modSigns: the instant kill on a confused living enemy
 		{	//modSigns
 			dismemberChance = GMGetAxiiInstakillChance();	//modSigns
@@ -867,7 +871,9 @@ function CanPerformFinisher( actorVictim : CActor ) : bool
 	victimToPlayerVector = actorVictim.GetWorldPosition() - playerPos;	//modSigns
 
 	npc = (CNewNPC)actorVictim;	//modSigns
-	if( !gmConfusionInstakillTested && GMIsAxiiInstakillTarget() )	//modSigns: the instant kill on a confused living human (5.x: 75% + level difference)
+	if( gmMutation8Triggered )	//modSigns: MUT-06, Deadly Counter's kill
+		finisherChance = 100;	//modSigns
+	else if( !gmConfusionInstakillTested && GMIsAxiiInstakillTarget() )	//modSigns: the instant kill on a confused living human (5.x: 75% + level difference)
 	{	//modSigns
 		finisherChance = GMGetAxiiInstakillChance();	//modSigns
 		gmConfusionInstakillTested = true;	//modSigns
@@ -887,7 +893,6 @@ function CanPerformFinisher( actorVictim : CActor ) : bool
 	}	//modSigns
 	else	//modSigns
 		finisherChance = 0;	//modSigns
-	//modSigns: legacy's Mutation 8 finisher comes with MUT
 	finisherChance = Clamp(finisherChance, 0, 100);	//modSigns
 
 	if ( actorVictim.HasTag('ForceFinisher') )	//modSigns

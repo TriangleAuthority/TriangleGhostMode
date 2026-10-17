@@ -18,13 +18,17 @@ enum EEffectType
 	EET_GMUndyingCooldown,
 	// SKL-09: Melt Armor
 	EET_GMMeltArmorDebuff,
-	EET_GMMeltArmorTimer
+	EET_GMMeltArmorTimer,
+	// MUT-10: Mutated Skin's damage over time
+	EET_GMMutation5,
+	// MUT-12: the Mutation Catalyst's potion effect
+	EET_GMMutationTrigger
 }
 
 // Last Ghost Mode effect type: keep it pointing at the last member above.
 function GMLastEffectType() : EEffectType
 {
-	return EET_GMMeltArmorTimer;
+	return EET_GMMutationTrigger;
 }
 
 function GMIsModEffectType(effect : EEffectType) : bool
