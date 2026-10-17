@@ -1037,3 +1037,65 @@ exec function gmtest_def08_archer(who : string, distance : float)
 	LogChannel('GMTest', "INFO DEF-08 archer spawned: " + npc.GetReadableName() + ", Deflection usable: classic " + GetWitcherPlayer().CanUseSkill(S_Sword_s10)
 		+ ", new S_Sword_s33 " + GetWitcherPlayer().CanUseSkill(S_Sword_s33));
 }
+
+// DEF-02, SKL-05: Fleet Footed. Scripted physical hits (5% of max Vitality, through ReduceDamage)
+// from the nearest hostile on Geralt, count of each: standing; dodging at 170 degrees (a failed
+// dodge: a graze); dodging an undodgeable attack (a graze); dodging at 0 degrees (dodged). Logs the
+// average Vitality taken, checks the graze value and that a graze is never a dodge.
+function GMTestGrazeHit(npc : CActor, dodging : bool, angle : float, canDodge : bool, out graze : float, out dodged : bool) : float
+{
+	var action : W3Action_Attack;
+	var health : float;
+
+	thePlayer.ForceSetStat(BCS_Vitality, thePlayer.GetStatMax(BCS_Vitality));
+	thePlayer.SetIsCurrentlyDodging(dodging);
+	if(dodging)
+		thePlayer.GMTestSetEvadeHeading(AngleNormalize180(npc.GetHeading() + angle));
+	health = thePlayer.GetStat(BCS_Vitality);
+	action = new W3Action_Attack in theGame.damageMgr;
+	action.Init(npc, thePlayer, NULL, GetInvalidUniqueId(), 'attack_light', npc.GetName(), EHRT_Light,
+		false, canDodge, '', AST_Jab, ASD_UpDown, true, false, false, false);
+	action.AddDamage(theGame.params.DAMAGE_NAME_PHYSICAL, thePlayer.GetStatMax(BCS_Vitality) * 0.05);
+	action.SetSuppressHitSounds(true);
+	action.SetHitAnimationPlayType(EAHA_ForceNo);
+	theGame.damageMgr.ProcessAction(action);
+	graze = action.GMGetGrazeReduction();
+	dodged = action.WasDodged();
+	delete action;
+	health -= thePlayer.GetStat(BCS_Vitality);
+	thePlayer.SetIsCurrentlyDodging(false);
+	thePlayer.ForceSetStat(BCS_Vitality, thePlayer.GetStatMax(BCS_Vitality));
+	return health;
+}
+
+exec function gmtest_def02(count : int)
+{
+	var npc : CActor;
+	var i : int;
+	var standing, failed, undodgeable, dodgedDmg, graze, grazeFailed, grazeUndodgeable, expected : float;
+	var dodged, anyFailedDodged, anyUndodgeableDodged, allDodged : bool;
+
+	npc = GMTestHostileNpc();
+	if(!npc)
+	{
+		GMTestReport(false, "DEF-02: no hostile NPC nearby");
+		return;
+	}
+	expected = GetWitcherPlayer().GMFleetFootedReduction();
+	allDodged = true;
+	for(i = 0; i < count; i += 1)
+	{
+		standing += GMTestGrazeHit(npc, false, 0, true, graze, dodged);
+		failed += GMTestGrazeHit(npc, true, 170, true, grazeFailed, dodged);
+		anyFailedDodged = anyFailedDodged || dodged;
+		undodgeable += GMTestGrazeHit(npc, true, 0, false, grazeUndodgeable, dodged);
+		anyUndodgeableDodged = anyUndodgeableDodged || dodged;
+		dodgedDmg += GMTestGrazeHit(npc, true, 0, true, graze, dodged);
+		allDodged = allDodged && dodged;
+	}
+	GMTestDefClearHitEffects();
+	GMTestReport(AbsF(grazeFailed - expected) < 0.001 && AbsF(grazeUndodgeable - expected) < 0.001 && !anyFailedDodged && !anyUndodgeableDodged,
+		"DEF-02 graze reduction " + grazeFailed + " on a failed dodge and " + grazeUndodgeable + " on an undodgeable attack (Fleet Footed " + expected + "); neither counts as a dodge");
+	GMTestReport(allDodged && dodgedDmg == 0, "DEF-02 a successful dodge still takes nothing");
+	LogChannel('GMTest', "INFO DEF-02 average Vitality taken over " + count + " hits: standing " + (standing / count) + ", failed dodge " + (failed / count) + ", undodgeable while dodging " + (undodgeable / count));
+}

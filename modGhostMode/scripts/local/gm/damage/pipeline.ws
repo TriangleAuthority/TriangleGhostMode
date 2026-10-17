@@ -13,7 +13,7 @@ function ProcessActionDamage() : bool
 	var dmgValue : float;
 	var anyDamageProcessed, fallingRaffard : bool;
 	var victimHealthPercBeforeHit, frozenAdditionalDamage : float;
-	var debilitatingPoisonMin, debilitatingPoisonMax: SAbilityAttributeValue;
+	//modSigns: removed debilitatingPoisonMin, debilitatingPoisonMax (unused: Killing Spree replaced Debilitating Poison, SKL)
 	var powerMod : SAbilityAttributeValue;
 	var witcher : W3PlayerWitcher;
 	var canLog : bool;
@@ -68,6 +68,8 @@ function ProcessActionDamage() : bool
 
 
 	ProcessNewSkills_Combat( dmgInfos );
+
+	GMProcessDamageDecrease( dmgInfos );	//modSigns: SKL-11, Quen absorbs the raw damage before armor (legacy's ProcessDamageDecrease, skills/quen.ws)
 
 
 	if ( canLog )
@@ -269,15 +271,9 @@ function ProcessActionDamage() : bool
 
 		if( playerAttacker.inv.ItemHasAnyActiveOilApplied(weaponId) )
 		{
-			if( !playerAttacker.CanUseSkill(S_Alchemy_s06) || playerAttacker.GetSkillLevel(S_Alchemy_s06) < 3 )
-			{
-				playerAttacker.ReduceAllOilsAmmo( weaponId );
-
-				if(ShouldProcessTutorial('TutorialOilAmmo'))
-				{
-					FactsAdd("tut_used_oil_in_combat");
-				}
-			}
+			//modSigns: removed 5.x's Fixative check: SKL-14, in ReduceAllOilsAmmo (legacy; skills/oils.ws)
+			playerAttacker.ReduceAllOilsAmmo( weaponId );
+			//modSigns: removed the tutorial fact: in ReduceAllOilsAmmo (legacy)
 
 
 			if( !playerAttacker.inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) )
@@ -342,10 +338,10 @@ function GMZeroSubOneDamage( out damageData : W3DamageAction )
 // damage dealt), then it modifies the final damage value". Skipped when there is no damage, for
 // dodged hits and for effects' damage over time. The generic rules: the player's signs deal less to
 // Vitality at low levels; the difficulty multiplier applies to hostile NPCs hitting the player only
-// (5.x: every NPC's raw damage); hits below 1 deal nothing. DD1's exceptions: Crippling Strike's
-// bonus and alchemy_s24's damage taken (5.x: raw damage multipliers). The other areas' terms
-// (unaimed bolts and bombs, Perk 16, Severance, Supercharged Glyphs, Crippling Strikes, Mutation 8,
-// Dimeritium) come with their areas; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
+// (5.x: every NPC's raw damage); hits below 1 deal nothing. DD1's exception: Crippling Strike's
+// bonus (5.x: a raw damage multiplier; 5.x's alchemy_s24 is gone, SKL-13). SKL-06: the player's bolts and
+// bombs not thrown from aiming deal half damage. The other areas' terms (Perk 16, Severance,
+// Supercharged Glyphs, Mutation 8, Dimeritium) come with their areas; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
 @addMethod(W3DamageManagerProcessor)
 function GMProcessDamageModification()
 {
@@ -358,6 +354,14 @@ function GMProcessDamageModification()
 		return;
 	npcVictim = (CNewNPC)actorVictim;
 
+	// SKL-06, SKL-15: the player's bolts and bombs deal half damage unless thrown from aiming (legacy);
+	// arrows reflected by a parry are not throws
+	if( (W3PlayerWitcher)playerAttacker && (CThrowable)action.causer && !((CThrowable)action.causer).GMIsFromAimThrow() && !action.IsBouncedArrow() )
+	{
+		action.processedDmg.vitalityDamage *= 0.5;
+		action.processedDmg.essenceDamage *= 0.5;
+	}
+
 	// the player's signs against Vitality: x0.25 at level 1 to x0.75 from level 11
 	if( (W3PlayerWitcher)playerAttacker && action.IsActionWitcherSign() && actorVictim.UsesVitality() )
 	{
@@ -366,23 +370,39 @@ function GMProcessDamageModification()
 		action.processedDmg.essenceDamage *= mult;
 	}
 
-	// Crippling Strike (new tree sword_s29): a crippled enemy takes more damage from any source
-	if( npcVictim && npcVictim.GetCripplingStrikeDamageMultiplier() != 0 )
+	// Supercharged Glyphs (SKL-10): the player's hits on an enemy inside the trap (skills/yrden.ws)
+	if( (W3PlayerWitcher)playerAttacker && actorVictim && actorVictim.HasBuff(EET_YrdenHealthDrain) )
 	{
-		mult = 1 + npcVictim.GetCripplingStrikeDamageMultiplier();
+		mult = ((W3Effect_YrdenHealthDrain)actorVictim.GetBuff(EET_YrdenHealthDrain)).GMGetDmgBonus();
+		action.processedDmg.vitalityDamage *= 1 + mult;
+		action.processedDmg.essenceDamage *= 1 + mult;
+		((W3Effect_YrdenHealthDrain)actorVictim.GetBuff(EET_YrdenHealthDrain)).GMPlayFX();
+	}
+
+	// Crippling Strikes (SKL-03, both trees): a fast attack on a bleeding enemy (5.x's new-tree crippled
+	// mark is gone, skills/cripplingStrikes.ws)
+	mult = GMCripplingStrikesDamageMult(playerAttacker, attackAction, actorVictim);
+	if( mult != 1 )
+	{
 		action.processedDmg.vitalityDamage *= mult;
 		action.processedDmg.essenceDamage *= mult;
 	}
 
-	// alchemy_s24: the player takes more damage at high toxicity
-	if( !playerAttacker && actorAttacker && playerVictim && playerVictim.CanUseSkill( S_Alchemy_s24 ) )
+	// In Combat's Fires (SKL-18, both trees): Geralt takes half the damage of his own bombs and bolts
+	// (skills/inCombatsFiresPyro.ws)
+	mult = GMInCombatsFiresDamageMult(actorAttacker, actorVictim, action.causer);
+	if( mult != 1 )
 	{
-		if ( playerVictim.GetStat( BCS_Toxicity, false ) / playerVictim.GetStatMax( BCS_Toxicity ) >= CalculateAttributeValue( playerVictim.GetSkillAttributeValue(S_Alchemy_s24, 'toxicity_threshold', false, true ) ) )
-		{
-			mult = CalculateAttributeValue( playerVictim.GetSkillAttributeValue( S_Alchemy_s24, 'received_damage_multiplier', false, true ) );
-			action.processedDmg.vitalityDamage *= mult;
-			action.processedDmg.essenceDamage *= mult;
-		}
+		action.processedDmg.vitalityDamage *= mult;
+		action.processedDmg.essenceDamage *= mult;
+	}
+
+	// Muscle Memory (SKL-03, the new tree's, D53): a boosted fast attack (skills/muscleMemory.ws)
+	mult = GMMuscleMemoryDamageMult(playerAttacker, attackAction);
+	if( mult != 1 )
+	{
+		action.processedDmg.vitalityDamage *= mult;
+		action.processedDmg.essenceDamage *= mult;
 	}
 
 	// DMG-10: non-deadly fights outside the fistfight minigame: a hit deals 20% of the victim's maximum

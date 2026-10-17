@@ -52,3 +52,108 @@
 2110992444|        |option_gm_lowstamsfx_dynvol|Use dynamic low stamina sfx volume
 2110992445|        |option_gm_lowstamsfx_rate|Low stamina sfx rate
 2110992446|        |option_gm_lowstamsfx_dynrate|Use dynamic low stamina sfx rate
+; SKL-07: Undying (legacy ids)
+2110992112|        |effect_undying_skill|Undying
+2110992262|        |effect_undying_cooldown|Undying cooldown
+; SKL-09: Melt Armor (legacy id)
+2110992493|        |effect_melt_armor_timer|Melt Armor Timer
+; SKL-02: new strings (not in legacy) start at 2110992600
+2110992600|        |option_gm_classic_skill_tree|Classic skill tree (takes effect with a character reset)
+; SKL-19 begin: skill and perk descriptions (legacy ids where the text is legacy's, new ids from 2110992601)
+2110992145|        |gm_skill_desc_sword_2|Allows you to perform strong melee attacks which add +$I$% to weapon damage and +$I$ to Armor Penetration.
+2110992315|        |gm_skill_desc_sword_3|Wolf School defensive techniques: parry, counter, dodge. Successful parry, counter and dodge reduce damage taken to zero and prevent all negative effects. Successful countering grants additional $I$% chance to critical hit. Partial parry reduces damage taken by $I$% and prevents bleeding. Rolling grants immunity to all knockdown and stagger effects and allows to dodge arrows. Some of the attacks cannot be dodged. Arrows can be parried.
+2110992170|        |gm_skill_desc_sword_4|Allows you to wield a light hand-held crossbow. Non-aimed shots deal 50% less damage.
+2110992166|        |gm_skill_desc_sword_5|Damage dealt during melee combat generates Adrenaline Points. Each Adrenaline Point increases Attack Power by $I$%.
+2110992103|        |gm_skill_desc_whirl|Spinning attack that strikes all foes in the surrounding area. Maintaining the attack consumes $S$ Stamina per second. During the attack Adrenaline is drained at a speed of $S$ pts/sec. While performing the attack at non-zero Adrenaline, Attack Power is increased by $S$% per additional attacker (max. $S$%) and damage received is decreased by $S$%.
+2110992116|        |gm_skill_desc_muscle_memory_c|Attack Power for fast attacks is increased by $S$%. Adrenaline gain for fast attacks is increased by $S$%.
+2110992117|        |gm_skill_desc_strength_training_c|Attack Power for strong attacks is increased by $S$%. Adrenaline gain for strong attacks is increased by $S$%.
+2110992118|        |gm_skill_desc_precise_blows_c|Increases fast attack critical hit chance by $I$% and fast attack critical hit power by $I$%.
+2110992119|        |gm_skill_desc_crushing_blows_c|Increases strong attack critical hit chance by $I$% and strong attack critical hit power by $I$%.
+2110992548|        |gm_skill_desc_steady_shot|Crossbow bolts deal $F$ pts more base damage.
+2110992549|        |gm_skill_desc_cold_blood_c|Each bolt that hits its target now generates the same amount of Adrenaline Points as when using swords.
+2110992513|        |gm_skill_name_deflection|Deflection
+2110992115|        |gm_skill_desc_undying|When Vitality reaches zero, Adrenaline Points are consumed to prevent death and grant invulnerability and increased Vitality regeneration for $S$ seconds. Restores $S$% of Vitality per Adrenaline Point (max $S$%). Cannot be triggered more than once every $S$ seconds.
+2110992510|        |gm_skill_desc_flood_of_anger|When casting a Sign, 3 Adrenaline Points (if available) are consumed to upgrade the Sign to its highest level, unlocking all bonuses, and increase Sign intensity by $I$%. With Rage Management, Adrenaline Points are not consumed immediately; instead, the Sign's casting cost is tripled.
+2110992342|        |gm_skill_desc_razor_focus|You always enter combat with at least $S$ Adrenaline Points. Adrenaline Point generation is increased by $I$%.
+2110992601|        |gm_skill_desc_rend|Strong attack that goes through blocks, armor and shields and knocks enemies down. Increases weapon damage by $S$%, plus $S$% per Stamina point and $S$% per Adrenaline point spent. Critical hit chance increased by $S$%. With $S$ Adrenaline Points, creates a shock wave that damages and knocks down all enemies within $S$ yards.
+2110992602|        |gm_skill_desc_crippling_strikes|Fast attacks have a $S$% chance to apply Bleeding. Fast attacks deal $S$% more total damage to bleeding enemies.
+2110992603|        |gm_skill_desc_sunder_armor|Strong attacks reduce enemy damage resistance by $S$%.
+2110992604|        |gm_skill_desc_deflection_1|Damage taken from partial parries and counters is reduced by $S$%. Perfectly timed parries reflect arrows back.
+2110992605|        |gm_skill_desc_deflection_2|Damage taken from partial parries and counters is reduced by $S$%. Perfectly timed parries reflect arrows back, with $S$% more weapon damage.
+2110992606|        |gm_skill_desc_deflection_3|Damage taken from partial parries and counters is reduced by $S$%. Perfectly timed parries reflect arrows back, with $S$% more weapon damage. When several enemies are near, parry cost is reduced by $S$%.
+2110992607|        |gm_skill_desc_fleet_footed|Damage taken from attacks that graze you while dodging or rolling is reduced by $S$%.
+2110992608|        |gm_skill_desc_counterattack_1|Increases counterattack attack power by $S$%.
+2110992609|        |gm_skill_desc_counterattack_2|Increases counterattack attack power by $S$% and critical hit chance by $S$%.
+2110992610|        |gm_skill_desc_counterattack_3|Increases counterattack attack power by $S$% and critical hit chance by $S$%. Each Adrenaline Point adds a $S$% chance to knock the enemy down when countering.
+2110992611|        |gm_skill_desc_deadly_precision|Each Adrenaline Point adds $S$% to the chance of killing an opponent instantly when countering.
+2110992612|        |gm_skill_desc_crippling_shot|Critical hits dealt with the crossbow disable a monster special ability for $S$ seconds.
+2110992613|        |gm_skill_desc_anatomical_knowledge|Increases crossbow critical hit chance by $S$% and crossbow critical hit power by $S$%.
+2110992614|        |gm_skill_desc_cold_blood|Each bolt that hits its target generates the same amount of Adrenaline as a sword hit. Crossbow bolts deal $S$ more base damage.
+2110992615|        |gm_skill_desc_muscle_memory_1|After a successful dodge or roll, your next Fast Attack gains $S$% attack power and deals $S$% more total damage. Adrenaline gain for Fast Attacks is increased by $S$%.
+2110992616|        |gm_skill_desc_muscle_memory_23|After a successful dodge or roll, your next $S$ Fast Attacks in a row gain $S$% attack power and deal $S$% more total damage. Adrenaline gain for Fast Attacks is increased by $S$%.
+2110992617|        |gm_skill_desc_strength_training_1|A Fast Attack increases the next Strong Attack's power by $S$% and weapon damage by $S$%. Adrenaline gain for Strong Attacks is increased by $S$%.
+2110992618|        |gm_skill_desc_strength_training_23|Each Fast Attack increases the next Strong Attack's power by $S$% and weapon damage by $S$%. This stacks up to $S$ times, with each stack losing half its effect. Adrenaline gain for Strong Attacks is increased by $S$%.
+2110992619|        |gm_skill_desc_precise_blows|Increases Fast Attack critical hit power by $S$% and critical hit chance by $S$%. A Fast Attack critical hit increases Fast Attack critical hit chance by a further $S$% and critical hit power by a further $S$% for $S$ seconds.
+2110992620|        |gm_skill_desc_crushing_blows|Increases Strong Attack critical hit power by $S$% and critical hit chance by $S$%. A Strong Attack critical hit increases Strong Attack critical hit chance by a further $S$% and critical hit power by a further $S$% for $S$ seconds.
+2110992284|        |gm_skill_desc_aard|A directed blast of telekinetic energy that staggers opponents and has $I$% knockdown chance. Heavy knockdown chance is $I$%. Chances scale with Sign Intensity and increase if enemy is low on Stamina. Heavy knockdown activates finisher move.
+2110992151|        |gm_skill_desc_yrden|Magic trap that slows enemies down by $S$% inside its area of effect (scales with Sign Intensity, max slowdown is limited by $S$%). Trap duration: $S$s. The longer the trap persists, the less efficient it becomes.
+2110992124|        |gm_skill_desc_quen|Protective shield that absorbs up to $I$% of damage dealt by enemy's weapon. Base damage absorption: $I$. Scales with Sign Intensity. Current absorption: $I$. Prevents stagger, burning, poison and bleeding effects (and then breaks). <br>Shield duration: $I$s.
+2110992286|        |gm_skill_desc_axii|Charms an opponent's mind, confusing them and temporarily eliminating them from combat. Failed Axii attempts stagger the opponent. Grants a $S$% chance to critically hit confused enemy. Can trigger a finisher or dismemberment on a confused enemy with $S$% chance (scales with Sign Intensity and damage severity). <br>Confusion duration: $S$ seconds (scales with Sign Intensity).
+2110992279|        |gm_skill_desc_aard_sweep|Alternate Sign Mode:<br>Aard strikes all opponents in range. Sign Intensity is $I$% lower for this mode.
+2110992281|        |gm_skill_desc_aard_sweep_3|Alternate Sign Mode:<br>Aard strikes all opponents in range. Sign Intensity is no longer lowered for this mode.
+2110992273|        |gm_skill_desc_aard_intensity|Increases base heavy knockdown chance by $I$%.
+2110992073|        |gm_skill_desc_pyromaniac|Increases burning chance by $I$%.
+2110992132|        |gm_skill_desc_sustained_glyphs_1|Magic Trap duration increases by $I$%.
+2110992133|        |gm_skill_desc_sustained_glyphs_2|Magic Trap duration increases by $I$%. Magic Trap radius increases by $I$%.
+2110992095|        |gm_skill_desc_magic_turret|Alternate Sign Mode:<br>Deals $I$ points of damage to enemies within a $I$ yard radius. Damage scales with Sign Intensity (current damage: $I$). Ignores enemy Armor. Destroys projectiles passing through this area. Lasts for $I$s. Turret charges - $I$.
+2110992131|        |gm_skill_name_magic_turret|Magic Turret
+2110992275|        |gm_skill_desc_yrden_intensity|Adds $I$ points to Magic Turret damage. Scales with Sign Intensity.
+2110992135|        |gm_skill_desc_exploding_shield_2|Quen shield pushes opponents back and deals $I$ points of damage when it breaks. Damage scales with Sign Intensity (current damage: $I$).
+2110992136|        |gm_skill_desc_exploding_shield_3|Quen shield pushes opponents back with a chance for knock-down and deals $I$ points of damage when it breaks. Damage scales with Sign Intensity (current damage: $I$).
+2110992137|        |gm_skill_desc_active_shield|Alternate Sign Mode:<br>An active shield that absorbs up to 100% of damage dealt by enemy's weapon. Base damage absorption is $I$% bigger. Maintaining it drains $I$ Stamina Points per second. Blocked attacks drain Stamina proportional to damage absorbed. Restores Vitality by $I$% of damage absorbed. Prevents stagger, burning, poison and bleeding effects. Prevents knockdown (and then breaks).
+2110992139|        |gm_skill_desc_active_shield_3|Alternate Sign Mode:<br>An active shield that absorbs up to 100% of damage dealt by enemy's weapon. Base damage absorption is $I$% bigger. Maintaining it no longer drains Stamina. Blocked attacks drain Stamina proportional to damage absorbed. Restores Vitality by $I$% of damage absorbed. Prevents stagger, burning, poison and bleeding effects. Prevents knockdown (and then breaks).
+2110992276|        |gm_skill_desc_quen_intensity|Adds $I$ points to shield damage absorption. Scales with Sign Intensity.
+2110992175|        |gm_skill_desc_delusion|Time is slowed down by additional $I$% while casting Axii. A chance to critically hit a confused opponent is increased by $I$%. Increases the effectiveness of Axii in dialogues.
+2110992288|        |gm_skill_desc_puppet|Alternate Sign Mode:<br>Targeted enemy becomes an ally for $I$s and gains $I$% attack power bonus. Effect duration scales with Sign Intensity. Current duration: $I$s.
+2110992287|        |gm_skill_desc_axii_intensity|Axii effects duration is increased by $I$%.
+2110992096|        |gm_skill_desc_domination|Two opponents can be influenced by Axii at the same time. Effect duration is lowered by $I$%.
+2110992098|        |gm_skill_desc_domination_3|Two opponents can be influenced by Axii at the same time. Effect duration is no longer lowered.
+2110992125|        |gm_skill_desc_melt_armor|Igni hits also reduce enemy Armor by $S$ and enemy damage resistances by $S$% (scales with Sign Intensity) for $S$ seconds. Does not stack.
+2110992274|        |gm_skill_desc_igni_intensity|Adds $I$ Fire damage to Igni and $I$ per second to Firestream. Scales with Sign Intensity.
+2110992621|        |gm_skill_desc_igni|Fiery blast that deals $I$ damage with a $I$% chance to set enemies on fire. Damage scales with Sign Intensity.
+2110992622|        |gm_skill_desc_shock_wave|Aard deals $I$ damage. Damage scales with Sign Intensity.
+2110992623|        |gm_skill_desc_firestream|Alternate Sign Mode:<br>Emits a continuous stream of fire that causes burning and deals $I$ damage per second. Damage scales with Sign Intensity. Drains $I$ Stamina per second.
+2110992624|        |gm_skill_desc_sustained_glyphs_3|Magic Trap duration increases by $I$%. Magic Trap radius increases by $I$%. Can now place an additional Magic Trap.
+2110992625|        |gm_skill_desc_supercharged_glyphs|Enemies inside the Yrden trap take $S$% more total damage.
+2110992318|        |gm_skill_desc_alchemy_2|Enables the creation of oils that can be applied to swords. Effectiveness decreases with oil rubbing off the blade (down to $I$% of the original value).
+2110992171|        |gm_skill_desc_alchemy_3|Enables the creation of handheld bombs that can be thrown at enemies. Non-aimed throws deal 50% less damage.
+2110992140|        |gm_skill_desc_poisoned_blades|Appropriate oil applied to blades gives a $I$% chance of poisoning the target on each hit. Enhanced oil increases this chance by $I$% and Superior - by $I$%. Effectiveness decreases with oil rubbing off the blade (down to $I$% of the original value).
+2110992317|        |gm_skill_desc_protective_coating|Reduces the damage taken from the enemy type the oil targets by $I$%. Enhanced oil additionally reduces the damage by $I$% and Superior - by $I$%. Effectiveness decreases with oil rubbing off the blade (down to $I$% of the original value).
+2110992492|        |gm_skill_desc_hunter_instinct|Critical hit power against the targeted enemy type is increased by $S$% for each Adrenaline Point available (up to $S$% max).
+2110992349|        |gm_skill_desc_acquired_tolerance|Every known level 1, 2 and 3 potion, bomb and oil formula, alchemy substance and mutagen decoction formula increases maximum Toxicity by 1 point, up to +$I$ points max. Current bonus is $I$ points.
+2110992454|        |gm_skill_desc_tissue_transmutation|When consumed, mutagen decoction increases maximum Vitality by $I$ points per each toxicity offset point for decoction's effective duration.
+2110992553|        |gm_skill_desc_adaptation|Decreases decoction toxicity by $S$%.
+2110992141|        |gm_skill_desc_frenzy|If Toxicity is above zero, time automatically slows by $S$% for $S$ sec when an enemy is about to perform a counterattack. Increases Attack Power and Sign Intensity by $S$% when Toxicity exceeds the safe threshold.
+2110992355|        |gm_skill_desc_fast_metabolism|Toxicity drops $S$ points per second faster.
+2110992505|        |gm_skill_name_refreshment|Refreshment
+2110992504|        |gm_skill_name_restoration|Restoration
+2110992359|        |gm_skill_name_expert_brewer|Expert Brewer
+2110992353|        |gm_skill_name_prolonged_effects|Prolonged Effects
+2110992506|        |gm_skill_desc_refreshment|Each potion dose restores $I$% of maximum Stamina.
+2110992627|        |gm_skill_desc_restoration|Each potion dose heals $I$% of maximum Vitality.
+2110992354|        |gm_skill_desc_prolonged_effects|Extends potion duration by $S$%.
+2110992358|        |gm_skill_desc_expert_brewer|Decreases potion toxicity by $S$ point(s).
+2110992626|        |gm_skill_desc_fixative_3|Blade oils do not wear off.
+2110992071|        |gm_skill_desc_cat_school|Each piece of light armor increases critical hit chance by $S$% and critical hit power by $S$%.
+2110992174|        |gm_skill_desc_griffin_school|Each piece of medium armor increases Sign Intensity by $S$% and decreases sign casting stamina cost by $S$%.
+2110992072|        |gm_skill_desc_bear_school|Each piece of heavy armor increases maximum Vitality by $S$%, damage dealt by melee attacks grants additional $S$ Adrenaline Points per each heavy armor piece.
+2110992313|        |gm_skill_desc_rage_management|If you have at least one Adrenaline Point, it will be used to cast a Sign instead of Stamina.
+2110992319|        |gm_skill_desc_adrenaline_burst|Increases Adrenaline gain by $I$%. In addition to usual Battle Trance effect, each Adrenaline Point also decreases melee action Stamina cost by $I$%.
+2110992172|        |gm_skill_desc_focus|In addition to usual Battle Trance effect, each Adrenaline Point also increases Sign Intensity by $I$%. Using Signs now generates the same amount of Adrenaline Points as when using swords.
+2110992491|        |gm_skill_desc_in_combats_fires|You ignore bomb and special bolt effects. Damage from own bombs and bolts is halved.
+2110992550|        |gm_skill_desc_advanced_pyrotechnics|Damage dealt by a bomb's explosion generates $F$ Adrenaline Points. This value is not affected by any Adrenaline gain bonuses.
+2110992399|        |gm_skill_desc_attack_best_defense|Killing an enemy restores $I$% of your Stamina (no cooldown). Critical hits and successful counters restore $I$% of your Stamina ($S$ sec cooldown).
+2110992628|        |gm_skill_desc_survival_instinct|Increases maximum Vitality by $S$.
+2110992629|        |gm_skill_desc_heavy_artillery|Bombs deal $S$% more damage, but the number of bombs in each slot is halved. Bombs which deal no damage keep their number, unless Pyrotechnics is equipped.
+2110992630|        |gm_skill_desc_wolf_school|After an enemy receives bomb damage, blade oils grant $S$% critical hit chance and $S$% critical hit power against it. Bombs deal $S$% more damage against poisoned enemies.
+; SKL-19 end

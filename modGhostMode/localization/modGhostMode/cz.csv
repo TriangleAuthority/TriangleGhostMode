@@ -1,6 +1,12 @@
 ;meta[language=cz]
 ; id      |key(hex)|key(str)| text
 ; Ghost Mode strings, ported from legacy Ghost Mode 4.1 (same ids and keys).
+; STAM-01: sign cooldown labels (legacy's cz rows, in English)
+2110992402|        |effect_aard_cooldown|Aard cooldown
+2110992403|        |effect_igni_cooldown|Igni cooldown
+2110992404|        |effect_yrden_cooldown|Yrden cooldown
+2110992405|        |effect_quen_cooldown|Quen cooldown
+2110992406|        |effect_axii_cooldown|Axii cooldown
 ; OPT-01: options menu
 2110992001|        |panel_ghost_mode|Ghost Mode
 2110992329|        |panel_gm_gameplay_options|Hratelnost
@@ -46,3 +52,108 @@
 2110992444|        |option_gm_lowstamsfx_dynvol|Use dynamic low stamina sfx volume
 2110992445|        |option_gm_lowstamsfx_rate|Low stamina sfx rate
 2110992446|        |option_gm_lowstamsfx_dynrate|Use dynamic low stamina sfx rate
+; SKL-07: Undying (legacy ids)
+2110992112|        |effect_undying_skill|Účinky schopnosti Nehynoucí
+2110992262|        |effect_undying_cooldown|Reaktivace účinků schopnosti Nehynoucí
+; SKL-09: Melt Armor (legacy id)
+2110992493|        |effect_melt_armor_timer|Melt Armor Timer
+; SKL-02: new strings (not in legacy) start at 2110992600
+2110992600|        |option_gm_classic_skill_tree|Classic skill tree (takes effect with a character reset)
+; SKL-19 begin: skill and perk descriptions (legacy ids where the text is legacy's, new ids from 2110992601)
+2110992145|        |gm_skill_desc_sword_2|Allows you to perform strong melee attacks which add +$I$% to weapon damage and +$I$ to Armor Penetration.
+2110992315|        |gm_skill_desc_sword_3|Wolf School defensive techniques: parry, counter, dodge. Successful parry, counter and dodge reduce damage taken to zero and prevent all negative effects. Successful countering grants additional $I$% chance to critical hit. Partial parry reduces damage taken by $I$% and prevents bleeding. Rolling grants immunity to all knockdown and stagger effects and allows to dodge arrows. Some of the attacks cannot be dodged. Arrows can be parried.
+2110992170|        |gm_skill_desc_sword_4|Umožňuje třímat lehkou kuši. Střelba bez míření působí o 50% menší poškození.
+2110992166|        |gm_skill_desc_sword_5|Damage dealt during melee combat generates Adrenaline Points. Each Adrenaline Point increases Attack Power by $I$%.
+2110992103|        |gm_skill_desc_whirl|Spinning attack that strikes all foes in the surrounding area. Maintaining the attack consumes $S$ Stamina per second. During the attack Adrenaline is drained at a speed of $S$ pts/sec. While performing the attack at non-zero Adrenaline, Attack Power is increased by $S$% per additional attacker (max. $S$%) and damage received is decreased by $S$%.
+2110992116|        |gm_skill_desc_muscle_memory_c|Síla útoku rychlými útoky je zvýšena o $S$%. Přísun adrenalinu pro rychlé útoky je zvýšen o $S$%.
+2110992117|        |gm_skill_desc_strength_training_c|Síla útoku silnými útoky je zvýšena o $S$%. Přísun adrenalinu pro silné útoky je zvýšen o $S$%.
+2110992118|        |gm_skill_desc_precise_blows_c|Zvyšuje šanci kritického zásahu rychlým útokem o $I$% a sílu kritického zásahu rychlým útokem o $I$%.
+2110992119|        |gm_skill_desc_crushing_blows_c|Zvyšuje šanci kritického zásahu silným útokem o $I$% a sílu kritického zásahu silným útokem o $I$%.
+2110992548|        |gm_skill_desc_steady_shot|Crossbow bolts deal $F$ pts more base damage.
+2110992549|        |gm_skill_desc_cold_blood_c|Each bolt that hits its target now generates the same amount of Adrenaline Points as when using swords.
+2110992513|        |gm_skill_name_deflection|Odrážení
+2110992115|        |gm_skill_desc_undying|Pokud zdraví klesne na nulu, aby se předešlo smrti, spotřebují se body adrenalinu, a získáš na $S$ sekund zvýšené zdraví a dočasnou nezranitelnost. Obnoví $S$% zdraví za každý bod adrenalinu (max. $S$%) a nemůže být použito víc než jednou za každých $S$ sekund.
+2110992510|        |gm_skill_desc_flood_of_anger|When casting a Sign, 3 Adrenaline Points (if available) are consumed to upgrade the Sign to its highest level, unlocking all bonuses, and increase Sign intensity by $I$%. With Rage Management, Adrenaline Points are not consumed immediately; instead, the Sign's casting cost is tripled.
+2110992342|        |gm_skill_desc_razor_focus|You always enter combat with at least $S$ Adrenaline Points. Adrenaline Point generation is increased by $I$%.
+2110992601|        |gm_skill_desc_rend|Silný útok, který prorazí kryt, zbroj i štíty a srazí nepřátele k zemi. Zvyšuje poškození zbraně o $S$%, navíc o $S$% za každý vynaložený bod výdrže a o $S$% za každý vynaložený bod adrenalinu. Šance na kritický zásah je zvýšena o $S$%. Se $S$ body adrenalinu vytvoří rázovou vlnu, která zraní a srazí k zemi všechny nepřátele v okruhu $S$ metrů.
+2110992602|        |gm_skill_desc_crippling_strikes|Rychlé útoky mají $S$% šanci způsobit krvácení. Rychlé útoky způsobují krvácejícím nepřátelům o $S$% vyšší celkové poškození.
+2110992603|        |gm_skill_desc_sunder_armor|Silné útoky snižují odolnost nepřítele vůči poškození o $S$%.
+2110992604|        |gm_skill_desc_deflection_1|Poškození z částečných vykrytí a protiútoků je sníženo o $S$%. Dokonale načasované vykrytí odrazí šípy zpět.
+2110992605|        |gm_skill_desc_deflection_2|Poškození z částečných vykrytí a protiútoků je sníženo o $S$%. Dokonale načasované vykrytí odrazí šípy zpět s poškozením zbraně vyšším o $S$%.
+2110992606|        |gm_skill_desc_deflection_3|Poškození z částečných vykrytí a protiútoků je sníženo o $S$%. Dokonale načasované vykrytí odrazí šípy zpět s poškozením zbraně vyšším o $S$%. Je-li poblíž více nepřátel, cena vykrytí je snížena o $S$%.
+2110992607|        |gm_skill_desc_fleet_footed|Poškození od útoků, které tě zasáhnou jen letmo při úskoku nebo kotoulu, je sníženo o $S$%.
+2110992608|        |gm_skill_desc_counterattack_1|Zvyšuje sílu útoku protiútoků o $S$%.
+2110992609|        |gm_skill_desc_counterattack_2|Zvyšuje sílu útoku protiútoků o $S$% a šanci na kritický zásah o $S$%.
+2110992610|        |gm_skill_desc_counterattack_3|Zvyšuje sílu útoku protiútoků o $S$% a šanci na kritický zásah o $S$%. Každý bod adrenalinu přidává $S$% šanci srazit nepřítele při protiútoku k zemi.
+2110992611|        |gm_skill_desc_deadly_precision|Každý bod adrenalinu přidává $S$% šanci zabít protivníka při protiútoku okamžitě.
+2110992612|        |gm_skill_desc_crippling_shot|Kritické zásahy kuší vyřadí jednu zvláštní schopnost nestvůry na $S$ sekund.
+2110992613|        |gm_skill_desc_anatomical_knowledge|Zvyšuje šanci na kritický zásah kuší o $S$% a sílu kritického zásahu kuší o $S$%.
+2110992614|        |gm_skill_desc_cold_blood|Každá šipka, která zasáhne cíl, vytvoří stejné množství adrenalinu jako zásah mečem. Šipky z kuše způsobují o $S$ více základního poškození.
+2110992615|        |gm_skill_desc_muscle_memory_1|Po úspěšném úskoku nebo kotoulu získá tvůj další rychlý útok $S$% síly útoku a způsobí o $S$% vyšší celkové poškození. Zisk adrenalinu z rychlých útoků je zvýšen o $S$%.
+2110992616|        |gm_skill_desc_muscle_memory_23|Po úspěšném úskoku nebo kotoulu získá tvých příštích $S$ rychlých útoků za sebou $S$% síly útoku a způsobí o $S$% vyšší celkové poškození. Zisk adrenalinu z rychlých útoků je zvýšen o $S$%.
+2110992617|        |gm_skill_desc_strength_training_1|Rychlý útok zvýší sílu dalšího silného útoku o $S$% a jeho poškození zbraně o $S$%. Zisk adrenalinu ze silných útoků je zvýšen o $S$%.
+2110992618|        |gm_skill_desc_strength_training_23|Každý rychlý útok zvýší sílu dalšího silného útoku o $S$% a jeho poškození zbraně o $S$%. Účinek se sčítá až $S$krát, přičemž každé další navýšení má poloviční účinek. Zisk adrenalinu ze silných útoků je zvýšen o $S$%.
+2110992619|        |gm_skill_desc_precise_blows|Zvyšuje sílu kritických zásahů rychlých útoků o $S$% a šanci na kritický zásah o $S$%. Kritický zásah rychlým útokem zvýší šanci rychlých útoků na kritický zásah o dalších $S$% a sílu jejich kritických zásahů o dalších $S$% na $S$ sekund.
+2110992620|        |gm_skill_desc_crushing_blows|Zvyšuje sílu kritických zásahů silných útoků o $S$% a šanci na kritický zásah o $S$%. Kritický zásah silným útokem zvýší šanci silných útoků na kritický zásah o dalších $S$% a sílu jejich kritických zásahů o dalších $S$% na $S$ sekund.
+2110992284|        |gm_skill_desc_aard|A directed blast of telekinetic energy that staggers opponents and has $I$% knockdown chance. Heavy knockdown chance is $I$%. Chances scale with Sign Intensity and increase if enemy is low on Stamina. Heavy knockdown activates finisher move.
+2110992151|        |gm_skill_desc_yrden|Magic trap that slows enemies down by $S$% inside its area of effect (scales with Sign Intensity, max slowdown is limited by $S$%). Trap duration: $S$s. The longer the trap persists, the less efficient it becomes.
+2110992124|        |gm_skill_desc_quen|Protective shield that absorbs up to $I$% of damage dealt by enemy's weapon. Base damage absorption: $I$. Scales with Sign intensity. Current absorption: $I$. Prevents stagger, burning, poison and bleeding effects (and then breaks). <br>Shield duration: $I$s.
+2110992286|        |gm_skill_desc_axii|Charms an opponent's mind, confusing them and temporarily eliminating them from combat. Failed Axii attempts stagger the opponent. Grants a $S$% chance to critically hit confused enemy. Can trigger a finisher or dismemberment on a confused enemy with $S$% chance (scales with Sign Intensity and damage severity). <br>Confusion duration: $S$ seconds (scales with Sign Intensity).
+2110992279|        |gm_skill_desc_aard_sweep|Alternativní režim znamení:<br>Aard zasáhne všechny protivníky v dosahu. Intenzita znamení je v tomto režimu o $I$% nižší.
+2110992281|        |gm_skill_desc_aard_sweep_3|Alternativní režim znamení:<br>Aard zasáhne všechny protivníky v dosahu. Intenzita znamení se v tomto režimu nadále nesnižuje.
+2110992273|        |gm_skill_desc_aard_intensity|Increases base heavy knockdown chance by $I$%.
+2110992073|        |gm_skill_desc_pyromaniac|Zvyšuje šanci na podpálení o $I$%.
+2110992132|        |gm_skill_desc_sustained_glyphs_1|Magic Trap duration increases by $I$%.
+2110992133|        |gm_skill_desc_sustained_glyphs_2|Magic Trap duration increases by $I$%. Magic Trap radius increases by $I$%.
+2110992095|        |gm_skill_desc_magic_turret|Alternativní režim znamení:<br>Způsobuje $I$ bodů poškození nepřátelům v rozmezí $I$ yardů. Poškození se zvyšuje s intenzitou znamení (současné poškození je: $I$). Ignores enemy Armor. Ničí střely procházející oblastí účinku. Trvá po dobu $I$ sekund. Zásobníky střílny - $I$.
+2110992131|        |gm_skill_name_magic_turret|Magická střílna
+2110992275|        |gm_skill_desc_yrden_intensity|Přidává $I$ bodů k poškození magickou střílnou. Scales with Sign Intensity.
+2110992135|        |gm_skill_desc_exploding_shield_2|Když se rozbije, zatlačí štít Quenu protivníky zpět a způsobí jim $I$ bodů poškození. Poškození se zvyšuje s intenzitou znamení (současné poškození: $I$).
+2110992136|        |gm_skill_desc_exploding_shield_3|Když se rozbije, zatlačí štít Quenu se šancí ke sražení protivníky zpět a způsobí jim $I$ bodů poškození. Poškození se zvyšuje s intenzitou znamení (současné poškození: $I$).
+2110992137|        |gm_skill_desc_active_shield|Alternate Sign Mode:<br>An active shield that absorbs up to 100% of damage dealt by enemy's weapon. Base damage absorption is $I$% bigger. Maintaining it drains $I$ Stamina Points per second. Blocked attacks drain Stamina proportional to damage absorbed. Restores Vitality by $I$% of damage absorbed. Prevents stagger, burning, poison and bleeding effects. Prevents knockdown (and then breaks).
+2110992139|        |gm_skill_desc_active_shield_3|Alternate Sign Mode:<br>An active shield that absorbs up to 100% of damage dealt by enemy's weapon. Base damage absorption is $I$% bigger. Maintaining it no longer drains Stamina. Blocked attacks drain Stamina proportional to damage absorbed. Restores Vitality by $I$% of damage absorbed. Prevents stagger, burning, poison and bleeding effects. Prevents knockdown (and then breaks).
+2110992276|        |gm_skill_desc_quen_intensity|Přidává $I$ bodů k pohlcenému poškození štítem. Scales with Sign Intensity.
+2110992175|        |gm_skill_desc_delusion|Time is slowed down by additional $I$% while casting Axii. A chance to critically hit a confused opponent is increased by $I$%. Increases the effectiveness of Axii in dialogues.
+2110992288|        |gm_skill_desc_puppet|Alternativní režim znamení:<br>Zaměřený nepřítel se na $I$ sekund stane Geraltovým spolubojovníkem a získá $I$% bonus k síle útoku. Trvání účinku se zvyšuje s intenzitou znamení. Současné trvání: $I$ sekund.
+2110992287|        |gm_skill_desc_axii_intensity|Doba trvání účinků Axie se zvyšuje o $I$%.
+2110992096|        |gm_skill_desc_domination|Až dva protivníci mohou být ve stejný okamžik ovlivněni Axie. Trvání efektu je sníženo o $I$%.
+2110992098|        |gm_skill_desc_domination_3|Až dva protivníci mohou být ve stejný okamžik ovlivněni Axie. Trvání efektu není nadále sníženo.
+2110992125|        |gm_skill_desc_melt_armor|Igni hits also reduce enemy Armor by $S$ and enemy damage resistances by $S$% (scales with Sign Intensity) for $S$ seconds. Does not stack.
+2110992274|        |gm_skill_desc_igni_intensity|Přidává $I$ bodů k poškození ohněm a $I$ bodů k poškození proudem ohně za sekundu. Scales with Sign Intensity.
+2110992621|        |gm_skill_desc_igni|Sprška ohně, která způsobuje $I$ bodů poškození s $I$% šancí podpálit nepřátele. Poškození se zvyšuje s intenzitou znamení.
+2110992622|        |gm_skill_desc_shock_wave|Aard způsobuje $I$ poškození. Poškození se zvyšuje s intenzitou znamení.
+2110992623|        |gm_skill_desc_firestream|Alternativní režim znamení:<br>Vysílá nepřetržitý proud ohně, který způsobuje podpálení a $I$ bodů poškození za sekundu. Poškození se zvyšuje s intenzitou znamení. Spotřebovává $I$ bodů výdrže za sekundu.
+2110992624|        |gm_skill_desc_sustained_glyphs_3|Trvání magické pasti se prodlužuje o $I$%. Poloměr magické pasti se zvětšuje o $I$%. Nyní lze položit další magickou past.
+2110992625|        |gm_skill_desc_supercharged_glyphs|Nepřátelé uvnitř Yrdenovy pasti utrpí o $S$% vyšší celkové poškození.
+2110992318|        |gm_skill_desc_alchemy_2|Umožňuje výrobu olejů, které mohou být aplikovány na meče. Efektivita se snižuje stíráním oleje z čepele během boje (down to $I$% of the original value).
+2110992171|        |gm_skill_desc_alchemy_3|Umožňuje výrobu petard, které mohou být vrženy na nepřátele. Házení bez míření působí o 50% menší poškození.
+2110992140|        |gm_skill_desc_poisoned_blades|S každým dalším zásahem přidává vhodně aplikovaný olej na čepele $I$% šanci otrávit protivníka. Vylepšený olej zvyšuje tuto šanci o $I$% a prvotřídní o $I$%. Effectiveness decreases with oil rubbing off the blade (down to $I$% of the original value).
+2110992317|        |gm_skill_desc_protective_coating|Snižuje utržené poškození od příšer (dle druhu), pokud se proti nim použije typ oleje, vůči kterému jsou zranitelní, o $I$%. Enhanced oil additionally reduces the damage by $I$% and Superior - by $I$%. Effectiveness decreases with oil rubbing off the blade (down to $I$% of the original value).
+2110992492|        |gm_skill_desc_hunter_instinct|Critical hit power against the targeted enemy type is increased by $S$% for each Adrenaline Point available (up to $S$% max).
+2110992349|        |gm_skill_desc_acquired_tolerance|Every known level 1, 2 and 3 potion, bomb and oil formula, alchemy substance and mutagen decoction formula increases maximum Toxicity by 1 point, up to +$I$ points max. Current bonus is $I$ points.
+2110992454|        |gm_skill_desc_tissue_transmutation|When consumed, mutagen decoction increases maximum Vitality by $I$ points per each toxicity offset point for decoction's effective duration.
+2110992553|        |gm_skill_desc_adaptation|Decreases decoction toxicity by $S$%.
+2110992141|        |gm_skill_desc_frenzy|If Toxicity is above zero, time automatically slows by $S$% for $S$ sec when an enemy is about to perform a counterattack. Increases Attack Power and Sign Intensity by $S$% when Toxicity exceeds the safe threshold.
+2110992355|        |gm_skill_desc_fast_metabolism|Toxicity drops $S$ points per second faster.
+2110992505|        |gm_skill_name_refreshment|Refreshment
+2110992504|        |gm_skill_name_restoration|Restoration
+2110992359|        |gm_skill_name_expert_brewer|Expert Brewer
+2110992353|        |gm_skill_name_prolonged_effects|Prodloužené účinky
+2110992506|        |gm_skill_desc_refreshment|Each potion dose restores $I$% of maximum Stamina.
+2110992627|        |gm_skill_desc_restoration|S každou vypitou dávkou elixírů si vyléčíš $I$ % maximálního zdraví.
+2110992354|        |gm_skill_desc_prolonged_effects|Extends potion duration by $S$%.
+2110992358|        |gm_skill_desc_expert_brewer|Decreases potion toxicity by $S$ points.
+2110992626|        |gm_skill_desc_fixative_3|Oleje na čepele se neopotřebovávají.
+2110992071|        |gm_skill_desc_cat_school|Každá část lehké zbroje zvyšuje šanci na kritický zásah o $S$% a sílu kritického zásahu o $S$%.
+2110992174|        |gm_skill_desc_griffin_school|Každá část střední zbroje zvyšuje intenzitu znamení o $S$% a snižuje spotřebu výdrže seslaných znamení o $S$%.
+2110992072|        |gm_skill_desc_bear_school|Každá část těžké zbroje zvyšuje maximální zdraví o $S$%, uštědřené poškození útoky na blízko dává navíc $S$ adrenalinových bodů za každou další část těžké zbroje.
+2110992313|        |gm_skill_desc_rage_management|Pokud máš alespoň jeden bod adrenalinu, použije se na seslání znamení místo výdrže.
+2110992319|        |gm_skill_desc_adrenaline_burst|Increases Adrenaline gain by $I$%. In addition to usual Battle Trance effect, each Adrenaline Point also decreases melee action Stamina cost by $I$%.
+2110992172|        |gm_skill_desc_focus|Jako dodatečný efekt obvyklého účinku bojového transu, každý bod adrenalinu dále zvyšuje intenzitu znamení o $I$%. Používání znamení nyní generuje stejný počet adrenalinových bodů jako při použití mečů.
+2110992491|        |gm_skill_desc_in_combats_fires|You ignore bomb and special bolt effects. Damage from own bombs and bolts is halved.
+2110992550|        |gm_skill_desc_advanced_pyrotechnics|Damage dealt by a bomb's explosion generates $F$ Adrenaline Points. This value is not affected by any Adrenaline gain bonuses.
+2110992399|        |gm_skill_desc_attack_best_defense|Killing an enemy restores $I$% of your Stamina (no cooldown). Critical hits and successful counters restore $I$% of your Stamina ($S$ sec cooldown).
+2110992628|        |gm_skill_desc_survival_instinct|Zvyšuje maximální vitalitu o $S$.
+2110992629|        |gm_skill_desc_heavy_artillery|Bomby způsobují o $S$% vyšší poškození, ale počet bomb v každém slotu je poloviční. Bomby, které nezpůsobují poškození, si svůj počet ponechají, pokud není vybavena Pyrotechnika.
+2110992630|        |gm_skill_desc_wolf_school|Poté, co nepřítel utrpí poškození bombou, poskytují oleje na čepele proti němu $S$% šanci na kritický zásah a $S$% síly kritického zásahu. Bomby způsobují otráveným nepřátelům o $S$% vyšší poškození.
+; SKL-19 end

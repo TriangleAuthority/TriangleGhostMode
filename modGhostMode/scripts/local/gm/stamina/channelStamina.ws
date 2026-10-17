@@ -1,5 +1,5 @@
 // STAM-03: the alternate Yrden (trap) and Axii (puppet) channels always finish: running out of
-// stamina, or of adrenaline when casting with it (5.x's S_Perk_34), does not stop them; releasing
+// stamina, or of adrenaline when casting with it (Rage Management, SKL-18), does not stop them; releasing
 // the sign still does (legacy; project owner, 2026-10-04: skills or items that lower a sign's start
 // cost or raise its channel cost could otherwise let them run dry). Vanilla stops every channel at 0.
 // Both trees: the alternate Yrden is the shared S_Magic_s03, the alternate Axii S_Magic_s05
@@ -16,7 +16,7 @@ function GMSignChannelFinishes(skill : ESkill) : bool
 @replaceMethod(W3SignEntityStateChanneling)
 function Update() : bool
 {
-	var multiplier, avoidanceMult, stamina, leftStaminaCostPerc, leftStaminaCost : float;
+	var multiplier, avoidanceMult, stamina, leftStaminaCostPerc, leftStaminaCost, normalCastCost : float;	//modSigns: normalCastCost
 	var player : CR4Player;
 	var reductionCounter, signSkillAvoidanceLevel : int;
 	var stop, abortAxii, signSkillAvoidanceActive : bool;
@@ -45,12 +45,9 @@ function Update() : bool
 			{
 				stop = false;
 			}
-			else if(player.CanUseSkill(S_Perk_34))
+			else if(player.GMHasRageManagement() && parent.usedFocus)	//modSigns: a channel started with adrenaline (Rage Management, SKL-18) stops when adrenaline runs out
 			{
-				if(player.GetStat(BCS_Focus) <= 0 && (stamina <= 0 || parent.onlyDrainFocus ))
-					stop = true;
-				else
-					stop = false;
+				stop = player.GetStat(BCS_Focus) <= 0;	//modSigns
 			}
 			else
 			{
@@ -108,25 +105,16 @@ function Update() : bool
 				}
 			}
 			
-			if(player && (parent.cachedCost > stamina && player.CanUseSkill(S_Perk_34)) || parent.onlyDrainFocus)
-			{
-				if(parent.onlyDrainFocus)
-				{
-					leftStaminaCost = parent.cachedCost;
-				}
-				else
-				{
-					leftStaminaCost = parent.cachedCost - stamina;
-				}
-				
-				leftStaminaCostPerc = leftStaminaCost / player.GetStatMax(BCS_Stamina);
-
-				player.DrainFocus(leftStaminaCostPerc * player.GetSignAdrenalineCostPerk34());
-				if(player.GetStat(BCS_Focus) <= 0 && !GMSignChannelFinishes( parent.skillEnum ))	//modSigns
-				{
-					OnEnded();
-				}
-			}
+			if(player && player.GMHasRageManagement() && parent.usedFocus)	//modSigns: Rage Management (SKL-18, legacy): the frame's cost in adrenaline, as a share of a regular cast's stamina cost, x Flood of Anger
+			{	//modSigns
+				leftStaminaCost = multiplier * player.GetStaminaActionCost( ESAT_Ability, SkillEnumToName( parent.skillEnum ), theTimer.timeDelta );	//modSigns: each frame's own time (legacy: the first frame's)
+				normalCastCost = ((W3PlayerAbilityManager)player.GetAbilityManager()).GetSkillStaminaUseCost(GMBaseSignSkill(parent.skillEnum));	//modSigns
+				if(normalCastCost <= 0)	//modSigns
+					normalCastCost = player.GetStatMax(BCS_Stamina);	//modSigns
+				leftStaminaCostPerc = leftStaminaCost / normalCastCost;	//modSigns
+				player.DrainFocus( MinF(player.GetStat(BCS_Focus), leftStaminaCostPerc * parent.GMFoaMult()) );	//modSigns
+				//modSigns: removed 5.x's perk_34 drain (from max stamina x its cost by level) and its stop (the check above stops the channel)
+			}	//modSigns
 			else if(multiplier > 0.f)
 			{
 				caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ), theTimer.timeDelta, multiplier );
@@ -159,7 +147,7 @@ function DrainStamina(action : EStaminaActionType, optional fixedCost : float, o
 	}
 	
 	
-	if (cost > 0 && dt <= 0 && owner == thePlayer && thePlayer.HasBuff(EET_Mutagen21) && abilityName != 'sword_s1' && abilityName != 'sword_s2')
+	if (cost > 0 && dt <= 0 && owner == thePlayer && thePlayer.HasBuff(EET_Mutagen21) && abilityName != 'sword_s1' && abilityName != 'sword_s2' && abilityName != 'GM_C_sword_s2')	//modSigns: SKL, Rend's classic-tree ability
 	{	
 		mutagen = (W3Mutagen21_Effect)thePlayer.GetBuff(EET_Mutagen21);
 		mutagen.Heal();
@@ -167,6 +155,9 @@ function DrainStamina(action : EStaminaActionType, optional fixedCost : float, o
 	
 	
 	
+	if(cost > 0 && owner == GetWitcherPlayer() && GetWitcherPlayer().GetCurrentSignEntity())	//modSigns: SKL-18, Focus: a sign's stamina earns adrenaline (legacy's ManageFocusGain; skills/focusPerk.ws)
+		GetWitcherPlayer().GetCurrentSignEntity().GMManageFocusGain(cost, dt);	//modSigns
+
 	//modSigns: removed the abort of the sign being cast when stamina reaches 0 (each channel stops itself at 0 in Channeling.Update, except the alternate Yrden and Axii)
 	
 	return cost;

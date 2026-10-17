@@ -44,10 +44,10 @@ scripts/game/gameplay/effects/gameEffectManager.ws::W3GameEffectManager.HACK_NO_
 scripts/game/gameplay/effects/gameEffectManager.ws::HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part1,STAM-01 STAM-02 SKL-07 MUT-05 MUT-07 MUT-08 MUT-09 MUT-10 MUT-12,effect registration (shared)
 scripts/game/gameplay/effects/gameEffectManager.ws::EffectTypeToName,STAM-01 STAM-02 SKL-07 MUT-05 MUT-07 MUT-08 MUT-09 MUT-10 MUT-12 MUT-13,effect registration (shared)
 scripts/game/actor.ws::CActor.IsImmuneToBuff,STAM-01 STAM-02 MUT-07,cooldowns ignore buff immunity (shared)
-scripts/game/actor.ws::CActor.AddBuffImmunity_AllNegative,STAM-01 STAM-02 MUT-07,cooldowns ignore buff immunity (shared)
-scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.GetStaminaActionCost,STAM-03 SKL-05 SKL-18,applies the cost multipliers
+scripts/game/actor.ws::CActor.AddBuffImmunity_AllNegative,STAM-01 STAM-02 MUT-07 SKL-07,"cooldowns ignore buff immunity (shared); SKL-07: removeIfPresent removes the negative effects present (Undying's start; SKL audit F32 follow-up)"
+scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.GetStaminaActionCost,STAM-03 SKL-05 SKL-18,"applies the cost multipliers; legacy's Gryphon set tier 1 term: ARM (SKL audit F3 hand-off)"
 scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.GetStaminaActionCostInternal,STAM-03 MUT-07,
-scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.GetSkillStaminaUseCost,STAM-03 SKL-18,sign cost
+scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.GetSkillStaminaUseCost,STAM-03 SKL-18,"sign cost; legacy's Gryphon set tier 1 term: ARM (SKL audit F3 hand-off)"
 scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.IsActionMelee,STAM-03,
 scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.DrainStamina,STAM-03 SKL-18 MUT-12,the abort of the sign being cast at 0 stamina removed (alternate Yrden and Axii finish); ALCH: Mutagen 21 proportional heal; SKL: ManageFocusGain
 scripts/game/player/r4Player.ws::CR4Player.HasStaminaToUseSkill,STAM-03 SKL-18,
@@ -1167,8 +1167,8 @@ scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.Ge
 scripts/game/player/states/combat.ws::CR4PlayerStateCombat.PerformEvade,SKL-05 SKL-18,Fleet Footed free dodge removed; perks: Perk 21 adrenaline on dodge removed
 scripts/game/gameplay/items/throwables/throwable.ws::CThrowable.IsFromAimThrow,SKL-06 SKL-15,accessor for the non-aimed penalty (bolts and bombs)
 scripts/game/gui/menus/characterMenu.ws::CR4CharacterMenu.GetSwordSkillsTooltipDescription,SKL-03 SKL-04 SKL-05 SKL-06 SKL-07 SKL-08 SKL-09 SKL-10 SKL-11 SKL-12 SKL-14 SKL-19,"skill tooltips with live numbers (Strong Attack, Defense, Whirl, Rend, Crippling Strikes, Deflection, Counterattack, Steady Shot, Undying, Razor Focus, Flood of Anger ...); signs and alchemy cases: other SKL parts; UI"
-scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatU2,SKL-03 MUT-13,Crippling Strikes chance in the bleeding-chance stat; UI
-scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatU,SKL-05 SKL-19 MUT-07,Deadly Precision dropped from the instant-kill stat; reworked sword/crossbow stat lines: UI
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatU2,SKL-03 MUT-13,Crippling Strikes chance in the bleeding-chance stat; not ported by SKL: handed to UI (SKL audit F34)
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatU,SKL-05 SKL-19 MUT-07,Deadly Precision dropped from the instant-kill stat; reworked sword/crossbow stat lines; not ported by SKL: handed to UI (SKL audit F34)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GetOffenseStatsList,SKL-03 SKL-04 SKL-18 MUT-09 MUT-11,"stats: Strong Attack +50%, Muscle Memory/Strength Training AP, Steady Shot; UI, XBOW, DMG"
 scripts/game/gameplay/items/spells/aardEntity.ws::W3AardEntity.PlayAardFX,SKL-08 MUT-04,FX by total sign power; Shock Wave FX level fix
 scripts/game/gameplay/projectile/signs/signProjectiles.ws::W3AardProjectile.ProcessCollision,SKL-08 MUT-04,"Shock Wave damage, live hostile only; ENCH: Depletion drain moved; MUT: Mutation 6 path"
@@ -1491,7 +1491,7 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.DrinkPotionFromSlot,SKL-18
 scripts/game/player/r4Player.ws::CR4Player.ConsumeItem,SKL-18,"without Connoisseur, alcohol and Uncooked food add toxicity and alcohol makes drunk; buff source ""alcohol""; FOOD"
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.UnequipItemFromSlot,SKL-18,perks 5/6/7 armor count: glyphwords 2/3/4 no longer count pieces as light/medium/heavy (ENCH)
 scripts/game/gui/menus/characterMenu.ws::CR4CharacterMenu.GetPerkTooltipDescription,SKL-19 SKL-18,"perk tooltips: perk_2 (Cold Blood text, no arguments), perk_5, perk_6, perk_7, perk_10, perk_11 (new case), perk_15, perk_21"
-scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatSigns,SKL-19 MUT-02 MUT-09 MUT-13,"stats popup sign lines per sign skill (damage, Firestream, traps, turret, Quen absorption, Axii durations): the sign skills' slices; UI"
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatSigns,SKL-19 MUT-02 MUT-09 MUT-13,"stats popup sign lines per sign skill (damage, Firestream, traps, turret, Quen absorption, Axii durations); not ported by SKL: handed to UI (SKL audit F34)"
 localization/modGhostMode/br.csv::row:2110992071,SKL-19,skill_desc_perk_5: text for perk_5; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992072,SKL-19,skill_desc_perk_7: text for perk_7; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992073,SKL-19,skill_desc_magic_s9: text for magic_s9; port with that skill's slice
@@ -2584,7 +2584,7 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.Mutation7CombatStartHackFi
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.Mutation7CombatStartHackFixGo,MUT-07,mutation unit (MUT research 2026-10-05)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnCombatFinished,MUT-05 MUT-06 MUT-07 MUT-08 MUT-09 MUT-10,mutation unit (MUT research 2026-10-05)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnMutation11Triggered,MUT-12,mutation unit (MUT research 2026-10-05)
-scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnSignCastPerformed,MUT-04,mutation unit (MUT research 2026-10-05)
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnSignCastPerformed,MUT-04,"mutation unit (MUT research 2026-10-05); also starts legacy's Gryphon set tier 1 buff: ARM (SKL audit F3 hand-off)"
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnTaskSyncAnim,MUT-08,mutation unit (MUT research 2026-10-05)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.ProcessActionMutation4ReturnedDamage,MUT-08,mutation unit (MUT research 2026-10-05)
 scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.GetMutationsUsedMutagens,MUT-01,mutation unit (MUT research 2026-10-05)
@@ -2799,3 +2799,10 @@ files/gameplay/abilities_plus/common_abilities.xml::definitions/abilities/abilit
 scripts/fixes/gm_bugfixes.ws::LazyArmorFix,DMG-15,human NPC armor fix (changelist Bugfixes)
 scripts/fixes/gm_bugfixes.ws::HasArmorAbility,DMG-15,human NPC armor fix (changelist Bugfixes)
 scripts/fixes/gm_bugfixes.ws::GetArmorAbilityFromPath,DMG-15,human NPC armor fix (changelist Bugfixes)
+scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.AddTempNonAlchemySkills,SKL-07,Flood of Anger's temporary sign skills also for learned skills below max level or not equipped (ported in skills/floodOfAnger.ws; found by the SKL audit's sweep)
+scripts/game/gameplay/ability/abilityManagerTypes.ws::GetBaseSignSkill,SKL-18,Rage Management's channel cost per sign (ported as GMBaseSignSkill in skills/rageManagement.ws; found by the SKL audit's sweep)
+scripts/game/gameplay/ability/abilityManagerTypes.ws::SignSkillToSignType,SKL-18,new helper with no caller in legacy; not ported (found by the SKL audit's sweep)
+scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.MutagensSyngergyBonusUpdateSingle,SKL-16,Synergy also counts the mutagen itself (level x (1 + same-colour skills)); 5.x has the same line (in-5.x; found by the SKL audit's sweep)
+scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.Init,SKL-16,a new character skips vanilla's one-off Synergy save migration (alchemy19OptimizationDone); no effect on play; not ported (found by the SKL audit's sweep)
+scripts/game/gameplay/items/spells/signEntity.ws::W3SignEntityStateChanneling.<members>,SKL-18,Rage Management: a channel's adrenaline cost in the share of a regular cast's stamina cost (normalCastCost; ported in skills/rageManagement.ws and stamina/channelStamina.ws; found by the SKL audit's sweep)
+scripts/game/gameplay/items/spells/signEntity.ws::W3SignEntityStateChanneling.OnEnterState,SKL-18,Rage Management: resets normalCastCost per channel (ported with the channel cost; found by the SKL audit's sweep)

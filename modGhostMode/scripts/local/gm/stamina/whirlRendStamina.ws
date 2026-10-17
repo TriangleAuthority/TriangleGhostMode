@@ -37,7 +37,8 @@ function GMWhirlSkill() : ESkill
 	return S_Sword_s35;
 }
 
-// Stamina cost of dt seconds of Whirl: its per-second cost, 15% less per level above 1.
+// Stamina cost of dt seconds of Whirl: its per-second cost, less per level above 1 (classic 15%,
+// new tree 30%: 20/s at the maximum level in both, SKL-03).
 @addMethod(W3PlayerWitcher)
 function GMGetWhirlStaminaCost(dt : float) : float
 {

@@ -76,12 +76,12 @@ Ghost Mode's skill-point cut is not in the changelist.
 | # | Mutation | Class | Why | Proposed action |
 |---|---|---|---|---|
 | 1 | Conductors of Magic | clean | 5.x untouched; depends on GM's `GetTotalWeaponDamage` (DMG/SWD) | Port as-is (XML value + `ProcessDamageIncrease` hunk) |
-| 2 | Magic Sensibilities | clean (units overlap) | idea untouched; hunks sit in damage-manager functions 5.x changed | Port the formula; keep 5.x's supercharged-Sign explosion (no conflict) |
+| 2 | Magic Sensibilities | clean (units overlap) | idea untouched; hunks sit in damage-manager functions 5.x changed | Port the formula; 5.x's supercharged-Sign explosion follows SKL's rule for Flood of Anger casts: as legacy (project owner, 2026-10-11), checked against legacy's code when implemented |
 | 3 | Bloodbath | clean | 5.x untouched | Port; check the skill count for the new tree (perks, shared skills) |
 | 4 | Toxic Blood | overlap | 5.x buffed vanilla's acid; GM replaced the mechanic and sets `AcidEffect` itself | GM's version (legacy first); GM's `AcidEffect` values override 5.x's 0.01 |
 | 5 | Mutated Skin | clean (units overlap) | 5.x untouched; hooks in `ReduceDamage`/`OnTakeDamage`/`CActor.OnTakeDamage` that 5.x and DEF changed | Port; merge with DEF's ported versions |
-| 6 | Piercing Cold | overlap, needs-decision | 5.x reworked the freeze chance (adrenaline) and boss rules in the same function GM rewrote | Legacy rule (30% × (1 − frost res), 250 SI-scaled), decision on 5.x's boss exclusion and supercharged rule (candidate deviations); override 5.x's new string; Shock Wave part with SKL-08 |
-| 7 | Adrenaline Rush | clean | 5.x only added an unrelated interplay | Port; leave 5.x's Delayed Recovery rule unless SKL drops it |
+| 6 | Piercing Cold | overlap, needs-decision | 5.x reworked the freeze chance (adrenaline) and boss rules in the same function GM rewrote | Legacy rule (30% × (1 − frost res), 250 SI-scaled), no boss exclusion (DM2); a Flood of Anger Aard as legacy (DM3); override 5.x's new string; Shock Wave part with SKL-08 |
+| 7 | Adrenaline Rush | clean | 5.x only added an unrelated interplay | Port; 5.x's Delayed Recovery rule goes (SKL replaces Delayed Recovery with Expert Brewer in both trees, D28) |
 | 8 | Deadly Counter | clean | 5.x untouched; depends on DEF-06/07 | Port; ends the DEF-07 and DEF-06 temporary deviations |
 | 9 | Cat Eyes | clean | 5.x untouched | Port with XBOW |
 | 10 | Euphoria | clean | 5.x cosmetic only | Port with ALCH (overdose damage `GetToxicityDamage`) |
@@ -114,7 +114,7 @@ Ghost Mode's skill-point cut is not in the changelist.
 
 **5.x:** costs unchanged (53); skill reset/refund functions count mutation skill points; Mutation 6's bank only is reloaded on spawn.
 
-**Decisions:** open: DM1 keep GM's 29-point costs or 5.x's 53 (5.x already made skills a third cheaper; P10).
+**Decisions:** DM1 (project owner, 2026-10-11): legacy's research costs, 29 skill points in all, in both trees (5.x: 53).
 
 ### MUT-02 Conductors of Magic (Mutation 1)
 
@@ -146,7 +146,7 @@ Ghost Mode's skill-point cut is not in the changelist.
 | Skill trees | both (affects every Sign) |
 | Port form | DLC XML `Mutation2` (add 0.05/mult 0.40 chance; add 0.25/mult 1.875 power); hunks in `GetAttackersPowerMod`, `ProcessCriticalHitCheck`; tooltip (MUT-13) |
 | Port status | not started |
-| Open checks | 5.x supercharged-Sign explosion rule kept (check with the new tree's sign skills) |
+| Open checks | a Flood of Anger sign's crit and the explosion: as legacy, to check against legacy's code when implemented |
 | Save impact | none (expected) |
 | NG+ counterpart | applied and scaled, untested |
 
@@ -164,11 +164,11 @@ Ghost Mode's skill-point cut is not in the changelist.
 | Skill trees | both: Aard; classic Shock Wave `magic_s06`, new `magic_s33` |
 | Port form | `@replaceMethod(W3AardProjectile) ProcessMutation6` merged with 5.x's version; DLC XML `Mutation6` (0.3, ForceDamage 250); string override for 5.x's new description |
 | Port status | not started |
-| Open checks | owner: 5.x's adrenaline-gated chance, boss exclusion, supercharged rule |
+| Open checks | a Flood of Anger Aard with Piercing Cold: as legacy (DM3), to check against legacy's code when implemented |
 | Save impact | none (expected) |
 | NG+ counterpart | applied and scaled, untested |
 
-**What it does:** Aard freezes with 30% × (1 − frost resistance) (not mid-air, not instant-kill-immune); frozen + knocked down = instant kill; else 250 force damage scaled by SI in its own action, with a new knockdown test. **5.x:** chance = adrenaline × 10%, no freeze with a supercharged Aard, Wild Hunt generals cannot be killed, `OnFrostHit` on Aard hits, Shock Wave formula changed in this path. **Proposed:** legacy rule; open DM2 keep 5.x's boss exclusion (deviation) and DM3 the supercharged-Aard rule (new tree only). **Scales:** Sign Intensity, target frost resistance, Aard knockdown. **Build:** Signs (control).
+**What it does:** Aard freezes with 30% × (1 − frost resistance) (not mid-air, not instant-kill-immune); frozen + knocked down = instant kill; else 250 force damage scaled by SI in its own action, with a new knockdown test. **5.x:** chance = adrenaline × 10%, no freeze with a supercharged Aard, Wild Hunt generals cannot be killed, `OnFrostHit` on Aard hits, Shock Wave formula changed in this path. **Decided:** legacy rule, no boss exclusion (DM2); a Flood of Anger Aard as legacy (DM3), to check against legacy's code when implemented. **Scales:** Sign Intensity, target frost resistance, Aard knockdown. **Build:** Signs (control).
 
 ### MUT-05 Bloodbath (Mutation 3)
 
@@ -354,21 +354,21 @@ Ghost Mode's skill-point cut is not in the changelist.
 
 ### Mutations in two trees
 
-The mutations' effects are the same in both trees; their research costs differ by tree (decision above). How (from the 5.x code, 2026-10-05; unverified):
+The mutations' effects and research costs are the same in both trees: legacy's (DM1, project owner, 2026-10-11). How (from the 5.x code, 2026-10-05; unverified):
 
-- **Research costs per tree.** `W3PlayerAbilityManager.LoadMutationData` refreshes each mutation's required skill points and mutagens from `<custom><mutations>` into the saved `mutations[]` array on every load. They are plain script fields, so a wrapper applies the active tree's costs after it: legacy's in the classic tree, the new tree's (to be decided) otherwise. MUT-01 then needs no XML override of `<custom><mutations>`, which avoids the open `on_conflict` question.
-- **Switching trees** is not a normal workflow (project owner, 2026-10-05). It goes through Ghost Mode's character reset ([SKL-01](skl.md#skl-01-skill-system-rules), D44), which refunds mutation research (skill points and mutagens) with everything else. Costs paid under one tree therefore never carry over to the other. Note: 5.x's own skill reset (`RemasterSkillResetAndRefund`) deliberately keeps researched mutations and their points.
-- **On the costs.** Legacy cut the research costs from vanilla's 53 skill points to 29 (not in the changelist). 5.x kept vanilla's 53 although its skills are about a third cheaper.
+- **Research costs.** `W3PlayerAbilityManager.LoadMutationData` refreshes each mutation's required skill points and mutagens from `<custom><mutations>` into the saved `mutations[]` array on every load. They are plain script fields, so a wrapper can apply legacy's costs after it, whichever tree is active. MUT-01 then needs no XML override of `<custom><mutations>`, which avoids the open `on_conflict` question.
+- **Switching trees** is not a normal workflow (project owner, 2026-10-05). It goes through Ghost Mode's character reset ([SKL-01](skl.md#skl-01-skill-system-rules), D44), which refunds mutation research (skill points and mutagens) with everything else. Note: 5.x's own skill reset (`RemasterSkillResetAndRefund`) deliberately keeps researched mutations and their points.
+- **On the costs.** Legacy cut the research costs from vanilla's 53 skill points to 29 (not in the changelist); 5.x kept vanilla's 53. The port uses legacy's 29 in both trees.
 
 ### Decisions waiting for the owner
 
-**Decided** (project owner, 2026-10-05): the mutations are legacy Ghost Mode's in both trees: DM2 and DM4 as legacy (no boss exclusion from Piercing Cold's instant kill; Life Leech 90 s). DM1 is split by tree. The classic tree takes legacy's research costs (29 skill points). The new tree's costs are decided when MUT is ported (5.x's 53, or other); they are expected to differ from legacy's, so the port supports research costs per tree ([how](#mutations-in-two-trees)). DM3 (supercharged Aard, new tree) waits for phase 2.
+**Decided** (project owner, 2026-10-05): the mutations are legacy Ghost Mode's in both trees: DM2 and DM4 as legacy (no boss exclusion from Piercing Cold's instant kill; Life Leech 90 s). DM1 (project owner, 2026-10-11): research costs match legacy in both trees, 29 skill points in all ([how](#mutations-in-two-trees)). DM3 (project owner, 2026-10-11): a Flood of Anger Aard behaves as in legacy, like SKL's other Flood of Anger casts (D16); checked against legacy's code when implemented.
 
 | # | Question | Recommendation |
 |---|---|---|
-| DM1 | Research costs: Ghost Mode's 29 skill points or 5.x's 53 | **Per tree** (2026-10-05): classic 29 (legacy); new tree decided with MUT |
+| DM1 | Research costs: Ghost Mode's 29 skill points or 5.x's 53 | **Legacy's 29 skill points in both trees** (project owner, 2026-10-11) |
 | DM2 | Piercing Cold: keep 5.x's exclusion of Eredin, Imlerith and Caranthir from the instant kill | **As legacy: no exclusion** (2026-10-05) |
-| DM3 | Piercing Cold and supercharged Aard (new tree only): 5.x gives no freeze | Decide with the new tree's sign skills (phase 2) |
+| DM3 | Piercing Cold and supercharged Aard (new tree only): 5.x gives no freeze | **As legacy** (project owner, 2026-10-11): a Flood of Anger cast behaves as in legacy; checked against legacy's code when implemented (SKL's D16) |
 | DM4 | Life Leech's cooldown: 90 s (code, changelist) or 120 s (design notes) | **90 s** (2026-10-05) |
 
 ### Hand-off to other areas

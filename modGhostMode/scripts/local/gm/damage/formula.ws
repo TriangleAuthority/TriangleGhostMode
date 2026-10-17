@@ -86,18 +86,10 @@ function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc 
 		actorVictim.GetResistValue( GetResistForDamage(dmgType, action.IsDoTDamage()), resistPts, resistPerc );
 
 
-		if(playerVictim && actorAttacker && playerVictim.CanUseSkill(S_Alchemy_s05))
-		{
-			GetOilProtectionAgainstMonster(dmgType, bonusResist, bonusReduct);
-
-			resistPerc += bonusResist * playerVictim.GetSkillLevel(S_Alchemy_s05);
-		}
+		//modSigns: removed 5.x's Protective Coating resistance (SKL-14: a cut of final damage in ReduceDamage, legacy)
 
 
-		if (playerVictim && playerVictim.CanUseSkill(S_Alchemy_s22) && actorAttacker && actorAttacker.HasBuff(EET_Poison))
-		{
-			resistPerc += CalculateAttributeValue( playerVictim.GetSkillAttributeValue(S_Alchemy_s22, 'defence_bonus', false, true ) ) * playerVictim.GetSkillLevel(S_Alchemy_s22);
-		}
+		//modSigns: removed 5.x's Debilitating Poison (alchemy_s22, now Killing Spree: SKL-17, D60)
 
 
 		if(playerVictim && actorAttacker && playerVictim.HasBuff(EET_Mutagen28))
@@ -119,21 +111,8 @@ function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc 
 			if(playerAttacker)
 			{
 				vsMonsterResistReduction = MonsterCategoryToResistReduction(victimMonsterCategory);
-				oils = playerAttacker.inv.GetOilsAppliedOnItem( weaponId );
-
-				if( oils.Size() > 0 )
-				{
-					for( i=0; i<oils.Size(); i+=1 )
-					{
-						appliedOilName = oils[ i ].GetOilItemName();
-
-
-						if( oils[ i ].GetAmmoCurrentCount() > 0 && dm.ItemHasAttribute( appliedOilName, true, vsMonsterResistReduction ) )
-						{
-							armorReductionPerc.valueMultiplicative += oils[ i ].GetAmmoPercentage();
-						}
-					}
-				}
+				armorReductionPerc += playerAttacker.inv.GMOilBonus( weaponId, victimMonsterCategory, vsMonsterResistReduction );	//modSigns: SKL-14, the oil's value, wearing off (legacy)
+				//modSigns: removed 5.x's charge share added as a multiplier for an oil with the attribute
 			}
 
 
@@ -158,9 +137,11 @@ function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc 
 					skillArmorReduction = playerAttacker.GetSkillAttributeValue(S_Sword_s06, 'armor_reduction_perc', false, true);
 					armorReductionPerc += skillArmorReduction * playerAttacker.GetSkillLevel(S_Sword_s06);
 				}
-				if(playerAttacker.CanUseSkill(S_Sword_s28) && (CNewNPC)actorVictim)
+				if(playerAttacker.CanUseSkill(S_Sword_s28))	//modSigns: SKL-04 (D56), legacy's Sunder Armor in the new tree too: a flat reduction (5.x: per-target stacks)
 				{
-					armorReductionPerc.valueAdditive += ((CNewNPC)actorVictim).GetSunderArmorPercent();
+					//modSigns: removed 5.x's stacks (GetSunderArmorPercent)
+					skillArmorReduction = playerAttacker.GetSkillAttributeValue(S_Sword_s28, 'armor_reduction_perc', false, true);	//modSigns
+					armorReductionPerc += skillArmorReduction * playerAttacker.GetSkillLevel(S_Sword_s28);	//modSigns
 				}
 			}
 		}
@@ -469,6 +450,7 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 {
 	var powerMod, criticalDamageBonus, min, max, critReduction, sp : SAbilityAttributeValue;
 	var mutagen : CBaseGameplayEffect;
+	var yrdenEnt : W3YrdenEntity;	//modSigns
 	var totalBonus, tempBonus : float;
 
 
@@ -489,6 +471,19 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 	if ( powerMod.valueAdditive == 0 && powerMod.valueBase == 0 && powerMod.valueMultiplicative == 0 && theGame.CanLog() )
 		LogDMHits("Attacker has power stat of 0!", action);
 
+	// SKL-10: the Yrden turret's shots use the sign intensity cached at the cast, so a Flood of Anger cast
+	// keeps its bonus after the cast's temporary skills are gone (legacy; skills/yrden.ws)
+	if( (W3PlayerWitcher)playerAttacker && action.IsActionWitcherSign() && StrContains(action.GetBuffSourceName(), "_sign_yrden_alt") )	//modSigns
+	{	//modSigns
+		yrdenEnt = (W3YrdenEntity)((W3PlayerWitcher)playerAttacker).GetSignEntity(ST_Yrden);	//modSigns
+		if( yrdenEnt )	//modSigns
+		{	//modSigns
+			sp = yrdenEnt.GMGetYrdenPower();	//modSigns
+			if( !( sp.valueAdditive == 0 && sp.valueBase == 0 && sp.valueMultiplicative == 0 ) )	//modSigns
+				powerMod = sp;	//modSigns
+		}	//modSigns
+	}	//modSigns
+
 
 	//modSigns: no attack power penalty for heavy attacks (5.x -0.433, 1.32 -0.833)
 
@@ -499,14 +494,7 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 	//modSigns: Aard's projectile keeps its full sign intensity
 
 
-	if(attackAction.GetAttackName() == 'bolt')
-	{
-		if(attackAction.GetIsHeadShot() && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s32))
-		{
-			tempBonus = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Sword_s32, 'damage_increase', false, true ));
-			powerMod.valueAdditive *= 1 + tempBonus;
-		}
-	}
+	//modSigns: removed Lightning Reflexes' headshot damage (new tree sword_s32, SKL-06)
 
 
 
@@ -542,6 +530,10 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 		powerMod.valueMultiplicative += GMHeadShotDamageBonus();	//modSigns
 	if(actorVictim && actorAttacker && actorVictim.IsAttackerAtBack(actorAttacker))	//modSigns: backstabs +25% attack power (GEN)
 		powerMod.valueMultiplicative += GMBackAttackDamageBonus();	//modSigns
+	if((W3PlayerWitcher)playerAttacker && attackAction)	//modSigns: SKL-04, the new tree's Strength Training's attack power (D54)
+		powerMod.valueMultiplicative += ((W3PlayerWitcher)playerAttacker).GMStrengthTrainingPowerFor(attackAction) + ((W3PlayerWitcher)playerAttacker).GMMuscleMemoryPowerFor(attackAction);	//modSigns: and Muscle Memory's (SKL-03, D53)
+	if((W3PlayerWitcher)playerAttacker && ((W3PlayerWitcher)playerAttacker).GMIsWhirlingWithAdrenaline())	//modSigns: SKL-03, Whirl's attack power per extra enemy
+		powerMod.valueMultiplicative += ((W3PlayerWitcher)playerAttacker).GMGetWhirlDamageBonus();	//modSigns
 
 	if(action.IsCriticalHit())
 	{
@@ -559,20 +551,25 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 
 			//modSigns: vanilla added critical_hit_chance_fast_style (a crit chance) to the crit damage
 
-			if(attackAction && playerAttacker)
+			if(attackAction && playerAttacker && attackAction.IsActionMelee())	//modSigns: SKL-03, SKL-04: melee only (5.x gave bolt crits Precise Blows' crit damage)
 			{
 				if(playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && playerAttacker.CanUseSkill(S_Sword_s08))
 					criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s08);
 				else if (!playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && playerAttacker.CanUseSkill(S_Sword_s17))
 					criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s17);
-			}
+				if((W3PlayerWitcher)playerAttacker)	//modSigns: the new tree's Crushing Blows and Precise Blows (D55, D57): their crit damage, then the crit starts their chain
+				{	//modSigns
+					criticalDamageBonus.valueAdditive += ((W3PlayerWitcher)playerAttacker).GMBlowsCritDamage(playerAttacker.IsHeavyAttack(attackAction.GetAttackName()));	//modSigns
+					((W3PlayerWitcher)playerAttacker).GMBlowsOnCrit(playerAttacker.IsHeavyAttack(attackAction.GetAttackName()));	//modSigns
+					criticalDamageBonus.valueAdditive += ((W3PlayerWitcher)playerAttacker).GMWolfSchoolCritDamage(actorVictim, weaponId, victimMonsterCategory);	//modSigns: SKL-18, Wolf School (D61)
+				}	//modSigns
+			}	//modSigns
+			if((W3PlayerWitcher)playerAttacker && (W3BoltProjectile)action.causer)	//modSigns: SKL-06, Anatomical Knowledge's crossbow crit damage (legacy)
+				criticalDamageBonus += ((W3PlayerWitcher)playerAttacker).GMAnatomicalKnowledgeCritDamage();	//modSigns
 		}
 
 
-		if ( thePlayer.CanUseSkill( S_Alchemy_s27 ) && thePlayer.GetStatMax(BCS_Focus) == thePlayer.GetStat(BCS_Focus) && IsMonsterOilTarget() )
-		{
-			criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Alchemy_s27, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Alchemy_s27);
-		}
+		//modSigns: removed 5.x's new-tree Hunter Instinct at full adrenaline (SKL-14: legacy's rule for both trees in W3PlayerWitcher.GetCriticalHitDamageBonus)
 
 
 		totalBonus = CalculateAttributeValue(criticalDamageBonus);

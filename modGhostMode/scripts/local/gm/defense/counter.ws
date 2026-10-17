@@ -6,8 +6,10 @@
 // counter (set in ProcessAction, defense/processAction.ws). 5.x's spear break is kept (project owner, 2026-10-04).
 // STAM-03: a counter costs the same against any attack (legacy; project owner, 2026-10-04); that
 // it needs stamina is STAM-03's wrapper in parryStamina.ws.
-// Left as 5.x for their areas: Mutation 8 (MUT), Counterattack's knockdown and Perk 21 (SKL),
-// the Lynx set (ARM). See docs/features/def.md.
+// SKL-05: Counterattack's knockdown roll comes after the whole repel chain, as legacy's (also for
+// monsters, two-handed and tournament fighters and slope kicks; not after Mutation 8's finisher), and
+// the ledge trace runs with the skill too; a kick or bash without a knockdown stuns (legacy).
+// Left as 5.x for their areas: Mutation 8 (MUT), the Lynx set (ARM). See docs/features/def.md.
 
 // DEF-06: the Blood and Wine tournament contestants (sq701) that legacy gave its empty marker
 // ability sq701_tournament_npcs, recognised by their entity templates instead of edited .w2ent
@@ -156,20 +158,13 @@ function PerformCounterCheck(parryInfo: SParryInfo) : bool
 						
 						ragdollTarget = parryInfo.attacker;
 						AddTimer( 'ApplyCounterRagdollTimer', 0.3 );
-						parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, "ReflexParryPerformed");	//modSigns: a kick down a slope stuns too
+						//modSigns: a kick down a slope stuns too, below (DEF-06), unless the attacker is knocked down
 					}
 					else
 					{
 						useKnockdown = false;
-						if ( CanUseSkill(S_Sword_s11) )
-						{
-							if( GetSkillLevel(S_Sword_s11) > 1 && RandRangeF(3,0) < GetWitcherPlayer().GetStat(BCS_Focus) )
-							{
-								duration = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s11, 'duration', false, true));
-								useKnockdown = true;
-							}
-						}
-						else if ( parryInfo.attacker.IsHuman() )
+						//modSigns: removed Counterattack's roll here (SKL-05: rolled after the whole repel chain, legacy)
+						if ( parryInfo.attacker.IsHuman() )	//modSigns: the ledge trace also with Counterattack (legacy)
 						{ 
 							
 							tracePosStart = parryInfo.attacker.GetWorldPosition();
@@ -187,29 +182,7 @@ function PerformCounterCheck(parryInfo: SParryInfo) : bool
 									useKnockdown = true;
 							}
 						}
-						
-						if(useKnockdown && (!parryInfo.attacker.IsImmuneToBuff(EET_HeavyKnockdown) || !parryInfo.attacker.IsImmuneToBuff(EET_Knockdown)))
-						{
-							if(!parryInfo.attacker.IsImmuneToBuff(EET_HeavyKnockdown))
-							{
-								params.effectType = EET_HeavyKnockdown;
-							}
-							else
-							{
-								params.effectType = EET_Knockdown;
-							}
-							
-							repelType = PRT_Kick;
-							params.creator = this;
-							params.sourceName = "ReflexParryPerformed";
-							params.duration = duration;
-							
-							parryInfo.attacker.AddEffectCustom(params);
-						}
-						else
-						{
-							parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, "ReflexParryPerformed");
-						}
+						//modSigns: removed the knockdown and the counter strike here (applied after the repel chain, legacy)
 					}
 				}
 				
@@ -221,6 +194,34 @@ function PerformCounterCheck(parryInfo: SParryInfo) : bool
 						repelType = PRT_Bash;
 					else
 						repelType = PRT_Kick;
+				
+				if ( repelType != PRT_RepelToFinisher )	//modSigns: SKL-05, the knockdown after the whole repel chain (legacy; Mutation 8's finisher left as 5.x)
+				{	//modSigns
+					if ( useKnockdown || RandF() < GetWitcherPlayer().GMCounterattackKnockdownChance() )	//modSigns: a human countered off a ledge, or Counterattack's roll (legacy: 5% per adrenaline point at level 3)
+					{	//modSigns
+						if ( GetWitcherPlayer().GMCounterattackSkill() != S_SUndefined )	//modSigns
+							duration = CalculateAttributeValue(GetSkillAttributeValue(GetWitcherPlayer().GMCounterattackSkill(), 'duration', false, true));	//modSigns
+						else	//modSigns
+							duration = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s11, 'duration', false, true));	//modSigns: legacy reads Counterattack's duration also without the skill
+						if(!parryInfo.attacker.IsImmuneToBuff(EET_HeavyKnockdown) || !parryInfo.attacker.IsImmuneToBuff(EET_Knockdown))	//modSigns
+						{	//modSigns
+							if(!parryInfo.attacker.IsImmuneToBuff(EET_HeavyKnockdown))	//modSigns
+								params.effectType = EET_HeavyKnockdown;	//modSigns
+							else	//modSigns
+								params.effectType = EET_Knockdown;	//modSigns
+							params.creator = this;	//modSigns
+							params.sourceName = "ReflexParryPerformed";	//modSigns
+							params.duration = duration;	//modSigns
+							parryInfo.attacker.AddEffectCustom(params);	//modSigns
+							repelType = PRT_Kick;	//modSigns
+							useKnockdown = true;	//modSigns
+						}	//modSigns
+						else	//modSigns
+							useKnockdown = false;	//modSigns
+					}	//modSigns
+					if ( !useKnockdown && ( repelType == PRT_Kick || repelType == PRT_Bash ) )	//modSigns: a kick or bash without a knockdown stuns (legacy)
+						parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, "ReflexParryPerformed");	//modSigns
+				}	//modSigns
 				
 				this.SetBehaviorVariable( 'repelType', (int)repelType );
 				parryInfo.attacker.SetBehaviorVariable( 'repelType', (int)repelType );
@@ -248,6 +249,8 @@ function PerformCounterCheck(parryInfo: SParryInfo) : bool
 			
 			//modSigns: removed the heavy-attack multiplier (STAM-03: a counter costs the same against any attack)
 			DrainStamina(ESAT_Counterattack, 0, 0, '', 0);	//modSigns
+			if(GetWitcherPlayer() == this)	//modSigns: SKL-18, Attack is the Best Defense's stamina for a counter (legacy)
+				GetWitcherPlayer().GMPerk21GainStamina('counter');	//modSigns
 			
 			theGame.GetGamerProfile().IncStat(ES_CounterattackChain);
 		}
@@ -311,12 +314,10 @@ function IsLightAttack(attackName : name) : bool
 	return wrappedMethod(attackName);
 }
 
-// DEF-07: a counter gets the light-attack attack power bonuses. Vanilla gives a light attack two:
-// the abilities tagged attack_light (Muscle Memory's tag is extended to counter_attack_light in
-// gm_defense.xml), and, for a light attack type, Muscle Memory per level and attack_power_fast_style
-// (the new tree's light-attack perks). A counter has no attack type, so the second share is added here,
-// mirroring vanilla's lines. That Muscle Memory counts twice for light attacks is vanilla's (also in
-// 1.32 and legacy); SKL decides whether to keep both shares.
+// DEF-07: a counter gets the light-attack attack power bonuses: the abilities tagged attack_light
+// (Muscle Memory's tag is extended to counter_attack_light in gm_defense.xml; counted once, SKL's
+// D47, skills/muscleStrength.ws) and attack_power_fast_style (the new tree's light-attack perks),
+// which vanilla adds only for a light attack type; a counter has none, so it is added here.
 @wrapMethod(W3Action_Attack)
 function GetPowerStatValue() : SAbilityAttributeValue
 {
@@ -326,10 +327,6 @@ function GetPowerStatValue() : SAbilityAttributeValue
 	result = wrappedMethod();
 	witcher = (W3PlayerWitcher)attacker;
 	if(witcher && attackName == 'counter_attack_light')
-	{
-		if(witcher.CanUseSkill(S_Sword_s21))
-			result += witcher.GetSkillAttributeValue(S_Sword_s21, PowerStatEnumToName(CPS_AttackPower), false, true) * witcher.GetSkillLevel(S_Sword_s21);
 		result += witcher.GetAttributeValue('attack_power_fast_style');
-	}
 	return result;
 }

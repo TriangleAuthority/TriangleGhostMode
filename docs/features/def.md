@@ -34,7 +34,6 @@ Stamina costs of dodges, parries and counters are STAM-03's; NPC defence and its
 
 **Decisions:** port as legacy.
 
-- **Deviation:** until DEF-02 replaces it with the graze rule, 5.x's Fleet Footed handling of failed dodges stays: vanilla's branch in `W3PlayerWitcher.ReduceDamage`, damage reduced on a failed dodge and a full dodge at the top level (the classic `sword_s9` has one level); legacy had the graze rule instead (temporary, until DEF-02; project owner, 2026-10-03).
 
 Vanilla's 150° check in `W3PlayerWitcher.ReduceDamage` is removed by replacing that function with its 5.x body minus the check (Fleet Footed's branch kept), as legacy removed it. The port dispatches from one `CActor` method by type instead of overriding an added method in a subclass. Legacy's fallback that counts a dodge or roll combat action as dodging is kept (legacy's comment calls it probably unneeded; it costs nothing). The dodge check is skipped for simulate-only actions, which 5.x added (no script sets them). Vanilla's NPC dodge in `CActor.ReduceDamage` stays in place but no longer fires: the same rule, decided earlier, skips the damage step.
 
@@ -52,9 +51,9 @@ Vanilla's 150° check in `W3PlayerWitcher.ReduceDamage` is removed by replacing 
 | Flags | balance, needs-decision |
 | Depends on | DEF-01; SKL (which Fleet Footed) |
 | Skill trees | both: classic `sword_s9`, new `sword_s36` (Fleet Footed) |
-| Port form | `@addField`/`@addMethod` on `W3DamageAction` (graze value), `@wrapMethod` of its `Clear`; applied in DEF-01's `ReduceDamage` wrapper |
-| Port status | not started |
-| Open checks | — |
+| Port form | `@addField`/`@addMethod` on `W3DamageAction` (graze value), `@wrapMethod` of its `Clear` (`skills/fleetFooted.ws`); set in DEF-01's `GMPlayerDodgeDamage`, applied in `W3PlayerWitcher.ReduceDamage` (`defense/dodge.ws`) |
+| Port status | ported and verified (with SKL-05) |
+| Open checks | a real graze in a fight; that dodges cost stamina while the target attacks (5.x's free dodge, removed by replacing `SkipStaminaDodgeEvadeCost`, not tested) |
 | Save impact | none (expected) |
 | NG+ counterpart | applied and scaled, untested |
 
@@ -64,7 +63,11 @@ Vanilla's 150° check in `W3PlayerWitcher.ReduceDamage` is removed by replacing 
 
 **5.x:** Fleet Footed is redesigned: the classic `sword_s9` has one level and a full dodge, the reworked tree's `sword_s36` three levels. Legacy reads only `sword_s9`.
 
-**Decisions:** the mechanism ports as legacy, for [both skill trees](../feature-mapping.md#two-skill-trees): the classic tree's `sword_s9` and the new tree's `sword_s36`. 5.x's versions of both skills are kept ([decision](../feature-mapping.md#two-skill-trees)): `sword_s9` has one level in 5.x, so how legacy's 10% per level maps onto it, and onto `sword_s36`'s three levels, is decided with SKL.
+**Decisions:** the mechanism ports as legacy, for [both skill trees](../feature-mapping.md#two-skill-trees): the classic tree's `sword_s9` and the new tree's `sword_s36`. SKL decided the values (project owner, 2026-10-08; [SKL-05](skl.md#skl-05-defense-branch)): legacy's Fleet Footed in both trees, the classic `sword_s9` with legacy's 5 levels at 10% per level, the new `sword_s36` at 16.67% per level (50% at level 3), without 5.x's full dodge and free dodge.
+
+**Slices:**
+
+1. **Graze damage** (5.x-GM `7b41c8bb`). Verified 2026-10-14 (`gmtest_def02`, scripted physical hits of 5% of max Vitality from a wolf on Geralt, his dodge state set by script; classic level 5 and new tree level 3): a graze reduction of 0.5 on a failed dodge (170 degrees) and on an undodgeable attack while dodging, neither counted as a dodge; a successful dodge (0 degrees) still takes nothing; average Vitality taken over 8 hits: 551 standing, 276 on a failed dodge, 290 on an undodgeable attack (the hits' random spread). `gmtest_regress()` 186 passed, 0 failed. This ends DEF-01's temporary deviation (5.x's Fleet Footed in `ReduceDamage`).
 
 ### DEF-03 Roll immunity to long stagger
 
@@ -129,7 +132,7 @@ Vanilla's 150° check in `W3PlayerWitcher.ReduceDamage` is removed by replacing 
 | 5.x class | conflict |
 | Flags | balance |
 | Depends on | STAM-03 (parry costs, partial parry without stamina) |
-| Skill trees | both: Deflection (`sword_s10`, classic) reduces the partial-parry share; new-tree counterpart to check with SKL |
+| Skill trees | both: Deflection (`sword_s10`, classic) reduces the partial-parry share; new tree: Deflection `sword_s33`, legacy's ([SKL-05](skl.md#skl-05-defense-branch)) |
 | Port form | Share: `W3GameParams` defaults `PARRY_STAGGER_REDUCE_DAMAGE_LARGE`/`SMALL` 0.5 (scope block in `stamina/staminaCosts.ws`); partial parry, and parried attacks that knock down or stagger: `@replaceMethod(W3DamageManagerProcessor) ProcessAction` with legacy's block (`defense/processAction.ws`) and their zero damage in DEF-01's `W3PlayerWitcher.ReduceDamage` replacement (`defense/dodge.ws`); the stagger of a parry without stamina: `@wrapMethod(W3DamageManagerProcessor) ProcessActionBuffs` (`defense/parry.ws`); parry check: STAM-03's `@replaceMethod(CR4Player) PerformParryCheck` (`stamina/parryStamina.ws`) |
 | Port status | signed off |
 | Open checks | a real parry of a real attack that cannot be parried (scripted only); Ciri parrying an attack that cannot be parried and knocks down or staggers (her `ReduceDamage` is not changed: such hits keep vanilla's damage); the fistfight parry cost (needs a fistfight minigame); legacy's actual behaviour in four cases ([to test in legacy](../open-questions.md#to-test-in-legacy-ghost-mode)) |
@@ -164,7 +167,7 @@ Legacy's code for an attack that cannot be parried and knocks down or staggers (
 | 5.x class | conflict |
 | Flags | — |
 | Depends on | STAM-03 (counters need stamina), DEF-05 |
-| Skill trees | both: Counterattack (`sword_s11`, classic); new-tree counterpart to check with SKL; the repel and AI rules involve no skill |
+| Skill trees | both: Counterattack (`sword_s11`, classic); new tree: `sword_s31`, legacy's ([SKL-05](skl.md#skl-05-defense-branch)); the repel and AI rules involve no skill |
 | Port form | `@replaceMethod(CR4Player) PerformCounterCheck` on the 5.x body (`defense/counter.ws`; STAM-03's stamina wrapper stays); partial counter, no effects on a counter and DEF-07's countered mark: DEF-05's `ProcessAction` replacement (`defense/processAction.ws`); the 1 s stun: DLC XML `extend` of `CounterStrikeHitEffect` (`gm_defense.xml`, and its NG+ copy); the tournament contestants: `GMIsTournamentContestant` (same file); stunned or countered enemies: wrappers of `CBTTaskDodge`, `CBTTaskCircularDodge`, `CBTTaskPerformParry` and `CBTTaskReaction` (`defense/enemyDefense.ws`) |
 | Port status | signed off |
 | Open checks | a real counter (scripted counter checks only); the kick down a slope stunning; a real dodge suppressed by a counter (the test bandit never dodged, marked or not); legacy's behaviour in two cases ([to test in legacy](../open-questions.md#to-test-in-legacy-ghost-mode)) |
@@ -182,7 +185,7 @@ Legacy's code for an attack that cannot be parried and knocks down or staggers (
 - **Deviation:** 5.x's spear break is kept: countering a two-handed spear breaks it. Legacy removed the branch as "not working anyway", which 5.x fixed (project owner, 2026-10-04).
 - **Deviation:** a counter blocks all of the attack's effects. Vanilla's code, and legacy's, applied them although the hit dealt no damage: a defect against the changelist's "prevent all negative effects" (project owner, 2026-10-04).
 - **Deviation:** counters of attacks that cannot be parried do not count toward the counter achievement and Learning the Ropes (vanilla's `TestParryAndCounter`); legacy counted them (porter's call, not confirmed by the owner).
-- **Deviation:** legacy's changes in this function to Counterattack's knockdown and Perk 21 (SKL), Mutation 8 and its place first in the repel order (MUT) and the Lynx set (ARM) are left as 5.x (temporary, until SKL, MUT and ARM are ported; porter's call, not confirmed by the owner).
+- **Deviation:** legacy's changes in this function to Mutation 8 and its place first in the repel order (MUT) and the Lynx set (ARM) are left as 5.x (temporary, until MUT and ARM are ported; porter's call, not confirmed by the owner). Perk 21's counter stamina is ported (SKL-18, 2026-10-15).
 
 **Slices:**
 
@@ -201,7 +204,7 @@ Legacy's code for an attack that cannot be parried and knocks down or staggers (
 | 5.x class | clean (attack type, XML); overlap (counter tracking) |
 | Flags | balance |
 | Depends on | DEF-06 |
-| Skill trees | both: classic Muscle Memory `sword_s21` (tag and per-level share) and Precise Blows `sword_s17` (crit, via `IsLightAttack`); new tree: the light-attack perks (`attack_power_fast_style`) and, via `IsLightAttack`, the combo skills `sword_s22`, `sword_s24` and `sword_s23`'s counter part (`ProcessNewSkills_Combat`); `IsLightAttack` also lists the new tree's Whirl `sword_s35`; `S_Sword_s31` (new) reads vanilla's counter flag |
+| Skill trees | both: classic Muscle Memory `sword_s21` (tag and per-level share) and Precise Blows `sword_s17` (crit, via `IsLightAttack`); new tree: the light-attack perks (`attack_power_fast_style`) and, via `IsLightAttack`, 5.x's combo skills `sword_s22`, `sword_s24` and `sword_s23`'s counter part (`ProcessNewSkills_Combat`; SKL replaces them, [SKL-03](skl.md#skl-03-fast-attack-branch)); `IsLightAttack` also lists the new tree's Whirl `sword_s35`; `S_Sword_s31` (new) reads vanilla's counter flag |
 | Port form | DLC XML `replace` of `counter_attack_light` and `extend` of `sword_s21`'s tags (`gm_defense.xml` and its NG+ copy); `@wrapMethod(CR4Player) IsLightAttack` and `@wrapMethod(W3Action_Attack) GetPowerStatValue`; the per-enemy flag: `@addField`/`@addMethod(CActor)` (a deadline in engine time), set and cleared in DEF-05's `ProcessAction` replacement (`defense/processAction.ws`); `@wrapMethod(W3PlayerWitcher) GetCriticalHitChance` (all in `defense/counter.ws`) |
 | Port status | signed off |
 | Open checks | a real counter's damage and crit chance (scripted read-backs only); the new tree: its light-attack perks (`attack_power_fast_style`) and combo skills on a counter (no test equipped them yet; the checks ran with classic or no skills); legacy's behaviour with Muscle Memory ([to test in legacy](../open-questions.md#to-test-in-legacy-ghost-mode)) |
@@ -214,14 +217,14 @@ Legacy's code for an attack that cannot be parried and knocks down or staggers (
 
 **5.x:** unchanged except that `IsLightAttack` gained 5.x's `sword_s35`, and 5.x's new `S_Sword_s31` reads vanilla's "recently countered" flag, which legacy removed.
 
-What "all the light attack bonuses" covers: the bonuses that ask `IsLightAttack` of the attack name (light-attack crit chance including Precise Blows `sword_s17`, the Lynx set, the light-attack combo skills, Aerondight), and a light attack's attack power bonuses, which vanilla gives in two shares: the abilities tagged `attack_light` (Muscle Memory `sword_s21`), and, for a light attack type, Muscle Memory per level again plus `attack_power_fast_style` (the new tree's light-attack perks). A counter has neither the tag nor an attack type (`IsBasicAttack` knows only light, heavy, super-heavy and speed-based attacks), so in legacy's code Muscle Memory and the perks did not reach it; the port gives counters both shares and keeps them distinguishable from light attacks (own name, tag and empty attack type). Legacy also removed the style bonuses (`attack_power_fast_style`, `attack_power_heavy_style`) for every attack; that is SKL's (`GetPowerStatValue`), and when SKL ports it, the counter's share in `defense/counter.ws` must go with it.
+What "all the light attack bonuses" covers: the bonuses that ask `IsLightAttack` of the attack name (light-attack crit chance including Precise Blows `sword_s17`, the Lynx set, the light-attack combo skills, Aerondight), and a light attack's attack power bonuses, which vanilla gives in two shares: the abilities tagged `attack_light` (Muscle Memory `sword_s21`), and, for a light attack type, Muscle Memory per level again plus `attack_power_fast_style` (the new tree's light-attack perks). A counter has neither the tag nor an attack type (`IsBasicAttack` knows only light, heavy, super-heavy and speed-based attacks), so in legacy's code Muscle Memory and the perks did not reach it; the ported code gives counters both shares (until SKL's D47 counts the attack power once) and keeps them distinguishable from light attacks (own name, tag and empty attack type). Legacy also removed the style bonuses (`attack_power_fast_style`, `attack_power_heavy_style`) for every attack; that is SKL's (`GetPowerStatValue`), and when SKL ports it, the counter's share in `defense/counter.ws` must go with it.
 
 **Decisions:** keep vanilla's flag (5.x's skills need it) and add Ghost Mode's per-enemy flag beside it (an implementation difference only; behaviour as legacy). The flag is a deadline in engine time (3 s), so it needs no timer function and is not saved (legacy's timer; same behaviour). Vanilla's flag keeps the two bugs the changelist lists as fixed (not reset after a missed counter; only the first of several simultaneous counters counted); they now touch only what still reads it: Counterattack and Mutation 8 until SKL and MUT switch them (deviation below), and 5.x's `S_Sword_s31`.
 
 - **Deviation:** the +25% crit goes to the player's light and heavy attacks, not to melee attacks that are neither (e.g. `attack_super_heavy`, `attack_speed_based`); legacy gave it to every melee attack action. The crit function is asked with neither light nor heavy for bolts, signs and other actions too, so the wrapper cannot tell the rest apart (porter's call, not confirmed by the owner).
-- **Deviation:** Counterattack's crit chance and attack power (`sword_s11`) and Mutation 8 still read vanilla's "Geralt has recently countered" flag (his next attack, on anyone, until he attacks), where legacy reads the countered enemy's flag (temporary, until SKL and MUT; porter's call, not confirmed by the owner).
+- **Deviation:** Mutation 8 still reads vanilla's "Geralt has recently countered" flag (his next attack, on anyone, until he attacks), where legacy reads the countered enemy's flag (temporary, until MUT; Counterattack reads the enemy's flag since SKL-05, 2026-10-14; porter's call, not confirmed by the owner).
 
-- **Deviation:** a counter gets a light attack's attack power bonuses, both shares (Muscle Memory by tag and per level, the light-attack perks), as the changelist says; legacy's code gave it neither. Counters stay distinguishable from light attacks, for later counter-only rules (project owner, 2026-10-04).
+- **Deviation:** a counter gets a light attack's attack power bonuses (Muscle Memory, the light-attack perks), as the changelist says; legacy's code gave it neither. Since SKL-03 ported D47 (2026-10-14), a counter gets Muscle Memory's attack power once, as every fast attack does. Counters stay distinguishable from light attacks, for later counter-only rules (project owner, 2026-10-04, revised 2026-10-11).
 
 **Slices:**
 
@@ -240,7 +243,7 @@ What "all the light attack bonuses" covers: the bonuses that ask `IsLightAttack`
 | Skill trees | both: classic Deflection `sword_s10`, new `S_Sword_s33` |
 | Port form | `@replaceMethod(W3ArrowProjectile) OnProjectileCollision` on the 5.x body, one changed line (`defense/arrowParry.ws`) |
 | Port status | signed off |
-| Open checks | the new tree's `S_Sword_s33` and the classic Deflection with the ungated parry (their reflection and deflection, as 5.x) |
+| Open checks | a real arrow reflected by a perfectly timed parry with Deflection, either tree (SKL-05 verified it with scripted reflected-arrow hits; [SKL-05](skl.md#skl-05-defense-branch)) |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
@@ -250,9 +253,8 @@ What "all the light attack bonuses" covers: the bonuses that ask `IsLightAttack`
 
 **5.x:** redesigned: parrying arrows needs Deflection or the new `S_Sword_s33`, with its own deflection path and deflectable boulders.
 
-**Decisions:** legacy's ungated arrow parry on 5.x's function (project owner, 2026-10-03): with the guard up anyone parries arrows; 5.x's Deflection and `S_Sword_s33` keep their extra effects (reflection, deflection), to be checked against SKL's mapping. The parry goes through Geralt's parry check, so it costs stamina (STAM-03) and, without stamina, still parries the arrow in full (no partial parry for arrows), as legacy. 5.x gives Perk 31's adrenaline for every arrow parry (`GainAdrenalineFromPerk31('parry')`, new tree); with the gate gone that now happens without Deflection or `S_Sword_s33` too (Perk 31 is SKL's).
+**Decisions:** legacy's ungated arrow parry on 5.x's function (project owner, 2026-10-03): with the guard up anyone parries arrows; 5.x's Deflection and `S_Sword_s33` keep their extra effects (reflection, deflection), to be checked against SKL's mapping (settled by SKL-05, D5 and D6: legacy's Deflection in both trees, reflection from level 1, 2026-10-14). The parry goes through Geralt's parry check, so it costs stamina (STAM-03) and, without stamina, still parries the arrow in full (no partial parry for arrows), as legacy. 5.x gives Perk 31's adrenaline for every arrow parry (`GainAdrenalineFromPerk31('parry')`, new tree); with the gate gone that now happens without Deflection or `S_Sword_s33` too (Perk 31 is SKL's).
 
-- **Deviation:** Deflection reflects arrows from its second level, as 5.x (5.x cut it from three levels to two); legacy reflected from the first (temporary, until SKL maps Deflection; project owner, 2026-10-03).
 
 **Slices:**
 
@@ -275,7 +277,7 @@ Done by a fresh session ([audit](../feature-mapping.md#audit-signing-a-feature-o
 | Area | Changes (legacy units) |
 |---|---|
 | ARM | The light armor set bonus ability (`ArmorTypeLightSetBonusAbility`, +30° dodge angle) in `geralt_skills.xml`, granted in `PlayerAbilityManager`, shown in an item tooltip; DEF-01 only reads it |
-| SKL | **Finding (2026-10-04):** the attack-power skills count twice for their attack type, once by tag (`attack_light`/`attack_heavy` on the skill's ability) and once in `W3Action_Attack.GetPowerStatValue`'s explicit checks: Muscle Memory `sword_s21` measured (+0.6 at level 3 where the XML says +0.3, real light attacks), Strength Training `sword_s4` by the same code (`sword_2` counts once: core skills are never equipped, so the tag path does not see it); in 1.32 too. Decided with SKL: the double count is canon in the classic tree (+50% at level 5, project owner, 2026-10-06); counters get a light attack's attack power ([SKL-03](skl.md#skl-03-fast-attack-branch), project owner, 2026-10-04). Fleet Footed (which skill DEF-02 targets, `s9_damage_reduction`, the free dodge removal in `PerformEvade`); Deflection (partial-parry share, arrow reflection level, level-3 damage moved to the damage manager); Counterattack (attack power, crit from level 2, knockdown; legacy reads the countered enemy's flag, which DEF-07 ports as `CActor.GMWasCountered()`: switch Counterattack's attack power in `W3Action_Attack.GetPowerStatValue` and its crit in the crit check from vanilla's `HasRecentlyCountered()` to it, which ends a [DEF-07 deviation](#def-07-counter-bonuses)); Deadly Precision on countered enemies; Perk 21 |
+| SKL | **Finding (2026-10-04; ported by SKL-03, 2026-10-14):** the attack-power skills count twice for their attack type, once by tag (`attack_light`/`attack_heavy` on the skill's ability) and once in `W3Action_Attack.GetPowerStatValue`'s explicit checks: Muscle Memory `sword_s21` measured (+0.6 at level 3 where the XML says +0.3, real light attacks), Strength Training `sword_s4` by the same code (`sword_2` counts once: core skills are never equipped, so the tag path does not see it); in 1.32 too. Decided with SKL (D47, project owner, 2026-10-06, revised 2026-10-11): the port counts the attack power once at a doubled value (+0.1 per level, +50% at level 5 in the classic tree), and counters, as fast attacks, get Muscle Memory's attack power once ([SKL-03](skl.md#skl-03-fast-attack-branch)); DEF-07's counter share in `defense/counter.ws` changes with it. Fleet Footed (which skill DEF-02 targets, `s9_damage_reduction`, the free dodge removal in `PerformEvade`); Deflection (partial-parry share, arrow reflection level, level-3 damage moved to the damage manager); Counterattack (attack power, crit from level 2, knockdown; legacy reads the countered enemy's flag, which DEF-07 ports as `CActor.GMWasCountered()`: switch Counterattack's attack power in `W3Action_Attack.GetPowerStatValue` and its crit in the crit check from vanilla's `HasRecentlyCountered()` to it, which ends a [DEF-07 deviation](#def-07-counter-bonuses)); Deadly Precision on countered enemies; Perk 21 |
 | AI | NPC dodge rules (minimum distance) and NPC defence tasks (`btTaskDodge.ws`, `btTaskReaction.ws`), except the checks that a stunned (counter stun) or recently countered enemy does not dodge, parry or react, which DEF ports (DEF-06); in the same guard lines legacy also stops dodges in the air and off the ground (`IsInAir`, `!IsOnGround`), and it lengthened the dodge wait 0.1 → 0.25 s: AI's; legacy fixed `CBTTaskReaction.Main`, which in vanilla and 5.x starts a dodge when `ChooseAndCheckDodge` answers no, and guarded that check while stunned: port both together (DEF-06); `IncDefendCounter`/`IncHitCounter` windows 2 → 2.5 s |
 | SWD | The Iris phantom strike cannot be dodged (`CActor.PrepareAttackAction`) |
 | MUT, ALCH, ENCH, FIX | Mutation 8 in counters (legacy moved it first in the repel order and reads the countered enemy's flag, DEF-07's `CActor.GMWasCountered()`, in the damage manager's finisher and damage checks, where 5.x reads vanilla's `HasRecentlyCountered()`; switching it ends a [DEF-07 deviation](#def-07-counter-bonuses) and part of a [DEF-06 one](#def-06-counters-and-partial-counters)); mutagens and Quen next to the dodge in `ReduceDamage`/`OnTakeDamage`; Glyphword 1 and the arrow collision fixes in `OnProjectileCollision` |

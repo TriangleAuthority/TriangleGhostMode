@@ -57,13 +57,14 @@ function GMDodgeDamage(out damageData : W3DamageAction)
 // DEF-01: the player's dodge. The angle is between the dodge's heading and the attacker's
 // (0: dodging straight away from the attack). The Ice Giant's stomp and anchor attacks keep
 // vanilla's rule (dodged beyond 75% of their range). Environment and damage over time are
-// never dodged. Fleet Footed's graze reduction is DEF-02.
+// never dodged. DEF-02: a hit taken while dodging that is not dodged (an undodgeable one included)
+// is a graze, reduced by Fleet Footed (skills/fleetFooted.ws).
 @addMethod(W3PlayerWitcher)
 function GMPlayerDodgeDamage(out damageData : W3DamageAction)
 {
 	var actorAttacker : CActor;
 	var attackRange : CAIAttackRange;
-	var safeAngleDist, angleDist, distToAttacker : float;
+	var safeAngleDist, angleDist, distToAttacker, grazeReduction : float;
 	var attackName : name;
 	var isDodging, isIceGiantSpecial : bool;
 
@@ -71,8 +72,14 @@ function GMPlayerDodgeDamage(out damageData : W3DamageAction)
 	// legacy's fix for dodges not registered: the combat action counts too
 	isDodging = IsCurrentlyDodging() || IsInCombatAction()
 		&& ((int)GetBehaviorVariable('combatActionType') == (int)CAT_Dodge || (int)GetBehaviorVariable('combatActionType') == (int)CAT_Roll);
-	if(!actorAttacker || !isDodging || damageData.IsActionEnvironment() || damageData.IsDoTDamage() || !damageData.CanBeDodged())
+	if(!actorAttacker || !isDodging || damageData.IsActionEnvironment() || damageData.IsDoTDamage())
 		return;
+	grazeReduction = GMFleetFootedReduction();
+	if(!damageData.CanBeDodged())
+	{
+		damageData.GMSetGrazeReduction(grazeReduction);
+		return;
+	}
 
 	attackName = actorAttacker.GetLastAttackRangeName();
 	angleDist = AbsF(AngleDistance(evadeHeading, actorAttacker.GetHeading()));
@@ -87,6 +94,8 @@ function GMPlayerDodgeDamage(out damageData : W3DamageAction)
 
 	if(!isIceGiantSpecial && angleDist <= safeAngleDist || isIceGiantSpecial && attackRange && distToAttacker > attackRange.rangeMax * 0.75)
 		damageData.SetWasDodged();
+	else
+		damageData.GMSetGrazeReduction(grazeReduction);
 }
 
 // DEF-04: Ciri dodges every dodgeable attack while dodging, whatever the angle (vanilla: under
@@ -129,62 +138,27 @@ function ReduceDamage(out damageData : W3DamageAction)
 	attackAction = (W3Action_Attack)damageData;	//modSigns
 	if(attackAction && damageData.IsActionMelee() && (attackAction.IsParried() || attackAction.IsCountered()) && !damageData.IsParryStagger())	//modSigns
 		damageData.SetAllProcessedDamageAs(0);	//modSigns
+	if(damageData.IsParryStagger() && GMDeflectionParryReduction() > 0)	//modSigns: SKL-05, Deflection: a partial parry or counter lets through 50% less its reduction (legacy: 1 - 0.5 - 0.1 per level)
+		damageData.MultiplyAllDamageBy(ClampF(1 - theGame.params.PARRY_STAGGER_REDUCE_DAMAGE_SMALL - GMDeflectionParryReduction(), 0, 1) / (1 - theGame.params.PARRY_STAGGER_REDUCE_DAMAGE_SMALL));	//modSigns
 
 	
 	
-	quen = (W3QuenEntity)signs[ST_Quen].entity;
-	useQuenForBleeding = false;
-	if(quen && !damageData.DealsAnyDamage() && ((W3Effect_Bleeding)damageData.causer) && damageData.GetDamageValue(theGame.params.DAMAGE_NAME_DIRECT) > 0.f)
-		useQuenForBleeding = true;
+	//modSigns: removed 5.x's Quen use for bleeding (SKL-11: Quen absorbs before armor, skills/quen.ws)
 
 	
-	if(!useQuenForBleeding && !damageData.DealsAnyDamage())
+	if(!damageData.DealsAnyDamage())	//modSigns
 		return;
 
 	actorAttacker = (CActor)damageData.attacker;
 
 	
 	//modSigns: the dodge itself is decided before damage (DEF-01, GMPlayerDodgeDamage, 120 degrees);
-	//vanilla's 150 degree check is removed. Fleet Footed's reduction of a failed dodge stays (until DEF-02).
-	if(actorAttacker && IsCurrentlyDodging() && damageData.CanBeDodged())
-	{
-		if( !damageData.IsActionEnvironment() && !damageData.IsDoTDamage() && ( CanUseSkill( S_Sword_s09 ) || CanUseSkill( S_Sword_s36 ) ) )	//modSigns: was else if, after the angle check
-		{
-			skillLevel = GetSkillLevel( S_Sword_s09 );
-			skillLevelRemaster = GetSkillLevel( S_Sword_s36 );
-			if( skillLevel == GetSkillMaxLevel( S_Sword_s09 ) || skillLevelRemaster == GetSkillMaxLevel( S_Sword_s36 ) )
-			{
-				damageData.SetAllProcessedDamageAs(0);
-				damageData.SetWasDodged();
-			}
-			else
-			{
-				if ( CanUseSkill( S_Sword_s09 ) )
-				{
-					damageData.processedDmg.vitalityDamage *= 1 - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s09, 'damage_reduction', false, true)) * skillLevel;
-				}
-				else if ( CanUseSkill( S_Sword_s36 ) )
-				{
-					damageData.processedDmg.vitalityDamage *= 1 - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s36, 'damage_reduction', false, true)) * skillLevelRemaster;
-				}
-			}
-
-			if ( theGame.CanLog() )
-			{
-				LogDMHits("W3PlayerWitcher.ReduceDamage: skill S_Sword_s09 or S_Sword_s36 reduced damage while dodging", damageData );
-			}
-		}
-	}
+	//modSigns: removed vanilla's 150 degree check and 5.x's Fleet Footed (a full dodge at its top level, else a reduction of failed dodges)
+	if(damageData.GMGetGrazeReduction() > 0)	//modSigns: DEF-02, SKL-05: Fleet Footed reduces a graze's Vitality damage, at most 95% (legacy)
+		damageData.processedDmg.vitalityDamage *= ClampF(1 - damageData.GMGetGrazeReduction(), 0.05, 1);	//modSigns
 
 	
-	if(quen && damageData.GetBuffSourceName() != "FallingDamage")
-	{
-		if ( theGame.CanLog() )
-		{
-			LogDMHits("W3PlayerWitcher.ReduceDamage: Processing Quen sign damage reduction...", damageData);
-		}
-		quen.OnTargetHit( damageData );
-	}
+	//modSigns: removed the Quen call here (SKL-11: before armor, GMProcessDamageDecrease)
 
 	
 	if( HasBuff( EET_GryphonSetBonusYrden ) )
@@ -221,6 +195,10 @@ function ReduceDamage(out damageData : W3DamageAction)
 			}
 		}
 	}
+
+	if(!damageData.IsDoTDamage() && GMIsWhirlingWithAdrenaline())	//modSigns: SKL-03, Whirl: less damage taken while spinning with adrenaline
+		damageData.processedDmg.vitalityDamage *= 1 - GMGetWhirlDamageReduction();	//modSigns
+	damageData.processedDmg.vitalityDamage *= ClampF(1 - GMProtectiveCoatingCut(damageData), 0, 1);	//modSigns: SKL-14, Protective Coating (legacy; skills/oils.ws)
 }
 
 // DEF-03: rolling also grants immunity to long stagger (vanilla: knockdowns and stagger).

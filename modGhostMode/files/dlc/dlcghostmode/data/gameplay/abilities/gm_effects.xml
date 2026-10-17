@@ -24,6 +24,70 @@
       <ability name="GMRendCooldownEffect">
         <duration type="add" min="-1" /> <!-- set in script -->
       </ability>
+      <!-- SKL-07: Undying's 5 s of immortality and its cooldown (the skill's trigger_delay); the regen
+           abilities are added once per skill level per whole adrenaline point (classic 1% of maximum
+           Vitality per second, new tree 1.667%) -->
+      <ability name="GMUndyingImmortalEffect">
+        <duration type="add" min="5" />
+      </ability>
+      <ability name="GMUndyingCooldownEffect">
+        <duration type="add" min="-1" /> <!-- set in script -->
+      </ability>
+      <!-- SKL-09: Melt Armor's debuff (15 s) and the stacks it adds, level x round(1 + 7 x intensity
+           bonus): classic -2 armor and -0.2% resistances each, new tree 5/3 of that; Geralt's HUD timer -->
+      <ability name="GMMeltArmorDebuffEffect">
+        <duration type="add" min="15" />
+      </ability>
+      <ability name="GMMeltArmorTimerEffect">
+        <duration type="add" min="15" />
+      </ability>
+      <ability name="GMMeltArmorDebuff">
+        <armor type="add" min="-2" />
+        <physical_resistance_perc type="add" min="-0.002" />
+        <slashing_resistance_perc type="add" min="-0.002" />
+        <piercing_resistance_perc type="add" min="-0.002" />
+        <bludgeoning_resistance_perc type="add" min="-0.002" />
+        <rending_resistance_perc type="add" min="-0.002" />
+        <elemental_resistance_perc type="add" min="-0.002" />
+      </ability>
+      <ability name="GMMeltArmorDebuffNewTree">
+        <armor type="add" min="-3.333333" />
+        <physical_resistance_perc type="add" min="-0.003333" />
+        <slashing_resistance_perc type="add" min="-0.003333" />
+        <piercing_resistance_perc type="add" min="-0.003333" />
+        <bludgeoning_resistance_perc type="add" min="-0.003333" />
+        <rending_resistance_perc type="add" min="-0.003333" />
+        <elemental_resistance_perc type="add" min="-0.003333" />
+      </ability>
+      <!-- SKL-08: a heavy knockdown lasts 5 s (5.x: 3 to 5 s at random; legacy, the finisher window) -->
+      <ability name="HeavyKnockdownEffect" on_conflict="extend">
+        <duration type="add" min="5" max="5" />
+      </ability>
+      <!-- SKL-09: Firestream's burning as the regular burning, 2.7% of maximum health per second for 3 s
+           (5.x: 1% for 1 s) -->
+      <ability name="BurningEffect_FireStream" on_conflict="extend">
+        <FireDamage type="mult" min="0.027" max="0.027" />
+        <duration type="add" min="3" max="3" />
+      </ability>
+      <!-- SKL-10: the slowdown's defaults 35% for 7.5 s (5.x: 50%, 10 s; Yrden's trap passes its own value) -->
+      <ability name="SlowdownEffect" on_conflict="extend">
+        <slowdown type="add" min="0.35" />
+        <duration type="add" min="7.5" max="7.5" />
+      </ability>
+      <!-- SKL-12: confusion 3 s at the least (scripts lengthen it) and Geralt's +25% crit chance against the
+           confused (read by skills/axii.ws; 5.x: 2 s, no bonus) -->
+      <ability name="ConfusionEffect" on_conflict="extend">
+        <duration type="add" min="3" max="3" />
+        <critical_hit_chance type="add" min="0.25" />
+      </ability>
+      <ability name="GMUndyingRegen">
+        <vitalityRegen type="mult" min="0.01" max="0.01" />
+        <vitalityCombatRegen type="mult" min="0.01" max="0.01" />
+      </ability>
+      <ability name="GMUndyingRegenNewTree">
+        <vitalityRegen type="mult" min="0.016667" max="0.016667" />
+        <vitalityCombatRegen type="mult" min="0.016667" max="0.016667" />
+      </ability>
     </abilities>
   </definitions>
   <custom>
@@ -35,6 +99,10 @@
       <effect name_name="GMAxiiCooldownEffect" defaultAbilityName_name="GMAxiiCooldownEffect" iconType_name="GMAxiiCooldown" showOnHUD="1" effectNameLocalisationKey_name="effect_axii_cooldown" />
       <effect name_name="GMWhirlCooldownEffect" defaultAbilityName_name="GMWhirlCooldownEffect" iconType_name="GMWhirlCooldown" showOnHUD="1" effectNameLocalisationKey_name="effect_whirl_cooldown" />
       <effect name_name="GMRendCooldownEffect" defaultAbilityName_name="GMRendCooldownEffect" iconType_name="GMRendCooldown" showOnHUD="1" effectNameLocalisationKey_name="effect_rend_cooldown" />
+      <effect name_name="GMMeltArmorTimerEffect" defaultAbilityName_name="GMMeltArmorTimerEffect" iconType_name="GMMeltArmorTimer" showOnHUD="1" effectNameLocalisationKey_name="effect_melt_armor_timer" />
+      <effect name_name="GMMeltArmorDebuffEffect" defaultAbilityName_name="GMMeltArmorDebuffEffect" showOnHUD="0" />
+      <effect name_name="GMUndyingImmortalEffect" defaultAbilityName_name="GMUndyingImmortalEffect" iconType_name="GMUndying" showOnHUD="1" effectNameLocalisationKey_name="effect_undying_skill" />
+      <effect name_name="GMUndyingCooldownEffect" defaultAbilityName_name="GMUndyingCooldownEffect" iconType_name="GMUndying" showOnHUD="1" effectNameLocalisationKey_name="effect_undying_cooldown" />
     </effects>
     <effect_icons>
       <effect iconType_name="GMAardCooldown" path="icons/Skills/core/magic_1.png" />
@@ -44,6 +112,8 @@
       <effect iconType_name="GMAxiiCooldown" path="icons/Skills/core/magic_5.png" />
       <effect iconType_name="GMWhirlCooldown" path="icons/Skills/Sword/sword_s1.png" />
       <effect iconType_name="GMRendCooldown" path="icons/Skills/Sword/sword_s2.png" />
+      <effect iconType_name="GMUndying" path="icons/Skills/Sword/sword_s18.png" />
+      <effect iconType_name="GMMeltArmorTimer" path="icons/Skills/Signs/magic_s8.png" />
     </effect_icons>
   </custom>
 </redxml>

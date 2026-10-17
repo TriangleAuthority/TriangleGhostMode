@@ -16,6 +16,7 @@
 //   autoload("<file name>")      load a specific save, e.g. "<save name>" (any case)
 //   autoresume()                 close the open menu (pause menu, inventory, intro video, ...), if any
 //   autoquit()                   exit the game (what Exit in the menu does, without asking)
+//   autonewgame()                from the main menu: start a new game (tutorial messages off), as the menu does
 //   autoconfig()                 list the options menu groups (what the in-game config system knows)
 //   autoconfig("<group id>")     list a group's variables: display name, label, type, value, visibility
 //   autoconfigset("<group id>", "<var id>", "<value>")   set a variable and save the user settings
@@ -125,6 +126,22 @@ exec function autoload(optional file : string)
 		}
 	}
 	AutomationLog("error save not found: " + file);
+}
+
+exec function autonewgame()
+{
+	var menu : CR4Menu;
+
+	TutorialMessagesEnable(false);
+	if (theGame.RequestNewGame(theGame.GetNewGameDefinitionFilename()))
+	{
+		AutomationLog("new game requested");
+		menu = theGame.GetGuiManager().GetRootMenu();
+		if (menu)
+			menu.CloseMenu();
+	}
+	else
+		AutomationLog("error new game refused");
 }
 
 exec function autoresume()

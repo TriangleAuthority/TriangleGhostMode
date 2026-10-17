@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ghost Mode: the classic skill tree's profile (SKL, docs/features/balance.md). The classic
+     tree is legacy Ghost Mode's tree. Each skill keeps its one definition in geralt_skills.xml;
+     the fields listed here replace that definition's while the classic tree is in force
+     (skills/skillTreeProfile.ws). The 28 skills 5.x shares between the trees stop being shared
+     in the classic tree (gated by tier points, no new-tree prerequisites; the script does that for
+     all of them) and read their values from their own abilities, GM_C_<skill>, as they are ported.
+     The block GMNewTreeSkills does the same for the new tree's definitions while it is in force. -->
+<redxml>
+  <definitions>
+    <abilities>
+      <!-- SKL-18: the classic perks with legacy's values (D49): Sun and Stars +5% stamina regeneration at
+           night (5.x: 1%; the day's +10 Vitality per second is unchanged); Survival Instinct +750 Vitality
+           (5.x: +15%); Metabolic Control +40 toxicity (5.x: 30); Battle Frenzy +10% crit chance per adrenaline
+           point (5.x: 8%); Strong Back +40 weight (5.x: 60) -->
+      <ability name="perk_1" on_conflict="extend">
+        <staminaRegen_tooltip type="mult" min="0.05" />
+      </ability>
+      <ability name="perk_1_night_ability" on_conflict="extend">
+        <staminaRegen type="mult" min="0.05" />
+      </ability>
+      <ability name="perk_4" on_conflict="extend">
+        <vitality type="base" min="750" />
+      </ability>
+      <ability name="perk_12" on_conflict="extend">
+        <toxicity type="base" min="40" />
+      </ability>
+      <!-- SKL-18: the school perks and Adrenaline Burst, legacy's (D49), given whole (5.x's attributes go): Cat
+           School +5% crit chance and +20% crit damage per light piece; Griffin School +5% sign intensity and -5%
+           sign cost per medium piece (skills/schoolPerks.ws); Bear School +7.5% Vitality and +0.025 adrenaline
+           per melee hit per heavy piece; Adrenaline Burst +5% adrenaline gain and -10% melee and agility
+           cost per adrenaline point (skills/adrenalineBurst.ws) -->
+      <ability name="perk_5" on_conflict="replace">
+        <tags>perk_5</tags>
+        <critical_hit_chance type="add" min="0.05" />
+        <critical_hit_damage_bonus type="add" min="0.2" />
+      </ability>
+      <ability name="perk_6" on_conflict="replace">
+        <tags>perk_6</tags>
+        <spell_power type="mult" min="0.05" />
+        <perk_6_stamina_cost_reduction type="mult" min="0.05" />
+      </ability>
+      <ability name="perk_7" on_conflict="replace">
+        <tags>perk_7</tags>
+        <vitality type="mult" min="0.075" />
+        <bonus_focus_gain type="add" min="0.025" />
+      </ability>
+      <ability name="perk_10" on_conflict="replace">
+        <tags>perk_10, GlobalPassiveBonus</tags>
+        <focus_gain type="add" min="0.05" />
+        <stamina_cost_reduction type="add" min="0.1" />
+      </ability>
+      <!-- Focus (D40): +15% sign intensity per adrenaline point (5.x: 10%; skills/focusPerk.ws) -->
+      <ability name="perk_11" on_conflict="extend">
+        <spell_power type="mult" min="0.15" />
+      </ability>
+      <!-- Attack is the Best Defense (Blood and Wine's perk_21, given whole): 15% of maximum stamina for a kill,
+           5% for a crit or a counter, 2.5 s cooldown (skills/attackBestDefense.ws; 5.x: adrenaline for
+           parries, counters, dodges and rolls, 5 s) -->
+      <ability name="perk_21" on_conflict="replace">
+        <tags>perk_21</tags>
+        <stamina_kill type="mult" min="0.15" />
+        <stamina_other type="mult" min="0.05" />
+      </ability>
+      <ability name="Perk21InternalCooldownEffect" on_conflict="replace">
+        <tags>Perk21InternalCooldownEffect</tags>
+        <duration type="add" min="2.5" />
+      </ability>
+      <!-- Heavy Artillery (Blood and Wine's perk_20, given whole): bomb damage +100% (5.x: +200%), bombs per slot
+           halved (skills/heavyArtilleryTrickShot.ws) -->
+      <ability name="perk_20" on_conflict="replace">
+        <tags>perk_20</tags>
+        <stack_multiplier type="mult" min="0.5" />
+        <dmg_multiplier type="mult" min="1.0" />
+      </ability>
+      <!-- Advanced Pyrotechnics (Hearts of Stone's perk_18, given whole): 0.1 adrenaline per enemy a bomb's impact
+           damages, divided by Cluster Bombs' fragments (gm_bomb_focus_gain, skills/inCombatsFiresPyro.ws; 5.x's
+           own code reads focus_gain, 0) -->
+      <ability name="perk_18" on_conflict="replace">
+        <tags>perk_18</tags>
+        <focus_gain type="add" min="0" />
+        <gm_bomb_focus_gain type="add" min="0.1" />
+      </ability>
+      <!-- perk_19 and perk_22 are defined by the first expansion (dlc\ep1); "extend" left them empty (Ghost
+           Mode's DLC can load first), so they are given whole -->
+      <ability name="perk_19" on_conflict="replace">
+        <tags>perk_19</tags>
+        <critical_hit_chance type="add" min="0.1" />
+      </ability>
+      <ability name="perk_22" on_conflict="replace">
+        <tags>perk_22, GlobalPassiveBonus</tags>
+        <encumbrance type="base" min="40" />
+      </ability>
+      <!-- Rend in the classic tree (SKL-04): legacy's values per level, 5 levels: +10% weapon damage,
+           +0.2% per stamina point spent charging, +10% per adrenaline point, +20% critical hit chance;
+           ignores armor. Stamina as STAM-09 (50/s, 1 s delay). -->
+      <ability name="GM_C_sword_s2">
+        <tags>sword_s2,attack_heavy</tags>
+        <armor_reduction min="1000" max="1000" />
+        <critical_hit_chance type="add" min="0.2" />
+        <attack_damage_bonus type="mult" min="0.1" />
+        <adrenaline_final_damage_bonus type="mult" min="0.1" />
+        <stamina_max_dmg_bonus type="mult" min="0.002" />
+        <stamina_cost type="add" min="0" />
+        <stamina_cost_per_sec type="add" min="50" />
+        <stamina_delay type="add" min="1" />
+        <gm_classic_tree type="add" min="1" />
+      </ability>
+      <!-- Classic-only skills, legacy's values per level (5 levels).
+           Whirl (SKL-03): its stamina cost is in gm_skills.xml (STAM-09); the attack power per extra
+           attacker and the damage reduction are read by SKL-03's code.
+           Precise Blows and Crushing Blows: +2% critical hit chance and +15% critical hit damage. -->
+      <ability name="sword_s1" on_conflict="extend">
+        <whirl_dmg_bonus type="mult" min="0.01" />
+        <whirl_dmg_reduction type="mult" min="0.25" />
+        <whirl_dmg_reduction_bonus_after_1 type="mult" min="0.0625" />
+      </ability>
+      <!-- Muscle Memory and Strength Training (D47): +10% attack power per level (5.x's value, counted
+           once: skills/muscleStrength.ws), and legacy's +3% adrenaline gain per level for fast or
+           strong attacks -->
+      <ability name="sword_s21" on_conflict="extend">
+        <light_focus_gain type="add" min="0.03" />
+      </ability>
+      <ability name="sword_s4" on_conflict="extend">
+        <heavy_focus_gain type="add" min="0.03" />
+      </ability>
+      <!-- Crippling Strikes (D2): legacy's, 5 levels: bleeding chance +5% per level, legacy's bleeding
+           (1% of maximum health per second, 8 s), +5% total damage per level from fast attacks on
+           bleeding enemies -->
+      <ability name="sword_s5" on_conflict="extend">
+        <sword_s5_chance type="add" min="0.05" />
+        <sword_s5_duration type="add" min="8" />
+        <sword_s5_dmg_per_sec type="add" min="0.01" />
+        <sword_s5_dmg_boost type="add" min="0.05" />
+      </ability>
+      <!-- Sunder Armor (D56): legacy's, 5 levels: melee strong attacks reduce the victim's physical
+           resistances by 5% per level -->
+      <ability name="sword_s6" on_conflict="extend">
+        <armor_reduction_perc type="add" always_random="false" min="0.05" max="0.05" />
+      </ability>
+      <!-- Fleet Footed (DEF-02, SKL-05): legacy's, 5 levels: graze damage -10% per level; 5.x's full dodge
+           (damage_reduction 1 at its single level) is no longer read -->
+      <ability name="sword_s9" on_conflict="extend">
+        <s9_damage_reduction type="add" min="0.10" />
+      </ability>
+      <!-- Deflection (D5, D6): legacy's, 3 levels: partial parry and counter damage -10% per level,
+           reflected arrows +50% weapon damage per level from level 2, parry cost -50% with several
+           enemies at level 3 -->
+      <ability name="sword_s10" on_conflict="extend">
+        <s10_damage_reduction type="add" min="0.10" />
+        <damage_increase type="add" min="0.5" />
+        <parry_cost_decrease type="add" min="0.5" />
+      </ability>
+      <!-- Counterattack (D9): legacy's, 3 levels, on the countered enemy: +33.3% attack power per level,
+           +35% critical hit chance per level from level 2; at level 3 a 5% chance per adrenaline point
+           to knock the attacker down for 5 s -->
+      <ability name="sword_s11" on_conflict="extend">
+        <attack_power type="mult" min="0.334" />
+        <critical_hit_chance type="add" min="0.35" />
+        <s11_knockdown_chance type="add" min="0.05" />
+        <duration type="add" min="5" />
+      </ability>
+      <!-- Crossbow skills (SKL-06), legacy's: Lightning Reflexes 3 levels, 0.15 slow motion per level;
+           Anatomical Knowledge 5 levels, +5% crossbow crit chance and +15% crit damage per level;
+           Crippling Shot 5 levels, a monster skill blocked for 5 s per level -->
+      <ability name="sword_s13" on_conflict="extend">
+        <slowdown_mod type="add" min="0.15" />
+      </ability>
+      <ability name="sword_s7" on_conflict="extend">
+        <critical_hit_chance type="add" min="0.05" />
+        <critical_hit_damage_bonus type="add" min="0.15" />
+      </ability>
+      <!-- Flood of Anger in the classic tree (SKL-07, D16): legacy's, 5 levels, +50% sign intensity per level
+           while it lasts (+250% at level 5; skills/floodOfAnger.ws) -->
+      <ability name="GM_C_sword_s19">
+        <tags>sword_s19</tags>
+        <spell_power type="mult" min="0.5" />
+      </ability>
+      <!-- Resolve in the classic tree (SKL-07): legacy's, 5 levels, adrenaline loss on taking damage
+           -20% per level (5.x's shared skill: 3 levels, -33.3% per level, kept for the new tree) -->
+      <ability name="GM_C_sword_s16">
+        <tags>sword_s16</tags>
+        <focus_drain_reduction type="add" min="0.20" />
+      </ability>
+      <!-- Razor Focus in the classic tree (SKL-07): legacy's, 5 levels: combat starts with at least 0.25
+           adrenaline per level, adrenaline gain +5% per level -->
+      <ability name="GM_C_sword_s20">
+        <tags>sword_s20</tags>
+        <focus_add type="add" min="0.25" />
+        <focus_gain type="add" min="0.05" />
+      </ability>
+      <!-- Undying in the classic tree (SKL-07, D15): legacy's, 5 levels, 120 s cooldown; the healing is
+           Ghost Mode's effect (gm_effects.xml, skills/undying.ws) -->
+      <ability name="GM_C_sword_s18">
+        <tags>sword_s18</tags>
+        <trigger_delay type="add" min="120" />
+      </ability>
+      <!-- Aard Intensity in the classic tree (SKL-08): legacy's, 5 levels, heavy knockdown chance +3% per
+           level when casting Aard (skills/aard.ws); 5.x's +10% sign intensity per level is 0 -->
+      <ability name="magic_s12" on_conflict="extend">
+        <spell_power type="mult" min="0" />
+        <heavy_knockdown_chance_bonus type="mult" min="0.03" />
+      </ability>
+      <!-- Shock Wave in the classic tree (SKL-08, D20): legacy's, 5 levels, 60 force damage per level
+           (300 at 5), scaling with sign intensity (5.x: 100, applied only through Mutation 6) -->
+      <ability name="magic_s6" on_conflict="extend">
+        <ForceDamage type="add" min="60" />
+      </ability>
+      <!-- Pyromaniac in the classic tree (SKL-09): legacy's, 5 levels, burning chance +5% per level
+           (5.x: +33% per level, read by no script) -->
+      <ability name="magic_s9" on_conflict="extend">
+        <chance_bonus type="add" min="0.05" />
+      </ability>
+      <!-- Igni Intensity in the classic tree (SKL-09): legacy's, 5 levels, +30 Igni and +15/s Firestream
+           fire damage per level (skills/igni.ws); 5.x's +10% sign intensity per level is 0 -->
+      <ability name="magic_s7" on_conflict="extend">
+        <spell_power type="mult" min="0" />
+        <fire_damage_bonus type="add" always_random="false" min="30" max="30" />
+        <channeling_damage_bonus type="add" always_random="false" min="15" max="15" />
+      </ability>
+      <!-- Melt Armor in the classic tree (SKL-09): legacy's 5 levels (the debuff in gm_effects.xml) -->
+      <ability name="GM_C_magic_s8">
+        <tags>magic_s8</tags>
+      </ability>
+      <!-- Sustained Glyphs in the classic tree (SKL-10): legacy's, 3 levels (5.x: 2): +33.3% trap duration
+           per level, +30% radius from level 2, a second trap at level 3; 5.x's +2 charges and +5 s are 0 -->
+      <ability name="magic_s10" on_conflict="extend">
+        <charge_count type="add" min="0" />
+        <trap_duration type="add" min="0" />
+        <trap_duration_bonus type="add" min="0.333" />
+        <range_bonus type="add" min="0.3" />
+      </ability>
+      <!-- Yrden Intensity in the classic tree (SKL-10): legacy's, 5 levels, +30 turret damage per level
+           (skills/yrden.ws); 5.x's +10% sign intensity per level is 0 -->
+      <ability name="magic_s16" on_conflict="extend">
+        <spell_power type="mult" min="0" />
+        <turret_bonus_damage type="add" min="30" />
+      </ability>
+      <!-- Supercharged Glyphs in the classic tree (SKL-10): legacy's, 5 levels, +5% final damage per level
+           to enemies inside the trap -->
+      <ability name="GM_C_magic_s11">
+        <tags>magic_s11</tags>
+        <s11_dmg_bonus type="add" min="0.05" />
+      </ability>
+      <!-- Quen Intensity and Quen Discharge in the classic tree (SKL-11): legacy's, 5 levels: +30 shield
+           health per level (5.x: sign intensity), 5% of the absorbed damage returned per level (5.x: 10%
+           of the incoming) -->
+      <ability name="magic_s15" on_conflict="extend">
+        <spell_power type="mult" min="0" />
+        <shield_health_bonus type="add" min="30" />
+      </ability>
+      <ability name="magic_s14" on_conflict="extend">
+        <discharge_percent type="add" min="0.05" />
+      </ability>
+      <!-- Axii Intensity in the classic tree (SKL-12): legacy's, 5 levels, +10% Axii duration per level (5.x:
+           +10% sign intensity) -->
+      <ability name="magic_s18" on_conflict="extend">
+        <spell_power type="mult" min="0" />
+        <axii_duration_bonus type="add" min="0.1" />
+      </ability>
+      <ability name="sword_s12" on_conflict="extend">
+        <duration type="add" min="5" />
+      </ability>
+      <!-- Steady Shot (SKL-06, D17): legacy's, 5 levels, +10 damage per level on every damage type of a
+           bolt hit (skills/crossbow.ws); 5.x's Cold Blood adrenaline on this slot (0.1 per level per
+           bolt, also counted in every hit's adrenaline gain) is 0. Cold Blood is the perk perk_2 (a
+           sword hit's adrenaline per bolt, in script); 5.x's Steady Shot on perk_2 (+25% crossbow
+           attack power) is 0. -->
+      <ability name="sword_s15" on_conflict="extend">
+        <focus_gain type="add" min="0" />
+        <xbow_dmg_bonus type="add" min="10" />
+      </ability>
+      <ability name="perk_2" on_conflict="extend">
+        <attack_power type="mult" min="0" />
+      </ability>
+      <!-- SKL-13: the Brewing skills in the classic tree, legacy's (D27 to D29; skills/brewing.ws): Refreshment
+           alchemy_s1, 3 levels, 10% of maximum stamina per potion dose per level (5.x's Heightened Tolerance
+           threshold is 0); Expert Brewer GM_C_alchemy_s3, 5 levels, potion toxicity -1 per level; Prolonged
+           Effects GM_C_alchemy_s4, 5 levels, potion duration +20% per level. Restoration (alchemy_s2) is the
+           same in both trees (gm_skills.xml) -->
+      <ability name="alchemy_s1" on_conflict="extend">
+        <threshold type="add" min="0" />
+        <stamina_gain_perc type="add" min="0.1" />
+      </ability>
+      <ability name="GM_C_alchemy_s3">
+        <tags>alchemy_s3</tags>
+        <toxicityReduction type="add" min="1" />
+      </ability>
+      <ability name="GM_C_alchemy_s4">
+        <tags>alchemy_s4</tags>
+        <gm_potion_duration type="add" min="0.2" />
+      </ability>
+      <!-- SKL-14: Oil Preparation in the classic tree, legacy's (D30; skills/oils.ws), 5 levels: Poisoned Blades
+           GM_C_alchemy_s12 poison chance +3% per level and +5% per oil level above 1; Protective Coating
+           GM_C_alchemy_s5 damage taken from the oil's monster type -3% per level and -5% per oil level above 1;
+           both wear off with the oil -->
+      <ability name="GM_C_alchemy_s12">
+        <tags>alchemy_s12</tags>
+        <PoisonEffect is_ability="true" />
+        <skill_chance type="add" min="0.03" />
+        <oil_level_chance type="add" min="0.05" />
+      </ability>
+      <ability name="GM_C_alchemy_s5">
+        <tags>alchemy_s5</tags>
+        <defence_bonus type="add" min="0.03" />
+        <oil_level_defence type="add" min="0.05" />
+      </ability>
+      <!-- SKL-14: Fixative alchemy_s6 (3 levels) +33.4% oil charges per level (5.x: 33.33%), no wear at level 3;
+           Hunter Instinct alchemy_s7, 5 levels, +6.68% critical hit damage per level per adrenaline point with
+           the right oil (5.x: +33.3% per level at full adrenaline; skills/oils.ws) -->
+      <ability name="alchemy_s6" on_conflict="extend">
+        <ammo_bonus type="add" min="0.334" />
+      </ability>
+      <ability name="alchemy_s7" on_conflict="extend">
+        <critical_hit_damage_bonus type="add" min="0.0668" />
+      </ability>
+      <!-- SKL-15: Bomb Creation in the classic tree, legacy's (D31, D32; skills/bombs.ws): Steady Aim alchemy_s9,
+           3 levels (5.x: 1), time slowed a further 15% per level while aiming bombs (5.x: 50%); Pyrotechnics
+           GM_C_alchemy_s10, Efficiency GM_C_alchemy_s8 and Cluster Bombs GM_C_alchemy_s11, 5 levels: +50
+           physical and silver damage per level on every bomb, +1 bomb per slot per level, level + 1 fragments
+           each dealing a full bomb's damage -->
+      <ability name="alchemy_s9" on_conflict="extend">
+        <slowdown_mod type="add" min="0.15" />
+      </ability>
+      <ability name="GM_C_alchemy_s10">
+        <tags>alchemy_s10</tags>
+        <PhysicalDamage type="add" min="50" />
+        <SilverDamage type="add" min="50" />
+      </ability>
+      <ability name="GM_C_alchemy_s8">
+        <tags>alchemy_s8</tags>
+        <gm_efficiency_base type="add" min="0" />
+        <gm_efficiency_per_level type="add" min="1" />
+      </ability>
+      <ability name="GM_C_alchemy_s11">
+        <tags>alchemy_s11</tags>
+        <gm_fragments_base type="add" min="1" />
+        <gm_fragments_per_level type="add" min="1" />
+      </ability>
+      <!-- SKL-16: Mutation in the classic tree, legacy's (D29, D33; skills/mutation.ws), 5 levels: Tissue
+           Transmutation GM_C_alchemy_s13 +2 Vitality per level per toxicity offset point; Adaptation
+           GM_C_alchemy_s14 decoction toxicity -4% per level; Synergy alchemy_s19 +10% mutagen bonus per level
+           (one copy of the bonus per level, 5.x's code). Acquired Tolerance (alchemy_s18) is the same in both
+           trees (gm_skills.xml) -->
+      <ability name="GM_C_alchemy_s13">
+        <tags>alchemy_s13</tags>
+        <vitality type="add" min="2" />
+      </ability>
+      <ability name="GM_C_alchemy_s14">
+        <tags>alchemy_s14</tags>
+        <tox_off_bonus type="mult" min="0.04" />
+      </ability>
+      <!-- SKL-17: Trial of the Grasses in the classic tree, legacy's (D34; skills/grasses.ws), 5 levels: Frenzy
+           GM_C_alchemy_s16 15% slow motion per level for 1.5 s, +5% attack power and sign intensity per level
+           while overdosed; Endure Pain GM_C_alchemy_s20 one copy of IgnorePainEffect (+10% maximum Vitality) per
+           level; Fast Metabolism GM_C_alchemy_s15 toxicity -0.25 per second per level; Killing Spree
+           alchemy_s17 +5% crit chance per level per kill (5.x: 10%) -->
+      <ability name="GM_C_alchemy_s16">
+        <tags>alchemy_s16</tags>
+        <slowdown_ratio type="add" min="0.15" />
+        <slowdown_duration type="add" min="1.5" />
+        <attack_power type="mult" min="0.05" />
+        <spell_power type="mult" min="0.05" />
+      </ability>
+      <ability name="GM_C_alchemy_s20">
+        <tags>alchemy_s20</tags>
+        <gm_endure_pain_copies type="add" min="1" />
+      </ability>
+      <ability name="GM_C_alchemy_s15">
+        <tags>alchemy_s15</tags>
+        <toxicityRegen type="add" min="-0.25" />
+      </ability>
+      <ability name="alchemy_s17" on_conflict="extend">
+        <critical_hit_chance type="add" min="0.05" />
+      </ability>
+      <ability name="sword_s17" on_conflict="extend">
+        <critical_hit_chance type="add" min="0.02" />
+        <critical_hit_damage_bonus type="add" min="0.15" />
+      </ability>
+      <ability name="sword_s8" on_conflict="extend">
+        <critical_hit_chance type="add" min="0.02" />
+        <critical_hit_damage_bonus type="add" min="0.15" />
+      </ability>
+    </abilities>
+  </definitions>
+  <custom>
+    <skills>
+      <skill_definition def_name="GMClassicSkills">
+        <!-- legacy: Whirl and Rend are tier 2 (8 points), Precise Blows and Crushing Blows tier 3 (20);
+             legacy's menu positions; 5 levels. Muscle Memory and Strength Training: 5 levels (D47). -->
+        <skill skill_name="sword_s21" maxLevel="5" />
+        <skill skill_name="sword_s4" maxLevel="5" />
+        <skill skill_name="sword_s5" maxLevel="5" />
+        <skill skill_name="sword_s6" maxLevel="5" />
+        <skill skill_name="sword_s9" maxLevel="5" />
+        <!-- SKL-19: legacy's name Deflection (5.x: Arrow Deflection) -->
+        <skill skill_name="sword_s10" maxLevel="3" localisationName="gm_skill_name_deflection" />
+        <skill skill_name="sword_s3" maxLevel="3" />
+        <skill skill_name="sword_s13" maxLevel="3" />
+        <skill skill_name="sword_s7" maxLevel="5" />
+        <skill skill_name="sword_s12" maxLevel="5" />
+        <skill skill_name="sword_s1" requiredPointsSpent="8" maxLevel="5" guiPositionID="32" />
+        <skill skill_name="sword_s17" requiredPointsSpent="20" maxLevel="5" guiPositionID="31" />
+        <skill skill_name="sword_s2" ability_name="GM_C_sword_s2" requiredPointsSpent="8" maxLevel="5" guiPositionID="6"
+            localisationName="skill_name_sword_s2" localisationDescription="skill_desc_sword_s2"
+            localisationDescriptionLevel2="skill_desc_sword_s2" localisationDescriptionLevel3="skill_desc_sword_s2" />
+        <skill skill_name="sword_s8" requiredPointsSpent="20" maxLevel="5" guiPositionID="12" />
+        <!-- legacy's tier points and menu positions for the other classic skills (where 5.x's differ);
+             their levels and values come with their slices. -->
+        <skill skill_name="sword_s5" requiredPointsSpent="30" />
+        <skill skill_name="sword_s6" requiredPointsSpent="30" />
+        <skill skill_name="sword_s9" requiredPointsSpent="8" />
+        <skill skill_name="sword_s11" requiredPointsSpent="20" />
+        <skill skill_name="sword_s3" requiredPointsSpent="30" />
+        <!-- Steady Shot and Cold Blood: legacy swapped the names and descriptions of sword_s15 and perk_2 -->
+        <skill skill_name="sword_s15" requiredPointsSpent="8" maxLevel="5"
+            localisationName="skill_name_perk_2" localisationDescription="skill_desc_perk_2"
+            localisationDescriptionLevel2="skill_desc_perk_2" localisationDescriptionLevel3="skill_desc_perk_2" />
+        <skill skill_name="perk_2" localisationName="skill_name_sword_s15" localisationDescription="skill_desc_sword_s15" />
+        <skill skill_name="sword_s7" requiredPointsSpent="20" />
+        <skill skill_name="sword_s12" requiredPointsSpent="30" />
+        <skill skill_name="sword_s16" ability_name="GM_C_sword_s16" maxLevel="5" />
+        <skill skill_name="sword_s18" ability_name="GM_C_sword_s18" requiredPointsSpent="8" maxLevel="5" />
+        <skill skill_name="sword_s20" ability_name="GM_C_sword_s20" requiredPointsSpent="20" maxLevel="5" />
+        <skill skill_name="sword_s19" ability_name="GM_C_sword_s19" requiredPointsSpent="30" maxLevel="5" />
+        <skill skill_name="magic_s12" requiredPointsSpent="18" maxLevel="5" />
+        <skill skill_name="magic_s6" requiredPointsSpent="28" maxLevel="5" />
+        <skill skill_name="magic_s7" requiredPointsSpent="18" maxLevel="5" />
+        <skill skill_name="magic_s10" requiredPointsSpent="0" maxLevel="3" />
+        <skill skill_name="magic_s8" ability_name="GM_C_magic_s8" requiredPointsSpent="0" maxLevel="5" />
+        <skill skill_name="magic_s9" requiredPointsSpent="28" maxLevel="5" />
+        <skill skill_name="magic_s16" requiredPointsSpent="18" maxLevel="5" />
+        <!-- SKL-19: legacy's names Refreshment (5.x: Heightened Tolerance), Restoration (Refreshment), Expert Brewer
+             (Delayed Recovery), Prolonged Effects (Side Effects), Adaptation (Adaptability), Magic Turret (Magic Trap) -->
+        <skill skill_name="alchemy_s1" localisationName="gm_skill_name_refreshment" />
+        <skill skill_name="magic_s3" localisationName="gm_skill_name_magic_turret" />
+        <skill skill_name="magic_s11" ability_name="GM_C_magic_s11" requiredPointsSpent="28" maxLevel="5" />
+        <skill skill_name="magic_s15" requiredPointsSpent="18" maxLevel="5" />
+        <skill skill_name="magic_s14" requiredPointsSpent="28" maxLevel="5" />
+        <skill skill_name="magic_s18" requiredPointsSpent="18" maxLevel="5" />
+        <skill skill_name="magic_s19" requiredPointsSpent="28" />
+        <skill skill_name="alchemy_s2" requiredPointsSpent="8" localisationName="gm_skill_name_restoration" />
+        <skill skill_name="alchemy_s4" ability_name="GM_C_alchemy_s4" requiredPointsSpent="20" maxLevel="5" guiPositionID="37" localisationName="gm_skill_name_prolonged_effects" />
+        <skill skill_name="alchemy_s3" ability_name="GM_C_alchemy_s3" requiredPointsSpent="28" maxLevel="5" guiPositionID="36" localisationName="gm_skill_name_expert_brewer" />
+        <skill skill_name="alchemy_s12" ability_name="GM_C_alchemy_s12" requiredPointsSpent="0" maxLevel="5" />
+        <skill skill_name="alchemy_s5" ability_name="GM_C_alchemy_s5" requiredPointsSpent="8" maxLevel="5" />
+        <skill skill_name="alchemy_s6" requiredPointsSpent="20" />
+        <skill skill_name="alchemy_s7" requiredPointsSpent="28" maxLevel="5" />
+        <skill skill_name="alchemy_s10" ability_name="GM_C_alchemy_s10" requiredPointsSpent="8" maxLevel="5" />
+        <skill skill_name="alchemy_s8" ability_name="GM_C_alchemy_s8" requiredPointsSpent="20" maxLevel="5" />
+        <skill skill_name="alchemy_s9" requiredPointsSpent="0" maxLevel="3" />
+        <skill skill_name="alchemy_s11" ability_name="GM_C_alchemy_s11" requiredPointsSpent="28" maxLevel="5" />
+        <skill skill_name="alchemy_s13" ability_name="GM_C_alchemy_s13" requiredPointsSpent="8" maxLevel="5" />
+        <skill skill_name="alchemy_s19" requiredPointsSpent="28" maxLevel="5" guiPositionID="21" />
+        <skill skill_name="alchemy_s14" ability_name="GM_C_alchemy_s14" requiredPointsSpent="20" maxLevel="5" guiPositionID="25" localisationName="skill_name_alchemy_s14" />
+        <skill skill_name="alchemy_s16" ability_name="GM_C_alchemy_s16" requiredPointsSpent="0" maxLevel="5" />
+        <skill skill_name="alchemy_s20" ability_name="GM_C_alchemy_s20" requiredPointsSpent="8" maxLevel="5" />
+        <skill skill_name="alchemy_s15" ability_name="GM_C_alchemy_s15" requiredPointsSpent="20" maxLevel="5" />
+        <skill skill_name="alchemy_s17" requiredPointsSpent="28" maxLevel="5" />
+      </skill_definition>
+      <!-- The new tree's profile (skills/skillTreeProfile.ws): its fields replace 5.x's definitions while the
+           new tree is in force. SKL-18 (D49): every general perk is legacy's, 1 point and 1 level (5.x: 3). -->
+      <skill_definition def_name="GMNewTreeSkills">
+        <skill skill_name="perk_23" maxLevel="1" />
+        <skill skill_name="perk_24" maxLevel="1" />
+        <skill skill_name="perk_25" maxLevel="1" />
+        <skill skill_name="perk_26" maxLevel="1" />
+        <skill skill_name="perk_27" maxLevel="1" localisationName="skill_name_perk_17" />
+        <skill skill_name="perk_28" maxLevel="1" localisationName="skill_name_perk_20" />
+        <skill skill_name="perk_30" maxLevel="1" />
+        <skill skill_name="perk_31" maxLevel="1" />
+        <skill skill_name="perk_32" maxLevel="1" localisationName="skill_name_perk_13" />
+        <skill skill_name="perk_33" maxLevel="1" />
+        <skill skill_name="perk_34" maxLevel="1" localisationName="skill_name_perk_9" />
+        <skill skill_name="perk_35" maxLevel="1" />
+        <skill skill_name="perk_37" maxLevel="1" localisationName="skill_name_perk_11" />
+        <skill skill_name="perk_38" maxLevel="1" />
+        <skill skill_name="perk_39" maxLevel="1" />
+        <skill skill_name="perk_40" maxLevel="1" />
+        <skill skill_name="perk_41" maxLevel="1" />
+        <skill skill_name="perk_42" maxLevel="1" />
+        <skill skill_name="perk_43" maxLevel="1" localisationName="skill_name_perk_14" />
+        <skill skill_name="perk_44" maxLevel="1" localisationName="skill_name_perk_16" />
+        <!-- SKL-19: a new-tree skill takes its legacy counterpart's name (project owner, 2026-10-11); the perks' names
+             are on their lines above -->
+        <skill skill_name="sword_s24" requiredPointsSpent="12" gridRow="12" gridColumn="0" localisationName="skill_name_sword_s17" />
+        <skill skill_name="sword_s25" requiredPointsSpent="12" gridRow="12" gridColumn="3" localisationName="skill_name_sword_s8" />
+        <skill skill_name="sword_s27" requiredPointsSpent="18" gridRow="18" gridColumn="9" localisationName="skill_name_sword_s12" />
+        <skill skill_name="sword_s29" requiredPointsSpent="18" gridRow="18" gridColumn="0" localisationName="skill_name_sword_s5" />
+        <skill skill_name="sword_s33" requiredPointsSpent="0" gridRow="0" gridColumn="6" localisationName="gm_skill_name_deflection" />
+        <skill skill_name="sword_s36" requiredPointsSpent="5" gridRow="6" gridColumn="6" localisationName="skill_name_sword_s9" />
+        <skill skill_name="magic_s3" requiredPointsSpent="4" gridRow="6" gridColumn="6" localisationName="gm_skill_name_magic_turret" />
+        <skill skill_name="alchemy_s24" requiredPointsSpent="0" gridRow="0" gridColumn="0" localisationName="gm_skill_name_refreshment" />
+        <skill skill_name="alchemy_s2" requiredPointsSpent="5" gridRow="6" gridColumn="0" localisationName="gm_skill_name_restoration" />
+        <skill skill_name="alchemy_s3" requiredPointsSpent="17" gridRow="18" gridColumn="0" localisationName="gm_skill_name_expert_brewer" />
+        <skill skill_name="alchemy_s4" requiredPointsSpent="12" gridRow="12" gridColumn="0" localisationName="gm_skill_name_prolonged_effects" />
+        <skill skill_name="alchemy_s14" requiredPointsSpent="12" gridRow="12" gridColumn="9" localisationName="skill_name_alchemy_s14" />
+        <skill skill_name="alchemy_s22" requiredPointsSpent="17" gridRow="18" gridColumn="12" localisationName="skill_name_alchemy_s17" />
+        <skill skill_name="alchemy_s23" requiredPointsSpent="0" gridRow="0" gridColumn="6" localisationName="skill_name_alchemy_s9" />
+        <skill skill_name="alchemy_s25" requiredPointsSpent="12" gridRow="12" gridColumn="3" localisationName="skill_name_alchemy_s6" />
+        <skill skill_name="alchemy_s26" requiredPointsSpent="17" gridRow="18" gridColumn="9" localisationName="skill_name_alchemy_s19" />
+        <skill skill_name="magic_s31" requiredPointsSpent="4" gridRow="6" gridColumn="12" localisationName="skill_name_magic_s5" />
+        <skill skill_name="magic_s33" requiredPointsSpent="17" gridRow="18" gridColumn="0" localisationName="skill_name_magic_s6" />
+        <skill skill_name="magic_s35" requiredPointsSpent="11" gridRow="12" gridColumn="3" localisationName="skill_name_magic_s7" />
+        <skill skill_name="magic_s36" requiredPointsSpent="11" gridRow="12" gridColumn="12" localisationName="skill_name_magic_s18" />
+        <skill skill_name="magic_s37" requiredPointsSpent="11" gridRow="12" gridColumn="6" localisationName="skill_name_magic_s16" />
+        <skill skill_name="magic_s38" requiredPointsSpent="11" gridRow="12" gridColumn="9" localisationName="skill_name_magic_s15" />
+        <skill skill_name="magic_s39" requiredPointsSpent="11" gridRow="12" gridColumn="0" localisationName="skill_name_magic_s12" />
+        <skill skill_name="magic_s40" requiredPointsSpent="17" gridRow="18" gridColumn="9" localisationName="skill_name_magic_s14" />
+        <skill skill_name="magic_s41" requiredPointsSpent="17" gridRow="18" gridColumn="3" localisationName="skill_name_magic_s9" />
+        <!-- D59: the new tree drops 5.x's prerequisite tree (the script clears the prerequisites): each skill is
+             gated by points spent in its path at its legacy counterpart's tier, scaled x3/5 to the 3 levels (sword
+             0/5/12/18, signs 0/4/11/17, alchemy 0/5/12/17), and drawn as the classic tree is: a column per legacy
+             branch, a row per tier. Skills with a name above carry these fields on their line. -->
+        <skill skill_name="sword_s22" requiredPointsSpent="0" gridRow="0" gridColumn="0" />
+        <skill skill_name="sword_s35" requiredPointsSpent="5" gridRow="6" gridColumn="0" />
+        <skill skill_name="sword_s23" requiredPointsSpent="0" gridRow="0" gridColumn="3" />
+        <skill skill_name="sword_s2" requiredPointsSpent="5" gridRow="6" gridColumn="3" />
+        <skill skill_name="sword_s28" requiredPointsSpent="18" gridRow="18" gridColumn="3" />
+        <skill skill_name="sword_s31" requiredPointsSpent="12" gridRow="12" gridColumn="6" />
+        <skill skill_name="sword_s30" requiredPointsSpent="18" gridRow="18" gridColumn="6" />
+        <skill skill_name="sword_s32" requiredPointsSpent="0" gridRow="0" gridColumn="9" />
+        <skill skill_name="sword_s34" requiredPointsSpent="5" gridRow="6" gridColumn="9" />
+        <skill skill_name="sword_s26" requiredPointsSpent="12" gridRow="12" gridColumn="9" />
+        <skill skill_name="sword_s16" requiredPointsSpent="0" gridRow="0" gridColumn="12" />
+        <skill skill_name="sword_s18" requiredPointsSpent="5" gridRow="6" gridColumn="12" />
+        <skill skill_name="sword_s20" requiredPointsSpent="12" gridRow="12" gridColumn="12" />
+        <skill skill_name="sword_s19" requiredPointsSpent="18" gridRow="18" gridColumn="12" />
+        <skill skill_name="magic_s20" requiredPointsSpent="0" gridRow="0" gridColumn="0" />
+        <skill skill_name="magic_s1" requiredPointsSpent="4" gridRow="6" gridColumn="0" />
+        <skill skill_name="magic_s8" requiredPointsSpent="0" gridRow="0" gridColumn="3" />
+        <skill skill_name="magic_s28" requiredPointsSpent="4" gridRow="6" gridColumn="3" />
+        <skill skill_name="magic_s42" requiredPointsSpent="0" gridRow="0" gridColumn="6" />
+        <skill skill_name="magic_s11" requiredPointsSpent="17" gridRow="18" gridColumn="6" />
+        <skill skill_name="magic_s13" requiredPointsSpent="0" gridRow="0" gridColumn="9" />
+        <skill skill_name="magic_s4" requiredPointsSpent="4" gridRow="6" gridColumn="9" />
+        <skill skill_name="magic_s17" requiredPointsSpent="0" gridRow="0" gridColumn="12" />
+        <skill skill_name="magic_s19" requiredPointsSpent="17" gridRow="18" gridColumn="12" />
+        <skill skill_name="alchemy_s12" requiredPointsSpent="0" gridRow="0" gridColumn="3" />
+        <skill skill_name="alchemy_s5" requiredPointsSpent="5" gridRow="6" gridColumn="3" />
+        <skill skill_name="alchemy_s27" requiredPointsSpent="17" gridRow="18" gridColumn="3" />
+        <skill skill_name="alchemy_s10" requiredPointsSpent="5" gridRow="6" gridColumn="6" />
+        <skill skill_name="alchemy_s8" requiredPointsSpent="12" gridRow="12" gridColumn="6" />
+        <skill skill_name="alchemy_s11" requiredPointsSpent="17" gridRow="18" gridColumn="6" />
+        <skill skill_name="alchemy_s18" requiredPointsSpent="0" gridRow="0" gridColumn="9" />
+        <skill skill_name="alchemy_s13" requiredPointsSpent="5" gridRow="6" gridColumn="9" />
+        <skill skill_name="alchemy_s16" requiredPointsSpent="0" gridRow="0" gridColumn="12" />
+        <skill skill_name="alchemy_s20" requiredPointsSpent="5" gridRow="6" gridColumn="12" />
+        <skill skill_name="alchemy_s15" requiredPointsSpent="12" gridRow="12" gridColumn="12" />
+      </skill_definition>
+    </skills>
+  </custom>
+</redxml>

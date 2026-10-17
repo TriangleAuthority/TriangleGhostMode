@@ -11,6 +11,8 @@ function GMOptionDefault(group : name, option : name) : string
 	{
 		switch(option)
 		{
+			// SKL-02: the classic tree is the default (D46)
+			case 'GMClassicSkillTree' :		return "true";
 			// STAM-05
 			case 'GMArmorRegenPenalty' :		return "false";
 			// STAM-04
@@ -49,6 +51,7 @@ function GMOptionList(out groups : array<name>, out options : array<name>)
 {
 	groups.Clear();
 	options.Clear();
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMClassicSkillTree');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMArmorRegenPenalty');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMCombatStaminaRegen');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMOutOfCombatStaminaRegen');

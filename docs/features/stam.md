@@ -98,7 +98,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 
 **5.x:** melee is still free and signs still cost 100, and 5.x's new sign skills are built around that cost: Avoidance (`S_Magic_s39`) reduces it, adrenaline casting (`S_Perk_34`, supercharged signs) bypasses it. 5.x changed `GetStaminaActionCostInternal`, `HasStaminaToUseSkill` and `ManagePlayerStamina` for them.
 
-**Decisions:** port Ghost Mode's cost model (cheap signs plus cooldowns, paid melee) and apply its multipliers on top of 5.x's cost rules, so Avoidance and adrenaline casting keep working with a 40 cost; whether those skills still make sense is judged in the balance pass (SKL) (2026-10-02). Legacy's changes to the cost functions also carry other features' rules (armor class modifiers, overencumbrance, the Griffin perk and set, glyphwords, mutagens, adrenaline-first casting); they stay with their features ([hand-off](#hand-off-to-other-areas)). Deviations and notes:
+**Decisions:** port Ghost Mode's cost model (cheap signs plus cooldowns, paid melee) and apply its multipliers on top of 5.x's cost rules, so Avoidance and adrenaline casting keep working with a 40 cost; whether those skills still make sense is judged in the balance pass (SKL) (2026-10-02). Avoidance (Sidestep) is dropped by SKL's D58 (2026-10-15). Legacy's changes to the cost functions also carry other features' rules (armor class modifiers, overencumbrance, the Griffin perk and set, glyphwords, mutagens, adrenaline-first casting); they stay with their features ([hand-off](#hand-off-to-other-areas)). Deviations and notes:
 
 - Counters cost the same against any attack, as in legacy (project owner, 2026-10-04; in DEF-06's replacement of `PerformCounterCheck`, `defense/counter.ws`). Until then the port kept vanilla's counter check, whose heavy-attack multiplier read Ghost Mode's lowered `HEAVY_STRIKE_COST_MULTIPLIER` (1.25; vanilla 2).
 - <a id="stam-03-channeled-signs"></a>*Channeled signs:* 5.x drains channels per second and ends them at 0 stamina, as legacy, so the XML costs suffice, with one legacy exception ported: the alternate Yrden (trap) and Axii (puppet) channels finish even at 0 stamina, or 0 adrenaline when casting with it; releasing the sign still ends them. Today they cannot run dry (a cast needs 40 to start, the whole channels cost about 37 and 38), but skills or items that lower a sign's start cost or raise its channel cost could change that (project owner, 2026-10-04). For it, as in legacy, a drain that empties stamina no longer aborts the sign being cast (vanilla's `W3PlayerAbilityManager.DrainStamina`); every other channel still stops itself at 0. The rest of legacy's channel rework is SKL or STAM-01.
@@ -332,7 +332,6 @@ Detailed measurements, the behaviour-tree analysis of the false starts, and the 
 
 **Decisions:** port Ghost Mode's drain model and numbers onto both Whirls (project owner, 2026-10-03; the classic `sword_s1` after the [two skill trees](../feature-mapping.md#two-skill-trees) decision). `W3PlayerWitcher.GetWhirlFocusCostPerSec` is not ported: on 5.x only the replaced Whirl functions called it.
 
-- **Deviation:** at 3 levels the cost reduction reaches 30% (legacy: 60% over 5 levels), per SKL's per-level rule for 5.x's three-level skills (project owner, 2026-10-03).
 - **Deviation:** with both Whirls equipped, `GMWhirlSkill()` uses the classic one, where 5.x's `CR4Player` prefers `sword_s35` (accepted at the STAM audit; project owner, 2026-10-04).
 
 **Slices:**
@@ -342,8 +341,6 @@ Detailed measurements, the behaviour-tree analysis of the false starts, and the 
 3. **Classic Whirl** (5.x-GM `2d2b3039`). Verified 2026-10-03 (classic tree setting on, `sword_s1` equipped, scripted input, real Whirl in a ghoul fight): 50/s at level 1, 35/s at level 3, adrenaline in proportion, stopped at 0; panel line 35/s.
 4. **Rend minimum cost** (audit fix, 5.x-GM `f8c8d108`). Verified 2026-10-03 (scripted input, real Rend in a ghoul fight): held about 0.15 s, it charged 18.3 and its end added 6.7 (25 in all); held about 0.25 s, nothing added.
 
-**Later:** the classic Whirl's skill description still shows 5.x's cost reduction (SKL ports legacy's descriptions).
-
 **Balance values:** Whirl cost per second and reduction per level; Whirl and Rend start check.
 
 ---
@@ -352,7 +349,7 @@ Detailed measurements, the behaviour-tree analysis of the false starts, and the 
 
 The STAM features were first ported for the new skill tree only. After the decision to support [both trees](../feature-mapping.md#two-skill-trees) (2026-10-03), the counterparts were added and verified the same day: the classic Whirl `sword_s1` (STAM-02, STAM-06, STAM-09; 5.x-GM `2d2b3039`) and the new tree's alternate Igni and Axii, Firestream `magic_s28` and Puppet `magic_s31` (STAM-01, STAM-03, STAM-06; `c5a7317c`). Each entry's **Skill trees** row and slices record them.
 
-**Follow-up (SKL, decided 2026-10-06):** the classic Whirl takes legacy's 5 levels (15% less per level above 1, 20/s at level 5), and the new tree's `sword_s35` matches it at its max level (30% less per level above 1, 20/s at level 3). STAM-09's deviation (30% cut at level 3) ends when SKL-03 ports this ([SKL-03](skl.md#skl-03-fast-attack-branch)).
+**Follow-up (SKL, decided 2026-10-06):** the classic Whirl takes legacy's 5 levels (15% less per level above 1, 20/s at level 5), and the new tree's `sword_s35` matches it at its max level (30% less per level above 1, 20/s at level 3). Ported 2026-10-14 ([SKL-03](skl.md#skl-03-fast-attack-branch)): the classic Whirl has 5 levels, the new tree's cut is 30% per level above 1; STAM-09's temporary deviation has ended.
 
 ### STAM audit (2026-10-03)
 

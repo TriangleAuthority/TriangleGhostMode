@@ -8,6 +8,8 @@
 //   (legacy; project owner, 2026-10-04; the zero damage is in W3PlayerWitcher.ReduceDamage, dodge.ws);
 // - a counter of a parryable attack applies none of its effects (DEF-06);
 // - Geralt's counter marks the attacker (DEF-07's +25% crit), his next hit uses the mark up.
+// SKL-07: the adrenaline a hit on the player costs is the share of maximum health it removed, up to 1
+// point (legacy; 5.x: a fixed amount by attack type), reduced by Resolve.
 // The rest of legacy's ProcessAction changes belong to other areas. See docs/features/def.md.
 
 // 5.x body; changes marked //modSigns.
@@ -81,8 +83,7 @@ function ProcessAction(act : W3DamageAction)
 	}	//modSigns
  		
  		
- 		if(actorAttacker && playerVictim && ((W3PlayerWitcher)playerVictim) && GetWitcherPlayer().IsAnyQuenActive())
-		FactsAdd("player_had_quen");
+	//modSigns: removed the player_had_quen fact (SKL-11: Quen's damage-over-time rule as legacy)
 	
 	if (!action.GetSimulateOnly())
 	{
@@ -147,20 +148,8 @@ function ProcessAction(act : W3DamageAction)
 	
 	if(actorVictim == GetWitcherPlayer() && action.DealsAnyDamage() && !action.IsDoTDamage())
 	{
-		if(actorAttacker && attackAction)
-		{
-			if(actorAttacker.IsHeavyAttack( attackAction.GetAttackName() ))
-				focusDrain = CalculateAttributeValue(thePlayer.GetAttributeValue('heavy_attack_focus_drain'));
-			else if(actorAttacker.IsSuperHeavyAttack( attackAction.GetAttackName() ))
-				focusDrain = CalculateAttributeValue(thePlayer.GetAttributeValue('super_heavy_attack_focus_drain'));
-			else 
-				focusDrain = CalculateAttributeValue(thePlayer.GetAttributeValue('light_attack_focus_drain')); 
-		}
-		else
-		{
-			
-			focusDrain = CalculateAttributeValue(thePlayer.GetAttributeValue('light_attack_focus_drain')); 
-		}
+		//modSigns: removed 5.x's loss by attack type (light, heavy, super heavy)
+		focusDrain = ClampF(action.GetDamageDealt() / actorVictim.GetMaxHealth(), 0, 1);	//modSigns: SKL-07, the share of maximum health the hit removed (legacy)
 		
 		
 		if ( GetWitcherPlayer().CanUseSkill(S_Sword_s16) )

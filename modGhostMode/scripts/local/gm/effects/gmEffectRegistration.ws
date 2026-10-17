@@ -28,6 +28,12 @@ function HACK_NO_MEMORY_TO_COMPILE_CacheEffect_Part1(effect : EEffectType) : boo
 		// STAM-02
 		case EET_GMWhirlCooldown :	effects[effect] = new W3GMEffect_WhirlCooldown in this;	return true;
 		case EET_GMRendCooldown :	effects[effect] = new W3GMEffect_RendCooldown in this;	return true;
+		// SKL-07
+		case EET_GMUndyingImmortal :	effects[effect] = new W3GMEffect_UndyingImmortal in this;	return true;
+		case EET_GMUndyingCooldown :	effects[effect] = new W3GMEffect_UndyingCooldown in this;	return true;
+		// SKL-09
+		case EET_GMMeltArmorDebuff :	effects[effect] = new W3GMEffect_MeltArmorDebuff in this;	return true;
+		case EET_GMMeltArmorTimer :	effects[effect] = new W3GMEffect_MeltArmorTimer in this;	return true;
 	}
 	return wrappedMethod(effect);
 }
@@ -47,6 +53,12 @@ function HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part1(effectName : name, out
 		// STAM-02
 		case 'GMWhirlCooldownEffect' :	type = EET_GMWhirlCooldown;	abilityName = '';	return true;
 		case 'GMRendCooldownEffect' :	type = EET_GMRendCooldown;	abilityName = '';	return true;
+		// SKL-07
+		case 'GMUndyingImmortalEffect' :	type = EET_GMUndyingImmortal;	abilityName = '';	return true;
+		case 'GMUndyingCooldownEffect' :	type = EET_GMUndyingCooldown;	abilityName = '';	return true;
+		// SKL-09
+		case 'GMMeltArmorDebuffEffect' :	type = EET_GMMeltArmorDebuff;	abilityName = '';	return true;
+		case 'GMMeltArmorTimerEffect' :	type = EET_GMMeltArmorTimer;	abilityName = '';	return true;
 	}
 	return wrappedMethod(effectName, type, abilityName);
 }
@@ -66,6 +78,12 @@ function EffectTypeToName(effectType : EEffectType) : name
 		// STAM-02
 		case EET_GMWhirlCooldown :	return 'GMWhirlCooldownEffect';
 		case EET_GMRendCooldown :	return 'GMRendCooldownEffect';
+		// SKL-07
+		case EET_GMUndyingImmortal :	return 'GMUndyingImmortalEffect';
+		case EET_GMUndyingCooldown :	return 'GMUndyingCooldownEffect';
+		// SKL-09
+		case EET_GMMeltArmorDebuff :	return 'GMMeltArmorDebuffEffect';
+		case EET_GMMeltArmorTimer :	return 'GMMeltArmorTimerEffect';
 	}
 	return wrappedMethod(effectType);
 }
@@ -78,4 +96,35 @@ function IsImmuneToBuff(effect : EEffectType) : bool
 	if(GMIsSignCooldown(effect) || GMIsMeleeSpecialCooldown(effect))
 		return false;
 	return wrappedMethod(effect);
+}
+
+// SKL-07 (SKL audit, owner's F32 follow-up): legacy's "removeIfPresent fix". With removeIfPresent,
+// an immunity to all negative effects also removes the negative effects already present (Undying's
+// start, a bed, god mode, teleports and Ciri's specials call it so), except Mutation 7's debuff and
+// Ghost Mode's cooldowns (the sign cooldowns, Whirl's and Rend's), as legacy's
+// CActor.AddBuffImmunity_AllNegative; 5.x's (as 1.32's) only sets the immunity flag.
+@wrapMethod(CActor)
+function AddBuffImmunity_AllNegative(source : name, removeIfPresent : bool)
+{
+	var buffs : array<CBaseGameplayEffect>;
+	var types : array<EEffectType>;
+	var type : EEffectType;
+	var i : int;
+
+	wrappedMethod(source, removeIfPresent);
+	if(!removeIfPresent)
+		return;
+	buffs = GetBuffs();
+	for(i = 0; i < buffs.Size(); i += 1)
+	{
+		if(!buffs[i] || !buffs[i].IsNegative())
+			continue;
+		type = buffs[i].GetEffectType();
+		if(type == EET_Mutation7Debuff || GMIsSignCooldown(type) || GMIsMeleeSpecialCooldown(type))
+			continue;
+		if(!types.Contains(type))
+			types.PushBack(type);
+	}
+	for(i = 0; i < types.Size(); i += 1)
+		RemoveAllBuffsOfType(types[i]);
 }

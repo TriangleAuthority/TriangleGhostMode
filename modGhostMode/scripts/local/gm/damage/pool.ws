@@ -34,7 +34,7 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 // that multiplies the weapon damage once, before armor and attack power ("remove damage stacking,
 // make all multipliers additive", legacy; 5.x's multipliers too, DD1). Flat additions come first, so
 // the pool scales them. DD1's exceptions: the underwater crossbow bonus stays a multiplier; Crippling
-// Strike's bonus and alchemy_s24's damage taken go to final damage, as does the difficulty multiplier
+// Strike's bonus goes to final damage, as does the difficulty multiplier
 // (GMProcessDamageModification). VulnerableFromFront is checked here, before the formula (legacy;
 // 5.x checks it in ReduceDamage, too late). 5.x's own versions of legacy's other terms (Rend, Perk 20,
 // Lynx, Aerondight, Runeword 4, Mutation 8) are pool terms until their areas port legacy's.
@@ -49,6 +49,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	var mpac : CMovingPhysicalAgentComponent;
 	var rendBonusPerPoint, staminaRendBonus, perk20Bonus, minCatalyst, maxCatalyst, minEnhanced, maxEnhanced : SAbilityAttributeValue;
 	var witcherAttacker : W3PlayerWitcher;
+	var bouncedPower : SAbilityAttributeValue;	//modSigns: SKL-05
 	var damageVal, damageBonus, min, max			: SAbilityAttributeValue;
 	var npcVictim : CNewNPC;
 	var sword : SItemUniqueId;
@@ -171,85 +172,15 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	}
 
 
-	if ( actorVictim && playerAttacker && GetWitcherPlayer().CanUseSkill( S_Magic_s35 ) )
-	{
-		yrdens = GetWitcherPlayer().yrdenEntities;
-		signSkillCatalystLevel = playerAttacker.GetSkillLevel( S_Magic_s35 );
-		signSkillCatalystActive = yrdens.Size() > 0 && ( action.GetSignType() == ST_Aard || action.GetSignType() == ST_Igni );
-
-		if ( signSkillCatalystActive )
-		{
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue('magic_s35', 'spell_power_aard_igni', minCatalyst, maxCatalyst);
-			extraSignDamageMult = minCatalyst.valueMultiplicative * signSkillCatalystLevel;
-
-			spellPower = action.GetDamageValueTotal();
-
-			for(i=0; i<yrdens.Size(); i+=1)
-			{
-				for(j=0; j<yrdens[i].validTargetsInArea.Size(); j+=1)
-				{
-					if(yrdens[i].validTargetsInArea[j] == actorVictim )
-					{
-
-						poolAll += extraSignDamageMult;	//modSigns: additive pool (5.x: a separate multiplier)
-					}
-				}
-			}
-		}
-	}
+	//modSigns: removed 5.x's Catalyst (magic_s35, D58): Aard and Igni damage to enemies inside Yrden
 
 
 
 
-	if( playerAttacker && action.IsActionMelee() && playerAttacker.IsHeavyAttack( attackAction.GetAttackName() ) &&
-		playerAttacker.CanUseSkill( S_Alchemy_s23 ) && GetWitcherPlayer().CanUseToxicShock() )
-	{
-		if ( actorVictim && actorVictim.HasBuff( EET_Poison ) )
-		{
-			alchemySkillToxicShockLevel = playerAttacker.GetSkillLevel(S_Alchemy_s23);
-			switch (alchemySkillToxicShockLevel)
-			{
-				case 1:
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue('alchemy_s23', 'poison_dmg_level_1', minEnhanced, maxEnhanced);
-					extraPoisonDamageMult = minEnhanced.valueMultiplicative;
-					break;
-				case 2:
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue('alchemy_s23', 'poison_dmg_level_2', minEnhanced, maxEnhanced);
-					extraPoisonDamageMult = minEnhanced.valueMultiplicative;
-					break;
-				case 3:
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue('alchemy_s23', 'poison_dmg_level_3', minEnhanced, maxEnhanced);
-					extraPoisonDamageMult = minEnhanced.valueMultiplicative;
-					break;
-				default:
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue('alchemy_s23', 'poison_dmg_level_3', minEnhanced, maxEnhanced);
-					extraPoisonDamageMult = minEnhanced.valueMultiplicative;
-					break;
-			}
-
-			toxicShockDamage.dmgType = theGame.params.DAMAGE_NAME_POISON;
-			toxicShockDamage.dmgVal = action.GetDamageValueTotal() * extraPoisonDamageMult;
-			dmgInfos.PushBack( toxicShockDamage );
-			actorVictim.RemoveBuff( EET_Poison );
-			GetWitcherPlayer().ConsumeToxicShock();
-			thePlayer.AddTimer( 'ResetToxicShock', 5.0,,,, true );
-
-			swordEntity = GetWitcherPlayer().GetHeldSwordEntity();
-			if (swordEntity)
-			{
-				swordEntity.PlayEffect('toxic_shock_sword');
-			}
-		}
-	}
+	//modSigns: removed 5.x's Toxic Shock (alchemy_s23, now Steady Aim: SKL-15, D60)
 
 
-	if ( actorVictim && playerAttacker && playerAttacker.CanUseSkill( S_Perk_37 ) )
-	{
-		conjunctionDamageMult = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue( S_Perk_37, 'damage_multiplier', false, false ) );
-		conjunctionDamageMult = 1 + playerAttacker.GetSkillLevel( S_Perk_37 ) * conjunctionDamageMult;
-
-		poolNonPhysical += conjunctionDamageMult - 1;	//modSigns: additive pool, non-physical damage types (5.x: a separate multiplier)
-	}
+	//modSigns: removed 5.x's Elemental Attunement (perk_37, now Focus: SKL-18, D40)
 
 
 	if(actorVictim)
@@ -287,29 +218,26 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	{
 		witcherAttacker = (W3PlayerWitcher)playerAttacker;
 
-
-		rendRatio = witcherAttacker.GetSpecialAttackTimeRatio();
-
-
-		rendLoad = MinF(rendRatio * playerAttacker.GetStatMax(BCS_Focus), playerAttacker.GetStat(BCS_Focus));
-
-
-		if(rendLoad >= 1)
-		{
-			rendBonusPerPoint = witcherAttacker.GetSkillAttributeValue(S_Sword_s02, 'adrenaline_damage_bonus', false, true);
-			rendBonus = FloorF(rendLoad) * rendBonusPerPoint.valueMultiplicative * witcherAttacker.GetSkillLevel(S_Sword_s02);
-
-			poolAll += rendBonus;	//modSigns: additive pool (5.x: a separate multiplier)
-		}
-
-
-		staminaRendBonus = witcherAttacker.GetSkillAttributeValue(S_Sword_s02, 'stamina_max_dmg_bonus', false, true);
-
-		poolAll += rendRatio * staminaRendBonus.valueMultiplicative;	//modSigns: additive pool (5.x: a separate multiplier)
+		//modSigns: removed 5.x's Rend terms (adrenaline up to the charge, rounded down; stamina by the charge ratio)
+		poolAll += witcherAttacker.GMGetRendPowerBonus();	//modSigns: SKL-04, legacy's Rend bonus (GetRendPowerBonus), a pool term
 
 
 		thePlayer.SetAttackActionName('');
 	}
+
+	if((W3PlayerWitcher)playerAttacker && action.IsActionRanged() && action.IsBouncedArrow() && actorVictim)	//modSigns: SKL-05, a reflected arrow: its archer's attack power base and Deflection's bonus (legacy)
+	{	//modSigns
+		bouncedPower = actorVictim.GetPowerStatValue(CPS_AttackPower);	//modSigns
+		for(i = 0; i < dmgInfos.Size(); i += 1)	//modSigns
+			dmgInfos[i].dmgVal += bouncedPower.valueBase;	//modSigns
+		poolAll += ((W3PlayerWitcher)playerAttacker).GMDeflectionDamageBonus();	//modSigns: a pool term
+	}	//modSigns
+	if((W3PlayerWitcher)playerAttacker && action.IsActionRanged() && !action.IsDoTDamage() && (W3BoltProjectile)action.causer)	//modSigns: SKL-06, Steady Shot: flat damage on every type of a bolt hit (legacy's xbow_dmg_bonus), before the pool
+	{	//modSigns
+		tempBonus = ((W3PlayerWitcher)playerAttacker).GMSteadyShotDamage();	//modSigns
+		for(i = 0; i < dmgInfos.Size(); i += 1)	//modSigns
+			dmgInfos[i].dmgVal += tempBonus;	//modSigns
+	}	//modSigns
 
 
 	//modSigns: no extra damage for NPCs' ranged attacks above level 31
@@ -356,14 +284,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 
 
 
-	if ( playerAttacker && attackAction.IsActionMelee() && thePlayer.HasBuff( EET_ElementOfSurprise ) )
-	{
-		survivalSkillElementOfSurpriseLevel = thePlayer.GetSkillLevel( S_Perk_44 );
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue('perk_44', 'melee_damage_increase', minElementOfSurprise, maxElementOfSurprise);
-		elementOfSurpriseMult = minElementOfSurprise.valueMultiplicative * survivalSkillElementOfSurpriseLevel;
-
-		poolAll += elementOfSurpriseMult;	//modSigns: additive pool (5.x: a separate multiplier)
-	}
+	//modSigns: removed 5.x's Element of Surprise (perk_44, now In Combat's Fires: SKL-18, D61)
 
 
 	if( playerAttacker && playerAttacker.IsLightAttack( attackAction.GetAttackName() ) && playerAttacker.HasBuff( EET_LynxSetBonus ) && !attackAction.WasDodged() )
@@ -411,32 +332,23 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 		poolAll += skillPassiveMod;	//modSigns: additive pool (5.x: a separate multiplier)
 
 
-		if ( GetWitcherPlayer().CanUseSkill(S_Perk_20) && !action.IsDoTDamage() )
+		if ( GetWitcherPlayer().GMHeavyArtillerySkill() != S_SUndefined && !action.IsDoTDamage() )	//modSigns: Heavy Artillery, either tree (SKL-18)
 		{
-			perk20Bonus = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_20, 'dmg_multiplier', false, false);
+			perk20Bonus = GetWitcherPlayer().GetSkillAttributeValue( GetWitcherPlayer().GMHeavyArtillerySkill(), 'dmg_multiplier', false, false);	//modSigns
 			poolAll += perk20Bonus.valueMultiplicative;	//modSigns: additive pool (5.x: a separate multiplier)
 		}
 
 
 
-		if ( GetWitcherPlayer().CanUseSkill(S_Perk_27) && !action.IsDoTDamage() )
-		{
-			perk20Bonus = GetWitcherPlayer().GetAttributeValue('bomb_dmg_multiplier');
-			poolAll += perk20Bonus.valueMultiplicative;	//modSigns: additive pool (5.x: a separate multiplier)
-		}
+		//modSigns: removed 5.x's Manticore School bomb term (perk_27, now Trick Shot: SKL-18, D61)
+		if ( !action.IsDoTDamage() )	//modSigns: SKL-18, Wolf School's bomb damage against poisoned enemies (D61)
+			poolAll += GetWitcherPlayer().GMWolfSchoolBombBonus(actorVictim);	//modSigns
 
 
-		if ( !playerVictim && playerAttacker.CanUseSkill(S_Alchemy_s25) && !action.IsDoTDamage() )
-		{
-			tempBonus = playerAttacker.GetStat(BCS_Toxicity) * CalculateAttributeValue(playerAttacker.GetSkillAttributeValue( S_Alchemy_s25, 'bomb_damage_bonus', false, false) * playerAttacker.GetSkillLevel(S_Alchemy_s25));
-			poolAll += tempBonus;	//modSigns: additive pool (5.x: a separate multiplier)
-		}
+		//modSigns: removed 5.x's Volatile Compound bomb term (alchemy_s25, now Fixative: SKL-14, D60)
 
 
-		if ( GetWitcherPlayer().CanUseSkill(S_Perk_44) && !action.IsDoTDamage() )
-		{
-			thePlayer.AddEffectDefault( EET_ElementOfSurprise, NULL, "ElementOfSurpriseEffect" );
-		}
+		//modSigns: removed 5.x's Element of Surprise trigger (perk_44, now In Combat's Fires: SKL-18, D61)
 	}
 
 
@@ -504,82 +416,19 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	//modSigns: Crippling Strike's bonus applies to final damage (GMProcessDamageModification)
 
 
-	if(playerAttacker && playerAttacker.CanUseSkill(S_Perk_28))
-	{
-		poisonDamageValue = playerAttacker.GetAttributeValue('poison_dmg_multiplier');	//modSigns
-		poolPoison += poisonDamageValue.valueMultiplicative;	//modSigns: additive pool, poison damage (5.x: a separate multiplier)
-	}
+	//modSigns: removed 5.x's Viper School poison term (perk_28, now Heavy Artillery: SKL-18, D61)
 
 
-	//modSigns: alchemy_s24's damage taken applies to final damage (GMProcessDamageModification)
+	//modSigns: removed 5.x's High Tolerance damage taken (alchemy_s24, now Refreshment: SKL-13)
 
 
-	if( actorVictim && playerAttacker && attackAction && attackAction.IsActionMelee() && playerAttacker.CanUseSkill(S_Alchemy_s26)
-		&& playerAttacker.inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) )
-	{
-
-		monsterBonusType = MonsterCategoryToAttackPowerBonus(victimMonsterCategory);
-		tempAttribute = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
-
-		if(tempAttribute != null && actorVictim.IsImmuneToBuff( EET_Poison ) )
-		{
-			tempBonus = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Alchemy_s26, 'damage_bonus_immune', false, true ) * playerAttacker.GetSkillLevel(S_Alchemy_s26) );
-			poolAll += tempBonus;	//modSigns: additive pool (5.x: a separate multiplier)
-		}
-		else if(tempAttribute != null)
-		{
-			tempBonus = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Alchemy_s26, 'damage_bonus', false, true ) * playerAttacker.GetSkillLevel(S_Alchemy_s26) );
-			poolAll += tempBonus;	//modSigns: additive pool (5.x: a separate multiplier)
-		}
-	}
+	//modSigns: removed 5.x's Potent Sting (alchemy_s26, now Synergy: SKL-16, D60)
 
 
-	meleeAttackCounterForResonanceSkill = thePlayer.GetMeleeAttackCounterForResonanceSkill();
-	if( playerAttacker && attackAction && attackAction.IsActionMelee() && !playerAttacker.GetInventory().IsItemFists(weaponId) && playerAttacker.HasBuff(EET_Resonance) &&
-		meleeAttackCounterForResonanceSkill <= 3)
-	{
-		tempAttribute = playerAttacker.GetPowerStatValue(CPS_SpellPower);
-		tempBonus = tempAttribute.valueMultiplicative;
-		tempBonus *= CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Magic_s41, 'sign_intensity_ratio', false, true ) * playerAttacker.GetSkillLevel(S_Magic_s41) );
-
-		poolAll += tempBonus;	//modSigns: additive pool (5.x: a separate multiplier)
-
-		if (meleeAttackCounterForResonanceSkill == 3)
-		{
-			playerAttacker.RemoveBuff(EET_Resonance);
-			thePlayer.SetMeleeAttackCounterForResonanceSkill(1);
-
-			if(GetWitcherPlayer())
-			{
-				GetWitcherPlayer().StopEffect('resonance_sword');
-			}
-		}
-		else
-		{
-			thePlayer.SetMeleeAttackCounterForResonanceSkill(meleeAttackCounterForResonanceSkill+1);
-		}
-	}
+	//modSigns: removed 5.x's Resonance (magic_s41, D58): melee damage after a sign
 
 
-	if(attackAction.GetAttackName() == 'bolt')
-	{
-		if(thePlayer.CanUseSkill(S_Sword_s26))
-		{
-			tempBonus = ProcessNewSkill_AnatomicalKnowledge();
-			for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-			{
-				dmgInfos[i].dmgVal += tempBonus;
-			}
-		}
-
-		if(attackAction.GetIsHeadShot() && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s32))
-		{
-			tempBonus = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Sword_s32, 'damage_increase', false, true ));
-			poolAll += tempBonus;	//modSigns: additive pool (5.x: a separate multiplier)
-		}
-
-
-	}
+	//modSigns: removed 5.x's new-tree bolt terms (SKL-06): Anatomical Knowledge's silver sword damage and Lightning Reflexes' headshot damage
 
 
 
@@ -624,41 +473,19 @@ function ProcessNewSkills_Combat(out dmgInfos : array< SRawDamage >)
 	{
 		if(!playerAttacker.GetInventory().IsItemFists(weaponId) && playerAttacker.IsLightAttack(attackAction.GetAttackName()))
 		{
-			if(witcherAttacker.CanUseSkill(S_Sword_s22))
+			if(witcherAttacker.CanUseSkill(S_Sword_s22))	//modSigns: the new tree's Muscle Memory (D53): a boosted attack's attack power and total damage, not raw damage
 			{
-				ProcessNewSkill_MuscleMemory(dmgInfos);
+				witcherAttacker.GMMuscleMemoryOnFastAttack(attackAction);	//modSigns
 			}
-			if(witcherAttacker.CanUseSkill(S_Sword_s23))
-			{
-				ProcessNewSkill_StrengthTraining_Counter();
-			}
-			if(witcherAttacker.CanUseSkill(S_Sword_s24))
-			{
-				witcherAttacker.ResetSkillComboEx(S_Sword_s24, PreciseBlowsCounterId_Strong);
-
-
-				witcherAttacker.StopAllSkillComboEffectsEx(S_Sword_s24, PreciseBlowsCounterId_Strong);
-				ProcessNewSkill_PreciseBlows(dmgInfos, PreciseBlowsCounterId_Fast);
-			}
+			//modSigns: removed 5.x's Strength Training counter (D54: stacks per swing, skills/strengthTraining.ws)
+			//modSigns: removed 5.x's Three Strikes on sword_s24 (Precise Blows, D57: skills/critBlows.ws)
 		}
 		else if( playerAttacker.IsHeavyAttack(attackAction.GetAttackName()))
 		{
-			if(witcherAttacker.CanUseSkill(S_Sword_s23))
-			{
-				ProcessNewSkill_StrengthTraining_Damage(dmgInfos);
-			}
-			if(witcherAttacker.CanUseSkill(S_Sword_s24))
-			{
-				witcherAttacker.ResetSkillComboEx(S_Sword_s24, PreciseBlowsCounterId_Fast);
-
-
-				witcherAttacker.StopAllSkillComboEffectsEx(S_Sword_s24, PreciseBlowsCounterId_Fast);
-				ProcessNewSkill_PreciseBlows(dmgInfos, PreciseBlowsCounterId_Strong);
-			}
-			if(witcherAttacker.CanUseSkill(S_Sword_s25))
-			{
-				ProcessNewSkill_CrushingBlows(dmgInfos);
-			}
+			gmPoolAll += witcherAttacker.GMStrengthTrainingConsume(attackAction);	//modSigns: Strength Training's weapon damage (D54; 5.x: its single bonus)
+			if(witcherAttacker.GMMuscleMemoryArmed())	//modSigns: a strong attack ends Muscle Memory's boosts (D53)
+				witcherAttacker.GMMuscleMemoryEnd();	//modSigns
+			//modSigns: removed 5.x's Three Strikes and Crushing Blow procs on sword_s24 and sword_s25 (D55, D57: skills/critBlows.ws)
 			if(witcherAttacker.CanUseSkill(S_Sword_s28))
 			{
 				ProcessNewSkill_SunderArmor();

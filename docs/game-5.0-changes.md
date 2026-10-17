@@ -16,6 +16,8 @@ Anything marked *unverified* is inferred but not yet tested in game.
 - **Reforging ("transmog"):** equipment appearance can be changed at master craftsmen. New `transmogMenu.ws` and `guiTransmogInventoryComponent.ws`.
 - **Looting:** loot from horseback, a grouped loot window, a loot feed HUD module (`hudModuleLootFeed.ws`) and item tooltips before pickup.
 - **Throwing knives:** new `knifeProjectile.ws` and `throwingKnifeProjectile.ws`.
+- **Aiming slow motion (from the code, verified 2026-10-15):** 1.32 slows time to ×0.6 half a second into aiming a bomb or a bolt (`PlayerAimingStateAiming.Aim` calls `SloMo`); 5.x dropped that call, so aiming a bomb no longer slows time at all, and the crossbow gets its slow motion from `rangedWeapon.ws` (`OnAddAimingSloMo`). Steady Aim (`alchemy_s9`) deepens a slow motion that never starts; Ghost Mode restores it for bombs (SKL-15).
+- **Skills with no ability:** some 5.x skills have no `<ability>` entry for their ability name (e.g. Endure Pain `alchemy_s20`: its value is the effect `IgnorePainEffect`); a DLC that gives one values adds a new entry (no `on_conflict`).
 - Also removed in 5.0: the drinking-game minigame, the old combat focus-mode scripts (`player/states/focusMode/*`, `focusModeCombat.ws`) and `combatManager.ws`.
 
 Sources: [mp1st patch notes summary](https://mp1st.com/news/the-witcher-3-remastered-update-patch-notes-list-over-90-improvements), [Game Rant](https://gamerant.com/the-witcher-3-remastered-patch-50-notes/), [Beebom](https://beebom.com/the-witcher-3-remastered-patch-notes/).

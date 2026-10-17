@@ -51,6 +51,9 @@ function GetStaminaActionCost(action : EStaminaActionType, out cost : float, out
 	{
 		if(action != ESAT_FixedValue)
 			GMModStaminaCost(action, action == ESAT_Ability && IsSkillSign(SkillNameToEnum(abilityName)), cost);
+		// SKL-05: Deflection halves the parry cost at level 3 with more than one enemy around
+		if(action == ESAT_Parry)
+			cost *= 1 - GetWitcherPlayer().GMDeflectionParryCostCut();
 		// STAM-06: the "Stamina regen delay" option adds to every regen pause of Geralt's.
 		delay = MaxF(delay + GMGetOptionFloat('GMGameplayOptions', 'GMStaminaDelay'), 0);
 	}

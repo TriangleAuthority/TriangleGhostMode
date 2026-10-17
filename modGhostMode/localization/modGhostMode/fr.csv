@@ -1,0 +1,159 @@
+;meta[language=fr]
+; id      |key(hex)|key(str)| text
+; Ghost Mode strings, ported from legacy Ghost Mode 4.1 (same ids and keys).
+; STAM-01: sign cooldown labels
+2110992402|        |effect_aard_cooldown|Récupération de Aard
+2110992403|        |effect_igni_cooldown|Récupération de Igni
+2110992404|        |effect_yrden_cooldown|Récupération de Yrden
+2110992405|        |effect_quen_cooldown|Récupération de Quen
+2110992406|        |effect_axii_cooldown|Récupération de Axii
+; OPT-01: options menu
+2110992001|        |panel_ghost_mode|Ghost Mode
+2110992329|        |panel_gm_gameplay_options|Gameplay
+2110992408|        |option_gm_scooldown|Récupération de Signe (en secondes)
+2110992431|        |option_gm_ascooldown|Récupération alternative de Signe (en secondes)
+; STAM-04: regen options
+2110992391|        |option_gm_cbtsreg|Régénération de la vigueur en combat (additionel)
+2110992392|        |option_gm_ocbtsreg|Régénération de la vigueur hors combat (additionel)
+; STAM-05: armor regen penalty option
+2110992458|        |option_gm_armor_reg_penalty|Active la régénération de la vigueur pour les armures
+; STAM-05: character panel line for the armor regen modifier
+2110992263|        |attribute_name_staminaRegen_armor_mod|Modificateur de régénération de la vigueur
+; STAM-02: Whirl and Rend cooldowns
+2110992400|        |effect_whirl_cooldown|Récupération de Tourbillon
+2110992401|        |effect_rend_cooldown|Récupération de Déchirure
+2110992407|        |option_gm_mcooldown|Récupération spéciale de Mêlée (en secondes)
+; STAM-03: stamina cost options
+2110992494|        |option_gm_ascost|Sprint/jump action cost modifier
+2110992395|        |option_gm_mscost|Modificateur de coût des actions de mêlée
+2110992396|        |option_gm_sscost|Modificateur de coût des actions de signe
+2110992397|        |option_gm_stdelay|Delai de régénération de la vigueur (additionel, en secondes)
+; STAM-03: character panel stamina costs
+2110992409|        |attribute_name_stamina_cost_light|Coût en vigueur des attaques rapides
+2110992410|        |attribute_name_stamina_cost_heavy|Coût en vigueur des attaques puissantes
+2110992411|        |attribute_name_stamina_cost_parry|Coût en vigueur des parades
+2110992412|        |attribute_name_stamina_cost_counter|Coût en vigueur des contre-attaques
+2110992413|        |attribute_name_stamina_cost_dodge|Coût en vigueur des esquives
+2110992414|        |attribute_name_stamina_cost_roll|Coût en vigueur des roulades
+2110992415|        |attribute_name_stamina_cost_sprint|Coût en vigueur des sprints
+2110992416|        |attribute_name_stamina_cost_jump|Coût en vigueur des sauts
+2110992417|        |attribute_name_stamina_cost_item|Coût en vigueur de l'utilisation d'objets
+2110992418|        |attribute_name_stamina_cost_aard|Coût en vigueur de Aard
+2110992419|        |attribute_name_stamina_cost_igni|Coût en vigueur de Igni
+2110992420|        |attribute_name_stamina_cost_yrden|Coût en vigueur de Yrden
+2110992421|        |attribute_name_stamina_cost_quen|Coût en vigueur de Quen
+2110992422|        |attribute_name_stamina_cost_axii|Coût en vigueur de Axii
+2110992438|        |attribute_name_stamina_cost_whirl|Coût en vigueur de Tourbillon
+2110992439|        |attribute_name_stamina_cost_rend|Coût en vigeur de Déchirure
+; STAM-07: low-stamina sound options (quality-of-life group)
+2110992441|        |panel_gm_qol_options|Qualité de vie
+2110992442|        |option_gm_lowstamsfx|Seuil du son de vigeur faible (en %)
+2110992443|        |option_gm_lowstamsfx_vol|Volume du son de vigeur faible
+2110992444|        |option_gm_lowstamsfx_dynvol|Volume du son de vigeur faible dynamique
+2110992445|        |option_gm_lowstamsfx_rate|Taux du son de vigueur faible
+2110992446|        |option_gm_lowstamsfx_dynrate|Taux du son de vigueur faible dynamique
+; SKL-07: Undying (legacy ids)
+2110992112|        |effect_undying_skill|Immortalité
+2110992262|        |effect_undying_cooldown|Délai d'immortalité
+; SKL-09: Melt Armor (legacy id)
+2110992493|        |effect_melt_armor_timer|Compteur de Fonte de l'armure
+; SKL-02: new strings (not in legacy) start at 2110992600
+2110992600|        |option_gm_classic_skill_tree|Classic skill tree (takes effect with a character reset)
+; SKL-19 begin: skill and perk descriptions (legacy ids where the text is legacy's, new ids from 2110992601)
+2110992145|        |gm_skill_desc_sword_2|Allows you to perform strong melee attacks which add +$I$% to weapon damage and +$I$ to Armor Penetration.
+2110992315|        |gm_skill_desc_sword_3|Wolf School defensive techniques: parry, counter, dodge. Successful parry, counter and dodge reduce damage taken to zero and prevent all negative effects. Successful countering grants additional $I$% chance to critical hit. Partial parry reduces damage taken by $I$% and prevents bleeding. Rolling grants immunity to all knockdown and stagger effects and allows to dodge arrows. Some of the attacks cannot be dodged. Arrows can be parried.
+2110992170|        |gm_skill_desc_sword_4|Permet d'utiliser une arbalète légère. Les tirs au jugé infligent 50% de dégâts en moins.
+2110992166|        |gm_skill_desc_sword_5|Les dégâts infligés pendant les combats de mêlée génère des Points d'adrénaline. Chaque point d'adrénaline augmente la puissance des attaques de $I$%.
+2110992103|        |gm_skill_desc_whirl|Spinning attack that strikes all foes in the surrounding area. Maintaining the attack consumes $S$ Stamina per second. During the attack Adrenaline is drained at a speed of $S$ pts/sec. While performing the attack at non-zero Adrenaline, Attack Power is increased by $S$% per additional attacker (max. $S$%) and damage received is decreased by $S$%.
+2110992116|        |gm_skill_desc_muscle_memory_c|La puissance des attaques rapides augmente de $S$%. Le gain d'adrénaline des attaques rapides augmente de $S$%.
+2110992117|        |gm_skill_desc_strength_training_c|La puissance des attaques puissantes augmente de $S$%. Le gain d'adrénaline des attaques puissantes augmente de $S$%.
+2110992118|        |gm_skill_desc_precise_blows_c|Augmente les chances de coup critique des attaques rapides de $I$% et la puissance de ces coups critiques de $I$%.
+2110992119|        |gm_skill_desc_crushing_blows_c|Augmente les chances de coup critique des attaques puissantes de $I$% et la puissance de ces coups critiques de $I$%.
+2110992548|        |gm_skill_desc_steady_shot|Crossbow bolts deal $F$ pts more base damage.
+2110992549|        |gm_skill_desc_cold_blood_c|Each bolt that hits its target now generates the same amount of Adrenaline Points as when using swords.
+2110992513|        |gm_skill_name_deflection|Déviation
+2110992115|        |gm_skill_desc_undying|Quand la vitalité tombe à zero, les points d'adrénaline sont consommés pour tromper la mort et rend invulnérable, augmentant la régénération de la vitalité pendant $S$s. Redonne $S$% de vitalité par point d'adrénaline (max $S$%). Ne peut pas être déclenché plus d'une fois toutes les $S$s.
+2110992510|        |gm_skill_desc_flood_of_anger|When casting a Sign, 3 Adrenaline Points (if available) are consumed to upgrade the Sign to its highest level, unlocking all bonuses, and increase Sign intensity by $I$%. With Rage Management, Adrenaline Points are not consumed immediately; instead, the Sign's casting cost is tripled.
+2110992342|        |gm_skill_desc_razor_focus|You always enter combat with at least $S$ Adrenaline Points. Adrenaline Point generation is increased by $I$%.
+2110992601|        |gm_skill_desc_rend|Attaque puissante qui traverse les blocages, les armures et les boucliers et renverse les ennemis. Augmente les dégâts de l'arme de $S$%, plus $S$% par point d'endurance et $S$% par point d'adrénaline dépensé. Chances de coup critique augmentées de $S$%. Avec $S$ points d'adrénaline, crée une onde de choc qui inflige des dégâts à tous les ennemis dans un rayon de $S$ mètres et les renverse.
+2110992602|        |gm_skill_desc_crippling_strikes|Les attaques rapides ont $S$% de chances de provoquer un saignement. Les attaques rapides infligent $S$% de dégâts totaux supplémentaires aux ennemis qui saignent.
+2110992603|        |gm_skill_desc_sunder_armor|Les attaques puissantes réduisent la résistance aux dégâts de l'ennemi de $S$%.
+2110992604|        |gm_skill_desc_deflection_1|Les dégâts subis lors des parades et contre-attaques partielles sont réduits de $S$%. Les parades parfaitement synchronisées renvoient les flèches.
+2110992605|        |gm_skill_desc_deflection_2|Les dégâts subis lors des parades et contre-attaques partielles sont réduits de $S$%. Les parades parfaitement synchronisées renvoient les flèches, avec $S$% de dégâts de l'arme en plus.
+2110992606|        |gm_skill_desc_deflection_3|Les dégâts subis lors des parades et contre-attaques partielles sont réduits de $S$%. Les parades parfaitement synchronisées renvoient les flèches, avec $S$% de dégâts de l'arme en plus. Quand plusieurs ennemis sont proches, le coût des parades est réduit de $S$%.
+2110992607|        |gm_skill_desc_fleet_footed|Les dégâts des attaques qui vous effleurent pendant une esquive ou une roulade sont réduits de $S$%.
+2110992608|        |gm_skill_desc_counterattack_1|Augmente la puissance d'attaque des contre-attaques de $S$%.
+2110992609|        |gm_skill_desc_counterattack_2|Augmente la puissance d'attaque des contre-attaques de $S$% et leurs chances de coup critique de $S$%.
+2110992610|        |gm_skill_desc_counterattack_3|Augmente la puissance d'attaque des contre-attaques de $S$% et leurs chances de coup critique de $S$%. Chaque point d'adrénaline ajoute $S$% de chances de renverser l'ennemi lors d'une contre-attaque.
+2110992611|        |gm_skill_desc_deadly_precision|Chaque point d'adrénaline ajoute $S$% de chances de tuer un adversaire sur le coup lors d'une contre-attaque.
+2110992612|        |gm_skill_desc_crippling_shot|Les coups critiques à l'arbalète désactivent une capacité spéciale d'un monstre pendant $S$ secondes.
+2110992613|        |gm_skill_desc_anatomical_knowledge|Augmente les chances de coup critique à l'arbalète de $S$% et la puissance des coups critiques à l'arbalète de $S$%.
+2110992614|        |gm_skill_desc_cold_blood|Chaque carreau qui atteint sa cible génère autant d'adrénaline qu'un coup d'épée. Les carreaux d'arbalète infligent $S$ points de dégâts de base supplémentaires.
+2110992615|        |gm_skill_desc_muscle_memory_1|Après une esquive ou une roulade réussie, votre prochaine attaque rapide gagne $S$% de puissance d'attaque et inflige $S$% de dégâts totaux en plus. Le gain d'adrénaline des attaques rapides est augmenté de $S$%.
+2110992616|        |gm_skill_desc_muscle_memory_23|Après une esquive ou une roulade réussie, vos $S$ prochaines attaques rapides consécutives gagnent $S$% de puissance d'attaque et infligent $S$% de dégâts totaux en plus. Le gain d'adrénaline des attaques rapides est augmenté de $S$%.
+2110992617|        |gm_skill_desc_strength_training_1|Une attaque rapide augmente la puissance de la prochaine attaque puissante de $S$% et ses dégâts de l'arme de $S$%. Le gain d'adrénaline des attaques puissantes est augmenté de $S$%.
+2110992618|        |gm_skill_desc_strength_training_23|Chaque attaque rapide augmente la puissance de la prochaine attaque puissante de $S$% et ses dégâts de l'arme de $S$%. L'effet se cumule jusqu'à $S$ fois, chaque cumul ayant moitié moins d'effet que le précédent. Le gain d'adrénaline des attaques puissantes est augmenté de $S$%.
+2110992619|        |gm_skill_desc_precise_blows|Augmente la puissance des coups critiques des attaques rapides de $S$% et leurs chances de coup critique de $S$%. Un coup critique d'attaque rapide augmente encore les chances de coup critique des attaques rapides de $S$% et la puissance de leurs coups critiques de $S$% pendant $S$ secondes.
+2110992620|        |gm_skill_desc_crushing_blows|Augmente la puissance des coups critiques des attaques puissantes de $S$% et leurs chances de coup critique de $S$%. Un coup critique d'attaque puissante augmente encore les chances de coup critique des attaques puissantes de $S$% et la puissance de leurs coups critiques de $S$% pendant $S$ secondes.
+2110992284|        |gm_skill_desc_aard|A directed blast of telekinetic energy that staggers opponents and has $I$% knockdown chance. Heavy knockdown chance is $I$%. Chances scale with Sign Intensity and increase if enemy is low on Stamina. Heavy knockdown activates finisher move.
+2110992151|        |gm_skill_desc_yrden|Magic trap that slows enemies down by $S$% inside its area of effect (scales with Sign Intensity, max slowdown is limited by $S$%). Trap duration: $S$s. The longer the trap persists, the less efficient it becomes.
+2110992124|        |gm_skill_desc_quen|Bouclier protecteur qui absorbe jusqu'à $I$% des dégâts infligés par l'arme de l'ennemi. Absorption des dégâts de base : $I$. S'équilibre à l'intensité du signe. Absorption actuelle : $I$. Empêche les effets de chancèlements, brûlures, poison et saignement (et puis s'arrête). <br>Durée du bouclier : $I$s.
+2110992286|        |gm_skill_desc_axii|Charms an opponent's mind, confusing them and temporarily eliminating them from combat. Failed Axii attempts stagger the opponent. Grants a $S$% chance to critically hit confused enemy. Can trigger a finisher or dismemberment on a confused enemy with $S$% chance (scales with Sign Intensity and damage severity). <br>Confusion duration: $S$ seconds (scales with Sign Intensity).
+2110992279|        |gm_skill_desc_aard_sweep|Mode de signe alternatif:<br>Aard frappe tous les ennemis dans la zone. L'intensité du signe est réduite de $I$% avec ce mode.
+2110992281|        |gm_skill_desc_aard_sweep_3|Mode de signe alternatif:<br>Aard frappe tous les ennemis dans la zone. L'intensité du signe n'est plus réduite.
+2110992273|        |gm_skill_desc_aard_intensity|Increases base heavy knockdown chance by $I$%.
+2110992073|        |gm_skill_desc_pyromaniac|Augmente les chances de brûlure de $I$%.
+2110992132|        |gm_skill_desc_sustained_glyphs_1|La durée des pièges magiques augmente de $I$%.
+2110992133|        |gm_skill_desc_sustained_glyphs_2|La durée des pièges magiques augmente de $I$%. Le rayon des pièges magiques augmente de $I$%.
+2110992095|        |gm_skill_desc_magic_turret|Mode de signe alternatif:<br>Inflige $I$ points de dégâts aux ennemis dans un rayon de $I$ mètres. Les dégâts augmentent avec l'intensité du signe (dégâts actuels : $I$). Ignore les armures ennemis. Détruit les projectiles qui traversent la zone d'effet. Dure pendant $I$s. Charges de la tourelle : $I$.
+2110992131|        |gm_skill_name_magic_turret|Tourelle magique
+2110992275|        |gm_skill_desc_yrden_intensity|Ajoute $I$ points de dégâts aux tourelles magiques. Varie en fonction de l'intensité du signe.
+2110992135|        |gm_skill_desc_exploding_shield_2|Le bouclier de Quen repousse les ennemis et inflige $I$ points de dégâts quand il explose. Les dégâts augmentent avec l'intensité du signe (dégâts actuels: $I$).
+2110992136|        |gm_skill_desc_exploding_shield_3|Le bouclier de Quen repousse les ennemis avec une chance de les renverser et inflige $I$ points de dégâts quand il explose. Les dégâts augmentent avec l'intensité du signe (dégâts actuels: $I$).
+2110992137|        |gm_skill_desc_active_shield|Mode de signe alternatif :<br>Un bouclier actif qui absorbe jusqu'à 100% des dégâts infligés par l'arme de l'ennemi. L'absorption des dégâts de base est $I$% plus importante. Le maintenir draine $I$ points de vigueur par seconde. Les attaques parées drainent de la vigueur proportionnellement aux dégâts absorbés. Restaure la vitalité de $I$% des dégâts absorbés. Empêche les effets de chancelement, brûlures, empoisonnement et saignement. Empêche les renversements (puis s'arrête).
+2110992139|        |gm_skill_desc_active_shield_3|Mode de signe alternatif :<br>Un bouclier actif qui absorbe jusqu'à 100% des dégâts infligés par l'arme de l'ennemi. L'absorption des dégâts de base est $I$% plus importante. Le maintenir ne draine plus la vigueur. Les attaques parées drainent de la vigueur proportionnellement aux dégâts absorbés. Restaure la vitalité de $I$% des dégâts absorbés. Empêche les effets de chancelement, brûlures, empoisonnement et saignement. Empêche les renversements (puis s'arrête).
+2110992276|        |gm_skill_desc_quen_intensity|Ajoute $I$ points à l'absorption des dégâts du bouclier. Varie en fonction de l'intensité du signe.
+2110992175|        |gm_skill_desc_delusion|Time is slowed down by additional $I$% while casting Axii. A chance to critically hit a confused opponent is increased by $I$%. Increases the effectiveness of Axii in dialogues.
+2110992288|        |gm_skill_desc_puppet|Mode de signe alternatif:<br>L'ennemi ciblé devient un allié pendant $I$s et gagne $I$% de bonus à sa puissance d'attaque. La durée de l'effet augmente avec l'intensité du signe. Durée actuelle: $I$s.
+2110992287|        |gm_skill_desc_axii_intensity|La durée d'effet d'Axii augmente de $I$%.
+2110992096|        |gm_skill_desc_domination|Axii peut influencer deux ennemis simultanément. La durée de l'effet est réduite de $I$%.
+2110992098|        |gm_skill_desc_domination_3|Axii peut influencer deux ennemis simultanément. Ne réduit plus la durée de l'effet.
+2110992125|        |gm_skill_desc_melt_armor|Igni hits also reduce enemy Armor by $S$ and enemy damage resistances by $S$% (scales with Sign Intensity) for $S$ seconds. Does not stack.
+2110992274|        |gm_skill_desc_igni_intensity|Ajoute $I$ points de dégâts de feu et $I$ points de dégâts de Langue de feu par seconde. Varie en fonction de l'intensité du signe.
+2110992621|        |gm_skill_desc_igni|Souffle incandescent qui inflige $I$ points de dégâts avec $I$% de chances d'enflammer les ennemis. Les dégâts augmentent avec l'intensité du signe.
+2110992622|        |gm_skill_desc_shock_wave|Aard inflige $I$ points de dégâts. Les dégâts augmentent avec l'intensité du signe.
+2110992623|        |gm_skill_desc_firestream|Mode de signe alternatif :<br>Émet un flot de flammes continu qui provoque des brûlures et inflige $I$ points de dégâts par seconde. Les dégâts augmentent avec l'intensité du signe. Draine $I$ points d'endurance par seconde.
+2110992624|        |gm_skill_desc_sustained_glyphs_3|La durée des pièges magiques augmente de $I$%. Le rayon des pièges magiques augmente de $I$%. Il est maintenant possible de placer un piège magique additionnel.
+2110992625|        |gm_skill_desc_supercharged_glyphs|Les ennemis dans le piège d'Yrden subissent $S$% de dégâts totaux supplémentaires.
+2110992318|        |gm_skill_desc_alchemy_2|Permet la création d'huiles pouvant être appliquées sur les lames. L'efficacité diminue à mesure que l'huile s'estompe de la lame (down to $I$% of the original value).
+2110992171|        |gm_skill_desc_alchemy_3|Permet de créer des bombes qui peuvent être lancées sur les ennemis. Les lancers au jugé infligent 50% de dégâts en moins.
+2110992140|        |gm_skill_desc_poisoned_blades|L'application de l'huile appropriée sur les lames confère $I$% de chances d'empoisonner la cible à chaque coup. L'huile améliorée augmente ces chances de $I$% et l'huile supérieure de $I$%. L'efficacité diminue à mesure que l'huile s'estompe de la lame (down to $I$% of the original value).
+2110992317|        |gm_skill_desc_protective_coating|Réduit les dégâts reçus par les monstres ciblés par l'huile de $I$%. L'huile améliorée réduit en plus les dégâts de $I$% and l'huile supérieure de $I$%. L'efficacité diminue à mesure que l'huile s'estompe de la lame (down to $I$% of the original value).
+2110992492|        |gm_skill_desc_hunter_instinct|Critical hit power against the targeted enemy type is increased by $S$% for each Adrenaline Point available (up to $S$% max).
+2110992349|        |gm_skill_desc_acquired_tolerance|Every known level 1, 2 and 3 potion, bomb and oil formula, alchemy substance and mutagen decoction formula increases maximum Toxicity by 1 point, up to +$I$ points max. Current bonus is $I$ points.
+2110992454|        |gm_skill_desc_tissue_transmutation|Lorsqu'elle est consommée, la décoction de mutagène augmente la vitalité de $I$ points pour chaque point de compensation d'intoxication pour toute la durée effective de la décoction.
+2110992553|        |gm_skill_desc_adaptation|Decreases decoction toxicity by $S$%.
+2110992141|        |gm_skill_desc_frenzy|If Toxicity is above zero, time automatically slows by $S$% for $S$ sec when an enemy is about to perform a counterattack. Increases Attack Power and Sign Intensity by $S$% when Toxicity exceeds the safe threshold.
+2110992355|        |gm_skill_desc_fast_metabolism|L'intoxication baisse de $S$ points par seconde plus rapidement.
+2110992505|        |gm_skill_name_refreshment|Refreshment
+2110992504|        |gm_skill_name_restoration|Restoration
+2110992359|        |gm_skill_name_expert_brewer|Brasseur expert
+2110992353|        |gm_skill_name_prolonged_effects|Effets prolongés
+2110992506|        |gm_skill_desc_refreshment|Each potion dose restores $I$% of maximum Stamina.
+2110992627|        |gm_skill_desc_restoration|Chaque dose de potion bue restaure $I$ % de la vitalité maximum.
+2110992354|        |gm_skill_desc_prolonged_effects|Augmente la durée des potions de $S$%.
+2110992358|        |gm_skill_desc_expert_brewer|Diminue la toxicité des potions de $S$ points.
+2110992626|        |gm_skill_desc_fixative_3|Les huiles pour lame ne s'usent pas.
+2110992071|        |gm_skill_desc_cat_school|Chaque pièce d'armure légère augmente les chances de coups critiques de $S$% et la puissance des coups critiques de $S$%.
+2110992174|        |gm_skill_desc_griffin_school|Chaque pièce d'armure intermédiaire augmente de $S$% l'intensité des signes et réduit le coût en vigueur pour leur lancement de $S$%.
+2110992072|        |gm_skill_desc_bear_school|Chaque pièce d'armure lourde augmente la vitalité maximum de $S$% et le gain de points d'adrénaline des attaques de mêlée de $S$.
+2110992313|        |gm_skill_desc_rage_management|Avec au moins un point d'adrénaline, il sera utilisé pour lancer un signe à la place de la vigueur.
+2110992319|        |gm_skill_desc_adrenaline_burst|Augmente le gain d'adrénaline de $I$%. En plus de l'effet habituel de la Transe de Bataille, chaque Point d'adrénaline diminue également le coût en vigueur des actions de mêlée de $I$%.
+2110992172|        |gm_skill_desc_focus|En plus de l'effet habituel de Fureur guerrière, chaque point d'adrénaline augmente l'intensité des signes de $I$%. Les signes génèrent le même montant d'adrénaline que les épées.
+2110992491|        |gm_skill_desc_in_combats_fires|Vous ignorez les bombes et les effets spéciaux des carreaux d'arbalète. Les dégâts de vos bombes et carreaux sont réduits de moitié.
+2110992550|        |gm_skill_desc_advanced_pyrotechnics|Damage dealt by a bomb's explosion generates $F$ Adrenaline Points. This value is not affected by any Adrenaline gain bonuses.
+2110992399|        |gm_skill_desc_attack_best_defense|Killing an enemy restores $I$% of your Stamina (no cooldown). Critical hits and successful counters restore $I$% of your Stamina ($S$ sec cooldown).
+2110992628|        |gm_skill_desc_survival_instinct|Augmente la vitalité maximale de $S$.
+2110992629|        |gm_skill_desc_heavy_artillery|Les bombes infligent $S$% de dégâts supplémentaires, mais le nombre de bombes par emplacement est divisé par deux. Les bombes qui n'infligent pas de dégâts conservent leur nombre, sauf si Pyrotechnie est équipée.
+2110992630|        |gm_skill_desc_wolf_school|Après qu'un ennemi a subi des dégâts de bombe, les huiles pour lame accordent $S$% de chances de coup critique et $S$% de puissance des coups critiques contre lui. Les bombes infligent $S$% de dégâts supplémentaires aux ennemis empoisonnés.
+; SKL-19 end

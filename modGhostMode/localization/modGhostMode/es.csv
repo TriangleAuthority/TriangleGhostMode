@@ -1,0 +1,159 @@
+;meta[language=es]
+; id      |key(hex)|key(str)| text
+; Ghost Mode strings, ported from legacy Ghost Mode 4.1 (same ids and keys).
+; STAM-01: sign cooldown labels
+2110992402|        |effect_aard_cooldown|Tiempo de espera: Aard
+2110992403|        |effect_igni_cooldown|Tiempo de espera: Igni
+2110992404|        |effect_yrden_cooldown|Tiempo de espera: Yrden
+2110992405|        |effect_quen_cooldown|Tiempo de espera: Quen
+2110992406|        |effect_axii_cooldown|Tiempo de espera: Axia
+; OPT-01: options menu
+2110992001|        |panel_ghost_mode|Ghost Mode
+2110992329|        |panel_gm_gameplay_options|Jugabilidad
+2110992408|        |option_gm_scooldown|Tiempo de espera para lanzar señales (seg.)
+2110992431|        |option_gm_ascooldown|Tiempo de espera para lanzar señal alternativa (seg.)
+; STAM-04: regen options
+2110992391|        |option_gm_cbtsreg|Regeneración de vigor en combate (adicional)
+2110992392|        |option_gm_ocbtsreg|Regeneración de vigor fuera del combate (adicional)
+; STAM-05: armor regen penalty option
+2110992458|        |option_gm_armor_reg_penalty|Activar penalizaciones de vigor por tipo de armadura
+; STAM-05: character panel line for the armor regen modifier
+2110992263|        |attribute_name_staminaRegen_armor_mod|Bonificación de regeneración del vigor
+; STAM-02: Whirl and Rend cooldowns
+2110992400|        |effect_whirl_cooldown|Tiempo de espera: Remolino
+2110992401|        |effect_rend_cooldown|Tiempo de espera: Desgarrar
+2110992407|        |option_gm_mcooldown|Tiempo de espera para ataques cuerpo a cuerpo (seg.)
+; STAM-03: stamina cost options
+2110992494|        |option_gm_ascost|Consumo de vigor al correr/saltar
+2110992395|        |option_gm_mscost|Consumo de vigor de acciones cuerpo a cuerpo
+2110992396|        |option_gm_sscost|Consumo de vigor al lanzar señales
+2110992397|        |option_gm_stdelay|Retardo de regeneración del vigor (adicional, segundos)
+; STAM-03: character panel stamina costs
+2110992409|        |attribute_name_stamina_cost_light|Consumo de vigor del ataque rápido
+2110992410|        |attribute_name_stamina_cost_heavy|Consumo de vigor del ataque potente
+2110992411|        |attribute_name_stamina_cost_parry|Consumo de vigor al bloquear
+2110992412|        |attribute_name_stamina_cost_counter|Consumo de vigor al contraatacar
+2110992413|        |attribute_name_stamina_cost_dodge|Consumo de vigor al esquivar
+2110992414|        |attribute_name_stamina_cost_roll|Consumo de vigor al rodar
+2110992415|        |attribute_name_stamina_cost_sprint|Consumo de vigor al correr
+2110992416|        |attribute_name_stamina_cost_jump|Consumo de vigor al saltar
+2110992417|        |attribute_name_stamina_cost_item|Consumo de vigor al usar equipo
+2110992418|        |attribute_name_stamina_cost_aard|Consumo de vigor al lanzar Aard
+2110992419|        |attribute_name_stamina_cost_igni|Consumo de vigor al lanzar Igni
+2110992420|        |attribute_name_stamina_cost_yrden|Consumo de vigor al lanzar Yrden
+2110992421|        |attribute_name_stamina_cost_quen|Consumo de vigor al lanzar Quen
+2110992422|        |attribute_name_stamina_cost_axii|Consumo de vigor al lanzar Axia
+2110992438|        |attribute_name_stamina_cost_whirl|Consumo de vigor de "Remolino"
+2110992439|        |attribute_name_stamina_cost_rend|Consumo de vigor de "Desgarrar"
+; STAM-07: low-stamina sound options (quality-of-life group)
+2110992441|        |panel_gm_qol_options|QoL
+2110992442|        |option_gm_lowstamsfx|Umbral del efecto de sonido de poco vigor (%)
+2110992443|        |option_gm_lowstamsfx_vol|Volumen del efecto de sonido de poco vigor
+2110992444|        |option_gm_lowstamsfx_dynvol|Usar desvanecimiento para el efecto de sonido
+2110992445|        |option_gm_lowstamsfx_rate|Velocidad del efecto de sonido de poco vigor
+2110992446|        |option_gm_lowstamsfx_dynrate|Usar velocidad dinámica para el efecto de sonido
+; SKL-07: Undying (legacy ids)
+2110992112|        |effect_undying_skill|Inmortal
+2110992262|        |effect_undying_cooldown|Inmortal: reactivación en
+; SKL-09: Melt Armor (legacy id)
+2110992493|        |effect_melt_armor_timer|Derretir armadura
+; SKL-02: new strings (not in legacy) start at 2110992600
+2110992600|        |option_gm_classic_skill_tree|Classic skill tree (takes effect with a character reset)
+; SKL-19 begin: skill and perk descriptions (legacy ids where the text is legacy's, new ids from 2110992601)
+2110992145|        |gm_skill_desc_sword_2|Te permite realizar ataques potentes que añaden +$I$% al daño de las armas y +$I$ a la penetración de armaduras.
+2110992315|        |gm_skill_desc_sword_3|Técnicas defensivas de la Escuela del Lobo: bloqueo, contraataque, esquivar. Llevar a cabo estas acciones de manera exitosa reduce a 0 el daño que recibes, además de prevenir todos los efectos negativos. Un contraataque exitoso añade un $I$% a las probabilidades de lograr un impacto crítico. Un bloqueo parcial reduce el daño recibido un $I$% y previene las hemorragias. Rodar evita que seas derribado o desequilibrado y permite esquivar flechas. Algunos de los ataques no pueden ser esquivados. Las flechas pueden ser bloqueadas.
+2110992170|        |gm_skill_desc_sword_4|Permite manejar una ballesta ligera. Los disparos sin apuntar causan 50% menos daño.
+2110992166|        |gm_skill_desc_sword_5|Los golpes lanzados durante el combate generan puntos de adrenalina. Cada punto de adrenalina aumenta la potencia del ataque un $I$%.
+2110992103|        |gm_skill_desc_whirl|Ataque giratorio que golpea a todos los enemigos alrededor. Mantener el ataque consume $S$ puntos de vigor. Durante el ataque, la adrenalina disminuye a una velocidad de $S$ puntos/seg. Mientras se realiza dicho ataque con cero adrenalina, el poder de ataque se incrementa un $S$% por cada enemigo adicional (máx. $S$%) y el daño recibido disminuye un $S$%.
+2110992116|        |gm_skill_desc_muscle_memory_c|El daño de los ataques rápidos aumenta en $S$%. La ganancia de adrenalina de los ataques rápidos aumenta en $S$%.
+2110992117|        |gm_skill_desc_strength_training_c|El daño de los ataques potentes aumenta en $S$%. La ganancia de adrenalina de los ataques potentes aumenta en $S$%.
+2110992118|        |gm_skill_desc_precise_blows_c|Aumenta la probabilidad de impacto crítico con el ataque rápido un $I$% y el poder del impacto crítico un $I$%.
+2110992119|        |gm_skill_desc_crushing_blows_c|Aumenta la probabilidad de impacto crítico con el ataque potente un $I$% y el poder del impacto crítico un $I$%.
+2110992548|        |gm_skill_desc_steady_shot|Los virotes de ballesta causan $F$ puntos más de daño base.
+2110992549|        |gm_skill_desc_cold_blood_c|Cada virote que acierte al objetivo también generará la misma cantidad de puntos de adrenalina como al usar las espadas.
+2110992513|        |gm_skill_name_deflection|Desvío
+2110992115|        |gm_skill_desc_undying|Cuando la vitalidad llegue a 0 se consumirán puntos de adrenalina para evitar la muerte, obtener invulnerabilidad y aumentar la regeneración de vitalidad durante $S$s. Restaura $S$% de vitalidad por punto de adrenalina (máx. $S$%). No se puede activar más de una vez cada $S$s.
+2110992510|        |gm_skill_desc_flood_of_anger|Cuando se lance una señal, se consumirán (si están disponibles) 3 puntos de adrenalina para mejorarla al máximo nivel (desbloqueando todas sus bonificaciones) y aumentar su intensidad un $I$%. Si Control de la Furia está activo, los puntos de adrenalina no se consumirán inmediatamente, pero en su lugar el costo de lanzar señales se triplicará.
+2110992342|        |gm_skill_desc_razor_focus|Al iniciar el combate obtienes de inmediato al menos $S$ puntos de adrenalina. La generación de adrenalina  aumenta un $I$%.
+2110992601|        |gm_skill_desc_rend|Ataque fuerte que atraviesa bloqueos, armaduras y escudos y derriba a los enemigos. Aumenta el daño del arma un $S$%, más un $S$% por cada punto de vigor y un $S$% por cada punto de adrenalina gastados. La probabilidad de impacto crítico aumenta un $S$%. Con $S$ puntos de adrenalina, crea una onda expansiva que daña y derriba a todos los enemigos en un radio de $S$ metros.
+2110992602|        |gm_skill_desc_crippling_strikes|Los ataques rápidos tienen un $S$% de probabilidades de causar hemorragia. Los ataques rápidos causan un $S$% más de daño total a los enemigos que sangran.
+2110992603|        |gm_skill_desc_sunder_armor|Los ataques fuertes reducen la resistencia al daño del enemigo un $S$%.
+2110992604|        |gm_skill_desc_deflection_1|El daño recibido en bloqueos y contraataques parciales se reduce un $S$%. Los bloqueos perfectamente sincronizados devuelven las flechas.
+2110992605|        |gm_skill_desc_deflection_2|El daño recibido en bloqueos y contraataques parciales se reduce un $S$%. Los bloqueos perfectamente sincronizados devuelven las flechas con un $S$% más de daño del arma.
+2110992606|        |gm_skill_desc_deflection_3|El daño recibido en bloqueos y contraataques parciales se reduce un $S$%. Los bloqueos perfectamente sincronizados devuelven las flechas con un $S$% más de daño del arma. Cuando hay varios enemigos cerca, el coste de bloquear se reduce un $S$%.
+2110992607|        |gm_skill_desc_fleet_footed|El daño de los ataques que te rozan mientras esquivas o ruedas se reduce un $S$%.
+2110992608|        |gm_skill_desc_counterattack_1|Aumenta el poder de ataque de los contraataques un $S$%.
+2110992609|        |gm_skill_desc_counterattack_2|Aumenta el poder de ataque de los contraataques un $S$% y su probabilidad de impacto crítico un $S$%.
+2110992610|        |gm_skill_desc_counterattack_3|Aumenta el poder de ataque de los contraataques un $S$% y su probabilidad de impacto crítico un $S$%. Cada punto de adrenalina añade un $S$% de probabilidades de derribar al enemigo al contraatacar.
+2110992611|        |gm_skill_desc_deadly_precision|Cada punto de adrenalina añade un $S$% de probabilidades de matar a un enemigo al instante al contraatacar.
+2110992612|        |gm_skill_desc_crippling_shot|Los impactos críticos con la ballesta desactivan una habilidad especial de un monstruo durante $S$ segundos.
+2110992613|        |gm_skill_desc_anatomical_knowledge|Aumenta la probabilidad de impacto crítico de la ballesta un $S$% y el poder de impacto crítico de la ballesta un $S$%.
+2110992614|        |gm_skill_desc_cold_blood|Cada virote que alcanza su objetivo genera la misma adrenalina que un golpe de espada. Los virotes de ballesta causan $S$ puntos más de daño base.
+2110992615|        |gm_skill_desc_muscle_memory_1|Tras esquivar o rodar con éxito, tu siguiente ataque rápido gana un $S$% de poder de ataque y causa un $S$% más de daño total. La adrenalina obtenida con ataques rápidos aumenta un $S$%.
+2110992616|        |gm_skill_desc_muscle_memory_23|Tras esquivar o rodar con éxito, tus siguientes $S$ ataques rápidos seguidos ganan un $S$% de poder de ataque y causan un $S$% más de daño total. La adrenalina obtenida con ataques rápidos aumenta un $S$%.
+2110992617|        |gm_skill_desc_strength_training_1|Un ataque rápido aumenta el poder del siguiente ataque fuerte un $S$% y su daño del arma un $S$%. La adrenalina obtenida con ataques fuertes aumenta un $S$%.
+2110992618|        |gm_skill_desc_strength_training_23|Cada ataque rápido aumenta el poder del siguiente ataque fuerte un $S$% y su daño del arma un $S$%. Se acumula hasta $S$ veces, y cada acumulación tiene la mitad de efecto que la anterior. La adrenalina obtenida con ataques fuertes aumenta un $S$%.
+2110992619|        |gm_skill_desc_precise_blows|Aumenta el poder de impacto crítico de los ataques rápidos un $S$% y su probabilidad de impacto crítico un $S$%. Un impacto crítico con un ataque rápido aumenta la probabilidad de impacto crítico de los ataques rápidos otro $S$% y su poder de impacto crítico otro $S$% durante $S$ segundos.
+2110992620|        |gm_skill_desc_crushing_blows|Aumenta el poder de impacto crítico de los ataques fuertes un $S$% y su probabilidad de impacto crítico un $S$%. Un impacto crítico con un ataque fuerte aumenta la probabilidad de impacto crítico de los ataques fuertes otro $S$% y su poder de impacto crítico otro $S$% durante $S$ segundos.
+2110992284|        |gm_skill_desc_aard|Una descarga directa de energía telequinética que desequilibra al enemigo y tiene un $I$% de probabilidades de derribarlos. La probabilidad de lograr un derribo pesado es de un $I$%. Las probabilidades aumentan con la intensidad de la señal y se incrementan si el enemigo tiene poco vigor. Los derribos pesados activan un movimiento de ejecución.
+2110992151|        |gm_skill_desc_yrden|Círculo mágico que ralentiza a los enemigos un $S$% dentro de su área (aumenta con la intensidad de la señal, la ralentización máx. está limitada a un $S$%). Duración del círculo: $S$s. Cuanto más dure el círculo, menos eficiente se vuelve.
+2110992124|        |gm_skill_desc_quen|Escudo protector que absorbe hasta $I$% del daño recibido. Absorción de daño base: $I$. Aumenta con la intensidad de la señal. Absorción actual: $I$. Previene los efectos de desequilibrio, quemaduras, envenenamiento y hemorragias (y luego se rompe). <br>Duración del escudo: $I$s.
+2110992286|        |gm_skill_desc_axii|Hechiza la mente del enemigo, confundiéndolo y eliminándolo temporalmente del combate. Los intentos fallidos de Axia desequilibran al enemigo. Otorga un $S$% de probabilidades de golpear críticamente al enemigo confundido. Puede activar movimientos de ejecución o desmembramiento en el enemigo confundido con una probabilidad del $S$% (aumenta con la intensidad de la señal y la severidad del daño). <br>Duración de la confusión: $S$s (aumenta con la intensidad de la señal).
+2110992279|        |gm_skill_desc_aard_sweep|Modo de señal alternativo:<br>Aard golpea a todos los enemigos en un radio determinado. La intensidad de la señal es $I$% inferior en este modo.
+2110992281|        |gm_skill_desc_aard_sweep_3|Modo de señal alternativo:<br>Aard golpea a todos los enemigos en un radio determinado. La intensidad de la señal ya no se reduce.
+2110992273|        |gm_skill_desc_aard_intensity|Aumenta la probabilidad base de realizar un derribo pesado un $I$%.
+2110992073|        |gm_skill_desc_pyromaniac|Aumenta la probabilidad de causar quemaduras un $I$%.
+2110992132|        |gm_skill_desc_sustained_glyphs_1|La duración del Círculo de Yrden aumenta un $I$%.
+2110992133|        |gm_skill_desc_sustained_glyphs_2|La duración del Círculo de Yrden aumenta un $I$%. El radio del Círculo de Yrden aumenta un $I$%.
+2110992095|        |gm_skill_desc_magic_turret|Modo de señal alternativo:<br>Causa $I$ puntos de daño a los enemigos dentro de un radio de $I$mts. El daño aumenta con la intensidad de la señal (daño actual: $I$). Ignora la armadura del enemigo. Destruye los proyectiles que atraviesan el área. Duración: $I$s. Cargas de la trampa: $I$.
+2110992131|        |gm_skill_name_magic_turret|Trampa Mágica
+2110992275|        |gm_skill_desc_yrden_intensity|Agrega $I$ puntos al daño de la Trampa Mágica. Aumenta con la intensidad de la señal.
+2110992135|        |gm_skill_desc_exploding_shield_2|Quen empuja a los enemigos hacia atrás y causa $I$ puntos de daño cuando se rompe. El daño aumenta con la intensidad de la señal (daño actual: $I$).
+2110992136|        |gm_skill_desc_exploding_shield_3|Quen empuja a los enemigos hacia atrás con una probabilidad de derribarlos, causa $I$ puntos de daño cuando se rompe. El daño aumenta con la intensidad de la señal (daño actual: $I$).
+2110992137|        |gm_skill_desc_active_shield|Modo de señal alternativo:<br>Escudo activo que absorbe hasta 100% del daño recibido por armas enemigas. La absorción base del daño es $I$% mayor. Mantenerlo consume $I$ puntos/seg. de vigor. Los ataques bloqueados consumen vigor proporcionalmente al daño absorbido. Restaura vitalidad por $I$% del daño absorbido. Previene el desequilibrio, quemaduras, envenenamiento y hemorragias. Previene ser derribado (y entonces se rompe).
+2110992139|        |gm_skill_desc_active_shield_3|Modo de señal alternativo:<br>Escudo activo que absorbe hasta 100% del daño recibido por armas enemigas. La absorción base del daño es $I$% mayor. Mantenerlo ya no consume vigor. Los ataques bloqueados consumen vigor proporcionalmente al daño absorbido. Restaura vitalidad por $I$% del daño absorbido. Previene el desequilibrio, quemaduras, envenenamiento y hemorragias. Previene ser derribado (y entonces se rompe).
+2110992276|        |gm_skill_desc_quen_intensity|Agrega $I$ puntos a la absorción del daño del Escudo Activo. Aumenta con la intensidad de la señal.
+2110992175|        |gm_skill_desc_delusion|El tiempo se ralentiza un $I$% adicional al lanzar Axia. La probabilidad de dar un impacto crítico a un enemigo confundido aumenta un $I$%. Aumenta la efectividad de Axia en los diálogos.
+2110992288|        |gm_skill_desc_puppet|Modo de señal alternativo:<br>El enemigo objetivo se convierte en aliado durante $I$s y obtiene $I$% de bonificación de potencia de ataque. La duración del efecto aumenta con la intensidad de la señal. Duración actual: $I$s.
+2110992287|        |gm_skill_desc_axii_intensity|La duración de los efectos de Axia aumenta $I$%.
+2110992096|        |gm_skill_desc_domination|Dos enemigos pueden ser influenciados por Axia al mismo tiempo. La duración del efecto se reduce un $I$%.
+2110992098|        |gm_skill_desc_domination_3|Dos enemigos pueden ser influenciados por Axia al mismo tiempo. La duración del efecto no se reduce.
+2110992125|        |gm_skill_desc_melt_armor|El daño causado por Igni ahora también reduce la armadura del enemigo en $S$ puntos y su resistencia a los daños un $S$% durante $S$s (aumenta con la intensidad de la señal). Los efectos aplicados posteriormente no son acumulativos.
+2110992274|        |gm_skill_desc_igni_intensity|Agrega $I$ puntos al daño de fuego y $I$ puntos/seg. al daño de la Corriente Ígnea.
+2110992621|        |gm_skill_desc_igni|Explosión ardiente que causa $I$ puntos de daño con un $I$% de probabilidades de prender fuego a los enemigos. El daño aumenta con la intensidad de la señal.
+2110992622|        |gm_skill_desc_shock_wave|Aard causa $I$ puntos de daño. El daño aumenta con la intensidad de la señal.
+2110992623|        |gm_skill_desc_firestream|Modo de señal alternativo:<br>Emite una corriente de fuego continua que provoca quemaduras y causa $I$ puntos de daño por segundo. El daño aumenta con la intensidad de la señal. Consume $I$ puntos de vigor por segundo.
+2110992624|        |gm_skill_desc_sustained_glyphs_3|La duración del Círculo de Yrden aumenta un $I$%. El radio del Círculo de Yrden aumenta un $I$%. Se puede lanzar una trampa adicional.
+2110992625|        |gm_skill_desc_supercharged_glyphs|Los enemigos dentro del Círculo de Yrden reciben un $S$% más de daño total.
+2110992318|        |gm_skill_desc_alchemy_2|Permite la creación de aceites que se pueden aplicar a las espadas. La efectividad disminuye con cada golpe asestado (hasta un $I$% del valor original).
+2110992171|        |gm_skill_desc_alchemy_3|Permite la creación de bombas portátiles que pueden lanzarse contra los enemigos. Los tiros sin apuntar causan 50% menos daño.
+2110992140|        |gm_skill_desc_poisoned_blades|El aceite apropiado aplicado a una espada da una probabilidad de $I$% de envenenar al objetivo en cada golpe. El aceite mejorado aumenta esta probabilidad en $I$% y el superior en $I$%. La efectividad disminuye con cada golpe asestado (hasta un $I$% del valor inicial).
+2110992317|        |gm_skill_desc_protective_coating|Reduce el daño recibido del tipo de monstruo al que pertenece el aceite un $I$%. El aceite mejorado reduce el daño un $I$% y el superior un $I$%. La efectividad disminuye con cada golpe asestado (hasta un $I$% del valor original).
+2110992492|        |gm_skill_desc_hunter_instinct|El poder de los impactos críticos contra el tipo de enemigo objetivo aumenta un $S$% por cada punto de adrenalina disponible (hasta un máx. de $S$%).
+2110992349|        |gm_skill_desc_acquired_tolerance|Every known level 1, 2 and 3 potion, bomb and oil formula, alchemy substance and mutagen decoction formula increases maximum Toxicity by 1 point, up to +$I$ points max. Current bonus is $I$ points.
+2110992454|        |gm_skill_desc_tissue_transmutation|Cuando se consume, el extracto de mutágeno aumenta la vitalidad máxima en $I$ puntos por cada punto de compensación de toxicidad para la duración del extracto.
+2110992553|        |gm_skill_desc_adaptation|Disminuye la toxicidad de los extractos un $S$%.
+2110992141|        |gm_skill_desc_frenzy|Si la toxicidad está sobre 0, el tiempo se ralentiza automáticamente un $S$% durante $S$s cuando el enemigo esté a punto de realizar un contraataque. Aumenta el poder de ataque y la intensidad de las señales un $S$% cuando la toxicidad excede el umbral de seguridad.
+2110992355|        |gm_skill_desc_fast_metabolism|La toxicidad disminuye en $S$ puntos/seg. más rápido.
+2110992505|        |gm_skill_name_refreshment|Revigorización
+2110992504|        |gm_skill_name_restoration|Restauración
+2110992359|        |gm_skill_name_expert_brewer|Bebedor Experto
+2110992353|        |gm_skill_name_prolonged_effects|Efectos Prolongados
+2110992506|        |gm_skill_desc_refreshment|Cada dosis consumida de la poción restaura $I$% del vigor máximo.
+2110992627|        |gm_skill_desc_restoration|Cada dosis consumida de la poción cura un $I$ % de la vitalidad máxima.
+2110992354|        |gm_skill_desc_prolonged_effects|Extiende la duración de las pociones un $S$%.
+2110992358|        |gm_skill_desc_expert_brewer|Disminuye la toxicidad de las pociones en $S$ punto(s).
+2110992626|        |gm_skill_desc_fixative_3|Los aceites para hojas no se desgastan.
+2110992071|        |gm_skill_desc_cat_school|Cada pieza de armadura ligera aumenta la probabilidad de impacto crítico en $S$% y el poder del impacto crítico en $S$%.
+2110992174|        |gm_skill_desc_griffin_school|Cada pieza de armadura intermedia aumenta la intensidad de las señales un $S$% y disminuye el vigor consumido por estas un $S$%.
+2110992072|        |gm_skill_desc_bear_school|Cada pieza de armadura pesada aumenta la vitalidad máxima en $S$%, el daño infligido por los ataques cuerpo a cuerpo añade $S$ puntos de adrenalina adicionales por cada pieza.
+2110992313|        |gm_skill_desc_rage_management|Si se tiene al menos un punto de adrenalina, se usará para lanzar una señal en lugar de consumir vigor.
+2110992319|        |gm_skill_desc_adrenaline_burst|Aumenta la ganancia de adrenalina un $I$%. Adicionalmente al efecto usual de Trance de Combate, cada punto de adrenalina disminuye el consumo de vigor un $I$%.
+2110992172|        |gm_skill_desc_focus|Además del efecto Trance de Combate habitual, cada punto de adrenalina también aumenta la intensidad de las señales un $I$%. Usar señales ahora genera la misma cantidad de puntos de adrenalina como al usar espadas.
+2110992491|        |gm_skill_desc_in_combats_fires|Las bombas y los efectos de los virotes especiales no te afectan pero su daño se reduce a la mitad.
+2110992550|        |gm_skill_desc_advanced_pyrotechnics|El daño que genera la explosión de una bomba genera $F$ puntos de adrenalina. Este valor no es afectado por ninguna otra bonificación a la adrenalina.
+2110992399|        |gm_skill_desc_attack_best_defense|Matar a un enemigo restaura un $I$% del vigor (sin tiempo de espera). Los impactos críticos y contraataques exitosos restauran un $I$% del vigor (tiempo de espera $S$s).
+2110992628|        |gm_skill_desc_survival_instinct|Aumenta la vitalidad máxima en $S$.
+2110992629|        |gm_skill_desc_heavy_artillery|Las bombas causan un $S$% más de daño, pero el número de bombas por casilla se reduce a la mitad. Las bombas que no causan daño conservan su número, salvo que Pirotecnia esté equipada.
+2110992630|        |gm_skill_desc_wolf_school|Después de que un enemigo reciba daño de bomba, los aceites para hojas otorgan contra él un $S$% de probabilidad de impacto crítico y un $S$% de poder de impacto crítico. Las bombas causan un $S$% más de daño a los enemigos envenenados.
+; SKL-19 end

@@ -22,7 +22,7 @@ Around it: enemies' stats are rebuilt so armor and resistances depend on the ene
 **What 5.x did in this area.** The formula is unchanged (still attack power before armor), but around it, from the code (not tested in game):
 
 - **Strong attacks are stronger**: −0.433 attack power instead of 1.32's −0.833, still ×1.833 final damage. Aard's damage gets attack power through `AARD_SPELL_POWER_MULT` (1.32 forced it to 1), and Aard's direct damage now goes through the formula.
-- **About 20 new raw-damage multipliers**, each `*=` and compounding with the others and with attack power: `ProcessNewSkills_Combat` (Muscle Memory s22 ×1.3, Strength Training s23 ×(1+0.15/level), Precise Blows s24, Crushing Blows s25 ×1.5) and in `ProcessDamageIncrease` Catalyst, Toxic Shock, Elemental Attunement, Element of Surprise, the Wolven and Netflix sets, Crippling Strike, the bomb passives and perks, `alchemy_s24`/`s25`/`s26`, Resonance, Anatomical Knowledge, the `sword_s32` headshot ×2.5 (full list in [DMG-04](#dmg-04-additive-raw-damage-pool)).
+- **About 20 new raw-damage multipliers**, each `*=` and compounding with the others and with attack power: `ProcessNewSkills_Combat` (Muscle Memory s22 ×1.3, Strength Training s23 ×(1+0.15/level), Three Strikes s24, Crushing Blow s25 ×1.5) and in `ProcessDamageIncrease` Catalyst, Toxic Shock, Elemental Attunement, Element of Surprise, the Wolven and Netflix sets, Crippling Strike, the bomb passives and perks, `alchemy_s24`/`s25`/`s26`, Resonance, Anatomical Knowledge, the `sword_s32` headshot ×2.5 (full list in [DMG-04](#dmg-04-additive-raw-damage-pool)).
 - **A negative resistance now shrinks armor** (`GetDamageResists`: armor × (1 + resistance) when the resistance is below 0), which the new Sunder Armor (`sword_s28`) uses.
 - **Allies are rebuilt**: friendly NPCs' damage is raised to a floor (level × 40) and clamped against Geralt's own damage, allied hits on bosses are capped at 0.5% of their health, Puppet ×1.2–1.6 by level, damage-boost abilities (`FCR3*DamageBoost`) added to weak allies, Axii'd allies take ×0.1 from NPCs.
 - `ProcessActionDamage` fetches the damage types once at the start, runs the immortality clamp after `ReduceDamage` (moved out of the actors' `ReduceDamage`), and adds Mutagen 28's specter block, auto-oil, `SetRecentlyDodged` and simulate-only gates.
@@ -35,8 +35,8 @@ Unit lists: [attribution.csv](attribution.csv): DMG-01 to DMG-15 (DMG-09 and DMG
 Made by the project owner on 2026-10-06 (DD1 to DD5):
 
 - **DD1: multiplicative raw-damage bonuses become additive.** "That was a good call from legacy": every percentage bonus to raw damage, 5.x's included, joins the additive pool ([DMG-04](#dmg-04-additive-raw-damage-pool)). Any exception must be carefully considered and deliberate; the four confirmed on 2026-10-07 are listed in DMG-04. This settles SKL's D4.
-- **DD2: resistances never go below 0, as legacy.** 5.x's rule that a negative resistance shrinks armor does not apply; the new tree's Sunder Armor (`sword_s28`) is reworked with SKL ([DMG-02](#dmg-02-armor-and-resistance-rules)).
-- **DD3: allied NPC damage as legacy** ([DMG-12](#dmg-12-allied-npc-damage)); the new tree's Puppet `magic_s31` gets legacy's puppet rule with SKL.
+- **DD2: resistances never go below 0, as legacy.** 5.x's rule that a negative resistance shrinks armor does not apply; the new tree's Sunder Armor (`sword_s28`) becomes legacy's flat −25% with SKL (D56) ([DMG-02](#dmg-02-armor-and-resistance-rules)).
+- **DD3: allied NPC damage as legacy** ([DMG-12](#dmg-12-allied-npc-damage)); the new tree's Puppet `magic_s31` gets legacy's puppet rule with SKL (D24).
 - **DD4: each change stays in its own area unless DMG needs it to be tested.** The enemy stat model (level bonuses, NPC templates, difficulty multipliers) is not needed to test the formula: the damage probe checks every step against any enemy. It goes to AI and DIFF ([DMG-13](#dmg-13-enemy-stat-model)). The human armor fix is needed (armor before attack power cannot be tested against human enemies without armor) and is ported here ([DMG-15](#dmg-15-human-npc-armor)).
 - **DD5: the scope.** DMG owns the formula, where every bonus sits, and the generic rules the formula needs to work (weapon damage source, damage-over-time and returned-damage rules). The skills, sets, potions and mutations that feed it keep their own areas: DMG ports the steps with hooks for them, and each area fills in its own terms. Exception: Strong Attack's core rule (`sword_2`, +50% weapon damage, +200 armor piercing), which replaces vanilla's heavy-attack multipliers.
 
@@ -48,8 +48,6 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 4. **Weapon damage and human armor** (DMG-08, DMG-15).
 5. **Signs and durations** (DMG-06, DMG-07).
 6. **Special fights and rules** (DMG-09, DMG-10, DMG-11, DMG-12).
-
-SKL resumes after slice 3 at the earliest; its numbers can be judged from then on.
 
 ---
 
@@ -77,7 +75,6 @@ SKL resumes after slice 3 at the earliest; its numbers can be judged from then o
 
 **Decisions:** port as legacy; the per-monster Igni weakness is dropped as in legacy (weaknesses are resistances, AI).
 
-- **Deviation:** the heavy attacks' adrenaline gain (`focus_gain` on `attack_heavy`, `attack_heavy_special`, `attack_heavy_noparry`, `attack_super_heavy`), which legacy removed with their attack power, stays 5.x's (temporary, until SKL-07: Battle Trance's adrenaline rules).
 - **Deviation:** 5.x's ×1.1 to the damage the player takes in New Game+ (end of `CalculateDamage`, new in 5.x) is kept: NG+ scaled like vanilla's ([New Game+ policy](../feature-mapping.md#new-game-carried-over-and-scaled-not-balanced-or-tested)) (project owner, 2026-10-07; audit F5).
 - **Deviation:** Mutagen 2's resistance bonus stays 5.x's (legacy reworked the mutagen) (temporary, until ALCH).
 
@@ -100,7 +97,7 @@ SKL resumes after slice 3 at the earliest; its numbers can be judged from then o
 | 5.x class | overlap |
 | Flags | balance |
 | Depends on | DMG-01; hooks for SKL (Sunder Armor, Strong Attack), ALCH (oils, Mutagen 2, Dimeritium), SWD (Aerondight, Iris), AI (Ice Armor), XBOW (headshots) |
-| Skill trees | both: classic `sword_s6` Sunder Armor, new `sword_s28` (its armor debuff, reworked with SKL: DD2); `sword_2` shared |
+| Skill trees | both: classic `sword_s6` Sunder Armor, new `sword_s28` (5.x's armor debuff goes; legacy's flat −25% with SKL: DD2, D56); `sword_2` shared |
 | Port form | `@replaceMethod(W3DamageManagerProcessor) GetDamageResists` (`damage/formula.ws`); `@replaceMethod` of the globals `ResistStatNameToEnum`, `ResistStatEnumToName`; XML `all_NPC_ability`, `all_PC_ability` |
 | Port status | signed off (2026-10-07), except the other areas' terms it hosts (deviations; ported with those areas) |
 | Open checks | the fistfight minigame ignoring armor and resistances; the other areas' terms kept from 5.x (oils, Sunder Armor) with this function |
@@ -115,7 +112,7 @@ SKL resumes after slice 3 at the earliest; its numbers can be judged from then o
 
 **Decisions:** port as legacy; 5.x's armor-shrinking rule does not apply (DD2, project owner, 2026-10-06): with resistances clamped at 0 it can never trigger. Before porting the resistance names, list the abilities carrying `bleeding_resistance` points in 5.x; switching them on is a deviation if they differ from legacy's.
 
-- **Deviation:** the other areas' terms in this function stay 5.x's until those areas are ported: oils' resistance reduction and Protective Coating (SKL-14, ALCH), Sunder Armor (SKL), Mutagen 28 (ALCH); legacy's full ignore of a fully charged Aerondight and Iris's phantom strike (SWD), Ice Armor's +30% resistance (AI, 5.x halves the damage in `ReduceDamage`), Dimeritium's armor and resistance reduction and Mutagen 2's debuff (ALCH) (temporary, until those areas).
+- **Deviation:** the other areas' terms in this function stay 5.x's until those areas are ported: the oils' resistance reduction values (ALCH; their wearing off and Protective Coating are SKL-14's, ported), Mutagen 28 (ALCH); legacy's full ignore of a fully charged Aerondight and Iris's phantom strike (SWD), Ice Armor's +30% resistance (AI, 5.x halves the damage in `ReduceDamage`), Dimeritium's armor and resistance reduction and Mutagen 2's debuff (ALCH) (temporary, until those areas).
 - **Deviation:** the point names of bleeding, will and burning resistance are not mapped yet (`ResistStatNameToEnum`) (temporary, until the 5.x XML entries carrying them are checked).
 
 
@@ -147,7 +144,7 @@ Stat registration (audit F4, 5.x-GM `6b90faf5`): `all_NPC_ability` registers wil
 
 **Decisions:** port as legacy; the headshot and backstab rule is GEN's in the changelist, ported here because it is one line of this function.
 
-- **Deviation:** the other areas' terms here stay 5.x's until their areas: Whirl, Yrden's cached power for Flood of Anger, the crit skills melee-only, `sword_s7`'s crit damage on bolts (SKL); Lynx, Bear and Red Wolf (ARM); Aerondight's crit (SWD); Mutation 2's crit formula, Mutation 9's crit damage on bolts (MUT); Mutagen 5's attack power, which legacy removed (ALCH) (temporary, until SKL, ARM, SWD, MUT, ALCH).
+- **Deviation:** the other areas' terms here stay 5.x's until their areas: Lynx, Bear and Red Wolf (ARM); Aerondight's crit (SWD); Mutation 2's crit formula, Mutation 9's crit damage on bolts (MUT); Mutagen 5's attack power, which legacy removed (ALCH) (temporary, until ARM, SWD, MUT, ALCH). SKL's terms here are ported: Whirl, the Yrden turret's cached intensity, the crit skills melee only, Anatomical Knowledge's crit damage on bolts.
 
 
 **Slices:** slice 2, with [DMG-01](#dmg-01-armor-before-attack-power). The 5.x level-ups' additive attack power (+31 at level 10) applies after armor and so ignores it, until GEN removes it from level-ups.
@@ -162,10 +159,10 @@ No crits for damage over time or in non-deadly fights (slice 6a, 5.x-GM `5a615f8
 | 5.x class | overlap |
 | Flags | balance |
 | Depends on | DMG-01; SKL (most of the pool's terms), SWD, ENCH, MUT, EFX (frozen) |
-| Skill trees | both: the pool takes legacy's terms (classic) and 5.x's new-tree multipliers (`sword_s22` to `s26`, `s29`, `s32`, `magic_s35`, `s41`, `perk_27`, `28`, `37`, `44`, `alchemy_s23` to `s26`) |
+| Skill trees | both: the pool takes legacy's terms (classic) and 5.x's new-tree multipliers (`sword_s22` to `s26`, `s29`, `s32`, `magic_s35`, `s41`, `perk_27`, `28`, `37`, `44`, `alchemy_s23` to `s26`); SKL dropped or replaced most of these ([follow-ups from SKL](#follow-ups-from-skl)) |
 | Port form | `damage/pool.ws`: `@replaceMethod(W3DamageManagerProcessor) ProcessDamageIncrease` on 5.x's signature (its multipliers as pool terms, the pool handed on in fields), `ProcessNewSkills_Combat` and the four new-tree combat skill functions (their bonuses as pool terms; the pool applied once at the end, `GMPoolApply`); the action's damage types written back (`SetDTs`, so that Quen and other later readers see the pool) with SKL-11, which needs it; XML `gm_damage.xml` (`sword_2`) |
 | Port status | signed off (2026-10-07), except the other areas' terms it hosts (deviations; ported with those areas) |
-| Open checks | the pool terms other than Strong Attack and Element of Surprise: the new-tree combat skills (Muscle Memory, Strength Training, Precise Blows, Crushing Blows), perk 37 on non-physical and perk 28 on poison damage only, Rend, the bomb terms, Lynx, Aerondight, Runeword 4, Mutation 8, the Wolven set, Catalyst, Resonance, `sword_s32`, `alchemy_s26`; Toxic Shock's added poison damage; the NPC ranged bonus above level 31 being gone |
+| Open checks | the pool terms of other areas: the bomb items' terms, Lynx, Aerondight, Runeword 4, Mutation 8, the Wolven set; the NPC ranged bonus above level 31 being gone. SKL's pool terms are checked in SKL's entries (Rend, Strength Training, Deflection, Steady Shot, Heavy Artillery, Wolf School); the 5.x new-tree terms are gone ([follow-ups from SKL](#follow-ups-from-skl)) |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
@@ -175,17 +172,17 @@ No crits for damage over time or in non-deadly fights (slice 6a, 5.x-GM `5a615f8
 
 **5.x:** keeps every 1.32 block and adds the raw multipliers listed in the intro (each `*=`): `ProcessNewSkills_Combat` (s22 ×1.3, s23 ×(1+0.15/level), s24 ×1.4–1.7 on a chance, s25 ×1.5, s28 armor debuff), Netflix set 2 (direct damage), Catalyst `magic_s35` ×(1+0.3/level), Toxic Shock `alchemy_s23` (adds poison damage, 25/50/75% of the total), Elemental Attunement `perk_37` ×(1+0.03/level), Wolven set 1 (+1% per bleed stack × pieces), Element of Surprise `perk_44` ×(1+0.1/level), bombs ×(1+`potion_duration`), `perk_27` ×1.02, `alchemy_s25`, Crippling Strike ×(1+its multiplier), `perk_28` ×1.02 poison, `alchemy_s24` (player ×1.5 at 80% toxicity), `alchemy_s26` ×(1+0.05/level, 0.1 against poison-immune), Resonance `magic_s41`, Anatomical Knowledge `sword_s26` (flat), `sword_s32` headshot ×2.5. 5.x works on a local array and does not write the action, so later readers see pre-bonus values.
 
-**Decisions:** the pool as legacy, and every 5.x raw-damage multiplier joins it as an additive term (DD1, project owner, 2026-10-06; settles SKL's D4). Each term's value stays its area's (SKL, ARM, ALCH); the new tree's percentages are re-judged in SKL's phase 2.
+**Decisions:** the pool as legacy, and every 5.x raw-damage multiplier joins it as an additive term (DD1, project owner, 2026-10-06; settles SKL's D4). Each term's value stays its area's (SKL, ARM, ALCH); SKL's per-skill pass (complete 2026-10-11) re-judged the new tree's terms: most of 5.x's were dropped or replaced by SKL ([follow-ups from SKL](#follow-ups-from-skl)).
 
 Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully considered and deliberate"):
 
-1. **Crippling Strike** (new tree `sword_s29`): a final-damage multiplier, not a pool term (already decided with SKL's D2, project owner, 2026-10-06).
-2. **`alchemy_s24`** (the player takes ×1.5 at 80% toxicity): it changes damage *received*, which the changelist's rules put in final damage ("if something decreases or increases the damage received ... it modifies the final damage value"): final damage.
-3. **Flat additions stay flat** (they are not multipliers): Anatomical Knowledge `sword_s26` (silver sword damage added to bolts), Netflix set 2 (direct damage), Toxic Shock `alchemy_s23` (adds poison damage equal to 25/50/75% of the hit). Added before the pool like legacy's flat additions, so the pool scales them; Toxic Shock's share is taken of the damage before the pool, so the pool is not counted twice.
+1. **Crippling Strike** (new tree `sword_s29`): a final-damage multiplier, not a pool term (SKL's D2, project owner, 2026-10-06; since 2026-10-09 the skill is legacy's Crippling Strikes, whose bonus is for fast attacks against bleeding enemies).
+2. **`alchemy_s24`** (the player takes ×1.5 at 80% toxicity): it changes damage *received*, which the changelist's rules put in final damage ("if something decreases or increases the damage received ... it modifies the final damage value"): final damage. Gone: SKL-13 replaced High Tolerance with Refreshment (D27).
+3. **Flat additions stay flat** (they are not multipliers): Anatomical Knowledge `sword_s26` (silver sword damage added to bolts), Netflix set 2 (direct damage), Toxic Shock `alchemy_s23` (adds poison damage equal to 25/50/75% of the hit). Added before the pool like legacy's flat additions, so the pool scales them; Toxic Shock's share is taken of the damage before the pool, so the pool is not counted twice. Anatomical Knowledge's add (D14) and Toxic Shock (D60) are gone with SKL; Netflix set 2 stays.
 4. **Legacy's own exceptions**, kept multiplicative in legacy's code: the underwater crossbow bonus and Mutation 9's bolt damage. Kept as legacy.
 
-- **Deviation:** 5.x's own versions of the terms legacy reworked are pool terms until their areas port legacy's: Rend's adrenaline and stamina bonuses (legacy `GetRendPowerBonus`, SKL-04), Perk 20, Perk 27 and `alchemy_s25` on bombs, the potion-duration passive on bombs (passives go with SKL-01), the Lynx set (legacy: attack power, ARM), Aerondight (legacy: attack power, SWD), Runeword 4's overheal (legacy: an effect, ENCH), Mutation 8 (legacy: final damage, MUT), the Wolven set (ARM) (temporary, until SKL, ARM, SWD, ENCH, MUT).
-- **Deviation:** legacy's pool terms and flat additions of other areas are not ported yet: Ghost Mode's `sword_dmg_bonus`/`spell_dmg_bonus` (SWD), Heft and Rotation (ENCH), Deflection on reflected arrows (SKL-05), the frozen target's bonus (EFX; 5.x's separate frost hit stays), Steady Shot (SKL-06), `fist_dmg_bonus` (AI), Mutagen 9 and Mutation 10 (ALCH, MUT) (temporary, until those areas).
+- **Deviation:** 5.x's own versions of the terms legacy reworked are pool terms until their areas port legacy's: the Lynx set (legacy: attack power, ARM), Aerondight (legacy: attack power, SWD), Runeword 4's overheal (legacy: an effect, ENCH), Mutation 8 (legacy: final damage, MUT), the Wolven set (ARM) (temporary, until ARM, SWD, ENCH, MUT). SKL's are ported: Heavy Artillery (legacy's), Perk 27 and `alchemy_s25` gone, the potion-duration passive zeroed (SKL-01).
+- **Deviation:** legacy's pool terms and flat additions of other areas are not ported yet: Ghost Mode's `sword_dmg_bonus`/`spell_dmg_bonus` (SWD), Heft and Rotation (ENCH), the frozen target's bonus (EFX; 5.x's separate frost hit stays), `fist_dmg_bonus` (AI), Mutagen 9 and Mutation 10 (ALCH, MUT) (temporary, until those areas).
 
 **Slices:**
 
@@ -202,12 +199,12 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 | Depends on | DMG-01 to DMG-04; SKL-11 (Quen before armor); hooks for SKL, MUT, ENCH, ALCH, XBOW, DIFF |
 | Skill trees | n/a (hooks only) |
 | Port form | `damage/pipeline.ws`: `@replaceMethod(W3DamageManagerProcessor) ProcessActionDamage` on 5.x's body, one call added (DEF-01's wrapper stacks on it); `@addMethod` `GMProcessDamageModification`; `ProcessDamageDecrease` and the damage types re-read (Quen before armor) with SKL-11 |
-| Port status | signed off (2026-10-07), except Quen before armor (SKL-11) and the other areas' terms it hosts (deviations; ported with those areas) |
-| Open checks | the sign rule against Vitality and Crippling Strike's bonus in final damage (no test yet: needs a sign hit and a crippled enemy) |
+| Port status | signed off (2026-10-07); Quen before armor added with SKL-11 slice 1 (2026-10-15: `GMProcessDamageDecrease` after the pool, the damage types written back with `GMSetDTs` and re-read); the other areas' terms it hosts are ported with those areas (deviations) |
+| Open checks | the sign rule against Vitality and Crippling Strikes' bonus in final damage (no test yet: needs a sign hit, and a fast attack on a bleeding enemy; SKL's D2 of 2026-10-09 makes the new tree's bonus legacy's, fast attacks only) |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
-**What it does:** the order in the intro: raw damage and its pool, then Quen on the raw damage, then the damage types re-read, then crit, attack power and the formula, then `ReduceDamage`, then **final damage** (`ProcessDamageModification`), then direct damage. Final damage applies after everything else ("If something decreases or increases the damage received (or the final damage dealt), then it modifies the final damage value after all the Armor, Attack Power bonuses and resistances were applied"); skipped when there is no damage, for dodged hits and for effect damage over time. Its generic rules, owned here: the difficulty multiplier applies to hostile NPCs hitting the player only (DIFF owns the values), NPCs hitting friendly NPCs deal ×0.25 (DMG-12), damage below 1 becomes 0 (DMG-01), and the player's signs deal reduced damage to Vitality (humans, animals): ×(0.75 − 0.5 × max(0, 1 − 0.1 × (level − 1))), 25% at level 1 rising to 75% at level 11 and above. The other terms are hooks: Perk 16, unaimed bolts and bombs ×0.5, Severance, Supercharged Glyphs, Crippling Strikes, Mutation 8, Dimeritium.
+**What it does:** the order in the intro: raw damage and its pool, then Quen on the raw damage, then the damage types re-read, then crit, attack power and the formula, then `ReduceDamage`, then **final damage** (`ProcessDamageModification`), then direct damage. Final damage applies after everything else ("If something decreases or increases the damage received (or the final damage dealt), then it modifies the final damage value after all the Armor, Attack Power bonuses and resistances were applied"); skipped when there is no damage, for dodged hits and for effect damage over time. Its generic rules, owned here: the difficulty multiplier applies to hostile NPCs hitting the player only (DIFF owns the values), NPCs hitting friendly NPCs deal ×0.25 (DMG-12), damage below 1 becomes 0 (DMG-01), and the player's signs deal reduced damage to Vitality (humans, animals): ×(0.75 − 0.5 × max(0, 1 − 0.1 × (level − 1))), 25% at level 1 rising to 75% at level 11 and above. The other terms are hooks: Perk 16, unaimed bolts and bombs ×0.5, Severance, Supercharged Glyphs, Crippling Strikes, Mutation 8, Dimeritium. SKL adds one: the new Muscle Memory's +10% total damage ([follow-ups from SKL](#follow-ups-from-skl)).
 
 **Implementation (legacy):** `ProcessActionDamage` (call order, damage types re-read after Quen, Viper set poison healing replacing Golden Oriole's), `ProcessDamageModification` (new), `ProcessDamageDecrease` (new).
 
@@ -216,8 +213,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 **Decisions:** port as legacy on 5.x's body; the difficulty multiplier's position (final damage, hostile NPCs hitting the player only) is DMG's, its values DIFF's (DD4). Keeping 5.x's additions that are not in the way (Mutagen 28's specter block for ALCH to decide, auto-oil, simulate-only gates, `SetRecentlyDodged`).
 
 - **Deviation:** Golden Oriole's level-3 absorption of poison damage, healing Geralt by it, stays 5.x's in `ProcessActionDamage` (legacy removed it; the Viper set heals from poison instead) (temporary, until ALCH and ARM).
-- **Deviation:** Quen still absorbs after armor (5.x, in `W3PlayerWitcher.ReduceDamage`) until SKL-11 moves it before armor (`ProcessDamageDecrease`, the damage types re-read after it) (temporary, until SKL-11).
-- **Deviation:** the other areas' final-damage terms are not ported yet: unaimed bolts and bombs ×0.5 (SKL-06, SKL-15), Perk 16 (SKL-18), Severance (ENCH), Supercharged Glyphs (SKL-10), legacy's Crippling Strikes (SKL-03), Mutation 8 (MUT, a pool term until then), Dimeritium (ALCH) (temporary, until those areas).
+- **Deviation:** the other areas' final-damage terms are not ported yet: Severance (ENCH), Mutation 8 (MUT, a pool term until then), Dimeritium (ALCH) (temporary, until those areas). SKL's are ported: unaimed bolts and bombs ×0.5, In Combat's Fires, Supercharged Glyphs, Crippling Strikes, Muscle Memory's total damage.
 - **Deviation:** until DIFF ports legacy's difficulty values (`difficulty_Common*`: Normal none, Hard +100%, Hardcore +250%), 5.x's values (+40%, +130%, +230%) apply at legacy's position, final damage (temporary, until DIFF).
 - The sign-damage reduction against Vitality is not in the changelist: an omission, recorded in [open-questions.md](../open-questions.md#legacy-data-vs-changelist).
 
@@ -478,6 +474,23 @@ Done by a fresh session ([audit](../feature-mapping.md#audit-signing-a-feature-o
 
 **Signed off** by the project owner on 2026-10-07 (DMG-01 to DMG-08, DMG-10 to DMG-12, DMG-15; DMG-02 to DMG-05 without the other areas' terms they host, listed as deviations; DMG-14's debug messages left). The open checks stay listed in the entries; the legacy question is on the list [to test in legacy](../open-questions.md#to-test-in-legacy-ghost-mode).
 
+### Follow-ups from SKL
+
+SKL's per-skill pass (complete 2026-10-11; [skl.md](skl.md#area-decisions)) changed what DMG's functions host. SKL has ported all of it (SKL-03 to SKL-18, verified in game in both trees by 2026-10-16); the entries above describe the code with it.
+
+Terms SKL adds or changes:
+
+- **Muscle Memory, new tree `sword_s22`** (D1): +60% attack power on each boosted fast attack (the attack-power step) and +10% total damage, a new final-damage term (DMG-05), in place of 5.x's ×1.3 pool term.
+- **Strength Training, new tree `sword_s23`** (D54): per stack an attack-power term and a weapon-damage pool term (up to +61.25% and +17.5% at 3 stacks), in place of 5.x's pool term.
+- **Precise Blows `sword_s24`** (D57) and **Crushing Blows `sword_s25`** (D55), new tree: crit chance and crit damage terms for fast and strong attacks, base and chain (the crit check and crit damage, DMG-03), in place of 5.x's Three Strikes and Crushing Blow multipliers.
+- **Wolf School `perk_26`** (D61): +30% bomb weapon damage against poisoned enemies, a pool term, and +20% crit chance and +60% crit damage for melee hits with the right oil within 10 s of bomb damage (totals at four medium armor pieces).
+- **Cold Blood, new tree `sword_s34`** (D13): +16.67 bolt damage per level, a flat addition before the pool, as legacy's Steady Shot (`xbow_dmg_bonus`, the classic tree's `sword_s15`).
+- **In Combat's Fires** (`perk_16`, new tree `perk_44`; D38): in the final-damage step it halves only the damage Geralt takes from his own bombs and bolts; legacy's code also halved the damage they deal to enemies.
+- **Classic Muscle Memory and Strength Training** (D47): attack power counted once at +0.1 per level in `W3Action_Attack.GetPowerStatValue`, counters included (DEF-07's counter share changes with it).
+- **Sunder Armor** (D56): legacy's flat −25% for melee strong attacks in both trees (DMG-02), in place of 5.x's stacks (`GetSunderArmorPercent`).
+
+5.x new-tree terms that go, because SKL drops or replaces their skills: Three Strikes `sword_s24` and 5.x's Crushing Blow `sword_s25` multipliers; 5.x's Anatomical Knowledge `sword_s26` silver-sword add (DMG-04's exception 3; removed by SKL-06, 2026-10-15); Lightning Reflexes `sword_s32`'s headshot bonus (removed by SKL-06); Catalyst `magic_s35` and Resonance `magic_s41` (removed by D58, 2026-10-15); Elemental Attunement `perk_37` (removed by SKL-18's Focus, 2026-10-15); Element of Surprise `perk_44` (removed by SKL-18, 2026-10-15); the Manticore `perk_27` and Viper `perk_28` bonuses (removed by SKL-18, 2026-10-15); Toxic Shock `alchemy_s23` (exception 3; removed by SKL-15, 2026-10-15); Volatile Compound `alchemy_s25` (removed by SKL-14, 2026-10-15); Potent Sting `alchemy_s26` (removed by SKL-16, 2026-10-15); High Tolerance `alchemy_s24` (exception 2; removed by SKL-13, 2026-10-15); Debilitating Poison `alchemy_s22`'s resistance against poisoned attackers (DMG-02; removed by SKL-17, 2026-10-15). Crippling Strikes `sword_s29` keeps its final-damage exception with legacy's rule (fast attacks against bleeding enemies) instead of 5.x's crit trigger. Of 5.x's DD1 terms this leaves the Wolven set and Netflix set 2 (ARM); the potion-duration passive on bombs goes with SKL-01. `gmtest_dmg03a` uses the new tree's Strength Training as its sample pool term (Element of Surprise is gone).
+
 ### Decisions waiting for the owner
 
 None.
@@ -486,7 +499,7 @@ None.
 
 | Area | Changes (legacy units) |
 |---|---|
-| SKL | The pool's skill terms (Rend `GetRendPowerBonus`, Deflection, Perk 20, Steady Shot), the final-damage terms (Perk 16, Crippling Strikes, Supercharged Glyphs), Whirl and the crit skills in `GetAttackersPowerMod`, Sunder Armor in `GetDamageResists`, skill attack power in `W3Action_Attack.GetPowerStatValue` (5.x adds `sword_s31` and `perk_27`'s attack power styles), Rend's crit chance (5.x removed it from `ProcessCriticalHitCheck`), the instant-kill skills (`ProcessInstantKill`: 5.x's `sword_s30`, `s32`, `s33`), Quen before armor (`ProcessDamageDecrease`, SKL-11), the callers of `SignPowerStatToPowerBonus` |
+| SKL | The pool's skill terms (Rend `GetRendPowerBonus`, Deflection, Perk 20, Steady Shot), the final-damage terms (Perk 16, Crippling Strikes, Supercharged Glyphs), Whirl and the crit skills in `GetAttackersPowerMod`, Sunder Armor in `GetDamageResists`, skill attack power in `W3Action_Attack.GetPowerStatValue` (5.x adds `sword_s31` and `perk_27`'s attack power styles), Rend's crit chance (5.x removed it from `ProcessCriticalHitCheck`), the instant-kill skills (`ProcessInstantKill`: 5.x's `sword_s30`, `s32`, `s33`), Quen before armor (`ProcessDamageDecrease`, SKL-11), the callers of `SignPowerStatToPowerBonus`; the new-tree terms SKL adds and the 5.x terms it removes: [follow-ups from SKL](#follow-ups-from-skl) |
 | AI | The enemy stat model's level bonuses and NPC templates ([DMG-13](#dmg-13-enemy-stat-model)), NPC armor abilities (`NPC Leather` to `Full Plate Armor` 8/20/30/40/50 → 30/45/60/90/120 with resistances; "Added different resistances to human armor"), `WeakenedState` (−15% resistances), individual monster armor and resistances (`monster_base_abl.xml` and expansions, about 830 units), NPC and monster weapons, Ice Armor (+30% resistances, removed by any fire: `CNewNPC.OnFireHit`), `EredinInvulnerable`, the hit-severity half of `ModifyHitSeverityReactionFromDamage` (poise, golems), monster-hunt monsters immune to instant kill, `LastBreath` (`GetLastBreathMaxAllowedDamage`), NPC special-attack damage now from weapon damage with attack power after armor (tornado, ground trap, ice spike, leshy roots and birds, boiling water, critters, `advancedProjectile.ws`), the Caretaker's heal, magic fists dealing ranged damage (`W3Action_Attack.Init`) |
 | DIFF | The difficulty multipliers (`difficulty_Common*`) and the scaling options' abilities (`ModSigns*`, [DMG-13](#dmg-13-enemy-stat-model)), per-enemy difficulty variants and Ciri's stats (97 units), the scaling options and level randomisation (`W3GameParams.Get*Mult`, `ManageNGPLevels`, `ResetLevel`, `SetLevel`, `OnLevelUpscalingChanged`), the options in `modSignsConfig.xml` |
 | ARM | Player armor values and resistances by class (about 1,000 units, 276 changed by 5.x), the Viper set's poison healing in `ProcessActionDamage`, Lynx, Bear and Red Wolf bonuses in `GetAttackersPowerMod`/crit check, Wolven and Netflix sets (5.x's DD1 terms), silver studs |

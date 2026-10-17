@@ -2049,7 +2049,7 @@ function GMTest_stam09()
 	GMTestAbilityValue('sword_s1', 'stamina_cost_per_sec', 50);
 	GMTestAbilityValue('sword_s1', 'stamina_cost_reduction_after_1', 0.15);
 	GMTestAbilityValue('sword_s35', 'stamina_cost_per_sec', 50);
-	GMTestAbilityValue('sword_s35', 'stamina_cost_reduction_after_1', 0.15);
+	GMTestAbilityValue('sword_s35', 'stamina_cost_reduction_after_1', 0.3);	// SKL-03: 30% per level in the new tree
 }
 
 // STAM-07, situation-free: the bank loads, and the check starts the heartbeat below the threshold
@@ -2104,6 +2104,21 @@ exec function gmtest_regress()
 	GMTest_dmg06();
 	GMTest_dmgxml();
 	GMTest_annotations();
+	GMTest_d58();
+	GMTest_skl01_passives(false);
+	GMTest_skl01_rules();
+	GMTest_skl19();
+	GMTest_skl_tiers_xml();
+	GMTest_alch();
+	GMTest_sklg_dot();
+	GMTest_sklg_selfbomb();
+	GMTest_skla_undying();
+	GMTest_skla_gorged();
+	GMTest_skla_perk21();
+	GMTest_skla_cleanse();
+	GMTest_skl07_foa_keep();
+	GMTest_skld_effects();
+	GMTest_skl_values();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

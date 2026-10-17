@@ -22,32 +22,33 @@ Set by the project owner on 2026-10-05. Every balance-relevant decision names th
 | B3 | **The other power stats keep their timing** | Attack power, sign intensity, bomb damage, crossbow damage, crit chance and damage, Vitality, armor and resistances may come from different skills or mutations than in legacy (there is plenty of room). Front-loaded stays front-loaded and back-loaded stays back-loaded: an effect legacy gives at tier 1 should not land in a capstone, nor a legacy capstone at the root of a grid. |
 | B4 | **Replaced effects are replaced again** | Where legacy removed or replaced an effect entirely (Heightened Tolerance → Refreshment, Side Effects → Prolonged Effects, per-sign intensity → flat bonuses, ...), the port does the same, or gives the stats legacy gave instead, so scaling stays similar. The list is in the ledger's [removed and replaced effects](ledger/skills.md#removed-and-replaced-effects). |
 | B5 | **A different mechanism is fine, judged by its effective power** | A 5.x skill that scales the same stat in a more interesting way (Muscle Memory's and Strength Training's combo damage) may stay, if its effective power matches legacy's reach and timing. Effective power counts how easily and how often the effect triggers, not only its number. Legacy's Muscle Memory is a constant flat bonus; 5.x's applies only after a dodge or roll, so a conditional effect may need a larger number to match a constant one, and an easy, always-on trigger may need a smaller one. |
-| B6 | **General perks are cornerstones** | In legacy, perks cost 1 point, are available from level 1 and define builds: Adrenaline Burst and Attack is the Best Defense carry melee stamina, the school techniques carry stamina, adrenaline, crit and intensity, and Cold Blood and Trick Shot carry crossbow builds. Perks get the same scrutiny as tier-4 skills. |
+| B6 | **General perks are cornerstones** | In legacy, perks cost 1 point, are available from level 1 and define builds: Adrenaline Burst and Attack is the Best Defense carry melee stamina, the school techniques carry stamina, adrenaline, crit and intensity, and Cold Blood and Trick Shot carry crossbow builds. Perks get the same scrutiny as tier-4 skills. In the port (SKL's D49) every general perk with a legacy counterpart is legacy's perk in both trees: 1 point, 1 level, legacy's effect and full value; the only general perk without a legacy counterpart is the redesigned Wolf School (D61), also 1 point and 1 level. |
 | B7 | **Signs resemble legacy closely** | Signs are overpowered in both vanillas. Sign skills keep legacy's values and mechanisms unless the owner decides otherwise, and new sign-intensity sources in 5.x are suspect by default. |
 | B8 | **Every archetype stays viable** | See [Archetypes](#archetypes). A change is checked against every archetype it touches, and synergies are tracked as well as single skills. |
 | B9 | **Alchemy effects stay where they are** | An effect is never moved between potions or decoctions just to fill a gap, because each one becomes available at a different time. Potions and decoctions are ported in ALCH, but SKL balances knowing what they give (ledger, [potions and decoctions](ledger/alchemy.md)). |
-| B10 | **5.x's faster skill buying is accepted for now** | In the new tree, skills cost about a third fewer points than in legacy. That is accepted for now; the pace is examined with XP (P10). The classic tree uses legacy's levels and tier points. |
+| B10 | **Both trees use legacy's tiers** | The new tree drops 5.x's prerequisite tree (project owner, 2026-10-09, SKL's D59): its skills are gated by points spent in their path, at their legacy counterpart's tier, with the tier points scaled to its 3 levels (×3/5: sword 5/12/18, alchemy 5/12/17, signs 4/11/17). The classic tree uses legacy's levels and tier points (sword 8/20/30, alchemy 8/20/28, signs 6/18/28). Ported 2026-10-16 ([SKL-02](skl.md#skl-02-skill-tree-option)); the general skills have no gate. The new tree's levels and tier points stay as decided; their pace is examined with XP's skill-point income (P10), not before (porter's call, not confirmed by the owner, 2026-10-16). |
 
 ## Two skill trees: the plan
 
-Direction set by the project owner on 2026-10-05. It replaces the decision of 2026-10-03 to keep 5.x's changes to the classic tree and the 5/3 rule of 2026-10-04 for that tree.
+Set by the project owner (the separation and the classic tree 2026-10-05; the new tree's content 2026-10-09 to 2026-10-11).
 
 1. **The trees are separated.** The 28 skills 5.x shares between the trees stop being shared: each tree gets its own values, levels, layout and descriptions.
-2. **The classic tree becomes legacy Ghost Mode's tree**, ported directly: legacy's skills, values, maximum levels (mostly 5), layout and descriptions. It is the faithful Ghost Mode and the candidate for the default (D46).
-3. **The new tree becomes Ghost Mode's experimental tree.** It is changed freely, guided by these rules and the ledger, and balanced over time. It does not affect the classic tree.
+2. **The classic tree becomes legacy Ghost Mode's tree**, ported directly: legacy's skills, values, maximum levels (mostly 5), layout and descriptions. It is the faithful Ghost Mode and the default tree (D46).
+3. **The new tree carries legacy's skills on 3 levels.** Each new-tree skill is its legacy counterpart under legacy's name, with legacy's max-level total at level 3 (a third per level), gated by legacy's tiers scaled ×3/5 (B10); 5.x's new-only skills and perks give their slots to the legacy skills and perks that had none (SKL's D58, D60, D61). General perks (D49): every general perk with a legacy counterpart is legacy's perk in both trees: 1 point, 1 level, legacy's effect and full value; the only general perk without a legacy counterpart is the redesigned Wolf School (D61), also 1 point and 1 level. A few parts are new designs by the project owner, not deviations from legacy: Muscle Memory, Precise Blows, Strength Training, Crushing Blows, Cold Blood carrying Steady Shot's damage, Wolf School, the 3 levels with scaled tier points, and the skill-point income rule for the XP area ([list](skl.md#new-designs)). The new tree does not affect the classic tree.
 
 **How (from the code, unverified; research 2026-10-05).** Every skill stays one definition, with a per-tree *profile* applied at runtime:
 - **Definition fields.** A Ghost Mode definitions block (`GMClassicSkills`) holds legacy's fields (max level, tier points, position, string keys, no new-tree prerequisites). Applied over the skill table when the classic tree is active, it also clears the shared flag so tier points gate the skill.
-- **Values.** In the classic tree, the 28 formerly shared skills read their values from Ghost Mode abilities `GM_C_<skill>`, through wrappers of `SkillEnumToName` and `SkillNameToEnum`. The new tree keeps the vanilla ability names, which Ghost Mode then changes freely.
+- **Values.** In the classic tree, the 28 formerly shared skills read their values from Ghost Mode abilities `GM_C_<skill>`, through wrappers of `SkillEnumToName` and `SkillNameToEnum`. The new tree keeps the vanilla ability names, with Ghost Mode's values.
 - **Switching trees** is not a normal workflow (project owner, 2026-10-05). It goes through Ghost Mode's character reset (D44, below), then the other profile applies.
+- **Tier gates in the new tree** (B10, SKL's D59): the block `GMNewTreeSkills` holds the scaled tier points and a tier layout, the profile clears 5.x's prerequisites, and wrappers of `CanLearnSkill` and `IsSkillUnlockedByDependency` gate by tier (5.x checks `requiredPointsSpent` only for classic-only skills). Verified 2026-10-16 ([SKL-02](skl.md#skl-02-skill-tree-option) slice 3).
 
 There are no new skill enum values and no native changes. As a side effect, this fixes 5.x's classic tree, where some shared skills are locked behind new-tree prerequisites the classic menu does not show (Razor Focus, and through it Rend). The first slice proves it with Rend and Whirl:
 - the profile is found and applied;
 - five levels can be bought;
-- the classic menu draws five level pips (the one thing only the game can show);
+- the menu draws five level pips (verified in the new menu, which shows the classic tree, [SKL-02](skl.md#skl-02-skill-tree-option));
 - the `GM_C_` value is read;
 - everything survives a reload;
-- switching back restores 5.x's Rend with points refunded.
+- switching back restores the new tree's Rend (3 levels) with points refunded.
 
 **Character reset** (D44, project owner, 2026-10-05). A safe console command that resets Geralt's development so it can be rebuilt at the same level under whatever rules are now in force: a tree switch, a changed skill or progression rule, another mod added mid-game, a test. It is part of the mod, not test-only. By default it:
 - refunds every skill point, including those not from level-ups (places of power and the like);
@@ -55,29 +56,29 @@ There are no new skill enum values and no native changes. As a side effect, this
 - resets skills and skill slots;
 - keeps Geralt's level, experience and inventory.
 
-Legacy has the base for it: `Debug_ClearCharacterDevelopment` was rebuilt into a respec that keeps level, experience and total skill points, refunds the mutagens, clears toxicity and oils, and unequips gear. 5.x's `cleardevelop` is far harsher: it resets the level, empties the inventory unless told not to, and hands out testing items. What the reset must also cover on 5.x (5.x's point bookkeeping, the tree profile, Ghost Mode's own saved state) is worked out when it is ported, with SKL-01. Skill tests start from a reset, so they run on a clean character.
+Legacy has the base for it: `Debug_ClearCharacterDevelopment` was rebuilt into a respec that keeps level, experience and total skill points, refunds the mutagens, clears toxicity and oils, and unequips gear. 5.x's `cleardevelop` is far harsher: it resets the level, empties the inventory unless told not to, and hands out testing items. It is ported as the console command `gmreset()`, built on 5.x's own respec ([SKL-01](skl.md#skl-01-skill-system-rules), verified 2026-10-11); it leaves gear and oils alone and is refused in combat. The tree profile and Ghost Mode's own saved state join it as they are ported. Skill tests start from a reset, so they run on a clean character.
 
-**What it changes in SKL:**
-- The classic tree's port is legacy's numbers. Most of SKL's decisions for the classic tree become "as legacy", and the 5/3 rescaling no longer applies to it.
-- The new tree's decisions (the new-tree counterparts, and D1, D2, D6, D9, D11, D13, D14, D20, D23–D24, D27, D30, D37, D40–D41) move to a second phase. They are made against the ledger's gaps rather than one by one.
-- Order: DMG first (the damage and armor formula decides what every bonus is worth; decision 2026-10-06), then (1) the character reset and the separation slice; (2) the classic tree, branch by branch, as legacy; (3) the new tree, phase 2, with this page's checklist.
+**What it means for SKL** (the per-skill pass is complete, 2026-10-11; [skl.md](skl.md#area-decisions)):
+- The classic tree's port is legacy's numbers.
+- The new tree's port is legacy's numbers at a third per level on legacy's tiers, plus the new designs above. Every skill and perk was decided one by one, against the ledger and these rules.
+- Order: DMG came first (the damage and armor formula decides what every bonus is worth; signed off 2026-10-07); then (1) the character reset and the separation slice; (2) the trees branch by branch, the classic skill as legacy with its new-tree counterpart; the new tree's levels and tier points are revisited with XP's skill-point income (D59). SKL was signed off 2026-10-17.
 
-**Decided** (project owner, 2026-10-05): the classic tree uses legacy's tier points (8/20/28–30; Signs 6/18/28), and it is the default tree (D46). B10's faster skill buying therefore applies only to the new tree.
+**Decided** (project owner, 2026-10-05): the classic tree uses legacy's tier points (8/20/28–30; Signs 6/18/28), and it is the default tree (D46). The new tree uses the same tiers scaled to its 3 levels (B10, 2026-10-09).
 
 ## Archetypes
 
-The builds legacy supports and that must stay viable (B8). Cornerstones are listed in the [ledger](ledger/skills.md#cornerstones). This table records what each archetype depends on and where the new tree stands. It is updated as decisions are made.
+The builds legacy supports and that must stay viable (B8). Cornerstones are listed in the [ledger](ledger/skills.md#cornerstones). This table records what each archetype depends on, where 5.x's new tree stands, and where the port's new tree stands with SKL's decisions (2026-10-11); the classic tree is legacy's.
 
-| Archetype | Legacy cornerstones | Hard stats it lives on | New tree today (5.x) |
-|---|---|---|---|
-| Quick melee, light armor | Muscle Memory, Precise Blows, Crippling Strikes, Cat School (crit chance and damage), Adrenaline Burst (melee cost), Attack is the Best Defense (stamina back), Battle Frenzy, Fleet Footed; Cat set | Stamina (cost cuts, restoration), adrenaline gain | No melee cost cut, no stamina restoration, almost no crit chance; Cat gives crit damage only |
-| Heavy armor, adrenaline | Strength Training, Rend, Bear School (adrenaline per hit, Vitality), Resolve, Undying, Razor Focus, Battle Trance; Bear set | Adrenaline gain and retention, Vitality | Bear gives strong-attack damage instead of adrenaline; Razor Focus at 3 points instead of 25 |
-| Signs | Griffin School (intensity, sign cost), Focus (intensity per adrenaline point, signs give adrenaline), Rage Management (adrenaline first), Flood of Anger, the per-sign skills; Griffin set; Petri's Philtre | Sign cost, adrenaline, sign intensity | Sign intensity can reach far above legacy (Wolf, Catalyst, Chain Reaction, Focus 90%); no general sign cost cut; no per-sign flat skills |
-| Bombs | Pyrotechnics, Efficiency, Cluster Bombs, Heavy Artillery, Advanced Pyrotechnics (adrenaline from bombs), Steady Aim | Adrenaline from bombs, toxicity room | No Heavy Artillery, no adrenaline from bombs |
-| Crossbow | Steady Shot (flat bolt damage), Anatomical Knowledge, Cold Blood (bolt adrenaline), Trick Shot, Lightning Reflexes | Adrenaline from bolts | 5.x's Cold Blood gives far more adrenaline; no flat bolt damage, no Trick Shot, no crossbow crit |
-| Alchemy, potions | Refreshment (stamina per potion), Prolonged Effects, Expert Brewer, Acquired Tolerance, Metabolic Control, Fast Metabolism, Restoration | Potion duration, toxicity, stamina | No potion-duration skill, no Refreshment; the replacements land far earlier than legacy's tier 3–4 |
-| Overdose / mutagens | Frenzy (attack power and intensity while overdosed), Endure Pain, Tissue Transmutation, Adaptation, Synergy; the decoctions | Toxicity room and threshold | 5.x's overdose threshold is 50% (ALCH); decoction duration exists again (Adaptability) |
-| Hybrids (combat/signs, combat/alchemy, signs/alchemy) | Perk-driven: a few cheap perks plus tier-1/2 skills from two paths | Whatever both sides need | Perks cost 3 points and are chained; capstones cost 4–7 points: hybrids reach capstones far sooner |
+| Archetype | Legacy cornerstones | Hard stats it lives on | New tree in vanilla 5.x | New tree after the port |
+|---|---|---|---|---|
+| Quick melee, light armor | Muscle Memory, Precise Blows, Crippling Strikes, Cat School (crit chance and damage), Adrenaline Burst (melee cost), Attack is the Best Defense (stamina back), Battle Frenzy, Fleet Footed; Cat set | Stamina (cost cuts, restoration), adrenaline gain | No melee cost cut, no stamina restoration, almost no crit chance; Cat gives crit damage only | As legacy: Cat, Adrenaline Burst, Attack is the Best Defense, Battle Frenzy, Fleet Footed, Crippling Strikes. Muscle Memory (conditional attack power) and Precise Blows (crit chain) by new design |
+| Heavy armor, adrenaline | Strength Training, Rend, Bear School (adrenaline per hit, Vitality), Resolve, Undying, Razor Focus, Battle Trance; Bear set | Adrenaline gain and retention, Vitality | Bear gives strong-attack damage instead of adrenaline; Razor Focus at 3 points instead of 25 | As legacy: Bear, Resolve, Undying, Rend, Razor Focus at tier 3. Strength Training's stacks and Crushing Blows's crit chain by new design |
+| Signs | Griffin School (intensity, sign cost), Focus (intensity per adrenaline point, signs give adrenaline), Rage Management (adrenaline first), Flood of Anger, the per-sign skills; Griffin set; Petri's Philtre | Sign cost, adrenaline, sign intensity | Sign intensity can reach far above legacy (Wolf, Catalyst, Chain Reaction, Focus 90%); no general sign cost cut; no per-sign flat skills | As legacy: Griffin, Focus on `perk_37`, Rage Management, Flood of Anger, the per-sign skills (D58); none of 5.x's extra intensity. Flood of Anger casts as legacy |
+| Bombs | Pyrotechnics, Efficiency, Cluster Bombs, Heavy Artillery, Advanced Pyrotechnics (adrenaline from bombs), Steady Aim | Adrenaline from bombs, toxicity room | No Heavy Artillery, no adrenaline from bombs | As legacy: Heavy Artillery `perk_28`, legacy's Advanced Pyrotechnics, Steady Aim `alchemy_s23`; plus Wolf School's link between bombs, poison and sword crits (new design) |
+| Crossbow | Steady Shot (flat bolt damage), Anatomical Knowledge, Cold Blood (bolt adrenaline), Trick Shot, Lightning Reflexes | Adrenaline from bolts | 5.x's Cold Blood gives far more adrenaline; no flat bolt damage, no Trick Shot, no crossbow crit | As legacy, with Steady Shot's damage on Cold Blood (`sword_s34`, tier 2) and Trick Shot on `perk_27`. Revisited when balancing |
+| Alchemy, potions | Refreshment (stamina per potion), Prolonged Effects, Expert Brewer, Acquired Tolerance, Metabolic Control, Fast Metabolism, Restoration | Potion duration, toxicity, stamina | No potion-duration skill, no Refreshment; the replacements land far earlier than legacy's tier 3–4 | As legacy, at legacy's tiers: Refreshment on `alchemy_s24`, Prolonged Effects, Expert Brewer, Metabolism Boosts |
+| Overdose / mutagens | Frenzy (attack power and intensity while overdosed), Endure Pain, Tissue Transmutation, Adaptation, Synergy; the decoctions | Toxicity room and threshold | 5.x's overdose threshold is 50% (ALCH); decoction duration exists again (Adaptability) | As legacy: Adaptation, Synergy on `alchemy_s26`, Killing Spree on `alchemy_s22`. The overdose threshold is ALCH's |
+| Hybrids (combat/signs, combat/alchemy, signs/alchemy) | Perk-driven: a few cheap perks plus tier-1/2 skills from two paths | Whatever both sides need | Perks cost 3 points and are chained; capstones cost 4–7 points: hybrids reach capstones far sooner | Perks cost 1 point with 1 level (D49); skills follow legacy's tiers scaled to 3 levels (D59) |
 
 **Key synergies in legacy** (from the [ledger](ledger/README.md); a change to one piece is checked against the whole chain):
 
@@ -101,7 +102,7 @@ The builds legacy supports and that must stay viable (B8). Cornerstones are list
 
 ## Mutations
 
-Blood and Wine's late-game progression: research with skill points and mutagens, one active mutation, and extra skill slots. Mapped as the MUT area ([mut.md](mut.md)); what each mutation scales and costs is in the [ledger](ledger/mutations.md), and the mutations at base stats in both tree files. Ghost Mode's cornerstones: Magic Sensibilities (Signs), Bloodbath (sword), Euphoria (alchemy); Adrenaline Rush, Mutated Skin, Deadly Counter and Life Leech run on adrenaline. The mutations are legacy Ghost Mode's in both trees; only their research costs differ by tree (classic: legacy's 29 skill points; new tree: decided with MUT) ([how](mut.md#mutations-in-two-trees)). They port after SKL's classic tree.
+Blood and Wine's late-game progression: research with skill points and mutagens, one active mutation, and extra skill slots. Mapped as the MUT area ([mut.md](mut.md)); what each mutation scales and costs is in the [ledger](ledger/mutations.md), and the mutations at base stats in both tree files. Ghost Mode's cornerstones: Magic Sensibilities (Signs), Bloodbath (sword), Euphoria (alchemy); Adrenaline Rush, Mutated Skin, Deadly Counter and Life Leech run on adrenaline. The mutations are legacy Ghost Mode's in both trees, research costs included (legacy's 29 skill points; MUT's DM1, project owner, 2026-10-11; [how](mut.md#mutations-in-two-trees)). They port after SKL's classic tree.
 
 ## How a balance-relevant change is made
 
@@ -116,6 +117,8 @@ For every skill, perk, mutation, potion or gear decision, before it is proposed:
 
 ## Open questions
 
-- Whether 5.x's classic menu draws five level pips (the separation slice).
 - Where legacy's code and its changelist disagree (contradictions and omissions): [open-questions.md](../open-questions.md#legacy-data-vs-changelist).
-- MUT's DM3 (supercharged Aard and Piercing Cold, new tree): with phase 2.
+- What a Flood of Anger cast means for signs that outlast it and for Piercing Cold (5.x's supercharged-sign extras, MUT's DM3): as legacy (project owner, 2026-10-11), to check against legacy's code when implemented.
+- SKL's D45: decided as one SKL-19 pass (porter's call, not confirmed by the owner, 2026-10-16). D43 is decided: the slot fixes are SKL-01's (project owner, 2026-10-16).
+- The new tree's levels and tier points (B10): kept; examined with XP's skill-point income (P10).
+- To revisit when balancing (project owner, 2026-10-09): enable a poison build, and create more synergy between bombs and other builds; 5.x's new-only skills dropped by SKL's D60 are the starting material.

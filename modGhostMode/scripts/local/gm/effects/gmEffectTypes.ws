@@ -12,13 +12,19 @@ enum EEffectType
 	EET_GMYrdenCooldown,
 	// STAM-02: Whirl and Rend cooldowns
 	EET_GMWhirlCooldown,
-	EET_GMRendCooldown
+	EET_GMRendCooldown,
+	// SKL-07: Undying
+	EET_GMUndyingImmortal,
+	EET_GMUndyingCooldown,
+	// SKL-09: Melt Armor
+	EET_GMMeltArmorDebuff,
+	EET_GMMeltArmorTimer
 }
 
 // Last Ghost Mode effect type: keep it pointing at the last member above.
 function GMLastEffectType() : EEffectType
 {
-	return EET_GMRendCooldown;
+	return EET_GMMeltArmorTimer;
 }
 
 function GMIsModEffectType(effect : EEffectType) : bool

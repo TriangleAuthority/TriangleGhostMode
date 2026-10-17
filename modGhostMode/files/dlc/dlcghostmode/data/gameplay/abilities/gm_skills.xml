@@ -3,6 +3,20 @@
 <redxml>
   <definitions>
     <abilities>
+      <!-- SKL-01: no passive path bonuses (legacy): 5.x's per-level bonuses of every equipped skill are 0
+           (skills/passiveBonuses.ws) -->
+      <ability name="sword_adrenalinegain" on_conflict="extend">
+        <focus_gain type="add" always_random="false" min="0" max="0" />
+      </ability>
+      <ability name="magic_staminaregen" on_conflict="extend">
+        <staminaRegen type="mult" always_random="false" min="0" max="0" />
+      </ability>
+      <ability name="alchemy_potionduration" on_conflict="extend">
+        <potion_duration type="add" always_random="false" min="0" max="0" />
+      </ability>
+      <ability name="survival_vitality" on_conflict="extend">
+        <vitality type="mult" always_random="false" min="0" max="0" />
+      </ability>
       <!-- STAM-03: the base sign cost is 40 stamina (vanilla 100, the whole bar); signs get a
            cooldown instead (STAM-01). STAM-06: every sign pauses stamina regen for 1 s (vanilla 0.5 s;
            alternates 0.3 to 1 s); the delay is base x mult, so both nodes are listed. -->
@@ -10,21 +24,37 @@
         <stamina_cost type="add" always_random="false" min="40" max="40" />
         <stamina_delay type="base" min="1" />
         <stamina_delay type="mult" min="1" />
+        <!-- SKL-08: Geralt's base knockdown chance (legacy; skills/aard.ws) -->
+        <starting_knockdown_chance type="add" min="0.33" />
       </ability>
       <ability name="magic_2" on_conflict="extend">
         <stamina_cost type="add" always_random="false" min="40" max="40" />
         <stamina_delay type="base" min="1" />
         <stamina_delay type="mult" min="1" />
+        <!-- SKL-09: Igni deals 150 fire damage (5.x: 100) and burns at 33% for Geralt, independent of
+             intensity (skills/igni.ws) -->
+        <FireDamage type="add" always_random="false" min="150" max="150" />
+        <initial_burn_chance type="add" min="0.33" />
       </ability>
       <ability name="magic_3" on_conflict="extend">
         <stamina_cost type="add" always_random="false" min="40" max="40" />
         <stamina_delay type="base" min="1" />
         <stamina_delay type="mult" min="1" />
+        <!-- SKL-10: the trap as legacy: 7.5 s (5.x: 10), slowdown 25% x (1 + intensity bonus), between 15%
+             and 75% (5.x: 20% to 45% by intensity / 4); skills/yrden.ws -->
+        <trap_duration type="base" min="7.5" />
+        <min_slowdown type="add" min="0.15" />
+        <max_slowdown type="add" min="0.75" />
+        <min_starting_slowdown type="add" min="0.25" />
       </ability>
       <ability name="magic_4" on_conflict="extend">
         <stamina_cost type="add" always_random="false" min="40" max="40" />
         <stamina_delay type="base" min="1" />
         <stamina_delay type="mult" min="1" />
+        <!-- SKL-11: the shield as legacy: 250 health (5.x: 200), x (1 + intensity bonus), absorbing 100% of
+             the raw damage before armor (skills/quen.ws) -->
+        <shield_health type="base" min="250" />
+        <max_dmg_absorption type="add" min="1.0" />
       </ability>
       <ability name="magic_5" on_conflict="extend">
         <stamina_cost type="add" always_random="false" min="40" max="40" />
@@ -35,11 +65,19 @@
            (50; reduction per level 0.167, vanilla 0.25), Yrden trap 26.8 (35), active Quen 20 (15),
            Axii puppet 16 (22.2). -->
       <ability name="magic_s1" on_conflict="extend">
+        <!-- SKL-08: Aard Sweep's intensity penalty, 40/20/0% by level (legacy; skills/aard.ws) -->
+        <spell_power type="mult" always_random="false" min="-0.4" max="-0.4" />
+        <spell_power_penalty_reduction type="add" min="0.2" />
         <stamina_cost type="add" always_random="false" min="40" max="40" />
         <stamina_delay type="base" min="1" />
         <stamina_delay type="mult" min="1" />
       </ability>
       <ability name="magic_s2" on_conflict="extend">
+        <!-- SKL-09: Firestream's damage as legacy: no first hit, 40/s + 30/s per level above 1 (100/s at
+             3), x the intensity (skills/igni.ws) -->
+        <FireDamage type="add" always_random="false" min="0" max="0" />
+        <channeling_damage type="add" min="40" max="40" />
+        <channeling_damage_after_1 type="add" min="30" max="30" />
         <stamina_cost_per_sec type="add" always_random="false" min="30" max="30" />
         <stamina_cost_reduction_after_1 type="mult" min="0.167" />
         <stamina_delay type="base" min="1" />
@@ -49,12 +87,29 @@
         <stamina_cost_per_sec type="add" always_random="false" min="26.8" max="26.8" />
         <stamina_delay type="base" min="1" />
         <stamina_delay type="mult" min="1" />
+        <!-- SKL-10: the turret as legacy (both trees, shared): 4 charges, 10 s, 50 shock damage at level 1;
+             per level above 1: +25 damage, +2.5 s, +1 charge (100 damage, 15 s, 6 charges at 3); 5.x:
+             5 charges, 18 s, 120 damage, +5 damage per level -->
+        <charge_count type="base" min="4" />
+        <trap_duration type="base" min="10" />
+        <ShockDamage type="add" min="50" />
+        <damage_bonus_flat_after_1 type="add" min="25" />
+        <duration_bonus_flat_after_1 type="add" min="2.5" />
+        <charge_bonus_flat_after_1 type="add" min="1" />
       </ability>
       <ability name="magic_s4" on_conflict="extend">
         <stamina_cost_per_sec type="add" always_random="false" min="20" max="20" />
         <stamina_delay type="add" min="1" />
       </ability>
       <ability name="magic_s5" on_conflict="extend">
+        <!-- SKL-12: Puppet as legacy: 10 s + 5 s per level above 1 (20 s at 3; 5.x: 3 s classic, 9 s new
+             tree), animals 20 s, +33.4% attack power per level (5.x: 20%), -100 armor -->
+        <duration type="base" min="10" />
+        <duration_bonus_after1 type="base" min="5" />
+        <duration_animals type="base" min="20" />
+        <attack_power type="mult" min="0.334" />
+        <armor_reduction type="add" min="100" max="100" />
+        <alt_axii_level type="add" min="1" />
         <stamina_cost_per_sec type="add" always_random="false" min="16" max="16" />
         <stamina_delay type="add" min="1" />
       </ability>
@@ -62,12 +117,24 @@
            as the classic tree's magic_s2 and magic_s5, which 5.x copied them from. Aard, Yrden and
            Quen use the same (shared) alternate skills in both trees. -->
       <ability name="magic_s28" on_conflict="extend">
+        <FireDamage type="add" always_random="false" min="0" max="0" />
+        <channeling_damage type="add" min="40" max="40" />
+        <channeling_damage_after_1 type="add" min="30" max="30" />
         <stamina_cost_per_sec type="add" always_random="false" min="30" max="30" />
         <stamina_cost_reduction_after_1 type="mult" min="0.167" />
         <stamina_delay type="base" min="1" />
         <stamina_delay type="mult" min="1" />
       </ability>
       <ability name="magic_s31" on_conflict="extend">
+        <!-- SKL-12: Puppet as legacy: 10 s + 5 s per level above 1 (20 s at 3; 5.x: 3 s classic, 9 s new
+             tree), animals 20 s, +33.4% attack power per level (5.x: 20%), -100 armor -->
+        <duration type="base" min="10" />
+        <duration_bonus_after1 type="base" min="5" />
+        <duration_animals type="base" min="20" />
+        <attack_power type="add" min="0" />
+        <attack_power type="mult" min="0.334" />
+        <armor_reduction type="add" min="100" max="100" />
+        <alt_axii_level type="add" min="1" />
         <stamina_cost_per_sec type="add" always_random="false" min="16" max="16" />
         <stamina_delay type="add" min="1" />
       </ability>
@@ -85,12 +152,456 @@
       <ability name="sword_s35" on_conflict="extend">
         <stamina_cost_per_sec type="add" min="50" />
         <stamina_delay type="add" min="1" />
-        <cost_reduction_desc_lvl2 type="mult" min="0.15" />
-        <cost_reduction_desc_lvl3 type="mult" min="0.3" />
-        <stamina_cost_reduction_after_1 type="add" min="0.15" />
+        <!-- SKL-03: 30% less per level above 1, legacy's 20/s at level 3 (STAM-09 had 15%) -->
+        <cost_reduction_desc_lvl2 type="mult" min="0.3" />
+        <cost_reduction_desc_lvl3 type="mult" min="0.6" />
+        <stamina_cost_reduction_after_1 type="add" min="0.3" />
+        <!-- SKL-03: legacy's Whirl at a third per level (D3): attack power per extra enemy
+             (+25% at level 3 with 5), damage taken while spinning with adrenaline -25% to -50% -->
+        <whirl_dmg_bonus type="mult" min="0.016667" />
+        <whirl_dmg_reduction type="mult" min="0.25" />
+        <whirl_dmg_reduction_bonus_after_1 type="mult" min="0.125" />
+      </ability>
+      <!-- SKL-03: Crippling Strikes in the new tree (D2): legacy's at a third per level (25% bleeding
+           chance and +25% total damage against bleeding enemies at level 3); 5.x's crit trigger and its
+           damage_increase are no longer read -->
+      <!-- SKL-04: Sunder Armor in the new tree (D56): legacy's flat reduction at a third per level
+           (-25% physical resistances for melee strong attacks at level 3); 5.x's stacks (duration,
+           stacking) are no longer used -->
+      <!-- DEF-02, SKL-05: Fleet Footed in the new tree: legacy's graze reduction at a third per level
+           (-50% at level 3); 5.x's damage_reduction (full dodge at level 3) is no longer read -->
+      <!-- SKL-05: Deflection in the new tree (5.x: Arrow Deflection), legacy's level for level (D5, D6);
+           5.x's instant kill on reflected arrows removed -->
+      <!-- SKL-05: Counterattack in the new tree, legacy's level for level (D9) -->
+      <ability name="sword_s31" on_conflict="extend">
+        <attack_power type="mult" min="0.334" />
+        <critical_hit_chance type="add" min="0.35" />
+        <s11_knockdown_chance type="add" min="0.05" />
+        <duration type="add" min="5" />
+      </ability>
+      <!-- SKL-05: Deadly Precision in the new tree, legacy's level for level (D10, D11): 1% instant-kill
+           chance per level per adrenaline point on the countered enemy -->
+      <ability name="sword_s30" on_conflict="extend">
+        <instant_kill_chance type="add" min="0.01" />
+      </ability>
+      <!-- SKL-06: the crossbow skills in the new tree, legacy's at a third per level. Lightning Reflexes:
+           5.x's code multiplies the aiming speed (0.6) by 1 - slowdown_mod x level; 0.25 gives legacy's
+           0.45, 0.30, 0.15 (0.6 - 0.15 per level); its headshot damage and instant kill are gone.
+           Anatomical Knowledge: +8.33% crossbow crit chance and +25% crit damage per level (D14).
+           Crippling Shot: a monster skill blocked for 8.33 s per level on a crossbow crit. -->
+      <ability name="sword_s32" on_conflict="extend">
+        <slowdown_mod type="add" min="0.25" />
+        <damage_increase type="add" min="0" max="0" />
+        <instant_kill_chance type="add" min="0" />
+      </ability>
+      <ability name="sword_s26" on_conflict="extend">
+        <critical_hit_chance type="add" min="0.083333" />
+        <critical_hit_damage_bonus type="add" min="0.25" />
+      </ability>
+      <ability name="sword_s27" on_conflict="extend">
+        <duration type="add" min="8.333333" />
+      </ability>
+      <!-- SKL-06: Cold Blood in the new tree (D13, new design): legacy's Cold Blood (a sword hit's
+           adrenaline per bolt, in script) and Steady Shot's bolt damage, +16.67 per level (+50 at
+           level 3, skills/crossbow.ws); 5.x's 0.3/0.6/1.0 adrenaline per bolt are 0 -->
+      <ability name="sword_s34" on_conflict="extend">
+        <focus_gain_lvl1 type="add" min="0" />
+        <focus_gain_lvl2 type="add" min="0" />
+        <focus_gain_lvl3 type="add" min="0" />
+        <xbow_dmg_bonus type="add" min="16.666667" />
+      </ability>
+      <!-- SKL-07: Resolve in the new tree, -100% adrenaline loss at level 3 (5.x's 0.33334 per level
+           makes 1.00002, a gain on every hit taken) -->
+      <ability name="sword_s16" on_conflict="extend">
+        <focus_drain_reduction type="add" min="0.333333" />
+      </ability>
+      <!-- SKL-07: Razor Focus in the new tree, legacy's totals at level 3: combat starts with at least
+           0.4167 adrenaline per level (1.25 at 3), adrenaline gain +8.33% per level (5.x: 1 point at
+           every level, +10% per level) -->
+      <ability name="sword_s20" on_conflict="extend">
+        <focus_add type="add" min="0.416667" />
+        <focus_gain type="add" min="0.083333" />
+      </ability>
+      <!-- SKL-07: Flood of Anger in the new tree (D16): +83.33% sign intensity per level while it lasts
+           (+250% at level 3; skills/floodOfAnger.ws; 5.x: +50%) -->
+      <ability name="sword_s19" on_conflict="extend">
+        <spell_power type="mult" min="0.833333" />
+      </ability>
+      <!-- SKL-07: Undying in the new tree (D15): legacy's, 120 s cooldown (5.x: 30 s; its instant heal,
+           healing_factor and healing_bonus, is no longer read) -->
+      <ability name="sword_s18" on_conflict="extend">
+        <trigger_delay type="add" min="120" />
+      </ability>
+      <!-- SKL-08: Shock Wave in the new tree (D20): legacy's force damage, 100 per level (300 at 3), scaling
+           with sign intensity; 5.x's direct damage of 1% of Geralt's maximum Vitality per level is 0 -->
+      <ability name="magic_s33" on_conflict="extend">
+        <damage_vitality_percent type="add" min="0" />
+        <ForceDamage type="add" min="100" />
+      </ability>
+      <!-- SKL-09: Melt Armor in the new tree: legacy's (the debuff in gm_effects.xml); 5.x's armor
+           reduction and burn chance bonus are no longer read -->
+      <ability name="magic_s8" on_conflict="extend">
+        <max_armor_reduction type="add" min="0" />
+        <burn_chance_bonus type="add" min="0" />
+      </ability>
+      <!-- SKL-10: Sustained Glyphs in the new tree, legacy's: +33.3% trap duration per level, +30% radius
+           from level 2, a second trap at level 3 (skills/yrden.ws); 5.x's +2 charges, +1 trap, +5 s and
+           +10% range per level are 0 -->
+      <ability name="magic_s42" on_conflict="extend">
+        <charge_count type="add" min="0" />
+        <trap_count type="add" min="0" />
+        <trap_duration type="add" min="0" />
+        <range type="mult" min="0" />
+        <trap_duration_bonus type="add" min="0.333" />
+        <range_bonus type="add" min="0.3" />
+      </ability>
+      <!-- SKL-10: Supercharged Glyphs in the new tree: +8.33% final damage per level to enemies inside the
+           trap (skills/yrden.ws); 5.x's drain is 0 -->
+      <ability name="magic_s11" on_conflict="extend">
+        <direct_damage_per_sec type="add" min="0" />
+        <direct_damage_per_sec type="mult" min="0" />
+        <s11_dmg_bonus type="add" min="0.083333" />
+      </ability>
+      <!-- SKL-11: Active Shield and Exploding Shield (shared by both trees), legacy's: the active shield
+           holds twice the health and heals 33.4% of the absorbed damage per level; the explosion deals
+           30 shock damage per level above 1 (5.x: health x10, 3-12 physical and silver damage) -->
+      <ability name="magic_s4" on_conflict="extend">
+        <shield_health_factor type="add" always_random="false" min="2" max="2" />
+        <shield_healing_factor type="add" always_random="false" min="0.334" max="0.334" />
+      </ability>
+      <ability name="magic_s13" on_conflict="extend">
+        <PhysicalDamage type="add" min="0" max="0" />
+        <SilverDamage type="add" min="0" max="0" />
+        <ShockDamage type="add" min="30" max="30" />
+      </ability>
+      <!-- SKL-12: Delusion and Domination (shared by both trees), legacy's: slow motion while casting -15%
+           per level, +25% crit chance against the confused per level (5.x's forced stagger of short
+           confusions off); Domination's penalty 25% per missing level -->
+      <ability name="magic_s17" on_conflict="extend">
+        <duration_to_force_stagger type="add" min="0" />
+        <slowdown_mod type="add" min="0.15" />
+        <crit_chance_bonus type="add" min="0.25" />
+      </ability>
+      <ability name="magic_s19" on_conflict="extend">
+        <duration type="mult" min="0.25" />
+      </ability>
+      <!-- D58: the new tree's sign slots of 5.x's new-only skills carry legacy's sign skills, legacy's
+           max-level values at level 3 (skills/signSlots.ws); 5.x's values on these slots are 0.
+           Igni Intensity on magic_s35 (5.x: Catalyst): +50 Igni and +25/s Firestream fire damage per
+           level (skills/igni.ws) -->
+      <ability name="magic_s35" on_conflict="extend">
+        <spell_power_aard_igni type="mult" min="0" />
+        <burn_chance_bonus type="add" min="0" />
+        <fire_damage_bonus type="add" always_random="false" min="50" max="50" />
+        <channeling_damage_bonus type="add" always_random="false" min="25" max="25" />
+      </ability>
+      <!-- Axii Intensity on magic_s36 (5.x: Fortified Signs, +20% Yrden, Quen and Axii duration per
+           level): Axii duration +16.67% per level (skills/axii.ws) -->
+      <ability name="magic_s36" on_conflict="extend">
+        <duration type="mult" min="0" />
+        <axii_duration_bonus type="add" min="0.166667" />
+      </ability>
+      <!-- Yrden Intensity on magic_s37 (5.x: Convergence Theory, +5/10/15% sign intensity per stack):
+           +50 turret damage per level (skills/yrden.ws) -->
+      <ability name="magic_s37" on_conflict="extend">
+        <damage_level1 type="add" min="0" />
+        <damage_level2 type="add" min="0" />
+        <damage_level3 type="add" min="0" />
+        <turret_bonus_damage type="add" min="50" />
+      </ability>
+      <!-- Quen Intensity on magic_s38 (5.x: Focus, +10% sign intensity per adrenaline point per level):
+           +50 shield health per level (skills/quen.ws) -->
+      <ability name="magic_s38" on_conflict="extend">
+        <spell_power type="mult" min="0" />
+        <shield_health_bonus type="add" min="50" />
+      </ability>
+      <!-- Aard Intensity on magic_s39 (5.x: Avoidance): heavy knockdown chance +5% per level when casting
+           Aard (skills/aard.ws) -->
+      <ability name="magic_s39" on_conflict="extend">
+        <stamina_cost_reduction type="mult" min="0" />
+        <heavy_knockdown_chance_bonus type="mult" min="0.05" />
+      </ability>
+      <!-- Quen Discharge on magic_s40 (5.x: Overload, 15 elemental damage per level around every sign):
+           8.33% of the absorbed damage returned per level (skills/quen.ws) -->
+      <ability name="magic_s40" on_conflict="extend">
+        <ElementalDamage type="add" min="0" />
+        <discharge_percent type="add" min="0.083333" />
+      </ability>
+      <!-- Pyromaniac on magic_s41 (5.x: Resonance): burning chance +8.33% per level (skills/igni.ws) -->
+      <ability name="magic_s41" on_conflict="extend">
+        <sign_intensity_ratio type="add" min="0" />
+        <chance_bonus type="add" min="0.083333" />
+      </ability>
+      <ability name="sword_s33" on_conflict="extend">
+        <s10_damage_reduction type="add" min="0.10" />
+        <damage_increase type="add" min="0.5" />
+        <parry_cost_decrease type="add" min="0.5" />
+        <instant_kill_chance type="add" min="0" />
+      </ability>
+      <!-- SKL-18 (D49): the new tree's perks with legacy's values at their 1 level (GMNewTreeSkills,
+           gm_skill_trees.xml): Sun and Stars perk_38 +5% stamina regeneration at night; Survival Instinct
+           perk_30 +750 Vitality (5.x: +8% per level); Metabolic Control perk_33 +40 toxicity (5.x: 10 per
+           level); Battle Frenzy perk_40 +10% crit chance per adrenaline point (5.x: 3% per level); Strong Back
+           perk_35 +40 weight (5.x: 20 per level) -->
+      <!-- the school perks and Adrenaline Burst in the new tree, as the classic ones (gm_skill_trees.xml),
+           given whole: 5.x's per-level values go -->
+      <ability name="perk_23" on_conflict="replace">
+        <tags>perk_23</tags>
+        <critical_hit_chance type="add" min="0.05" />
+        <critical_hit_damage_bonus type="add" min="0.2" />
+      </ability>
+      <ability name="perk_24" on_conflict="replace">
+        <tags>perk_24</tags>
+        <spell_power type="mult" min="0.05" />
+        <perk_6_stamina_cost_reduction type="mult" min="0.05" />
+      </ability>
+      <ability name="perk_25" on_conflict="replace">
+        <tags>perk_25</tags>
+        <vitality type="mult" min="0.075" />
+        <bonus_focus_gain type="add" min="0.025" />
+      </ability>
+      <ability name="perk_42" on_conflict="replace">
+        <tags>perk_42, AdrenalineBurst, GlobalPassiveBonus</tags>
+        <focus_gain type="add" min="0.05" />
+        <stamina_cost_reduction type="add" min="0.1" />
+      </ability>
+      <!-- Focus on perk_37 (D40; 5.x: Elemental Attunement, +3% non-physical damage per level): +15% sign
+           intensity per adrenaline point (skills/focusPerk.ws) -->
+      <ability name="perk_37" on_conflict="replace">
+        <tags>perk_37</tags>
+        <spell_power type="mult" min="0.15" />
+      </ability>
+      <!-- Attack is the Best Defense on perk_31 (as the classic perk_21, gm_skill_trees.xml) -->
+      <ability name="perk_31" on_conflict="replace">
+        <tags>perk_31</tags>
+        <stamina_kill type="mult" min="0.15" />
+        <stamina_other type="mult" min="0.05" />
+      </ability>
+      <!-- Heavy Artillery on perk_28 (5.x: Viper School) and Trick Shot on perk_27 (5.x: Manticore School), D61:
+           5.x's schools are gone (their per-piece abilities are empty); Trick Shot needs no value -->
+      <ability name="perk_28" on_conflict="replace">
+        <tags>perk_28</tags>
+        <stack_multiplier type="mult" min="0.5" />
+        <dmg_multiplier type="mult" min="1.0" />
+      </ability>
+      <ability name="perk_27" on_conflict="replace">
+        <tags>perk_27</tags>
+      </ability>
+      <!-- In Combat's Fires on perk_44 (5.x: Element of Surprise, D61) and Advanced Pyrotechnics on perk_39 (5.x's
+           design: a 10% chance per level not to use up a bomb, and immunity to Geralt's own bombs) as the
+           classic ones (skills/inCombatsFiresPyro.ws) -->
+      <ability name="perk_44" on_conflict="replace">
+        <tags>perk_44</tags>
+      </ability>
+      <ability name="perk_39" on_conflict="replace">
+        <tags>perk_39, AdvancedPyroTechnics</tags>
+        <free_bomb type="add" min="0" />
+        <gm_bomb_focus_gain type="add" min="0.1" />
+      </ability>
+      <!-- Metabolism Boosts on perk_32 (5.x: 10% per level): 33.4% per adrenaline point, as the classic perk_13
+           (skills/metabolismBoosts.ws) -->
+      <ability name="perk_32" on_conflict="extend">
+        <cost_reduction type="mult" min="0.334" />
+      </ability>
+      <!-- Gorged on Power on perk_43 (5.x: Synergy, D60, D61; skills/gorgedOnPower.ws): no value -->
+      <ability name="perk_43" on_conflict="replace">
+        <tags>perk_43</tags>
+      </ability>
+      <!-- Wolf School perk_26 (D61, new design), per medium armor piece: +5% crit chance and +15% crit damage for
+           melee hits with the right oil on an enemy that took bomb damage in the last 10 s, +7.5% bomb weapon
+           damage against poisoned enemies (skills/wolfSchool.ws; 5.x: +2% attack power and intensity) -->
+      <ability name="perk_26" on_conflict="replace">
+        <tags>perk_26</tags>
+        <gm_wolf_crit_chance type="add" min="0.05" />
+        <gm_wolf_crit_damage type="add" min="0.15" />
+        <gm_wolf_bomb_damage type="add" min="0.075" />
+      </ability>
+      <ability name="perk_38" on_conflict="extend">
+        <staminaRegen_tooltip type="mult" min="0.05" />
+      </ability>
+      <ability name="perk_38_night_ability" on_conflict="extend">
+        <staminaRegen type="mult" min="0.05" />
+      </ability>
+      <ability name="perk_30" on_conflict="extend">
+        <vitality type="base" min="750" />
+      </ability>
+      <ability name="perk_33" on_conflict="extend">
+        <toxicity type="base" min="40" />
+      </ability>
+      <ability name="perk_40" on_conflict="extend">
+        <critical_hit_chance type="add" min="0.1" />
+      </ability>
+      <ability name="perk_35" on_conflict="extend">
+        <encumbrance type="base" min="40" />
+      </ability>
+      <!-- SKL-03: Muscle Memory sword_s22 (D1, D53), new design: a successful dodge or roll arms 1 boosted fast
+           attack per level, each within 6 s of the one before: +60% attack power, +10% total damage; +5%
+           fast-attack adrenaline gain per level (skills/muscleMemory.ws). 5.x's raw-damage multiplier is 0 -->
+      <ability name="sword_s22" on_conflict="extend">
+        <damage_increase type="mult" min="0" max="0" />
+        <gm_mm_attack_power type="add" min="0.6" />
+        <gm_mm_total_damage type="add" min="0.1" />
+        <gm_mm_window type="add" min="6" />
+        <light_focus_gain type="add" min="0.05" />
+      </ability>
+      <!-- SKL-04: Strength Training sword_s23 (D54), new design: per fast-attack swing that hits, a stack for the
+           next strong attack, up to 1 per level, each half the one before: +35% attack power and +10% weapon
+           damage first; expire after 6 s; +5% strong-attack adrenaline gain per level
+           (skills/strengthTraining.ws). 5.x's bonus is 0 -->
+      <ability name="sword_s23" on_conflict="extend">
+        <damage_increase type="mult" min="0" max="0" />
+        <gm_st_attack_power type="add" min="0.35" />
+        <gm_st_weapon_damage type="add" min="0.1" />
+        <gm_st_duration type="add" min="6" />
+        <heavy_focus_gain type="add" min="0.05" />
+      </ability>
+      <!-- SKL-03, SKL-04: Precise Blows sword_s24 (D57) and Crushing Blows sword_s25 (D55), new designs: melee
+           fast or strong attacks +8% crit chance, +20% crit damage per level; a crit of the type chains for
+           4 s or 6 s: a further +8% and +20% per level (skills/critBlows.ws). 5.x's procs are 0 -->
+      <ability name="sword_s24" on_conflict="extend">
+        <damage_increase type="mult" min="0" max="0" />
+        <gm_crit_chance type="add" min="0.08" />
+        <gm_crit_damage type="add" min="0.2" />
+        <gm_chain_crit_chance type="add" min="0.08" />
+        <gm_chain_crit_damage type="add" min="0.2" />
+        <gm_chain_duration type="add" min="4" />
+      </ability>
+      <ability name="sword_s25" on_conflict="extend">
+        <damage_increase type="mult" min="0" max="0" />
+        <gm_crit_chance type="add" min="0.08" />
+        <gm_crit_damage type="add" min="0.2" />
+        <gm_chain_crit_chance type="add" min="0.08" />
+        <gm_chain_crit_damage type="add" min="0.2" />
+        <gm_chain_duration type="add" min="6" />
+      </ability>
+      <ability name="sword_s36" on_conflict="extend">
+        <s9_damage_reduction type="add" min="0.166667" />
+      </ability>
+      <ability name="sword_s28" on_conflict="extend">
+        <armor_reduction_perc type="add" always_random="false" min="0.083333" max="0.083333" />
+      </ability>
+      <ability name="sword_s29" on_conflict="extend">
+        <sword_s5_chance type="add" min="0.083333" />
+        <sword_s5_duration type="add" min="8" />
+        <sword_s5_dmg_per_sec type="add" min="0.01" />
+        <sword_s5_dmg_boost type="add" min="0.083333" />
       </ability>
       <ability name="sword_s2" on_conflict="extend">
+        <!-- SKL-04: the new tree's Rend, legacy's level-5 totals at level 3, per level: +16.67% weapon
+             damage, +0.333% per stamina point spent charging, +16.67% per adrenaline point, +33.3%
+             critical hit chance (5.x's adrenaline_damage_bonus is no longer read) -->
+        <critical_hit_chance type="add" min="0.333333" />
+        <attack_damage_bonus type="mult" min="0.166667" />
+        <adrenaline_final_damage_bonus type="mult" min="0.166667" />
+        <stamina_max_dmg_bonus type="mult" min="0.003333" />
         <stamina_delay type="add" min="1" />
+      </ability>
+      <!-- SKL-13: the Brewing skills, legacy's (D27 to D29; skills/brewing.ws). Restoration alchemy_s2 (shared): 5%
+           of maximum Vitality per potion dose per level in both trees (5.x: 10%). The new tree's Expert Brewer
+           alchemy_s3 (5.x: Delayed Recovery) -1.67 potion toxicity per level, Prolonged Effects alchemy_s4 (5.x:
+           Side Effects) +33.3% potion duration per level, Refreshment alchemy_s24 (5.x: High Tolerance, given
+           whole) 10% of maximum stamina per potion dose per level; the classic values are in gm_skill_trees.xml -->
+      <ability name="alchemy_s2" on_conflict="extend">
+        <vitality_gain_perc type="add" min="0.05" />
+      </ability>
+      <ability name="alchemy_s3" on_conflict="extend">
+        <toxicityReduction type="add" min="1.666667" />
+      </ability>
+      <ability name="alchemy_s4" on_conflict="extend">
+        <apply_chance type="add" min="0" />
+        <gm_potion_duration type="add" min="0.333334" />
+      </ability>
+      <ability name="alchemy_s24" on_conflict="replace">
+        <tags>alchemy_s24</tags>
+        <stamina_gain_perc type="add" min="0.1" />
+      </ability>
+      <!-- SKL-14: Oil Preparation in the new tree, legacy's totals at level 3 (D30; skills/oils.ws): Poisoned Blades
+           alchemy_s12 poison chance +5% per level and +5% per oil level above 1 (5.x: +10% per oil level);
+           Protective Coating alchemy_s5 damage taken -5% per level and -5% per oil level above 1; the classic
+           values are in gm_skill_trees.xml -->
+      <ability name="alchemy_s12" on_conflict="extend">
+        <skill_chance type="add" min="0.05" />
+        <oil_level_chance type="add" min="0.05" />
+      </ability>
+      <ability name="alchemy_s5" on_conflict="extend">
+        <defence_bonus type="add" min="0.05" />
+        <oil_level_defence type="add" min="0.05" />
+      </ability>
+      <!-- SKL-14: Fixative on alchemy_s25 (D60; 5.x: Volatile Compound, bomb damage by toxicity, given whole):
+           +33.4% oil charges per level, no wear at level 3; Hunter Instinct alchemy_s27 +11.13% critical hit
+           damage per level per adrenaline point with the right oil (5.x: +20% per level at full adrenaline) -->
+      <ability name="alchemy_s25" on_conflict="replace">
+        <tags>alchemy_s25</tags>
+        <ammo_bonus type="add" min="0.334" />
+      </ability>
+      <ability name="alchemy_s27" on_conflict="extend">
+        <critical_hit_damage_bonus type="add" min="0.1113" />
+      </ability>
+      <!-- SKL-15: Bomb Creation in the new tree, legacy's totals at level 3 (D31, D32, D60; skills/bombs.ws): Steady Aim
+           on alchemy_s23 (5.x: Toxic Shock, given whole) 15% per level; Pyrotechnics alchemy_s10 +83.33 physical
+           and silver damage per level (5.x: 50); Efficiency alchemy_s8 +1/+3/+5 bombs per slot at levels 1/2/3
+           (5.x: +1 per level); Cluster Bombs alchemy_s11 2 fragments per level at full damage (5.x: level + 1
+           at 40%); the classic values are in gm_skill_trees.xml -->
+      <ability name="alchemy_s23" on_conflict="replace">
+        <tags>alchemy_s23</tags>
+        <slowdown_mod type="add" min="0.15" />
+      </ability>
+      <ability name="alchemy_s10" on_conflict="extend">
+        <PhysicalDamage type="add" min="83.333333" />
+        <SilverDamage type="add" min="83.333333" />
+      </ability>
+      <ability name="alchemy_s8" on_conflict="extend">
+        <gm_efficiency_base type="add" min="-1" />
+        <gm_efficiency_per_level type="add" min="2" />
+      </ability>
+      <ability name="alchemy_s11" on_conflict="extend">
+        <gm_fragments_base type="add" min="0" />
+        <gm_fragments_per_level type="add" min="2" />
+      </ability>
+      <!-- SKL-16: Mutation, legacy's (D29, D33, D60; skills/mutation.ws). Acquired Tolerance alchemy_s18 (both trees,
+           3 levels): +1 maximum toxicity per known formula, up to 50 per level (5.x: 0.5 per formula). The new
+           tree: Tissue Transmutation alchemy_s13 +3.33 Vitality per level per toxicity offset point (5.x: +300
+           per decoction); Adaptation alchemy_s14 decoction toxicity -6.67% per level (5.x's Adaptability
+           duration is 0); Synergy on alchemy_s26 (5.x: Potent Sting, given whole) counted as 5/3 classic levels
+           per level (+50% at level 3); the classic values are in gm_skill_trees.xml -->
+      <ability name="alchemy_s18" on_conflict="extend">
+        <toxicity type="add" min="1" />
+        <max_abs_per_lvl_s18 type="add" min="50" />
+      </ability>
+      <ability name="alchemy_s13" on_conflict="extend">
+        <vitality type="add" min="3.333333" />
+      </ability>
+      <ability name="alchemy_s14" on_conflict="extend">
+        <duration type="mult" min="0" />
+        <tox_off_bonus type="mult" min="0.066667" />
+      </ability>
+      <ability name="alchemy_s26" on_conflict="replace">
+        <tags>alchemy_s26</tags>
+        <synergy_bonus type="add" min="0.166667" />
+        <gm_synergy_levels type="add" min="1.666667" />
+      </ability>
+      <!-- SKL-17: Trial of the Grasses in the new tree, legacy's totals at level 3 (D34, D60; skills/grasses.ws): Frenzy
+           alchemy_s16 25% slow motion per level for 1.5 s, +8.33% attack power and sign intensity per level while
+           overdosed (5.x: 0.48 - 12% per level, 0.3 s per level); Endure Pain alchemy_s20 counted as 5/3 copies of
+           IgnorePainEffect per level (+50% at level 3; 5.x defines no ability for this skill, so this one is new); Fast Metabolism alchemy_s15 toxicity -0.4167 per second per
+           level (5.x: -1); Killing Spree on alchemy_s22 (5.x: Debilitating Poison, given whole) +8.33% crit chance
+           per level per kill; the classic values are in gm_skill_trees.xml -->
+      <ability name="alchemy_s16" on_conflict="extend">
+        <slowdown_ratio type="add" min="0.25" />
+        <slowdown_duration type="add" min="1.5" />
+        <attack_power type="mult" min="0.083333" />
+        <spell_power type="mult" min="0.083333" />
+      </ability>
+      <ability name="alchemy_s20">
+        <tags>alchemy_s20</tags>
+        <gm_endure_pain_copies type="add" min="1.666667" />
+      </ability>
+      <ability name="alchemy_s15" on_conflict="extend">
+        <toxicityRegen type="add" min="-0.416667" />
+      </ability>
+      <ability name="alchemy_s22" on_conflict="replace">
+        <tags>alchemy_s22</tags>
+        <critical_hit_chance type="add" min="0.083333" />
       </ability>
     </abilities>
   </definitions>

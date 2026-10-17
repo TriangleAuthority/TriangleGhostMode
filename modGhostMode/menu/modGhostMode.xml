@@ -4,6 +4,8 @@
 <UserConfig>
 	<Group id="GMGameplayOptions" displayName="Mods.ghost_mode.gm_gameplay_options">
 		<VisibleVars>
+			<!-- SKL-02 -->
+			<Var id="GMClassicSkillTree" displayName="gm_classic_skill_tree" displayType="TOGGLE"/>
 			<!-- STAM-05 -->
 			<Var id="GMArmorRegenPenalty" displayName="gm_armor_reg_penalty" displayType="TOGGLE"/>
 			<!-- STAM-04 -->

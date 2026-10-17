@@ -1,7 +1,6 @@
 // DEF-08: arrows can be parried with the guard up, no skill needed ("Arrows can be parried",
-// changelist; vanilla needs Deflection S_Sword_s10 or the new tree's S_Sword_s33). Deflection's and
-// S_Sword_s33's extra effects (reflecting, deflecting) stay as 5.x until SKL (project owner,
-// 2026-10-03). The parry goes through PerformParryCheck, so it costs stamina (STAM-03) and, without
+// changelist; vanilla needs Deflection S_Sword_s10 or the new tree's S_Sword_s33). Deflection's
+// reflection is SKL-05's (skills/deflection.ws). The parry goes through PerformParryCheck, so it costs stamina (STAM-03) and, without
 // stamina, still parries the arrow fully (arrows have no partial parry). See docs/features/def.md.
 
 // 5.x body; changes marked //modSigns. Legacy's other changes here (collision groups, Glyphword 1,

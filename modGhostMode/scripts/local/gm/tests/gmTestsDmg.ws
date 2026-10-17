@@ -517,7 +517,7 @@ exec function gmtest_dmg02_back()
 
 // DMG slice 3a (DMG-04): the additive raw-damage pool and heavy attacks, against the test dummy with
 // Geralt's sword (scripted attacks built as real ones). Needs a dummy (gmtest_dummy("human") in an
-// earlier call); for the additivity check also the Element of Surprise perk (skilleq(S_Perk_44)).
+// earlier call); for the additivity check also the new tree's Strength Training (skilleq(S_Sword_s23, 0, 3)).
 exec function gmtest_dmg03a()
 {
 	var npc : CNewNPC;
@@ -540,7 +540,6 @@ exec function gmtest_dmg03a()
 	GMTestDummyNeutral(npc);
 	GMTestDummySet(npc, 'armor', 250);
 	GMTestDummySet(npc, 'critical_hit_damage_reduction', 1);
-	thePlayer.RemoveBuff(EET_ElementOfSurprise);
 
 	// Geralt's light attack: no pool term
 	thePlayer.ForceSetStat(BCS_Focus, 0);
@@ -551,6 +550,7 @@ exec function gmtest_dmg03a()
 	GMTestReport(GMTestDmgNear(lightRatio, 1), "DMG-04 a light attack: raw damage unchanged by the pool (x" + NoTrailZeros(lightRatio) + ")");
 
 	// Geralt's heavy attack: +50% weapon damage (Strong Attack), 200 armor piercing, no attack power change
+	GetWitcherPlayer().GMTestSetSTStacks(0);	// the light attack gave the new tree's Strength Training a stack
 	thePlayer.ForceSetStat(BCS_Focus, 0);
 	GMTestDmgHit(thePlayer, npc, weaponId, 'attack_heavy');
 	heavy = GMTestDmgStep0();
@@ -563,21 +563,20 @@ exec function gmtest_dmg03a()
 	GMTestReport(GMTestDmgNear(heavy.result, MaxF(0, MaxF(0, heavy.rawIn + heavy.base - heavy.pts) * heavy.mult + heavy.add) * (1 - heavy.perc)),
 		"DMG-01 a heavy attack follows the formula without 5.x's x1.833");
 
-	// Pool terms add up: Strong Attack + Element of Surprise (perk_44)
-	if(thePlayer.GetSkillLevel(S_Perk_44) > 0)
+	// Pool terms add up: Strong Attack + the new tree's Strength Training at 3 stacks (5.x's Element of
+	// Surprise, the former sample, is gone)
+	if(thePlayer.CanUseSkill(S_Sword_s23))
 	{
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue('perk_44', 'melee_damage_increase', min, max);
-		eos = min.valueMultiplicative * thePlayer.GetSkillLevel(S_Perk_44);
-		thePlayer.AddEffectDefault(EET_ElementOfSurprise, NULL, "gmtest");
+		GetWitcherPlayer().GMTestSetSTStacks(GetWitcherPlayer().GetSkillLevel(S_Sword_s23));
+		eos = GetWitcherPlayer().GMStrengthTrainingBonus('gm_st_weapon_damage', GetWitcherPlayer().GetSkillLevel(S_Sword_s23));
 		thePlayer.ForceSetStat(BCS_Focus, 0);
 		GMTestDmgHit(thePlayer, npc, weaponId, 'attack_heavy');
 		ratio = thePlayer.gmTestDmgRawAfter / MaxF(0.001, thePlayer.gmTestDmgRawBefore);
-		thePlayer.RemoveBuff(EET_ElementOfSurprise);
-		GMTestReport(GMTestDmgNear(ratio, 1 + 0.5 + eos), "DMG-04 pool terms add up: Strong Attack +50% and Element of Surprise +" + NoTrailZeros(eos * 100)
+		GMTestReport(GMTestDmgNear(ratio, 1 + 0.5 + eos), "DMG-04 pool terms add up: Strong Attack +50% and Strength Training +" + NoTrailZeros(eos * 100)
 			+ "% give x" + NoTrailZeros(ratio) + " (additive " + NoTrailZeros(1.5 + eos) + ", 5.x's stacking " + NoTrailZeros(1.5 * (1 + eos)) + ")");
 	}
 	else
-		LogChannel('GMTest', "INFO DMG-04 additivity not checked: Geralt lacks the Element of Surprise perk (skilleq(S_Perk_44))");
+		LogChannel('GMTest', "INFO DMG-04 additivity not checked: Geralt lacks the new tree's Strength Training (skilleq(S_Sword_s23, 0, 3))");
 
 	// the dummy's heavy attack on Geralt: +25% weapon damage, no attack power bonus
 	npcWeapon = GMTestNpcWeapon(npc);
@@ -1080,4 +1079,13 @@ function GMTest_dmgxml()
 	ok = min.valueAdditive == 200;
 	dm.GetAbilityAttributeValue('sword_2', 'heavy_attack_dmg_boost', min, max);
 	GMTestReport(ok && min.valueMultiplicative == 0.5, "DMG-04 sword_2: 200 armor piercing, +50% heavy attack damage");
+}
+
+@addMethod(W3PlayerWitcher)
+function GMTestSetSTStacks(n : int)
+{
+	gmSTStacks = n;
+	gmSTEnd = theGame.GetEngineTimeAsSeconds() + 6;
+	gmSTLastStackAt = theGame.GetEngineTimeAsSeconds();
+	gmSTUsedAt = 0;
 }
