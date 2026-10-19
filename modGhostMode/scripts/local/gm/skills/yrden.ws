@@ -33,6 +33,9 @@ var gmTurretDamageBonus : float;
 var gmHasSupercharged : bool;
 @addField(W3YrdenEntity)
 var gmSuperchargedDmg : float;
+// ENCH-15: a trap Entanglement placed (the Magic Turret's hit with Glyphword 15 on the chest armor).
+@addField(W3YrdenEntity)
+public var gmIsEntanglement : bool;
 
 // Sustained Glyphs: the classic magic_s10 or the new tree's magic_s42; S_SUndefined if none.
 @addMethod(W3YrdenEntity)
@@ -85,11 +88,13 @@ function GetSignStats()
 {
 	var chargesAtt, trapDurationAtt : SAbilityAttributeValue;	//modSigns: removed fortifiedSignsAtt
 	var sustained : ESkill;	//modSigns
+	var min, max : SAbilityAttributeValue;	//modSigns: ENCH-15
 	//modSigns: removed fortifiedSignsAtt, player, rangeAttr, rangeMult
 
 	super.GetSignStats();
 
 	//modSigns: removed 5.x's supercharged-sign flag
+	gmIsEntanglement = notFromPlayerCast && (W3PlayerWitcher)owner.GetActor() && ((W3PlayerWitcher)owner.GetActor()).HasGlyphwordActive('Glyphword 15 _Stats');	//modSigns: ENCH-15, Entanglement's trap (legacy)
 
 	chargesAtt = owner.GetSkillAttributeValue(skillEnum, 'charge_count', false, true);
 	trapDurationAtt = owner.GetSkillAttributeValue(skillEnum, 'trap_duration', false, false);	//modSigns: without the skills' mods
@@ -124,7 +129,14 @@ function GetSignStats()
 	if(!IsAlternateCast() && sustained != S_SUndefined)	//modSigns: Sustained Glyphs' duration
 		trapDuration *= 1 + CalculateAttributeValue(owner.GetSkillAttributeValue(sustained, 'trap_duration_bonus', false, false)) * owner.GetSkillLevel(sustained);	//modSigns
 	//modSigns: removed 5.x's Fortify Signs (magic_s36)
-	//modSigns: legacy's Glyphword 15 (Entanglement) comes with ENCH, its Petri Philtre level 3 bonus with ALCH
+	if(gmIsEntanglement)	//modSigns: ENCH-15, Entanglement's trap: fixed duration and radius (legacy)
+	{	//modSigns
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 15 _Stats', 'glyphword15_duration', min, max);	//modSigns
+		trapDuration = min.valueAdditive;	//modSigns
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 15 _Stats', 'glyphword15_range', min, max);	//modSigns
+		baseModeRange = min.valueAdditive;	//modSigns
+	}	//modSigns
+	//modSigns: legacy's Petri Philtre level 3 bonus comes with ALCH
 }
 
 @replaceMethod(W3YrdenEntityStateYrdenSlowdown)
@@ -141,6 +153,7 @@ function YrdenSlowdown_Loop()
 	var currentlyAnimatedCS : CBaseGameplayEffect;	//modSigns
 	var yrden : W3YrdenEntity;	//modSigns
 	var power : SAbilityAttributeValue;	//modSigns
+	var capMin, capMax : SAbilityAttributeValue;	//modSigns: ENCH-15
 	var paramsDrain : SCustomEffectParams;	//modSigns: Supercharged Glyphs' marker
 	var superchargedBonus, bonus : float;	//modSigns
 	//modSigns: removed paramsDrain, scale, sp, multiplier
@@ -155,6 +168,11 @@ function YrdenSlowdown_Loop()
 	startingMin = CalculateAttributeValue(casterPlayer.GetSkillAttributeValue(S_Magic_3, 'min_starting_slowdown', false, false));	//modSigns
 	power = yrden.GMGetYrdenPower();	//modSigns
 	slowPower = power.valueMultiplicative;	//modSigns
+	if(yrden.gmIsEntanglement)	//modSigns: ENCH-15, Entanglement's trap: its own slowdown cap (legacy)
+	{	//modSigns
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 15 _Stats', 'glyphword15_slow_cap', capMin, capMax);	//modSigns
+		max = CalculateAttributeValue(capMin);	//modSigns
+	}	//modSigns
 
 	params.effectType = EET_Slowdown;	//modSigns
 	params.creator = casterActor;
@@ -198,7 +216,10 @@ function YrdenSlowdown_Loop()
 			curTarget.GetResistValue(CDS_ShockRes, pts, prc);	//modSigns
 			if(prc < 1)
 			{	//modSigns
-				slow = MaxF(0, startingMin * (1 + GMSignPowerStatToPowerBonus(slowPower - pts / 100))) * (1 - prc);	//modSigns
+				if(yrden.gmIsEntanglement)	//modSigns: ENCH-15, Entanglement: the cap, not scaled by intensity (legacy)
+					slow = max * (1 - prc);	//modSigns
+				else	//modSigns
+					slow = MaxF(0, startingMin * (1 + GMSignPowerStatToPowerBonus(slowPower - pts / 100))) * (1 - prc);	//modSigns
 				slow = ClampF(slow, min, max);	//modSigns
 				bonus = MaxF(0, superchargedBonus * (1 - prc));	//modSigns
 				if(timePassed >= decayDelay)	//modSigns
@@ -560,7 +581,7 @@ function YrdenTrapHitEnemy(entity : CEntity, hitPosition : Vector)
 		entity.PlayEffect( 'yrden_shock' );
 	}
 
-	if(casterActor.HasAbility('Glyphword 15 _Stats', true))
+	if((W3PlayerWitcher)casterActor && ((W3PlayerWitcher)casterActor).HasGlyphwordActive('Glyphword 15 _Stats'))	//modSigns: ENCH-01, from the chest armor
 	{
 		glyphwordY = (W3YrdenEntity)theGame.CreateEntity(GetWitcherPlayer().GetSignTemplate(ST_Yrden), entity.GetWorldPosition(), entity.GetWorldRotation() );
 		glyphwordY.Init(caster, parent, true, true);

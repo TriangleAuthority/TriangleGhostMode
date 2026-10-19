@@ -39,7 +39,7 @@ Ghost Mode's skill-point cut is not in the changelist.
 
 | # | Mutation | Vanilla 1.32 | Legacy GM | Units (main) |
 |---|---|---|---|---|
-| 1 | Conductors of Magic | Sign damage + 50% of the held sword's raw damage attribute (quality ≥ 3) | 30%, computed from the sword's total base damage (`GetTotalWeaponDamage`, GM's weapon damage incl. upgrades); Invigoration (Runeword 4) also consumed by Sign hits with M1 | XML `Mutation1`; `ProcessDamageIncrease`; `OnProcessActionPost` (Runeword 4, ENCH) |
+| 1 | Conductors of Magic | Sign damage + 50% of the held sword's raw damage attribute (quality ≥ 3) | 30%, computed from the sword's total base damage (`GetTotalWeaponDamage`, GM's weapon damage incl. upgrades); Invigoration (Runeword 4) also consumed by Sign hits with M1 (changelist; legacy's code: never, ENCH-05) | XML `Mutation1`; `ProcessDamageIncrease`; `OnProcessActionPost` (Runeword 4, ENCH) |
 | 2 | Magic Sensibilities | crit chance 20% + 10% × SP, crit damage 100% × SP (30%/100% at SI 0%) | Uses GM's SI→power-bonus curve B (`SignPowerStatToPowerBonus`, 0 at SI 0, 0.75 at 100%, 2.0 at ≥ 500%): chance 5% + 40% × B (5% → 85%), crit power 25% + 187.5% × B (25% → 400%) | XML `Mutation2`; `GetAttackersPowerMod`, `ProcessCriticalHitCheck`, tooltip |
 | 3 | Bloodbath | +5% AP per melee hit (max 250%), lost on any damage taken | Combat start: +10% AP per sword-path skill and +5% per other skill equipped (unlocked slots); a hit removes 0.5% per 1% of max Vitality lost; a kill restores the bonus to its peak and adds +20%; max 250%; reset at combat end. Finisher/dismember on sword kills kept | XML `Mutation3` (new attributes); `W3Effect_Mutation3` (rewritten: `InitVars`, `CalcInitialNumAbl`, `SetAbls`, `AddAbls`, `RemoveAbls`, `ManageMutation3Bonus`); callers `CNewNPC.OnDeath`, `W3PlayerWitcher.OnTakeDamage`, `OnCombatStart`; old trigger removed from `OnProcessActionPost` |
 | 4 | Toxic Blood | Attacker gets acid DoT = 1.5% of the damage dealt per toxicity point (3 s); vampires: −20% stamina regen, −2000 essence regen | Acid DoT independent of damage: 1.5 × current toxicity per second for 5 s (melee hits within 3 m, 6 m vs huge); every attacker gets −10% stamina regen while it runs; toxicity decay −50% | XML `Mutation4` (new), `AcidEffect`, `Mutation4BloodDebuff`; `ProcessActionMutation4ReturnedDamage`, `W3Effect_Acid.OnEffectAdded/Removed`, `W3Effect_Toxicity.OnUpdate` (decay), `W3Effect_Mutation4`, `AddCharacterStatToxicity`; `CNewNPC.RemoveMutation4BloodDebuff` removed |
@@ -166,7 +166,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 
 **Decisions:**
 
-- **Deviation:** legacy's Runeword 4 (Invigoration) is also consumed by Sign hits while Conductors of Magic is active; not ported yet (temporary, until ENCH; porter's call, confirmed by the owner, 2026-10-17).
+- Invigoration (Runeword 4) with Conductors of Magic since ENCH-05 (2026-10-19): Sign hits get its bonus through the sword's damage and a damaging Sign hit spends it, as the changelist says (the owner's ruling, 2026-10-19; legacy's check sat in the melee branch, so there they never spent it: a deviation recorded in [ENCH-05](ench.md#ench-05-invigoration-runeword-4)).
 
 **Slices:**
 
@@ -551,5 +551,5 @@ The mutations' effects and research costs are the same in both trees: legacy's (
 | ALCH | Mutation Catalyst potion, recipe and effect (ported by MUT-12 with Life Leech); the overdose threshold (5.x 50%, legacy 75%) that starts Euphoria; the rest of `W3Effect_Toxicity.OnUpdate` (replaced in `mutations/toxicity.ws`, where ALCH's hunks go) |
 | DEF | Deadly Counter ends DEF-06's and DEF-07's temporary deviations |
 | SKL | Mutation skill slots (SKL-01); Shock Wave in Piercing Cold's path (SKL-08); Bloodbath counts equipped skills (both trees) |
-| XBOW, DMG, ENCH | Cat Eyes' bolt damage; the intensity-to-power curve (Magic Sensibilities); Runeword 4 on Sign hits (Conductors of Magic, MUT-02's temporary deviation); Runeword 1 in `ProcessPreHitModifications` and Glyphword 6's (Depletion) enemy stamina drain, which legacy moved into `W3AardProjectile.ProcessCollision` (now replaced in `mutations/piercingCold.ws`) |
+| XBOW, DMG, ENCH | Cat Eyes' bolt damage; the intensity-to-power curve (Magic Sensibilities); Runeword 4 on Sign hits (Conductors of Magic; done with ENCH-05); Runeword 1 in `ProcessPreHitModifications` and Glyphword 6's (Depletion) enemy stamina drain, which legacy moved into `W3AardProjectile.ProcessCollision` (now replaced in `mutations/piercingCold.ws`) |
 | UI | The character stats popup's and the inventory's mutation lines (MUT-07, MUT-08, MUT-09, MUT-11, MUT-13 temporary deviations: `AddCharacterStatSigns`, `AddCharacterStatU`, `AddCharacterStatU2`, `AddCharacterStatToxicity`, `GetOffenseStatsList`); Life Leech's average attack power read from that list (MUT-12's temporary deviation) |

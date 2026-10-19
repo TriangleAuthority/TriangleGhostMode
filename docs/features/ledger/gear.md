@@ -143,7 +143,7 @@ Note: the task brief and `docs/features/deviations.md` call these Blood and Wine
 | Usurpation (Glyphword 10) | Axii transfers on death | **Replaced:** each puppet gives +25% AP and SI (max 4 stacks) | as 1.32 | AP, SI |
 | Beguilement (Glyphword 14) | Axii +2 s per hit | **Replaced:** each confused enemy gives +25% crit chance and crit damage (max 4) | as 1.32 | crit |
 
-Elation, Rejuvenation and Prolongation were strongly buffed in 5.x (×4 to ×10 adr, ×4 stamina, ×2 potion time). If the port keeps 5.x's runeword data, they become major adrenaline, stamina and potion-duration sources.
+Elation, Rejuvenation and Prolongation were strongly buffed in 5.x (×4 to ×10 adr, ×4 stamina, ×2 potion time). The port takes legacy's numbers and mechanics for all six words 5.x raised (the owner's DE2, [ENCH](../ench.md#area-decisions), 2026-10-19). 5.x also added the dying enemy's weapon damage ×5 to Eruption's (Glyphword 20) explosion, which the port still has ([ENCH audit](../ench.md#ench-audit-2026-10-19) F2).
 
 ## 6. Trophies (worn on the horse; the abilities apply to Geralt)
 

@@ -1320,13 +1320,27 @@ exec function gmtest_stam03_chan_empty()
 		+ ", casting " + thePlayer.IsCastingSign() + ", sign state " + entityState);
 }
 
-// Test probe: what an Axii cast applies when it ends (targets, alternate or not, their effects).
+// Test probe: what an Axii cast applies when it ends (targets, alternate or not, their effects; the
+// Beguilement and Usurpation stacks on Geralt then, for ENCH-14's gmtest_ench14_count).
+@addField(CR4Player)
+public var gmTestAxiiEnd : string;
+
+@addMethod(CR4Player)
+function GMTestSetAxiiEnd(s : string)
+{
+	gmTestAxiiEnd = s;
+}
+
 @wrapMethod(W3AxiiEntity)
 function OnEnded(optional isEnd : bool)
 {
 	var i : int;
+	var confused : bool;
 
 	wrappedMethod(isEnd);
+	for(i = 0; i < targets.Size(); i += 1)
+		confused = confused || targets[i].HasBuff(EET_Confusion) || targets[i].HasBuff(EET_AxiiGuardMe);
+	thePlayer.GMTestSetAxiiEnd("confused " + confused + ", Beguilement stacks " + thePlayer.GetAbilityCount('Glyphword 14 abl') + ", Usurpation stacks " + thePlayer.GetAbilityCount('Glyphword 10 abl'));
 	if(GMTestProbes())
 	{
 		LogChannel('GMTest', "INFO Axii OnEnded: alternate " + IsAlternateCast() + ", skill " + skillEnum + ", targets " + targets.Size()
@@ -2129,6 +2143,7 @@ exec function gmtest_regress()
 	GMTest_skl_values();
 	GMTest_mut();
 	GMTest_arm();
+	GMTest_ench();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

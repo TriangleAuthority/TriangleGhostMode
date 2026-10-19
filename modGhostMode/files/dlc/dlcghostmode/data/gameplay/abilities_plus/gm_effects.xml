@@ -105,6 +105,14 @@
         <staminaRegen type="add" min="1" />
         <maxStacks type="add" min="5" />
       </ability>
+      <!-- ENCH-05: Invigoration's bonus (legacy's Runeword4Effect; the bonus is in the script) -->
+      <ability name="GMRuneword4Effect">
+        <duration type="add" min="-1" />
+      </ability>
+      <!-- ENCH-09: Prolongation's bonus (legacy's Runeword11Effect; the bonus is in the script) -->
+      <ability name="GMRuneword11Effect">
+        <duration type="add" min="-1" />
+      </ability>
     </abilities>
   </definitions>
   <custom>
@@ -123,6 +131,8 @@
       <effect name_name="GMMutation5Effect" defaultAbilityName_name="GMMutation5Effect" iconType_name="icon_mutation5" showOnHUD="1" effectNameLocalisationKey_name="skill_name_mutation_5" />
       <effect name_name="GMMutationTriggerEffect" defaultAbilityName_name="GMMutationTriggerEffect" isPotionEffect="1" showOnHUD="0" onStartSound_name="gui_potion_activation" />
       <effect name_name="GMKaerMorhenSetBonusEffect" defaultAbilityName_name="GMKaerMorhenSetBonusEffect" showOnHUD="0" />
+      <effect name_name="GMRuneword4Effect" defaultAbilityName_name="GMRuneword4Effect" iconType_name="icon_effect_runeword" showOnHUD="1" effectNameLocalisationKey_name="runeword04_name" />
+      <effect name_name="GMRuneword11Effect" defaultAbilityName_name="GMRuneword11Effect" iconType_name="icon_effect_runeword" showOnHUD="1" effectNameLocalisationKey_name="runeword11_name" />
     </effects>
     <effect_icons>
       <effect iconType_name="GMAardCooldown" path="icons/Skills/core/magic_1.png" />

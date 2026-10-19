@@ -212,3 +212,22 @@
 2110992474|0ced58f4||Bonificación por tipo de equipo:
 2110992631|b2eae791||Aumenta la duración de las pociones (no de las decocciones) un $S$% por cada pieza del conjunto (bonificación actual: $S$%).
 2110992632|b2eae792||Contra los enemigos dentro de tu Círculo de Yrden, la intensidad de la señal de todos los efectos de señales, salvo los del propio Yrden, aumenta un $S$%.
+2110992337|e9c58057||Las señales consumen un $I$% menos de vigor, pero todas las acciones físicas (excepto los ataques especiales) consumen $I$% más de vigor.
+2110992338|eb7a58f6||Todas las acciones que causan daño (excepto los ataques especiales) consumen un $I$% más de vigor, pero causan $I$% más de daño.
+2110992339|e810a7b8||Todas las acciones físicas (excepto los ataques especiales) consumen $I$% menos vigor, pero el consumo de todas las señales aumenta un $I$%.
+2110992296|ed2f3195||El daño causado por la descarga y explosión del escudo activo aumenta un $I$%.
+2110992160|22156cd6||Cuando la Trampa Mágica de Yrden golpee a un enemigo, un Círculo de Yrden aparecerá en esa posición. El tamaño, la duración y la ralentización de dicho círculo no son afectados por la intensidad de la señal ni sus mejoras y están limitadas a $S$mts, $S$s y $S$% respectivamente.
+2110992501|257f1e14||Cuando entres en combate, aparecerá un escudo de Quen que no consumirá vigor, además de obtener una bonificación de $I$% a la intensidad de la señal.
+2110992387|f098e2d3||El ataque básico de Igni golpea a todos los enemigos en un radio de 360 grados y les causa $I$ puntos de daño adicional (aumenta con la intensidad de la señal). Las probabilidades de incendiarlos se reducen un $I$%.
+2110992499|eee40a34||Golpear enemigos con la señal de Aard reduce su vigor un $I$%, lo que también aumenta las probabilidades de lograr un derribo normal o pesado.
+2110992516|4e736cfc||Los enemigos muertos por Igni (por quemaduras o daño de fuego) explotan, causando $I$ puntos de daño a otros enemigos en un radio de $I$mts, además de prenderlos en llamas. El daño aumenta con la intensidad de la señal.
+2110992517|198d31bb||Cada enemigo controlado por Marioneta (Axia) añade $I$% a tu poder de ataque y a la intensidad de las señales (hasta un $I$%).
+2110992518|20609437||Cada enemigo confundido por Axia añade $I$% de probabilidades de lograr impactos críticos y al poder de estos (hasta un $I$%).
+2110992502|c43de44b||Después de lanzar una señal, se consumirá un punto de adrenalina y tu siguiente ataque de espada se cargará con el poder de esa señal. Aard: derribar (las posibilidades dependen del poder del ataque). Igni: $S$% del daño de tu arma se añadirá como daño por fuego (aumenta con el poder del ataque). Yrden: se aplica un efecto de ralentización durante $S$s. Quen: regenera vitalidad respecto al $S$% del daño causado. Axia: se aplica un efecto de confusión durante $S$s.
+2110992500|c5f2bcea||Aumenta el rango de Remolino $S$mts. y el de Desgarrar $S$mts. El daño final causado por estos ataques se reduce un $S$%. 
+2110992158|c95c6e28||Cuando se alcance la vitalidad máxima, toda regeneración adicional de esta aumentará el daño de las armas un $I$% por cada 1% de vitalidad adicional (hasta un +$I$%). Solo funciona durante el combate. Se reinicia al recibir daños y al causarlos.
+2110992386|d02fd0a4||Una vez que alcancen el máximo, los puntos de adrenalina disminuirán hasta llegar a 0 a una tasa de $S$ puntos/seg. Durante este tiempo, la vitalidad se regenerará más rápidamente un $S$%/seg., el vigor un $S$%/seg., y la toxicidad disminuirá más rápidamente en $S$ puntos/seg.
+2110992294|f76f46ed||Al matar a un enemigo recuperas $I$% de vigor.
+2110992295|fad8f82b||Al matar a un enemigo obtienes $F$ puntos de adrenalina.
+2110992507|f9241f8c||La generación adicional de adrenalina ralentiza la expiración de las pociones un $S$% por cada 1% de adrenalina adicional. (3 puntos = 100%). La bonificación máx. no puede exceder el $S$%. La bonificación se reinicia al perder adrenalina y al finalizar el combate.
+2110992159|ccc61f66||Cualquier comestible consumido dura un $I$% más, pero sabe a albóndigas.

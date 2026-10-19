@@ -83,7 +83,13 @@ function GetSignStats()
 	//modSigns: removed 5.x's supercharged-sign flag
 
 	gmQuenPower = owner.GetActor().GetTotalSignSpellPower(S_Magic_4);	//modSigns: Quen's own intensity for both casts
-	//modSigns: legacy's Mutagen 19 and Glyphword 17 intensity bonuses come with ALCH and ENCH
+	//modSigns: legacy's Mutagen 19 intensity bonus comes with ALCH
+	if(gmGlyphword17Cast)	//modSigns: ENCH-15, Protection's Quen at combat start: +100% intensity (legacy)
+	{	//modSigns
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 17 _Stats', 'glyphword17_quen_buff', min, max);	//modSigns
+		gmQuenPower.valueMultiplicative += CalculateAttributeValue(min);	//modSigns
+		gmGlyphword17Cast = false;	//modSigns
+	}	//modSigns
 	if(owner.CanUseSkill(S_Magic_s13))	//modSigns: Exploding Shield's level, cached
 		gmImpulseLevel = owner.GetSkillLevel(S_Magic_s13);	//modSigns
 	else	//modSigns
@@ -97,7 +103,8 @@ function GetSignStats()
 	if ( GMQuenDischargeSkill() != S_SUndefined)	//modSigns: either tree
 	{
 		dischargePercent = CalculateAttributeValue(owner.GetSkillAttributeValue(GMQuenDischargeSkill(), 'discharge_percent', false, true)) * owner.GetSkillLevel(GMQuenDischargeSkill());	//modSigns
-		//modSigns: removed the Bear set's boost (ARM-08, legacy; legacy's Glyphword 5 boost comes with ENCH)
+		//modSigns: removed the Bear set's boost (ARM-08, legacy)
+		dischargePercent *= 1 + GMRetributionBoost(owner.GetActor());	//modSigns: ENCH-12, Retribution (legacy)
 	}
 	else
 	{
@@ -527,6 +534,7 @@ function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : st
 			{	//modSigns
 				dm.GetAbilityAttributeValue(skillAbilityName, damages[j], min, max);	//modSigns
 				dmg = CalculateAttributeValue(GetAttributeRandomizedValue(min, max)) * (level - 1);	//modSigns: scales with the level
+				dmg *= 1 + GMRetributionBoost(this);	//modSigns: ENCH-12, Retribution (legacy)
 				if(dmg > 0)	//modSigns
 				{	//modSigns
 					action.SetHitEffect('hit_electric_quen');	//modSigns: the hit effect with damage, both casts

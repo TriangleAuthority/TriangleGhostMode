@@ -1,4 +1,4 @@
-// W3PlayerWitcher.OnCombatStart, replaced for the mutations' combat-start rules: MUT-05 Bloodbath's
+// W3PlayerWitcher.OnCombatStart, replaced for the mutations' combat-start rules (and ENCH-15's Protection): MUT-05 Bloodbath's
 // bonus starts; MUT-09 Euphoria starts only when overdosed; MUT-10 Mutated Skin has no buff. (MUT-07's Adrenaline Rush start is a wrapper in adrenalineRush.ws.)
 // See docs/features/mut.md.
 
@@ -69,15 +69,17 @@ function OnCombatStart()
 		}
 	}
 
-	if ( HasAbility('Glyphword 17 _Stats', true) && RandF() < CalculateAttributeValue(GetAttributeValue('quen_apply_chance')) )
+	if ( HasGlyphwordActive('Glyphword 17 _Stats') && !IsAnyQuenActive() )	//modSigns: ENCH-15, Protection: always, only without a Quen up (legacy)
 	{
-		stamina = GetStat(BCS_Stamina);
+		//modSigns: removed the stamina read (the Quen is free)
 		glyphQuen = (W3QuenEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
+		glyphQuen.GMSetGlyphword17Cast();	//modSigns: +100% intensity (legacy)
 		glyphQuen.Init( signOwner, signs[ST_Quen].entity, true );
+		glyphQuen.freeFromBearSetBonus = true;	//modSigns: free, as legacy's freeCast (no stamina, adrenaline or cooldown)
 		glyphQuen.OnStarted();
 		glyphQuen.OnThrowing();
 		glyphQuen.OnEnded();
-		ForceSetStat(BCS_Stamina, stamina);
+		//modSigns: removed the stamina restore
 	}
 
 	

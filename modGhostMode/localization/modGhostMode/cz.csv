@@ -212,3 +212,22 @@
 2110992474|        |gm_crafting_bonus_title|Bonus for gear type:
 2110992631|b2eae791||Prodlužuje účinek elixírů (ne odvarů) o $S$% za každou část setu (současný bonus: $S$%).
 2110992632|b2eae792||Proti nepřátelům uvnitř tvého Yrdenu je intenzita znamení všech účinků znamení kromě účinků samotného Yrdenu zvýšena o $S$%.
+2110992337|e9c58057||Casting a Sign costs $I$% less Stamina, but all physical actions (except for special attacks) cost $I$% more Stamina.
+2110992338|eb7a58f6||All damaging melee actions (except for special attacks) cost $I$% more Stamina, but deal $I$% more damage.
+2110992339|e810a7b8||All physical actions (except for special attacks) cost $I$% less Stamina, but all Signs cost $I$% more Stamina.
+2110992296|ed2f3195||Damage dealt by Quen Discharge and Exploding Shield is increased by $I$%.
+2110992160|22156cd6||When Yrden Magic Turret hits an enemy, an Yrden Magic Trap is placed at that position. Size, duration and slowdown for such a trap are unaffected by Yrden Intensity and upgrades and limited to $S$ yards, $S$ sec and $S$% respectively.
+2110992501|257f1e14||When you enter combat, you will automatically get a Quen shield without using any Stamina and with $I$% bonus to Sign Power.
+2110992387|f098e2d3||Igni's basic attack strikes all opponents in a 360-degree radius and deals $I$ more damage (scales with Sign Intensity). Burning chance is decreased by $I$%.
+2110992499|eee40a34||Hitting enemies with Aard reduces their Stamina by $I$%, which also increases knockdown and heavy knockdown chances.
+2110992516|4e736cfc||Foes killed by Igni (burning or fire) explode dealing $I$ damage to other enemies within a $I$-yard radius and igniting them. Damage scales with Sign Intensity.
+2110992517|198d31bb||Each enemy controlled by Axii Puppet adds $I$% to your Attack Power and Sign Intensity (up to $I$%).
+2110992518|20609437||Each enemy affected by Axii Confusion adds $I$% to your critical hit chance and critical hit power (up to $I$%).
+2110992502|c43de44b||After you cast a Sign, an Adrenaline Point is consumed and your next sword attack is charged with the power of that Sign. Aard: knockdown (chances depend on Attack Power). Igni: $S$% of your weapon damage is added as Fire damage (scales with Attack Power). Yrden: slowdown effect is applied for $S$ sec. Quen: heals Geralt for $S$% of damage dealt. Axii: confusion effect is applied for $S$ sec.
+2110992500|c5f2bcea||Increases the range of Whirl by $S$ yards and Rend by $S$ yards. Final damage dealt by these attacks is decreased by $S$%.
+2110992158|c95c6e28||When at maximum Vitality, additional Vitality regeneration increases your weapon damage by $I$% per 1% of excess Vitality gained (up to +$I$%). Works only in combat. Resets on damage taken and damage dealt.
+2110992386|d02fd0a4||Once they reach their maximum level, Adrenaline Points steadily decline until they reach zero at a rate of $S$ points per sec. During this time Vitality regenerates faster by $S$%/sec, Stamina regenerates faster by $S$%/sec, and Toxicity declines faster by $S$ points/sec.
+2110992294|f76f46ed||Killing an enemy heals $I$% of maximum Vitality.
+2110992295|fad8f82b||Killing an enemy gives $F$ Adrenaline Points.
+2110992507|f9241f8c||Excess Adrenaline generated slows down potion expiration timer by $S$% per 1% of excess Adrenaline (3 points = 100%). Max bonus cannot exceed $S$%. The bonus resets when you lose Adrenaline and at the end of the combat.
+2110992159|ccc61f66||Všechno jídlo účinkuje o $I$% déle, ale chutná jako knedlíčky.

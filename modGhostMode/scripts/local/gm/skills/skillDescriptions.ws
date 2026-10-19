@@ -353,11 +353,16 @@ function GMSignSkillDescription(skill : ESkill, lvl : int) : string
 			other = GMTreeSkill(S_Magic_s12, S_Magic_s39);
 			ai.PushBack(RoundMath((0.15 + GMEquippedSkillVal(other, 'heavy_knockdown_chance_bonus')) * MinF(v, 1) * 100));
 			return GetLocStringByKeyExtWithParams("gm_skill_desc_aard", ai);
-		// Igni: base damage and burn chance with the equipped Igni Intensity and Pyromaniac
+		// Igni: base damage and burn chance with the equipped Igni Intensity and Pyromaniac, and Rotation
+		// (ENCH-13: +150 damage, 33.3 points less burning chance, floored at 0; legacy)
 		case S_Magic_2:
 			v = GMSkillVal(skill, theGame.params.DAMAGE_NAME_FIRE) + GMEquippedSkillVal(GMTreeSkill(S_Magic_s07, S_Magic_s35), 'fire_damage_bonus');
+			if(witcher.HasGlyphwordActive('Glyphword 7 _Stats'))
+				v += GMRotationValue('glyphword7_dmg_buff');
 			ai.PushBack(RoundMath(v));
 			v = GMSkillVal(skill, 'initial_burn_chance') + GMEquippedSkillVal(GMTreeSkill(S_Magic_s09, S_Magic_s41), 'chance_bonus');
+			if(witcher.HasGlyphwordActive('Glyphword 7 _Stats'))
+				v = MaxF(0, v + GMRotationValue('glyphword7_burnchance_debuff'));
 			ai.PushBack(RoundMath(v * 100));
 			return GetLocStringByKeyExtWithParams("gm_skill_desc_igni", ai);
 		// Yrden's trap (SKL-10)

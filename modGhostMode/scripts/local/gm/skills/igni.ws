@@ -76,8 +76,9 @@ function GetSignApplyBuffTest(signType : ESignType, effectType : EEffectType, po
 		rawChance = CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Magic_2, 'initial_burn_chance', false, true));	//modSigns
 		if(witcher.GMPyromaniacSkill() != S_SUndefined)	//modSigns: Pyromaniac, either tree
 			bonusChance = CalculateAttributeValue(witcher.GetSkillAttributeValue(witcher.GMPyromaniacSkill(), 'chance_bonus', false, true)) * witcher.GetSkillLevel(witcher.GMPyromaniacSkill());	//modSigns
+		if(witcher.HasGlyphwordActive('Glyphword 7 _Stats'))	//modSigns: ENCH-13, Rotation: 33.3 points less burning chance (legacy)
+			bonusChance += GMRotationValue('glyphword7_burnchance_debuff');	//modSigns
 	}	//modSigns
-	//modSigns: legacy's Glyphword 7 bonus comes with ENCH
 	chance = MaxF(0, (rawChance + bonusChance) * (1 - res));	//modSigns
 	if(witcher)	//modSigns: MUT-13, Metamorphosis
 		chance *= witcher.GMMutation12ChanceMult();	//modSigns

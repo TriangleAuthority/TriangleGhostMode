@@ -37,7 +37,7 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 // Strike's bonus goes to final damage, as does the difficulty multiplier
 // (GMProcessDamageModification). VulnerableFromFront is checked here, before the formula (legacy;
 // 5.x checks it in ReduceDamage, too late). 5.x's own versions of legacy's other terms (Rend, Perk 20,
-// Aerondight, Runeword 4; the Lynx and Netflix sets' are gone, ARM-06, ARM-15) are pool terms until their areas port legacy's.
+// Aerondight; the Lynx and Netflix sets' are gone, ARM-06, ARM-15, Runeword 4's ENCH-05) are pool terms until their areas port legacy's.
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 {
@@ -185,6 +185,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 
 		thePlayer.SetAttackActionName('');
 	}
+	poolAll += GMHeftDamageBonus(action);	//modSigns: ENCH-10, Heft's melee damage bonus (legacy), a pool term
 
 	if((W3PlayerWitcher)playerAttacker && action.IsActionRanged() && action.IsBouncedArrow() && actorVictim)	//modSigns: SKL-05, a reflected arrow: its archer's attack power base and Deflection's bonus (legacy)
 	{	//modSigns
@@ -204,20 +205,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	//modSigns: no extra damage for NPCs' ranged attacks above level 31
 
 
-	if ( actorVictim && playerAttacker && attackAction && action.IsActionMelee() && thePlayer.HasAbility('Runeword 4 _Stats', true) && !attackAction.WasDodged() )
-	{
-		overheal = thePlayer.abilityManager.GetOverhealBonus() / thePlayer.GetStatMax(BCS_Vitality);
-
-		if(overheal > 0.005f)
-		{
-			poolAll += overheal;	//modSigns: additive pool (5.x: a separate multiplier)
-
-			thePlayer.abilityManager.ResetOverhealBonus();
-
-
-			actorVictim.CreateFXEntityAtPelvis( 'runeword_4', true );
-		}
-	}
+	//modSigns: removed 5.x's Runeword 4 (Invigoration) term: legacy's bonus is on the weapon damage (ENCH-05, damage/weapon.ws)
 
 
 	//modSigns: removed 5.x's Wolven set term: sword damage per Bleeding stack nearby (ARM-09: legacy's oil bonuses, armor/wolfSet.ws)
@@ -290,6 +278,13 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	}
 
 
+
+	if( playerAttacker && action.IsActionWitcherSign() && action.GetSignType() == ST_Igni && !action.IsDoTDamage() && GetWitcherPlayer().HasGlyphwordActive('Glyphword 7 _Stats') )	//modSigns: ENCH-13, Rotation: +150 flat damage on each type before the pool (legacy)
+	{	//modSigns
+		tempBonus = GMRotationValue('glyphword7_dmg_buff');	//modSigns
+		for( i = 0 ; i < dmgInfos.Size() ; i += 1 )	//modSigns
+			dmgInfos[i].dmgVal += tempBonus;	//modSigns
+	}	//modSigns
 
 	npcVictim = (CNewNPC) actorVictim;
 	//modSigns: removed 5.x's Mutation 8 sword damage (MUT-06: legacy's final-damage factor against a countered enemy, GMProcessDamageModification)

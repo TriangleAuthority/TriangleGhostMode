@@ -1,8 +1,8 @@
 // DMG-11: returned damage. Damage returned to an attacker is based on the damage the hit actually
 // dealt and gets no attack power ("returned damage shouldn't use attack power", legacy); a dodged hit
 // returns nothing. Thorns return 10% of the attacker's weapon damage (30 without a weapon) and keep
-// attack power. Legacy's bodies; Glyphword 5's reflection stays 5.x's until ENCH. See
-// docs/features/dmg.md.
+// attack power. Legacy's bodies; Glyphword 5 (Retribution) no longer reflects damage (ENCH-12,
+// enchantments/retribution.ws). See docs/features/dmg.md.
 
 // Nothing is returned for a dodged hit.
 @wrapMethod(W3DamageManagerProcessor)

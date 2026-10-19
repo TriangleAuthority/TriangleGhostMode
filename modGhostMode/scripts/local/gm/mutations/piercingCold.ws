@@ -47,6 +47,8 @@ function ProcessCollision( collider : CGameplayEntity, pos, normal : Vector )
 		{
 			action.AddDamage( theGame.params.DAMAGE_NAME_DIRECT, GetWitcherPlayer().CalcMagic33Damage() );
 		}
+		if( victimNPC && victimNPC.IsAlive() && GMDepletionDrain((CActor)caster) > 0 )	//modSigns: ENCH-13, Depletion: drained before the hit, regen paused 1 s (legacy)
+			victimNPC.DrainStamina(ESAT_FixedValue, GMDepletionDrain((CActor)caster) * victimNPC.GetStatMax(BCS_Stamina) + 1, 1);	//modSigns
 	}
 	else
 	{

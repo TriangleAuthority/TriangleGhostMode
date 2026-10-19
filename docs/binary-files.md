@@ -54,7 +54,7 @@ Changes by folder: quest characters (`quests/**/characters`) mostly got level an
 
 - The 5.x versions of all these files exist on `vanilla-5.x` (CR2W 164). Ghost Mode's legacy files cannot be used as-is.
 - Each Ghost Mode edit is a small value change, so it can be reapplied to the 5.x file: take the 5.x file, then set the same level, ability list, loot entries, category, and so on. First check whether 5.x already changed that value: `python tools/bindiff.py master vanilla-5.x <path>`.
-- Editing needs a tool that writes 5.x CR2W files. The REDkit editor can (see [tools.md](tools.md)); `tools/cr2w_dump.py` only reads. For simple same-size values (levels, categories), patching bytes in place with a script would also work.
+- Editing needs a tool that writes 5.x CR2W files. The REDkit editor can (see [tools.md](tools.md)); `tools/cr2w_dump.py` only reads. **Same-size integer values** (prices, counts, levels) are set in place with `tools/cr2w_patch.py` on `5.x-GM`'s copy of the 5.x file, which recomputes the CRCs (**compiles**, packs and loads: the game starts and runs with ENCH-02's four patched files in the mod's bundle, 2026-10-19; the dialogue and quest themselves not yet played). The build ships a patched file because it differs from `vanilla-5.x`. Name values (categories, abilities) are not supported by the script.
 - Some edits may be better done another way in 5.x, e.g. loot through XML loot definitions. Some may be unnecessary, since 5.0 reworked monster combat and skills (see [game-5.0-changes.md](game-5.0-changes.md)).
 
 ## Inspecting them

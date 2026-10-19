@@ -212,3 +212,22 @@
 2110992474|0ced58f4||Bonus per tipo di equipaggiamento:
 2110992631|b2eae791||Aumenta la durata delle pozioni (non dei decotti) del $S$% per ogni pezzo del set (Bonus attuale: $S$%).
 2110992632|b2eae792||Contro i nemici all'interno della tua trappola Yrden, l'intensità del segno di ogni effetto dei segni, tranne quelli di Yrden, aumenta del $S$%.
+2110992337|e9c58057||Lanciare un Segno costa il $I$% di Vigore in meno, ma tutte le azioni fisiche (escluso gli attacchi speciali) costano il $I$% di Vigore in più.
+2110992338|eb7a58f6||Tutte le azioni dannose da mischia (escluso gli attacchi speciali) costano il $I$% di Vigore in più, ma infliggono il $I$% di danno in più.
+2110992339|e810a7b8||Tutte le azioni fisiche (escluso gli attacchi speciali) costano il $I$% di Vigore in meno, ma tutti i Segni costano il $I$% di Vigore in più.
+2110992296|ed2f3195||I danni inflitti da Scarica di Quen e Scudo Esplosivo è aumentato del $I$%.
+2110992160|22156cd6||When Yrden Magic Turret hits an enemy, an Yrden Magic Trap is placed at that position. Size, duration and slowdown for such a trap are unaffected by Yrden Intensity and upgrades and limited to $S$ yards, $S$ sec and $S$% respectively.
+2110992501|257f1e14||Quando inizi a combattere, otterrai automaticamente uno scudo Quen senza usare Vigore e un bonus del $I$% alla Potenza del Segno.
+2110992387|f098e2d3||L'attacco base di Igni colpisce tutti gli avversari in un raggio di 360 gradi e infligge $I$ danni in più (scala con l'Intensità del Segno). La probabilità di Incenerimento è diminuita del $I$%.
+2110992499|eee40a34||Colpire i nemici con Aard riduce il loro Vigore del $I$%, aumentando anche la possibilità di atterramento e atterramento pesante.
+2110992516|4e736cfc||I nemici uccisi da Igni (Incenerimento o Fuoco) esplodono causando $I$ danni ai nemici entro un raggio di $I$-metri e gli applica incenerimento su di loro. Il danno scala con l'Intensità del Segno.
+2110992517|198d31bb||Ogni nemico controllato da Marionetta di Axii aggiunge il $I$% alla tua Potenza d'Attacco e Intensità del Segno (fino al $I$%).
+2110992518|20609437||Ogni nemico affetto da Confusione di Axii aggiunge il $I$% alla tua probabilità di colpo critico e potenza del colpo critico (fino a $I$%).
+2110992502|c43de44b||Dopo aver lanciato un Segno, viene consumato un Punto Adrenalina e il tuo prossimo attacco con la spada viene caricato con il potere di quel Segno. Aard: atterramento (le probabilità dipendono dalla potenza di attacco)). Igni: il $S$% del danno dell'arma viene aggiunto come danno da Fuoco (scala con Potenza d'Attacco). Yrden: l'effetto di rallentamento viene applicato per $S$ sec. Quen: cura Geralt per il $S$% del danno inflitto. Axii: l'effetto di confusione viene applicato per $S$ sec.
+2110992500|c5f2bcea||Aumenta il range di Turbine di $S$ metri e Lacerazione di $S$ metri. Il danno finale inflitto da questi attacchi è diminuito del $S$%.
+2110992158|c95c6e28||Quando alla massima Vitalità, un'ulteriore rigenerazione della Vitalità aumenta il danno dell'arma del $I$% per 1% di eccesso di Vitalità guadagnato (fino a +$I$%). Funziona solo in combattimento. Ripristina i danni subiti e i danni inflitti.
+2110992386|d02fd0a4||Una volta raggiunto il livello massimo, i Punti Adrenalina diminuiscono costantemente fino a raggiungere lo zero ad un tasso di $S$ punti per sec. Durante questo periodo la Vitalità si rigenera più velocemente del $S$%/sec, il Vigore si rigenera più velocemente del $S$%/sec, e la tossicità diminuisce più velocemente del $S$ punti/sec.
+2110992294|f76f46ed||Uccidere un nemico cura il $I$% della Vitalità massima.
+2110992295|fad8f82b||Uccidere un nemico dona $F$ Punti Adrenalina.
+2110992507|f9241f8c||L'eccesso di Adrenalina generata rallenta il tempo di scadenza della pozione del $S$% per 1% di Adrenalina in eccesso (3 punti = 100%). Il bonus massimo non può superare il $S$%. Il bonus si ripristina quando si perde Adrenalina e alla fine del combattimento.
+2110992159|ccc61f66||Qualsiasi alimento consumato ha una durata maggiore del $I$%.

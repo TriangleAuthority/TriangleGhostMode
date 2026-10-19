@@ -163,22 +163,7 @@ function ProcessAction(act : W3DamageAction)
 	}
 	
 	
-	if(actorAttacker == GetWitcherPlayer() && actorVictim && !actorVictim.IsAlive() && (action.IsActionMelee() || action.GetBuffSourceName() == "Kill"))
-	{
-		autoFinishersEnabled = theGame.GetInGameConfigWrapper().GetVarValue('Gameplay', 'AutomaticFinishersEnabled');
-		
-		
-		
-		
-		if(!autoFinishersEnabled || !thePlayer.GetFinisherVictim())
-		{
-			if(thePlayer.HasAbility('Runeword 10 _Stats', true))
-				GetWitcherPlayer().Runeword10Triggerred();
-			if(thePlayer.HasAbility('Runeword 12 _Stats', true))
-				GetWitcherPlayer().Runeword12Triggerred();
-
-		}
-	}
+	//modSigns: removed 5.x's Rejuvenation and Elation triggers (ENCH-08: legacy's in CNewNPC.OnDeath, enchantments/npcDeath.ws)
 	
 	
 	if(action.EndsQuen() && actorVictim)

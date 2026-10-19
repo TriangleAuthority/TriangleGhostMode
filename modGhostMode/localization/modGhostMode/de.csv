@@ -212,3 +212,22 @@
 2110992474|0ced58f4||Bonus des Ausrüstungstyp:
 2110992631|b2eae791||Verlängert die Wirkungsdauer von Tränken (nicht von Absuden) um $S$% für jeden Teil des Sets (Derzeitiger Bonus: $S$%).
 2110992632|b2eae792||Gegen Gegner in deiner Yrden-Falle ist die Zeichenintensität aller Zeicheneffekte außer Yrdens eigenen um $S$% erhöht.
+2110992337|e9c58057||Das Wirken eines Zeichens kostet $I$% weniger Ausdauer, aber alle körperlichen Aktionen (ausgenommen Spezialangriffe) kosten $I$% mehr Ausdauer.
+2110992338|eb7a58f6||Alle Nahkampfaktionen die Schaden verursachen (ausgenommen Spezialangriffe) kosten $I$% mehr Ausdauer, aber verursachen $I$% mehr Schaden.
+2110992339|e810a7b8||Alle körperlichen Aktionen (ausgenommen Spezialangriffe) kosten $I$% weniger Ausdauer, aber alle Zeichen kosten $I$% mehr Ausdauer.
+2110992296|ed2f3195||Der Schaden von Quen Entladungen und explodierendem Schild ist um $I$% erhöht.
+2110992160|22156cd6||When Yrden Magic Turret hits an enemy, an Yrden Magic Trap is placed at that position. Size, duration and slowdown for such a trap are unaffected by Yrden Intensity and upgrades and limited to $S$ yards, $S$ sec and $S$% respectively.
+2110992501|257f1e14||Wenn du einen Kampf beginnst, bekommst du automatisch einen Quen-Schild, ohne die damit verbundenen Ausdauerkosten. Außerdem erhälst du einen Bonus von $I$% auf die Zeichenkraft.
+2110992387|f098e2d3||Igni trifft alle Gegner in einem 360-Grad Radius und fügt $I$ mehr Schaden zu. Die Chance auf Verbrennen ist jedoch um $I$% verringert.<br>(Skaliert mit Zeichenintensität)
+2110992499|eee40a34||Wenn du Gegner mit Aard triffst, wird deren Ausdauer um $I$% reduziert, was sie anfälliger gegenüber Niederschlag und Schwerem Niederschlag werden lässt.
+2110992516|4e736cfc||Gegner, welche durch die Effekte von Igni sterben (Brennen oder Feuer), explodieren und fügen anderen Gegnern $I$ Schaden, in einem Umkreis von $I$ Metern zu. Zudem werden umstehende Feinde in Brand gesteckt.<br>(Skaliert mit Zeichenintesität)
+2110992517|198d31bb||Jeder Gegner der durch Puppenspieler kontrolliert wird, erhöht deine Angriffskraft und Zeichenstärke um $I$% (Bis zu einem Maximum von $I$%).
+2110992518|20609437||Jeder Gegner der durch den Effekt von Axii betroffen ist, erhöht deine kritische Trefferchance und kritische Trefferstärke um $I$% (Bis zu einem Maximum von $I$%).
+2110992502|c43de44b||Nachdem du ein Zeichen gewirkt hast, wird ein Adrenalinpunkt verbraucht, der deinem nächsten Angriff mit dem Schwert die Kraft des Zeichens verleiht.<br>Aard: Niederschlag (Chance basierend auf Angriffskraft).<br>Igni: $S$% des Waffenschadens wird als Feuerschaden zugefügt. (Skaliert mit Angriffskraft).<br>Yrden: Verlangsamt deinen Gegner für $S$ Sekunden.<br>Quen: Heilt dich um $S$% des verursachten Schadens.<br>Axii: Verwirrt den Gegner für $S$ Sekunden.
+2110992500|c5f2bcea||Erhöht die Reichweite von Wirbel um $S$ Meter und die Reichweite von Zerfleischen um $S$ Meter. Der Schaden der dabei durch diese Angriffe verursacht wird, ist um $S$% reduziert.
+2110992158|c95c6e28||Wenn Geralt bei voller Gesundheit ist, erhöht jede weitere Vitalitätsregeneration den Waffenschaden um $I$% pro 1% zusätzlich generiertem Vitalitätspunkt, bis zu einem Maximum von +$I$%. Funktioniert nur im Kampf und wird zurückgesetzt, wenn Schaden erlitten oder ausgeteilt wird.
+2110992386|d02fd0a4||Wenn deine Adrenalinpunkte ihren Maximalwert erreicht haben, beginnen sie mit einer Geschwindigkeit von $S$ Punkt(en) pro Sekunde zurück auf Null zu fallen. Während dieser Zeit regeneriert sich deine Vitalität um $S$%/sek. schneller, deine Ausdauer um $S$%/sek. schneller und deine Toxizität verringert sich um $S$ Punkte/sek. schneller.
+2110992294|f76f46ed||Wenn du einen Gegner tötest, heilst du dich um $I$% deiner maximalen Vitalität.
+2110992295|fad8f82b||Das Töten von Gegnern gibt $F$ Adrenalinpunkte.
+2110992507|f9241f8c||Überschüssig generiertes Adrenalin, verlangsamt die Trank-Ablaufzeit um $S$% pro 1% des überschüssigen Adrenalins (3 Punkte = 100$). Der maximale Bonus von $S$% kann nicht überschritten werden. Der Bonus wird zurückgesetzt, wenn du Adrenalin verlierst oder der Kampf endet.
+2110992159|ccc61f66||Jedes Nahrungsmittel hält $I$% länger, schmeckt dafür aber wie Pirogge.

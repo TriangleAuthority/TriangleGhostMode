@@ -140,6 +140,9 @@ function OnFocusChanged()
 	
 	points = GetStat(BCS_Focus);
 	
+	if(points < owner.GetStatMax(BCS_Focus))	//modSigns: ENCH-09, Prolongation's bonus ends below the maximum (legacy)
+		owner.RemoveBuff(EET_GMRuneword11);	//modSigns
+	
 	if(points < 1 && owner.HasBuff(EET_BattleTrance))
 	{
 		owner.RemoveBuff(EET_BattleTrance);
@@ -150,7 +153,7 @@ function OnFocusChanged()
 			owner.AddEffectDefault(EET_BattleTrance, owner, "BattleTranceSkill");
 	}
 	
-	if ( points >= owner.GetStatMax(BCS_Focus) && owner.HasAbility('Runeword 8 _Stats', true) && !owner.HasBuff(EET_Runeword8) )
+	if ( (W3PlayerWitcher)owner && points >= owner.GetStatMax(BCS_Focus) && ((W3PlayerWitcher)owner).HasRunewordActive('Runeword 8 _Stats') && !owner.HasBuff(EET_Runeword8) )	//modSigns: ENCH-07, Placation from the drawn sword (ENCH-01)
 	{
 		owner.AddEffectDefault(EET_Runeword8, owner, "max focus");
 	}

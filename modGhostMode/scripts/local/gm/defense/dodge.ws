@@ -169,6 +169,7 @@ function ReduceDamage(out damageData : W3DamageAction)
 	if(!damageData.IsDoTDamage() && GMIsWhirlingWithAdrenaline())	//modSigns: SKL-03, Whirl: less damage taken while spinning with adrenaline
 		damageData.processedDmg.vitalityDamage *= 1 - GMGetWhirlDamageReduction();	//modSigns
 	damageData.processedDmg.vitalityDamage *= ClampF(1 - GMProtectiveCoatingCut(damageData), 0, 1);	//modSigns: SKL-14, Protective Coating (legacy; skills/oils.ws)
+	GMWardingQuen(damageData);	//modSigns: ENCH-16, Glyph of Warding's Quen on projectile hits (legacy, moved here from ReactToBeingHit)
 }
 
 // DEF-03: rolling also grants immunity to long stagger (vanilla: knockdowns and stagger).

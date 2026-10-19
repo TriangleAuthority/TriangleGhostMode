@@ -212,3 +212,22 @@
 2110992474|0ced58f4||Bônus por tipo de equipamento:
 2110992631|b2eae791||Aumenta a duração das poções (não das decocções) em $S$% para cada peça de conjunto (atual: $S$%).
 2110992632|b2eae792||Contra inimigos dentro da sua Armadilha Yrden, a Intensidade do Sinal de todos os efeitos de Sinais, exceto os do próprio Yrden, é aumentada em $S$%.
+2110992337|e9c58057||Lançar um Sinal custa $I$% menos Vigor, mas todas as ações físicas (exceto ataques especiais) custam $I$% mais Vigor.
+2110992338|eb7a58f6||Todas as ações corpo a corpo que causam dano (exceto ataques especiais) custam $I$% mais Vigor, mas causam $I$% mais dano.
+2110992339|e810a7b8||Todas as ações físicas (exceto ataques especiais) custam $I$% menos Vigor, mas todos os sinais custam $I$% mais Vigor.
+2110992296|ed2f3195||O dano causado pela Descarga de Quen e Escudo Explosivo é aumentada em $I$%.
+2110992160|22156cd6||When Yrden Magic Turret hits an enemy, an Yrden Magic Trap is placed at that position. Size, duration and slowdown for such a trap are unaffected by Yrden Intensity and upgrades and limited to $S$ yards, $S$ sec and $S$% respectively.
+2110992501|257f1e14||Quando você entra em combate, você recebe automaticamente um escudo Quen sem usar nenhum Vigor e com $I$% de bônus à Intensidade do Sinal.
+2110992387|f098e2d3||O ataque básico de Igni atinge todos os oponentes em um raio de 360 ​​graus e causa $I$ mais dano (varia com a Intensidade do Sinal). A chance de incendiar diminui em $I$%.
+2110992499|eee40a34||Atingir inimigos com Aard reduz o Vigor deles em $I$%, o que também aumenta as chances de Nocaute e de Nocaute pesado.
+2110992516|4e736cfc||Inimigos mortos por Igni explodem causando $I$ de dano aos demais inimigos dentro do raio de $I$ jardas, incendiando-os. O dano varia com a Intensidade do Sinal.
+2110992517|198d31bb||Cada inimigo controlado por Marionete Axii acrescenta $I$% ao seu Poder de Ataque e Intensidade do Sinal (até $I$%).
+2110992518|20609437||Cada inimigo afetado pela confusão de Axii acrescenta $I$% à sua chance de Acerto Crítico e Poder de Acerto Crítico (até $I$%).
+2110992502|c43de44b||Depois que você lança um Sinal, um Ponto de Adrenalina é consumido e seu próximo ataque de espada é carregado com o poder desse Sinal. Aard: nocaute (as chances dependem do Poder de Ataque). Igni: $S$% do dano da sua arma é adicionado como dano de Fogo (varia com o Poder de Ataque). Yrden: efeito de desaceleração é aplicado por $S$s. Quen: cura Geralt em $S$% do dano causado. Axii: efeito de confusão é aplicado por $S$s.
+2110992500|c5f2bcea||Aumenta o alcance de Espiral em $S$ jardas e de Despedaçar em $S$ jardas. O dano final causado por esses ataques é reduzido em $S$%.
+2110992158|c95c6e28||Quando com Vitalidade máxima, a regeneração adicional de Vitalidade aumenta o dano da arma em $I$% por 1% do excesso de Vitalidade adquirida (até +$I$%). Funciona apenas em combate. Reseta ao receber ou ao causar dano.
+2110992386|d02fd0a4||Quando atingem seu nível máximo, os Pontos de Adrenalina diminuem constantemente até atingir zero a uma taxa de $S$ pontos /s. Durante esse tempo, a Vitalidade regenera $S$%/s mais rápido, o Vigor regenera $S$%/s mais rápido, e a Toxicidade diminui $S$ pontos/s mais rápido.
+2110992294|f76f46ed||Matar um inimigo cura $I$% da Vitalidade máxima.
+2110992295|fad8f82b||Matar um inimigo concede $F$ Pontos de Adrenalina.
+2110992507|f9241f8c||Excesso de Adrenalina gerado diminui o tempo de expiração da poção em $S$% por 1% do excesso de Adrenalina (3 pontos = 100%). O bônus máximo não pode exceder $S$%. Zera ao perder Adrenalina ou ao final do combate.
+2110992159|ccc61f66||Qualquer comestível consumido dura $I$% mais tempo, mas tem gosto de pierogi.

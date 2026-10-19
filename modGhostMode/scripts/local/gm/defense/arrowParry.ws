@@ -3,8 +3,9 @@
 // reflection is SKL-05's (skills/deflection.ws). The parry goes through PerformParryCheck, so it costs stamina (STAM-03) and, without
 // stamina, still parries the arrow fully (arrows have no partial parry). See docs/features/def.md.
 
-// 5.x body; changes marked //modSigns. Legacy's other changes here (collision groups, Glyphword 1,
-// Deflection's damage) belong to FIX, ENCH and SKL; Yoana's armor's bounce chance is ARM-01's.
+// 5.x body; changes marked //modSigns. Glyphword 1 (Deflection) as legacy since ENCH-11: 5.x's branch before the parry
+// removed, and the armor bounces only the arrows Geralt does not parry (enchantments/deflection.ws). Legacy's other changes here (collision groups,
+// Deflection's damage) belong to FIX and SKL; Yoana's armor's bounce chance is ARM-01's.
 @replaceMethod(W3ArrowProjectile)
 function OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
 {
@@ -131,21 +132,7 @@ function OnProjectileCollision( pos, normal : Vector, collidingComponent : CComp
 		{
 			isRolling = true;
 		}
-		else if(thePlayer.HasAbility( 'Glyphword 1 _Stats', true ))
-		{
-			
-			thePlayer.PlayEffect('glyphword_reflection');
-			
-			
-			template = (CEntityTemplate)LoadResource('glyphword_1');
-			theGame.CreateEntity(template, GetWorldPosition(), thePlayer.GetWorldRotation(), , , true);
-		
-			if(ProcessCombat_ArrowDeflection())
-				return true;
-
-			this.SoundEvent( "cmb_arrow_bounce" );
-			bounce = true;
-		}
+		//modSigns: ENCH-11, removed 5.x's Deflection (Glyphword 1) branch before the parry: arrows are parried as without it; the bounce comes after the parry (legacy)
 		else if(thePlayer.CanParryAttack())	//modSigns: arrows can be parried with the guard up, no skill needed (vanilla: Deflection S_Sword_s10 or S_Sword_s33)
 		{			
 			
@@ -164,6 +151,8 @@ function OnProjectileCollision( pos, normal : Vector, collidingComponent : CComp
 		}
 		
 		
+		if(!bounce && GMDeflectionBounce(this))	//modSigns: ENCH-11, Deflection bounces what was not parried, from the chest armor (legacy; it no longer reflects)
+			bounce = true;	//modSigns
 		if(!bounce)
 		{
 			thePlayer.GetCharacterStats().GetAbilities(abs, true);				

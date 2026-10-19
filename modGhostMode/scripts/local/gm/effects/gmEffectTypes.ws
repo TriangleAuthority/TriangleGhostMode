@@ -24,13 +24,17 @@ enum EEffectType
 	// MUT-12: the Mutation Catalyst's potion effect
 	EET_GMMutationTrigger,
 	// ARM-12: the Kaer Morhen set's stamina regen
-	EET_GMKaerMorhenSetBonus
+	EET_GMKaerMorhenSetBonus,
+	// ENCH-05: Invigoration
+	EET_GMRuneword4,
+	// ENCH-09: Prolongation
+	EET_GMRuneword11
 }
 
 // Last Ghost Mode effect type: keep it pointing at the last member above.
 function GMLastEffectType() : EEffectType
 {
-	return EET_GMKaerMorhenSetBonus;
+	return EET_GMRuneword11;
 }
 
 function GMIsModEffectType(effect : EEffectType) : bool

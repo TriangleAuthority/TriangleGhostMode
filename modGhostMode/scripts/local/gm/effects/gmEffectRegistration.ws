@@ -40,6 +40,10 @@ function HACK_NO_MEMORY_TO_COMPILE_CacheEffect_Part1(effect : EEffectType) : boo
 		case EET_GMMutationTrigger :	effects[effect] = new W3GMPotion_MutationTrigger in this;	return true;
 		// ARM-12
 		case EET_GMKaerMorhenSetBonus :	effects[effect] = new W3GMEffect_KaerMorhenSetBonus in this;	return true;
+		// ENCH-05
+		case EET_GMRuneword4 :	effects[effect] = new W3GMEffect_Runeword4 in this;	return true;
+		// ENCH-09
+		case EET_GMRuneword11 :	effects[effect] = new W3GMEffect_Runeword11 in this;	return true;
 	}
 	return wrappedMethod(effect);
 }
@@ -71,6 +75,10 @@ function HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part1(effectName : name, out
 		case 'GMMutationTriggerEffect' :	type = EET_GMMutationTrigger;	abilityName = '';	return true;
 		// ARM-12
 		case 'GMKaerMorhenSetBonusEffect' :	type = EET_GMKaerMorhenSetBonus;	abilityName = '';	return true;
+		// ENCH-05
+		case 'GMRuneword4Effect' :	type = EET_GMRuneword4;	abilityName = '';	return true;
+		// ENCH-09
+		case 'GMRuneword11Effect' :	type = EET_GMRuneword11;	abilityName = '';	return true;
 	}
 	return wrappedMethod(effectName, type, abilityName);
 }
@@ -102,6 +110,10 @@ function EffectTypeToName(effectType : EEffectType) : name
 		case EET_GMMutationTrigger :	return 'GMMutationTriggerEffect';
 		// ARM-12
 		case EET_GMKaerMorhenSetBonus :	return 'GMKaerMorhenSetBonusEffect';
+		// ENCH-05
+		case EET_GMRuneword4 :	return 'GMRuneword4Effect';
+		// ENCH-09
+		case EET_GMRuneword11 :	return 'GMRuneword11Effect';
 	}
 	return wrappedMethod(effectType);
 }

@@ -28,8 +28,9 @@ function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, c
 
 // DMG-08: a sword's extra damage types (fire, frost, ...) at full value: vanilla multiplied every
 // non-physical damage type by 0 + the grindstone bonus ("Fixed a bug with additional sword damages
-// (like fire and frost) not being actually applied to a target", legacy). 5.x's body; the other
-// areas' parts (Aerondight, Runeword 4) stay 5.x's until SWD and ENCH; Mutation 9's flat damage is gone (MUT-11).
+// (like fire and frost) not being actually applied to a target", legacy). 5.x's body; Aerondight's
+// part stays 5.x's until SWD; Mutation 9's flat damage is gone (MUT-11); ENCH-05: Invigoration's
+// bonus multiplies slashing and silver damage (legacy; 5.x: a pool term).
 @replaceMethod(W3PlayerWitcher)
 function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, crossbowId : SItemUniqueId) : float
 {
@@ -73,6 +74,9 @@ function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, c
 			damage += itemMod;
 		}
 	}
+
+	if( HasBuff(EET_GMRuneword4) && ( damageTypeName == 'SilverDamage' || damageTypeName == 'SlashingDamage' ) )	//modSigns: ENCH-05, Invigoration
+		damage *= 1 + GMInvigorationBonus();	//modSigns
 
 	return damage * (durMod + repairObjectBonus.valueMultiplicative);
 }

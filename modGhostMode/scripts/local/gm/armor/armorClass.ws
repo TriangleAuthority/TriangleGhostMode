@@ -1,5 +1,5 @@
 // ARM-02: armor classes and stamina costs. A piece's class is the item's own (Levity, Balance and
-// Heft no longer change it, DA7; their legacy stamina trades come with ENCH). Geralt's melee and
+// Heft no longer change it, DA7; their legacy stamina trades are ENCH-10's). Geralt's melee and
 // agility actions (attacks, parries, counters, dodges, rolls, sprint, jump; not usable items) cost
 // -7.5% per light piece, +12.5% per heavy piece and -12.5% per missing piece (4 light -30%, 4 heavy
 // +50%, naked -50%); signs cost +12.5% per heavy piece. See docs/features/arm.md.

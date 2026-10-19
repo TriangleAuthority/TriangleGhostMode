@@ -6,8 +6,8 @@
 // perk_9 only when stamina runs out, perk_34 2/1.5/1 points by level whenever stamina is not full.
 // A cast or channel start paid with adrenaline sets the sign's usedFocus, which the channel's drain
 // and Quen's shield read; such a start does not pause stamina regeneration (legacy). Flood of Anger
-// multiplies these costs (GMFoaMult, SKL-07), and its points are paid also on a cast
-// Glyphword 22 makes free (legacy pays every cast). The alternate Aard's entity sits 1 m lower (SKL-08,
+// multiplies these costs (GMFoaMult, SKL-07). 5.x's free cast with 'Glyphword 22 Bonus', which nothing
+// grants, is gone (ENCH-18, the owner's DE6). The alternate Aard's entity sits 1 m lower (SKL-08,
 // legacy's bugfix 35).
 // See docs/features/skl.md.
 
@@ -103,16 +103,8 @@ function ManagePlayerStamina()
 
 	//modSigns: removed 5.x's Griffin set free cast (ARM-07: legacy's Griffin set has none)
 
-	if( !l_player.HasAbility('Glyphword 22 Bonus', true))	//modSigns: ARM-07, only Glyphword 22's free cast (ENCH)
-	{
-		GMPaySignCost(l_player, true);	//modSigns: legacy's Rage Management, adrenaline first (5.x: perk_9 only when stamina runs out, perk_34 by level)
-	}	//modSigns
-	else if(GMUsedFoA())	//modSigns: SKL-07, a free cast (Glyphword 22) still pays Flood of Anger's adrenaline (legacy pays every cast in full; SKL audit F3)
-	{	//modSigns
-		l_player.DrainFocus(1 * GMFoaMult());	//modSigns
-	}	//modSigns
-
-	l_player.RemoveAbility('Glyphword 22 Bonus');
+	//modSigns: removed 5.x's Glyphword 22 Bonus free cast and its removal (ENCH-18, the owner's DE6: nothing grants it)
+	GMPaySignCost(l_player, true);	//modSigns: legacy's Rage Management, adrenaline first (5.x: perk_9 only when stamina runs out, perk_34 by level)
 
 }
 

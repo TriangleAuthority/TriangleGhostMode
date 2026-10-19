@@ -133,7 +133,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-17 from the chang
 
 **Decisions:** port as legacy; DA7 (a), the owner's decision (2026-10-17): the class is the item's. SKL-18's school perks count pieces through `GetArmorType`, so they no longer follow the glyphwords either.
 
-- **Deviation:** Levity, Balance and Heft do nothing until ENCH ports their legacy stamina trades (`GetGlyphword234Mod`): the class change is gone, their new effects are not there yet (temporary, until ENCH; the owner's decision DA7, 2026-10-17).
+- Levity, Balance and Heft no longer change the armor class (DA7); their legacy stamina trades came with [ENCH-10](ench.md#ench-10-levity-balance-and-heft-glyphwords-2-3-4) (2026-10-19).
 
 **Slices:**
 
@@ -574,7 +574,7 @@ The owner confirmed the fix round's porter's calls (2026-10-18): 5.x's Fully Arm
 ### Dependencies on other areas
 
 - **Done areas ARM builds on:** STAM-03 (cost functions; ARM-02, ARM-07), STAM-05 (the regen option; ARM-03), DEF-01 (the light set's dodge angle; ARM-04), DMG (pool terms for Feline, Bear, Wolven, Netflix, the crit check, `ProcessActionDamage`), SKL-07 (adrenaline), SKL-11 (Quen, Quen Discharge), SKL-14 (oils), SKL-18 (school perks, Rage Management).
-- **Areas ARM waits for or shares with:** ENCH (Levity, Balance, Heft's stamina trades; Glyphword 5's Quen Discharge boost; Glyphword 22), ALCH (Golden Oriole with Viper, potion duration with Manticore and Netflix, oil items), ITEM (item level), CRAFT (schematics, crafting costs), WGT (armor weight), ECON (prices), UI (character panel lines).
+- **Areas ARM waits for or shares with:** ENCH (done 2026-10-19: Levity, Balance, Heft's stamina trades, ENCH-10; Glyphword 5's Quen Discharge boost, ENCH-12; Glyphword 22 removed, ENCH-18), ALCH (Golden Oriole with Viper, potion duration with Manticore and Netflix, oil items), ITEM (item level), CRAFT (schematics, crafting costs), WGT (armor weight), ECON (prices), UI (character panel lines).
 
 ### Hand-offs received
 

@@ -60,7 +60,7 @@ function UpdateBuffs()
 				
 				format = 1;
 			}
-			else if ( effectType == EET_Mutation3 || effectType == EET_Mutation5 || effectType == EET_LynxSetBonus )	//modSigns: MUT-08, MUT-09: Mutation 4 and 10 moved to the counter format; ARM-06: the Feline set's bonus (legacy)
+			else if ( effectType == EET_Mutation3 || effectType == EET_Mutation5 || effectType == EET_LynxSetBonus || effectType == EET_GMRuneword4 || effectType == EET_GMRuneword11 )	//modSigns: MUT-08, MUT-09: Mutation 4 and 10 moved to the counter format; ARM-06: the Feline set's bonus (legacy); ENCH-05, ENCH-09: Invigoration's and Prolongation's bonus in %
 			{
 				
 				format = 2;
@@ -119,6 +119,16 @@ function UpdateBuffs()
 			{	//modSigns
 				l_flashObject.SetMemberFlashNumber("duration", 			( ( W3Effect_LynxSetBonus ) _currentEffects[i] ).GMGetStacks() );	//modSigns
 				l_flashObject.SetMemberFlashNumber("initialDuration", 	( ( W3Effect_LynxSetBonus ) _currentEffects[i] ).GMGetMaxStacks() );	//modSigns
+			}	//modSigns
+			else if( effectType == EET_GMRuneword4 )	//modSigns: ENCH-05, Invigoration's bonus in % (legacy)
+			{	//modSigns
+				l_flashObject.SetMemberFlashNumber("duration", 			( ( W3GMEffect_Runeword4 ) _currentEffects[i] ).GetStacks() );	//modSigns
+				l_flashObject.SetMemberFlashNumber("initialDuration", 	( ( W3GMEffect_Runeword4 ) _currentEffects[i] ).GetMaxStacks() );	//modSigns
+			}	//modSigns
+			else if( effectType == EET_GMRuneword11 )	//modSigns: ENCH-09, Prolongation's bonus in % (legacy)
+			{	//modSigns
+				l_flashObject.SetMemberFlashNumber("duration", 			( ( W3GMEffect_Runeword11 ) _currentEffects[i] ).GetStacks() );	//modSigns
+				l_flashObject.SetMemberFlashNumber("initialDuration", 	( ( W3GMEffect_Runeword11 ) _currentEffects[i] ).GetMaxStacks() );	//modSigns
 			}	//modSigns
 			else if( effectType == EET_Mutation3 )
 			{						
@@ -321,6 +331,16 @@ function OnTick( timeDelta : float )
 				{	//modSigns
 					duration = ( ( W3Effect_LynxSetBonus ) effectArray[i] ).GMGetStacks();	//modSigns
 					initialDuration = ( ( W3Effect_LynxSetBonus ) effectArray[i] ).GMGetMaxStacks();	//modSigns
+				}	//modSigns
+				else if( effectType == EET_GMRuneword4 )	//modSigns: ENCH-05, Invigoration's bonus in % (legacy)
+				{	//modSigns
+					duration = ( ( W3GMEffect_Runeword4 ) effectArray[i] ).GetStacks();	//modSigns
+					initialDuration = ( ( W3GMEffect_Runeword4 ) effectArray[i] ).GetMaxStacks();	//modSigns
+				}	//modSigns
+				else if( effectType == EET_GMRuneword11 )	//modSigns: ENCH-09, Prolongation's bonus in % (legacy)
+				{	//modSigns
+					duration = ( ( W3GMEffect_Runeword11 ) effectArray[i] ).GetStacks();	//modSigns
+					initialDuration = ( ( W3GMEffect_Runeword11 ) effectArray[i] ).GetMaxStacks();	//modSigns
 				}	//modSigns
 				
 				if(_currentEffects.Size() < i+1-offset)

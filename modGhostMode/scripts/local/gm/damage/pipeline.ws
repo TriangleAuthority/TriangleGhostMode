@@ -349,8 +349,8 @@ function GMZeroSubOneDamage( out damageData : W3DamageAction )
 // Vitality at low levels; the difficulty multiplier applies to hostile NPCs hitting the player only
 // (5.x: every NPC's raw damage); hits below 1 deal nothing. DD1's exception: Crippling Strike's
 // bonus (5.x: a raw damage multiplier; 5.x's alchemy_s24 is gone, SKL-13). SKL-06: the player's bolts and
-// bombs not thrown from aiming deal half damage. The other areas' terms (Perk 16, Severance,
-// Supercharged Glyphs, Dimeritium) come with their areas; Mutation 8 is MUT-06's; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
+// bombs not thrown from aiming deal half damage. Severance (ENCH-04) and Supercharged Glyphs (SKL-10)
+// are here; the other areas' terms (Perk 16, Dimeritium) come with their areas; Mutation 8 is MUT-06's; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
 @addMethod(W3DamageManagerProcessor)
 function GMProcessDamageModification()
 {
@@ -377,6 +377,17 @@ function GMProcessDamageModification()
 		mult = 0.75 - 0.5 * MaxF(0, 1 - 0.1 * (actorAttacker.GetLevel() - 1));
 		action.processedDmg.vitalityDamage *= mult;
 		action.processedDmg.essenceDamage *= mult;
+	}
+
+	// Severance (ENCH-04): Whirl and Rend hits of the player lose Runeword 2's runeword2_damage_debuff while
+	// Severance is active (the changelist's rule, the owner's decision; legacy's code cut every Whirl and Rend
+	// hit; enchantments/replenishmentSeverance.ws)
+	if( (W3PlayerWitcher)playerAttacker && action.IsActionMelee() && ( thePlayer.IsDoingSpecialAttack(false) || thePlayer.IsDoingSpecialAttack(true) ) && ((W3PlayerWitcher)playerAttacker).HasRunewordActive('Runeword 2 _Stats') )
+	{
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Runeword 2 _Stats', 'runeword2_damage_debuff', min, max);
+		mult = CalculateAttributeValue(min);
+		action.processedDmg.vitalityDamage *= 1 - mult;
+		action.processedDmg.essenceDamage *= 1 - mult;
 	}
 
 	// Supercharged Glyphs (SKL-10): the player's hits on an enemy inside the trap (skills/yrden.ws)

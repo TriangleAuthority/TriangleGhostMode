@@ -212,3 +212,22 @@
 2110992474|0ced58f4||Premia za typ rynsztunku:
 2110992631|b2eae791||Wydłuża czas działania eliksirów (nie wywarów) o $S$% za każdą część zestawu (obecna premia: $S$%).
 2110992632|b2eae792||Przeciwko wrogom w obszarze twojego Znaku Yrden Moc Znaków wszystkich efektów znaków, poza efektami samego Yrdena, zwiększona jest o $S$%.
+2110992337|e9c58057||Rzucenie Znaku używa $I$% mniej Wytrzymałości, ale wykonywanie wszystkich czynności fizycznych (oprócz ataków specjalnych) używa $I$% więcej Wytrzymałości.
+2110992338|eb7a58f6||Wykonywanie czynności walki wręcz zadających obrażenia (oprócz ataków specjalnych) używa $I$% więcej Wytrzymałości, ale zadają one $I$% więcej obrażeń.
+2110992339|e810a7b8||Wykonywanie czynności fizycznych (oprócz ataków specjalnych) używa $I$% mniej Wytrzymałości, ale rzucanie Znaków używa $I$% więcej Wytrzymałości.
+2110992296|ed2f3195||Obrażenia zadawane przez Rozładowanie Tarczy i Rozładowanie Quen zostają zwiększone o $I$%.
+2110992160|22156cd6||When Yrden Magic Turret hits an enemy, an Yrden Magic Trap is placed at that position. Size, duration and slowdown for such a trap are unaffected by Yrden Intensity and upgrades and limited to $S$ yards, $S$ sec and $S$% respectively.
+2110992501|257f1e14||Po rozpoczęciu walki, automatycznie zostanie utworzona Tarcza Quen bez użycia Wytrzymałości i z $I$% premią do Siły Znaku.
+2110992387|f098e2d3||Podstawowy atak Znakiem Igni razi wszystkich przeciwników dookoła i zadaje $I$ więcej punktów obrażeń (skaluje się wraz z Mocą Znaku). Szansa na podpalenie jest zmniejszona o $I$%.
+2110992499|eee40a34||Trafienie przeciwnika Znakiem Aard zmniejsza jego Wytrzymałość o $I$%, co również zwiększa szanse na powalenie i poważne powalenie.
+2110992516|4e736cfc||Umierając, przeciwnicy podpaleni Znakiem Igni eksplodują zadając $I$ punktów obrażeń w zasięgu $I$m i podpalają pobliskich przeciwników. Obrażenia skalują się wraz z Mocą Znaku.
+2110992517|198d31bb||Każdy przeciwnik kontrolowany przez Marionetkę Aksji zapewnia dodatkowe $I$% do Siły Ataku i Mocy Znaków wiedźmina (do maksymalnego poziomu $I$%).
+2110992518|20609437||Każdy przeciwnik pod wpływem Uroku Aksji zapewnia dodatkowe $I$% do szansy na trafienie krytyczne i do obrażeń trafienia krytycznego (do maksymalnego poziomu $I$%).
+2110992502|c43de44b||Po rzuceniu Znaku Punkt Adrenaliny zostaje użyty i następny atak mieczem zostaje naładowany mocą tego Znaku. Aard: powalenie (szansa zależy od Siły Ataku). Igni: $S$% obrażeń broni zostaje dodanych jako obrażenia od ognia (skaluje się wraz z Siłą Ataku). Yrden: na $S$s nałożony zostaje efekt spowolnienia. Quen: leczy Geralta o wartość równą $S$% zadanych obrażeń. Aksji: na $S$s nałożony zostaje efekt oszołomienia.
+2110992500|c5f2bcea||Zwiększa zasięg Młynka o $S$m oraz Rozpłatania o $S$m. Końcowe obrażenia zadawane przez te ataki zostają zmniejszone o $S$%.
+2110992158|c95c6e28||Gdy poziom Żywotności jest na maksymalnym poziomie, dodatkowa regeneracja Żywotności zwiększa obrażenia broni o $I$% za każdy 1% zyskanej nadmiernej Żywotości (do maksymalnego poziomu $I$%). Działa tylko podczas walki. Resetuje się przy otrzymaniu i zadaniu obrażeń.
+2110992386|d02fd0a4||Punkty Adrenaliny po osiągnięciu maksymalnego poziomu stopniowo spadają do zera w tempie $S$/s. W tym czasie regeneracja Żywotności jest zwiększona o $S$%/s, regeneracja punktów Wytrzymałości jest zwiększona o $S$%/s i Toksyczność spada szybciej o $S$/s.
+2110992294|f76f46ed||Zabicie przeciwnika regeneruje $I$% maksymalnej Żywotności.
+2110992295|fad8f82b||Zabicie przeciwnika generuje $F$ Punktów Adrenaliny.
+2110992507|f9241f8c||Gdy poziom Adrenaliny jest na maksymalnym poziomie, dodatkowa generacja Punktów Adrenaliny spowalnia czas trwania eliksirów o $S$% za każdy 1% nadwyżki Adrenaliny (3 Punkty = 100%). Maksymalna premia nie może przekroczyć $S$%. Premia resetuje się po straceniu Adrenaliny oraz po zakończoniu walki.
+2110992159|ccc61f66||Jedzenie regeneruje Żywotność o $I$% dłużej, ale wszystko smakuje jak pierogi.

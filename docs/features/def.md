@@ -242,7 +242,7 @@ What "all the light attack bonuses" covers: the bonuses that ask `IsLightAttack`
 | Skill trees | both: classic Deflection `sword_s10`, new `S_Sword_s33` |
 | Port form | `@replaceMethod(W3ArrowProjectile) OnProjectileCollision` on the 5.x body, one changed line (`defense/arrowParry.ws`) |
 | Port status | signed off |
-| Open checks | a real arrow reflected by a perfectly timed parry with Deflection, either tree (SKL-05 verified it with scripted reflected-arrow hits; [SKL-05](skl.md#skl-05-defense-branch)) |
+| Open checks | a real perfectly timed parry press reflecting an arrow with Deflection, either tree (SKL-05 verified it with scripted reflected-arrow hits; real arrows were reflected with a parry press stamped by script at impact, in both trees, by [ENCH-11](ench.md#ench-11-deflection-glyphword-1) slice 2, 2026-10-19) |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
