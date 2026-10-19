@@ -22,13 +22,15 @@ enum EEffectType
 	// MUT-10: Mutated Skin's damage over time
 	EET_GMMutation5,
 	// MUT-12: the Mutation Catalyst's potion effect
-	EET_GMMutationTrigger
+	EET_GMMutationTrigger,
+	// ARM-12: the Kaer Morhen set's stamina regen
+	EET_GMKaerMorhenSetBonus
 }
 
 // Last Ghost Mode effect type: keep it pointing at the last member above.
 function GMLastEffectType() : EEffectType
 {
-	return EET_GMMutationTrigger;
+	return EET_GMKaerMorhenSetBonus;
 }
 
 function GMIsModEffectType(effect : EEffectType) : bool

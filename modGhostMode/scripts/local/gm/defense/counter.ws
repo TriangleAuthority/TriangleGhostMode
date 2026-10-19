@@ -9,7 +9,7 @@
 // SKL-05: Counterattack's knockdown roll comes after the whole repel chain, as legacy's (also for
 // monsters, two-handed and tournament fighters and slope kicks; not after Mutation 8's finisher), and
 // the ledge trace runs with the skill too; a kick or bash without a knockdown stuns (legacy).
-// Left as 5.x for its area: the Lynx set (ARM). Deadly Counter's repel is MUT-06's (first in the order). See docs/features/def.md.
+// The Lynx set's chain kept by a kick or bash (ARM-06). Deadly Counter's repel is MUT-06's (first in the order). See docs/features/def.md.
 
 // DEF-06: the Blood and Wine tournament contestants (sq701) that legacy gave its empty marker
 // ability sq701_tournament_npcs, recognised by their entity templates instead of edited .w2ent
@@ -217,7 +217,11 @@ function PerformCounterCheck(parryInfo: SParryInfo) : bool
 							useKnockdown = false;	//modSigns
 					}	//modSigns
 					if ( !useKnockdown && ( repelType == PRT_Kick || repelType == PRT_Bash ) )	//modSigns: a kick or bash without a knockdown stuns (legacy)
+					{	//modSigns
 						parryInfo.attacker.AddEffectDefault(EET_CounterStrikeHit, this, "ReflexParryPerformed");	//modSigns
+						if( (W3PlayerWitcher)this && this.HasBuff( EET_LynxSetBonus ) )	//modSigns: ARM-06, such a counter keeps the Feline chain going (legacy)
+							((W3Effect_LynxSetBonus)this.GetBuff( EET_LynxSetBonus )).GMResetDecay();	//modSigns
+					}	//modSigns
 				}	//modSigns
 				
 				this.SetBehaviorVariable( 'repelType', (int)repelType );

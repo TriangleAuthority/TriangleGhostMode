@@ -348,6 +348,7 @@ Rules:
 - **`new game` should be extremely rare.** Treat it as `needs-decision`: before accepting it, look for an alternative, such as a fix-up that runs when a save is loaded (Ghost Mode's `gm_bugfixes.ws` is an example of this kind of code), or limiting the change to content the player has not reached yet. If none works, the project owner decides.
 - Legacy Ghost Mode already asked players to run `cleardevelop` when moving an existing save to the mod, and to re-craft items to get the new stats ([legacy-ModDescription.txt](legacy-ModDescription.txt)). Expect the skills, perks and experience changes to need `cleardevelop` again.
 - `docs/features/README.md` keeps a running list of every feature whose impact is not `none`, so it can go straight into release notes and the install instructions.
+- **Ghost Mode is installed at the start of a playthrough; adding it to or removing it from a save in the middle of a playthrough is not supported** (the project owner's decision, 2026-10-18). Save impacts are still recorded as facts, and so is what a save meets when the mod is removed, labelled unsupported; such cases need no fix or fix-up code.
 
 ## Pilot
 

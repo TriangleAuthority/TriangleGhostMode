@@ -27,7 +27,7 @@ function InternalAddEffect(effectType : EEffectType, creat : CGameplayEntity, sr
 function OnThrowing()
 {
 	var l_player : W3PlayerWitcher;
-	var l_gryphonBuff : W3Effect_GryphonSetBonus;
+	//modSigns: removed l_gryphonBuff (ARM-07)
 
 
 	var abilityName : name;
@@ -48,12 +48,7 @@ function OnThrowing()
 
 		theGame.GetGamerProfile().CheckLearningTheRopes();
 
-		l_gryphonBuff = (W3Effect_GryphonSetBonus)l_player.GetBuff( EET_GryphonSetBonus );
-
-		if( l_gryphonBuff && !l_gryphonBuff.GetWhichSignForFree() )
-		{
-			l_gryphonBuff.SetWhichSignForFree( parent );
-		}
+		//modSigns: removed 5.x's Griffin set free cast (ARM-07: legacy's Griffin set has none)
 
 
 

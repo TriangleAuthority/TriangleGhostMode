@@ -173,3 +173,42 @@
 2110992544|        |item_name_mutation_trigger|Mutation Catalyst
 2110992545|        |item_desc_mutation_trigger|This potion serves as a catalyst to activate Life Leech mutation.
 1188318|        |skill_name_mutation_11|Life Leech
+2110992429|6d1ad461||Leichte Rüstungen bieten nicht viel Schutz vor Angriffen, dafür benötigst du aber weniger Ausdauer um Angriffe auszuführen. Mittlere und Schwere Rüstungen bieten wesentlich besseren Schutz vor Angriffen, deine eigenen Angriffe kosten jedoch auch dementsprechend mehr Ausdauer.
+2110992320|ff9b0dc7||Setbonus für Schwere Rüstungen: +$I$% auf alle Schadenswiderstände.
+2110992321|2b2a501b||Setbonus für Mittlere Rüstungen: +$S$/Sek auf Toxizität-Abfallsrate.
+2110992322|31637b56||Setbonus für Leichte Rüstungen: +$I$ Grad auf den sicheren Winkelabstand beim Ausweichen.
+2110992107|8ed43e3e||Wenn du ein Zeichen wirkst, reduzieren sich die Kosten aller darauffolgenden Aktionen um $S$% pro getragenem Teil des Sets.<br>Derzeitiger Bonus: $S$% <br>Hält für $S$ Sekunden.
+2110992108|8ed43e3f||Die Größe von Yrden-Fallen ist um $S$% erhöht. Während du dich in einer Yrden-Falle befindest, ist die Zeichenintensität um $S$% erhöht und der Schadenswiderstand um $S$% erhöht.
+2110992325|d23efdaf||Wenn du Schaden nimmst, erhöht sich dein Adrenalinspiegel um $S$ Punkt(e) pro ausgerüstem Teil des Sets.<br>Derzeitiger Bonus: $S$Punkt(e)<br>Jeder zusätzliche Adrenalinpunkt erhöht deine Angriffskraft um $S$% pro ausgerüstem Teil des Sets.<br>Derzeitiger Bonus: $S$
+2110992336|d23efdb0||Schaden der mit starken Angriffen ausgeteilt wird, stellt $S$% der verbrauchten Ausdauer wieder her.
+2110992106|739e1e2c||Aneinandergereihte schnelle Nahkampfangriffe erhöhen deine Angriffskraft um +$S$% pro getragenem Teil des Sets (Derzeit: +$S$%), bis zu einem Maximum von +$S$%. Wenn du deine schnelle Nahkampfangriffsfolge mit einem starken Angriff beendest, entlädt sich dieser und verdoppelt so die Angriffskraft. Dieser Bonus endet, wenn die Nahkampfangriffsfolge unterbrochen wird, oder wenn der Kampf endet.
+2110992109|739e1e2d||Kritische Treffer mit einem Schwert verdoppeln den Adrenalingewinn.
+2110992091|85e8fbd1||Jedes Teil des Sets erhöht die Effektivität von Ölen, die auf Schwerter aufgetragen wurden um $S$% (Derzeitiger Bonus: $S$%).
+2110992326|85e8fbd2||Bis zu drei verschiedene Öle können gleichzeitig auf dein Schwert aufgetragen werden. Jedes aufgetragene Öl, erhöht die Chance auf kritische Treffer um $S$% und deren Stärke um $S$%.
+2110992090|6c1d3ba3||Bomben werden ohne Verzögerung geworfen und können kritischen Schaden verursachen. Jedes Teil des Sets erhöht die Chance auf kritische Treffer bei Bomben um $S$% (Derzeitiger Bonus: $S$%) und die Stärke von kritischen Treffern mit Bomben um $S$% (Derzeitiger Bonus: $S$%).
+2110992323|90f6cc99||Gewährt Giftimmunität. Gifte heilen um $S$% des Giftschadens pro ausgerüstetem Ausrüstungsstück.<br>Die aktuelle Heilungsrate beträgt: $S$%
+2110992430|4080bc95||Ausgeteilter Schaden im Kampf heilt dich um $S$% deiner maximalen Vitalität, für jedes getragene Teil des Sets.<br>Derzeitiger Wert: $S$%
+2110992360|917ce1b5||Kaer Morhen Rüstung
+2110992361|25cb5427||Verbesserte Kaer Morhen Rüstung
+2110992362|25cb5428||Überlegene Kaer Morhen Rüstung
+2110992363|25cb5429||Meisterlich gefertigte Kaer Morhen Rüstung
+2110992364|92488c52||Kaer Morhen Hose
+2110992365|2256cb84||Verbesserte Kaer Morhen Hose
+2110992366|2256cb85||Überlegene Kaer Morhen Hose
+2110992367|2256cb86||Meisterlich gefertigte Kaer Morhen Hose
+2110992368|9189a437||Kaer Morhen Stiefel
+2110992369|55b17e29||Verbesserte Kaer Morhen Stiefel
+2110992370|55b17e2a||Überlegene Kaer Morhen Stiefel
+2110992371|55b17e2b||Meisterlich gefertigte Kaer Morhen Stiefel
+2110992372|a808dd84||Kaer Morhen Handschuhe
+2110992373|c9479836||Verbesserte Kaer Morhen Handschuhe
+2110992374|c9479837||Überlegene Kaer Morhen Handschuhe
+2110992375|c9479838||Meisterlich gefertigte Kaer Morhen Handschuhe
+2110992376|e17342fd||Abgenutzte Kaer Morhen Rüstung
+2110992377|7656b740||Abgenutzte Kaer Morhen Hose
+2110992378|ae52593b||Abgenutzte Kaer Morhen Stiefel
+2110992379|cc58d3d4||Abgenutzte Kaer Morhen Handschuhe
+2110992380|41dddfc6||Die Ausdauer-Regenerationsrate erhöht sich für jeden zusätzlichen Gegner im Kampf um $S$ (maximal $S$).
+2110992474|0ced58f4||Bonus des Ausrüstungstyp:
+2110992631|b2eae791||Verlängert die Wirkungsdauer von Tränken (nicht von Absuden) um $S$% für jeden Teil des Sets (Derzeitiger Bonus: $S$%).
+2110992632|b2eae792||Gegen Gegner in deiner Yrden-Falle ist die Zeichenintensität aller Zeicheneffekte außer Yrdens eigenen um $S$% erhöht.

@@ -534,6 +534,10 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 		powerMod.valueMultiplicative += ((W3PlayerWitcher)playerAttacker).GMStrengthTrainingPowerFor(attackAction) + ((W3PlayerWitcher)playerAttacker).GMMuscleMemoryPowerFor(attackAction);	//modSigns: and Muscle Memory's (SKL-03, D53)
 	if((W3PlayerWitcher)playerAttacker && ((W3PlayerWitcher)playerAttacker).GMIsWhirlingWithAdrenaline())	//modSigns: SKL-03, Whirl's attack power per extra enemy
 		powerMod.valueMultiplicative += ((W3PlayerWitcher)playerAttacker).GMGetWhirlDamageBonus();	//modSigns
+	if((W3PlayerWitcher)playerAttacker && attackAction && (attackAction.IsActionMelee() || attackAction.IsActionRanged()))	//modSigns: ARM-08, the Bear set's attack power per adrenaline point (legacy)
+		powerMod.valueMultiplicative += ((W3PlayerWitcher)playerAttacker).GMBearSetAttackPower();	//modSigns
+	if((W3PlayerWitcher)playerAttacker && attackAction)	//modSigns: ARM-06, the Feline set's chain of fast hits (legacy)
+		powerMod.valueMultiplicative += ((W3PlayerWitcher)playerAttacker).GMLynxSetAttackPower(attackAction);	//modSigns
 
 	if(action.IsCriticalHit())
 	{
@@ -566,6 +570,8 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 			}	//modSigns
 			if((W3PlayerWitcher)playerAttacker && (W3BoltProjectile)action.causer)	//modSigns: SKL-06, Anatomical Knowledge's crossbow crit damage (legacy)
 				criticalDamageBonus += ((W3PlayerWitcher)playerAttacker).GMAnatomicalKnowledgeCritDamage();	//modSigns
+			if((W3PlayerWitcher)playerAttacker && (W3Petard)action.causer)	//modSigns: ARM-10, the Manticore set's bomb crit damage per piece (legacy)
+				criticalDamageBonus.valueAdditive += ((W3PlayerWitcher)playerAttacker).GMManticoreBombBonus('per_redwolf_piece_crit_power_bonus');	//modSigns
 		}
 
 

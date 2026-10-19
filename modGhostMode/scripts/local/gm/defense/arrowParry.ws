@@ -4,7 +4,7 @@
 // stamina, still parries the arrow fully (arrows have no partial parry). See docs/features/def.md.
 
 // 5.x body; changes marked //modSigns. Legacy's other changes here (collision groups, Glyphword 1,
-// the sq108 bounce ability, Deflection's damage) belong to FIX, ENCH and SKL.
+// Deflection's damage) belong to FIX, ENCH and SKL; Yoana's armor's bounce chance is ARM-01's.
 @replaceMethod(W3ArrowProjectile)
 function OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
 {
@@ -175,6 +175,9 @@ function OnProjectileCollision( pos, normal : Vector, collidingComponent : CComp
 				thePlayer.PlayEffect( 'bolt_bump' );
 			}
 		}
+		
+		if( !bounce && (W3PlayerWitcher)thePlayer && RandF() < CalculateAttributeValue(((W3PlayerWitcher)thePlayer).GetAttributeValue('q108_bounce_arrows')) )	//modSigns: ARM-01, Yoana's armor (q108_bounce_arrows) bounces arrows by chance (legacy's fix, changelist 144)
+		{ thePlayer.PlayEffect( 'bolt_bump' ); bounce = true; }	//modSigns
 		
 		if(bounce)
 		{	

@@ -233,6 +233,7 @@ function ProcessCollision( collider : CGameplayEntity, pos, normal : Vector )
 	actorVictim = ( CActor ) action.victim;
 	npc = (CNewNPC)collider;
 	signPower = signEntity.GetOwner().GetTotalSignSpellPower(signEntity.GetSkill());	//modSigns: needed before the damage
+	signPower.valueMultiplicative += GMNetflixYrdenIntensity(ownerActor, actorVictim, signEntity.GetSkill());	//modSigns: ARM-15, the Netflix set inside Yrden (Melt Armor, Firestream)
 	GMMeltArmor(collider, owner.GetActor(), signPower, signEntity.IsAlternateCast());	//modSigns: SKL-09, Melt Armor before the damage (legacy)
 	if(!signEntity.IsAlternateCast() && GMIgniIntensityDamage(owner, 'fire_damage_bonus') > 0)	//modSigns: SKL-09, Igni Intensity's fire damage (legacy), either tree
 		action.AddDamage(theGame.params.DAMAGE_NAME_FIRE, GMIgniIntensityDamage(owner, 'fire_damage_bonus'));	//modSigns

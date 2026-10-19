@@ -295,6 +295,6 @@ Each archetype is defined by an armor class (stamina cost rule plus school perk)
 - **5.x runeword data:** decide whether to keep 5.x's Elation (1 adr per kill), Rejuvenation (100% stamina) and Prolongation (+1 s/hit), or restore GM's values. Kept as-is, they undercut GM's adrenaline and stamina economy.
 - **The `potion_duration` → bomb damage coupling in 5.x:** GM sources (Water Hag, Manticore) would inflate bombs.
 - **5.x Wolven:** its 3/6-pc bonuses depend on bleeding stacks and adr, which GM's skills and DoT rework change.
-- **Netflix set (5.x):** it has no GM counterpart (+42% potion duration including decoctions); it needs a policy.
+- **Netflix set (5.x):** it has no GM counterpart (+42% potion duration including decoctions); decided: DA3, ported with ARM-15 (every tier counts, potions only, +0.5 sign intensity against enemies inside Yrden at 6 pieces; [arm.md](../arm.md#arm-15-5xs-new-armor)).
 - **Set-bonus eligibility:** GM grants minor bonuses from every tier; 5.x regular data tags only grandmaster, Manticore, Tesham Mutna and Netflix as `SetBonusPiece`. A port must re-tag the tiers or change the counting.
 - **1.32 Wolven 6 pc:** the vanilla text is unknown; the code only gives bombs without delay. Only matters for "legacy behaviour" questions.

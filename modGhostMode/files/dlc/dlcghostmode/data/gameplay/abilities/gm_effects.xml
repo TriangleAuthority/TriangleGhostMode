@@ -97,6 +97,13 @@
       <ability name="GMMutationTriggerEffect">
         <duration type="add" min="0.01" />
       </ability>
+      <!-- ARM-12: the Kaer Morhen set: +1 stamina regen per additional enemy, up to 5 (the effect adds the ability once per enemy) -->
+      <ability name="GMKaerMorhenSetBonusEffect">
+        <tags>GMKaerMorhenSetBonusEffect</tags>
+        <duration type="add" min="-1" />
+        <staminaRegen type="add" min="1" />
+        <maxStacks type="add" min="5" />
+      </ability>
     </abilities>
   </definitions>
   <custom>
@@ -114,6 +121,7 @@
       <effect name_name="GMUndyingCooldownEffect" defaultAbilityName_name="GMUndyingCooldownEffect" iconType_name="GMUndying" showOnHUD="1" effectNameLocalisationKey_name="effect_undying_cooldown" />
       <effect name_name="GMMutation5Effect" defaultAbilityName_name="GMMutation5Effect" iconType_name="icon_mutation5" showOnHUD="1" effectNameLocalisationKey_name="skill_name_mutation_5" />
       <effect name_name="GMMutationTriggerEffect" defaultAbilityName_name="GMMutationTriggerEffect" isPotionEffect="1" showOnHUD="0" onStartSound_name="gui_potion_activation" />
+      <effect name_name="GMKaerMorhenSetBonusEffect" defaultAbilityName_name="GMKaerMorhenSetBonusEffect" showOnHUD="0" />
     </effects>
     <effect_icons>
       <effect iconType_name="GMAardCooldown" path="icons/Skills/core/magic_1.png" />

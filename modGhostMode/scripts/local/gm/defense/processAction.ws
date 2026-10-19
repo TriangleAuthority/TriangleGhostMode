@@ -155,7 +155,11 @@ function ProcessAction(act : W3DamageAction)
 		if ( GetWitcherPlayer().CanUseSkill(S_Sword_s16) )
 			focusDrain *= 1 - (CalculateAttributeValue( thePlayer.GetSkillAttributeValue(S_Sword_s16, 'focus_drain_reduction', false, true) ) * thePlayer.GetSkillLevel(S_Sword_s16));
 			
-		thePlayer.DrainFocus(focusDrain);
+		focusDrain -= GetWitcherPlayer().GMBearSetHitAdrenaline();	//modSigns: ARM-08, the Bear set's adrenaline on hits taken (legacy)
+		if(focusDrain > 0)	//modSigns
+			thePlayer.DrainFocus(focusDrain);
+		else if(focusDrain < 0)	//modSigns
+			thePlayer.GainStat(BCS_Focus, -focusDrain);	//modSigns
 	}
 	
 	

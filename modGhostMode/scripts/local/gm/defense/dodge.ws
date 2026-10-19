@@ -161,11 +161,7 @@ function ReduceDamage(out damageData : W3DamageAction)
 	//modSigns: removed the Quen call here (SKL-11: before armor, GMProcessDamageDecrease)
 
 	
-	if( HasBuff( EET_GryphonSetBonusYrden ) )
-	{
-		min = GetAttributeValue( 'gryphon_set_bns_dmg_reduction' );
-		damageData.processedDmg.vitalityDamage *= 1 - min.valueAdditive;
-	}
+	//modSigns: removed the Griffin set's damage reduction inside Yrden (ARM-07: +15% resistances instead, legacy)
 
 	
 	//modSigns: removed Mutated Skin's damage reduction per adrenaline point (MUT-10: the damage is spread over time)

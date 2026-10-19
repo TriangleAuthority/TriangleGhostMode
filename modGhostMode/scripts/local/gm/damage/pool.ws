@@ -37,7 +37,7 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 // Strike's bonus goes to final damage, as does the difficulty multiplier
 // (GMProcessDamageModification). VulnerableFromFront is checked here, before the formula (legacy;
 // 5.x checks it in ReduceDamage, too late). 5.x's own versions of legacy's other terms (Rend, Perk 20,
-// Lynx, Aerondight, Runeword 4) are pool terms until their areas port legacy's.
+// Aerondight, Runeword 4; the Lynx and Netflix sets' are gone, ARM-06, ARM-15) are pool terms until their areas port legacy's.
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 {
@@ -130,46 +130,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 
 
 
-	if(actorVictim && playerAttacker && GetWitcherPlayer().IsSetBonusActive( EISB_Netflix_2 ) && !action.IsDoTDamage() && ( (W3AardProjectile)action.causer || (W3AardEntity)action.causer))
-	{
-		yrdens = GetWitcherPlayer().yrdenEntities;
-
-		if(yrdens.Size() > 0)
-		{
-			spellPowerAard = CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('spell_power_aard'));
-			spellPowerYrden = CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('spell_power_yrden'));
-			spellPower = ClampF(1 + spellPowerAard + spellPowerYrden + CalculateAttributeValue(GetWitcherPlayer().GetPowerStatValue(CPS_SpellPower)), 1, 3);
-
-			for(i=0; i<yrdens.Size(); i+=1)
-			{
-				for(j=0; j<yrdens[i].validTargetsInArea.Size(); j+=1)
-				{
-					if(yrdens[i].validTargetsInArea[j] == actorVictim )
-					{
-						levelDiff = playerAttacker.GetLevel() - actorVictim.GetLevel();
-						aardDamage.dmgType = theGame.params.DAMAGE_NAME_DIRECT;
-						if( GetWitcherPlayer().CanUseSkill(S_Magic_s06) )
-							aardDamageF = (RandRangeF(375.0, 325.0) + (playerAttacker.GetLevel() * 1.8f) + (GetWitcherPlayer().GetSkillLevel(S_Magic_s06) * 100) ) * spellPower;
-						else
-							aardDamageF = (RandRangeF(375.0, 325.0) + (playerAttacker.GetLevel() * 1.8f) ) * spellPower;
-
-						if( actorVictim.GetCharacterStats().HasAbilityWithTag('Boss') || (W3MonsterHuntNPC)actorVictim || (levelDiff < 0 && Abs(levelDiff) > theGame.params.LEVEL_DIFF_HIGH))
-						{
-							aardDamage.dmgVal = aardDamageF * 0.75f;
-						}
-						else
-						{
-							aardDamage.dmgVal = aardDamageF;
-						}
-
-						spNetflix = action.GetPowerStatValue();
-						aardDamage.dmgVal += 3 * actorVictim.GetHealth() * ( 0.01 + 0.03 * LogF( spNetflix.valueMultiplicative ) );
-						dmgInfos.PushBack(aardDamage);
-					}
-				}
-			}
-		}
-	}
+	//modSigns: removed 5.x's Netflix set tier 2 (Aard damage to enemies inside Yrden; ARM-15, DA3: +0.5 sign intensity against them instead, armor/netflixSet.ws)
 
 
 	//modSigns: removed 5.x's Catalyst (magic_s35, D58): Aard and Igni damage to enemies inside Yrden
@@ -259,69 +220,14 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	}
 
 
-	if( playerAttacker && actorVictim && attackAction.IsActionMelee() && GetWitcherPlayer().IsSetBonusActive( EISB_Wolf_1 ) )
-	{
-		FindGameplayEntitiesInRange( entities, playerAttacker, 50, 1000, , FLAG_OnlyAliveActors );
-		if( entities.Size() > 0 )
-		{
-			for( i=0; i<entities.Size(); i+=1 )
-			{
-				npcVictim = (CNewNPC) entities[i];
-				if( npcVictim )
-				{
-					if( npcVictim.HasBuff( EET_Bleeding ) )  bonusCount += 1;
-					if( npcVictim.HasBuff( EET_Bleeding1 ) ) bonusCount += 1;
-					if( npcVictim.HasBuff( EET_Bleeding2 ) ) bonusCount += 1;
-					if( npcVictim.HasBuff( EET_Bleeding3 ) ) bonusCount += 1;
-				}
-			}
-
-			bonusCount *= ((W3PlayerWitcher)playerAttacker).GetSetPartsEquipped( EIST_Wolf );
-
-			poolAll += bonusCount*0.01;	//modSigns: additive pool (5.x: a separate multiplier)
-		}
-	}
+	//modSigns: removed 5.x's Wolven set term: sword damage per Bleeding stack nearby (ARM-09: legacy's oil bonuses, armor/wolfSet.ws)
 
 
 
 	//modSigns: removed 5.x's Element of Surprise (perk_44, now In Combat's Fires: SKL-18, D61)
 
 
-	if( playerAttacker && playerAttacker.IsLightAttack( attackAction.GetAttackName() ) && playerAttacker.HasBuff( EET_LynxSetBonus ) && !attackAction.WasDodged() )
-	{
-		if( !attackAction.IsParried() && !attackAction.IsCountered() )
-		{
-
-			damageBonus = playerAttacker.GetAttributeValue( 'lynx_dmg_boost' );
-
-			damageBonus.valueAdditive *= ((W3PlayerWitcher)playerAttacker).GetSetPartsEquipped( EIST_Lynx );
-
-			poolAll += damageBonus.valueAdditive;	//modSigns: additive pool (5.x: a separate multiplier)
-		}
-	}
-
-
-	if( playerAttacker && attackAction.IsActionMelee() && actorVictim.IsAttackerAtBack( playerAttacker ) && !actorVictim.HasAbility( 'CannotBeAttackedFromBehind' ) && ((W3PlayerWitcher)playerAttacker).IsSetBonusActive( EISB_Lynx_2 ) && !attackAction.WasDodged() && ( playerAttacker.inv.IsItemSteelSwordUsableByPlayer( attackAction.GetWeaponId() ) || playerAttacker.inv.IsItemSilverSwordUsableByPlayer( attackAction.GetWeaponId() ) ) )
-	{
-		if( !attackAction.IsParried() && !attackAction.IsCountered() && playerAttacker.GetStat(BCS_Focus) >= 1.0f )
-		{
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Lynx_2 ), 'lynx_2_dmg_boost', min, max );
-			poolAll += min.valueAdditive;	//modSigns: additive pool (5.x: a separate multiplier)
-
-			if ( !( thePlayer.IsInCombatAction() && ( thePlayer.GetCombatAction() == EBAT_SpecialAttack_Light || thePlayer.GetCombatAction() == EBAT_SpecialAttack_Heavy ) ) )
-			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Lynx_2 ), 'lynx_2_adrenaline_cost', min, max );
-				focusCost = min.valueAdditive;
-				if( GetWitcherPlayer().GetStat( BCS_Focus ) >= focusCost )
-				{
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Lynx_2 ), 'lynx_2_stun_duration', min, max );
-					attackAction.AddEffectInfo( EET_Confusion, min.valueAdditive );
-					playerAttacker.SoundEvent( "ep2_setskill_lynx_activate" );
-					playerAttacker.DrainFocus( focusCost );
-				}
-			}
-		}
-	}
+	//modSigns: removed 5.x's Feline set terms: fast attacks after a strong one, rear attacks and their stun (ARM-06: attack power, damage/formula.ws)
 
 
 

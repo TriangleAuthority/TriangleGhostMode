@@ -607,13 +607,13 @@ exec function gmtest_sklb_state(optional label : string)
 	LogChannel('GMTest', "INFO SKL audit B " + label + " t=" + theGame.GetEngineTimeAsSeconds() + ": stamina " + witcher.GetStat(BCS_Stamina) + "/" + witcher.GetStatMax(BCS_Stamina) + ", adrenaline " + witcher.GetStat(BCS_Focus) + ", regen effect " + (bool)regen + " paused by a sign " + paused + ", Quen " + quenState + ", impulses " + witcher.gmTestQuenImpulses + ", alternate Aard: " + aard + ", Vitality " + witcher.GetStat(BCS_Vitality) + ", cooldowns Quen " + witcher.HasBuff(EET_GMQuenCooldown) + " Aard " + witcher.HasBuff(EET_GMAardCooldown) + " Igni " + witcher.HasBuff(EET_GMIgniCooldown) + ", casting " + witcher.IsCastingSign() + ", Gryphon " + witcher.HasBuff(EET_GryphonSetBonus));
 }
 
-// The Gryphon set's free-cast buff on or off (F3: a free cast with Flood of Anger still pays its points).
+// The Gryphon set's buff on or off (F3; since ARM-07 the buff no longer makes a cast free).
 exec function gmtest_sklb_gryphon(on : bool)
 {
 	thePlayer.RemoveAllBuffsOfType(EET_GryphonSetBonus);
 	if(on)
 		thePlayer.AddEffectDefault(EET_GryphonSetBonus, thePlayer, "gmtest");
-	LogChannel('GMTest', "INFO SKL audit F3: Gryphon free-cast buff " + thePlayer.HasBuff(EET_GryphonSetBonus));
+	LogChannel('GMTest', "INFO SKL audit F3: Gryphon buff " + thePlayer.HasBuff(EET_GryphonSetBonus));
 }
 
 // F13: a scripted hit from the hostile test dummy on Geralt for the given physical damage (to break a

@@ -173,3 +173,42 @@
 2110992544|        |item_name_mutation_trigger|Mutation Catalyst
 2110992545|        |item_desc_mutation_trigger|This potion serves as a catalyst to activate Life Leech mutation.
 1188318|        |skill_name_mutation_11|Life Leech
+2110992429|6d1ad461||Light Armor does not provide much protection, but your combat actions require less stamina when it is equipped. Medium Armor and Heavy Armor absorb more damage, but while in Heavy Armor your combat actions require more stamina.
+2110992320|        |item_desc_armor_type_heavy_set_bonus|Bonus za set těžké zbroje: +$I$% ke všem odolnostem vůči poškození.
+2110992321|        |item_desc_armor_type_medium_set_bonus|Medium armor set bonus: +$S$/sec to Toxicity Decay Rate.
+2110992322|        |item_desc_armor_type_light_set_bonus|Bonus za set lehké zbroje: +$I$ ke stupňům bezpečného úhlu vzdálenosti během úniku/piruety.
+2110992107|8ed43e3e||Casting a sign reduces stamina cost of all the subsequent actions taken by $S$% for each piece of the set. Current bonus: $S$%. Lasts for $S$ sec.
+2110992108|8ed43e3f||Rozsah pastí Yrdenu je zvýšen o $S$%. Dokud jsi uvnitř Yrdenu, je intenzita znamení zvýšena o $S$% a odolnost vůči poškození je zvýšena o $S$%.
+2110992325|d23efdaf||Taking damage increases your Adrenaline by $S$ points per set piece equipped (current bonus: $S$ points). Each Adrenaline point additionally increases your Attack Power by $S$% per set piece equipped (current bonus: $S$%).
+2110992336|d23efdb0||Damage dealt with a strong attack restores $S$% Stamina spent on that attack.
+2110992106|739e1e2c||Chained fast hits add +$S$% to Attack Power for each piece of the set (currently +$S$%), up to +$S$% max. Finishing a chain of fast hits with a strong hit discharges the sword doubling the current Attack Power bonus. The bonus resets when the chain of hits stops and at the end of the combat.
+2110992109|739e1e2d||Kritické zásahy mečem zdvojnásobují získaný adrenalin.
+2110992091|85e8fbd1||Každá část setu zvyšuje efektivitu aplikovaného oleje na meči o $S$% (současný bonus: $S$%).
+2110992326|85e8fbd2||Na meč mohou být současně aplikovány až tři různé typy oleje. Každý na meč aplikovaný olej zvyšuje šanci na kritický zásah o $S$% a sílu kritického útoku o $S$%.
+2110992090|6c1d3ba3||Petardy jsou hozeny bez prodlevy a mohou způsobit kritické poškození. Každá část setu zvyšuje šanci kritického zásahu petardou o $S$% (současný bonus: $S$%) a sílu kritického zásahu petardou o $S$% (současný bonus: $S$%).
+2110992323|        |skill_desc_viper_set_ability1|Dáva imunitu vůči jedům. Jedy léčí $S$% poškození jedem za každou část stejného vybaveného setu (současné množství obnoveného zdraví: $S$%).
+2110992430|4080bc95||Dealing damage in combat heals $S$% of maximum Vitality for each piece of the set (currently $S$%).
+2110992360|        |item_name_kaer_morhen_armor|Kaer Morhenská zbroj
+2110992361|        |item_name_kaer_morhen_armor_1|Vylepšená Kaer Morhenská zbroj
+2110992362|        |item_name_kaer_morhen_armor_2|Prvotřídní Kaer Morhenská zbroj
+2110992363|        |item_name_kaer_morhen_armor_3|Mistrovská Kaer Morhenská zbroj
+2110992364|        |item_name_kaer_morhen_pants|Kaer Morhenské kalhoty
+2110992365|        |item_name_kaer_morhen_pants_1|Vylepšené Kaer Morhenské kalhoty
+2110992366|        |item_name_kaer_morhen_pants_2|Prvotřídní Kaer Morhenské kalhoty
+2110992367|        |item_name_kaer_morhen_pants_3|Mistrovské Kaer Morhenské kalhoty
+2110992368|        |item_name_kaer_morhen_boots|Kaer Morhenské boty
+2110992369|        |item_name_kaer_morhen_boots_1|Vylepšené Kaer Morhenské boty
+2110992370|        |item_name_kaer_morhen_boots_2|Prvotřídní Kaer Morhenské boty
+2110992371|        |item_name_kaer_morhen_boots_3|Mistrovské Kaer Morhenské boty
+2110992372|        |item_name_kaer_morhen_gloves|Kaer Morhenské rukavice
+2110992373|        |item_name_kaer_morhen_gloves_1|Vylepšené Kaer Morhen rukavice
+2110992374|        |item_name_kaer_morhen_gloves_2|Prvotřídní Morhenské rukavice
+2110992375|        |item_name_kaer_morhen_gloves_3|Mistrovské Morhenské rukavice
+2110992376|        |item_name_starting_armor_gm|Obnošená Kaer Morhenská zbroj
+2110992377|        |item_name_starting_pants_gm|Obnošené Kaer Morhenské kalhoty
+2110992378|        |item_name_starting_boots_gm|Obnošené Kaer Morhenské boty
+2110992379|        |item_name_starting_gloves_gm|Obnošené Kaer Morhenské rukavice
+2110992380|        |skill_desc_kaer_morhen_set_ability1|Rychlost regenerace výdrže se zvyšuje o $S$ za každého dodatečného protivníka v boji (max. $S$).
+2110992474|        |gm_crafting_bonus_title|Bonus for gear type:
+2110992631|b2eae791||Prodlužuje účinek elixírů (ne odvarů) o $S$% za každou část setu (současný bonus: $S$%).
+2110992632|b2eae792||Proti nepřátelům uvnitř tvého Yrdenu je intenzita znamení všech účinků znamení kromě účinků samotného Yrdenu zvýšena o $S$%.

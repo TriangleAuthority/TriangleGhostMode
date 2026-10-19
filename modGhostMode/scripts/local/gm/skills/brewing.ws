@@ -109,9 +109,9 @@ function CalculatePotionDuration(item : SItemUniqueId, isMutagenPotion : bool, o
 		duration = duration * (1 + skillPassiveMod + GMProlongedEffectsBonus());	//modSigns: Prolonged Effects
 
 
-	if( IsSetBonusActive( EISB_Netflix_1 ) )
+	if( !isMutagenPotion && IsSetBonusActive( EISB_Netflix_1 ) )	//modSigns: ARM-15, potions only (DA3)
 	{
-		duration += (duration * (amountOfSetPiecesEquipped[ EIST_Netflix ] * 7 )) / 100 ;
+		duration += duration * GetSetPartsEquipped( EIST_Netflix ) * GMNetflixPotionDurationPerPiece();	//modSigns: every tier's pieces (DA3); the value from the set's ability
 	}
 
 	return duration;

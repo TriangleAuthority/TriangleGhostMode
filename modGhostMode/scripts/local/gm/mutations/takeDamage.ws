@@ -1,6 +1,7 @@
 // W3PlayerWitcher.OnTakeDamage and CActor.OnTakeDamage, replaced for the mutations' hunks: MUT-05
 // Bloodbath's bonus lowered by damage taken (5.x: the effect ends); MUT-10 Mutated Skin's trigger and
-// the Vitality drain it takes over; MUT-12: no death trigger for Mutation 11.
+// the Vitality drain it takes over; MUT-12: no death trigger for Mutation 11; ARM-13: the Tesham Mutna
+// set's heal on damage dealt (armor/vampireSet.ws).
 // See docs/features/mut.md.
 
 @replaceMethod(W3PlayerWitcher)
@@ -271,6 +272,8 @@ function OnTakeDamage( action : W3DamageAction )
 			
 			thePlayer.GainStat(BCS_Vitality, lifeLeech);
 		}			
+		if( GetWitcherPlayer() && GetWitcherPlayer().IsSetBonusActive( EISB_Vampire ) && !GetWitcherPlayer().IsInFistFight() && action.DealsAnyDamage() && !action.IsDoTDamage() )	//modSigns: ARM-13, the Tesham Mutna set heals on damage dealt (legacy)
+			GetWitcherPlayer().VampiricSetAbilityRegeneration();	//modSigns
 	}
 	
 	

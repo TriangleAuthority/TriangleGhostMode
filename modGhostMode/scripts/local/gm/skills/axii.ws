@@ -175,7 +175,7 @@ function OnEnded(optional isEnd : bool)
 	var buff : EEffectInteract;
 	//modSigns: removed conf
 	var i : int;
-	var duration, durationAnimal, fortifiedSignsAtt, axiiPower : SAbilityAttributeValue;	//modSigns
+	var duration, durationAnimal, fortifiedSignsAtt, axiiPower, targetPower : SAbilityAttributeValue;	//modSigns
 	var casterActor : CActor;
 	var dur, durAnimals : float;
 	var params, staggerParams : SCustomEffectParams;
@@ -253,7 +253,10 @@ function OnEnded(optional isEnd : bool)
 				pts = 0;	//modSigns
 				chance = 1;	//modSigns
 			}	//modSigns
-			params.duration = currentDuration * (1 + GMSignPowerStatToPowerBonus(MaxF(0, axiiPower.valueMultiplicative - pts / 100)));	//modSigns: the intensity bonus after will resistance points
+			targetPower = axiiPower;	//modSigns: ARM-15, the Netflix set inside Yrden, per target
+			targetPower.valueMultiplicative += GMNetflixYrdenIntensity(casterActor, targets[i], skillEnum);	//modSigns
+			params.customPowerStatValue = targetPower;	//modSigns
+			params.duration = currentDuration * (1 + GMSignPowerStatToPowerBonus(MaxF(0, targetPower.valueMultiplicative - pts / 100)));	//modSigns: the intensity bonus after will resistance points
 
 			jobTreeType = npcTarget.GetCurrentJTType();
 

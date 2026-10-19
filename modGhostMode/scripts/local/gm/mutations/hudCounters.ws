@@ -60,7 +60,7 @@ function UpdateBuffs()
 				
 				format = 1;
 			}
-			else if ( effectType == EET_Mutation3 || effectType == EET_Mutation5 )	//modSigns: MUT-08, MUT-09: Mutation 4 and 10 moved to the counter format
+			else if ( effectType == EET_Mutation3 || effectType == EET_Mutation5 || effectType == EET_LynxSetBonus )	//modSigns: MUT-08, MUT-09: Mutation 4 and 10 moved to the counter format; ARM-06: the Feline set's bonus (legacy)
 			{
 				
 				format = 2;
@@ -115,6 +115,11 @@ function UpdateBuffs()
 			}
 			
 			
+			else if( effectType == EET_LynxSetBonus )	//modSigns: ARM-06, the Feline set's bonus in % (legacy)
+			{	//modSigns
+				l_flashObject.SetMemberFlashNumber("duration", 			( ( W3Effect_LynxSetBonus ) _currentEffects[i] ).GMGetStacks() );	//modSigns
+				l_flashObject.SetMemberFlashNumber("initialDuration", 	( ( W3Effect_LynxSetBonus ) _currentEffects[i] ).GMGetMaxStacks() );	//modSigns
+			}	//modSigns
 			else if( effectType == EET_Mutation3 )
 			{						
 				mut3Buff = ( W3Effect_Mutation3 ) _currentEffects[i];						
@@ -158,3 +163,203 @@ function UpdateBuffs()
 	m_flashValueStorage.SetFlashArray( "hud.buffs", l_flashArray );
 }
 
+// ARM-06 (audit F7): the HUD's per-frame update sends the Feline set's chain to the buff list, as
+// legacy; 5.x sent 1/1 for an effect without a duration, overwriting UpdateBuffs's counter each tick.
+// 5.x body; changes marked //modSigns.
+@replaceMethod(CR4HudModuleBuffs)
+function OnTick( timeDelta : float )
+{
+	var effectsSize : int;
+	var effectArray : array< CBaseGameplayEffect >;
+	var i : int;
+	var offset : int;
+	var duration : float;
+	var extraValue : int;
+	var initialDuration : float;
+	var hasRunword5 : bool;
+	var oilEffect : W3Effect_Oil;
+	var aerondightEffect	: W3Effect_Aerondight;
+	var effectType : EEffectType;
+	var minAttributeValue, maxAttributeValue : SAbilityAttributeValue;
+
+	if ( !CanTick( timeDelta ) )
+		return true;
+
+	_previousEffects = _currentEffects;
+	_currentEffects.Clear();
+	
+	if( bDisplayBuffs && GetEnabled() )
+	{		
+		offset = 0;
+		
+		effectArray = thePlayer.GetCurrentEffects();
+		effectsSize = effectArray.Size();
+		hasRunword5 = false;
+		
+		for ( i = 0; i < effectsSize; i += 1 )
+		{
+			if(effectArray[i].ShowOnHUD() && effectArray[i].GetEffectNameLocalisationKey() != "MISSING_LOCALISATION_KEY_NAME" )
+			{	
+				
+				initialDuration = effectArray[i].GetInitialDurationAfterResists();
+				
+				if ( (W3RepairObjectEnhancement)effectArray[i] && GetWitcherPlayer().HasRunewordActive('Runeword 5 _Stats') )
+				{
+					hasRunword5 = true;
+					
+					if (!m_runword5Applied)
+					{
+						m_runword5Applied = true;
+						UpdateBuffs();
+						break;
+					}
+				}
+
+				effectType = effectArray[i].GetEffectType();
+
+				if( initialDuration < 1.0)
+				{
+					initialDuration = 1;
+					duration = 1;
+				}
+				else
+				{
+					duration = effectArray[i].GetDurationLeft();
+					if ( thePlayer.CanUseSkill( S_Perk_14 ) &&
+						( effectType == EET_ShrineAxii || 
+						  effectType == EET_ShrineIgni || 
+						  effectType == EET_ShrineQuen || 
+						  effectType == EET_ShrineYrden || 
+						  effectType == EET_ShrineAard
+						)
+					   )
+					{
+						
+						duration = effectArray[i].GetInitialDuration() + 1;
+					}
+					else if ( effectType == EET_EnhancedWeapon ||
+							  effectType == EET_EnhancedArmor )
+					{
+						if ( GetWitcherPlayer().HasRunewordActive('Runeword 5 _Stats') )
+						{
+							
+							duration = effectArray[i].GetInitialDuration() + 1;
+						}
+					}
+					else
+					{
+						if(duration < 0.f)
+							duration = 0.f;		
+					}
+				}
+				
+				if ( effectType == EET_Oil )
+				{
+					oilEffect = (W3Effect_Oil)effectArray[ i ];
+					if ( oilEffect )
+					{
+						
+						if (oilEffect.GetAmmoCurrentCount() > 0 && GetWitcherPlayer().CanUseSkill(S_Alchemy_s06) && GetWitcherPlayer().GetSkillLevel(S_Alchemy_s06) > 2)
+						{
+							initialDuration = oilEffect.GetAmmoMaxCount();
+							duration		= oilEffect.GetAmmoMaxCount();
+						}
+						else
+						{
+							initialDuration = oilEffect.GetAmmoMaxCount();
+							duration		= oilEffect.GetAmmoCurrentCount();
+						}
+					}
+				}					
+				else if( effectType == EET_Aerondight )
+				{
+					aerondightEffect = (W3Effect_Aerondight)effectArray[i];
+					if( aerondightEffect )
+					{
+						initialDuration = aerondightEffect.GetMaxCount();
+						duration		= aerondightEffect.GetCurrentCount();
+					}
+				}
+				else if( effectType == EET_BasicQuen )
+				{
+					
+					extraValue = ( ( W3Effect_BasicQuen ) effectArray[i] ).GetStacks();
+					
+				}
+				else if ( effectType == EET_ConvergenceTheory )
+				{
+					theGame.GetDefinitionsManager().GetAbilityAttributeValue('ConvergenceTheoryEffect', 'spell_power', minAttributeValue, maxAttributeValue);
+					extraValue = ( int )( minAttributeValue.valueMultiplicative * 100 );
+					extraValue *= ( ( W3Effect_ConvergenceTheory ) effectArray[i] ).GetStacks() * thePlayer.GetSkillLevel(S_Magic_s37);
+				}
+				else if( effectType == EET_Mutation3 )
+				{						
+					duration = ( ( W3Effect_Mutation3 ) effectArray[i] ).GetStacks();
+					initialDuration = duration;
+				}
+				else if( effectType == EET_Mutation4 )
+				{						
+					duration = ( ( W3Effect_Mutation4 ) effectArray[i] ).GetStacks();
+					initialDuration = duration;
+				}
+				else if( effectType == EET_Mutation5 )
+				{						
+					duration = ( ( W3Effect_Mutation5 ) effectArray[i] ).GetStacks();
+					initialDuration = ( ( W3Effect_Mutation5 ) effectArray[i] ).GetMaxStacks();
+				}
+				else if( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff )
+				{	
+					
+					extraValue = ( ( W3Mutation7BaseEffect ) effectArray[i] ).GetStacks();
+				}
+				else if( effectType == EET_Mutation10 )
+				{						
+					duration = ( ( W3Effect_Mutation10 ) effectArray[i] ).GetStacks();
+					initialDuration = duration;
+				}
+				else if( effectType == EET_LynxSetBonus )	//modSigns: ARM-06, the Feline set's chain (legacy)
+				{	//modSigns
+					duration = ( ( W3Effect_LynxSetBonus ) effectArray[i] ).GMGetStacks();	//modSigns
+					initialDuration = ( ( W3Effect_LynxSetBonus ) effectArray[i] ).GMGetMaxStacks();	//modSigns
+				}	//modSigns
+				
+				if(_currentEffects.Size() < i+1-offset)
+				{
+					_currentEffects.PushBack(effectArray[i]);
+					m_fxSetPercentSFF.InvokeSelfFourArgs( FlashArgNumber(i-offset),FlashArgNumber( duration ), FlashArgNumber( initialDuration ), FlashArgInt( extraValue ) );
+				}
+				else if( effectArray[i].GetEffectType() == _currentEffects[i-offset].GetEffectType() )
+				{
+					m_fxSetPercentSFF.InvokeSelfFourArgs( FlashArgNumber(i-offset),FlashArgNumber( duration ), FlashArgNumber( initialDuration ), FlashArgInt( extraValue ) );
+				}
+				else
+				{
+					LogChannel('HUDBuffs',i+" something wrong");
+				}
+			}
+			else
+			{
+				offset += 1;
+				
+			}
+		}
+		
+		if (!hasRunword5 && m_runword5Applied)
+		{
+			m_runword5Applied = false;
+			UpdateBuffs();
+		}
+	}
+
+	
+	if ( _currentEffects.Size() == 0 && _previousEffects.Size() == 0 )
+		return true;
+
+	
+	if ( buffListHasChanged(_currentEffects, _previousEffects) || _forceUpdate )
+	{
+		_forceUpdate = false;
+		UpdateBuffs();
+	}
+
+}

@@ -36,8 +36,8 @@ function GMOilLevel() : int
 	return RoundMath(CalculateAttributeValue(min));
 }
 
-// One of the oil's attributes against the monster category, wearing off; nothing for another category or
-// an empty oil.
+// One of the oil's attributes against the monster category, wearing off, with the Wolven set's tier 1
+// (ARM-09); nothing for another category or an empty oil.
 @addMethod(W3Effect_Oil)
 function GMBonus(monsterCategory : EMonsterCategory, attributeName : name) : SAbilityAttributeValue
 {
@@ -48,7 +48,7 @@ function GMBonus(monsterCategory : EMonsterCategory, attributeName : name) : SAb
 		return attrVal;
 	theGame.GetDefinitionsManager().GetAbilityAttributeValue(oilAbility, attributeName, min, max);
 	attrVal = GetAttributeRandomizedValue(min, max);
-	factor = GMScaleFactor();
+	factor = GMScaleFactor() * GMWolfOilMult();	// ARM-09: the Wolven set's tier 1 (armor/wolfSet.ws)
 	attrVal.valueBase *= factor;
 	attrVal.valueAdditive *= factor;
 	attrVal.valueMultiplicative *= factor;
@@ -233,9 +233,10 @@ function GetCriticalHitChance( isLightAttack : bool, isHeavyAttack : bool, targe
 	
 	
 	oilChanceAttribute = MonsterCategoryToCriticalChanceBonus( victimMonsterCategory );
-	if( IsNameValid( oilChanceAttribute ) && ( isLightAttack || isHeavyAttack ) && !isBolt )	//modSigns: melee only (legacy)
+	if( ( isLightAttack || isHeavyAttack ) && !isBolt )	//modSigns: melee only (legacy)
 	{
 		critChance += CalculateAttributeValue( inv.GMOilBonus( inv.GetCurrentlyHeldSword(), victimMonsterCategory, oilChanceAttribute ) );	//modSigns: the held sword's oils, wearing off (legacy)
+		critChance += inv.GMOilWolfCritBonus( inv.GetCurrentlyHeldSword(), 'per_oil_crit_chance_bonus' );	//modSigns: ARM-09, the Wolven set's tier 2 per oil
 	}
 
 	return critChance;
@@ -257,6 +258,7 @@ function GetCriticalHitDamageBonus(weaponId : SItemUniqueId, victimMonsterCatego
 		oilBonus = inv.GMOilBonus(weaponId, victimMonsterCategory, vsAttributeName);	//modSigns: wearing off (legacy)
 		bonus += oilBonus;
 	}
+	bonus.valueAdditive += inv.GMOilWolfCritBonus( weaponId, 'per_oil_crit_power_bonus' );	//modSigns: ARM-09, the Wolven set's tier 2 per oil, whatever the enemy
 	
 	return bonus;
 }
@@ -332,7 +334,8 @@ function ProcessOnBeforeHitChecks()
 
 // SKL-14: Fixative (classic alchemy_s6, the new tree's alchemy_s25 in place of Volatile Compound; legacy's
 // 3 levels in both): +33.4% oil charges per level, and oils do not wear off at level 3. A sword holds one
-// oil at a time, as in legacy (5.x's Fixative kept one oil per level). Hunter Instinct (classic
+// oil at a time, as in legacy, three with the Wolven set's tier 2 (ARM-09, armor/wolfSet.ws; 5.x's
+// Fixative kept one oil per level). Hunter Instinct (classic
 // alchemy_s7, 5 levels; the new tree's alchemy_s27): with the right oil, critical hit damage +6.68% (new
 // tree 11.13%) per level per adrenaline point, from 1 point, not spent (5.x: only at full adrenaline).
 // 5.x's Volatile Compound (bomb damage by toxicity) is gone (damage/pool.ws). The HUD's charge display and
@@ -415,7 +418,7 @@ function ApplyOil( oilId : SItemUniqueId, usedOnItem : SItemUniqueId ) : bool
 	{
 		
 		
-		if( !GetWitcherPlayer() || !CanUseSkill(S_Alchemy_s06) )
+		if( !GetWitcherPlayer() || GMMaxOilsPerSword() <= 1 )	//modSigns: one oil at a time (legacy), but with the Wolven set's tier 2 (ARM-09)
 		
 		{
 			inv.RemoveAllOilsFromItem( usedOnItem );
@@ -423,7 +426,8 @@ function ApplyOil( oilId : SItemUniqueId, usedOnItem : SItemUniqueId ) : bool
 		else
 		{
 			//modSigns: removed 5.x's Fixative keeping one oil per level
-			inv.RemoveAllOilsFromItem( usedOnItem );	//modSigns: one oil at a time (legacy)
+			if( inv.GetActiveOilsAppliedOnItemCount( usedOnItem ) >= GMMaxOilsPerSword() )	//modSigns: ARM-09, the Wolven set's tier 2: up to three oils, the oldest goes (legacy)
+				inv.RemoveOldestOilFromItem( usedOnItem );	//modSigns
 		}
 	}
 	

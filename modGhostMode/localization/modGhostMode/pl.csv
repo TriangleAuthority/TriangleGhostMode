@@ -173,3 +173,42 @@
 2110992544|        |item_name_mutation_trigger|Mutation Catalyst
 2110992545|        |item_desc_mutation_trigger|This potion serves as a catalyst to activate Life Leech mutation.
 1188318|        |skill_name_mutation_11|Life Leech
+2110992429|6d1ad461||Lekki rynsztunek nie daje dużo ochrony, ale czynności podczas walki używają mniej Wytrzymałości, kiedy ten jest założony. Średni i ciężki rynsztunek absorbują więcej obrażeń, ale nosząc ciężki rynsztunek wykonywanie czynności podczas walki używa więcej Wytrzymałości.
+2110992320|ff9b0dc7||Premia ciężkiego rynsztunku: +$I$% do odporności na każdy typ obrażeń.
+2110992321|2b2a501b||Premia średniego rynsztunku: +$S$/s do Tempa Redukcji Toksyczności.
+2110992322|31637b56||Premia lekkiego ryznsztunku: +$I$ stopni do bezpiecznej odległości kątowej podczas wykonywania uniku.
+2110992107|8ed43e3e||Rzucenie znaku zmniejsza koszt Wytrzymałości wszystkich kolejnych czynności o $S$% za każdą część zestawu. Obecna premia: $S$%. Czas trwania: $S$s.
+2110992108|8ed43e3f||Obszar połapki Znaku Yrden jest większy o $S$%. Wewnątrz obszaru działania Moc Znaków zwiększona jest o $S$%, a odporność na obrażenia o $S$%.
+2110992325|d23efdaf||Otrzymanie obrażeń generuje $S$ Punktów Adrenaliny za każdą założoną część zestawu (obecna premia: $S$ punktów). Każdy Punkt Adrenaliny dodatkowo zwiększa Siłę Ataku o $S$% za każdą założoną część zestawu (obecna premia: $S$%).
+2110992336|d23efdb0||Obrażenia zadane Silnym Atakiem odnawiają $S$% Wytrzymałości użytej do tego ataku.
+2110992106|739e1e2c||Seryjne szybkie ciosy zwiększają Siłę Ataku o $S$% za każdą część zestawu (obecna premia: $S$%), aż do maksymalnego poziomu $S$%. Zakończenie serii szybkich ciosów ciosem silnym wyładowuje miecz podwajając obecną premię do Siły Ataku. Premia resetuje się po zakończeniu serii ciosów i po zakończeniu walki.
+2110992109|739e1e2d||Trafienie krytyczne mieczem generuje dwukrotną ilość Punktów Adrenaliny.
+2110992091|85e8fbd1||Każda część zestawu zwiększa efektywność oleju nałożonego na miecz o $S$% (obecna premia: $S$%).
+2110992326|85e8fbd2||Na miecz można nakładać do trzech różnych olejów na raz. Każdy olej nałożony na miecz zwiększa szansę trafienia krytycznego o $S$% i obrażenia trafienia krytycznego o $S$%.
+2110992090|6c1d3ba3||Bomby są rzucane bez żadnego opóźnienia i mogą zadawać obrażenia krytyczne. Każda część zestawu zwiększa szansę trafienia krytycznego bombą o $S$% (obecna premia: $S$%) i obrażenia trafienia krytycznego bombą o $S$% (obecna premia: $S$%).
+2110992323|90f6cc99||Uodparnia na działanie trucizn. Trucizny leczą $S$% obrażeń od trucizny za każdy element wyposażongeo zestawu (obecne tempo leczenia: $S$%).
+2110992430|4080bc95||Zadawanie obrażeń w walce przywraca $S$% maksymalnej Żywotności za każdą część zestawu (Obecnie: $S$%).
+2110992360|917ce1b5||Pancerz z Kaer Morhen
+2110992361|25cb5427||Ulepszony pancerz z Kaer Morhen
+2110992362|25cb5428||Wyśmienity pancerz z Kaer Morhen
+2110992363|25cb5429||Mistrzowski pancerz z Kaer Morhen
+2110992364|92488c52||Spodnie z Kaer Morhen
+2110992365|2256cb84||Ulepszone spodnie z Kaer Morhen
+2110992366|2256cb85||Wyśmienite spodnie z Kaer Morhen
+2110992367|2256cb86||Mistrzowskie spodnie z Kaer Morhen
+2110992368|9189a437||Buty z Kaer Morhen
+2110992369|55b17e29||Ulepszone buty z Kaer Morhen
+2110992370|55b17e2a||Wyśmienite buty z Kaer Morhen
+2110992371|55b17e2b||Mistrzowskie buty z Kaer Morhen
+2110992372|a808dd84||Rękawice z Kaer Morhen
+2110992373|c9479836||Ulepszone rękawice z Kaer Morhen
+2110992374|c9479837||Wyśmienite rękawice z Kaer Morhen
+2110992375|c9479838||Mistrzowskie rękawice z Kaer Morhen
+2110992376|e17342fd||Znoszony pancerz z Kaer Morhen
+2110992377|7656b740||Znoszone spodnie z Kaer Morhen
+2110992378|ae52593b||Znoszone buty z Kaer Morhen
+2110992379|cc58d3d4||Znoszone rękawice z Kaer Morhen
+2110992380|41dddfc6||Tempo regeneracji punktów Wytrzymałości wzrasta o $S$/s za każdego kolejnego przeciwnika w walce (maksymalnie $S$/s).
+2110992474|0ced58f4||Premia za typ rynsztunku:
+2110992631|b2eae791||Wydłuża czas działania eliksirów (nie wywarów) o $S$% za każdą część zestawu (obecna premia: $S$%).
+2110992632|b2eae792||Przeciwko wrogom w obszarze twojego Znaku Yrden Moc Znaków wszystkich efektów znaków, poza efektami samego Yrdena, zwiększona jest o $S$%.

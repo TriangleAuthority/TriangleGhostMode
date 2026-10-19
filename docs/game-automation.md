@@ -231,6 +231,8 @@ python tools/game.py run <save name>
 
 Build the character a test needs with exec functions after loading (see [Setting up Geralt and the world](#setting-up-geralt-and-the-world)), so the save itself stays a clean level 1 start.
 
+**Saves made by tests** (save impact checks such as `gmtest_arm09_mksave`): `theGame.SaveGame(SGT_Manual, -1)` writes a new manual slot, but nothing is saved while a hostile NPC is near (Geralt in combat): remove test dummies first (`gmtest_dummy_clear()`, `killall()`). `game.py saves -n 1` names the new slot. **Removing the mod** for a check: set `Enabled=0` under `[modGhostMode]` in `mods.settings` (with the game closed), load the save, then restore the file; `gmtest_regress()` failing to run confirms the mod is off (ARM-12, 2026-10-17).
+
 ## Ideas not done
 
 - A test runner on top of `game.py`: build, `run`, a list of exec calls with expected log lines, `quit`, report.

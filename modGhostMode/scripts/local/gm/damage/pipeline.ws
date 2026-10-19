@@ -122,6 +122,15 @@ function ProcessActionDamage() : bool
 			continue;
 		}
 
+		if(dmgInfos[i].dmgType == theGame.params.DAMAGE_NAME_POISON && witcher == actorVictim && witcher.IsSetBonusActive(EISB_Viper))	//modSigns: ARM-11, the Viper set cancels poison damage and heals a share of it (legacy)
+		{	//modSigns
+			witcher.GainStat(BCS_Vitality, dmgInfos[i].dmgVal * witcher.GMViperPoisonHealRate());	//modSigns
+			if ( canLog )	//modSigns
+				LogDMHits("*** Player absorbs poison damage from Viper Set ability: " + (dmgInfos[i].dmgVal * witcher.GMViperPoisonHealRate()), action);	//modSigns
+			dmgInfos[i].dmgVal = 0;	//modSigns
+			continue;	//modSigns
+		}	//modSigns
+
 
 		if ( canLog )
 		{

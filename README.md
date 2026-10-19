@@ -12,6 +12,8 @@ The goal is to carry over the spirit of Ghost Mode wherever possible. Port what 
 
 **New Game+: changes carried over and scaled, but not balanced or tested.** The port applies Ghost Mode's changes to the New Game+ data as well, scaling its numbers the way vanilla scales them from a normal game to NG+ (a reasonable effort, not a tuned NG+ experience). Only regular playthroughs are balanced and tested; NG+ is not tested at all, not even for crashes. Extending the port properly to NG+ is left to whoever wants to take it on after the port is done. See [docs/feature-mapping.md](docs/feature-mapping.md#new-game-carried-over-and-scaled-not-balanced-or-tested).
 
+**Installed at the start of a playthrough.** Adding Ghost Mode to a save, or removing it, in the middle of a playthrough is not supported (decision 2026-10-18). See [docs/feature-mapping.md](docs/feature-mapping.md#save-compatibility).
+
 ## How this repository is organised
 
 The git history is built so that every change is visible as a diff:

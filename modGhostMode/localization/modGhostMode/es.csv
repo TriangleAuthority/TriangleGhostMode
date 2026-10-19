@@ -173,3 +173,42 @@
 2110992544|        |item_name_mutation_trigger|Catalizador de mutación
 2110992545|        |item_desc_mutation_trigger|Esta poción actúa como un catalizador de la mutación Drenador de Vida.
 1188318|        |skill_name_mutation_11|Drenador de vida
+2110992429|6d1ad461||La armadura ligera no ofrece mucha protección, pero las acciones en combate consumen menos vigor. La armadura intermedia y pesada absorben más daño, pero cuando usas equipo pesado, las acciones de combate consumen más vigor.
+2110992320|ff9b0dc7||Bonificación de conjunto de armadura pesada: +$I$% de resistencia a todos los daños.
+2110992321|2b2a501b||Bonificación de conjunto de armadura intermedia: +$S$/seg. a la tasa de decaimiento de la toxicidad.
+2110992322|31637b56||Bonificación de conjunto de armadura ligera: +$I$ grados a la distancia de seguridad al esquivar.
+2110992107|8ed43e3e||Lanzar una señal reduce el consumo de vigor de todas las acciones subsecuentes un $S$% por cada pieza del conjunto. Bonificación actual: $S$%. duración: $S$s.
+2110992108|8ed43e3f||El tamaño del Círculo de Yrden aumenta un $S$%. Mientras estás dentro del círculo, la intensidad de la señal aumenta un $S$% y la resistencia al daño un $S$%.
+2110992325|d23efdaf||Recibir daños aumenta la adrenalina en $S$ puntos por cada pieza equipada del conjunto (bonificación actual: $S$ puntos). Adicionalmente, cada punto de adrenalina aumenta el poder de ataque un $S$% por cada pieza equipada (bonificación actual: $S$%).
+2110992336|d23efdb0||El daño causado con el ataque potente restaura $S$% del vigor utilizado en ese ataque.
+2110992106|739e1e2c||Encadenar ataques rápidos añade +$S$% de poder de ataque por cada pieza equipada del conjunto (actualmente +$S$%), hasta un +$S$% máx. Finalizar una cadena de ataques rápidos con un ataque potente descarga la espada, duplicando la bonificación al poder de ataque actual. La bonificación se reinicia cuando la cadena de ataques se detiene o al finalizar el combate.
+2110992109|739e1e2d||Los impactos críticos con la espada duplican la ganancia de adrenalina.
+2110992091|85e8fbd1||Cada pieza aumenta la efectividad del aceite aplicado a las espadas en $S$% (bonificación actual: $S$%).
+2110992326|85e8fbd2||Se pueden aplicar hasta tres aceites diferentes a la vez a una espada. Cada aceite aplicado a una espada aumenta la probabilidad de impacto crítico en $S$% y la potencia de impacto crítico en $S$%.
+2110992090|6c1d3ba3||Las bombas se lanzan sin demora y pueden causar impactos críticos. Cada pieza aumenta la probabilidad de impacto crítico de la bomba en $S$% (bonificación actual: $S$%) y el daño de dicho impacto en $S$% (bonificación actual: $S$%).
+2110992323|90f6cc99||Obtienes inmunidad al veneno. Los venenos curan $S$% del daño recibido por envenenamiento por cada pieza equipada del conjunto (tasa de curación actual: $S$%).
+2110992430|4080bc95||Causar daño en combate restaura $S$% de la vitalidad máxima por cada pieza del conjunto (actualmente $S$%).
+2110992360|917ce1b5||Armadura de Kaer Morhen
+2110992361|25cb5427||Armadura Mejorada de Kaer Morhen
+2110992362|25cb5428||Armadura Superior de Kaer Morhen
+2110992363|25cb5429||Armadura Magistral de Kaer Morhen
+2110992364|92488c52||Pantalones de Kaer Morhen
+2110992365|2256cb84||Pantalones Mejorados de Kaer Morhen
+2110992366|2256cb85||Pantalones Superiores de Kaer Morhen
+2110992367|2256cb86||Pantalones Magistrales de Kaer Morhen
+2110992368|9189a437||Botas de Kaer Morhen
+2110992369|55b17e29||Botas Mejoradas de Kaer Morhen
+2110992370|55b17e2a||Botas Superiores de Kaer Morhen
+2110992371|55b17e2b||Botas Magistrales de Kaer Morhen
+2110992372|a808dd84||Guanteletes de Kaer Morhen
+2110992373|c9479836||Guanteletes Mejorados de Kaer Morhen
+2110992374|c9479837||Guanteletes Superiores de Kaer Morhen
+2110992375|c9479838||Guanteletes Magistrales de Kaer Morhen
+2110992376|e17342fd||Armadura Desgastada de Kaer Morhen
+2110992377|7656b740||Pantalones Desgastados de Kaer Morhen
+2110992378|ae52593b||Botas Desgastadas de Kaer Morhen
+2110992379|cc58d3d4||Guanteletes Desgastados de Kaer Morhen
+2110992380|41dddfc6||La tasa de regeneración del vigor aumenta en $S$ por cada enemigo que participe en el combate (máx. $S$).
+2110992474|0ced58f4||Bonificación por tipo de equipo:
+2110992631|b2eae791||Aumenta la duración de las pociones (no de las decocciones) un $S$% por cada pieza del conjunto (bonificación actual: $S$%).
+2110992632|b2eae792||Contra los enemigos dentro de tu Círculo de Yrden, la intensidad de la señal de todos los efectos de señales, salvo los del propio Yrden, aumenta un $S$%.

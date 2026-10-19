@@ -173,3 +173,42 @@
 2110992544|        |item_name_mutation_trigger|Mutation Catalyst
 2110992545|        |item_desc_mutation_trigger|This potion serves as a catalyst to activate Life Leech mutation.
 1188318|        |skill_name_mutation_11|Life Leech
+2110992429|6d1ad461||A Armadura Leve não oferece muita proteção, mas suas ações de combate requerem menos Vigor quando equipadas. Armadura Média e Armadura Pesada absorvem mais dano, mas enquanto estiver em Armadura Pesada, suas ações de combate exigem mais Vigor.
+2110992320|ff9b0dc7||Bônus de conjunto de Armadura Pesada: +$I$% a todas as resistências a dano.
+2110992321|2b2a501b||Bônus de conjunto de armadura peso médio: +$S$/s à taxa de decaimento de Toxicidade.
+2110992322|31637b56||Bônus de conjunto de Armadura Leve: +$I$ graus para a distância do ângulo seguro enquanto esquiva.
+2110992107|8ed43e3e||Lançar um Sinal reduz o custo de Vigor de todas as ações seguintes em $S$% para cada peça do conjunto (bônus atual: $S$%). Dura por $S$s.
+2110992108|8ed43e3f||O tamanho da Armadilha Yrden é aumentado em $S$%. Enquanto você estiver dentro de uma Armadilha Yrden, a Intensidade do Sinal é aumentada em $S$% e o dano sofrido é reduzido em $S$%.
+2110992325|d23efdaf||Tomar dano aumenta a sua Adrenalina em $S$ pontos por peça equipada (bônus atual: $S$ pontos). Cada ponto de Adrenalina aumenta adicionalmente seu Poder de Ataque em $S$% por peça equipada (bônus atuals: $S$%).
+2110992336|d23efdb0||Dano causado por um Ataque Forte restaura $S$% do Vigor gasto no ataque.
+2110992106|739e1e2c||Ataques Rápidos consecutivos adicionam +$S$% ao Poder de Ataque para cada peça do conjunto (bônus atual +$S$%), até no máximo +$S$%. Terminar uma sequência de golpes rápidos com um golpe forte descarrega a espada dobrando o bônus atual do Poder de Ataque. O bônus é zerado quando a sequência de golpes é interrompida e ao final do combate.
+2110992109|739e1e2d||Danos críticos com espada dobram o ganho de Adrenalina.
+2110992091|85e8fbd1||Cada peça de conjunto aumenta a eficácia de um óleo aplicado a uma espada em $S$% (atual: $S$%).
+2110992326|85e8fbd2||Até três óleos diferentes podem ser aplicados a uma espada de cada vez. Cada óleo aplicado a uma espada aumenta a chance de Acerto Crítico em $S$% e Poder de Acerto Crítico em $S$%.
+2110992090|6c1d3ba3||Bombas são lançadas sem demora e podem causar danos críticos. Cada peça de conjunto aumenta a chance de Acerto Crítico da bomba em $S$% (atual: $S$%) e o Poder de Acerto Crítico da bomba em $S$% (atual: $S$%).
+2110992323|90f6cc99||Concede imunidade a veneno. Venenos curam em $S$% de dano venenoso para cada peça de conjunto equipada (taxa de cura atual: $S$%).
+2110992430|4080bc95||Causar dano em combate cura $S$% da Vitalidade máxima para cada peça do conjunto (atualmente $S$%).
+2110992360|917ce1b5||Armadura de Kaer Morhen
+2110992361|25cb5427||Armadura de Kaer Morhen Aprimorada
+2110992362|25cb5428||Armadura de Kaer Morhen Superior
+2110992363|25cb5429||Armadura de Kaer Morhen Obra-prima
+2110992364|92488c52||Calças de Kaer Morhen
+2110992365|2256cb84||Calça de Kaer Morhen Aprimorada
+2110992366|2256cb85||Calça de Kaer Morhen Superior
+2110992367|2256cb86||Calça de Kaer Morhen Obra-prima
+2110992368|9189a437||Bota de Kaer Morhen
+2110992369|55b17e29||Bota de Kaer Morhen Aprimorada
+2110992370|55b17e2a||Bota de Kaer Morhen Superior
+2110992371|55b17e2b||Bota de Kaer Morhen Obra-prima
+2110992372|a808dd84||Manopla de Kaer Morhen
+2110992373|c9479836||Manopla de Kaer Morhen Aprimorada
+2110992374|c9479837||Manopla de Kaer Morhen Superior
+2110992375|c9479838||Manopla de Kaer Morhen Obra-prima
+2110992376|e17342fd||Armadura de Kaer Morhen Desgastada
+2110992377|7656b740||Calça de Kaer Morhen Desgastada
+2110992378|ae52593b||Bota de Kaer Morhen Desgastada
+2110992379|cc58d3d4||Manopla de Kaer Morhen Desgastada
+2110992380|41dddfc6||A taxa de regeneração de Vigor aumenta em $S$ para cada inimigo adicional em combate (máx. $S$).
+2110992474|0ced58f4||Bônus por tipo de equipamento:
+2110992631|b2eae791||Aumenta a duração das poções (não das decocções) em $S$% para cada peça de conjunto (atual: $S$%).
+2110992632|b2eae792||Contra inimigos dentro da sua Armadilha Yrden, a Intensidade do Sinal de todos os efeitos de Sinais, exceto os do próprio Yrden, é aumentada em $S$%.

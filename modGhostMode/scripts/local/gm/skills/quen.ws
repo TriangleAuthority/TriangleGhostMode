@@ -97,11 +97,7 @@ function GetSignStats()
 	if ( GMQuenDischargeSkill() != S_SUndefined)	//modSigns: either tree
 	{
 		dischargePercent = CalculateAttributeValue(owner.GetSkillAttributeValue(GMQuenDischargeSkill(), 'discharge_percent', false, true)) * owner.GetSkillLevel(GMQuenDischargeSkill());	//modSigns
-		if( owner.GetPlayer().IsSetBonusActive( EISB_Bear_2 ) )	//modSigns: 5.x's Bear set bonus kept until ARM (legacy: Glyphword 5)
-		{
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Bear_2 ), 'quen_dmg_boost', min, max );
-			dischargePercent *= 1 + min.valueMultiplicative;
-		}
+		//modSigns: removed the Bear set's boost (ARM-08, legacy; legacy's Glyphword 5 boost comes with ENCH)
 	}
 	else
 	{
@@ -531,11 +527,6 @@ function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : st
 			{	//modSigns
 				dm.GetAbilityAttributeValue(skillAbilityName, damages[j], min, max);	//modSigns
 				dmg = CalculateAttributeValue(GetAttributeRandomizedValue(min, max)) * (level - 1);	//modSigns: scales with the level
-				if( IsSetBonusActive( EISB_Bear_2 ) )	//modSigns: 5.x's Bear set bonus kept until ARM (legacy: Glyphword 5)
-				{	//modSigns
-					dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Bear_2 ), 'quen_dmg_boost', min, max );	//modSigns
-					dmg *= 1 + min.valueMultiplicative;	//modSigns
-				}	//modSigns
 				if(dmg > 0)	//modSigns
 				{	//modSigns
 					action.SetHitEffect('hit_electric_quen');	//modSigns: the hit effect with damage, both casts
@@ -562,14 +553,7 @@ function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : st
 
 		if(level >= 2)
 		{
-			if( !IsSetBonusActive( EISB_Bear_2 ) )
-			{
-				signEntity.PlayHitEffect('quen_electric_explode', signEntity.GetWorldRotation());
-			}
-			else
-			{
-				signEntity.PlayHitEffect('quen_electric_explode_bear_abl2', signEntity.GetWorldRotation());
-			}
+			signEntity.PlayHitEffect('quen_electric_explode', signEntity.GetWorldRotation());	//modSigns: not the Bear set's effect (ARM-08, legacy)
 		}
 	}
 	else

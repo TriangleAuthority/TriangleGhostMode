@@ -442,7 +442,7 @@ function GMTestStam05Check(enabled : bool, armor : SItemUniqueId)
 	LogChannel('GMTest', "INFO " + label + "armor regen bonus " + FloatToString(bonus)
 		+ " (staminaRegen_armor_mod mult " + FloatToString(attr.valueMultiplicative) + ")");
 	if(enabled)
-		GMTestReport(bonus < 0 && bonus == attr.valueMultiplicative, label + "heavy armor lowers regen (vanilla value)");
+		GMTestReport(bonus < 0 && bonus == attr.valueMultiplicative, label + "heavy armor lowers regen (the item's value)");
 	else
 		GMTestReport(bonus == 0, label + "no armor regen bonus or penalty");
 
@@ -471,7 +471,10 @@ function GMTest_stam05()
 {
 	var ids : array<SItemUniqueId>;
 	var previous : string;
+	var old : SItemUniqueId;
+	var hadOld : bool;
 
+	hadOld = GetWitcherPlayer().GetItemEquippedOnSlot(EES_Armor, old);
 	ids = thePlayer.inv.AddAnItem('Heavy armor 01', 1);
 	GMTestReport(ids.Size() > 0, "STAM-05 Heavy armor 01 added");
 	if(ids.Size() == 0)
@@ -485,6 +488,11 @@ function GMTest_stam05()
 	GMTestStam05Check(false, ids[0]);
 	GMTestStam05Check(true, ids[0]);
 	theGame.GetInGameConfigWrapper().SetVarValue('GMGameplayOptions', 'GMArmorRegenPenalty', previous);
+	// the chest worn before back on (ARM-02's class costs would change later checks)
+	thePlayer.UnequipItem(ids[0]);
+	thePlayer.inv.RemoveItem(ids[0], 1);
+	if(hadOld)
+		thePlayer.EquipItem(old);
 }
 
 // STAM-04, STAM-05: the character panel's stamina lines. Needs a menu open for its flash
@@ -2120,6 +2128,7 @@ exec function gmtest_regress()
 	GMTest_skld_effects();
 	GMTest_skl_values();
 	GMTest_mut();
+	GMTest_arm();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

@@ -6,7 +6,7 @@
 // perk_9 only when stamina runs out, perk_34 2/1.5/1 points by level whenever stamina is not full.
 // A cast or channel start paid with adrenaline sets the sign's usedFocus, which the channel's drain
 // and Quen's shield read; such a start does not pause stamina regeneration (legacy). Flood of Anger
-// multiplies these costs (GMFoaMult, SKL-07), and its points are paid also on a cast the Gryphon set or
+// multiplies these costs (GMFoaMult, SKL-07), and its points are paid also on a cast
 // Glyphword 22 makes free (legacy pays every cast). The alternate Aard's entity sits 1 m lower (SKL-08,
 // legacy's bugfix 35).
 // See docs/features/skl.md.
@@ -92,7 +92,7 @@ function ManagePlayerStamina()
 {
 	var l_player			: W3PlayerWitcher;
 	//modSigns: removed l_cost, l_stamina
-	var l_gryphonBuff		: W3Effect_GryphonSetBonus;
+	//modSigns: removed l_gryphonBuff (ARM-07: no free casts)
 
 	if ( disableCost )
 	{
@@ -101,14 +101,13 @@ function ManagePlayerStamina()
 
 	l_player = owner.GetPlayer();
 
-	l_gryphonBuff = (W3Effect_GryphonSetBonus)l_player.GetBuff( EET_GryphonSetBonus );
-	l_gryphonBuff.SetWhichSignForFree( this );
+	//modSigns: removed 5.x's Griffin set free cast (ARM-07: legacy's Griffin set has none)
 
-	if( (!l_gryphonBuff || l_gryphonBuff.GetWhichSignForFree() != this) && !l_player.HasAbility('Glyphword 22 Bonus', true))
+	if( !l_player.HasAbility('Glyphword 22 Bonus', true))	//modSigns: ARM-07, only Glyphword 22's free cast (ENCH)
 	{
 		GMPaySignCost(l_player, true);	//modSigns: legacy's Rage Management, adrenaline first (5.x: perk_9 only when stamina runs out, perk_34 by level)
 	}	//modSigns
-	else if(GMUsedFoA())	//modSigns: SKL-07, a free cast still pays Flood of Anger's adrenaline (legacy pays every cast in full; SKL audit F3)
+	else if(GMUsedFoA())	//modSigns: SKL-07, a free cast (Glyphword 22) still pays Flood of Anger's adrenaline (legacy pays every cast in full; SKL audit F3)
 	{	//modSigns
 		l_player.DrainFocus(1 * GMFoaMult());	//modSigns
 	}	//modSigns
@@ -305,10 +304,7 @@ function HasStaminaToUseSkill(skill : ESkill, optional perSec : bool, optional s
 	//modSigns: removed 5.x's perk_34 check
 
 
-	if( !ret && IsSkillSign( skill ) && GetWitcherPlayer().HasBuff( EET_GryphonSetBonus ) )
-	{
-		ret = true;
-	}
+	//modSigns: removed 5.x's Griffin set free cast (ARM-07)
 
 	if(!ret)
 	{

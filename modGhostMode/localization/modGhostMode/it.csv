@@ -173,3 +173,42 @@
 2110992544|        |item_name_mutation_trigger|Mutation Catalyst
 2110992545|        |item_desc_mutation_trigger|This potion serves as a catalyst to activate Life Leech mutation.
 1188318|        |skill_name_mutation_11|Life Leech
+2110992429|6d1ad461||L'armatura leggera non offre molta protezione, ma le tue azioni in combattimento richiedono meno Vigore quando equipaggiate. L'armatura media e l'armatura pesante assorbono più danni, con la differenza che l'armatura pesante richiede più Vigore per le azioni di combattimento.
+2110992320|ff9b0dc7||Bonus set armatura pesante: +$I$% per tutte le resistenze al danno.
+2110992321|2b2a501b||Bonus set armatura media: +$S$/sec al Tasso di Decadimento della Tossicità.
+2110992322|31637b56||Bonus set armatura leggera: +$I$ gradi alla distanza dell'angolo di sicurezza delle schivate.
+2110992107|8ed43e3e||Lanciare un segno riduce il costo di Vigore di tutte le azioni successive del $S$% per ogni pezzo del set. Bonus corrente: $S$%. Dura per $S$ sec.
+2110992108|8ed43e3f||La dimensione delle trappole Yrden è aumentata del $S$%. Mentre sei all'interno di una trappola Yrden, l'intensità del segno aumenta del $S$% e la resistenza ai danni aumenta del $S$%.
+2110992325|d23efdaf||Subire danni aumenta l'Adrenalina di $S$ punti per ogni pezzo set equipaggiato (bonus attuale: $S$ punti). Ogni Punto Adrenalina aumenta ulteriormente la Potenza d'Attacco del $S$% per ogni pezzo set equipaggiato (bonus attuale: $S$%).
+2110992336|d23efdb0||I danni inflitti con un attacco potente ripristinano il $S$% del Vigore speso in quell'attacco.
+2110992106|739e1e2c||I colpi veloci in successione aggiungono +$S$% alla Potenza di Attacco per ogni pezzo del set (currently +$S$%), fino a +$S$% max. Terminare la catena di colpi veloci in successione con un colpo potente scarica la spada raddoppiando l'attuale bonus alla potenza d'attacco. Il bonus si azzera quando la catena di colpi si ferma e alla fine del combattimento.
+2110992109|739e1e2d||I colpi critici con una spada raddoppiano il guadagno di Adrenalina.
+2110992091|85e8fbd1||Ogni pezzo del set aumenta l'efficacia di un unguento applicato a una spada del $S$% (Bonus attuale: $S$%).
+2110992326|85e8fbd2||Fino a tre diversi unguenti possono essere applicati contemporaneamente a una spada. Ogni unguento applicato aumenta la probabilità di colpo critico del $S$% e la potenza del colpo critico del $S$%.
+2110992090|6c1d3ba3||Le bombe vengono lanciate senza alcun ritardo e possono infliggere danni critici. Ogni pezzo del set aumenta la probabilità di colpo critico delle bombe del $S$% (Bonus attuale: $S$%) e la potenza del colpo critico del $S$% (Bonus attuale: $S$%).
+2110992323|90f6cc99||Garantisce l'immunità all'avvelenamento. I veleni guariscono del $S$% del danno da veleno per ogni set equipaggiato(Tasso di guarigione attuale: $S$%).
+2110992430|4080bc95||Infliggendo danni in combattimento curi il $S$% della massima Vitalità per ogni pezzo del set (attualmente $S$%).
+2110992360|917ce1b5||Armatura di Kaer Morhen
+2110992361|25cb5427||Armatura di Kaer Morhen Migliorata
+2110992362|25cb5428||Armatura di Kaer Morhen Superiore
+2110992363|25cb5429||Armatura di Kaer Morhen Gran Maestro
+2110992364|92488c52||Pantaloni di Kaer Morhen
+2110992365|2256cb84||Pantaloni di Kaer Morhen Migliorati
+2110992366|2256cb85||Pantaloni di Kaer Morhen Superiori
+2110992367|2256cb86||Pantaloni di Kaer Morhen Gran Maestro
+2110992368|9189a437||Stivali di Kaer Morhen
+2110992369|55b17e29||Stivali di Kaer Morhen Migliorati
+2110992370|55b17e2a||Stivali di Kaer Morhen Superiori
+2110992371|55b17e2b||Stivali di Kaer Morhen Gran Maestro
+2110992372|a808dd84||Guanti di Kaer Morhen
+2110992373|c9479836||Guanti di Kaer Morhen Migliorati
+2110992374|c9479837||Guanti di Kaer Morhen Superiori
+2110992375|c9479838||Guanti di Kaer Morhen Gran Maestro
+2110992376|e17342fd||Armatura di Kaer Morhen
+2110992377|7656b740||Pantaloni di Kaer Morhen
+2110992378|ae52593b||Stivali di Kaer Morhen
+2110992379|cc58d3d4||Guanti di Kaer Morhen
+2110992380|41dddfc6||Il tasso di rigenerazione del Vigore aumenta di $S$ per ogni nemico aggiuntivo in combattimento (max. $S$).
+2110992474|0ced58f4||Bonus per tipo di equipaggiamento:
+2110992631|b2eae791||Aumenta la durata delle pozioni (non dei decotti) del $S$% per ogni pezzo del set (Bonus attuale: $S$%).
+2110992632|b2eae792||Contro i nemici all'interno della tua trappola Yrden, l'intensità del segno di ogni effetto dei segni, tranne quelli di Yrden, aumenta del $S$%.

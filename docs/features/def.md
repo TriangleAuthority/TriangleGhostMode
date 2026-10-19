@@ -22,7 +22,7 @@ Stamina costs of dodges, parries and counters are STAM-03's; NPC defence and its
 | Skill trees | n/a (reads the light armor bonus, not a skill) |
 | Port form | `@wrapMethod(W3DamageManagerProcessor) ProcessActionDamage` (dodge first, skip damage when dodged); `@addMethod(CActor) GMDodgeDamage` (NPC rule, dispatches to `@addMethod(W3PlayerWitcher) GMPlayerDodgeDamage`); `@replaceMethod(W3PlayerWitcher) ReduceDamage` (5.x body without vanilla's 150° check). In `defense/dodge.ws` |
 | Port status | signed off |
-| Open checks | a real hit during a real dodge at more than 120° (the real dodges tested went straight away); the light armor set bonus (with ARM); the Ice Giant's stomp; whether a dodged hit plays a hit reaction (the same path as vanilla's dodge: no damage, flagged dodged) |
+| Open checks | a real hit during a real dodge at more than 120° (the light armor set's +30° is verified with scripted hits, ARM-04) (the real dodges tested went straight away); the Ice Giant's stomp; whether a dodged hit plays a hit reaction (the same path as vanilla's dodge: no damage, flagged dodged) |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
@@ -185,7 +185,7 @@ Legacy's code for an attack that cannot be parried and knocks down or staggers (
 - **Deviation:** 5.x's spear break is kept: countering a two-handed spear breaks it. Legacy removed the branch as "not working anyway", which 5.x fixed (project owner, 2026-10-04).
 - **Deviation:** a counter blocks all of the attack's effects. Vanilla's code, and legacy's, applied them although the hit dealt no damage: a defect against the changelist's "prevent all negative effects" (project owner, 2026-10-04).
 - **Deviation:** counters of attacks that cannot be parried do not count toward the counter achievement and Learning the Ropes (vanilla's `TestParryAndCounter`); legacy counted them (porter's call, not confirmed by the owner).
-- **Deviation:** legacy's changes in this function to the Lynx set (ARM) are left as 5.x (temporary, until ARM is ported; porter's call, not confirmed by the owner). Perk 21's counter stamina is ported (SKL-18, 2026-10-15); Mutation 8 first in the repel order with MUT-06 (2026-10-17).
+- Legacy's Lynx set change here (a kick or bash counter keeps the chain going) is ported with ARM-06 (2026-10-17). Perk 21's counter stamina is ported (SKL-18, 2026-10-15); Mutation 8 first in the repel order with MUT-06 (2026-10-17).
 
 **Slices:**
 

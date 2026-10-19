@@ -148,7 +148,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 
 **Decisions:** port the default, without the armor regen modifier (2026-10-02). `FilterAutoBuff` is not needed for stamina. Re-check the rates in the balance pass.
 
-- **Deviation:** with STAM-05's option on, 5.x's own armor calculation applies, not legacy's rework of it (which ignored the Hearts of Stone glyphwords' regen and added regen per missing armor piece), and legacy's per-item `staminaRegen_armor_mod` values (e.g. heavy armor −0.10 → −0.30), which matter only with the option on, are not ported; they are attributed here (temporary, until ARM and the glyphwords; porter's call, 2026-10-02, not confirmed by the owner).
+- With the option on, legacy's armor calculation (the Hearts of Stone glyphwords' regen ignored, regen per missing armor piece) and legacy's per-item `staminaRegen_armor_mod` values (e.g. heavy armor −0.10 → −0.30) apply since ARM-03 and ARM-01 (2026-10-17).
 - **Deviation:** the regen effect recomputes its value on every update, in and out of combat (legacy and vanilla: in combat only), so option changes apply at once (porter's call, not confirmed by the owner).
 - **Deviation:** the character panel's out-of-combat regen line leaves out the armor modifier (legacy showed it), because the effect applies it in combat only (porter's call, not confirmed by the owner).
 
@@ -178,7 +178,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
-**What it does:** armor no longer changes stamina regen (vanilla gives armor pieces regen penalties or bonuses); the option "Enable stamina regen penalty for armors" (`GMArmorRegenPenalty`, default off) restores 5.x's calculation. Tooltips and the character panel hide the modifier when it is off; with it on, the panel shows it under the regen lines ("Stamina regeneration modifier", legacy string 2110992263; legacy put it under Armor). Armor classes affect stamina costs instead (ARM).
+**What it does:** armor no longer changes stamina regen (vanilla gives armor pieces regen penalties or bonuses); the option "Enable stamina regen penalty for armors" (`GMArmorRegenPenalty`, default off) restores the armor's regen modifier, with legacy's calculation and per-piece values since ARM-03. Tooltips and the character panel hide the modifier when it is off; with it on, the panel shows it under the regen lines ("Stamina regeneration modifier", legacy string 2110992263; legacy put it under Armor). Armor classes affect stamina costs instead (ARM).
 
 **Implementation (legacy):** `W3GameParams.IsArmorRegenPenaltyEnabled`, `W3RegenEffect.OnUpdate`, `W3PlayerWitcher.CalculatedArmorStaminaRegenBonus`, `CInventoryComponent.GetItemStatsFromName`, tooltips (`AddItemStats`, `CalculateStatsComparance`), character panel. 8 units, all unchanged in 5.x.
 
