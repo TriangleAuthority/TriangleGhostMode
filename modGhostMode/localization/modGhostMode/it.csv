@@ -231,3 +231,14 @@
 2110992295|fad8f82b||Uccidere un nemico dona $F$ Punti Adrenalina.
 2110992507|f9241f8c||L'eccesso di Adrenalina generata rallenta il tempo di scadenza della pozione del $S$% per 1% di Adrenalina in eccesso (3 punti = 100%). Il bonus massimo non può superare il $S$%. Il bonus si ripristina quando si perde Adrenalina e alla fine del combattimento.
 2110992159|ccc61f66||Qualsiasi alimento consumato ha una durata maggiore del $I$%.
+; SWD-09: sword attribute names (legacy ids)
+2110992014|99a2fd83||Riduzione della resistenza ai danni del nemico
+2110992154|28838f82||Penetrazione armatura
+2110992155|f35fcb73||Penetrazione armatura
+2110992440|6fd9d47c||Possibilità di smembrare
+2110992161|        |attribute_name_spell_dmg_bonus|Danno Segno
+2110992162|        |attribute_name_sword_dmg_bonus|Danno arma
+; SWD-05: Aerondight's description and counter (legacy ids)
+2110992291|483c9092||In combattimento, il danno dell'arma aumenta di $I$ punti per nemico. Ogni colpo andato a segno carica la spada. La spada completamente caricata si scarica in caso di colpo andato a segno, infliggendo danni critici con bonus alla potenza d'attacco del $I$% ignorando l'Armatura e resistenza ai danni. La scarica della spada inoltre danneggia e causa vacillamento ai nemici circostanti.<br><br>Colpisci per caricare completamente la spada: $I$. La carica decade nel tempo (uno per $I$ sec.) e si ripristina quando Geralt subisce danni.
+2110992292|1f5adb4f||<br><br>Carica attuale: $I$/$I$. Bonus danno attuale: $I$ punti.
+2110992299|f2e69faf||Infliggere danni con attacchi carica la spada di energia. Quando si attacca con la spada completamente carica, il danno dell'arma viene aumentato del $I$% della vitalità dell'attaccante (se l'attacco ha successo, la vitalità viene prosciugata). Un forte attacco con la spada completamente carica genera una copia fantasma della spada che infligge danni aggiuntivi, che passa attraverso scudi, blocchi e armature e ignora le resistenze ai danni.<br><br>Colpisci per caricare completamente la spada: $I$. La carica decade nel tempo (uno per $I$ sec.) e si ripristina quando Geralt subisce danni. La spada completamente carica si scarica dopo $I$ sec. o dopo un attacco potente.<br><br>Carica attuale: $I$/$I$. Bonus al danno attuale per la spada completamente carica: $I$ punti.

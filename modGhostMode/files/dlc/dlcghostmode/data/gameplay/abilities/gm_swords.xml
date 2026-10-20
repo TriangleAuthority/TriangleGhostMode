@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ghost Mode: the swords' data (SWD). -->
+<redxml>
+  <definitions>
+    <abilities>
+      <!-- SWD-05: Aerondight as legacy (Blood and Wine's ability, given whole). crit_chance_bonus is 5.x's
+           term in ProcessCriticalHitCheck: +1 makes the fully charged hit a certain crit (legacy set the
+           chance to 1 in code). perm_dmg_boost, stacks_per_level and dmg_bonus are vanilla's, unused. -->
+      <ability name="AerondightEffect" on_conflict="replace">
+        <duration type="add" min="-1" />
+        <crit_dmg_bonus type="add" min="1" />
+        <dmg_boost_per_enemy type="add" min="10" />
+        <collateral_dmg type="add" min="100" />
+        <hitsToCharge type="add" min="4" />
+        <stackDrainDelay type="add" min="6" />
+        <crit_chance_bonus type="add" min="1" />
+        <perm_dmg_boost type="add" min="0" />
+        <stacks_per_level type="add" min="0" />
+        <maxStacks type="add" min="0" />
+      </ability>
+      <!-- SWD-06: Iris's effect (legacy's PhantomWeaponEffect): +5% of Geralt's maximum Vitality to the fully
+           charged sword's damage, 4 hits to charge it, a charge decays every 6 s. -->
+      <ability name="GMPhantomWeaponEffect">
+        <duration type="add" min="-1" />
+        <dmg_bonus_prc type="add" min="0.05" />
+        <hitsToCharge type="add" min="4" />
+        <stackDrainDelay type="add" min="6" />
+      </ability>
+    </abilities>
+  </definitions>
+  <custom>
+    <effects>
+      <effect name_name="GMPhantomWeaponEffect" defaultAbilityName_name="GMPhantomWeaponEffect" iconType_name="GMPhantomWeapon" showOnHUD="1" effectNameLocalisationKey_name="item_name_olgierd_sabre" />
+    </effects>
+    <effect_icons>
+      <effect iconType_name="GMPhantomWeapon" path="icons/buffs/aerondight_buff_icon_64x64.png" />
+    </effect_icons>
+  </custom>
+</redxml>

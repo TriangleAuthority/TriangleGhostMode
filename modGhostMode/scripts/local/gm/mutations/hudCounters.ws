@@ -1,7 +1,8 @@
 // MUT-14: the HUD's buff list: Toxic Blood's counter (the acid's damage per second) and Euphoria's
 // (the damage added per hit) show as numbers, as legacy's (5.x: percentages). Bloodbath's stays a
 // percentage; Mutated Skin's damage over time is its own effect with a timer (MUT-10). Legacy's other
-// HUD changes in this function (other features' counters) are not ported yet (UI).
+// HUD changes in this function (other features' counters) are not ported yet (UI); Iris's charges show
+// as a counter like Aerondight's (SWD-06).
 // See docs/features/mut.md.
 
 @replaceMethod(CR4HudModuleBuffs)
@@ -55,7 +56,7 @@ function UpdateBuffs()
 				
 				format = 0;
 			}
-			else if ( effectType == EET_Oil || effectType == EET_Aerondight || effectType == EET_Mutation4 || effectType == EET_Mutation10 )	//modSigns: MUT-08, MUT-09: Toxic Blood's and Euphoria's counters are damage values, not percentages
+			else if ( effectType == EET_Oil || effectType == EET_Aerondight || effectType == EET_GMPhantomWeapon || effectType == EET_Mutation4 || effectType == EET_Mutation10 )	//modSigns: MUT-08, MUT-09: Toxic Blood's and Euphoria's counters are damage values, not percentages; SWD-06: Iris's charges
 			{
 				
 				format = 1;
@@ -113,6 +114,11 @@ function UpdateBuffs()
 					l_flashObject.SetMemberFlashNumber("initialDuration", aerondightEffect.GetMaxCount()	 * 1.0 );
 				}
 			}
+			else if( effectType == EET_GMPhantomWeapon )	//modSigns: SWD-06, Iris's charges
+			{	//modSigns
+				l_flashObject.SetMemberFlashNumber("duration",        ( (W3GMEffect_PhantomWeapon)_currentEffects[i] ).GetCurrentCount() * 1.0 );	//modSigns
+				l_flashObject.SetMemberFlashNumber("initialDuration", ( (W3GMEffect_PhantomWeapon)_currentEffects[i] ).GetMaxCount() * 1.0 );	//modSigns
+			}	//modSigns
 			
 			
 			else if( effectType == EET_LynxSetBonus )	//modSigns: ARM-06, the Feline set's bonus in % (legacy)
@@ -290,6 +296,11 @@ function OnTick( timeDelta : float )
 						duration		= aerondightEffect.GetCurrentCount();
 					}
 				}
+				else if( effectType == EET_GMPhantomWeapon )	//modSigns: SWD-06, Iris's charges
+				{	//modSigns
+					initialDuration = ( (W3GMEffect_PhantomWeapon)effectArray[i] ).GetMaxCount();	//modSigns
+					duration		= ( (W3GMEffect_PhantomWeapon)effectArray[i] ).GetCurrentCount();	//modSigns
+				}	//modSigns
 				else if( effectType == EET_BasicQuen )
 				{
 					

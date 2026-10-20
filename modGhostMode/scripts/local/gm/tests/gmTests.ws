@@ -2144,6 +2144,7 @@ exec function gmtest_regress()
 	GMTest_mut();
 	GMTest_arm();
 	GMTest_ench();
+	GMTest_swd();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

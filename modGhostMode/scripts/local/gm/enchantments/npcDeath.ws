@@ -517,25 +517,7 @@ function OnDeath( damageAction : W3DamageAction  )
 			weaponID = thePlayer.inv.GetCurrentlyHeldSword();
 		}
 		
-		if( damageAction.attacker.GetInventory().ItemHasTag( weaponID, 'Aerondight' ) )
-		{
-			aerondight = (W3Effect_Aerondight)thePlayer.GetBuff( EET_Aerondight );
-			
-			if( aerondight )				
-			{
-				if( aerondight.IsFullyCharged() )
-				{
-					if( aerondight.DischargeAerondight() )
-					{
-						PlayEffect( 'hit_electric_quen' );
-					}
-				}
-				else if( isFinisher )
-				{
-					aerondight.IncreaseAerondightCharges( theGame.params.ATTACK_NAME_LIGHT );
-				}
-			}
-		}
+		//modSigns: removed Aerondight's discharge and charge on kills and finishers (SWD-05, legacy)
 	}
 
 

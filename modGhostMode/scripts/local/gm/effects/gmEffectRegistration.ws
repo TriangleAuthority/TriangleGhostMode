@@ -44,6 +44,8 @@ function HACK_NO_MEMORY_TO_COMPILE_CacheEffect_Part1(effect : EEffectType) : boo
 		case EET_GMRuneword4 :	effects[effect] = new W3GMEffect_Runeword4 in this;	return true;
 		// ENCH-09
 		case EET_GMRuneword11 :	effects[effect] = new W3GMEffect_Runeword11 in this;	return true;
+		// SWD-06
+		case EET_GMPhantomWeapon :	effects[effect] = new W3GMEffect_PhantomWeapon in this;	return true;
 	}
 	return wrappedMethod(effect);
 }
@@ -79,6 +81,8 @@ function HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part1(effectName : name, out
 		case 'GMRuneword4Effect' :	type = EET_GMRuneword4;	abilityName = '';	return true;
 		// ENCH-09
 		case 'GMRuneword11Effect' :	type = EET_GMRuneword11;	abilityName = '';	return true;
+		// SWD-06
+		case 'GMPhantomWeaponEffect' :	type = EET_GMPhantomWeapon;	abilityName = '';	return true;
 	}
 	return wrappedMethod(effectName, type, abilityName);
 }
@@ -114,6 +118,8 @@ function EffectTypeToName(effectType : EEffectType) : name
 		case EET_GMRuneword4 :	return 'GMRuneword4Effect';
 		// ENCH-09
 		case EET_GMRuneword11 :	return 'GMRuneword11Effect';
+		// SWD-06
+		case EET_GMPhantomWeapon :	return 'GMPhantomWeaponEffect';
 	}
 	return wrappedMethod(effectType);
 }

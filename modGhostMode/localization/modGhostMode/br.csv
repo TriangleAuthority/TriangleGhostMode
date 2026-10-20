@@ -231,3 +231,14 @@
 2110992295|fad8f82b||Matar um inimigo concede $F$ Pontos de Adrenalina.
 2110992507|f9241f8c||Excesso de Adrenalina gerado diminui o tempo de expiração da poção em $S$% por 1% do excesso de Adrenalina (3 pontos = 100%). O bônus máximo não pode exceder $S$%. Zera ao perder Adrenalina ou ao final do combate.
 2110992159|ccc61f66||Qualquer comestível consumido dura $I$% mais tempo, mas tem gosto de pierogi.
+; SWD-09: sword attribute names (legacy ids)
+2110992014|99a2fd83||Redução de resistência a dano inimigo
+2110992154|28838f82||Penetração de armadura
+2110992155|f35fcb73||Penetração de armadura
+2110992440|6fd9d47c||Chance de Desmembrar
+2110992161|        |attribute_name_spell_dmg_bonus|Dano dos Sinais
+2110992162|        |attribute_name_sword_dmg_bonus|Dano da arma
+; SWD-05: Aerondight's description and counter (legacy ids)
+2110992291|483c9092||Enquanto em combate, o dano da arma aumenta em $I$ pontos por inimigo. Cada golpe bem-sucedido carrega a espada. Após totalmente carregada, o próximo golpe bem-sucedido a descarrega, causando dano crítico com um bônus de $I$% de Poder de Ataque e ignora a armadura e as resistências à dano. A descarga da espada também causa dano e desequilibra todos os inimigos ao redor.<br><br>Acertos para carregar completamente a espada: $I$. A carga decai com o tempo (uma por $I$s) e zera quando Geralt sofre dano.
+2110992292|1f5adb4f||<br><br>Carga atual: $I$/$I$. Bônus de dano atual: $I$ pontos.
+2110992299|f2e69faf||Causar dano com ataques carrega a espada com energia. Ao atacar com a espada totalmente carregada, o dano da arma é aumentado em $I$% da Vitalidade de Geralt (se o ataque for bem sucedido, a Vitalidade é drenada). Um forte ataque com a espada totalmente carregada gera uma cópia fantasma da espada que causa dano adicional, que atravessa escudos, bloqueios e armaduras e ignora a resistência à dano.<br><br>Acertos para carregar completamente a espada: $I$. A carga decai com o tempo (uma por $I$s) e zera quando Geralt sofre dano. A espada totalmente carregada descarrega em $I$s ou após um Ataque Forte.<br><br>Current charges: $I$/$I$. Bônus de dano atual para a espada totalmente carregada: $I$ pontos.

@@ -47,6 +47,25 @@ function GMTest_arm()
 	GMTest_arm14();
 	GMTest_arm15();
 	GMTest_arm_audit();
+	GMTest_arm_dne();
+}
+
+// Crafted armor carries legacy's DoNotEnhance (the owner's decision on the SWD audit's F4, 2026-10-19),
+// so a new piece gets no random bonus on top of its fixed stats; an untagged piece of the same quality
+// still does (the control). The counting is GMTestSwdRandomBonuses (gmTestsSwd.ws). NG+ data: --verify.
+function GMTest_arm_dne()
+{
+	var a, b, c, d, ab, bb, cb, db : int;
+
+	GMTestReport(GMTestArmTag('Heavy armor 01_crafted', 'DoNotEnhance') && GMTestArmTag('Medium armor 01_crafted', 'DoNotEnhance') && GMTestArmTag('Light armor 08_crafted', 'DoNotEnhance')
+		&& GMTestArmTag('Boots 01_crafted', 'DoNotEnhance') && GMTestArmTag('Heavy gloves 01_crafted', 'DoNotEnhance') && GMTestArmTag('Pants 01_crafted', 'DoNotEnhance') && !GMTestArmTag('Burning Rose Armor', 'DoNotEnhance'),
+		"ARM DoNotEnhance on crafted armor: heavy armor 01, medium armor 01, light armor 08, boots 01, heavy gloves 01, trousers 01 (not on the Burning Rose armor)");
+	a = GMTestSwdRandomBonuses('Heavy armor 01_crafted', 8, ab);
+	b = GMTestSwdRandomBonuses('Medium armor 01_crafted', 8, bb);
+	c = GMTestSwdRandomBonuses('Boots 01_crafted', 8, cb);
+	d = GMTestSwdRandomBonuses('Burning Rose Armor', 8, db);
+	GMTestReport(a == 0 && b == 0 && c == 0 && d == 8,
+		"ARM new armor with a random bonus, of 8 each: crafted heavy armor 01 (quality 3) " + a + " (0), crafted medium armor 01 (quality 2) " + b + " (0), crafted boots 01 (quality 3) " + c + " (0); control, the untagged Burning Rose armor (quality 3) " + d + " (8); most abilities " + ab + "/" + bb + "/" + cb + "/" + db);
 }
 
 // ARM audit (2026-10-18) fixes, situation-free: the generated items against legacy's values (F2, F3,

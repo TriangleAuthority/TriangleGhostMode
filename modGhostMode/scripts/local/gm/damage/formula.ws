@@ -78,6 +78,18 @@ function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc 
 		resistPerc = 0;	//modSigns
 		return;	//modSigns
 	}	//modSigns
+	if(GMAerondightChargedHit(playerAttacker, attackAction, action))	//modSigns: SWD-05, a fully charged Aerondight ignores armor and resistances
+	{	//modSigns
+		resistPts = 0;	//modSigns
+		resistPerc = 0;	//modSigns
+		return;	//modSigns
+	}	//modSigns
+	if(action.GetBuffSourceName() == "PhantomWeapon")	//modSigns: SWD-06, Iris's phantom strike ignores armor and resistances
+	{	//modSigns
+		resistPts = 0;	//modSigns
+		resistPerc = 0;	//modSigns
+		return;	//modSigns
+	}	//modSigns
 
 
 	if(actorVictim)
@@ -572,6 +584,8 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 				criticalDamageBonus += ((W3PlayerWitcher)playerAttacker).GMAnatomicalKnowledgeCritDamage();	//modSigns
 			if((W3PlayerWitcher)playerAttacker && (W3Petard)action.causer)	//modSigns: ARM-10, the Manticore set's bomb crit damage per piece (legacy)
 				criticalDamageBonus.valueAdditive += ((W3PlayerWitcher)playerAttacker).GMManticoreBombBonus('per_redwolf_piece_crit_power_bonus');	//modSigns
+			if(GMAerondightChargedHit(playerAttacker, attackAction, action))	//modSigns: SWD-05, a fully charged Aerondight's crit power
+				criticalDamageBonus.valueAdditive += GMAerondightChargedHit(playerAttacker, attackAction, action).GMGetCritPowerBoost();	//modSigns
 		}
 
 

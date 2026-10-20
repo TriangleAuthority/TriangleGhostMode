@@ -28,13 +28,15 @@ enum EEffectType
 	// ENCH-05: Invigoration
 	EET_GMRuneword4,
 	// ENCH-09: Prolongation
-	EET_GMRuneword11
+	EET_GMRuneword11,
+	// SWD-06: Iris
+	EET_GMPhantomWeapon
 }
 
 // Last Ghost Mode effect type: keep it pointing at the last member above.
 function GMLastEffectType() : EEffectType
 {
-	return EET_GMRuneword11;
+	return EET_GMPhantomWeapon;
 }
 
 function GMIsModEffectType(effect : EEffectType) : bool

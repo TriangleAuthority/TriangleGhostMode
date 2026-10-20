@@ -7,8 +7,8 @@ change as a three-way merge (what 1.32 had and legacy removed goes, what legacy 
 5.x itself changed stays), and writes it with on_conflict="replace" (an entry given whole works
 for the expansions' items too; see docs/development.md, "Fine-grained XML overrides").
 
-What is ARM's (other areas' changes to the same entries, such as prices, weights, dismantling
-parts or DoNotEnhance, are left as 5.x has them):
+What is ARM's (other areas' changes to the same entries, such as prices, weights or dismantling
+parts, are left as 5.x has them):
 
 - set tags: the school set tags, the lower tiers' `*SetMinor`, `SetBonusPiece`, `ViperSet`,
   `VampireSet` (ARM-05);
@@ -18,6 +18,9 @@ parts or DoNotEnhance, are left as 5.x has them):
   armor, the set gear's bonuses, `staminaRegen_armor_mod`, ...) except `weight` (WGT), `quality`
   and `item_level_min/max` (ITEM); a fixed `armor` legacy removed (for armor by item level) is kept
   until ITEM; plus the armor-by-level abilities (`autogen_*`, `Autogen ... _Stats`).
+- `DoNotEnhance` on armor pieces where legacy added it, so crafted armor gets no random bonus (the
+  owner's decision on the SWD audit's F4, 2026-10-19; `gen_swd_items.py` does the same for swords);
+  where legacy removed it, 5.x's stays (legacy's rework of the random bonuses is ITEM's).
 
 - the display of armor pieces where legacy changed it and 5.x kept 1.32's (audit F4): the class
   text (`localisation_key_description`), the icon, the look (`equip_template` and its `<variants>`)
@@ -30,6 +33,9 @@ Abilities are given whole as well: 5.x's ability with legacy's changed nodes (ma
 `type` and occurrence) set, added or removed; in an ability legacy rewrote, legacy's value also
 where 5.x changed one legacy had left at 1.32's (DA5, audit F2 and F3).
 
+The set swords' entries (their set tags) are not written here: `gen_swd_items.py` takes them from
+`generate` and writes them with SWD's changes, one entry per sword in `gm_swd_items.xml`.
+
 Regular items come from `gameplay/items/` folders, New Game+ items from `items_plus/`, each merged
 against the same folder in the three branches (legacy's NG+ entries are legacy's own). In NG+ the
 lower tiers of school gear take the regular lower tiers' set tags (`<School>SetMinor`,
@@ -40,7 +46,7 @@ tag); legacy's NG+-only display changes (NG+ names, glove looks) are not carried
 
 Writes `items/gm_arm_items.xml` and `items_plus/gm_arm_items.xml` (and `gm_arm_item_extensions.xml`
 in both) in Ghost Mode's DLC (default worktree ../TGM-5x-GM). --check writes nothing and fails if a file is out of date. --verify reads
-what the game reads (Ghost Mode's DLC items over 5.x's) and compares every ARM tag, slot count,
+what the game reads (Ghost Mode's DLC items over 5.x's) and compares every ARM tag (`DoNotEnhance` included), slot count,
 display field and ability stat with legacy's, counting the differences that are rules of the port
 and failing on any other (audit F10; about a minute).
 """
@@ -57,12 +63,15 @@ ITEM = re.compile(r'<item\b([^>]*)>(.*?)</item>', re.S)
 TAGS = re.compile(r'(<tags>)(.*?)(</tags>)', re.S)
 SET_TAG = re.compile(r'^(?:Lynx|Gryphon|Bear|Wolf|RedWolf|Vampire|Viper)Set(?:Minor)?$|^SetBonusPiece$')
 ARMOR_TAG = re.compile(r'^(?:Light|Medium|Heavy)Armor$|^gm_NoSetBonuses$')
+SWORD_CATEGORY = re.compile(r'\bcategory\s*=\s*"(steelsword|silversword)"')
 ARMOR_CATEGORY = re.compile(r'\bcategory\s*=\s*"(armor|boots|pants|gloves)"')
 NOT_ARM = {"weight", "quality", "item_level_min", "item_level_max"}
 DISPLAY_ATTRS = ("localisation_key_description", "icon_path", "equip_template")
 # Yoana's reward armor, made heavy by legacy, also takes legacy's name (audit F4b, the owner's decision)
 NAME_CARRIED = {"q108 Medium armor 10"}
 AUTOGEN = re.compile(r'^autogen_(?:fixed_)?(?:armor|pants|gloves|boots)_|^Autogen (?:Armor|Gloves|Boots|Pants) _Stats$')
+# The starting armor pieces are given whole by gen_arm_km.py (ARM-12), legacy's DoNotEnhance included.
+KM_STARTING = {"Starting Armor", "Starting Pants", "Starting Boots", "Starting Gloves"}
 ABILITY = re.compile(r'<ability\s+name="([^"]+)"[^>]*>(.*?)</ability>', re.S)
 NODE = re.compile(r'<([A-Za-z_]\w*)\b([^>]*?)/>')
 
@@ -180,6 +189,26 @@ def merge(base, ours, theirs, is_arm):
     return result
 
 
+def add_dne(base, ours, result):
+    """`DoNotEnhance` added to a merged tag list where legacy (ours) added it to 1.32's (base); never removed."""
+    if "DoNotEnhance" in ours and "DoNotEnhance" not in base and "DoNotEnhance" not in result:
+        result = result + ["DoNotEnhance"]
+    return result
+
+
+def check_dne(mtags, ltags, vtags, ftags):
+    """--verify's `DoNotEnhance` check: None when the final tags agree with legacy's, a reason (str) for
+    a difference that is a rule of the port, True for a missing tag legacy added."""
+    want, got = "DoNotEnhance" in ltags, "DoNotEnhance" in ftags
+    if want == got:
+        return None
+    if want:
+        return True if "DoNotEnhance" not in mtags else "DoNotEnhance 1.32 had and 5.x removed (5.x's kept)"
+    if "DoNotEnhance" in mtags:
+        return "DoNotEnhance legacy removed (5.x's kept: legacy's rework of the random bonuses is ITEM's)"
+    return "DoNotEnhance 5.x added (kept)"
+
+
 def head_attr(entry, attr):
     """(match, stripped value) of an attribute of an item's opening tag, or (None, None)."""
     text = blank_comments(entry)
@@ -250,7 +279,7 @@ def generate(folder, regular=None):
     m, l, v = items("master", folder), items("legacy-GM", folder), items("vanilla-5.x", folder)
     blocks, report = [], []
     armor_abilities = set()
-    ctx = {"minor": {}, "display": {}}
+    ctx = {"minor": {}, "display": {}, "swords": {}}
     for name, (path, lentry, ltags) in l.items():
         if name not in m or name not in v:
             continue
@@ -260,6 +289,8 @@ def generate(folder, regular=None):
             armor_abilities.update(a.strip() for a in re.findall(r'<a>([^<]+)</a>', lentry))
         is_arm = (lambda t: SET_TAG.match(t) or ARMOR_TAG.match(t)) if piece else SET_TAG.match
         new = merge(mtags, ltags, vtags, is_arm)
+        if piece:
+            new = add_dne(mtags, ltags, new)
         minor = [t for t in ltags if t.endswith("SetMinor")]
         if minor:
             ctx["minor"][name] = minor[0]
@@ -279,9 +310,12 @@ def generate(folder, regular=None):
             changes.append(f"slots {slots[2].group(1)} -> {slots[1].group(1)}")
         if piece:
             entry = carry_display(name, folder, mentry, lentry, entry, ventry, ctx, regular, changes)
-        if not changes:
+        if not changes or name in KM_STARTING:
             continue
         entry = re.sub(r'^<item\b', '<item on_conflict="replace"', entry)
+        if SWORD_CATEGORY.search(ventry):
+            ctx["swords"][name] = entry  # written by gen_swd_items.py, with SWD's changes merged in
+            continue
         blocks.append((vpath, name, entry))
         report.append(f"{folder}: {name}: {'; '.join(changes)}")
     ma, la, va = abilities("master", folder), abilities("legacy-GM", folder), abilities("vanilla-5.x", folder)
@@ -406,6 +440,11 @@ def verify(worktree):
                     note("set tags 5.x added and legacy did not remove (5.x's NG+ SetBonusPiece, ViperSet)")
             if not piece:
                 continue
+            dne = check_dne(m[name][2], ltags, v[name][2], ftags)
+            if dne is True:
+                problems.append(f"{name}: no DoNotEnhance; legacy has it")
+            elif dne:
+                note(dne)
             fs, ls = (re.search(r'\benhancement_slots\s*=\s*"(\d+)"', e) for e in (final, lentry))
             if fs and ls and fs.group(1) != ls.group(1):
                 ms = re.search(r'\benhancement_slots\s*=\s*"(\d+)"', m[name][1])

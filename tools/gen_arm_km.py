@@ -4,7 +4,8 @@ Legacy Ghost Mode added a 4-piece medium set to the base game's item files: the 
 armor pieces and their `_Stats` abilities, their crafting schematics (items and `<schematic>`
 entries), and renamed the starting armor ("Worn Kaer Morhen ..."). This tool copies legacy's new
 entries (`legacy-GM`) into a DLC file, and gives the four starting items whole from 5.x
-(`vanilla-5.x`, on_conflict="replace") with legacy's name keys.
+(`vanilla-5.x`, on_conflict="replace") with legacy's name keys (and legacy's `DoNotEnhance`, as
+`gen_arm_items.py` carries it; that tool leaves these four items to this one).
 
 Legacy turned the vanilla "Starting Armor Upgrade schematic 1" into the first armor schematic
 (Starting Armor -> Kaer Morhen Armor). A DLC cannot override a `<schematic>` (the crafting manager
@@ -91,6 +92,11 @@ def generate(folder):
         key = re.search(r'localisation_key_name\s*=\s*"([^"]*)"', el[0]).group(1)
         e = re.sub(r'(localisation_key_name\s*=\s*")[^"]*(")', lambda m: m.group(1) + key + m.group(2), e5[0], count=1)
         e = re.sub(r'<item\b', '<item on_conflict="replace"', e, count=1)
+        tl = re.search(r'<tags>(.*?)</tags>', el[0], re.S)
+        if tl and "DoNotEnhance" in [t.strip() for t in tl.group(1).split(",")]:
+            # legacy's DoNotEnhance, as gen_arm_items.py carries it (SWD audit F4, the owner's decision)
+            e = re.sub(r'(<tags>)(.*?)(\s*</tags>)', lambda m: m.group(1) + m.group(2).rstrip()
+                       + ("" if "DoNotEnhance" in m.group(2) else ", DoNotEnhance") + m.group(3), e, count=1, flags=re.S)
         starting.append(e)
 
     def block(lst):

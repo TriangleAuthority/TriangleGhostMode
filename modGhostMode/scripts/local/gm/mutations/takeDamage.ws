@@ -145,11 +145,13 @@ function OnTakeDamage( action : W3DamageAction)
 	if( !action.WasDodged() && action.DealtDamage() && inv.ItemHasTag( inv.GetCurrentlyHeldSword(), 'Aerondight' ) && !action.IsDoTDamage() && !( (W3Effect_Toxicity) action.causer ) )
 	{
 		aerondight = (W3Effect_Aerondight)GetBuff( EET_Aerondight );
-		if( aerondight && aerondight.GetCurrentCount() != 0 )
+		if( aerondight )	//modSigns
 		{
-			aerondight.ReduceAerondightStacks();
+			aerondight.GMResetCharges();	//modSigns: SWD-05, damage taken resets the charges (5.x halves them)
 		}
 	}
+	if( !action.WasDodged() && action.DealtDamage() && !action.IsDoTDamage() && !( (W3Effect_Toxicity) action.causer ) )	//modSigns: SWD-06, Iris's charges too
+		GMIrisOnDamageTaken( this );	//modSigns
 
 	
 	//modSigns: removed Bloodbath's end on damage taken (MUT-05)

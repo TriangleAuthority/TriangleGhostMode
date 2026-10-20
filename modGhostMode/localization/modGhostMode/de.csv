@@ -231,3 +231,14 @@
 2110992295|fad8f82b||Das Töten von Gegnern gibt $F$ Adrenalinpunkte.
 2110992507|f9241f8c||Überschüssig generiertes Adrenalin, verlangsamt die Trank-Ablaufzeit um $S$% pro 1% des überschüssigen Adrenalins (3 Punkte = 100$). Der maximale Bonus von $S$% kann nicht überschritten werden. Der Bonus wird zurückgesetzt, wenn du Adrenalin verlierst oder der Kampf endet.
 2110992159|ccc61f66||Jedes Nahrungsmittel hält $I$% länger, schmeckt dafür aber wie Pirogge.
+; SWD-09: sword attribute names (legacy ids)
+2110992014|99a2fd83||Reduktion des Schadenswiderstands von Gegnern
+2110992154|28838f82||Rüstungsdurchdringung
+2110992155|f35fcb73||Rüstungsdurchdringung
+2110992440|6fd9d47c||Chance auf Zerstückeln
+2110992161|        |attribute_name_spell_dmg_bonus|Zeichenschaden
+2110992162|        |attribute_name_sword_dmg_bonus|Waffenschaden
+; SWD-05: Aerondight's description and counter (legacy ids)
+2110992291|483c9092||Während du im Kampf bist, erhöht sich dein Waffenschaden um $I$ Punkt(e) pro Gegner. Jeder erfolgreiche Treffer lädt dein Schwert auf. Ein vollständig aufgeladenes Schwert, entlädt sich bei einem erfolgreichen Treffer und fügt deinem Gegner kritischen Schaden, mit einem $I$% Angriffskraft Bonus zu und ignoriert zudem Rüstungs-, und Schadenswiderstand. Schwertentladungen betäuben und verletzen alle umstehenden Gegner.<br><br>Treffer bis komplette Aufladung: $I$.<br>Aufladungen verringern sich über Zeit (Eine pro $I$ Sek.) und werden zurückgesetzt, wenn Geralt Schaden nimmt.
+2110992292|1f5adb4f||<br><br>Derzeitige Ladungen: $I$/$I$  <br>Derzeitiger Schadensbonus: $I$ Punkt(e).
+2110992299|f2e69faf||Erfolgreiche Nahkampfangriffe laden dein Schwert mit Energie auf. Wenn du mit einem vollständig aufgeladenen Schwert Schaden verursachst, ist der Waffenschaden um $I$% der Vitalität des Angreifers erhöht. Ein starker Angriff mit dem Schwert beschwört eine Phantomkopie des Schwerts, welche zusätzlichen Schaden verursacht und Schilde, Rüstungen & Abwehrhaltungen durchdringt. Ignoriert zudem sämtliche Schadenswiderstände.<br><br>Treffer bis komplette Aufladung: $I$.<br>Aufladungen verringern sich über Zeit (Eine pro $I$ Sek.) und werden zurückgesetzt, wenn Geralt Schaden nimmt. Voll aufgeladenes Schwert entlädt sich in $I$ Sek. oder nach einem starken Angriff.<br><br>Derzeitige Ladungen: $I$/$I$.<br>Derzeitiger Schadensbonus: $I$ Punkt(e).

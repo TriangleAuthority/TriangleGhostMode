@@ -36,8 +36,9 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 // the pool scales them. DD1's exceptions: the underwater crossbow bonus stays a multiplier; Crippling
 // Strike's bonus goes to final damage, as does the difficulty multiplier
 // (GMProcessDamageModification). VulnerableFromFront is checked here, before the formula (legacy;
-// 5.x checks it in ReduceDamage, too late). 5.x's own versions of legacy's other terms (Rend, Perk 20,
-// Aerondight; the Lynx and Netflix sets' are gone, ARM-06, ARM-15, Runeword 4's ENCH-05) are pool terms until their areas port legacy's.
+// 5.x checks it in ReduceDamage, too late). 5.x's own versions of legacy's other terms (Rend, Perk 20;
+// the Lynx and Netflix sets' are gone, ARM-06, ARM-15, Runeword 4's ENCH-05, Aerondight's SWD-05) are pool terms until their areas port legacy's.
+// SWD-07: the NG+ school swords' sword_dmg_bonus (melee) and spell_dmg_bonus (signs), legacy's pool terms.
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 {
@@ -306,23 +307,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	}	//modSigns
 
 
-	if( playerAttacker && actorVictim && attackAction && action.IsActionMelee() && playerAttacker.inv.ItemHasTag( attackAction.GetWeaponId(), 'Aerondight' ) )
-	{
-		aerondight = (W3Effect_Aerondight)playerAttacker.GetBuff( EET_Aerondight );
-
-		if( aerondight )
-		{
-			min = playerAttacker.GetAbilityAttributeValue( 'AerondightEffect', 'dmg_bonus' );
-			bonusCount = aerondight.GetCurrentCount();
-
-			if( bonusCount > 0 )
-			{
-				min.valueMultiplicative *= bonusCount;
-
-				poolAll += min.valueMultiplicative;	//modSigns: additive pool (5.x: a separate multiplier)
-			}
-		}
-	}
+	//modSigns: removed 5.x's Aerondight pool term (dmg_bonus per charge): SWD-05, legacy's damage per enemy is in GetTotalWeaponDamage
 
 
 
@@ -344,6 +329,14 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	//modSigns: removed 5.x's new-tree bolt terms (SKL-06): Anatomical Knowledge's silver sword damage and Lightning Reflexes' headshot damage
 
 
+
+	if( (W3PlayerWitcher)playerAttacker )	//modSigns: SWD-07, the NG+ school swords' weapon and sign damage bonuses
+	{	//modSigns
+		if( action.IsActionMelee() )	//modSigns
+			poolAll += CalculateAttributeValue( playerAttacker.GetAttributeValue( 'sword_dmg_bonus' ) );	//modSigns
+		if( action.IsActionWitcherSign() )	//modSigns
+			poolAll += CalculateAttributeValue( playerAttacker.GetAttributeValue( 'spell_dmg_bonus' ) );	//modSigns
+	}	//modSigns
 
 	if( actorAttacker && attackAction && actorAttacker.IsHeavyAttack(attackAction.GetAttackName()) )	//modSigns: heavy attacks: Strong Attack +50% weapon damage for the player, +25% for NPCs
 	{	//modSigns

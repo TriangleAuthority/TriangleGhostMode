@@ -10,7 +10,8 @@ the Scarlet Crest set (w3r). This tool takes each of their `_Stats` abilities an
   Yrden intensity (the boots' per-tier values) instead of Aard; the trousers give sign intensity for all
   signs (0.05/0.10/0.12) instead of their stamina regen and inert base intensity; the lower tiers
   (armor and swords, Reinald's swords too) are tagged `NetflixSetMinor` and `SetBonusPiece`, so they
-  count towards the 3-piece bonus.
+  count towards the 3-piece bonus. The swords' entries are written by `gen_swd_items.py` (SWD-10, which
+  also sets their stats and slots), with these tags from `minor_tags`, so each sword has one entry.
 - Dol Blathanna and White Tiger (DA4): legacy's medium resistances (legacy's DLC5 Nilfgaardian
   armor); Dol Blathanna's chest gives Igni and Aard intensity +10% instead of stamina regen.
 - Scarlet Crest (DA4): armor 465 and resistances slashing 40%, piercing 32%, bludgeoning 44% in all
@@ -75,6 +76,7 @@ for piece, (armor, r) in SCARLET.items():
 # Netflix items of the lower tiers: they count towards the set's first bonus.
 MINOR = re.compile(r'^(?:NGP )?(?:Netflix (?:Armor|Boots|Gloves|Pants|steel sword|silver sword)(?: 1)?|Reinald Netflix (?:steel|silver) sword)$')
 NODE = re.compile(r'<([A-Za-z_]\w*)\b([^>]*?)/>')
+SWORD = re.compile(r'\bcategory\s*=\s*"(?:steelsword|silversword)"')
 
 
 def git(*args):
@@ -146,6 +148,14 @@ def del_node(body, tag, typ):
     return body[:start] + body[m.end():]
 
 
+def minor_tags(entry):
+    """A lower-tier Netflix item's entry with the tags that count it towards the set's first bonus."""
+    tm = re.search(r'(<tags>)(.*?)(</tags>)', entry, re.S)
+    tags = [t.strip() for t in tm.group(2).split(",") if t.strip()]
+    new = tags + [t for t in ("NetflixSetMinor", "SetBonusPiece") if t not in tags]
+    return entry[:tm.start(2)] + "\t\t\t\t\t\t\t" + ", ".join(new) + "\n\t\t\t\t" + entry[tm.end(2):]
+
+
 def generate(folder):
     ng = {n: e for f in FILES for n, e in entries(no_comments(git("show", "vanilla-5.x:modGhostMode/files/gameplay/items/%s.xml" % f)), "ability", "name")}
     abilities, items = [], []
@@ -178,13 +188,9 @@ def generate(folder):
             body = re.sub(r'<ability\b', '<ability on_conflict="replace"', body, count=1)
             abilities.append(body)
         for name, entry in entries(text, "item", "name"):
-            if not MINOR.match(name):
+            if not MINOR.match(name) or SWORD.search(entry):  # swords: gen_swd_items.py (SWD-10)
                 continue
-            tm = re.search(r'(<tags>)(.*?)(</tags>)', entry, re.S)
-            tags = [t.strip() for t in tm.group(2).split(",") if t.strip()]
-            new = tags + [t for t in ("NetflixSetMinor", "SetBonusPiece") if t not in tags]
-            entry = entry[:tm.start(2)] + "\t\t\t\t\t\t\t" + ", ".join(new) + "\n\t\t\t\t" + entry[tm.end(2):]
-            items.append(re.sub(r'^<item\b', '<item on_conflict="replace"', entry))
+            items.append(re.sub(r'^<item\b', '<item on_conflict="replace"', minor_tags(entry)))
 
     def block(lst):
         return "\n".join("\t" + e.strip() for e in lst)

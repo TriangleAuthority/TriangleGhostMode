@@ -231,3 +231,14 @@
 2110992295|fad8f82b||Al matar a un enemigo obtienes $F$ puntos de adrenalina.
 2110992507|f9241f8c||La generación adicional de adrenalina ralentiza la expiración de las pociones un $S$% por cada 1% de adrenalina adicional. (3 puntos = 100%). La bonificación máx. no puede exceder el $S$%. La bonificación se reinicia al perder adrenalina y al finalizar el combate.
 2110992159|ccc61f66||Cualquier comestible consumido dura un $I$% más, pero sabe a albóndigas.
+; SWD-09: sword attribute names (legacy ids)
+2110992014|99a2fd83||Reducción de la resistencia del enemigo
+2110992154|28838f82||Penetración de armadura
+2110992155|f35fcb73||Penetración de armadura
+2110992440|6fd9d47c||Probabilidad de desmembrar
+2110992161|        |attribute_name_spell_dmg_bonus|Daño de señales
+2110992162|        |attribute_name_sword_dmg_bonus|Daño de armas
+; SWD-05: Aerondight's description and counter (legacy ids)
+2110992291|483c9092||Al estar en combate, el daño del arma aumenta en $I$ puntos por enemigo. Cada golpe exitoso carga la espada. Cuando se cargue por completo, un golpe exitoso la descargará, causando daño por impacto crítico con una bonificación de $I$% al poder de ataque, además de ignorar la armadura y la resistencia del enemigo. La descarga también daña y desequilibra a los enemigos alrededor.<br><br>Golpes para cargar la espada: $I$. Las cargas se pierden con el tiempo (una cada $I$s) y se reinician cuando recibes daños.
+2110992292|1f5adb4f||<br><br>Cargas actuales: $I$/$I$. Bonificación de daño actual: $I$ puntos.
+2110992299|f2e69faf||El daño que causas carga la espada con energía, al atacar con la espada completamente cargada el daño aumenta un $I$% respecto a tu vitalidad (si el ataque es exitoso la vitalidad será drenada). Un ataque potente con la espada completamente cargada genera una copia fantasma de esta que causa daño adicional, el cual atraviesa armaduras, bloqueos y escudos e ignora la resistencia del enemigo a los daños.<br><br>Golpes para cargar la espada: $I$. Las cargas se pierden con el tiempo (una cada $I$s) y se reinician cuando recibes daños. La carga máxima desaparece en $I$s o después de realizar un ataque potente.<br><br>Cargas actuales: $I$/$I$. Bonificación de daño actual con carga máxima: $I$ puntos.

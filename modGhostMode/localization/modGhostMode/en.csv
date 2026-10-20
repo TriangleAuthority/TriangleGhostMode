@@ -231,3 +231,14 @@
 2110992295|fad8f82b||Killing an enemy gives $F$ Adrenaline Points.
 2110992507|f9241f8c||Excess Adrenaline generated slows down potion expiration timer by $S$% per 1% of excess Adrenaline (3 points = 100%). Max bonus cannot exceed $S$%. The bonus resets when you lose Adrenaline and at the end of the combat.
 2110992159|ccc61f66||Any edible consumed lasts longer by $I$%, but tastes like pierogi.
+; SWD-09: sword attribute names (legacy ids)
+2110992014|        |attribute_name_armor_reduction_perc|Enemy damage resistance reduction
+2110992154|28838f82||Armor penetration
+2110992155|f35fcb73||Armor penetration
+2110992440|        |attribute_name_dismember_chance|Dismember chance
+2110992161|        |attribute_name_spell_dmg_bonus|Sign damage
+2110992162|        |attribute_name_sword_dmg_bonus|Weapon damage
+; SWD-05: Aerondight's description and counter (legacy ids)
+2110992291|483c9092||While in combat, weapon damage increases by $I$ points per enemy. Each successful hit charges the sword. Fully charged sword discharges on successful hit, dealing critical damage with $I$% Attack Power bonus and ignoring Armor and damage resistances. Sword discharge also damages and staggers all the surrounding enemies.<br><br>Hits to fully charge the sword: $I$. Charges decay over time (one per $I$ sec.) and reset when Geralt takes damage.
+2110992292|1f5adb4f||<br><br>Current charges: $I$/$I$. Current damage bonus: $I$ points.
+2110992299|f2e69faf||Dealing damage with attacks charges the sword with energy. When attacking with the fully charged sword, weapon damage is increased by $I$% of the player's Vitality (if the attack is successful, player's Vitality is drained). A strong attack with the fully charged sword spawns a phantom copy of the sword that deals additional damage, which goes through shields, blocks and Armor and ignores damage resistances.<br><br>Hits to fully charge the sword: $I$. Charges decay over time (one per $I$ sec.) and reset when Geralt takes damage. Fully charged sword discharges in $I$ sec. or after a strong attack.<br><br>Current charges: $I$/$I$. Current damage bonus for the fully charged sword: $I$ points.

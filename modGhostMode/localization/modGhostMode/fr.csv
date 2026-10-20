@@ -231,3 +231,14 @@
 2110992295|fad8f82b||Killing an enemy gives $F$ Adrenaline Points.
 2110992507|f9241f8c||Excess Adrenaline generated slows down potion expiration timer by $S$% per 1% of excess Adrenaline (3 points = 100%). Max bonus cannot exceed $S$%. The bonus resets when you lose Adrenaline and at the end of the combat.
 2110992159|ccc61f66||Les aliments consommés durent $I$% plus longtemps.
+; SWD-09: sword attribute names (legacy ids)
+2110992014|99a2fd83||Réduction de la résistance aux dégâts des ennemis
+2110992154|28838f82||Pénétration d'armure
+2110992155|f35fcb73||Pénétration d'armure
+2110992440|6fd9d47c||Chance de démembrement
+2110992161|        |attribute_name_spell_dmg_bonus|Dégâts des signes
+2110992162|        |attribute_name_sword_dmg_bonus|Dégâts des armes
+; SWD-05: Aerondight's description and counter (legacy ids)
+2110992291|483c9092||En combat, les dégâts de l'arme augmentent de $I$ points par ennemi. Chaque coup qui touche sa cible charge l'épée. Une épée entièrement chargée se décharge à chaque coup réussi, infligeant des dégâts critiques avec un bonus de $I$% à la puissance de l'attaque et qui ignorent la résistance aux dégâts et la résistance de l'armure. La décharge de l'épée inflige également des dégâts et étourdit tous les ennemis proches.<br><br>Coups avant la charge complète de l'épée : $I$. Les charges diminuent au fil du temps (une par $I$ secondes) et se réinitialise lorsque Geralt encaisse des dégâts.
+2110992292|1f5adb4f||<br><br>Charges actuelles : $I$/$I$. Bonus de dégâts actuel : $I$ points.
+2110992299|f2e69faf||Dealing damage with attacks charges the sword with energy. When attacking with the fully charged sword, weapon damage is increased by $I$% of the player's Vitality (if the attack is successful, player's Vitality is drained). A strong attack with the fully charged sword spawns a phantom copy of the sword that deals additional damage, which goes through shields, blocks and Armor and ignores damage resistances.<br><br>Hits to fully charge the sword: $I$. Charges decay over time (one per $I$ sec.) and reset when Geralt takes damage. Fully charged sword discharges in $I$ sec. or after a strong attack.<br><br>Current charges: $I$/$I$. Current damage bonus for the fully charged sword: $I$ points.

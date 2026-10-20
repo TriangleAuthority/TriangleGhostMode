@@ -231,3 +231,14 @@
 2110992295|fad8f82b||Zabicie przeciwnika generuje $F$ Punktów Adrenaliny.
 2110992507|f9241f8c||Gdy poziom Adrenaliny jest na maksymalnym poziomie, dodatkowa generacja Punktów Adrenaliny spowalnia czas trwania eliksirów o $S$% za każdy 1% nadwyżki Adrenaliny (3 Punkty = 100%). Maksymalna premia nie może przekroczyć $S$%. Premia resetuje się po straceniu Adrenaliny oraz po zakończoniu walki.
 2110992159|ccc61f66||Jedzenie regeneruje Żywotność o $I$% dłużej, ale wszystko smakuje jak pierogi.
+; SWD-09: sword attribute names (legacy ids)
+2110992014|99a2fd83||Znosi część odporności na obrażenia u przeciwników
+2110992154|28838f82||Przebicie Pancerza
+2110992155|f35fcb73||Przebicie Pancerza
+2110992440|6fd9d47c||Szansa na rozczłonkowanie
+2110992161|        |attribute_name_spell_dmg_bonus|Obrażenia Znaku
+2110992162|        |attribute_name_sword_dmg_bonus|Obrażenia broni
+; SWD-05: Aerondight's description and counter (legacy ids)
+2110992291|483c9092||Podczas walki obrażenia broni zwiększają się o $I$ punktów za każdego przeciwnika. Każdy cios ładuje miecz. W pełni naładowany miecz wraz z zadaniem ciosu wyładowuje się, zadając obrażenia krytyczne z $I$% premią do Siły Ataku i ignorując Pancerz oraz odporności na obrażenia. Wyładowanie miecza również rani i wytrąca z równowagi wszystkich okolicznych przeciwników.<br><br>Liczba ciosów do pełnego naładowania: $I$. Ładunki można stracić z czasem (jeden na $I$s) lub otrzymując obrażenia.
+2110992292|1f5adb4f||<br><br>Obecna ilość ładunków: $I$/$I$. Obecna premia do obrażeń: $I$.
+2110992299|f2e69faf||Zadawanie obrażeń mieczem ładuje go energią. Zadając cios w pełni naładowanym mieczem, obrażenia broni są zwiększone o wartość równą $I$% Żywotności Geralta (udany atak wysysa Żywotność z dzierżącego miecz). Silny Atak w pełni naładowanym mieczem przywołuje widmową kopię miecza, która zadaje dodatkowe obrażenia, przebijając się jednocześnie przez tarczę, blok oraz Pancerz i ignorując odporności na obrażenia.<br><br>Uderzenia potrzebne do pełnego naładowania: $I$. Ładunki można stracić z czasem (jeden na $I$s) lub otrzymując obrażenia. W pełni naładowany miecz rozładowuje się w czasie $I$s lub po Silnym Ataku.<br><br>Obecna ilość ładunków: $I$/$I$. Obecna premia do obrażeń za w pełni naładowany miecz: $I$.

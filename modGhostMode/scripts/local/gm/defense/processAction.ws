@@ -195,40 +195,9 @@ function ProcessAction(act : W3DamageAction)
 	
 	if( playerAttacker && npc && action.IsActionMelee() && action.DealtDamage() && IsRequiredAttitudeBetween( playerAttacker, npc, true ))
 	{		
-		if(!npc.HasTag( 'AerondightIgnore' ))	
-		{
-			if( playerAttacker.inv.ItemHasTag( attackAction.GetWeaponId(), 'Aerondight' ) )
-			{
-				
-				aerondight = (W3Effect_Aerondight)playerAttacker.GetBuff( EET_Aerondight );
-				aerondight.IncreaseAerondightCharges( attackAction.GetAttackName() );
-				
-				
-				if( aerondight.GetCurrentCount() == aerondight.GetMaxCount() )
-				{
-					switch( npc.GetBloodType() )
-					{
-						case BT_Red : 
-							trailFxName = 'aerondight_blood_red';
-							break;
-							
-						case BT_Yellow :
-							trailFxName = 'aerondight_blood_yellow';
-							break;
-						
-						case BT_Black : 
-							trailFxName = 'aerondight_blood_black';
-							break;
-						
-						case BT_Green :
-							trailFxName = 'aerondight_blood_green';
-							break;
-					}
-					
-					playerAttacker.inv.GetItemEntityUnsafe( attackAction.GetWeaponId() ).PlayEffect( trailFxName );
-				}
-			}
-		}
+		//modSigns: removed 5.x's Aerondight charging (by attack type, AerondightIgnore) and its trail effect at full charge
+		GMAerondightOnHit( playerAttacker, npc, attackAction );	//modSigns: SWD-05, legacy's charge or discharge
+		GMIrisOnHit( playerAttacker, attackAction );	//modSigns: SWD-06, Iris's charge, drain or discharge
 		
 		
 		if(!action.WasDodged() && !attackAction.IsParried() && !attackAction.IsCountered())

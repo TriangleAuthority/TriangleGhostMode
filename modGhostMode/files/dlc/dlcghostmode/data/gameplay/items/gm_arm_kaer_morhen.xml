@@ -874,7 +874,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/armor-01.png"
 	>
-		<tags>							Armor, MediumArmor, mod_armor
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Starting Armor _Stats</a>

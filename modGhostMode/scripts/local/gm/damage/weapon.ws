@@ -28,14 +28,15 @@ function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, c
 
 // DMG-08: a sword's extra damage types (fire, frost, ...) at full value: vanilla multiplied every
 // non-physical damage type by 0 + the grindstone bonus ("Fixed a bug with additional sword damages
-// (like fire and frost) not being actually applied to a target", legacy). 5.x's body; Aerondight's
-// part stays 5.x's until SWD; Mutation 9's flat damage is gone (MUT-11); ENCH-05: Invigoration's
+// (like fire and frost) not being actually applied to a target", legacy). 5.x's body; SWD-05: Aerondight's
+// damage per enemy (legacy); SWD-06: the fully charged Iris's share of Geralt's Vitality (legacy); Mutation 9's flat damage is gone (MUT-11); ENCH-05: Invigoration's
 // bonus multiplies slashing and silver damage (legacy; 5.x: a pool term).
 @replaceMethod(W3PlayerWitcher)
 function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, crossbowId : SItemUniqueId) : float
 {
 	var damage, durRatio, durMod, itemMod : float;
 	var repairObjectBonus, min, max : SAbilityAttributeValue;
+	var aerondight : W3Effect_Aerondight;	//modSigns
 
 	durMod = 1;	//modSigns: vanilla 0, which zeroed non-physical weapon damage
 	damage = super.GetTotalWeaponDamage(weaponId, damageTypeName, crossbowId);
@@ -68,12 +69,13 @@ function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, c
 
 	if( damageTypeName == 'SilverDamage' && inv.ItemHasTag( weaponId, 'Aerondight' ) )
 	{
-		itemMod = inv.GetItemModifierFloat( weaponId, 'PermDamageBoost' );
-		if( itemMod > 0.f )
-		{
-			damage += itemMod;
-		}
+		//modSigns: removed the permanent damage growth (PermDamageBoost)
+		aerondight = (W3Effect_Aerondight)GetBuff( EET_Aerondight );	//modSigns: SWD-05, damage per hostile enemy in combat
+		if( aerondight )	//modSigns
+			damage += aerondight.GMGetDamageBoost();	//modSigns
 	}
+
+	damage += GMIrisDamageBoost( this, weaponId, damageTypeName );	//modSigns: SWD-06, the fully charged Iris's share of Geralt's Vitality
 
 	if( HasBuff(EET_GMRuneword4) && ( damageTypeName == 'SilverDamage' || damageTypeName == 'SlashingDamage' ) )	//modSigns: ENCH-05, Invigoration
 		damage *= 1 + GMInvigorationBonus();	//modSigns
