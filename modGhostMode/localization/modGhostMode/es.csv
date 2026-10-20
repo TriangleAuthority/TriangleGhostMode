@@ -242,3 +242,10 @@
 2110992291|483c9092||Al estar en combate, el daño del arma aumenta en $I$ puntos por enemigo. Cada golpe exitoso carga la espada. Cuando se cargue por completo, un golpe exitoso la descargará, causando daño por impacto crítico con una bonificación de $I$% al poder de ataque, además de ignorar la armadura y la resistencia del enemigo. La descarga también daña y desequilibra a los enemigos alrededor.<br><br>Golpes para cargar la espada: $I$. Las cargas se pierden con el tiempo (una cada $I$s) y se reinician cuando recibes daños.
 2110992292|1f5adb4f||<br><br>Cargas actuales: $I$/$I$. Bonificación de daño actual: $I$ puntos.
 2110992299|f2e69faf||El daño que causas carga la espada con energía, al atacar con la espada completamente cargada el daño aumenta un $I$% respecto a tu vitalidad (si el ataque es exitoso la vitalidad será drenada). Un ataque potente con la espada completamente cargada genera una copia fantasma de esta que causa daño adicional, el cual atraviesa armaduras, bloqueos y escudos e ignora la resistencia del enemigo a los daños.<br><br>Golpes para cargar la espada: $I$. Las cargas se pierden con el tiempo (una cada $I$s) y se reinician cuando recibes daños. La carga máxima desaparece en $I$s o después de realizar un ataque potente.<br><br>Cargas actuales: $I$/$I$. Bonificación de daño actual con carga máxima: $I$ puntos.
+; ITEM-11: the master repair kits (legacy's ids and keys)
+2110992266|cb404984||Herramientas de Maestro Herrero
+2110992267|29e78e8a||Herramientas utilizadas por los maestros herreros. Aumentan de forma permanente el daño del arma.
+2110992268|fcf7e421||Herramientas de Maestro Armero
+2110992269|ad70e65b||Herramientas utilizadas por los maestros armeros. Aumentan de forma permanente el valor de la armadura.
+; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
+2110992483|d400b4dd||Resistencia al daño

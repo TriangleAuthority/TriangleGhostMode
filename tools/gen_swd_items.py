@@ -20,11 +20,13 @@ What is SWD's (other areas' changes to the same entries are left as 5.x has them
   weight; the look (`variants`), the ability list (`base_abilities`) and the draw, holster and attack
   animations (`anim_actions`, `anim_switches`; SWD-08); the tags, except `Autogen*` (ITEM) and the
   `mod_*` price tags (ECON); `DoNotEnhance` where legacy added it (crafted swords get no random
-  bonus, SWD-02; the owner's decision on the SWD audit's F4, 2026-10-19), not where legacy removed it
-  (legacy's rework of the random bonuses is ITEM's). The set tags of set swords are ARM's: the
+  bonus, SWD-02; the owner's decision on the SWD audit's F4, 2026-10-19); where legacy removed it,
+  ITEM-08 removes it (`item_layer.py`). The set tags of set swords are ARM's: the
   sword entries come from `gen_arm_items.py`'s output with ARM's tags merged in (that tool leaves the
   swords out of `gm_arm_items.xml`), so one entry per sword carries both areas' changes. Not the
   dismantling parts (CRAFT) or NPC scabbards (`bound_items`, AI).
+- ITEM's fields of the same entries (level tags, level ranges, ...) as `item_layer.py` gives them
+  for ITEM's ported slices; ITEM's entries no area tool writes come from `gen_item.py`.
 - where 5.x changed the same field as legacy (the three crafted silver swords' animation switch,
   DS3), 5.x's stays.
 
@@ -46,6 +48,7 @@ import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_arm_items as arm  # noqa: E402
+import item_layer  # noqa: E402  ITEM's fields of the same entries
 
 REPO = arm.REPO
 DLC = arm.DLC
@@ -266,7 +269,9 @@ def merge_ability(mn, ln, vbody, ported, notes):
             else:
                 appends.append(lv[2].strip())
         elif k in vn:
-            if DAMAGE.match(k[0]):
+            if DAMAGE.match(k[0]) and not any(x[0] == k[0] and x not in mn for x in ln):
+                # removed for damage by level (ITEM-04, item_layer.py); a node legacy gave a type (1.32's
+                # typeless SilverDamage of NG+'s crafted Burning Rose sword) is a fix, carried here
                 notes.append(f"{k[0]} kept (legacy removed it for damage by level: ITEM)")
                 continue
             edits.append((vn[k][0], vn[k][1], ""))
@@ -289,7 +294,7 @@ def is_swd_tag(t):
     return not NOT_SWD_TAG.match(t) and not arm.SET_TAG.match(t)
 
 
-def merge_item(mentry, lentry, entry, notes):
+def merge_item(mentry, lentry, entry, notes, folder=None, name=None, ventry=None):
     """`entry` (5.x's, or ARM's output) with legacy's SWD item changes."""
     changes = []
     ma, la, va = head_attrs(mentry), head_attrs(lentry), head_attrs(entry)
@@ -317,7 +322,9 @@ def merge_item(mentry, lentry, entry, notes):
         changes.append(tag)
     mt, lt = arm.split_tags(arm.blank_comments(mentry)), arm.split_tags(arm.blank_comments(lentry))
     vt = arm.split_tags(arm.blank_comments(entry))
+    ventry = ventry or entry
     new = arm.add_dne(mt, lt, arm.merge(mt, lt, vt, is_swd_tag))
+    new = item_layer.merge_tags(folder, name, mt, lt, arm.split_tags(arm.blank_comments(ventry)), new)  # ITEM's tags
     if new != vt:
         tm = arm.TAGS.search(arm.blank_comments(entry))
         if tm:
@@ -361,6 +368,7 @@ def generate(folder, armsw, ported=PORTED):
                 continue
             body = merge_ability(mab[name][1], lab[name][1], vab[name][0], ported, notes)
             if body is not None:
+                body, _ = item_layer.merge_nodes(folder, name, mab[name][1], lab[name][1], body, arm.nodes, arm.norm)  # ITEM's nodes
                 ablocks.append((path, name, f'<ability name="{name}" on_conflict="replace">{body}</ability>'))
                 report.append(f"{folder}: ability {name}" + (f" ({'; '.join(notes)})" if notes else ""))
         else:
@@ -371,7 +379,7 @@ def generate(folder, armsw, ported=PORTED):
             entry = re.sub(r'^<item on_conflict="replace"', '<item', base) if base else vi[name]
             changes = []
             if main in ported:
-                entry, changes = merge_item(mi[name], li[name], entry, notes)
+                entry, changes = merge_item(mi[name], li[name], entry, notes, folder, name, vi[name])
             if not changes and not base:
                 continue
             done.add(name)
@@ -467,7 +475,7 @@ def verify(worktree):
                     elif k[0] in SWD07 and "SWD-07" not in PORTED:
                         note("NG+ sword and sign damage bonus not ported yet (SWD-07)")
                     elif lv is None and DAMAGE.match(k[0]):
-                        note("fixed damage kept where legacy moved to damage by level (until ITEM)")
+                        note(f"fixed damage kept where legacy moved to damage by level (until ITEM): {folder} {name}")
                     elif mv == lv and k in vn:
                         note("stats legacy left as 1.32's (5.x's kept)")
                     elif k in vn and k in mn and arm.norm(vn[k][2]) != mv:

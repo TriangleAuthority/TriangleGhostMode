@@ -5,7 +5,16 @@ function GMTestArmAdd(itemName : name, equip : bool) : SItemUniqueId
 {
 	var ids : array<SItemUniqueId>;
 
+	var tries : int;
+
 	ids = thePlayer.GetInventory().AddAnItem(itemName, 1, true, true, false);
+	// ITEM-02: a level-scaled piece can get Geralt's level + 1, which he cannot wear: take another copy
+	while(equip && ids.Size() > 0 && tries < 20 && thePlayer.GetInventory().GetItemLevel(ids[0]) > thePlayer.GetLevel())
+	{
+		thePlayer.GetInventory().RemoveItem(ids[0], 1);
+		ids = thePlayer.GetInventory().AddAnItem(itemName, 1, true, true, false);
+		tries += 1;
+	}
 	if(equip && ids.Size() > 0)
 		GetWitcherPlayer().EquipItem(ids[0]);
 	return ids[0];

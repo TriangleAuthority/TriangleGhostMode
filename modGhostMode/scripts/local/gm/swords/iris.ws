@@ -562,6 +562,6 @@ function GetBaseItemData( item : SItemUniqueId, itemInvComponent : CInventoryCom
 
 	tooltipData = wrappedMethod(item, itemInvComponent, isShopItem, compareWithItem, compareItemInv);
 	if(tooltipData && itemInvComponent && itemInvComponent.ItemHasTag(item, 'PhantomWeapon'))
-		tooltipData.SetMemberFlashString("Description", GMGetIrisTooltipDescription());
+		tooltipData.SetMemberFlashString("Description", itemInvComponent.GMGetEnhancedBuffInfo(item) + GMGetIrisTooltipDescription());	// ITEM-12: the table and grindstone lines first
 	return tooltipData;
 }

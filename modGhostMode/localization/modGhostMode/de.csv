@@ -242,3 +242,10 @@
 2110992291|483c9092||Während du im Kampf bist, erhöht sich dein Waffenschaden um $I$ Punkt(e) pro Gegner. Jeder erfolgreiche Treffer lädt dein Schwert auf. Ein vollständig aufgeladenes Schwert, entlädt sich bei einem erfolgreichen Treffer und fügt deinem Gegner kritischen Schaden, mit einem $I$% Angriffskraft Bonus zu und ignoriert zudem Rüstungs-, und Schadenswiderstand. Schwertentladungen betäuben und verletzen alle umstehenden Gegner.<br><br>Treffer bis komplette Aufladung: $I$.<br>Aufladungen verringern sich über Zeit (Eine pro $I$ Sek.) und werden zurückgesetzt, wenn Geralt Schaden nimmt.
 2110992292|1f5adb4f||<br><br>Derzeitige Ladungen: $I$/$I$  <br>Derzeitiger Schadensbonus: $I$ Punkt(e).
 2110992299|f2e69faf||Erfolgreiche Nahkampfangriffe laden dein Schwert mit Energie auf. Wenn du mit einem vollständig aufgeladenen Schwert Schaden verursachst, ist der Waffenschaden um $I$% der Vitalität des Angreifers erhöht. Ein starker Angriff mit dem Schwert beschwört eine Phantomkopie des Schwerts, welche zusätzlichen Schaden verursacht und Schilde, Rüstungen & Abwehrhaltungen durchdringt. Ignoriert zudem sämtliche Schadenswiderstände.<br><br>Treffer bis komplette Aufladung: $I$.<br>Aufladungen verringern sich über Zeit (Eine pro $I$ Sek.) und werden zurückgesetzt, wenn Geralt Schaden nimmt. Voll aufgeladenes Schwert entlädt sich in $I$ Sek. oder nach einem starken Angriff.<br><br>Derzeitige Ladungen: $I$/$I$.<br>Derzeitiger Schadensbonus: $I$ Punkt(e).
+; ITEM-11: the master repair kits (legacy's ids and keys)
+2110992266|cb404984||Meister-Waffenschmiedewerkzeug
+2110992267|29e78e8a||Schmiedewerkzeug eines Meister-Waffenschmieds. Erhöht dauerhaft den Waffenschaden.
+2110992268|fcf7e421||Meister-Rüstungsschmiedewerkzeug
+2110992269|ad70e65b||Schmiedewerkzeug eines Meister-Rüstungsschmieds. Erhöht dauerhaft den Rüstungswert.
+; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
+2110992483|d400b4dd||Schadenswiderstand

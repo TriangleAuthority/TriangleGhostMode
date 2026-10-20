@@ -242,3 +242,10 @@
 2110992291|483c9092||In combattimento, il danno dell'arma aumenta di $I$ punti per nemico. Ogni colpo andato a segno carica la spada. La spada completamente caricata si scarica in caso di colpo andato a segno, infliggendo danni critici con bonus alla potenza d'attacco del $I$% ignorando l'Armatura e resistenza ai danni. La scarica della spada inoltre danneggia e causa vacillamento ai nemici circostanti.<br><br>Colpisci per caricare completamente la spada: $I$. La carica decade nel tempo (uno per $I$ sec.) e si ripristina quando Geralt subisce danni.
 2110992292|1f5adb4f||<br><br>Carica attuale: $I$/$I$. Bonus danno attuale: $I$ punti.
 2110992299|f2e69faf||Infliggere danni con attacchi carica la spada di energia. Quando si attacca con la spada completamente carica, il danno dell'arma viene aumentato del $I$% della vitalità dell'attaccante (se l'attacco ha successo, la vitalità viene prosciugata). Un forte attacco con la spada completamente carica genera una copia fantasma della spada che infligge danni aggiuntivi, che passa attraverso scudi, blocchi e armature e ignora le resistenze ai danni.<br><br>Colpisci per caricare completamente la spada: $I$. La carica decade nel tempo (uno per $I$ sec.) e si ripristina quando Geralt subisce danni. La spada completamente carica si scarica dopo $I$ sec. o dopo un attacco potente.<br><br>Carica attuale: $I$/$I$. Bonus al danno attuale per la spada completamente carica: $I$ punti.
+; ITEM-11: the master repair kits (legacy's ids and keys)
+2110992266|cb404984||Strumenti fabbro maestro
+2110992267|29e78e8a||Forgia strumenti utilizzati dal fabbro maestro. Aumenta permanentemente il danno dell'arma.
+2110992268|fcf7e421||Strumenti armaiolo maestro
+2110992269|ad70e65b||Forgia strumenti utilizzati dall'armaiolo maestro. Aumenta permanentemente il valore dell'armatura.
+; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
+2110992483|d400b4dd||Resistenze ai Danni

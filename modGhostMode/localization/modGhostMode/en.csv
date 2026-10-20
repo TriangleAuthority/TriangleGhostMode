@@ -242,3 +242,10 @@
 2110992291|483c9092||While in combat, weapon damage increases by $I$ points per enemy. Each successful hit charges the sword. Fully charged sword discharges on successful hit, dealing critical damage with $I$% Attack Power bonus and ignoring Armor and damage resistances. Sword discharge also damages and staggers all the surrounding enemies.<br><br>Hits to fully charge the sword: $I$. Charges decay over time (one per $I$ sec.) and reset when Geralt takes damage.
 2110992292|1f5adb4f||<br><br>Current charges: $I$/$I$. Current damage bonus: $I$ points.
 2110992299|f2e69faf||Dealing damage with attacks charges the sword with energy. When attacking with the fully charged sword, weapon damage is increased by $I$% of the player's Vitality (if the attack is successful, player's Vitality is drained). A strong attack with the fully charged sword spawns a phantom copy of the sword that deals additional damage, which goes through shields, blocks and Armor and ignores damage resistances.<br><br>Hits to fully charge the sword: $I$. Charges decay over time (one per $I$ sec.) and reset when Geralt takes damage. Fully charged sword discharges in $I$ sec. or after a strong attack.<br><br>Current charges: $I$/$I$. Current damage bonus for the fully charged sword: $I$ points.
+; ITEM-11: the master repair kits (legacy's ids and keys)
+2110992266|        |item_name_repair_kit_weapon_4|Master weaponsmith tools
+2110992267|        |item_desc_repair_kit_weapon_4|Smithing tools used by master blacksmith. Permanently increase weapon damage.
+2110992268|        |item_name_repair_kit_armor_4|Master armorsmith tools
+2110992269|        |item_desc_repair_kit_armor_4|Smithing tools used by master armorer. Permanently increase armor value.
+; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
+2110992483|        |attribute_name_resistance_perc_bonus_descr|Damage resistances

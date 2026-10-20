@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<redxml>
+<definitions>
+<abilities>
+	<!-- ITEM-12: the Armorer's Table gives +5% to every damage resistance, the grindstone 10 armor penetration
+	     and 5% resistance reduction, for 30 minutes (legacy; DI3; 5.x: 60 minutes, +20% armor or attack power).
+	     resistance_perc_bonus_descr is the tooltip's line (tooltip_settings.csv). Given whole. -->
+	<ability name="EnhancedArmorEffect" on_conflict="replace">
+		<duration type="add" min="1800" />
+		<resistance_perc_bonus_descr type="add" min="0.05" />
+		<slashing_resistance_perc type="add" min="0.05" />
+		<piercing_resistance_perc type="add" min="0.05" />
+		<bludgeoning_resistance_perc type="add" min="0.05" />
+		<rending_resistance_perc type="add" min="0.05" />
+		<elemental_resistance_perc type="add" min="0.05" />
+	</ability>
+	<ability name="EnhancedWeaponEffect" on_conflict="replace">
+		<duration type="add" min="1800" />
+		<armor_reduction type="add" min="10" max="10" />
+		<armor_reduction_perc type="add" min="0.05" max="0.05" />
+	</ability>
+</abilities>
+</definitions>
+</redxml>

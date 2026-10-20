@@ -242,3 +242,10 @@
 2110992291|483c9092||Enquanto em combate, o dano da arma aumenta em $I$ pontos por inimigo. Cada golpe bem-sucedido carrega a espada. Após totalmente carregada, o próximo golpe bem-sucedido a descarrega, causando dano crítico com um bônus de $I$% de Poder de Ataque e ignora a armadura e as resistências à dano. A descarga da espada também causa dano e desequilibra todos os inimigos ao redor.<br><br>Acertos para carregar completamente a espada: $I$. A carga decai com o tempo (uma por $I$s) e zera quando Geralt sofre dano.
 2110992292|1f5adb4f||<br><br>Carga atual: $I$/$I$. Bônus de dano atual: $I$ pontos.
 2110992299|f2e69faf||Causar dano com ataques carrega a espada com energia. Ao atacar com a espada totalmente carregada, o dano da arma é aumentado em $I$% da Vitalidade de Geralt (se o ataque for bem sucedido, a Vitalidade é drenada). Um forte ataque com a espada totalmente carregada gera uma cópia fantasma da espada que causa dano adicional, que atravessa escudos, bloqueios e armaduras e ignora a resistência à dano.<br><br>Acertos para carregar completamente a espada: $I$. A carga decai com o tempo (uma por $I$s) e zera quando Geralt sofre dano. A espada totalmente carregada descarrega em $I$s ou após um Ataque Forte.<br><br>Current charges: $I$/$I$. Bônus de dano atual para a espada totalmente carregada: $I$ pontos.
+; ITEM-11: the master repair kits (legacy's ids and keys)
+2110992266|cb404984||Ferramentas de mestre ferreiro
+2110992267|29e78e8a||Ferramentas de ferreiro usadas pelo mestre ferreiro. Aumenta permanentemente os danos da arma.
+2110992268|fcf7e421||Ferramentas de mestre armeiro
+2110992269|ad70e65b||Ferramentas de ferreiro usadas por armeiro. Aumenta permanentemente a defesa da armadura.
+; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
+2110992483|d400b4dd||Resistência a dano

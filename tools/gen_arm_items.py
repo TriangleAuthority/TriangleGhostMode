@@ -20,7 +20,10 @@ parts, are left as 5.x has them):
   until ITEM; plus the armor-by-level abilities (`autogen_*`, `Autogen ... _Stats`).
 - `DoNotEnhance` on armor pieces where legacy added it, so crafted armor gets no random bonus (the
   owner's decision on the SWD audit's F4, 2026-10-19; `gen_swd_items.py` does the same for swords);
-  where legacy removed it, 5.x's stays (legacy's rework of the random bonuses is ITEM's).
+  where legacy removed it, ITEM-08 removes it (`item_layer.py`).
+- ITEM's fields of the same entries (level tags, level ranges, ...), on the armor pieces, the swords
+  and the abilities written here, as `item_layer.py` gives them for ITEM's ported slices; ITEM's
+  entries no area tool writes come from `gen_item.py`.
 
 - the display of armor pieces where legacy changed it and 5.x kept 1.32's (audit F4): the class
   text (`localisation_key_description`), the icon, the look (`equip_template` and its `<variants>`)
@@ -53,6 +56,9 @@ and failing on any other (audit F10; about a minute).
 import argparse, os, re, subprocess, sys
 import xml.etree.ElementTree as ET
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import item_layer  # noqa: E402  ITEM's fields of the same entries
+
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
 OUT = "gm_arm_items.xml"
@@ -72,7 +78,7 @@ NAME_CARRIED = {"q108 Medium armor 10"}
 AUTOGEN = re.compile(r'^autogen_(?:fixed_)?(?:armor|pants|gloves|boots)_|^Autogen (?:Armor|Gloves|Boots|Pants) _Stats$')
 # The starting armor pieces are given whole by gen_arm_km.py (ARM-12), legacy's DoNotEnhance included.
 KM_STARTING = {"Starting Armor", "Starting Pants", "Starting Boots", "Starting Gloves"}
-ABILITY = re.compile(r'<ability\s+name="([^"]+)"[^>]*>(.*?)</ability>', re.S)
+ABILITY = re.compile(r'<ability\s+name="([^"]+)"[^>]*?(?<!/)>(.*?)</ability>', re.S)  # a self-closing <ability .../> has no body
 NODE = re.compile(r'<([A-Za-z_]\w*)\b([^>]*?)/>')
 
 
@@ -291,6 +297,8 @@ def generate(folder, regular=None):
         new = merge(mtags, ltags, vtags, is_arm)
         if piece:
             new = add_dne(mtags, ltags, new)
+        if piece or SWORD_CATEGORY.search(ventry):
+            new = item_layer.merge_tags(folder, name, mtags, ltags, vtags, new)  # ITEM's tags (item_layer.py)
         minor = [t for t in ltags if t.endswith("SetMinor")]
         if minor:
             ctx["minor"][name] = minor[0]
@@ -310,6 +318,8 @@ def generate(folder, regular=None):
             changes.append(f"slots {slots[2].group(1)} -> {slots[1].group(1)}")
         if piece:
             entry = carry_display(name, folder, mentry, lentry, entry, ventry, ctx, regular, changes)
+            if changes:
+                entry, _ = item_layer.merge_attrs(folder, name, mentry, lentry, entry)  # ITEM's attributes
         if not changes or name in KM_STARTING:
             continue
         entry = re.sub(r'^<item\b', '<item on_conflict="replace"', entry)
@@ -333,6 +343,7 @@ def generate(folder, regular=None):
         body = merge_ability(ma[name][2], la[name][2], va[name][1])
         if body is None:
             continue
+        body, _ = item_layer.merge_nodes(folder, name, ma[name][2], la[name][2], body, nodes, norm)  # ITEM's nodes
         ablocks.append((va[name][0], name, f'<ability name="{name}" on_conflict="replace">{body}</ability>'))
         report.append(f"{folder}: ability {name}")
     ablocks.sort()

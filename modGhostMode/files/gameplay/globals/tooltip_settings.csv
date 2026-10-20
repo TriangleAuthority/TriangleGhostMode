@@ -104,3 +104,4 @@ lifesteal;BAADA0;TRUE;attack;
 armor_reduction_perc;BAADA0;TRUE;attack;0.4
 spell_dmg_bonus;BAADA0;TRUE;attack;0.4
 sword_dmg_bonus;BAADA0;TRUE;attack;0.4
+resistance_perc_bonus_descr;BAADA0;TRUE;defence;0.4

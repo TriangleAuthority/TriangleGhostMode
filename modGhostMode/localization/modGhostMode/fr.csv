@@ -242,3 +242,10 @@
 2110992291|483c9092||En combat, les dégâts de l'arme augmentent de $I$ points par ennemi. Chaque coup qui touche sa cible charge l'épée. Une épée entièrement chargée se décharge à chaque coup réussi, infligeant des dégâts critiques avec un bonus de $I$% à la puissance de l'attaque et qui ignorent la résistance aux dégâts et la résistance de l'armure. La décharge de l'épée inflige également des dégâts et étourdit tous les ennemis proches.<br><br>Coups avant la charge complète de l'épée : $I$. Les charges diminuent au fil du temps (une par $I$ secondes) et se réinitialise lorsque Geralt encaisse des dégâts.
 2110992292|1f5adb4f||<br><br>Charges actuelles : $I$/$I$. Bonus de dégâts actuel : $I$ points.
 2110992299|f2e69faf||Dealing damage with attacks charges the sword with energy. When attacking with the fully charged sword, weapon damage is increased by $I$% of the player's Vitality (if the attack is successful, player's Vitality is drained). A strong attack with the fully charged sword spawns a phantom copy of the sword that deals additional damage, which goes through shields, blocks and Armor and ignores damage resistances.<br><br>Hits to fully charge the sword: $I$. Charges decay over time (one per $I$ sec.) and reset when Geralt takes damage. Fully charged sword discharges in $I$ sec. or after a strong attack.<br><br>Current charges: $I$/$I$. Current damage bonus for the fully charged sword: $I$ points.
+; ITEM-11: the master repair kits (legacy's ids and keys)
+2110992266|cb404984||Outils de maître forgeron
+2110992267|29e78e8a||Outils de forge utilisés par les maîtres forgerons. Augmente les dégâts de l'arme de façon permanente.
+2110992268|fcf7e421||Outils de maître armurier
+2110992269|ad70e65b||Outils de forge utilisés par les maîtres armuriers. Augmente la valeur de l'armure de façon permanente.
+; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
+2110992483|d400b4dd||Résistances aux dégâts

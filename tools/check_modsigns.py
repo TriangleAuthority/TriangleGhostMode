@@ -36,8 +36,9 @@ FUNC = re.compile(r"\b((?:(?:import|final|private|public|protected|latent|timer|
 ANNOT = re.compile(r"@(replaceMethod|wrapMethod|addMethod)(?:\(\s*(\w+)\s*\))?\s*$")
 
 
-def mask(text):
-    """The text with comments, strings and names blanked (same length), for structure scans."""
+def mask(text, keep_strings=False):
+    """The text with comments, strings and names blanked (same length), for structure scans;
+    with keep_strings, strings and names are kept (for comparing lines of code)."""
     out = list(text)
     i, n = 0, len(text)
     while i < n:
@@ -53,6 +54,9 @@ def mask(text):
             while j < n and text[j] != c and text[j] != "\n":
                 j += 2 if text[j] == "\\" else 1
             j = min(j + 1, n)
+            if keep_strings:
+                i = j
+                continue
         else:
             i += 1
             continue
@@ -178,7 +182,7 @@ def lookup(classes, defs, cont, name, inherited):
 def code(line):
     """The line's code (comments dropped, whitespace collapsed) and whether it carries the marker."""
     marked = MARK.lower() in line.lower()
-    c = mask(line)
+    c = mask(line, keep_strings=True)  # names kept: lines differing only in a name align correctly
     return " ".join(c.split()), marked
 
 
@@ -212,7 +216,10 @@ def check_body(mod_body, vanilla_body, first_line):
                 b += 1
             lo = mcode[a][0] if a >= 0 else first_line - 1
             hi = mcode[b][0] if b < len(mcode) else first_line + len(mod)
-            near = [x for x in mod if lo <= x[0] <= hi and x[2]]
+            # a marker comment line right after hi counts too (identical lines such as `break;` can
+            # align the removal one line earlier than the comment that records it)
+            nxt = mcode[b + 1][0] if b + 1 < len(mcode) else hi + 1
+            near = [x for x in mod if lo <= x[0] <= hi and x[2]] + [x for x in mod if hi < x[0] < nxt and x[2] and not x[1]]
             if not near:
                 problems.append((hi if j1 < len(mcode) else lo, "", f"vanilla lines removed here without a //modSigns comment: {' | '.join(vcode[i1:i2])[:120]}"))
     return problems

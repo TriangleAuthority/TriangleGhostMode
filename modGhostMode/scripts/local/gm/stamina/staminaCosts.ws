@@ -14,6 +14,11 @@ import class W3GameParams extends CObject
 	// (legacy PARRY_STAGGER_REDUCE_DAMAGE 0.5; CActor.ReduceDamage multiplies by these).
 	default PARRY_STAGGER_REDUCE_DAMAGE_LARGE = 0.5;	//modSigns: vanilla 0.6
 	default PARRY_STAGGER_REDUCE_DAMAGE_SMALL = 0.5;	//modSigns: vanilla 0.3
+	// ITEM-10: gear wears slower and counts as damaged below 75% (legacy; gm/items/durability.ws).
+	default ITEM_DAMAGED_DURABILITY = 75;	//modSigns: vanilla 50
+	default DURABILITY_ARMOR_LOSE_VALUE = 0.5;	//modSigns: vanilla 0.6
+	default DURABILITY_WEAPON_LOSE_VALUE = 0.05;	//modSigns: vanilla 0.26
+	default DURABILITY_WEAPON_LOSE_VALUE_HARDCORE = 0.05;	//modSigns: vanilla 0.1
 }
 
 function GMIsMeleeStaminaAction(action : EStaminaActionType) : bool

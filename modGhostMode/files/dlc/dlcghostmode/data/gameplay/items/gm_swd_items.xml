@@ -264,23 +264,19 @@
 		<weight							type="base"	min="3.05"				/>
 		<quality						type="add"	min="2"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="33"				/>
-		<item_level_max					type="add"	min="100"				/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="EP2 Silver sword 1 _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.0"				/>
 		<quality						type="add"	min="3"					/>
 		<SlashingDamage					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="36"				/>
-		<item_level_max					type="add"	min="38"				/>
 		<armor_reduction				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="EP2 Silver sword 1R _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.2"				/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="38"				/>
+		<item_level_min					type="add"	min="36"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<armor_reduction				type="base"	min="35"	max="65"	/>
 		<buff_apply_chance				type="add"	min="0.15"				/>
@@ -294,23 +290,19 @@
 		<weight							type="base"	min="6.2"				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="41"				/>
-		<item_level_max					type="add"	min="43"				/>
 		<armor_reduction				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="EP2 Silver sword 3 _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.32"				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="46"				/>
-		<item_level_max					type="add"	min="47"				/>
 		<armor_reduction				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="EP2 Silver sword 3R _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.62"				/>
 		<quality						type="add"	min="4"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="48"				/>
+		<item_level_min					type="add"	min="46"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<critical_hit_chance			type="add"	min="0.30"	max="0.35"	/>
 		<buff_apply_chance 				type="add" 	min="0.20"				/>
@@ -324,39 +316,31 @@
 		<weight							type="base"	min="3.3"				/>
 		<quality						type="add"	min="2"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="37"				/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="Guard Lvl1 steel sword 2 _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.3"				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="38"				/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Guard Lvl2 steel sword 1 _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.9"				/>
 		<quality						type="add"	min="2"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="38"				/>
-		<item_level_max					type="add"	min="41"				/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="Guard Lvl2 steel sword 2 _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.05"				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="39"				/>
-		<item_level_max					type="add"	min="42"				/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Guard lvl1 steel sword 3 Autogen _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.9"				/>
 		<quality						type="add"	min="4"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="43"				/>
+		<item_level_min					type="add"	min="41"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<critical_hit_chance			type="add"	min="0.30"	max="0.35"	/>
 		<critical_hit_damage_bonus		type="add"	min="0.55"	max="0.65"	/>
@@ -369,7 +353,7 @@
 	<ability name="Gwent steel sword 1 _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.35"				/>
 		<quality						type="add"	min="4"					/>
-		<item_level_min					type="add"	min="40"				/>
+		<item_level_min					type="add"	min="36"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<PoisonDamage 					type="add"  min="35" 	max="40"	/>
@@ -384,38 +368,29 @@
 		<weight							type="base"	min="4.75"				/>
 		<quality						type="add"	min="2"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="44"				/>
 		<critical_hit_damage_bonus		type="add"	min="0.1"	max="0.3"	/>
 	</ability>
 	<ability name="Hanza steel sword 2 _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.8"				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="45"				/>
 		<critical_hit_damage_bonus		type="add"	min="0.1"	max="0.3"	/>
 	</ability>
 	<ability name="Knights steel sword 1 _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.25"				/>
 		<quality						type="add"	min="2"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="45"				/>
-		<item_level_max					type="add"	min="46"				/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="Knights steel sword 2 _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.4"				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="46"				/>
-		<item_level_max					type="add"	min="47"				/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Laundry stick _Stats" on_conflict="replace">
 		<weight							type="base"	min="0.7"				/>
 		<quality						type="add"	min="1"					/>
-		<BludgeoningDamage				type="base"	min="10"	max="30"	/>
 		<SilverDamage					type="base"	min="1"					/>
 		<BludgeoningDamage				type="add"	min="10"	max="30"	/>
 	</ability>
@@ -423,7 +398,7 @@
 		<weight							type="base"	min="7.7"				/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="45"				/>
+		<item_level_min					type="add"	min="43"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<desc_poinsonchance_mult		type="add"	min="0.20"				/>
 		<buff_apply_chance				type="add"	min="0.20"				/>
@@ -437,23 +412,19 @@
 		<weight							type="base"	min="4.9"				/>
 		<quality						type="add"	min="2"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="42"				/>
-		<item_level_max					type="add"	min="44"				/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="Squire steel sword 2 _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.05"				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="43"				/>
-		<item_level_max					type="add"	min="45"				/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Squire steel sword 3 _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.4"				/>
 		<quality						type="add"	min="4"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="46"				/>
+		<item_level_min					type="add"	min="44"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<BurningEffect 					is_ability="true" 					/>
 		<buff_apply_chance 				type="add" 	min="0.20" 				/>
@@ -465,8 +436,6 @@
 	</ability>
 	<ability name="Toussaint steel sword 2 _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.92"				/>
-		<item_level_min					type="add"	min="45"				/>
-		<item_level_max					type="add"	min="46"				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
@@ -475,7 +444,7 @@
 		<weight							type="base"	min="4.02"				/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<quality						type="add"	min="4"					/>
-		<item_level_min					type="add"	min="40"				/>
+		<item_level_min					type="add"	min="45"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<BurningEffect					is_ability="true"					/>
 		<buff_apply_chance				type="add"	min="0.20"				/>
@@ -488,7 +457,7 @@
 		<weight							type="base"	min="6.4"				/>
 		<quality						type="add"	min="4"					/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<item_level_min					type="add"	min="40"				/>
+		<item_level_min					type="add"	min="45"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<ConfusionEffect				is_ability="true"					/>
 		<buff_apply_chance				type="add"	min="0.20"				/>
@@ -509,11 +478,11 @@
 		<desc_confusionchance_mult		type="add"	min="0.15"				/>
 		<dismember_chance				type="add"	min="0.1"				/>
 		<spell_power_aard				type="mult"	min="0.10"	max="0.15"	/>
+		<item_level_min					type="add"	min="34"				/>
 	</ability>
 	<ability name="mq7007 Elven Sword _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.82"				/>
 		<quality						type="add"	min="3"					/>
-		<item_level_max					type="add"	min="100"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.15"	max="0.20"	/>
 		<critical_hit_damage_bonus		type="add"	min="0.30"	max="0.40"	/>
@@ -530,11 +499,11 @@
 		<desc_freezingchance_mult 		type="add" 	min="0.15"				/>
 		<dismember_chance				type="add"	min="0.1"				/>
 		<spell_power_quen				type="mult"	min="0.10"	max="0.15"	/>
+		<item_level_min					type="add"	min="34"				/>
 	</ability>
 	<ability name="q702 vampire steel sword _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.5"				/>
 		<quality						type="add"	min="4"					/>
-		<SlashingDamage 				type="base"	min="356"				/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<desc_bleedingchance_mult		type="add"	min="0.15"				/>
 		<BleedingEffect					is_ability="true"					/>
@@ -543,12 +512,14 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 		<focus_gain 					type="add" 	min="0.10"	max="0.15"	/>
 		<spell_power_axii				type="mult"	min="0.10"	max="0.15"	/>
+		<item_level_max					type="add"	min="100"				/>
+		<item_level_min					type="add"	min="37"				/>
 	</ability>
 	<ability name="q704 vampire silver sword _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.3"				/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
-		<item_level_min					type="add"	min="40"				/>
+		<item_level_min					type="add"	min="45"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<desc_confusionchance_mult 		type="add" min="0.20" 				/>
 		<ConfusionEffect 				is_ability="true" 					/>
@@ -561,7 +532,7 @@
 	<ability name="q704 vampire steel sword _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.77"				/>
 		<quality						type="add"	min="4"					/>
-		<item_level_min					type="add"	min="40"				/>
+		<item_level_min					type="add"	min="45"				/>
 		<item_level_max					type="add"	min="100"				/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<desc_bleedingchance_mult		type="add"	min="0.20"				/>
@@ -584,6 +555,7 @@
 		<buff_apply_chance				type="add"	min="0.15"				/>
 		<desc_staggerchance_mult		type="add"	min="0.15"				/>
 		<dismember_chance				type="add"	min="0.1"				/>
+		<item_level_min					type="add"	min="33"				/>
 	</ability>
 	<ability name="sq701 Ravix of Fourhorn Sword _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.57"				/>
@@ -597,6 +569,7 @@
 		<buff_apply_chance				type="add"	min="0.15"				/>
 		<desc_staggerchance_mult		type="add"	min="0.15"				/>
 		<dismember_chance				type="add"	min="0.1"				/>
+		<item_level_min					type="add"	min="33"				/>
 	</ability>
 
 <!-- dlc/dlc10/data/gameplay/items/dlc10_wolf_swords.xml -->
@@ -749,7 +722,6 @@
 	<ability name="mq1058_cat_school_sword _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.2"				/>
 		<quality						type="add"	min="5"		max="5"		/>
-		<SlashingDamage					type="base"	min="30"				/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.2"				/>
 		<desc_bleedingchance_mult		type="add"	min="0.15"				/>
@@ -823,8 +795,6 @@
 		<SilverDamage 					min="1" 	max="1"					/>						
 		<quality 						type="add" 	min="3" 	max="3"		/>
 		<weight 						type="base"	min="4.05"				/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<dismember_chance 			type="add"	min="0.5" 				/>
 	</ability>
 	<ability name="Burning Rose Sword _Stats" on_conflict="replace"> 
@@ -834,8 +804,6 @@
 		<desc_burningchance_mult 		type="add" 	min="0.15" 				/>
 		<quality 						type="add" 	min="4" 	max="4"		/>
 		<weight 						type="base"	min="4.05"				/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<dismember_chance 			type="add"	min="0.5" 				/>
 	</ability>
 	<ability name="Hakland Sabre _Stats" on_conflict="replace">
@@ -843,8 +811,6 @@
 		<critical_hit_chance			type="add"	min="0.15"				/>
 		<quality 						type="add" 	min="2" 	max="2"		/>
 		<weight 						type="base"	min="4.05"				/>
-		<item_level_min					type="add"	min="30"				/>
-		<item_level_max					type="add"	min="34"				/>
 	</ability>
 	<ability name="NPC Olgierd Sabre _Stats" on_conflict="replace">
 				<SlashingDamage min="500" max="500"/>
@@ -862,12 +828,9 @@
 		<BurningEffect 					is_ability="true" 					/>
 		<spell_power_igni 				type="mult" min="0.15" 				/>
 		<spell_power_aard 				type="mult" min="0.15" 				/>
-		<item_level_min					type="add"	min="33"				/>
-		<item_level_max					type="add"	min="35"				/>
 		<armor_reduction_perc			type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Ofir Sabre 2 _Stats" on_conflict="replace">
-		<SlashingDamage 				min="308" 	max="308"				/>
 		<SilverDamage 					min="1" 	max="1"					/>						
 		<critical_hit_chance			type="add"	min="0.15"				/>
 		<quality 						type="add" 	min="3" 	max="3"		/>
@@ -875,7 +838,6 @@
 		<armor_reduction_perc			type="add"	min="0.15"				/>
 	</ability>
 	<ability name="PC Olgierd Sabre _Stats" on_conflict="replace">
-		<SlashingDamage min="363" max="363"/>
 		<SilverDamage								min="1"		max="1"		/>				
 		<quality						type="add"	min="4"		max="4"		/>
 		<weight type="base" min="8" />
@@ -1583,12 +1545,10 @@
 		<weight							type="base"	min="2.2"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
-		<SilverDamage 					type="base"	min="395" 	max="395"	/>
 		<armor_reduction 				type="base" min="50" 				/>
 	</ability>
 	<ability name="EP1 Standalone Starting Steel Sword _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.45"				/>
-		<SlashingDamage 				type="base"	min="265" 	max="265"	/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction 				type="base" min="50" 				/>
@@ -1599,12 +1559,10 @@
 		<weight							type="base"	min="2.2"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
-		<SilverDamage 					type="base"	min="435" 				/>
 		<armor_reduction 				type="base" min="50" 				/>
 	</ability>
 	<ability name="EP2 Standalone Starting Steel Sword _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.45"				/>
-		<SlashingDamage 				type="base"	min="297" 				/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction 				type="base" min="50" 				/>
@@ -1666,8 +1624,6 @@
 		<weight							type="base"	min="4.7"				/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage 				type="base"	min="1"					/>	
-		<item_level_min					type="add"	min="17"				/>
-		<item_level_max					type="add"	min="100"				/>
 		<critical_hit_chance			type="add"	min="0.25"	max="0.30"	/>
 		<critical_hit_damage_bonus		type="add"	min="0.30"	max="0.60"	/>
 		<desc_bleedingchance_mult		type="add"	min="0.15"				/>
@@ -1737,7 +1693,6 @@
 		<armor_reduction_perc			type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Iron Poker _Stats" on_conflict="replace">				
-				<SilverDamage min="1" max="1"/>
 				<weight type="base" min="12" max="12"/>
 				<quality type="add"	min="1"					/>
 		<SilverDamage 					type="base" min="1"		max="1"		/>
@@ -2761,7 +2716,215 @@
 </abilities>
 <items>
 
+<!-- ? -->
+	<item on_conflict="replace"
+				name							="Aerondight EP2"
+				category						="silversword"
+				price							="700"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				equip_template					="mq7006_aerondight"
+				equip_slot						="silver_sword_back_slot"	
+				hold_slot						="r_weapon"	
+				weapon							="true"	
+				lethal							="true"
+				ability_mode					="OnHold"
+				hand							="right"
+				sound_identification			="long steel"
+				draw_event						="DrawWeapon"
+				draw_act						="draw_steel_sword_back_act"
+				draw_deact						="draw_steel_sword_back_deact"
+				holster_event					="HolsterWeapon"
+				holster_act						="holster_steel_sword_back_act"
+				holster_deact					="holster_steel_sword_back_deact"
+				localisation_key_name			="item_name_aerondight_ep2"
+				localisation_key_description	="item_desc_silver_sword"
+				icon_path						="icons\inventory\quests\Aerondight EP2.png"
+			>
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary, EP1, EP2, Aerondight
+		</tags>
+				<base_abilities>				<a>Default weapon _Stats</a>
+												<a>Aerondight_EP2_Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="2">Hardened leather</parts>
+												<parts count="3">Chitin scale</parts>
+												<parts count="4">Green gold ore</parts>
+				</recycling_parts>
+				<anim_actions>
+												<action 
+													name="draw"	
+													event="DrawWeapon"
+													act="draw_steel_sword_back_act"	
+													deact="draw_steel_sword_back_deact">
+												</action>
+												<action 
+													name="holster"	
+													event="HolsterWeapon"	
+													act="holster_steel_sword_back_act"	
+													deact="holster_steel_sword_back_deact">
+												</action>
+												<action 
+													name="attack"	
+													event="attack_steel_sword_back"	
+													act="attack_steel_sword_back_act"	
+													deact="attack_steel_sword_back_deact">
+												</action>
+				</anim_actions>
+				<anim_switches>
+												<anim_switch 
+													category="steelsword"	
+													equip_slot="silver_sword_back_slot"
+													event="silver_to_steel"
+													switch_act="silver_to_steel_act"
+													switch_deact="silver_to_steel_deact">
+												</anim_switch>
+												<anim_switch
+													category="steelsword" 
+													equip_slot="steel_sword_back_slot"
+													event="steel_to_silver"
+													switch_act="steel_to_silver_act"
+													switch_deact="steel_to_silver_deact">
+												</anim_switch>
+				</anim_switches>
+				<player_override><bound_items>					<item>scabbard_silver_2_04</item>
+				</bound_items></player_override>
+			</item>
+
 <!-- dlc/bob/data/gameplay/items/def_item_weapons.xml -->
+	<item on_conflict="replace"
+		name							="Damien sword"
+		category						="steelsword"
+		price							="14"
+		initial_durability				="200"
+		max_durability					="200"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="damien_sword"
+		equip_slot						="l_hip_weapon_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="draw_short_sword"
+		draw_act						="draw_sword_act"
+		draw_deact						="draw_sword_deact"
+		holster_event					="holster_short_sword"
+		holster_act						="holster_sword_act"
+		holster_deact					="holster_sword_deact"
+		localisation_key_name			="item_name_guard_lvl1_steel_sword"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/damien_sword_64x128.png"
+	>
+		<tags>							SteelWeapon, Weapon, sword1h, 1handedWeapon, NoShow, NoDrop, mod_weapon, Autogen
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Damien sword_Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="1">Leather straps</parts>
+										<parts count="2">Steel ingot</parts>
+		</recycling_parts> 
+		<anim_actions>					<action 
+											name="draw" 
+											event="draw_short_sword"
+											act="draw_sword_act" 
+											deact="draw_sword_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="holster_short_sword" 
+											act="holster_sword_act" 
+											deact="holster_sword_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+		</anim_switches>
+		<bound_items>
+			<item>scabbard_knight_lvl1</item>
+		</bound_items>	
+	</item>
+	<item on_conflict="replace"
+		name							="EP2 Silver sword 1R"
+		category						="silversword" 
+		price							="974"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="silver_sword_lvl7"
+		equip_slot						="silver_sword_back_slot" 
+		hold_slot						="r_weapon"
+		weapon							="true"
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_ep2_bonus_silver_sword_1" 
+		localisation_key_description	="item_desc_silver_sword"
+		icon_path						="icons/inventory/weapons/silver_sword_lvl7_64x128.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>EP2 Silver sword 1R _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather squares</parts>
+										<parts count="4">Leather straps</parts>
+										<parts count="4">Green gold ore</parts>
+										<parts count="2">Emerald dust</parts>
+										<parts count="2">Amber dust</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon" 
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_silver_sword_back" 
+											act="attack_silver_sword_back_act" 
+											deact="attack_silver_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="steelsword" 
+											equip_slot="steel_sword_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+										<anim_switch
+											category="steelsword" 
+											equip_slot="axe_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+		</anim_switches>
+		<player_override><bound_items>					<item>scabbard_silver_1_01</item>
+		</bound_items></player_override>
+	</item>
 	<item on_conflict="replace"
 		name							="EP2 Silver sword 2"
 		category						="silversword" 
@@ -2789,7 +2952,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/elven_silver_sword_lvl1-64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, DoNotEnhance
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP2 Silver sword 2 _Stats</a>
@@ -2840,6 +3003,152 @@
 		</bound_items></player_override>
 	</item>
 	<item on_conflict="replace"
+		name							="EP2 Silver sword 3R"
+		category						="silversword" 
+		price							="1045"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="dwarven_sword_lvl1"
+		equip_slot						="silver_sword_back_slot" 
+		hold_slot						="r_weapon"
+		weapon							="true"
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_ep2_bonus_silver_sword_3" 
+		localisation_key_description	="item_desc_silver_sword"
+		icon_path						="icons/inventory/weapons/dwarven_silver_sword_lvl1-64x128.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>EP2 Silver sword 3R _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="4">Dwimeryte ore</parts>
+										<parts count="2">Ruby dust</parts>
+										<parts count="2">Amethyst dust</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon" 
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_silver_sword_back" 
+											act="attack_silver_sword_back_act" 
+											deact="attack_silver_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="steelsword" 
+											equip_slot="steel_sword_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+										<anim_switch
+											category="steelsword" 
+											equip_slot="axe_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+		</anim_switches>
+		<player_override><bound_items>					<item>scabbard_silver_1_01</item>
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="Gwent steel sword 1"
+		category						="steelsword"
+		price							="726"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="collector_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_gwent_steel_sword_1"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/gwent_steel_sword_1_64x128.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Gwent steel sword 1 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="1">Leather straps</parts>
+										<parts count="2">Dark steel ingot</parts>
+										<parts count="2">Emerald dust</parts>
+										<parts count="2">Sapphire dust</parts>
+										<parts count="2">Amber dust</parts>
+		</recycling_parts> 
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_nomansland_01</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
 		name							="Hanza steel sword 2"
 		category						="steelsword" 
 		price							="316"
@@ -2866,7 +3175,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/hanza_1_steel_sword_64x128.png"
 	>			
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, mod_weapon
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Hanza steel sword 2 _Stats</a>
@@ -2934,7 +3243,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/knight_1_steel_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon,
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Knights steel sword 1 _Stats</a>
@@ -3002,7 +3311,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/knight_1_steel_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon,
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Knights steel sword 2 _Stats</a>
@@ -3044,6 +3353,73 @@
 		</bound_items></player_override>
 	</item>
 	<item on_conflict="replace" 
+		name							="Laundry pole" 
+		category						="steelsword" 
+		price							="24"
+		enhancement_slots				="0" 
+		equip_template					="q705_item__stick_for_laundry_pressing"
+		stackable						="1" 
+		equip_slot						="axe_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		initial_durability				="100"
+		max_durability					="100"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="sword_wooden"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterSecondaryWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		grid_size 						= "2"
+		localisation_key_name			="item_name_q705_item__stick_for_laundry_pressing" 
+		localisation_key_description	="item_desc_q705_item__stick_for_laundry_pressing"
+		icon_path						="icons/inventory/weapons/q705_item__stick_for_laundry_pressing_64x128.png"
+	>
+	<tags>							Wooden, Quest, Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeClub, SecondaryWeapon, mod_secondary, NoShow, AutogenForceLevel
+		</tags>
+	<player_override><bound_items>
+	</bound_items></player_override>
+	<base_abilities>
+										<a>Laundry stick _Stats</a>
+										<a>Default weapon _Stats</a>
+	</base_abilities>
+	<recycling_parts>					<parts count="2">Haft</parts>
+	</recycling_parts> 
+	<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+									</anim_actions>
+									<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+	</anim_switch>
+	</anim_switches>			
+</item>
+	<item on_conflict="replace" 
 		name							="Laundry stick" 
 		category						="steelsword" 
 		price							="12"
@@ -3070,7 +3446,7 @@
 		localisation_key_description	="item_desc_q705_laundry_stick"
 		icon_path						="icons/inventory/weapons/q705_item__laundry_stick_64x128.png"
 	>
-	<tags>							Quest, Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeClub, SecondaryWeapon, mod_secondary, NoShow, Wooden
+	<tags>							Quest, Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeClub, SecondaryWeapon, mod_secondary, NoShow, AutogenForceLevel, Wooden
 		</tags>
 	<player_override><bound_items>
 	</bound_items></player_override>
@@ -3137,7 +3513,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/squire_1_steel_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon,
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Squire steel sword 1 _Stats</a>
@@ -3205,7 +3581,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/squire_1_steel_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon,
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Squire steel sword 2 _Stats</a>
@@ -3273,7 +3649,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/toussaint_2_steel_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon,
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Toussaint steel sword 2 _Stats</a>
@@ -3283,6 +3659,153 @@
 										<parts count="2">Green gold ore</parts>
 										<parts count="1">Infused shard</parts>
 										<parts count="1">Diamond flawless</parts>
+		</recycling_parts> 
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_nomansland_01</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="Unique silver sword"
+		category						="silversword" 
+		price							="1204"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="unique_silver_sword"
+		equip_slot						="silver_sword_back_slot" 
+		hold_slot						="r_weapon"
+		weapon							="true"
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_serpent_silver_sword_3" 
+		localisation_key_description	="item_desc_silver_sword"
+		icon_path						="icons/inventory/weapons/unique_1_silver_sword_1_64x128.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Unique silver sword _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather squares</parts>
+										<parts count="4">Leather straps</parts>
+										<parts count="4">Green gold ore</parts>
+										<parts count="2">Infused dust</parts>
+										<parts count="2">Diamond</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon" 
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_silver_sword_back" 
+											act="attack_silver_sword_back_act" 
+											deact="attack_silver_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="steelsword" 
+											equip_slot="steel_sword_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+										<anim_switch
+											category="steelsword" 
+											equip_slot="axe_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+		</anim_switches>
+		<player_override><bound_items>					<item>scabbard_silver_1_01</item>
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="Unique steel sword"
+		category						="steelsword"
+		price							="830"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="unique_steel_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_unique_steel_sword"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/unique_1_steel_sword_1_64x128.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Unique steel sword _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather squares</parts>
+										<parts count="3">Dark steel ingot</parts>
+										<parts count="2">Sapphire dust</parts>
+										<parts count="2">Ruby dust</parts>
+										<parts count="2">Emerald dust</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -3343,7 +3866,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/toussaint_1_steel_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance
+		<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq7001 Toussaint steel sword _Stats</a>
@@ -3411,7 +3934,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/quests/Cianfanelli Sword.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq7011 Cianfanelli steel sword _Stats</a>
@@ -3453,6 +3976,75 @@
 		</bound_items></player_override>
 	</item>
 	<item on_conflict="replace"
+		name							="q702 vampire steel sword"
+		category						="steelsword" 
+		price							="674"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="q704_steel_vampire" 
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_baw_vampire_steel_sword" 
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/q704_vampire_steel_sword_64x128.png" 
+	>
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece, Autogen, AutogenUseLevelRange
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>q702 vampire steel sword _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather</parts>
+										<parts count="2">Dark steel ingot</parts>
+										<parts count="2">Ruby dust</parts>
+										<parts count="2">Diamond dust</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>q704_scabbard_steel_vampire</item>   
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
 		name							="q704 vampire silver sword"
 		category						="silversword" 
 		price							="1062"
@@ -3479,7 +4071,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/vampire_silver_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>q704 vampire silver sword _Stats</a>
@@ -3526,6 +4118,834 @@
 										</anim_switch>
 		</anim_switches>
 		<player_override><bound_items>					<item>scabbard_silver_vampire</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="q704 vampire steel sword"
+		category						="steelsword" 
+		price							="1225"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="steel_vampire"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_baw_vampire_steel_sword_2" 
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/vampire_steel_sword_64x128.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>q704 vampire steel sword _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="4">Dwimeryte ore</parts>
+										<parts count="2">Ruby dust</parts>
+										<parts count="2">Diamond dust</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_vampire</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="sq701 Geralt of Rivia sword"
+		category						="steelsword"
+		price							="842"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="sword_geralt_of_rivia"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_geralt_of_rivia_sword"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/quests/sq701_sword_geralt_of_rivia.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>sq701 Geralt of Rivia Sword _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="6">Green gold ore</parts>
+		</recycling_parts> 
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_nomansland_01</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="sq701 Ravix of Fourhorn sword"
+		category						="steelsword"
+		price							="857"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="sword_ravix_of_fourhorn"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_ravix_of_fourhorn_sword"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/quests/sq701_sword_ravix_of_fourhorn.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>sq701 Ravix of Fourhorn Sword _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="6">Green gold ore</parts>
+		</recycling_parts> 
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_nomansland_01</item>  
+		</bound_items></player_override>
+	</item>
+
+<!-- dlc/bob/data/gameplay/items_plus/def_item_weapons.xml -->
+	<item on_conflict="replace"
+		name							="EP2 Silver sword 1"
+		category						="silversword" 
+		price							="574"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="1"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="silver_sword_lvl7"
+		equip_slot						="silver_sword_back_slot" 
+		hold_slot						="r_weapon"
+		weapon							="true"
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_ep2_bonus_silver_sword_1" 
+		localisation_key_description	="item_desc_silver_sword"
+		icon_path						="icons/inventory/weapons/silver_sword_lvl7_64x128.png"
+	>
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>EP2 Silver sword 1 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather squares</parts>
+										<parts count="4">Leather straps</parts>
+										<parts count="4">Green gold ore</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon" 
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_silver_sword_back" 
+											act="attack_silver_sword_back_act" 
+											deact="attack_silver_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="steelsword" 
+											equip_slot="steel_sword_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+										<anim_switch
+											category="steelsword" 
+											equip_slot="axe_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+		</anim_switches>
+		<player_override><bound_items>					<item>scabbard_silver_1_01</item>
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="EP2 Silver sword 3"
+		category						="silversword" 
+		price							="710"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="2"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="dwarven_sword_lvl1"
+		equip_slot						="silver_sword_back_slot" 
+		hold_slot						="r_weapon"
+		weapon							="true"
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_ep2_bonus_silver_sword_3" 
+		localisation_key_description	="item_desc_silver_sword"
+		icon_path						="icons/inventory/weapons/dwarven_silver_sword_lvl1-64x128.png"
+	>
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>EP2 Silver sword 3 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather squares</parts>
+										<parts count="4">Leather straps</parts>
+										<parts count="4">Dwimeryte ore</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon" 
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_silver_sword_back" 
+											act="attack_silver_sword_back_act" 
+											deact="attack_silver_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="steelsword" 
+											equip_slot="steel_sword_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+										<anim_switch
+											category="steelsword" 
+											equip_slot="axe_back_slot"
+											event="steel_to_silver"
+											switch_act="steel_to_silver_act"
+											switch_deact="steel_to_silver_deact">
+										</anim_switch>
+		</anim_switches>
+		<player_override><bound_items>					<item>scabbard_silver_1_01</item>
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="Guard Lvl1 steel sword 1"
+		category						="steelsword"
+		price							="96"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="guard_lvl1_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_guard_lvl1_geralt_steel_sword"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/guard_1_steel_sword_64x128.png"
+	>
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Guard Lvl1 steel sword 1 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather straps</parts>
+										<parts count="4">Dark iron ore</parts>
+		</recycling_parts> 
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_nomansland_01</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="Guard Lvl1 steel sword 2"
+		category						="steelsword"
+		price							="96"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="1"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="guard_lvl1_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_guard_lvl1_geralt_steel_sword"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/guard_1_steel_sword_64x128.png"
+	>
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Guard Lvl1 steel sword 2 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather straps</parts>
+										<parts count="4">Dark iron ore</parts>
+		</recycling_parts> 
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_nomansland_01</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="Guard Lvl2 steel sword 1"
+		category						="steelsword"
+		price							="138"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="guard_lvl2_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_guard_lvl2_geralt_steel_sword"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/guard_2_steel_sword_64x128.png"
+	>
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Guard Lvl2 steel sword 1 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="1">Leather squares</parts>
+										<parts count="4">Leather straps</parts>
+										<parts count="4">Dark iron ore</parts>
+		</recycling_parts> 
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_3_06</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="Guard Lvl2 steel sword 2"
+		category						="steelsword"
+		price							="153"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="1"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="guard_lvl2_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_guard_lvl2_geralt_steel_sword"
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/guard_2_steel_sword_64x128.png"
+	>
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Guard Lvl2 steel sword 2 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="1">Leather squares</parts>
+										<parts count="4">Leather straps</parts>
+										<parts count="4">Dark iron ore</parts>
+		</recycling_parts> 
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>scabbard_steel_3_06</item>  
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="Hanza steel sword 0"
+		category						="steelsword" 
+		price							="116"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="hanza_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_hanza_steel_sword" 
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/hanza_1_steel_sword_64x128.png"
+	>			
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Hanza steel sword 0 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Timber</parts>
+										<parts count="2">Dark steel ingot</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>	
+		<player_override><bound_items>					<item>Sabre Scabbard v02</item>
+		</bound_items></player_override>				
+		
+	</item>
+	<item on_conflict="replace"
+		name							="Hanza steel sword 1"
+		category						="steelsword" 
+		price							="216"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="hanza_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_hanza_steel_sword" 
+		localisation_key_description	="item_desc_steel_sword"
+		icon_path						="icons/inventory/weapons/hanza_1_steel_sword_64x128.png"
+	>			
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>Hanza steel sword 1 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Timber</parts>
+										<parts count="2">Dark steel ingot</parts>
+										<parts count="1">Ruby dust</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>					<item>Sabre Scabbard v02</item>
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
+		name							="mq7007 Elven Sword"
+		category						="steelsword"
+		price							="154"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="2"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="mq7007_item__elven_sword"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_mq7007_elven_sword" 
+		localisation_key_description	="item_desc_quest_item"
+		icon_path						="icons\inventory\quests\mq7007_ancient_elven_sword_64x128.png"
+	>
+		<tags>							Autogen, AutogenForceLevel, Quest, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>mq7007 Elven Sword _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="4">Dark iron ore</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>
+		<player_override><bound_items>					<item>Sabre Scabbard v02</item>
 		</bound_items></player_override>
 	</item>
 
@@ -4692,7 +6112,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons\inventory\quests\cat_school_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, LynxSetMinor, SetBonusPiece
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, LynxSetMinor, SetBonusPiece
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq1058_cat_school_sword _Stats</a>
@@ -4908,7 +6328,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/burning_rose_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Burning Rose Sword _Stats</a>
@@ -4980,7 +6400,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/burning_rose_sword_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Burning Rose Sword B _Stats</a>
@@ -5052,7 +6472,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/ofir_steel_sabre_3_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, Ofir
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, Ofir
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Hakland Sabre _Stats</a>
@@ -5122,7 +6542,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/ofir_steel_sabre_2_64x128.png"
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, mod_valuable, Ofir, EP1
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, mod_valuable, Ofir, EP1
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Ofir Sabre 1 _Stats</a>
@@ -5191,7 +6611,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/ofir_steel_sabre_3_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, mod_valuable, Ofir, EP1
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, mod_valuable, Ofir, EP1, Autogen
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Ofir Sabre 2 _Stats</a>
@@ -5235,6 +6655,73 @@
 		</player_override>
 	</item>
 	<item on_conflict="replace"
+		name							="Olgierd Sabre"
+		category						="steelsword"
+		price							="16"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		equip_template					="olgierd_sabre"
+		equip_slot						="steel_sword_back_slot" 
+		hold_slot						="r_weapon" 
+		weapon							="true" 
+		lethal							="true"
+		ability_mode					="OnHold"
+		hand							="right"
+		sound_identification			="long steel"
+		draw_event						="DrawWeapon"
+		draw_act						="draw_steel_sword_back_act"
+		draw_deact						="draw_steel_sword_back_deact"
+		holster_event					="HolsterWeapon"
+		holster_act						="holster_steel_sword_back_act"
+		holster_deact					="holster_steel_sword_back_deact"
+		localisation_key_name			="item_name_olgierd_sabre" 
+		localisation_key_description	="item_desc_olgierd_sabre"
+		icon_path						="icons/inventory/weapons/olgierd_sabre_64x128.png"
+	>
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, PhantomWeapon, OlgierdSabre, EP1, Autogen
+		</tags>
+		<base_abilities>				<a>Default weapon _Stats</a>
+										<a>PC Olgierd Sabre _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="1">Leather squares</parts>
+										<parts count="2">Iron ingot</parts>
+		</recycling_parts>
+		<anim_actions>
+										<action 
+											name="draw" 
+											event="DrawWeapon"
+											act="draw_steel_sword_back_act" 
+											deact="draw_steel_sword_back_deact">
+										</action>
+										<action 
+											name="holster" 
+											event="HolsterWeapon" 
+											act="holster_steel_sword_back_act" 
+											deact="holster_steel_sword_back_deact">
+										</action>
+										<action 
+											name="attack" 
+											event="attack_steel_sword_back" 
+											act="attack_steel_sword_back_act" 
+											deact="attack_steel_sword_back_deact">
+										</action>
+		</anim_actions>
+		<anim_switches>
+										<anim_switch 
+											category="silversword" 
+											equip_slot="silver_sword_back_slot"
+											event="silver_to_steel"
+											switch_act="silver_to_steel_act"
+											switch_deact="silver_to_steel_deact">
+										</anim_switch>
+		</anim_switches>			
+		<player_override><bound_items>				<item>Sabre Scabbard 07</item>  	 
+		</bound_items></player_override>
+	</item>
+	<item on_conflict="replace"
 		name							="PC Caretaker Shovel"
 		category						="steelsword"
 		price							="14"
@@ -5261,7 +6748,7 @@
 		localisation_key_description 	="item_name_caretaker_spade_desc"
 		icon_path						="icons/inventory/weapons/caretaker_shovel_64x128.png"
 	>
-		<tags>							Autogen, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, TypeAxe, SecondaryWeapon, mod_secondary
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeAxe, SecondaryWeapon, mod_secondary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>PC Caretaker Shovel _Stats</a>
@@ -10490,7 +11977,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/silver_sword_lvl1_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, DoNotEnhance, Autogen, AutogenForceLevel
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP1 Standalone Starting Silver Sword _Stats</a>
@@ -10564,7 +12051,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/nomansland_sword_lvl1_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance, Autogen, AutogenForceLevel
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP1 Standalone Starting Steel Sword _Stats</a>
@@ -10633,7 +12120,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/silver_sword_lvl1_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, DoNotEnhance, Autogen, AutogenForceLevel
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP2 Standalone Starting Silver Sword _Stats</a>
@@ -10707,7 +12194,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/nomansland_sword_lvl1_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance, Autogen, AutogenForceLevel
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP2 Standalone Starting Steel Sword _Stats</a>
@@ -11066,7 +12553,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/gnomish_silver_sword_lvl2-64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, mod_origin_nonhuman, 1handedWeapon
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, mod_origin_nonhuman, 1handedWeapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>DLC10_Remorse _Stats</a>

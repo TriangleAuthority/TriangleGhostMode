@@ -8,8 +8,6 @@
 	<ability name="Guard Lvl1 A Armor 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="14.96" 			/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="36"				/>
-					<item_level_max					type="add"	min="38"				/>
 					<slashing_resistance_perc		type="base"	min="0.03"				/>
 					<bludgeoning_resistance_perc	type="base" min="0.02"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.07"				/>
@@ -20,8 +18,6 @@
 	<ability name="Guard Lvl1 A Armor 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="18.24" 			/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="37"				/>
-					<item_level_max					type="add"	min="39"				/>
 					<slashing_resistance_perc		type="base"	min="0.03"				/>
 					<bludgeoning_resistance_perc	type="base" min="0.02"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.07"				/>
@@ -32,8 +28,6 @@
 	<ability name="Guard Lvl1 Armor 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="15.12" 			/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="35"				/>
-					<item_level_max					type="add"	min="37"				/>
 					<slashing_resistance_perc		type="base"	min="0.03"				/>
 					<bludgeoning_resistance_perc	type="base" min="0.02"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.07"				/>
@@ -44,8 +38,6 @@
 	<ability name="Guard Lvl1 Armor 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="18.4" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="35"				/>
-					<item_level_max					type="add"	min="38"				/>
 					<slashing_resistance_perc		type="base"	min="0.03"				/>
 					<bludgeoning_resistance_perc	type="base" min="0.02"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.07"				/>
@@ -56,8 +48,6 @@
 	<ability name="Guard Lvl2 A Armor 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="12.52" 			/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="40"				/>
-					<item_level_max					type="add"	min="41"				/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -67,8 +57,6 @@
 	<ability name="Guard Lvl2 A Armor 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="14.12" 			/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="41"				/>
-					<item_level_max					type="add"	min="42"				/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -78,8 +66,6 @@
 	<ability name="Guard Lvl2 Armor 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="12.12" 			/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="38"				/>
-					<item_level_max					type="add"	min="39"				/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -89,8 +75,6 @@
 	<ability name="Guard Lvl2 Armor 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="12.12" 			/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="39"				/>
-					<item_level_max					type="add"	min="40"				/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -100,8 +84,6 @@
 	<ability name="Knight Geralt A Armor 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="24.28" 			/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="45"				/>
-					<item_level_max					type="add"	min="46"				/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
@@ -112,8 +94,6 @@
 	<ability name="Knight Geralt A Armor 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="24.6" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="46"				/>
-					<item_level_max					type="add"	min="47"				/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
@@ -124,8 +104,6 @@
 	<ability name="Knight Geralt Armor 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="18.69" 			/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="42"				/>
-					<item_level_max					type="add"	min="44"				/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
@@ -136,8 +114,6 @@
 	<ability name="Knight Geralt Armor 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="18.85" 			/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="43"				/>
-					<item_level_max					type="add"	min="45"				/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
@@ -148,8 +124,6 @@
 	<ability name="Toussaint Armor 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="14.8" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="45"				/>
-					<item_level_max					type="add"	min="46"				/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
@@ -160,7 +134,6 @@
 	<ability name="q702_vampire_armor _Stats" on_conflict="replace">
 					<weight							type="base"	min="16.93" 			/>
 					<quality						type="add"	min="4"					/>
-					<armor							type="base"	min="230" 				/>
 					<slashing_resistance_perc		type="base"	min="0.22"				/>
 					<piercing_resistance_perc		type="base"	min="0.22"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.22"				/>
@@ -172,8 +145,6 @@
 	<ability name="q704_vampire_armor _Stats" on_conflict="replace">
 					<weight							type="base"	min="16.93" 			/>
 					<quality						type="add"	min="4"					/>
-					<item_level_min					type="add"	min="40"				/>
-					<item_level_max					type="add"	min="100"				/>
 					<slashing_resistance_perc		type="base"	min="0.22"				/>
 					<piercing_resistance_perc		type="base"	min="0.22"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.22"				/>
@@ -184,8 +155,7 @@
 	</ability>
 	<ability name="sq701_geralt_armor _Stats" on_conflict="replace">
 					<weight							type="base"	min="23.6"				/>
-					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_max					type="add"	min="100"				/>
+					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<bludgeoning_resistance_perc	type="base" min="0.20"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
@@ -195,8 +165,7 @@
 	</ability>
 	<ability name="sq701_ravix_armor _Stats" on_conflict="replace">
 					<weight							type="base"	min="23.6"				/>
-					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_max					type="add"	min="100"				/>
+					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<bludgeoning_resistance_perc	type="base" min="0.20"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
@@ -209,8 +178,6 @@
 	<ability name="Guard Lvl1 A Boots 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.32" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="36"				/>
-					<item_level_max					type="add"	min="38"				/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01"				/>
@@ -221,8 +188,6 @@
 	<ability name="Guard Lvl1 A Boots 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.56" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="37"				/>
-					<item_level_max					type="add"	min="39"				/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01"				/>
@@ -233,8 +198,6 @@
 	<ability name="Guard Lvl1 Boots 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.12" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="35"				/>
-					<item_level_max					type="add"	min="37"				/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01"				/>
@@ -245,8 +208,6 @@
 	<ability name="Guard Lvl1 Boots 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.36" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="35"				/>
-					<item_level_max					type="add"	min="38"				/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01"				/>
@@ -257,8 +218,6 @@
 	<ability name="Guard Lvl2 A Boots 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.02" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="40"				/>
-					<item_level_max					type="add"	min="41"				/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -268,8 +227,6 @@
 	<ability name="Guard Lvl2 A Boots 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.06" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="41"				/>
-					<item_level_max					type="add"	min="42"				/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -279,8 +236,6 @@
 	<ability name="Guard Lvl2 Boots 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.62" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="38"				/>
-					<item_level_max					type="add"	min="39"				/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -290,8 +245,6 @@
 	<ability name="Guard Lvl2 Boots 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.86" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="39"				/>
-					<item_level_max					type="add"	min="40"				/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -301,8 +254,6 @@
 	<ability name="Knight Geralt A Boots 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="4.66" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="45"				/>
-					<item_level_max					type="add"	min="46"				/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
 					<staminaRegen_armor_mod			type="mult" min="-0.1"				/>
@@ -313,8 +264,6 @@
 	<ability name="Knight Geralt A Boots 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="5.54" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="46"				/>
-					<item_level_max					type="add"	min="47"				/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
 					<staminaRegen_armor_mod			type="mult" min="-0.1"				/>
@@ -325,8 +274,6 @@
 	<ability name="Knight Geralt Boots 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="4.46" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="42"				/>
-					<item_level_max					type="add"	min="44"				/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
 					<staminaRegen_armor_mod			type="mult" min="-0.1"				/>
@@ -336,9 +283,7 @@
 	</ability>
 	<ability name="Knight Geralt Boots 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="5.34" 				/>
-					<quality						type="add"	min="3"		max="2"		/>
-					<item_level_min					type="add"	min="43"				/>
-					<item_level_max					type="add"	min="45"				/>
+					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
 					<staminaRegen_armor_mod			type="mult" min="-0.1"				/>
@@ -349,8 +294,6 @@
 	<ability name="Toussaint Boots 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.96" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="45"				/>
-					<item_level_max					type="add"	min="46"				/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
 					<staminaRegen_armor_mod			type="mult" min="-0.1"				/>
@@ -361,7 +304,6 @@
 	<ability name="q702_vampire_boots _Stats" on_conflict="replace">
 					<weight							type="base"	min="7.0" 				/>
 					<quality						type="add"	min="4"					/>
-					<armor							type="base"	min="87"				/>
 					<slashing_resistance_perc		type="base"	min="0.13"				/>
 					<piercing_resistance_perc		type="base"	min="0.13"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.13"				/>
@@ -373,8 +315,6 @@
 	<ability name="q704_vampire_boots _Stats" on_conflict="replace">
 					<weight							type="base"	min="7.75" 				/>
 					<quality						type="add"	min="4"					/>
-					<item_level_min					type="add"	min="40"				/>
-					<item_level_max					type="add"	min="100"				/>
 					<slashing_resistance_perc		type="base"	min="0.13"				/>
 					<piercing_resistance_perc		type="base"	min="0.13"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.13"				/>
@@ -385,8 +325,7 @@
 	</ability>
 	<ability name="sq701_geralt_boots _Stats" on_conflict="replace">
 					<weight							type="base"	min="6.65" 				/>
-					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_max					type="add"	min="100"				/>
+					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
 					<staminaRegen_armor_mod			type="mult" min="-0.1"				/>
@@ -1055,8 +994,6 @@
 	<ability name="Guard Lvl1 A Gloves 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.72" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="36"				/>
-					<item_level_max					type="add"	min="38"				/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01"				/>
@@ -1067,8 +1004,6 @@
 	<ability name="Guard Lvl1 A Gloves 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.76" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="37"				/>
-					<item_level_max					type="add"	min="39"				/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01"				/>
@@ -1079,8 +1014,6 @@
 	<ability name="Guard Lvl1 Gloves 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.32" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="35"				/>
-					<item_level_max					type="add"	min="37"				/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01"				/>
@@ -1091,8 +1024,6 @@
 	<ability name="Guard Lvl1 Gloves 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="3.36" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="35"				/>
-					<item_level_max					type="add"	min="38"				/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01"				/>
@@ -1103,8 +1034,6 @@
 	<ability name="Guard Lvl2 A Gloves 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.68" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="40"				/>
-					<item_level_max					type="add"	min="41"				/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -1114,8 +1043,6 @@
 	<ability name="Guard Lvl2 A Gloves 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.72" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="41"				/>
-					<item_level_max					type="add"	min="42"				/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -1125,8 +1052,6 @@
 	<ability name="Guard Lvl2 Gloves 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.13" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="38"				/>
-					<item_level_max					type="add"	min="39"				/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -1136,8 +1061,6 @@
 	<ability name="Guard Lvl2 Gloves 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.17" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="39"				/>
-					<item_level_max					type="add"	min="40"				/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -1147,8 +1070,6 @@
 	<ability name="Knight Geralt A Gloves 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="7.12" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="45"				/>
-					<item_level_max					type="add"	min="46"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
@@ -1159,8 +1080,6 @@
 	<ability name="Knight Geralt A Gloves 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="6.1" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="46"				/>
-					<item_level_max					type="add"	min="47"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
@@ -1171,8 +1090,6 @@
 	<ability name="Knight Geralt Gloves 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="4.05" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="42"				/>
-					<item_level_max					type="add"	min="44"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
@@ -1183,8 +1100,6 @@
 	<ability name="Knight Geralt Gloves 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="5.08" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="43"				/>
-					<item_level_max					type="add"	min="45"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
@@ -1195,8 +1110,6 @@
 	<ability name="Toussaint Gloves 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="4.71" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="45"				/>
-					<item_level_max					type="add"	min="46"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
@@ -1207,7 +1120,6 @@
 	<ability name="q702_vampire_gloves _Stats" on_conflict="replace">
 					<weight							type="base"	min="5.71" 				/>
 					<quality						type="add"	min="4"					/>
-					<armor							type="base"	min="84"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.08"				/>
@@ -1219,8 +1131,6 @@
 	<ability name="q704_vampire_gloves _Stats" on_conflict="replace">
 					<weight							type="base"	min="5.71" 				/>
 					<quality						type="add"	min="4"					/>
-					<item_level_min					type="add"	min="40"				/>
-					<item_level_max					type="add"	min="100"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.08"				/>
@@ -1231,8 +1141,7 @@
 	</ability>
 	<ability name="sq701_geralt_gloves _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.08" 				/>
-					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_max					type="add"	min="100"				/>
+					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
@@ -1245,8 +1154,6 @@
 	<ability name="Guard Lvl1 A Pants 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.8" 				/>
 					<quality						type="add"	min="2"		max="2"		/>	
-					<item_level_min					type="add"	min="36"				/>
-					<item_level_max					type="add"	min="38"				/>
 					<slashing_resistance_perc 		type="base" min="0.02"				/>
 					<bludgeoning_resistance_perc 	type="base" min="0.00"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01" 				/>
@@ -1257,8 +1164,6 @@
 	<ability name="Guard Lvl1 A Pants 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.8" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="37"				/>
-					<item_level_max					type="add"	min="39"				/>
 					<slashing_resistance_perc 		type="base" min="0.03"				/>
 					<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01" 				/>
@@ -1269,8 +1174,6 @@
 	<ability name="Guard Lvl1 Pants 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.64" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="35"				/>
-					<item_level_max					type="add"	min="37"				/>
 					<slashing_resistance_perc 		type="base" min="0.02"				/>
 					<bludgeoning_resistance_perc 	type="base" min="0.00"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01" 				/>
@@ -1281,8 +1184,6 @@
 	<ability name="Guard Lvl1 Pants 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="1.64" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="35"				/>
-					<item_level_max					type="add"	min="38"				/>
 					<slashing_resistance_perc 		type="base" min="0.03"				/>
 					<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
 					<staminaRegen_armor_mod			type="mult" min="0.01" 				/>
@@ -1293,8 +1194,6 @@
 	<ability name="Guard Lvl2 A Pants 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.5" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="40"				/>
-					<item_level_max					type="add"	min="41"				/>
 					<slashing_resistance_perc 		type="base" min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
@@ -1304,8 +1203,6 @@
 	<ability name="Guard Lvl2 A Pants 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="2.5" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="41"				/>
-					<item_level_max					type="add"	min="42"				/>
 					<slashing_resistance_perc 		type="base" min="0.05"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.02"				/>
@@ -1315,8 +1212,6 @@
 	<ability name="Guard Lvl2 Pants 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="3.08" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="38"				/>
-					<item_level_max					type="add"	min="39"				/>
 					<slashing_resistance_perc 		type="base" min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
@@ -1326,8 +1221,6 @@
 	<ability name="Guard Lvl2 Pants 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="3.08" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="39"				/>
-					<item_level_max					type="add"	min="40"				/>
 					<slashing_resistance_perc 		type="base" min="0.05"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.02"				/>
@@ -1337,8 +1230,6 @@
 	<ability name="Knight Geralt A Pants 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="15.58" 			/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="45"				/>
-					<item_level_max					type="add"	min="46"				/>
 					<slashing_resistance_perc		type="base"	min="0.07"				/>
 					<piercing_resistance_perc		type="base"	min="0.07"				/>
 					<staminaRegen_armor_mod 		type="mult"	min="-0.05"				/>
@@ -1349,8 +1240,6 @@
 	<ability name="Knight Geralt A Pants 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="18.78" 			/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="46"				/>
-					<item_level_max					type="add"	min="47"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod 		type="mult"	min="-0.05"				/>
@@ -1361,8 +1250,6 @@
 	<ability name="Knight Geralt Pants 1 _Stats" on_conflict="replace">
 					<weight							type="base"	min="14.58" 			/>
 					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_min					type="add"	min="42"				/>
-					<item_level_max					type="add"	min="44"				/>
 					<slashing_resistance_perc		type="base"	min="0.07"				/>
 					<piercing_resistance_perc		type="base"	min="0.07"				/>
 					<staminaRegen_armor_mod 		type="mult"	min="-0.05"				/>
@@ -1373,8 +1260,6 @@
 	<ability name="Knight Geralt Pants 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="17.78" 			/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="43"				/>
-					<item_level_max					type="add"	min="45"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod 		type="mult"	min="-0.05"				/>
@@ -1385,8 +1270,6 @@
 	<ability name="Toussaint Pants 2 _Stats" on_conflict="replace">
 					<weight							type="base"	min="13.78" 			/>
 					<quality						type="add"	min="3"		max="3"		/>
-					<item_level_min					type="add"	min="45"				/>
-					<item_level_max					type="add"	min="46"				/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
 					<staminaRegen_armor_mod 		type="mult"	min="-0.05"				/>
@@ -1397,7 +1280,6 @@
 	<ability name="q702_vampire_pants _Stats" on_conflict="replace">
 					<weight							type="base"	min="15.56" 			/>
 					<quality						type="add"	min="4"					/>
-					<armor							type="base"	min="87"				/>
 					<slashing_resistance_perc 		type="base"	min="0.09"				/>
 					<piercing_resistance_perc 		type="base"	min="0.09"				/>
 					<bludgeoning_resistance_perc 	type="base"	min="0.09"				/>
@@ -1409,8 +1291,6 @@
 	<ability name="q704_vampire_pants _Stats" on_conflict="replace">
 					<weight							type="base"	min="15.88" 			/>
 					<quality						type="add"	min="4"					/>
-					<item_level_min					type="add"	min="40"				/>
-					<item_level_max					type="add"	min="100"				/>
 					<slashing_resistance_perc 		type="base"	min="0.09"				/>
 					<piercing_resistance_perc 		type="base"	min="0.09"				/>
 					<bludgeoning_resistance_perc 	type="base"	min="0.09"				/>
@@ -1421,8 +1301,7 @@
 	</ability>
 	<ability name="sq701_geralt_pants _Stats" on_conflict="replace">
 					<weight							type="base"	min="17.78" 			/>
-					<quality						type="add"	min="2"		max="2"		/>
-					<item_level_max					type="add"	min="100"				/>
+					<quality						type="add"	min="4"		max="4"		/>
 					<slashing_resistance_perc 		type="base"	min="0.09"				/>
 					<piercing_resistance_perc 		type="base"	min="0.09"				/>
 					<staminaRegen_armor_mod			type="mult"	min="-0.025"			/>
@@ -1951,7 +1830,6 @@
 	<ability name="Nekker Boots _Stats" on_conflict="replace">
 				<weight							type="base"	min="7.8"				/>
 				<quality						type="add"	min="4"					/>
-				<armor							type="base"	min="64"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
 				<piercing_resistance_perc		type="base"	min="0.04"				/>
 				<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2155,8 +2033,6 @@
 		<slashing_resistance_perc 		type="base" min="0.175"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.175"				/>
 		<staminaRegen_armor_mod 		type="mult" min="-0.30"				/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<elemental_resistance_perc 		type="base" min="0.175"				/>
 		<piercing_resistance_perc 		type="base" min="0.175"				/>
 		<rending_resistance_perc 		type="base" min="0.175"				/>
@@ -2164,23 +2040,19 @@
 	<ability name="Burning Rose Armor _Stats" on_conflict="replace">
 		<weight							type="base"	min="22.4"				/>
 		<quality						type="add"	min="3"		max="3"		/>
-		<armor							type="base" min="4"					/>
 		<slashing_resistance_perc		type="base"	min="0.20" 				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.20"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<elemental_resistance_perc		type="base" min="0.20"				/>
 		<piercing_resistance_perc		type="base" min="0.20"				/>
 		<rending_resistance_perc		type="base" min="0.20"				/>
 	</ability>
 	<ability name="Geralt_kontusz _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.32"				/>
-		<quality						type="add"	min="2"					/>
+		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.05"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.02"				/>
 		<rending_resistance_perc		type="base"	min="0.02"				/>
@@ -2194,8 +2066,8 @@
 		<burning_resistance_perc 		type="base" min="0.20" 				/>
 		<spell_power_igni 				type="mult" min="0.20" 				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.07"				/>
-		<item_level_min					type="add"	min="33"				/>
-		<item_level_max					type="add"	min="35"				/>
+		<item_level_min					type="add"	min="30"				/>
+		<item_level_max					type="add"	min="34"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
@@ -2205,8 +2077,6 @@
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.01"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.06"				/>
-		<item_level_min					type="add"	min="30"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<elemental_resistance_perc		type="base" min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<rending_resistance_perc		type="base" min="0.02"				/>
@@ -2214,7 +2084,6 @@
 	<ability name="Ofir Armor _Stats" on_conflict="replace">
 		<weight							type="base"	min="6.19"				/>
 		<quality						type="add"	min="3"		max="3"		/>
-		<armor							type="base" min="200"	max="200"	/>
 		<slashing_resistance_perc		type="base" min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.02"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.07"				/>
@@ -2227,7 +2096,6 @@
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bonus_money 					type="add" 	min="0.35" 				/>
 		<elemental_resistance_perc		type="base"	min="0.09"				/>
 		<encumbrance					type="add"	min="20"				/>
@@ -2239,7 +2107,6 @@
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bonus_money 					type="add" 	min="0.35" 				/>
 		<elemental_resistance_perc		type="base"	min="0.09"				/>
 		<encumbrance					type="add"	min="20"				/>
@@ -2251,8 +2118,6 @@
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
-		<item_level_min					type="add"	min="33"				/>
-		<item_level_max					type="add"	min="35"				/>
 		<bonus_money 					type="add" 	min="0.5" 				/>
 		<elemental_resistance_perc		type="base"	min="0.12"				/>
 		<encumbrance					type="add"	min="20"				/>
@@ -2265,8 +2130,6 @@
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 		<bonus_money 					type="add" 	min="0.7" 				/>
-		<item_level_min					type="add"	min="34"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<elemental_resistance_perc		type="base"	min="0.17"				/>
 		<encumbrance					type="add"	min="20"				/>
 		<piercing_resistance_perc		type="base"	min="0.09"				/>
@@ -2284,8 +2147,8 @@
 		<burning_resistance_perc 		type="base" min="0.06" 				/>
 		<spell_power_igni 				type="mult" min="0.06" 				/>
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
-		<item_level_min					type="add"	min="33"				/>
-		<item_level_max					type="add"	min="35"				/>
+		<item_level_min					type="add"	min="30"				/>
+		<item_level_max					type="add"	min="34"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.03"				/>
@@ -2293,11 +2156,10 @@
 	<ability name="Geralt Kontusz Boots _Stats" on_conflict="replace">
 		<tags></tags>		
 		<weight							type="base"	min="2.32"				/>
-		<quality						type="add"	min="2"		max="2"		/>
+		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.01"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.01"				/>
 		<rending_resistance_perc		type="base"	min="0.01"				/>
@@ -2308,8 +2170,6 @@
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
-		<item_level_min					type="add"	min="30"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<elemental_resistance_perc		type="base"	min="0.01"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<rending_resistance_perc		type="base"	min="0.01"				/>
@@ -2320,8 +2180,6 @@
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
-		<item_level_min					type="add"	min="32"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<elemental_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<rending_resistance_perc		type="base"	min="0.02"				/>
@@ -2331,7 +2189,6 @@
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 		<encumbrance					type="add"	min="4"					/>
@@ -2343,7 +2200,6 @@
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 		<encumbrance					type="add"	min="4"					/>
@@ -2355,8 +2211,6 @@
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<item_level_min					type="add"	min="33"				/>
-		<item_level_max					type="add"	min="35"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc		type="base"	min="0.04"				/>
 		<encumbrance					type="add"	min="4"					/>
@@ -2369,8 +2223,6 @@
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 		<bonus_money 					type="add" 	min="0.1" 				/>
-		<item_level_min					type="add"	min="34"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<elemental_resistance_perc		type="base"	min="0.06"				/>
 		<encumbrance					type="add"	min="6"					/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -2520,8 +2372,6 @@
 		<slashing_resistance_perc		type="base"	min="0.07"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<elemental_resistance_perc		type="base"	min="0.06"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
 		<rending_resistance_perc		type="base"	min="0.06"				/>
@@ -2532,8 +2382,6 @@
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.08"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
-		<item_level_min					type="add"	min="35"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<elemental_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.08"				/>
 		<rending_resistance_perc		type="base"	min="0.08"				/>
@@ -2543,7 +2391,6 @@
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 		<encumbrance					type="add"	min="3"					/>
@@ -2555,7 +2402,6 @@
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 		<encumbrance					type="add"	min="3"					/>
@@ -2567,8 +2413,6 @@
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<item_level_min					type="add"	min="33"				/>
-		<item_level_max					type="add"	min="35"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc		type="base"	min="0.04"				/>
 		<encumbrance					type="add"	min="3"					/>
@@ -2581,8 +2425,6 @@
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<bonus_money 					type="add" 	min="0.1" 				/>
-		<item_level_min					type="add"	min="34"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<elemental_resistance_perc		type="base"	min="0.05"				/>
 		<encumbrance					type="add"	min="4"					/>
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
@@ -2596,8 +2438,6 @@
 		<slashing_resistance_perc 		type="base" min="0.02"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.01" 				/>
-		<item_level_min					type="add"	min="30"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<elemental_resistance_perc 		type="base" min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<rending_resistance_perc		type="base" min="0.02"				/>
@@ -2608,8 +2448,6 @@
 		<slashing_resistance_perc 		type="base" min="0.03"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.01" 				/>
-		<item_level_min					type="add"	min="32"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<elemental_resistance_perc 		type="base" min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<rending_resistance_perc		type="base" min="0.03"				/>
@@ -2619,7 +2457,6 @@
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc 		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc 		type="base" min="0.04"				/>
 		<encumbrance					type="add"	min="6"					/>
@@ -2631,7 +2468,6 @@
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc 		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<item_level_max					type="add"	min="34"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc 		type="base" min="0.04"				/>
 		<encumbrance					type="add"	min="6"					/>
@@ -2643,8 +2479,6 @@
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<item_level_min					type="add"	min="33"				/>
-		<item_level_max					type="add"	min="35"				/>
 		<bonus_money 					type="add" 	min="0.05" 				/>
 		<elemental_resistance_perc 		type="base" min="0.05"				/>
 		<encumbrance					type="add"	min="6"					/>
@@ -2657,8 +2491,6 @@
 		<slashing_resistance_perc 		type="base"	min="0.07"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 		<bonus_money 					type="add" 	min="0.1" 				/>
-		<item_level_min					type="add"	min="34"				/>
-		<item_level_max					type="add"	min="36"				/>
 		<elemental_resistance_perc 		type="base" min="0.07"				/>
 		<encumbrance					type="add"	min="8"					/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -2668,7 +2500,7 @@
 <!-- gameplay/items/def_item_armor.xml -->
 	<ability name="Heavy armor 01 _Stats" on_conflict="replace">
 		<weight							type="base" min="24.95"				/>
-		<quality 						type="add"	min="1"		max="3"		/>
+		<quality 						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.15"				/>
 		<piercing_resistance_perc 		type="base" min="0.15"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.15"				/>
@@ -2678,7 +2510,7 @@
 	</ability>
 	<ability name="Heavy armor 02 _Stats" on_conflict="replace">
 		<weight 						type="base" min="21.8"				/>
-		<quality 						type="add" 	min="1" 	max="3"		/>
+		<quality 						type="add" 	min="2" 	max="2"		/>
 		<slashing_resistance_perc 		type="base" min="0.17"				/>
 		<piercing_resistance_perc 		type="base" min="0.17"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.17"				/>
@@ -2688,7 +2520,7 @@
 	</ability>
 	<ability name="Heavy armor 03 _Stats" on_conflict="replace">
 		<weight							type="base"	min="20.32"				/>
-		<quality 						type="add"	min="1"		max="3"		/>
+		<quality 						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.20" 				/>
 		<piercing_resistance_perc		type="base" min="0.20"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.20"				/>
@@ -2708,7 +2540,7 @@
 		</ability>
 	<ability name="Heavy armor 05 _Stats" on_conflict="replace">
 		<weight							type="base"	min="30.65"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.19"				/>
 		<piercing_resistance_perc		type="base"	min="0.19"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.19"				/>
@@ -2728,7 +2560,7 @@
 	</ability>
 	<ability name="Light armor 02 _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.99"				/>
-		<quality						type="add"	min="1"		max="1"		/>
+		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -2738,7 +2570,7 @@
 	</ability>
 	<ability name="Light armor 03 _Stats" on_conflict="replace">
 		<weight							type="base" min="3.46"				/>
-		<quality						type="add"	min="1"		max="2"		/>
+		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.01"				/>
@@ -2748,7 +2580,7 @@
 	</ability>
 	<ability name="Light armor 04 _Stats" on_conflict="replace">
 		<weight 						type="base" min="3.62" 				/>
-		<quality 						type="add" 	min="1"		max="2"		/>
+		<quality 						type="add" 	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base" min="0.03"				/>
 		<piercing_resistance_perc		type="base" min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.02"				/>
@@ -2778,7 +2610,7 @@
 	</ability>
 	<ability name="Light armor 08 _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.28"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
@@ -2788,7 +2620,7 @@
 	</ability>
 	<ability name="Light armor 09 _Stats" on_conflict="replace">
 		<weight							type="base" min="4.53" 				/>
-		<quality 						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
@@ -2798,7 +2630,7 @@
 	</ability>
 	<ability name="Medium armor 01 _Stats" on_conflict="replace">
 		<weight 						type="base"	min="12.65"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<piercing_resistance_perc		type="base" min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
@@ -2807,7 +2639,7 @@
 	</ability>
 	<ability name="Medium armor 02 _Stats" on_conflict="replace">
 		<weight							type="base"	min="16.49"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.10"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2816,7 +2648,7 @@
 	</ability>
 	<ability name="Medium armor 03 _Stats" on_conflict="replace">
 		<weight							type="base"	min="16.01"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.10"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2825,7 +2657,7 @@
 	</ability>
 	<ability name="Medium armor 04 _Stats" on_conflict="replace">
 		<weight							type="base"	min="13.15"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2852,7 +2684,7 @@
 	</ability>
 	<ability name="Medium armor 10 _Stats" on_conflict="replace">
 		<weight							type="base"	min="11.48"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2861,7 +2693,7 @@
 	</ability>
 	<ability name="Medium armor 11 _Stats" on_conflict="replace">
 		<weight							type="base"	min="12.73" 			/>
-		<quality 						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2880,7 +2712,6 @@
 	</ability>
 	<ability name="q108 Medium armor 10 _Stats" on_conflict="replace">
 		<weight							type="base"	min="12.11"				/>
-		<armor 							type="base" min="166" 	max="166"/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -3229,7 +3060,7 @@
 	</ability>
 	<ability name="Boots 02 _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.28"				/>
-		<quality						type="add"	min="1"		max="2"		/>
+		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
@@ -3248,7 +3079,7 @@
 	</ability>
 	<ability name="Boots 03 _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.52"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.01"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -3290,7 +3121,7 @@
 	</ability>
 	<ability name="Boots 06 _Stats" on_conflict="replace">
 		<weight							type="base"	min="2.82"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
@@ -3310,7 +3141,7 @@
 	</ability>
 	<ability name="Heavy boots 01 _Stats" on_conflict="replace">
 		<weight							type="base"	min="2.36"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.10"				/>
 		<piercing_resistance_perc		type="base"	min="0.10"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.10"				/>
@@ -3320,7 +3151,7 @@
 	</ability>
 	<ability name="Heavy boots 02 _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.22"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.11"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.11"				/>
@@ -3340,7 +3171,7 @@
 	</ability>
 	<ability name="Heavy boots 04 _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.37"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.10"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.11"				/>
@@ -3350,7 +3181,7 @@
 	</ability>
 	<ability name="Heavy boots 05 _Stats" on_conflict="replace">
 		<weight							type="base"	min="2.92"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.12"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.12"				/>
@@ -3495,7 +3326,7 @@
 	</ability>
 	<ability name="Heavy armor 01_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="24.95"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="1"					/>
 		<armor							type="base"	min="40"				/>
 		<slashing_resistance_perc		type="base"	min="0.18"				/>
 		<piercing_resistance_perc		type="base"	min="0.18"				/>
@@ -3506,7 +3337,7 @@
 	</ability>
 	<ability name="Heavy armor 02_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="21.8"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="55"				/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -3518,7 +3349,7 @@
 	</ability>
 	<ability name="Heavy armor 03_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="24.32" 			/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="70"				/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -3542,7 +3373,7 @@
 	</ability>
 	<ability name="Light armor 01_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.62"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="1"					/>
 		<armor							type="base"	min="30"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -3553,7 +3384,7 @@
 	</ability>
 	<ability name="Light armor 02_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.99"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="1"					/>
 		<armor							type="base"	min="35"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -3564,7 +3395,7 @@
 	</ability>
 	<ability name="Light armor 03_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.46"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="1"					/>
 		<armor							type="base"	min="45"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -3575,7 +3406,7 @@
 	</ability>
 	<ability name="Light armor 04_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.62" 				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="55"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -3600,7 +3431,7 @@
 	</ability>
 	<ability name="Light armor 06_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.89"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="65"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -3684,7 +3515,7 @@
 	</ability>
 	<ability name="Medium armor 01_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="12.65"				/>
-		<quality 						type="add"	min="2"		max="3"		/>
+		<quality 						type="add"	min="1"					/>
 		<armor							type="base"	min="45"				/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
 		<piercing_resistance_perc		type="base"	min="0.05"				/>
@@ -3694,7 +3525,7 @@
 	</ability>
 	<ability name="Medium armor 02_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="16.49"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="55"				/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
 		<piercing_resistance_perc		type="base"	min="0.06"				/>
@@ -3705,7 +3536,7 @@
 	</ability>
 	<ability name="Medium armor 03_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="17.01"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="65"				/>
 		<slashing_resistance_perc		type="base"	min="0.14"				/>
 		<piercing_resistance_perc		type="base"	min="0.06"				/>
@@ -3739,7 +3570,7 @@
 	</ability>
 	<ability name="Starting Armor 1 _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.08"				/>
-		<quality						type="add"	min="5"		max="5"		/>
+		<quality						type="add"	min="1"					/>
 		<armor							type="base" min="35"				/>
 		<slashing_resistance_perc		type="base" min="0.10"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.02"				/>
@@ -3811,7 +3642,7 @@
 	</ability>
 	<ability name="Boots 01_crafted _Stats" on_conflict="replace">
 		<weight 						type="base"	min="1.24"				/>
-		<quality 						type="add"	min="3"					/>
+		<quality 						type="add"	min="1"					/>
 		<armor 							type="base"	min="9"					/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -3823,7 +3654,7 @@
 	</ability>
 	<ability name="Boots 02_crafted _Stats" on_conflict="replace">
 		<weight 						type="base" min="1.32"				/>
-		<quality 						type="add"	min="3"					/>
+		<quality 						type="add"	min="2"					/>
 		<armor 							type="base"	min="15"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
@@ -3834,7 +3665,7 @@
 	</ability>
 	<ability name="Boots 03_crafted _Stats" on_conflict="replace"> 
 		<weight 						type="base" min="1.56"				/>
-		<quality 						type="add"	min="3"					/>
+		<quality 						type="add"	min="2"					/>
 		<armor 							type="base" min="17"				/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -3846,7 +3677,7 @@
 	</ability>
 	<ability name="Boots 04_crafted _Stats" on_conflict="replace">
 		<weight 						type="base" min="1.88"				/>
-		<quality 						type="add"	min="3"					/>
+		<quality						type="add"	min="4"					/>
 		<armor 							type="base"	min="29"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -3914,7 +3745,7 @@
 	</ability>
 	<ability name="Heavy boots 01_crafted _Stats" on_conflict="replace">
 		<weight 						type="base" min="2.86"				/>
-		<quality 						type="add"	min="3"					/>
+		<quality 						type="add"	min="1"					/>
 		<armor 							type="base"	min="13"				/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
 		<piercing_resistance_perc		type="base"	min="0.12"				/>
@@ -3926,7 +3757,7 @@
 	</ability>
 	<ability name="Heavy boots 02_crafted _Stats" on_conflict="replace">
 		<weight							type="base" min="3.26"				/>
-		<quality 						type="add"	min="3"					/>
+		<quality 						type="add"	min="2"					/>
 		<armor 							type="base"	min="25"				/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
 		<piercing_resistance_perc		type="base"	min="0.13"				/>
@@ -4082,7 +3913,7 @@
 	</ability>
 	<ability name="Gloves 01_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.32"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="11"				/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
@@ -4094,7 +3925,7 @@
 	</ability>
 	<ability name="Gloves 02_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.72" 				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="9"					/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
@@ -4173,7 +4004,7 @@
 	</ability>
 	<ability name="Heavy gloves 01_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.64"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="13"				/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<piercing_resistance_perc		type="base"	min="0.09"				/>
@@ -4362,7 +4193,7 @@
 	</ability>
 	<ability name="Heavy pants 01_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="5.1"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="15"				/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -4457,7 +4288,7 @@
 	</ability>
 	<ability name="Pants 01_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="0.72"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="13"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc 		type="base" min="0.02"				/>
@@ -4469,7 +4300,7 @@
 	</ability>
 	<ability name="Pants 02_crafted _Stats" on_conflict="replace">
 		<weight							type="base"	min="0.98"				/>
-		<quality						type="add"	min="3"		max="3"		/>
+		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="17"				/>
 		<slashing_resistance_perc 		type="base"	min="0.06"				/>
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
@@ -4507,7 +4338,6 @@
 	<ability name="EP1 Standalone Starting Armor _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.12"				/>
 		<quality						type="add"	min="3"		max="3"		/>
-		<armor							type="base"	min="175"	max="175"	/>
 		<slashing_resistance_perc		type="base" min="0.10"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.05"				/>
 		<rending_resistance_perc		type="base" min="0.10"				/>
@@ -4517,7 +4347,6 @@
 	<ability name="EP1 Standalone Starting Boots _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.4"				/>
 		<quality						type="add"	min="3"		max="3"		/>
-		<armor							type="base"	min="65"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<rending_resistance_perc		type="base"	min="0.05"				/>
@@ -4527,7 +4356,6 @@
 	<ability name="EP1 Standalone Starting Gloves _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.2"				/>
 		<quality						type="add"	min="3"		max="3"		/>
-		<armor							type="base"	min="61"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<rending_resistance_perc		type="base"	min="0.05"				/>
@@ -4537,7 +4365,6 @@
 	<ability name="EP1 Standalone Starting Pants _Stats" on_conflict="replace">
 		<weight 						type="base" min="2.1" 				/>
 		<quality 						type="add" 	min="3" 	max="3"		/>
-		<armor 							type="base" min="65" 			 	/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.03"				/>
 		<rending_resistance_perc 		type="base" min="0.05"				/>
@@ -4548,8 +4375,7 @@
 <!-- gameplay/items/def_item_ep2_stand_alone.xml -->
 	<ability name="EP2 Standalone Starting Armor _Stats" on_conflict="replace">
 		<weight							type="base"	min="3.12"				/>
-		<quality						type="add"	min="3"					/>
-		<armor							type="base"	min="195"				/>
+		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base" min="0.10"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.05"				/>
 		<rending_resistance_perc		type="base" min="0.10"				/>
@@ -4558,8 +4384,7 @@
 	</ability>
 	<ability name="EP2 Standalone Starting Boots _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.4"				/>
-		<quality						type="add"	min="3"					/>
-		<armor							type="base"	min="73"				/>
+		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<rending_resistance_perc		type="base"	min="0.05"				/>
@@ -4568,8 +4393,7 @@
 	</ability>
 	<ability name="EP2 Standalone Starting Gloves _Stats" on_conflict="replace">
 		<weight							type="base"	min="1.2"				/>
-		<quality						type="add"	min="3"					/>
-		<armor							type="base"	min="69"				/>
+		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<rending_resistance_perc		type="base"	min="0.05"				/>
@@ -4578,8 +4402,7 @@
 	</ability>
 	<ability name="EP2 Standalone Starting Pants _Stats" on_conflict="replace">
 		<weight 						type="base" min="2.1" 				/>
-		<quality 						type="add" 	min="3" 				/>
-		<armor 							type="base" min="73" 			 	/>
+		<quality 						type="add" 	min="3" 	max="3"		/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.03"				/>
 		<rending_resistance_perc 		type="base" min="0.05"				/>
@@ -4640,7 +4463,7 @@
 	</ability>
 	<ability name="Heavy gloves 01 _Stats" on_conflict="replace">
 		<weight							type="base"	min="4.6"				/>
-		<quality						type="add"	min="1"		max="3"		/>
+		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
 		<piercing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.06"				/>
@@ -4692,7 +4515,7 @@
 <!-- gameplay/items/def_item_pants.xml -->
 	<ability name="Heavy pants 01 _Stats" on_conflict="replace">
 		<weight							type="base" min="5.05" 				/>
-		<quality 						type="add"	min="1"		max="2"		/>
+		<quality 						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
@@ -4752,7 +4575,7 @@
 	</ability>
 	<ability name="Pants 02 _Stats" on_conflict="replace">
 		<weight 						type="base"	min="0.94" 				/>
-		<quality 						type="add"	min="1"		max="3"		/>
+		<quality 						type="add" 	min="1" 	max="1"		/>
 		<slashing_resistance_perc 		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
@@ -4941,8 +4764,8 @@
 					localisation_key_description	="item_category_light_armor_description"
 					icon_path						="icons/inventory/armors/guard_1a_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, DoNotEnhance, Armor, LightArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Guard Lvl1 A Armor 1 _Stats</a>
 					</base_abilities>
@@ -4970,8 +4793,8 @@
 					localisation_key_description	="item_category_light_armor_description"
 					icon_path						="icons/inventory/armors/guard_1a_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, LightArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Guard Lvl1 A Armor 2 _Stats</a>
 					</base_abilities>
@@ -4999,8 +4822,8 @@
 					localisation_key_description	="item_category_light_armor_description"
 					icon_path						="icons/inventory/armors/guard_1_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, DoNotEnhance, Armor, LightArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Guard Lvl1 Armor 1 _Stats</a>
 					</base_abilities>
@@ -5028,8 +4851,8 @@
 					localisation_key_description	="item_category_light_armor_description"
 					icon_path						="icons/inventory/armors/guard_1_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, LightArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Guard Lvl1 Armor 2 _Stats</a>
 					</base_abilities>
@@ -5057,8 +4880,8 @@
 					localisation_key_description	="item_category_medium_armor_description"
 					icon_path						="icons/inventory/armors/guard_2a_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, DoNotEnhance, Armor, MediumArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Guard Lvl2 A Armor 1 _Stats</a>
 					</base_abilities>
@@ -5086,8 +4909,8 @@
 					localisation_key_description	="item_category_medium_armor_description"
 					icon_path						="icons/inventory/armors/guard_2a_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, MediumArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Guard Lvl2 A Armor 2 _Stats</a>
 					</base_abilities>
@@ -5115,8 +4938,8 @@
 					localisation_key_description	="item_category_medium_armor_description"
 					icon_path						="icons/inventory/armors/guard_2_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, DoNotEnhance, Armor, MediumArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Guard Lvl2 Armor 1 _Stats</a>
 					</base_abilities>
@@ -5144,8 +4967,8 @@
 					localisation_key_description	="item_category_medium_armor_description"
 					icon_path						="icons/inventory/armors/guard_2_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, MediumArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Guard Lvl2 Armor 2 _Stats</a>
 					</base_abilities>
@@ -5173,8 +4996,8 @@
 					localisation_key_description	="item_category_heavy_armor_description"
 					icon_path						="icons/inventory/armors/knight_2_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, DoNotEnhance, Armor, HeavyArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Knight Geralt A Armor 1 _Stats</a>
 					</base_abilities>
@@ -5216,8 +5039,8 @@
 					localisation_key_description	="item_category_heavy_armor_description"
 					icon_path						="icons/inventory/armors/knight_2_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, HeavyArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Knight Geralt A Armor 2 _Stats</a>
 					</base_abilities>
@@ -5259,8 +5082,8 @@
 					localisation_key_description	="item_category_heavy_armor_description"
 					icon_path						="icons/inventory/armors/knight_1_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, DoNotEnhance, Armor, HeavyArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Knight Geralt Armor 1 _Stats</a>
 					</base_abilities>
@@ -5302,8 +5125,8 @@
 					localisation_key_description	="item_category_heavy_armor_description"
 					icon_path						="icons/inventory/armors/knight_1_armor_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, HeavyArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Knight Geralt Armor 2 _Stats</a>
 					</base_abilities>
@@ -5345,8 +5168,8 @@
 					localisation_key_description	="item_category_heavy_armor_description"
 					icon_path						="icons/inventory/armors/toussaint_armor_2_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, HeavyArmor, mod_armor
-					</tags>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Toussaint Armor 2 _Stats</a>
 					</base_abilities>
@@ -5374,6 +5197,94 @@
 					</variants>
 			</item>
 	<item on_conflict="replace"
+				name							="q702_vampire_armor"
+				category						="armor"
+				price							="3234"
+				initial_durability				="100"
+				max_durability					="100" 
+				enhancement_slots				="3"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="q_704_t_01_mg__vampire"
+				localisation_key_name			="item_name_baw_vampire_chest"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/q704_vampire_armor_64x128.png"
+			>
+				<tags>							Armor, HeavyArmor, mod_armor, mod_legendary, VampireSet, SetBonusPiece, Autogen
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>q702_vampire_armor _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="6">Linen</parts>
+												<parts count="3">Leather straps</parts>
+												<parts count="6">Hardened leather</parts>
+												<parts count="5">Chitin scale</parts>
+												<parts count="6">Meteorite silver ingot</parts>
+				</recycling_parts> 					
+					<variants>
+											<variant equip_template="q_704_t_01_mg__vampire"> 
+												<item>q702_vampire_gloves</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>q704_vampire_gloves</item> <!-- these gloves don't need the armor to be collapsed -->                                   
+                                                <item>Knight Geralt Gloves 1</item> <!-- these gloves don't need the armor to be collapsed -->    
+                                                <item>Knight Geralt Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Knight Geralt Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->      
+                                                <item>Knight Geralt A Gloves 1</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>Knight Geralt A Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Knight Geralt A Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>Toussaint Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Toussaint Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>sq701_geralt_gloves</item> <!-- these gloves don't need the armor to be collapsed -->
+											</variant>
+											<variant equip_template="q704_t_01a_mg__vampire" category="gloves"></variant>
+											
+					</variants>
+		</item>
+	<item on_conflict="replace"
+				name							="q704_vampire_armor"
+				category						="armor"
+				price							="3234"
+				initial_durability				="100"
+				max_durability					="100" 
+				enhancement_slots				="3"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="t_01_mg__vampire"
+				localisation_key_name			="item_name_baw_vampire_chest_2"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/vampire_armor_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor, mod_legendary, VampireSet, SetBonusPiece
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>q704_vampire_armor _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="6">Linen</parts>
+												<parts count="3">Leather straps</parts>
+												<parts count="6">Hardened leather</parts>
+												<parts count="5">Chitin scale</parts>
+												<parts count="6">Meteorite silver ingot</parts>
+				</recycling_parts> 					
+					<variants>
+											<variant equip_template="t_01_mg__vampire"> 
+												<item>q702_vampire_gloves</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>q704_vampire_gloves</item> <!-- these gloves don't need the armor to be collapsed -->                                   
+                                                <item>Knight Geralt Gloves 1</item> <!-- these gloves don't need the armor to be collapsed -->    
+                                                <item>Knight Geralt Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Knight Geralt Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->      
+                                                <item>Knight Geralt A Gloves 1</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>Knight Geralt A Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Knight Geralt A Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>Toussaint Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Toussaint Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>sq701_geralt_gloves</item> <!-- these gloves don't need the armor to be collapsed -->
+											</variant>
+											<variant equip_template="t_01a_mg__vampire" category="gloves"></variant>
+
+					</variants>
+		</item>
+	<item on_conflict="replace"
 				name							="sq701_geralt_armor"
 				category						="armor"
 				price							="704"
@@ -5388,8 +5299,8 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/sq701_geralt_armor_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, DoNotEnhance, Armor, HeavyArmor, mod_armor
-				</tags>
+				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>sq701_geralt_armor _Stats</a>
 				</base_abilities>
@@ -5431,8 +5342,8 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/sq701_ravix_armor_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, DoNotEnhance, Armor,HeavyArmor, mod_armor
-				</tags>
+				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>sq701_ravix_armor _Stats</a>
 				</base_abilities>
@@ -5521,6 +5432,356 @@
 					</variants>
 				</item>
 	<item on_conflict="replace"
+					name							="Guard Lvl1 A Boots 1"
+					category						="boots"
+					price							="100"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="0"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_07a_mg__bob"
+					localisation_key_name			="item_name_guard_lvl1_A_geralt_boots"
+					localisation_key_description	="item_category_light_armor_description"
+					icon_path						="icons/inventory/armors/guard_1a_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Guard Lvl1 A Boots 1 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="1">Leather</parts>
+													<parts count="5">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="2">Thread</parts>
+													<parts count="2">Fiber</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Guard Lvl1 A Boots 2"
+					category						="boots"
+					price							="72"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="1"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_07a_mg__bob"
+					localisation_key_name			="item_name_guard_lvl1_A_geralt_boots"
+					localisation_key_description	="item_category_light_armor_description"
+					icon_path						="icons/inventory/armors/guard_1a_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Guard Lvl1 A Boots 2 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="2">Leather</parts>
+													<parts count="1">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="2">Thread</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Guard Lvl1 Boots 1"
+					category						="boots"
+					price							="92"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="0"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_06a_mg__bob"
+					localisation_key_name			="item_name_guard_lvl1_geralt_boots"
+					localisation_key_description	="item_category_light_armor_description"
+					icon_path						="icons/inventory/armors/guard_1_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Guard Lvl1 Boots 1 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="1">Leather</parts>
+													<parts count="5">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="2">Thread</parts>
+													<parts count="2">Fiber</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Guard Lvl1 Boots 2"
+					category						="boots"
+					price							="104"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="1"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_06a_mg__bob"
+					localisation_key_name			="item_name_guard_lvl1_geralt_boots"
+					localisation_key_description	="item_category_light_armor_description"
+					icon_path						="icons/inventory/armors/guard_1_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Guard Lvl1 Boots 2 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="1">Leather</parts>
+													<parts count="5">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="1">String</parts>
+													<parts count="2">Thread</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Guard Lvl2 A Boots 1"
+					category						="boots"
+					price							="273"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="0"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_05_mg__bob"
+					localisation_key_name			="item_name_guard_lvl2_A_geralt_boots"
+					localisation_key_description	="item_category_medium_armor_description"
+					icon_path						="icons/inventory/armors/guard_2a_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Guard Lvl2 A Boots 1 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="2">Leather</parts>
+													<parts count="3">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="2">Thread</parts>
+													<parts count="2">Fiber</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Guard Lvl2 A Boots 2"
+					category						="boots"
+					price							="277"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="1"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_05_mg__bob"
+					localisation_key_name			="item_name_guard_lvl2_A_geralt_boots"
+					localisation_key_description	="item_category_medium_armor_description"
+					icon_path						="icons/inventory/armors/guard_2a_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Guard Lvl2 A Boots 2 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="2">Leather</parts>
+													<parts count="3">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="1">String</parts>
+													<parts count="2">Thread</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Guard Lvl2 Boots 1"
+					category						="boots"
+					price							="277"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="0"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_04_mg__bob"
+					localisation_key_name			="item_name_guard_lvl2_geralt_boots"
+					localisation_key_description	="item_category_medium_armor_description"
+					icon_path						="icons/inventory/armors/guard_2_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Guard Lvl2 Boots 1 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="2">Leather</parts>
+													<parts count="1">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="2">Thread</parts>
+													<parts count="2">Fiber</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Guard Lvl2 Boots 2"
+					category						="boots"
+					price							="289"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="1"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_04_mg__bob"
+					localisation_key_name			="item_name_guard_lvl2_geralt_boots"
+					localisation_key_description	="item_category_medium_armor_description"
+					icon_path						="icons/inventory/armors/guard_2_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Guard Lvl2 Boots 2 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="2">Leather</parts>
+													<parts count="1">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="1">String</parts>
+													<parts count="1">Thread</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Knight Geralt A Boots 1"
+					category						="boots"
+					price							="300"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="0"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_02_mg__errant_knight"
+					localisation_key_name			="item_name_knight_A_geralt_boots"
+					localisation_key_description	="item_category_heavy_armor_description"
+					icon_path						="icons/inventory/armors/knight_2_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Knight Geralt A Boots 1 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="4">Dark iron ore</parts>
+													<parts count="3">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="4">Thread</parts>
+													<parts count="1">Orichalcum ore</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Knight Geralt A Boots 2"
+					category						="boots"
+					price							="320"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="1"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_02_mg__errant_knight"
+					localisation_key_name			="item_name_knight_A_geralt_boots"
+					localisation_key_description	="item_category_heavy_armor_description"
+					icon_path						="icons/inventory/armors/knight_2_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Knight Geralt A Boots 2 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="2">Dark steel ingot</parts>
+													<parts count="3">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="3">String</parts>
+													<parts count="1">Orichalcum ore</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Knight Geralt Boots 1"
+					category						="boots"
+					price							="292"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="0"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_01_mg__errant_knight"
+					localisation_key_name			="item_name_knight_geralt_boots"
+					localisation_key_description	="item_category_heavy_armor_description"
+					icon_path						="icons/inventory/armors/knight_1_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Knight Geralt Boots 1 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="4">Dark iron ore</parts>
+													<parts count="2">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="4">Thread</parts>
+													<parts count="1">Orichalcum ore</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Knight Geralt Boots 2"
+					category						="boots"
+					price							="312"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="1"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_01_mg__errant_knight"
+					localisation_key_name			="item_name_knight_geralt_boots"
+					localisation_key_description	="item_category_heavy_armor_description"
+					icon_path						="icons/inventory/armors/knight_1_boots_1_64x128.png"
+				>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Knight Geralt Boots 2 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="2">Dark steel ingot</parts>
+													<parts count="2">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="3">String</parts>
+													<parts count="1">Orichalcum ore</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
+					name							="Toussaint Boots 2"
+					category						="boots"
+					price							="712"
+					initial_durability				="100"
+					max_durability					="100"
+					enhancement_slots				="1"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_03_mg__errant_knight"
+					localisation_key_name			="item_name_toussaint_boots"
+					localisation_key_description	="item_category_heavy_armor_description"
+					icon_path						="icons/inventory/armors/toussaint_boots_2_64x128.png"
+				>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>Toussaint Boots 2 _Stats</a>
+					</base_abilities>
+					<recycling_parts>				<parts count="4">Orichalcum ore</parts>
+													<parts count="2">Leather squares</parts>
+													<parts count="4">Leather straps</parts>
+													<parts count="2">Linen</parts>
+													<parts count="3">String</parts>
+					</recycling_parts>
+				</item>
+	<item on_conflict="replace"
 					name							="q702_vampire_boots"
 					category						="boots"
 					price							="404"
@@ -5535,8 +5796,8 @@
 					localisation_key_description	="item_category_heavy_armor_description"
 					icon_path						="icons/inventory/armors/q704_vampire_boots_64x128.png"
 				>
-					<tags>							Armor, HeavyArmor, mod_armor, mod_legendary, EP1, VampireSet, SetBonusPiece
-					</tags>
+					<tags>							Armor, HeavyArmor, mod_armor, mod_legendary, VampireSet, SetBonusPiece, Autogen
+		</tags>
 					<recycling_parts>				<parts count="4">Meteorite ore</parts>
 													<parts count="4">Silver ore</parts>
 													<parts count="4">Leather</parts>
@@ -5545,6 +5806,35 @@
 					</recycling_parts>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>q702_vampire_boots _Stats</a>
+					</base_abilities>
+					<variants>						
+					</variants>
+				</item>
+	<item on_conflict="replace"
+					name							="q704_vampire_boots"
+					category						="boots"
+					price							="406"
+					initial_durability				="100"
+					max_durability					="100" 
+					enhancement_slots				="2"
+					stackable						="1"
+					grid_size						="2"
+					ability_mode					="OnMount"
+					equip_template					="s_01_mg__vampire"
+					localisation_key_name			="item_name_baw_vampire_boots_2"
+					localisation_key_description	="item_category_heavy_armor_description"
+					icon_path						="icons/inventory/armors/vampire_boots_64x128.png"
+				>
+					<tags>							Autogen, Armor, HeavyArmor, mod_armor, mod_legendary, VampireSet, SetBonusPiece
+		</tags>
+					<recycling_parts>				<parts count="4">Meteorite ore</parts>
+													<parts count="4">Silver ore</parts>
+													<parts count="2">Hardened leather</parts>
+													<parts count="5">Chitin scale</parts>
+													<parts count="3">Nails</parts>
+					</recycling_parts>
+					<base_abilities>				<a>Default armor _Stats</a>
+													<a>q704_vampire_boots _Stats</a>
 					</base_abilities>
 					<variants>						
 					</variants>
@@ -5564,8 +5854,8 @@
 					localisation_key_description	="item_category_heavy_armor_description"
 					icon_path						="icons/inventory/armors/knight_1_boots_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, DoNotEnhance, Armor, HeavyArmor, mod_armor
-					</tags>
+					<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>sq701_geralt_boots _Stats</a>
 					</base_abilities>
@@ -5612,8 +5902,85 @@
 										<!-- <variant equip_template="t_01a_mg__lynx_lvl5" category="gloves"></variant> -->
 		</variants>
 	</item>
+	<item on_conflict="replace"
+		name							="Toussaint Armor 3"
+		category						="armor"
+		price							="236"
+		initial_durability				="100"
+		max_durability					="100" 
+		enhancement_slots				="3"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="t_03_mg__errant_knight"
+		localisation_key_name			="item_name_toussaint_armor"
+		localisation_key_description	="item_category_heavy_armor_description"
+		icon_path						="icons/inventory/armors/toussaint_armor_2_64x128.png"
+	>
+		<tags>							Autogen, AutogenUseLevelRange, Armor, HeavyArmor, mod_armor, mod_legendary, EP1
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>Toussaint Armor 3 _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="6">Linen</parts>
+										<parts count="4">Leather straps</parts>
+										<parts count="4">Hardened leather</parts>
+										<parts count="4">Chitin scale</parts>
+										<parts count="6">Orichalcum ingot</parts>
+		</recycling_parts> 					
+		<variants>
+											<variant equip_template="t_03_mg__errant_knight"> 
+                                                <item>q702_vampire_gloves</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>q704_vampire_gloves</item> <!-- these gloves don't need the armor to be collapsed -->                                   
+                                                <item>Knight Geralt Gloves 1</item> <!-- these gloves don't need the armor to be collapsed -->    
+                                                <item>Knight Geralt Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Knight Geralt Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->      
+                                                <item>Knight Geralt A Gloves 1</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>Knight Geralt A Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Knight Geralt A Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>Toussaint Gloves 2</item> <!-- these gloves don't need the armor to be collapsed -->
+                                                <item>Toussaint Gloves 3</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                                <item>sq701_geralt_gloves</item> <!-- these gloves don't need the armor to be collapsed -->  
+                                            </variant>
+
+								<variant equip_template="t_03a_mg__errant_knight" category="gloves"></variant>
+		</variants>
+	</item>
 
 <!-- dlc/bob/data/gameplay/items/def_item_gloves.xml -->
+	<item on_conflict="replace"
+				name							="Guard Lvl1 A Gloves 1"
+				category						="gloves"
+				price							="116"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="g_02a_mg__guard_lvl1"
+				localisation_key_name			="item_name_guard_lvl1_A_geralt_gloves"
+				localisation_key_description	="item_category_light_armor_description"
+				icon_path						="icons/inventory/armors/guard_1_gloves_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl1 A Gloves 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="3">Leather</parts>
+												<parts count="5">Leather squares</parts>
+												<parts count="6">Leather straps</parts>
+												<parts count="2">Thread</parts>
+				</recycling_parts>
+				<variants>			
+												<variant equip_template="g_02a_mg__guard_lvl1">
+													<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+													<item>Lynx Armor</item>           <!-- this item uses slim version -->
+												</variant>
+												<variant equip_template="g_02_mg__guard_lvl1" category="armor"></variant>  <!-- this item uses bold version -->
+				</variants>
+			</item>
 	<item on_conflict="replace"
 				name							="Guard Lvl1 A Gloves 2"
 				category						="gloves"
@@ -5629,8 +5996,8 @@
 				localisation_key_description	="item_category_light_armor_description"
 				icon_path						="icons/inventory/armors/guard_1_gloves_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, LightArmor, mod_armor
-				</tags>
+				<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Guard Lvl1 A Gloves 2 _Stats</a>
 				</base_abilities>
@@ -5648,6 +6015,39 @@
 				</variants>
 			</item>
 	<item on_conflict="replace"
+				name							="Guard Lvl1 Gloves 1"
+				category						="gloves"
+				price							="100"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="g_01a_mg__guard_lvl1"
+				localisation_key_name			="item_name_guard_lvl1_geralt_gloves"
+				localisation_key_description	="item_category_light_armor_description"
+				icon_path						="icons/inventory/armors/guard_1a_gloves_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl1 Gloves 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="1">Leather</parts>
+												<parts count="4">Leather squares</parts>
+												<parts count="6">Leather straps</parts>
+												<parts count="1">Thread</parts>
+				</recycling_parts>
+				<variants>			
+												<variant equip_template="g_01a_mg__guard_lvl1">
+													<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+													<item>Lynx Armor</item>           <!-- this item uses slim version -->
+												</variant>
+												<variant equip_template="g_01_mg__guard_lvl1" category="armor"></variant>  <!-- this item uses bold version -->
+				</variants>
+			</item>
+	<item on_conflict="replace"
 				name							="Guard Lvl1 Gloves 2"
 				category						="gloves"
 				price							="144"
@@ -5662,8 +6062,8 @@
 				localisation_key_description	="item_category_light_armor_description"
 				icon_path						="icons/inventory/armors/guard_1a_gloves_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, LightArmor, mod_armor
-				</tags>
+				<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Guard Lvl1 Gloves 2 _Stats</a>
 				</base_abilities>
@@ -5681,6 +6081,40 @@
 				</variants>
 			</item>
 	<item on_conflict="replace"
+				name							="Guard Lvl2 A Gloves 1"
+				category						="gloves"
+				price							="72"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="g_01a_mg__guard_lvl2"
+				localisation_key_name			="item_name_guard_lvl2_A_geralt_gloves"
+				localisation_key_description	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/guard_2a_gloves_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl2 A Gloves 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="2">Leather</parts>
+												<parts count="2">Leather squares</parts>
+												<parts count="4">Leather straps</parts>
+												<parts count="1">Thread</parts>
+												<parts count="2">Cotton</parts>
+				</recycling_parts>
+				<variants>			
+												<variant equip_template="g_01a_mg__guard_lvl2">
+													<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+													<item>Lynx Armor</item>           <!-- this item uses slim version -->
+												</variant>
+												<variant equip_template="g_01_mg__guard_lvl2" category="armor"></variant>  <!-- this item uses bold version -->
+				</variants>
+			</item>
+	<item on_conflict="replace"
 				name							="Guard Lvl2 A Gloves 2"
 				category						="gloves"
 				price							="76"
@@ -5695,8 +6129,8 @@
 				localisation_key_description	="item_category_medium_armor_description"
 				icon_path						="icons/inventory/armors/guard_2a_gloves_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, MediumArmor, mod_armor
-				</tags>
+				<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Guard Lvl2 A Gloves 2 _Stats</a>
 				</base_abilities>
@@ -5715,6 +6149,40 @@
 				</variants>
 			</item>
 	<item on_conflict="replace"
+				name							="Guard Lvl2 Gloves 1"
+				category						="gloves"
+				price							="90"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="g_01a_mg__common_light_lvl3"
+				localisation_key_name			="item_name_guard_lvl2_geralt_gloves"
+				localisation_key_description	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/common_light_lvl3_64x128.png"
+			>
+				<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl2 Gloves 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="1">Leather</parts>
+												<parts count="5">Leather squares</parts>
+												<parts count="5">Leather straps</parts>
+												<parts count="1">Thread</parts>
+												<parts count="2">Cotton</parts>
+				</recycling_parts>
+				<variants>			
+												<variant equip_template="g_01a_mg__common_light_lvl3">
+													<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+													<item>Lynx Armor</item>           <!-- this item uses slim version -->
+												</variant>
+												<variant equip_template="g_01_mg__common_light_lvl3" category="armor"></variant>  <!-- this item uses bold version -->
+				</variants>
+			</item>
+	<item on_conflict="replace"
 				name							="Guard Lvl2 Gloves 2"
 				category						="gloves"
 				price							="94"
@@ -5729,8 +6197,8 @@
 				localisation_key_description	="item_category_medium_armor_description"
 				icon_path						="icons/inventory/armors/common_light_lvl3_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, MediumArmor, mod_armor
-				</tags>
+				<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Guard Lvl2 Gloves 2 _Stats</a>
 				</base_abilities>
@@ -5749,6 +6217,53 @@
 				</variants>
 			</item>
 	<item on_conflict="replace"
+				name							="Knight Geralt A Gloves 1"
+				category						="gloves"
+				price							="236"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="g_02a_mg__errant_knight"
+				localisation_key_name			="item_name_knight_A_geralt_gloves"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/knight_2_gloves_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Knight Geralt A Gloves 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="4">Leather squares</parts>
+												<parts count="4">Dark iron ore</parts>
+												<parts count="2">Steel ingot</parts>
+												<parts count="2">Thread</parts>
+												<parts count="2">Cotton</parts>
+				</recycling_parts>
+				<variants>						<variant equip_template="g_02a_mg__errant_knight">
+												<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+												<item>Lynx Armor</item>           <!-- this item uses slim version -->
+												</variant>
+												<variant equip_template="g_02b_mg__errant_knight">
+												<item>Toussaint Armor 2</item>      
+												<item>Knight Geralt A Armor 2</item>   
+												<item>Knight Geralt A Armor 1</item>      
+												<item>Knight Geralt Armor 2</item>  
+												<item>Knight Geralt Armor 1</item>      
+												<item>Knight Geralt Armor 3</item>  
+												<item>Knight Geralt A Armor 3</item>      
+												<item>Toussaint Armor 3</item>
+												<item>q702_vampire_armor</item>  
+												<item>q704_vampire_armor</item>	
+												<item>sq701_geralt_armor</item> 
+												<item>sq701_ravix_armor</item> 										
+												</variant>
+												<variant equip_template="g_02_mg__errant_knight" category="armor"></variant>  <!-- this item uses bold version -->
+				</variants>
+			</item>
+	<item on_conflict="replace"
 				name							="Knight Geralt A Gloves 2"
 				category						="gloves"
 				price							="468"
@@ -5763,8 +6278,8 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/knight_2_gloves_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, HeavyArmor, mod_armor
-				</tags>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Knight Geralt A Gloves 2 _Stats</a>
 				</base_abilities>
@@ -5796,6 +6311,51 @@
 				</variants>
 			</item>
 	<item on_conflict="replace"
+				name							="Knight Geralt Gloves 1"
+				category						="gloves"
+				price							="134"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="g_01a_mg__errant_knight"
+				localisation_key_name			="item_name_knight_geralt_gloves"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/knight_1_gloves_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Knight Geralt Gloves 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="4">Leather squares</parts>
+												<parts count="4">Dark iron ore</parts>
+												<parts count="1">Leather straps</parts>
+				</recycling_parts>
+				<variants>						<variant equip_template="g_01a_mg__errant_knight">
+												<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+												<item>Lynx Armor</item>           <!-- this item uses slim version -->
+												</variant>
+												<variant equip_template="g_01b_mg__errant_knight">
+												<item>Toussaint Armor 2</item>      
+												<item>Knight Geralt A Armor 2</item>   
+												<item>Knight Geralt A Armor 1</item>      
+												<item>Knight Geralt Armor 2</item>  
+												<item>Knight Geralt Armor 1</item>      
+												<item>Knight Geralt Armor 3</item>  
+												<item>Knight Geralt A Armor 3</item>     
+												<item>Toussaint Armor 3</item>
+												<item>q702_vampire_armor</item>  	
+												<item>q704_vampire_armor</item>
+												<item>sq701_geralt_armor</item> 
+												<item>sq701_ravix_armor</item> 
+												</variant>
+												<variant equip_template="g_01_mg__errant_knight" category="armor"></variant>  <!-- this item uses bold version -->
+				</variants>
+			</item>
+	<item on_conflict="replace"
 				name							="Knight Geralt Gloves 2"
 				category						="gloves"
 				price							="152"
@@ -5810,8 +6370,8 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/knight_1_gloves_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, HeavyArmor, mod_armor
-				</tags>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Knight Geralt Gloves 2 _Stats</a>
 				</base_abilities>
@@ -5856,8 +6416,8 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/toussaint_gloves_2_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, EP1, Armor, HeavyArmor, mod_armor
-				</tags>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Toussaint Gloves 2 _Stats</a>
 				</base_abilities>
@@ -5903,8 +6463,8 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/q704_vampire_gloves_64x128.png" 
 			>
-				<tags>							Armor, HeavyArmor, mod_armor, mod_legendary, EP1, VampireSet, SetBonusPiece
-				</tags>
+				<tags>							Armor, HeavyArmor, mod_armor, mod_legendary, VampireSet, SetBonusPiece, Autogen
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>q702_vampire_gloves _Stats</a>
 				</base_abilities>
@@ -5950,8 +6510,8 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/vampire_gloves_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, Armor, HeavyArmor, mod_armor, mod_legendary, EP1, VampireSet, SetBonusPiece
-				</tags>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor, mod_legendary, VampireSet, SetBonusPiece
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>q704_vampire_gloves _Stats</a>
 				</base_abilities>
@@ -6009,11 +6569,57 @@
 				<variants>						
 				</variants>
 			</item>
+	<item on_conflict="replace"
+				name							="sq701_geralt_gloves"
+				category						="gloves"
+				price							="144"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="g_01a_mg__errant_knight"
+				localisation_key_name			="item_name_knight_geralt_gloves"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/knight_1_gloves_1_64x128.png"
+			>
+				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>sq701_geralt_gloves _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="4">Leather squares</parts>
+												<parts count="4">Dark iron ore</parts>
+												<parts count="2">Thread</parts>
+												<parts count="2">Cotton</parts>
+				</recycling_parts>
+				<variants>						<variant equip_template="g_01a_mg__errant_knight">
+												<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+												<item>Lynx Armor</item>           <!-- this item uses slim version -->
+												</variant>
+												<variant equip_template="g_01b_mg__errant_knight">
+												<item>Toussaint Armor 2</item>      
+												<item>Knight Geralt A Armor 2</item>   
+												<item>Knight Geralt A Armor 1</item>      
+												<item>Knight Geralt Armor 2</item>  
+												<item>Knight Geralt Armor 1</item>      
+												<item>Knight Geralt Armor 3</item>  
+												<item>Knight Geralt A Armor 3</item>      
+												<item>Toussaint Armor 3</item>
+												<item>q702_vampire_armor</item>  
+												<item>q704_vampire_armor</item>
+												<item>sq701_geralt_armor</item> 
+												<item>sq701_ravix_armor</item> 
+												</variant>
+												<variant equip_template="g_01_mg__errant_knight" category="armor"></variant>  <!-- this item uses bold version -->
+				</variants>
+			</item>
 
 <!-- dlc/bob/data/gameplay/items/def_item_pants.xml -->
 	<item on_conflict="replace" name="Beauclair Casual Pants 01" category="pants" stackable="1" enhancement_slots="0" equip_template="l_06_mg__bob" ability_mode="OnMount" grid_size = "2"
 				icon_path="icons/inventory/quests/Beauclair-Casual-Pants-01_64x128.png" localisation_key_name = "item_name_beauclair_pants" localisation_key_description = "item_desc_beauclair_pants" price = "120"
-				initial_durability="75"
+				initial_durability="100"
 				max_durability="100">
 				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance
 		</tags>
@@ -6034,7 +6640,7 @@
 			</item>
 	<item on_conflict="replace" name="Beauclair Prison Pants" category="pants" stackable="1" enhancement_slots="0" equip_template="l_01_mg__prison_outfit" ability_mode="OnMount" grid_size = "2"
 				icon_path="icons/inventory/quests/Beauclair-Prison-Pants_64x128.png" localisation_key_name = "item_name_beauclair_prison_pants" localisation_key_description = "item_desc_beauclair_prison_pants" price = "48"
-				initial_durability="75"
+				initial_durability="100"
 				max_durability="100">
 				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance
 		</tags>
@@ -6088,6 +6694,558 @@
 		</variants>
 	</item>
 	<item on_conflict="replace" 
+				name							="Guard Lvl1 A Pants 1"
+				category						="pants"
+				price							="168"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l2_02_mg__bob"
+				localisation_key_name			="item_name_guard_lvl1_A_geralt_pants"
+				localisation_key_description	="item_category_light_armor_description"
+				icon_path						="icons/inventory/armors/guard_1a_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl1 A Pants 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="2">Silk</parts>
+										<parts count="5">Linen</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="3">Thread</parts>
+										<parts count="2">Cotton</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l2_02a_mg__bob" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Guard Lvl1 A Pants 2"
+				category						="pants"
+				price							="168"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="1"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l2_02_mg__bob"
+				localisation_key_name			="item_name_guard_lvl1_A_geralt_pants"
+				localisation_key_description	="item_category_light_armor_description"
+				icon_path						="icons/inventory/armors/guard_1a_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl1 A Pants 2 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="2">Silk</parts>
+										<parts count="5">Linen</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="4">Thread</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l2_02a_mg__bob" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Guard Lvl1 Pants 1"
+				category						="pants"
+				price							="152"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l2_01_mg__bob"
+				localisation_key_name			="item_name_guard_lvl1_geralt_pants"
+				localisation_key_description	="item_category_light_armor_description"
+				icon_path						="icons/inventory/armors/guard_1_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl1 Pants 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="1">Silk</parts>
+										<parts count="5">Linen</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Thread</parts>
+										<parts count="2">Cotton</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l2_01a_mg__bob" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Guard Lvl1 Pants 2"
+				category						="pants"
+				price							="152"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="1"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l2_01_mg__bob"
+				localisation_key_name			="item_name_guard_lvl1_geralt_pants"
+				localisation_key_description	="item_category_light_armor_description"
+				icon_path						="icons/inventory/armors/guard_1_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, LightArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl1 Pants 2 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="1">Silk</parts>
+										<parts count="5">Linen</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Thread</parts>
+										<parts count="2">Cotton</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l2_01a_mg__bob" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Guard Lvl2 A Pants 1"
+				category						="pants"
+				price							="366"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l2_04_mg__bob"
+				localisation_key_name			="item_name_guard_lvl2_A_geralt_pants"
+				localisation_key_description	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/guard_2a_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl2 A Pants 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="3">Silk</parts>
+										<parts count="5">Linen</parts>
+										<parts count="2">Leather squares</parts>
+										<parts count="6">Thread</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l2_04a_mg__bob" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Guard Lvl2 A Pants 2"
+				category						="pants"
+				price							="366"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="1"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l2_04_mg__bob"
+				localisation_key_name			="item_name_guard_lvl2_A_geralt_pants"
+				localisation_key_description	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/guard_2a_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl2 A Pants 2 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="3">Silk</parts>
+										<parts count="5">Linen</parts>
+										<parts count="2">Leather squares</parts>
+										<parts count="6">Thread</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l2_04a_mg__bob" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Guard Lvl2 Pants 1"
+				category						="pants"
+				price							="210"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l2_03_mg__bob"
+				localisation_key_name			="item_name_guard_lvl2_geralt_pants"
+				localisation_key_description	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/guard_2_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl2 Pants 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="2">Silk</parts>
+										<parts count="5">Linen</parts>
+										<parts count="2">Leather squares</parts>
+										<parts count="6">Thread</parts>
+										<parts count="2">Twine</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l2_03a_mg__bob" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Guard Lvl2 Pants 2"
+				category						="pants"
+				price							="210"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="1"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l2_03_mg__bob"
+				localisation_key_name			="item_name_guard_lvl2_geralt_pants"
+				localisation_key_description	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/guard_2_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, MediumArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Guard Lvl2 Pants 2 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="2">Silk</parts>
+										<parts count="5">Linen</parts>
+										<parts count="2">Leather squares</parts>
+										<parts count="6">Thread</parts>
+										<parts count="2">Twine</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l2_03a_mg__bob" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Knight Geralt A Pants 1"
+				category						="pants"
+				price							="836"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l_02_mg__errant_knight"
+				localisation_key_name			="item_name_knight_A_geralt_pants"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/knight_2_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Knight Geralt A Pants 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="6">Dark iron ingot</parts>
+												<parts count="3">Silk</parts>
+												<parts count="2">Linen</parts>
+												<parts count="2">Leather squares</parts>
+												<parts count="2">Orichalcum ore</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l_02a_mg__errant_knight" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Knight Geralt A Pants 2"
+				category						="pants"
+				price							="884"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="1"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l_02_mg__errant_knight"
+				localisation_key_name			="item_name_knight_A_geralt_pants"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/knight_2_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Knight Geralt A Pants 2 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="4">Dark iron ingot</parts>
+												<parts count="4">Steel ingot</parts>
+												<parts count="3">Silk</parts>
+												<parts count="2">Linen</parts>
+												<parts count="2">Orichalcum ore</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l_02a_mg__errant_knight" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Knight Geralt Pants 1"
+				category						="pants"
+				price							="516"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l_01_mg__errant_knight"
+				localisation_key_name			="item_name_knight_geralt_pants"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/knight_1_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Knight Geralt Pants 1 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="6">Dark iron ingot</parts>
+										<parts count="3">Silk</parts>
+										<parts count="2">Linen</parts>
+										<parts count="2">Leather squares</parts>
+										<parts count="2">Leather straps</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l_01a_mg__errant_knight" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Knight Geralt Pants 2"
+				category						="pants"
+				price							="564"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="1"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l_01_mg__errant_knight"
+				localisation_key_name			="item_name_knight_geralt_pants"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/knight_1_pants_1_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Knight Geralt Pants 2 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="4">Dark iron ingot</parts>
+										<parts count="4">Steel ingot</parts>
+										<parts count="3">Silk</parts>
+										<parts count="2">Linen</parts>
+										<parts count="6">Leather straps</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l_01a_mg__errant_knight" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="Toussaint Pants 2"
+				category						="pants"
+				price							="2172"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="1"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l_03_mg__errant_knight"
+				localisation_key_name			="item_name_toussaint_pants"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/toussaint_pants_2_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>Toussaint Pants 2 _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="4">Orichalcum ingot</parts>
+												<parts count="1">Orichalcum plate</parts>
+												<parts count="2">Dark steel ingot</parts>
+												<parts count="3">Silk</parts>
+												<parts count="5">Leather straps</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l_03a_mg__errant_knight" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="q702_vampire_pants"
+				category						="pants"
+				price							="1160"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="2"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="q704_l_01_mg__vampire" 
+				localisation_key_name			="item_name_baw_vampire_trousers"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/q704_vampire_pants_64x128.png" 
+			>
+				<tags>							Armor, HeavyArmor, mod_armor, mod_legendary, VampireSet, SetBonusPiece, Autogen
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>q702_vampire_pants _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="3">Meteorite silver plate</parts>
+												<parts count="5">Linen</parts>
+												<parts count="2">Hardened leather</parts>
+												<parts count="5">Chitin scale</parts>
+												<parts count="2">Leather straps</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="q704_l_01a_mg__vampire" category="boots"></variant> 
+				</variants>
+			</item>
+	<item on_conflict="replace" 
+				name							="q704_vampire_pants"
+				category						="pants"
+				price							="1192"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="2"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="l_01_mg__vampire"
+				localisation_key_name			="item_name_baw_vampire_trousers_2"
+				localisation_key_description	="item_category_heavy_armor_description"
+				icon_path						="icons/inventory/armors/vampire_pants_64x128.png"
+			>
+				<tags>							Autogen, Armor, HeavyArmor, mod_armor, mod_legendary, VampireSet, SetBonusPiece
+		</tags>
+				<base_abilities>				<a>Default armor _Stats</a>
+												<a>q704_vampire_pants _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="3">Meteorite silver plate</parts>
+												<parts count="4">Linen</parts>
+												<parts count="2">Hardened leather</parts>
+												<parts count="5">Chitin scale</parts>
+												<parts count="2">Leather straps</parts>
+				</recycling_parts>
+				<collapse>						<category_cond name="armor" collapse="true"/>
+													<item_cond name="Body torso wet" collapse="false"/>
+													<item_cond name="Body torso towel" collapse="false"/>
+													<item_cond name="Body torso 01" collapse="false"/>
+													<item_cond name="Geralt Shirt" collapse="false"/>
+													<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+				</collapse>
+				<variants>				
+												<variant equip_template="l_01a_mg__vampire" category="boots"></variant>
+				</variants>
+			</item>
+	<item on_conflict="replace" 
 				name							="sq701_geralt_pants"
 				category						="pants"
 				price							="564"
@@ -6102,8 +7260,8 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/knight_1_pants_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, DoNotEnhance, Armor, HeavyArmor, mod_armor
-				</tags>
+				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>sq701_geralt_pants _Stats</a>
 				</base_abilities>
@@ -7103,8 +8261,8 @@
 				localisation_key_description	="item_category_medium_armor_description"
 				icon_path						="icons/inventory/quests/nekker_shoes_64x128.png"
 			>
-				<tags>							Armor, MediumArmor,
-				</tags>
+				<tags>							Armor, MediumArmor, Autogen
+		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Nekker Boots _Stats</a>
 				</base_abilities>
@@ -7129,7 +8287,7 @@
 		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/flaming_rose_armor_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, Armor, HeavyArmor, mod_armor, EP1
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor, EP1
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Burning Rose Armor _Stats</a>
@@ -7158,7 +8316,7 @@
 		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/flaming_rose_armor_64x128.png"
 	>
-		<tags>							Autogen, AutogenUseLevelRange, Armor, HeavyArmor, mod_armor, DoNotEnhance
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Burning Rose Armor B _Stats</a>
@@ -7187,7 +8345,7 @@
 		localisation_key_description	="item_desc_kontusz"
 		icon_path						="icons/inventory/quests/q602_wedding_suit_64x128.png"
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, LightArmor, mod_armor, DoNotEnhance, Sleevless, gm_NoSetBonuses
+		<tags>							Autogen, AutogenForceLevel, Armor, LightArmor, mod_armor, DoNotEnhance, Sleevless, gm_NoSetBonuses
 		</tags>
 		<base_abilities>				<a>Geralt_kontusz _Stats</a>
 										<a>Default armor _Stats</a>
@@ -7253,7 +8411,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/ofir_armor_2_64x128.png"
 	>									  
-		<tags>							Armor, LightArmor, mod_armor, mod_armor, mod_origin_ofir, mod_valuable, Ofir, DoNotEnhance, Sleevless
+		<tags>							Armor, LightArmor, mod_armor, mod_armor, mod_origin_ofir, mod_valuable, Ofir, Sleevless, Autogen
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Ofir Armor _Stats</a>
@@ -7282,7 +8440,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/ofir_armor_2_64x128.png"
 	>									  
-		<tags>							Autogen, AutogenUseLevelRange, Armor, LightArmor, mod_armor, mod_armor, mod_origin_ofir, Ofir, DoNotEnhance, Sleevless
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_armor, mod_origin_ofir, Ofir, Sleevless
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Ofir Armor B _Stats</a>
@@ -7311,7 +8469,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_armor_64x128.png" 
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, MediumArmor, mod_armor, mod_valuable, EP1
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_valuable, EP1
 		</tags>
 		<bound_items>
 		</bound_items>
@@ -7343,7 +8501,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_armor_64x128.png" 
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, MediumArmor, mod_armor, DoNotEnhance
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor
 		</tags>
 		<bound_items>
 		</bound_items>
@@ -7375,7 +8533,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_armor_64x128.png" 
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, MediumArmor, mod_armor, DoNotEnhance
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor
 		</tags>
 		<bound_items>
 		</bound_items>
@@ -7407,7 +8565,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_armor_64x128.png" 
 	>
-		<tags>							Autogen, AutogenUseLevelRange, Armor, MediumArmor, mod_armor, EP1
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, EP1
 		</tags>
 		<bound_items>
 		</bound_items>
@@ -7441,7 +8599,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_boots_lvl1_64x128.png"
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, LightArmor, mod_armor, DoNotEnhance, gm_NoSetBonuses
+		<tags>							Autogen, AutogenForceLevel, Armor, LightArmor, mod_armor, DoNotEnhance, gm_NoSetBonuses
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Geralt Kontusz Boots _Stats</a>
@@ -7475,6 +8633,186 @@
 										<parts count="2">Leather squares</parts>
 										<parts count="3">Thread</parts>
 		</recycling_parts>
+	</item>
+	<item on_conflict="replace" 
+		name							="Ofir Boots" 
+		category						="boots" 
+		price							="136"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="1" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="s_01_mg__ofir_lv1" 
+		localisation_key_name 			="item_name_ofir_shoes" 
+		localisation_key_description 	="item_category_light_armor_description" 
+		icon_path						="icons/inventory/armors/ofir_shoes_64x128.png" 
+	>
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_origin_ofir, Ofir, EP1
+		</tags>
+		<base_abilities>
+										<a>Ofir Boots _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Hardened leather</parts>
+										<parts count="3">Leather squares</parts>
+										<parts count="2">String</parts>
+										<parts count="1">Linen</parts>
+		</recycling_parts> 		
+		<variants>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Ofir Boots B" 
+		category						="boots" 
+		price							="136"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="0" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="s_01_mg__ofir_lv1" 
+		localisation_key_name 			="item_name_ofir_shoes" 
+		localisation_key_description 	="item_category_light_armor_description" 
+		icon_path						="icons/inventory/armors/ofir_shoes_64x128.png" 
+	>
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_origin_ofir, Ofir
+		</tags>
+		<base_abilities>
+										<a>Ofir Boots B _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Hardened leather</parts>
+										<parts count="3">Leather squares</parts>
+										<parts count="2">String</parts>
+										<parts count="1">Linen</parts>
+		</recycling_parts> 		
+		<variants>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Boots" 
+		category						="boots" 
+		price							="135"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="1" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="s_01_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_boots" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_shoes_64x128.png" 
+	>
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_valuable, EP1
+		</tags>
+		<base_abilities>
+										<a>Thief Boots _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Leather</parts>
+										<parts count="3">Leather squares</parts>
+										<parts count="2">Thread</parts>
+										<parts count="3">String</parts>
+		</recycling_parts> 		
+		<variants>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Boots B" 
+		category						="boots" 
+		price							="135"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="0" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="s_01_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_boots" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_shoes_64x128.png" 
+	>
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor
+		</tags>
+		<base_abilities>
+										<a>Thief Boots B _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Leather</parts>
+										<parts count="3">Leather squares</parts>
+										<parts count="2">Thread</parts>
+										<parts count="3">String</parts>
+		</recycling_parts> 		
+		<variants>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Boots No Medallion" 
+		category						="boots" 
+		price							="135"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="0" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="s_01_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_boots" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_shoes_64x128.png" 
+	>
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor, mod_valuable
+		</tags>
+		<base_abilities>
+										<a>Thief Boots No Medallion _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Leather</parts>
+										<parts count="3">Leather squares</parts>
+										<parts count="2">Thread</parts>
+										<parts count="3">String</parts>
+		</recycling_parts> 		
+		<variants>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Boots Y" 
+		category						="boots" 
+		price							="135"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="1" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="s_01_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_boots" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_shoes_64x128.png" 
+	>
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, EP1
+		</tags>
+		<base_abilities>
+										<a>Thief Boots Y _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Leather</parts>
+										<parts count="3">Leather squares</parts>
+										<parts count="2">Thread</parts>
+										<parts count="3">String</parts>
+		</recycling_parts> 		
+		<variants>
+		</variants>			
 	</item>
 
 <!-- dlc/ep1/data/gameplay/items/def_item_crafting_armor.xml -->
@@ -7735,6 +9073,106 @@
 	</item>
 
 <!-- dlc/ep1/data/gameplay/items/def_item_gloves.xml -->
+	<item on_conflict="replace"
+		name							="Burning Rose Gloves"
+		category						="gloves"
+		price							="130"
+		initial_durability				="200"
+		max_durability					="200"
+		enhancement_slots				="1"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="g_01a_mg__flamingrose"
+		localisation_key_name			="item_name_rose_gloves"
+		localisation_key_description	="item_category_heavy_armor_description"
+		icon_path						="icons/inventory/armors/flaming_rose_gloves_64x128.png"
+	>
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor, EP1
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>Burning Rose Gloves _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather</parts>
+										<parts count="1">Hardened leather</parts>
+										<parts count="2">Leather straps</parts>
+										<parts count="2">String</parts>
+										<parts count="1">Steel ingot</parts>
+		</recycling_parts>
+		<variants>						<variant equip_template="g_01a_mg__flamingrose">
+											<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+											<item>Lynx Armor</item>           <!-- this item uses slim version -->
+										</variant>
+										<variant equip_template="g_01_mg__flamingrose" category="armor"></variant>  <!-- this item uses bold version -->
+		</variants>
+	</item>
+	<item on_conflict="replace"
+		name							="Burning Rose Gloves B"
+		category						="gloves"
+		price							="130"
+		initial_durability				="200"
+		max_durability					="200"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="g_01a_mg__flamingrose"
+		localisation_key_name			="item_name_rose_gloves"
+		localisation_key_description	="item_category_heavy_armor_description"
+		icon_path						="icons/inventory/armors/flaming_rose_gloves_64x128.png"
+	>
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>Burning Rose Gloves B _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather</parts>
+										<parts count="1">Hardened leather</parts>
+										<parts count="2">Leather straps</parts>
+										<parts count="2">String</parts>
+										<parts count="1">Steel ingot</parts>
+		</recycling_parts>
+		<variants>						<variant equip_template="g_01a_mg__flamingrose">
+											<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+											<item>Lynx Armor</item>           <!-- this item uses slim version -->
+										</variant>
+										<variant equip_template="g_01_mg__flamingrose" category="armor"></variant>  <!-- this item uses bold version -->
+		</variants>
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Gloves" 
+		category						="gloves" 
+		price							="100"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="1" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="g_01a_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_gloves" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_gloves_64x128.png" 
+	>
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_valuable, EP1
+		</tags>
+		<base_abilities>
+										<a>Thief Gloves _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="3">Leather squares</parts>
+										<parts count="2">Leather</parts>
+										<parts count="3">Thread</parts>
+		</recycling_parts> 	
+		<variants>						<variant equip_template="g_01a_mg__thief">
+											<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+											<item>Lynx Armor</item>           <!-- this item uses slim version -->
+										</variant>
+										<variant equip_template="g_01_mg__thief" category="armor"></variant>  <!-- this item uses bold version -->
+		
+		</variants>			
+	</item>
 	<item on_conflict="replace" 
 		name							="Thief Gloves B" 
 		category						="gloves" 
@@ -7751,10 +9189,44 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_gloves_64x128.png" 
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, MediumArmor, mod_armor, DoNotEnhance
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor
 		</tags>
 		<base_abilities>
 										<a>Thief Gloves B _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="3">Leather squares</parts>
+										<parts count="2">Leather</parts>
+										<parts count="3">Thread</parts>
+		</recycling_parts> 	
+		<variants>						<variant equip_template="g_01a_mg__thief">
+											<item>Geralt Shirt</item>         <!-- this item uses slim version -->
+											<item>Lynx Armor</item>           <!-- this item uses slim version -->
+										</variant>
+										<variant equip_template="g_01_mg__thief" category="armor"></variant>  <!-- this item uses bold version -->
+		
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Gloves No Medallion" 
+		category						="gloves" 
+		price							="100"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="0" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="g_01a_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_gloves" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_gloves_64x128.png" 
+	>
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor
+		</tags>
+		<base_abilities>
+										<a>Thief Gloves No Medallion _Stats</a>
 										<a>Default armor _Stats</a>
 		</base_abilities>		
 		<recycling_parts>				<parts count="3">Leather squares</parts>
@@ -7785,7 +9257,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_gloves_64x128.png" 
 	>
-		<tags>							Autogen, AutogenUseLevelRange, Armor, MediumArmor, mod_armor, EP1
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, EP1
 		</tags>
 		<base_abilities>
 										<a>Thief Gloves Y _Stats</a>
@@ -7801,6 +9273,206 @@
 										</variant>
 										<variant equip_template="g_01_mg__thief" category="armor"></variant>  <!-- this item uses bold version -->
 		
+		</variants>			
+	</item>
+
+<!-- dlc/ep1/data/gameplay/items/def_item_pants.xml -->
+	<item on_conflict="replace" 
+		name							="Ofir Pants" 
+		category						="pants" 
+		price							="176"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="1" 
+		stackable						="1"
+		grid_size 						="2"
+		ability_mode					="OnMount" 
+		equip_template					="l_01_mg__ofir_lv1" 
+		localisation_key_name 			="item_name_ofir_pants" 
+		localisation_key_description 	="item_category_light_armor_description" 
+		icon_path						="icons/inventory/armors/ofir_pants_64x128.png" 
+	>
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_origin_ofir, Ofir, EP1
+		</tags>
+		<base_abilities>
+										<a>Ofir Pants _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="4">Silk</parts>
+										<parts count="2">Linen</parts>
+										<parts count="3">Thread</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Iron ore</parts>
+		</recycling_parts> 	
+		<collapse>
+										<category_cond name="armor" collapse="true"/>
+										<item_cond name="Geralt Shirt" collapse="false"/>
+										<item_cond name="Body torso wet" collapse="false"/>
+										<item_cond name="Body torso towel" collapse="false"/>
+										<item_cond name="Body torso 01" collapse="false"/>
+		</collapse>
+		<variants>						<variant equip_template="l_01a_mg__ofir_lv1" category="boots"></variant>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Ofir Pants B" 
+		category						="pants" 
+		price							="176"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="0" 
+		stackable						="1"
+		grid_size 						="2"
+		ability_mode					="OnMount" 
+		equip_template					="l_01_mg__ofir_lv1" 
+		localisation_key_name 			="item_name_ofir_pants" 
+		localisation_key_description 	="item_category_light_armor_description" 
+		icon_path						="icons/inventory/armors/ofir_pants_64x128.png" 
+	>
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_origin_ofir, Ofir
+		</tags>
+		<base_abilities>
+										<a>Ofir Pants B _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="4">Silk</parts>
+										<parts count="2">Linen</parts>
+										<parts count="3">Thread</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Iron ore</parts>
+		</recycling_parts> 	
+		<collapse>
+										<category_cond name="armor" collapse="true"/>
+										<item_cond name="Geralt Shirt" collapse="false"/>
+										<item_cond name="Body torso wet" collapse="false"/>
+										<item_cond name="Body torso towel" collapse="false"/>
+										<item_cond name="Body torso 01" collapse="false"/>
+		</collapse>
+		<variants>						<variant equip_template="l_01a_mg__ofir_lv1" category="boots"></variant>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Pants" 
+		category						="pants" 
+		price							="114"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="2" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="l_01_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_pants" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_pants_64x128.png" 
+	>
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_valuable, EP1
+		</tags>
+		<base_abilities>
+										<a>Thief Pants _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Silk</parts>
+										<parts count="1">Leather</parts>
+										<parts count="3">Leather straps</parts>
+										<parts count="3">Thread</parts>
+		</recycling_parts> 	
+		<variants>				
+										<variant equip_template="l_01a_mg__thief" category="boots"></variant>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Pants B" 
+		category						="pants" 
+		price							="114"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="0" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="l_01_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_pants" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_pants_64x128.png" 
+	>
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor
+		</tags>
+		<base_abilities>
+										<a>Thief Pants B _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Silk</parts>
+										<parts count="1">Leather</parts>
+										<parts count="3">Leather straps</parts>
+										<parts count="3">Thread</parts>
+		</recycling_parts> 	
+		<variants>				
+										<variant equip_template="l_01a_mg__thief" category="boots"></variant>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Pants No Medallion" 
+		category						="pants" 
+		price							="114"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="0" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="l_01_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_pants" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_pants_64x128.png" 
+	>
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor
+		</tags>
+		<base_abilities>
+										<a>Thief Pants No Medallion _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Silk</parts>
+										<parts count="1">Leather</parts>
+										<parts count="3">Leather straps</parts>
+										<parts count="3">Thread</parts>
+		</recycling_parts> 	
+		<variants>				
+										<variant equip_template="l_01a_mg__thief" category="boots"></variant>
+		</variants>			
+	</item>
+	<item on_conflict="replace" 
+		name							="Thief Pants Y" 
+		category						="pants" 
+		price							="114"
+		initial_durability				="100" 
+		max_durability					="100" 
+		enhancement_slots				="1" 
+		stackable						="1"
+		grid_size 						="2"
+		upgrade_list_name				="list6"
+		ability_mode					="OnMount" 
+		equip_template					="l_01_mg__thief" 
+		localisation_key_name 			="item_name_thief_borsody_pants" 
+		localisation_key_description 	="item_category_medium_armor_description" 
+		icon_path						="icons/inventory/armors/thief_pants_64x128.png" 
+	>
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, EP1
+		</tags>
+		<base_abilities>
+										<a>Thief Pants Y _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>		
+		<recycling_parts>				<parts count="2">Silk</parts>
+										<parts count="1">Leather</parts>
+										<parts count="3">Leather straps</parts>
+										<parts count="3">Thread</parts>
+		</recycling_parts> 	
+		<variants>				
+										<variant equip_template="l_01a_mg__thief" category="boots"></variant>
 		</variants>			
 	</item>
 
@@ -8318,7 +9990,7 @@
 		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_lvl3_01_64x128.png"
 	>
-		<tags>							Armor, mod_armor, HeavyArmor
+		<tags>							Armor, mod_armor, HeavyArmor, Autogen
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>q108 Medium armor 10 _Stats</a>
@@ -12334,6 +14006,270 @@
 											<item_cond name="Geralt Shirt No Knife" collapse="false"/>
 		</collapse>
 		<variants>						<variant equip_template="l_01a_mg__common_light_lvl4" category="boots"></variant>
+		</variants>
+	</item>
+
+<!-- gameplay/items/def_item_ep1_stand_alone.xml -->
+	<item on_conflict="replace"
+		name							="EP1 Standalone Starting Armor"
+		category						="armor"
+		price							="88"
+		initial_durability				="100"
+		max_durability					="100" 
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="t_01_mg__viper_lvl3"
+		localisation_key_name			="item_name_starting_armor_01"
+		localisation_key_description	="item_category_medium_armor_description"
+		icon_path						="icons/inventory/armors/armor-01.png"
+	>
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance, Autogen, AutogenForceLevel
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>EP1 Standalone Starting Armor _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Leather squares</parts>
+										<parts count="2">Leather straps</parts>
+										<parts count="2">Iron ore</parts>
+		</recycling_parts>
+		<variants>						<variant equip_template="t_01a_mg__viper_lvl3" category="gloves"></variant>
+		</variants>
+	</item>
+	<item on_conflict="replace"
+		name							="EP1 Standalone Starting Boots"
+		category						="boots"
+		price							="28"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="s_01_mg__viper_lvl3"
+		localisation_key_name			="item_name_boots_01"
+		localisation_key_description	="item_category_medium_armor_description"
+		icon_path						="icons/inventory/armors/boots-01.png"
+	>
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance, Autogen, AutogenForceLevel
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>EP1 Standalone Starting Boots _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="3">Leather squares</parts>
+										<parts count="1">Iron ore</parts>
+										<parts count="1">Leather straps</parts>
+		</recycling_parts>
+	</item>
+	<item on_conflict="replace"
+		name							="EP1 Standalone Starting Gloves"
+		category						="gloves"
+		price							="20"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="g_01a_mg__viper_lvl3"
+		localisation_key_name			="item_name_gloves_01"
+		localisation_key_description	="item_category_medium_armor_description"
+		icon_path						="icons/inventory/armors/gauntlet-01.png"
+	>
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance, Autogen, AutogenForceLevel
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>EP1 Standalone Starting Gloves _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather squares</parts>
+										<parts count="1">Iron ore</parts>
+										<parts count="1">Leather straps</parts>
+		</recycling_parts>
+		<variants>						<variant equip_template="g_01a_mg__viper_lvl3">
+											<item>Geralt Shirt</item>
+											<item>Lynx Armor</item>
+										</variant>
+										<variant equip_template="g_01_mg__viper_lvl3" category="armor"></variant>
+		</variants>
+	</item>
+	<item on_conflict="replace" 
+		name							="EP1 Standalone Starting Pants"
+		category						="pants"
+		price							="66"
+		initial_durability				="100"
+		max_durability					="100"
+		stackable						="1"
+		grid_size						="2"
+		enhancement_slots				="0"
+		ability_mode					="OnMount"
+		equip_template					="l_01_mg__viper_lvl3"
+		localisation_key_name			="item_name_pants_01"
+		localisation_key_description	="item_category_medium_armor_description"
+		icon_path						="icons/inventory/armors/trousers-01.png"
+	>
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance, Autogen, AutogenForceLevel
+		</tags>
+		<base_abilities>				<a>EP1 Standalone Starting Pants _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="1">Steel ingot</parts>
+										<parts count="5">Thread</parts>
+										<parts count="4">Cotton</parts>
+		</recycling_parts>
+		<collapse>						<category_cond name="armor" collapse="true"/>
+											<item_cond name="Body torso wet" collapse="false"/>
+											<item_cond name="Body torso towel" collapse="false"/>
+											<item_cond name="Body torso 01" collapse="false"/>
+											<item_cond name="Geralt Shirt" collapse="false"/>
+											<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+											<item_cond name="Wolf Armor" collapse="false"/>
+											<item_cond name="Wolf Armor 1" collapse="false"/>
+											<item_cond name="Wolf Armor 2" collapse="false"/>
+											<item_cond name="Wolf Armor 3" collapse="false"/>
+											<item_cond name="NGP Wolf Armor" collapse="false"/>
+											<item_cond name="NGP Wolf Armor 1" collapse="false"/>
+											<item_cond name="NGP Wolf Armor 2" collapse="false"/>
+											<item_cond name="NGP Wolf Armor 3" collapse="false"/>
+											<item_cond name="DLC5 Nilfgaardian Armor" collapse="false"/>
+		</collapse>
+		<variants>				
+										<variant equip_template="l_01a_mg__viper_lvl3" category="boots"></variant>
+		</variants>
+	</item>
+
+<!-- gameplay/items/def_item_ep2_stand_alone.xml -->
+	<item on_conflict="replace"
+		name							="EP2 Standalone Starting Armor"
+		category						="armor"
+		price							="88"
+		initial_durability				="100"
+		max_durability					="100" 
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="t_01_mg__viper_lvl3"
+		localisation_key_name			="item_name_starting_armor_01"
+		localisation_key_description	="item_category_medium_armor_description"
+		icon_path						="icons/inventory/armors/armor-01.png"
+	>
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance, Autogen, AutogenForceLevel
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>EP2 Standalone Starting Armor _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Leather squares</parts>
+										<parts count="2">Leather straps</parts>
+										<parts count="2">Iron ore</parts>
+		</recycling_parts>
+		<variants>						<variant equip_template="t_01a_mg__viper_lvl3" category="gloves"></variant>
+		</variants>
+	</item>
+	<item on_conflict="replace"
+		name							="EP2 Standalone Starting Boots"
+		category						="boots"
+		price							="28"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="s_01_mg__viper_lvl3"
+		localisation_key_name			="item_name_boots_01"
+		localisation_key_description	="item_category_medium_armor_description"
+		icon_path						="icons/inventory/armors/boots-01.png"
+	>
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance, Autogen, AutogenForceLevel
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>EP2 Standalone Starting Boots _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="3">Leather squares</parts>
+										<parts count="1">Iron ore</parts>
+										<parts count="1">Leather straps</parts>
+		</recycling_parts>
+	</item>
+	<item on_conflict="replace"
+		name							="EP2 Standalone Starting Gloves"
+		category						="gloves"
+		price							="20"
+		initial_durability				="100"
+		max_durability					="100"
+		enhancement_slots				="0"
+		stackable						="1"
+		grid_size						="2"
+		ability_mode					="OnMount"
+		equip_template					="g_01a_mg__viper_lvl3"
+		localisation_key_name			="item_name_gloves_01"
+		localisation_key_description	="item_category_medium_armor_description"
+		icon_path						="icons/inventory/armors/gauntlet-01.png"
+	>
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance, Autogen, AutogenForceLevel
+		</tags>
+		<base_abilities>				<a>Default armor _Stats</a>
+										<a>EP2 Standalone Starting Gloves _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Leather squares</parts>
+										<parts count="1">Iron ore</parts>
+										<parts count="1">Leather straps</parts>
+		</recycling_parts>
+		<variants>						<variant equip_template="g_01a_mg__viper_lvl3">
+											<item>Geralt Shirt</item>
+											<item>Lynx Armor</item>
+										</variant>
+										<variant equip_template="g_01_mg__viper_lvl3" category="armor"></variant>
+		</variants>
+	</item>
+	<item on_conflict="replace" 
+		name							="EP2 Standalone Starting Pants"
+		category						="pants"
+		price							="66"
+		initial_durability				="100"
+		max_durability					="100"
+		stackable						="1"
+		grid_size						="2"
+		enhancement_slots				="0"
+		ability_mode					="OnMount"
+		equip_template					="l_01_mg__viper_lvl3"
+		localisation_key_name			="item_name_pants_01"
+		localisation_key_description	="item_category_medium_armor_description"
+		icon_path						="icons/inventory/armors/trousers-01.png"
+	>
+		<tags>							Armor, MediumArmor, mod_armor, DoNotEnhance, Autogen, AutogenForceLevel
+		</tags>
+		<base_abilities>				<a>EP2 Standalone Starting Pants _Stats</a>
+										<a>Default armor _Stats</a>
+		</base_abilities>
+		<recycling_parts>				<parts count="2">Linen</parts>
+										<parts count="1">Steel ingot</parts>
+										<parts count="5">Thread</parts>
+										<parts count="4">Cotton</parts>
+		</recycling_parts>
+		<collapse>						<category_cond name="armor" collapse="true"/>
+											<item_cond name="Body torso wet" collapse="false"/>
+											<item_cond name="Body torso towel" collapse="false"/>
+											<item_cond name="Body torso 01" collapse="false"/>
+											<item_cond name="Geralt Shirt" collapse="false"/>
+											<item_cond name="Geralt Shirt No Knife" collapse="false"/>
+											<item_cond name="Wolf Armor" collapse="false"/>
+											<item_cond name="Wolf Armor 1" collapse="false"/>
+											<item_cond name="Wolf Armor 2" collapse="false"/>
+											<item_cond name="Wolf Armor 3" collapse="false"/>
+											<item_cond name="NGP Wolf Armor" collapse="false"/>
+											<item_cond name="NGP Wolf Armor 1" collapse="false"/>
+											<item_cond name="NGP Wolf Armor 2" collapse="false"/>
+											<item_cond name="NGP Wolf Armor 3" collapse="false"/>
+											<item_cond name="DLC5 Nilfgaardian Armor" collapse="false"/>								
+		</collapse>
+		<variants>				
+										<variant equip_template="l_01a_mg__viper_lvl3" category="boots"></variant>
 		</variants>
 	</item>
 

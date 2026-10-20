@@ -476,6 +476,11 @@ function GMTest_stam05()
 
 	hadOld = GetWitcherPlayer().GetItemEquippedOnSlot(EES_Armor, old);
 	ids = thePlayer.inv.AddAnItem('Heavy armor 01', 1);
+	while(ids.Size() > 0 && thePlayer.inv.GetItemLevel(ids[0]) > thePlayer.GetLevel())	// ITEM-02: a copy Geralt can wear
+	{
+		thePlayer.inv.RemoveItem(ids[0], 1);
+		ids = thePlayer.inv.AddAnItem('Heavy armor 01', 1);
+	}
 	GMTestReport(ids.Size() > 0, "STAM-05 Heavy armor 01 added");
 	if(ids.Size() == 0)
 		return;
@@ -542,9 +547,12 @@ function GMTestHasLine(lines : array<string>, prefix : string) : bool
 	return false;
 }
 
+// The regression's second call (after gmtest_regress() and ingamemenu()): the character panel, and the
+// regression checks that need time to pass after gmtest_regress() (ITEM-12's resistance gain).
 exec function gmtest_panel()
 {
 	GMTest_panel();
+	GMTest_item12_after();
 }
 
 function GMTest_panel()
@@ -2145,6 +2153,7 @@ exec function gmtest_regress()
 	GMTest_arm();
 	GMTest_ench();
 	GMTest_swd();
+	GMTest_item();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

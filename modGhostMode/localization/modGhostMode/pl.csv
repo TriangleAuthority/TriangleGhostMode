@@ -242,3 +242,10 @@
 2110992291|483c9092||Podczas walki obrażenia broni zwiększają się o $I$ punktów za każdego przeciwnika. Każdy cios ładuje miecz. W pełni naładowany miecz wraz z zadaniem ciosu wyładowuje się, zadając obrażenia krytyczne z $I$% premią do Siły Ataku i ignorując Pancerz oraz odporności na obrażenia. Wyładowanie miecza również rani i wytrąca z równowagi wszystkich okolicznych przeciwników.<br><br>Liczba ciosów do pełnego naładowania: $I$. Ładunki można stracić z czasem (jeden na $I$s) lub otrzymując obrażenia.
 2110992292|1f5adb4f||<br><br>Obecna ilość ładunków: $I$/$I$. Obecna premia do obrażeń: $I$.
 2110992299|f2e69faf||Zadawanie obrażeń mieczem ładuje go energią. Zadając cios w pełni naładowanym mieczem, obrażenia broni są zwiększone o wartość równą $I$% Żywotności Geralta (udany atak wysysa Żywotność z dzierżącego miecz). Silny Atak w pełni naładowanym mieczem przywołuje widmową kopię miecza, która zadaje dodatkowe obrażenia, przebijając się jednocześnie przez tarczę, blok oraz Pancerz i ignorując odporności na obrażenia.<br><br>Uderzenia potrzebne do pełnego naładowania: $I$. Ładunki można stracić z czasem (jeden na $I$s) lub otrzymując obrażenia. W pełni naładowany miecz rozładowuje się w czasie $I$s lub po Silnym Ataku.<br><br>Obecna ilość ładunków: $I$/$I$. Obecna premia do obrażeń za w pełni naładowany miecz: $I$.
+; ITEM-11: the master repair kits (legacy's ids and keys)
+2110992266|cb404984||Mistrzowskie narzędzia kowalskie
+2110992267|29e78e8a||Narzędzia używane przez najlepszych kowali. Na stałe zwiększają obrażenia broni. Wymagany poziom zostaje podniesiony o 1.
+2110992268|fcf7e421||Mistrzowskie narzędzia płatnerskie.
+2110992269|ad70e65b||Narzędzia używane przez najlepszych płatnerzy. Na stałe zwiększają ilość punktów Pancerza. Wymagany poziom zostaje podniesiony o 1.
+; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
+2110992483|d400b4dd||Odporności na obrażenia
