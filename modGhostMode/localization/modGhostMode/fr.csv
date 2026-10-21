@@ -420,3 +420,83 @@
 2110992015|c4ea0ecf||Durée de la potion
 ; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
 2110992259|b91d9859||Peut être vendu aux marchands.
+; UI-07: attribute names of Ghost Mode's tooltip rows and panel lines (legacy's ids and keys)
+2110992013|cdb77880||Résistance au gel
+2110992110|328ae462||Chances de renversement
+2110992153|c32e766a||Bonus de puissance des coups critiques
+2110992156|0147942a||Régénération de la vitalité hors combat
+2110992157|a83467f6||Régénération de la vitalité en combat
+2110992164|b02a28c2||Augmentation des dégâts
+2110992265|2eaeb09b||Chances de renvoyer les flèches
+2110992476|2ae9db22||Drain de vitalité
+; UI-06: the armor class descriptions with their stamina rule, the notes' description (legacy's ids and keys)
+2110992426|736e017e||Equipement léger. Offre une protection minimale. Les actions de combat consomment moins de vigueur.
+2110992427|320650a7||Equipement moyen. Offre une protection optimale.
+2110992428|942892ef||Equipement lourd. Offre la meilleure protection. Les actions de combats et le lancement de signes consomment plus de vigueur.
+2110992256|256ad6b4||Contient des informations inutiles.
+; UI-02: the sword and crossbow sections (legacy)
+2110992017|1662935c||Dégâts par coup (argent)
+2110992018|4f1d703c||Dégâts par coup (acier)
+2110992028|8566fddf||Dégâts des attaques rapides
+2110992029|7a3d2c04||Dégâts des attaques puissantes
+2110992074|3c4a6af2||Dégâts des attaques puissantes
+2110992075|5806ca6e||Dégâts critiques des attaques puissantes
+2110992076|69d8dd89||Dégâts des attaques rapides
+2110992077|89dfeac9||Chances de coups critiques des attaques rapides
+2110992078|bc4297c4||Chances de coups critiques des attaques puissantes
+2110992079|d23992f7||Dégâts des attaques rapides
+2110992080|2e06698e||Dégâts critiques des attaques puissantes
+2110992081|3375c4a9||Dégâts critiques des attaques rapides
+2110992082|73d42fa9||Chances de coups critiques des attaques rapides
+2110992083|b08bd7d2||Dégâts des attaques puissantes
+2110992084|c7b0b7d7||Dégâts des attaques rapides
+2110992085|fa3924a4||Chances de coups critiques des attaques puissantes
+2110992167|d11e5fa2||Puissance des coups critiques des attaques rapides
+2110992168|3018409d||Puissance des coups critiques des attaques puissantes
+; UI-02, UI-05: adrenaline gain (crossbow section, misc section)
+2110992105|6f2a6f0f||Gain d'adrénaline
+; UI-03: the sign lines (legacy)
+2110992019|f38f5b36||Dégâts par seconde de Langue de feu
+2110992020|6a994712||Pièges magiques
+2110992022|60b53abe||Durée de la tourelle magique
+2110992023|8594f9d5||Charges de la tourelle magique
+2110992024|1e6cbb19||Dégâts de la tourelle magique
+2110992025|ee530dcc||Dégâts renvoyés
+2110992026|e379a123||Absorption des dégâts par le bouclier actif
+2110992030|a3e34c39||Absorption des dégâts
+2110992272|7641d6c5||Chances de renversement
+2110992277|9246181a||Durée de la confusion
+2110992278|b72fae71||Durée du contrôle
+2110992293|0516c455||Chances de renversement critique
+2110992461|6a758d69||Portée des pièges magiques
+; UI-04: the toxicity lines (legacy)
+2110992423|        |attribute_name_tox_hp_drain|Overdose Vitality drain
+2110992424|1f5ba9f0||Taux de diminution de l'intoxication
+2110992425|1050a15c||Intoxication disponible
+2110992519|        |attribute_name_tox_overdose|Overdose threshold
+; UI-05: adrenaline gain for fast and strong attacks (legacy)
+2110992383|7d183fe6||Gain en adrénaline des attaques rapides
+2110992384|7cddfb97||Gain en adrénaline des attaques puissantes
+; UI-10: the bestiary's kill count (legacy)
+2110992301|bdf0ea49||Humanoïdes
+2110992302|bafca59c||Guerriers de la Chasse Sauvage
+2110992303|82a5fd81||Total
+2110992304|98357039||Animaux
+2110992305|4153fdc1||Monstres
+2110992306|c8dde11f||Victimes par type
+2110992307|d8d52cd1||Compteur de victimes
+2110992308|ba738dce||Humanoïdes
+2110992309|8e8b5e03||Créatures uniques
+; UI-13: loading screen tips (legacy, by key hash)
+2110992520|b93269f0||Your opponents have limited Stamina. When their Stamina is exhausted, they won't be able to fight as effectively.
+2110992521|6d1ad3cb||Pay attention to the color of your enemies' level numbers. Green means they are close to your level. Red means they are a challenge, and a skull icon means they are deadly.
+2110992522|6d1ad3a6||Sharpening your blade on a grindstone will enhance its combat capabilities.
+2110992523|6d1ad427||Strike an opponent while riding towards him at high speed for an increased damage.
+2110992524|b93269e9||Striking from behind increases you critical hit chances.
+2110992525|6d1ad3e4||When throwing a bomb or shooting a bolt from your crossbow, you can either take advantage of auto-aiming for a quick attack, or aim manually for better damage.
+2110992526|6d1ad447||You can deflect incoming bolts and arrows with your sword.
+2110992527|363f99af||You can use Quen to protect from critical effects such as Burning, Bleeding, etc.
+2110992528|6d1ad3cc||Dodging is usually the best tactic when fighting huge monsters. When fighting humans and smaller monsters, try to parry and counter their attacks with your sword.
+; UI-15: shaving (legacy)
+2110992169|25746309||Geralt est maintenant rasé de près.
+2110992173|04bda90f||Utilisé pour se raser.

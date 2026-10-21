@@ -118,19 +118,14 @@ class W3GMPotion_MutationTrigger extends CBaseGameplayEffect
 }
 
 // The drain per second at 1 adrenaline point, before it is shared: the held (or equipped) sword's
-// base damage + the average attack power of fast and strong attacks (crits weighted) in % + the
-// average sign intensity bonus in %. Legacy read the attack power from its character stats list
-// (per attack type and sword); until that list is ported (UI), the port takes the general attack
-// power with the crit chance and crit damage of fast and strong hits: Precise Blows and Crushing
-// Blows of either tree (classic sword_s17 and sword_s08 per level, as legacy's list; the new tree's
-// sword_s24 and sword_s25 through GMBlowsCritChance/GMBlowsCritDamage).
+// base damage + the average attack power of fast and strong attacks with each sword (crits weighted)
+// in %, from the character stats list (UI-01, legacy) + the average sign intensity bonus in %.
 @addMethod(W3PlayerWitcher)
 function GMMutation11GetBaseStrength() : float
 {
 	var swordDmg, avAP, avSI : float;
 	var abl : SAbilityAttributeValue;
-	var ap, critChance, critPower : float;
-	var fastCritChance, fastCritPower, strongCritChance, strongCritPower : float;
+	var curStats : SGMOffenseStats;
 	var sword : SItemUniqueId;
 
 	abl  = GetTotalSignSpellPower(S_Magic_1);
@@ -139,27 +134,14 @@ function GMMutation11GetBaseStrength() : float
 	abl += GetTotalSignSpellPower(S_Magic_4);
 	abl += GetTotalSignSpellPower(S_Magic_5);
 	avSI = MaxF(0.0, abl.valueMultiplicative / 5.0 - 1.0) * 100;
-	abl = GetPowerStatValue(CPS_AttackPower);
-	ap = abl.valueMultiplicative;
-	critChance = CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_CHANCE));
-	critPower = CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
-	fastCritChance = GMBlowsCritChance(false);
-	fastCritPower = GMBlowsCritDamage(false);
-	strongCritChance = GMBlowsCritChance(true);
-	strongCritPower = GMBlowsCritDamage(true);
-	if( CanUseSkill(S_Sword_s17) )
-	{
-		fastCritChance += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * GetSkillLevel(S_Sword_s17);
-		fastCritPower += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * GetSkillLevel(S_Sword_s17);
-	}
-	if( CanUseSkill(S_Sword_s08) )
-	{
-		strongCritChance += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * GetSkillLevel(S_Sword_s08);
-		strongCritPower += CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * GetSkillLevel(S_Sword_s08);
-	}
-	avAP = ( ap + ClampF(critChance + fastCritChance, 0, 1) * (critPower + fastCritPower)
-		+ ap + ClampF(critChance + strongCritChance, 0, 1) * (critPower + strongCritPower) ) / 2.0;
-	avAP = MaxF(0.0, avAP) * 100;
+	curStats = GMGetOffenseStats();
+	avAP = MaxF(0.0,
+				(	curStats.steelFastAP * (1 - curStats.steelFastCritChance/100.0) + curStats.steelFastCritAP * curStats.steelFastCritChance/100.0
+				+	curStats.silverFastAP * (1 - curStats.silverFastCritChance/100.0) + curStats.silverFastCritAP * curStats.silverFastCritChance/100.0
+				+	curStats.steelStrongAP * (1 - curStats.steelStrongCritChance/100.0) + curStats.steelStrongCritAP * curStats.steelStrongCritChance/100.0
+				+	curStats.silverStrongAP * (1 - curStats.silverStrongCritChance/100.0) + curStats.silverStrongCritAP * curStats.silverStrongCritChance/100.0
+				)/4.0
+		) * 100;
 	sword = inv.GetCurrentlyHeldSword();
 	if( sword == GetInvalidUniqueId() )
 	{

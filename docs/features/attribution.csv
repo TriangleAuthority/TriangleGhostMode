@@ -65,15 +65,15 @@ scripts/game/gameplay/effects/effects/auto/staminaRegen.ws::*,STAM-04,regen rate
 scripts/gm_generic/gm_options.ws::gmModRegenValue,STAM-04,also vitality regen options
 scripts/gm_generic/gm_options.ws::gmUpdateRegenEffects,STAM-04,
 scripts/game/gameplay/effects/effectManager.ws::W3EffectManager.FilterAutoBuff,STAM-04,
-scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStat,STAM-03 STAM-04 STAM-05,"stamina section: every action cost (STAM-03), modified regen (STAM-04), armor modifier (STAM-05); other lines belong to UI and other areas"
-scripts/game/gui/popups/CharacterStatsPopup.ws::GetPlayerStatsGFxData,STAM-03 STAM-05,"stamina cost lines (STAM-03), armor modifier line (STAM-05); other lines belong to UI"
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStat,STAM-03 STAM-04 STAM-05 UI-05,"stamina section: every action cost (STAM-03), modified regen (STAM-04), armor modifier (STAM-05); other lines belong to UI and other areas; UI: vitality regen with its multiplicative part (changelist 89), raw sign power"
+scripts/game/gui/popups/CharacterStatsPopup.ws::GetPlayerStatsGFxData,STAM-03 STAM-05 UI-02 UI-03 UI-04 UI-05,"stamina cost lines (STAM-03), armor modifier line (STAM-05); other lines belong to UI; UI: the popup sections (swords, crossbow, signs in two panels, toxicity, misc)"
 scripts/game/gameParams.ws::W3GameParams.GetCombatStaminaRegen,STAM-04,
 scripts/game/gameParams.ws::W3GameParams.GetOutOfCombatStaminaRegen,STAM-04,
 scripts/game/gameParams.ws::W3GameParams.IsArmorRegenPenaltyEnabled,STAM-05,
 scripts/game/components/inventoryComponent.ws::CInventoryComponent.GetItemStatsFromName,STAM-05,
 scripts/game/gameplay/effects/effects/regen/regenEffect.ws::W3RegenEffect.OnUpdate,STAM-05 SKL-07,
-scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddItemStats,STAM-05 SKL-13 SKL-16,"tooltips hide the armor regen penalty; ALCH: the ' sec' unit on cloud_duration, duration_out_of_cloud and poison_immunity_duration, toxicity_offset under its own label (ALCH-17, audit F11: an AddItemStats wrapper; the potion toxicity line without /max and the Adaptation reduction wait for UI)"
-scripts/game/gui/_old/components/guiTooltipComponent.ws::CalculateStatsComparance,STAM-05,"tooltips hide the armor regen penalty; ALCH: the ' sec' unit on the alchemy duration rows (ALCH-17, audit F11: a wrapper)"
+scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddItemStats,STAM-05 SKL-13 SKL-16 UI-06,"tooltips hide the armor regen penalty; ALCH: the ' sec' unit on cloud_duration, duration_out_of_cloud and poison_immunity_duration, toxicity_offset under its own label (ALCH-17, audit F11: an AddItemStats wrapper; the potion toxicity line without /max and the Adaptation reduction wait for UI); UI: toxicity line, negative values, trophies"
+scripts/game/gui/_old/components/guiTooltipComponent.ws::CalculateStatsComparance,STAM-05 UI-06,"tooltips hide the armor regen penalty; ALCH: the ' sec' unit on the alchemy duration rows (ALCH-17, audit F11: a wrapper); UI: negative modifiers compared, slow motion and breath names"
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.CalculatedArmorStaminaRegenBonus,STAM-05 ARM-03,"ARM: legacy armour regen calculation with the option on (glyphwords ignored, regen per missing piece)"
 scripts/game/gameplay/ability/abilityManager.ws::W3AbilityManager.DrainStamina,STAM-06 STAM-07,regen delay; low stamina check
 scripts/gm_generic/gm_options.ws::gmModStaminaDelay,STAM-06,
@@ -113,7 +113,7 @@ files/gameplay/abilities*/effects.xml::custom/effects/effect:WhirlCooldownEffect
 files/gameplay/abilities*/effects.xml::custom/effect_icons/effect:WhirlCooldown,STAM-02,HUD icon path; also NG+
 files/gameplay/abilities*/effects.xml::custom/effects/effect:RendCooldownEffect,STAM-02,effect entry (HUD icon and label); also NG+
 files/gameplay/abilities*/effects.xml::custom/effect_icons/effect:RendCooldown,STAM-02,HUD icon path; also NG+
-files/gameplay/globals/tooltip_settings.csv::row:staminaRegen_armor_mod,STAM-05,tooltip line for the armor regen modifier (shown when the option is on); port with the other tooltip_settings.csv rows
+files/gameplay/globals/tooltip_settings.csv::row:staminaRegen_armor_mod,STAM-05 UI-07,tooltip line for the armor regen modifier (shown when the option is on); port with the other tooltip_settings.csv rows; UI ports the row
 files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:ConGeralt,STAM-03 STAM-04 STAM-06 SKL-07,"stamina action costs (STAM-03), regen (STAM-04), stamina delays (STAM-06); its vitality regen, poison/bleeding resistance and adrenaline gain changes belong to other areas, not mapped yet"
 files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:ConGeralt,STAM-03 STAM-04 STAM-06 SKL-07,NG+
 scripts/game/player/playerInput.ws::CPlayerInput.OnCastSign,STAM-01 STAM-03,"body moved to CastSign (STAM-01 cooldown check, ported as a wrapper on OnCastSign); the stamina refusal is vanilla"
@@ -1167,9 +1167,9 @@ scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.Ge
 scripts/game/player/states/combat.ws::CR4PlayerStateCombat.PerformEvade,SKL-05 SKL-18,Fleet Footed free dodge removed; perks: Perk 21 adrenaline on dodge removed
 scripts/game/gameplay/items/throwables/throwable.ws::CThrowable.IsFromAimThrow,SKL-06 SKL-15,accessor for the non-aimed penalty (bolts and bombs)
 scripts/game/gui/menus/characterMenu.ws::CR4CharacterMenu.GetSwordSkillsTooltipDescription,SKL-03 SKL-04 SKL-05 SKL-06 SKL-07 SKL-08 SKL-09 SKL-10 SKL-11 SKL-12 SKL-14 SKL-19 ENCH-13,"skill tooltips with live numbers (Strong Attack, Defense, Whirl, Rend, Crippling Strikes, Deflection, Counterattack, Steady Shot, Undying, Razor Focus, Flood of Anger ...); signs and alchemy cases: other SKL parts; UI; ENCH: Rotation in the Igni skill tooltip"
-scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatU2,SKL-03 MUT-13,Crippling Strikes chance in the bleeding-chance stat; not ported by SKL: handed to UI (SKL audit F34)
-scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatU,SKL-05 SKL-19 MUT-07,Deadly Precision dropped from the instant-kill stat; reworked sword/crossbow stat lines; not ported by SKL: handed to UI (SKL audit F34)
-scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GetOffenseStatsList,SKL-03 SKL-04 SKL-18 MUT-09 MUT-11 ARM-08 ENCH-05 ENCH-10 SWD-07,"stats: Strong Attack +50%, Muscle Memory/Strength Training AP, Steady Shot; UI, XBOW, DMG; ARM: Bear tier 1 attack power per adrenaline point in the stats; ENCH: Heft line, Invigoration line removed; SWD: NG+ sword_dmg_bonus in the shown sword damage"
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatU2,SKL-03 MUT-13 UI-02,Crippling Strikes chance in the bleeding-chance stat; not ported by SKL: handed to UI (SKL audit F34); UI: effect chances in the sword sections
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatU,SKL-05 SKL-19 MUT-07 UI-02 UI-05,"Deadly Precision dropped from the instant-kill stat; reworked sword/crossbow stat lines; not ported by SKL: handed to UI (SKL audit F34); UI: sword and crossbow lines, instant kill as the maximum (changelist 169), adrenaline gain lines"
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GetOffenseStatsList,SKL-03 SKL-04 SKL-18 MUT-09 MUT-11 ARM-08 ENCH-05 ENCH-10 SWD-07 UI-01,"stats: Strong Attack +50%, Muscle Memory/Strength Training AP, Steady Shot; UI, XBOW, DMG; ARM: Bear tier 1 attack power per adrenaline point in the stats; ENCH: Heft line, Invigoration line removed; SWD: NG+ sword_dmg_bonus in the shown sword damage; UI: the whole list as legacy (GM formula, damage per hit, sheathed-sword bonuses)"
 scripts/game/gameplay/items/spells/aardEntity.ws::W3AardEntity.PlayAardFX,SKL-08 MUT-04,FX by total sign power; Shock Wave FX level fix
 scripts/game/gameplay/projectile/signs/signProjectiles.ws::W3AardProjectile.ProcessCollision,SKL-08 MUT-04 ENCH-13,"Shock Wave damage, live hostile only; ENCH: Depletion drain moved; MUT: Mutation 6 path; ENCH: Depletion drain"
 scripts/game/gameplay/effects/effects/applicator/knockdownTypeApplicator.ws::W3Effect_KnockdownTypeApplicator.OnEffectAdded,SKL-08 MUT-13,"knockdown roll 33% x (1+SI) x (1-res), heavy 15% + Aard Intensity; generic for all applicator sources"
@@ -1477,7 +1477,7 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.PerformParryCheck,SKL-18,v
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.PerformCounterCheck,SKL-18,vanilla Perk 21 adrenaline on counter removed
 scripts/game/npc/npc.ws::CNewNPC.OnDeath,SKL-18 MUT-03 MUT-04 MUT-05 ARM-13 ENCH-08 ENCH-13 ENCH-14 SWD-05 ALCH-12,"Perk 21 stamina on kill; also runewords 10/12 (ENCH) and the other death changes (their owners); ARM: Tesham Mutna kill heal removed; ENCH: Rejuvenation and Elation on kills, Eruption and Possession checks; SWD: vanilla Aerondight discharge and charge on kills removed; ALCH-12: Noonwraith and Grave Hag per kill; Nekker Warrior horse panic removed"
 scripts/game/gameplay/items/spells/signEntity.ws::W3SignEntity.ManageFocusGain,SKL-18 MUT-07,"Perk 11 Focus: signs in combat give sword-hit adrenaline (alternate casts per second, Quen per stamina spent), not when cast with adrenaline or Flood of Anger; Mutation 7 (MUT)"
-scripts/game/gui/popups/CharacterStatsPopup.ws::GetEquippedCrossbowDamage,SKL-18 MUT-11,"perk_2 attack power removed from crossbow damage (Steady Shot moved); rest UI, XBOW"
+scripts/game/gui/popups/CharacterStatsPopup.ws::GetEquippedCrossbowDamage,SKL-18 MUT-11 UI-02,"perk_2 attack power removed from crossbow damage (Steady Shot moved); rest UI, XBOW; UI: crossbow damage (Water Hag line removed, ALCH audit F15)"
 scripts/game/gameplay/effects/effects/dotEffect.ws::W3DamageOverTimeEffect.OnEffectAdded,SKL-18,Heavy Artillery on bomb DoTs multiplies only the additive value (moved here from criticalDOTEffect)
 scripts/game/gameplay/effects/effects/criticalDOTEffect.ws::W3CriticalDOTEffect.OnEffectAdded,SKL-18,Heavy Artillery DoT bonus moved to the base DoT effect
 scripts/game/player/r4Player.ws::CR4Player.ReduceDamage,SKL-18,"vanilla 50% reduction of damage from Geralt's own bombs removed (""make Perk_16 more valuable"")"
@@ -1492,7 +1492,7 @@ scripts/game/player/r4Player.ws::CR4Player.ConsumeItem,SKL-18,"without Connoisse
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.UnequipItemFromSlot,SKL-18 ARM-04 SWD-05 SWD-06,perks 5/6/7 armor count: glyphwords 2/3/4 no longer count pieces as light/medium/heavy (ENCH); ARM: refreshes the generic set bonus; SWD: Aerondight and Iris effects removed on unequip
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.NewGamePlusReplaceEP1,SWD-06 ITEM-04,"NG+: legacy no longer swaps Iris for NGP Olgierd Sabre; kept as 5.x (deviation, SWD audit F3); ITEM: legacy keeps Iris level-scaled in NG+ (the swap commented out, ITEM-04)"
 scripts/game/gui/menus/characterMenu.ws::CR4CharacterMenu.GetPerkTooltipDescription,SKL-19 SKL-18,"perk tooltips: perk_2 (Cold Blood text, no arguments), perk_5, perk_6, perk_7, perk_10, perk_11 (new case), perk_15, perk_21"
-scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatSigns,SKL-19 MUT-02 MUT-09 MUT-13 ARM-07 ENCH-12 ENCH-13,"stats popup sign lines per sign skill (damage, Firestream, traps, turret, Quen absorption, Axii durations); not ported by SKL: handed to UI (SKL audit F34); ARM: Gryphon tier 2 Yrden size line; ENCH: Rotation and Retribution in the sign lines"
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatSigns,SKL-19 MUT-02 MUT-09 MUT-13 ARM-07 ENCH-12 ENCH-13 UI-03,"stats popup sign lines per sign skill (damage, Firestream, traps, turret, Quen absorption, Axii durations); not ported by SKL: handed to UI (SKL audit F34); ARM: Gryphon tier 2 Yrden size line; ENCH: Rotation and Retribution in the sign lines; UI: every sign line"
 localization/modGhostMode/br.csv::row:2110992071,SKL-19,skill_desc_perk_5: text for perk_5; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992072,SKL-19,skill_desc_perk_7: text for perk_7; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992073,SKL-19,skill_desc_magic_s9: text for magic_s9; port with that skill's slice
@@ -2565,7 +2565,7 @@ scripts/game/gameplay/items/spells/signEntity.ws::W3SignEntityStateChanneling.Sh
 scripts/game/gameplay/projectile/signs/signProjectiles.ws::W3AardProjectile.ProcessMutation6,MUT-04,mutation unit (MUT research 2026-10-05)
 scripts/game/gui/hud/modules/hudModuleBuffs.ws::CR4HudModuleBuffs.OnTick,MUT-05 MUT-07 MUT-08 MUT-09 MUT-10 ARM-06 ENCH-05 ENCH-09 SWD-06 ALCH-10,"mutation unit (MUT research 2026-10-05); ARM: Feline buff shows its stacks; ENCH: Invigoration and Prolongation counters; SWD: Iris charge counter on the HUD; ALCH-10: decoction stack counters on the HUD (Katakan, Water Hag and others)"
 scripts/game/gui/hud/modules/hudModuleBuffs.ws::CR4HudModuleBuffs.UpdateBuffs,MUT-05 MUT-07 MUT-08 MUT-09 MUT-10 ARM-06 ENCH-05 ENCH-09 SWD-06 ALCH-10,"mutation unit (MUT research 2026-10-05); ARM: Feline buff shows its stacks; ENCH: Invigoration and Prolongation counters; SWD: Iris charge counter on the HUD; ALCH-10: decoction stack counters on the HUD (Katakan, Water Hag and others)"
-scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatToxicity,MUT-08 ARM-04 ENCH-07,mutation unit (MUT research 2026-10-05); ARM: medium armour set toxicity decay line; ENCH: Placation toxicity line
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatToxicity,MUT-08 ARM-04 ENCH-07 UI-04,"mutation unit (MUT research 2026-10-05); ARM: medium armour set toxicity decay line; ENCH: Placation toxicity line; UI: available toxicity, decay rate, overdose threshold and drain"
 scripts/game/npc/npc.ws::CNewNPC.IsImmuneToMutation8Finisher,MUT-06,mutation unit (MUT research 2026-10-05)
 scripts/game/npc/npc.ws::CNewNPC.Mutation8RepelToFinisherImmune,MUT-06,mutation unit (MUT research 2026-10-05)
 scripts/game/npc/npc.ws::CNewNPC.OnAardHit,MUT-04 ENCH-13,mutation unit (MUT research 2026-10-05); ENCH: Depletion drain moved to the projectile
@@ -3887,7 +3887,7 @@ scripts/game/gameplay/effects/effects/other/gryphonSetBonusBuff.ws::W3Effect_Gry
 scripts/game/gameplay/effects/effects/other/gryphonSetBonusBuff.ws::W3Effect_GryphonSetBonus.GetWhichSignForFree,ARM-07,removed
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.BearSetBonusQuenReapply,ARM-08,vanilla Bear tier 1 free Quen no longer used
 scripts/game/player/r4Player.ws::CR4Player.ApplyOil,ARM-09,three oils at once moved to Wolven tier 2
-scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddOilStats,ARM-09 ARM-14,oil tooltip with the Wolven tier 1 bonus
+scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddOilStats,ARM-09 ARM-14 UI-06,oil tooltip with the Wolven tier 1 bonus; UI: the oil tooltip
 scripts/game/gameplay/effects/effects/other/KaerMorhenSetBonusBuff.ws::W3Effect_KaerMorhenSetBonus.<members>,ARM-12,new effect
 scripts/game/gameplay/effects/effects/other/KaerMorhenSetBonusBuff.ws::W3Effect_KaerMorhenSetBonus.OnEffectAdded,ARM-12,new effect
 scripts/game/gameplay/effects/effects/other/KaerMorhenSetBonusBuff.ws::W3Effect_KaerMorhenSetBonus.OnEffectRemoved,ARM-12,new effect
@@ -3897,8 +3897,8 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.NewGamePlusReplaceKaerMorh
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.VampiricSetAbilityRegeneration,ARM-13,heal 0.5% per piece from setBonusAbilityVampire
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GetSetBonusTooltipDescription,ARM-14,set bonus texts with live values (every set)
 scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddSetAttributes,ARM-14 ARM-04 ARM-05,"set lines by item name (stash fix), minor-tier counts, generic set line"
-scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.GetBaseItemData,ARM-14 SWD-06 ITEM-12 ALCH-17,"set colour only for set pieces; glyphword armour class line removed (ENCH); SWD: Iris description on the item; ITEM: the Armorer's Table and grindstone buff line (GetEnhancedBuffInfo, ITEM-12); ALCH-17: potion and bomb tooltips; decoction stacks; legacy's unique descriptions (item_desc_ key from the item's name key: the oils, Cat 3; books, keys, quest items: changelist 41) ported whole with ALCH-17 (audit F6, the owner); a Gwent card's empty description and the armor and weapon description line: UI"
-scripts/game/gui/_old/components/guiPlayerInventoryComponent.ws::W3GuiPlayerInventoryComponent.GetCraftedItemInfo,ARM-14 ALCH-17,set lines on crafting schematics; ALCH-17: crafted potion and bomb effects by name
+scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.GetBaseItemData,ARM-14 SWD-06 ITEM-12 ALCH-17 UI-06 UI-08 UI-16,"set colour only for set pieces; glyphword armour class line removed (ENCH); SWD: Iris description on the item; ITEM: the Armorer's Table and grindstone buff line (GetEnhancedBuffInfo, ITEM-12); ALCH-17: potion and bomb tooltips; decoction stacks; legacy's unique descriptions (item_desc_ key from the item's name key: the oils, Cat 3; books, keys, quest items: changelist 41) ported whole with ALCH-17 (audit F6, the owner); a Gwent card's empty description and the armor and weapon description line: UI; UI: armor and weapon descriptions, Gwent cards, trophy and oil stats, ingredient counts, debug info"
+scripts/game/gui/_old/components/guiPlayerInventoryComponent.ws::W3GuiPlayerInventoryComponent.GetCraftedItemInfo,ARM-14 ALCH-17 UI-08,set lines on crafting schematics; ALCH-17: crafted potion and bomb effects by name; UI: random-attribute and weight lines removed
 files/dlc/bob/data/gameplay/abilities/effects_ep2.xml::definitions/abilities/ability:GryphonSetBonusEffect,ARM-07,"tier 1: 2.5 s, 5% per piece"
 files/dlc/bob/data/gameplay/abilities_plus/effects_ep2.xml::definitions/abilities/ability:GryphonSetBonusEffect,ARM-07,"tier 1: 2.5 s, 5% per piece; NG+"
 files/dlc/bob/data/gameplay/abilities/effects_ep2.xml::definitions/abilities/ability:GryphonSetBonusYrdenEffect,ARM-07,"tier 2: intensity +50%, +15% resistances, no regen"
@@ -4486,8 +4486,8 @@ scripts/game/gameplay/effects/effects/skill/axiiGuardMe.ws::W3Effect_AxiiGuardMe
 scripts/game/gameplay/effects/effects/skill/axiiGuardMe.ws::W3Effect_AxiiGuardMe.<members>,ENCH-14,Usurpation flag
 scripts/game/gameplay/items/spells/aardEntity.ws::W3AardEntity.ProcessThrow_MainTick,ENCH-13,Depletion only from the chest armor
 scripts/game/gameplay/items/spells/igniEntity.ws::W3IgniEntity.OnStarted,ENCH-13,Rotation only from the chest armor
-scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.addComponentsInfo,ENCH-17,"ingredient counts on schematic tooltips, enchantment schematics included; the recipe part is UI and CRAFT (changelist fix)"
-scripts/game/gui/menus/journalQuestMenu.ws::CR4JournalQuestMenu.UpdateObjectives,ENCH-02,enchanter objective shows 3000 crowns; also legacy debug labels
+scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.addComponentsInfo,ENCH-17 UI-08,"ingredient counts on schematic tooltips, enchantment schematics included; the recipe part is UI and CRAFT (changelist fix); UI: the whole function (schematics, recipes, enchantment schematics)"
+scripts/game/gui/menus/journalQuestMenu.ws::CR4JournalQuestMenu.UpdateObjectives,ENCH-02 UI-16,enchanter objective shows 3000 crowns; also legacy debug labels; UI: debug labels
 scripts/game/npc/npc.ws::CNewNPC.OnProcessActionPost,ENCH-14,Axii duration per hit for Possession only
 scripts/game/player/playerWeaponHolster.ws::WeaponHolsterStateSelectingWeapon.OnEquippedMeleeWeapon,ENCH-05 SWD-05 SWD-06,Invigoration FX from its effect; Aerondight and Iris effects resumed on drawing
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.OnAbilityAdded,ENCH-01 ENCH-05,runeword checks through HasRunewordActive
@@ -7540,7 +7540,7 @@ files/gameplay/items_plus/def_item_alchemy_oils.xml::definitions/abilities/abili
 files/gameplay/items_plus/def_item_alchemy_oils.xml::definitions/abilities/ability:RelicOil_3,ALCH-16,"oil values: +25% AP, crit chance T2+, crit damage T3, no resistance reduction; NG+"
 scripts/game/components/inventoryComponent.ws::CInventoryComponent.GiveItemTo,ALCH-16,oils removed when a sword changes inventory (stuck-oil fix)
 scripts/game/components/inventoryComponent.ws::CInventoryComponent.RemoveAllOilAbilitiesFromItem,ALCH-16,oils removed when a sword changes inventory (stuck-oil fix)
-scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddOilInfo,ALCH-16,oil tooltip lines
+scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddOilInfo,ALCH-16 UI-06,oil tooltip lines; UI: oil name and charges
 files/gameplay/globals/tooltip_settings.csv::row:vsBeast_critical_hit_chance,ALCH-16,oil tooltip rows
 files/gameplay/globals/tooltip_settings.csv::row:vsCursed_critical_hit_chance,ALCH-16,oil tooltip rows
 files/gameplay/globals/tooltip_settings.csv::row:vsDraconide_critical_hit_chance,ALCH-16,oil tooltip rows
@@ -8278,7 +8278,7 @@ scripts/game/components/inventoryComponent.ws::CInventoryComponent.FillInMutagen
 scripts/game/components/inventoryComponent.ws::CInventoryComponent.GetBombAttributesForTooltip,ALCH-17,alchemy tooltips by item and by name; decoction descriptions
 scripts/game/components/inventoryComponent.ws::CInventoryComponent.GetBombAttributesForTooltipByName,ALCH-17,alchemy tooltips by item and by name; decoction descriptions
 scripts/game/components/inventoryComponent.ws::CInventoryComponent.FindAttrInTooltipSettings,ALCH-17,alchemy tooltips by item and by name; decoction descriptions
-scripts/game/gui/_old/components/guiBaseInventoryComponent.ws::W3GuiBaseInventoryComponent.GetAlchemyBookText,ALCH-17,recipe tooltips list the potion and bomb effects (layout UI)
+scripts/game/gui/_old/components/guiBaseInventoryComponent.ws::W3GuiBaseInventoryComponent.GetAlchemyBookText,ALCH-17 UI-08,recipe tooltips list the potion and bomb effects (layout UI); UI: the layout
 files/gameplay/globals/tooltip_settings.csv::row:potion_duration,ALCH-17,potion duration tooltip row
 localization/modGhostMode/br.csv::row:2110992015,ALCH-17,potion duration attribute name
 localization/modGhostMode/cz.csv::row:2110992015,ALCH-17,potion duration attribute name
@@ -8326,3 +8326,1291 @@ localization/modGhostMode/fr.csv::row:2110992259,ALCH-17,"item_desc_junk_no_ingr
 localization/modGhostMode/it.csv::row:2110992259,ALCH-17,"item_desc_junk_no_ingr: junk without recycling parts, for the descriptions by name key (audit F6)"
 localization/modGhostMode/pl.csv::row:2110992259,ALCH-17,"item_desc_junk_no_ingr: junk without recycling parts, for the descriptions by name key (audit F6)"
 localization/modGhostMode/ru.csv::row:2110992259,ALCH-17,"item_desc_junk_no_ingr: junk without recycling parts, for the descriptions by name key (audit F6)"
+scripts/game/characterStats.ws::SPlayerOffenseStats,UI-01,"UI: attack power and crit power per attack type, average damage per hit, crossbow attack power, crit damage and elemental bolt damage (a struct: the port keeps its own)"
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterHeader,UI-05,non-localized name fallback
+scripts/game/gui/popups/CharacterStatsPopup.ws::AddCharacterStatF,UI-05,non-localized name fallback
+scripts/game/gui/popups/CharacterStatsPopup.ws::GetCrossbowSteelDmgName,UI-02,crossbow section: the bolt damage types
+scripts/game/gui/popups/CharacterStatsPopup.ws::GetCrossbowElementaDmgName,UI-02,crossbow section: the bolt damage types
+scripts/game/gui/popups/CharacterStatsPopup.ws::IsBoltEquipped,UI-02,crossbow section: the bolt damage types
+scripts/game/gui/menus/characterMenu.ws::CR4CharacterMenu.UpdatePlayerStatisticsData,UI-02,damage-per-hit labels in the summary (5.x: also characterMenuDupe.ws)
+scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.GetRecipeDataFromXML,UI-08,typo fix (alchemy_recipies): recipe tooltips in shops (bugfix 87)
+scripts/game/gui/_old/components/guiBaseInventoryComponent.ws::W3GuiBaseInventoryComponent.GetSchematicBookText,UI-08,schematic text layout (changelist UI: recipe and schematic descriptions)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.<members>,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.OnConfigUI,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.OnBuyIngredient,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.BuyIngredient,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.GetTooltipData,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.UpdateItemsCounter,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.UpdateMerchantData,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.UpdateDescription,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/gui/menus/alchemyMenu.ws::CR4AlchemyMenu.FillItemInformation,UI-09,buying ingredients at herbalists and alchemists (modFriendlyHUD code)
+scripts/game/components/merchantComponent.ws::W3MerchantComponent.GetMapPinType,UI-09,Yolar shown as a herbalist
+scripts/game/gui/menus/glossaryBestiaryMenu.ws::CR4GlossaryBestiaryMenu.UpdateImage,UI-10,bestiary kill count entry
+scripts/game/gui/menus/glossaryBestiaryMenu.ws::CR4GlossaryBestiaryMenu.UpdateDescription,UI-10,bestiary kill count entry
+scripts/game/gui/menus/glossaryBestiaryMenu.ws::CR4GlossaryBestiaryMenu.UpdateKillCountEntry,UI-10,bestiary kill count entry
+scripts/game/gui/menus/glossaryBestiaryMenu.ws::CR4GlossaryBestiaryMenu.UpdateItems,UI-10,bestiary kill count entry
+scripts/game/gui/menus/glossaryBestiaryMenu.ws::CR4GlossaryBestiaryMenu.PopulateData,UI-10 UI-16,kill count entry; debug labels
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.IncKills,UI-10,kill counter (called in CalculateExperiencePoints: shared with XP)
+scripts/game/npc/npc.ws::CNewNPC.CalculateExperiencePoints,UI-10,"kill counter: the count is incremented here (UI-10, a wrapper in ui/bestiary.ws); the experience values, level difference and diminishing returns are XP's (not mapped yet; UI audit F1)"
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GetKills,UI-10,kill counter (XP reads it for diminishing returns)
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.<members>,UI-10,saved enemiesKilledByType; the commented hasRecentlyCountered and cannotUseUndyingSkill are DEF-06 and SKL-07 (ported)
+scripts/gm_generic/gm_generic.ws::EEnemyType,UI-10,enemy types (shared with XP)
+scripts/gm_generic/gm_generic.ws::GetEnemyTypeByAbility,UI-10,enemy type of an NPC (shared with XP)
+scripts/gm_generic/gm_generic.ws::GetLocStringByEnemyType,UI-10,kill count names
+scripts/game/npc/npc.ws::CNewNPC.GetExperienceDifferenceLevelName,UI-12,no ??? for deadly enemies; the fake-level removal is DIFF
+scripts/game/gui/menus/mapMenu.ws::CR4MapMenu.UpdateEntityPins,UI-16,debug labels
+scripts/game/gui/menus/mapMenu.ws::CR4MapMenu.AddPinTypeData,UI-16,debug labels
+scripts/game/gui/menus/journalQuestMenu.ws::CR4JournalQuestMenu.generateFlashObjectForQuest,UI-16,debug labels
+scripts/debug/console_debug.ws::toggledebuglabels,UI-16,debug labels
+scripts/game/components/inventoryComponent.ws::CInventoryComponent.TransferStashItemsTo,UI-17,unused stash-mode code (never called in legacy): not ported
+scripts/game/components/inventoryComponent.ws::CInventoryComponent.TransferStashItemsFrom,UI-17,unused stash-mode code (never called in legacy): not ported
+scripts/game/components/inventoryComponent.ws::CInventoryComponent.CanTransferItem,UI-17,unused stash-mode code (never called in legacy): not ported
+scripts/game/components/inventoryComponent.ws::CInventoryComponent.IsItemTempTransferred,UI-17,unused stash-mode code (never called in legacy): not ported
+scripts/game/gui/menus/inventoryMenu.ws::CR4InventoryMenu.UpdateFace,UI-15,razor shaving
+scripts/game/gui/inventoryContext.ws::W3InventoryGridContext.updateInputFeedback,UI-15,razor input; the dismantle inputs are CRAFT
+scripts/game/gui/inventoryContext.ws::W3InventoryGridContext.execurePrimaryAction,UI-15,razor use; the dismantle actions are CRAFT
+files/gameplay/items/def_item_ingredients.xml::definitions/items/item:Razor,UI-15,"description key item_desc_razor_mod; price ECON, weight WGT, parts CRAFT"
+files/gameplay/items_plus/def_item_ingredients.xml::definitions/items/item:Razor,UI-15,NG+
+content/texture.cache::<file>,UI-14,one icon: sword_s10.png (skills)
+files/dlc/bob/journal/bestiary/mq7002grottore.journal::<file>,UI-11,"bestiary ""used against"" list"
+files/dlc/bob/journal/bestiary/mq7002spriggan.journal::<file>,UI-11,"bestiary ""used against"" list"
+files/gameplay/journal/bestiary/bestiarymonsterhuntmh302.journal::<file>,UI-11,"bestiary ""used against"" list"
+files/gameplay/journal/bestiary/bestiarymonsterhuntmh303.journal::<file>,UI-11,"bestiary ""used against"" list"
+files/gameplay/journal/bestiary/dzinn.journal::<file>,UI-11,"bestiary ""used against"" list"
+files/gameplay/journal/bestiary/leshy1.journal::<file>,UI-11,"bestiary ""used against"" list"
+files/gameplay/journal/bestiary/sq204ancientleszen.journal::<file>,UI-11,"bestiary ""used against"" list"
+files/gameplay/journal/bestiary/succubus.journal::<file>,UI-11,"bestiary ""used against"" list"
+files/gameplay/globals/tooltip_settings.csv::row:frost_resistance_perc,UI-07,tooltip row
+files/gameplay/globals/tooltip_settings.csv::row:desc_knockdownchance_mult,UI-07,tooltip row
+files/gameplay/globals/tooltip_settings.csv::row:vitalityCombatRegen,UI-07,tooltip row
+files/gameplay/globals/tooltip_settings.csv::row:q108_bounce_arrows,UI-07,tooltip row
+localization/modGhostMode/br.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992017,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992018,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992028,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992029,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992074,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992075,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992076,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992077,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992078,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992079,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992080,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992081,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992082,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992083,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992084,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992085,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992167,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/cz.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/de.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/en.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/es.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/fr.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/it.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/pl.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/ru.csv::row:2110992168,UI-02,panel string
+localization/modGhostMode/br.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992019,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992020,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992021,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992022,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992023,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992024,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992025,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992026,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992027,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992030,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992272,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992277,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992278,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992293,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/cz.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/de.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/en.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/es.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/fr.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/it.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/pl.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/ru.csv::row:2110992461,UI-03,panel string
+localization/modGhostMode/br.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/cz.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/de.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/en.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/es.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/fr.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/it.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/pl.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/ru.csv::row:2110992423,UI-04,panel string
+localization/modGhostMode/br.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/cz.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/de.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/en.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/es.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/fr.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/it.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/pl.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/ru.csv::row:2110992424,UI-04,panel string
+localization/modGhostMode/br.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/cz.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/de.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/en.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/es.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/fr.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/it.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/pl.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/ru.csv::row:2110992425,UI-04,panel string
+localization/modGhostMode/br.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/cz.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/de.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/en.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/es.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/fr.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/it.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/pl.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/ru.csv::row:2110992519,UI-04,panel string
+localization/modGhostMode/br.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/cz.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/de.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/en.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/es.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/fr.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/it.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/pl.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/ru.csv::row:2110992105,UI-05,panel string
+localization/modGhostMode/br.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/cz.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/de.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/en.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/es.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/fr.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/it.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/pl.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/ru.csv::row:2110992383,UI-05,panel string
+localization/modGhostMode/br.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/cz.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/de.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/en.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/es.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/fr.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/it.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/pl.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/ru.csv::row:2110992384,UI-05,panel string
+localization/modGhostMode/br.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/cz.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/de.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/en.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/es.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/fr.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/it.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/pl.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/ru.csv::row:2110992256,UI-06,tooltip description
+localization/modGhostMode/br.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/cz.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/de.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/en.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/es.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/fr.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/it.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/pl.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/ru.csv::row:2110992426,UI-06,tooltip description
+localization/modGhostMode/br.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/cz.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/de.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/en.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/es.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/fr.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/it.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/pl.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/ru.csv::row:2110992427,UI-06,tooltip description
+localization/modGhostMode/br.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/cz.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/de.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/en.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/es.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/fr.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/it.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/pl.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/ru.csv::row:2110992428,UI-06,tooltip description
+localization/modGhostMode/br.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/cz.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/de.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/en.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/es.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/fr.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/it.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/pl.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/ru.csv::row:2110992013,UI-07,attribute name
+localization/modGhostMode/br.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/cz.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/de.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/en.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/es.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/fr.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/it.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/pl.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/ru.csv::row:2110992110,UI-07,attribute name
+localization/modGhostMode/br.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/cz.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/de.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/en.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/es.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/fr.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/it.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/pl.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/ru.csv::row:2110992153,UI-07,attribute name
+localization/modGhostMode/br.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/cz.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/de.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/en.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/es.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/fr.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/it.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/pl.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/ru.csv::row:2110992156,UI-07,attribute name
+localization/modGhostMode/br.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/cz.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/de.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/en.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/es.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/fr.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/it.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/pl.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/ru.csv::row:2110992157,UI-07,attribute name
+localization/modGhostMode/br.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/cz.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/de.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/en.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/es.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/fr.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/it.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/pl.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/ru.csv::row:2110992164,UI-07,attribute name
+localization/modGhostMode/br.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/cz.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/de.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/en.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/es.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/fr.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/it.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/pl.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/ru.csv::row:2110992265,UI-07,attribute name
+localization/modGhostMode/br.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/cz.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/de.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/en.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/es.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/fr.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/it.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/pl.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/ru.csv::row:2110992476,UI-07,attribute name
+localization/modGhostMode/br.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992301,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992302,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992303,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992304,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992305,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992306,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992307,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992308,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/cz.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/de.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/en.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/es.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/fr.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/it.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/pl.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/ru.csv::row:2110992309,UI-10,kill count string
+localization/modGhostMode/br.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992520,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992521,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992522,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992523,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992524,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992525,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992526,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992527,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/cz.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/de.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/en.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/es.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/fr.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/it.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/pl.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/ru.csv::row:2110992528,UI-13,loading screen tip
+localization/modGhostMode/br.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992182,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992184,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992185,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992186,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992187,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992261,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992264,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992312,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/cz.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/de.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/en.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/es.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/fr.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/it.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/pl.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/ru.csv::row:2110992324,UI-17,unused in legacy's scripts: not ported
+localization/modGhostMode/br.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992001,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992329,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992391,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992392,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992395,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992396,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992397,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992407,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992408,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992431,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992441,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992442,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992443,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992444,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992445,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992446,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992458,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992494,OPT-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992402,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992403,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992404,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992405,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992406,STAM-01,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992400,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992401,STAM-02,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992409,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992410,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992411,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992412,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992413,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992414,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992415,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992416,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992417,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992418,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992419,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992420,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992421,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992422,STAM-03,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992438,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992439,STAM-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992112,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992262,SKL-07,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992493,SKL-09,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/br.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/cz.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/de.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/en.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/es.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/fr.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/it.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/pl.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGhostMode/ru.csv::row:2110992474,ARM-14,ported; attributed by the UI sweep (2026-10-20)
+localization/modGMTutorials/br.csv::row:1073416,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1073418,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1075370,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1075376,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1075378,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1075445,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1075722,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1075726,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1075756,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1076122,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1076394,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1076733,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1086362,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1086915,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1086917,UI-13,tutorial text
+localization/modGMTutorials/br.csv::row:1188182,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1073416,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1073418,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1075370,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1075376,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1075378,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1075445,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1075722,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1075726,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1075756,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1076122,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1076394,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1076733,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1086362,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1086915,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1086917,UI-13,tutorial text
+localization/modGMTutorials/de.csv::row:1188182,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1073416,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1073418,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1075370,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1075376,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1075378,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1075445,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1075722,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1075726,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1075756,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1076122,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1076394,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1076733,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1086362,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1086915,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1086917,UI-13,tutorial text
+localization/modGMTutorials/en.csv::row:1188182,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1073416,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1073418,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1075370,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1075376,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1075378,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1075445,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1075722,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1075726,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1075756,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1076122,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1076394,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1076733,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1086362,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1086915,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1086917,UI-13,tutorial text
+localization/modGMTutorials/es.csv::row:1188182,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1073416,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1073418,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1075370,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1075376,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1075378,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1075445,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1075722,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1075726,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1075756,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1076122,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1076394,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1076733,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1086362,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1086915,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1086917,UI-13,tutorial text
+localization/modGMTutorials/pl.csv::row:1188182,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1073416,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1073418,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1075370,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1075376,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1075378,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1075445,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1075722,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1075726,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1075756,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1076122,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1076394,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1076733,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1086362,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1086915,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1086917,UI-13,tutorial text
+localization/modGMTutorials/ru.csv::row:1188182,UI-13,tutorial text
+localization/modGhostMode/br.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/cz.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/de.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/en.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/es.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/fr.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/it.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/pl.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/ru.csv::row:2110992169,UI-15,razor string
+localization/modGhostMode/br.csv::row:2110992173,UI-15,razor string
+localization/modGhostMode/cz.csv::row:2110992173,UI-15,razor string
+localization/modGhostMode/de.csv::row:2110992173,UI-15,razor string
+localization/modGhostMode/en.csv::row:2110992173,UI-15,razor string
+localization/modGhostMode/es.csv::row:2110992173,UI-15,razor string
+localization/modGhostMode/fr.csv::row:2110992173,UI-15,razor string
+localization/modGhostMode/it.csv::row:2110992173,UI-15,razor string
+localization/modGhostMode/pl.csv::row:2110992173,UI-15,razor string
+localization/modGhostMode/ru.csv::row:2110992173,UI-15,razor string

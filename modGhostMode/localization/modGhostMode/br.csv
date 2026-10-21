@@ -420,3 +420,83 @@
 2110992015|c4ea0ecf||Duração da poção
 ; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
 2110992259|b91d9859||Pode ser vendido para comerciantes.
+; UI-07: attribute names of Ghost Mode's tooltip rows and panel lines (legacy's ids and keys)
+2110992013|cdb77880||Resistência a frio
+2110992110|328ae462||Chance de Nocaute
+2110992153|c32e766a||Bônus de Poder de Acerto Crítico
+2110992156|0147942a||Regeneração de Vitalidade fora de combate
+2110992157|a83467f6||Regeneração de Vitalidade durante combate
+2110992164|b02a28c2||Aumento de dano
+2110992265|2eaeb09b||Chance de driblar uma flecha
+2110992476|2ae9db22||Drenagem de Vitalidade
+; UI-06: the armor class descriptions with their stamina rule, the notes' description (legacy's ids and keys)
+2110992426|736e017e||Equipamento Leve. Oferece proteção mínima. Ações de combate exigem menos Vigor.
+2110992427|320650a7||Equipamento Médio. Oferece proteção ideal.
+2110992428|942892ef||Equipamento Pesado. Oferece a melhor proteção. Ações de combate e lançamento de Sinais exigem mais Vigor.
+2110992256|256ad6b4||Contém informações inúteis.
+; UI-02: the sword and crossbow sections (legacy)
+2110992017|1662935c||Dano por acerto (Prata)
+2110992018|4f1d703c||Dano por acerto (Aço)
+2110992028|8566fddf||Poder do Ataque Rápido
+2110992029|7a3d2c04||Poder do Ataque Forte
+2110992074|3c4a6af2||Dano do Ataque Forte
+2110992075|5806ca6e||Dano crítico do Ataque Forte
+2110992076|69d8dd89||Dano crítico do Ataque Rápido
+2110992077|89dfeac9||Chance de Acerto Crítico do Ataque Rápido
+2110992078|bc4297c4||Chance de Acerto Crítico do Ataque Forte
+2110992079|d23992f7||Dano do Ataque Rápido
+2110992080|2e06698e||Dano crítico do Ataque Forte
+2110992081|3375c4a9||Dano crítico do Ataque Rápido
+2110992082|73d42fa9||Chance de Acerto Crítico do Ataque Rápido
+2110992083|b08bd7d2||Dano do Ataque Forte
+2110992084|c7b0b7d7||Dano do Ataque Rápido
+2110992085|fa3924a4||Chance de Acerto Crítico do Ataque Forte
+2110992167|d11e5fa2||Poder de Acerto Crítico do Ataque Rápido
+2110992168|3018409d||Poder de Acerto Crítico do Ataque Forte
+; UI-02, UI-05: adrenaline gain (crossbow section, misc section)
+2110992105|6f2a6f0f||Ganho de Adrenalina
+; UI-03: the sign lines (legacy)
+2110992019|f38f5b36||Dano por segundo da Labareda de Fogo
+2110992020|6a994712||Armadilha Mágica
+2110992022|60b53abe||Duração da Torre Mágica
+2110992023|8594f9d5||Cargas da Torre Mágica
+2110992024|1e6cbb19||Dano da Torre Mágica
+2110992025|ee530dcc||Dano retornado
+2110992026|e379a123||Absorção de danos com Escudo Ativo
+2110992030|a3e34c39||Absorção de dano
+2110992272|7641d6c5||Chance de Nocaute
+2110992277|9246181a||Duração da confusão
+2110992278|b72fae71||Duração do controle
+2110992293|0516c455||Chance de Nocaute Pesado
+2110992461|6a758d69||Alcance da Armadilha Mágica
+; UI-04: the toxicity lines (legacy)
+2110992423|fe37faf4||Drenagem de Vitalidade por Overdose
+2110992424|1f5ba9f0||Taxa de Decaimento de Toxicidade
+2110992425|1050a15c||Toxicidade disponível
+2110992519|1dc1cde4||Limite de Overdose
+; UI-05: adrenaline gain for fast and strong attacks (legacy)
+2110992383|7d183fe6||Ganho de Adrenalina do Ataque Rápido
+2110992384|7cddfb97||Ganho de Adrenalina do Ataque Forte
+; UI-10: the bestiary's kill count (legacy)
+2110992301|bdf0ea49||Humanóides
+2110992302|bafca59c||Guerreiros da Caçada Selvagem
+2110992303|82a5fd81||Total
+2110992304|98357039||Animais
+2110992305|4153fdc1||Monstros
+2110992306|c8dde11f||Mortes por tipo
+2110992307|d8d52cd1||Contagem de mortos
+2110992308|ba738dce||Humanóides
+2110992309|8e8b5e03||Criaturas únicas
+; UI-13: loading screen tips (legacy, by key hash)
+2110992520|b93269f0||Seus oponentes têm Vigor limitado. Quando o Vigor deles acabar, eles não serão capazes de lutar com a mesma eficácia.
+2110992521|6d1ad3cb||Preste atenção na cor dos números dos níveis de seus inimigos. Verde significa que eles estão perto do seu nível. Vermelho significa que eles são um desafio, e um ícone de caveira significa que eles são mortais.
+2110992522|6d1ad3a6||Afiar sua lâmina em uma pedra de amolar aumentará suas capacidades de combate.
+2110992523|6d1ad427||Atinja um oponente enquanto cavalga em sua direção em alta velocidade para causar dano aumentado.
+2110992524|b93269e9||Golpear por trás aumenta suas chances de Acerto Crítico.
+2110992525|6d1ad3e4||Ao atirar uma bomba ou disparar um virote de sua Besta, você pode tirar vantagem da mira automática para um Ataque Rápido ou apontar manualmente para obter melhores danos.
+2110992526|6d1ad447||Você pode defletir virotes e flechas vindo na sua direção com sua espada.
+2110992527|363f99af||Você pode usar o Sinal Quen para se proteger de efeitos críticos como incineração, sangramento, etc.
+2110992528|6d1ad3cc||Esquivar-se geralmente é a melhor tática ao combater monstros enormes. Ao lutar contra Humanos e monstros menores, tente Bloquear e Contra-atacar seus ataques com sua espada.
+; UI-15: shaving (legacy)
+2110992169|25746309||Geralt está agora barbeado
+2110992173|04bda90f||Usado para barbear.

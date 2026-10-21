@@ -420,3 +420,83 @@
 2110992015|c4ea0ecf||Duración de la poción
 ; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
 2110992259|b91d9859||Se puede vender a comerciantes.
+; UI-07: attribute names of Ghost Mode's tooltip rows and panel lines (legacy's ids and keys)
+2110992013|cdb77880||Resistencia al frío
+2110992110|328ae462||Probabilidad de derribar
+2110992153|c32e766a||Bonificación a la potencia del impacto crítico
+2110992156|0147942a||Regeneración de vitalidad fuera del combate
+2110992157|a83467f6||Regeneración de vitalidad durante el combate
+2110992164|b02a28c2||Aumento de daño
+2110992265|2eaeb09b||Probabilidad de desviar una flecha
+2110992476|2ae9db22||Consumo de vitalidad
+; UI-06: the armor class descriptions with their stamina rule, the notes' description (legacy's ids and keys)
+2110992426|736e017e||Equipo ligero. Ofrece protección mínima. Las acciones de combate requieren menos vigor.
+2110992427|320650a7||Equipo intermedio. Ofrece una protección óptima.
+2110992428|942892ef||Equipo pesado. Ofrece la mejor protección. Las acciones de combate y el uso de señales consumen más vigor.
+2110992256|256ad6b4||Contiene información inútil.
+; UI-02: the sword and crossbow sections (legacy)
+2110992017|1662935c||Daño por golpe (Plata)
+2110992018|4f1d703c||Daño por golpe (Acero)
+2110992028|8566fddf||Poder del ataque rápido
+2110992029|7a3d2c04||Poder del ataque potente
+2110992074|3c4a6af2||Daño del ataque potente
+2110992075|5806ca6e||Daño crítico del ataque potente
+2110992076|69d8dd89||Daño crítico del ataque rápido
+2110992077|89dfeac9||Probabilidad de impacto crítico con el ataque rápido
+2110992078|bc4297c4||Probabilidad de impacto crítico con el ataque potente
+2110992079|d23992f7||Daño del ataque rápido
+2110992080|2e06698e||Daño crítico del ataque potente
+2110992081|3375c4a9||Daño crítico del ataque rápido
+2110992082|73d42fa9||Probabilidad de impacto crítico con el ataque rápido
+2110992083|b08bd7d2||Daño del ataque potente
+2110992084|c7b0b7d7||Daño del ataque rápido
+2110992085|fa3924a4||Probabilidad de impacto crítico con el ataque potente
+2110992167|d11e5fa2||Poder crítico del ataque rápido
+2110992168|3018409d||Poder crítico del ataque potente
+; UI-02, UI-05: adrenaline gain (crossbow section, misc section)
+2110992105|6f2a6f0f||Ganancia de adrenalina
+; UI-03: the sign lines (legacy)
+2110992019|f38f5b36||Daño por segundo de la Corriente Ígnea
+2110992020|6a994712||Cargas del Círculo de Yrden
+2110992022|60b53abe||Duración de la Trampa Mágica
+2110992023|8594f9d5||Cargas de la Trampa Mágica
+2110992024|1e6cbb19||Daño de la Trampa Mágica
+2110992025|ee530dcc||Daño devuelto
+2110992026|e379a123||Absorción de daño del Escudo Activo
+2110992030|a3e34c39||Absorción del daño
+2110992272|7641d6c5||Probabilidad de derribar
+2110992277|9246181a||Duración de la confusión
+2110992278|b72fae71||Duración del control
+2110992293|0516c455||Probabilidad de lograr un derribo pesado
+2110992461|6a758d69||Rango de la Trampa Mágica
+; UI-04: the toxicity lines (legacy)
+2110992423|fe37faf4||Pérdida de vitalidad por sobredosis
+2110992424|1f5ba9f0||Tasa de decaimiento de la toxicidad
+2110992425|1050a15c||Toxicidad disponible
+2110992519|1dc1cde4||Umbral de sobredosis
+; UI-05: adrenaline gain for fast and strong attacks (legacy)
+2110992383|7d183fe6||Ganancia de adrenalina del ataque rápido
+2110992384|7cddfb97||Ganancia de adrenalina del ataque potente
+; UI-10: the bestiary's kill count (legacy)
+2110992301|bdf0ea49||Humanoides
+2110992302|bafca59c||Guerreros de la Cacería salvaje
+2110992303|82a5fd81||Total
+2110992304|98357039||Animales
+2110992305|4153fdc1||Monstruos
+2110992306|c8dde11f||Muertes por tipo
+2110992307|d8d52cd1||Contador de muertes
+2110992308|ba738dce||Humanoides
+2110992309|8e8b5e03||Criaturas únicas
+; UI-13: loading screen tips (legacy, by key hash)
+2110992520|b93269f0||Tus enemigos tienen vigor limitado. Cuando su nivel de vigor se agote, no serán capaces de combatir tan efectivamente.
+2110992521|6d1ad3cb||Presta atención al color del nivel de tus enemigos. Verde significa que están cerca de tu nivel. Rojo, que son un desafío, y un icono de calavera significa que son mortales.
+2110992522|6d1ad3a6||Usa las piedras de afilar para mejorar las capacidades de combate de tus espadas.
+2110992523|6d1ad427||Atacar a un enemigo mientras galopas a máxima velocidad en tu caballo hará que causes más daño.
+2110992524|b93269e9||Atacar por detrás a los enemigos aumenta tus probabilidades de lograr un impacto crítico.
+2110992525|6d1ad3e4||Al lanzar una bomba o disparar un virote, puedes aprovechar el apuntado automático para atacar rápidamente o apuntar manualmente para causar más daños.
+2110992526|6d1ad447||Al estar en combate puedes desviar flechas y virotes con tu espada.
+2110992527|363f99af||Puedes usar Quen para protegerte de efectos críticos tales como Quemadura, Hemorragia, etc.
+2110992528|6d1ad3cc||Esquivar es normalmente la mejor táctica al enfrentarte a monstruos grandes. Al combatir contra humanos y monstruos menores, prueba a bloquear y contraatacar con la espada.
+; UI-15: shaving (legacy)
+2110992169|25746309||Geralt ahora está bien afeitado
+2110992173|04bda90f||Se utiliza para afeitar.

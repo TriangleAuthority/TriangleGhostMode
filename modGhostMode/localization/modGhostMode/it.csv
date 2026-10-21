@@ -420,3 +420,83 @@
 2110992015|c4ea0ecf||Durata della pozione
 ; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
 2110992259|b91d9859||Può essere venduto ai mercanti
+; UI-07: attribute names of Ghost Mode's tooltip rows and panel lines (legacy's ids and keys)
+2110992013|cdb77880||Resistenza al gelo
+2110992110|328ae462||Probabilità atterramento
+2110992153|c32e766a||Bonus potenza colpo critico
+2110992156|0147942a||Rigenerazione Vitalità fuori dal combattimento.
+2110992157|a83467f6||Rigenerazione Vitalità durante il combattimento.
+2110992164|b02a28c2||Aumento danno
+2110992265|2eaeb09b||Probabilità di far rimbalzare una freccia
+2110992476|2ae9db22||Consumo Vitalità
+; UI-06: the armor class descriptions with their stamina rule, the notes' description (legacy's ids and keys)
+2110992426|736e017e||Equipaggiamento leggero. Offre una protezione minima. Le azioni di combattimento richiedono meno Vigore.
+2110992427|320650a7||Equipaggiamento medio. Offre una protezione ottimale.
+2110992428|942892ef||Equipaggiamento pesante. Offre la migliore protezione. Le azioni di combattimento e il lancio dei segni richiedono più Vigore.
+2110992256|256ad6b4||Contiene informazione inutili.
+; UI-02: the sword and crossbow sections (legacy)
+2110992017|1662935c||Danno per colpo (argento)
+2110992018|4f1d703c||Danno per colpo (acciaio)
+2110992028|8566fddf||Potenza attacco rapido
+2110992029|7a3d2c04||Potenza attacco potente
+2110992074|3c4a6af2||Danno attacco potente
+2110992075|5806ca6e||Danno critico attacco potente
+2110992076|69d8dd89||Danno critico attacco rapido
+2110992077|89dfeac9||Probabilità colpo critico attacco rapido
+2110992078|bc4297c4||Probabilità colpo critico attacco potente
+2110992079|d23992f7||Danno attacco rapido
+2110992080|2e06698e||Danno critico attacco potente
+2110992081|3375c4a9||Danno critico attacco rapido
+2110992082|73d42fa9||Probabilità colpo critico attacco rapido
+2110992083|b08bd7d2||Danno attacco potente
+2110992084|c7b0b7d7||Danno attacco rapido
+2110992085|fa3924a4||Probabilità colpo critico attacco potente
+2110992167|d11e5fa2||Potenza colpo critico attacco rapido  
+2110992168|3018409d||Potenza colpo critico attacco potente 
+; UI-02, UI-05: adrenaline gain (crossbow section, misc section)
+2110992105|6f2a6f0f||Guadagno Adrenalina
+; UI-03: the sign lines (legacy)
+2110992019|f38f5b36||Danni fiammata continua per sec
+2110992020|6a994712||Trappole magiche
+2110992022|60b53abe||Durata torretta magica
+2110992023|8594f9d5||Cariche torretta magica
+2110992024|1e6cbb19||Danni torretta magica
+2110992025|ee530dcc||Ritorno danni
+2110992026|e379a123||Scudo attivo assorbimento danni
+2110992030|a3e34c39||Assorbimento danni
+2110992272|7641d6c5||Probabilità atterramento
+2110992277|9246181a||Durata confusione
+2110992278|b72fae71||Durata controllo
+2110992293|0516c455||Probabilità di atterramento pesante
+2110992461|6a758d69||Raggio d'azione Trappola Magica
+; UI-04: the toxicity lines (legacy)
+2110992423|fe37faf4||Consumo Vitalità overdose 
+2110992424|1f5ba9f0||Tasso di decadimento Tossicità
+2110992425|1050a15c||Tossicità disponibile
+2110992519|1dc1cde4||Soglia Overdose
+; UI-05: adrenaline gain for fast and strong attacks (legacy)
+2110992383|7d183fe6||Guadagno Adrenalina Attacco Rapido
+2110992384|7cddfb97||Guadagno Adrenalina Attacco Potente
+; UI-10: the bestiary's kill count (legacy)
+2110992301|bdf0ea49||Umanoidi
+2110992302|bafca59c||Guerrieri della Caccia Selvaggia
+2110992303|82a5fd81||Totale
+2110992304|98357039||Animali
+2110992305|4153fdc1||Mostri
+2110992306|c8dde11f||Uccisioni per tipo
+2110992307|d8d52cd1||Conteggio uccisioni
+2110992308|ba738dce||Umanoidi
+2110992309|8e8b5e03||Creature uniche
+; UI-13: loading screen tips (legacy, by key hash)
+2110992520|b93269f0||I tuoi avversari hanno un Vigore limitato. Quando il loro Vigore è esaurito, non saranno in grado di combattere nel modo più efficace.
+2110992521|6d1ad3cb||Presta attenzione ai numeri del livello dei tuoi nemici e al loro colore. Verde indica che sono vicini al tuo livello, rosso che sono una sfida, mentre un icona a forma di teschio indica che sono mortali.
+2110992522|6d1ad3a6||Affilare la lama su una mola migliorerà le sue capacità di combattimento.
+2110992523|6d1ad427||Colpisci un avversario mentre cavalchi verso di lui ad alta velocità per aumentare il danno.
+2110992524|b93269e9||Colpire alle spalle aumenta la tua probabilità di colpo critico.
+2110992525|6d1ad3e4||Quando lanci una bomba o un dardo della balestra, puoi sfruttare la mira automatica per un attacco rapido o mirare manualmente per un danno migliore.
+2110992526|6d1ad447||Puoi deviare dardi e freccie in arrivo con la tua spada.
+2110992527|363f99af||Puoi usare Quen per proteggerti da effetti critici come Incenerimento, sanguinamento, ecc.
+2110992528|6d1ad3cc||Schivare di solito è la tatica migliore contro mostri enormi. Quando combatti contro umani e mostri più piccoli, prova a parare e contrattaccare i loro attacchi con la tua spada.
+; UI-15: shaving (legacy)
+2110992169|25746309||Geralt è ben rasato adesso.
+2110992173|04bda90f||Usato per la rasatura.

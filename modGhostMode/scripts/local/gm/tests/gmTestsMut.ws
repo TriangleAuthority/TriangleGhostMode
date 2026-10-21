@@ -1496,8 +1496,8 @@ exec function gmtest_mut12_blows(phase : int)
 		GMTestReport(fc == 0 && sc == 0, "MUT-12 blows: base strength " + w.gmTestMut12Base + " without the skills (crit chance " + cc + ", damage " + cp + ")");
 		return;
 	}
-	before = ClampF(w.gmTestMut12CritChance, 0, 1) * w.gmTestMut12CritPower;
-	after = ( ClampF(cc + fc, 0, 1) * (cp + fp) + ClampF(cc + sc, 0, 1) * (cp + sp) ) / 2.0;
+	before = w.gmTestMut12CritChance * w.gmTestMut12CritPower;	// UI-01: legacy's list weights crit power by the unclamped chance
+	after = ( (cc + fc) * (cp + fp) + (cc + sc) * (cp + sp) ) / 2.0;
 	expected = w.gmTestMut12Base + 100 * (after - before);
 	GMTestReport((fc > 0 || fp > 0) && (sc > 0 || sp > 0) && AbsF(w.GMMutation11GetBaseStrength() - expected) < 0.01, "MUT-12 blows (classic tree " + GMIsClassicProfileInForce() + "): base strength " + w.gmTestMut12Base + " -> " + w.GMMutation11GetBaseStrength() + " (expected " + expected + "; fast +" + fc + " chance +" + fp + " damage, strong +" + sc + " chance +" + sp + " damage)");
 }

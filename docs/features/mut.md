@@ -289,7 +289,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 **Decisions:**
 
 - Implementation: legacy multiplies the gain at each of its sites (melee hits with the Lynx set's and the Bear School perk's terms, Cold Blood's bolts, Advanced Pyrotechnics' bombs, Focus's sign casts); the port applies the factor to every adrenaline gain made while one of Geralt's own actions is processed, which covers those sites and the port's other gains on hits (the new tree's Muscle Memory and Strength Training follow the hit's rule), and to Focus's sign casts directly. Razor Focus's combat-start top-up is not doubled, as legacy's. Confirmed by the owner (2026-10-17).
-- **Deviation:** the character stats popup's Adrenaline Rush lines (legacy's attack power and sign intensity with the Rush or Recovery) are not ported (temporary, until UI; porter's call, confirmed by the owner, 2026-10-17).
+- The character stats popup shows the Adrenaline Rush terms since UI-01 (attack power) and UI-05 (adrenaline gain with the Rush's or the Recovery's factor; 2026-10-21, 5.x-GM `1a6a9fd6`): the temporary deviation has ended.
 
 **Slices:**
 
@@ -316,7 +316,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 **Decisions:**
 
 - Vanilla's vampire-bite path (`OnTaskSyncAnim`, a Bruxa's bite) is kept: legacy removed its own debuff and 15 s timer, but the acid's end removes every copy of the debuff first, so it plays as legacy's.
-- **Deviation:** the character stats popup's toxicity decay line does not show Toxic Blood's reduction as legacy's does (temporary, until UI; porter's call, confirmed by the owner, 2026-10-17).
+- The character stats popup's toxicity decay line shows Toxic Blood's reduction since UI-04 (2026-10-21, 5.x-GM `a31306a4`): the temporary deviation has ended.
 
 **Slices:**
 
@@ -344,7 +344,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 
 - Legacy's own rule kept: Euphoria stops when toxicity falls below the threshold during the toxicity effect's update; toxicity set to 0 at once (a potion that clears it) ends the toxicity effect first, and Euphoria then lasts until combat ends.
 - **Deviation:** the energy FX on hits is 5.x's (on melee and Sign hits on actors, not for channelled Signs); legacy played it on melee hits and once per Sign cast (porter's call, confirmed by the owner, 2026-10-17).
-- **Deviation:** the character stats popup's and the inventory's lines with Euphoria (legacy's overdose drain line and its damage bonus in `GetOffenseStatsList` and `AddCharacterStatSigns`) are not ported (temporary, until UI; porter's call, confirmed by the owner, 2026-10-17).
+- The character stats popup shows Euphoria's damage bonus in the sword lines (UI-01) and the sign lines (UI-03) and the overdose drain with its factor (UI-04, 2026-10-21, 5.x-GM `a31306a4`): the temporary deviation has ended.
 - Euphoria starts and stops at the overdose threshold, legacy's 75% since [ALCH-01](alch.md#alch-01-toxicity-and-overdose) (2026-10-20; until then 5.x's 50%, a temporary deviation that ALCH ended).
 
 **Slices:**
@@ -398,7 +398,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 
 **Decisions:**
 
-- **Deviation:** the crossbow damage shown in the inventory and the character panel (`GetOffenseStatsList`) is not doubled by Cat Eyes as legacy's is (temporary, until UI; porter's call, confirmed by the owner, 2026-10-17).
+- The crossbow damage shown in the inventory and the character panel is doubled by Cat Eyes as legacy's since UI-01 (2026-10-21, 5.x-GM `f768e9b1`): the temporary deviation has ended.
 
 **Slices:**
 
@@ -429,7 +429,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 - **Deviation:** only Life Leech's free Quen skips Quen's cooldown; legacy skipped it for every alternate Quen that ended while Life Leech or its 90 s cooldown was on Geralt, so his own alternate Quen in those 90 s had none (audit F4, option (b); project owner, 2026-10-17).
 - **Deviation:** the free Quen costs nothing at all: legacy's `freeCast` skipped only the basic shield's payment, so its free alternate Quen paid an alternate Quen's channel start like any other (stamina, or with Rage Management adrenaline when the start costs anything) (porter's call, confirmed by the owner, 2026-10-17).
 - **Deviation:** the free Quen ends when Life Leech ends, also while the cast key is held; legacy's went on as a normal channel while the key was held, paying stamina per second (porter's call, confirmed by the owner, 2026-10-17).
-- **Deviation:** the drain's average attack power is the general attack power with the crit chance and damage of fast and strong hits (Precise Blows and Crushing Blows of either tree: classic `sword_s17` and `sword_s08` per level, as legacy's list, the new tree's `sword_s24` and `sword_s25`); legacy averaged its character stats list's attack power per attack type and sword (with Muscle Memory's, Strength Training's, the swords' and the Lynx set's terms) (temporary, until UI; porter's call, confirmed by the owner, 2026-10-17).
+- The drain's average attack power is read from the character stats list again, as legacy (per attack type and sword, crits weighted by the unclamped chance) since UI-01 (2026-10-21, 5.x-GM `f768e9b1`): the temporary deviation has ended.
 
 **Slices:**
 
@@ -458,7 +458,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 **Decisions:**
 
 - With legacy's `GetNonSignApplyBuffTest` (attributed to MUT-13 only), the negative effects of Geralt's and every other actor's non-sign actions are now resisted: the chance is × (1 − the target's resistance) (5.x: the bare chance). "Negative" is the game's `IsNegativeEffectType`: critical effects (burning, knockdowns, staggers, blindness, freezing...) and a few drains and slowdowns; bleeding and poison are not, so their chances are not resisted or raised.
-- **Deviation:** the character stats popup's lines with Metamorphosis's bonus (legacy's chance lines) are not ported (temporary, until UI; porter's call, confirmed by the owner, 2026-10-17).
+- The character stats popup's chance lines include Metamorphosis's bonus since UI-02 (the swords' effect chances) and UI-03 (Aard's knockdown, Igni's burning; 2026-10-21, 5.x-GM `52db5ef7`): the temporary deviation has ended.
 
 **Slices:**
 

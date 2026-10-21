@@ -420,3 +420,83 @@
 2110992015|c4ea0ecf||Czas trwania eliksiru
 ; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
 2110992259|b91d9859||Rupieć. Może zostać odsprzedany handlarzom.
+; UI-07: attribute names of Ghost Mode's tooltip rows and panel lines (legacy's ids and keys)
+2110992013|cdb77880||Odporność na chłód
+2110992110|328ae462||Szansa na powalenie
+2110992153|c32e766a||Premia do obrażeń trafienia krytycznego
+2110992156|0147942a||Regeneracja Żywotności poza walką
+2110992157|a83467f6||Regeneracja Żywotności w trakcie walki
+2110992164|b02a28c2||Zwiększenie obrażeń
+2110992265|2eaeb09b||Szansa na odbicie strzały
+2110992476|2ae9db22||Wyczerpywanie Żywotności
+; UI-06: the armor class descriptions with their stamina rule, the notes' description (legacy's ids and keys)
+2110992426|736e017e||Element lekkiego rynsztunku. Oferuje minimalną ochronę. Czynności podczas walki używają mniej Wytrzymałości.
+2110992427|320650a7||Element średniego rynsztunku. Oferuje optymalną ochonę.
+2110992428|942892ef||Element ciężkiego rynsztunku. Oferuje najlepszą ochronę. Czynności podczas walki i rzucanie Znaków używają więcej Wytrzymałości.
+2110992256|256ad6b4||Nie zawiera nic ciekawego
+; UI-02: the sword and crossbow sections (legacy)
+2110992017|1662935c||Siła Ataku (broń srebrna)
+2110992018|4f1d703c||Siła Ataku (broń stalowa)
+2110992028|8566fddf||Szybki Atak - obrażenia
+2110992029|7a3d2c04||Silny Atak - obrażenia
+2110992074|3c4a6af2||Silny Atak - obrażenia
+2110992075|5806ca6e||Silny Atak - obrażenia trafienia krytycznego
+2110992076|69d8dd89||Szybki Atak - obrażenia trafienia krytycznego
+2110992077|89dfeac9||Szybki Atak - szansa na trafienie krytyczne
+2110992078|bc4297c4||Silny Atak - szansa na trafienie krytyczne
+2110992079|d23992f7||Szybki Atak - obrażenia
+2110992080|2e06698e||Silny Atak - obrażenia trafienia krytycznego
+2110992081|3375c4a9||Szybki Atak - obrażenia trafienia krytycznego
+2110992082|73d42fa9||Szybki Atak - szansa na trafienie krytyczne
+2110992083|b08bd7d2||Silny Atak - obrażenia
+2110992084|c7b0b7d7||Szybki Atak - obrażenia
+2110992085|fa3924a4||Silny Atak - szansa na trafienie krytyczne
+2110992167|d11e5fa2||Szybki Atak - obrażenia trafienia krytycznego
+2110992168|3018409d||Silny Atak - obrażenia trafienia krytycznego
+; UI-02, UI-05: adrenaline gain (crossbow section, misc section)
+2110992105|6f2a6f0f||Generacja Punktów Adrenaliny
+; UI-03: the sign lines (legacy)
+2110992019|f38f5b36||Strumień Ognia - obrażenia na sekundę
+2110992020|6a994712||Limit Glifów
+2110992022|60b53abe||Magiczna Pułapka - czas trwania
+2110992023|8594f9d5||Magiczna Pułapka - ładunki
+2110992024|1e6cbb19||Magiczna Pułapka - obrażenia
+2110992025|ee530dcc||Odbijane obrażenia
+2110992026|e379a123||Absorbcja obrażeń przez aktywą tarczę
+2110992030|a3e34c39||Absorbcja obrażeń
+2110992272|7641d6c5||Szansa na powalenie
+2110992277|9246181a||Czas pod wpływem Uroku Aksji
+2110992278|b72fae71||Czas pod wpływem Marionetki Aksji
+2110992293|0516c455||Szansa na poważne powalenie
+2110992461|6a758d69||Zasięg Magicznej Pułapki
+; UI-04: the toxicity lines (legacy)
+2110992423|fe37faf4||Wyczerpywanie Żywotności podczas przedawkowania
+2110992424|1f5ba9f0||Tempo Redukcji Toksyczności
+2110992425|1050a15c||Dostępna Tolerancja na Toksyny
+2110992519|1dc1cde4||Próg przedawkowania
+; UI-05: adrenaline gain for fast and strong attacks (legacy)
+2110992383|7d183fe6||Szybki Atak - generacja Adrenaliny
+2110992384|7cddfb97||Silny Atak - generacja Adrenaliny
+; UI-10: the bestiary's kill count (legacy)
+2110992301|bdf0ea49||Humanoidy
+2110992302|bafca59c||Wojownicy Dzikiego Gonu
+2110992303|82a5fd81||Wszystkie
+2110992304|98357039||Zwierzęta
+2110992305|4153fdc1||Potwory
+2110992306|c8dde11f||Zabójstwa po typie
+2110992307|d8d52cd1||Ilość zabójstw
+2110992308|ba738dce||Humanoidy
+2110992309|8e8b5e03||Unikatowe
+; UI-13: loading screen tips (legacy, by key hash)
+2110992520|b93269f0||Twoi przeciwnicy mają ograniczone pokłady Wytrzymałości. Gdy ta się wyczerpie, będą mniej skuteczni w walce.
+2110992521|6d1ad3cb||Zwracaj uwagę na kolor liczby opisującej poziom przeciwnika. Zielony oznacza, że jest on na podobnym poziomie, co Geralt. Czerwony oznacza wyzwanie, a ikona czaszki – niemal pewną śmierć.
+2110992522|6d1ad3a6||Broń naostrzona na kamieniu szlifierskim jest bardziej skuteczna w walce.
+2110992523|6d1ad427||Kiedy zaatakujesz przeciwnika jadąc konno z dużą prędkością, zadasz większe obrażenia.
+2110992524|b93269e9||Atakowanie od tyłu zwiększa szansę na trafienie krytyczne.
+2110992525|6d1ad3e4||Petard i kusz można używać w jednym z dwóch trybów – z autocelowaniem dla szykiego ataku lub ręcznym celowaniem dla zwiększonych obrażeń.
+2110992526|6d1ad447||Wiedźmin jest w stanie odbijać mieczem lecące w jego stronę strzały i bełty.
+2110992527|363f99af||Możesz użyć Znaku Quen do ochrony przed krytycznymi efektami, np. podpaleniem czy krwawieniem.
+2110992528|6d1ad3cc||W czasie walki z większymi potworami zazwyczaj sprawdzają się uniki. W czasie walki z ludźmi i mniejszymi potworami lepiej parować i kontrować ich ataki mieczem.
+; UI-15: shaving (legacy)
+2110992169|25746309||Geralt jest teraz ogolony na czysto
+2110992173|04bda90f||Służy do golenia.

@@ -196,7 +196,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-17 from the chang
 
 **Decisions:** port as legacy. The bonus is checked at every load, where legacy granted it once on old saves (same result). The tooltip shows the generic line for armor pieces only (legacy filled the set block for any item outside a witcher set; display only).
 
-- **Deviation:** the character panel's toxicity decay line (`tox_dec_rate`, which counts the medium set) is not shown: it belongs to legacy's toxicity panel rework (temporary, until UI; porter's call, confirmed by the owner, 2026-10-18).
+- The character panel's toxicity decay line counts the medium set since UI-04 (2026-10-21, 5.x-GM `a31306a4`): the temporary deviation has ended.
 
 **Slices:**
 
@@ -261,7 +261,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-17 from the chang
 
 **Decisions:** port as legacy; ends DMG-04's Lynx term deviation, SKL-07's Lynx adrenaline deviation and DEF-06's Lynx deviation. The crit's double adrenaline adds the hit's gain once more (divided by Adrenaline Rush's multiplier, which the gain passes through again), the same as legacy's doubling before that multiplier; legacy's Bear School term in between counts heavy pieces, which a full Feline set does not have.
 
-- **Deviation:** the character panel's fast and strong attack power do not include the Feline chain (legacy added it in `GetOffenseStatsList`) (temporary, until UI; porter's call, confirmed by the owner, 2026-10-18).
+- The character panel's fast and strong attack power include the Feline chain since UI-01 (2026-10-21, 5.x-GM `f768e9b1`): the temporary deviation has ended.
 
 **Slices:**
 
@@ -318,7 +318,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-17 from the chang
 
 **Decisions:** DA8 (legacy). Ends SKL-07's Bear adrenaline deviation, SKL-11's Bear deviation and its deferred visuals (F19), DMG-03's Bear term. Quen Discharge's effects play in both trees (legacy keys them on the discharge share, which the port computes for either tree's skill).
 
-- **Deviation:** the character panel's attack power does not include the Bear set's term (legacy added it in `GetOffenseStatsList`) (temporary, until UI; porter's call, confirmed by the owner, 2026-10-18).
+- The character panel's attack power includes the Bear set's term (melee and crossbow) since UI-01 (2026-10-21, 5.x-GM `f768e9b1`): the temporary deviation has ended.
 
 **Slices:**
 
@@ -347,7 +347,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-17 from the chang
 
 **Decisions:** DA2. Ends SKL-14's Wolf deviation and DMG-04's Wolven pool term. Tier 1 boosts the oil's own bonuses (attack power, resistance reduction, crit chance and damage against its monster type), not Poisoned Blades or Protective Coating, as legacy. Tier 2's crit chance counts for melee attacks with the held sword, its crit damage for the attacking sword, both whatever the enemy and wearing off with each oil, as legacy. Only Hanged Man's Venom and Beast Oil fit a steel sword (legacy and 5.x alike), so three oils fit only a silver sword. 5.x also calls `RemoveExtraOilsFromItem` when Fixative is taken off, where its body removed every oil; with legacy's body the sword's newest oil stays (legacy did not call it there; with one oil per sword the result is legacy's).
 
-- **Deviation:** the oil item tooltip does not show the Wolven tier 1 boost (legacy's `AddOilStats`, part of its oil tooltip rework) (temporary, until UI; porter's call, confirmed by the owner, 2026-10-18).
+- The oil item tooltip shows the Wolven tier 1 boost since UI-06 (legacy's `AddOilStats`, 2026-10-20, 5.x-GM `6ca81e09`): the temporary deviation has ended.
 
 **Slices:**
 

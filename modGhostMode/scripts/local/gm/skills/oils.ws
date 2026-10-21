@@ -341,7 +341,7 @@ function ProcessOnBeforeHitChecks()
 // alchemy_s7, 5 levels; the new tree's alchemy_s27): with the right oil, critical hit damage +6.68% (new
 // tree 11.13%) per level per adrenaline point, from 1 point, not spent (5.x: only at full adrenaline).
 // 5.x's Volatile Compound (bomb damage by toxicity) is gone (damage/pool.ws). The HUD's charge display and
-// the item tooltip still read only the classic Fixative.
+// the oil's tooltip read either tree's Fixative (UI-06).
 
 // The Fixative the player has (classic first); S_SUndefined if none.
 @addMethod(CR4Player)

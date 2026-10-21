@@ -5,7 +5,7 @@
 // duration is its cloud's. The texts are legacy's strings (modGhostMode tables). Items other than armor and
 // weapons get legacy's descriptions by name key (audit F6); the alchemy durations show in seconds and a
 // decoction's toxicity offset under its own name (audit F11). The recipe book's text and the recipe items'
-// tooltips are UI's (layout, GetRecipeDataFromXML's typo fix).
+// tooltips are UI-08's (ui/recipes.ws).
 // See docs/features/alch.md.
 
 // 5.x body replaced by legacy's: by item name, every effect ability of the item (legacy).
@@ -579,13 +579,25 @@ function GMItemHasRecyclingParts(id : SItemUniqueId) : bool
 // Audit F11 (the owner, 2026-10-20): legacy's units in the item tooltip's stats (legacy's AddItemStats): the
 // alchemy durations (a bomb's cloud, Dimeritium out of the cloud, Golden Oriole's immunity) in seconds, and
 // a decoction's toxicity offset under its own name with no "/max" (5.x shows it as "Toxicity 70/max").
+// UI-06 (legacy's AddItemStats): a potion's toxicity after Expert Brewer, without "/max"; a decoction's
+// offset after Adaptation; a negative value without "+".
 // The rows AddItemStats adds are its stats in order, less the primary ones it skips.
 @wrapMethod(W3TooltipComponent)
 function AddItemStats(itemStats : array<SAttributeTooltip>, out resultGFxArray : CScriptedFlashArray, rootGFxObject : CScriptedFlashObject, ignorePrimaryStat : bool, defaultPrefix : string, isArmorOrWeapon : bool):void
 {
 	var row : CScriptedFlashObject;
 	var i, idx : int;
+	var witcher : W3PlayerWitcher;
+	var value : string;
 
+	witcher = GetWitcherPlayer();
+	for(i = 0; i < itemStats.Size() && witcher && !isArmorOrWeapon; i += 1)
+	{
+		if(itemStats[i].originName == 'toxicity' && witcher.CanUseSkill(S_Alchemy_s03))
+			itemStats[i].value = MaxF(0, itemStats[i].value - CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Alchemy_s03, 'toxicityReduction', false, false)) * witcher.GetSkillLevel(S_Alchemy_s03));
+		else if(itemStats[i].originName == 'toxicity_offset')
+			itemStats[i].value *= witcher.GMAdaptationMult();
+	}
 	idx = resultGFxArray.GetLength();
 	wrappedMethod(itemStats, resultGFxArray, rootGFxObject, ignorePrimaryStat, defaultPrefix, isArmorOrWeapon);
 	for(i = 0; i < itemStats.Size(); i += 1)
@@ -596,7 +608,19 @@ function AddItemStats(itemStats : array<SAttributeTooltip>, out resultGFxArray :
 			break;
 		row = resultGFxArray.GetElementFlashObject(idx);
 		idx += 1;
-		if(GMIsAlchemyDurationStat(itemStats[i].originName))
+		if(itemStats[i].value < 0 && row.GetMemberFlashString("valuePrefix") == "+")
+		{
+			value = row.GetMemberFlashString("value");
+			if(StrBeginsWith(value, "+"))
+				row.SetMemberFlashString("value", StrRight(value, StrLen(value) - 1));
+			row.SetMemberFlashString("valuePrefix", "");
+		}
+		if(itemStats[i].originName == 'toxicity' && !isArmorOrWeapon)
+		{
+			row.SetMemberFlashString("valuePrefix", "");
+			row.SetMemberFlashString("value", NoTrailZeros(RoundMath(itemStats[i].value)));
+		}
+		else if(GMIsAlchemyDurationStat(itemStats[i].originName))
 		{
 			row.SetMemberFlashString("valuePrefix", "");
 			row.SetMemberFlashString("value", NoTrailZeros(RoundMath(itemStats[i].value)) + " " + GetLocStringByKeyExt("per_second"));

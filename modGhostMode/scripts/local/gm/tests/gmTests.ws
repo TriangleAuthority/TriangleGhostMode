@@ -552,6 +552,11 @@ function GMTestHasLine(lines : array<string>, prefix : string) : bool
 exec function gmtest_panel()
 {
 	GMTest_panel();
+	GMTest_ui01_crit();
+	GMTest_ui02();
+	GMTest_ui03();
+	GMTest_ui04();
+	GMTest_ui05();
 	GMTest_item12_after();
 	GMTest_alchport_after();
 }
@@ -575,13 +580,13 @@ function GMTest_panel()
 	outOfCombat = GMStaminaRegenPerSecond('staminaOutOfCombatRegen');
 	GMTestReport(lines.Contains("defStat15=" + NoTrailZeros(RoundMath(combat)) + perSecond), "STAM-04 panel combat regen includes the option (" + NoTrailZeros(combat) + ")");
 	GMTestReport(lines.Contains("defStat14=" + NoTrailZeros(RoundMath(outOfCombat)) + perSecond), "STAM-04 panel out-of-combat regen (" + NoTrailZeros(outOfCombat) + ")");
-	GMTestReport(lines.Size() > 0 && !GMTestHasLine(lines, "defStat16="), "STAM-05 panel: no armor line while the option is off");
+	GMTestReport(lines.Size() > 0 && GMTestPanelLine(GMTestPanelSection("mainResStat"), "defStat16") == "", "STAM-05 panel: no armor line while the option is off");
 
 	cfg.SetVarValue('GMGameplayOptions', 'GMArmorRegenPenalty', "true");
 	lines = GMTestPanelStaminaLines("panel, option on: ");
 	combat = (15 + 5) * (1 + GetWitcherPlayer().CalculatedArmorStaminaRegenBonus());
 	GMTestReport(lines.Contains("defStat15=" + NoTrailZeros(RoundMath(combat)) + perSecond), "STAM-05 panel combat regen includes the armor modifier (" + NoTrailZeros(combat) + ")");
-	GMTestReport(lines.Contains("defStat16=" + NoTrailZeros(RoundMath(GetWitcherPlayer().CalculatedArmorStaminaRegenBonus() * 100)) + " %"), "STAM-05 panel armor line shows the modifier");
+	GMTestReport(GMTestPanelValue(GMTestPanelSection("mainResStat"), "defStat16") == NoTrailZeros(RoundMath(GetWitcherPlayer().CalculatedArmorStaminaRegenBonus() * 100)) + " %" && !GMTestHasLine(lines, "defStat16="), "STAM-05 panel armor line shows the modifier, under Armor (UI-05, DU3)");
 	GMTestReport(lines.Contains("defStat18=6.66") && lines.Contains("defStat19=10") && lines.Contains("defStat27=40"), "STAM-03 panel cost lines (light 6.66, heavy 10, Aard 40; RoundTo truncates, as in legacy)");
 	GMTestReport(lines.Contains("defStat24=10" + perSecond), "STAM-03 panel sprint cost per second");
 	// STAM-09: present only with the skill equipped (skilleq(S_Sword_s35), skilleq(S_Sword_s02)).
@@ -2156,6 +2161,7 @@ exec function gmtest_regress()
 	GMTest_swd();
 	GMTest_item();
 	GMTest_alchport();
+	GMTest_uiport();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

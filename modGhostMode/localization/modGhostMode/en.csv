@@ -420,3 +420,83 @@
 2110992015|        |attribute_name_potion_duration|Potion duration
 ; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
 2110992259|        |item_desc_junk_no_ingr|Can be sold to merchants.
+; UI-07: attribute names of Ghost Mode's tooltip rows and panel lines (legacy's ids and keys)
+2110992013|        |attribute_name_frost_resistance_perc|Frost resistance
+2110992110|        |attribute_name_desc_knockdownchance_mult|Knockdown chance
+2110992153|c32e766a||Critical hit power bonus
+2110992156|        |attribute_name_vitalityRegen|Vitality regeneration outside of combat
+2110992157|        |attribute_name_vitalityCombatRegen|Vitality regeneration during combat
+2110992164|b02a28c2||Damage increase
+2110992265|        |attribute_name_q108_bounce_arrows|Chance to bounce an arrow
+2110992476|2ae9db22||Vitality drain
+; UI-06: the armor class descriptions with their stamina rule, the notes' description (legacy's ids and keys)
+2110992426|736e017e||Light gear. Offers minimal protection. Combat actions require less stamina.
+2110992427|320650a7||Medium gear. Offers optimal protection.
+2110992428|942892ef||Heavy gear. Offers the best protection. Combat actions and sign casting require more stamina.
+2110992256|        |item_desc_note|Contains useless information.
+; UI-02: the sword and crossbow sections (legacy)
+2110992017|        |panel_common_statistics_tooltip_silver_dph_gm|Damage per hit (silver)
+2110992018|        |panel_common_statistics_tooltip_steel_dph_gm|Damage per hit (steel)
+2110992028|        |gm_combat_stats_fast_attack_power|Fast attack power
+2110992029|        |gm_combat_stats_strong_attack_power|Strong attack power
+2110992074|3c4a6af2||Strong attack damage
+2110992075|5806ca6e||Strong attack critical damage
+2110992076|69d8dd89||Fast attack critical damage
+2110992077|89dfeac9||Fast attack critical hit chance
+2110992078|bc4297c4||Strong attack critical hit chance
+2110992079|d23992f7||Fast attack damage
+2110992080|2e06698e||Strong attack critical damage
+2110992081|3375c4a9||Fast attack critical damage
+2110992082|73d42fa9||Fast attack critical hit chance
+2110992083|b08bd7d2||Strong attack damage
+2110992084|c7b0b7d7||Fast attack damage
+2110992085|fa3924a4||Strong attack critical hit chance
+2110992167|        |gm_combat_stats_fast_crit_attack_power|Fast attack critical hit power
+2110992168|        |gm_combat_stats_strong_crit_attack_power|Strong attack critical hit power
+; UI-02, UI-05: adrenaline gain (crossbow section, misc section)
+2110992105|        |gm_stat_adrenaline_gain|Adrenaline Gain
+; UI-03: the sign lines (legacy)
+2110992019|        |gm_sign_stats_channeling_damage_per_sec|Firestream damage per sec
+2110992020|        |gm_sign_stats_yrden_traps|Magic Traps
+2110992022|        |gm_sign_stats_alt_yrden_duration|Magic Turret duration
+2110992023|        |gm_sign_stats_alt_yrden_charges|Magic Turret charges
+2110992024|        |gm_sign_stats_alt_yrden_damage|Magic Turret damage
+2110992025|        |gm_sign_stats_alt_quen_returned_damage|Returned damage
+2110992026|        |gm_sign_stats_alt_quen_dmg_absorption|Active shield damage absorption
+2110992030|        |gm_sign_stats_quen_dmg_absorption|Damage absorption
+2110992272|        |attribute_name_knockdown|Knockdown chance
+2110992277|        |gm_sign_stats_axii_duration_confusion|Confusion duration
+2110992278|        |gm_sign_stats_axii_duration_control|Control duration
+2110992293|        |gm_sign_stats_heavy_knockdown|Heavy knockdown chance
+2110992461|        |gm_sign_stats_yrden_range|Magic Trap Range
+; UI-04: the toxicity lines (legacy)
+2110992423|        |attribute_name_tox_hp_drain|Overdose Vitality drain
+2110992424|        |attribute_name_tox_dec_rate|Toxicity Decay Rate
+2110992425|        |attribute_name_avail_tox|Available Toxicity
+2110992519|        |attribute_name_tox_overdose|Overdose threshold
+; UI-05: adrenaline gain for fast and strong attacks (legacy)
+2110992383|        |gm_stat_adrenaline_gain_light|Fast attack Adrenaline Gain
+2110992384|        |gm_stat_adrenaline_gain_heavy|Strong attack Adrenaline Gain
+; UI-10: the bestiary's kill count (legacy)
+2110992301|        |gm_kills_humans|Humanoids
+2110992302|        |gm_kills_wh_warriors|Wild Hunt warriors
+2110992303|        |gm_kills_total|Total
+2110992304|        |gm_kills_animals_total|Animals
+2110992305|        |gm_kills_monsters_total|Monsters
+2110992306|        |gm_kills_by_type|Kills by type
+2110992307|        |gm_kills_kill_count|Kill count
+2110992308|        |gm_kills_humans_total|Humanoids
+2110992309|        |gm_kills_bosses_total|Unique creatures
+; UI-13: loading screen tips (legacy, by key hash)
+2110992520|b93269f0||Your opponents have limited Stamina. When their Stamina is exhausted, they won't be able to fight as effectively.
+2110992521|6d1ad3cb||Pay attention to the color of your enemies' level numbers. Green means they are close to your level. Red means they are a challenge, and a skull icon means they are deadly.
+2110992522|6d1ad3a6||Sharpening your blade on a grindstone will enhance its combat capabilities.
+2110992523|6d1ad427||Strike an opponent while riding towards him at high speed for an increased damage.
+2110992524|b93269e9||Striking from behind increases you critical hit chances.
+2110992525|6d1ad3e4||When throwing a bomb or shooting a bolt from your crossbow, you can either take advantage of auto-aiming for a quick attack, or aim manually for better damage.
+2110992526|6d1ad447||You can deflect incoming bolts and arrows with your sword.
+2110992527|363f99af||You can use Quen to protect from critical effects such as Burning, Bleeding, etc.
+2110992528|6d1ad3cc||Dodging is usually the best tactic when fighting huge monsters. When fighting humans and smaller monsters, try to parry and counter their attacks with your sword.
+; UI-15: shaving (legacy)
+2110992169|        |gm_used_razor_success|Geralt is now clean-shaven
+2110992173|        |item_desc_razor_mod|Used for shaving.

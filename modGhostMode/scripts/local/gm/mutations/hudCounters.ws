@@ -48,7 +48,7 @@ function UpdateBuffs()
 			effectType = _currentEffects[i].GetEffectType();
 
 			
-			if(thePlayer.IsSkillEquipped( S_Alchemy_s06 ) && GetWitcherPlayer().CanUseSkill(S_Alchemy_s06) && GetWitcherPlayer().GetSkillLevel(S_Alchemy_s06) > 2)
+			if(thePlayer.GMFixativeNoWear())	//modSigns: UI-06, either tree's Fixative at level 3 (SKL-14)
 				isOilInfinite = true;
 			
 			if ( effectType == EET_Oil && isOilInfinite )
@@ -275,7 +275,7 @@ function OnTick( timeDelta : float )
 					if ( oilEffect )
 					{
 						
-						if (oilEffect.GetAmmoCurrentCount() > 0 && GetWitcherPlayer().CanUseSkill(S_Alchemy_s06) && GetWitcherPlayer().GetSkillLevel(S_Alchemy_s06) > 2)
+						if (oilEffect.GetAmmoCurrentCount() > 0 && thePlayer.GMFixativeNoWear())	//modSigns: UI-06, either tree's Fixative at level 3 (SKL-14)
 						{
 							initialDuration = oilEffect.GetAmmoMaxCount();
 							duration		= oilEffect.GetAmmoMaxCount();

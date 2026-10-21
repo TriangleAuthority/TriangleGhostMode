@@ -420,3 +420,83 @@
 2110992015|        |attribute_name_potion_duration|Время действия эликсира
 ; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
 2110992259|        |item_desc_junk_no_ingr|Можно продать торговцам.
+; UI-07: attribute names of Ghost Mode's tooltip rows and panel lines (legacy's ids and keys)
+2110992013|        |attribute_name_frost_resistance_perc|Сопротивление урону холодом
+2110992110|        |attribute_name_desc_knockdownchance_mult|Шанс сбить с ног
+2110992153|c32e766a||Бонус к силе критического удара
+2110992156|        |attribute_name_vitalityRegen|Регенерация здоровья вне боя
+2110992157|        |attribute_name_vitalityCombatRegen|Регенерация здоровья в бою
+2110992164|b02a28c2||Увеличение урона
+2110992265|        |attribute_name_q108_bounce_arrows|Шанс отразить стрелу
+2110992476|2ae9db22||Вытягивание здоровья
+; UI-06: the armor class descriptions with their stamina rule, the notes' description (legacy's ids and keys)
+2110992426|736e017e||Легкий доспех. Дает минимальную защиту. Уменьшает затраты энергии на действия в ближнем бою.
+2110992427|320650a7||Средний доспех. Дает оптимальную защиту.
+2110992428|942892ef||Тяжелый доспех. Дает наибольшую защиту. Увеличивает затраты энергии на действия в ближнем бою и наложение знаков.
+2110992256|        |item_desc_note|Содержит бесполезную информацию.
+; UI-02: the sword and crossbow sections (legacy)
+2110992017|        |panel_common_statistics_tooltip_silver_dph_gm|Урон серебряным мечом
+2110992018|        |panel_common_statistics_tooltip_steel_dph_gm|Урон стальным мечом
+2110992028|        |gm_combat_stats_fast_attack_power|Сила быстрой атаки
+2110992029|        |gm_combat_stats_strong_attack_power|Сила мощной атаки
+2110992074|3c4a6af2||Урон при мощной атаке
+2110992075|5806ca6e||Урон от крит. удара при мощной атаке
+2110992076|69d8dd89||Урон от крит. удара при быстрой атаке
+2110992077|89dfeac9||Шанс крит. удара при быстрой атаке
+2110992078|bc4297c4||Шанс крит. удара при мощной атаке
+2110992079|d23992f7||Урон при быстрой атаке
+2110992080|2e06698e||Урон от крит. удара при мощной атаке
+2110992081|3375c4a9||Урон от крит. удара при быстрой атаке
+2110992082|73d42fa9||Шанс крит. удара при быстрой атаке
+2110992083|b08bd7d2||Урон при мощной атаке
+2110992084|c7b0b7d7||Урон при быстрой атаке
+2110992085|fa3924a4||Шанс крит. удара при мощной атаке
+2110992167|        |gm_combat_stats_fast_crit_attack_power|Сила крит. удара при быстрой атаке
+2110992168|        |gm_combat_stats_strong_crit_attack_power|Сила крит. удара при мощной атаке
+; UI-02, UI-05: adrenaline gain (crossbow section, misc section)
+2110992105|        |gm_stat_adrenaline_gain|Получение адреналина
+; UI-03: the sign lines (legacy)
+2110992019|        |gm_sign_stats_channeling_damage_per_sec|Урон в сек. (Огненный поток)
+2110992020|        |gm_sign_stats_yrden_traps|Магические ловушки
+2110992022|        |gm_sign_stats_alt_yrden_duration|Длительность Магической турели
+2110992023|        |gm_sign_stats_alt_yrden_charges|Заряды Магической турели
+2110992024|        |gm_sign_stats_alt_yrden_damage|Урон Магической турели
+2110992025|        |gm_sign_stats_alt_quen_returned_damage|Возвращаемый урон
+2110992026|        |gm_sign_stats_alt_quen_dmg_absorption|Поглощаемый урон (Активный щит)
+2110992030|        |gm_sign_stats_quen_dmg_absorption|Поглощаемый урон
+2110992272|        |attribute_name_knockdown|Шанс нокаута
+2110992277|        |gm_sign_stats_axii_duration_confusion|Длительность ошеломления
+2110992278|        |gm_sign_stats_axii_duration_control|Длительность контроля
+2110992293|        |gm_sign_stats_heavy_knockdown|Шанс продолж. нокаута
+2110992461|        |gm_sign_stats_yrden_range|Радиус Магической ловушки
+; UI-04: the toxicity lines (legacy)
+2110992423|        |attribute_name_tox_hp_drain|Потеря здоровья от передозировки
+2110992424|        |attribute_name_tox_dec_rate|Скорость сокращения токсичности
+2110992425|        |attribute_name_avail_tox|Доступная токсичность
+2110992519|        |attribute_name_tox_overdose|Порог передозировки
+; UI-05: adrenaline gain for fast and strong attacks (legacy)
+2110992383|        |gm_stat_adrenaline_gain_light|Получение адреналина при быстрой атаке
+2110992384|        |gm_stat_adrenaline_gain_heavy|Получение адреналина при мощной атаке
+; UI-10: the bestiary's kill count (legacy)
+2110992301|        |gm_kills_humans|Гуманоид
+2110992302|        |gm_kills_wh_warriors|Воин Дикой Охоты
+2110992303|        |gm_kills_total|Всего
+2110992304|        |gm_kills_animals_total|Животные
+2110992305|        |gm_kills_monsters_total|Монстры
+2110992306|        |gm_kills_by_type|По типам
+2110992307|        |gm_kills_kill_count|Счет убитых
+2110992308|        |gm_kills_humans_total|Гуманоиды
+2110992309|        |gm_kills_bosses_total|Особые существа
+; UI-13: loading screen tips (legacy, by key hash)
+2110992520|b93269f0||Энергия противников ограничена. Когда энергия подойдет к нулю, они станут хуже сражаться.
+2110992521|6d1ad3cb||Обращайте внимание на цвет уровня вашего противника. Зеленый означает, что враг по силам близок Геральту. Красный - что вас ждет тяжелый бой, а знак черепа - что противник смертельно опасен.
+2110992522|6d1ad3a6||Заточите клинок на точильном камне, чтобы получить преимущество в бою.
+2110992523|6d1ad427||Сражаясь из седла, наносите удары на высокой скорости для увеличения урона.
+2110992524|b93269e9||Атака сзади повышает шансы критического урона.
+2110992525|6d1ad3e4||Кидать бомбы и стрелять из арбалета можно в двух режимах: с автоматическим и с ручным прицеливанием. Автоматическое прицеливание наносит меньший урон.
+2110992526|6d1ad447||Вы можете отражать летящие в вас болты и стрелы при помощи меча.
+2110992527|363f99af||Знак Квен помогает защититься от критических эффектов: горения, кровотечения и др.
+2110992528|6d1ad3cc||В бою с большими чудовищами не забывайте уклоняться. Сражаясь с людьми и монстрами поменьше, пытайтесь блокировать их атаки мечом и контратаковать.
+; UI-15: shaving (legacy)
+2110992169|        |gm_used_razor_success|Геральт теперь чисто выбрит
+2110992173|        |item_desc_razor_mod|Нужна, чтобы побриться.

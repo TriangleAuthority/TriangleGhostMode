@@ -313,7 +313,7 @@ function CalculateDamage(dmgInfo : SRawDamage, powerMod : SAbilityAttributeValue
 	}
 
 
-	curStats = GetWitcherPlayer().GetOffenseStatsList();
+	//modSigns: removed the offense list read for every hit (UI-01): its only readers below are off (DMG-12)
 	playerStlDmg = MaxF(0, curStats.steelStrongDmg - resistPoints);
 	playerStlDmg *= 1 - resistPercents;
 	playerStlDmg /= 6;

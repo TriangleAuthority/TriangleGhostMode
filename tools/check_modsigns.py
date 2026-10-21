@@ -200,7 +200,15 @@ def check_body(mod_body, vanilla_body, first_line):
                 problems.append((ln, raw, "no vanilla body in this class: every line is Ghost Mode's"))
         return problems
     vcode = [c for c in (code(l)[0] for l in vanilla_body.replace("\r\n", "\n").split("\n")) if c]
-    sm = difflib.SequenceMatcher(None, vcode, [x[1] for x in mcode], autojunk=False)
+    # Two alignments: the plain one, and one where a marked line never pairs with a vanilla line (else a
+    # marked brace can take a kept brace's place). A change counts as unmarked only when both find it.
+    found = [_unmarked(vcode, mcode, mod, first_line, distinct) for distinct in (False, True)]
+    return [p for p in found[0] if p in found[1]]
+
+
+def _unmarked(vcode, mcode, mod, first_line, distinct):
+    problems = []
+    sm = difflib.SequenceMatcher(None, vcode, [x[1] + ("" if distinct and x[2] else "") for x in mcode], autojunk=False)
     for tag, i1, i2, j1, j2 in sm.get_opcodes():
         if tag in ("replace", "insert"):
             for ln, cd, mk, raw in mcode[j1:j2]:

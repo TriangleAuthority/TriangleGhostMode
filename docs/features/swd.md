@@ -285,7 +285,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-19 from the chang
 
 **Decisions:** port as legacy (NG+ is carried over, not tested; DS4).
 
-- **Deviation:** the character panel's sword lines do not include `sword_dmg_bonus` and the sign lines not `spell_dmg_bonus` (legacy's `GetOffenseStatsList` and `CharacterStatsPopup`), since the panel is UI's (temporary, until UI; porter's call, confirmed by the owner, 2026-10-19).
+- The character panel's sword lines include `sword_dmg_bonus` (UI-01) and its sign lines `spell_dmg_bonus` (UI-03, 2026-10-21, 5.x-GM `52db5ef7`): the temporary deviation has ended.
 
 **Slices:**
 

@@ -150,3 +150,8 @@ dbomb_resist_reduction;BAADA0;TRUE;attack;0.4
 hpPercDamageBonusPerHit;BAADA0;TRUE;attack;0.4
 explosionFireDamage;BAADA0;FALSE;attack;0.4
 poison_immunity_duration;BAADA0;FALSE;duration;1
+frost_resistance_perc;BAADA0;TRUE;defence;0.4
+desc_knockdownchance_mult;BAADA0;TRUE;attack;0.4
+vitalityCombatRegen;BAADA0;FALSE;vitality;0.4
+staminaRegen_armor_mod;BAADA0;TRUE;defence;0.4
+q108_bounce_arrows;BAADA0;TRUE;defence;0.4

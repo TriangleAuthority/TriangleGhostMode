@@ -298,7 +298,7 @@ D12 decided (project owner, 2026-10-08): no instant-kill cooldown for the player
 - Trick Shot (one extra bolt before reloading) is a general perk in both trees: `perk_17` in the classic tree, `perk_27` in the new (D61, [SKL-18](#skl-18-perks)).
 - Descriptions (new tree, max level): Lightning Reflexes "Time slowed by an additional 45% while aiming the crossbow."; Anatomical Knowledge "Increases crossbow critical hit chance by 25% and crossbow critical hit power by 75%."; Cold Blood "Each bolt that hits its target generates the same amount of Adrenaline as a sword hit. Crossbow bolts deal 50 more base damage."
 - The owner finds Steady Shot dull; its damage is legacy's for now, to be redesigned when balancing.
-- **Deviation:** the character panel's crossbow damage does not include Steady Shot's +50, which legacy adds in `GetOffenseStatsList`; the panel's damage lines do not follow Ghost Mode's formula yet anyway (temporary, until UI; porter's call, not confirmed by the owner, 2026-10-15).
+- The character panel's crossbow damage includes Steady Shot's flat damage (either tree) since UI-01 (2026-10-21, 5.x-GM `f768e9b1`): the temporary deviation has ended.
 
 D13, D14 and D17 are decided.
 
@@ -554,7 +554,7 @@ Audit F3 is closed by ARM-07 (2026-10-17): legacy's Griffin set replaced 5.x's f
 | Skill trees | both: core `alchemy_2`; Poisoned Blades `alchemy_s12`, Protective Coating `alchemy_s5` (shared in 5.x); classic Fixative `alchemy_s6`, Hunter Instinct `alchemy_s7`; new Fixative `alchemy_s25` (5.x: Volatile Compound), Hunter Instinct `alchemy_s27` |
 | Port form | `skills/oils.ws`: oil bonuses read from the oil effects with legacy's decay (`@addMethod`s of `W3Effect_Oil` and `CInventoryComponent`), a wrapper of `W3Action_Attack.GetPowerStatValue`, `@replaceMethod`s of `CR4Player.GetCriticalHitChance`, `GetCriticalHitDamageBonus`, `ReduceAllOilsAmmo`, `W3Effect_Oil.GetAmmoPercentage` and `W3DamageManagerProcessor.ProcessOnBeforeHitChecks` (Poisoned Blades); the resistance reduction in `GetDamageResists` (`damage/formula.ws`); Protective Coating at the end of `W3PlayerWitcher.ReduceDamage` (`defense/dodge.ws`); DLC XML (classic `GM_C_alchemy_s12`, `GM_C_alchemy_s5` in `gm_skill_trees.xml`, the new tree's in `gm_skills.xml`) |
 | Port status | signed off (2026-10-17); slices 1 (oils wearing off, Poisoned Blades, Protective Coating) and 2 (Fixative, Hunter Instinct) verified, both trees |
-| Open checks | the decay on an oil's crit chance and crit damage (code read; ALCH-16 verified a fresh oil's values, 2026-10-20); a real fight with an oiled sword (scripted hits only); the character panel's oil lines (UI); the HUD's oil charges and the oil tooltip with the new tree's Fixative (5.x's UI reads only `alchemy_s6`: UI); Fixative below level 3 wearing oils in the new tree (code shared with the classic tree); a real finisher with Fixative at 3 (its call of `ReduceAllOilsAmmo` was made by script) |
+| Open checks | the decay on an oil's crit chance and crit damage (code read; ALCH-16 verified a fresh oil's values, 2026-10-20); a real fight with an oiled sword (scripted hits only); the character panel's oil lines (UI);  Fixative below level 3 wearing oils in the new tree (code shared with the classic tree); a real finisher with Fixative at 3 (its call of `ReduceAllOilsAmmo` was made by script) |
 | Save impact | none (expected) |
 | NG+ counterpart | applied and scaled, untested |
 

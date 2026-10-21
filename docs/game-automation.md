@@ -134,6 +134,7 @@ The game has no way to fake a key press, but a script can call the input handler
 - **Alternate Axii in tests:** with both alternate Axii skills equipped, 5.x casts the classic one (`ChangeAspect` checks `S_Magic_s05` first), so unequip it to test Puppet (`S_Magic_s31`): `autoskills()` shows its slot, `skilluneq(<slot>)` removes it, and check again, since slot numbers shift. The puppet lands on a human (e.g. `gmtest_stam06_bandit()`); on that bandit it is gone again within about 1.5 s (its forced hostile attitude), so read it when the channel ends (the test probe on `W3AxiiEntity.OnEnded`, logged with `gmtest_probes(true)`), not afterwards.
 - **Axii's confusion on the frozen test dummy** (seen 2026-10-19, ENCH-14): a real Axii's confusion can outlast its duration on the frozen dummy (its time left goes negative) and survive `RemoveAllBuffsOfType`, with no `OnEffectRemoved`; in other runs it ended within about 1.5 s. Read what a cast applied when it ends (the test probe on `W3AxiiEntity.OnEnded` stores it in `thePlayer.gmTestAxiiEnd`; `gmtest_ench14_count`), and test removal with effects added by script (`gmtest_ench14_stacks`).
 - Other conditions as in play: the sign's skill (alternate casts need the alternate skill equipped: `S_Magic_s01` to `s05` in the classic tree; in the new tree Aard, Yrden and Quen use the same (shared) skills, Igni `S_Magic_s28` and Axii `S_Magic_s31`), stamina, and for Axii a hostile target in range. Axii's alternate (puppet) aborts unless held about 2 s.
+- **Several signs in a row:** casting another sign ends Quen's shield (its entity's values then read 0), so read each sign's entity before the next cast (`gmtest_ui03_cast(sign)`, `gmtest_ui03_casts(sign)`, UI audit slice A). The sign cooldowns are per sign: Quen, Yrden and Axii can be cast a few seconds apart with the cooldown option left at 5.
 - **Hits interrupt casts.** In a fight, run `god()` first (no hit reactions); otherwise casts fail at random.
 - **A scripted hit does not break a channel.** A hit through `theGame.damageMgr.ProcessAction`, even `EHRT_Heavy` with `EAHA_ForceYes`, left a held Firestream channeling (2026-10-16, SKL-07 slice 6). To test an interrupted cast, abort the sign (`OnSignAborted(true)` on the sign entity, `gmtest_skl07_foa_abort()`).
 - **Out of combat, stamina regen is 100% of max per second**, so stamina read after an out-of-combat cast says nothing about its cost; measure costs in combat.
@@ -159,7 +160,7 @@ The game has no way to fake a key press, but a script can call the input handler
 
 ### Menus
 
-- The inventory's stats view opens with `C` (`send_key.ps1 type c`); its rows do not react to the arrow keys or to a cursor moved by `SetCursorPos` (the game reads raw mouse input). Check panel values from script instead: `GetPlayerStatsGFxData(menu.GetMenuFlashValueStorage())` with any menu open (e.g. `ingamemenu()`), reading the lines back with `GetMemberFlashArray` / `GetMemberFlashString` (`gmtest_panel`).
+- The inventory's stats view opens with `C` (`send_key.ps1 type c`); its rows do not react to the arrow keys or to a cursor moved by `SetCursorPos` (the game reads raw mouse input; `mouse_move.ps1` moves it). Check panel values from script instead: `GetPlayerStatsGFxData(menu.GetMenuFlashValueStorage())` with any menu open (e.g. `ingamemenu()`), reading the lines back with `GetMemberFlashArray` / `GetMemberFlashString` (`gmtest_panel`).
 - If the Claude desktop window covers the game, minimize it (`ShowWindow(<claude main window>, 6)`), then `focus_game.ps1`.
 
 ### Launch
@@ -213,13 +214,14 @@ Used for the first manual run, before the mod existed. Kept for situations the m
 - `focus_game.ps1`: brings the game window to the foreground (key presses go to the foreground window).
 - `send_key.ps1 <key> [count] [delayMs]`: `space`, `esc`, `enter`, `tilde`, `e`, `backspace`, `up`, `down`, `left`, `right` as hardware scan codes (arrows as extended keys). `send_key.ps1 type <text>` types text as scan codes.
 - `screenshot.ps1 <out.png> [-Region x,y,w,h]`: captures the primary screen (3440x1440 here). Save screenshots in the session scratchpad, not the repo.
+- `mouse_move.ps1 <X> <Y> [-Click]`: moves the game's menu cursor to a screen pixel with relative raw moves, optionally left-clicks. Hovering an item in the inventory shows its tooltip, clicking a tab switches it (**verified** 2026-10-20, UI slice 1: `r4inventory()` opens the inventory, then hover and screenshot).
 
 What we learned about input:
 
 - **Verified:** the game reads hardware scan codes (`SendInput` with `KEYEVENTF_SCANCODE`). `~` opens the console, letters type, Enter runs the command.
 - **Failed:** Shift does not reach the console: `()` typed as Shift+9/Shift+0 came out as `12`. No-argument exec functions work without `()`.
 - **Failed:** Unicode key events type nothing; clipboard plus simulated Ctrl+V did not paste (the console ran `k`, cause unknown).
-- **Verified:** menus navigate with the arrow keys and Enter (open the pause menu with `exec "ingamemenu()"` first). E does not select in menus, and simulated mouse clicks (`SetCursorPos` plus `mouse_event`) did not register.
+- **Verified:** menus navigate with the arrow keys and Enter (open the pause menu with `exec "ingamemenu()"` first). E does not select in menus. `SetCursorPos` does not move the game's cursor (it reads raw input); relative `mouse_event` moves and clicks do (`mouse_move.ps1`, **verified** 2026-10-20).
 - The HUD message from `gmpilot` (`DisplayHudMessage`) never showed up in a screenshot, perhaps hidden by a tutorial hint. Results come from the script log instead.
 
 ## Test saves

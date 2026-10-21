@@ -150,7 +150,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 
 - With the option on, legacy's armor calculation (the Hearts of Stone glyphwords' regen ignored, regen per missing armor piece) and legacy's per-item `staminaRegen_armor_mod` values (e.g. heavy armor −0.10 → −0.30) apply since ARM-03 and ARM-01 (2026-10-17).
 - **Deviation:** the regen effect recomputes its value on every update, in and out of combat (legacy and vanilla: in combat only), so option changes apply at once (porter's call, not confirmed by the owner).
-- **Deviation:** the character panel's out-of-combat regen line leaves out the armor modifier (legacy showed it), because the effect applies it in combat only (porter's call, not confirmed by the owner).
+- **Deviation:** the character panel's out-of-combat regen line leaves out the armor modifier (legacy showed it), because the effect applies it in combat only (porter's call, confirmed by the owner, 2026-10-21).
 
 **Slices:**
 
@@ -186,7 +186,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 
 **Decisions:** port as is. Vanilla (legacy and 5.x) has no `tooltip_settings.csv` row for `staminaRegen_armor_mod`, so the line never shows; Ghost Mode adds one along with 55 other tooltip rows; the filter keeps it out while the option is off.
 
-- **Deviation:** the tooltip row is not ported yet: it comes with Ghost Mode's other tooltip rows, to avoid a whole-file override of the CSV for one row; it is attributed here (temporary, until those rows are ported; porter's call, not confirmed by the owner).
+- The tooltip row (`staminaRegen_armor_mod`) is ported with UI-07's rows (2026-10-20, 5.x-GM `6ca81e09`): the temporary deviation that held it back has ended.
 
 **Slices:**
 
