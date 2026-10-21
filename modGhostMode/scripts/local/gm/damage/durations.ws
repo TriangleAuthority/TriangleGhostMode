@@ -3,7 +3,7 @@
 // CBaseGameplayEffect.CalculateDuration). Recalculating a duration (when the target's resistance
 // changes) starts from the initial duration: vanilla shrank it at every recalculation ("Fixed a bug
 // with effect duration math", legacy). The Petri Philtre's level-3 bonus to sign effects in the same
-// function comes with ALCH. See docs/features/dmg.md.
+// function: sign effects (heavy knockdown, confusion, the puppet, burning) x1.34 (ALCH-06). See docs/features/dmg.md and alch.md.
 @replaceMethod(CBaseGameplayEffect)
 function RecalcDuration()
 {
@@ -52,6 +52,9 @@ function CalculateDuration(optional setInitialDuration : bool)
 			durationResistance = resistance;
 
 		duration = MaxF(0, duration * (1 - durationResistance) );	//modSigns: the creator's power does not lengthen it (vanilla: initialDuration x power x (1 - resistance))
+		if(isSignEffect && duration > 0 && (W3PlayerWitcher)GetCreator() && ((W3PlayerWitcher)GetCreator()).GetPotionBuffLevel(EET_PetriPhiltre) == 3)	//modSigns: ALCH-06, Petri's Philtre level 3: sign effects last a third longer
+			if( effectType == EET_HeavyKnockdown || effectType == EET_Confusion || effectType == EET_AxiiGuardMe || effectType == EET_Burning )	//modSigns
+				duration *= 1.34;	//modSigns
 		LogEffects("BaseEffect.CalculateDuration: " + effectType + " duration with target resistance (" + NoTrailZeros(resistance) + ") and attacker power mul of (" + NoTrailZeros(creatorPowerStat.valueMultiplicative) + ") is " + NoTrailZeros(duration) + ", base was " + NoTrailZeros(initialDuration));
 	}
 }

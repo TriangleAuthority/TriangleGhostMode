@@ -30,6 +30,8 @@ function GMProcessDamageDecrease(out dmgInfos : array< SRawDamage >)
 
 	if(playerVictim != GetWitcherPlayer())
 		return;
+	if(playerVictim.HasBuff(EET_Mutagen19))	// ALCH-11: the Wraith decoction's free Quen against an attack from behind, which then takes this hit (legacy)
+		((W3Mutagen19_Effect)playerVictim.GetBuff(EET_Mutagen19)).GMProtectiveQuen(action);
 	quen = (W3QuenEntity)GetWitcherPlayer().GetSignEntity(ST_Quen);
 	if(!quen || !quen.IsAnyQuenActive())
 		return;
@@ -83,7 +85,8 @@ function GetSignStats()
 	//modSigns: removed 5.x's supercharged-sign flag
 
 	gmQuenPower = owner.GetActor().GetTotalSignSpellPower(S_Magic_4);	//modSigns: Quen's own intensity for both casts
-	//modSigns: legacy's Mutagen 19 intensity bonus comes with ALCH
+	if(owner.GetActor() == GetWitcherPlayer() && owner.GetActor().HasBuff(EET_Mutagen19))	//modSigns: ALCH-11, Wraith: +50% Quen intensity while a hostile specter is near (legacy)
+		gmQuenPower += ((W3Mutagen19_Effect)owner.GetActor().GetBuff(EET_Mutagen19)).GMGetQuenPowerBonus();	//modSigns
 	if(gmGlyphword17Cast)	//modSigns: ENCH-15, Protection's Quen at combat start: +100% intensity (legacy)
 	{	//modSigns
 		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 17 _Stats', 'glyphword17_quen_buff', min, max);	//modSigns
@@ -97,7 +100,8 @@ function GetSignStats()
 	gmDmgAbsorptionPrc = CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_4, 'max_dmg_absorption', false, false));	//modSigns
 
 	shieldDuration = CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_4, 'shield_duration', true, true));	//modSigns: from magic_4 for both casts
-	//modSigns: legacy's Petri Philtre level 3 duration comes with ALCH
+	if(owner.GetPlayer() && owner.GetPlayer().GetPotionBuffLevel(EET_PetriPhiltre) == 3)	//modSigns: ALCH-06, Petri's Philtre level 3: the shield lasts a third longer
+		shieldDuration *= 1.34;	//modSigns
 	shieldHealth = CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_4, 'shield_health', false, true));	//modSigns
 
 	if ( GMQuenDischargeSkill() != S_SUndefined)	//modSigns: either tree
@@ -577,6 +581,10 @@ function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : st
 // - Geralt with either shield: damage-over-time effects (burning, bleeding, poison, ...) are denied, the
 //   basic shield breaks (5.x: 0.1 s of their damage dealt, and after any hit taken with Quen up).
 // Effects Geralt is immune to anyway do not touch the shield.
+// ALCH-09 (audit F3): Chort's decoction (Mutagen 8) acts first, as in legacy: on Geralt a knockdown or heavy
+// knockdown becomes a stagger (5.x converts the plain knockdown only) and the Quen rules see a stagger; a stagger
+// or long stagger is denied before Quen sees it. The knockdown goes on to 5.x's code as a plain knockdown,
+// which turns it into the stagger (a stagger passed on would be denied there).
 function GMIsDoTEffectType(effectType : EEffectType) : bool
 {
 	switch(effectType)
@@ -619,6 +627,17 @@ function InternalAddEffect(effectType : EEffectType, creat : CGameplayEntity, sr
 	witcher = (W3PlayerWitcher)owner;
 	if(owner && !owner.IsImmuneToBuff(effectType))
 	{
+		if(owner == thePlayer && thePlayer.HasBuff(EET_Mutagen08))
+		{
+			if(effectType == EET_Stagger || effectType == EET_LongStagger)
+				return EI_Deny;
+			if(isKnockdown)
+			{
+				effectType = EET_Knockdown;
+				isKnockdown = false;
+				isStagger = true;
+			}
+		}
 		if(!witcher && owner != thePlayer && owner.HasAlternateQuen())
 		{
 			if(isKnockdown)

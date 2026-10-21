@@ -319,7 +319,7 @@ Detailed measurements, the behaviour-tree analysis of the false starts, and the 
 | Depends on | STAM-02, STAM-03 |
 | Skill trees | both: Whirl (classic `sword_s1`, new `sword_s35`; `GMWhirlSkill()` reads the equipped one, the classic first as vanilla's sustain code does); Rend `sword_s2` is shared |
 | Port form | `@replaceMethod(W3PlayerWitcher)` of the Whirl sustain timer `SpecialAttackLightSustainCost` (Ghost Mode's body) and of `IsSpecialLightAttackInputHeld`/`IsSpecialHeavyAttackInputHeld` (5.x bodies, changes marked); new Whirl cost methods; `@wrapMethod` on `W3PlayerAbilityManager.GainStat` (adrenaline pause) and `W3PlayerWitcherStateCombatSword.OnPerformSpecialAttack` (Rend's minimum cost); all in `stamina/whirlRendStamina.ws`. DLC XML `extend` of `sword_s1` and `sword_s35` (`gm_skills.xml`); panel lines in `ui/characterStatsPopup.ws` |
-| Port status | signed off (2026-10-04; [audit](#stam-audit-2026-10-03)), except the ArchGriffin decoction's cost increase (ALCH) |
+| Port status | signed off (2026-10-04; [audit](#stam-audit-2026-10-03)); the ArchGriffin decoction's cost increase came with [ALCH-12](alch.md#alch-12-sustain-and-stamina-decoctions-archgriffin-troll-noonwraith-grave-hag-ekhidna-basilisk-nekker-warrior) (2026-10-20) |
 | Open checks | the low-stamina warning and sound when a start is refused; the skill description text (new tree) |
 | Save impact | none (expected) |
 | NG+ counterpart | applied and scaled, untested ([NG+ copies](#stam-audit-2026-10-03)) |

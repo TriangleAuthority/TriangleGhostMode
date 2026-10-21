@@ -19,6 +19,8 @@ import class W3GameParams extends CObject
 	default DURABILITY_ARMOR_LOSE_VALUE = 0.5;	//modSigns: vanilla 0.6
 	default DURABILITY_WEAPON_LOSE_VALUE = 0.05;	//modSigns: vanilla 0.26
 	default DURABILITY_WEAPON_LOSE_VALUE_HARDCORE = 0.05;	//modSigns: vanilla 0.1
+	// ALCH-01: overdose at 75% of maximum toxicity (legacy, the owner's DL1; gm/alchemy/toxicity.ws).
+	default TOXICITY_DAMAGE_THRESHOLD = 0.75;	//modSigns: vanilla 0.50001
 }
 
 function GMIsMeleeStaminaAction(action : EStaminaActionType) : bool

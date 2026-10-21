@@ -39,13 +39,16 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 // 5.x checks it in ReduceDamage, too late). 5.x's own versions of legacy's other terms (Rend, Perk 20;
 // the Lynx and Netflix sets' are gone, ARM-06, ARM-15, Runeword 4's ENCH-05, Aerondight's SWD-05) are pool terms until their areas port legacy's.
 // SWD-07: the NG+ school swords' sword_dmg_bonus (melee) and spell_dmg_bonus (signs), legacy's pool terms.
+// ALCH-14 (audit F2): a frozen target's bonus (hpPercDamageBonusPerHit: Northern Wind +25/35/50%) is a pool
+// term, legacy's, instead of 5.x's separate frost hit; 5.x's knockdown stays (legacy's removal of it and its
+// Aard force damage are EFX's).
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 {
 	var difficultyDamageMultiplier, rendLoad, rendBonus, overheal, rendRatio, focusCost, extraSignDamageMult, extraPoisonDamageMult, tempBonus : float;
 	var i, j, dmgIdx, bonusCount, signSkillCatalystLevel, alchemySkillToxicShockLevel, meleeAttackCounterForResonanceSkill : int;
 	var frozenBuff : W3Effect_Frozen;
-	var frozenDmgInfo : SRawDamage;
+	//modSigns: removed frozenDmgInfo (5.x's frost hit)
 	var hadFrostDamage, signSkillCatalystActive : bool;
 	var mpac : CMovingPhysicalAgentComponent;
 	var rendBonusPerPoint, staminaRendBonus, perk20Bonus, minCatalyst, maxCatalyst, minEnhanced, maxEnhanced : SAbilityAttributeValue;
@@ -54,7 +57,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	var damageVal, damageBonus, min, max			: SAbilityAttributeValue;
 	var npcVictim : CNewNPC;
 	var sword : SItemUniqueId;
-	var actionFreeze : W3DamageAction;
+	//modSigns: removed actionFreeze (5.x's frost hit)
 	var aerondight	: W3Effect_Aerondight;
 	var conjunctionDamageMult, spellPowerIgni : float;
 	var toxicShockDamage : SRawDamage;
@@ -104,29 +107,15 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 		action.SetWasFrozen();
 
 
-		if( !( ( W3WhiteFrost )action.causer ) )
-		{
-			frozenBuff = (W3Effect_Frozen)actorVictim.GetBuff(EET_Frozen);
-			frozenDmgInfo.dmgVal = frozenBuff.GetAdditionalDamagePercents() * actorVictim.GetHealth();
-		}
+		frozenBuff = (W3Effect_Frozen)actorVictim.GetBuff(EET_Frozen);	//modSigns: ALCH-14 (audit F2), legacy's frozen bonus: a pool term
+		poolAll += frozenBuff.GetAdditionalDamagePercents();	//modSigns: hpPercDamageBonusPerHit (Northern Wind +25/35/50%), legacy's dmgBonusMult
 
 
 		actorVictim.RemoveAllBuffsOfType(EET_Frozen);
-		action.AddEffectInfo(EET_KnockdownTypeApplicator);
+		action.AddEffectInfo(EET_KnockdownTypeApplicator);	//modSigns: 5.x's knockdown kept (legacy removed it; left to EFX with the Aard bonus)
 
 
-		if( !( ( W3WhiteFrost )action.causer ) )
-		{
-			actionFreeze = new W3DamageAction in theGame;
-			actionFreeze.Initialize( actorAttacker, actorVictim, action.causer, action.GetBuffSourceName(), EHRT_None, CPS_Undefined, action.IsActionMelee(), action.IsActionRanged(), action.IsActionWitcherSign(), action.IsActionEnvironment() );
-			actionFreeze.SetCannotReturnDamage( true );
-			actionFreeze.SetCanPlayHitParticle( false );
-			actionFreeze.SetHitAnimationPlayType( EAHA_ForceNo );
-			actionFreeze.SetWasFrozen();
-			actionFreeze.AddDamage( theGame.params.DAMAGE_NAME_FROST, frozenDmgInfo.dmgVal );
-			theGame.damageMgr.ProcessAction( actionFreeze );
-			delete actionFreeze;
-		}
+		//modSigns: removed 5.x's separate frost hit of the bonus x the victim's current health (ALCH-14, audit F2)
 	}
 
 
@@ -202,6 +191,15 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 			dmgInfos[i].dmgVal += tempBonus;	//modSigns
 	}	//modSigns
 
+	if( playerAttacker && action.IsActionWitcherSign() && playerAttacker.HasBuff(EET_Mutagen09) )	//modSigns: ALCH-11, Foglet: flat base damage to every sign hit per blue mutagen (per second for damage over time), before the pool (legacy)
+	{	//modSigns
+		tempBonus = ((W3Mutagen09_Effect)playerAttacker.GetBuff(EET_Mutagen09)).GMGetM09Bonus();	//modSigns
+		if( action.IsDoTDamage() )	//modSigns
+			tempBonus *= action.GetDoTdt();	//modSigns
+		for( i = 0 ; i < dmgInfos.Size() ; i += 1 )	//modSigns
+			dmgInfos[i].dmgVal += tempBonus;	//modSigns
+	}	//modSigns
+
 
 	//modSigns: no extra damage for NPCs' ranged attacks above level 31
 
@@ -223,8 +221,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 
 	if ( playerAttacker && action.IsActionRanged() && ((W3Petard)action.causer) )
 	{
-		skillPassiveMod = CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('potion_duration'));
-		poolAll += skillPassiveMod;	//modSigns: additive pool (5.x: a separate multiplier)
+		//modSigns: removed 5.x's potion duration bonus to bomb damage (ALCH-14, the owner's DL7)
 
 
 		if ( GetWitcherPlayer().GMHeavyArtillerySkill() != S_SUndefined && !action.IsDoTDamage() )	//modSigns: Heavy Artillery, either tree (SKL-18)

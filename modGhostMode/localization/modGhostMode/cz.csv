@@ -249,3 +249,174 @@
 2110992269|        |item_desc_repair_kit_armor_4|Kovářské nástroje mistra zbrojíře. Permanentně zvyšuje obranu zbroje.
 ; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
 2110992483|        |attribute_name_resistance_perc_bonus_descr|Damage resistances
+; ALCH-15: the Dimeritium effect's HUD label (legacy's id and key)
+2110992343|        |effect_dimeritium|Dwimerit
+; ALCH-04: Swallow, White Raffard, White Honey (legacy's ids and keys)
+2110992178|        ||Zrychlení regenerace zdraví. Při utrženém poškození se regenerace zdraví nezastaví.
+2110992231|de026195||Vyčistí toxicitu a zruší aktivní účinky všech lektvarů.
+2110992232|de026196||Vyčistí toxicitu a zruší aktivní účinky všech lektvarů.
+2110992233|de026197||Vyčistí toxicitu a zruší aktivní účinky všech lektvarů.
+2110992433|9ec8a224||Immediately restores a portion of Vitality and stops bleeding.
+2110992434|9ec8a225||Immediately restores a large portion of Vitality and stops bleeding.
+2110992435|9ec8a226||Restores Vitality immediately and fully and stops bleeding. Grants immunity to damage for a short duration.
+2110992537|56747c55||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Vitality regeneration pauses for 2 seconds upon receiving damage.
+2110992538|56747c56||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Vitality regeneration pauses for 2 seconds upon receiving damage.
+2110992539|56747c57||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Taking damage does not interrupt Vitality regeneration.
+; ALCH-05: Golden Oriole (legacy's ids and keys)
+2110992530|3a84c328||Increases poison resistance, neutralizes the effects of poisons already in bloodstream.
+2110992531|3a84c329||Increases poison resistance, neutralizes the effects of poisons already in bloodstream. Extended duration.
+2110992532|3a84c32a||Increases poison resistance, neutralizes the effects of poisons already in bloodstream. Extended duration. Grants temporary immunity to poison effects.
+2110992533|        |attribute_name_poison_immunity_duration|Poison immunity duration
+; ALCH-05: Golden Oriole's buff text (audit F12; new id, the vanilla key)
+2110992638|42725726||Zvyšuje odolnost vůči jedu a neutralizuje účinky jedů, které už jsou v krvi.
+; ALCH-06: Petri's Philtre (legacy's ids and keys)
+2110992165|9e58d1f5||Zvyšuje intenzitu znamení. Prodloužené trvání. Speciální účinky znamení jsou o jednu třetinu delší.
+; ALCH-07: Cat, Blizzard, Tawny Owl (legacy's ids and keys)
+2110992235|874e9f88||Propůjčí zrak v naprosté tmě a imunitu proti hypnóze. Prodloužené trvání.
+2110992240|874e9f87||Propůjčuje zrak v naprosté tmě. Prodloužené trvání.
+2110992471|1b06cd09||Whenever you slay an enemy, time slows for a short period.
+2110992534|437e276a||Accelerates Stamina regeneration.
+2110992535|437e276b||Accelerates Stamina regeneration.
+2110992536|437e276c||Accelerates Stamina regeneration. Never expires at night.
+; ALCH-07: Cat 1's and Cat's buff text without crit chance, Blizzard 1's and 3's legacy texts (audit F7, F8; new ids, the vanilla keys)
+2110992633|874e9f86||Umožňuje vidět i v naprosté tmě.
+2110992634|1a61ef57||Umožňuje vidět i v naprosté tmě.
+2110992635|1b06cd08||Kdykoli zabiješ nepřítele, čas se na chvíli zpomalí.
+2110992636|1b06cd0a||Kdykoli zabiješ nepřítele, čas se na chvíli zpomalí. Pokud máš 3 dostupné body adrenalinu, během tohoto účinku akce nespotřebovávají výdrž.
+; ALCH-08: Killer Whale (legacy's ids and keys)
+2110992464|a1370329||Increases breath supply while underwater and improves vision while diving.
+; ALCH-09: decoction rules (toxicity offset, Nightwraith, Ekimmara, Cockatrice) (legacy's ids and keys)
+2110992188|e71d7c90||Increases Geralt's base Vitality by $S$ points with each foe killed.
+2110992246|e71d7c91||Regenerates Vitality by $S$% of the damage dealt to an enemy.
+2110992381|        |attribute_name_toxicity_offset|Vyrovnání toxicity
+2110992382|        |gm_toxicity_offset_description|Vyrovnání toxicity si vyhrazuje množství tvé maximální toxicity po dobu trvání účinku odvaru.
+2110992477|e71d7c8d||All bombs and potions (but not decoctions) can be used one additional time.
+; ALCH-10: melee decoctions' descriptions (legacy's ids and keys)
+2110992247|fc921505||Casting a sign increases your melee Attack Power by $I$% (max $I$%). Resets after dealing melee damage and at the end of the combat.
+2110992455|e71d7c8b||Non-critical damage dealt with a sword increases Critical hit chance for subsequent attacks by $I$% (max $I$%). When at max bonus, receive additional $I$% to Critical hit power. Bonus resets on successful critical hit and at the end of the combat.
+2110992484|fc92150c||Damage dealt with a melee weapon increases Sign Intensity by $I$% (max $I$%). Resets after casting a sign and at the end of the combat.
+2110992485|e71d7c8f||Dealing melee damage to enemies increases your Attack Power by $S$% (max $S$%). Getting hit decreases the bonus proportional to damage received: $S$% per 1% of health lost. Resets at the end of the combat.
+2110992486|fc92150a||Dealing melee damage to enemies increases your Adrenaline Gain by $S$% (max $S$%). Getting hit decreases the bonus proportional to damage received: $S$% per 1% of health lost. Resets at the end of the combat.
+; ALCH-11: sign decoctions' descriptions (legacy's ids and keys)
+2110992243|e71d7c93||Each Lesser Blue Mutagen equipped increases base damage dealt with signs by $S$ points. Blue Mutagen increases the bonus to $S$ and Greater Blue Mutagen - to $S$.
+2110992248|fc921509||Enemies controlled by Axii Puppet deal $I$% more damage.
+2110992249|fc921526||Casting a Sign in combat increases your Sign Intensity by $S$% (max $S$%). Getting hit decreases the bonus proportional to damage received: $S$% per 1% of health lost. Resets at the end of the combat.
+2110992481|fc92150e||When the witcher is attacked from behind, normal Quen gets activated and reduces the damage. When hostile specters are around, Quen Power is increased by $S$%.
+; ALCH-12: sustain decoctions' descriptions (legacy's ids and keys)
+2110992241|e71d7c8e||All your melee attacks cost $S$% more Stamina. Successful melee attack additionally reduces victim's health by $S$% of its current value per each Stamina point spent on the attack.
+2110992242|fc921527||Each Lesser Green Mutagen equipped increases your Vitality regeneration rate by $S$/sec. Green Mutagen increases the bonus to $S$/sec and Greater Green Mutagen - to $S$/sec.
+2110992245|fc921525||Regenerates Vitality by $S$% for each point of Stamina spent. Works only while in combat.
+2110992436|fc921529||Each Lesser Red Mutagen equipped decreases melee action stamina cost by $S$%. Red Mutagen increases the bonus to $S$% and Greater Red Mutagen - to $S$%.
+2110992488|fc921507||Gain +$I$ to non-combat Vitality regeneration and +$I$ to combat Vitality regeneration. When your Stamina is at $I$% and below, gain another +$I$ to combat Vitality regeneration.
+2110992489|fc92150d||When you kill a foe, gain +$I$ to Vitality regeneration per each alive enemy nearby. Max bonus cannot exceed +$I$. Resets at the end of the combat.
+2110992490|fc921508||When you kill a foe, gain +$I$ to combat Stamina regeneration per each alive enemy nearby. Max bonus cannot exceed +$I$. Resets at the end of the combat.
+; ALCH-13: defensive decoctions' descriptions (legacy's ids and keys)
+2110992244|fc921524||Increases the witcher's resistance to bleeding, burning, poison effects as well as to fire and poison damage by $I$%.
+2110992388|fc92152b||Getting hit more than once within $S$ sec makes you immune to damage for the next $S$ sec.
+2110992389|e71d7c8c||When enemies damage you in melee combat, they get an Acid effect that reduces their Damage Resistance by $I$% (max $I$%).
+2110992390|fc92152c||Damage dealt to enemies in spectral form is increased from $I$% to $I$% of normal damage. Damage taken from enemies in spectral form is reduced by $I$%.
+2110992457|fc92150b||Hit Reaction Severity is reduced to zero, if damage received is less than $I$% of your maximum Health.
+2110992478|fc921506||Increases critical hit power by $I$% when attacking from behind.
+2110992479|fc92152a||$I$% of the damage taken by the witcher is reflected back on the attacker.
+2110992487|fc921528||Gain +$I$% to Attack Power, +$I$% to Sign Intensity, +$I$/s to Stamina regeneration and +$I$% to Adrenaline gain while your health is at $I$% or lower. Resets when you regain your health and at the end of the combat. $I$ sec cooldown.
+; ALCH-14: bombs' descriptions and attribute names (legacy's ids and keys)
+2110992163|7968d6e0||Zmrazí soupeře. Údery zasazené zmraženým nepřátelům způsobují dodatečná poškození. Prodloužené trvání.
+2110992189|d3510d11||Obsahuje stříbrné střepy, které dočasně blokují nebo oslabují schopnost přeměny příšer a jejich regeneraci.
+2110992190|d3510d12||Obsahuje stříbrné střepy, které dočasně blokují nebo oslabují schopnost přeměny příšer a jejich regeneraci. Prodloužené trvání.
+2110992191|d3510d13||Obsahuje stříbrné střepy, které dočasně blokují nebo oslabují schopnost přeměny příšer a jejich regeneraci. Prodloužené trvání.
+2110992237|fe608837||Způsobí poškození střepinami všem protivníkům v dosahu výbuchu. Způsobuje poškození ohněm. Vylepšený účinek. Zničí protivníkovi štít. Zničí hnízdo příšer.
+2110992348|        |attribute_name_cloud_duration|Trvání oblaku
+2110992482|        |attribute_name_hpPercDamageBonusPerHit|Damage bonus
+2110992508|        |attribute_name_explosionFireDamage|Fire damage on explosion
+; ALCH-14: Samum 3's text (audit F12; new id, the vanilla key)
+2110992637|3c30d2a9||Oslepuje protivníky v oblasti výbuchu. Prodloužený účinek. Zvyšuje šanci na kritický zásah vůči oslepeným protivníkům. Ničí hnízda příšer.
+; ALCH-15: Dimeritium's descriptions and attribute names (legacy's ids and keys)
+2110992239|        |attribute_name_duration_out_of_cloud|Trvání oblaku
+2110992344|63cd93a3||Releases a cloud of dimeritium slivers that block primitive magic and monsters' magic abilities. Weakens Armor of magic creatures. Weakens mages, reducing their damage.
+2110992345|63cd93a4||Releases a cloud of dimeritium slivers that block primitive magic and monsters' magic abilities. Weakens Armor of magic creatures. Weakens mages, reducing their damage. Lasts longer.
+2110992346|63cd93a5||Releases a cloud of dimeritium slivers that block primitive magic and monsters' magic abilities. Weakens Armor of magic creatures. Weakens mages, reducing their damage. Lasts longer.
+2110992347|        |attribute_name_dbomb_armor_piercing|Proražení zbroje
+2110992456|        |attribute_name_dbomb_dmg_reduction|Damage reduction
+2110992480|        |attribute_name_dbomb_resist_reduction|Damage resistance reduction
+; ALCH-16: oil attribute names and descriptions (legacy's ids and keys)
+2110992034|        |attribute_name_vsBeast_critical_hit_chance|Šance kritického zásahu proti zvířatům
+2110992035|        |attribute_name_vsCursed_critical_hit_chance|Šance kritického zásahu proti prokletým
+2110992036|        |attribute_name_vsDraconide_critical_hit_chance|Šance kritického zásahu proti drakovitým
+2110992037|        |attribute_name_vsHuman_critical_hit_chance|Šance kritického zásahu proti lidem
+2110992038|        |attribute_name_vsHybrid_critical_hit_chance|Šance kritického zásahu proti hybridům
+2110992039|        |attribute_name_vsInsectoid_critical_hit_chance|Šance kritického zásahu proti hmyzovitým
+2110992040|        |attribute_name_vsMagicals_critical_hit_chance|Šance kritického zásahu proti elementálům
+2110992041|        |attribute_name_vsNecrophage_critical_hit_chance|Šance kritického zásahu proti nekrofágům
+2110992042|        |attribute_name_vsRelic_critical_hit_chance|Šance kritického zásahu proti reliktům
+2110992043|        |attribute_name_vsSpecter_critical_hit_chance|Šance kritického zásahu proti přeludům
+2110992044|        |attribute_name_vsOgre_critical_hit_chance|Šance kritického zásahu proti zlobrovitým
+2110992045|        |attribute_name_vsVampire_critical_hit_chance|Šance kritického zásahu proti upírům
+2110992046|        |attribute_name_vsBeast_critical_hit_damage_bonus|Síla kritického zásahu proti zvířatům
+2110992047|        |attribute_name_vsCursed_critical_hit_damage_bonus|Síla kritického zásahu proti prokletým
+2110992048|        |attribute_name_vsDraconide_critical_hit_damage_bonus|Síla kritického zásahu proti drakovitým
+2110992049|        |attribute_name_vsHuman_critical_hit_damage_bonus|Síla kritického zásahu proti lidem
+2110992050|        |attribute_name_vsHybrid_critical_hit_damage_bonus|Síla kritického zásahu proti hybridům
+2110992051|        |attribute_name_vsInsectoid_critical_hit_damage_bonus|Síla kritického zásahu proti hmyzovitým
+2110992052|        |attribute_name_vsMagicals_critical_hit_damage_bonus|Síla kritického zásahu proti elementálům
+2110992053|        |attribute_name_vsNecrophage_critical_hit_damage_bonus|Síla kritického zásahu proti nekrofágům
+2110992054|        |attribute_name_vsRelic_critical_hit_damage_bonus|Síla kritického zásahu proti reliktům
+2110992055|        |attribute_name_vsSpecter_critical_hit_damage_bonus|Síla kritického zásahu proti přeludům
+2110992056|        |attribute_name_vsOgre_critical_hit_damage_bonus|Síla kritického zásahu proti zlobrovitým
+2110992057|        |attribute_name_vsVampire_critical_hit_damage_bonus|Síla kritického zásahu proti upírům
+2110992058|        |attribute_name_vsBeast_resist_reduction|Snížení odolnosti před poškozením proti zvířatům
+2110992059|        |attribute_name_vsCursed_resist_reduction|Snížení odolnosti před poškozením proti prokletým
+2110992060|        |attribute_name_vsDraconide_resist_reduction|Snížení odolnosti před poškozením proti drakovitým
+2110992061|        |attribute_name_vsHuman_resist_reduction|Snížení odolnosti před poškozením proti lidem
+2110992062|        |attribute_name_vsHybrid_resist_reduction|Snížení odolnosti před poškozením proti hybridům
+2110992063|        |attribute_name_vsInsectoid_resist_reduction|Snížení odolnosti před poškozením proti hmyzovitým
+2110992064|        |attribute_name_vsMagicals_resist_reduction|Snížení odolnosti před poškozením proti elementálům
+2110992065|        |attribute_name_vsNecrophage_resist_reduction|Snížení odolnosti před poškozením proti nekrofágům
+2110992066|        |attribute_name_vsRelic_resist_reduction|Snížení odolnosti před poškozením proti reliktům
+2110992067|        |attribute_name_vsSpecter_resist_reduction|Snížení odolnosti před poškozením proti přeludům
+2110992068|        |attribute_name_vsOgre_resist_reduction|Snížení odolnosti před poškozením proti zlobrovitým
+2110992069|        |attribute_name_vsVampire_resist_reduction|Snížení odolnosti před poškozením proti upírům
+2110992070|        |attribute_name_vsHuman_attack_power|Síla útoku proti lidem
+2110992192|08eace65||Zvyšuje efektivitu útoku proti hmyzovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992193|08eace66||Zvyšuje efektivitu útoku proti hmyzovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992194|08eace67||Zvyšuje efektivitu útoku proti hmyzovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992195|3a67f159||Zvyšuje efektivitu útoku proti prokletým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992196|3a67f15a||Zvyšuje efektivitu útoku proti prokletým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992197|3a67f15b||Zvyšuje efektivitu útoku proti prokletým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992198|65067e25||Zvyšuje efektivitu útoku proti nekrofágům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992199|65067e26||Zvyšuje efektivitu útoku proti nekrofágům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992200|65067e27||Zvyšuje efektivitu útoku proti nekrofágům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992201|7b1c29c3||Zvyšuje efektivitu útoku proti hybridům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992202|7b1c29c4||Zvyšuje efektivitu útoku proti hybridům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992203|7b1c29c5||Zvyšuje efektivitu útoku proti hybridům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992204|88e86911||Zvyšuje efektivitu útoku proti upírům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992205|88e86912||Zvyšuje efektivitu útoku proti upírům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992206|88e86913||Zvyšuje efektivitu útoku proti upírům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992207|aed490e2||Zvyšuje efektivitu útoku proti elementálům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992208|aed490e3||Zvyšuje efektivitu útoku proti elementálům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992209|aed490e4||Zvyšuje efektivitu útoku proti elementálům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992210|d11afcde||Zvyšuje efektivitu útoku proti lidem, elfům, trpaslíkům a půlčíkům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992211|d11afcdf||Zvyšuje efektivitu útoku proti lidem, elfům, trpaslíkům a půlčíkům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992212|d11afce0||Zvyšuje efektivitu útoku proti lidem, elfům, trpaslíkům a půlčíkům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992213|ea1a3189||Zvyšuje efektivitu útoku proti přeludům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992214|ea1a318a||Zvyšuje efektivitu útoku proti přeludům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992215|ea1a318b||Zvyšuje efektivitu útoku proti přeludům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992216|ef649cfe||Zvyšuje efektivitu útoku proti drakovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992217|ef649cff||Zvyšuje efektivitu útoku proti drakovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992218|ef649d00||Zvyšuje efektivitu útoku proti drakovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992219|f8b46c36||Zvyšuje efektivitu útoku proti reliktům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992220|f8b46c37||Zvyšuje efektivitu útoku proti reliktům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992221|1ff07bf8||Zvyšuje efektivitu útoku proti reliktům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992222|7753393f||Zvyšuje efektivitu útoku proti zlobrovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992223|77533940||Zvyšuje efektivitu útoku proti zlobrovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992224|77533941||Zvyšuje efektivitu útoku proti zlobrovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992225|c0218f12||Zvyšuje efektivitu útoku proti zlobrovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992226|c0218f13||Zvyšuje efektivitu útoku proti zlobrovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992227|c0218f14||Zvyšuje efektivitu útoku proti zlobrovitým. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992228|dd8e2b22||Zvyšuje efektivitu útoku proti zvířatům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992229|dd8e2b23||Zvyšuje efektivitu útoku proti zvířatům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992230|dd8e2b24||Zvyšuje efektivitu útoku proti zvířatům. Efektivita se snižuje stíráním oleje z čepele během boje.
+2110992234|        |item_desc_relic_oil_3|Zvyšuje efektivitu útoku proti reliktům.
+; ALCH-17: the potion duration attribute (legacy's ids and keys)
+2110992015|        |attribute_name_potion_duration|Trvání účinku lektvaru
+; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
+2110992259|        |item_desc_junk_no_ingr|Může být prodáno obchodníkům.

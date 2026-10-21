@@ -548,11 +548,12 @@ function GMTestHasLine(lines : array<string>, prefix : string) : bool
 }
 
 // The regression's second call (after gmtest_regress() and ingamemenu()): the character panel, and the
-// regression checks that need time to pass after gmtest_regress() (ITEM-12's resistance gain).
+// regression checks that need time to pass after gmtest_regress() (ITEM-12's resistance gain, ALCH's later doses).
 exec function gmtest_panel()
 {
 	GMTest_panel();
 	GMTest_item12_after();
+	GMTest_alchport_after();
 }
 
 function GMTest_panel()
@@ -2154,6 +2155,7 @@ exec function gmtest_regress()
 	GMTest_ench();
 	GMTest_swd();
 	GMTest_item();
+	GMTest_alchport();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

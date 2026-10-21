@@ -52,36 +52,7 @@ function OnThrowing()
 
 
 
-		if(l_player.HasBuff(EET_Mutagen22) && l_player.IsInCombat() && l_player.IsThreatened())
-		{
-			abilityName = l_player.GetBuff(EET_Mutagen22).GetAbilityName();
-			abilityCount = l_player.GetAbilityCount(abilityName);
-
-			if(abilityCount == 0)
-			{
-				addAbility = true;
-			}
-			else
-			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen22_max_stack', min, max);
-				maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-
-				if(maxStack >= 0)
-				{
-					addAbility = (abilityCount < maxStack);
-				}
-				else
-				{
-					addAbility = true;
-				}
-			}
-
-			if(addAbility)
-			{
-				l_player.AddAbility(abilityName, true);
-			}
-
-		}
+		//modSigns: removed 1.32's Ancient Leshen stamina regen per sign (ALCH-11: legacy's per-sign intensity, alchemy/decoctionsSigns.ws)
 	}
 
 	return true;

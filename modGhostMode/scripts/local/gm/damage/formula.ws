@@ -22,15 +22,17 @@ function GMBackAttackDamageBonus() : float
 function GMAllyDamage(finalDamage : float) : float
 {
 	var npcAttacker : CNewNPC;
-	var maxAllowedDmg, minAllowedDmg, axiiLvl : float;
+	var maxAllowedDmg, minAllowedDmg, axiiLvl, succubus : float;
 
 	npcAttacker = (CNewNPC)actorAttacker;
 	if( npcAttacker.HasBuff( EET_AxiiGuardMe ) )
 	{
 		// the player's Puppet level, either tree (legacy read the puppet's alt_axii_level, which 5.x's XML lacks)
 		axiiLvl = Max(GetWitcherPlayer().GetSkillLevel(S_Magic_s05), GetWitcherPlayer().GetSkillLevel(S_Magic_s31));
-		maxAllowedDmg = MaxF(20, 0.12 * actorVictim.GetMaxHealth() * axiiLvl / 3.0);
-		minAllowedDmg = MaxF(10, 0.06 * actorVictim.GetMaxHealth() * axiiLvl / 3.0);
+		if( thePlayer.HasBuff(EET_Mutagen14) )	// ALCH-11: the Succubus decoction raises a puppet's damage limits by half (legacy)
+			succubus = ((W3Mutagen14_Effect)thePlayer.GetBuff(EET_Mutagen14)).GMGetMutagen14Bonus();
+		maxAllowedDmg = MaxF(20, 0.12 * (1 + succubus) * actorVictim.GetMaxHealth() * axiiLvl / 3.0);
+		minAllowedDmg = MaxF(10, 0.06 * (1 + succubus) * actorVictim.GetMaxHealth() * axiiLvl / 3.0);
 	}
 	else if( npcAttacker.HasTag('mq1041_soldier') || npcAttacker.HasTag('mq1041_redanian') )
 	{
@@ -53,7 +55,7 @@ function GMAllyDamage(finalDamage : float) : float
 // resistance: DD2, not applied). Headshots and fistfight minigames ignore both; damage over time,
 // point-resist-ignoring actions and the player's shock damage skip armor. Fists outside the
 // minigame no longer ignore resistances. Legacy GetDamageResists; the other areas' terms (oils,
-// skills, mutagens, sets, swords) stay 5.x's until those areas are ported.
+// skills, decoctions, Dimeritium, sets, swords) are marked with their feature IDs.
 @replaceMethod(W3DamageManagerProcessor)
 function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc : float)
 {
@@ -164,10 +166,12 @@ function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc 
 		resistPts += CalculateAttributeValue( actorVictim.GetTotalArmor() );
 
 
+	resistPerc = MaxF(0, resistPerc - GMArachasResistReduction(actorVictim));	//modSigns: ALCH-13, the Arachas decoction's acid on the enemy (legacy)
+	resistPerc = MaxF(0, resistPerc - GMDimeritiumResistReduction(actorVictim));	//modSigns: ALCH-15, the Dimeritium effect on a magic creature or Wild Hunt minion (legacy)
 	resistPerc -= CalculateAttributeValue(armorReductionPerc);
 
 
-	resistPts = MaxF(0, resistPts - CalculateAttributeValue(armorReduction));	//modSigns: a negative resistance does not shrink armor (5.x: armor * (1 + resistance))
+	resistPts = MaxF(0, resistPts - CalculateAttributeValue(armorReduction) - GMDimeritiumArmorPiercing(actorVictim));	//modSigns: a negative resistance does not shrink armor (5.x: armor * (1 + resistance)); ALCH-15, the Dimeritium effect's armor cut (legacy)
 
 	if(action.IsPointResistIgnored() || action.IsDoTDamage())	//modSigns: damage over time and point-resist-ignoring actions skip armor
 		resistPts = 0;	//modSigns
@@ -184,16 +188,17 @@ function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc 
 // (5.x lets elemental, fire and frost through), as GetDamageResists decides. Removed as legacy: the
 // burning-sign attack power cap, the fist bonus by level, the per-monster Igni weakness, the player's
 // heavy attack x1.833 (Strong Attack's +50% weapon damage is in the pool, DMG-04). DMG-12: allies'
-// damage by legacy's rule (GMAllyDamage); 5.x's ally floor, clamps and Puppet multipliers off. Kept
-// until ALCH: Mutagen 2's resistance. Legacy CalculateDamage.
+// damage by legacy's rule (GMAllyDamage); 5.x's ally floor, clamps and Puppet multipliers off. 5.x's
+// Mutagen 2 resistance on Geralt removed (ALCH-13: the Arachas decoction debuffs enemies instead,
+// alchemy/decoctionsDefense.ws). Legacy CalculateDamage.
 @replaceMethod(W3DamageManagerProcessor)
 function CalculateDamage(dmgInfo : SRawDamage, powerMod : SAbilityAttributeValue) : float
 {
 	var finalDamage : float;
 	var resistPoints, resistPercents : float;
 	var ptsString, percString : string;
-	var mutagen : CBaseGameplayEffect;
-	var min, max : SAbilityAttributeValue;
+	//modSigns: removed mutagen (5.x's Mutagen 2 term, ALCH-13)
+	//modSigns: removed min, max (5.x's Mutagen 2 term, ALCH-13)
 	var encumbranceBonus : float;
 	var temp : bool;
 	var fistfightDamageMult : float;
@@ -277,16 +282,7 @@ function CalculateDamage(dmgInfo : SRawDamage, powerMod : SAbilityAttributeValue
 	if(finalDamage > 0.f)
 	{
 
-		if (playerVictim == GetWitcherPlayer() && playerVictim.HasBuff(EET_Mutagen02))
-		{
-			encumbranceBonus = 1 - (GetWitcherPlayer().GetEncumbrance() / GetWitcherPlayer().GetMaxRunEncumbrance(temp));
-			if (encumbranceBonus < 0)
-				encumbranceBonus = 0;
-			mutagen = playerVictim.GetBuff(EET_Mutagen02);
-			dm.GetAbilityAttributeValue(mutagen.GetAbilityName(), 'resistGainRate', min, max);
-			encumbranceBonus *= CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-			resistPercents += encumbranceBonus;
-		}
+		//modSigns: removed 1.32's Arachas resistance by free carry weight (ALCH-13: legacy's Arachas puts acid on enemies)
 		finalDamage *= ClampF(1 - resistPercents, 0, 1);	//modSigns
 	}	
 
@@ -456,7 +452,7 @@ function CalculateDamage(dmgInfo : SRawDamage, powerMod : SAbilityAttributeValue
 // DMG-03: attack power. No attack power (x1) for damage over time and in fistfight minigames;
 // headshots and backstabs +25%; signs keep their full intensity (5.x reduces Igni's and Aard's
 // projectiles); no additive attack power for bolts; nothing negative; vanilla's crit chance added to
-// crit damage removed; no heavy attack penalty; 5.x's damage boosts for weak allies off (DMG-12). Legacy GetAttackersPowerMod; the other areas' terms stay 5.x's until ported.
+// crit damage removed; no heavy attack penalty; 5.x's damage boosts for weak allies off (DMG-12). Legacy GetAttackersPowerMod; the other areas' terms are marked with their feature IDs.
 @replaceMethod(W3DamageManagerProcessor)
 function GetAttackersPowerMod() : SAbilityAttributeValue
 {
@@ -603,12 +599,7 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 
 	if (actorVictim && playerAttacker)
 	{
-		if ( playerAttacker.HasBuff(EET_Mutagen05) && (playerAttacker.GetStat(BCS_Vitality) == playerAttacker.GetStatMax(BCS_Vitality)) )
-		{
-			mutagen = playerAttacker.GetBuff(EET_Mutagen05);
-			dm.GetAbilityAttributeValue(mutagen.GetAbilityName(), 'damageIncrease', min, max);
-			powerMod += GetAttributeRandomizedValue(min, max);
-		}
+		//modSigns: removed 1.32's Water Hag bonus at full Vitality (ALCH-10: legacy's Water Hag builds up on melee hits)
 	}
 
 	if( (W3PlayerWitcher)playerAttacker && action.IsActionRanged() && (W3BoltProjectile)action.causer )	//modSigns: no additive attack power for bolts

@@ -184,8 +184,8 @@ def verify(worktree):
         print("abilities %s: %d compared with legacy's" % (folder, n))
     for path, edits in BINARIES:
         port = open(os.path.join(worktree, path), "rb").read()
-        expected, changes = cr2w_patch.patch(git_bytes("show", "vanilla-5.x:" + path), edits)
-        ok = port == expected and cr2w_patch.check_crcs(port) and not any(c.startswith("NO MATCH") for c in changes)
+        expected, changes, hit = cr2w_patch.patch(git_bytes("show", "vanilla-5.x:" + path), edits)
+        ok = port == expected and cr2w_patch.check_crcs(port) and len(hit) == len(edits)
         print("%s %s: %s" % ("ok  " if ok else "DIFF", os.path.basename(path), "; ".join(changes)))
         bad |= not ok
     rows = lambda text: [l for l in text.replace("\r", "").split("\n") if l]

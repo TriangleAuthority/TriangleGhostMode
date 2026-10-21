@@ -77,59 +77,15 @@ function OnTakeDamage( action : W3DamageAction)
 	
 	if(action.DealsAnyDamage() && !((W3Effect_Toxicity)action.causer) )
 	{
-		if(HasBuff(EET_Mutagen10))
-			RemoveAbilityAll( GetBuff(EET_Mutagen10).GetAbilityName() );
-
-		if(HasBuff(EET_Mutagen15))
-			RemoveAbilityAll( GetBuff(EET_Mutagen15).GetAbilityName() );
+		//modSigns: removed 1.32's Wyvern and Alghoul stacks lost on any hit (ALCH-10)
+		GMDecoctionsOnDamageTaken(action);	//modSigns: ALCH-10, Water Hag's and Alghoul's stacks lost by the damage taken (legacy)
 	}
 
 	
-	if(HasBuff(EET_Mutagen19))
-	{
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue(GetBuff(EET_Mutagen19).GetAbilityName(), 'max_hp_perc_trigger', min, max);
-		hpTriggerTreshold = GetStatMax(BCS_Vitality) * CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-
-		if(action.GetDamageDealt() >= hpTriggerTreshold)
-		{
-			mutagenQuen = (W3SignEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
-			mutagenQuen.Init( signOwner, signs[ST_Quen].entity, true );
-			mutagenQuen.OnStarted();
-			mutagenQuen.OnThrowing();
-			mutagenQuen.OnEnded();
-		}
-	}
+	//modSigns: removed 1.32's Wraith Quen on a hit of 30% Vitality (ALCH-11: legacy's Wraith casts Quen against attacks from behind, skills/quen.ws)
 
 	
-	if(action.DealsAnyDamage() && !action.IsDoTDamage() && HasBuff(EET_Mutagen27))
-	{
-		abilityName = GetBuff(EET_Mutagen27).GetAbilityName();
-		abilityCount = GetAbilityCount(abilityName);
-
-		if(abilityCount == 0)
-		{
-			addAbility = true;
-		}
-		else
-		{
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen27_max_stack', min, max);
-			maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-
-			if(maxStack >= 0)
-			{
-				addAbility = (abilityCount < maxStack);
-			}
-			else
-			{
-				addAbility = true;
-			}
-		}
-
-		if(addAbility)
-		{
-			AddAbility(abilityName, true);
-		}
-	}
+	//modSigns: removed 1.32's Griffin stacking resistances (ALCH-13: legacy's Griffin immunity after two quick hits, alchemy/decoctionsDefense.ws)
 	
 	if(HasBuff(EET_Trap) && !action.IsDoTDamage() && action.attacker.HasAbility( 'mon_dettlaff_monster_base' ))
 	{
@@ -140,6 +96,7 @@ function OnTakeDamage( action : W3DamageAction)
 	GMMutation5Trigger(action, currVitality, killSourceName);	//modSigns: MUT-10, Mutated Skin spreads the hit's damage
 
 	super.OnTakeDamage(action);
+	GMDefenseDecoctionsOnDamageTaken(action);	//modSigns: ALCH-13, Arachas's acid and Griffin's hit count, once the hit's damage is dealt (legacy)
 
 	
 	if( !action.WasDodged() && action.DealtDamage() && inv.ItemHasTag( inv.GetCurrentlyHeldSword(), 'Aerondight' ) && !action.IsDoTDamage() && !( (W3Effect_Toxicity) action.causer ) )
@@ -251,11 +208,10 @@ function OnTakeDamage( action : W3DamageAction )
 	}
 	
 	
-	if(action.attacker && !action.IsDoTDamage() && wasAlive && action.GetDTCount() > 0 && !action.GetUnderwaterDisplayDamageHack())
-	{
-		theGame.witcherLog.CacheCombatDamageMessage(action.attacker, this, action.GetDamageDealt());
-		theGame.witcherLog.AddCombatDamageMessage(action.DealtDamage());
-	}
+	//modSigns: removed the combat log here (ALCH-12, audit F16: written after ArchGriffin's drain, below, with it added, as legacy)
+
+	if(HasBuff(EET_Mutagen16))	//modSigns: ALCH-13, Fiend: no hit reaction from small hits (legacy)
+		((W3Mutagen16_Effect)GetBuff(EET_Mutagen16)).GMModifyHitAnim(action);	//modSigns
 		
 	
 	if(playerAttacker)
@@ -284,31 +240,35 @@ function OnTakeDamage( action : W3DamageAction )
 		attackName = ((W3Action_Attack)action).GetAttackName();
 	
 		
-		if ( thePlayer.HasBuff(EET_Mutagen04) && action.DealsAnyDamage() && thePlayer.IsHeavyAttack(attackName) && thePlayer.GetStat(BCS_Stamina) > 0)
-		{
-			mutagen = thePlayer.GetBuff(EET_Mutagen04);
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue(mutagen.GetAbilityName(), 'staminaCostPerc', min, max);
-			stamina = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-			stamina *= thePlayer.GetStat(BCS_Stamina);
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue(mutagen.GetAbilityName(), 'healthReductionPerc', min, max);
-			health = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+		if ( thePlayer.HasBuff(EET_Mutagen04) && action.DealsAnyDamage() )	//modSigns: ALCH-12, ArchGriffin: the hit takes a share of the victim's current Vitality per stamina point the attack cost (legacy; 1.32: heavy attacks spent all stamina)
+		{	//modSigns
+			if(thePlayer.IsDoingSpecialAttack(true))	//modSigns: Rend, by its charge
+				stamina = thePlayer.GetSpecialAttackTimeRatio() * thePlayer.GetStatMax(BCS_Stamina);	//modSigns
+			else if(thePlayer.IsDoingSpecialAttack(false))	//modSigns: Whirl, about 4 hits per second
+				stamina = GetWitcherPlayer().GMGetWhirlStaminaCost(0.25);	//modSigns
+			else if(thePlayer.IsHeavyAttack(attackName))	//modSigns
+				stamina = thePlayer.GetStaminaActionCost(ESAT_HeavyAttack);	//modSigns
+			else	//modSigns
+				stamina = thePlayer.GetStaminaActionCost(ESAT_LightAttack);	//modSigns
+			health = ((W3Mutagen04_Effect)thePlayer.GetBuff(EET_Mutagen04)).GMGetHealthReductionPrc(stamina);	//modSigns
 			if (UsesVitality())
 			{
 				health *= GetStat(BCS_Vitality);
-				DrainVitality(health);					
-				thePlayer.DrainStamina(ESAT_FixedValue, stamina, 0.5f);
+				DrainVitality(health);	//modSigns: no stamina spent
 			}
 			else if (UsesEssence())
 			{
 				health *= GetStat(BCS_Essence);
-				DrainEssence(health);					
-				thePlayer.DrainStamina(ESAT_FixedValue, stamina, 0.5f);
+				DrainEssence(health);	//modSigns: no stamina spent
 			}
+			else	//modSigns
+				health = 0;	//modSigns
 			
 			if(health > 0)
 				action.SetDealtDamage();
 		}
 	}
+	GMLogCombatDamage(action, wasAlive, health);	//modSigns: the combat log, moved here with ArchGriffin's drain added (ALCH-12, audit F16; legacy)
 	
 	
 	if( !IsAlive() )
@@ -326,3 +286,14 @@ function OnTakeDamage( action : W3DamageAction )
 	SignalGameplayDamageEvent('DamageTaken', action );
 }
 
+// ALCH-12 (audit F16): 5.x's combat log line of a hit, written after ArchGriffin's drain with the drain added
+// (legacy's order).
+@addMethod(CActor)
+function GMLogCombatDamage(action : W3DamageAction, wasAlive : bool, extraDamage : float)
+{
+	if(action.attacker && !action.IsDoTDamage() && wasAlive && action.GetDTCount() > 0 && !action.GetUnderwaterDisplayDamageHack())
+	{
+		theGame.witcherLog.CacheCombatDamageMessage(action.attacker, this, action.GetDamageDealt() + extraDamage);
+		theGame.witcherLog.AddCombatDamageMessage(action.DealtDamage());
+	}
+}

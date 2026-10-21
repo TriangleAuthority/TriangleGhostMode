@@ -21,16 +21,10 @@ function OnCombatStart()
 	}
 
 	
-	if(HasBuff(EET_Mutagen14))
-	{
-		AddTimer('Mutagen14Timer', 2, true);
-	}
+	//modSigns: removed 1.32's Succubus attack power timer (ALCH-11: legacy's Succubus strengthens Axii puppets)
 
 	
-	if(HasBuff(EET_Mutagen15))
-	{
-		AddAbility(GetBuff(EET_Mutagen15).GetAbilityName(), false);
-	}
+	//modSigns: removed 1.32's Alghoul ability at combat start (ALCH-10: legacy's Alghoul builds up on melee hits)
 
 	
 	mutation12IsOnCooldown = false;

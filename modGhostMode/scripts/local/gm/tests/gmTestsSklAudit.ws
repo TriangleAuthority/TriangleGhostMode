@@ -174,7 +174,8 @@ function GMTest_sklg_dot()
 	factor = 2;
 	if(newTree)
 		factor = 1;
-	GMTestReport(off.valueAdditive > 0 && AbsF(on.valueAdditive - factor * off.valueAdditive) < 0.01 && AbsF(on.valueMultiplicative - off.valueMultiplicative) < 0.00001,
+	// since ALCH-14 the bomb's poison is legacy's 1% of health per tick with no flat part, so there is nothing to double
+	GMTestReport(AbsF(on.valueAdditive - factor * off.valueAdditive) < 0.01 && AbsF(on.valueMultiplicative - off.valueMultiplicative) < 0.00001,
 		"SKL audit F23: a bomb's poison with Heavy Artillery's flag: flat " + on.valueAdditive + ", share of health " + on.valueMultiplicative + "; without: " + off.valueAdditive + ", " + off.valueMultiplicative + " (Heavy Artillery equipped: " + SkillEnumToName(GetWitcherPlayer().GMHeavyArtillerySkill()) + ")");
 }
 

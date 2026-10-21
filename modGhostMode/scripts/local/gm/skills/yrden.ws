@@ -136,7 +136,8 @@ function GetSignStats()
 		theGame.GetDefinitionsManager().GetAbilityAttributeValue('Glyphword 15 _Stats', 'glyphword15_range', min, max);	//modSigns
 		baseModeRange = min.valueAdditive;	//modSigns
 	}	//modSigns
-	//modSigns: legacy's Petri Philtre level 3 bonus comes with ALCH
+	if(owner.GetPlayer() && owner.GetPlayer().GetPotionBuffLevel(EET_PetriPhiltre) == 3)	//modSigns: ALCH-06, Petri's Philtre level 3: the trap lasts a third longer
+		trapDuration *= 1.34;	//modSigns
 }
 
 @replaceMethod(W3YrdenEntityStateYrdenSlowdown)

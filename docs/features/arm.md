@@ -373,7 +373,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-17 from the chang
 
 **5.x:** no delay already on tier 1 (and for throwing knives); toxicity +20.
 
-**Decisions:** legacy's crit per piece; DA6 for toxicity (ARM-01). The gear's potion duration also lengthens bombs in 5.x ([ledger](ledger/gear.md)): handled with ALCH's potion duration rule. The set's bombs roll the crit chance 5.x reads for bombs (Geralt's crit chance and a level 3 Samum's blindness) plus the set's; legacy's other crit terms for bombs (blindness and confusion of any level) belong to the effects they come from. Ends DMG's Red Wolf term.
+**Decisions:** legacy's crit per piece; DA6 for toxicity (ARM-01). The gear's potion duration no longer raises bomb damage (5.x's rule, removed with ALCH's DL7, [ALCH-14](alch.md#alch-14-bombs), 2026-10-20). The set's bombs roll Geralt's crit chance plus the set's; since ALCH-14 that crit chance includes legacy's blindness bonus (Samum +50/75/100%, the larger of it and confusion's) and 5.x's certain crit against a level 3 Samum's blindness is gone. Ends DMG's Red Wolf term.
 
 **Slices:**
 
@@ -399,7 +399,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-17 from the chang
 
 **5.x:** the gear tagged `ViperSet`, no bonus, hidden from set tooltips.
 
-**Decisions:** port as legacy; ends DMG-05's Golden Oriole deviation together with ALCH. 5.x's Golden Oriole absorption (level 3) still comes first until ALCH removes it; the set heals from the raw poison damage, before resistances, as legacy.
+**Decisions:** port as legacy; ends DMG-05's Golden Oriole deviation together with ALCH. 5.x's Golden Oriole absorption (level 3) is gone since ALCH-05 (2026-10-20); the set heals from the raw poison damage, before resistances, as legacy.
 
 **Slices:**
 
@@ -576,7 +576,7 @@ The owner confirmed the fix round's porter's calls (2026-10-18): 5.x's Fully Arm
 ### Dependencies on other areas
 
 - **Done areas ARM builds on:** STAM-03 (cost functions; ARM-02, ARM-07), STAM-05 (the regen option; ARM-03), DEF-01 (the light set's dodge angle; ARM-04), DMG (pool terms for Feline, Bear, Wolven, Netflix, the crit check, `ProcessActionDamage`), SKL-07 (adrenaline), SKL-11 (Quen, Quen Discharge), SKL-14 (oils), SKL-18 (school perks, Rage Management).
-- **Areas ARM waits for or shares with:** ENCH (done 2026-10-19: Levity, Balance, Heft's stamina trades, ENCH-10; Glyphword 5's Quen Discharge boost, ENCH-12; Glyphword 22 removed, ENCH-18), ALCH (Golden Oriole with Viper, potion duration with Manticore and Netflix, oil items), ITEM (item level), CRAFT (schematics, crafting costs), WGT (armor weight), ECON (prices), UI (character panel lines).
+- **Areas ARM waits for or shares with:** ENCH (done 2026-10-19: Levity, Balance, Heft's stamina trades, ENCH-10; Glyphword 5's Quen Discharge boost, ENCH-12; Glyphword 22 removed, ENCH-18), ALCH (done 2026-10-20: Golden Oriole with Viper, ALCH-05; potion duration no longer raising bomb damage, ALCH-14; oil items, ALCH-16), ITEM (item level), CRAFT (schematics, crafting costs), WGT (armor weight), ECON (prices), UI (character panel lines).
 
 ### Hand-offs received
 

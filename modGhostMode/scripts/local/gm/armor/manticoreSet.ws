@@ -31,7 +31,6 @@ function GMManticoreBombCritChance(victim : CActor, victimMonsterCategory : EMon
 function ProcessCriticalHitCheck()
 {
 	var witcher : W3PlayerWitcher;
-	var samum : CBaseGameplayEffect;
 	var critChance : float;
 	var arrStr : array<string>;
 
@@ -40,9 +39,7 @@ function ProcessCriticalHitCheck()
 		&& !(action.IsActionWitcherSign() && witcher.IsMutationActive(EPMT_Mutation2)))
 	{
 		critChance = witcher.GMManticoreBombCritChance(actorVictim, victimMonsterCategory);
-		samum = actorVictim.GetBuff(EET_Blindness, 'petard');	// 5.x's: a level 3 Samum's blindness makes the hit a crit
-		if(samum && samum.GetBuffLevel() == 3)
-			critChance += 1.0f;
+		// Samum's blindness bonus is in GetCriticalHitChance (ALCH-14, legacy's; 5.x's certain crit at level 3 is gone)
 		if(RandF() < critChance)
 		{
 			action.SetCriticalHit();

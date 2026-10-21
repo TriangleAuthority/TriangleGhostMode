@@ -249,3 +249,174 @@
 2110992269|ad70e65b||Herramientas utilizadas por los maestros armeros. Aumentan de forma permanente el valor de la armadura.
 ; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
 2110992483|d400b4dd||Resistencia al daño
+; ALCH-15: the Dimeritium effect's HUD label (legacy's id and key)
+2110992343|b616490f||Dimerita
+; ALCH-04: Swallow, White Raffard, White Honey (legacy's ids and keys)
+2110992178|        ||Acelera la regeneración de vitalidad. Duración extendida. La regeneración de vitalidad no se detiene al recibir daño.
+2110992231|de026195||Reduce la toxicidad a 0 y cancela todos los efectos de la poción activa.
+2110992232|de026196||Reduce la toxicidad a 0 y cancela todos los efectos de la poción activa.
+2110992233|de026197||Reduce la toxicidad a 0 y cancela todos los efectos de la poción activa.
+2110992433|9ec8a224||Restaura inmediatamente una porción de vitalidad y detiene las hemorragias.
+2110992434|9ec8a225||Restaura inmediatamente una porción mayor de vitalidad y detiene las hemorragias.
+2110992435|9ec8a226||Restaura inmediatamente toda la vitalidad y detiene las hemorragias. Obtienes inmunidad al daño por una corta duración.
+2110992537|56747c55||Detiene las hemorragias y aumenta la resistencia a las mismas. Acelera la regeneración de vitalidad. La regeneración de vitalidad se detiene durante 2 segundos al recibir daño.
+2110992538|56747c56||Detiene las hemorragias y aumenta la resistencia a las mismas. Acelera la regeneración de vitalidad. La regeneración de vitalidad se detiene durante 2 segundos al recibir daño.
+2110992539|56747c57||Detiene las hemorragias y aumenta la resistencia a las mismas. Acelera la regeneración de vitalidad. La regeneración de vitalidad ya no se interrumpe al recibir daño.
+; ALCH-05: Golden Oriole (legacy's ids and keys)
+2110992530|3a84c328||Neutraliza el envenenamiento y aumenta la resistencia al mismo.
+2110992531|3a84c329||Neutraliza el envenenamiento y aumenta la resistencia al mismo. Duración extendida.
+2110992532|3a84c32a||Neutraliza el envenenamiento y aumenta la resistencia al mismo. Duración extendida. Te vuelve inmune al envenenamiento temporalmente.
+2110992533|2e268281||Duración de inmunidad al envenenamiento
+; ALCH-05: Golden Oriole's buff text (audit F12; new id, the vanilla key)
+2110992638|42725726||Neutraliza el envenenamiento y aumenta la resistencia al mismo.
+; ALCH-06: Petri's Philtre (legacy's ids and keys)
+2110992165|9e58d1f5||Aumenta la intensidad de la señal. Duración extendida. Los efectos especiales de las señales son un tercio más largos.
+; ALCH-07: Cat, Blizzard, Tawny Owl (legacy's ids and keys)
+2110992235|874e9f88||Obtienes visión total en la oscuridad e inmunidad a la hipnosis. Duración extendida.
+2110992240|874e9f87||Obtienes visión total en la oscuridad. Duración extendida.
+2110992471|1b06cd09||Cada vez que matas a un enemigo, el tiempo se ralentiza durante un corto período de tiempo.
+2110992534|437e276a||Acelera la regeneración de vigor.
+2110992535|437e276b||Acelera la regeneración de vigor.
+2110992536|437e276c||Acelera la regeneración de vigor. No expira durante la noche.
+; ALCH-07: Cat 1's and Cat's buff text without crit chance, Blizzard 1's and 3's legacy texts (audit F7, F8; new ids, the vanilla keys)
+2110992633|874e9f86||Permite ver a oscuras.
+2110992634|1a61ef57||Permite ver a oscuras.
+2110992635|1b06cd08||Cada vez que matas a un enemigo, el tiempo se ralentiza durante un corto período de tiempo.
+2110992636|1b06cd0a||Cada vez que matas a un enemigo, el tiempo se ralentiza durante un corto período de tiempo. Si hay 3 puntos de adrenalina disponibles, durante este periodo las acciones no consumen vigor.
+; ALCH-08: Killer Whale (legacy's ids and keys)
+2110992464|a1370329||Aumenta el suministro de oxigeno bajo el agua y mejora la visión al bucear.
+; ALCH-09: decoction rules (toxicity offset, Nightwraith, Ekimmara, Cockatrice) (legacy's ids and keys)
+2110992188|e71d7c90||Aumenta la vitalidad base de Geralt en $S$ puntos con cada enemigo eliminado.
+2110992246|e71d7c91||Restaura un $S$% de vitalidad según el daño causado al enemigo.
+2110992381|44aa9fca||Compensación de toxicidad
+2110992382|f4fd119f||Reserva una cantidad de la toxicidad máxima para la duración del efecto de los extractos.
+2110992477|e71d7c8d||Cada bomba y poción puede ser usado una vez más (excepto los extractos).
+; ALCH-10: melee decoctions' descriptions (legacy's ids and keys)
+2110992247|fc921505||Lanzar una señal aumenta la potencia de los ataques físicos un $I$% (máx. $I$%). Se reinicia al causar daño y al finalizar el combate.
+2110992455|e71d7c8b||El daño no crítico causado con una espada aumenta en $I$% (máx. $I$%) la probabilidad de lograr un impacto crítico con el siguiente ataque. Cuando la bonificación está al máximo, obtienes un $I$% adicional a la potencia del impacto crítico. La bonificación se reinicia al lograr un impacto crítico o al acabar el combate.
+2110992484|fc92150c||El daño causado con un arma cuerpo a cuerpo aumenta la intensidad de las señales un $I$% (máx. $I$%). Se reinicia al lanzar una señal o al finalizar el combate.
+2110992485|e71d7c8f||Infligir daño cuerpo a cuerpo a los enemigos aumenta la potencia de ataque un $S$% (máx. $S$%). Ser golpeado reduce la bonificación proporcionalmente al daño recibido: $S$% por 1% de la vitalidad perdida. Se reinicia al finalizar el combate.
+2110992486|fc92150a||Infligir daño cuerpo a cuerpo a los enemigos aumenta la ganancia de adrenalina un $S$% (máx. $S$%). Ser golpeado reduce la bonificación proporcionalmente al daño recibido: $S$% por 1% de la vitalidad perdida. Se reinicia al finalizar el combate.
+; ALCH-11: sign decoctions' descriptions (legacy's ids and keys)
+2110992243|e71d7c93||Cada mutágeno azul menor equipado aumenta el daño base de las señales en $S$ puntos. El mutágeno azul aumenta la bonificación en $S$ puntos y el mutágeno azul mayor en $S$ puntos.
+2110992248|fc921509||Los enemigos controlados por el lanzamiento alternativo de Axia causan $I$% más de daño.
+2110992249|fc921526||Lanzar señales durante el combate aumenta la intensidad de las mismas un $S$% (máx. $S$%). Ser golpeado reduce la bonificación proporcionalmente al daño recibido: $S$% por cada 1% de la vitalidad perdida. Se reinicia al finalizar el combate.
+2110992481|fc92150e||Cuando eres atacado por detrás, un escudo de Quen se activa y reduce el daño. Cuando hay espectros alrededor, la intensidad de Quen aumenta un $S$%. 
+; ALCH-12: sustain decoctions' descriptions (legacy's ids and keys)
+2110992241|e71d7c8e||Todos tus ataques físicos consumen un $S$% más de vigor. Los ataques exitosos reducen adicionalmente la vitalidad del enemigo golpeado un $S$% de su valor actual por cada punto de vigor gastado en el ataque.
+2110992242|fc921527||Cada mutágeno verde menor equipado aumenta la tasa de regeneración de vitalidad en $S$ puntos/seg. El mutágeno verde aumenta la bonificación en $S$ puntos/seg. y el mutágeno verde mayor en $S$ puntos/seg.
+2110992245|fc921525||Restaura un $S$% de vitalidad por cada punto de vigor consumido. Sólo funciona durante el combate.
+2110992436|fc921529||Cada mutágeno rojo menor equipado disminuye el consumo de vigor de las acciones cuerpo a cuerpo un $S$%. El mutágeno rojo aumenta la bonificación un $S$% y el mutágeno rojo mayor un $S$%.
+2110992488|fc921507||Obtienes +$I$ a la regeneración de vitalidad fuera del combate y +$I$ al estar en combate. Cuando el vigor está al $I$% o por debajo, obtienes +$I$% más a la regeneración de vitalidad en combate.
+2110992489|fc92150d||Cuando eliminas a un enemigo, obtienes +$I$ a la regeneración de vitalidad por cada enemigo vivo cercano. La bonificación máx. no puede exceder +$I$. Se reinicia al finalizar el combate.
+2110992490|fc921508||Cuando eliminas a un enemigo, obtienes +$I$ a la regeneración de vigor en combate por cada enemigo vivo cercano. La bonificación máx. no puede exceder +$I$. Se reinicia al finalizar el combate.
+; ALCH-13: defensive decoctions' descriptions (legacy's ids and keys)
+2110992244|fc921524||Aumenta un $I$% la resistencia a las hemorragias, quemaduras y envenenamiento así como al fuego y al daño por veneno.
+2110992388|fc92152b||Recibir golpes más de una vez durante $S$s te vuelve inmune al daño por los siguientes $S$s.
+2110992389|e71d7c8c||Cuando los enemigos te dañan en combate cuerpo a cuerpo, son afectados por un efecto ácido que reduce su resistencia al daño un $I$% (máx. $I$%).
+2110992390|fc92152c||El daño causado a los enemigos en su forma espectral aumenta de $I$% a $I$% del daño normal. El daño recibido de enemigos en su forma espectral se reduce un $I$%.
+2110992457|fc92150b||La gravedad de la reacción a los golpes se reduce a 0, si el daño recibido es menor al $I$% de la vitalidad máxima.
+2110992478|fc921506||Aumenta la potencia de los impactos críticos un $I$% al atacar por la espalda.
+2110992479|fc92152a||$I$% del daño recibido es devuelto al atacante.
+2110992487|fc921528||Obtienes +$I$% de potencia de ataque, +$I$% de intensidad de señales, +$I$/seg. a la regeneración de vigor y +$I$% a la ganancia de adrenalina mientras la vitalidad esté al $I$% o menos. Se reinicia cuando recuperas vitalidad o al finalizar el combate. $I$s para volver a activar.
+; ALCH-14: bombs' descriptions and attribute names (legacy's ids and keys)
+2110992163|7968d6e0||Congela a los enemigos. Los golpes lanzados sobre enemigos congelados causan daño adicional. Duración extendida.
+2110992189|d3510d11||Contiene fragmentos de plata que bloquean o debilitan las habilidades de transformación o regeneración de los monstruos.
+2110992190|d3510d12||Contiene fragmentos de plata que bloquean o debilitan las habilidades de transformación o regeneración de los monstruos. Duración extendida.
+2110992191|d3510d13||Contiene fragmentos de plata que bloquean o debilitan las habilidades de transformación o regeneración de los monstruos. Duración extendida.
+2110992237|fe608837||Causa daño de metralla a los enemigos dentro de su radio de explosión. Causa daño por fuego. Efecto mejorado. Destruye el escudo enemigo. Destruye los nidos de monstruos.
+2110992348|ec4dca6f||Duración de la nube
+2110992482|6ac22a47||Bonificación de daño
+2110992508|fa56c289||Daño por fuego al explotar
+; ALCH-14: Samum 3's text (audit F12; new id, the vanilla key)
+2110992637|3c30d2a9||Ciega a los rivales que estén dentro del radio de la explosión. Duración ampliada. Aumenta la probabilidad de impactos críticos contra rivales cegados. Destruye los cubiles de monstruos.
+; ALCH-15: Dimeritium's descriptions and attribute names (legacy's ids and keys)
+2110992239|3ed03538||Duración fuera de la nube
+2110992344|63cd93a3||Libera una nube de fragmentos de dimerita que bloquea la magia y las habilidades mágicas de los monstruos. Debilita la armadura de las criaturas mágicas. Debilita a los magos, reduciendo su daño.
+2110992345|63cd93a4||Libera una nube de fragmentos de dimerita que bloquea la magia y las habilidades mágicas de los monstruos. Debilita la armadura de las criaturas mágicas. Debilita a los magos, reduciendo su daño. Duración extendida.
+2110992346|63cd93a5||Libera una nube de fragmentos de dimerita que bloquea la magia y las habilidades mágicas de los monstruos. Debilita la armadura de las criaturas mágicas. Debilita a los magos, reduciendo su daño. Duración extendida.
+2110992347|db81c2af||Perforación de armaduras
+2110992456|0391a988||Reducción del daño
+2110992480|9691af88||Reducción de la resistencia al daño
+; ALCH-16: oil attribute names and descriptions (legacy's ids and keys)
+2110992034|40aed692||Probabilidad de crítico contra bestias
+2110992035|c8957121||Probabilidad de crítico contra malditos
+2110992036|79a23d6e||Probabilidad de crítico contra dracónidos
+2110992037|d33fe160||Probabilidad de crítico contra humanoides
+2110992038|f261a80b||Probabilidad de crítico contra híbridos
+2110992039|97466e95||Probabilidad de crítico contra insectoides
+2110992040|4bfdf9ea||Probabilidad de crítico contra constructos
+2110992041|016d02ed||Probabilidad de crítico contra necrófagos
+2110992042|9c73a4a6||Probabilidad de crítico contra relictos
+2110992043|c3702fb9||Probabilidad de crítico contra espectros
+2110992044|cd868a1a||Probabilidad de crítico contra ogroides
+2110992045|42229941||Probabilidad de crítico contra vampiros
+2110992046|4fa6c42d||Daño del impacto crítico contra bestias
+2110992047|df4cf77c||Daño del impacto crítico contra malditos
+2110992048|f7d09609||Daño del impacto crítico contra dracónidos
+2110992049|810bfc7b||Daño del impacto crítico contra humanoides
+2110992050|6b0ad6e6||Daño del impacto crítico contra híbridos
+2110992051|6adf0df0||Daño del impacto crítico contra insectoides
+2110992052|0cf40585||Daño del impacto crítico contra constructos
+2110992053|69eb0048||Daño del impacto crítico contra necrófagos
+2110992054|2e15b341||Daño del impacto crítico contra relictos
+2110992055|17546414||Daño del impacto crítico contra espectros
+2110992056|b4fbb1b5||Daño del impacto crítico contra ogroides
+2110992057|d123879c||Daño del impacto crítico contra vampiros
+2110992058|c8d4450c||Reducción de la resistencia al daño contra bestias
+2110992059|4b1b4cdd||Reducción de la resistencia al daño contra malditos
+2110992060|da69abb0||Reducción de la resistencia al daño contra dracónidos
+2110992061|83b5dcfe||Reducción de la resistencia al daño contra humanoides
+2110992062|5da28e33||Reducción de la resistencia al daño contra híbridos
+2110992063|ca4463e9||Reducción de la resistencia al daño contra insectoides
+2110992064|d14fa0b4||Reducción de la resistencia al daño contra constructos
+2110992065|8b85ee91||Reducción de la resistencia al daño contra necrófagos
+2110992066|0ecc4f78||Reducción de la resistencia al daño contra relictos
+2110992067|64e2d545||Reducción de la resistencia al daño contra espectros
+2110992068|111c7e84||Reducción de la resistencia al daño contra ogroides
+2110992069|5a3c18bd||Reducción de la resistencia al daño contra vampiros
+2110992070|d25344ee||Potencia de ataque contra humanoides
+2110992192|08eace65||Aumenta la efectividad del ataque contra insectoides. La efectividad disminuye a medida que se agota el aceite.
+2110992193|08eace66||Aumenta la efectividad del ataque contra insectoides. La efectividad disminuye a medida que se agota el aceite.
+2110992194|08eace67||Aumenta la efectividad del ataque contra insectoides. La efectividad disminuye a medida que se agota el aceite.
+2110992195|3a67f159||Aumenta la efectividad del ataque contra malditos. La efectividad disminuye a medida que se agota el aceite.
+2110992196|3a67f15a||Aumenta la efectividad del ataque contra malditos. La efectividad disminuye a medida que se agota el aceite.
+2110992197|3a67f15b||Aumenta la efectividad del ataque contra malditos. La efectividad disminuye a medida que se agota el aceite.
+2110992198|65067e25||Aumenta la efectividad del ataque contra necrófagos. La efectividad disminuye a medida que se agota el aceite.
+2110992199|65067e26||Aumenta la efectividad del ataque contra necrófagos. La efectividad disminuye a medida que se agota el aceite.
+2110992200|65067e27||Aumenta la efectividad del ataque contra necrófagos. La efectividad disminuye a medida que se agota el aceite.
+2110992201|7b1c29c3||Aumenta la efectividad del ataque contra híbridos. La efectividad disminuye a medida que se agota el aceite.
+2110992202|7b1c29c4||Aumenta la efectividad del ataque contra híbridos. La efectividad disminuye a medida que se agota el aceite.
+2110992203|7b1c29c5||Aumenta la efectividad del ataque contra híbridos. La efectividad disminuye a medida que se agota el aceite.
+2110992204|88e86911||Aumenta la efectividad del ataque contra vampiros. La efectividad disminuye a medida que se agota el aceite.
+2110992205|88e86912||Aumenta la efectividad del ataque contra vampiros. La efectividad disminuye a medida que se agota el aceite.
+2110992206|88e86913||Aumenta la efectividad del ataque contra vampiros. La efectividad disminuye a medida que se agota el aceite.
+2110992207|aed490e2||Aumenta la efectividad del ataque contra constructos. La efectividad disminuye a medida que se agota el aceite.
+2110992208|aed490e3||Aumenta la efectividad del ataque contra constructos. La efectividad disminuye a medida que se agota el aceite.
+2110992209|aed490e4||Aumenta la efectividad del ataque contra constructos. La efectividad disminuye a medida que se agota el aceite.
+2110992210|d11afcde||Aumenta la efectividad del ataque contra humanos, elfos, enanos y medianos. La efectividad disminuye a medida que se agota el aceite.
+2110992211|d11afcdf||Aumenta la efectividad del ataque contra humanos, elfos, enanos y medianos. La efectividad disminuye a medida que se agota el aceite.
+2110992212|d11afce0||Aumenta la efectividad del ataque contra humanos, elfos, enanos y medianos. La efectividad disminuye a medida que se agota el aceite.
+2110992213|ea1a3189||Aumenta la efectividad del ataque contra espectros. La efectividad disminuye a medida que se agota el aceite.
+2110992214|ea1a318a||Aumenta la efectividad del ataque contra espectros. La efectividad disminuye a medida que se agota el aceite.
+2110992215|ea1a318b||Aumenta la efectividad del ataque contra espectros. La efectividad disminuye a medida que se agota el aceite.
+2110992216|ef649cfe||Aumenta la efectividad del ataque contra dracónidos. La efectividad disminuye a medida que se agota el aceite.
+2110992217|ef649cff||Aumenta la efectividad del ataque contra dracónidos. La efectividad disminuye a medida que se agota el aceite.
+2110992218|ef649d00||Aumenta la efectividad del ataque contra dracónidos. La efectividad disminuye a medida que se agota el aceite.
+2110992219|f8b46c36||Aumenta la efectividad del ataque contra relictos. La efectividad disminuye a medida que se agota el aceite.
+2110992220|f8b46c37||Aumenta la efectividad del ataque contra relictos. La efectividad disminuye a medida que se agota el aceite.
+2110992221|1ff07bf8||Aumenta la efectividad del ataque contra relictos. La efectividad disminuye a medida que se agota el aceite.
+2110992222|7753393f||Aumenta la efectividad del ataque contra ogroides. La efectividad disminuye a medida que se agota el aceite.
+2110992223|77533940||Aumenta la efectividad del ataque contra ogroides. La efectividad disminuye a medida que se agota el aceite.
+2110992224|77533941||Aumenta la efectividad del ataque contra ogroides. La efectividad disminuye a medida que se agota el aceite.
+2110992225|c0218f12||Aumenta la efectividad del ataque contra ogroides. La efectividad disminuye a medida que se agota el aceite.
+2110992226|c0218f13||Aumenta la efectividad del ataque contra ogroides. La efectividad disminuye a medida que se agota el aceite.
+2110992227|c0218f14||Aumenta la efectividad del ataque contra ogroides. La efectividad disminuye a medida que se agota el aceite.
+2110992228|dd8e2b22||Aumenta la efectividad del ataque contra bestias. La efectividad disminuye a medida que se agota el aceite.
+2110992229|dd8e2b23||Aumenta la efectividad del ataque contra bestias. La efectividad disminuye a medida que se agota el aceite.
+2110992230|dd8e2b24||Aumenta la efectividad del ataque contra bestias. La efectividad disminuye a medida que se agota el aceite.
+2110992234|f8b46c38||Aumenta la efectividad del ataque contra relictos.
+; ALCH-17: the potion duration attribute (legacy's ids and keys)
+2110992015|c4ea0ecf||Duración de la poción
+; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
+2110992259|b91d9859||Se puede vender a comerciantes.

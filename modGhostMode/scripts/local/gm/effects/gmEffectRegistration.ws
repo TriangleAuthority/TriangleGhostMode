@@ -46,6 +46,8 @@ function HACK_NO_MEMORY_TO_COMPILE_CacheEffect_Part1(effect : EEffectType) : boo
 		case EET_GMRuneword11 :	effects[effect] = new W3GMEffect_Runeword11 in this;	return true;
 		// SWD-06
 		case EET_GMPhantomWeapon :	effects[effect] = new W3GMEffect_PhantomWeapon in this;	return true;
+		// ALCH-15
+		case EET_GMDimeritium :	effects[effect] = new W3GMEffect_Dimeritium in this;	return true;
 	}
 	return wrappedMethod(effect);
 }
@@ -83,6 +85,15 @@ function HACK_NO_MEMORY_TO_COMPILE_EffectNameToType_Part1(effectName : name, out
 		case 'GMRuneword11Effect' :	type = EET_GMRuneword11;	abilityName = '';	return true;
 		// SWD-06
 		case 'GMPhantomWeaponEffect' :	type = EET_GMPhantomWeapon;	abilityName = '';	return true;
+		// ALCH-15 (its abilities by level, GMDimeritiumEffect_Level1 to 3, below)
+		case 'GMDimeritiumEffect' :	type = EET_GMDimeritium;	abilityName = '';	return true;
+	}
+	// ALCH-15: an effect name with its ability ("<effect>_<suffix>", as vanilla's names)
+	if(StrBeginsWith(NameToString(effectName), "GMDimeritiumEffect_"))
+	{
+		type = EET_GMDimeritium;
+		abilityName = effectName;
+		return true;
 	}
 	return wrappedMethod(effectName, type, abilityName);
 }
@@ -120,6 +131,8 @@ function EffectTypeToName(effectType : EEffectType) : name
 		case EET_GMRuneword11 :	return 'GMRuneword11Effect';
 		// SWD-06
 		case EET_GMPhantomWeapon :	return 'GMPhantomWeaponEffect';
+		// ALCH-15
+		case EET_GMDimeritium :	return 'GMDimeritiumEffect';
 	}
 	return wrappedMethod(effectType);
 }

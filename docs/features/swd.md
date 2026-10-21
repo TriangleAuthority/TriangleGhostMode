@@ -470,7 +470,7 @@ Every item other areas handed to SWD, and where it lands:
 | CRAFT | Dismantling parts of swords, sword schematics (the NG+ Wolven schematics included), mastercrafted weapon kits, the BaW relic schematics' witcher colour fix (changelist 183) |
 | WGT | Sword weights (every sword ability) |
 | LOOT | Where swords drop and are sold |
-| ALCH | Oil items, the oil tooltip rows (`vs*_critical_hit_*`, `vs*_resist_reduction`), the stuck-oil fix (`RemoveAllOilAbilitiesFromItem`, `GiveItemTo`; changelist 70) |
+| ALCH | Oil items, the oil tooltip rows (`vs*_critical_hit_*`, `vs*_resist_reduction`), the stuck-oil fix (`RemoveAllOilAbilitiesFromItem`, `GiveItemTo`; changelist 70) (ported with ALCH-16, 2026-10-20) |
 | UI | The character panel's sword sections (average damage per hit, attack power and crit power lines: `SPlayerOffenseStats`, the rest of `GetOffenseStatsList`, `CharacterStatsPopup`), the instant-kill chance shown as the swords' maximum (changelist 169) |
 | HORSE | Horseback damage from weapon damage (changelist 488) |
 

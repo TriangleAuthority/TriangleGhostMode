@@ -66,7 +66,7 @@ function UpdateBuffs()
 				
 				format = 2;
 			}
-			else if ( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff || effectType == EET_BasicQuen || effectType == EET_ConvergenceTheory )
+			else if ( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff || effectType == EET_BasicQuen || effectType == EET_ConvergenceTheory || effectType == EET_Mutagen01 || effectType == EET_Mutagen05 || effectType == EET_Mutagen10 || effectType == EET_Mutagen15 || effectType == EET_Mutagen17 || effectType == EET_Mutagen22 )	//modSigns: ALCH-10, ALCH-11 (audit F13): the decoctions' stacks shown next to their timers (legacy)
 			{
 				
 				format = 4;
@@ -338,6 +338,18 @@ function OnTick( timeDelta : float )
 					duration = ( ( W3Effect_Mutation10 ) effectArray[i] ).GetStacks();
 					initialDuration = duration;
 				}
+				else if( effectType == EET_Mutagen01 )	//modSigns: ALCH-10, the decoctions' stacks in % next to their timers (legacy)
+					extraValue = ( ( W3Mutagen01_Effect ) effectArray[i] ).GMGetStacks();	//modSigns
+				else if( effectType == EET_Mutagen05 )	//modSigns
+					extraValue = ( ( W3Mutagen05_Effect ) effectArray[i] ).GMGetStacks();	//modSigns
+				else if( effectType == EET_Mutagen10 )	//modSigns
+					extraValue = ( ( W3Mutagen10_Effect ) effectArray[i] ).GMGetStacks();	//modSigns
+				else if( effectType == EET_Mutagen15 )	//modSigns
+					extraValue = ( ( W3Mutagen15_Effect ) effectArray[i] ).GMGetStacks();	//modSigns
+				else if( effectType == EET_Mutagen17 )	//modSigns
+					extraValue = ( ( W3Mutagen17_Effect ) effectArray[i] ).GMGetStacks();	//modSigns
+				else if( effectType == EET_Mutagen22 )	//modSigns: ALCH-11
+					extraValue = ( ( W3Mutagen22_Effect ) effectArray[i] ).GMGetStacks();	//modSigns
 				else if( effectType == EET_LynxSetBonus )	//modSigns: ARM-06, the Feline set's chain (legacy)
 				{	//modSigns
 					duration = ( ( W3Effect_LynxSetBonus ) effectArray[i] ).GMGetStacks();	//modSigns

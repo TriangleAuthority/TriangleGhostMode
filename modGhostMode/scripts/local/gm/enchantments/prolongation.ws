@@ -107,7 +107,7 @@ function OnTimeUpdated(dt : float)
 	}
 }
 
-// Tawny Owl's own timer, the same (its freeze at night stays 5.x's until ALCH). 5.x body; changes marked //modSigns.
+// Tawny Owl's own timer, the same, with legacy's night hours (ALCH-07). 5.x body; changes marked //modSigns.
 @replaceMethod(W3Potion_TawnyOwl)
 function OnTimeUpdated(deltaTime : float)
 {
@@ -122,7 +122,7 @@ function OnTimeUpdated(deltaTime : float)
 
 			level = GetBuffLevel();
 			currentHour = GameTimeHours(theGame.GetGameTime());
-			if(level < 3 || (currentHour > GetHourForDayPart(EDP_Dawn) && currentHour < GetHourForDayPart(EDP_Dusk)) )
+			if(level < 3 || (currentHour >= GetHourForDayPart(EDP_Dawn) && currentHour < GetHourForDayPart(EDP_Dusk)) )	//modSigns: ALCH-07, legacy's night: before dawn or from dusk on (5.x froze it during the dawn hour too)
 				timeLeft -= deltaTime * GMProlongationTimeFactor();	//modSigns: ENCH-09, Prolongation
 
 			if( timeLeft <= 0 )

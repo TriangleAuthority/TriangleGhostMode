@@ -332,7 +332,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-19 from the chang
 
 **5.x:** +1 s to active potions per unblocked hit (1.32: 0.5 s).
 
-**Decisions:** DE2 (owner, 2026-10-19): legacy's numbers and mechanics. Ported now, ahead of ALCH: the rule is self-contained (the potion timers' tick). What waits for ALCH: Tawny Owl's night freeze stays 5.x's (legacy rewrote it); the timer term applies on top of whatever ALCH ports. Legacy's quirk (the bonus removed with Replenishment's ability, not Prolongation's) is ported as legacy's code, its fix on the Later list: porter's call, confirmed by the owner (2026-10-19).
+**Decisions:** DE2 (owner, 2026-10-19): legacy's numbers and mechanics. Ported now, ahead of ALCH: the rule is self-contained (the potion timers' tick). Tawny Owl's night freeze is legacy's since [ALCH-07](alch.md#alch-07-other-potions-special-effects) (2026-10-20); the timer term applies on top. Legacy's quirk (the bonus removed with Replenishment's ability, not Prolongation's) is ported as legacy's code, its fix on the Later list: porter's call, confirmed by the owner (2026-10-19).
 
 **Later:** remove the bonus when Prolongation's own ability is removed (legacy's quirk keys it on Runeword 1).
 

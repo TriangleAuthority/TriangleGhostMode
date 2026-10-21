@@ -118,7 +118,7 @@ function GMCiriDodgeDamage(out damageData : W3DamageAction)
 // DEF-01: 5.x's W3PlayerWitcher.ReduceDamage without its dodge check (150 degrees): Ghost Mode
 // decides the dodge before damage (GMPlayerDodgeDamage), as legacy did. 5.x body, changes marked
 // //modSigns; Fleet Footed's reduction of a failed dodge is kept until DEF-02 (project owner,
-// 2026-10-03).
+// 2026-10-03). ALCH-13: Griffin's decoction cancels a hit right after super.ReduceDamage (legacy).
 @replaceMethod(W3PlayerWitcher)
 function ReduceDamage(out damageData : W3DamageAction)
 {
@@ -131,6 +131,9 @@ function ReduceDamage(out damageData : W3DamageAction)
 	var attackAction : W3Action_Attack;	//modSigns
 
 	super.ReduceDamage(damageData);
+
+	if(HasBuff(EET_Mutagen27) && !(damageData.IsActionEnvironment() || damageData.IsDoTDamage()))	//modSigns: ALCH-13 (audit F14), Griffin's immunity right after the base reduction, as legacy, so nothing below (Glyph of Warding's Quen) runs for a hit it cancels
+		((W3Mutagen27_Effect)GetBuff(EET_Mutagen27)).GMReduceDamage(damageData);	//modSigns
 
 	//modSigns: DEF-05, DEF-06: a parried or countered hit that is not a partial parry takes no damage, also when
 	//modSigns: the attack cannot be parried (legacy dropped CanBeParried from CActor.ReduceDamage's parry branch);

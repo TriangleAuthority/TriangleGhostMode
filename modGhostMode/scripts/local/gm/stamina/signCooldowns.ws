@@ -98,6 +98,7 @@ function GMAddSignCooldown(signType : ESignType, alt : bool)
 	var effect : EEffectType;
 	var duration : float;
 
+	GMDecoctionsOnSignCast();	// ALCH-10: the decoctions that react to Geralt's sign casts (Wyvern, Forktail)
 	effect = GMSignCooldownType(signType);
 	if(effect == EET_Undefined)
 		return;

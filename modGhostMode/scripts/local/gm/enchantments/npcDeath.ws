@@ -256,40 +256,8 @@ function OnDeath( damageAction : W3DamageAction  )
 		theGame.GetMonsterParamsForActor(this, monsterCategory, tmpName, tmpBool, tmpBool, tmpBool);
 		
 		
-		if(thePlayer.HasBuff(EET_Mutagen18))
-		{
-			
-			
-			if(monsterCategory != MC_Animal || IsRequiredAttitudeBetween(this, thePlayer, true))
-			{			
-				abilityName = thePlayer.GetBuff(EET_Mutagen18).GetAbilityName();
-				abilityCount = thePlayer.GetAbilityCount(abilityName);
-				
-				if(abilityCount == 0)
-				{
-					addAbility = true;
-				}
-				else
-				{
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen18_max_stack', min, max);
-					maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-					
-					if(maxStack >= 0)
-					{
-						addAbility = (abilityCount < maxStack);
-					}
-					else
-					{
-						addAbility = true;
-					}
-				}
-				
-				if(addAbility)
-				{
-					thePlayer.AddAbility(abilityName, true);
-				}
-			}
-		}
+		//modSigns: removed 5.x's Grave Hag regen per kill, uncapped (ALCH-12)
+		GMDecoctionsOnKill();	//modSigns: ALCH-12, Noonwraith's and Grave Hag's stacks per kill (legacy)
 		
 		
 		if (thePlayer.HasBuff(EET_Mutagen06))

@@ -58,7 +58,7 @@ function GMRecalcAcquiredTolerance()
 		for(i = 0; i < names.Size() && target < maxCount; i += 1)
 		{
 			alchemyManager.GetRecipe(names[i], recipe);
-			if(GMIsAcquiredToleranceRecipe(recipe.cookedItemType))
+			if(GMIsAcquiredToleranceRecipe(recipe.cookedItemType) && !GMIsPheromoneRecipe(names[i]))	// ALCH-08: the pheromone formulas are quest formulas in legacy
 				target += 1;
 		}
 		delete alchemyManager;

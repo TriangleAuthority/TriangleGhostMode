@@ -84,8 +84,9 @@ class Blobs:
 
 # ---------------------------------------------------------------- scripts --
 
-def blank_comments_and_strings(text: str) -> str:
-    """Replace comments and string/name literals with spaces, keeping offsets and newlines."""
+def blank_comments_and_strings(text: str, keep_strings: bool = False) -> str:
+    """Replace comments and string/name literals with spaces, keeping offsets and newlines; with
+    keep_strings, only comments (the literals are skipped over, not blanked)."""
     out = list(text)
     i, n = 0, len(text)
     while i < n:
@@ -107,8 +108,9 @@ def blank_comments_and_strings(text: str) -> str:
             j = i + 1
             while j < n and text[j] != c and text[j] != "\n":
                 j += 2 if text[j] == "\\" else 1
-            for k in range(i + 1, min(j, n)):
-                out[k] = " "
+            if not keep_strings:
+                for k in range(i + 1, min(j, n)):
+                    out[k] = " "
             i = j + 1
         else:
             i += 1
@@ -138,13 +140,15 @@ def script_units(text: str) -> dict[str, tuple[str, int, str]]:
     """Split a script into units: {name: (comparable text, first line, source text)}.
 
     The source text includes comments (and the comment lines just above a function);
-    the comparable text does not.
+    the comparable text does not, but keeps string and name literals (a change of a name such as
+    'vsOgre_attack_power' is a change; the structure is read with the literals blanked).
     """
     clean = blank_comments_and_strings(text)
+    comparable = blank_comments_and_strings(text, keep_strings=True)
     units: dict[str, list] = {}
 
     def add(name, start, end):
-        body = re.sub(r"\s+", " ", clean[start:end]).strip()
+        body = re.sub(r"\s+", " ", comparable[start:end]).strip()
         if not body:
             return
         line = text.count("\n", 0, start) + 1

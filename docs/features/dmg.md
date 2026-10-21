@@ -76,7 +76,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 **Decisions:** port as legacy; the per-monster Igni weakness is dropped as in legacy (weaknesses are resistances, AI).
 
 - **Deviation:** 5.x's ×1.1 to the damage the player takes in New Game+ (end of `CalculateDamage`, new in 5.x) is kept: NG+ scaled like vanilla's ([New Game+ policy](../feature-mapping.md#new-game-carried-over-and-scaled-not-balanced-or-tested)) (project owner, 2026-10-07; audit F5).
-- **Deviation:** Mutagen 2's resistance bonus stays 5.x's (legacy reworked the mutagen) (temporary, until ALCH).
+- Mutagen 2's 1.32 resistance bonus is removed since [ALCH-13](alch.md#alch-13-defensive-and-conditional-decoctions-arachas-doppler-fiend-elemental-werewolf-leshen-griffin-relievers) (2026-10-20; until then a temporary deviation).
 
 
 **Later:** —
@@ -112,7 +112,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 
 **Decisions:** port as legacy; 5.x's armor-shrinking rule does not apply (DD2, project owner, 2026-10-06): with resistances clamped at 0 it can never trigger. Before porting the resistance names, list the abilities carrying `bleeding_resistance` points in 5.x; switching them on is a deviation if they differ from legacy's.
 
-- **Deviation:** the other areas' terms in this function stay 5.x's until those areas are ported: the oils' resistance reduction values (ALCH; their wearing off and Protective Coating are SKL-14's, ported), Mutagen 28 (ALCH); Ice Armor's +30% resistance (AI, 5.x halves the damage in `ReduceDamage`), Dimeritium's armor and resistance reduction and Mutagen 2's debuff (ALCH) (temporary, until those areas). A fully charged Aerondight's and Iris's phantom strike's full ignore are legacy's (SWD-05, SWD-06, 2026-10-19).
+- **Deviation:** the other areas' terms in this function stay 5.x's until those areas are ported: Ice Armor's +30% resistance (AI, 5.x halves the damage in `ReduceDamage`) (temporary, until those areas). Mutagen 28's 1.32 resistances are gone and Mutagen 2's debuff is legacy's since ALCH-13, Dimeritium's armor and resistance reduction since ALCH-15, the oils' values since ALCH-16 (their resistance reduction 0 in every version; 2026-10-20). A fully charged Aerondight's and Iris's phantom strike's full ignore are legacy's (SWD-05, SWD-06, 2026-10-19).
 - **Deviation:** the point names of bleeding, will and burning resistance are not mapped yet (`ResistStatNameToEnum`) (temporary, until the 5.x XML entries carrying them are checked).
 
 
@@ -144,7 +144,7 @@ Stat registration (audit F4, 5.x-GM `6b90faf5`): `all_NPC_ability` registers wil
 
 **Decisions:** port as legacy; the headshot and backstab rule is GEN's in the changelist, ported here because it is one line of this function.
 
-- **Deviation:** the other areas' terms here stay 5.x's until their areas: Mutagen 5's attack power, which legacy removed (ALCH) (temporary, until ALCH). Aerondight's crit is legacy's since SWD-05 (2026-10-19): a certain crit through 5.x's `crit_chance_bonus` term, +100% crit power in `GetAttackersPowerMod`. Ported: the Bear, Feline and Manticore sets' terms (ARM-08, ARM-06, ARM-10), Mutation 2's crit formula and Mutation 9's bolt terms (MUT-03, MUT-11), 2026-10-17. SKL's terms here are ported: Whirl, the Yrden turret's cached intensity, the crit skills melee only, Anatomical Knowledge's crit damage on bolts.
+- Mutagen 5's (Water Hag's) 1.32 attack power at full Vitality is removed, as legacy, since [ALCH-10](alch.md#alch-10-decoctions-that-build-up-on-melee-hits-katakan-water-hag-wyvern-alghoul-forktail) (2026-10-20; until then a temporary deviation). Aerondight's crit is legacy's since SWD-05 (2026-10-19): a certain crit through 5.x's `crit_chance_bonus` term, +100% crit power in `GetAttackersPowerMod`. Ported: the Bear, Feline and Manticore sets' terms (ARM-08, ARM-06, ARM-10), Mutation 2's crit formula and Mutation 9's bolt terms (MUT-03, MUT-11), 2026-10-17. SKL's terms here are ported: Whirl, the Yrden turret's cached intensity, the crit skills melee only, Anatomical Knowledge's crit damage on bolts.
 
 
 **Slices:** slice 2, with [DMG-01](#dmg-01-armor-before-attack-power). The 5.x level-ups' additive attack power (+31 at level 10) applies after armor and so ignores it, until GEN removes it from level-ups.
@@ -166,7 +166,7 @@ No crits for damage over time or in non-deadly fights (slice 6a, 5.x-GM `5a615f8
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
-**What it does:** percentage bonuses to weapon damage are added together, then multiply the raw damage of every type once, before armor and attack power ("If something increases your weapon damage, it increases your base damage value and helps with penetrating enemy's Armor"). Flat additions are made first, so the pool scales them. Terms: Strong Attack (player heavy attacks, `heavy_attack_dmg_boost` 0.5: the core rule ported here), NPC heavy attacks +25%, `sword_dmg_bonus`/`spell_dmg_bonus` (Ghost Mode's item attributes), Rend, Heft, Perk 20 on bombs, Deflection on reflected arrows, the frozen-target bonus. Two stay separate multipliers: the underwater crossbow and Mutation 9. Removed from 1.32's function: the difficulty multiplier (moved to final damage, DMG-05), the NPC ranged bonus above level 31, the frozen target's separate frost hit and knockdown (now a pool term, EFX), Rend's two multipliers (now `GetRendPowerBonus`), Mutation 8 (final damage), Lynx and Aerondight (attack power), Runeword 4 (an effect).
+**What it does:** percentage bonuses to weapon damage are added together, then multiply the raw damage of every type once, before armor and attack power ("If something increases your weapon damage, it increases your base damage value and helps with penetrating enemy's Armor"). Flat additions are made first, so the pool scales them. Terms: Strong Attack (player heavy attacks, `heavy_attack_dmg_boost` 0.5: the core rule ported here), NPC heavy attacks +25%, `sword_dmg_bonus`/`spell_dmg_bonus` (Ghost Mode's item attributes), Rend, Heft, Perk 20 on bombs, Deflection on reflected arrows, the frozen-target bonus. Two stay separate multipliers: the underwater crossbow and Mutation 9. Removed from 1.32's function: the difficulty multiplier (moved to final damage, DMG-05), the NPC ranged bonus above level 31, the frozen target's separate frost hit (now a pool term, ALCH-14; the knockdown stays 5.x's until EFX), Rend's two multipliers (now `GetRendPowerBonus`), Mutation 8 (final damage), Lynx and Aerondight (attack power), Runeword 4 (an effect).
 
 **Implementation (legacy):** `ProcessDamageIncrease` (no parameter; reads and writes the action's damage types); `W3DamageAction.SetDTs`. `GetVitalityDamageTotal` and `GetEssenceDamageTotal` (new in `W3DamageAction`) have no caller: not ported.
 
@@ -182,7 +182,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 4. **Legacy's own exceptions**, kept multiplicative in legacy's code: the underwater crossbow bonus and Mutation 9's bolt damage. Kept as legacy.
 
 - 5.x's own versions of the terms legacy reworked were pool terms until their areas ported legacy's; none is left (ended with SWD-05, 2026-10-19). Aerondight's is gone: legacy's damage per enemy and crit power since SWD-05 (2026-10-19). Runeword 4's overheal term is gone: legacy's Invigoration effect on the weapon damage since ENCH-05 (2026-10-19). The Wolven set's is gone (legacy's oil bonuses, ARM-09, 2026-10-17). Mutation 8's term is gone: legacy's final-damage factor since MUT-06 (2026-10-17). The Lynx set's are gone (legacy's attack power, ARM-06, 2026-10-17). SKL's are ported: Heavy Artillery (legacy's), Perk 27 and `alchemy_s25` gone, the potion-duration passive zeroed (SKL-01).
-- **Deviation:** legacy's pool terms and flat additions of other areas are not ported yet: the frozen target's bonus (EFX; 5.x's separate frost hit stays), `fist_dmg_bonus` (AI), Mutagen 9 (ALCH) (temporary, until those areas; Mutation 10 came with MUT-09, Heft and Rotation with ENCH-10 and ENCH-13, `sword_dmg_bonus`/`spell_dmg_bonus` with SWD-07, 2026-10-19).
+- **Deviation:** legacy's pool terms and flat additions of other areas are not ported yet: `fist_dmg_bonus` (AI) (temporary, until that area; the frozen target's bonus came with ALCH-14, audit F2, 2026-10-20; Mutagen 9 came with ALCH-11, 2026-10-20; Mutation 10 came with MUT-09, Heft and Rotation with ENCH-10 and ENCH-13, `sword_dmg_bonus`/`spell_dmg_bonus` with SWD-07, 2026-10-19).
 
 **Slices:**
 
@@ -210,10 +210,10 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 
 **5.x:** see the intro: damage types fetched once at the start; the immortality clamp and `DamageInstigated` now in `ProcessActionDamage` after `ReduceDamage`; Mutagen 28 blocks specter abilities; `ProcessNewSkills_Combat`; Aard's direct damage through the formula; auto-oil; simulate-only gates. There is no wrap point between `ReduceDamage` and direct damage, hence the replacement.
 
-**Decisions:** port as legacy on 5.x's body; the difficulty multiplier's position (final damage, hostile NPCs hitting the player only) is DMG's, its values DIFF's (DD4). Keeping 5.x's additions that are not in the way (Mutagen 28's specter block for ALCH to decide, auto-oil, simulate-only gates, `SetRecentlyDodged`).
+**Decisions:** port as legacy on 5.x's body; the difficulty multiplier's position (final damage, hostile NPCs hitting the player only) is DMG's, its values DIFF's (DD4). Keeping 5.x's additions that are not in the way (auto-oil, simulate-only gates, `SetRecentlyDodged`). Mutagen 28's (Reliever's) 5.x specter block is removed since ALCH-13 (the owner's DL6, 2026-10-20).
 
-- **Deviation:** Golden Oriole's level-3 absorption of poison damage, healing Geralt by it, stays 5.x's in `ProcessActionDamage` (legacy removed it; the Viper set heals from poison instead, ported with ARM-11 after it) (temporary, until ALCH).
-- **Deviation:** the other areas' final-damage terms are not ported yet: Dimeritium (ALCH) (temporary, until that area). Mutation 8's is ported (MUT-06, 2026-10-17), Severance's (ENCH-04, 2026-10-19). SKL's are ported: unaimed bolts and bombs ×0.5, In Combat's Fires, Supercharged Glyphs, Crippling Strikes, Muscle Memory's total damage.
+- Golden Oriole's level-3 absorption of poison damage is removed from `ProcessActionDamage`, as legacy ([ALCH-05](alch.md#alch-05-golden-oriole), 2026-10-20; until then a temporary deviation); the Viper set heals from poison instead (ARM-11).
+- The other areas' final-damage terms are ported: Dimeritium's mage damage cut (ALCH-15, 2026-10-20), Mutation 8's (MUT-06, 2026-10-17), Severance's (ENCH-04, 2026-10-19). SKL's are ported: unaimed bolts and bombs ×0.5, In Combat's Fires, Supercharged Glyphs, Crippling Strikes, Muscle Memory's total damage.
 - **Deviation:** until DIFF ports legacy's difficulty values (`difficulty_Common*`: Normal none, Hard +100%, Hardcore +250%), 5.x's values (+40%, +130%, +230%) apply at legacy's position, final damage (temporary, until DIFF).
 - The sign-damage reduction against Vitality is not in the changelist: an omission, recorded in [open-questions.md](../open-questions.md#legacy-data-vs-changelist).
 
@@ -273,7 +273,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 
 **Decisions:** port as legacy. `resistStat` cannot be made protected by annotation: Ghost Mode code reads it through an added getter.
 
-- **Deviation:** the Petri Philtre's level-3 bonus to sign effect durations (+34% for knockdown, confusion, Axii's puppet, burning), in the same function, is not ported yet (temporary, until ALCH).
+- The Petri Philtre's level-3 bonus to sign effect durations (+34% for knockdown, confusion, Axii's puppet, burning) is in the same function since [ALCH-06](alch.md#alch-06-petris-philtre-level-3) (2026-10-20; until then a temporary deviation).
 
 **Slices:**
 
@@ -396,7 +396,7 @@ Handed off to ITEM ([hand-off](#hand-off-to-other-areas)); the ID is kept so the
 **Decisions:** port as legacy (DD3, project owner, 2026-10-06); 5.x's ally code in `CalculateDamage`, `GetAttackersPowerMod` (the damage-boost abilities) and `CActor.ReduceDamage` (×0.1 for Axii'd allies) is left out.
 
 - **Deviation:** a puppet's level is the player's Puppet level, either tree (`S_Magic_s05` or `S_Magic_s31`); legacy read the puppet's `alt_axii_level`, which its XML gave Puppet's skill ability (one per level) and 5.x's lacks. The same result except when Geralt's Puppet level changes while a puppet lives (project owner, 2026-10-07, audit F8: no functional difference, and one change fewer to 5.x).
-- **Deviation:** the Succubus decoction's bonus to a puppet's damage is not ported yet (temporary, until ALCH).
+- The Succubus decoction's bonus to a puppet's damage (its limits ×1.5) is in `GMAllyDamage` since [ALCH-11](alch.md#alch-11-sign-decoctions-foglet-succubus-wraith-ancient-leshen) (2026-10-20; until then a temporary deviation).
 
 **Slices:**
 
@@ -506,9 +506,9 @@ None.
 | SWD | Sword damage and crit bonuses (618 units), `sword_dmg_bonus`/`spell_dmg_bonus`, Aerondight (attack power, crit, ignoring armor), Iris's phantom strike |
 | XBOW | Crossbows' armor piercing and bolts (62 units), headshots ignoring armor and resistances, NPC bow damage (`W3ArrowProjectile.ProcessDamageAction`, `GetHeldWeaponDamage`), the underwater multiplier |
 | ITEM | Durability (`GetDurabilityMultiplier`, the durability constants in `W3GameParams.<members>`, DMG-09), random item modifiers (`def_item_quality.xml` MA_*: attack power add removed, crits and resistances raised; 24 units), item level |
-| ALCH | Oils' resistance reduction (a flat 0.25 at every level), Mutagens 2, 5, 9, 19, 20, 26, 28, Black Blood, Dimeritium bomb, Petri Philtre in `CalculateDuration`, Golden Oriole's poison healing removed |
+| ALCH | Oils' resistance reduction (0 in 1.32, legacy and 5.x alike: no play difference; the 0.25 is the oils' attack power, [ALCH-16](alch.md#alch-16-oils)), Mutagens 2, 5, 9, 19, 20, 26, 28, Black Blood, Dimeritium bomb, Petri Philtre in `CalculateDuration`, Golden Oriole's poison healing removed |
 | ENCH | Heft, Rotation, Severance, Runeword 1 (`ProcessPreHitModifications`, attributed to MUT-11 only), Runeword 4, Glyphword 5 (`ProcessActionReflectDamage`, disabled) |
-| EFX | The frozen target's pool bonus and Aard force damage, Frozen pausing damage over time, damage-over-time ticks (at least 1 per second, only to the stat the target uses; `W3DamageOverTimeEffect.CalculateDamage`, `OnUpdate`), bleeding and blindness crit bonuses |
+| EFX | The frozen target's knockdown (legacy removed it) and Aard force damage (the pool bonus came with ALCH-14), Frozen pausing damage over time, damage-over-time ticks (at least 1 per second, only to the stat the target uses; `W3DamageOverTimeEffect.CalculateDamage`, `OnUpdate`), bleeding and blindness crit bonuses |
 | GEN | Geralt's base poison and bleeding resistance removed (`ConGeralt`), level-ups without attack power or sign intensity |
 | UI | The damage shown in the character panel and tooltips (`SPlayerOffenseStats`, `GetOffenseStatsList`, the stats popup's sword sections): `SPlayerOffenseStats` is a struct, which annotations cannot extend |
 | HORSE | The horse-speed attack power bonus removed from `GetPowerStatValue` |

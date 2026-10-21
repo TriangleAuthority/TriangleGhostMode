@@ -136,7 +136,7 @@ Columns: **Points** for GM = path points needed, then levels to max; for 5.x = u
 | legacy GM | general | general rule | - | - | - | overdose threshold fixed at 75% of max; no skill raises it | rule |  |
 | 5.x new | `perk_33` Metabolic Control | Perks_col5 | row 18 | unlock 2, max 4 pts in Perks grid | 3 | +30 max Toxicity (10/level) |  | legacy (D49): +40, 1 level |
 | 5.x new | `alchemy_s18` Acquired Tolerance | Alchemy_Mutagens | row 9 | unlock 3, max 5 pts in Alchemy grid; shared (5.x requiredPointsSpent 0 ignored) | 3 | +0.5 per formula of level <= skill level (x level) |  | D33: +1 per formula |
-| 5.x new | general | general rule | - | - | - | overdose threshold 50% (5.x); no new-tree skill raises it | rule | ALCH decides the threshold |
+| 5.x new | general | general rule | - | - | - | overdose threshold 50% (5.x); no new-tree skill raises it | rule | legacy's 75% (ALCH-01, DL1) |
 
 ### Toxicity reduction
 

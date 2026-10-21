@@ -126,8 +126,7 @@ function Update() : bool
 	return true;
 }
 
-// 5.x body; changes marked //modSigns. (Legacy's Mutagen 21 and adrenaline changes here are ALCH's
-// and SKL's.)
+// 5.x body; changes marked //modSigns. Legacy's Mutagen 21 (Ekhidna) heal per stamina point is ALCH-12's.
 @replaceMethod(W3PlayerAbilityManager)
 function DrainStamina(action : EStaminaActionType, optional fixedCost : float, optional fixedDelay : float, optional abilityName : name, optional dt : float, optional costMult : float) : float
 {	
@@ -148,10 +147,10 @@ function DrainStamina(action : EStaminaActionType, optional fixedCost : float, o
 	}
 	
 	
-	if (cost > 0 && dt <= 0 && owner == thePlayer && thePlayer.HasBuff(EET_Mutagen21) && abilityName != 'sword_s1' && abilityName != 'sword_s2' && abilityName != 'GM_C_sword_s2')	//modSigns: SKL, Rend's classic-tree ability
+	if (cost > 0 && owner == thePlayer && thePlayer.HasBuff(EET_Mutagen21))	//modSigns: ALCH-12, Ekhidna heals per stamina point spent, every drain (sprint, Whirl, channelled signs included; legacy)
 	{	
 		mutagen = (W3Mutagen21_Effect)thePlayer.GetBuff(EET_Mutagen21);
-		mutagen.Heal();
+		mutagen.GMHeal(cost);	//modSigns
 	}
 	
 	

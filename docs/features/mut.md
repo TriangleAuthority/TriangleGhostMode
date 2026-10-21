@@ -338,14 +338,14 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 | Save impact | none |
 | NG+ counterpart | applied (generated), untested |
 
-**What it does:** only while overdosed (toxicity at or above the overdose threshold: 5.x's 50% for now, legacy's 75%) and in combat: the overdose's Vitality drain is × (1 + 0.75 × toxicity / 100), and that drain per second is added to the base damage of every sword hit and Sign (per damage type of the hit, as legacy's loop: a hit with three damage types gets it three times); it starts when Geralt is overdosed in combat or enters combat overdosed, and stops below the threshold and at combat end. 5.x's +0.75% attack power and sign intensity per toxicity point is gone. At 100 toxicity and 5380 Vitality: +47 per damage type, 47 Vitality lost per second. **Scales:** toxicity (overdose), max Vitality. **Build:** Alchemy (cornerstone).
+**What it does:** only while overdosed (toxicity at or above the overdose threshold, legacy's 75%, ALCH-01) and in combat: the overdose's Vitality drain is × (1 + 0.75 × toxicity / 100), and that drain per second is added to the base damage of every sword hit and Sign (per damage type of the hit, as legacy's loop: a hit with three damage types gets it three times); it starts when Geralt is overdosed in combat or enters combat overdosed, and stops below the threshold and at combat end. 5.x's +0.75% attack power and sign intensity per toxicity point is gone. At 100 toxicity and 5380 Vitality: +47 per damage type, 47 Vitality lost per second. **Scales:** toxicity (overdose), max Vitality. **Build:** Alchemy (cornerstone).
 
 **Decisions:**
 
 - Legacy's own rule kept: Euphoria stops when toxicity falls below the threshold during the toxicity effect's update; toxicity set to 0 at once (a potion that clears it) ends the toxicity effect first, and Euphoria then lasts until combat ends.
 - **Deviation:** the energy FX on hits is 5.x's (on melee and Sign hits on actors, not for channelled Signs); legacy played it on melee hits and once per Sign cast (porter's call, confirmed by the owner, 2026-10-17).
 - **Deviation:** the character stats popup's and the inventory's lines with Euphoria (legacy's overdose drain line and its damage bonus in `GetOffenseStatsList` and `AddCharacterStatSigns`) are not ported (temporary, until UI; porter's call, confirmed by the owner, 2026-10-17).
-- **Deviation:** Euphoria starts, and stops, at 5.x's overdose threshold, 50% of the toxicity bar (`theGame.params.TOXICITY_DAMAGE_THRESHOLD` 0.50001), not legacy's 75%: the threshold is ALCH's, and also moves Endure Pain's, Frenzy's and the overdose drain's start (audit F2; temporary, until ALCH; porter's call, not confirmed by the owner, 2026-10-17).
+- Euphoria starts and stops at the overdose threshold, legacy's 75% since [ALCH-01](alch.md#alch-01-toxicity-and-overdose) (2026-10-20; until then 5.x's 50%, a temporary deviation that ALCH ended).
 
 **Slices:**
 

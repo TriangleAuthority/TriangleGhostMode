@@ -249,3 +249,174 @@
 2110992269|ad70e65b||Ferramentas de ferreiro usadas por armeiro. Aumenta permanentemente a defesa da armadura.
 ; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
 2110992483|d400b4dd||Resistência a dano
+; ALCH-15: the Dimeritium effect's HUD label (legacy's id and key)
+2110992343|b616490f||Dimerítio
+; ALCH-04: Swallow, White Raffard, White Honey (legacy's ids and keys)
+2110992178|        ||Acelera a regeneração de Vitalidade. A regeneração de Vitalidade não é interrompida após receber dano.
+2110992231|de026195||Reduz a Toxicidade para zero e cancela os efeitos ativos de outras poções.
+2110992232|de026196||Reduz a Toxicidade para zero e cancela os efeitos ativos de outras poções.
+2110992233|de026197||Reduz a Toxicidade para zero e cancela os efeitos ativos de outras poções.
+2110992433|9ec8a224||Restaura imediatamente uma parte da Vitalidade e interrompe Sangramentos.
+2110992434|9ec8a225||Restaura imediatamente uma grande parte da Vitalidade e interrompe Sangramentos.
+2110992435|9ec8a226||Restaura a Vitalidade imediatamente e totalmente e interrompe Sangramentos. Concede imunidade a dano por um curto período.
+2110992537|56747c55||Interrompe o sangramento e aumenta a resistência a sangramento. Acelera a regeneração de Vitalidade. A regeneração da Vitalidade pausa por 2 segundos após receber dano.
+2110992538|56747c56||Interrompe o sangramento e aumenta a resistência a sangramento. Acelera a regeneração de Vitalidade. A regeneração da Vitalidade pausa por 2 segundos após receber dano.
+2110992539|56747c57||Interrompe o sangramento e aumenta a resistência a sangramento. Acelera a regeneração de Vitalidade. Receber dano não interrompe a regeneração de Vitalidade.
+; ALCH-05: Golden Oriole (legacy's ids and keys)
+2110992530|3a84c328||Aumenta a resistência a veneno e neutraliza efeitos de venenos que já estão na corrente sanguínea.
+2110992531|3a84c329||Aumenta a resistência a veneno e neutraliza efeitos de venenos que já estão na corrente sanguínea. Duração extendida.
+2110992532|3a84c32a||Aumenta a resistência a veneno e neutraliza efeitos de venenos que já estão na corrente sanguínea. Concede imunidade temporária a efeitos de veneno.
+2110992533|2e268281||Duração da imunidade a veneno
+; ALCH-05: Golden Oriole's buff text (audit F12; new id, the vanilla key)
+2110992638|42725726||Aumenta a resistência a veneno e neutraliza efeitos de venenos que já estão na corrente sanguínea.
+; ALCH-06: Petri's Philtre (legacy's ids and keys)
+2110992165|9e58d1f5||Aumenta a Intensidade do Sinal. Duração estendida. Os efeitos especiais dos Sinais são um terço mais duradouros.
+; ALCH-07: Cat, Blizzard, Tawny Owl (legacy's ids and keys)
+2110992235|874e9f88||Concede visão na escuridão total e imunidade contra hipnose. Duração estendida.
+2110992240|874e9f87||Concede visão na escuridão total. Duração estendida.
+2110992471|1b06cd09||Sempre que você mata um inimigo, o tempo desacelera por um curto período.
+2110992534|437e276a||Acelera a regeneração de Vigor.
+2110992535|437e276b||Acelera a regeneração de Vigor.
+2110992536|437e276c||Acelera a regeneração de Vigor. O efeito nunca acaba à noite.
+; ALCH-07: Cat 1's and Cat's buff text without crit chance, Blizzard 1's and 3's legacy texts (audit F7, F8; new ids, the vanilla keys)
+2110992633|874e9f86||Concede visão na escuridão total.
+2110992634|1a61ef57||Concede visão na escuridão total.
+2110992635|1b06cd08||Sempre que você mata um inimigo, o tempo desacelera por um curto período.
+2110992636|1b06cd0a||Sempre que você mata um inimigo, o tempo desacelera por um curto período. Se houver 3 pontos de adrenalina disponíveis, durante este período as ações não esgotarão o vigor.
+; ALCH-08: Killer Whale (legacy's ids and keys)
+2110992464|a1370329||Melhora o aporte respiratório e a visão enquanto estiver debaixo d'água.
+; ALCH-09: decoction rules (toxicity offset, Nightwraith, Ekimmara, Cockatrice) (legacy's ids and keys)
+2110992188|e71d7c90||Aumenta a Vitalidade base de Geralt em $S$ pontos com cada inimigo morto.
+2110992246|e71d7c91||Regenera Vitalidade em $S$% do dano causado a um inimigo.
+2110992381|44aa9fca||Compensação de Toxicidade
+2110992382|f4fd119f||A compensação de Toxicidade reserva uma quantidade da sua Toxicidade máxima durante o efeito de decocção.
+2110992477|e71d7c8d||Todas as bombas e poções (exceto decocções) podem ser usadas mais uma vez.
+; ALCH-10: melee decoctions' descriptions (legacy's ids and keys)
+2110992247|fc921505||Lançar um Sinal aumenta o seu Poder de Ataque corpo a corpo em $I$% (máx. $I$%). O bônus reseta após causar dano corpo a corpo e ao fim do combate.
+2110992455|e71d7c8b||O dano não crítico causado por uma espada aumenta a chance de Acerto Crítico para ataques subsequentes em $I$% (máx. $I$%). Quando este bônus estiver no máximo, recebe um adicional de $I$% ao Poder de Acerto Crítico. O bônus é zerado ao desferir um Acerto Crítico ou ao fim do combate.
+2110992484|fc92150c||O dano causado por arma branca aumenta a Intensidade do Sinal em $I$% (máx. $I$%). O bônus é zerado após lançar um Sinal ou ao fim do combate.
+2110992485|e71d7c8f||Causar dano corpo a corpo aos inimigos aumenta seu Poder de Ataque em $S$% (máx. $S$%). Ser atingido diminui o bônus proporcional ao dano recebido: $S$% por 1% da saúde perdida. Zera ao fim do combate.
+2110992486|fc92150a||Causar dano corpo a corpo aos inimigos aumenta seu ganho de Adrenalina em $S$% (máx. $S$%). Ser atingido diminui o bônus proporcional ao dano recebido: $S$% por 1% da saúde perdida. Zera ao fim do combate.
+; ALCH-11: sign decoctions' descriptions (legacy's ids and keys)
+2110992243|e71d7c93||Cada Mutagênico Azul Menor equipado aumenta o dano base dos Sinais em $S$ pontos. O Mutagênico Azul aumenta o bônus para $S$ e o Mutagênico Azul Maior para $S$.
+2110992248|fc921509||Inimigos controlados pela Marionete Axii causam $I$% mais dano.
+2110992249|fc921526||Lançar um Sinal em combate aumenta sua Intensidade de Sinal em $S$% (máx. $S$%). Ser atingido diminui o bônus proporcional ao dano recebido: $S$% por 1% da saúde perdida. Reseta ao fim do combate.
+2110992481|fc92150e||Quando o Bruxo é atacado por trás, o Sinal Quen é ativado e reduz o dano. Quando há Espectros hostis por perto, o poder de Quen é aumentado em $S$%.
+; ALCH-12: sustain decoctions' descriptions (legacy's ids and keys)
+2110992241|e71d7c8e||Todos os seus ataques corpo a corpo custam $S$% mais Vigor. O ataque corpo a corpo bem-sucedido reduz adicionalmente a saúde da vítima em $S$% do seu valor atual por cada ponto de Vigor gasto no ataque.
+2110992242|fc921527||Cada Mutagênico Verde Menor equipado aumenta sua taxa de regeneração de Vitalidade em $S$/sec. O Mutagênico Verde aumenta o bônus para $S$/s e o Mutagênico Verde Maior para $S$s.
+2110992245|fc921525||Regenera Vitalidade em $S$% para cada ponto de Vigor gasto. Funciona apenas em combate.
+2110992436|fc921529||Cada Mutagênico Vermelho Menor equipado reduz o custo de Vigor de ações corpo a corpo em $S$%. O Mutagênico Vermelho aumenta o bônus para $S$% e o Mutagênico Vermelho Maior para $S$%.
+2110992488|fc921507||Você ganha +$I$ à regeneração de Vitalidade fora de combate e +$I$ à regeneração de Vitalidade em combate. Quando seu Vigor estiver a $I$% ou menos, você ganha outros +$I$ à regeneração de Vitalidade em combate.
+2110992489|fc92150d||Ao matar um inimigo você ganha +$I$ à regeneração de Vitalidade por cada inimigo próximo. O bônus máximo não pode exceder +$I$. Zera ao final do combate.
+2110992490|fc921508||Ao matar um inimigo você ganha +$I$ à regeneração de Vigor por cada inimigo próximo. O bônus máximo não pode exceder +$I$. Zera ao final do combate.
+; ALCH-13: defensive decoctions' descriptions (legacy's ids and keys)
+2110992244|fc921524||Aumenta a resistência do bruxo aos efeitos de sangramento, incineração e envenenamento, bem como ao dano de fogo e veneno por $I$%.
+2110992388|fc92152b||Ser atingido mais de uma vez dentro de $S$s torna você imune a dano pelos próximos $S$s.
+2110992389|e71d7c8c||Quando inimigos te ferirem em combate corpo a corpo, eles recebem um efeito ácido que reduz sua Resistência a Dano em $I$% (máx. $I$%).
+2110992390|fc92152c||O dano causado aos inimigos na forma espectral aumenta de $I$% para $I$% do dano normal. O dano recebido de inimigos na forma espectral é reduzido em $I$%.
+2110992457|fc92150b||A severidade da reação dos golpes é reduzida a zero, se o dano recebido for inferior a $I$% da sua saúde máxima.
+2110992478|fc921506||Aumenta o Poder de Acerto Crítico em $I$% ao atacar por trás.
+2110992479|fc92152a||$I$% do dano recebido pelo Bruxo é refletido de volta ao atacante.
+2110992487|fc921528||Você ganha +$I$% ao Poder de Ataque, +$I$% à Intensidade do Sinal, +$I$ pontos/s à regeneração de Vigor e +$I$% ao Ganho de Adrenalina enquanto sua Vitalidade estiver em $I$% ou menos. Zera ao recobrar a Vitalidade ou ao fim do combate. $I$s de recarga.
+; ALCH-14: bombs' descriptions and attribute names (legacy's ids and keys)
+2110992163|7968d6e0||Congela inimigos. Ataques feitos contra inimigos congelados causam dano adicional. Duração estendida.
+2110992189|d3510d11||Contém lascas de prata que bloqueiam ou enfraquecem temporariamente as habilidades de transformação e regeneração de monstros.
+2110992190|d3510d12||Contém lascas de prata que bloqueiam ou enfraquecem temporariamente as habilidades de transformação e regeneração de monstros. Duração extendida.
+2110992191|d3510d13||Contém lascas de prata que bloqueiam ou enfraquecem temporariamente as habilidades de transformação e regeneração de monstros. Duração extendida.
+2110992237|fe608837||Causa dano de estilhaços a oponentes no raio da explosão. Causa dano de fogo. Efeito melhorado. Destrói o escudo do inimigo. Destrói ninhos de monstros.
+2110992348|ec4dca6f||Duração da nuvem
+2110992482|6ac22a47||Bônus de dano
+2110992508|fa56c289||Dano de fogo em explosão
+; ALCH-14: Samum 3's text (audit F12; new id, the vanilla key)
+2110992637|3c30d2a9||Cega oponentes em seu raio de explosão. Duração estendida. Aumenta a chance de acerto crítico contra oponentes cegados. Destrói ninhos de monstros.
+; ALCH-15: Dimeritium's descriptions and attribute names (legacy's ids and keys)
+2110992239|3ed03538||Duração fora da nuvem
+2110992344|63cd93a3||Libera uma nuvem de lascas de dimerítio que bloqueiam magia primitiva e as habilidades mágicas dos monstros. Enfraquece a armadura de criaturas mágicas. Enfraquece magos, reduzindo seu dano.
+2110992345|63cd93a4||Libera uma nuvem de lascas de dimerítio que bloqueiam magia primitiva e as habilidades mágicas dos monstros. Enfraquece a armadura de criaturas mágicas. Enfraquece magos, reduzindo seu dano. Dura mais .
+2110992346|63cd93a5||Libera uma nuvem de lascas de dimerítio que bloqueiam magia primitiva e as habilidades mágicas dos monstros. Enfraquece a armadura de criaturas mágicas. Enfraquece magos, reduzindo seu dano. Dura mais.
+2110992347|db81c2af||Penetração de armadura
+2110992456|0391a988||Redução de dano
+2110992480|9691af88||Redução de Resistência a Dano
+; ALCH-16: oil attribute names and descriptions (legacy's ids and keys)
+2110992034|40aed692||Chance de Acerto Crítico contra Feras
+2110992035|c8957121||Chance de Acerto Crítico contra Amaldiçoados
+2110992036|79a23d6e||Chance de Acerto Crítico contra Draconídeos
+2110992037|d33fe160||Chance de Acerto Crítico contra Humanos
+2110992038|f261a80b||Chance de Acerto Crítico contra Híbridos
+2110992039|97466e95||Chance de Acerto Crítico contra Insectoides
+2110992040|4bfdf9ea||Chance de Acerto Crítico contra Elementais
+2110992041|016d02ed||Chance de Acerto Crítico contra Necrófagos
+2110992042|9c73a4a6||Chance de Acerto Crítico contra Relictos
+2110992043|c3702fb9||Chance de Acerto Crítico contra Espectros
+2110992044|cd868a1a||Chance de Acerto Crítico contra Ogroides
+2110992045|42229941||Chance de Acerto Crítico contra Vampiros
+2110992046|4fa6c42d||Poder de Acerto Crítico contra Feras
+2110992047|df4cf77c||Poder de Acerto Crítico contra Amaldiçoados
+2110992048|f7d09609||Poder de Acerto Crítico contra Draconídeos
+2110992049|810bfc7b||Poder de Acerto Crítico contra Humanos
+2110992050|6b0ad6e6||Poder de Acerto Crítico contra Híbridos
+2110992051|6adf0df0||Poder de Acerto Crítico contra Insectoides
+2110992052|0cf40585||Poder de Acerto Crítico contra Elementais
+2110992053|69eb0048||Poder de Acerto Crítico contra Necrófagos
+2110992054|2e15b341||Poder de Acerto Crítico contra Relictos
+2110992055|17546414||Poder de Acerto Crítico contra Espectros
+2110992056|b4fbb1b5||Poder de Acerto Crítico contra Ogroides
+2110992057|d123879c||Poder de Acerto Crítico contra Vampiros
+2110992058|c8d4450c||Redução de resistência a dano contra Feras
+2110992059|4b1b4cdd||Redução de resistência a dano contra Amaldiçoados
+2110992060|da69abb0||Redução de resistência a dano contra Draconídeos
+2110992061|83b5dcfe||Redução de resistência a dano contra Humanos
+2110992062|5da28e33||Redução de resistência a dano contra Híbridos
+2110992063|ca4463e9||Redução de resistência a dano contra Insectoides
+2110992064|d14fa0b4||Redução de resistência a dano contra Elementais
+2110992065|8b85ee91||Redução de resistência a dano contra Necrófagos
+2110992066|0ecc4f78||Redução de resistência a dano contra Relictos
+2110992067|64e2d545||Redução de resistência a dano contra Espectros
+2110992068|111c7e84||Redução de resistência a dano contra Ogroides
+2110992069|5a3c18bd||Redução de resistência a dano contra Vampiros
+2110992070|d25344ee||Poder de Ataque contra Humanos
+2110992192|08eace65||Aumenta a eficácia do ataque contra Insectoides.  A efetividade do óleo diminui com o uso da lâmina.
+2110992193|08eace66||Aumenta a eficácia do ataque contra Insectoides.  A efetividade do óleo diminui com o uso da lâmina.
+2110992194|08eace67||Aumenta a eficácia do ataque contra Insectoides.  A efetividade do óleo diminui com o uso da lâmina.
+2110992195|3a67f159||Aumenta a eficácia do ataque contra inimigos Amaldiçoados. A efetividade do óleo diminui com o uso da lâmina.
+2110992196|3a67f15a||Aumenta a eficácia do ataque contra inimigos Amaldiçoados. A efetividade do óleo diminui com o uso da lâmina.
+2110992197|3a67f15b||Aumenta a eficácia do ataque contra inimigos Amaldiçoados. A efetividade do óleo diminui com o uso da lâmina.
+2110992198|65067e25||Aumenta a eficácia do ataque contra Necrófagos. A efetividade do óleo diminui com o uso da lâmina.
+2110992199|65067e26||Aumenta a eficácia do ataque contra Necrófagos. A efetividade do óleo diminui com o uso da lâmina.
+2110992200|65067e27||Aumenta a eficácia do ataque contra Necrófagos. A efetividade do óleo diminui com o uso da lâmina.
+2110992201|7b1c29c3||Aumenta a eficácia do ataque contra Híbridos. A efetividade do óleo diminui com o uso da lâmina.
+2110992202|7b1c29c4||Aumenta a eficácia do ataque contra Híbridos. A efetividade do óleo diminui com o uso da lâmina.
+2110992203|7b1c29c5||Aumenta a eficácia do ataque contra Híbridos. A efetividade do óleo diminui com o uso da lâmina.
+2110992204|88e86911||Aumenta a eficácia do ataque contra Vampiros. A efetividade do óleo diminui com o uso da lâmina.
+2110992205|88e86912||Aumenta a eficácia do ataque contra Vampiros. A efetividade do óleo diminui com o uso da lâmina.
+2110992206|88e86913||Aumenta a eficácia do ataque contra Vampiros. A efetividade do óleo diminui com o uso da lâmina.
+2110992207|aed490e2||Aumenta a eficácia do ataque contra Elementais. A efetividade do óleo diminui com o uso da lâmina.
+2110992208|aed490e3||Aumenta a eficácia do ataque contra Elementais. A efetividade do óleo diminui com o uso da lâmina.
+2110992209|aed490e4||Aumenta a eficácia do ataque contra Elementais. A efetividade do óleo diminui com o uso da lâmina.
+2110992210|d11afcde||Aumenta a eficácia do ataque contra Humanos, Elfos, Anões e Ananicos. A efetividade do óleo diminui com o uso da lâmina.
+2110992211|d11afcdf||Aumenta a eficácia do ataque contra Humanos, Elfos, Anões e Ananicos. A efetividade do óleo diminui com o uso da lâmina.
+2110992212|d11afce0||Aumenta a eficácia do ataque contra Humanos, Elfos, Anões e Ananicos. A efetividade do óleo diminui com o uso da lâmina.
+2110992213|ea1a3189||Aumenta a eficácia do ataque contra Espectros. A efetividade do óleo diminui com o uso da lâmina.
+2110992214|ea1a318a||Aumenta a eficácia do ataque contra Espectros. A efetividade do óleo diminui com o uso da lâmina.
+2110992215|ea1a318b||Aumenta a eficácia do ataque contra Espectros. A efetividade do óleo diminui com o uso da lâmina.
+2110992216|ef649cfe||Aumenta a eficácia do ataque contra Draconídeos. A efetividade do óleo diminui com o uso da lâmina.
+2110992217|ef649cff||Aumenta a eficácia do ataque contra Draconídeos. A efetividade do óleo diminui com o uso da lâmina.
+2110992218|ef649d00||Aumenta a eficácia do ataque contra Draconídeos. A efetividade do óleo diminui com o uso da lâmina.
+2110992219|f8b46c36||Aumenta a eficácia do ataque contra Relictos. A efetividade do óleo diminui com o uso da lâmina.
+2110992220|f8b46c37||Aumenta a eficácia do ataque contra Relictos. A efetividade do óleo diminui com o uso da lâmina.
+2110992221|1ff07bf8||Aumenta a eficácia do ataque contra Relictos. A efetividade do óleo diminui com o uso da lâmina.
+2110992222|7753393f||Aumenta a eficácia do ataque contra Ogroides. A efetividade do óleo diminui com o uso da lâmina.
+2110992223|77533940||Aumenta a eficácia do ataque contra Ogroides. A efetividade do óleo diminui com o uso da lâmina.
+2110992224|77533941||Aumenta a eficácia do ataque contra Ogroides. A efetividade do óleo diminui com o uso da lâmina.
+2110992225|c0218f12||Aumenta a eficácia do ataque contra Ogroides. A efetividade do óleo diminui com o uso da lâmina.
+2110992226|c0218f13||Aumenta a eficácia do ataque contra Ogroides. A efetividade do óleo diminui com o uso da lâmina.
+2110992227|c0218f14||Aumenta a eficácia do ataque contra Ogroides. A efetividade do óleo diminui com o uso da lâmina.
+2110992228|dd8e2b22||Aumenta a eficácia do ataque contra Feras. A efetividade do óleo diminui com o uso da lâmina.
+2110992229|dd8e2b23||Aumenta a eficácia do ataque contra Feras. A efetividade do óleo diminui com o uso da lâmina.
+2110992230|dd8e2b24||Aumenta a eficácia do ataque contra Feras. A efetividade do óleo diminui com o uso da lâmina.
+2110992234|f8b46c38||Aumenta a eficácia do ataque contra Relictos.
+; ALCH-17: the potion duration attribute (legacy's ids and keys)
+2110992015|c4ea0ecf||Duração da poção
+; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
+2110992259|b91d9859||Pode ser vendido para comerciantes.

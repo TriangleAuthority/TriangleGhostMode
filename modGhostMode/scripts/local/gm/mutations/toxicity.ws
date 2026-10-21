@@ -1,6 +1,7 @@
 // W3Effect_Toxicity.OnUpdate, replaced for the mutations' hunks: MUT-08 Toxic Blood's slower toxicity
-// decay; MUT-09 Euphoria's start and stop, and its larger overdose drain. ALCH's own changes to this function (legacy's) go into this replacement when ALCH is ported.
-// See docs/features/mut.md.
+// decay; MUT-09 Euphoria's start and stop, and its larger overdose drain; ALCH-01 legacy's decay (only while
+// there is toxicity, the same in and out of combat; the owner's DL1). 5.x's five-step head effects are kept.
+// See docs/features/mut.md and alch.md.
 
 @replaceMethod(W3Effect_Toxicity)
 function OnUpdate(deltaTime : float)
@@ -147,13 +148,15 @@ function OnUpdate(deltaTime : float)
 	}
 		
 	
+	if(GetWitcherPlayer().GetStat(BCS_Toxicity, true) > 0)	//modSigns: ALCH-01, decay only while there is toxicity
+	{	//modSigns
 	drainVal = deltaTime * (effectValue.valueAdditive + (effectValue.valueMultiplicative * (effectValue.valueBase + target.GetStatMax(BCS_Toxicity)) ) );
 	
 	
-	if(!target.IsInCombat())
-		drainVal *= 1.1; 
+	//modSigns: removed the x1.1 decay out of combat (ALCH-01, legacy's decay the same in and out of combat)
 		
 	if(GetWitcherPlayer().IsMutationActive(EPMT_Mutation4))	//modSigns: MUT-08, Toxic Blood's slower decay
 		drainVal *= MaxF(0.01, 1 - GMMutation4DecayFactor());	//modSigns
 	effectManager.CacheStatUpdate(BCS_Toxicity, drainVal);
+	}	//modSigns
 }

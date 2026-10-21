@@ -127,11 +127,7 @@ function OnEffectAdded(optional customParams : W3BuffCustomParams)
 	}
 
 
-	if( params.isFromBomb )
-	{
-		skillPassiveMod = CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('potion_duration'));
-		effectValue.valueAdditive *= ( 1 + skillPassiveMod );
-	}
+	//modSigns: removed 5.x's potion duration bonus to bomb damage (ALCH-14, the owner's DL7)
 
 
 

@@ -182,6 +182,7 @@ function GetPowerStatValue() : SAbilityAttributeValue
 function GetCriticalHitChance( isLightAttack : bool, isHeavyAttack : bool, target : CActor, victimMonsterCategory : EMonsterCategory, isBolt : bool ) : float
 {
 	var critChance : float;
+	var confusionCrit : float;	//modSigns: ALCH-14
 	var oilChanceAttribute : name;
 	var weapons : array< SItemUniqueId >;
 	var i : int;
@@ -228,8 +229,9 @@ function GetCriticalHitChance( isLightAttack : bool, isHeavyAttack : bool, targe
 
 	if( target && target.HasBuff( EET_Confusion ) )
 	{
-		critChance += ( ( W3ConfuseEffect )target.GetBuff( EET_Confusion ) ).GetCriticalHitChanceBonus();
+		confusionCrit = ( ( W3ConfuseEffect )target.GetBuff( EET_Confusion ) ).GetCriticalHitChanceBonus();	//modSigns: ALCH-14, the larger of the confusion and blindness bonuses (legacy)
 	}
+	critChance += MaxF(confusionCrit, GMBlindnessCritBonus(target));	//modSigns: ALCH-14, Samum's blindness +50/75/100% (legacy)
 	
 	
 	oilChanceAttribute = MonsterCategoryToCriticalChanceBonus( victimMonsterCategory );

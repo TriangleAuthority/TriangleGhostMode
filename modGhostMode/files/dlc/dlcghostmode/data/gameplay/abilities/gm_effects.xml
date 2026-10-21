@@ -132,6 +132,8 @@
       <effect name_name="GMKaerMorhenSetBonusEffect" defaultAbilityName_name="GMKaerMorhenSetBonusEffect" showOnHUD="0" />
       <effect name_name="GMRuneword4Effect" defaultAbilityName_name="GMRuneword4Effect" iconType_name="icon_effect_runeword" showOnHUD="1" effectNameLocalisationKey_name="runeword04_name" />
       <effect name_name="GMRuneword11Effect" defaultAbilityName_name="GMRuneword11Effect" iconType_name="icon_effect_runeword" showOnHUD="1" effectNameLocalisationKey_name="runeword11_name" />
+      <!-- ALCH-15: the Dimeritium bomb's effect (legacy's DimeritiumEffect; its abilities GMDimeritiumEffect_Level1 to 3 in items/gm_alch.xml) -->
+      <effect name_name="GMDimeritiumEffect" iconType_name="GMDimeritium" showOnHUD="1" effectNameLocalisationKey_name="effect_dimeritium" />
     </effects>
     <effect_icons>
       <effect iconType_name="GMAardCooldown" path="icons/Skills/core/magic_1.png" />
@@ -143,6 +145,7 @@
       <effect iconType_name="GMRendCooldown" path="icons/Skills/Sword/sword_s2.png" />
       <effect iconType_name="GMUndying" path="icons/Skills/Sword/sword_s18.png" />
       <effect iconType_name="GMMeltArmorTimer" path="icons/Skills/Signs/magic_s8.png" />
+      <effect iconType_name="GMDimeritium" path="icons/inventory/bombs/dwimeritium_bomb.png" />
     </effect_icons>
   </custom>
 </redxml>

@@ -249,3 +249,174 @@
 2110992269|ad70e65b||Schmiedewerkzeug eines Meister-Rüstungsschmieds. Erhöht dauerhaft den Rüstungswert.
 ; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
 2110992483|d400b4dd||Schadenswiderstand
+; ALCH-15: the Dimeritium effect's HUD label (legacy's id and key)
+2110992343|b616490f||Dimeritium
+; ALCH-04: Swallow, White Raffard, White Honey (legacy's ids and keys)
+2110992178|        ||Beschleunigt die Vitalitätsregeneration. Die Vitalitätsregeneration wird nicht unterbrochen, wenn Schaden erlitten wird.
+2110992231|de026195||Entfernt die Toxizität in Geralt's Blut, aber auch jeden aktiven Effekt von Tränken.
+2110992232|de026196||Entfernt die Toxizität in Geralt's Blut, aber auch jeden aktiven Effekt von Tränken.
+2110992233|de026197||Entfernt die Toxizität in Geralt's Blut, aber auch jeden aktiven Effekt von Tränken.
+2110992433|9ec8a224||Stellt augenblicklich einen Teil deiner Vitalität wieder her und stoppt Blutungseffekte.
+2110992434|9ec8a225||Stellt augenblicklich einen großen Teil deiner Vitalität wieder her und stoppt Blutungseffekte.
+2110992435|9ec8a226||Stellt augenblicklich deine gesamte Vitalität wieder her und stoppt Blutungseffekte. Gewährt außerdem für eine kurzer Zeit Unverwundbarkeit.
+2110992537|56747c55||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Vitality regeneration pauses for 2 seconds upon receiving damage.
+2110992538|56747c56||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Vitality regeneration pauses for 2 seconds upon receiving damage.
+2110992539|56747c57||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Taking damage does not interrupt Vitality regeneration.
+; ALCH-05: Golden Oriole (legacy's ids and keys)
+2110992530|3a84c328||Increases poison resistance, neutralizes the effects of poisons already in bloodstream.
+2110992531|3a84c329||Increases poison resistance, neutralizes the effects of poisons already in bloodstream. Extended duration.
+2110992532|3a84c32a||Increases poison resistance, neutralizes the effects of poisons already in bloodstream. Extended duration. Grants temporary immunity to poison effects.
+2110992533|        |attribute_name_poison_immunity_duration|Poison immunity duration
+; ALCH-05: Golden Oriole's buff text (audit F12; new id, the vanilla key)
+2110992638|42725726||Erhöht die Giftresistenz und neutralisiert die Wirkung von Giften, die bereits im Blut sind.
+; ALCH-06: Petri's Philtre (legacy's ids and keys)
+2110992165|9e58d1f5||Erhöht Zeichenintensität. Erhöhte Dauer. Spezielle Effekte von Zeichen halten 33% länger an.
+; ALCH-07: Cat, Blizzard, Tawny Owl (legacy's ids and keys)
+2110992235|874e9f88||Ermöglicht es dir, in absoluter Dunkelheit zu sehen und gewährt Immunität gegenüber Hypnose. Erhöhte Dauer.
+2110992240|874e9f87||Ermöglicht es in absoluter Dunkelheit zu sehen. Erhöhte Dauer.
+2110992471|1b06cd09||Wann immer du einen Gegner tötest, verlangsamt sich die Zeit für einen kurzen Moment.
+2110992534|437e276a||Accelerates Stamina regeneration.
+2110992535|437e276b||Accelerates Stamina regeneration.
+2110992536|437e276c||Accelerates Stamina regeneration. Never expires at night.
+; ALCH-07: Cat 1's and Cat's buff text without crit chance, Blizzard 1's and 3's legacy texts (audit F7, F8; new ids, the vanilla keys)
+2110992633|874e9f86||Ermöglicht das Sehen in völliger Dunkelheit.
+2110992634|1a61ef57||Ermöglicht das Sehen in völliger Dunkelheit.
+2110992635|1b06cd08||Wann immer du einen Gegner tötest, verlangsamt sich die Zeit für einen kurzen Moment.
+2110992636|1b06cd0a||Wann immer du einen Gegner tötest, verlangsamt sich die Zeit für einen kurzen Moment. Wenn 3 Adrenalinpunkte zur Verfügung steht, verbrauchen Aktionen in dieser Zeit keine Ausdauer.
+; ALCH-08: Killer Whale (legacy's ids and keys)
+2110992464|a1370329||Verbessert die Sicht und Atmung während du tauchst.
+; ALCH-09: decoction rules (toxicity offset, Nightwraith, Ekimmara, Cockatrice) (legacy's ids and keys)
+2110992188|e71d7c90||Erhöht Geralts Grund-Vitalitätswert um $S$ Punkte pro getötetem Gegner.
+2110992246|e71d7c91||Regeneriert Vitalität um $S$%, basierend auf dem ausgeteilten Schaden.
+2110992381|44aa9fca||Toxizitätsversatz
+2110992382|f4fd119f||Der Toxizitätsversatz reserviert einen Betrag der maximalen Toxizität für die Effektdauer des Absuds.
+2110992477|e71d7c8d||Alle Bomben und Tränke (ausgenommen Mutagen-Absude) können ein weiteres Mal benutzt werden.
+; ALCH-10: melee decoctions' descriptions (legacy's ids and keys)
+2110992247|fc921505||Das Wirken eines Zeichens erhöht deine Angriffskraft um $I$% (max. $I$%). Wird zurückgesetzt wenn Schaden ausgeteilt wird oder der Kampf endet.
+2110992455|e71d7c8b||Nicht-kritischer Schaden mit einem Schwert erhöht die kritische Trefferchance für Folgeangriffe um $I$% (max $I$%). Wenn die maximale kritische Trefferchance erreicht wurde, erhältst du stattdessen $I$% auf die kritische Trefferstärke. Bei erfolgreichem kritischem Treffer, oder bei Kampfende wird der Bonus zurückgesetzt.
+2110992484|fc92150c||Mit Nahkampfangriffen verursachter Schaden, erhöht die Zeichenintensität um $I$% (max $I$%). Der Effekt endet, wenn ein Zeichen gewirkt wird oder der Kampf endet.
+2110992485|e71d7c8f||Mit Nahkampfangriffen verursachter Schaden, erhöht die Angriffskraft um $S$% (max $S$%). Wenn du getroffen wirst, reduziert sich der Bonus proportional ($S$% pro 1% der verlorenen Vitalität) zum erlittenen Schaden. Bonus wird am Ende des Kampfes zurückgesetzt.
+2110992486|fc92150a||Mit Nahkampfangriffen verursachter Schaden, erhöht den Adrenalingewinn um $S$% (max $S$%). Wenn du getroffen wirst reduziert sich der Bonus proportional ($S$% pro 1% der verlorenen Vitalität) zum erlittenen Schaden. Bonus wird am Ende des Kampfes zurückgesetzt.
+; ALCH-11: sign decoctions' descriptions (legacy's ids and keys)
+2110992243|e71d7c93||Jedes ausgerüstete kleine blaue Mutagen, erhöht deinen Grundschaden um $S$ Punkt(e). Blaue Mutagene erhöhen diesen Bonus auf $S$ und große blaue Mutagene sogar auf $S$.
+2110992248|fc921509||Gegner, welche unter der Kontrolle von Marionette (Axii) stehen, verursachen $I$% mehr Schaden.
+2110992249|fc921526||Das Wirken eines Zeichens erhöht die Zeichenintensität um $S$% (max. $S$%). Wenn du getroffen wirst, reduziert sich dieser Bonus proportional zum erlittenen Schaden: $S$% pro 1% verlorener Vitalität. Wird zurückgesetzt wenn der Kampf endet.
+2110992481|fc92150e||Wenn Geralt von Hinten getroffen wird, wird automatisch ein "normales" Quen Zeichen gewirkt, welches den Schaden reduziert. Wenn feindliche Geister in der Nähe sind, ist die Stärke von Quen um $S$% erhöht.
+; ALCH-12: sustain decoctions' descriptions (legacy's ids and keys)
+2110992241|e71d7c8e||Alle deine Nahkampfangriffe kosten $S$% mehr Ausdauer. Aber erfolgreiche Nahkampfangriffe reduzieren die Gesundheit deines Gegners um $S$% pro Ausdauerpunkt der für den Angriff benötigt wurde.
+2110992242|fc921527||Jedes ausgerüstete kleine grüne Mutagen, erhöht deine Vitalitätsregenerationsrate um $S$/sek. Grüne Mutagene erhöhen diesen Bonus auf $S$/sek und große grüne Mutagene sogar auf $S$/sek.
+2110992245|fc921525||Regeneriert Vitalität um $S$% für jeden verbrauchten Ausdauerpunkt. Funktioniert nur während des Kampfs.
+2110992436|fc921529||Jedes ausgerüste kleine rote Mutagen verringert die Ausdauerkosten für Nahkampfangriffe um $S$%. Rote Mutagene erhöhen diesen Bonus auf $S$% und große rote Mutagene sogar um $S$%.
+2110992488|fc921507||Du erhältst +$I$ auf die Vitalitätsregeneration außerhalb des Kampfes und +$I$ auf die Vitalitätsregeneration während des Kampfes. Wenn deine Ausdauer auf $I$% oder weniger fällt, erhälst du zusätzliche Vitalitätsregeneration für den Kampf von +$I$.
+2110992489|fc92150d||Wenn du einen Gegner tötest, erhältst du +$I$ Vitalitätsregeneration für jeden lebenden Gegner im Umkreis. Der maximale Bonus von +$I$ kann nicht überschritten werden. Wird bei Kampfende zurückgesetzt.
+2110992490|fc921508||Wenn du einen Gegner tötest, erhältst du +$I$ Ausdauerregeneration für jeden lebenden Gegner im Umkreis. Der maximale Bonus von +$I$ kann nicht überschritten werden. Wird bei Kampfende zurückgesetzt.
+; ALCH-13: defensive decoctions' descriptions (legacy's ids and keys)
+2110992244|fc921524||Erhöht Geralt's Resistenz gegen Blutung, Brand & Gift Effekte.<br>Desweiteren auch den Schaden um $I$%.
+2110992388|fc92152b||Wenn du innerhalb von $S$ Sekunden mehrfach Schaden nimmst, aktiviert sich ein Effekt, der dich für $S$ Sekunden lang immun gegen Schaden jeglicher Art werden lässt.
+2110992389|e71d7c8c||Wenn Gegner dich im Nahkampf verletzen, befällt sie ein Säure-Effekt, der ihren Schadenswiderstand um $I$% (max. $I$%) reduziert.
+2110992390|fc92152c||Schaden gegen Gegner in Spektralform ist von $I$% auf $I$% des normalen Schadens erhöht. Schaden von Gegnern in Spektralform ist um $I$% reduziert.
+2110992457|fc92150b||Treffer-Reaktionsstärke ist auf Null reduziert, solang der erlittenen Schaden weniger als $I$% deiner maximalen Vitalität ist.
+2110992478|fc921506||Erhöht die kritische Trefferstärke um $I$%, wenn du einen Gegner von Hinten angreifst.
+2110992479|fc92152a||$I$% des erlittenen Schadens, werden auf den Angreifer zurückgeworfen.
+2110992487|fc921528||Du erhältst +$I$% auf Angriffskraft, +$I$% auf Zeichenintensität, +$I$/s auf Ausdauerregeneration und +$I$% auf Adrenalingewinn, solange sich deine Vitalität auf $I$% oder weniger befindet. Die Boni werden zurückgesetzt, wenn du über den Vitalitäts-Schwellwert kommst, oder wenn der Kampf endet.<br>$I$ Sekunden Abklingzeit.
+; ALCH-14: bombs' descriptions and attribute names (legacy's ids and keys)
+2110992163|7968d6e0||Friert Gegner ein. Treffer gegen eingefrorene Gegner fügen zusätzlichen Schaden zu. Erhöhte Dauer.
+2110992189|d3510d11||Enthält Silbersplitter, die die Verwandlungs- und Regenerationsfähigkeiten von Monstern vorübergehend blockieren oder schwächen.
+2110992190|d3510d12||Enthält Silbersplitter, die die Verwandlungs- und Regenerationsfähigkeiten von Monstern vorübergehend blockieren oder schwächen. Erhöhte Dauer.
+2110992191|d3510d13||Enthält Silbersplitter, die die Verwandlungs- und Regenerationsfähigkeiten von Monstern vorübergehend blockieren oder schwächen. Erhöhte Dauer.
+2110992237|fe608837||Fügt Gegnern im Explosionsradius Schrapnellschaden zu. Verursacht Feuerschaden. Verbesserter Effekt. Zerstört Schilde von Gegnern. Zerstört Monsternester.
+2110992348|ec4dca6f||Wolkendauer
+2110992482|6ac22a47||Schadensbonus
+2110992508|fa56c289||Feuerschaden bei Explosion
+; ALCH-14: Samum 3's text (audit F12; new id, the vanilla key)
+2110992637|3c30d2a9||Blendet Gegner im Explosionsradius. Verlängerte Wirkdauer. Erhöht die Chance auf kritische Treffer gegen geblendete Gegner. Zerstört Monsternester.
+; ALCH-15: Dimeritium's descriptions and attribute names (legacy's ids and keys)
+2110992239|3ed03538||Dauer der Wolke
+2110992344|63cd93a3||Setzt eine Wolke von Dimeritium Splittern frei, die primitive Magie und magische Fähigkeiten von Monstern blockiert. Verringert außerdem die Rüstung von magischen Kreaturen und schwächt Magier und den Schaden, welchen diese verursachen.
+2110992345|63cd93a4||Setzt eine Wolke von Dimeritium Splittern frei, die primitive Magie und magische Fähigkeiten von Monstern blockiert. Verringert außerdem die Rüstung von magischen Kreaturen und schwächt Magier und den Schaden, welchen diese verursachen.<br>Hält länger an.
+2110992346|63cd93a5||Setzt eine Wolke von Dimeritium Splittern frei, die primitive Magie und magische Fähigkeiten von Monstern blockiert. Verringert außerdem die Rüstung von magischen Kreaturen und schwächt Magier und den Schaden, welchen diese verursachen.<br>Hält länger an.
+2110992347|db81c2af||Rüstungsdurchdringend
+2110992456|0391a988||Schadensreduktion
+2110992480|9691af88||Schadenswiderstand Reduktion
+; ALCH-16: oil attribute names and descriptions (legacy's ids and keys)
+2110992034|40aed692||Chance auf kritische Treffer gegen Bestien
+2110992035|c8957121||Chance auf kritische Treffer gegen Verfluchte
+2110992036|79a23d6e||Chance auf kritische Treffer gegen Drakoniden
+2110992037|d33fe160||Chance auf kritische Treffer gegen Menschen
+2110992038|f261a80b||Chance auf kritische Treffer gegen Hybriden
+2110992039|97466e95||Chance auf kritische Treffer gegen Insektoiden
+2110992040|4bfdf9ea||Chance auf kritische Treffer gegen Konstrukte
+2110992041|016d02ed||Chance auf kritische Treffer gegen Nekrophagen
+2110992042|9c73a4a6||Chance auf kritische Treffer gegen Relikte
+2110992043|c3702fb9||Chance auf kritische Treffer gegen Geister
+2110992044|cd868a1a||Chance auf kritische Treffer gegen Ogroiden
+2110992045|42229941||Chance auf kritische Treffer gegen Vampire
+2110992046|4fa6c42d||Stärke von kritischen Treffern gegen Bestien
+2110992047|df4cf77c||Stärke von kritischen Treffern gegen Verfluchte
+2110992048|f7d09609||Stärke von kritischen Treffern gegen Drakoniden
+2110992049|810bfc7b||Stärke von kritischen Treffern gegen Menschen
+2110992050|6b0ad6e6||Stärke von kritischen Treffern gegen Hybriden
+2110992051|6adf0df0||Stärke von kritischen Treffern gegen Insektoiden
+2110992052|0cf40585||Stärke von kritischen Treffern gegen Konstrukte
+2110992053|69eb0048||Stärke von kritischen Treffern gegen Nekrophagen
+2110992054|2e15b341||Stärke von kritischen Treffern gegen Relikte
+2110992055|17546414||Stärke von kritischen Treffern gegen Geister
+2110992056|b4fbb1b5||Stärke von kritischen Treffern gegen Ogroiden
+2110992057|d123879c||Stärke von kritischen Treffern gegen Vampire
+2110992058|c8d4450c||Reduktion des Schadenswiderstands gegen Bestien
+2110992059|4b1b4cdd||Reduktion des Schadenswiderstands gegen Verfluchte
+2110992060|da69abb0||Reduktion des Schadenswiderstands gegen Drakoniden
+2110992061|83b5dcfe||Reduktion des Schadenswiderstands gegen Menschen
+2110992062|5da28e33||Reduktion des Schadenswiderstands gegen Hybriden
+2110992063|ca4463e9||Reduktion des Schadenswiderstands gegen Insektoiden
+2110992064|d14fa0b4||Reduktion des Schadenswiderstands gegen Konstrukte
+2110992065|8b85ee91||Reduktion des Schadenswiderstands gegen Nekrophagen
+2110992066|0ecc4f78||Reduktion des Schadenswiderstands gegen Relikte
+2110992067|64e2d545||Reduktion des Schadenswiderstands gegen Geister
+2110992068|111c7e84||Reduktion des Schadenswiderstands gegen Ogroiden
+2110992069|5a3c18bd||Reduktion des Schadenswiderstands gegen Vampire
+2110992070|d25344ee||Angriffsstärke gegen Menschen
+2110992192|08eace65||Erhöht die Effektivität von Angriffen gegen Insektoiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992193|08eace66||Erhöht die Effektivität von Angriffen gegen Insektoiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992194|08eace67||Erhöht die Effektivität von Angriffen gegen Insektoiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992195|3a67f159||Erhöht die Effektivität von Angriffen gegen Verfluchte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992196|3a67f15a||Erhöht die Effektivität von Angriffen gegen Verfluchte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992197|3a67f15b||Erhöht die Effektivität von Angriffen gegen Verfluchte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992198|65067e25||Erhöht die Effektivität von Angriffen gegen Nekrophagen. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992199|65067e26||Erhöht die Effektivität von Angriffen gegen Nekrophagen. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992200|65067e27||Erhöht die Effektivität von Angriffen gegen Nekrophagen. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992201|7b1c29c3||Erhöht die Effektivität von Angriffen gegen Hybriden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992202|7b1c29c4||Erhöht die Effektivität von Angriffen gegen Hybriden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992203|7b1c29c5||Erhöht die Effektivität von Angriffen gegen Hybriden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992204|88e86911||Erhöht die Effektivität von Angriffen gegen Vampire. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992205|88e86912||Erhöht die Effektivität von Angriffen gegen Vampire. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992206|88e86913||Erhöht die Effektivität von Angriffen gegen Vampire. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992207|aed490e2||Erhöht die Effektivität von Angriffen gegen Konstrukte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992208|aed490e3||Erhöht die Effektivität von Angriffen gegen Konstrukte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992209|aed490e4||Erhöht die Effektivität von Angriffen gegen Konstrukte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992210|d11afcde||Erhöht die Effektivität von Angriffen gegen Menschen, Elfen, Zwerge und Halblinge. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992211|d11afcdf||Erhöht die Effektivität von Angriffen gegen Menschen, Elfen, Zwerge und Halblinge. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992212|d11afce0||Erhöht die Effektivität von Angriffen gegen Menschen, Elfen, Zwerge und Halblinge. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992213|ea1a3189||Erhöht die Effektivität von Angriffen gegen Geister. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992214|ea1a318a||Erhöht die Effektivität von Angriffen gegen Geister. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992215|ea1a318b||Erhöht die Effektivität von Angriffen gegen Geister. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992216|ef649cfe||Erhöht die Effektivität von Angriffen gegen Drakoniden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992217|ef649cff||Erhöht die Effektivität von Angriffen gegen Drakoniden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992218|ef649d00||Erhöht die Effektivität von Angriffen gegen Drakoniden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992219|f8b46c36||Erhöht die Effektivität von Angriffen gegen Relikte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992220|f8b46c37||Erhöht die Effektivität von Angriffen gegen Relikte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992221|1ff07bf8||Erhöht die Effektivität von Angriffen gegen Relikte. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992222|7753393f||Erhöht die Effektivität von Angriffen gegen Ogroiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992223|77533940||Erhöht die Effektivität von Angriffen gegen Ogroiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992224|77533941||Erhöht die Effektivität von Angriffen gegen Ogroiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992225|c0218f12||Erhöht die Effektivität von Angriffen gegen Ogroiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992226|c0218f13||Erhöht die Effektivität von Angriffen gegen Ogroiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992227|c0218f14||Erhöht die Effektivität von Angriffen gegen Ogroiden. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992228|dd8e2b22||Erhöht die Effektivität von Angriffen gegen Bestien. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992229|dd8e2b23||Erhöht die Effektivität von Angriffen gegen Bestien. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992230|dd8e2b24||Erhöht die Effektivität von Angriffen gegen Bestien. Effektivität verringert sich, je mehr das Öl sich abreibt.
+2110992234|f8b46c38||Erhöht die Effektivität von Angriffen gegen Relikte.
+; ALCH-17: the potion duration attribute (legacy's ids and keys)
+2110992015|c4ea0ecf||Trankdauer
+; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
+2110992259|b91d9859||Kann an Händler verkauft werden.

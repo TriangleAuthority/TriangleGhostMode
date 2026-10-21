@@ -249,3 +249,174 @@
 2110992269|ad70e65b||Outils de forge utilisés par les maîtres armuriers. Augmente la valeur de l'armure de façon permanente.
 ; ITEM-12: the Armorer's Table buff's tooltip line (legacy's id and key)
 2110992483|d400b4dd||Résistances aux dégâts
+; ALCH-15: the Dimeritium effect's HUD label (legacy's id and key)
+2110992343|b616490f||Dimeritium
+; ALCH-04: Swallow, White Raffard, White Honey (legacy's ids and keys)
+2110992178|        ||Accélère le regain de vitalité. Le regain de vitalité ne s'arrête pas en cas de dégâts reçus.
+2110992231|de026195||Supprime l'intoxication et annule tous les effets actifs des potions.
+2110992232|de026196||Supprime l'intoxication et annule tous les effets actifs des potions.
+2110992233|de026197||Supprime l'intoxication et annule tous les effets actifs des potions.
+2110992433|9ec8a224||Restaure immédiatement une portion de vigueur et stoppe le saignement.
+2110992434|9ec8a225||Restaure immédiatement une large portion de vigueur et stoppe le saignement.
+2110992435|9ec8a226||Restaure immédiatement et intégralement la vigueur et stoppe le saignement. Accorde une imunité contre les dégâts pendant un court laps de temps.
+2110992537|56747c55||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Vitality regeneration pauses for 2 seconds upon receiving damage.
+2110992538|56747c56||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Vitality regeneration pauses for 2 seconds upon receiving damage.
+2110992539|56747c57||Stops bleeding and increases bleeding resistance. Accelerates Vitality regeneration. Taking damage does not interrupt Vitality regeneration.
+; ALCH-05: Golden Oriole (legacy's ids and keys)
+2110992530|3a84c328||Increases poison resistance, neutralizes the effects of poisons already in bloodstream.
+2110992531|3a84c329||Increases poison resistance, neutralizes the effects of poisons already in bloodstream. Extended duration.
+2110992532|3a84c32a||Increases poison resistance, neutralizes the effects of poisons already in bloodstream. Extended duration. Grants temporary immunity to poison effects.
+2110992533|        |attribute_name_poison_immunity_duration|Poison immunity duration
+; ALCH-05: Golden Oriole's buff text (audit F12; new id, the vanilla key)
+2110992638|42725726||Augmente la résistance au poison et neutralise les effets des poisons déjà présents dans le sang.
+; ALCH-06: Petri's Philtre (legacy's ids and keys)
+2110992165|9e58d1f5||Augmente l'intensité des signes. Durée accrue. Les effets spéciaux des signes durent un tiers plus longtemps.
+; ALCH-07: Cat, Blizzard, Tawny Owl (legacy's ids and keys)
+2110992235|874e9f88||Permet de voir dans l'obscurité totale et immunise contre l'hypnose. Durée accrue.
+2110992240|874e9f87||Permet de voir dans l'obscurité totale. Durée accrue.
+2110992471|1b06cd09||Chaque fois qu'un ennemi est tué, le temps ralentit pendant un bref instant.
+2110992534|437e276a||Accelerates Stamina regeneration.
+2110992535|437e276b||Accelerates Stamina regeneration.
+2110992536|437e276c||Accelerates Stamina regeneration. Never expires at night.
+; ALCH-07: Cat 1's and Cat's buff text without crit chance, Blizzard 1's and 3's legacy texts (audit F7, F8; new ids, the vanilla keys)
+2110992633|874e9f86||Permet de voir dans le noir le plus total.
+2110992634|1a61ef57||Permet de voir dans le noir le plus total.
+2110992635|1b06cd08||Chaque fois qu'un ennemi est tué, le temps ralentit pendant un bref instant.
+2110992636|1b06cd0a||Chaque fois qu'un ennemi est tué, le temps ralentit pendant un bref instant. Quand 3 points d'adrénaline sont disponibles, les actions ne réduisent pas la vigueur.
+; ALCH-08: Killer Whale (legacy's ids and keys)
+2110992464|a1370329||Augmente la durée de la respiration sous l'eau et améliore la vision en plongée.
+; ALCH-09: decoction rules (toxicity offset, Nightwraith, Ekimmara, Cockatrice) (legacy's ids and keys)
+2110992188|e71d7c90||Augmente la vitalité de base de Geralt de $S$ points par ennemis tués.
+2110992246|e71d7c91||Régénère la vitalité de $S$% des dégâts infligés à l'ennemi.
+2110992381|44aa9fca||Tolérance dégradée
+2110992382|f4fd119f||La Tolérance dégradée retient une partie de l'intoxication maximum pendant la durée de l'effet de la décoction.
+2110992477|e71d7c8d||Les bombes et potions (à l'exception des décoctions) peuvent être utilisées une fois de plus.
+; ALCH-10: melee decoctions' descriptions (legacy's ids and keys)
+2110992247|fc921505||Lancer un signe augmente la puissance des attaques de mêlée de $I$% (max : $I$%). L'effet s'arrête après avoir infligé des dégâts de mêlée et à la fin du combat.
+2110992455|e71d7c8b||Les dégâts non critiques infligés avec une épée augmentent les chances de coups critiques des attaques suivantes de $I$% (max $I$%). Lorsque le bonus max est atteint, $I$% est ajouté à la puissance des coups critiques. Le bonus se réinitialise après un coup critique réussi et à la fin du combat.
+2110992484|fc92150c||Les dégâts infligés avec une arme de mêlée augmente l'intensité des signes de $I$% (max $I$%). Se réinitialise après avoir lancé un signe et à la fin du combat.
+2110992485|e71d7c8f||Les dégâts infligés aux ennemis augmentent la puissance d'attaque de $S$% (max $S$%). Être touché diminue le bonus proportionnellement aux dégâts reçus : $S$% par 1% de santé perdue. Se réinitialise à la fin du combat.
+2110992486|fc92150a||Infliger des dégâts de mêlée augmente la gain d'adrénaline de $S$% (max $S$%). Se faire toucher diminue le bonus proportionnellement aux dégâts reçus : $S$% par 1% de santé perdue. Se réinitialise à la fin du combat.
+; ALCH-11: sign decoctions' descriptions (legacy's ids and keys)
+2110992243|e71d7c93||Chaque mutagène bleu inférieur équipé augmente les dégâts de base infligés par les signes de $S$ points. Les mutagènes bleus augmentent le bonus de $S$/sec et les mutagènes bleus supérieurs de $S$/sec.
+2110992248|fc921509||Les ennemis controlés par le Pantin Axii infligent $I$% de dégâts en plus.
+2110992249|fc921526||Casting a Sign in combat increases your Sign Intensity by $S$% (max $S$%). Getting hit decreases the bonus proportional to damage received: $S$% per 1% of health lost. Resets at the end of the combat.
+2110992481|fc92150e||Lorsque le personnage est attaqué par derrière, le signe Quen normal s'active et réduit les dégâts. Lorsqu'un spectre hostile se trouve à proximité, la puissance de Quen Power augmente de $S$%.
+; ALCH-12: sustain decoctions' descriptions (legacy's ids and keys)
+2110992241|e71d7c8e||Toutes les attaques de mêlée coûte $S$% de vigueur en plus. Les attaques de mêlée réussies réduisent aditionellement la santé de l'ennemi de $S$% de sa valeur actuelle pour chaque points de vigueur dépensé pour l'attaque.
+2110992242|fc921527||Chaque mutagène vert inférieur équipé augmente le taux de régénération de la vitalité de $S$/sec. Les mutagènes verts augmentent le bonus de $S$/sec et les mutagènes verts supérieurs de $S$/sec.
+2110992245|fc921525||Régénère la vitalité de $S$% pour chaque points de vigueur dépensés. Fonctionne uniquement en combat.
+2110992436|fc921529||Chaque Mutagène Rouge Inférieur équipé diminue le coût en vigueur des actions de mêlée de $S$%. Les Mutagènes ouges augmentent le bonus de $S$% et les Mutagènes Rouges Supérieur de $S$%.
+2110992488|fc921507||Augmente de $I$ la régénération de vitalité hors combat et de $I$ la régénération de vitalité en combat. Quand la vigueur est inférieure à $I$%, gagne +$I$ supplémentaire à la régénération de la vitalité en combat.
+2110992489|fc92150d||Quand un ennemi est tué, gagne +$I$ à la régénération de vitalité pour chaque ennemi vivant à proximité. Le bonus max ne peut exéder +$I$. Se réinitialise à la fin du combat.
+2110992490|fc921508||Quand un ennemi est tué, gagne +$I$ à la régénération de vigueur en combat pour chaque ennemi vivant à proximité. Le bonus max ne peut exéder +$I$. Se réinitialise à la fin du combat.
+; ALCH-13: defensive decoctions' descriptions (legacy's ids and keys)
+2110992244|fc921524||Augmente la résistance aux saignements, brûlures et poisons. Augmente la résistance aux effets de saignement, de brûlure, de poison ainsi que les dégâts de feu et de poison de $I$%.
+2110992388|fc92152b||Se faire toucher plus d'une fois dans les $S$ secondes protège des dégâts pour les $S$ secondes suivantes.
+2110992389|e71d7c8c||Lorsque les ennemis infligent des dégâts de mêlée, ils souffrent de l'effet Acide qui réduit leur résistance aux dégâts de $I$% (max : $I$%).
+2110992390|fc92152c||Les dégâts infligés aux ennemis de forme spectrale passent de $I$% à $I$% des dégâts normaux. Les dégâts reçus des ennemis de type spectral sont réduits de $I$%.
+2110992457|fc92150b||La gravité de la réaction des coups est réduite à zéro si les dégâts reçus sont inférieurs à $I$% de la santé maximum.
+2110992478|fc921506||Augmente la puissance des coups critiques de $I$% en attaquant par derrière.
+2110992479|fc92152a||$I$% des dégâts encaissés par le joueur sont renvoyés vers l'attaquant.
+2110992487|fc921528||Augmente de $I$% la puissance des attaques, de $I$% l'intensité des signes, de $I$/s la régénération de vigueur et de $I$% le gain d'adrénaline tant que la santé est inférieure ou égale à $I$%. Se réinitialise quand la santé remonte et à la fin du combat. Temps de recharge : $I$ secondes.
+; ALCH-14: bombs' descriptions and attribute names (legacy's ids and keys)
+2110992163|7968d6e0||Gèle les ennemis. Frapper un ennemi gelé lui inflige des dégâts supplémentaires. Durée accrue.
+2110992189|d3510d11||Contient des éclats d'argent qui bloquent ou affaiblissent temporairement les capacités de transformation et de régénération des monstres.
+2110992190|d3510d12||Contient des éclats d'argent qui bloquent ou affaiblissent temporairement les capacités de transformation et de régénération des monstres. Durée augmentée.
+2110992191|d3510d13||Contient des éclats d'argent qui bloquent ou affaiblissent temporairement les capacités de transformation et de régénération des monstres. Durée augmentée.
+2110992237|fe608837||Explose en libérant des éclats qui blessent les ennemis dans la zone. Inflige des dégâts de feu. Effet accru. Détruit les boucliers ennemis et les nids de monstres.
+2110992348|ec4dca6f||Durée du nuage
+2110992482|6ac22a47||Bonus de dégâts
+2110992508|        |attribute_name_explosionFireDamage|Fire damage on explosion
+; ALCH-14: Samum 3's text (audit F12; new id, the vanilla key)
+2110992637|3c30d2a9||Aveugle les adversaires situés dans le rayon de son explosion. Durée accrue. Augmente les chances d'infliger un coup critique aux adversaires aveuglés. Détruit les nids de monstres.
+; ALCH-15: Dimeritium's descriptions and attribute names (legacy's ids and keys)
+2110992239|3ed03538||Durée hors du nuage
+2110992344|63cd93a3||Libère un nuage d'éclats de dimeritium qui bloque les aptitudes magiques des primitifs magiques et des monstres. Affaiblit l'armure de créatures magiques. Affaiblit les mages en réduisant leurs dégâts.
+2110992345|63cd93a4||Libère un nuage d'éclats de dimeritium qui bloque les aptitudes magiques des primitifs magiques et des monstres. Affaiblit l'armure de créatures magiques. Affaiblit les mages en réduisant leurs dégâts. Dure plus longtemps.
+2110992346|63cd93a5||Libère un nuage d'éclats de dimeritium qui bloque les aptitudes magiques des primitifs magiques et des monstres. Affaiblit l'armure de créatures magiques. Affaiblit les mages en réduisant leurs dégâts. Dure plus longtemps.
+2110992347|db81c2af||Pénétration d'armure
+2110992456|0391a988||Réduction de dégât
+2110992480|9691af88||Réduction de la résistance aux dégâts
+; ALCH-16: oil attribute names and descriptions (legacy's ids and keys)
+2110992034|40aed692||Chances de coups critiques contre les bêtes
+2110992035|c8957121||Chances de coups critiques contre les créatures maudites
+2110992036|79a23d6e||Chances de coups critiques contre les draconides
+2110992037|d33fe160||Chances de coups critiques contre les humains
+2110992038|f261a80b||Chances de coups critiques contre les hybrides
+2110992039|97466e95||Chances de coups critiques contre les insectoïdes
+2110992040|4bfdf9ea||Chances de coups critiques contre les élémentaires
+2110992041|016d02ed||Chances de coups critiques contre les nécrophages
+2110992042|9c73a4a6||Chances de coups critiques contre les vestiges
+2110992043|c3702fb9||Chances de coups critiques contre les spectres
+2110992044|cd868a1a||Chances de coups critiques contre les ogroïdes
+2110992045|42229941||Chances de coups critiques contre les vampires
+2110992046|4fa6c42d||Puissance des coups critiques contre les bêtes
+2110992047|df4cf77c||Puissance des coups critiques contre les créatures maudites
+2110992048|f7d09609||Puissance des coups critiques contre les draconides
+2110992049|810bfc7b||Puissance des coups critiques contre les humains
+2110992050|6b0ad6e6||Puissance des coups critiques contre les hybrides
+2110992051|6adf0df0||Puissance des coups critiques contre les insectoïdes
+2110992052|0cf40585||Puissance des coups critiques contre les élémentaires
+2110992053|69eb0048||Puissance des coups critiques contre les nécrophages
+2110992054|2e15b341||Puissance des coups critiques contre les vestiges
+2110992055|17546414||Puissance des coups critiques contre les spectres
+2110992056|b4fbb1b5||Puissance des coups critiques contre les ogroïdes
+2110992057|d123879c||Puissance des coups critiques contre les vampires
+2110992058|c8d4450c||Réduction de la résistance aux dégâts contre les bêtes
+2110992059|4b1b4cdd||Réduction de la résistance aux dégâts contre les créatures maudites
+2110992060|da69abb0||Réduction de la résistance aux dégâts contre les draconides
+2110992061|83b5dcfe||Réduction de la résistance aux dégâts contre les humains
+2110992062|5da28e33||Réduction de la résistance aux dégâts contre les hybrides
+2110992063|ca4463e9||Réduction de la résistance aux dégâts contre les insectoïdes
+2110992064|d14fa0b4||Réduction de la résistance aux dégâts contre les élémentaires
+2110992065|8b85ee91||Réduction de la résistance aux dégâts contre les nécrophages
+2110992066|0ecc4f78||Réduction de la résistance aux dégâts contre les vestiges
+2110992067|64e2d545||Réduction de la résistance aux dégâts contre les spectres
+2110992068|111c7e84||Réduction de la résistance aux dégâts contre les ogroïdes
+2110992069|5a3c18bd||Réduction de la résistance aux dégâts contre les vampires
+2110992070|d25344ee||Puissance des attaques contre les humains
+2110992192|08eace65||Augmente l'efficacité des attaques contre les insectoïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992193|08eace66||Augmente l'efficacité des attaques contre les insectoïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992194|08eace67||Augmente l'efficacité des attaques contre les insectoïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992195|3a67f159||Augmente l'efficacité des attaques contre les créatures maudites. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992196|3a67f15a||Augmente l'efficacité des attaques contre les créatures maudites. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992197|3a67f15b||Augmente l'efficacité des attaques contre les créatures maudites. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992198|65067e25||Augmente l'efficacité des attaques contre les nécrophages. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992199|65067e26||Augmente l'efficacité des attaques contre les nécrophages. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992200|65067e27||Augmente l'efficacité des attaques contre les nécrophages. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992201|7b1c29c3||Augmente l'efficacité des attaques contre les hybrides. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992202|7b1c29c4||Augmente l'efficacité des attaques contre les hybrides. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992203|7b1c29c5||Augmente l'efficacité des attaques contre les hybrides. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992204|88e86911||Augmente l'efficacité des attaques contre les vampires. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992205|88e86912||Augmente l'efficacité des attaques contre les vampires. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992206|88e86913||Augmente l'efficacité des attaques contre les vampires. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992207|aed490e2||Augmente l'efficacité des attaques contre les élémentaires. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992208|aed490e3||Augmente l'efficacité des attaques contre les élémentaires. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992209|aed490e4||Augmente l'efficacité des attaques contre les élémentaires. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992210|d11afcde||Augmente l'efficacité des attaques contre les humains, les elfes, les nains et les halfelins. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992211|d11afcdf||Augmente l'efficacité des attaques contre les humains, les elfes, les nains et les halfelins. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992212|d11afce0||Augmente l'efficacité des attaques contre les humains, les elfes, les nains et les halfelins. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992213|ea1a3189||Augmente l'efficacité des attaques contre les spectres. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992214|ea1a318a||Augmente l'efficacité des attaques contre les spectres. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992215|ea1a318b||Augmente l'efficacité des attaques contre les spectres. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992216|ef649cfe||Augmente l'efficacité des attaques contre les draconides. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992217|ef649cff||Augmente l'efficacité des attaques contre les draconides. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992218|ef649d00||Augmente l'efficacité des attaques contre les draconides. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992219|f8b46c36||Augmente l'efficacité des attaques contre les vestiges. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992220|f8b46c37||Augmente l'efficacité des attaques contre les vestiges. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992221|1ff07bf8||Augmente l'efficacité des attaques contre les vestiges. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992222|7753393f||Augmente l'efficacité des attaques contre les ogroïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992223|77533940||Augmente l'efficacité des attaques contre les ogroïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992224|77533941||Augmente l'efficacité des attaques contre les ogroïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992225|c0218f12||Augmente l'efficacité des attaques contre les ogroïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992226|c0218f13||Augmente l'efficacité des attaques contre les ogroïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992227|c0218f14||Augmente l'efficacité des attaques contre les ogroïdes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992228|dd8e2b22||Augmente l'efficacité des attaques contre les bêtes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992229|dd8e2b23||Augmente l'efficacité des attaques contre les bêtes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992230|dd8e2b24||Augmente l'efficacité des attaques contre les bêtes. L'efficacité diminue à mesure que l'huile s'estompe de la lame.
+2110992234|f8b46c38||Augmente l'efficacité des attaques contre les vestiges.
+; ALCH-17: the potion duration attribute (legacy's ids and keys)
+2110992015|c4ea0ecf||Durée de la potion
+; ALCH-17: the description of junk without recycling parts, for the descriptions by name key (legacy's id and key; audit F6)
+2110992259|b91d9859||Peut être vendu aux marchands.

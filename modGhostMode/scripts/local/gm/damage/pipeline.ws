@@ -52,15 +52,7 @@ function ProcessActionDamage() : bool
 		victimHealthPercBeforeHit = actorVictim.GetStatPercents(BCS_Essence);
 
 
-	if ( actorVictim && playerAttacker && victimMonsterCategory == MC_Specter && playerAttacker.HasBuff(EET_Mutagen28) && !actorVictim.HasAbility( 'ShadowFormActive' ) && !action.GetSimulateOnly())
-	{
-		actorVictim.BlockAbility('ShadowForm', true);
-		actorVictim.BlockAbility('Flashstep', true);
-		actorVictim.BlockAbility('EssenceRegen', true);
-		actorVictim.BlockAbility('Teleport', true);
-
-		actorVictim.BlockAbility('Specter', true);
-	}
+	//modSigns: removed 5.x's Reliever's block of a specter's shadow form and abilities on any hit (ALCH-13, the owner's DL6)
 
 
 
@@ -104,23 +96,7 @@ function ProcessActionDamage() : bool
 		}
 
 
-		if(dmgInfos[i].dmgType == theGame.params.DAMAGE_NAME_POISON && witcher == actorVictim && witcher.HasBuff(EET_GoldenOriole) && witcher.GetPotionBuffLevel(EET_GoldenOriole) == 3)
-		{
-
-			witcher.GainStat(BCS_Vitality, dmgInfos[i].dmgVal);
-
-
-			if ( canLog )
-			{
-				LogDMHits("", action);
-				LogDMHits("*** Player absorbs poison damage from level 3 Golden Oriole potion: " + dmgInfos[i].dmgVal, action);
-			}
-
-
-			dmgInfos[i].dmgVal = 0;
-
-			continue;
-		}
+		//modSigns: removed Golden Oriole level 3's healing from poison damage (ALCH-05, the owner's DL5: the Viper set heals instead)
 
 		if(dmgInfos[i].dmgType == theGame.params.DAMAGE_NAME_POISON && witcher == actorVictim && witcher.IsSetBonusActive(EISB_Viper))	//modSigns: ARM-11, the Viper set cancels poison damage and heals a share of it (legacy)
 		{	//modSigns
@@ -350,7 +326,7 @@ function GMZeroSubOneDamage( out damageData : W3DamageAction )
 // (5.x: every NPC's raw damage); hits below 1 deal nothing. DD1's exception: Crippling Strike's
 // bonus (5.x: a raw damage multiplier; 5.x's alchemy_s24 is gone, SKL-13). SKL-06: the player's bolts and
 // bombs not thrown from aiming deal half damage. Severance (ENCH-04) and Supercharged Glyphs (SKL-10)
-// are here; the other areas' terms (Perk 16, Dimeritium) come with their areas; Mutation 8 is MUT-06's; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
+// are here; Dimeritium is ALCH-15's; Perk 16 comes with its area; Mutation 8 is MUT-06's; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
 @addMethod(W3DamageManagerProcessor)
 function GMProcessDamageModification()
 {
@@ -478,6 +454,14 @@ function GMProcessDamageModification()
 		action.processedDmg.essenceDamage *= 0.25;
 	}
 
+	// ALCH-15: a mage under the Dimeritium effect deals Geralt 30/40/50% less (alchemy/dimeritium.ws)
+	mult = GMDimeritiumDamageMult(actorAttacker, actorVictim);
+	if( mult != 1 )
+	{
+		action.processedDmg.vitalityDamage *= mult;
+		action.processedDmg.essenceDamage *= mult;
+	}
+
 	// a hit below 1 deals nothing
 	if( action.processedDmg.vitalityDamage < 1.f && !action.IsDoTDamage() )
 		action.processedDmg.vitalityDamage = 0;
@@ -488,8 +472,8 @@ function GMProcessDamageModification()
 // DMG-01, DMG-02: 5.x's CActor.ReduceDamage without the player's minimum damage (armor can stop a hit
 // completely) and without the VulnerableFromFront check, which ProcessDamageIncrease makes before the
 // formula (legacy). DMG-12: hostile hits on allies deal 1% to 2% of their maximum health (Axii
-// puppets 10% to 15%; legacy); 5.x's x0.1 for Axii'd allies off. The rest is 5.x's until its areas
-// (Ice Armor and Eredin: AI; Mutagen 28: ALCH).
+// puppets 10% to 15%; legacy); 5.x's x0.1 for Axii'd allies off. ALCH-13: Reliever's decoction's (Mutagen 28)
+// terms are legacy's. The rest is 5.x's until its areas (Ice Armor and Eredin: AI).
 @replaceMethod(CActor)
 function ReduceDamage( out damageData : W3DamageAction )
 {
@@ -511,6 +495,7 @@ function ReduceDamage( out damageData : W3DamageAction )
 	var i						: int;
 	var dmgTypes 				: array< SRawDamage >;
 	var hasPoisonDamage			: bool;
+	var mutagen28dmgMult		: float;	//modSigns: ALCH-13, Reliever's
 
 	canLog = theGame.CanLog();
 
@@ -811,15 +796,25 @@ function ReduceDamage( out damageData : W3DamageAction )
 
 	if( HasAbility( 'ShadowFormActive' ) )
 	{
+		mutagen28dmgMult = 0.1f;	//modSigns: ALCH-13, Reliever's: Geralt deals 60% to a spectral form (legacy)
+		if( actorAttacker == thePlayer && thePlayer.HasBuff(EET_Mutagen28) )	//modSigns
+			mutagen28dmgMult = ((W3Mutagen28_Effect)thePlayer.GetBuff(EET_Mutagen28)).GMGetDmgMultiplier();	//modSigns
+		else	//modSigns
+			damageData.SetCanPlayHitParticle( false );	//modSigns
 		if ( canLog )
 		{
-			LogDMHits("CActor.ReduceDamage: victim has ShadowFormActive ability - damage reduced to 10% of base", damageData );
+			LogDMHits("CActor.ReduceDamage: victim has ShadowFormActive ability - damage reduced to a share of base", damageData );	//modSigns
 		}
-		damageData.processedDmg.vitalityDamage *= 0.1f;
-		damageData.processedDmg.essenceDamage *= 0.1f;
-		damageData.SetCanPlayHitParticle( false );
-		theGame.witcherLog.CombatMessageAddGlobalDamageMult(0.1f);
-	}
+		damageData.processedDmg.vitalityDamage *= mutagen28dmgMult;	//modSigns
+		damageData.processedDmg.essenceDamage *= mutagen28dmgMult;	//modSigns
+		theGame.witcherLog.CombatMessageAddGlobalDamageMult(mutagen28dmgMult);	//modSigns
+	}	//modSigns
+	if( actorAttacker && actorAttacker.HasAbility( 'ShadowFormActive' ) && this == thePlayer && HasBuff(EET_Mutagen28) )	//modSigns: ALCH-13, Reliever's: a spectral form's damage to Geralt halved (legacy)
+	{	//modSigns
+		mutagen28dmgMult = ((W3Mutagen28_Effect)thePlayer.GetBuff(EET_Mutagen28)).GMGetDmgReduction();	//modSigns
+		damageData.processedDmg.vitalityDamage *= mutagen28dmgMult;	//modSigns
+		damageData.processedDmg.essenceDamage *= mutagen28dmgMult;	//modSigns
+	}	//modSigns
 
 
 

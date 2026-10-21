@@ -46,6 +46,8 @@ function GMGetWhirlStaminaCost(dt : float) : float
 
 	cost = GetStaminaActionCost(ESAT_Ability, GetSkillAbilityName(GMWhirlSkill()), dt);
 	cost *= GMWhirlCostFactor();
+	if(HasBuff(EET_Mutagen04))	// ALCH-12: ArchGriffin's +50% (legacy GetWhirlStaminaCost)
+		cost *= 1 + ((W3Mutagen04_Effect)GetBuff(EET_Mutagen04)).GMGetAttackCostIncrease();
 	return cost;
 }
 
