@@ -384,11 +384,18 @@ def generate(folder, armsw, ported=PORTED):
                 continue
             done.add(name)
             entry = re.sub(r'^<item\b', '<item on_conflict="replace"', entry)
+            entry, craft = item_layer.apply_item(folder, name, mi[name], li[name], entry)  # CRAFT's fields
+            changes = changes + craft
             iblocks.append((path, name, entry))
             report.append(f"{folder}: item {name}: {'; '.join(changes) or 'ARM set tags only'}" + (f" ({'; '.join(notes)})" if notes else ""))
     for name, entry in sorted(armsw.items()):
         if name not in done:  # set swords not among SWD's units (none expected)
             vpath = next((p for (f, k, n), (p, _, _) in us.items() if n == name), "?")
+            if "all" not in cache:
+                cache["all"] = (arm.items("master", folder), arm.items("legacy-GM", folder))
+            ma, la = cache["all"]
+            if name in ma and name in la:
+                entry, _ = item_layer.apply_item(folder, name, ma[name][1], la[name][1], entry)  # CRAFT's fields
             iblocks.append((vpath, name, entry))
             report.append(f"{folder}: item {name}: ARM set tags only (not an SWD unit)")
     if "SWD-10" in ported:

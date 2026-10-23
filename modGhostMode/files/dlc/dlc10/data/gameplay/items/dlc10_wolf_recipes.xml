@@ -745,10 +745,12 @@
 		craftedItem_name				="Wolf School steel sword"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Journeyman"
-		price							="108"
+		price							="238"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Steel ingot"						/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Steel ingot"						/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Amber dust"						/>
 										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 										<ingredient	quantity="1"	item_name="Monstrous eye"					/>
 		</ingredients>
@@ -759,11 +761,12 @@
 		craftedItem_name				="Wolf School steel sword 1"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Master"
-		price							="104"
+		price							="502"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf School steel sword"			/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="1"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
 										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous claw"					/>
 		</ingredients>
@@ -774,11 +777,12 @@
 		craftedItem_name				="Wolf School steel sword 2"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Master"
-		price							="104"
+		price							="775"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf School steel sword 1"		/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="1"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Sapphire dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
 		</ingredients>
@@ -789,11 +793,12 @@
 		craftedItem_name				="Wolf School steel sword 3"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Grand Master"
-		price							="648"
+		price							="1351"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf School steel sword 2"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
 										<ingredient	quantity="1"	item_name="Siren vocal cords"				/>
 		</ingredients>
@@ -805,11 +810,13 @@
 		craftedItem_name				="Wolf School silver sword"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Journeyman"
-		price							="108"
+		price							="274"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="Silver ingot"					/>
-										<ingredient	quantity="1"	item_name="Fifth essence"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Amber dust"						/>
+										<ingredient	quantity="1"	item_name="Monstrous eye"					/>
 										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 		</ingredients>
 	</schematic>
@@ -819,11 +826,12 @@
 		craftedItem_name				="Wolf School silver sword 1"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Master"
-		price							="152"
+		price							="574"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf School silver sword"		/>
-										<ingredient	quantity="2"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Meteorite silver ingot"			/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
 										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
 										<ingredient	quantity="1"	item_name="Monstrous tongue"				/>
 		</ingredients>
@@ -834,11 +842,12 @@
 		craftedItem_name				="Wolf School silver sword 2"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Master"
-		price							="224"
+		price							="1011"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf School silver sword 1"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 		</ingredients>
@@ -849,11 +858,12 @@
 		craftedItem_name				="Wolf School silver sword 3"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Grand Master"
-		price							="224"
+		price							="1614"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf School silver sword 2"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
 										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
 		</ingredients>
@@ -865,13 +875,14 @@
 		craftedItem_name				="Wolf Armor"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Journeyman"
-		price							="336"
+		price							="565"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Geralt Shirt"					/>
 										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
-										<ingredient	quantity="5"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Monstrous eye"					/>					
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous eye"					/>					
 		</ingredients>
 	</schematic>
 
@@ -880,13 +891,13 @@
 		craftedItem_name				="Wolf Armor 1"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="336"
+		price							="865"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Armor"						/>
-										<ingredient	quantity="3"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
-										<ingredient	quantity="4"	item_name="Linen"							/>
-										<ingredient	quantity="5"	item_name="Monstrous feather"				/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="2"	item_name="Monstrous heart"					/>
 		</ingredients>
 	</schematic>
 
@@ -894,14 +905,14 @@
 		name_name						="Witcher Wolf Jacket Upgrade schematic 2"
 		craftedItem_name				="Wolf Armor 2"
 		craftsmanType_name				="Armorer"
-		craftsmanLevel_name				="Grand Master"
-		price							="640"
+		craftsmanLevel_name				="Master"
+		price							="1875"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Armor 1"					/>
-										<ingredient	quantity="3"	item_name="Draconide leather"				/>
-										<ingredient	quantity="2"	item_name="Dwimeryte plate"					/>
-										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
-										<ingredient	quantity="2"	item_name="Monstrous heart"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Draconide leather"				/>
+										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
 		</ingredients>
 	</schematic>
 
@@ -910,12 +921,12 @@
 		craftedItem_name				="Wolf Armor 3"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Grand Master"
-		price							="740"
+		price							="3193"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Armor 2"					/>
-										<ingredient	quantity="2"	item_name="Draconide leather"				/>
-										<ingredient	quantity="3"	item_name="Dwimeryte plate"					/>
-										<ingredient	quantity="1"	item_name="Fifth essence"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Draconide leather"				/>
 										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 		</ingredients>
 	</schematic>
@@ -925,13 +936,12 @@
 		craftedItem_name				="Wolf Gloves 1"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Journeyman"
-		price							="186"
+		price							="226"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="2"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Monstrous dust"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather straps"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
 		</ingredients>
 	</schematic>
 
@@ -940,14 +950,13 @@
 		craftedItem_name				="Wolf Gloves 2"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="186"
+		price							="570"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Gloves 1"					/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="2"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Monstrous dust"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous tongue"				/>
 		</ingredients>
 	</schematic>
 	
@@ -956,13 +965,13 @@
 		craftedItem_name				="Wolf Gloves 3"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="186"
+		price							="934"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Gloves 2"					/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Monstrous tongue"				/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 		</ingredients>
 	</schematic>
 	
@@ -970,14 +979,14 @@
 		name_name						="Witcher Wolf Gloves Upgrade schematic 3"
 		craftedItem_name				="Wolf Gloves 4"
 		craftsmanType_name				="Armorer"
-		craftsmanLevel_name				="Master"
-		price							="186"
+		craftsmanLevel_name				="Grand Master"
+		price							="1338"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Gloves 3"					/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Monstrous tongue"				/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
 		</ingredients>
 	</schematic>
 
@@ -986,13 +995,12 @@
 		craftedItem_name				="Wolf Pants 1"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Journeyman"
-		price							="236"
+		price							="273"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
 		</ingredients>
 	</schematic>
 
@@ -1001,13 +1009,12 @@
 		craftedItem_name				="Wolf Pants 2"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="283"
+		price							="610"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Pants 1"					/>
-										<ingredient	quantity="2"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
 										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 		</ingredients>
 	</schematic>
@@ -1017,13 +1024,13 @@
 		craftedItem_name				="Wolf Pants 3"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="283"
+		price							="975"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Pants 2"					/>
-										<ingredient	quantity="2"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather straps"					/>
-										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
-										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous bone"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1031,14 +1038,14 @@
 		name_name						="Witcher Wolf Pants Upgrade schematic 3"
 		craftedItem_name				="Wolf Pants 4"
 		craftsmanType_name				="Armorer"
-		craftsmanLevel_name				="Master"
-		price							="283"
+		craftsmanLevel_name				="Grand Master"
+		price							="1642"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Pants 3"					/>
-										<ingredient	quantity="2"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather straps"					/>
-										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
-										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
 		</ingredients>
 	</schematic>
 
@@ -1047,13 +1054,13 @@
 		craftedItem_name				="Wolf Boots 1"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Journeyman"
-		price							="201"
+		price							="291"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="3"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Wire"							/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 		</ingredients>
 	</schematic>
 
@@ -1062,14 +1069,13 @@
 		craftedItem_name				="Wolf Boots 2"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="216"
+		price							="628"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Boots 1"					/>
-										<ingredient	quantity="1"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="3"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous saliva"				/>
 		</ingredients>
 	</schematic>
 	
@@ -1078,13 +1084,13 @@
 		craftedItem_name				="Wolf Boots 3"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="216"
+		price							="993"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Boots 2"					/>
-										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Monstrous claw"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous ear"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1092,14 +1098,14 @@
 		name_name						="Witcher Wolf Boots Upgrade schematic 3"
 		craftedItem_name				="Wolf Boots 4"
 		craftsmanType_name				="Armorer"
-		craftsmanLevel_name				="Master"
-		price							="216"
+		craftsmanLevel_name				="Grand Master"
+		price							="1660"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Boots 3"					/>
-										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Monstrous claw"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hair"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1108,11 +1114,13 @@
 		name_name						="NGP Wolf School steel sword schematic"
 		craftedItem_name				="NGP Wolf School steel sword"
 		craftsmanType_name				="Smith"
-		craftsmanLevel_name				="Master"
-		price							="108"
+		craftsmanLevel_name				="Journeyman"
+		price							="238"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Steel ingot"						/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Steel ingot"						/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Amber dust"						/>
 										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 										<ingredient	quantity="1"	item_name="Monstrous eye"					/>
 		</ingredients>
@@ -1123,11 +1131,12 @@
 		craftedItem_name				="NGP Wolf School steel sword 1"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Master"
-		price							="104"
+		price							="502"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School steel sword"		/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dark steel ingot"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School steel sword"			/>
+										<ingredient	quantity="1"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
 										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous claw"					/>
 		</ingredients>
@@ -1138,11 +1147,12 @@
 		craftedItem_name				="NGP Wolf School steel sword 2"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Master"
-		price							="104"
+		price							="775"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School steel sword 1"	/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="Dark steel ingot"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School steel sword 1"		/>
+										<ingredient	quantity="1"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Sapphire dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
 		</ingredients>
@@ -1153,11 +1163,12 @@
 		craftedItem_name				="NGP Wolf School steel sword 3"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Grand Master"
-		price							="648"
+		price							="1351"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School steel sword 2"	/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte ingot"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School steel sword 2"		/>
+										<ingredient	quantity="1"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
 										<ingredient	quantity="1"	item_name="Siren vocal cords"				/>
 		</ingredients>
@@ -1168,12 +1179,14 @@
 		name_name						="NGP Wolf School silver sword schematic"
 		craftedItem_name				="NGP Wolf School silver sword"
 		craftsmanType_name				="Smith"
-		craftsmanLevel_name				="Master"
-		price							="108"
+		craftsmanLevel_name				="Journeyman"
+		price							="274"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="Silver ingot"					/>
-										<ingredient	quantity="1"	item_name="Fifth essence"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Amber dust"						/>
+										<ingredient	quantity="1"	item_name="Monstrous eye"					/>
 										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 		</ingredients>
 	</schematic>
@@ -1183,11 +1196,12 @@
 		craftedItem_name				="NGP Wolf School silver sword 1"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Master"
-		price							="152"
+		price							="574"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School silver sword"	/>
-										<ingredient	quantity="2"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Meteorite silver ingot"			/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School silver sword"		/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
 										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
 										<ingredient	quantity="1"	item_name="Monstrous tongue"				/>
 		</ingredients>
@@ -1198,11 +1212,12 @@
 		craftedItem_name				="NGP Wolf School silver sword 2"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Master"
-		price							="224"
+		price							="1011"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School silver sword 1"	/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School silver sword 1"		/>
+										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 		</ingredients>
@@ -1213,11 +1228,12 @@
 		craftedItem_name				="NGP Wolf School silver sword 3"
 		craftsmanType_name				="Smith"
 		craftsmanLevel_name				="Grand Master"
-		price							="224"
+		price							="1614"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School silver sword 2"	/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte ingot"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf School silver sword 2"		/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
 										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
 		</ingredients>
@@ -1228,14 +1244,15 @@
 		name_name						="NGP Wolf Armor schematic"
 		craftedItem_name				="NGP Wolf Armor"
 		craftsmanType_name				="Armorer"
-		craftsmanLevel_name				="Master"
-		price							="336"
+		craftsmanLevel_name				="Journeyman"
+		price							="565"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Geralt Shirt"					/>
 										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
-										<ingredient	quantity="5"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Monstrous eye"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous eye"					/>					
 		</ingredients>
 	</schematic>
 
@@ -1244,13 +1261,13 @@
 		craftedItem_name				="NGP Wolf Armor 1"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="336"
+		price							="865"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Armor"					/>
-										<ingredient	quantity="3"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
-										<ingredient	quantity="4"	item_name="Linen"							/>
-										<ingredient	quantity="5"	item_name="Monstrous feather"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Armor"						/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="2"	item_name="Monstrous heart"					/>
 		</ingredients>
 	</schematic>
 
@@ -1259,13 +1276,13 @@
 		craftedItem_name				="NGP Wolf Armor 2"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="640"
+		price							="1875"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Armor 1"				/>
-										<ingredient	quantity="3"	item_name="Draconide leather"				/>
-										<ingredient	quantity="2"	item_name="Dwimeryte plate"					/>
-										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
-										<ingredient	quantity="2"	item_name="Monstrous heart"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Armor 1"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Draconide leather"				/>
+										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
 		</ingredients>
 	</schematic>
 
@@ -1274,12 +1291,12 @@
 		craftedItem_name				="NGP Wolf Armor 3"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Grand Master"
-		price							="740"
+		price							="3193"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Armor 2"				/>
-										<ingredient	quantity="2"	item_name="Draconide leather"				/>
-										<ingredient	quantity="3"	item_name="Dwimeryte plate"					/>
-										<ingredient	quantity="1"	item_name="Fifth essence"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Armor 2"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Draconide leather"				/>
 										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 		</ingredients>
 	</schematic>
@@ -1288,14 +1305,13 @@
 		name_name						="NGP Wolf Gloves schematic"
 		craftedItem_name				="NGP Wolf Gloves 1"
 		craftsmanType_name				="Armorer"
-		craftsmanLevel_name				="Master"
-		price							="186"
+		craftsmanLevel_name				="Journeyman"
+		price							="226"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="2"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Monstrous dust"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather straps"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
 		</ingredients>
 	</schematic>
 
@@ -1304,14 +1320,13 @@
 		craftedItem_name				="NGP Wolf Gloves 2"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="186"
+		price							="570"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Gloves 1"				/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="2"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Monstrous dust"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Gloves 1"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous tongue"				/>
 		</ingredients>
 	</schematic>
 	
@@ -1320,13 +1335,13 @@
 		craftedItem_name				="NGP Wolf Gloves 3"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="186"
+		price							="934"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Gloves 2"				/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Monstrous tongue"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Gloves 2"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1335,13 +1350,13 @@
 		craftedItem_name				="NGP Wolf Gloves 4"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Grand Master"
-		price							="186"
+		price							="1338"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Gloves 3"				/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Monstrous tongue"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Gloves 3"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
 		</ingredients>
 	</schematic>
 
@@ -1349,14 +1364,13 @@
 		name_name						="NGP Wolf Pants schematic"
 		craftedItem_name				="NGP Wolf Pants 1"
 		craftsmanType_name				="Armorer"
-		craftsmanLevel_name				="Master"
-		price							="236"
+		craftsmanLevel_name				="Journeyman"
+		price							="273"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
 		</ingredients>
 	</schematic>
 
@@ -1365,13 +1379,12 @@
 		craftedItem_name				="NGP Wolf Pants 2"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="283"
+		price							="610"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Pants 1"				/>
-										<ingredient	quantity="2"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Pants 1"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
 										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 		</ingredients>
 	</schematic>
@@ -1381,13 +1394,13 @@
 		craftedItem_name				="NGP Wolf Pants 3"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="283"
+		price							="975"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Pants 2"				/>
-										<ingredient	quantity="2"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather straps"					/>
-										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
-										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Pants 2"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous bone"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1396,13 +1409,13 @@
 		craftedItem_name				="NGP Wolf Pants 4"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Grand Master"
-		price							="283"
+		price							="1642"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Pants 3"				/>
-										<ingredient	quantity="2"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather straps"					/>
-										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
-										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Pants 3"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
 		</ingredients>
 	</schematic>
 
@@ -1410,14 +1423,14 @@
 		name_name						="NGP Wolf Boots schematic"
 		craftedItem_name				="NGP Wolf Boots 1"
 		craftsmanType_name				="Armorer"
-		craftsmanLevel_name				="Master"
-		price							="201"
+		craftsmanLevel_name				="Journeyman"
+		price							="291"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="3"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Wire"							/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 		</ingredients>
 	</schematic>
 
@@ -1426,14 +1439,13 @@
 		craftedItem_name				="NGP Wolf Boots 2"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="216"
+		price							="628"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Boots 1"				/>
-										<ingredient	quantity="1"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
-										<ingredient	quantity="3"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Boots 1"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous saliva"				/>
 		</ingredients>
 	</schematic>
 	
@@ -1442,13 +1454,13 @@
 		craftedItem_name				="NGP Wolf Boots 3"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Master"
-		price							="216"
+		price							="993"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Boots 2"				/>
-										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Monstrous claw"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Boots 2"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous ear"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1457,13 +1469,13 @@
 		craftedItem_name				="NGP Wolf Boots 4"
 		craftsmanType_name				="Armorer"
 		craftsmanLevel_name				="Grand Master"
-		price							="216"
+		price							="1660"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Boots 3"				/>
-										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Monstrous claw"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="NGP Wolf Boots 3"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hair"					/>
 		</ingredients>
 	</schematic>
 

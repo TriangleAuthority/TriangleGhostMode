@@ -18,30 +18,23 @@
                 <loot_entry name="lw_tm12_bandit_note" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
 			
-			<loot name="lw nml boatbuilder exterior" quantity_min="3" quantity_max="3" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Broken paddle" quantity_min="1" quantity_max="1"
-				player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="Timber" quantity_min="1" quantity_max="1"
-				player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="String" quantity_min="1" quantity_max="1"
-				player_level_min="0" player_level_max="0" chance="100" />
+			<loot name="lw nml boatbuilder exterior" quantity_min="2" quantity_max="3" player_level_min="0" player_level_max="0" respawn_time="0">
+                <loot_entry name="Broken paddle" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="0" chance="100" />
+                <loot_entry name="Timber" quantity_min="1" quantity_max="2" player_level_min="0" player_level_max="0" chance="100" />
+                <loot_entry name="String" quantity_min="1" quantity_max="2"	player_level_min="0" player_level_max="0" chance="100" />
             </loot>
 			
-			<loot name="lw nml boatmaker interior" quantity_min="4" quantity_max="4" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Blunt axe" quantity_min="1" quantity_max="1"
-				player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="Hardened timber" quantity_min="1" quantity_max="1"
-				player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="Cotton" quantity_min="1" quantity_max="1"
-				player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="Nails" quantity_min="1" quantity_max="1"
-				player_level_min="0" player_level_max="0" chance="100" />
+			<loot name="lw nml boatmaker interior" quantity_min="2" quantity_max="4" player_level_min="0" player_level_max="0" respawn_time="0">
+                <loot_entry name="Blunt axe" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="0" chance="100" />
+                <loot_entry name="Hardened timber" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="0" chance="100" />
+                <loot_entry name="Cotton" quantity_min="1" quantity_max="3" player_level_min="0" player_level_max="0" chance="100" />
+                <loot_entry name="Nails" quantity_min="1" quantity_max="3" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
 			
 			<loot name="lw nml boatbuilder ghoul boss" quantity_min="3" quantity_max="3" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="Ghoul blood" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="0" chance="100" />
                 <loot_entry name="Alghoul bone marrow" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="Meteorite ore" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="0" chance="100" />
+                <loot_entry name="Meteorite ore" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
 			
 			<loot name="lw nml boatbuilder ghoul nest" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="0" respawn_time="0">
@@ -132,7 +125,6 @@
             </loot>
             <loot name="lw_gr41_loot_chest" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
                 <loot_entry name="Meteorite silver plate" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Mourner" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="tm101_body" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="Gold sapphire ring" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -141,38 +133,40 @@
                 <loot_entry name="lw_gr40_treasure_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="lw_gr40_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="lw_gr40_loot_chest" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
-                <loot_entry name="Boots 03" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Silver sword 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+            <loot name="lw_gr40_loot_chest" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
+                <loot_entry name="Heavy pants 02" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Pants 4 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Moonblade" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="gr39_body_key" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
                 <loot_entry name="lw_gr39_treasure_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="lw_gr39_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="gr39_buried_treasure" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
+            <loot name="gr39_buried_treasure" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
+                <loot_entry name="Boots 06" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Boots 4 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Headtaker" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_tm6_treasure_chest" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
                 <loot_entry name="Ultimatum" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Gloves 01 q2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Light Armor 5 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Light armor 06" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Light Armor 8 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="de11_body_dead" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
                 <loot_entry name="lw_de11_treasure_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="lw_de11_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_de11_treasure" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Heavy armor 01" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Heavy armor 02" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="hs7_drowned_corpse" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_cp33_treasure_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="de30_chest" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100">
-                <loot_entry name="Orens" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="30" chance="100" />
-                <loot_entry name="Steel ingot schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Orens" player_level_min="0" player_level_max="100" quantity_min="100" quantity_max="200" chance="100" />
                 <loot_entry name="Emerald dust" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="2" chance="100" />
                 <loot_entry name="Dark steel plate" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Oathbreaker Armor schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="cp29_land_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_cp39_captains_log" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -186,24 +180,26 @@
             </loot>
             <loot name="sb24_buried_treasure" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
                 <loot_entry name="Harvall" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Pants 01 q2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Medium armor 04" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Relic Heavy 3 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="gr34_body_key" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
                 <loot_entry name="lw_gr34_treasure_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="lw_gr34_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="gr34_buried_treasure" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
-                <loot_entry name="Scoiatael sword 2 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+            <loot name="gr34_buried_treasure" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
+                <loot_entry name="Scoiatael sword 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Scoiatael sword 3 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Pants 03" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="cp34_land_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_cp39_captains_log" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="hs15_body" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Headtaker" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Nilfgaardian sword 4" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="gr38_loot" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
+                <loot_entry name="Heavy armor 01" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Medium Armor 2 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Rune svarog lesser" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
@@ -223,7 +219,7 @@
                 <loot_entry name="Recipe for Vitriol" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sb12_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Light Armor 5 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Light armor 03" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_de6_simpa_fossil" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="Valuable fossil" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -231,15 +227,16 @@
             <loot name="sb11_lootable_corpse" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="No Mans Land sword 3" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="gr31_chest" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100">
-                <loot_entry name="Scoiatael sword 2 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Split Bolt Legendary" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="20" chance="100" />
-                <loot_entry name="Blunt Bolt Legendary" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="20" chance="100" />
-                <loot_entry name="Crossbow 4" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+            <loot name="gr31_chest" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="5" chance="100">
+                <loot_entry name="Scoiatael sword 3" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Scoiatael sword 4 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Split Bolt" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="20" chance="100" />
+                <loot_entry name="Blunt Bolt" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="20" chance="100" />
+                <loot_entry name="Crossbow 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sb13_sunken_treasure" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
-                <loot_entry name="Aerondight" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Pants 03" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Silver sword 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Heavy pants 03" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sb13_smugglers_body" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_sb13_smugglers_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -258,14 +255,14 @@
                 <loot_entry name="lw_cb17_bandits_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="tm100_chest" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
-                <loot_entry name="Light Armor 2 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Leather" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="5" chance="100" />
-                <loot_entry name="Fried fish" player_level_min="0" player_level_max="100" quantity_min="10" quantity_max="10" chance="100" />
+                <loot_entry name="Light armor 01" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Leather" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100" />
+                <loot_entry name="Fried fish" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="6" chance="100" />
             </loot>
             <loot name="cp36_bags" player_level_min="0" player_level_max="100" quantity_min="6" quantity_max="6" chance="100">
                 <loot_entry name="Recipe for Mutagen 1" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Crossbow 3" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Split Bolt Legendary" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="20" chance="100" />
+                <loot_entry name="Crossbow 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Split Bolt" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="20" chance="100" />
                 <loot_entry name="W_Axe06" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Horse Blinder 1" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Steel ingot" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -274,7 +271,7 @@
                 <loot_entry name="Valuable fossil" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="gr12_underwater_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Harvall" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+				<loot_entry name="Dwarven sword 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="gr12_body_with_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_gr12_ferry_man_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -283,37 +280,34 @@
                 <loot_entry name="lw_tm5_villager_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="tm5_cave_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Medium Armor 1 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Medium armor 01" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_campfire_sack" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="10" quantity_max="15" chance="100" />
             </loot>
-            <loot name="lw_campfire_chest_q2" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="4" chance="100">
-                <loot_entry name="Sulfur" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Pearl" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="50" />
-                <loot_entry name="Glowing ore" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Chitin scale" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+            <loot name="lw_campfire_chest_q2" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
+                <loot_entry name="Sulfur" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="100" />
+                <loot_entry name="Pearl" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="50" />
             </loot>
-            <loot name="lw_campfire_chest_whales" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="12" chance="100">
+            <loot name="lw_campfire_chest_whales" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100">
                 <loot_entry name="Valuable fossil" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Pearl" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="3" chance="100" />
-                <loot_entry name="Powdered pearl" player_level_min="0" player_level_max="100" quantity_min="0" quantity_max="1" chance="100" />
-                <loot_entry name="Fish" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="5" chance="100" />
-                <loot_entry name="Siren vocal cords" player_level_min="0" player_level_max="100" quantity_min="0" quantity_max="2" chance="100" />
+                <loot_entry name="Pearl" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="100" />
+                <loot_entry name="Powdered pearl" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="2" chance="100" />
+                <loot_entry name="Fish" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="5" chance="100" />
             </loot>
             <loot name="sk4_chest_q2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Inis" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Gnomish sword 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sk110_abandoned_fisherman_hut" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="Heavy armor 05" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sk59_contraband_package" player_level_min="0" player_level_max="100" quantity_min="11" quantity_max="21" chance="100">
                 <loot_entry name="W_Axe01" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Silk" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="5" chance="100" />
-                <loot_entry name="Sulfur" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="15" chance="100" />
+                <loot_entry name="Silk" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="100" />
+                <loot_entry name="Sulfur" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="5" chance="100" />
             </loot>
             <loot name="sk50_treasure_fix" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Bloedeaedd" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Mourner" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sk30_treasure_chest" player_level_min="0" player_level_max="100" quantity_min="9" quantity_max="9" chance="100">
                 <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="100" quantity_max="110" chance="100" />
@@ -323,7 +317,7 @@
                 <loot_entry name="Golden casket" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Melitele figurine" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="50" />
                 <loot_entry name="Glyph axii lesser" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Amethyst" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="100" />
+                <loot_entry name="Amethyst" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="2" chance="100" />
                 <loot_entry name="Dyaebl" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sk30_body_key" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
@@ -356,7 +350,7 @@
                 <loot_entry name="lw_sk21_chest_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sk31_buried_treasure" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Bloodsword" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Inis" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sk20_seagull_island_body" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_sk20_chest_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -378,8 +372,8 @@
                 <loot_entry name="Orens" player_level_min="0" player_level_max="100" quantity_min="40" quantity_max="50" chance="100" />
             </loot>
             <loot name="temerian_royal_chest" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100">
-                <loot_entry name="Temerian Rye" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="5" chance="100" />
-                <loot_entry name="Temerian special forces insignia" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="3" chance="100" />
+                <loot_entry name="Temerian Rye" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="100" />
+                <loot_entry name="Temerian special forces insignia" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="2" chance="100" />
                 <loot_entry name="lw_prologue_temerian_loot_manifest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="31" quantity_max="31" chance="100" />
             </loot>
@@ -405,15 +399,17 @@
                 <loot_entry name="lw_de6_scavenger_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="cont_lw_de31_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Moonblade" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Elven silver sword 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="cont_corpse_de31_nilfgaard_soldier" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_de31_chest_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="tm4_bandit_stash_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Heavy Boots 3 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+            <loot name="tm4_bandit_stash_chest" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
+                <loot_entry name="Heavy boots 03" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Heavy Pants 4 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="tm13_corpse_with_potion" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
+            <loot name="tm13_corpse_with_potion" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100">
+                <loot_entry name="Thyssen Armor schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Dwarven spirit" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Hellebore petals" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="lw_tm_underwater_dungeon_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -421,13 +417,13 @@
             <loot name="lw_giggler_loot_chest" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
                 <loot_entry name="lw_sb5_giggler_leader_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Diamond dust" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Novigraadan sword 1 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="lw_sb25_anchor_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Pants 4 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+            <loot name="lw_sb25_anchor_chest" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
+                <loot_entry name="Pants 01 q2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Heavy Boots 3 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="cont_sb30_bandits" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Hardened leather schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Hardened leather" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="2" chance="100" />
             </loot>
             <loot name="lw_sb3_workers_note_gigglers" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_sb3_giggler_note_workers" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -438,7 +434,8 @@
             <loot name="lw_sb3_pirate_note_gigglers" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_sb3_giggler_note_pirates" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="lw_sb17_ironbound_chest" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
+            <loot name="lw_sb17_ironbound_chest" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
+                <loot_entry name="Light armor 03" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Light Armor 6 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Gloves 4 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
@@ -488,7 +485,7 @@
             <loot name="lw_gr_poi_042_chest" player_level_min="0" player_level_max="100" quantity_min="6" quantity_max="6" chance="100">
                 <loot_entry name="Target Point Bolt schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="30" chance="100" />
-                <loot_entry name="Linen" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100" />
+                <loot_entry name="Linen" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="100" />
                 <loot_entry name="Rune morana greater" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Dried fruit" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="5" chance="100" />
                 <loot_entry name="Glyph quen lesser" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -496,8 +493,9 @@
             <loot name="lw_gr_poi_042_corpse_wife" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_gr_poi_042_chest_key" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="cont_lw_gr29_chest_wooden" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Boots 4 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+            <loot name="cont_lw_gr29_chest_wooden" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
+                <loot_entry name="Boots 01 q2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Boots 3 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_gr29_bandit_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
                 <loot_entry name="lw_gr29_bandit_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -515,17 +513,14 @@
                 <loot_entry name="lw_gf2_white_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_gf2_ironbound_chest" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="5" chance="100">
-                <loot_entry name="Pants 3 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Light Armor 5 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Gloves 3 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Boots 3 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Fisstech" player_level_min="0" player_level_max="100" quantity_min="10" quantity_max="20" chance="100" />
+                <loot_entry name="Medium armor 05" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Fisstech" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="10" chance="100" />
             </loot>
-            <loot name="lw_sk_poe_200_ironbound_chest" player_level_min="0" player_level_max="100" quantity_min="0" quantity_max="4" chance="100">
-                <loot_entry name="Ruby" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="50" />
-                <loot_entry name="Diamond" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="50" />
-                <loot_entry name="Horse Bag 3" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="30" />
-                <loot_entry name="Glyph igni lesser" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="90" />
+            <loot name="lw_sk_poe_200_ironbound_chest" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100">
+                <loot_entry name="Ruby" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Diamond" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Horse Bag 3" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Glyph igni lesser" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_sk58_wall_treasure" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
                 <loot_entry name="Recipe for Aether" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -544,13 +539,13 @@
             <loot name="lw_sk7_treasure_chest" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
                 <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="100" quantity_max="100" chance="100" />
                 <loot_entry name="W_Axe06" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Hardened leather" player_level_min="0" player_level_max="100" quantity_min="10" quantity_max="10" chance="100" />
+                <loot_entry name="Hardened leather" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="100" />
             </loot>
             <loot name="lw_sk57_treasure_chest" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100">
                 <loot_entry name="Medium Armor 4 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Crossbow 4" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Broadhead Bolt Legendary" player_level_min="0" player_level_max="100" quantity_min="20" quantity_max="20" chance="100" />
-                <loot_entry name="Bear pelt" player_level_min="0" player_level_max="100" quantity_min="10" quantity_max="10" chance="100" />
+                <loot_entry name="Bear pelt" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="4" chance="100" />
             </loot>
             <loot name="lw_sk57_corpse" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
                 <loot_entry name="lw_sk57_treasure_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -565,15 +560,15 @@
             <loot name="lw_sk32_corpse_02" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="3" chance="100">
                 <loot_entry name="lw_sk32_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
                 <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="100" quantity_max="100" chance="100" />
-                <loot_entry name="Meteorite silver plate" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100" />
+                <loot_entry name="Meteorite silver plate" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
-            <loot name="lw_sk23_ghost_corpse" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Heavy boots 04" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+            <loot name="lw_sk23_ghost_corpse" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
+                <loot_entry name="Heavy boots 05" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Light Armor 5 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sk25_chest_q1" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100">
-                <loot_entry name="Light Armor 7 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Recipe for Vitriol" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Silver ore" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="5" chance="100" />
+                <loot_entry name="Light armor 08" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Silver ore" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="5" chance="100" />
                 <loot_entry name="Gloves 04" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="sk25_chest_q3" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
@@ -589,12 +584,11 @@
                 <loot_entry name="lw_sk16_village_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_sk16_pirate_note" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
-                <loot_entry name="Leather straps" player_level_min="0" player_level_max="100" quantity_min="50" quantity_max="50" chance="100" />
-                <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="40" quantity_max="45" chance="100" />
+                <loot_entry name="Leather straps" player_level_min="0" player_level_max="100" quantity_min="3" quantity_max="5" chance="100" />
+                <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="50" quantity_max="100" chance="100" />
             </loot>
             <loot name="cont_lw_sk38_treasure" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
-                <loot_entry name="Thyssen Armor schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
-                <loot_entry name="Water essence" player_level_min="0" player_level_max="100" quantity_min="5" quantity_max="5" chance="100" />
+                <loot_entry name="Water essence" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="3" chance="100" />
             </loot>
             <loot name="cont_lw_sk38_corpse" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
                 <loot_entry name="lw_sk38_treasure_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
@@ -616,7 +610,7 @@
                 <loot_entry name="Skull" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_sk42_treasure_chest" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100">
-                <loot_entry name="Pants 04" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+                <loot_entry name="Light armor 04" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
             </loot>
             <loot name="lw_sk42_corpse" player_level_min="0" player_level_max="100" quantity_min="2" quantity_max="2" chance="100">
                 <loot_entry name="lw_sk42_treasure_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />

@@ -500,3 +500,11 @@
 ; UI-15: shaving (legacy)
 2110992169|25746309||Geralt ahora está bien afeitado
 2110992173|04bda90f||Se utiliza para afeitar.
+2110992257|2b555f18||Componentes de artesanía
+2110992258|25691b0a||Se puede vender a comerciantes o desmantelar.
+2110992260|7fd2ce90||Puede ser vendido por una suma significativa o desmantelarse.
+2110992330|de9dbdb0||Equipo de desmontaje
+2110992331|54df196a||Permite desmontar objetos corrientes y componentes de artesanía.
+2110992332|cd3869e4||Equipo de desmontaje alquímico
+2110992333|4d09bbea||Permite desmontar componentes de alquimia.
+2110992334|0544643a||Desmantelar

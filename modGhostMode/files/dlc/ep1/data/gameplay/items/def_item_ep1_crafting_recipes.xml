@@ -231,10 +231,11 @@
 		craftedItem_name				="Rune pierog"
 		craftsmanLevel_name				="Master"
 		craftsmanType_name				="Crafter"
-		price							="96"
+		price							="170"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Runestone lesser"			/>
 										<ingredient	quantity="1"	item_name="Dumpling"					/>
+										<ingredient	quantity="1"	item_name="Amber dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -245,10 +246,11 @@
 		craftedItem_name				="Rune tvarog"
 		craftsmanLevel_name				="Master"
 		craftsmanType_name				="Crafter"
-		price							="125"
+		price							="180"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Runestone lesser"			/>
 										<ingredient	quantity="1"	item_name="Cows milk"					/>
+										<ingredient	quantity="1"	item_name="Diamond dust"				/>
 		</ingredients>
 	</schematic>
 	
@@ -258,11 +260,11 @@
 		craftedItem_name				="Glyph warding lesser"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="154"
+		price							="218"
 	>
 		<ingredients>					<ingredient quantity="1" item_name="Glyph infusion lesser"				/>
-										<ingredient quantity="1" item_name="Silver ore"							/>
-										<ingredient quantity="1" item_name="Infused dust"						/>
+										<ingredient quantity="1" item_name="Glowing ore"						/>
+										<ingredient quantity="1" item_name="Diamond dust"						/>
 		</ingredients>
 	</schematic>
 
@@ -272,7 +274,7 @@
 		craftedItem_name				="Glyph warding"
 		craftsmanLevel_name				="Master"
 		craftsmanType_name				="Crafter"
-		price							="308"
+		price							="436"
 	>
 		<ingredients>					<ingredient quantity="2" item_name="Glyph warding lesser"				/>
 		</ingredients>
@@ -284,7 +286,7 @@
 		craftedItem_name				="Glyph warding greater"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="616"
+		price							="872"
 	>
 		<ingredients>					<ingredient quantity="2" item_name="Glyph warding"						/>
 		</ingredients>
@@ -296,11 +298,11 @@
 		craftedItem_name				="Glyph binding lesser"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="159"
+		price							="156"
 	>
 		<ingredients>					<ingredient quantity="1" item_name="Glyph infusion lesser"				/>
-										<ingredient quantity="1" item_name="Meteorite ore"						/>
-										<ingredient quantity="1" item_name="Infused dust"						/>
+										<ingredient quantity="1" item_name="Dark iron ore"						/>
+										<ingredient quantity="1" item_name="Amethyst dust"						/>
 		</ingredients>
 	</schematic>
 
@@ -310,7 +312,7 @@
 		craftedItem_name				="Glyph binding"
 		craftsmanLevel_name				="Master"
 		craftsmanType_name				="Crafter"
-		price							="318"
+		price							="312"
 	>
 		<ingredients>					<ingredient quantity="2" item_name="Glyph binding lesser"				/>
 		</ingredients>
@@ -322,7 +324,7 @@
 		craftedItem_name				="Glyph binding greater"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="636"
+		price							="624"
 	>
 		<ingredients>					<ingredient quantity="2" item_name="Glyph binding"						/>
 		</ingredients>
@@ -334,11 +336,11 @@
 		craftedItem_name				="Glyph reinforcement lesser"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="152"
+		price							="186"
 	>
 		<ingredients>					<ingredient quantity="1" item_name="Glyph infusion lesser"				/>
-										<ingredient quantity="1" item_name="Dark iron ore"						/>
-										<ingredient quantity="1" item_name="Infused dust"						/>
+										<ingredient quantity="1" item_name="Meteorite ore"						/>
+										<ingredient quantity="1" item_name="Ruby dust"							/>
 		</ingredients>
 	</schematic>
 
@@ -348,7 +350,7 @@
 		craftedItem_name				="Glyph reinforcement"
 		craftsmanLevel_name				="Master"
 		craftsmanType_name				="Crafter"
-		price							="304"
+		price							="372"
 	>
 		<ingredients>					<ingredient quantity="2" item_name="Glyph reinforcement lesser"			/>
 		</ingredients>
@@ -360,7 +362,7 @@
 		craftedItem_name				="Glyph reinforcement greater"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="608"
+		price							="744"
 	>
 		<ingredients>					<ingredient quantity="2" item_name="Glyph reinforcement"				/>
 		</ingredients>
@@ -372,11 +374,11 @@
 		craftedItem_name				="Glyph mending lesser"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="159"
+		price							="172"
 	>
 		<ingredients>					<ingredient quantity="1" item_name="Glyph infusion lesser"				/>
-										<ingredient quantity="3" item_name="Gold mineral"						/>
-										<ingredient quantity="1" item_name="Infused dust"						/>
+										<ingredient quantity="1" item_name="Silver ore"							/>
+										<ingredient quantity="1" item_name="Amber dust"							/>
 		</ingredients>
 	</schematic>
 
@@ -386,7 +388,7 @@
 		craftedItem_name				="Glyph mending"
 		craftsmanLevel_name				="Master"
 		craftsmanType_name				="Crafter"
-		price							="318"
+		price							="344"
 	>
 		<ingredients>					<ingredient quantity="2" item_name="Glyph mending lesser"				/>
 		</ingredients>
@@ -398,7 +400,7 @@
 		craftedItem_name				="Glyph mending greater"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="636"
+		price							="688"
 	>
 		<ingredients>					<ingredient quantity="2" item_name="Glyph mending"						/>
 		</ingredients>

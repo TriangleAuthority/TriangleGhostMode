@@ -28,6 +28,9 @@ Fails on any difference.
 """
 import argparse, os, re, subprocess, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import item_layer  # noqa: E402  CRAFT's fields of the items written here
+
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
 OUT = "gm_ench.xml"
@@ -59,7 +62,7 @@ SPEC = [
 ]
 
 # Items: (source file pattern, feature, item, change), taken from vanilla-5.x whole with the change.
-# Only what the feature changes: prices, weights and dismantling parts stay 5.x's (ECON, WGT, CRAFT).
+# Only what the feature changes and CRAFT's fields (item_layer.py); prices and weights stay 5.x's (ECON, WGT).
 ITEMS = [
     (EP1_UPGRADES, "ENCH-16: Pierog and Tvarog are not relics (legacy removed Relic _Stats)", "Rune pierog", ("drop", "<a>Relic _Stats</a>")),
     (EP1_UPGRADES, None, "Rune tvarog", ("drop", "<a>Relic _Stats</a>")),
@@ -101,6 +104,10 @@ def build(folder):
         if change[0] == "drop":
             body = re.sub(r'\s*' + re.escape(change[1]), '', body, count=1)
         body = body.replace("<item", '<item on_conflict="replace"', 1)
+        # CRAFT's fields of the same item (dismantling parts, ...), as item_layer.py gives them
+        src = {r: re.search(r'(?ms)^[ 	]*<item\s+name\s*="%s".*?</item>' % re.escape(item), git("show", f"{r}:" + pattern % folder)).group(0).strip()
+               for r in ("master", "legacy-GM")}
+        body, _ = item_layer.apply_item(folder, item, src["master"], src["legacy-GM"], body)
         if feature:
             lines.append("\t\t\t<!-- %s -->" % feature)
         lines.append("\n".join(("\t\t\t" if l.strip().startswith(("<item", "</item", ">")) else "\t\t\t\t") + l.strip()

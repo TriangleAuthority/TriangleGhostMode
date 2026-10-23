@@ -120,6 +120,8 @@ Actions that need input (casting, guarding) are driven by script instead: see [I
 
 **Long exec output is cut off.** rw3d_cli returns only the first part of a call's `LogChannel` output when a function logs a lot (about 40 lines was too many); the script log has all of it (`grep GMTest` in `Documents\The Witcher 3\scriptslog.txt`). Keep test functions' INFO lines few.
 
+**Teleports can start quest scenes:** `tptopos` into the White Orchard bandit camp started a prologue scene and the game wrote an autosave (2026-10-22); check `game.py saves -n 1` after teleporting and report it. After many spawned NPCs, menus and loads in one session, `game.py load` hung twice: start fresh with `quit` and `run` for the regression.
+
 **Changes made this way are not saved** unless the game saves. No autosave happened in testing, but an autosave can trigger at quest events; `game.py run <save>` with the test save's name always starts from its unchanged state. Do not save over the test save.
 
 ## Input simulation
@@ -217,6 +219,8 @@ Used for the first manual run, before the mod existed. Kept for situations the m
 - `mouse_move.ps1 <X> <Y> [-Click]`: moves the game's menu cursor to a screen pixel with relative raw moves, optionally left-clicks. Hovering an item in the inventory shows its tooltip, clicking a tab switches it (**verified** 2026-10-20, UI slice 1: `r4inventory()` opens the inventory, then hover and screenshot).
 
 What we learned about input:
+
+- **Failed** (2026-10-22): an injected E key in the inventory runs no item action (our "E Dismantle", vanilla's "E Read"), although `c` (stats) works and arrow keys move the selection. Send the action's navigation code to the menu instead: `gmtest_menuinput("enter-gamepad_A")` calls the inventory's `OnInputHandled` as its Flash does for the key.
 
 - **Verified:** the game reads hardware scan codes (`SendInput` with `KEYEVENTF_SCANCODE`). `~` opens the console, letters type, Enter runs the command.
 - **Failed:** Shift does not reach the console: `()` typed as Shift+9/Shift+0 came out as `12`. No-argument exec functions work without `()`.

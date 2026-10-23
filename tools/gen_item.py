@@ -56,6 +56,8 @@ def generate(worktree, folder):
             continue
         if kind == "item":
             if name in l and name not in m and name not in v and name not in taken_i:
+                if not feats <= item_layer.PORTED:
+                    continue  # a new item is written once every feature it carries is ported
                 # an item legacy added (the master kits): legacy's, new
                 iblocks.append((l[name][0], name, l[name][1]))
                 report.append(f"{folder}: new item {name}")
@@ -146,7 +148,8 @@ def verify(worktree):
             if fold != folder:
                 continue
             for f in sorted(feats):
-                own_t, own_n = item_layer.TAGS.get(f, set()), item_layer.NODES.get(f, set())
+                own_n = item_layer.NODES.get(f, set())
+                own_t = item_layer.own_tags(f, m[name][2], l[name][2]) if kind == "item" and name in m and name in l else item_layer.TAGS.get(f, set())
                 if kind == "item" and own_t:
                     if name not in m or name not in l or name not in v:
                         note("item not in all three branches")
@@ -167,8 +170,8 @@ def verify(worktree):
                             problems.append(f"{folder}: item {name}: {t} {'missing' if t in lt else 'present'} ({f})")
                 if kind == "item" and name in l and name not in m and name not in v:
                     checked[0] += 1
-                    if f not in item_layer.PORTED:
-                        note(f"{f} not ported yet")
+                    if not feats <= item_layer.PORTED:
+                        note(f"{f}: new item, {', '.join(sorted(feats - item_layer.PORTED))} not ported yet")
                     elif name not in gi or " ".join(gi[name].split()) != " ".join(l[name][1].split()):
                         problems.append(f"{folder}: new item {name} missing or not legacy's")
                     continue
@@ -176,12 +179,14 @@ def verify(worktree):
                     if kind != "item" or name not in l or name not in v:
                         continue
                     checked[0] += 1
-                    blk = lambda e: (lambda mm: " ".join(mm.group(0).split()) if mm else None)(re.search(rf'<{tag}>.*?</{tag}>', e, re.S))
+                    blk = lambda e: item_layer.norm_block(item_layer.block_of(e, tag))
                     if blk(gi.get(name, v[name][1])) == blk(l[name][1]):
                         continue
                     if f not in item_layer.PORTED:
                         note(f"{f} not ported yet")
-                    elif name in m and blk(v[name][1]) != blk(m[name][1]):
+                    elif (tag, name) in item_layer.KEEP_5X and blk(gi.get(name, v[name][1])) == blk(v[name][1]):
+                        note(f"{tag}: another area's part of legacy's block, 5.x's kept (KEEP_5X)")
+                    elif name in m and blk(v[name][1]) != blk(m[name][1]) and (tag, name) not in item_layer.FORCE_LEGACY:
                         note(f"{tag}: 5.x changed it, 5.x's kept")
                     else:
                         problems.append(f"{folder}: item {name}: {tag} not legacy's ({f})")

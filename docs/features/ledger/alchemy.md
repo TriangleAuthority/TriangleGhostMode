@@ -135,10 +135,10 @@ Black Blood return **lowered** but duration doubled, Blizzard **stronger and lon
 
 - **Starting / prologue:** Swallow 1 (given at start in all three, `playerWitcher.ws`); Thunderbolt 1 via the alchemy tutorial (White Orchard).
 - **Legacy vanilla:** T1 formulas at herbalists from L2–L10 (Maribor/Petri L2, Thunderbolt L3, Golden Oriole/Blizzard L5, Tawny Owl/Full Moon/Swallow 2/White Raffard L10, White Honey L15); T2 L2–L15 at shops, L10–L20 in random loot; T3 shops L2–L16 (Druid Herbalist, Master Alchemist), random loot ("_everywhere_recipes") L15–L30. Toussaint (EP2) alchemist/herbalist sell many T2/T3 (late game).
-- **GM:** **uniform gates**: T1 ungated, T2 L10, T3 **L20** everywhere; T1 recipes added to Druid Herbalist, Master Alchemist and the Toussaint alchemist; Swallow 1, Cat 1, White Honey 1, bear/nekker pheromones made purchasable; per changelist the Master Alchemist sells all recipes and rare ingredients after his quest.
+- **GM:** gates by item, from the data ([LOOT-03](../loot.md#loot-03-recipe-and-schematic-level-gates)): T1 mostly ungated (some L4), T2 L8–L12, T3 L16–L20 in shops and random loot (a few T2 and T3 ungated at the Druid Herbalist and Toussaint's herbalist); T1 recipes added to Druid Herbalist, Master Alchemist and the Toussaint alchemist; Swallow 1, Cat 1, White Honey 1, bear/nekker pheromones made purchasable; per changelist the Master Alchemist sells all recipes and rare ingredients after his quest.
 - **5.x:** identical to 1.32 (no diff in the shop/container tables for these recipes).
 
-Rough classes (GM): **early** Swallow, Thunderbolt, Petri, Maribor, Tawny Owl, Golden Oriole, White Raffard, Full Moon, Black Blood, Blizzard, Cat T1; **mid** all T2 (L10); **late-mid** all T3 (L20).
+Rough classes (GM): **early** Swallow, Thunderbolt, Petri, Maribor, Tawny Owl, Golden Oriole, White Raffard, Full Moon, Black Blood, Blizzard, Cat T1; **mid** all T2 (L8–12); **late-mid** all T3 (L16–20).
 
 ### 3b. Decoction formulas
 

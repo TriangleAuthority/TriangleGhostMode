@@ -326,8 +326,9 @@ def generate(folder, regular=None):
         if SWORD_CATEGORY.search(ventry):
             ctx["swords"][name] = entry  # written by gen_swd_items.py, with SWD's changes merged in
             continue
+        entry, craft = item_layer.apply_item(folder, name, mentry, lentry, entry)  # CRAFT's fields (item_layer.py)
         blocks.append((vpath, name, entry))
-        report.append(f"{folder}: {name}: {'; '.join(changes)}")
+        report.append(f"{folder}: {name}: {'; '.join(changes + craft)}")
     ma, la, va = abilities("master", folder), abilities("legacy-GM", folder), abilities("vanilla-5.x", folder)
     ablocks = []
     for name in sorted(la):

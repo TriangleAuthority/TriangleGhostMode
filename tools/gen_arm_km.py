@@ -5,7 +5,8 @@ armor pieces and their `_Stats` abilities, their crafting schematics (items and 
 entries), and renamed the starting armor ("Worn Kaer Morhen ..."). This tool copies legacy's new
 entries (`legacy-GM`) into a DLC file, and gives the four starting items whole from 5.x
 (`vanilla-5.x`, on_conflict="replace") with legacy's name keys (and legacy's `DoNotEnhance`, as
-`gen_arm_items.py` carries it; that tool leaves these four items to this one).
+`gen_arm_items.py` carries it; that tool leaves these four items to this one), with CRAFT's fields
+(their dismantling parts) applied through `item_layer.apply_item`.
 
 Legacy turned the vanilla "Starting Armor Upgrade schematic 1" into the first armor schematic
 (Starting Armor -> Kaer Morhen Armor). A DLC cannot override a `<schematic>` (the crafting manager
@@ -18,6 +19,8 @@ Writes `items/gm_arm_kaer_morhen.xml` and `items_plus/gm_arm_kaer_morhen.xml` in
 (default worktree ../TGM-5x-GM). --check writes nothing and fails if a file is out of date.
 """
 import argparse, os, re, subprocess, sys
+
+import item_layer
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -97,6 +100,11 @@ def generate(folder):
             # legacy's DoNotEnhance, as gen_arm_items.py carries it (SWD audit F4, the owner's decision)
             e = re.sub(r'(<tags>)(.*?)(\s*</tags>)', lambda m: m.group(1) + m.group(2).rstrip()
                        + ("" if "DoNotEnhance" in m.group(2) else ", DoNotEnhance") + m.group(3), e, count=1, flags=re.S)
+        # CRAFT's fields (the dismantling parts, CRAFT-08; CRAFT/LOOT audit F2), as the other item tools apply them
+        mst = no_comments(git("show", "master:modGhostMode/files/gameplay/%s/def_item_%s.xml" % (folder, piece)))
+        em = [x for n, x in entries(mst, "item", "name") if n == name]
+        if em:
+            e, _ = item_layer.apply_item(folder, name, em[0], el[0], e)
         starting.append(e)
 
     def block(lst):

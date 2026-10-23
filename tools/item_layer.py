@@ -1,4 +1,5 @@
-"""ITEM's fields of an item or ability entry, shared by the item generators (docs/features/item.md).
+"""ITEM's and CRAFT's fields of an item or ability entry, shared by the item generators
+(docs/features/item.md, docs/features/craft.md).
 
 ITEM's changes sit in the same entries as ARM's and SWD's (an armor piece's level tags next to its
 class tags, a sword's level range next to its damage), and the game reads one definition per name.
@@ -20,10 +21,14 @@ import csv, os, re
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PORTED = {"ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11"}
+PORTED = {"ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11",
+          "CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09", "LOOT-08"}
+AREAS = ("ITEM-", "CRAFT-", "LOOT-")
 
-# The item tags each feature owns (added or removed where legacy did).
+# The item tags each feature owns (added or removed where legacy did); "*": every tag but the mod_*
+# price tags (ECON's).
 TAGS = {
+    "CRAFT-07": {"*"},  # the ingredients' kind tags (CraftingIngredient, AlchemyIngredient, ...)
     "ITEM-03": {"AutogenUseLevelRange", "AutogenForceLevel", "EP1"},
     "ITEM-04": {"Autogen"},
     "ITEM-05": {"Autogen", "AutogenForceLevel"},
@@ -38,15 +43,31 @@ NODES = {
     "ITEM-07": {"*"},  # the random bonus abilities (MA_*), given as legacy has them
     "ITEM-09": {"quality"},
     "ITEM-11": {"*"},  # the repair kits' values and quality, the master kits
+    "CRAFT-04": {"*"},  # the craftable quest armors' abilities (new, legacy's whole)
+    "CRAFT-09": {"*"},  # the dismantle kits' abilities (new)
 }
 # The child blocks of an item each feature owns (taken whole from legacy).
 BLOCKS = {
     "ITEM-11": {"base_abilities"},  # the kits' quality abilities
+    "CRAFT-01": {"base_abilities"},  # the schematic items' rarity (bugfix 183)
+    "CRAFT-02": {"base_abilities"},
+    "CRAFT-06": {"base_abilities"},  # the recipe items' rarity
+    "CRAFT-07": {"base_abilities"},  # the ingredients' rarity (bugfix 120)
+    "CRAFT-08": {"recycling_parts"},  # the dismantling parts
 }
+# (block, item) where legacy's block is taken although 5.x changed it (the owner's DC4: Cheesecutter
+# without 5.x's Cheese).
+FORCE_LEGACY = {("recycling_parts", "Cheesecutter")}
+# (block, item) left as 5.x has it although the item's feature owns the block: another area's part of
+# legacy's block (the Free nilfgaardian lemon's drink quality and toxicity are FOOD's; CRAFT-07 makes it
+# a drink, CRAFT/LOOT audit F3).
+KEEP_5X = {("base_abilities", "Free nilfgaardian lemon")}
 
 # The attributes of an item's opening tag each feature owns.
 ATTRS = {
     "ITEM-10": {"initial_durability", "max_durability"},  # the two Beauclair trousers start at full durability
+    "CRAFT-02": {"localisation_key_name"},  # the NG+ Wolf school sword schematics' names
+    "CRAFT-07": {"category", "grid_size", "localisation_key_description"},
 }
 
 _UNITS = None
@@ -54,13 +75,13 @@ UNIT = re.compile(r'^(.*/gameplay/(items|items_plus)/[^/]+\.xml)::definitions/(i
 
 
 def units():
-    """{(folder, kind, name): (path, {ITEM features})} of ITEM's item and ability units."""
+    """{(folder, kind, name): (path, {ITEM and CRAFT features})} of their item and ability units."""
     global _UNITS
     if _UNITS is None:
         _UNITS = {}
         with open(os.path.join(REPO, "docs", "features", "attribution.csv"), encoding="utf-8") as f:
             for row in csv.DictReader(f):
-                feats = {x for x in row["features"].split() if x.startswith("ITEM-")}
+                feats = {x for x in row["features"].split() if x.startswith(AREAS)}
                 m = UNIT.match(row["unit"])
                 if m and feats:
                     _UNITS[(m.group(2), m.group(3).split("/")[1], m.group(4))] = ("modGhostMode/" + m.group(1), feats)
@@ -74,10 +95,21 @@ def ported(folder, kind, name, only=None):
     return feats & only if only is not None else feats
 
 
-def item_tags(folder, name):
+def own_tags(feature, mtags, ltags):
+    """The tags `feature` owns on an item whose 1.32 and legacy tags are `mtags`, `ltags`."""
+    own = set(TAGS.get(feature, set()))
+    if "*" in own:
+        own.discard("*")
+        own |= {t for t in set(mtags) | set(ltags) if not t.startswith("mod_")}
+    return own
+
+
+def item_tags(folder, name, mtags=(), ltags=(), area=None):
     out = set()
     for f in ported(folder, "item", name):
-        out |= TAGS.get(f, set())
+        if area and not f.startswith(area):
+            continue
+        out |= own_tags(f, mtags, ltags)
     return out
 
 
@@ -93,10 +125,10 @@ def ability_nodes(folder, name):
     return out
 
 
-def merge_tags(folder, name, mtags, ltags, vtags, cur):
+def merge_tags(folder, name, mtags, ltags, vtags, cur, area=None):
     """`cur` (a tag list) with ITEM's ported tag changes; `vtags` 5.x's own tags (5.x's change kept)."""
     out = list(cur)
-    for t in sorted(item_tags(folder, name)):
+    for t in sorted(item_tags(folder, name, mtags, ltags, area)):
         was, want = t in mtags, t in ltags
         if was == want or (t in vtags) != was:  # legacy did not change it, or 5.x did
             continue
@@ -110,7 +142,7 @@ def merge_tags(folder, name, mtags, ltags, vtags, cur):
 def tag_changes(folder, name, mtags, ltags, vtags):
     """[(tag, added?)] of ITEM's ported tag changes legacy made and 5.x did not."""
     out = []
-    for t in sorted(item_tags(folder, name)):
+    for t in sorted(item_tags(folder, name, mtags, ltags)):
         was, want = t in mtags, t in ltags
         if was != want and (t in vtags) == was:
             out.append((t, want))
@@ -162,10 +194,12 @@ def head(entry):
     return {m.group(1): (m.start(2), m.end(2)) for m in re.finditer(r'\b(\w+)\s*=\s*"([^"]*)"', text[:end])}, end
 
 
-def merge_attrs(folder, name, mentry, lentry, entry):
-    """`entry` with ITEM's ported opening-tag attribute changes; [changes]."""
+def merge_attrs(folder, name, mentry, lentry, entry, area=None):
+    """`entry` with the ported opening-tag attribute changes; [changes]."""
     own = set()
     for f in ported(folder, "item", name):
+        if area and not f.startswith(area):
+            continue
         own |= ATTRS.get(f, set())
     if not own:
         return entry, []
@@ -190,19 +224,79 @@ def merge_attrs(folder, name, mentry, lentry, entry):
     return entry, changes
 
 
-def merge_blocks(folder, name, mentry, lentry, entry):
-    """`entry` with ITEM's ported child blocks (legacy's, where 5.x kept 1.32's); [changes]."""
+class _Block:
+    """A block's span in an entry, with the entry's own text (comments inside the block kept)."""
+
+    def __init__(self, entry, m):
+        self._text, self._s, self._e = entry[m.start():m.end()], m.start(), m.end()
+
+    def start(self):
+        return self._s
+
+    def end(self):
+        return self._e
+
+    def group(self, _=0):
+        return self._text
+
+
+def block_of(entry, tag):
+    """An item's top-level child block `tag` (None if it has none). Blocks inside comments do not
+    count (1.32 and 5.x comment some out, e.g. the Grave Hag ear's parts: CRAFT/LOOT audit F1)."""
+    text = re.sub(r'<!--.*?-->', lambda c: " " * len(c.group(0)), entry, flags=re.S)
+    m = re.search(rf'<{tag}>.*?</{tag}>|<{tag}\s*/>', text, re.S)
+    return _Block(entry, m) if m else None
+
+
+def norm_block(m):
+    return " ".join(m.group(0).split()) if m else None
+
+
+def merge_blocks(folder, name, mentry, lentry, entry, area=None):
+    """`entry` with the ported child blocks (legacy's, where 5.x kept 1.32's); [changes]."""
     own = set()
     for f in ported(folder, "item", name):
+        if area and not f.startswith(area):
+            continue
         own |= BLOCKS.get(f, set())
     changes = []
     for tag in sorted(own):
-        mb, lb, vb = (re.search(rf'<{tag}>.*?</{tag}>', e, re.S) for e in (mentry, lentry, entry))
-        if not (mb and lb and vb):
+        if (tag, name) in KEEP_5X:
             continue
-        n = lambda m: " ".join(m.group(0).split())
-        if n(lb) == n(mb) or n(vb) != n(mb):
+        mb, lb, vb = (block_of(e, tag) for e in (mentry, lentry, entry))
+        if norm_block(lb) == norm_block(mb) or norm_block(vb) == norm_block(lb):
             continue
-        entry = entry[:vb.start()] + lb.group(0) + entry[vb.end():]
+        if norm_block(vb) != norm_block(mb) and (tag, name) not in FORCE_LEGACY:
+            continue  # 5.x changed it: 5.x's kept
+        if vb and lb:
+            entry = entry[:vb.start()] + lb.group(0) + entry[vb.end():]
+        elif vb:  # legacy removed the block
+            entry = entry[:vb.start()].rstrip(" \t") + entry[vb.end():].lstrip(" \t\r\n")
+        else:  # legacy added it: before the closing tag
+            end = entry.rindex("</item>")
+            entry = entry[:end].rstrip() + "\n\t\t" + lb.group(0) + "\n\t" + entry[end:]
         changes.append(tag)
     return entry, changes
+
+
+def apply_item(folder, name, mentry, lentry, entry, area="CRAFT-"):
+    """`entry` (an item's entry as a generator writes it) with every ported ITEM and CRAFT field of the
+    item (by default CRAFT's: the item tools apply ITEM's themselves): tags, opening-tag attributes
+    and child blocks; [changes]. Idempotent."""
+    vtags = split_tags(entry)
+    mt, lt = split_tags(mentry), split_tags(lentry)
+    new = merge_tags(folder, name, mt, lt, vtags, vtags, area)
+    changes = []
+    if new != vtags:
+        tm = re.search(r'(<tags>)(.*?)(</tags>)', entry, re.S)
+        if tm:
+            entry = entry[:tm.start(2)] + "\t\t\t\t\t\t\t" + ", ".join(new) + "\n\t\t" + entry[tm.end(2):]
+            changes.append(f"tags {', '.join(vtags)} -> {', '.join(new)}")
+    entry, a = merge_attrs(folder, name, mentry, lentry, entry, area)
+    entry, b = merge_blocks(folder, name, mentry, lentry, entry, area)
+    return entry, changes + a + b
+
+
+def split_tags(entry):
+    m = re.search(r'<tags>(.*?)</tags>', re.sub(r'<!--.*?-->', '', entry, flags=re.S), re.S)
+    return [t.strip() for t in m.group(1).split(",") if t.strip()] if m else []

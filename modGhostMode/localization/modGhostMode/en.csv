@@ -500,3 +500,11 @@
 ; UI-15: shaving (legacy)
 2110992169|        |gm_used_razor_success|Geralt is now clean-shaven
 2110992173|        |item_desc_razor_mod|Used for shaving.
+2110992257|        |gm_recycling_parts|Crafting components
+2110992258|25691b0a||Can be sold to merchants or dismantled.
+2110992260|7fd2ce90||Can be sold for a significant sum or dismantled.
+2110992330|        |item_name_dismantle_kit_gear_1|Item dismantle kit
+2110992331|        |item_desc_dismantle_kit_gear_1|Allows to dismantle junk items and crafting components.
+2110992332|        |item_name_dismantle_kit_alchemy_1|Alchemy dismantle kit
+2110992333|        |item_desc_dismantle_kit_alchemy_1|Allows to dismantle alchemy components.
+2110992334|        |panel_button_hud_interaction_dismantle|Dismantle

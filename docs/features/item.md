@@ -197,21 +197,21 @@ A finding from the test: the level is generated inside `AddAnItem` (`OnItemAdded
 | Flags | balance |
 | Depends on | ITEM-02, ITEM-03, ARM-01, SWD-01, SWD-06 (Iris) |
 | Skill trees | n/a |
-| Port form | the item tools (`item_layer.py`: the `Autogen` tag and the fixed armor or damage nodes); `@replaceMethod W3PlayerWitcher.NewGamePlusReplaceEP1` (`gm/items/itemScaling.ws`, the Iris swap removed) |
-| Port status | **signed off** (2026-10-20); **ported** (slice 3, 5.x-GM `038ddd65`), verified in both trees |
-| Open checks | NG+'s start keeping Iris; a save holding an Iris obtained before (expected to need reacquiring) |
+| Port form | the item tools (`item_layer.py`: the `Autogen` tag and the fixed armor or damage nodes); `@replaceMethod W3PlayerWitcher.NewGamePlusReplaceEP1` and `NewGamePlusReplaceEP2Items` (`gm/items/itemScaling.ws`, the Iris and the vampire gear swaps removed) |
+| Port status | **signed off** (2026-10-20); **ported** (slice 3, 5.x-GM `038ddd65`), verified in both trees; the NG+ vampire gear swap added after the sign-off (5.x-GM `9b8e16a3`, compiles) |
+| Open checks | NG+'s start keeping Iris and the vampire gear; a save holding an Iris obtained before (expected to need reacquiring) |
 | Save impact | reacquire items (expected): an owned item that had fixed damage or armor and was never generated loses its fixed value and has no per-level abilities until it is obtained again (Iris in a save made before; unsupported mid-playthrough, matters for test saves) |
 | NG+ counterpart | applied, untested |
 
-**What it does:** items with a fixed damage or armor become level-scaled (`Autogen`, the fixed value removed): Iris (363 slashing; about 300 at level 35), Ofir armor (200) and Ofir Sabre 2 (308), Blood and Wine's first vampire set (`q702`: armor 230/87/84/87) and its steel sword (356, which also loses its fixed armor penetration, crit and confusion bonuses), Yoana's reward armor (166), the free DLC's Nekker boots (64), Damien's sword (an NPC's); the laundry stick, the Iron Poker, the Feline sword of the free DLC quest and the Burning Rose armor lose the fixed value they had next to their level scaling. In NG+ legacy keeps Iris (level-scaled) instead of swapping it for `NGP Olgierd Sabre`. Not in the changelist (an omission).
+**What it does:** items with a fixed damage or armor become level-scaled (`Autogen`, the fixed value removed): Iris (363 slashing; about 300 at level 35), Ofir armor (200) and Ofir Sabre 2 (308), Blood and Wine's first vampire set (`q702`: armor 230/87/84/87) and its steel sword (356, which also loses its fixed armor penetration, crit and confusion bonuses), Yoana's reward armor (166), the free DLC's Nekker boots (64), Damien's sword (an NPC's); the laundry stick, the Iron Poker, the Feline sword of the free DLC quest and the Burning Rose armor lose the fixed value they had next to their level scaling. In NG+ legacy keeps Iris and Blood and Wine's vampire armor, gloves, pants, boots and steel sword (level-scaled) instead of swapping them for their NG+ copies. Not in the changelist (an omission).
 
-**Implementation (legacy):** the items' tags and their `_Stats` abilities (26 units and NG+), `NewGamePlusReplaceEP1`.
+**Implementation (legacy):** the items' tags and their `_Stats` abilities (26 units and NG+), `NewGamePlusReplaceEP1`, `NewGamePlusReplaceEP2Items` (the five `q702` swaps commented out; found by CRAFT's mapping after ITEM's sign-off, ported after the [CRAFT and LOOT audit](craft.md#craft-and-loot-audit-2026-10-22), F5).
 
 **5.x:** 1.32's fixed values. In the port they stay as deviations until ITEM: ARM-01's (Ofir armor, the `q702` vampire armor, Yoana's armor, the standalone gear; its text named the vampire armor Hearts of Stone's, corrected with this mapping), SWD-01's second (the standalone swords, Ofir Sabre 2, the Iron Poker, the laundry stick, the `q702` sword, the `mq1058` Feline sword, NG+'s crafted Burning Rose sword), SWD-06's two (Iris's fixed damage, the NG+ swap). The Nekker boots and Damien's sword are in no deviation (found by this mapping).
 
 **Decisions:** port as legacy.
 
-**Verification (slice 3, 2026-10-19, both trees):** scripted (`GMTest_item04`, in the regression; also at level 25): the `Autogen` tags and the fixed values gone from Iris, Ofir armor and Ofir Sabre 2, the first vampire armor and sword, Yoana's armor, the Nekker boots, Damien's sword; new copies of Iris and Ofir armor at Geralt's level -1 to +1, their level read from their damage or armor equal to the generated one; Iris equipped at level 25 with about 225 damage (`gmtest_swd_equip`). `gen_item.py`, `gen_arm_items.py` and `gen_swd_items.py --verify`: 0 unexplained. Not tested: NG+'s start (Iris kept), a save holding an Iris obtained before.
+**Verification (slice 3, 2026-10-19, both trees):** scripted (`GMTest_item04`, in the regression; also at level 25): the `Autogen` tags and the fixed values gone from Iris, Ofir armor and Ofir Sabre 2, the first vampire armor and sword, Yoana's armor, the Nekker boots, Damien's sword; new copies of Iris and Ofir armor at Geralt's level -1 to +1, their level read from their damage or armor equal to the generated one; Iris equipped at level 25 with about 225 damage (`gmtest_swd_equip`). `gen_item.py`, `gen_arm_items.py` and `gen_swd_items.py --verify`: 0 unexplained. Not tested: NG+'s start (Iris kept), a save holding an Iris obtained before. The vampire gear's NG+ swap (2026-10-22, 5.x-GM `9b8e16a3`): compiles; `check_modsigns.py` 0 unmarked; NG+ untested by policy.
 
 ### ITEM-05 Standalone starting gear
 
@@ -390,9 +390,9 @@ The bonuses count the level the item was given at generation, as legacy (the own
 
 **5.x:** unchanged; the blacksmith's repair panel rebuilt (repair prices ECON).
 
-**Decisions:** port as legacy; ITEM takes the kits and their effect, where they are sold stays CRAFT's and LOOT's (DI6, owner, 2026-10-19): until then no merchant sells the master kits (they exist as items).
+**Decisions:** port as legacy; ITEM takes the kits and their effect, where they are sold stays CRAFT's and LOOT's (DI6, owner, 2026-10-19): sold since CRAFT-10 and LOOT-04 (2026-10-22), below.
 - **Deviation:** 5.x's quest lock on equipment changes (`AreManualEquipmentChangesBlocked`, set by quests) also stops the master kits' forced unequip: while a quest blocks equipment changes, an item a master kit raises above Geralt's level stays equipped; legacy had no such lock (porter's call, the auditor's suggestion; confirmed by the owner, 2026-10-20).
-- **Deviation:** no shop sells the master weaponsmith and armorsmith tools; legacy's Hattori, Yoana, the Hearts of Stone enchanter and the Blood and Wine grandmaster smiths do (temporary, until CRAFT and LOOT; confirmed by the owner, 2026-10-20).
+- Ended 2026-10-22 with CRAFT-10 and LOOT-04: the temporary deviation "no shop sells the master kits". Hattori, Yoana after her quest, the Hearts of Stone enchanter and Blood and Wine's archmaster sell them ([LOOT-04](loot.md#loot-04-special-merchants)).
 
 **Verification (slice 7, 2026-10-19, both trees):** scripted (`GMTest_item11`, in the regression), through `RepairItem`, which using a kit calls: kit values 0.1/0.2/0.3 and 1, qualities; weapon kit 1 on a sword at 50% gives 60% and is used up; a full sword takes a kit; master weaponsmith tools on a full sword raise its level 1 to 2 (one more per-level ability); master armorsmith tools on armor at 20% repair it fully and add a level; the master kits' names. Not tested: using a kit in the inventory menu (drag and drop or E).
 

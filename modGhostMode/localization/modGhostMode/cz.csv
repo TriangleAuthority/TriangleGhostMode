@@ -500,3 +500,11 @@
 ; UI-15: shaving (legacy)
 2110992169|        |gm_used_razor_success|Geralt je nyní hladce oholen
 2110992173|        |item_desc_razor_mod|Používá se na holení.
+2110992257|        |gm_recycling_parts|Výrobní součásti
+2110992258|25691b0a||Může být prodáno obchodníkům nebo rozebráno na výrobní součásti.
+2110992260|7fd2ce90||Může být prodáno za vysokou cenu nebo rozebráno na výrobní součásti.
+2110992330|        |item_name_dismantle_kit_gear_1|Nářadí na rozebrání předmětů
+2110992331|        |item_desc_dismantle_kit_gear_1|Umožňuje rozebrat nepotřebné předměty a výrobní součásti.
+2110992332|        |item_name_dismantle_kit_alchemy_1|Nářadí na rozebrání alchymistických předmětů
+2110992333|        |item_desc_dismantle_kit_alchemy_1|Umožňuje rozebrat alchymistické součásti.
+2110992334|        |panel_button_hud_interaction_dismantle|Rozebrat

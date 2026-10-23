@@ -500,3 +500,11 @@
 ; UI-15: shaving (legacy)
 2110992169|25746309||Geralt est maintenant rasé de près.
 2110992173|04bda90f||Utilisé pour se raser.
+2110992257|2b555f18||Composants d'artisanat
+2110992258|25691b0a||Peut être vendu aux marchands ou désassemblé.
+2110992260|7fd2ce90||Peut être vendu à très bon prix ou désassemblé.
+2110992330|de9dbdb0||Kit de désassemblage d'objets
+2110992331|54df196a||Permet de désassembler des objets et des composants d'artisanat.
+2110992332|cd3869e4||Kit de désassemblement alchimique
+2110992333|4d09bbea||Permet de désassembler des composants alchimiques.
+2110992334|0544643a||Désassembler

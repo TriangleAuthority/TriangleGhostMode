@@ -1332,11 +1332,8 @@
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Starting Armor _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Linen</parts>
-										<parts count="1">Leather</parts>
-										<parts count="2">Leather squares</parts>
-										<parts count="2">Leather straps</parts>
-										<parts count="2">Iron ore</parts>
+		<recycling_parts>				<parts count="1">Leather</parts>
+										<parts count="1">Linen</parts>
 		</recycling_parts>
 		<variants>						<variant equip_template="t_01a_mg__viper_lvl3" category="gloves"></variant>
 		</variants>
@@ -1361,10 +1358,8 @@
 		<base_abilities>				<a>Starting Pants _Stats</a>
 										<a>Default armor _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Linen</parts>
-										<parts count="1">Steel ingot</parts>
-										<parts count="5">Thread</parts>
-										<parts count="4">Cotton</parts>
+		<recycling_parts>				<parts count="1">Linen</parts>
+										<parts count="1">Leather squares</parts>
 		</recycling_parts>
 		<collapse>						<category_cond name="armor" collapse="true"/>
 											<item_cond name="Body torso wet" collapse="false"/>
@@ -1397,9 +1392,7 @@
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Starting Boots _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="3">Leather squares</parts>
-										<parts count="1">Iron ore</parts>
-										<parts count="1">Leather straps</parts>
+		<recycling_parts>				<parts count="1">Leather squares</parts>
 		</recycling_parts>
 	</item>
 	<item on_conflict="replace"
@@ -1422,9 +1415,7 @@
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Starting Gloves _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="1">Iron ore</parts>
-										<parts count="1">Leather straps</parts>
+		<recycling_parts>				<parts count="2">Leather straps</parts>
 		</recycling_parts>
 		<variants>						<variant equip_template="g_01a_mg__viper_lvl3">
 											<item>Geralt Shirt</item>

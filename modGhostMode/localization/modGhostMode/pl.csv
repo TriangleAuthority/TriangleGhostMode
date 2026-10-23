@@ -500,3 +500,11 @@
 ; UI-15: shaving (legacy)
 2110992169|25746309||Geralt jest teraz ogolony na czysto
 2110992173|04bda90f||Służy do golenia.
+2110992257|2b555f18||Składniki rzemieślnicze
+2110992258|25691b0a||Rupieć. Może zostać odsprzedany handlarzom lub rozłożony na składniki rzemieślnicze.
+2110992260|7fd2ce90||Przedmiot wartościowy. Może zostać odsprzedany za dobrą cenę lub rozłożony na składniki rzemieślnicze.
+2110992330|de9dbdb0||Zestaw do demontażu przedmiotów
+2110992331|54df196a||Pozwala na rozmontowanie śmieci i składników rzemieślniczych.
+2110992332|cd3869e4||Zestaw do demontażu komponentów alchemicznych
+2110992333|4d09bbea||Pozwala na rozmontowanie komponentów alchemicznych
+2110992334|0544643a||Demontaż

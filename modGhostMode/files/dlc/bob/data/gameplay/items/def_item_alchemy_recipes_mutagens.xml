@@ -406,7 +406,7 @@
 		<ingredients>					<ingredient quantity="1" item_name="Mutagen red" 			/>
 										<ingredient quantity="1" item_name="Vitriol" 				/>
 										<ingredient quantity="1" item_name="Blue lotus" 			/>
-										<ingredient quantity="2" item_name="Ginatia petals" 		/>
+										<ingredient quantity="1" item_name="Ginatia petals" 		/>
 		</ingredients>
 	</recipe>
 
@@ -422,7 +422,7 @@
 		<ingredients>					<ingredient quantity="1" item_name="Mutagen red" 			/>
 										<ingredient quantity="1" item_name="Rebis" 					/>
 										<ingredient quantity="1" item_name="Holy basil" 			/>
-										<ingredient quantity="4" item_name="Celandine" 				/>
+										<ingredient quantity="1" item_name="Celandine" 				/>
 		</ingredients>
 	</recipe>
 
@@ -438,7 +438,7 @@
 		<ingredients>					<ingredient quantity="1" item_name="Mutagen green" 			/>
 										<ingredient quantity="1" item_name="Rubedo" 				/>
 										<ingredient quantity="1" item_name="Winter cherry" 			/>
-										<ingredient quantity="8" item_name="Blowbill" 				/>
+										<ingredient quantity="1" item_name="Blowbill" 				/>
 		</ingredients>
 	</recipe>
 
@@ -454,7 +454,7 @@
 		<ingredients>					<ingredient quantity="1" item_name="Mutagen green" 			/>
 										<ingredient quantity="1" item_name="Vitriol" 				/>
 										<ingredient quantity="1" item_name="Blue lotus" 			/>
-										<ingredient quantity="4" item_name="Green mold"				/>
+										<ingredient quantity="1" item_name="Green mold"				/>
 		</ingredients>
 	</recipe>
 
@@ -486,7 +486,7 @@
 		<ingredients>					<ingredient quantity="1" item_name="Mutagen blue"			/>
 										<ingredient quantity="1" item_name="Rebis"					/>
 										<ingredient quantity="1" item_name="Holy basil"				/>
-										<ingredient quantity="4" item_name="Green mold"				/>
+										<ingredient quantity="1" item_name="Green mold"				/>
 		</ingredients>
 	</recipe>
 
@@ -503,8 +503,8 @@
 		<ingredients>					<ingredient quantity="1" item_name="Greater mutagen red"	/>
 										<ingredient quantity="1" item_name="Vitriol"				/>
 										<ingredient quantity="1" item_name="Blue lotus"				/>
-										<ingredient quantity="2" item_name="Ginatia petals"			/>
-										<ingredient quantity="2" item_name="Honeysuckle"			/>
+										<ingredient quantity="1" item_name="Ginatia petals"			/>
+										<ingredient quantity="1" item_name="Honeysuckle"			/>
 		</ingredients>
 	</recipe>
 
@@ -520,8 +520,8 @@
 		<ingredients>					<ingredient quantity="1" item_name="Greater mutagen red"	/>
 										<ingredient quantity="1" item_name="Rebis"					/>
 										<ingredient quantity="1" item_name="Holy basil"				/>
-										<ingredient quantity="3" item_name="Celandine"				/>
-										<ingredient quantity="3" item_name="Ranogrin"				/>
+										<ingredient quantity="1" item_name="Celandine"				/>
+										<ingredient quantity="1" item_name="Ranogrin"				/>
 		</ingredients>
 	</recipe>
 
@@ -537,8 +537,8 @@
 		<ingredients>					<ingredient quantity="1" item_name="Greater mutagen green"	/>
 										<ingredient quantity="1" item_name="Rubedo"					/>
 										<ingredient quantity="1" item_name="Winter cherry"			/>
-										<ingredient quantity="4" item_name="Blowbill"				/>
-										<ingredient quantity="2" item_name="Sulfur"					/>
+										<ingredient quantity="1" item_name="Blowbill"				/>
+										<ingredient quantity="1" item_name="Sulfur"					/>
 		</ingredients>
 	</recipe>
 
@@ -555,7 +555,7 @@
 										<ingredient quantity="1" item_name="Vitriol"				/>
 										<ingredient quantity="1" item_name="Blue lotus"				/>
 										<ingredient quantity="1" item_name="Green mold"				/>
-										<ingredient quantity="1" item_name="Aether"					/>
+										<ingredient quantity="1" item_name="Phosphorus"				/>
 		</ingredients>
 	</recipe>
 
@@ -571,8 +571,8 @@
 		<ingredients>					<ingredient quantity="1" item_name="Greater mutagen blue"	/>
 										<ingredient quantity="1" item_name="Rubedo"					/>
 										<ingredient quantity="1" item_name="Winter cherry"			/>
-										<ingredient quantity="2" item_name="Honeysuckle"			/>
-										<ingredient quantity="2" item_name="Hellebore petals"		/>
+										<ingredient quantity="1" item_name="Honeysuckle"			/>
+										<ingredient quantity="1" item_name="Hellebore petals"		/>
 		</ingredients>
 	</recipe>
 
@@ -588,8 +588,8 @@
 		<ingredients>					<ingredient quantity="1" item_name="Greater mutagen blue" 	/>
 										<ingredient quantity="1" item_name="Rebis" 					/>
 										<ingredient quantity="1" item_name="Holy basil" 			/>
-										<ingredient quantity="5" item_name="Green mold" 			/>
-										<ingredient quantity="5" item_name="Ergot seeds" 			/>
+										<ingredient quantity="1" item_name="Green mold" 			/>
+										<ingredient quantity="1" item_name="Ergot seeds" 			/>
 		</ingredients>
 	</recipe>
 

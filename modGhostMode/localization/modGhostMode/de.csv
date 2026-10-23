@@ -500,3 +500,11 @@
 ; UI-15: shaving (legacy)
 2110992169|25746309||Geralt ist jetzt glatt rasiert
 2110992173|04bda90f||Wird für die Rasur benötigt.
+2110992257|2b555f18||Handwerkskomponente
+2110992258|25691b0a||Kann an Händler verkauft oder in Handwerkszutaten zerlegt werden.
+2110992260|7fd2ce90||Kann für eine ordentliche Summe an Händler verkauft, oder in Handwerkszutaten zerlegt werden.
+2110992330|de9dbdb0||Ausrüstung für Gegenstands-Zerlegung
+2110992331|54df196a||Ermöglicht es, Schrottgegenstände und Handwerkskomponenten zu zerlegen.
+2110992332|cd3869e4||Ausrüstung für Alchemie-Zerlegung
+2110992333|4d09bbea||Ermöglicht es, Alchemiekomponenten zu zerlegen.
+2110992334|0544643a||Zerlegen

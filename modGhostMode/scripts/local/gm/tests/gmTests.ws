@@ -2160,6 +2160,8 @@ exec function gmtest_regress()
 	GMTest_ench();
 	GMTest_swd();
 	GMTest_item();
+	GMTest_craft();
+	GMTest_loot();
 	GMTest_alchport();
 	GMTest_uiport();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");

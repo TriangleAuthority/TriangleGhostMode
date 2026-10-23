@@ -1451,13 +1451,13 @@
 		craftedItem_name				="Guard lvl1 steel sword 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="429"
+		price							="780"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Dark iron ingot"					/>
-										<ingredient	quantity="1"	item_name="Ruby"							/>
-										<ingredient	quantity="1"	item_name="Amethyst"						/>
-										<ingredient	quantity="1"	item_name="Monstrous eye"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient quantity="2"	item_name="Wire rope"						/>
+										<ingredient quantity="1"	item_name="Haft"							/>
+										<ingredient	quantity="1"	item_name="Amethyst dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -1466,13 +1466,13 @@
 		craftedItem_name				="Guard lvl2 steel sword 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="446"
+		price							="785"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Dark iron ingot"					/>
-										<ingredient	quantity="1"	item_name="Ruby"							/>
-										<ingredient	quantity="1"	item_name="Amethyst"						/>
-										<ingredient	quantity="2"	item_name="Monstrous eye"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient quantity="2"	item_name="Wire rope"						/>
+										<ingredient quantity="1"	item_name="Haft"							/>
+										<ingredient	quantity="1"	item_name="Sapphire dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -1481,13 +1481,13 @@
 		craftedItem_name				="Knights steel sword 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="490"
+		price							="790"
 	>
-		<ingredients>					<ingredient	quantity="3"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Dark steel ingot"				/>
-										<ingredient	quantity="1"	item_name="Ruby"							/>
-										<ingredient	quantity="1"	item_name="Amber"							/>
-										<ingredient	quantity="2"	item_name="Monstrous saliva"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient quantity="2"	item_name="Wire rope"						/>
+										<ingredient quantity="1"	item_name="Haft"							/>
+										<ingredient	quantity="1"	item_name="Amber dust"						/>
 		</ingredients>
 	</schematic>
 
@@ -1496,13 +1496,13 @@
 		craftedItem_name				="Hanza steel sword 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="592"
+		price							="795"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dark steel ingot"				/>
-										<ingredient	quantity="1"	item_name="Ruby"							/>
-										<ingredient	quantity="1"	item_name="Emerald"							/>
-										<ingredient	quantity="2"	item_name="Acid extract"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient quantity="2"	item_name="Wire rope"						/>
+										<ingredient quantity="1"	item_name="Haft"							/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
 		</ingredients>
 	</schematic>
 
@@ -1511,13 +1511,13 @@
 		craftedItem_name				="Toussaint steel sword 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="636"
+		price							="800"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dark steel ingot"				/>
-										<ingredient	quantity="1"	item_name="Ruby"							/>
-										<ingredient	quantity="2"	item_name="Amber"							/>
-										<ingredient	quantity="2"	item_name="Monstrous saliva"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient quantity="2"	item_name="Wire rope"						/>
+										<ingredient quantity="1"	item_name="Haft"							/>
+										<ingredient	quantity="1"	item_name="Sapphire dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -1529,12 +1529,13 @@
 		craftedItem_name				="Lynx School steel sword 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1275"
+		price							="1723"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Lynx School steel sword 3"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Sapphire"						/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
+										<ingredient	quantity="1"	item_name="Monstrous spore"					/>
 										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 		</ingredients>
 	</schematic>
@@ -1545,13 +1546,15 @@
 		craftedItem_name				="Gryphon School steel sword 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1070"
+		price							="1725"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Gryphon School steel sword 3"	/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Amber dust"						/>
+										<ingredient	quantity="1"	item_name="Monstrous vine"					/>
 										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
+										
 		</ingredients>
 	</schematic>
 
@@ -1561,13 +1564,14 @@
 		craftedItem_name				="Bear School steel sword 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1070"
+		price							="1972"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Bear School steel sword 3"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
-										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
+										<ingredient	quantity="1"	item_name="Monstrous stomach"				/>
+										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -1577,13 +1581,14 @@
 		craftedItem_name				="Wolf School steel sword 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1255"
+		price							="1723"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf School steel sword 3"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Ruby"							/>
-										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
+										<ingredient	quantity="1"	item_name="Monstrous feather"				/>
+										<ingredient	quantity="1"	item_name="Monstrous pincer"				/>
 		</ingredients>
 	</schematic>
 
@@ -1593,12 +1598,14 @@
 		craftedItem_name				="Red Wolf School steel sword 1"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="729"
+		price							="1025"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte ingot"					/>
-										<ingredient	quantity="1"	item_name="Ruby dust"						/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Steel ingot"						/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Emerald dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous saliva"				/>
+										<ingredient	quantity="1"	item_name="Acid extract"					/>
 		</ingredients>
 	</schematic>
 
@@ -1607,13 +1614,14 @@
 		craftedItem_name				="Red Wolf School steel sword 2"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1070"
+		price							="1432"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Red Wolf School steel sword 1"	/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Emerald dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous saliva"				/>
-										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
+										<ingredient	quantity="1"	item_name="Acid extract"					/>
 		</ingredients>
 	</schematic>
 
@@ -1623,12 +1631,13 @@
 		craftedItem_name				="Serpent Steel Sword 1"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="245"
+		price							="780"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dark steel ingot"				/>
-										<ingredient	quantity="1"	item_name="Venom extract"					/>
-										<ingredient	quantity="1"	item_name="Sapphire dust"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Haft"							/>
+										<ingredient	quantity="1"	item_name="Emerald dust"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1637,12 +1646,13 @@
 		craftedItem_name				="Serpent Steel Sword 2"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="804"
+		price							="880"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Emerald dust"					/>
-										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Haft"							/>
+										<ingredient	quantity="1"	item_name="Sapphire dust"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1651,12 +1661,13 @@
 		craftedItem_name				="Serpent Steel Sword 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="1275"
+		price							="980"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Acid extract"					/>
-										<ingredient	quantity="1"	item_name="Sapphire"						/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Haft"							/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -1669,12 +1680,13 @@
 		craftedItem_name				="Lynx School silver sword 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1275"
+		price							="2526"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Lynx School silver sword 3"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Sapphire"						/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
+										<ingredient	quantity="1"	item_name="Monstrous spore"					/>
 										<ingredient	quantity="1"	item_name="Monstrous tooth"					/>
 		</ingredients>
 	</schematic>
@@ -1685,13 +1697,14 @@
 		craftedItem_name				="Gryphon School silver sword 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1070"
+		price							="2440"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Gryphon School silver sword 3"	/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Amber dust"						/>
+										<ingredient	quantity="1"	item_name="Monstrous vine"					/>
 										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
-										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
 		</ingredients>
 	</schematic>
 
@@ -1701,12 +1714,13 @@
 		craftedItem_name				="Bear School silver sword 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1070"
+		price							="2724"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Bear School silver sword 3"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Monstrous saliva"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
+										<ingredient	quantity="1"	item_name="Monstrous stomach"				/>
 										<ingredient	quantity="1"	item_name="Monstrous tongue"				/>
 		</ingredients>
 	</schematic>
@@ -1717,12 +1731,13 @@
 		craftedItem_name				="Wolf School silver sword 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1243"
+		price							="2526"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf School silver sword 3"		/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Ruby"							/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
+										<ingredient	quantity="1"	item_name="Monstrous pincer"				/>
 										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 		</ingredients>
 	</schematic>
@@ -1733,12 +1748,14 @@
 		craftedItem_name				="Red Wolf School silver sword 1"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="879"
+		price							="1925"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte ingot"					/>
-										<ingredient	quantity="1"	item_name="Ruby"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Emerald dust"					/>
 										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
+										<ingredient	quantity="1"	item_name="Acid extract"					/>
 		</ingredients>
 	</schematic>
 
@@ -1747,13 +1764,14 @@
 		craftedItem_name				="Red Wolf School silver sword 2"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Smith"
-		price							="1070"
+		price							="2323"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Red Wolf School silver sword 1"	/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
-										<ingredient	quantity="1"	item_name="Monstrous hair"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Green gold ingot"				/>
+										<ingredient	quantity="1"	item_name="Emerald dust"					/>
+										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
+										<ingredient	quantity="1"	item_name="Acid extract"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1763,12 +1781,13 @@
 		craftedItem_name				="Serpent Silver Sword 1"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="361"
+		price							="1025"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Meteorite silver ingot"			/>
-										<ingredient quantity="1"	item_name="Venom extract"					/>
-										<ingredient	quantity="1"	item_name="Sapphire dust"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient quantity="1"	item_name="Leather"							/>
+										<ingredient quantity="2"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Emerald dust"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1777,12 +1796,13 @@
 		craftedItem_name				="Serpent Silver Sword 2"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="804"
+		price							="1125"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte ingot"					/>
-										<ingredient quantity="1"	item_name="Emerald dust"					/>
-										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient quantity="1"	item_name="Leather"							/>
+										<ingredient quantity="2"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Sapphire dust"					/>
 		</ingredients>
 	</schematic>
 	
@@ -1791,12 +1811,13 @@
 		craftedItem_name				="Serpent Silver Sword 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Smith"
-		price							="1275"
+		price							="1225"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient quantity="1"	item_name="Acid extract"					/>
-										<ingredient	quantity="1"	item_name="Sapphire"						/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
+										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient quantity="1"	item_name="Leather"							/>
+										<ingredient quantity="2"	item_name="Wire rope"						/>
+										<ingredient	quantity="1"	item_name="Amber dust"						/>
 		</ingredients>
 	</schematic>
 
@@ -1808,13 +1829,13 @@
 		craftedItem_name				="Guard Lvl1 Armor 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="392"
+		price							="568"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Geralt Shirt"					/>
-										<ingredient	quantity="2"	item_name="Leather"							/>
-										<ingredient	quantity="2"	item_name="Thread"							/>
-										<ingredient	quantity="4"	item_name="Linen"							/>
-										<ingredient	quantity="2"	item_name="Dark iron plate"					/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Silk"							/>
+										<ingredient	quantity="2"	item_name="Hardened leather"				/>
+										<ingredient	quantity="2"	item_name="String"							/>
+										<ingredient	quantity="1"	item_name="Glowing ore"						/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
 		</ingredients>
 	</schematic>
 
@@ -1824,14 +1845,14 @@
 		craftedItem_name				="Guard Lvl1 A Armor 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="484"
+		price							="578"
 	>
 		
-		<ingredients>					<ingredient	quantity="1"	item_name="Geralt Shirt"					/>
-										<ingredient	quantity="3"	item_name="Leather"							/>
-										<ingredient	quantity="3"	item_name="Thread"							/>
-										<ingredient	quantity="3"	item_name="Silk"							/>
-										<ingredient	quantity="2"	item_name="Dark steel plate"				/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Silk"							/>
+										<ingredient	quantity="2"	item_name="Hardened leather"				/>
+										<ingredient	quantity="2"	item_name="String"							/>
+										<ingredient	quantity="1"	item_name="Glowing ore"						/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
 		</ingredients>
 	</schematic>
 
@@ -1841,14 +1862,15 @@
 		craftedItem_name				="Guard Lvl2 Armor 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="560"
+		price							="823"
 	>
 		
-		<ingredients>					<ingredient	quantity="4"	item_name="Linen"							/>
-										<ingredient	quantity="4"	item_name="Leather"							/>
-										<ingredient	quantity="3"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Orichalcum ore"					/>
-										<ingredient	quantity="2"	item_name="Dark iron plate"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite plate"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="2"	item_name="Hardened leather"				/>
+										<ingredient	quantity="2"	item_name="String"							/>
+										<ingredient	quantity="1"	item_name="Emerald dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -1858,14 +1880,15 @@
 		craftedItem_name				="Guard Lvl2 A Armor 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="592"
+		price							="853"
 	>
 		
-		<ingredients>					<ingredient	quantity="4"	item_name="Linen"							/>
-										<ingredient	quantity="4"	item_name="Leather"							/>
-										<ingredient	quantity="4"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Orichalcum ore"					/>
-										<ingredient	quantity="2"	item_name="Dark steel plate"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite plate"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="2"	item_name="Hardened leather"				/>
+										<ingredient	quantity="2"	item_name="String"							/>
+										<ingredient	quantity="1"	item_name="Emerald dust"					/>
 		</ingredients>
 	</schematic>
 	<!-- KNIGHT GERALT SET -->
@@ -1874,13 +1897,12 @@
 		craftedItem_name				="Knight Geralt Armor 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="634"
+		price							="1523"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Silk"							/>
-										<ingredient	quantity="3"	item_name="Hardened leather"				/>
-										<ingredient	quantity="5"	item_name="Leather straps"					/>
-										<ingredient	quantity="4"	item_name="Nails"							/>
-										<ingredient	quantity="4"	item_name="Dark iron plate"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte plate"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="String"							/>
+										<ingredient	quantity="1"	item_name="Ruby dust"						/>
 		</ingredients>
 	</schematic>
 
@@ -1890,13 +1912,12 @@
 		craftedItem_name				="Knight Geralt A Armor 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="832"
+		price							="1623"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Silk"							/>
-										<ingredient	quantity="3"	item_name="Hardened leather"				/>
-										<ingredient	quantity="4"	item_name="Leather straps"					/>
-										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
-										<ingredient	quantity="4"	item_name="Dark steel plate"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte plate"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="String"							/>
+										<ingredient	quantity="1"	item_name="Diamond dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -1905,11 +1926,11 @@
 		craftedItem_name				="Guard Lvl1 Gloves 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="76"
+		price							="163"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="3"	item_name="Thread"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="2"	item_name="Leather straps"					/>
+										<ingredient	quantity="1"	item_name="String"							/>
 		</ingredients>
 	</schematic>
 
@@ -1918,11 +1939,11 @@
 		craftedItem_name				="Guard Lvl1 A Gloves 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="112"
+		price							="173"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Leather"							/>
-										<ingredient	quantity="2"	item_name="String"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="2"	item_name="Leather straps"					/>
+										<ingredient	quantity="1"	item_name="String"							/>
 		</ingredients>
 	</schematic>
 
@@ -1931,12 +1952,12 @@
 		craftedItem_name				="Guard Lvl2 Gloves 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="118"
+		price							="283"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Hardened leather"				/>
-										<ingredient	quantity="3"	item_name="Thread"							/>
-										<ingredient quantity="3"	item_name="Leather straps"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="String"							/>
 		</ingredients>
 	</schematic>
 
@@ -1945,12 +1966,12 @@
 		craftedItem_name				="Guard Lvl2 A Gloves 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="164"
+		price							="293"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather"							/>
-										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Leather straps"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="String"							/>
 		</ingredients>
 	</schematic>
 
@@ -1959,12 +1980,12 @@
 		craftedItem_name				="Knight Geralt Gloves 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="216"
+		price							="470"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Dark steel plate"				/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
+										<ingredient	quantity="1"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="2"	item_name="Leather"							/>
 										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
 		</ingredients>
 	</schematic>
 
@@ -1973,13 +1994,12 @@
 		craftedItem_name				="Knight Geralt A Gloves 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="284"
+		price							="480"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="1"	item_name="Dark iron plate"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite silver ingot"			/>
+										<ingredient	quantity="1"	item_name="Dark steel ingot"				/>
+										<ingredient	quantity="2"	item_name="Leather"							/>
 										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Orichalcum ore"					/>
 		</ingredients>
 	</schematic>
 
@@ -1988,13 +2008,12 @@
 		craftedItem_name				="Guard Lvl1 Pants 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="152"
+		price							="250"
 	>
-		<ingredients>					<ingredient	quantity="3"	item_name="Silk"							/>
-										<ingredient	quantity="2"	item_name="Linen"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
 										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Thread"							/>
-										<ingredient	quantity="1"	item_name="String"							/>
+										<ingredient	quantity="1"	item_name="Silk"							/>
+										<ingredient	quantity="1"	item_name="Thread"							/>
 		</ingredients>
 	</schematic>
 
@@ -2004,13 +2023,12 @@
 		craftedItem_name				="Guard Lvl1 A Pants 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="156"
+		price							="260"
 	>
-		<ingredients>					<ingredient	quantity="3"	item_name="Silk"							/>
-										<ingredient	quantity="2"	item_name="Linen"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
 										<ingredient	quantity="1"	item_name="Leather squares"					/>
+										<ingredient	quantity="1"	item_name="Silk"							/>
 										<ingredient	quantity="1"	item_name="Thread"							/>
-										<ingredient	quantity="2"	item_name="String"							/>
 		</ingredients>
 	</schematic>
 
@@ -2021,12 +2039,13 @@
 		craftedItem_name				="Guard Lvl2 Pants 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="192"
+		price							="405"
 	>
-		<ingredients>					<ingredient	quantity="3"	item_name="Silk"							/>
-										<ingredient	quantity="4"	item_name="Linen"							/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="String"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="2"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Silk"							/>
+										<ingredient	quantity="1"	item_name="String"							/>
 		</ingredients>
 	</schematic>
 
@@ -2035,12 +2054,12 @@
 		craftedItem_name				="Guard Lvl2 A Pants 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="216"
+		price							="415"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Silk"							/>
-										<ingredient	quantity="4"	item_name="Linen"							/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="2"	item_name="Thread"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="2"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Silk"							/>
 										<ingredient	quantity="1"	item_name="String"							/>
 		</ingredients>
 	</schematic>
@@ -2050,12 +2069,12 @@
 		craftedItem_name				="Knight Geralt Pants 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="454"
+		price							="475"
 	>
-		<ingredients>					<ingredient	quantity="3"	item_name="Dark steel plate"				/>
-										<ingredient	quantity="4"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="Leather straps"					/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="2"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Twine"							/>
 		</ingredients>
 	</schematic>
 
@@ -2064,13 +2083,12 @@
 		craftedItem_name				="Knight Geralt A Pants 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="738"
+		price							="485"
 	>
-		<ingredients>					<ingredient	quantity="3"	item_name="Dark iron plate"					/>
-										<ingredient	quantity="4"	item_name="Silk"							/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="Leather straps"					/>
-										<ingredient	quantity="2"	item_name="Orichalcum ingot"				/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="2"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Twine"							/>
 		</ingredients>
 	</schematic>
 
@@ -2079,12 +2097,11 @@
 		craftedItem_name				="Guard Lvl1 Boots 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="128"
+		price							="163"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Glowing ingot"					/>
 										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Linen"							/>
+										<ingredient	quantity="2"	item_name="Thread"							/>
 		</ingredients>
 	</schematic>
 
@@ -2093,12 +2110,11 @@
 		craftedItem_name				="Guard Lvl1 A Boots 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="128"
+		price							="173"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Glowing ingot"					/>
 										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="3"	item_name="String"							/>
-										<ingredient	quantity="2"	item_name="Linen"							/>
+										<ingredient	quantity="2"	item_name="Thread"							/>
 		</ingredients>
 	</schematic>
 
@@ -2107,13 +2123,12 @@
 		craftedItem_name				="Guard Lvl2 Boots 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="130"
+		price							="286"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Hardened leather"				/>
-										<ingredient	quantity="2"	item_name="String"							/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Leather straps"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Wire"							/>
 		</ingredients>
 	</schematic>
 
@@ -2122,13 +2137,12 @@
 		craftedItem_name				="Guard Lvl2 A Boots 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="138"
+		price							="296"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Leather"							/>
-										<ingredient	quantity="1"	item_name="Hardened leather"				/>
-										<ingredient	quantity="3"	item_name="String"							/>
-										<ingredient	quantity="1"	item_name="Leather squares"					/>
-										<ingredient	quantity="1"	item_name="Leather straps"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Glowing ingot"					/>
+										<ingredient	quantity="1"	item_name="Meteorite ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Wire"							/>
 		</ingredients>
 	</schematic>
 
@@ -2140,13 +2154,11 @@
 		craftedItem_name				="Knight Geralt Boots 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="247"
+		price							="535"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Dark steel plate"				/>
-										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="3"	item_name="String"							/>
-										<ingredient	quantity="1"	item_name="Linen"							/>
-										<ingredient	quantity="1"	item_name="Dark iron ore"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="3"	item_name="Wire"							/>
 		</ingredients>
 	</schematic>
 
@@ -2158,13 +2170,11 @@
 		craftedItem_name				="Knight Geralt A Boots 3"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Armorer"
-		price							="292"
+		price							="545"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Dark iron plate"					/>
-										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="3"	item_name="String"							/>
-										<ingredient	quantity="1"	item_name="Linen"							/>
-										<ingredient	quantity="1"	item_name="Orichalcum ore"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
+										<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="3"	item_name="Wire"							/>
 		</ingredients>
 	</schematic>
 
@@ -2177,13 +2187,13 @@
 		craftedItem_name				="Lynx Armor 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="2708"
+		price							="4370"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Lynx Armor 3"					/>
-										<ingredient	quantity="2"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous liver"					/>
-										<ingredient	quantity="2"	item_name="Monstrous heart"					/>
+										<ingredient	quantity="2"	item_name="Orichalcum ore"					/>
+										<ingredient	quantity="2"	item_name="Dwimeryte enriched ore"			/>
+										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
+										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
 		</ingredients>
 	</schematic>
 
@@ -2195,12 +2205,12 @@
 		craftedItem_name				="Gryphon Armor 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="2693"
+		price							="5139"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Gryphon Armor 3"					/>
-										<ingredient	quantity="2"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous heart"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
 										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
 		</ingredients>
 	</schematic>
@@ -2213,13 +2223,12 @@
 		craftedItem_name				="Bear Armor 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="2678"
+		price							="6182"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Bear Armor 3"					/>
-										<ingredient	quantity="2"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
-										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
+										<ingredient	quantity="1"	item_name="Monstrous carapace"				/>
+										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
 		</ingredients>
 	</schematic>
 								<!-- ####### WOLF SET ####### -->
@@ -2230,13 +2239,13 @@
 		craftedItem_name				="Wolf Armor 4"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="2678"
+		price							="5139"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Armor 3"					/>
-										<ingredient	quantity="2"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
-										<ingredient	quantity="1"	item_name="Monstrous stomach"				/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
+										<ingredient	quantity="1"	item_name="Monstrous eye"					/>
 		</ingredients>
 	</schematic>
 
@@ -2248,12 +2257,14 @@
 		craftedItem_name				="Red Wolf Armor 1"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1716"
+		price							="3081"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Draconide leather"				/>
-										<ingredient	quantity="2"	item_name="Dwimeryte plate"					/>
-										<ingredient	quantity="2"	item_name="Monstrous ear"					/>
-										<ingredient	quantity="2"	item_name="Monstrous eye"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Geralt Shirt"					/>
+										<ingredient	quantity="2"	item_name="Hardened leather"				/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
+										<ingredient	quantity="1"	item_name="Monstrous ear"					/>
 		</ingredients>
 	</schematic>
 
@@ -2262,13 +2273,13 @@
 		craftedItem_name				="Red Wolf Armor 2"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="2678"
+		price							="3901"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Red Wolf Armor 1"				/>
-										<ingredient	quantity="2"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="2"	item_name="Dwimeryte enriched plate"		/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
 										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
-										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
 		</ingredients>
 	</schematic>
 
@@ -2278,13 +2289,13 @@
 		craftedItem_name				="Lynx Gloves 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="857"
+		price							="1435"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Lynx Gloves 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="2"	item_name="Monstrous bone"					/>
-										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ore"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ore"			/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous ear"					/>
 		</ingredients>
 	</schematic>
 
@@ -2294,13 +2305,13 @@
 		craftedItem_name				="Gryphon Gloves 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="857"
+		price							="2298"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Gryphon Gloves 4"				/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
 										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
-										<ingredient	quantity="2"	item_name="Monstrous blood"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous tongue"				/>
 		</ingredients>
 	</schematic>
 
@@ -2310,13 +2321,12 @@
 		craftedItem_name				="Bear Gloves 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="857"
+		price							="3120"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Bear Gloves 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
 										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="2"	item_name="Monstrous claw"					/>
-										<ingredient	quantity="1"	item_name="Monstrous dust"					/>
+										<ingredient	quantity="1"	item_name="Monstrous plate"					/>
+										<ingredient	quantity="1"	item_name="Monstrous claw"					/>
 		</ingredients>
 	</schematic>
 	
@@ -2326,13 +2336,13 @@
 		craftedItem_name				="Wolf Gloves 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="857"
+		price							="2298"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Gloves 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
 										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="2"	item_name="Monstrous dust"					/>
-										<ingredient	quantity="1"	item_name="Monstrous heart"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous egg"					/>
 		</ingredients>
 	</schematic>
 	
@@ -2342,12 +2352,14 @@
 		craftedItem_name				="Red Wolf Gloves 1"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="430"
+		price							="1150"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Draconide leather"				/>
-										<ingredient	quantity="1"	item_name="Meteorite silver plate"			/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather straps"					/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
 										<ingredient	quantity="1"	item_name="Monstrous hair"					/>
-										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 		</ingredients>
 	</schematic>
 
@@ -2356,13 +2368,13 @@
 		craftedItem_name				="Red Wolf Gloves 2"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="857"
+		price							="1580"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Red Wolf Gloves 1"				/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
 										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
-										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
-										<ingredient	quantity="2"	item_name="Monstrous bone"					/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous bone"					/>
 		</ingredients>
 	</schematic>
 
@@ -2372,13 +2384,13 @@
 		craftedItem_name				="Lynx Pants 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1384"
+		price							="1498"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Lynx Pants 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous tongue"				/>
-										<ingredient	quantity="2"	item_name="Monstrous blood"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ore"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ore"			/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 		</ingredients>
 	</schematic>
 
@@ -2388,13 +2400,13 @@
 		craftedItem_name				="Gryphon Pants 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1384"
+		price							="2584"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Gryphon Pants 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous blood"					/>
-										<ingredient	quantity="2"	item_name="Monstrous brain"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous brain"					/>
 		</ingredients>
 	</schematic>
 
@@ -2404,13 +2416,12 @@
 		craftedItem_name				="Bear Pants 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1384"
+		price							="3500"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Bear Pants 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous hair"					/>
-										<ingredient	quantity="2"	item_name="Monstrous essence"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Monstrous plate"					/>
+										<ingredient	quantity="1"	item_name="Monstrous hair"					/>
 		</ingredients>
 	</schematic>
 
@@ -2420,13 +2431,13 @@
 		craftedItem_name				="Wolf Pants 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1384"
+		price							="2602"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Pants 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous blood"					/>
-										<ingredient	quantity="2"	item_name="Monstrous heart"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous bone"					/>
 		</ingredients>
 	</schematic>
 
@@ -2436,12 +2447,14 @@
 		craftedItem_name				="Red Wolf Pants 1"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="549"
+		price							="1545"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Draconide leather"				/>
-										<ingredient	quantity="1"	item_name="Dwimeryte ingot"					/>
-										<ingredient	quantity="1"	item_name="Monstrous claw"					/>
-										<ingredient	quantity="2"	item_name="Monstrous blood"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="1"	item_name="Silver ingot"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous tooth"					/>
 		</ingredients>
 	</schematic>
 
@@ -2450,13 +2463,13 @@
 		craftedItem_name				="Red Wolf Pants 2"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1384"
+		price							="2105"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Red Wolf Pants 1"				/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous bone"					/>
-										<ingredient	quantity="2"	item_name="Monstrous dust"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous bone"					/>
 		</ingredients>
 	</schematic>
 	
@@ -2466,13 +2479,13 @@
 		craftedItem_name				="Lynx Boots 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1414"
+		price							="2043"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Lynx Boots 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous bone"					/>
-										<ingredient	quantity="4"	item_name="Monstrous claw"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ore"					/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ore"			/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous claw"					/>
 		</ingredients>
 	</schematic>
 
@@ -2482,13 +2495,13 @@
 		craftedItem_name				="Gryphon Boots 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1414"
+		price							="2665"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Gryphon Boots 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous dust"					/>
-										<ingredient	quantity="4"	item_name="Monstrous claw"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous essence"				/>
 		</ingredients>
 	</schematic>
 
@@ -2498,13 +2511,12 @@
 		craftedItem_name				="Bear Boots 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1414"
+		price							="5425"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Bear Boots 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
 										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="3"	item_name="Monstrous saliva"				/>
-										<ingredient	quantity="3"	item_name="Monstrous tooth"					/>
+										<ingredient	quantity="1"	item_name="Monstrous plate"					/>
+										<ingredient	quantity="1"	item_name="Monstrous saliva"				/>
 		</ingredients>
 	</schematic>
 
@@ -2514,13 +2526,13 @@
 		craftedItem_name				="Wolf Boots 5"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1414"
+		price							="2620"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Wolf Boots 4"					/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="4"	item_name="Monstrous blood"					/>
-										<ingredient	quantity="2"	item_name="Monstrous heart"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous blood"					/>
 		</ingredients>
 	</schematic>
 
@@ -2530,12 +2542,14 @@
 		craftedItem_name				="Red Wolf Boots 1"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="918"
+		price							="1497"
 	>
-		<ingredients>					<ingredient	quantity="1"	item_name="Draconide leather"				/>
-										<ingredient	quantity="1"	item_name="Dwimeryte plate"					/>
-										<ingredient	quantity="4"	item_name="Monstrous claw"					/>
-										<ingredient	quantity="2"	item_name="Monstrous blood"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Leather"							/>
+										<ingredient	quantity="2"	item_name="Wire"							/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous claw"					/>
 		</ingredients>
 	</schematic>
 
@@ -2544,13 +2558,13 @@
 		craftedItem_name				="Red Wolf Boots 2"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Armorer"
-		price							="1414"
+		price							="2095"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Red Wolf Boots 1"				/>
-										<ingredient	quantity="1"	item_name="Draconide infused leather"		/>
-										<ingredient	quantity="1"	item_name="Dwimeryte enriched plate"		/>
-										<ingredient	quantity="2"	item_name="Monstrous bone"					/>
-										<ingredient	quantity="4"	item_name="Monstrous dust"					/>
+										<ingredient	quantity="1"	item_name="Orichalcum ingot"				/>
+										<ingredient	quantity="1"	item_name="Dwimeryte enriched ingot"		/>
+										<ingredient	quantity="1"	item_name="Chitin scale"					/>
+										<ingredient	quantity="1"	item_name="Monstrous bone"					/>
 		</ingredients>
 	</schematic>
 
@@ -2561,7 +2575,7 @@
 		craftedItem_name				="Draconide infused leather"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Crafter"
-		price							="300"
+		price							="1066"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Draconide leather"				/>
 										<ingredient	quantity="1"	item_name="Infused crystal"					/>
@@ -2573,9 +2587,9 @@
 		craftedItem_name				="Nickel ore"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="20"
+		price							="12"
 	>
-		<ingredients>					<ingredient	quantity="5"	item_name="Nickel mineral"					/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Nickel mineral"					/>
 		</ingredients>
 	</schematic>
 
@@ -2584,9 +2598,9 @@
 		craftedItem_name				="Cupronickel ore"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="13"
+		price							="11"
 	>
-		<ingredients>					<ingredient	quantity="3"	item_name="Copper mineral"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Copper mineral"					/>
 										<ingredient	quantity="1"	item_name="Nickel mineral"					/>
 		</ingredients>
 	</schematic>
@@ -2596,9 +2610,9 @@
 		craftedItem_name				="Copper ore"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="15"
+		price							="9"
 	>
-		<ingredients>					<ingredient	quantity="5"	item_name="Copper mineral"					/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Copper mineral"					/>
 		</ingredients>
 	</schematic>
 
@@ -2607,7 +2621,7 @@
 		craftedItem_name				="Copper ingot"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="30"
+		price							="27"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Copper ore"						/>
 		</ingredients>
@@ -2618,7 +2632,7 @@
 		craftedItem_name				="Copper plate"
 		craftsmanLevel_name				="Journeyman"
 		craftsmanType_name				="Crafter"
-		price							="60"
+		price							="81"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Copper ingot"					/>
 		</ingredients>
@@ -2629,9 +2643,9 @@
 		craftedItem_name				="Green gold ore"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="68"
+		price							="36"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Green gold mineral"				/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Green gold mineral"				/>
 		</ingredients>
 	</schematic>
 
@@ -2640,10 +2654,10 @@
 		craftedItem_name				="Green gold ore"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="68"
+		price							="36"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Gold mineral"					/>
-										<ingredient	quantity="5"	item_name="Silver mineral"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Gold mineral"					/>
+										<ingredient	quantity="1"	item_name="Silver mineral"					/>
 										<ingredient	quantity="1"	item_name="Copper mineral"					/>										
 		</ingredients>
 	</schematic>
@@ -2653,7 +2667,7 @@
 		craftedItem_name				="Green gold ingot"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="136"
+		price							="108"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Green gold ore"					/>
 		</ingredients>
@@ -2664,7 +2678,7 @@
 		craftedItem_name				="Green gold plate"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="272"
+		price							="324"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Green gold ingot"				/>
 		</ingredients>
@@ -2675,9 +2689,9 @@
 		craftedItem_name				="Orichalcum ore"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="80"
+		price							="54"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Orichalcum mineral"				/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Orichalcum mineral"				/>
 		</ingredients>
 	</schematic>
 
@@ -2686,10 +2700,10 @@
 		craftedItem_name				="Orichalcum ore"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="80"
+		price							="54"
 	>
-		<ingredients>					<ingredient	quantity="4"	item_name="Green gold mineral"				/>
-										<ingredient	quantity="3"	item_name="Copper mineral"					/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Green gold mineral"				/>
+										<ingredient	quantity="1"	item_name="Copper mineral"					/>
 										<ingredient	quantity="1"	item_name="Nickel mineral"					/>
 		</ingredients>
 	</schematic>
@@ -2699,7 +2713,7 @@
 		craftedItem_name				="Orichalcum ingot"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="160"
+		price							="162"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Orichalcum ore"					/>
 		</ingredients>
@@ -2710,7 +2724,7 @@
 		craftedItem_name				="Orichalcum plate"
 		craftsmanLevel_name				="Grand Master"
 		craftsmanType_name				="Crafter"
-		price							="320"
+		price							="486"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Orichalcum ingot"				/>
 		</ingredients>
@@ -2721,7 +2735,7 @@
 		craftedItem_name				="Dwimeryte enriched ore"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Crafter"
-		price							="256"
+		price							="234"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Dwimeryte ore"					/>
 										<ingredient	quantity="1"	item_name="Orichalcum ore"					/>
@@ -2734,7 +2748,7 @@
 		craftedItem_name				="Dwimeryte enriched ingot"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Crafter"
-		price							="512"
+		price							="702"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Dwimeryte enriched ore"			/>
 		</ingredients>
@@ -2745,7 +2759,7 @@
 		craftedItem_name				="Dwimeryte enriched plate"
 		craftsmanLevel_name				="Arch Master"
 		craftsmanType_name				="Crafter"
-		price							="1024"
+		price							="2106"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Dwimeryte enriched ingot"		/>
 		</ingredients>

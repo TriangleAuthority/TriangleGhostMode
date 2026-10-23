@@ -69,7 +69,7 @@
 		localisation_key_name			="item_name_recipe_for_dwarven_spirit"
 	>
 		<ingredients>					<ingredient quantity="1"	item_name="Empty bottle" 					/>
-										<ingredient quantity="2"	item_name="Mahakam Spirit"					/>
+										<ingredient quantity="1"	item_name="Mahakam Spirit"					/>
 										<ingredient quantity="1"	item_name="White myrtle" 					/>
 		</ingredients>
 	</recipe>
@@ -84,7 +84,7 @@
 		localisation_key_name			="item_name_recipe_for_alcohest"
 	>
 		<ingredients>					<ingredient quantity="1"	item_name="Empty bottle" 					/>
-										<ingredient quantity="1"	item_name="Cherry Cordial"					/>
+										<ingredient quantity="1"	item_name="Mahakam Spirit" 					/>
 										<ingredient quantity="1"	item_name="Nilfgaardian Lemon"				/>
 										<ingredient quantity="1"	item_name="Balisse fruit" 					/>
 		</ingredients>
@@ -101,10 +101,39 @@
 		localisation_key_name			="item_name_recipe_for_white_gull"
 	>
 		<ingredients>					<ingredient quantity="1"	item_name="Empty bottle" 					/>
-										<ingredient quantity="1"	item_name="Redanian Herbal" 				/>
-										<ingredient quantity="1"	item_name="Cherry Cordial" 					/>
 										<ingredient quantity="1"	item_name="Mandrake cordial" 				/>
+										<ingredient quantity="1"	item_name="Cherry Cordial"					/>
 										<ingredient quantity="1"	item_name="Arenaria" 						/>
+		</ingredients>
+	</recipe>
+
+	<recipe
+		name_name						="Recipe for Mahakam spirit 1"
+		level							="1"
+		cookedItem_name					="Mahakam Spirit"
+		cookedItemType					="alcohol"
+		cookedItemQuantity				="1"
+		localisation_key_name			="item_name_mahakam_spirit"
+	>
+		<ingredients>					<ingredient quantity="1"	item_name="Empty bottle" 					/>
+										<ingredient quantity="1"	item_name="Local pepper vodka" 				/>
+										<ingredient quantity="1"	item_name="Hop umbels"						/>
+										<ingredient quantity="1"	item_name="Sewant mushrooms"				/>
+		</ingredients>
+	</recipe>
+
+	<recipe
+		name_name						="Recipe for Mandrake cordial 1"
+		level							="1"
+		cookedItem_name					="Mandrake cordial"
+		cookedItemType					="alcohol"
+		cookedItemQuantity				="1"
+		localisation_key_name			="item_name_mandrake_cordial"
+	>
+		<ingredients>					<ingredient quantity="1"	item_name="Empty bottle" 					/>
+										<ingredient quantity="1"	item_name="Temerian Rye" 					/>
+										<ingredient quantity="1"	item_name="Redanian Herbal"					/>
+										<ingredient quantity="1"	item_name="Mandrake root"					/>
 		</ingredients>
 	</recipe>
 

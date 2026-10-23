@@ -418,7 +418,7 @@
 				</tags>
 				<base_abilities>				<a>Rune pierog _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="3">Infused dust</parts>
+				<recycling_parts>				<parts count="1">Infused dust</parts>
 				</recycling_parts>
 			</item>
 			<item on_conflict="replace"
@@ -436,7 +436,7 @@
 				</tags>
 				<base_abilities>				<a>Rune tvarog _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="3">Infused dust</parts>
+				<recycling_parts>				<parts count="1">Infused dust</parts>
 				</recycling_parts>
 			</item>
 		</items>

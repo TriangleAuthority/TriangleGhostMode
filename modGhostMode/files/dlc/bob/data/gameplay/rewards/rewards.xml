@@ -7,9 +7,12 @@
 			<item name="q701_duchess_summons" amount="1" />
 		</items>
 	</reward>
-	<reward name="q701_cyclops_reward" 							level="35"	experience="450" 	gold="0" 	achievement="0" 	script="" comment="G has killed the custom Giant Goliath. Give high xp, no gold, the item below." >		
+	<reward name="q701_cyclops_reward" 							level="35"	experience="450" 	gold="0" 	achievement="0" 	script="" comment="G has killed the custom Giant Goliath. Give high xp, no gold, the item below." >
 		<items>
 			<item name="q701_cyclops_trophy" amount="1" />
+			<!-- +++modWBC+++ -->
+			<item name="poi_gor_b_12_note" amount="1" />
+			<!-- ---modWBC--- -->
 		</items>
 	</reward>
 	<reward name="q701_bruxa_recognised" 						level="35"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="G has learned the monster is a bruxa. Give low xp, no gold, no items." />
@@ -118,7 +121,11 @@
 	<reward name="sq701_reward" 								level="35"	experience="250" 	gold="500" 	achievement="0" 	script="" comment="We solve the curse, which was the reason for participating in the tournament. We get a payment of at least 500, but we can haggle for more. High EXP" />
 	<reward name="sq701_novigrad" 								level="35"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="We meet Vivienne again in Novigrad and she gives us one of her feather as thanks for helping her. Low XP" />	
 <!-- SQ703 -->
-	<reward name="sq703_safari" 								level="37"	experience="150" 	gold="200" 	achievement="0" 	script="" comment="the basic reward for the safari that we will always get, regardless of our behavior. the value will be adjusted by +- 10%, depending on how we behaved during the quest. also, there is haggling with this reward." />
+	<reward name="sq703_safari" 								level="37"	experience="150" 	gold="200" 	achievement="0" 	script="" comment="the basic reward for the safari that we will always get, regardless of our behavior. the value will be adjusted by +- 10%, depending on how we behaved during the quest. also, there is haggling with this reward." >
+		<items>
+			<item name="sq703_wife_letter" amount="1" />
+		</items>
+	</reward>
 	<reward name="sq703_picture" 								level="37"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="in case the player gets invited to the picnic party, he gets a picture as a thanks" >
 		<items>
 			<item name="sq703_safari_picture" amount="1" />
@@ -201,7 +208,11 @@
 	<reward name="mq7010_investigation_done" 					level="38"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="G has found a trail to follow. Give low xp, no gold, no items. " />
 	<reward name="mq7010_nest_found" 							level="38"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="G has found the dracolizard nest. Give med xp, no gold, no items." />
 	<reward name="mq7010_reward" 								level="38"	experience="200" 	gold="300" 	achievement="0" 	script="" comment="Reward for completing the quest. Give med xp, high gold. Gold is negotiable." />
-	<reward name="mq7010_nest_destroyed" 						level="38"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="XP reward for destroying dracolizard's nest. Nest is custom with it's features 'faked' in the quest structure." />
+	<reward name="mq7010_nest_destroyed" 						level="38"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="XP reward for destroying dracolizard's nest. Nest is custom with it's features 'faked' in the quest structure." >
+		<items>
+			<item name="poi_bar_a_13_note" amount="1" />
+		</items>
+	</reward>
 
 	
 	<reward name="mq7011_gwent" 								level="36"	experience="50" 	gold="25" 	achievement="0" 	script="" comment="G has won am optional game of gwent with one of the clients. Give low xp, low gold." />	
@@ -257,13 +268,29 @@
 	<reward name="mq7023_found_lab" 							level="35"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="After solving the portal puzzle and teleporting to the lab we were looking for all along (no combat involved). Small XP reward. No gold" />
 	<reward name="mq7023_found_all_crystals"					level="35"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="Optional objective. Small XP reward. No gold." />
 	<reward name="mq7023_killed_pale_widows"					level="35"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="After killing a bunch of mutated unique giant centipedes to loot their eggs. XP reward. No gold." />
-	<reward name="mq7023_completed" 							level="35"	experience="200" 	gold="0" 	achievement="0" 	script="" comment="Completing the quest. XP reward. No gold. The main reward from this quest is having unlocked the new mutation system." />
+	<reward name="mq7023_completed" 							level="35"	experience="200" 	gold="0" 	achievement="0" 	script="" comment="Completing the quest. XP reward. No gold. The main reward from this quest is having unlocked the new mutation system." >
+		<items>
+			<item name="mq7023_contract" amount="1" />
+		</items>
+	</reward>
 	
 	<reward name="mq7024_exp_reward" 							level="35"	experience="200" 	gold="0" 	achievement="0" 	script="" comment="XP only. Medium amount." />
 	
-	<reward name="ff701_gb_reward" 								level="36"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" />
-	<reward name="ff701_mnt_reward" 							level="36"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" />
-	<reward name="ff701_br_reward" 								level="36"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" />
+	<reward name="ff701_gb_reward" 								level="36"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
+		<items>
+			<item name="ff701_notice" amount="1" />
+		</items>
+	</reward>
+	<reward name="ff701_mnt_reward" 							level="36"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
+		<items>
+			<item name="ff701_notice" amount="1" />
+		</items>
+	</reward>
+	<reward name="ff701_br_reward" 								level="36"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
+		<items>
+			<item name="ff701_notice" amount="1" />
+		</items>
+	</reward>
 	<reward name="ff701_master_reward" 							level="40"	experience="200" 	gold="150" 	achievement="0" 	script="" comment="XP and Gold medium amounts but more than the other fist fights" />
 	
 	<reward name="mq7019_picnic_reward" 						level="30"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -289,8 +316,17 @@
 	<!-- LIVING WORLD -->
 	
 	<reward name="lw_ww_coronata_reward" 						level="37"	experience="100" 	gold="700" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" />	
-	<reward name="lw_ww_vermentino_reward" 						level="37"	experience="100" 	gold="700" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" />			
-	<reward name="lw_ww_belgaard_reward" 						level="39"	experience="150" 	gold="900" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" />	
+	<reward name="lw_ww_vermentino_reward" 						level="37"	experience="100" 	gold="700" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" >
+		<items>
+			<item name="poi_ww_ver_10_note" amount="1" />
+		</items>
+	</reward>			
+	<reward name="lw_ww_belgaard_reward" 						level="39"	experience="150" 	gold="900" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" >
+		<items>
+			<item name="poi_ww_bel_08_note" amount="1" />
+			<item name="poi_ww_bel_09_note" amount="1" />
+		</items>
+	</reward>	
 	<reward name="lw_ww_secret_path_done" 						level="42"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="Medium Exp" />
 	<reward name="lw_ww_secret_path_bulbs_destroyed" 			level="42"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="Low Exp" />
 	<reward name="lw_plegmund_reward" 							level="40"	experience="150" 	gold="800" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" />
@@ -302,6 +338,9 @@
 	<reward name="camm_final_reward"							level="47"	experience="300" 	gold="0" 	achievement="0" 	script="" comment="LATE no gold, horse trophy" >
 		<items>
 			<item name="camm_trophy" amount="1" />
+			<!-- +++modWBC+++ -->
+			<item name="poi_gor_d_06_note05" amount="1" />
+			<!-- ---modWBC--- -->
 		</items>
 	</reward>
 	

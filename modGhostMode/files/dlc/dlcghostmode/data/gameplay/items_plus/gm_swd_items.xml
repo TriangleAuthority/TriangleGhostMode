@@ -3408,9 +3408,8 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Aerondight_EP2_Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Hardened leather</parts>
-												<parts count="3">Chitin scale</parts>
-												<parts count="4">Green gold ore</parts>
+				<recycling_parts>				<parts count="1">Dwimeryte enriched ingot</parts>
+												<parts count="1">Orichalcum ingot</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -3485,9 +3484,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Damien sword_Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather straps</parts>
-												<parts count="2">Steel ingot</parts>
-				</recycling_parts> 
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+										<parts count="1">Steel ingot</parts>
+		</recycling_parts> 
 				<anim_actions>
 				<action 
 					name="draw" 
@@ -3540,10 +3539,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>EP2 Silver sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="4">Green gold ore</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -3615,12 +3614,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>EP2 Silver sword 1R _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="4">Green gold ore</parts>
-												<parts count="2">Emerald dust</parts>
-												<parts count="2">Amber dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Ruby</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -3692,12 +3688,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>EP2 Silver sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather</parts>
-												<parts count="4">Leather squares</parts>
-												<parts count="6">Green gold ore</parts>
-												<parts count="2">Sapphire dust</parts>
-												<parts count="2">Ruby dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Wire rope</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -3769,10 +3763,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>EP2 Silver sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="4">Dwimeryte ore</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Wire rope</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -3844,11 +3838,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>EP2 Silver sword 3R _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Linen</parts>
-												<parts count="4">Dwimeryte ore</parts>
-												<parts count="2">Ruby dust</parts>
-												<parts count="2">Amethyst dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Sapphire</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -3920,9 +3912,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Guard Lvl1 steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="4">Dark iron ore</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+										<parts count="1">Steel ingot</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -3987,9 +3979,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Guard Lvl1 steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="4">Dark iron ore</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4055,9 +4048,8 @@
 												<a>Guard Lvl2 steel sword 1 _Stats</a>
 				</base_abilities>
 				<recycling_parts>				<parts count="1">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="4">Dark iron ore</parts>
-				</recycling_parts>
+										<parts count="1">Steel ingot</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4122,10 +4114,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Guard Lvl2 steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="4">Dark iron ore</parts>
-				</recycling_parts> 
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
+		</recycling_parts> 
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4190,12 +4182,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Gwent steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
-												<parts count="2">Emerald dust</parts>
-												<parts count="2">Sapphire dust</parts>
-												<parts count="2">Amber dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Emerald</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4260,9 +4249,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Hanza steel sword 0 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Timber</parts>
-												<parts count="2">Dark steel ingot</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4328,10 +4317,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Hanza steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Timber</parts>
-												<parts count="2">Dark steel ingot</parts>
-												<parts count="1">Ruby dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4396,10 +4384,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Hanza steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Timber</parts>
-												<parts count="2">Dark steel ingot</parts>
-												<parts count="2">Ruby dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Leather</parts>
+										<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Wire rope</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4464,10 +4452,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Knights steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="3">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+										<parts count="1">Steel ingot</parts>
+										<parts count="1">Wire</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4532,10 +4520,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Knights steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="3">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4631,8 +4619,10 @@
 													switch_act="silver_to_steel_act"
 													switch_deact="silver_to_steel_deact">
 			</anim_switch>
-			</anim_switches>			
-		</item>
+			</anim_switches>
+		<recycling_parts>					<parts count="1">Haft</parts>
+	</recycling_parts>
+	</item>
 	<item on_conflict="replace" 
 				name							="Laundry stick" 
 				category						="steelsword" 
@@ -4696,8 +4686,10 @@
 													switch_act="silver_to_steel_act"
 													switch_deact="silver_to_steel_deact">
 			</anim_switch>
-			</anim_switches>			
-		</item>
+			</anim_switches>
+		<recycling_parts>					<parts count="1">Haft</parts>
+	</recycling_parts>
+	</item>
 	<item on_conflict="replace"
 				name							="NGP q702 vampire steel sword"
 				category						="steelsword" 
@@ -4730,10 +4722,8 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP q702 vampire steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather</parts>
-												<parts count="2">Dark steel ingot</parts>
-												<parts count="2">Ruby dust</parts>
-												<parts count="2">Diamond dust</parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Ruby</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -4799,10 +4789,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Squire steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
-				</recycling_parts> 
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+										<parts count="1">Steel ingot</parts>
+										<parts count="1">Wire</parts>
+		</recycling_parts> 
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -4935,12 +4925,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Toussaint steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="1">Dark steel ingot</parts>
-												<parts count="2">Green gold ore</parts>
-												<parts count="1">Infused shard</parts>
-												<parts count="1">Diamond flawless</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5005,12 +4993,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Unique silver sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="4">Leather straps</parts>
-												<parts count="4">Green gold ore</parts>
-												<parts count="2">Infused dust</parts>
-												<parts count="2">Diamond</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Amber</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5082,12 +5067,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Unique steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="3">Dark steel ingot</parts>
-												<parts count="2">Sapphire dust</parts>
-												<parts count="2">Ruby dust</parts>
-												<parts count="2">Emerald dust</parts>
-				</recycling_parts> 
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Diamond</parts>
+		</recycling_parts> 
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5152,10 +5134,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>mq7001 Toussaint steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
-												<parts count="1">Ruby dust</parts>
-				</recycling_parts> 
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Amethyst</parts>
+		</recycling_parts> 
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5220,9 +5201,10 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>mq7007 Elven Sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Linen</parts>
-												<parts count="4">Dark iron ore</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5287,10 +5269,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq7011 Cianfanelli steel sword _Stats</a>
 		</base_abilities>
-				<recycling_parts>				<parts count="2">Timber</parts>
-												<parts count="4">Dark iron ore</parts>
-												<parts count="2">Ruby dust</parts>
-				</recycling_parts> 
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Sapphire</parts>
+		</recycling_parts> 
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5355,11 +5336,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>q702 vampire steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather</parts>
-												<parts count="2">Dark steel ingot</parts>
-												<parts count="2">Ruby dust</parts>
-												<parts count="2">Diamond dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Ruby</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5424,11 +5403,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>q704 vampire silver sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Timber</parts>
-												<parts count="4">Green gold ore</parts>
-												<parts count="2">Ruby dust</parts>
-												<parts count="2">Diamond dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Amethyst</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5500,11 +5477,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>q704 vampire steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Linen</parts>
-												<parts count="4">Dwimeryte ore</parts>
-												<parts count="2">Ruby dust</parts>
-												<parts count="2">Diamond dust</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Ruby</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5569,9 +5544,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>sq701 Geralt of Rivia Sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Linen</parts>
-												<parts count="6">Green gold ore</parts>
-				</recycling_parts>  
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Amethyst</parts>
+		</recycling_parts>  
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5636,9 +5611,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>sq701 Ravix of Fourhorn Sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Linen</parts>
-												<parts count="6">Green gold ore</parts>
-				</recycling_parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Amethyst</parts>
+		</recycling_parts>
 				<anim_actions>
 												<action 
 													name="draw" 
@@ -5705,8 +5680,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather straps</parts>
-												<parts count="3">Silver ingot</parts>
+				<recycling_parts>				<parts count="1">Silver ingot</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -5779,8 +5755,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather straps</parts>
-												<parts count="3">Silver ingot</parts>
+				<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -5853,8 +5830,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Meteorite silver ingot</parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -5927,8 +5905,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Meteorite silver ingot</parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6001,8 +5980,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Steel ingot</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6068,8 +6048,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6135,8 +6116,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6202,8 +6184,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Dwimeryte ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6269,9 +6252,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="3">Silver ingot</parts>
-												<parts count="1">Fifth essence</parts>
+				<recycling_parts>				<parts count="1">Silver ingot</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6344,8 +6327,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather straps</parts>
-												<parts count="2">Meteorite silver ingot</parts>
+				<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6418,9 +6402,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="1">Dwimeryte ore</parts>
-												<parts count="3">Glowing ingot</parts>
+				<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6493,9 +6477,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Dwimeryte ore</parts>
-												<parts count="2">Glowing ingot</parts>
+				<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6568,9 +6552,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather squares</parts>
-												<parts count="2">Steel ingot</parts>
-												<parts count="1">Fifth essence</parts>
+				<recycling_parts>				<parts count="1">Steel ingot</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6636,8 +6620,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 1 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Meteorite ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6703,8 +6688,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 2 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="1">Leather squares</parts>
-												<parts count="2">Dark steel ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Glowing ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6770,9 +6756,9 @@
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 3 _Stats</a>
 				</base_abilities>
-				<recycling_parts>				<parts count="2">Leather squares</parts>
-												<parts count="2">Dwimeryte ore</parts>
-												<parts count="2">Glowing ingot</parts>
+				<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+												<parts count="1">Dwimeryte ingot</parts>
+												<parts count="1">Wire rope</parts>
 				</recycling_parts>
 				<anim_actions>
 												<action 
@@ -6840,8 +6826,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq1058_cat_school_sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -6909,11 +6896,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Crafted Burning Rose Sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="3">Dwimeryte ingot</parts>
-										<parts count="1">Sapphire dust</parts>
-										<parts count="3">Monstrous blood</parts>
-										<parts count="2">Emerald dust</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -6980,10 +6966,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP1 Viper School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ingot</parts>
-										<parts count="1">Sapphire dust</parts>
-										<parts count="2">Emerald dust</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7056,10 +7042,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP1 Viper School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ingot</parts>
-										<parts count="1">Amethyst dust</parts>
-										<parts count="1">Diamond dust</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7125,10 +7111,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>NGP EP1 Viper School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ingot</parts>
-										<parts count="1">Sapphire dust</parts>
-										<parts count="2">Emerald dust</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7201,10 +7187,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>NGP EP1 Viper School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ingot</parts>
-										<parts count="1">Amethyst dust</parts>
-										<parts count="1">Diamond dust</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7272,8 +7258,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Burning Rose Sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Leather</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Ruby dust</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7344,8 +7331,8 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Burning Rose Sword B _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Leather</parts>
+										<parts count="1">Dark steel ingot</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7416,8 +7403,8 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Hakland Sabre _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Leather squares</parts>
+										<parts count="1">Steel ingot</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7486,8 +7473,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Ofir Sabre 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Leather</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Ruby dust</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7554,8 +7542,8 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Ofir Sabre 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Leather</parts>
+										<parts count="1">Dark steel ingot</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7622,8 +7610,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>PC Olgierd Sabre _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Leather</parts>
+										<parts count="1">Haft</parts>
+										<parts count="1">Dark steel ingot</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7690,7 +7679,7 @@
 										<a>PC Caretaker Shovel _Stats</a>
 		</base_abilities>
 		<recycling_parts>				<parts count="1">Haft</parts>
-										<parts count="3">Iron ore</parts>
+										<parts count="1">Dark iron plate</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7757,9 +7746,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Arbitrator_crafted_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Steel ingot</parts>
-										<parts count="1">Amethyst</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7825,9 +7815,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Beannshie_crafted_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
-										<parts count="1">Sapphire</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -7893,8 +7884,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="3">Silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -7967,9 +7959,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School silver sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -8042,9 +8035,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School silver sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8117,9 +8111,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School silver sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8192,8 +8187,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8259,8 +8255,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School steel sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8326,9 +8324,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School steel sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8394,9 +8393,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School steel sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8462,11 +8462,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Blackunicorn_crafted_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
-										<parts count="2">Ruby dust</parts>
-										<parts count="2">Sapphire dust</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8532,8 +8531,11 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Dwarven silver sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -8606,9 +8608,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Dwarven silver sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -8681,8 +8684,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Dwarven sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8748,9 +8753,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Dwarven sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -8816,8 +8822,11 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Elven silver sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -8890,8 +8899,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Elven silver sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -8964,8 +8975,11 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gnomish silver sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -9038,9 +9052,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gnomish silver sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -9113,9 +9128,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gnomish sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9181,11 +9197,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gnomish sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
-										<parts count="2">Ruby dust</parts>
-										<parts count="2">Sapphire dust</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9251,9 +9266,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="3">Silver ingot</parts>
-										<parts count="1">Fifth essence</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9326,8 +9341,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School silver sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9400,9 +9417,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School silver sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9475,9 +9493,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School silver sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9550,9 +9569,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Steel ingot</parts>
-										<parts count="1">Fifth essence</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9618,8 +9637,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School steel sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9685,8 +9706,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School steel sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9752,9 +9775,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School steel sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9820,10 +9844,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Harpy_crafted_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
-										<parts count="1">Ruby</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9896,8 +9920,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Inquisitor sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -9963,8 +9989,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Inquisitor sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -10025,8 +10053,10 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/steel_unique_longclaw_64x128.png"
 	>
-		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
-										<parts count="1">Amethyst</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary, DoNotEnhance
 		</tags>
@@ -10097,9 +10127,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Silver ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>  
 		<anim_actions>
 										<action 
@@ -10172,9 +10202,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School silver sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Meteorite silver ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -10247,10 +10278,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School silver sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -10323,10 +10354,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School silver sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
-										<parts count="1">Ruby</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -10399,9 +10430,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="4">Iron ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -10467,9 +10498,10 @@
 		<base_abilities>				<a>Lynx School steel sword 1 _Stats</a>
 										<a>Default weapon _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -10535,9 +10567,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School steel sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="1">Ruby</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -10603,10 +10636,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School steel sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
-										<parts count="1">Ruby flawless</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -10672,8 +10705,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Bear School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="3">Silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -10746,9 +10780,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Bear School silver sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -10821,9 +10856,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Bear School silver sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -10896,9 +10932,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Bear School silver sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -10971,8 +11008,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Bear School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11038,8 +11076,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Bear School steel sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11105,9 +11145,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Bear School steel sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11173,9 +11214,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Bear School steel sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11241,9 +11283,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Gryphon School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="3">Silver ingot</parts>
-										<parts count="1">Fifth essence</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11316,8 +11358,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Gryphon School silver sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11390,9 +11434,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Gryphon School silver sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11465,9 +11510,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Gryphon School silver sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11540,9 +11586,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Gryphon School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Steel ingot</parts>
-										<parts count="1">Fifth essence</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11608,8 +11654,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Gryphon School steel sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11675,8 +11723,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Gryphon School steel sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11742,9 +11792,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Gryphon School steel sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11810,9 +11861,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Lynx School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Silver ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>  
 		<anim_actions>
 										<action 
@@ -11885,9 +11936,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Lynx School silver sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Meteorite silver ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -11960,10 +12012,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Lynx School silver sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -12036,10 +12088,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Lynx School silver sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
-										<parts count="1">Ruby</parts>
+		<recycling_parts>				<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -12112,9 +12164,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Lynx School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="4">Iron ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -12180,9 +12232,10 @@
 		<base_abilities>				<a>Base Lynx School steel sword 1 _Stats</a>
 										<a>Default weapon _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="1">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -12248,9 +12301,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Lynx School steel sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="1">Ruby</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -12316,10 +12370,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Lynx School steel sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
-										<parts count="1">Ruby flawless</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -12385,9 +12439,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Viper School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Silver ingot</parts>
-										<parts count="1">Emerald dust</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -12460,9 +12514,8 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Base Viper School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Iron ingot</parts>
-										<parts count="1">Emerald dust</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -12528,10 +12581,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Negotiator_crafted_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
-										<parts count="2">Diamond dust</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -12604,8 +12657,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Nilfgaardian sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="4">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -12671,8 +12726,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Nilfgaardian sword 4_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire rope</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -12738,8 +12795,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>No Mans Land sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -12805,8 +12863,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>No Mans Land sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -12872,8 +12932,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>No Mans Land sword 3_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -12939,8 +13001,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>No Mans Land sword 4_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13006,8 +13070,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Novigraadan sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="3">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -13073,8 +13139,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Novigraadan sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13140,8 +13208,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Novigraadan sword 3_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire rope</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13207,8 +13277,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Novigraadan sword 4_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13274,9 +13346,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Scoiatael sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="1">Silk</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Hardened timber</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13342,9 +13415,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Scoiatael sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="1">Silk</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13410,9 +13484,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Scoiatael sword 3_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="1">Silk</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13478,9 +13553,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Scoiatael sword 4_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="4">Meteorite ore</parts>
-										<parts count="1">Silk</parts>
+		<recycling_parts>				<parts count="1">Dark steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13546,8 +13622,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Short sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13613,8 +13690,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Short sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -13680,8 +13758,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Silver sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="3">Silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13754,8 +13833,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Silver sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="3">Silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -13828,8 +13908,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Silver sword 3_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="3">Silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>   
 		<anim_actions>
 										<action 
@@ -13902,8 +13984,11 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Silver sword 4_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="3">Silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -13976,8 +14061,11 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Silver sword 5_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Meteorite ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -14050,8 +14138,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Silver sword 6_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -14124,8 +14214,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Silver sword 7_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Glowing ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -14198,8 +14290,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Skellige sword 1_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="3">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -14265,8 +14358,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Skellige sword 2_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -14332,8 +14427,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Skellige sword 3_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="1">Wire rope</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -14399,8 +14496,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Skellige sword 4_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
+										<parts count="1">Haft</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -14466,9 +14565,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Viper School silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Silver ingot</parts>
-										<parts count="1">Emerald dust</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Hardened timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -14541,9 +14640,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Viper School steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Iron ingot</parts>
-										<parts count="1">Emerald dust</parts>
+		<recycling_parts>				<parts count="1">Iron ingot</parts>
+										<parts count="1">Leather straps</parts>
+										<parts count="1">Timber</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -14609,9 +14708,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Weeper_crafted_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -14684,8 +14784,10 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq4005 Silver sword 6_crafted _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Meteorite silver ingot</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Wire rope</parts>
 		</recycling_parts> 
 		<anim_actions>
 										<action 
@@ -14760,8 +14862,8 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP1 Standalone Starting Silver Sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="4">Silver ore</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather straps</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -14834,8 +14936,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP1 Standalone Starting Steel Sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -14903,8 +15006,8 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP2 Standalone Starting Silver Sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="4">Silver ore</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather straps</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -14977,8 +15080,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>EP2 Standalone Starting Steel Sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -15622,9 +15726,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>DLC10_Remorse _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="3">Leather squares</parts>
-										<parts count="2">Dwimeryte ore</parts>
-										<parts count="2">Glowing ingot</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Wire rope</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -15691,9 +15795,7 @@
 				  localisation_key_description = "item_category_secondary_desc"
 				  price	= "25" >
 				<recycling_parts>
-					<parts count="2">Dark iron ore</parts>
-					<parts count="3">Leather straps</parts>
-					<parts count="2">Timber</parts>
+					<parts count="1">Iron ingot</parts>
 				</recycling_parts> 
 				<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, mod_weapon, TypeClub, SecondaryWeapon
 		</tags>
@@ -15763,8 +15865,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Long Steel Sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -15830,8 +15933,7 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Rusty Nilfgaardian sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ore</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -15897,8 +15999,7 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Rusty No Mans Land sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ore</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -15964,8 +16065,7 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Rusty Novigraadan sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ore</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16031,8 +16131,7 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Rusty Skellige sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Iron ingot</parts>
+		<recycling_parts>				<parts count="1">Iron ore</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16239,9 +16338,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 1 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="1">Sapphire dust</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16307,9 +16406,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 2 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Dark steel ingot</parts>
-										<parts count="2">Sapphire dust</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16375,10 +16474,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 3 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
-										<parts count="1">Sapphire</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16444,10 +16542,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 4 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather squares</parts>
-										<parts count="1">Dwimeryte ore</parts>
-										<parts count="3">Glowing ingot</parts>
-										<parts count="1">Sapphire flawless</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16513,8 +16610,8 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Witcher Silver Sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="4">Silver ore</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather straps</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16588,8 +16685,7 @@
 		</tags>
 		<base_abilities>				<a>Longclaw_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dark steel ingot</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
 										<parts count="1">Amethyst</parts>
 		</recycling_parts>
 		<anim_actions>
@@ -16655,11 +16751,10 @@
 		</tags>
 		<base_abilities>				<a>Torlara_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
-										<parts count="2">Dwimeryte ingot</parts>
-										<parts count="2">Amber dust</parts>
-										<parts count="1">Emerald dust</parts>
-										<parts count="2">Sapphire dust</parts>
+		<recycling_parts>				<parts count="1">Dwimeryte ingot</parts>
+										<parts count="1">Amber</parts>
+										<parts count="1">Emerald</parts>
+										<parts count="1">Sapphire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16724,7 +16819,7 @@
 		</tags>
 		<base_abilities>				<a>Torzirael_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather squares</parts>
+		<recycling_parts>				<parts count="2">Meteorite silver ingot</parts>
 										<parts count="2">Dwimeryte ingot</parts>
 		</recycling_parts>
 		<anim_actions>
@@ -16804,10 +16899,9 @@
 		</tags>
 		<base_abilities>				<a>WitcherSilverWolf_Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="2">Meteorite silver ingot</parts>
-										<parts count="2">Amber dust</parts>
-										<parts count="2">Ruby dust</parts>
+		<recycling_parts>				<parts count="1">Meteorite silver ingot</parts>
+										<parts count="1">Amber</parts>
+										<parts count="1">Ruby</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16889,8 +16983,8 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Autogen silver sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Leather straps</parts>
-										<parts count="4">Silver ore</parts>
+		<recycling_parts>				<parts count="1">Silver ingot</parts>
+										<parts count="1">Leather straps</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 
@@ -16963,8 +17057,9 @@
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Autogen steel sword _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Leather straps</parts>
-										<parts count="2">Iron ore</parts>
+		<recycling_parts>				<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather squares</parts>
+										<parts count="1">Wire</parts>
 		</recycling_parts>
 		<anim_actions>
 										<action 

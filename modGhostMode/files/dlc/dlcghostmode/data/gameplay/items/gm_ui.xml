@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- Ghost Mode: UI-15, the razor's description ("Used for shaving."): 5.x's item given whole, only its
-     description key changed (legacy). Using it shaves Geralt (scripts: ui/shaving.ws). -->
+     description key (UI-15) and dismantling parts (CRAFT-08: Timber for Fiber) changed (legacy). Using it shaves Geralt (scripts: ui/shaving.ws). -->
 <redxml>
   <definitions>
     <items>
@@ -20,7 +20,7 @@
 		<base_abilities>				
 		</base_abilities>
 		<recycling_parts>				<parts count="1">Iron ore</parts>
-										<parts count="1">Fiber</parts>
+										<parts count="1">Timber</parts>
 		</recycling_parts>
 	</item>
     </items>

@@ -102,8 +102,10 @@
                 <loot_entry name="Inkwell" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
             <loot name="mq0004_talers_monocle_loot" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="mq0004_thalers_monocle" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+		<!-- +++modWBC+++ -->
+        <loot_entry name="mq0004_thalers_monocle_wearable" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="mq1001_locker" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="mq1001_locker_diary" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -117,10 +119,13 @@
             <loot name="mq1002_sword_stash" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="Cheesecutter" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="mq1002_vault_chest" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Crowns" quantity_min="50" quantity_max="50" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="mq1002_artifact_3" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="mq1002_vault_chest" quantity_min="3" quantity_max="3" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="mq1002_artifact_3" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+        <loot_entry name="Crowns" player_level_min="0" player_level_max="100" quantity_min="50" quantity_max="50" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="lore_tyromancy" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="mq1014_enc_03_chest" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="mq1014_old_mine_journal" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -359,9 +364,12 @@
             <loot name="q001_crystal_skull" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q001_crystal_skull" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q002_yennefer_notes" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="q002_yenn_notes_about_ciri" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q002_yennefer_notes" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="q002_yenn_notes_about_ciri" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="lore_inteligence_report_about_ciri" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q101_candle_instruction_new" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q101_candle_instruction" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -386,9 +394,12 @@
             <loot name="q103_love_letter" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q103_love_letter" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q103_nilfgaardian_demand" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="q103_nilfgaardian_demand" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q103_nilfgaardian_demand" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="q103_nilfgaardian_demand" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="mq1043_notice" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q103_spinning_top" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q103_spinning_top" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -472,9 +483,12 @@
             <loot name="q201_mead" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q201_mead" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q201_mousesack_letter" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="q201_mousesack_letter" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q201_mousesack_letter" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="q201_mousesack_letter" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="item_name_sq210_notice" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q201_pine_cone" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q201_pine_cone" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -487,9 +501,12 @@
             <loot name="q201_wild_hunt_book" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q201_wild_hunt_book" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q201_yen_journal_1" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="q201_yen_journal_1" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q201_yen_journal_1" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="q201_yen_journal_1" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="lore_cult_of_hemdall" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q202_broken_horn" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q202_navigator_horn" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -535,8 +552,8 @@
                 <loot_entry name="q205_key_to_burrow" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
             <loot name="q205_skjal_body_container" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Skellige sword 2 schematic" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+        <loot_entry name="Longclaw schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+    </loot>
             <loot name="q206_arnvalds_book_loot" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="lore_skellige_heroes_broddr" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -555,9 +572,14 @@
             <loot name="q206_wine_stash" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="Beauclair White" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q210_avallach_lover_notes" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="q210_avallach_lover_notes" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q210_avallach_lover_notes" quantity_min="4" quantity_max="4" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="q210_avallach_lover_notes" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="q210_avallach_notes_01" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<loot_entry name="q210_avallach_notes_02" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<loot_entry name="lore_elven_legends" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q210_avallach_notes_01" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q210_avallach_notes_01" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -573,9 +595,12 @@
             <loot name="q301_lost_triss_parcel" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q301_triss_parcel" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q301_rose_of_remembrance" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="q301_rose_remembrance" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q301_rose_of_remembrance" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="q301_rose_remembrance" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="mq1002_3012_notice" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q301_thief_body" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q301_crematory_key" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -594,9 +619,12 @@
             <loot name="q302_roche_report_container" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q302_roche_report" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q302_whoreson_crafter_notes_container" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="q302_crafter_notes" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q302_whoreson_crafter_notes_container" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="q302_crafter_notes" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="q302_whoreson_letter_to_radowid" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q302_whoreson_letter_container" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q302_whoreson_letter_to_radowid" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -625,12 +653,18 @@
             <loot name="q303_valuable_gold_loot" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="Crowns" quantity_min="6" quantity_max="6" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q303_valuable_pearl_loot" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Pearl" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
-            <loot name="q303_valuable_ring_loot" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Gold ring" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q303_valuable_pearl_loot" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="Pearl" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="q302_dijkstras_notes" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
+            <loot name="q303_valuable_ring_loot" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="Gold ring" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="lore_the_great_four" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q303_valuable_s_emerald_ring_loot" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="Silver emerald ring" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -764,9 +798,13 @@
             <loot name="q310_cell_letters_loot" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q310_journal_notes_1" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="q310_cell_letters_loot_2" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="q310_journal_notes_2" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="q310_cell_letters_loot_2" quantity_min="3" quantity_max="3" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="q310_journal_notes_2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="lw_cp36_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<loot_entry name="q310_explorer_note" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="q310_officer_desk" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q310_cell_key" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -813,8 +851,8 @@
                 <loot_entry name="Egg" quantity_min="3" quantity_max="3" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
             <loot name="q401_eskels_loot" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Draconide Oil 2" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+        <loot_entry name="Draconide Oil 2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+    </loot>
             <loot name="q401_forktail_corpse" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="Boots 01" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -889,8 +927,8 @@
                 <loot_entry name="q401_yen_journal_2" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
             <loot name="q403_bomb_chest" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Dwimeritium Bomb 1" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+        <loot_entry name="Dwimeritium Bomb 1" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+    </loot>
             <loot name="q403_treaty" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="q403_treaty" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -930,9 +968,12 @@
             <loot name="sq102_dolores_diary_ct" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="sq102_dolores_diary" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="sq102_dolores_diary_loot" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="sq102_dolores_diary" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="sq102_dolores_diary_loot" quantity_min="2" quantity_max="2" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="sq102_dolores_diary" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="sq102_huberts_diary" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="sq102_dolores_papers_ct" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="Orens" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
@@ -957,12 +998,15 @@
             <loot name="sq102_rodericks_bones_ct" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="Orens" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>
-            <loot name="sq104_chest" quantity_min="4" quantity_max="4" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
-                <loot_entry name="Light Armor 5 schematic" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="Orens" quantity_min="100" quantity_max="100" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="Pants 01 q2" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-                <loot_entry name="Silver ore" quantity_min="4" quantity_max="4" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
-            </loot>
+            <loot name="sq104_chest" quantity_min="5" quantity_max="5" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
+        <loot_entry name="Orens" player_level_min="0" player_level_max="100" quantity_min="100" quantity_max="100" chance="100" />
+        <loot_entry name="Pants 01 q2" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+        <loot_entry name="Silver ore" player_level_min="0" player_level_max="100" quantity_min="4" quantity_max="4" chance="100" />
+        <loot_entry name="Light Armor 6 schematic" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- +++modWBC+++ -->
+		<loot_entry name="sq104_werewolf" player_level_min="0" player_level_max="100" quantity_min="1" quantity_max="1" chance="100" />
+		<!-- ---modWBC--- -->
+    </loot>
             <loot name="sq104_niellen_dead" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" respawn_time="0">
                 <loot_entry name="sq104_key" quantity_min="1" quantity_max="1" player_level_min="0" player_level_max="100" player_level_min="0" player_level_max="0" chance="100" />
             </loot>

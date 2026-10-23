@@ -52,7 +52,11 @@
 	<reward name="q602_wedding_mirror" 								level="33"	experience="150" 		gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="q602_wedding_end" 								level="33"	experience="200" 		gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="q602_romance_gift" 								level="33"	experience="150" 		gold="0" 	achievement="0" 	script="" comment="" />
-	<reward name="q602_romance_end" 								level="33"	experience="150" 		gold="0" 	achievement="0" 	script="" comment="" />
+	<reward name="q602_romance_end" 								level="33"	experience="150" 		gold="0" 	achievement="0" 	script="" comment="" >
+		<items>
+			<item name="q602_letter_from_witold" amount="1" />
+		</items>
+	</reward>
 	<reward name="q602_olgier_reported" 							level="33"	experience="150" 		gold="0" 	achievement="0" 	script="" comment="" />
 
 	<!-- Q603 -->

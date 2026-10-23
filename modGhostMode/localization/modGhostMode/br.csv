@@ -500,3 +500,11 @@
 ; UI-15: shaving (legacy)
 2110992169|25746309||Geralt está agora barbeado
 2110992173|04bda90f||Usado para barbear.
+2110992257|2b555f18||Componentes de fabricação
+2110992258|25691b0a||Você pode vender para comerciantes ou desmontar para obter componentes para fabricação.
+2110992260|7fd2ce90||Você pode vender por uma quantia generosa ou desmontar para obter componentes para fabricação.
+2110992330|de9dbdb0||Kit de desmontagem de itens
+2110992331|54df196a||Permite desmontar itens indesejados e componentes de criaçã.
+2110992332|cd3869e4||Kit de desmontagem de alquimia
+2110992333|4d09bbea||Permite desmontar componentes de alquimia.
+2110992334|0544643a||Desmontar
