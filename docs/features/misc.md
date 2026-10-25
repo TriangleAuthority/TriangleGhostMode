@@ -8,5 +8,4 @@ Ghost Mode changes that fit no area, feature or [pillar](pillars.md), gathered h
 
 | ID | Misfit | Found in | Why it fits nowhere | Added |
 |---|---|---|---|---|
-
-Nothing yet.
+| — | `enabledeletedscene`: a debug command setting `q401_cooking_enabled` (a cut Kaer Morhen cooking scene); the unit is unattributed | FOOD's mapping ([food.md](food.md#scope)), 2026-10-23 | A quest scene's debug switch, not the food system or any other area | 2026-10-24 (FOOD audit) |

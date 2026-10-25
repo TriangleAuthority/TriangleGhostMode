@@ -297,7 +297,7 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 
 **Decisions:** port as legacy.
 
-**Verification (slice 1, 2026-10-20, both trees):** scripted (`GMTest_ui06`, in the regression): the five names read legacy's strings by key ("Frost resistance", "Vitality regeneration outside of combat", ...). Not seen on screen: an item with one of the five rows.
+**Verification (slice 1, 2026-10-20, both trees):** scripted (`GMTest_ui06`, in the regression): the five names read legacy's strings by key ("Frost resistance", "Vitality regeneration outside of combat", ...). Not seen on screen: an item with one of the five rows. The combat Vitality regen name (2110992157) names a food or drink tooltip's in-combat regen row since the FOOD audit (F4, owner 2026-10-24), through FOOD-08's code ([food.md](food.md#food-08-edible-tooltip)); UI's code is unchanged.
 
 **Ends:** STAM-05's tooltip row deviation; ENCH's hand-off (Vitality regen names).
 
@@ -643,7 +643,7 @@ All 17 deviations recorded "until UI" and STAM-05's row land in a UI feature (li
 | CRAFT | Dismantling (`PlayerDismantleItem`, the dismantle inputs in `inventoryContext.ws`, strings 2110992257, 258, 260, 330–334), the crafting components' rarity colours (bugfix 120: item data), the razor's parts |
 | ECON | `OpenMonsterHuntNegotiationPopup`, the razor's price |
 | WGT | `W3Boat.OnAreaEnter` and its message (2110992179), the razor's weight |
-| FOOD | `attribute_name_staminaRestore` (2110992352) |
+| FOOD | `attribute_name_staminaRestore` (2110992352; unused by legacy, dropped: [food.md](food.md) FOOD-08) |
 | AI | The creatures' weakness lists (`itemsUsedAgainstCreature` in 12 entity files), the caretaker's spade text (2110992475) |
 | ARM | `arrowProjectile.ws`'s fix for Yoana's arrow bounce (the row is UI-07's) |
 

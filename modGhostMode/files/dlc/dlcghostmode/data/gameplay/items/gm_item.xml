@@ -3874,6 +3874,619 @@
 				</bound_items></player_override>				
 			</item>
 
+<!-- dlc/bob/data/gameplay/items/def_item_edibles.xml -->
+	<item on_conflict="replace"
+		name							="Baguette camembert"
+		category						="edibles"
+		price							="6"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_baguette_camembert"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_baguette_camembert_64x64.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Baguette fish paste"
+		category						="edibles"
+		price							="8"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_baguette_fish_paste"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_baguette_fish_paste_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Boeuf bourguignon"
+		category						="edibles"
+		price							="10"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_boeuf_bourguignon"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_boeuf_bourguignon_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Bourgogne chardonnay"
+		category						="edibles"
+		price							="18"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_bourgogne_chardonnay"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_bourgogne_chardonnay_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Bourgogne pinot noir"
+		category						="edibles"
+		price							="19"
+		weight							="1.2"
+		stackable						="10"
+		localisation_key_name			="item_name_bourgogne_pinot_noir"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_bourgogne_pinot_noir_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Butcher of Blaviken"
+		category						="edibles"
+		price							="14"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_butcher_of_blaviken"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_butcher_of_blaviken_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Camembert"
+		category						="edibles"
+		price							="8"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_camembert"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_camembert_64x64.png"
+	>
+		<tags>							Edibles, Dairy, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Chateau de konrad cabernet"
+		category						="edibles"
+		price							="14"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_chateau_de_konrad_cabernet"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_chateau_de_konrad_cabernet_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Chateau mont valjean"
+		category						="edibles"
+		price							="15"
+		weight							="1.2"
+		stackable						="10"
+		localisation_key_name			="item_name_chateau_mont_valjean"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_chateau_mont_valjean_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Chevalier adam pinot blanc reserve"
+		category						="edibles"
+		price							="14"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_chevalier_adam_pinot_blanc_reserve"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_chevalier_adam_pinot_blanc_reserve_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Chocolate souffle"
+		category						="edibles"
+		price							="1"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_chocolate_souffle"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_chocolate_souffle_64x64.png"
+	>
+		<tags>							Edibles, Dairy, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Confit de canard"
+		category						="edibles"
+		price							="6"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_confit_de_canard"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_confit_de_canard_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Cookies"
+		category						="edibles"
+		price							="8"
+		weight							="0.6"
+		stackable						="100"
+		localisation_key_name			="item_name_cookies"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_cookies_64x64.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Count var ochmann shiraz"
+		category						="edibles"
+		price							="14"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_count_var_ochmann_shiraz"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_count_var_ochmann_shiraz_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Crossaint honey"
+		category						="edibles"
+		price							="2"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_crossaint_honey"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_crossaint_honey_64x64.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Duke nicolas chardonnay"
+		category						="edibles"
+		price							="16"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_duke_nicolas_chardonnay"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_duke_nicolas_chardonnay_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Fish tarte"
+		category						="edibles"
+		price							="18"
+		weight							="0.9"
+		stackable						="100"
+		localisation_key_name			="item_name_fish_tarte"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_fish_tarte_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Flamiche"
+		category						="edibles"
+		price							="1"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_flamiche"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_flamiche_64x64.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Geralt de rivia"
+		category						="edibles"
+		price							="14"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_geralt_de_rivia"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_geralt_de_rivia_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Ginger Bread"
+		category						="edibles"
+		price							="8"
+		weight							="0.6"
+		stackable						="100"
+		localisation_key_name			="item_name_ginger_bread_soup"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_ginger_bread_64x64.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+		</base_abilities>
+		
+	</item>
+	<item on_conflict="replace"
+		name							="Ham roasted"
+		category						="edibles"
+		price							="18"
+		weight							="0.9"
+		stackable						="100"
+		localisation_key_name			="item_name_ham_roasted"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_ham_roasted_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Herb toasts"
+		category						="edibles"
+		price							="4"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_herb_toasts"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_herb_toasts_64x64.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Magic Mushrooms"
+		category						="edibles"
+		price							="8"
+		weight							="0.6"
+		stackable						="100"
+		localisation_key_name			="item_name_magic_mushrooms"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_magic_mushrooms_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Vegetables, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_1</a>
+										<a>alco_toxicity</a>
+										<a>Relic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Magic food"
+		category						="edibles"
+		price							="2"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_magic_food"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/quests/q704_ft_magic_food.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+										<a>Relic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Onion soup"
+		category						="edibles"
+		price							="8"
+		weight							="0.6"
+		stackable						="100"
+		localisation_key_name			="item_name_onion_soup"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_onion_soup_64x64.png"
+	>
+		<tags>							Edibles, Vegetables, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Pate chicken livers"
+		category						="edibles"
+		price							="5"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_pate_chicken_livers"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_pate_chicken_livers_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Pheasant gutted"
+		category						="edibles"
+		price							="18"
+		weight							="0.9"
+		stackable						="100"
+		localisation_key_name			="item_name_pheasant_gutted"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_pheasant_gutted_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food, Uncooked
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+										<a>food_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Poison Apple"
+		category						="edibles"
+		price							="8"
+		weight							="0.6"
+		stackable						="100"
+		localisation_key_name			="item_name_poison_apple"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_poison_apple_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Vegetables, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_1</a>
+										<a>alco_toxicity</a>
+										<a>PoisonAppleToxicity</a>
+										<a>Relic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Prince john merlot"
+		category						="edibles"
+		price							="14"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_prince_john_merlot"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_prince_john_merlot_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Ratatouille"
+		category						="edibles"
+		price							="7"
+		weight							="0.04"
+		stackable						="100"
+		localisation_key_name			="item_name_ratatouille"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_ratatouille_64x64.png"
+	>
+		<tags>							Edibles, Vegetables, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Rillettes porc"
+		category						="edibles"
+		price							="12"
+		weight							="1.1"
+		stackable						="100"
+		localisation_key_name			="item_name_rillettes_porc"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_rillettes_porc_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Saint mathieu rouge"
+		category						="edibles"
+		price							="12"
+		weight							="1.2"
+		stackable						="10"
+		localisation_key_name			="item_name_saint_mathieu_rouge"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_saint_mathieu_rouge_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Tarte tatin"
+		category						="edibles"
+		price							="1"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_tarte_tatin"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_tarte_tatin_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Uncle toms exquisite blanc"
+		category						="edibles"
+		price							="14"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_uncle_toms_exquisite_blanc"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_uncle_toms_exquisite_blanc_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="White Wolf"
+		category						="edibles"
+		price							="14"
+		weight							="1.0"
+		stackable						="18"
+		localisation_key_name			="item_name_white_wolf"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_white_wolf_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>Magic _Stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+
 <!-- dlc/bob/data/gameplay/items/def_item_ingredients.xml -->
 	<item on_conflict="replace"
 		name							="Acid extract"
@@ -8998,6 +9611,41 @@
 
 <!-- dlc/ep1/data/gameplay/items/def_item_quest.xml -->
 	<item on_conflict="replace"
+		name							="Cornucopia"
+		category						="edibles"
+		price							="0"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_cornucopia"
+		localisation_key_description	="item_desc_cornucopia"
+		icon_path						="icons/inventory/quests/q605_cornucopia_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food, NoSell, InfiniteUse
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleCornucopia</a>
+										<a>Relic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Soltis Vodka"
+		category						="alchemy_ingredient"
+		price							="0"
+		weight							="0.7"
+		stackable						="100"
+		localisation_key_name			="item_name_soltis_vodka"
+		localisation_key_description	="item_desc_soltis_vodka"
+		icon_path						="icons/inventory/quests/q605_carafe_64x64.png"
+	>
+		<tags>							StrongAlcohol, Alcohol, NoSell, InfiniteUse, Drinks, Edibles
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+										<a>Relic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
 		name							="ep1_poi_01_key"
 		category						="misc"
 		price							="1"
@@ -13587,6 +14235,91 @@
 
 <!-- gameplay/items/def_item_edibles.xml -->
 	<item on_conflict="replace"
+		name							="Apple juice"
+		category						="edibles"
+		price							="12"
+		weight							="1.2"
+		stackable						="100"
+		localisation_key_name			="item_name_apple_juice"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_apple_juice_64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Baked apple"
+		category						="edibles"
+		price							="7"
+		weight							="0.04"
+		stackable						="100"
+		localisation_key_name			="item_name_baked_apple"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_apple_baked_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Baked potato"
+		category						="edibles"
+		price							="14"
+		weight							="0.15"
+		stackable						="100"
+		localisation_key_name			="item_name_baked_potato"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_potato_baked_64x64.png"
+	>
+		<tags>							Edibles, Vegetables, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Banana"
+		category						="edibles"
+		price							="6"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_banana"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_banana_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Beauclair White"
+		category						="edibles"
+		price							="18"
+		weight							="1.0"
+		stackable						="100"
+		localisation_key_name			="item_name_beauclair_white"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_beauclair_white_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
 		name							="Bottled water"
 		category						="edibles"
 		price							="5"
@@ -13599,9 +14332,323 @@
 		<tags>							Edibles, Drinks, mod_food
 		</tags>
 		<base_abilities>				<a>base_edible_stats</a>
-										<a>BeverageQuality_2</a>
+										<a>BeverageQuality_1</a>
 		</base_abilities>
 </item>
+	<item on_conflict="replace"
+		name							="Bread"
+		category						="edibles"
+		price							="2"
+		weight							="0.6"
+		stackable						="100"
+		localisation_key_name			="item_name_bread"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_bread_64x64.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>bread_stats</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Bun"
+		category						="edibles"
+		price							="8"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_bun"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_bun_64x64.png"
+	>
+		<tags>							Edibles, Wheat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Butter Bandalura"
+		category						="edibles"
+		price							="5"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_butter_bandalura"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/ingredients/alchemy/paste_dog_tallow_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>relic_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Candy"
+		category						="edibles"
+		price							="6"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_candy"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_candy_64x64.png"
+	>
+		<tags>							Edibles, Sweets, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+										<a>candy_stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Cheese"
+		category						="edibles"
+		price							="8"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_cheese"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_cheese_64x64.png"
+	>
+		<tags>							Edibles, Dairy, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>cheese_stats</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Chicken"
+		category						="edibles"
+		price							="18"
+		weight							="0.9"
+		stackable						="100"
+		localisation_key_name			="item_name_chicken"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_chicken_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food, Uncooked
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+										<a>food_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Chicken leg"
+		category						="edibles"
+		price							="10"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_chicken_leg"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_chicken_leg_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food, Uncooked
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>chicken_leg_stats</a>
+										<a>Master _Stats</a>
+										<a>food_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Chicken sandwich"
+		category						="edibles"
+		price							="16"
+		weight							="0.2"
+		stackable						="100"
+		localisation_key_name			="item_name_chicken_sandwich"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_chicken_sandwich_64x64.png"
+	>
+		<tags>							Edibles, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Chips"
+		category						="edibles"
+		price							="12"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_chips"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_potato_chip_wedges_64x64.png"
+	>
+		<tags>							Edibles, Vegetables, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Cows milk"
+		category						="edibles"
+		price							="8"
+		weight							="1.0"
+		stackable						="100"
+		localisation_key_name			="item_name_cows_milk"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_milk_cow_64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Dijkstra Dry"
+		category						="edibles"
+		price							="12"
+		weight							="1.2"
+		stackable						="100"
+		localisation_key_name			="item_name_dijkstra_dry"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_dijkstra_dry_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Dried fruit"
+		category						="edibles"
+		price							="12"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_dried_fruit"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_dried_fruit_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Dried fruit and nuts"
+		category						="edibles"
+		price							="12"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_dried_fruit_and_nuts"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_dried_fruit_and_nuts_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Dumpling"
+		category						="edibles"
+		price							="1"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_dumpling"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_dumpling_64x64.png"
+	>
+		<tags>							Edibles, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Erveluce"
+		category						="edibles"
+		price							="35"
+		weight							="0.8"
+		stackable						="100"
+		localisation_key_name			="item_name_erveluce"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_erveluce_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>Magic _Stats</a>
+										<a>base_edible_stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Est Est"
+		category						="edibles"
+		price							="40"
+		weight							="0.7"
+		stackable						="100"
+		localisation_key_name			="item_name_est_est"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_est_est_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>Magic _Stats</a>
+										<a>base_edible_stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Fish"
+		category						="edibles"
+		price							="14"
+		weight							="0.85"
+		stackable						="100"
+		localisation_key_name			="item_name_fish"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_fish_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food, Uncooked
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+										<a>food_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Fondue"
+		category						="edibles"
+		price							="16"
+		weight							="0.8"
+		stackable						="100"
+		localisation_key_name			="item_name_fondue"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_fondue_64x64.png"
+	>
+		<tags>							Edibles, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
 	<item on_conflict="replace"
 		name							="Free nilfgaardian lemon"
 		category						="edibles"
@@ -13615,7 +14662,195 @@
 		<tags>							mod_alchemy, Alcohol, Drinks, Edibles
 		</tags>
 		<base_abilities>				<a>base_edible_stats</a>
-										<a>BeverageQuality_1</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Free roasted chicken leg"
+		category						="edibles"
+		price							="0"
+		weight							="0.6"
+		stackable						="100"
+		localisation_key_name			="item_name_roasted_chicken_leg"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_chicken_leg_roasted_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Fried fish"
+		category						="edibles"
+		price							="18"
+		weight							="0.95"
+		stackable						="100"
+		localisation_key_name			="item_name_fried_fish"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_fish_fried_64x64.png"
+	>
+		<tags>							Edibles, Fish, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Fried meat"
+		category						="edibles"
+		price							="20"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_fried_meat"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_meat_fried_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Goats milk"
+		category						="edibles"
+		price							="7"
+		weight							="1.0"
+		stackable						="100"
+		localisation_key_name			="item_name_goats_milk"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_milk_goat_64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Grapes"
+		category						="edibles"
+		price							="6"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_grapes"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_grapes_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Grilled chicken sandwich"
+		category						="edibles"
+		price							="18"
+		weight							="0.25"
+		stackable						="100"
+		localisation_key_name			="item_name_grilled_chicken_sandwich"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_chicken_sandwich_grilled_64x64.png"
+	>
+		<tags>							Edibles, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Grilled pork"
+		category						="edibles"
+		price							="18"
+		weight							="0.4"
+		stackable						="100"
+		localisation_key_name			="item_name_grilled_pork"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_pork_grilled_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Gutted fish"
+		category						="edibles"
+		price							="12"
+		weight							="0.45"
+		stackable						="100"
+		localisation_key_name			="item_name_gutted_fish"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_fish_gutted_64x64.png"
+	>
+		<tags>							Edibles, Fish, mod_food, Uncooked
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+										<a>food_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Ham sandwich"
+		category						="edibles"
+		price							="18"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_ham_sandwich"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_ham_sandwich_64x64.png"
+	>
+		<tags>							Edibles, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Honeycomb"
+		category						="edibles"
+		price							="8"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_honeycomb"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_honeycomb_64x64.png"
+	>
+		<tags>							Edibles, Sweets, mod_food, mod_collectible
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Kaedwenian Stout"
+		category						="edibles"
+		price							="7"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_kaedwenian_stout"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_kaedwenian_stout_64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_2</a>
+										<a>Master _Stats</a>
 										<a>alco_toxicity</a>
 		</base_abilities>
 	</item>
@@ -13632,6 +14867,283 @@
 		<tags>							mod_food, AlchemyIngredient, StrongAlcohol
 		</tags>
 </item>
+	<item on_conflict="replace"
+		name							="Mettina Rose"
+		category						="edibles"
+		price							="15"
+		weight							="1.2"
+		stackable						="100"
+		localisation_key_name			="item_name_mettina_rose"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_mettina_rose_64x64.png"
+	>
+		<tags>							mod_food, Edibles, Drinks, Alcohol
+		</tags>
+		<base_abilities>				<a>Magic _Stats</a>
+										<a>base_edible_stats</a>
+										<a>BeverageQuality_3</a>
+										<a>alco_toxicity_strong</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Mutton curry"
+		category						="edibles"
+		price							="15"
+		weight							="0.8"
+		stackable						="100"
+		localisation_key_name			="item_name_mutton_curry"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_mutton_curry_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Mutton leg"
+		category						="edibles"
+		price							="14"
+		weight							="0.4"
+		stackable						="100"
+		localisation_key_name			="item_name_mutton_leg"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_mutton_leg.dds"
+	>
+		<tags>							Edibles, Meat, mod_food, Uncooked
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+										<a>food_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Pork"
+		category						="edibles"
+		price							="16"
+		weight							="0.8"
+		stackable						="100"
+		localisation_key_name			="item_name_pork"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_pork_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food, Uncooked
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+										<a>food_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Potatoes"
+		category						="edibles"
+		price							="8"
+		weight							="0.2"
+		stackable						="100"
+		localisation_key_name			="item_name_potatoes"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_potato_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_1</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Raspberry juice"
+		category						="edibles"
+		price							="6"
+		weight							="1.0"
+		stackable						="100"
+		localisation_key_name			="item_name_raspberry_juice"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_raspberry_juice_64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_2</a>
+										<a>Master _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Raw meat"
+		category						="edibles"
+		price							="4"
+		weight							="0.45"
+		stackable						="100"
+		localisation_key_name			="item_name_raw_meat"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_meat_raw_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food, Uncooked
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_2</a>
+										<a>Master _Stats</a>
+										<a>food_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Redanian Lager"
+		category						="edibles"
+		price							="11"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_redanian_lager"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_redanian_lager_64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_2</a>
+										<a>Master _Stats</a>
+										<a>alco_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Rivian Kriek"
+		category						="edibles"
+		price							="6"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_rivian_kriek"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_rivian_kriek_64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_2</a>
+										<a>Master _Stats</a>
+										<a>alco_toxicity</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Roasted chicken"
+		category						="edibles"
+		price							="12"
+		weight							="1.1"
+		stackable						="100"
+		localisation_key_name			="item_name_roasted_chicken"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_chicken_roasted_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Roasted chicken leg"
+		category						="edibles"
+		price							="8"
+		weight							="0.6"
+		stackable						="100"
+		localisation_key_name			="item_name_roasted_chicken_leg"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_chicken_leg_roasted_64x64.png"
+	>
+		<tags>							Edibles, Meat, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item
+		name							="Sausages Mod"
+		category						="edibles"
+		price							="16"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_q401_sausages"
+		localisation_key_description	="item_desc_q401_sausages"
+		icon_path						="icons/inventory/quests/sausages-64x64.png"
+	>
+		<tags>							Edibles, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item
+		name							="Scrambled Eggs Mod"
+		category						="edibles"
+		price							="14"
+		weight							="0.05"
+		stackable						="100"
+		localisation_key_name			="item_name_scrambled_eggs"
+		localisation_key_description	="item_desc_scrambled_eggs"
+		icon_path						="icons/inventory/quests/scrambled_eggs-64x64.png"
+	>
+		<tags>							Edibles, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Tirnalia potion"
+		stackable						="100"
+		price							="1"
+		weight							="0.05"
+		category						="edibles"
+		localisation_key_name			="item_name_tir_na_lia_potion"
+		localisation_key_description	="attribute_name_vitalityregen"
+		icon_path						="icons/inventory/potions/tir_na_lia_potion-64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_1</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Very good honey"
+		category						="edibles"
+		price							="30"
+		weight							="1.0"
+		stackable						="100"
+		localisation_key_name			="item_name_very_good_honey"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/food_honey_pure_64x64.png"
+	>
+		<tags>							Edibles, Fruits, mod_food
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>FoodEdibleQuality_3</a>
+										<a>Magic _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Viziman Champion"
+		category						="edibles"
+		price							="7"
+		weight							="0.5"
+		stackable						="100"
+		localisation_key_name			="item_name_viziman_champion"
+		localisation_key_description	="item_desc_food"
+		icon_path						="icons/inventory/food/alcohol_viziman_champion_64x64.png"
+	>
+		<tags>							Edibles, Drinks, mod_food, Alcohol
+		</tags>
+		<base_abilities>				<a>base_edible_stats</a>
+										<a>BeverageQuality_2</a>
+										<a>Master _Stats</a>
+										<a>alco_toxicity</a>
+		</base_abilities>
+	</item>
 
 <!-- gameplay/items/def_item_gloves.xml -->
 	<item on_conflict="replace"

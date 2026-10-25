@@ -248,7 +248,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-21 from the chang
 **5.x:** unchanged.
 
 **Decisions:** port as legacy.
-- **Deviation:** Free nilfgaardian lemon gets legacy's category, description and tags, but its drink abilities stay 5.x's (`item_layer.KEEP_5X`): the drink's effect is FOOD's ([audit](#craft-and-loot-audit-2026-10-22) F3; temporary, until FOOD; porter's call, confirmed by the owner, 2026-10-23).
+Free nilfgaardian lemon gets legacy's category, description and tags here; its drink abilities (Well Hydrated 3, strong alcohol) came with FOOD-04 ([food.md](food.md#food-04-food-and-drink-items), 2026-10-24), which ended the temporary deviation that kept 5.x's.
 
 ### CRAFT-08 Dismantling
 
@@ -310,9 +310,9 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-21 from the chang
 | Flags | — |
 | Depends on | ITEM-11 (the kits, signed off), LOOT-04 (the four shop lists) |
 | Skill trees | n/a |
-| Port form | `@addMethod CInventoryComponent.GMAddMasterArmorerItems` (legacy's body), called by a wrapper of `CInventoryComponent.AutoBalanaceItemsWithPlayerLevel` for an inventory whose entity has the tag `sq108_blacksmith_woman` (legacy's call sat right before it in the storyscene function `ShowMeGoods`, which stays 5.x's; the function's only other caller is a container's), `gm/craft/masterKits.ws`; the shop entries with LOOT-04 |
-| Port status | **signed off** (2026-10-23); verified (2026-10-22, with LOOT-04): Hattori's shop stocks the master weaponsmith tools; Yoana's shop stocks her master list after her quest's fact and a master armorsmith kit was bought from it; ITEM-11's temporary deviation ended |
-| Open checks | the Hearts of Stone enchanter (LOOT-04: his list never reaches the kits) |
+| Port form | `@addMethod CInventoryComponent.GMAddMasterArmorerItems` (legacy's fact check; the list's 18 entries added by `AddAnItem` through `GMAddMasterStockEntry`, not by `AddItemsFromLootDefinition`: below), called by a wrapper of `CInventoryComponent.AutoBalanaceItemsWithPlayerLevel` for an inventory whose entity has the tag `sq108_blacksmith_woman` (legacy's call sat right before it in the storyscene function `ShowMeGoods`, which stays 5.x's; the function's only other caller is a container's), `gm/craft/masterKits.ws`; the shop entries with LOOT-04 |
+| Port status | **signed off** (2026-10-23); verified (2026-10-22, with LOOT-04): Hattori's shop stocks the master weaponsmith tools; Yoana's shop stocks her master list after her quest's fact and a master armorsmith kit was bought from it; ITEM-11's temporary deviation ended; the stock added without the engine's list call verified 2026-10-24 (5.x-GM `e2273a6e`, both trees): a Yoana spawned from her entity file (given her quest tag) with the fact, her shop opened 45 times (classic tree) and 42 times (new tree) in one launch without a crash, stocking the master armorsmith tools (13), the Item dismantle kits, the four quest armors' schematics, Thyssen's and the horse gear at level 20, the same stock at every opening; emptied, her next opening restocked the list's entries and skipped the four schematics Geralt had learnt (`gmtest_craft04_give`); `GMTest_loot04` (a second opening adds nothing) |
+| Open checks | the Hearts of Stone enchanter (LOOT-04: his list never reaches the kits); Yoana's shop in play after her quest (her real entity's tag) |
 | Save impact | none (expected); the shop lists are rolled when a merchant restocks |
 | NG+ counterpart | applied, untested |
 
@@ -322,7 +322,9 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-21 from the chang
 
 **5.x:** none.
 
-**Decisions:** port as legacy (DI6 left it to CRAFT and LOOT). Yoana's master list is added each time her shop opens, as legacy (confirmed by the owner, 2026-10-21).
+**Decisions:** port as legacy (DI6 left it to CRAFT and LOOT), apart from how Yoana's master list is added (below).
+
+- **Deviation:** Yoana's master stock is the stock one roll of legacy's list `_store__Master_Armorsmith_Yoana` gives, added by the script without the engine's list call: at each opening of her shop after her quest, each of the list's entries from its level gate (`player_level_min`; every entry has chance -1), except a schematic Geralt knows (as the engine's list skips it), topped up to the entry's quantity (`quantity_min` to `quantity_max`) when she holds fewer than `quantity_min`. Legacy queued the list (`AddItemsFromLootDefinition`) at every opening, so her stock grew with each visit; on 5.x that call repeated on one inventory crashes the game (her shop at its 14th to 16th opening in one launch). The list stays in `def_loot_shops.xml` (LOOT-04) and its entries are repeated in `gm/craft/masterKits.ws`: keep the two in step. Replaces the call "Yoana's master list added on each shop open, as legacy" (confirmed by the owner, 2026-10-21). (Owner, 2026-10-24.)
 
 ---
 
@@ -411,7 +413,7 @@ Every item other areas handed to CRAFT, and where it lands:
 | LOOT | Where schematics, recipes, ingredients and kits are sold and found; the master stock lists (LOOT-04 with CRAFT-10); the four quest armors' schematic sources |
 | ECON | Item, schematic-item and recipe-item prices (their price-only units left unattributed), `mod_*` price tags on ingredients and junk, the `mod_craftitem`, `mod_disassemble` and `mod_removeupgrade` factors (ENCH-02 edits the same file copy), dye quality (BaW's dyes lose their Magic rarity) |
 | WGT | Weights of items, kits, ingredients and herbs |
-| FOOD | The 27 cooking recipes and their items, `EACIT_Edibles` and its type functions, `W3AlchemyManager.CookItem` (cooked quantity), `addrecipesedibles`; the two alcohols' drink effects; the Hearts of Stone vodka's drink abilities |
+| FOOD | The 27 cooking recipes and their items, `EACIT_Edibles` and its type functions, `W3AlchemyManager.CookItem` (cooked quantity), `addrecipesedibles`; the two alcohols' drink effects; the Hearts of Stone vodka's drink abilities (mapped 2026-10-23: [food.md](food.md) FOOD-07, FOOD-04) |
 | XBOW | Bolt and crossbow stats (the bolt schematics are CRAFT-01); the quest bolt's `mod_nosale` tag fix |
 | ITEM | `NewGamePlusReplaceEP2Items` (legacy no longer swaps Blood and Wine's vampire gear for its NG+ copy), found by the sweep, unattributed; ITEM was signed off before it: ported with ITEM-04 after the [audit](#craft-and-loot-audit-2026-10-22) (F5, 5.x-GM `9b8e16a3`) |
 | Quest-item fixes (`FixQuestItems`, unattributed) | The `QuestEP1` tag legacy adds to the Hearts of Stone note `ep1_poi_12_note_b` (the unit carries CRAFT-08 for its parts only; [audit](#craft-and-loot-audit-2026-10-22) F7) |

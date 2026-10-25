@@ -824,7 +824,7 @@ Every item other areas handed to ALCH, and where it lands:
 | LOOT | Recipe entries in shops and loot (the Master Alchemist's stock, pheromone recipes at four more vendors, recipe level gates: T2 at 8/9/10, T3 at 16/18/20, which do not match the changelist's 10 and 20), mutagen drops (`_monster_add__Mutagens_lesser`), the standalone starts' mutagens |
 | ECON | Prices of alchemy items and recipes, `mod_alchemy`, `mod_alcohol` |
 | WGT | Alchemy item weights (`default_potion_stats`, `ClearingPotion_stats`, `RestoringPotion_stats`, `default_oil_stats`, `default_bomb_stats`, `CommonMutagenAbility`) |
-| FOOD | Well fed, well hydrated, drunkenness, alcohol and raw-food toxicity (`alco_toxicity*`, `food_toxicity`), `EACIT_Edibles` and `W3AlchemyManager.CookItem` (cooking) |
+| FOOD | Well fed, well hydrated, drunkenness, alcohol and raw-food toxicity (`alco_toxicity*`, `food_toxicity`), `EACIT_Edibles` and `W3AlchemyManager.CookItem` (cooking) (mapped 2026-10-23: [food.md](food.md)) |
 | EFX | Generic bleeding, poison critical, frozen (DoT pause, Aard damage on frozen enemies, legacy's removal of the knockdown on a frozen enemy's hit, the generic `FrozenEffect`'s +0.5), hypnotized and frost-slowdown effects |
 | AI | The frozen rotfiend's explosion, witch boiling water, monster abilities blocked by Silver Dust and Dimeritium |
 | XP | Monster nest experience (`CMonsterNestEntity.AddExp`, `AddBonusExp` and the modifiers in `CMonsterNestEntity.<members>`: `expOnNestDestroyedMod` 25, `bonusExpOnBossKilledMod` 25, `addExpOnlyOnceMod`; audit F26), `fb3_internal` |

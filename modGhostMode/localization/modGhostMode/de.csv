@@ -508,3 +508,6 @@
 2110992332|cd3869e4||Ausrüstung für Alchemie-Zerlegung
 2110992333|4d09bbea||Ermöglicht es, Alchemiekomponenten zu zerlegen.
 2110992334|0544643a||Zerlegen
+; FOOD-06: Connoisseur (the classic perk_15 and the new tree's perk_41), legacy's name and description
+2110992462|dd7afa8f||Feinschmecker
+2110992463|754d1895||Reduces alcohol and toxic food toxicity to zero. Removes drunken effect from alcohol. After drinking an alcoholic beverage, its bonuses last longer by $S$%.

@@ -170,6 +170,10 @@ def verify(worktree):
                             problems.append(f"{folder}: item {name}: {t} {'missing' if t in lt else 'present'} ({f})")
                 if kind == "item" and name in l and name not in m and name not in v:
                     checked[0] += 1
+                    other = [r for (ft, p), r in item_layer.ELSEWHERE.items() if ft in feats and re.match(p, name)]
+                    if other:
+                        note(other[0])
+                        continue
                     if not feats <= item_layer.PORTED:
                         note(f"{f}: new item, {', '.join(sorted(feats - item_layer.PORTED))} not ported yet")
                     elif name not in gi or " ".join(gi[name].split()) != " ".join(l[name][1].split()):

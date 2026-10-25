@@ -22,8 +22,8 @@ import csv, os, re
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PORTED = {"ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11",
-          "CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09", "LOOT-08"}
-AREAS = ("ITEM-", "CRAFT-", "LOOT-")
+          "CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09", "LOOT-08", "FOOD-04", "FOOD-07"}
+AREAS = ("ITEM-", "CRAFT-", "LOOT-", "FOOD-")
 
 # The item tags each feature owns (added or removed where legacy did); "*": every tag but the mod_*
 # price tags (ECON's).
@@ -32,7 +32,8 @@ TAGS = {
     "ITEM-03": {"AutogenUseLevelRange", "AutogenForceLevel", "EP1"},
     "ITEM-04": {"Autogen"},
     "ITEM-05": {"Autogen", "AutogenForceLevel"},
-    "ITEM-08": {"DoNotEnhance", "DoNotEnhancem"},  # DoNotEnhancem: 1.32's misspelt tag on the sq701 gloves
+    "ITEM-08": {"DoNotEnhance", "DoNotEnhancem"},
+    "FOOD-04": {"*"},  # the food and drink kind tags (Drinks, Alcohol, Uncooked, Potion off seven items, ...)  # DoNotEnhancem: 1.32's misspelt tag on the sq701 gloves
 }
 # The ability nodes each feature owns.
 NODES = {
@@ -54,20 +55,27 @@ BLOCKS = {
     "CRAFT-06": {"base_abilities"},  # the recipe items' rarity
     "CRAFT-07": {"base_abilities"},  # the ingredients' rarity (bugfix 120)
     "CRAFT-08": {"recycling_parts"},  # the dismantling parts
+    "FOOD-04": {"base_abilities", "recycling_parts"},  # the food and drink tier, rarity and toxicity abilities; Wolf liver's parts (none: audit F1)
 }
 # (block, item) where legacy's block is taken although 5.x changed it (the owner's DC4: Cheesecutter
 # without 5.x's Cheese).
 FORCE_LEGACY = {("recycling_parts", "Cheesecutter")}
 # (block, item) left as 5.x has it although the item's feature owns the block: another area's part of
-# legacy's block (the Free nilfgaardian lemon's drink quality and toxicity are FOOD's; CRAFT-07 makes it
-# a drink, CRAFT/LOOT audit F3).
-KEEP_5X = {("base_abilities", "Free nilfgaardian lemon")}
+# legacy's block (none since FOOD-04 gave the Free nilfgaardian lemon its drink abilities).
+KEEP_5X = set()
+
+# New items another generator writes with its own --verify (gen_item.py's check skips them):
+# (feature, name pattern) -> reason.
+ELSEWHERE = {("FOOD-07", r"^Recipe for "): "FOOD-07's cooking recipe items, written by gen_food.py with Q1's names"}
 
 # The attributes of an item's opening tag each feature owns.
 ATTRS = {
     "ITEM-10": {"initial_durability", "max_durability"},  # the two Beauclair trousers start at full durability
     "CRAFT-02": {"localisation_key_name"},  # the NG+ Wolf school sword schematics' names
     "CRAFT-07": {"category", "grid_size", "localisation_key_description"},
+    # every drink stacks to 100; Wolf liver's category and description (legacy moved it from the ingredients to the
+    # food: its ingredient unit, CRAFT-07's and CRAFT-08's, shares the name with its food unit, which wins; audit F1)
+    "FOOD-04": {"stackable", "category", "localisation_key_description"},
 }
 
 _UNITS = None

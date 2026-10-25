@@ -61,6 +61,13 @@ function CumulateWith(effect: CBaseGameplayEffect)
 		initialDuration = duration;	//modSigns
 		keepTier = effect.GetBuffLevel() < GetBuffLevel();	//modSigns: DL12, a weaker dose keeps the stronger tier
 	}	//modSigns
+	else if((W3Effect_WellHydrated)this && effect.GetBuffLevel() < GetBuffLevel())	//modSigns: FOOD-03, the owner's DF6: a weaker drink adds its time
+	{	//modSigns
+		timeLeft += effect.timeLeft;	//modSigns
+		duration += effect.duration;	//modSigns
+		initialDuration = duration;	//modSigns
+		keepTier = true;	//modSigns: the stronger tier stays
+	}	//modSigns
 	else	//modSigns
 	{	//modSigns
 	timeLeft = effect.timeLeft;
@@ -97,9 +104,18 @@ function CumulateWith(effect: CBaseGameplayEffect)
 @wrapMethod(W3PlayerWitcher)
 function DrinkPotionFromSlot(slot : EEquipmentSlots)
 {
+	var gmItem : SItemUniqueId;
+
 	if(GMCannotDrinkNow())
 	{
 		DisplayHudMessage(GetLocStringByKeyExt( "menu_cannot_perform_action_now" ));
+		return;
+	}
+	// FOOD-05: alcohol and raw food refused when Geralt is too toxic for them (legacy).
+	GetItemEquippedOnSlot(slot, gmItem);
+	if(GMFoodTooToxic(gmItem))
+	{
+		SendToxicityTooHighMessage();
 		return;
 	}
 	wrappedMethod(slot);

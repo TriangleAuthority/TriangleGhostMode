@@ -978,7 +978,13 @@
 	<loot name="_EP2_store__Butcher" 								player_level_min="0"	player_level_max="0"	quantity_min="15"	quantity_max="20"	chance="1"  	>
 <!-- recipes -->
 <!-- edibles Q2 -->
+		<loot_entry name="Recipe for Chicken leg"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Gutted fish"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
 <!-- edibles Q3 -->
+		<loot_entry name="Recipe for Roasted chicken"				player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Roasted chicken leg"			player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Fried meat"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Grilled pork"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
 <!-- FOOD -->
 		<loot_entry name="Chicken"									player_level_min="0"	player_level_max="0"	quantity_min="3"	quantity_max="6"	chance="1"		/>
 		<loot_entry name="Chicken leg"								player_level_min="0"	player_level_max="0"	quantity_min="3"	quantity_max="6"	chance="1"		/>
@@ -1002,6 +1008,8 @@
 <!-- EP2 Innkeeper -->
 	<loot name="_EP2_store__Innkeeper" 								player_level_min="0"	player_level_max="0"	quantity_min="70"	quantity_max="80"	chance="1"  	>
 <!-- recipes -->
+		<loot_entry name="Recipe for Apple juice"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Raspberry juice"				player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
 <!-- edibles Q1 -->
 <!-- ingredients -->
 		<loot_entry name="Apple"									player_level_min="0"	player_level_max="0"	quantity_min="2"	quantity_max="5"	chance="-1"			/>
@@ -1044,7 +1052,16 @@
 <!-- DLC -->
 <!-- recipes -->
 <!-- edibles Q2 -->
+		<loot_entry name="Recipe for Chocolate souffle"				player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Crossaint honey"				player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Flamiche"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Onion soup"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Ratatouille"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
 <!-- edibles Q3 -->
+		<loot_entry name="Recipe for Tarte tatin"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Baguette camembert"			player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Boeuf bourguignon"				player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
+		<loot_entry name="Recipe for Fish tarte"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"			/>
 <!-- edibles Q1 -->
 <!-- ingredients -->
 		<loot_entry name="Brioche"									player_level_min="0"	player_level_max="0"	quantity_min="4"	quantity_max="8"	chance="-1"			/>

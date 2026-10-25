@@ -35,6 +35,13 @@
 //                                W3SignOwnerPlayer.ChangeAspect and the channel's ShouldStopChanneling
 //                                are forced until the release)
 //   autocastrelease()            release the cast-sign input (ends a held cast)
+// Shops and loot (docs/game-automation.md):
+//   autospawn("<path>", '<tag>') spawn an entity template in front of Geralt and tag it
+//   automerchants()              merchants within 200 m: name, distance, tags
+//   autoshop('<tag>', hours)     time moved on by hours, then the NPC's shop opened as the shop dialogue does
+//   autoshopempty('<tag>')       empty the NPC's inventory; autoshopkinds('<tag>'): its number of item kinds
+//   autolootroll('<list>', n)    queue a loot list n times into a spawned test merchant (crashes the game
+//                                after some dozens of rolls: 5.x's engine on this path)
 
 function AutomationLog(msg : string)
 {
@@ -488,4 +495,161 @@ exec function autolock(optional unlock : bool, optional range : float)
 	thePlayer.HardLockToTarget(true);
 	AutomationLog("locked target=" + target.GetDisplayName() + " distance=" + NoTrailZeros(best)
 		+ " hardlock=" + AutomationBool(thePlayer.IsHardLockEnabled()) + " playerTarget=" + AutomationBool(thePlayer.GetTarget() == target));
+}
+
+// Loot and shop probes (the loot-roll crash, docs/game-automation.md).
+// autolootroll('<list>', n): rolls a loot list n times into a spawned test merchant (the generic Novigrad
+// weaponsmith, spawned once and kept, tag autolootroller), as LOOT's tests do: empty its inventory, queue
+// the list (AddItemsFromLootDefinition), balance it (AutoBalanaceItemsWithPlayerLevel). Logs each roll.
+function AutomationLootRoller() : CNewNPC
+{
+	var npc : CNewNPC;
+	var template : CEntityTemplate;
+
+	npc = theGame.GetNPCByTag('autolootroller');
+	if (npc)
+		return npc;
+	template = (CEntityTemplate)LoadResource("living_world\dialogue\generic_merchants\entities\shop_generic_merchant_novigrad_weapons.w2ent", true);
+	if (!template)
+		return NULL;
+	npc = (CNewNPC)theGame.CreateEntity(template, thePlayer.GetWorldPosition() + thePlayer.GetHeadingVector() * 3, thePlayer.GetWorldRotation());
+	if (npc)
+	{
+		npc.AddTag('autolootroller');
+		npc.GetInventory().AutoBalanaceItemsWithPlayerLevel();
+	}
+	return npc;
+}
+
+exec function autolootroll(list : name, optional rolls : int)
+{
+	var npc : CNewNPC;
+	var inv : CInventoryComponent;
+	var ids : array<SItemUniqueId>;
+	var k : int;
+
+	npc = AutomationLootRoller();
+	if (!npc)
+	{
+		AutomationLog("error lootroll: no roller");
+		return;
+	}
+	if (rolls <= 0)
+		rolls = 1;
+	inv = npc.GetInventory();
+	for (k = 0; k < rolls; k += 1)
+	{
+		inv.RemoveAllItems();
+		inv.AddItemsFromLootDefinition(list);
+		inv.AutoBalanaceItemsWithPlayerLevel();
+		inv.GetAllItems(ids);
+		AutomationLog("lootroll list=" + list + " roll=" + (k + 1) + " kinds=" + ids.Size());
+	}
+	inv.RemoveAllItems();
+}
+
+// autoshop('<npc tag>', hours): a merchant's shop visit as a player makes it: game time moved on by
+// `hours` (the restock), then what the shop dialogue does (ShowMeGoods: AutoBalanaceItemsWithPlayerLevel,
+// the inventory menu opened for the merchant, whose opening runs UpdateLoot). Close the menu with autoresume().
+exec function autoshop(tag : name, optional hours : int)
+{
+	var npc : CNewNPC;
+	var init : W3InventoryInitData;
+	var ids : array<SItemUniqueId>;
+
+	npc = theGame.GetNPCByTag(tag);
+	if (!npc)
+	{
+		AutomationLog("error shop: no npc " + tag);
+		return;
+	}
+	if (hours > 0)
+		theGame.SetGameTime(theGame.GetGameTime() + GameTimeCreate(0, hours, 0, 0), true);
+	if (!npc.HasTag('Merchant'))
+		npc.AddTag('Merchant');
+	npc.GetInventory().AutoBalanaceItemsWithPlayerLevel();
+	init = new W3InventoryInitData in theGame.GetGuiManager();
+	init.containerNPC = npc;
+	theGame.GetGuiManager().SetLastOpenedCommonMenuName('None');
+	theGame.RequestMenuWithBackground('InventoryMenu', 'CommonMenu', init);
+	npc.GetInventory().GetAllItems(ids);
+	AutomationLog("shop npc=" + tag + " day=" + GameTimeDays(theGame.GetGameTime()) + " kinds=" + ids.Size());
+}
+
+// autoshopempty('<npc tag>'): empties a merchant's inventory (as if Geralt had bought everything), so the
+// next restock shows whether it happened.
+exec function autoshopempty(tag : name)
+{
+	var npc : CNewNPC;
+
+	npc = theGame.GetNPCByTag(tag);
+	if (!npc)
+	{
+		AutomationLog("error shopempty: no npc " + tag);
+		return;
+	}
+	npc.GetInventory().RemoveAllItems();
+	AutomationLog("shopempty npc=" + tag);
+}
+
+// autoshopkinds('<npc tag>'): the number of item kinds a merchant holds.
+exec function autoshopkinds(tag : name)
+{
+	var npc : CNewNPC;
+	var ids : array<SItemUniqueId>;
+
+	npc = theGame.GetNPCByTag(tag);
+	if (!npc)
+	{
+		AutomationLog("error shopkinds: no npc " + tag);
+		return;
+	}
+	npc.GetInventory().GetAllItems(ids);
+	AutomationLog("shopkinds npc=" + tag + " kinds=" + ids.Size());
+}
+
+// automerchants(): merchants (NPCs tagged ShopkeeperEntity or Merchant) within 200 m: their tags.
+exec function automerchants(optional range : float)
+{
+	var actors : array<CActor>;
+	var tags : array<name>;
+	var i, j : int;
+	var s : string;
+
+	if (range <= 0)
+		range = 200;
+	actors = thePlayer.GetNPCsAndPlayersInRange(range, 200);
+	for (i = 0; i < actors.Size(); i += 1)
+	{
+		if (!actors[i].HasTag('ShopkeeperEntity') && !actors[i].HasTag('Merchant'))
+			continue;
+		tags = actors[i].GetTags();
+		s = "";
+		for (j = 0; j < tags.Size(); j += 1)
+			s += " " + tags[j];
+		AutomationLog("merchant name=" + actors[i].GetDisplayName() + " distance=" + NoTrailZeros(RoundMath(VecDistance(actors[i].GetWorldPosition(), thePlayer.GetWorldPosition()))) + " tags=" + s);
+	}
+	AutomationLog("merchants done");
+}
+
+// autospawn("<depot path>.w2ent", '<tag>'): spawns an entity template 3 m in front of Geralt and tags it.
+exec function autospawn(path : string, tag : name)
+{
+	var template : CEntityTemplate;
+	var ent : CEntity;
+
+	template = (CEntityTemplate)LoadResource(path, true);
+	if (!template)
+	{
+		AutomationLog("error spawn: no template " + path);
+		return;
+	}
+	ent = theGame.CreateEntity(template, thePlayer.GetWorldPosition() + thePlayer.GetHeadingVector() * 3, thePlayer.GetWorldRotation());
+	if (!ent)
+	{
+		AutomationLog("error spawn: not created " + path);
+		return;
+	}
+	ent.AddTag(tag);
+	AutomationLog("spawned " + path + " tag=" + tag);
 }

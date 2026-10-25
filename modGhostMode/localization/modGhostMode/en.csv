@@ -508,3 +508,6 @@
 2110992332|        |item_name_dismantle_kit_alchemy_1|Alchemy dismantle kit
 2110992333|        |item_desc_dismantle_kit_alchemy_1|Allows to dismantle alchemy components.
 2110992334|        |panel_button_hud_interaction_dismantle|Dismantle
+; FOOD-06: Connoisseur (the classic perk_15 and the new tree's perk_41), legacy's name and description
+2110992462|dd7afa8f||Connoisseur
+2110992463|754d1895||Reduces alcohol and toxic food toxicity to zero. Removes drunken effect from alcohol. After drinking an alcoholic beverage, its bonuses last longer by $S$%.

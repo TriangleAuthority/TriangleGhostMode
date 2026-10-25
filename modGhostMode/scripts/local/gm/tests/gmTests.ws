@@ -551,6 +551,7 @@ function GMTestHasLine(lines : array<string>, prefix : string) : bool
 // regression checks that need time to pass after gmtest_regress() (ITEM-12's resistance gain, ALCH's later doses).
 exec function gmtest_panel()
 {
+	GMTest_food_after();	// first: it ends the food effects, which raise the regen the panel shows
 	GMTest_panel();
 	GMTest_ui01_crit();
 	GMTest_ui02();
@@ -2118,9 +2119,12 @@ function GMTest_stam07()
 
 // Regression run, in one game session: every check that needs no particular situation (no fight,
 // no input, no menu), each restoring what it changes. Run when a feature is finished, followed in
-// the same session by the character panel check, which needs a menu open:
-//   python tools/game.py exec "gmtest_regress()" "ingamemenu()" "gmtest_panel()"
+// the same session by the character panel check, which needs a menu open (its later checks report
+// after the SUMMARY line: read them too):
+//   python tools/game.py exec --wait 3000 "gmtest_regress()" "ingamemenu()" "gmtest_panel()"
 //   python tools/game.py resume
+// LOOT's checks roll loot lists into a spawned merchant and stay out of it: gmtest_loot() in a launch
+// of its own (docs/game-automation.md).
 exec function gmtest_regress()
 {
 	thePlayer.GMTestCount(true, true);
@@ -2161,9 +2165,11 @@ exec function gmtest_regress()
 	GMTest_swd();
 	GMTest_item();
 	GMTest_craft();
-	GMTest_loot();
+	// GMTest_loot() is not in the regression: its loot rolls into a spawned merchant crash the game
+	// (access violation) after a varying number of rolls; run gmtest_loot() in a launch of its own.
 	GMTest_alchport();
 	GMTest_uiport();
+	GMTest_food();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

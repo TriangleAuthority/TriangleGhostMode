@@ -1,6 +1,10 @@
 // In-game tests for LOOT (merchants' stock, containers, rewards, standalone starts). See docs/features/loot.md.
 
-// LOOT's situation-free checks (in gmtest_regress()).
+// LOOT's situation-free checks. Not in gmtest_regress(): they roll loot lists into a spawned merchant
+// (GMTestLootRoll), and such rolls crash the game (access violation, exit code 0xC0000005) a few seconds
+// later, after anything from about 8 to over 90 rolls in one launch (2026-10-24; the rolls of the
+// regression made it close after the regression in many launches). Run gmtest_loot() once, in a launch
+// of its own, and quit after it.
 function GMTest_loot()
 {
 	GMTest_loot01();
@@ -11,7 +15,9 @@ function GMTest_loot()
 
 exec function gmtest_loot()
 {
+	thePlayer.GMTestCount(true, true);
 	GMTest_loot();
+	LogChannel('GMTest', "SUMMARY loot: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 
 // The test merchant that loot lists are rolled into (the generic Novigrad weaponsmith, ITEM's test merchant,
@@ -93,7 +99,7 @@ function GMTest_loot04()
 	var m : W3MerchantNPC;
 	var inv : CInventoryComponent;
 	var had : bool;
-	var before, after, noFact : int;
+	var before, after, noFact, count : int;
 
 	names = GMTestLootRoll('_store__Hattori_Master_Blacksmith', 1);
 	GMTestReport(names.Contains('weapon_repair_kit_4'), "LOOT-04 Hattori sells the master weaponsmith tools: " + names.Contains('weapon_repair_kit_4'));
@@ -124,9 +130,16 @@ function GMTest_loot04()
 	FactsAdd("sq108_master_bsmith_helped");
 	inv.AutoBalanaceItemsWithPlayerLevel();
 	after = inv.GetItemQuantityByName('armor_repair_kit_4');
-	GMTestReport(noFact == 0 && after > 0 && inv.HasItem('q108 Heavy Armor 4 schematic') && inv.HasItem('Oathbreaker Armor schematic') == (thePlayer.GetLevel() >= 14),
-		"LOOT-04 Yoana's master stock: before her quest " + noFact + " master armorsmith tools, after " + after + "; Hindarfjall schematic " + inv.HasItem('q108 Heavy Armor 4 schematic')
+	GMTestReport(noFact == 0 && after >= 10 && after <= 20 && inv.HasItem('q108 Heavy Armor 4 schematic') && inv.HasItem('Oathbreaker Armor schematic') == (thePlayer.GetLevel() >= 14),
+		"LOOT-04 Yoana's master stock: before her quest " + noFact + " master armorsmith tools, after " + after + " (10 to 20); Hindarfjall schematic " + inv.HasItem('q108 Heavy Armor 4 schematic')
 		+ ", Oathbreaker schematic " + inv.HasItem('Oathbreaker Armor schematic') + " (from level 14)");
+	// CRAFT-10's deviation (owner, 2026-10-24): the entries are added by AddAnItem, topped up to the list's
+	// quantity, so a second opening adds nothing (legacy's queued list added another roll).
+	count = inv.GetItemCount();
+	inv.AutoBalanaceItemsWithPlayerLevel();
+	GMTestReport(inv.GetItemQuantityByName('armor_repair_kit_4') == after && inv.GetItemQuantityByName('q108 Heavy Armor 4 schematic') == 1 && inv.GetItemCount() == count,
+		"CRAFT-10 Yoana's stock does not grow at a second opening: master armorsmith tools " + after + " then " + inv.GetItemQuantityByName('armor_repair_kit_4')
+		+ ", Hindarfjall schematics " + inv.GetItemQuantityByName('q108 Heavy Armor 4 schematic') + ", items " + count + " then " + inv.GetItemCount());
 	if(!had)
 		FactsRemove("sq108_master_bsmith_helped");
 	m.RemoveTag('sq108_blacksmith_woman');
@@ -261,3 +274,27 @@ exec function gmtest_loot07_lists()
 {
 	GMTest_loot07_lists();
 }
+
+// CRAFT-10: an NPC's (by tag) Yoana master stock: the two kits' quantities, the quest-armor schematics,
+// the number of items (for repeated openings of her shop). tagYoana gives the NPC Yoana's quest tag
+// (sq108_blacksmith_woman, which a Yoana spawned from her entity file lacks).
+exec function gmtest_craft10_stock(tag : name, optional tagYoana : bool)
+{
+	var ent : CGameplayEntity;
+	var inv : CInventoryComponent;
+
+	ent = (CGameplayEntity)theGame.GetEntityByTag(tag);
+	if(!ent)
+	{
+		LogChannel('GMTest', "INFO craft10 stock: no entity " + tag);
+		return;
+	}
+	if(tagYoana)
+		ent.AddTag('sq108_blacksmith_woman');
+	inv = ent.GetInventory();
+	LogChannel('GMTest', "INFO craft10 stock " + tag + " (Yoana's tag " + ent.HasTag('sq108_blacksmith_woman') + ", fact " + FactsDoesExist("sq108_master_bsmith_helped") + "): items " + inv.GetItemCount() + ", master armorsmith tools " + inv.GetItemQuantityByName('armor_repair_kit_4')
+		+ ", item dismantle kits " + inv.GetItemQuantityByName('gear_dismantle_kit_1') + ", quest-armor schematics " + inv.GetItemQuantityByName('q108 Light Armor 9 schematic') + "/"
+		+ inv.GetItemQuantityByName('q108 Medium Armor 3 schematic') + "/" + inv.GetItemQuantityByName('q108 Heavy Armor 4 schematic') + "/" + inv.GetItemQuantityByName('Oathbreaker Armor schematic')
+		+ ", Thyssen " + inv.GetItemQuantityByName('Thyssen Armor schematic') + ", Horse Bag 2 " + inv.GetItemQuantityByName('Horse Bag 2'));
+}
+

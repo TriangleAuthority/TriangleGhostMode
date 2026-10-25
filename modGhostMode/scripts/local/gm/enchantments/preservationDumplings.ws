@@ -64,7 +64,7 @@ function SetEffectValue()
 }
 
 // Dumplings on drinks: +100% read from the word's definition, as legacy (5.x read Geralt's attribute,
-// which sums both swords: +200% with Dumplings on both). Connoisseur's alcohol rule stays 5.x's until FOOD.
+// which sums both swords: +200% with Dumplings on both). FOOD-06: Connoisseur's +100% on an alcohol's Well Hydrated.
 // 5.x body; changes marked //modSigns.
 @replaceMethod(W3Effect_WellHydrated)
 function CalculateDuration(optional setInitialDuration : bool)
@@ -74,6 +74,8 @@ function CalculateDuration(optional setInitialDuration : bool)
 	
 	super.CalculateDuration(setInitialDuration);
 	
+	if(isOnPlayer && thePlayer == GetWitcherPlayer() && sourceName == "alcohol")	//modSigns: FOOD-06, Connoisseur: an alcohol's effects last longer
+		duration *= 1 + GetWitcherPlayer().GMConnoisseurDurationBonus();	//modSigns
 	
 	if(isOnPlayer && thePlayer == GetWitcherPlayer() && GetWitcherPlayer().HasRunewordActive('Runeword 6 _Stats'))
 	{

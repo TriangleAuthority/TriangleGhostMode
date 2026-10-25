@@ -243,7 +243,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-19 from the chang
 | Skill trees | n/a |
 | Port form | `@replaceMethod W3RepairObjectEnhancement.OnTimeUpdated` and a scope-based override of its inherited `OnEffectRemoved` (Preservation); `@replaceMethod` of `W3Effect_WellFed.SetEffectValue` and `W3Effect_WellHydrated.SetEffectValue` (5.x's regen multiplier removed) and of `W3Effect_WellHydrated.CalculateDuration` (Dumplings' bonus read from the word's definition, audit F4; `enchantments/preservationDumplings.ws`); Dumplings' value in `gm_ench.xml`; the rest of legacy's food effects (Perk 15, the edible tooltip) with FOOD |
 | Port status | **signed off** (2026-10-19); **ported**, verified in both trees (2026-10-19) |
-| Open checks | a real drink (no item applies Well Hydrated in the port until FOOD: 5.x's drinks give Well Fed); the Armorer's Table; a grindstone buff outlasting its time with Preservation; the tooltip on screen |
+| Open checks | a real drink with Dumplings (drinks give Well Hydrated since FOOD-02; the tooltips' durations are checked by FOOD-08's `gmtest_food08`); the Armorer's Table; a grindstone buff outlasting its time with Preservation; the tooltip on screen |
 | Save impact | none (expected) |
 | NG+ counterpart | applied |
 
@@ -253,7 +253,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-19 from the chang
 
 **Decisions:** DE2 (owner, 2026-10-19): legacy's numbers and mechanics; 5.x's multiplier of food and drink regeneration by Dumplings' bonus is removed (legacy: duration only). Food and drink durations themselves and legacy's other changes to the food effects are FOOD's.
 
-- **Deviation:** the edible tooltip shows Dumplings' bonus only for an edible equipped in a quick slot (5.x); legacy shows it on every edible (temporary, until FOOD, which owns the tooltip code; porter's call, confirmed by the owner, 2026-10-19).
+Dumplings' longer duration shows on every edible's tooltip (legacy), with FOOD-08 ([food.md](food.md#food-08-edible-tooltip), 2026-10-24), which ended the temporary deviation that kept 5.x's quick-slot-only rule.
 
 **Slices:**
 
@@ -665,7 +665,7 @@ Every item other areas handed to ENCH, and where it lands:
 | XP | `q702_03b_wight_disenchanted` reward XP |
 | UI | The recipe part of `W3TooltipComponent.addComponentsInfo`; the Vitality regen attribute names (strings 2110992156, 2110992157); the character panel's lines with the words (legacy `CharacterStatsPopup.ws`: Placation's toxicity, 592; Rotation's Igni damage and burning chance, 726, 746; Retribution's Quen Discharge, 922, 936) and Heft's damage in `GetOffenseStatsList` (legacy `playerWitcher.ws:8988-8992`; audit F6) |
 | FIX | The throw-abort fix in `W3PlayerWitcher.ReactToBeingHit` |
-| FOOD | Food and drink durations Dumplings multiplies (`wellFed`, `wellHydrated`); legacy's drinks giving Well Hydrated (`BeverageQuality_1` to `_3`; 5.x's give Well Fed), which makes Dumplings' Well Hydrated rule (audit F4) act; Dumplings' bonus on every edible's tooltip (`W3TooltipComponent.AddBuffStats`, ENCH-06's temporary deviation; audit F6) |
+| FOOD | Food and drink durations Dumplings multiplies (`wellFed`, `wellHydrated`); legacy's drinks giving Well Hydrated (`BeverageQuality_1` to `_3`; 5.x's give Well Fed), which makes Dumplings' Well Hydrated rule (audit F4) act; Dumplings' bonus on every edible's tooltip (`W3TooltipComponent.AddBuffStats`, ENCH-06's temporary deviation; audit F6) (mapped 2026-10-23: [food.md](food.md) FOOD-01, FOOD-02, FOOD-08) |
 | ALCH | Tawny Owl's level-3 night freeze, which legacy rewrote (`W3Potion_TawnyOwl.OnTimeUpdated`; Prolongation's term is ported on 5.x's; ENCH-09; audit F6) |
 
 ### Save impact

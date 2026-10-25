@@ -378,7 +378,7 @@ Ghost Mode changes that affect stamina but belong to other features. They stay u
 | HORSE | Horse Axii cost (`W3VehicleCombatManagerStateCastSign.HasResourcesForAxii`, `DrainResourcesForAxii`, `StartCastingSign`, `OnEnterState`), no stamina drain on enemies hit from horseback (`DealDamageToHostiles`), horse sprint cost 5 → 7.5 (`def_item_horse.xml` `HorseLevel1`) |
 | EFX | Low stamina raises knockdown severity (`ModifyKnockdownSeverity`) |
 | ITEM, CRAFT | Stamina regen removed from random magical items (`InitPantsAbilities`, `InitBootsAbilities`, `def_item_quality.xml` `MA_StaminaRegeneration`) |
-| FOOD | Drinks' stamina regen (`effects.xml` `WellHydratedEffect_Level*`) |
+| FOOD | Drinks' stamina regen (`effects.xml` `WellHydratedEffect_Level*`; [food.md](food.md) FOOD-01) |
 | TRPH | Trophy stamina regen (`wyvern_mq1051_trophy_stats`, `white_basilisk_trophy_stats`) |
 | FIX | Regen not starting when an ability with a regen stat is added (`W3AbilityManager.OnAbilityChanged`); the fiend's tree (`monster_bies_logic.w2behtree`, legacy's only behaviour-tree edit) gains a close-range melee branch (three attacks within 4 m, melee ticket), the changelist's "Fixed a bug with chorts and fiends not attacking the player"; its attacks use the default cost like any other |
 | DEF | Partial parry damage reduction 50% and the rest of legacy's parry and counter rework (`ProcessAction`, `PerformParryCheck`, `PerformCounterCheck`; already attributed to STAM-03 for its stamina part) |

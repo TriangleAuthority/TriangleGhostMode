@@ -508,3 +508,6 @@
 2110992332|cd3869e4||Equipo de desmontaje alquímico
 2110992333|4d09bbea||Permite desmontar componentes de alquimia.
 2110992334|0544643a||Desmantelar
+; FOOD-06: Connoisseur (the classic perk_15 and the new tree's perk_41), legacy's name and description
+2110992462|dd7afa8f||Connoisseur
+2110992463|754d1895||Reduce la toxicidad del alcohol y los alimentos tóxicos a cero. Elimina el efecto de embriaguez del alcohol. Después de beber una bebida alcohólica, sus bonificaciones duran un $S$% más.

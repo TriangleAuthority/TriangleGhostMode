@@ -1254,7 +1254,7 @@ scripts/game/gameplay/effects/effects/skill/MeltArmorTimer.ws::W3Effect_MeltArmo
 scripts/game/gameplay/effects/effects/skill/BattleTrance.ws::W3Effect_BattleTrance.OnUpdate,SKL-09,Igni Intensity per-adrenaline leftover removed
 scripts/game/gameplay/effects/effects/skill/BattleTrance.ws::W3Effect_BattleTrance.OnEffectAdded,SKL-09,Igni Intensity per-adrenaline leftover removed
 scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.OnSkillEquip,SKL-09 SKL-15 SKL-16 SKL-17 SKL-01,"s07 Concentration leftover removed; other parts: alchemy (s10, s16, s18, s19) and sword-path passives (other SKL agents)"
-scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.OnSkillUnequip,SKL-09 SKL-13 SKL-16 SKL-17 SKL-01 SKL-18,s07 Concentration leftover removed; other parts: alchemy and sword-path passives (other SKL agents)
+scripts/game/gameplay/ability/PlayerAbilityManager.ws::W3PlayerAbilityManager.OnSkillUnequip,SKL-09 SKL-13 SKL-16 SKL-17 SKL-01 SKL-18 FOOD-06,s07 Concentration leftover removed; other parts: alchemy and sword-path passives (other SKL agents)
 scripts/game/gameplay/items/spells/yrdenEntity.ws::W3YrdenEntity.<members>,SKL-10 ALCH-06,"trap/turret stats cached; ENCH Glyphword 15, ARM Griffin radius, ALCH Petri inside; ALCH-06: Petri Philtre T3: Yrden duration"
 scripts/game/gameplay/items/spells/yrdenEntity.ws::W3YrdenEntity.GetCachedYrdenPower,SKL-10 ALCH-06,"trap/turret stats cached; ENCH Glyphword 15, ARM Griffin radius, ALCH Petri inside; ALCH-06: Petri Philtre T3: Yrden duration"
 scripts/game/gameplay/items/spells/yrdenEntity.ws::W3YrdenEntity.GetSignStats,SKL-10 ARM-07 ENCH-15 ALCH-06,"trap/turret stats cached; ENCH Glyphword 15, ARM Griffin radius, ALCH Petri inside; ARM: Gryphon tier 2 Yrden size; ENCH: Entanglement trap values; ALCH-06: Petri Philtre T3: Yrden duration"
@@ -1453,10 +1453,10 @@ files/dlc/ep1/data/gameplay/abilities/geralt_skills_ep1.xml::definitions/abiliti
 files/dlc/ep1/data/gameplay/abilities/geralt_skills_ep1.xml::definitions/abilities/ability:perk_22,SKL-18,Strong Back: encumbrance +60 -> +40 (WGT)
 files/dlc/ep1/data/gameplay/abilities_plus/geralt_skills_ep1.xml::definitions/abilities/ability:perk_19,SKL-18,Battle Frenzy: crit chance per AP 0.08 -> 0.10; NG+
 files/dlc/ep1/data/gameplay/abilities_plus/geralt_skills_ep1.xml::definitions/abilities/ability:perk_22,SKL-18,Strong Back: encumbrance +60 -> +40 (WGT); NG+
-files/dlc/bob/data/gameplay/abilities/geralt_skills_ep2.xml::definitions/abilities/ability:perk_15,SKL-18,Connoisseur (replaces Gourmet): duration 1200 -> duration_bonus 1.0 (alcohol buffs +100%); FOOD
+files/dlc/bob/data/gameplay/abilities/geralt_skills_ep2.xml::definitions/abilities/ability:perk_15,SKL-18 FOOD-06,Connoisseur (replaces Gourmet): duration 1200 -> duration_bonus 1.0 (alcohol buffs +100%); FOOD
 files/dlc/bob/data/gameplay/abilities/geralt_skills_ep2.xml::definitions/abilities/ability:perk_20,SKL-18,"Heavy Artillery: dmg_multiplier 2 -> 1.0 (+100%, additive with the other bomb bonuses)"
 files/dlc/bob/data/gameplay/abilities/geralt_skills_ep2.xml::definitions/abilities/ability:perk_21,SKL-18,"Attack is the Best Defense redone: stamina_kill 15%, stamina_other 5% of max stamina (adrenaline values removed)"
-files/dlc/bob/data/gameplay/abilities_plus/geralt_skills_ep2.xml::definitions/abilities/ability:perk_15,SKL-18,Connoisseur (replaces Gourmet): duration 1200 -> duration_bonus 1.0 (alcohol buffs +100%); FOOD; NG+
+files/dlc/bob/data/gameplay/abilities_plus/geralt_skills_ep2.xml::definitions/abilities/ability:perk_15,SKL-18 FOOD-06,Connoisseur (replaces Gourmet): duration 1200 -> duration_bonus 1.0 (alcohol buffs +100%); FOOD; NG+
 files/dlc/bob/data/gameplay/abilities_plus/geralt_skills_ep2.xml::definitions/abilities/ability:perk_20,SKL-18,"Heavy Artillery: dmg_multiplier 2 -> 1.0 (+100%, additive with the other bomb bonuses); NG+"
 files/dlc/bob/data/gameplay/abilities_plus/geralt_skills_ep2.xml::definitions/abilities/ability:perk_21,SKL-18,"Attack is the Best Defense redone: stamina_kill 15%, stamina_other 5% of max stamina (adrenaline values removed); NG+"
 files/dlc/bob/data/gameplay/abilities/effects_ep2.xml::definitions/abilities/ability:Perk21InternalCooldownEffect,SKL-18,Perk 21 cooldown 5 -> 2.5 s
@@ -1481,14 +1481,14 @@ scripts/game/gui/popups/CharacterStatsPopup.ws::GetEquippedCrossbowDamage,SKL-18
 scripts/game/gameplay/effects/effects/dotEffect.ws::W3DamageOverTimeEffect.OnEffectAdded,SKL-18,Heavy Artillery on bomb DoTs multiplies only the additive value (moved here from criticalDOTEffect)
 scripts/game/gameplay/effects/effects/criticalDOTEffect.ws::W3CriticalDOTEffect.OnEffectAdded,SKL-18,Heavy Artillery DoT bonus moved to the base DoT effect
 scripts/game/player/r4Player.ws::CR4Player.ReduceDamage,SKL-18,"vanilla 50% reduction of damage from Geralt's own bombs removed (""make Perk_16 more valuable"")"
-scripts/game/gameplay/effects/effects/other/wellFed.ws::W3Effect_WellFed.CalculateDuration,SKL-18,Connoisseur: alcohol-sourced Well Fed lasts +100%; FOOD
-scripts/game/gameplay/effects/effects/other/wellFed.ws::W3Effect_WellFed.OnPerk15Unequipped,SKL-18,Connoisseur unequipped: keeps the share of time left
-scripts/game/gameplay/effects/effects/other/wellHydrated.ws::W3Effect_WellHydrated.CalculateDuration,SKL-18 ENCH-06,Connoisseur: alcohol-sourced Well Hydrated lasts +100%; FOOD; ENCH: Dumplings
-scripts/game/gameplay/effects/effects/other/wellHydrated.ws::W3Effect_WellHydrated.OnPerk15Unequipped,SKL-18,Connoisseur unequipped: Well Hydrated keeps the share of time left
-scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddBuffStats,SKL-18 ENCH-06 ALCH-17,alcohol tooltip shows the Connoisseur duration bonus; UI; ENCH: Dumplings shown for any edible; ALCH-17: potion and bomb tooltips; decoction stacks
-scripts/game/gui/inventoryContext.ws::W3InventoryItemContext.HandleUserFeedback,SKL-18,"without Connoisseur, alcohol and raw food need free toxicity; FOOD"
-scripts/game/player/playerWitcher.ws::W3PlayerWitcher.DrinkPotionFromSlot,SKL-18 ALCH-02,"without Connoisseur, alcohol and raw food need free toxicity; also no drinking during special attacks or channelled signs (ALCH/UI); ALCH-02: no drinking during special attacks or channelled signs"
-scripts/game/player/r4Player.ws::CR4Player.ConsumeItem,SKL-18,"without Connoisseur, alcohol and Uncooked food add toxicity and alcohol makes drunk; buff source ""alcohol""; FOOD"
+scripts/game/gameplay/effects/effects/other/wellFed.ws::W3Effect_WellFed.CalculateDuration,SKL-18 FOOD-06,Connoisseur: alcohol-sourced Well Fed lasts +100%; FOOD
+scripts/game/gameplay/effects/effects/other/wellFed.ws::W3Effect_WellFed.OnPerk15Unequipped,SKL-18 FOOD-06,Connoisseur unequipped: keeps the share of time left
+scripts/game/gameplay/effects/effects/other/wellHydrated.ws::W3Effect_WellHydrated.CalculateDuration,SKL-18 ENCH-06 FOOD-06,Connoisseur: alcohol-sourced Well Hydrated lasts +100%; FOOD; ENCH: Dumplings
+scripts/game/gameplay/effects/effects/other/wellHydrated.ws::W3Effect_WellHydrated.OnPerk15Unequipped,SKL-18 FOOD-06,Connoisseur unequipped: Well Hydrated keeps the share of time left
+scripts/game/gui/_old/components/guiTooltipComponent.ws::W3TooltipComponent.AddBuffStats,SKL-18 ENCH-06 ALCH-17 FOOD-08,alcohol tooltip shows the Connoisseur duration bonus; UI; ENCH: Dumplings shown for any edible; ALCH-17: potion and bomb tooltips; decoction stacks
+scripts/game/gui/inventoryContext.ws::W3InventoryItemContext.HandleUserFeedback,SKL-18 FOOD-05 FOOD-06,"without Connoisseur, alcohol and raw food need free toxicity; FOOD"
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.DrinkPotionFromSlot,SKL-18 ALCH-02 FOOD-05 FOOD-06,"without Connoisseur, alcohol and raw food need free toxicity; also no drinking during special attacks or channelled signs (ALCH/UI); ALCH-02: no drinking during special attacks or channelled signs"
+scripts/game/player/r4Player.ws::CR4Player.ConsumeItem,SKL-18 FOOD-05 FOOD-06,"without Connoisseur, alcohol and Uncooked food add toxicity and alcohol makes drunk; buff source ""alcohol""; FOOD"
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.UnequipItemFromSlot,SKL-18 ARM-04 SWD-05 SWD-06,perks 5/6/7 armor count: glyphwords 2/3/4 no longer count pieces as light/medium/heavy (ENCH); ARM: refreshes the generic set bonus; SWD: Aerondight and Iris effects removed on unequip
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.NewGamePlusReplaceEP1,SWD-06 ITEM-04,"NG+: legacy no longer swaps Iris for NGP Olgierd Sabre; kept as 5.x (deviation, SWD audit F3); ITEM: legacy keeps Iris level-scaled in NG+ (the swap commented out, ITEM-04)"
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.NewGamePlusReplaceEP2Items,ITEM-04,"NG+: legacy no longer swaps the q702 vampire armor, gloves, pants, boots and steel sword for their NG+ copies (level-scaled, ITEM-04; CRAFT/LOOT audit F5)"
@@ -1584,8 +1584,8 @@ localization/modGhostMode/br.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/br.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/br.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/br.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/br.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/br.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/br.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -1692,8 +1692,8 @@ localization/modGhostMode/cz.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/cz.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/cz.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/cz.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/cz.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/cz.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/cz.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/cz.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/cz.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/cz.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/cz.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -1800,8 +1800,8 @@ localization/modGhostMode/de.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/de.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/de.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/de.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/de.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/de.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/de.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/de.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/de.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/de.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/de.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -1908,8 +1908,8 @@ localization/modGhostMode/en.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/en.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/en.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/en.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/en.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/en.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/en.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/en.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/en.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/en.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/en.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -2016,8 +2016,8 @@ localization/modGhostMode/es.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/es.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/es.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/es.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/es.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/es.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/es.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/es.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/es.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/es.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/es.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -2123,8 +2123,8 @@ localization/modGhostMode/fr.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/fr.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/fr.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/fr.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/fr.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/fr.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/fr.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/fr.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/fr.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/fr.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/fr.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -2231,8 +2231,8 @@ localization/modGhostMode/it.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/it.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/it.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/it.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/it.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/it.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/it.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/it.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/it.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/it.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/it.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -2339,8 +2339,8 @@ localization/modGhostMode/pl.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/pl.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/pl.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/pl.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/pl.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/pl.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/pl.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/pl.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/pl.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/pl.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/pl.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -2449,8 +2449,8 @@ localization/modGhostMode/ru.csv::row:2110992398,SKL-19,skill_name_perk_21: text
 localization/modGhostMode/ru.csv::row:2110992399,SKL-19,skill_desc_perk_21: text for perk_21; port with that skill's slice
 localization/modGhostMode/ru.csv::row:2110992454,SKL-19,skill_desc_alchemy_s13: text for alchemy_s13; port with that skill's slice
 localization/modGhostMode/ru.csv::row:2110992460,SKL-19,skill_desc_magic_s10_l3: text for magic_s10; port with that skill's slice
-localization/modGhostMode/ru.csv::row:2110992462,SKL-19,skill_name_perk_15: text for perk_15; port with that skill's slice
-localization/modGhostMode/ru.csv::row:2110992463,SKL-19,skill_desc_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/ru.csv::row:2110992462,SKL-19 FOOD-06,skill_name_perk_15: text for perk_15; port with that skill's slice
+localization/modGhostMode/ru.csv::row:2110992463,SKL-19 FOOD-06,skill_desc_perk_15: text for perk_15; port with that skill's slice
 localization/modGhostMode/ru.csv::row:2110992491,SKL-19,skill_desc_perk_16: text for perk_16; port with that skill's slice
 localization/modGhostMode/ru.csv::row:2110992492,SKL-19,skill_desc_alchemy_s7: text for alchemy_s7; port with that skill's slice
 localization/modGhostMode/ru.csv::row:2110992504,SKL-19,skill_name_alchemy_s2: text for alchemy_s2; port with that skill's slice
@@ -12433,8 +12433,8 @@ files/gameplay/items/def_item_character_decorations.xml::definitions/items/item:
 files/gameplay/items/def_item_character_decorations.xml::definitions/items/item:Witch Hunter mask,CRAFT-08,dismantling parts
 files/gameplay/items/def_item_character_decorations.xml::definitions/items/item:mq0004_thalers_monocle_wearable,CRAFT-08,dismantling parts
 files/gameplay/items/def_item_character_decorations.xml::definitions/items/item:mq1013_Pretender pendant,CRAFT-08,dismantling parts
-files/gameplay/items/def_item_edibles.xml::definitions/items/item:Bottled water,CRAFT-08,dismantling parts
-files/gameplay/items/def_item_edibles.xml::definitions/items/item:Free nilfgaardian lemon,CRAFT-07,"a drink instead of the potion-refill alcohol (category, description, tags; CRAFT/LOOT audit F3); drink quality and toxicity: FOOD; weight: WGT"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Bottled water,CRAFT-08 FOOD-04,dismantling parts; FOOD: drink tier BeverageQuality_2 -> _1
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Free nilfgaardian lemon,CRAFT-07 FOOD-04 FOOD-05,"a drink instead of the potion-refill alcohol (category, description, tags; CRAFT/LOOT audit F3); drink quality and toxicity: FOOD; weight: WGT; FOOD: its drink abilities (Well Hydrated 3, Magic rarity, alco_toxicity_strong), 5.x until FOOD (KEEP_5X)"
 files/gameplay/items/def_item_edibles.xml::definitions/items/item:Local pepper vodka,CRAFT-07,"the potion-refill alcohol (StrongAlcohol), an alchemy ingredient: category, description, tags, no drink abilities (CRAFT/LOOT audit F3); price, mod_ tags: ECON; weight: WGT"
 files/gameplay/items/def_item_gloves.xml::definitions/items/item:Ciri gloves 01,CRAFT-08,dismantling parts
 files/gameplay/items/def_item_gloves.xml::definitions/items/item:Gloves 01,CRAFT-08,dismantling parts
@@ -13278,8 +13278,8 @@ files/gameplay/items_plus/def_item_character_decorations.xml::definitions/items/
 files/gameplay/items_plus/def_item_character_decorations.xml::definitions/items/item:Witch Hunter mask,CRAFT-08,dismantling parts; NG+
 files/gameplay/items_plus/def_item_character_decorations.xml::definitions/items/item:mq0004_thalers_monocle_wearable,CRAFT-08,dismantling parts; NG+
 files/gameplay/items_plus/def_item_character_decorations.xml::definitions/items/item:mq1013_Pretender pendant,CRAFT-08,dismantling parts; NG+
-files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Bottled water,CRAFT-08,dismantling parts; NG+
-files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Free nilfgaardian lemon,CRAFT-07,"a drink instead of the potion-refill alcohol (category, description, tags; CRAFT/LOOT audit F3); drink quality and toxicity: FOOD; weight: WGT; NG+"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Bottled water,CRAFT-08 FOOD-04,dismantling parts; NG+; FOOD: drink tier BeverageQuality_2 -> _1
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Free nilfgaardian lemon,CRAFT-07 FOOD-04 FOOD-05,"a drink instead of the potion-refill alcohol (category, description, tags; CRAFT/LOOT audit F3); drink quality and toxicity: FOOD; weight: WGT; NG+; FOOD: its drink abilities (Well Hydrated 3, Magic rarity, alco_toxicity_strong), 5.x until FOOD (KEEP_5X)"
 files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Local pepper vodka,CRAFT-07,"the potion-refill alcohol (StrongAlcohol), an alchemy ingredient: category, description, tags, no drink abilities (CRAFT/LOOT audit F3); price, mod_ tags: ECON; weight: WGT; NG+"
 files/gameplay/items_plus/def_item_gloves.xml::definitions/items/item:Ciri gloves 01,CRAFT-08,dismantling parts; NG+
 files/gameplay/items_plus/def_item_gloves.xml::definitions/items/item:Gloves 01,CRAFT-08,dismantling parts; NG+
@@ -15609,3 +15609,337 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.StandaloneEp2_1,LOOT-09,"B
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.StandaloneEp2_2,LOOT-09,standalone_ep2 fact added once
 files/gameplay/items/def_item_notices.xml::definitions/items/item:mh208_contract,LOOT-08,new item: the mh208 contract notice (no loot or reward in the data places it)
 files/gameplay/items_plus/def_item_notices.xml::definitions/items/item:mh208_contract,LOOT-08,new item: the mh208 contract notice (no loot or reward in the data places it); NG+
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Rivian Kriek,FOOD-04,"tier BeverageQuality_1 -> BeverageQuality_2; rarity Master _Stats; tags -Potion; stack 8 -> 100; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Rivian Kriek,FOOD-04,"tier BeverageQuality_1 -> BeverageQuality_2; rarity Master _Stats; tags -Potion; stack 8 -> 100; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Viziman Champion,FOOD-04,"tier BeverageQuality_1 -> BeverageQuality_2; rarity Master _Stats; stack 5 -> 100; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Viziman Champion,FOOD-04,"tier BeverageQuality_1 -> BeverageQuality_2; rarity Master _Stats; stack 5 -> 100; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Kaedwenian Stout,FOOD-04,"tier BeverageQuality_1 -> BeverageQuality_2; rarity Master _Stats; tags -Potion; stack 9 -> 100; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Kaedwenian Stout,FOOD-04,"tier BeverageQuality_1 -> BeverageQuality_2; rarity Master _Stats; tags -Potion; stack 9 -> 100; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Redanian Lager,FOOD-04,"tier BeverageQuality_1 -> BeverageQuality_2; rarity Master _Stats; tags -Potion; stack 10 -> 100; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Redanian Lager,FOOD-04,"tier BeverageQuality_1 -> BeverageQuality_2; rarity Master _Stats; tags -Potion; stack 10 -> 100; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Dijkstra Dry,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; stack 10 -> 100; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Dijkstra Dry,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; stack 10 -> 100; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Beauclair White,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; stack 18 -> 100; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Beauclair White,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; stack 18 -> 100; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Mettina Rose,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Mettina Rose,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Erveluce,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; stack 35 -> 100; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Erveluce,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; stack 35 -> 100; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Est Est,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; stack 40 -> 100; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Est Est,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; stack 40 -> 100; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Banana,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Banana,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Candy,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Candy,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Fish,FOOD-04 FOOD-05,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_1; toxicity food_toxicity (Uncooked); price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Fish,FOOD-04 FOOD-05,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_1; toxicity food_toxicity (Uncooked); price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Grapes,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Grapes,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Honeycomb,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Honeycomb,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Potatoes,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Potatoes,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Baked apple,FOOD-04,"rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Baked apple,FOOD-04,"rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Baked potato,FOOD-04,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Baked potato,FOOD-04,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Bread,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Bread,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Bun,FOOD-04,"rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Bun,FOOD-04,"rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Butter Bandalura,FOOD-04,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Butter Bandalura,FOOD-04,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Cheese,FOOD-04,"rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Cheese,FOOD-04,"rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Chicken,FOOD-04 FOOD-05,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Chicken,FOOD-04 FOOD-05,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Chicken leg,FOOD-04 FOOD-05,"rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Chicken leg,FOOD-04 FOOD-05,"rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Chips,FOOD-04,"rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Chips,FOOD-04,"rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Dried fruit,FOOD-04,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Dried fruit,FOOD-04,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Dried fruit and nuts,FOOD-04,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Dried fruit and nuts,FOOD-04,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Dumpling,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Dumpling,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Gutted fish,FOOD-04 FOOD-05,"rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Gutted fish,FOOD-04 FOOD-05,"rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Mutton leg,FOOD-04 FOOD-05,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Mutton leg,FOOD-04 FOOD-05,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Pork,FOOD-04 FOOD-05,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Pork,FOOD-04 FOOD-05,"tier FoodEdibleQuality_3 -> FoodEdibleQuality_2; rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Raw meat,FOOD-04 FOOD-05,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Raw meat,FOOD-04 FOOD-05,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Wolf liver,FOOD-04 FOOD-05,"Wolf liver as food: Well Fed 2, Master rarity, raw (Uncooked, food_toxicity); category edibles, the food description and no dismantling parts (legacy moved it from the ingredients; its ingredient unit shares the name, so FOOD-04 carries them: audit F1); price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Wolf liver,FOOD-04 FOOD-05,"Wolf liver as food: Well Fed 2, Master rarity, raw (Uncooked, food_toxicity); category edibles, the food description and no dismantling parts (legacy moved it from the ingredients; its ingredient unit shares the name, so FOOD-04 carries them: audit F1); price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Roasted chicken,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Roasted chicken,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Roasted chicken leg,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Roasted chicken leg,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Chicken sandwich,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Chicken sandwich,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Grilled chicken sandwich,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Grilled chicken sandwich,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Fried fish,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Fried fish,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Fried meat,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Fried meat,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Fondue,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Fondue,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Grilled pork,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Grilled pork,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Ham sandwich,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Ham sandwich,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Mutton curry,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Mutton curry,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Sausages Mod,FOOD-04 FOOD-07,"new cooked dish of a legacy cooking recipe: Well Fed 3, Magic rarity; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Sausages Mod,FOOD-04 FOOD-07,"new cooked dish of a legacy cooking recipe: Well Fed 3, Magic rarity; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Scrambled Eggs Mod,FOOD-04 FOOD-07,"new cooked dish of a legacy cooking recipe: Well Fed 3, Magic rarity; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Scrambled Eggs Mod,FOOD-04 FOOD-07,"new cooked dish of a legacy cooking recipe: Well Fed 3, Magic rarity; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Very good honey,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Very good honey,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Tirnalia potion,FOOD-04,"tier FoodEdibleQuality_1 -> BeverageQuality_1; tags +Drinks, -Fruits; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Tirnalia potion,FOOD-04,"tier FoodEdibleQuality_1 -> BeverageQuality_1; tags +Drinks, -Fruits; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Apple juice,FOOD-04,"tier BeverageQuality_3 -> BeverageQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Apple juice,FOOD-04,"tier BeverageQuality_3 -> BeverageQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Raspberry juice,FOOD-04,"rarity Master _Stats; tags -Potion; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Raspberry juice,FOOD-04,"rarity Master _Stats; tags -Potion; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Cows milk,FOOD-04,"tier BeverageQuality_2 -> BeverageQuality_3; rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Cows milk,FOOD-04,"tier BeverageQuality_2 -> BeverageQuality_3; rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Goats milk,FOOD-04,"tier BeverageQuality_2 -> BeverageQuality_3; rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Goats milk,FOOD-04,"tier BeverageQuality_2 -> BeverageQuality_3; rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Free roasted chicken leg,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Free roasted chicken leg,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Bourgogne chardonnay,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Bourgogne chardonnay,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Chateau mont valjean,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Chateau mont valjean,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Bourgogne pinot noir,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Bourgogne pinot noir,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Saint mathieu rouge,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Saint mathieu rouge,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Duke nicolas chardonnay,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Duke nicolas chardonnay,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Uncle toms exquisite blanc,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Uncle toms exquisite blanc,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Chevalier adam pinot blanc reserve,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Chevalier adam pinot blanc reserve,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Prince john merlot,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Prince john merlot,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Count var ochmann shiraz,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Count var ochmann shiraz,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Chateau de konrad cabernet,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Chateau de konrad cabernet,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Geralt de rivia,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Geralt de rivia,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:White Wolf,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:White Wolf,FOOD-04 FOOD-05,"tier BeverageQuality_1 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Butcher of Blaviken,FOOD-04 FOOD-05,"tier BeverageQuality_2 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Butcher of Blaviken,FOOD-04 FOOD-05,"tier BeverageQuality_2 -> BeverageQuality_3; toxicity alco_toxicity_strong; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Cookies,FOOD-04,"tier FoodEdibleQuality_1+BeverageQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Cookies,FOOD-04,"tier FoodEdibleQuality_1+BeverageQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Ginger Bread,FOOD-04,"tier FoodEdibleQuality_1+BeverageQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Ginger Bread,FOOD-04,"tier FoodEdibleQuality_1+BeverageQuality_2 -> FoodEdibleQuality_1; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Camembert,FOOD-04,"rarity Master _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Camembert,FOOD-04,"rarity Master _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Chocolate souffle,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Chocolate souffle,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Crossaint honey,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Crossaint honey,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Flamiche,FOOD-04,"rarity Master _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Flamiche,FOOD-04,"rarity Master _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Herb toasts,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Herb toasts,FOOD-04,"tier FoodEdibleQuality_1 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Onion soup,FOOD-04,"tier FoodEdibleQuality_1+BeverageQuality_2 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Onion soup,FOOD-04,"tier FoodEdibleQuality_1+BeverageQuality_2 -> FoodEdibleQuality_2; rarity Master _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Pheasant gutted,FOOD-04 FOOD-05,"rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Pheasant gutted,FOOD-04 FOOD-05,"rarity Master _Stats; toxicity food_toxicity (Uncooked); price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Ratatouille,FOOD-04,"rarity Master _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Ratatouille,FOOD-04,"rarity Master _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Tarte tatin,FOOD-04,"rarity Master _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Tarte tatin,FOOD-04,"rarity Master _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Baguette camembert,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Baguette camembert,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Baguette fish paste,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Baguette fish paste,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Boeuf bourguignon,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Boeuf bourguignon,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Confit de canard,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Confit de canard,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Fish tarte,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Fish tarte,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Ham roasted,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Ham roasted,FOOD-04,"rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Pate chicken livers,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Pate chicken livers,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Rillettes porc,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Rillettes porc,FOOD-04,"tier FoodEdibleQuality_2 -> FoodEdibleQuality_3; rarity Magic _Stats; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Magic Mushrooms,FOOD-04,"rarity Relic _Stats; tags -Potion; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Magic Mushrooms,FOOD-04,"rarity Relic _Stats; tags -Potion; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Poison Apple,FOOD-04,"rarity Relic _Stats; tags -Potion; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Poison Apple,FOOD-04,"rarity Relic _Stats; tags -Potion; price ECON, weight WGT; NG+"
+files/dlc/bob/data/gameplay/items/def_item_edibles.xml::definitions/items/item:Magic food,FOOD-04,"rarity Relic _Stats; price ECON, weight WGT"
+files/dlc/bob/data/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Magic food,FOOD-04,"rarity Relic _Stats; price ECON, weight WGT; NG+"
+files/dlc/ep1/data/gameplay/items/def_item_quest.xml::definitions/items/item:Soltis Vodka,FOOD-04 FOOD-05,"tier - -> BeverageQuality_3; toxicity alco_toxicity_strong; tags +Drinks, +Edibles; price ECON, weight WGT"
+files/dlc/ep1/data/gameplay/items_plus/def_item_quest.xml::definitions/items/item:Soltis Vodka,FOOD-04 FOOD-05,"tier - -> BeverageQuality_3; toxicity alco_toxicity_strong; tags +Drinks, +Edibles; price ECON, weight WGT; NG+"
+files/dlc/ep1/data/gameplay/items/def_item_quest.xml::definitions/items/item:Cornucopia,FOOD-04,"tags -Potion; price ECON, weight WGT"
+files/dlc/ep1/data/gameplay/items_plus/def_item_quest.xml::definitions/items/item:Cornucopia,FOOD-04,"tags -Potion; price ECON, weight WGT; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/abilities/ability:BeverageQuality_1,FOOD-02,drinks give Well Hydrated (WellHydratedEffect_Level1) instead of Well Fed
+files/gameplay/items_plus/def_item_edibles.xml::definitions/abilities/ability:BeverageQuality_1,FOOD-02,drinks give Well Hydrated (WellHydratedEffect_Level1) instead of Well Fed; NG+
+files/gameplay/items/def_item_edibles.xml::definitions/abilities/ability:BeverageQuality_2,FOOD-02,drinks give Well Hydrated (WellHydratedEffect_Level2) instead of Well Fed
+files/gameplay/items_plus/def_item_edibles.xml::definitions/abilities/ability:BeverageQuality_2,FOOD-02,drinks give Well Hydrated (WellHydratedEffect_Level2) instead of Well Fed; NG+
+files/gameplay/items/def_item_edibles.xml::definitions/abilities/ability:BeverageQuality_3,FOOD-02,drinks give Well Hydrated (WellHydratedEffect_Level3) instead of Well Fed
+files/gameplay/items_plus/def_item_edibles.xml::definitions/abilities/ability:BeverageQuality_3,FOOD-02,drinks give Well Hydrated (WellHydratedEffect_Level3) instead of Well Fed; NG+
+files/gameplay/items/def_item_edibles.xml::definitions/abilities/ability:alco_toxicity,FOOD-05,"alcohol toxicity 0 -> 5, duration 10 -> 0"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/abilities/ability:alco_toxicity,FOOD-05,"alcohol toxicity 0 -> 5, duration 10 -> 0; NG+"
+files/gameplay/items/def_item_edibles.xml::definitions/abilities/ability:alco_toxicity_strong,FOOD-05,new: strong alcohol toxicity 10
+files/gameplay/items_plus/def_item_edibles.xml::definitions/abilities/ability:alco_toxicity_strong,FOOD-05,new: strong alcohol toxicity 10; NG+
+files/gameplay/items/def_item_edibles.xml::definitions/abilities/ability:food_toxicity,FOOD-05,new: raw food toxicity 5
+files/gameplay/items_plus/def_item_edibles.xml::definitions/abilities/ability:food_toxicity,FOOD-05,new: raw food toxicity 5; NG+
+files/gameplay/abilities/effects.xml::definitions/abilities/ability:WellFedEffect_Level1,FOOD-01,"Well Fed: 60 s, 10/20/30 Vitality/s out of combat, 1/5/10 in combat"
+files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:WellFedEffect_Level1,FOOD-01,"Well Fed: 60 s, 10/20/30 Vitality/s out of combat, 1/5/10 in combat; NG+"
+files/gameplay/abilities/effects.xml::definitions/abilities/ability:WellHydratedEffect_Level1,FOOD-01,"Well Hydrated: 60 s, 5/10/20 Vitality/s out of combat, 1/5/10 in combat, +1/2/3% stamina regen"
+files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:WellHydratedEffect_Level1,FOOD-01,"Well Hydrated: 60 s, 5/10/20 Vitality/s out of combat, 1/5/10 in combat, +1/2/3% stamina regen; NG+"
+files/gameplay/abilities/effects.xml::definitions/abilities/ability:WellFedEffect_Level2,FOOD-01,"Well Fed: 60 s, 10/20/30 Vitality/s out of combat, 1/5/10 in combat"
+files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:WellFedEffect_Level2,FOOD-01,"Well Fed: 60 s, 10/20/30 Vitality/s out of combat, 1/5/10 in combat; NG+"
+files/gameplay/abilities/effects.xml::definitions/abilities/ability:WellHydratedEffect_Level2,FOOD-01,"Well Hydrated: 60 s, 5/10/20 Vitality/s out of combat, 1/5/10 in combat, +1/2/3% stamina regen"
+files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:WellHydratedEffect_Level2,FOOD-01,"Well Hydrated: 60 s, 5/10/20 Vitality/s out of combat, 1/5/10 in combat, +1/2/3% stamina regen; NG+"
+files/gameplay/abilities/effects.xml::definitions/abilities/ability:WellFedEffect_Level3,FOOD-01,"Well Fed: 60 s, 10/20/30 Vitality/s out of combat, 1/5/10 in combat"
+files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:WellFedEffect_Level3,FOOD-01,"Well Fed: 60 s, 10/20/30 Vitality/s out of combat, 1/5/10 in combat; NG+"
+files/gameplay/abilities/effects.xml::definitions/abilities/ability:WellHydratedEffect_Level3,FOOD-01,"Well Hydrated: 60 s, 5/10/20 Vitality/s out of combat, 1/5/10 in combat, +1/2/3% stamina regen"
+files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:WellHydratedEffect_Level3,FOOD-01,"Well Hydrated: 60 s, 5/10/20 Vitality/s out of combat, 1/5/10 in combat, +1/2/3% stamina regen; NG+"
+files/gameplay/abilities/effects.xml::definitions/abilities/ability:DrunkennessEffect,FOOD-05,drunkenness 30 -> 60 s
+files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:DrunkennessEffect,FOOD-05,drunkenness 30 -> 60 s; NG+
+files/dlc/ep1/data/gameplay/abilities/effects.xml::definitions/abilities/ability:WellFedEffect_Cornucopia,FOOD-01,"Cornucopia: 30 s, 15/15 Vitality/s (1.32: 5 s, 40/25)"
+files/dlc/ep1/data/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:WellFedEffect_Cornucopia,FOOD-01,"Cornucopia: 30 s, 15/15 Vitality/s (1.32: 5 s, 40/25); NG+"
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Baked apple,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Baked potato,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Chicken leg,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Gutted fish,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Roasted chicken,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Roasted chicken leg,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Chicken sandwich,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Grilled chicken sandwich,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Fried fish,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Fried meat,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Fondue,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Grilled pork,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Ham sandwich,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Mutton curry,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Sausages,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Scrambled egg,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Apple juice,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Raspberry juice,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Chocolate souffle,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Crossaint honey,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Flamiche,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Onion soup,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Ratatouille,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Tarte tatin,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Baguette camembert,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Boeuf bourguignon,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Fish tarte,FOOD-07,new cooking recipe item; price ECON
+files/gameplay/items/def_item_cooking_recipes.xml::custom,FOOD-07,the new alchemy_recipes block of the cooking recipes
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Baked apple,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Baked potato,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Chicken leg,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Gutted fish,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Roasted chicken,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Roasted chicken leg,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Chicken sandwich,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Grilled chicken sandwich,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Fried fish,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Fried meat,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Fondue,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Grilled pork,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Ham sandwich,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Mutton curry,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Sausages,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Scrambled egg,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Apple juice,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Raspberry juice,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Chocolate souffle,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Crossaint honey,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Flamiche,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Onion soup,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Ratatouille,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Tarte tatin,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Baguette camembert,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Boeuf bourguignon,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Fish tarte,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles)
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Baked apple,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Baked potato,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Chicken leg,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Gutted fish,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Roasted chicken,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Roasted chicken leg,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Chicken sandwich,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Grilled chicken sandwich,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Fried fish,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Fried meat,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Fondue,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Grilled pork,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Ham sandwich,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Mutton curry,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Sausages,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Scrambled egg,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Apple juice,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Raspberry juice,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Chocolate souffle,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Crossaint honey,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Flamiche,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Onion soup,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Ratatouille,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Tarte tatin,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Baguette camembert,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Boeuf bourguignon,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::definitions/items/item:Recipe for Fish tarte,FOOD-07,new cooking recipe item; price ECON; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom,FOOD-07,the new alchemy_recipes block of the cooking recipes; NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Baked apple,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Baked potato,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Chicken leg,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Gutted fish,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Roasted chicken,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Roasted chicken leg,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Chicken sandwich,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Grilled chicken sandwich,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Fried fish,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Fried meat,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Fondue,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Grilled pork,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Ham sandwich,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Mutton curry,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Sausages,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Scrambled egg,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Apple juice,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Raspberry juice,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Chocolate souffle,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Crossaint honey,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Flamiche,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Onion soup,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Ratatouille,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Tarte tatin,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Baguette camembert,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Boeuf bourguignon,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+files/gameplay/items_plus/def_item_cooking_recipes.xml::custom/alchemy_recipes/recipe:Recipe for Fish tarte,FOOD-07,new cooking recipe (an alchemy recipe of cooked type edibles); NG+
+scripts/game/gameplay/alchemy/alchemyManager.ws::W3AlchemyManager.CookItem,FOOD-07,cooked edibles in the recipe quantity
+scripts/game/gameplay/alchemy/alchemyTypes.ws::EAlchemyCookedItemType,FOOD-07,EACIT_Edibles
+scripts/game/gameplay/alchemy/alchemyTypes.ws::AlchemyCookedItemTypeStringToEnum,FOOD-07,EACIT_Edibles
+scripts/game/gameplay/alchemy/alchemyTypes.ws::AlchemyCookedItemTypeEnumToName,FOOD-07,EACIT_Edibles
+scripts/game/gameplay/alchemy/alchemyTypes.ws::AlchemyCookedItemTypeToLocKey,FOOD-07,EACIT_Edibles
+scripts/debug/console_debug.ws::addrecipesedibles,FOOD-07,debug command: every cooking recipe
+scripts/game/gameplay/effects/effects/other/wellHydrated.ws::W3Effect_WellHydrated.GetSelfInteraction,FOOD-03,Well Fed level rule with a cast to W3Effect_WellFed: a new drink always replaces Well Hydrated (DF6)
+scripts/game/gameplay/effects/effects/other/wellHydrated.ws::W3Effect_WellHydrated.CacheSettings,FOOD-03,level cache removed (the level is read from the ability)
+scripts/game/gameplay/ability/abilityManager.ws::W3AbilityManager.OnAbilityChanged,FOOD-03,an ability changing a Vitality or stamina regen stat restarts the auto regen
+localization/modGhostMode/br.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+localization/modGhostMode/cz.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+localization/modGhostMode/de.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+localization/modGhostMode/en.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+localization/modGhostMode/es.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+localization/modGhostMode/fr.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+localization/modGhostMode/it.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+localization/modGhostMode/pl.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+localization/modGhostMode/ru.csv::row:2110992352,FOOD-08,attribute_name_staminaRestore: read by no legacy script or data (UI hand-off): dropped
+files/gameplay/items/def_item_edibles.xml::definitions/items/item:Bell pepper,FOOD-04,"icon fix (food_bell_pepper), also made by 5.x (with its own name key): nothing to port; price ECON, weight WGT"
+files/gameplay/items_plus/def_item_edibles.xml::definitions/items/item:Bell pepper,FOOD-04,"icon fix (food_bell_pepper), also made by 5.x (with its own name key): nothing to port; price ECON, weight WGT; NG+"

@@ -51,6 +51,17 @@
         <focus_gain type="add" min="0.05" />
         <stamina_cost_reduction type="add" min="0.1" />
       </ability>
+      <!-- FOOD-06 (DF7): Connoisseur, legacy's perk_15, in both trees (the new tree's on perk_41, 1 level): an
+           alcohol's effects last 100% longer; no toxicity or drunkenness from alcohol and raw food (food/*.ws).
+           Given whole: 5.x's Gourmet (20 minutes) and Gourmand (5 minutes per level) go -->
+      <ability name="perk_15" on_conflict="replace">
+        <tags>perk_15</tags>
+        <duration_bonus type="mult" min="1.0" />
+      </ability>
+      <ability name="perk_41" on_conflict="replace">
+        <tags>perk_41</tags>
+        <duration_bonus type="mult" min="1.0" />
+      </ability>
       <!-- Focus (D40): +15% sign intensity per adrenaline point (5.x: 10%; skills/focusPerk.ws) -->
       <ability name="perk_11" on_conflict="extend">
         <spell_power type="mult" min="0.15" />
@@ -478,7 +489,7 @@
         <skill skill_name="perk_38" maxLevel="1" />
         <skill skill_name="perk_39" maxLevel="1" />
         <skill skill_name="perk_40" maxLevel="1" />
-        <skill skill_name="perk_41" maxLevel="1" />
+        <skill skill_name="perk_41" maxLevel="1" localisationName="skill_name_perk_15" />
         <skill skill_name="perk_42" maxLevel="1" />
         <skill skill_name="perk_43" maxLevel="1" localisationName="skill_name_perk_14" />
         <skill skill_name="perk_44" maxLevel="1" localisationName="skill_name_perk_16" />

@@ -122,8 +122,8 @@ def known_items():
 
 
 WORKTREE = [os.path.join(REPO, "..", "TGM-5x-GM")]
-# Entries naming items no definition has yet: FOOD's new cooking recipes (innkeepers and butchers sell
-# them in legacy), left out until FOOD defines them (temporary deviation, loot.md LOOT-01).
+# Entries naming a recipe item no definition has are left out (none since FOOD-07 defined the cooking
+# recipes, 2026-10-24; legacy's lists never name Butter Bandalura's commented-out recipe).
 PENDING = re.compile(r'^Recipe for ')
 
 

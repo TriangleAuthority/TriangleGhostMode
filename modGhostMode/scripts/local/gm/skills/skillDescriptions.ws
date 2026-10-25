@@ -723,10 +723,11 @@ function GMPerkDescription(skill : ESkill, lvl : int) : string
 		case S_Perk_14:
 		case S_Perk_43:
 			return GetLocStringByKeyExt("skill_desc_perk_14");
-		// Gourmet: 5.x's perk until Connoisseur is ported (FOOD); its argument, which 5.x's new menu lacks
+		// Connoisseur (FOOD-06; the new tree's on perk_41): legacy's text, the alcohol bonus in percent
 		case S_Perk_15:
-			min = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_15, 'duration', false, false);
-			a.PushBack(GMDescNum(min.valueAdditive / 60, 0));
+		case S_Perk_41:
+			min = GetWitcherPlayer().GetSkillAttributeValue(skill, 'duration_bonus', false, false);
+			a.PushBack(GMDescNum(min.valueMultiplicative * 100, 0));
 			return GetLocStringByKeyExtWithParams("skill_desc_perk_15", , , a);
 		// In Combat's Fires (the new tree's on perk_44, D38, D61)
 		case S_Perk_16:
