@@ -2170,6 +2170,11 @@ exec function gmtest_regress()
 	GMTest_alchport();
 	GMTest_uiport();
 	GMTest_food();
+	GMTest_efx01();
+	GMTest_efx02();
+	GMTest_efx04();
+	GMTest_efx08();
+	GMTest_efx11();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

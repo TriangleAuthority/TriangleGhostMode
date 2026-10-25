@@ -32,7 +32,10 @@ STATS = ([("armor", "add", BIG)]
          + [(n, "add", SMALL) for n in DOT_PERC]
          + [("vitality", "add", BIG), ("essence", "add", BIG),
             ("attack_power", "mult", SMALL), ("damage_final_multiplier", "add", SMALL),
-            ("critical_hit_damage_reduction", "mult", SMALL)])
+            ("critical_hit_damage_reduction", "mult", SMALL)]
+         # The point names of bleeding, will and burning resistance, which only Ghost Mode's EFX-08
+         # makes the game read (after the others, so the earlier stats keep their order).
+         + [(t + "_resistance", "add", BIG) for t in ["bleeding", "will", "burning"]])
 
 
 def tag(x):

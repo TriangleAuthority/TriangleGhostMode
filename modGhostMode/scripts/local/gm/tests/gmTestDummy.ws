@@ -167,6 +167,8 @@ function GMTestDummyStats() : array<name>
 	s.PushBack('bleeding_DoT_damage_resistance_perc');
 	s.PushBack('vitality'); s.PushBack('essence'); s.PushBack('attack_power'); s.PushBack('damage_final_multiplier');
 	s.PushBack('critical_hit_damage_reduction');
+	// The point names of bleeding, will and burning resistance (counted with EFX-08).
+	s.PushBack('bleeding_resistance'); s.PushBack('will_resistance'); s.PushBack('burning_resistance');
 	return s;
 }
 

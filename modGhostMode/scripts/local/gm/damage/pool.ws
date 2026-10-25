@@ -6,14 +6,18 @@ var gmPoolAll : float;
 var gmPoolNonPhysical : float;
 @addField(W3DamageManagerProcessor)
 var gmPoolPoison : float;
+@addField(W3DamageManagerProcessor)
+var gmFrozenForceDamage : float;	// EFX-02: Aard's force damage on a frozen victim, added after the pool
 
 // Multiplies every damage type once by 1 + the pool (for non-physical types also their own terms,
-// for poison too), then clears the pool.
+// for poison too), then clears the pool. EFX-02: then adds Aard's force damage on a frozen victim to the
+// action's force damage, or as a new one (legacy's order: the frozen bonus does not multiply it).
 @addMethod(W3DamageManagerProcessor)
 function GMPoolApply(out dmgInfos : array< SRawDamage >)
 {
-	var i : int;
+	var i, forceIdx : int;
 	var sum : float;
+	var forceDmg : SRawDamage;
 
 	for(i = 0; i < dmgInfos.Size(); i += 1)
 	{
@@ -25,6 +29,22 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 		if(sum != 0)
 			dmgInfos[i].dmgVal *= 1 + sum;
 	}
+	if(gmFrozenForceDamage > 0)
+	{
+		forceIdx = -1;
+		for(i = 0; i < dmgInfos.Size(); i += 1)
+			if(dmgInfos[i].dmgType == theGame.params.DAMAGE_NAME_FORCE)
+				forceIdx = i;
+		if(forceIdx != -1)
+			dmgInfos[forceIdx].dmgVal += gmFrozenForceDamage;
+		else
+		{
+			forceDmg.dmgType = theGame.params.DAMAGE_NAME_FORCE;
+			forceDmg.dmgVal = gmFrozenForceDamage;
+			dmgInfos.PushBack(forceDmg);
+		}
+	}
+	gmFrozenForceDamage = 0;
 	gmPoolAll = 0;
 	gmPoolNonPhysical = 0;
 	gmPoolPoison = 0;
@@ -39,9 +59,10 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 // 5.x checks it in ReduceDamage, too late). 5.x's own versions of legacy's other terms (Rend, Perk 20;
 // the Lynx and Netflix sets' are gone, ARM-06, ARM-15, Runeword 4's ENCH-05, Aerondight's SWD-05) are pool terms until their areas port legacy's.
 // SWD-07: the NG+ school swords' sword_dmg_bonus (melee) and spell_dmg_bonus (signs), legacy's pool terms.
-// ALCH-14 (audit F2): a frozen target's bonus (hpPercDamageBonusPerHit: Northern Wind +25/35/50%) is a pool
-// term, legacy's, instead of 5.x's separate frost hit; 5.x's knockdown stays (legacy's removal of it and its
-// Aard force damage are EFX's).
+// ALCH-14 (audit F2): a frozen target's bonus (hpPercDamageBonusPerHit: Northern Wind +25/35/50%, the
+// generic FrozenEffect +50%, EFX-02) is a pool term, legacy's, instead of 5.x's separate frost hit.
+// EFX-02: the shattering hit no longer knocks down (5.x's knockdown applicator removed), and an Aard hit
+// adds 5% of the victim's maximum health as force damage after the pool (legacy).
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 {
@@ -111,8 +132,11 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 		poolAll += frozenBuff.GetAdditionalDamagePercents();	//modSigns: hpPercDamageBonusPerHit (Northern Wind +25/35/50%), legacy's dmgBonusMult
 
 
+		if( (W3AardProjectile)action.causer || (W3AardEntity)action.causer )	//modSigns: EFX-02, Aard: 5% of the victim's maximum health as force damage (legacy)
+			gmFrozenForceDamage = 0.05 * actorVictim.GetMaxHealth();	//modSigns: added after the pool (GMPoolApply), so the bonus does not multiply it
+
 		actorVictim.RemoveAllBuffsOfType(EET_Frozen);
-		action.AddEffectInfo(EET_KnockdownTypeApplicator);	//modSigns: 5.x's knockdown kept (legacy removed it; left to EFX with the Aard bonus)
+		//modSigns: removed 5.x's knockdown on the shattering hit (EFX-02, legacy: "remove knockdown, make it to multiply the damage instead")
 
 
 		//modSigns: removed 5.x's separate frost hit of the bonus x the victim's current health (ALCH-14, audit F2)

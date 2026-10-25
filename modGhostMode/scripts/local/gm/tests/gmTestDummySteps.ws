@@ -40,6 +40,9 @@ function GMTestDummySteps(stat : name, negative : bool, out names : array<name>,
 	if(stat == 'attack_power') { GMTestDummySteps31(negative, names, scales); return; }
 	if(stat == 'damage_final_multiplier') { GMTestDummySteps32(negative, names, scales); return; }
 	if(stat == 'critical_hit_damage_reduction') { GMTestDummySteps33(negative, names, scales); return; }
+	if(stat == 'bleeding_resistance') { GMTestDummySteps34(negative, names, scales); return; }
+	if(stat == 'will_resistance') { GMTestDummySteps35(negative, names, scales); return; }
+	if(stat == 'burning_resistance') { GMTestDummySteps36(negative, names, scales); return; }
 }
 
 function GMTestDummySteps0(negative : bool, out names : array<name>, out scales : array<float>)
@@ -544,4 +547,52 @@ function GMTestDummySteps33(negative : bool, out names : array<name>, out scales
 	scales.PushBack(0.001);
 	if(negative) names.PushBack('GMTD_critical_hit_damage_reduction_n0.0001'); else names.PushBack('GMTD_critical_hit_damage_reduction_p0.0001');
 	scales.PushBack(0.0001);
+}
+
+function GMTestDummySteps34(negative : bool, out names : array<name>, out scales : array<float>)
+{
+	if(negative) names.PushBack('GMTD_bleeding_resistance_n1000'); else names.PushBack('GMTD_bleeding_resistance_p1000');
+	scales.PushBack(1000);
+	if(negative) names.PushBack('GMTD_bleeding_resistance_n100'); else names.PushBack('GMTD_bleeding_resistance_p100');
+	scales.PushBack(100);
+	if(negative) names.PushBack('GMTD_bleeding_resistance_n10'); else names.PushBack('GMTD_bleeding_resistance_p10');
+	scales.PushBack(10);
+	if(negative) names.PushBack('GMTD_bleeding_resistance_n1'); else names.PushBack('GMTD_bleeding_resistance_p1');
+	scales.PushBack(1);
+	if(negative) names.PushBack('GMTD_bleeding_resistance_n0.1'); else names.PushBack('GMTD_bleeding_resistance_p0.1');
+	scales.PushBack(0.1);
+	if(negative) names.PushBack('GMTD_bleeding_resistance_n0.01'); else names.PushBack('GMTD_bleeding_resistance_p0.01');
+	scales.PushBack(0.01);
+}
+
+function GMTestDummySteps35(negative : bool, out names : array<name>, out scales : array<float>)
+{
+	if(negative) names.PushBack('GMTD_will_resistance_n1000'); else names.PushBack('GMTD_will_resistance_p1000');
+	scales.PushBack(1000);
+	if(negative) names.PushBack('GMTD_will_resistance_n100'); else names.PushBack('GMTD_will_resistance_p100');
+	scales.PushBack(100);
+	if(negative) names.PushBack('GMTD_will_resistance_n10'); else names.PushBack('GMTD_will_resistance_p10');
+	scales.PushBack(10);
+	if(negative) names.PushBack('GMTD_will_resistance_n1'); else names.PushBack('GMTD_will_resistance_p1');
+	scales.PushBack(1);
+	if(negative) names.PushBack('GMTD_will_resistance_n0.1'); else names.PushBack('GMTD_will_resistance_p0.1');
+	scales.PushBack(0.1);
+	if(negative) names.PushBack('GMTD_will_resistance_n0.01'); else names.PushBack('GMTD_will_resistance_p0.01');
+	scales.PushBack(0.01);
+}
+
+function GMTestDummySteps36(negative : bool, out names : array<name>, out scales : array<float>)
+{
+	if(negative) names.PushBack('GMTD_burning_resistance_n1000'); else names.PushBack('GMTD_burning_resistance_p1000');
+	scales.PushBack(1000);
+	if(negative) names.PushBack('GMTD_burning_resistance_n100'); else names.PushBack('GMTD_burning_resistance_p100');
+	scales.PushBack(100);
+	if(negative) names.PushBack('GMTD_burning_resistance_n10'); else names.PushBack('GMTD_burning_resistance_p10');
+	scales.PushBack(10);
+	if(negative) names.PushBack('GMTD_burning_resistance_n1'); else names.PushBack('GMTD_burning_resistance_p1');
+	scales.PushBack(1);
+	if(negative) names.PushBack('GMTD_burning_resistance_n0.1'); else names.PushBack('GMTD_burning_resistance_p0.1');
+	scales.PushBack(0.1);
+	if(negative) names.PushBack('GMTD_burning_resistance_n0.01'); else names.PushBack('GMTD_burning_resistance_p0.01');
+	scales.PushBack(0.01);
 }

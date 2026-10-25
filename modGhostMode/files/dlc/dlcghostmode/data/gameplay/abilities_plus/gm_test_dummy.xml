@@ -373,6 +373,42 @@
       <ability name="GMTD_critical_hit_damage_reduction_n0.001"><critical_hit_damage_reduction type="mult" always_random="false" min="-0.001" max="-0.001" /></ability>
       <ability name="GMTD_critical_hit_damage_reduction_p0.0001"><critical_hit_damage_reduction type="mult" always_random="false" min="0.0001" max="0.0001" /></ability>
       <ability name="GMTD_critical_hit_damage_reduction_n0.0001"><critical_hit_damage_reduction type="mult" always_random="false" min="-0.0001" max="-0.0001" /></ability>
+      <ability name="GMTD_bleeding_resistance_p1000"><bleeding_resistance type="add" always_random="false" min="1000" max="1000" /></ability>
+      <ability name="GMTD_bleeding_resistance_n1000"><bleeding_resistance type="add" always_random="false" min="-1000" max="-1000" /></ability>
+      <ability name="GMTD_bleeding_resistance_p100"><bleeding_resistance type="add" always_random="false" min="100" max="100" /></ability>
+      <ability name="GMTD_bleeding_resistance_n100"><bleeding_resistance type="add" always_random="false" min="-100" max="-100" /></ability>
+      <ability name="GMTD_bleeding_resistance_p10"><bleeding_resistance type="add" always_random="false" min="10" max="10" /></ability>
+      <ability name="GMTD_bleeding_resistance_n10"><bleeding_resistance type="add" always_random="false" min="-10" max="-10" /></ability>
+      <ability name="GMTD_bleeding_resistance_p1"><bleeding_resistance type="add" always_random="false" min="1" max="1" /></ability>
+      <ability name="GMTD_bleeding_resistance_n1"><bleeding_resistance type="add" always_random="false" min="-1" max="-1" /></ability>
+      <ability name="GMTD_bleeding_resistance_p0.1"><bleeding_resistance type="add" always_random="false" min="0.1" max="0.1" /></ability>
+      <ability name="GMTD_bleeding_resistance_n0.1"><bleeding_resistance type="add" always_random="false" min="-0.1" max="-0.1" /></ability>
+      <ability name="GMTD_bleeding_resistance_p0.01"><bleeding_resistance type="add" always_random="false" min="0.01" max="0.01" /></ability>
+      <ability name="GMTD_bleeding_resistance_n0.01"><bleeding_resistance type="add" always_random="false" min="-0.01" max="-0.01" /></ability>
+      <ability name="GMTD_will_resistance_p1000"><will_resistance type="add" always_random="false" min="1000" max="1000" /></ability>
+      <ability name="GMTD_will_resistance_n1000"><will_resistance type="add" always_random="false" min="-1000" max="-1000" /></ability>
+      <ability name="GMTD_will_resistance_p100"><will_resistance type="add" always_random="false" min="100" max="100" /></ability>
+      <ability name="GMTD_will_resistance_n100"><will_resistance type="add" always_random="false" min="-100" max="-100" /></ability>
+      <ability name="GMTD_will_resistance_p10"><will_resistance type="add" always_random="false" min="10" max="10" /></ability>
+      <ability name="GMTD_will_resistance_n10"><will_resistance type="add" always_random="false" min="-10" max="-10" /></ability>
+      <ability name="GMTD_will_resistance_p1"><will_resistance type="add" always_random="false" min="1" max="1" /></ability>
+      <ability name="GMTD_will_resistance_n1"><will_resistance type="add" always_random="false" min="-1" max="-1" /></ability>
+      <ability name="GMTD_will_resistance_p0.1"><will_resistance type="add" always_random="false" min="0.1" max="0.1" /></ability>
+      <ability name="GMTD_will_resistance_n0.1"><will_resistance type="add" always_random="false" min="-0.1" max="-0.1" /></ability>
+      <ability name="GMTD_will_resistance_p0.01"><will_resistance type="add" always_random="false" min="0.01" max="0.01" /></ability>
+      <ability name="GMTD_will_resistance_n0.01"><will_resistance type="add" always_random="false" min="-0.01" max="-0.01" /></ability>
+      <ability name="GMTD_burning_resistance_p1000"><burning_resistance type="add" always_random="false" min="1000" max="1000" /></ability>
+      <ability name="GMTD_burning_resistance_n1000"><burning_resistance type="add" always_random="false" min="-1000" max="-1000" /></ability>
+      <ability name="GMTD_burning_resistance_p100"><burning_resistance type="add" always_random="false" min="100" max="100" /></ability>
+      <ability name="GMTD_burning_resistance_n100"><burning_resistance type="add" always_random="false" min="-100" max="-100" /></ability>
+      <ability name="GMTD_burning_resistance_p10"><burning_resistance type="add" always_random="false" min="10" max="10" /></ability>
+      <ability name="GMTD_burning_resistance_n10"><burning_resistance type="add" always_random="false" min="-10" max="-10" /></ability>
+      <ability name="GMTD_burning_resistance_p1"><burning_resistance type="add" always_random="false" min="1" max="1" /></ability>
+      <ability name="GMTD_burning_resistance_n1"><burning_resistance type="add" always_random="false" min="-1" max="-1" /></ability>
+      <ability name="GMTD_burning_resistance_p0.1"><burning_resistance type="add" always_random="false" min="0.1" max="0.1" /></ability>
+      <ability name="GMTD_burning_resistance_n0.1"><burning_resistance type="add" always_random="false" min="-0.1" max="-0.1" /></ability>
+      <ability name="GMTD_burning_resistance_p0.01"><burning_resistance type="add" always_random="false" min="0.01" max="0.01" /></ability>
+      <ability name="GMTD_burning_resistance_n0.01"><burning_resistance type="add" always_random="false" min="-0.01" max="-0.01" /></ability>
     </abilities>
   </definitions>
 </redxml>

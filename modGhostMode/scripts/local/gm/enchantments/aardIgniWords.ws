@@ -9,6 +9,8 @@
 //   a 50% roll (legacy's code skips an enemy when the roll is below the chance).
 // - Eruption: an enemy killed by Igni explodes for 300 fire damage (data) and always sets others alight
 //   (CNewNPC.OnDeath, enchantments/npcDeath.ws).
+// EFX-07: W3Effect_Burning.OnUpdate below also drops 5.x's release of an NPC's hit reactions from half
+// its burning (1.32's rule, effects/burningHits.ws).
 // 5.x bodies; changes marked //modSigns. See docs/features/ench.md.
 
 // Rotation's values (Glyphword 7 _Stats).
@@ -254,13 +256,7 @@ function OnUpdate(deltaTime : float)
 		}
 	}
 
-	if(!this.IsOnPlayer() && duration * 0.5 <= duration - timeLeft)
-	{
-		for(i=0; i<allowedHits.Size(); i+=1)
-			allowedHits[i] = true;
-
-		allowedHits[EHRT_Igni] = false;
-	}
+	//modSigns: removed 5.x's release of an NPC's hit reactions from half its burning (EFX-07: allowed from the start, effects/burningHits.ws)
 
 	
 	if(cachedMPAC && cachedMPAC.GetSubmergeDepth() <= -1)

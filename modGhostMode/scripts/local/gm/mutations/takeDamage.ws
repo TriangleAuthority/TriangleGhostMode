@@ -1,7 +1,8 @@
 // W3PlayerWitcher.OnTakeDamage and CActor.OnTakeDamage, replaced for the mutations' hunks: MUT-05
 // Bloodbath's bonus lowered by damage taken (5.x: the effect ends); MUT-10 Mutated Skin's trigger and
 // the Vitality drain it takes over; MUT-12: no death trigger for Mutation 11; ARM-13: the Tesham Mutna
-// set's heal on damage dealt (armor/vampireSet.ws).
+// set's heal on damage dealt (armor/vampireSet.ws). EFX-09: a LastBreath monster (rotfiend) killed by a
+// frozen hit gets the tag ExplodeNoDamage (effects/frozenRotfiend.ws).
 // See docs/features/mut.md.
 
 @replaceMethod(W3PlayerWitcher)
@@ -153,6 +154,20 @@ function OnTakeDamage( action : W3DamageAction )
 			break;
 		}
 	}
+
+	if(HasAbility('LastBreath') && action.GetWasFrozen())	//modSigns: EFX-09, a monster that explodes on death killed by the hit that shatters its freeze: its explosion deals no damage (legacy)
+	{	//modSigns
+		if(action.processedDmg.vitalityDamage > 0 && UsesVitality())	//modSigns
+		{	//modSigns
+			if(GetStat(BCS_Vitality) - action.processedDmg.vitalityDamage <= 0)	//modSigns
+				AddTag('ExplodeNoDamage');	//modSigns
+		}	//modSigns
+		else if(action.processedDmg.essenceDamage > 0 && UsesEssence())	//modSigns
+		{	//modSigns
+			if(GetStat(BCS_Essence) - action.processedDmg.essenceDamage <= 0)	//modSigns
+				AddTag('ExplodeNoDamage');	//modSigns
+		}	//modSigns
+	}	//modSigns
 
 	if(action.processedDmg.vitalityDamage > 0 && UsesVitality())
 	{

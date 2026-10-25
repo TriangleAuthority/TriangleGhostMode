@@ -473,7 +473,7 @@ function GMProcessDamageModification()
 // completely) and without the VulnerableFromFront check, which ProcessDamageIncrease makes before the
 // formula (legacy). DMG-12: hostile hits on allies deal 1% to 2% of their maximum health (Axii
 // puppets 10% to 15%; legacy); 5.x's x0.1 for Axii'd allies off. ALCH-13: Reliever's decoction's (Mutagen 28)
-// terms are legacy's. The rest is 5.x's until its areas (Ice Armor and Eredin: AI).
+// terms are legacy's. EFX-09: LastBreath (rotfiends) does not cap a frozen hit. The rest is 5.x's until its areas (Ice Armor and Eredin: AI).
 @replaceMethod(CActor)
 function ReduceDamage( out damageData : W3DamageAction )
 {
@@ -845,7 +845,7 @@ function ReduceDamage( out damageData : W3DamageAction )
 
 
 
-	if( HasAbility( 'LastBreath' ) )
+	if( HasAbility( 'LastBreath' ) && !damageData.GetWasFrozen() )	//modSigns: EFX-09, a frozen hit is not held back: it can kill a rotfiend outright (legacy)
 	{
 		l_threshold 	= CalculateAttributeValue( GetAttributeValue('lastbreath_threshold') );
 		if( l_threshold == 0 ) l_threshold = 0.25f;

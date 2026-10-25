@@ -80,6 +80,45 @@
         <duration type="add" min="3" max="3" />
         <critical_hit_chance type="add" min="0.25" />
       </ability>
+      <!-- EFX-01: damage over time deals about the same total, as a share of maximum health: bleeding 1% per
+           second for 8 s (5.x: 0.8% for 10 s; also the default of 5.x's inert Wolven BleedingEffect1 to 3) -->
+      <ability name="BleedingEffect" on_conflict="extend">
+        <DirectDamage type="mult" min="0.01" max="0.01" />
+        <duration type="add" min="8" max="8" />
+      </ability>
+      <!-- EFX-01: a tracking bolt's bleeding 0.5% for 16 s (5.x: 0.1% for 30 s) -->
+      <ability name="BleedingTrackingEffect" on_conflict="extend">
+        <DirectDamage type="mult" min="0.005" max="0.005" />
+        <duration type="add" min="16" max="16" />
+      </ability>
+      <!-- EFX-01: a broadhead bolt's bleeding 1% for 8 s (5.x: a flat 10 plus 0.1 to 0.2% for 10 s); given
+           whole (replace): legacy removed the flat DirectDamage node -->
+      <ability name="BleedingEffect_BroadheadBolt" on_conflict="replace">
+        <DirectDamage type="mult" min="0.01" max="0.01" />
+        <duration type="add" min="8" max="8" />
+        <hp_regen_reduction_strength type="add" min="200" />
+        <hp_regen_reduction_duration type="add" min="5" />
+      </ability>
+      <!-- EFX-01: the critical poison 1.6% for 5 s, as the plain poison (5.x: 2%) -->
+      <ability name="PoisonCriticalEffect" on_conflict="extend">
+        <PoisonDamage type="mult" min="0.016" max="0.016" />
+      </ability>
+      <!-- EFX-05: frost slowdown 7.5 s (5.x: 10 s), shortened by frost resistance (effects/slowdownFrost.ws);
+           slowdown 0.35 (5.x: 0.5) carried though no script reads it: the slow is a fixed 30% -->
+      <ability name="SlowdownFrostEffect" on_conflict="extend">
+        <slowdown type="add" min="0.35" />
+        <duration type="add" min="7.5" max="7.5" />
+      </ability>
+      <!-- EFX-05: hypnosis's default 5 s (5.x: 3 s; the fiend passes its own length) -->
+      <ability name="HypnotizedEffect" on_conflict="extend">
+        <duration type="add" min="5" max="5" />
+      </ability>
+      <!-- EFX-02: the generic freeze (Piercing Cold's and other freezes but Northern Wind's) 5 s (5.x: 4 s);
+           the hit that shatters it deals +50% (5.x: 0, its knockdown instead; damage/pool.ws) -->
+      <ability name="FrozenEffect" on_conflict="extend">
+        <duration type="add" min="5" max="5" />
+        <hpPercDamageBonusPerHit type="add" min="0.5" />
+      </ability>
       <ability name="GMUndyingRegen">
         <vitalityRegen type="mult" min="0.01" max="0.01" />
         <vitalityCombatRegen type="mult" min="0.01" max="0.01" />
