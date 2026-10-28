@@ -282,6 +282,26 @@
 </abilities>
 <items>
 
+<!-- dlc/bob/data/gameplay/items_plus/def_item_bolts.xml -->
+	<item on_conflict="replace"
+		name							="q704_vampire_lure_bolt"
+		category						="bolt"
+		price							="0"
+		weight							="0.1"
+		stackable						="1"
+		grid_size						="2"
+		hold_template					="q704_vampire_lure_bolt"
+		localisation_key_name			="item_name_q704_vampire_lure_bolt"
+		localisation_key_description	="item_desc_quest_item"
+		icon_path						="icons/inventory/arrows/target_legendary_bolt_64x64.png"
+	>
+		<tags>							bolt, mod_weapon, Quest, mod_nosale
+		</tags>
+		<base_abilities>				<a>q704_vampire_lure_bolt _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>	
+	</item>
+
 <!-- dlc/bob/data/gameplay/items_plus/def_item_character_decorations.xml -->
 	<item on_conflict="replace"
 		name							="Anarietta mandragora mask"
@@ -11255,7 +11275,7 @@
 				<tags>							Weapon, crossbow, mod_weapon
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
-												<a>Toussaint Crossbow 2 _Stats</a>
+												<a>Toussaint Crossbow 1 _Stats</a>
 				</base_abilities>
 				<recycling_parts>				<parts count="1">Hardened timber</parts>
 												<parts count="1">Twine</parts>
@@ -11280,7 +11300,7 @@
 				<tags>							Weapon, crossbow, mod_weapon
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
-												<a>Toussaint Crossbow 2 _Stats</a>
+												<a>Toussaint Crossbow 1 _Stats</a>
 				</base_abilities>
 				<recycling_parts>				<parts count="1">Hardened timber</parts>
 												<parts count="1">Twine</parts>
@@ -15631,6 +15651,224 @@
 		</recycling_parts>
 		<variants>						<variant equip_template="t_02a_mg__common_heavy_lvl2" category="gloves"></variant>
 		</variants>
+	</item>
+
+<!-- gameplay/items_plus/def_item_bolts.xml -->
+	<item on_conflict="replace"
+		name							="Bait Bolt"
+		category						="bolt"
+		price							="86"
+		weight							="0.1"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="bait_bolt"
+		localisation_key_name			="item_name_bait_bolt"
+		localisation_key_description	="item_desc_bait_bolt" 
+		icon_path						="icons/inventory/arrows/bait_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>bait_bolt _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Blunt Bolt"
+		category						="bolt"
+		price							="72"
+		weight							="0.1"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="blunt_bolt"
+		localisation_key_name			="item_name_blunt_bolt"
+		localisation_key_description	="item_desc_blunt_bolt" 
+		icon_path						="icons/inventory/arrows/blunt_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>blunt_bolt _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Blunt Bolt Legendary"
+		category						="bolt"
+		price							="92"
+		weight							="0.1"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="blunt_bolt"
+		localisation_key_name			="item_name_blunt_bolt"
+		localisation_key_description	="item_desc_blunt_bolt"
+		icon_path						="icons/inventory/arrows/blunt_legendary_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>blunt_bolt_legendary _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Broadhead Bolt"
+		category						="bolt"
+		price							="80"
+		weight							="0.1"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="broadhead_bolt"
+		localisation_key_name			="item_name_broadhead_bolt"
+		localisation_key_description	="item_desc_broadhead_bolt" 
+		icon_path						="icons/inventory/arrows/broadhead_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>broadhead_bolt _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Broadhead Bolt Legendary"
+		category						="bolt"
+		price							="91"
+		weight							="0.2"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="broadhead_bolt"
+		localisation_key_name			="item_name_broadhead_bolt"
+		localisation_key_description	="item_desc_broadhead_bolt"
+		icon_path						="icons/inventory/arrows/broadhead_legendary_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>broadhead_bolt_legendary _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Explosive Bolt"
+		category						="bolt"
+		price							="132"
+		weight							="0.2"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="explosive_bolt"
+		localisation_key_name			="item_name_explosive_bolt"
+		localisation_key_description	="item_desc_explosive_bolt" 
+		icon_path						="icons/inventory/arrows/explosive_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>explosive_bolt _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Explosive Bolt Legendary"
+		category						="bolt"
+		price							="218"
+		weight							="0.4"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="explosive_bolt"
+		localisation_key_name			="item_name_explosive_bolt"
+		localisation_key_description	="item_desc_explosive_bolt"
+		icon_path						="icons/inventory/arrows/explosive_legendary_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon, mod_legendary
+		</tags>
+		<base_abilities>				<a>explosive_bolt_legendary _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Split Bolt"
+		category						="bolt"
+		price							="107"
+		weight							="0.1"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="split_bolt"
+		localisation_key_name			="item_name_split_bolt"
+		localisation_key_description	="item_desc_split_bolt" 
+		icon_path						="icons/inventory/arrows/split_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>split_bolt _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Split Bolt Legendary"
+		category						="bolt"
+		price							="162"
+		weight							="0.3"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="split_bolt"
+		localisation_key_name			="item_name_split_bolt"
+		localisation_key_description	="item_desc_split_bolt"
+		icon_path						="icons/inventory/arrows/split_legendary_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon, mod_legendary
+		</tags>
+		<base_abilities>				<a>split_bolt_legendary _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Target Point Bolt"
+		category						="bolt"
+		price							="104"
+		weight							="0.1"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="target_point_bolt"
+		localisation_key_name			="item_name_target_point_bolt"
+		localisation_key_description	="item_desc_target_point_bolt" 
+		icon_path						="icons/inventory/arrows/target_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>target_point_bolt _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Target Point Bolt Legendary"
+		category						="bolt"
+		price							="206"
+		weight							="0.25"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="target_point_bolt"
+		localisation_key_name			="item_name_target_point_bolt"
+		localisation_key_description	="item_desc_target_point_bolt"
+		icon_path						="icons/inventory/arrows/target_legendary_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>target_point_bolt_legendary _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
+	</item>
+	<item on_conflict="replace"
+		name							="Tracking Bolt"
+		category						="bolt"
+		price							="86"
+		weight							="0.1"
+		stackable						="100"
+		grid_size						="2"
+		hold_template					="tracking_bolt"
+		localisation_key_name			="item_name_tracking_bolt"
+		localisation_key_description	="item_desc_tracking_bolt" 
+		icon_path						="icons/inventory/arrows/tracking_bolt_64x64.png"
+	>
+		<tags>							WeaponTab, bolt, mod_weapon
+		</tags>
+		<base_abilities>				<a>tracking_bolt _Stats</a>
+										<a>Default weapon _Stats</a>
+		</base_abilities>
 	</item>
 
 <!-- gameplay/items_plus/def_item_boots.xml -->

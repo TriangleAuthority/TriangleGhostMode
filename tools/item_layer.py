@@ -22,8 +22,9 @@ import csv, os, re
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PORTED = {"ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11",
-          "CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09", "LOOT-08", "FOOD-04", "FOOD-07"}
-AREAS = ("ITEM-", "CRAFT-", "LOOT-", "FOOD-")
+          "CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09", "LOOT-08", "FOOD-04", "FOOD-07",
+          "XBOW-02", "XBOW-03"}
+AREAS = ("ITEM-", "CRAFT-", "LOOT-", "FOOD-", "XBOW-")
 
 # The item tags each feature owns (added or removed where legacy did); "*": every tag but the mod_*
 # price tags (ECON's).
@@ -33,6 +34,7 @@ TAGS = {
     "ITEM-04": {"Autogen"},
     "ITEM-05": {"Autogen", "AutogenForceLevel"},
     "ITEM-08": {"DoNotEnhance", "DoNotEnhancem"},
+    "XBOW-03": {"mod_nosale", "mod_nosalem"},  # bolts sellable; the quest bolt's misspelt mod_nosalem fixed (xbow.md)
     "FOOD-04": {"*"},  # the food and drink kind tags (Drinks, Alcohol, Uncooked, Potion off seven items, ...)  # DoNotEnhancem: 1.32's misspelt tag on the sq701 gloves
 }
 # The ability nodes each feature owns.
@@ -55,7 +57,8 @@ BLOCKS = {
     "CRAFT-06": {"base_abilities"},  # the recipe items' rarity
     "CRAFT-07": {"base_abilities"},  # the ingredients' rarity (bugfix 120)
     "CRAFT-08": {"recycling_parts"},  # the dismantling parts
-    "FOOD-04": {"base_abilities", "recycling_parts"},  # the food and drink tier, rarity and toxicity abilities; Wolf liver's parts (none: audit F1)
+    "FOOD-04": {"base_abilities", "recycling_parts"},
+    "XBOW-02": {"base_abilities"},  # the two Blood and Wine quest crossbows on Toussaint Crossbow 1's stats  # the food and drink tier, rarity and toxicity abilities; Wolf liver's parts (none: audit F1)
 }
 # (block, item) where legacy's block is taken although 5.x changed it (the owner's DC4: Cheesecutter
 # without 5.x's Cheese).
@@ -79,7 +82,7 @@ ATTRS = {
 }
 
 _UNITS = None
-UNIT = re.compile(r'^(.*/gameplay/(items|items_plus)/[^/]+\.xml)::definitions/(items/item|abilities/ability):(.+)$')
+UNIT = re.compile(r'^(.*/gameplay/)(items|items_plus|items\*)(/[^/]+\.xml)::definitions/(items/item|abilities/ability):(.+)$')
 
 
 def units():
@@ -92,7 +95,10 @@ def units():
                 feats = {x for x in row["features"].split() if x.startswith(AREAS)}
                 m = UNIT.match(row["unit"])
                 if m and feats:
-                    _UNITS[(m.group(2), m.group(3).split("/")[1], m.group(4))] = ("modGhostMode/" + m.group(1), feats)
+                    # `items*`: one row for the regular and the NG+ entry (XBOW's rows)
+                    for folder in (["items", "items_plus"] if m.group(2) == "items*" else [m.group(2)]):
+                        _UNITS[(folder, m.group(4).split("/")[1], m.group(5))] = (
+                            "modGhostMode/" + m.group(1) + folder + m.group(3), feats)
     return _UNITS
 
 

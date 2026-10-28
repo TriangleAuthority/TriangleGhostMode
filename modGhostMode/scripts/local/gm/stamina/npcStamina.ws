@@ -478,3 +478,25 @@ function ProcessActionReaction(wasFrozen : bool, wasAlive : bool)
 			npcVictim.ProcessShieldDestruction();
 	}
 }
+
+// XBOW-09 (NPC archers' stamina): a shot costs the light-attack stamina cost, paid when the shoot
+// task starts (the decorator's own drain), and is not taken without it, like every other NPC
+// attack (the shoot task is not an attack task, so STAM-08's attack default missed it).
+// See docs/features/xbow.md.
+class CBTTaskShootDef extends CBTTaskPlayAnimationEventDecoratorDef
+{
+	default xmlStaminaCostName = 'light_action_stamina_cost';	//modSigns
+	default drainStaminaOnUse = true;	//modSigns
+}
+
+// 5.x body; changed lines marked //modSigns.
+@replaceMethod(CBTTaskShoot)
+function IsAvailable() : bool
+{
+	InitializeCombatDataStorage();
+	if ( !((CHumanAICombatStorage)combatDataStorage).GetProjectile() )
+	{
+		return CreateProjectile() && super.IsAvailable();	//modSigns: and the stamina for the shot
+	}
+	return super.IsAvailable();	//modSigns: the stamina for the shot
+}

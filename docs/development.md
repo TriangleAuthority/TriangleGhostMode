@@ -231,7 +231,8 @@ Prefer **one file per vanilla class or system** that Ghost Mode changes, holding
 
 - **Fields cannot be assigned through `thePlayer` or a function's return value**: `thePlayer.gmCounter += 1` fails with "Expected type 'Int32' to be assignable", `thePlayer.gmField = 1` with "Left hand side is const", `GetWitcherPlayer().gmField = 1` with "L-value required". Reading works. Assign through a local variable holding the object (`w = GetWitcherPlayer(); w.gmField = 1;`, **verified** 2026-10-20, ITEM's tests), or give the class a method (`@addMethod`) and call that.
 - Fields default to private; declare fields that other code reads as `public`.
-- **`name` is a type keyword**: a parameter called `name` fails to compile ("unexpected TOKEN_TYPE_NAME"); call it something else. So is `set` ("unexpected TOKEN_SET"), `enter` ("unexpected TOKEN_ENTER") and `saved` ("unexpected TOKEN_SAVED", as a variable name).
+- **`name` is a type keyword**: a parameter called `name` fails to compile ("unexpected TOKEN_TYPE_NAME"); call it something else. So is `set` ("unexpected TOKEN_SET"), `enter` ("unexpected TOKEN_ENTER"), `saved` ("unexpected TOKEN_SAVED", as a variable name) and `def` ("unexpected TOKEN_DEF", as a variable name).
+- **An entity handle reads as null right after `Destroy()`**, in the same function: compute anything that tests the handle (`ent && ...`) before destroying it (**verified** 2026-10-26, XBOW fix slice T).
 - **A cast cannot follow `!` directly**: `if(!(CActor)x.attacker || ...)` is a syntax error ("unexpected TOKEN_CLASS_TYPE"); assign the cast to a local first.
 - **Backslashes in strings are literal** (`"dlc\bob\data"` as in vanilla's own paths), but avoid a backslash right before the closing quote.
 - **A short-lived flag needs no timer:** store a deadline (`theGame.GetEngineTimeAsSeconds() + 3.0`) and compare it when read (DEF-07's countered flag); not saved, so nothing survives a load.

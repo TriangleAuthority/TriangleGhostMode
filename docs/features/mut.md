@@ -390,7 +390,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 | Skill trees | n/a |
 | Port form | DLC XML `Mutation9` (whole, `replace`: `mut9_damage` 1, `health_reduction` 0.15, `mut9_slowdown` 0.25; no `damage` or `critical_hit_chance`); the bolt's raw damage ×2 in `ProcessDamageIncrease` (`damage/pool.ws`, before the pool); 5.x's +150 removed from `GetTotalWeaponDamage` (`damage/weapon.ws`); the slowdown in SKL-15's replaced `PlayerAimingStateAiming.SloMo`; description (MUT-14) |
 | Port status | signed off (2026-10-17); ported (2026-10-17), verified in both trees |
-| Open checks | an aimed shot with the real key (the crossbow's aim cannot be scripted: tested by switching a bomb's aim to the crossbow's); the 15% health loss, pierce and knockdown (vanilla's code, unchanged); the inventory's and character panel's crossbow damage (legacy doubles it in `GetOffenseStatsList`, with UI) |
+| Open checks | an aimed shot with the real key (the crossbow's aim cannot be scripted: tested by switching a bomb's aim to the crossbow's); the 15% health loss and knockdown (vanilla's code, unchanged; the pierce was seen in XBOW-05's shots, 2026-10-25: explosive bolts pierced and exploded again, plain bolts pierce and hit each enemy once, [xbow.md](xbow.md#xbow-05-bolt-hit-fixes)); the inventory's and character panel's crossbow damage (legacy doubles it in `GetOffenseStatsList`, with UI) |
 | Save impact | none |
 | NG+ counterpart | applied (generated), untested |
 

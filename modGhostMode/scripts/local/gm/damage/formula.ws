@@ -76,6 +76,7 @@ function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc 
 	}	//modSigns
 	if(action.GetIsHeadShot())	//modSigns: headshots ignore armor and resistances
 	{	//modSigns
+		GMSignalHeadshot('resists');	//modSigns: XBOW-07, legacy's Headshot event
 		resistPts = 0;	//modSigns
 		resistPerc = 0;	//modSigns
 		return;	//modSigns

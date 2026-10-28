@@ -538,10 +538,11 @@ def main():
     data = open(a.file, "rb").read()
     if not check_crcs(data):
         raise SystemExit("%s: CRCs inconsistent before patching; not touching it" % a.file)
-    numeric = all(o.kind == "set" and re.fullmatch(r"-?[\d.]+", o.old) and re.fullmatch(r"-?[\d.]+", o.new) for o in ops)
+    numeric = all(o.kind == "set" and o.nth is None and all(spec is None for _, spec in o.path)
+                  and re.fullmatch(r"-?[\d.]+", o.old) and re.fullmatch(r"-?[\d.]+", o.new) for o in ops)
     if numeric:
         num = lambda o, s: float(s) if ("." in o.old or "." in o.new) else int(s)
-        out, changes, hit = patch(data, [(o.cls, ".".join(o.path), num(o, o.old), num(o, o.new)) for o in ops])
+        out, changes, hit = patch(data, [(o.cls, ".".join(c for c, _ in o.path), num(o, o.old), num(o, o.new)) for o in ops])
     else:
         out, changes, hit = apply(data, ops)
     missing = ["NO MATCH %s" % o for k, o in enumerate(ops) if k not in hit]

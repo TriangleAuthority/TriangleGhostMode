@@ -239,7 +239,7 @@ function ProcessCriticalHitCheck()
 				if(action.GetIsHeadShot())
 				{
 					critChance += theGame.params.HEAD_SHOT_CRIT_CHANCE_BONUS;
-					actorVictim.SignalGameplayEvent( 'Headshot' );
+					//modSigns: removed the Headshot event (XBOW-07: sent when the headshot deals damage, xbow/headshots.ws)
 				}
 				
 				

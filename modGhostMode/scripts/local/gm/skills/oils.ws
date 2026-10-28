@@ -197,7 +197,7 @@ function GetCriticalHitChance( isLightAttack : bool, isHeavyAttack : bool, targe
 		critChance += 1;
 	}
 	
-	if( IsInState( 'HorseRiding' ) && ( ( CActor )GetUsedVehicle() ).GetMovingAgentComponent().GetRelativeMoveSpeed() >= 4.0 )
+	if( !isBolt && IsInState( 'HorseRiding' ) && ( ( CActor )GetUsedVehicle() ).GetMovingAgentComponent().GetRelativeMoveSpeed() >= 4.0 )	//modSigns: XBOW-06, no galloping-horse crit for bolts (legacy)
 	{
 		critChance += 1;
 	}
@@ -250,6 +250,9 @@ function GetCriticalHitDamageBonus(weaponId : SItemUniqueId, victimMonsterCatego
 {
 	var bonus, oilBonus : SAbilityAttributeValue;
 	var vsAttributeName : name;
+	var weapons : array< SItemUniqueId >;	//modSigns: XBOW-06
+	var i : int;	//modSigns: XBOW-06
+	var isBolt, holdsCrossbow : bool;	//modSigns: XBOW-06
 
 	bonus = super.GetCriticalHitDamageBonus(weaponId, victimMonsterCategory, isStrikeAtBack);
 	
@@ -261,6 +264,15 @@ function GetCriticalHitDamageBonus(weaponId : SItemUniqueId, victimMonsterCatego
 		bonus += oilBonus;
 	}
 	bonus.valueAdditive += inv.GMOilWolfCritBonus( weaponId, 'per_oil_crit_power_bonus' );	//modSigns: ARM-09, the Wolven set's tier 2 per oil, whatever the enemy
+	
+	isBolt = inv.IsItemCrossbow( weaponId ) || inv.IsItemBolt( weaponId );	//modSigns: XBOW-06, a held weapon's crit damage counts only for its own kind of hit (legacy): the sword's not for bolts, the crossbow's not for swords
+	weapons = inv.GetHeldWeapons();	//modSigns
+	for( i = 0; i < weapons.Size(); i += 1 )	//modSigns
+	{	//modSigns
+		holdsCrossbow = ( inv.IsItemCrossbow( weapons[i] ) || inv.IsItemBolt( weapons[i] ) );	//modSigns
+		if( holdsCrossbow != isBolt )	//modSigns
+			bonus -= inv.GetItemAttributeValue( weapons[i], theGame.params.CRITICAL_HIT_DAMAGE_BONUS );	//modSigns
+	}	//modSigns
 	
 	return bonus;
 }

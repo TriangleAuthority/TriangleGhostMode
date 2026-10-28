@@ -111,7 +111,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-24 from the chang
 | Skill trees | n/a |
 | Port form | `BleedingEffect`, `BleedingTrackingEffect`, `PoisonCriticalEffect` in Ghost Mode's DLC `gm_effects.xml` (`on_conflict="extend"`, as SKL's effect values); `BleedingEffect_BroadheadBolt` given whole (`replace`: legacy removed 5.x's flat `DirectDamage` node); NG+ through `gen_ngplus.py` (vanilla's NG and NG+ values are equal, so the copies equal legacy's NG+ values) |
 | Port status | **signed off** (2026-10-25); ported (slice 1, 2026-10-24, 5.x-GM `6317278f`), verified in both trees |
-| Open checks | A real broadhead or tracking bolt and a real poison cloud not tested (scripted effects with the bolts' ability names; the bolts' chances are XBOW's) |
+| Open checks | A real poison cloud not tested. The bolts: real Tracking and Broadhead bolts shot at the test dummy (XBOW's slices, 2026-10-25) left 16 s at 0.5% and 8 s at 1% of maximum health per second, verified ([xbow.md](xbow.md#xbow-01-bolts)) |
 | Save impact | none (expected): effect abilities are read when an effect is applied |
 | NG+ counterpart | applied (legacy's NG+ values), untested |
 

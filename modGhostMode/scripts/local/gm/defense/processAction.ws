@@ -10,6 +10,7 @@
 // - Geralt's counter marks the attacker (DEF-07's +25% crit), his next hit uses the mark up.
 // SKL-07: the adrenaline a hit on the player costs is the share of maximum health it removed, up to 1
 // point (legacy; 5.x: a fixed amount by attack type), reduced by Resolve.
+// XBOW-07: the Headshot event when a headshot by Geralt deals damage (xbow/headshots.ws).
 // The rest of legacy's ProcessAction changes belong to other areas. See docs/features/def.md.
 
 // 5.x body; changes marked //modSigns.
@@ -122,6 +123,8 @@ function ProcessAction(act : W3DamageAction)
 	if( wasAlive && action.DealsAnyDamage() )
 	{
 		((CActor) action.attacker).SignalGameplayEventParamFloat(  'CausesDamage', MaxF( action.processedDmg.vitalityDamage, action.processedDmg.essenceDamage ) );
+		if( playerAttacker && action.GetIsHeadShot() )	//modSigns: XBOW-07, legacy's Headshot event when Geralt's headshot deals damage
+			GMSignalHeadshot('damage');	//modSigns
 	}
 	
 	

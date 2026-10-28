@@ -2175,6 +2175,12 @@ exec function gmtest_regress()
 	GMTest_efx04();
 	GMTest_efx08();
 	GMTest_efx11();
+	GMTest_xbow01();
+	GMTest_xbow02();
+	GMTest_xbow04();
+	GMTest_xbow07();
+	GMTest_xbow08();
+	GMTest_xbow09();
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 
