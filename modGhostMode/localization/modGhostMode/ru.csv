@@ -511,3 +511,5 @@
 ; FOOD-06: Connoisseur (the classic perk_15 and the new tree's perk_41), legacy's name and description
 2110992462|dd7afa8f||Коносьер
 2110992463|754d1895||Снижает токсичность алкоголя и токсичной еды до нуля. Убирает эффект опьянения. Продолжительность действия бонусов алкогольного напитка увеличивается на $S$%.
+; AI-19: the description of the Caretaker's spade (the player's PC Caretaker Shovel), legacy's (5.x has no text for its key)
+2110992475|        |item_name_caretaker_spade_desc|Восстанавливает здоровье пропорционально нанесенному урону.

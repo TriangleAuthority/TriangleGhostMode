@@ -167,6 +167,7 @@ function GetDamageResists(dmgType : name, out resistPts : float, out resistPerc 
 		resistPts += CalculateAttributeValue( actorVictim.GetTotalArmor() );
 
 
+	resistPerc += GMIceArmorResistBonus(action, actorAttacker, actorVictim);	//modSigns: AI-15, Ice Armor's +30% resistances (legacy; 5.x halved the damage in ReduceDamage)
 	resistPerc = MaxF(0, resistPerc - GMArachasResistReduction(actorVictim));	//modSigns: ALCH-13, the Arachas decoction's acid on the enemy (legacy)
 	resistPerc = MaxF(0, resistPerc - GMDimeritiumResistReduction(actorVictim));	//modSigns: ALCH-15, the Dimeritium effect on a magic creature or Wild Hunt minion (legacy)
 	resistPerc -= CalculateAttributeValue(armorReductionPerc);

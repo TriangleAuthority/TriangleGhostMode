@@ -384,7 +384,7 @@ The same under both rules: humans, including Bruxa and Alp in human form and mag
 - *Regression:* 957 passed, 0 failed in each tree.
 
 **Decisions:** PB8 (confirmed (project owner, 2026-10-25)); the boundary (DB2, confirmed (project owner, 2026-10-25)): NPC bows are XBOW's, other NPC weapons AI's.
-- **Deviation:** 5.x's level term on projectile damage (+2.5% per Geralt level at each collision) stays for reflected arrows (and for every projectile that is not an archer's, such as monster projectiles, AI's): at Geralt level 30 a reflected arrow reads 612.5 where legacy's reads the arrow's 200; an archer's arrow loses the term, its damage being the bow's (porter's call 2026-10-25, confirmed by the owner as temporary, until AI, 2026-10-26).
+- 5.x's level term on projectile damage (+2.5% per Geralt level at each collision) is gone from every projectile since AI-18 (slice C2, 2026-10-28, 5.x-GM `f32f3f59`, [ai.md](ai.md#ai-18-special-attacks-and-monster-projectiles); until then a temporary deviation, confirmed by the owner, 2026-10-26): a reflected arrow reads the arrow's 200 at Geralt level 30 (5.x: 612.5), 453 after SKL-05's pool (**real** reflected arrows, Deflection in each tree).
 
 ### XBOW-09 NPC archers' stamina
 
@@ -475,7 +475,7 @@ Every item other areas handed to XBOW, and where it lands:
 |---|---|
 | ECON | Bolt, crossbow and schematic prices (the bolt and crossbow items, `DLC13` crossbow items, bolt and school crossbow schematic items); `mod_legendary` on the Split and Explosive Legendary bolts (removed) and the Ofir Crossbow R (added) |
 | WGT | Bolt weights (0.05), crossbow weights (items and the weight nodes of the Toussaint, DLC13 and Ofir abilities) |
-| AI | `CNewNPC.ReactToBeingHit`: a flying enemy hit by a bolt, Yrden or burning (or any damaging hit) is forced to land (knockdown applicator), already AI's from SKL and EFX; the Skellige bandit and pirate archers' and the Emhyr quest crossbowman's levels and attack ranges (with DIFF); monster projectiles; 5.x's level term on projectile damage (`W3AdvancedProjectile.OnProjectileCollision`: +2.5% per Geralt level at each collision; legacy's code has none), kept for now (XBOW-08's deviation) |
+| AI | `CNewNPC.ReactToBeingHit`: a flying enemy hit by a bolt, Yrden or burning (or any damaging hit) is forced to land (knockdown applicator), already AI's from SKL and EFX; the Skellige bandit and pirate archers' and the Emhyr quest crossbowman's levels and attack ranges (with DIFF); monster projectiles; 5.x's level term on projectile damage (`W3AdvancedProjectile.OnProjectileCollision`: +2.5% per Geralt level at each collision; legacy's code has none), removed by AI-18 (slice C2, 2026-10-28), which ended XBOW-08's deviation |
 | FIX | The W3EE collision fixes: `W3ArrowProjectile.OnProjectileCollision`'s groups (also DEF-08's note), `CBTTaskShoot.ShootProjectile`, `CBTTaskProjectileAttack.Initialize`; the arrow fix for Yoana's armor test (`sq108_heavy_armor`, bugfix 144) |
 
 ### Save impact

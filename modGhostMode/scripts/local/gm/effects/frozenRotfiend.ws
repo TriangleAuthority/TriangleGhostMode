@@ -3,8 +3,10 @@
 // their freeze is not held back (CActor.ReduceDamage, damage/pipeline.ws): it can kill one outright,
 // and the one it kills gets the tag ExplodeNoDamage (CActor.OnTakeDamage, mutations/takeDamage.ws),
 // so its death explosion deals no damage (legacy's changelist, Enemy AI: "Killing a frozen rotfiend
-// now prevents the explosion"). The explosion's own damage is 5.x's until AI. 5.x's Northern Wind
-// blocks PoisonDeath, so a rotfiend frozen by it does not explode at all (ALCH-14, kept).
+// now prevents the explosion"). AI-17: the explosion deals the damage of the monster's weapon in the
+// task's slot, 300 without one (legacy; 5.x: 100 + 3x the weapon's heavy frost damage on Normal, 50 + 2x
+// on Easy, 150 + 4x on Hard, 200 + 5x on Death March), its attack power and the victims' armor applying.
+// 5.x's Northern Wind blocks PoisonDeath, so a rotfiend frozen by it does not explode at all (ALCH-14, kept).
 
 // 5.x body; changes marked //modSigns.
 @replaceMethod(BTTaskExplodeAtDeath)
@@ -54,15 +56,18 @@ function Explode()
 				l_inv 		= l_actor.GetInventory();		
 				l_weaponId 	= l_inv.GetItemFromSlot( weaponSlot );
 				l_inv.GetWeaponDTNames( l_weaponId, l_damageNames );
-				l_attribute = GetBasicAttackDamageAttributeName( theGame.params.ATTACK_NAME_HEAVY, theGame.params.DAMAGE_NAME_FROST);
-				l_damageAttr = l_actor.GetAttributeValue( l_attribute );
+				//modSigns: removed the weapon's heavy frost damage attribute (AI-17)
+				l_damageAttr.valueAdditive = 0;	//modSigns
+				l_damageAttr.valueMultiplicative = 1;	//modSigns
 				l_damageAttr.valueBase  =l_actor.GetTotalWeaponDamage( l_weaponId, l_damageNames[0], GetInvalidUniqueId() );
 				
-				if ( theGame.GetDifficultyMode() == EDM_Easy )     damageValue = 50  + ( ( l_damageAttr.valueBase * l_damageAttr.valueMultiplicative + l_damageAttr.valueAdditive ) * 2 ); else
-				if ( theGame.GetDifficultyMode() == EDM_Hard )     damageValue = 150 + ( ( l_damageAttr.valueBase * l_damageAttr.valueMultiplicative + l_damageAttr.valueAdditive ) * 4 ); else
-				if ( theGame.GetDifficultyMode() == EDM_Hardcore ) damageValue = 200 + ( ( l_damageAttr.valueBase * l_damageAttr.valueMultiplicative + l_damageAttr.valueAdditive ) * 5 ); else
-																   damageValue = 100 + ( ( l_damageAttr.valueBase * l_damageAttr.valueMultiplicative + l_damageAttr.valueAdditive ) * 3 );
+				//modSigns: removed 5.x's damage by difficulty (AI-17)
+				damageValue = CalculateAttributeValue(l_damageAttr);	//modSigns: AI-17, the weapon's damage (legacy)
 			}
+			if ( damageValue < 1 )	//modSigns: AI-17, 300 without a weapon (legacy)
+			{	//modSigns
+				damageValue = 300;	//modSigns
+			}	//modSigns
 			
 			for	( i = 0; i < l_actors.Size(); i += 1 )
 			{

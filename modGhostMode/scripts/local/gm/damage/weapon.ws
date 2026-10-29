@@ -85,18 +85,8 @@ function GetTotalWeaponDamage(weaponId : SItemUniqueId, damageTypeName : name, c
 
 // DMG-15: a human NPC without an armor ability gets the one its entity template includes ("Fixed a
 // bug with humans not actually using armor abilities - all of them had zero armor", legacy
-// gm_bugfixes.ws LazyArmorFix). Does nothing to an NPC that has one. Legacy called it when an NPC's
-// level bonuses were applied; here when it spawns (AI replaces the level bonuses later).
-@wrapMethod(CNewNPC)
-function OnSpawned(spawnData : SEntitySpawnData)
-{
-	var ret : bool;
-
-	ret = wrappedMethod(spawnData);
-	GMLazyArmorFix(this);
-	return ret;
-}
-
+// gm_bugfixes.ws LazyArmorFix). Does nothing to an NPC that has one. Called, as in legacy, when an
+// NPC's level bonuses are applied (AI-01's AddLevelBonuses, ai/levels.ws).
 function GMLazyArmorFix(npc : CNewNPC)
 {
 	var template : CEntityTemplate;

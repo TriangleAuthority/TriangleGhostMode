@@ -312,3 +312,61 @@ function OnAardHit( sign : W3AardProjectile )
 		this.Init( thePlayer );
 	}
 }
+
+// Aard deflects stones (legacy's copy of the environment projectile's handler) and environment projectiles (1.32's,
+// kept by legacy) at 0.7 of their speed whatever the skills, as boulders (D25; AI-C audit F5, owner, 2026-10-29;
+// 5.x: 0.1 without Aard Sweep or Aard Intensity, 0.3/0.5/0.7 by their level).
+@replaceMethod(W3StoneProjectile)
+function OnAardHit( sign : W3AardProjectile )
+{
+	var rigidMesh		 	: CMeshComponent;
+	var randAngleOffset 	: float;
+	//modSigns: removed var level
+
+	super.OnAardHit(sign);
+
+	StopProjectile();
+
+	rigidMesh = (CMeshComponent)this.GetComponentByClassName('CRigidMeshComponent');
+
+	if ( rigidMesh )
+	{
+		rigidMesh.SetEnabled( true );
+	}
+	else
+	{
+		randAngleOffset = RandRangeF( 10, -10 );
+		//modSigns: removed 5.x's speed by the level of Aard Sweep or Aard Intensity
+		this.bounceOfVelocityPreserve = 0.7;	//modSigns: SKL-08 (AI-C audit F5)
+		this.BounceOff( VecFromHeading( thePlayer.GetHeading() + randAngleOffset ),this.GetWorldPosition() );
+		this.Init( thePlayer );
+	}
+}
+
+// See W3StoneProjectile's above.
+@replaceMethod(W3EnvironmentProjectile)
+function OnAardHit( sign : W3AardProjectile )
+{
+	var rigidMesh		 	: CMeshComponent;
+	var randAngleOffset 	: float;
+	//modSigns: removed var level
+
+	super.OnAardHit(sign);
+
+	StopProjectile();
+
+	rigidMesh = (CMeshComponent)this.GetComponentByClassName('CRigidMeshComponent');
+
+	if ( rigidMesh )
+	{
+		rigidMesh.SetEnabled( true );
+	}
+	else
+	{
+		randAngleOffset = RandRangeF( 10, -10 );
+		//modSigns: removed 5.x's speed by the level of Aard Sweep or Aard Intensity
+		this.bounceOfVelocityPreserve = 0.7;	//modSigns: SKL-08 (AI-C audit F5)
+		this.BounceOff( VecFromHeading( thePlayer.GetHeading() + randAngleOffset ),this.GetWorldPosition() );
+		this.Init( thePlayer );
+	}
+}

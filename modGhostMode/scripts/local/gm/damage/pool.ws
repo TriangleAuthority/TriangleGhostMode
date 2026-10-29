@@ -63,6 +63,7 @@ function GMPoolApply(out dmgInfos : array< SRawDamage >)
 // generic FrozenEffect +50%, EFX-02) is a pool term, legacy's, instead of 5.x's separate frost hit.
 // EFX-02: the shattering hit no longer knocks down (5.x's knockdown applicator removed), and an Aard hit
 // adds 5% of the victim's maximum health as force damage after the pool (legacy).
+// AI-20: the fist damage bonus (fist_dmg_bonus of the fistfight tiers), legacy's first flat addition.
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 {
@@ -118,6 +119,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	//modSigns: the difficulty multiplier applies to final damage, hostile NPCs hitting the player only (GMProcessDamageModification)
 	if(action.IsActionMelee() && actorVictim && actorVictim.HasAbility( 'VulnerableFromFront' ) && actorAttacker && !actorVictim.IsAttackerAtBack(actorAttacker) )	//modSigns: moved from CActor.ReduceDamage: the hit ignores armor
 		action.SetIgnoreArmor( true );	//modSigns
+	GMAddFistDamageBonus(dmgInfos);	//modSigns: AI-20, the fist damage bonus (fist_dmg_bonus), a flat addition before the pool (ai/fistfights.ws)
 
 
 

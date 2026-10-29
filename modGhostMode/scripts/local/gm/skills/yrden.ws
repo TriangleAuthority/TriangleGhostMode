@@ -297,7 +297,7 @@ function GMRecalcSlowdown()
 	slowdown = ClampF(CalculateAttributeValue(effectValue), 0, 1);
 	if(slowdownCauserId)
 		target.ResetAnimationSpeedMultiplier(slowdownCauserId);
-	slowdownCauserId = target.SetAnimationSpeedMultiplier(1 - slowdown);
+	slowdownCauserId = target.GMSetAnimSpeedCauser(1 - slowdown);	// never id 0, which the callers that leave the id out overwrite and remove (AI-B audit F1)
 }
 
 @addMethod(W3Effect_Slowdown)

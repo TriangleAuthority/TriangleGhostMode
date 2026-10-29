@@ -33,6 +33,10 @@ ABILITY = re.compile(r'<ability\s+name="([^"]+)"[^>]*>(.*?)</ability>', re.S)
 # Abilities another feature gives whole in its own DLC file (an expansion's ability loses its
 # attributes and tags with extend): left out here.
 OWNED = {"Mutation4BloodDebuff": "MUT-08, gm_mutations.xml"}
+# AI's abilities given whole by gen_ai.py, with legacy's stamina values in them (ai.md's PA2).
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from gen_ai import owned as _ai_owned  # noqa: E402
+OWNED.update({n: "AI, " + f for n, f in _ai_owned().items()})
 NODE = re.compile(r'<([A-Za-z_][\w]*)\b([^>]*?)/>')
 
 

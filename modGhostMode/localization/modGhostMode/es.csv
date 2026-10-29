@@ -511,3 +511,5 @@
 ; FOOD-06: Connoisseur (the classic perk_15 and the new tree's perk_41), legacy's name and description
 2110992462|dd7afa8f||Connoisseur
 2110992463|754d1895||Reduce la toxicidad del alcohol y los alimentos tóxicos a cero. Elimina el efecto de embriaguez del alcohol. Después de beber una bebida alcohólica, sus bonificaciones duran un $S$% más.
+; AI-19: the description of the Caretaker's spade (the player's PC Caretaker Shovel), legacy's (5.x has no text for its key)
+2110992475|5a519178||Restaura vitalidad proporcionalmente al daño causado.

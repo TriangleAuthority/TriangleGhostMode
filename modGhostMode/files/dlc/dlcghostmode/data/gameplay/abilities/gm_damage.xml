@@ -20,8 +20,13 @@
       <ability name="attack_heavy_special" on_conflict="extend">
         <attack_power type="mult" always_random="false" min="0" max="0" />
       </ability>
-      <ability name="attack_heavy_noparry" on_conflict="extend">
+      <!-- attack_heavy_noparry is a Hearts of Stone ability: extend empties it (development.md), so it is
+           given whole, as legacy's: no attack power bonus (DMG-01), no focus_gain (SKL-07), the tag and
+           focus_hit_drain_mod kept. -->
+      <ability name="attack_heavy_noparry" on_conflict="replace">
+        <tags>attack_heavy</tags>
         <attack_power type="mult" always_random="false" min="0" max="0" />
+        <focus_hit_drain_mod type="mult" always_random="false" min="1.5" max="1.5" />
       </ability>
       <ability name="attack_heavy_knockdown" on_conflict="extend">
         <attack_power type="mult" always_random="false" min="0" max="0" />

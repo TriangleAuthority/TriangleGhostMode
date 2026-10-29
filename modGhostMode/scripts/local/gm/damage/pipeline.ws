@@ -285,7 +285,8 @@ function ProcessActionDamage() : bool
 
 
 // DMG-01: a hit that deals less than 1 to the stat the victim uses deals nothing and plays no hit
-// animation (legacy ModifyHitSeverityReactionFromDamage, its damage half; the hit severity half is AI's).
+// animation (legacy ModifyHitSeverityReactionFromDamage, its damage half; the hit severity half is AI-12's
+// GMModifyHitSeverityFromDamage, ai/poise.ws, called at the end for the hits this one leaves alone).
 // Called in CActor.ReduceDamage, before the final-damage step, so the difficulty multiplier cannot lift
 // such a hit above 1. Damage over time, parried, countered and dodged hits and flying NPCs are left alone.
 function GMZeroSubOneDamage( out damageData : W3DamageAction )
@@ -315,7 +316,9 @@ function GMZeroSubOneDamage( out damageData : W3DamageAction )
 	{
 		damageData.processedDmg.vitalityDamage = 0;
 		damageData.SetHitAnimationPlayType(EAHA_ForceNo);
+		return;
 	}
+	GMModifyHitSeverityFromDamage(damageData);	// AI-12: poise
 }
 
 // DMG-05: final damage, after armor, attack power, resistances and ReduceDamage (legacy
@@ -473,7 +476,8 @@ function GMProcessDamageModification()
 // completely) and without the VulnerableFromFront check, which ProcessDamageIncrease makes before the
 // formula (legacy). DMG-12: hostile hits on allies deal 1% to 2% of their maximum health (Axii
 // puppets 10% to 15%; legacy); 5.x's x0.1 for Axii'd allies off. ALCH-13: Reliever's decoction's (Mutagen 28)
-// terms are legacy's. EFX-09: LastBreath (rotfiends) does not cap a frozen hit. The rest is 5.x's until its areas (Ice Armor and Eredin: AI).
+// terms are legacy's. EFX-09: LastBreath (rotfiends) does not cap a frozen hit. AI-15: Ice Armor no longer halves damage (its +30%
+// resistances are in GetDamageResists, damage/formula.ws) and Eredin is no longer immune to signs (legacy).
 @replaceMethod(CActor)
 function ReduceDamage( out damageData : W3DamageAction )
 {
@@ -667,7 +671,7 @@ function ReduceDamage( out damageData : W3DamageAction )
 	}
 
 
-	if( this.HasAbility( 'EredinInvulnerable' ) && damageData.IsActionWitcherSign() )
+	if( false && this.HasAbility( 'EredinInvulnerable' ) && damageData.IsActionWitcherSign() )	//modSigns: AI-15, Eredin no longer immune to signs (legacy)
 	{
 		if ( canLog )
 		{
@@ -818,29 +822,7 @@ function ReduceDamage( out damageData : W3DamageAction )
 
 
 
-	if( actorAttacker && HasAbility( 'IceArmor' ) && !actorAttacker.HasAbility( 'Ciri_Rage' ) )
-	{
-		if ( theGame.GetDifficultyMode() == EDM_Easy )
-		{
-			if ( canLog )
-			{
-				LogDMHits("CActor.ReduceDamage: victim has IceArmor ability - damage reduced by 5%", damageData );
-			}
-			damageData.processedDmg.vitalityDamage *= 0.95f;
-			damageData.processedDmg.essenceDamage *= 0.95f;
-			theGame.witcherLog.CombatMessageAddGlobalDamageMult(0.95f);
-		}
-		else
-		{
-			if ( canLog )
-			{
-				LogDMHits("CActor.ReduceDamage: victim has IceArmor ability - damage reduced by 50%", damageData );
-			}
-			damageData.processedDmg.vitalityDamage *= 0.5f;
-			damageData.processedDmg.essenceDamage *= 0.5f;
-			theGame.witcherLog.CombatMessageAddGlobalDamageMult(0.5f);
-		}
-	}
+	//modSigns: removed IceArmor's halving of damage (5% on Easy): +30% resistances in GetDamageResists instead (AI-15, legacy)
 
 
 

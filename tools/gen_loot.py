@@ -445,12 +445,28 @@ def bin_plan(blobs, path):
     return ops, touched, conflicts
 
 
-def bin_expected(blobs, path):
+def bin_expected(blobs, path, with_ai=True):
+    """LOOT's edits on 5.x's file; then, for a file AI also edits, AI's (gen_ai_ent.py), so both tools write
+    the same bytes. `touched` lists LOOT's edited objects; AI's are checked by gen_ai_ent.py --verify."""
     import cr2w_patch as cp
     ops, touched, conflicts = bin_plan(blobs, path)
     out, changes, hit = cp.apply(blobs.get("vanilla-5.x", path), [cp.Op(o) for o in ops])
     missing = [o for k, o in enumerate(ops) if k not in hit]
+    if with_ai:
+        import gen_ai_ent
+        ai = gen_ai_ent.expected(blobs, path)[0] if path in gen_ai_ent.units() else None
+        if ai is not None:
+            out = ai
     return out, ops, changes, missing, touched, conflicts
+
+
+def ai_touched(blobs, path):
+    """The objects AI's edits change in a file (gen_ai_ent.py), left to its --verify."""
+    import gen_ai_ent
+    if path not in gen_ai_ent.units():
+        return set()
+    out, p = gen_ai_ent.expected(blobs, path)
+    return set(p.targets) if out is not None else set()
 
 
 def bin_generate(worktree, check):
@@ -492,7 +508,10 @@ def bin_verify(worktree):
         g, v, l = bin_chunks(port), bin_chunks(blobs.get("vanilla-5.x", path)), bin_chunks(blobs.get("legacy-GM", path))
         if set(g) != set(v):
             bad.append("objects differ from 5.x's")
+        ai = ai_touched(blobs, path)
         for key in sorted(set(g) & set(v)):
+            if key in ai:
+                continue
             if key in touched:
                 if bin_decoded(*g[key]) != bin_decoded(*l[key]):
                     bad.append(f"{key} does not read as legacy's")

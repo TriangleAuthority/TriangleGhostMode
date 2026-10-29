@@ -65,7 +65,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 | Port status | signed off (2026-10-07; slices 2, 3a, 3b) |
 | Open checks | the removal of the fist bonus by level and of the per-monster Igni weakness (no Igni or fist hit tested); real attacks (all checks are scripted hits through the damage manager) |
 | Save impact | none (expected) |
-| NG+ counterpart | applied (`gm_damage.xml`'s NG+ copy; the `basic_attacks.xml` overrides reach the NG+ and ep1 definitions too: ep1's `attack_heavy_noparry` reads 0 attack power in game) |
+| NG+ counterpart | applied (`gm_damage.xml`'s NG+ copy; the `basic_attacks.xml` overrides reach the NG+ definitions too; Hearts of Stone's `attack_heavy_noparry` is given whole, see Decisions) |
 
 **What it does:** damage = (weapon damage × (1 + the additive pool) + attack power base − armor) × attack power multiplier + attack power additive, then × (1 − resistance), resistance clamped to 0–100%. "Raw damage" is the weapon damage after the raw-damage steps (flat additions, then the pool, [DMG-04](#dmg-04-additive-raw-damage-pool)); the attack power base (flat, from the attacker's abilities, e.g. NPC level bonuses) is added after the pool, so the pool does not scale it. Until slice 3, 5.x's own raw-damage steps (separate multipliers) stand where the pool will be. Armor applies to every damage type, fire, frost and elemental included (vanilla let those through armor), except where DMG-02 ignores it. A hit that armor stops deals nothing: the player's vanilla minimum (5% of the raw damage, at least 1) is gone, damage below 1 becomes 0 and plays no hit reaction, and the hit is flagged as stopped by armor. Vanilla's heavy-attack handling (−0.833 attack power, ×1.833 final damage) is removed, replaced by Strong Attack's +50% weapon damage and +200 armor piercing (DMG-04, DMG-02); NPC heavy attacks get +25% raw damage instead of their attack power bonuses (`basic_attacks.xml`: heavy, super heavy, knockdown, stagger and bleeding attacks lose their +0.15 to +0.5).
 
@@ -76,6 +76,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 **Decisions:** port as legacy; the per-monster Igni weakness is dropped as in legacy (weaknesses are resistances, AI).
 
 - **Deviation:** 5.x's ×1.1 to the damage the player takes in New Game+ (end of `CalculateDamage`, new in 5.x) is kept: NG+ scaled like vanilla's ([New Game+ policy](../feature-mapping.md#new-game-carried-over-and-scaled-not-balanced-or-tested)) (project owner, 2026-10-07; audit F5).
+- Hearts of Stone's `attack_heavy_noparry` (an NPC heavy attack that cannot be parried) is given whole (`replace`) as legacy's: tag `attack_heavy`, `focus_hit_drain_mod` ×1.5, no attack power bonus, no `focus_gain` (SKL-07). Until 2026-10-28 it took `extend`, which empties a Hearts of Stone ability ([development.md](../development.md#fine-grained-xml-overrides-50)): in game it read 0 attributes and had lost its `attack_heavy` tag, so heavy-attack rules keyed on the tag missed it (found by the AI-A audit, F1; fixed in 5.x-GM `2499b4f7`, verified in both trees by scripted reads, `GMTest_dmgxml` in the regression, which failed on a throwaway build with the old entry).
 - Mutagen 2's 1.32 resistance bonus is removed since [ALCH-13](alch.md#alch-13-defensive-and-conditional-decoctions-arachas-doppler-fiend-elemental-werewolf-leshen-griffin-relievers) (2026-10-20; until then a temporary deviation).
 
 
@@ -86,7 +87,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 1. **The formula** (slice 2, 5.x-GM `6456ff4d`): `damage/formula.ws` replaces `CalculateDamage`, `GetDamageResists` and `GetAttackersPowerMod` on 5.x's bodies. Verified 2026-10-07 (`gmtest_dmg02`, `gmtest_dmg02_turn`/`_back`: scripted hits of Geralt's of one damage type on a human test dummy with set armor and resistances; `gmtest_dmg`: real weapons on dummies, a bandit and a wraith, and a live wolf; regression 181 passed): armor 40 subtracted from raw damage before attack power; a hit below the armor deals only the additive attack power; elemental damage reduced by armor; a resistance of −50% counts as 0 and leaves armor whole; a 30% resistance applied last; damage over time without armor and attack power; the player's shock damage without armor; a headshot without armor and resistance, +25% attack power; a backstab +25% attack power; the probe's recorded hits all follow the port's formula.
 2. **Heavy attacks** (slice 3a, 5.x-GM `dc81f49b`, with [DMG-04](#dmg-04-additive-raw-damage-pool)): 5.x's −0.433 attack power and ×1.833 removed; `sword_2` as legacy (`gm_damage.xml`: +50% weapon damage, 200 armor piercing, no +0.333 attack power); heavy and special attacks lose their attack power bonus (`attack_heavy` and five more). Verified 2026-10-07 (`gmtest_dmg03a`, scripted attacks built as real ones, Geralt's sword, a human test dummy with 250 armor): a heavy attack has a light attack's attack power, Geralt's and the dummy's; it follows the formula without ×1.833; Strong Attack pierces 200 armor.
 3. **No minimum damage, nothing below 1** (slice 3b, 5.x-GM `7aecd469`, with [DMG-05](#dmg-05-order-of-damage-steps-and-final-damage)): `CActor.ReduceDamage` replaced on 5.x's body without the player's minimum damage; hits below 1 deal nothing (the final-damage step). Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits of the test dummy on Geralt): a hit of 10 that Geralt's armor stops deals 0 (5.x: at least 1); a hit of 0.43 after the formula deals 0. 
-4. **Hits below 1 in `ReduceDamage`** (audit F2, 5.x-GM `6b90faf5`): `GMZeroSubOneDamage` (legacy `ModifyHitSeverityReactionFromDamage`, its damage half; the hit severity half is AI's), called in `CActor.ReduceDamage` after the bolts' minimum of 1: a hit below 1 deals nothing and plays no hit animation, before final damage (so the difficulty multiplier cannot lift it). Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits of the test dummy on Geralt, the animation left to the game): a hit of 10 that his armor stops deals 0 with no hit animation; a hit of 300 deals 217 with its animation.
+4. **Hits below 1 in `ReduceDamage`** (audit F2, 5.x-GM `6b90faf5`): `GMZeroSubOneDamage` (legacy `ModifyHitSeverityReactionFromDamage`, its damage half; the hit severity half is AI-12's `GMModifyHitSeverityFromDamage`, `ai/poise.ws`, called at its end since AI slice B2), called in `CActor.ReduceDamage` after the bolts' minimum of 1: a hit below 1 deals nothing and plays no hit animation, before final damage (so the difficulty multiplier cannot lift it). Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits of the test dummy on Geralt, the animation left to the game): a hit of 10 that his armor stops deals 0 with no hit animation; a hit of 300 deals 217 with its animation.
 
 ### DMG-02 Armor and resistance rules
 
@@ -99,7 +100,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 | Depends on | DMG-01; hooks for SKL (Sunder Armor, Strong Attack), ALCH (oils, Mutagen 2, Dimeritium), SWD (Aerondight, Iris), AI (Ice Armor), XBOW (headshots) |
 | Skill trees | both: classic `sword_s6` Sunder Armor, new `sword_s28` (5.x's armor debuff goes; legacy's flat −25% with SKL: DD2, D56); `sword_2` shared |
 | Port form | `@replaceMethod(W3DamageManagerProcessor) GetDamageResists` (`damage/formula.ws`); XML `all_NPC_ability`, `all_PC_ability`; the point names (`ResistStatNameToEnum`, `ResistStatEnumToName`) ported with EFX-08 (`effects/resistNames.ws`, wrappers) |
-| Port status | signed off (2026-10-07), except the other areas' terms it hosts (deviations; ported with those areas) |
+| Port status | signed off (2026-10-07); the other areas' terms it hosts ported with those areas (the last, Ice Armor's, with AI-15, 2026-10-28) |
 | Open checks | the fistfight minigame ignoring armor and resistances; the other areas' terms kept from 5.x (oils, Sunder Armor) with this function |
 | Save impact | none (expected) |
 | NG+ counterpart | applied (the two abilities' NG+ copies) |
@@ -112,7 +113,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 
 **Decisions:** port as legacy; 5.x's armor-shrinking rule does not apply (DD2, project owner, 2026-10-06): with resistances clamped at 0 it can never trigger. Before porting the resistance names, list the abilities carrying `bleeding_resistance` points in 5.x; switching them on is a deviation if they differ from legacy's: checked with EFX-08 (2026-10-24): every `bleeding_resistance` and `burning_resistance` point value in 5.x's XML is 0 (20 and 2 entries), as legacy's (its `will_resistance` 0 or registrations with a multiplier of 1), so no deviation.
 
-- **Deviation:** the other areas' terms in this function stay 5.x's until those areas are ported: Ice Armor's +30% resistance (AI, 5.x halves the damage in `ReduceDamage`) (temporary, until those areas). Mutagen 28's 1.32 resistances are gone and Mutagen 2's debuff is legacy's since ALCH-13, Dimeritium's armor and resistance reduction since ALCH-15, the oils' values since ALCH-16 (their resistance reduction 0 in every version; 2026-10-20). A fully charged Aerondight's and Iris's phantom strike's full ignore are legacy's (SWD-05, SWD-06, 2026-10-19).
+The other areas' terms in this function are ported with their areas; the temporary deviation that kept them 5.x's ended with the last one, Ice Armor's +30% resistance, ported by AI-15 (slice C1, 2026-10-28, [ai.md](ai.md#ai-15-the-wild-hunt); 5.x halved the damage in `ReduceDamage`, removed there). Mutagen 28's 1.32 resistances are gone and Mutagen 2's debuff is legacy's since ALCH-13, Dimeritium's armor and resistance reduction since ALCH-15, the oils' values since ALCH-16 (their resistance reduction 0 in every version; 2026-10-20). A fully charged Aerondight's and Iris's phantom strike's full ignore are legacy's (SWD-05, SWD-06, 2026-10-19).
 
 
 **Slices:** slice 2, with [DMG-01](#dmg-01-armor-before-attack-power).
@@ -131,7 +132,7 @@ Stat registration (audit F4, 5.x-GM `6b90faf5`): `all_NPC_ability` registers wil
 | Depends on | DMG-01; GEN (headshot and backstab rule); hooks for SKL (Whirl, crit skills), ARM (Lynx, Bear, Red Wolf), SWD (Aerondight), MUT (Mutations 2, 9) |
 | Skill trees | both (crit skills `sword_s8`, `sword_s17`, `sword_s7` read by the function; ported with SKL) |
 | Port form | `@replaceMethod(W3DamageManagerProcessor) GetAttackersPowerMod` (`damage/formula.ws`), `ProcessCriticalHitCheck` (later) (shared with SKL, MUT, DEF-07: one body, feature-tagged hunks); the constants as `GMHeadShotDamageBonus()` and `GMBackAttackDamageBonus()` |
-| Port status | signed off (2026-10-07), except the other areas' terms it hosts (deviations; ported with those areas) |
+| Port status | signed off (2026-10-07); the other areas' terms it hosts ported with those areas (the last, AI-20's fist bonus, in AI slice C3, 2026-10-28) |
 | Open checks | Igni's and Aard's projectiles at full sign intensity; no additive attack power for bolts; no crits for damage over time and in non-deadly fights (the wrapper skips the check; a crit was not attempted in those cases) |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
@@ -161,7 +162,7 @@ No crits for damage over time or in non-deadly fights (slice 6a, 5.x-GM `5a615f8
 | Depends on | DMG-01; SKL (most of the pool's terms), SWD, ENCH, MUT, EFX (frozen) |
 | Skill trees | both: the pool takes legacy's terms (classic) and 5.x's new-tree multipliers (`sword_s22` to `s26`, `s29`, `s32`, `magic_s35`, `s41`, `perk_27`, `28`, `37`, `44`, `alchemy_s23` to `s26`); SKL dropped or replaced most of these ([follow-ups from SKL](#follow-ups-from-skl)) |
 | Port form | `damage/pool.ws`: `@replaceMethod(W3DamageManagerProcessor) ProcessDamageIncrease` on 5.x's signature (its multipliers as pool terms, the pool handed on in fields), `ProcessNewSkills_Combat` and the four new-tree combat skill functions (their bonuses as pool terms; the pool applied once at the end, `GMPoolApply`); the action's damage types written back (`SetDTs`, so that Quen and other later readers see the pool) with SKL-11, which needs it; XML `gm_damage.xml` (`sword_2`) |
-| Port status | signed off (2026-10-07), except the other areas' terms it hosts (deviations; ported with those areas) |
+| Port status | signed off (2026-10-07); the other areas' terms it hosts ported with those areas (the last, AI-20's fist bonus, in AI slice C3, 2026-10-28) |
 | Open checks | the pool terms of other areas: the bomb items' terms, SWD-07's NG+ `sword_dmg_bonus` and `spell_dmg_bonus` (NG+, untested by policy) (Aerondight's is gone with SWD-05; Runeword 4's with ENCH-05; Mutation 8's is gone with MUT-06; the Lynx and Wolven sets' with ARM-06 and ARM-09); the NPC ranged bonus above level 31 being gone. SKL's pool terms are checked in SKL's entries (Rend, Strength Training, Deflection, Steady Shot, Heavy Artillery, Wolf School); the 5.x new-tree terms are gone ([follow-ups from SKL](#follow-ups-from-skl)) |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
@@ -182,7 +183,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 4. **Legacy's own exceptions**, kept multiplicative in legacy's code: the underwater crossbow bonus and Mutation 9's bolt damage. Kept as legacy.
 
 - 5.x's own versions of the terms legacy reworked were pool terms until their areas ported legacy's; none is left (ended with SWD-05, 2026-10-19). Aerondight's is gone: legacy's damage per enemy and crit power since SWD-05 (2026-10-19). Runeword 4's overheal term is gone: legacy's Invigoration effect on the weapon damage since ENCH-05 (2026-10-19). The Wolven set's is gone (legacy's oil bonuses, ARM-09, 2026-10-17). Mutation 8's term is gone: legacy's final-damage factor since MUT-06 (2026-10-17). The Lynx set's are gone (legacy's attack power, ARM-06, 2026-10-17). SKL's are ported: Heavy Artillery (legacy's), Perk 27 and `alchemy_s25` gone, the potion-duration passive zeroed (SKL-01).
-- **Deviation:** legacy's pool terms and flat additions of other areas are not ported yet: `fist_dmg_bonus` (AI) (temporary, until that area; the frozen target's bonus came with ALCH-14, audit F2, 2026-10-20; Mutagen 9 came with ALCH-11, 2026-10-20; Mutation 10 came with MUT-09, Heft and Rotation with ENCH-10 and ENCH-13, `sword_dmg_bonus`/`spell_dmg_bonus` with SWD-07, 2026-10-19).
+- Legacy's pool terms and flat additions of other areas are all ported: the fist damage bonus (`fist_dmg_bonus` of the fistfight tiers, the first flat addition) came with AI-20 (AI slice C3, 2026-10-28; until then a temporary deviation); the frozen target's bonus with ALCH-14, audit F2, 2026-10-20; Mutagen 9 with ALCH-11, 2026-10-20; Mutation 10 with MUT-09, Heft and Rotation with ENCH-10 and ENCH-13, `sword_dmg_bonus`/`spell_dmg_bonus` with SWD-07, 2026-10-19.
 
 **Slices:**
 
@@ -445,7 +446,7 @@ What the probe showed of 5.x (level 10, steel sword, Hard): Geralt's attack powe
 | Flags | — |
 | Depends on | — (AI's armor values for humans) |
 | Skill trees | n/a |
-| Port form | `damage/weapon.ws`: `GMLazyArmorFix`, `GMHasArmorAbility`, `GMGetArmorAbilityFromPath`, called from `@wrapMethod(CNewNPC) OnSpawned` (legacy: from `AddLevelBonuses`, which AI replaces later) |
+| Port form | `damage/weapon.ws`: `GMLazyArmorFix`, `GMHasArmorAbility`, `GMGetArmorAbilityFromPath`, called, as in legacy, from `CNewNPC.AddLevelBonuses` (AI-01's replacement, `ai/levels.ws`, since AI slice A1, 2026-10-28; before it from a wrapper of `OnSpawned`) |
 | Port status | signed off (2026-10-07; slice 4) |
 | Open checks | — |
 | Save impact | none (expected: added at spawn) |

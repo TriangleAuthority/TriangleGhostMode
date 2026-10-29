@@ -6,7 +6,8 @@
 // 5.x's new-tree instant-kill sources are gone: Deadly Precision's armed strong attack (and its
 // adrenaline against immune enemies), Arrow Deflection's reflected arrows, Lightning Reflexes'
 // headshots.
-// See docs/features/skl.md.
+// AI-17 (ai/instantKill.ws) adds two of legacy's rules to the same function: contract monsters are immune,
+// and a LastBreath monster is cut down to its threshold. See docs/features/skl.md and ai.md.
 
 // The Deadly Precision the player has (classic first); S_SUndefined if none.
 @addMethod(W3PlayerWitcher)
@@ -51,6 +52,11 @@ function ProcessInstantKill()
 	{
 		return;
 	}
+
+	if( (W3MonsterHuntNPC)actorVictim )	//modSigns: AI-17, contract monsters are immune to instant kills (legacy)
+	{	//modSigns
+		return;	//modSigns
+	}	//modSigns
 
 	victimIsImmune = actorVictim.IsImmuneToInstantKill();
 
@@ -103,8 +109,18 @@ function ProcessInstantKill()
 			LogDMHits( "Instant kill!! (" + NoTrailZeros( instantKill * 100 ) + "% chance", action );
 		}
 
-		action.processedDmg.vitalityDamage += actorVictim.GetStat( BCS_Vitality );
-		action.processedDmg.essenceDamage += actorVictim.GetStat( BCS_Essence );
+		if( actorVictim.HasAbility( 'LastBreath' ) && !action.GetWasFrozen() )	//modSigns: AI-17, a LastBreath monster (rotfiend) is cut down to its threshold and explodes; a frozen one dies (EFX-09) (legacy)
+		{	//modSigns
+			if( actorVictim.UsesVitality() )	//modSigns
+				action.processedDmg.vitalityDamage = GMGetLastBreathMaxAllowedDamage();	//modSigns
+			else	//modSigns
+				action.processedDmg.essenceDamage = GMGetLastBreathMaxAllowedDamage();	//modSigns
+		}	//modSigns
+		else	//modSigns
+		{	//modSigns
+			action.processedDmg.vitalityDamage = actorVictim.GetStat( BCS_Vitality );	//modSigns: the victim's health (legacy; 5.x adds it to the hit's damage)
+			action.processedDmg.essenceDamage = actorVictim.GetStat( BCS_Essence );	//modSigns
+		}	//modSigns
 		action.SetCriticalHit();
 		action.SetInstantKillFloater();
 

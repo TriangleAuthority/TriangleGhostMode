@@ -21,6 +21,10 @@ import class W3GameParams extends CObject
 	default DURABILITY_WEAPON_LOSE_VALUE_HARDCORE = 0.05;	//modSigns: vanilla 0.1
 	// ALCH-01: overdose at 75% of maximum toxicity (legacy, the owner's DL1; gm/alchemy/toxicity.ws).
 	default TOXICITY_DAMAGE_THRESHOLD = 0.75;	//modSigns: vanilla 0.50001
+	// AI-01: an enemy counts as "high" 6 and "deadly" 15 levels above Geralt (legacy and 1.32; the owner's
+	// DA4). Also read by SKL-12's finisher rule, UI-12's red level, quest colours, parries and XP.
+	default LEVEL_DIFF_HIGH = 6;	//modSigns: vanilla 10
+	default LEVEL_DIFF_DEADLY = 15;	//modSigns: vanilla 20
 }
 
 function GMIsMeleeStaminaAction(action : EStaminaActionType) : bool

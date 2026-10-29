@@ -1079,6 +1079,15 @@ function GMTest_dmgxml()
 	ok = min.valueAdditive == 200;
 	dm.GetAbilityAttributeValue('sword_2', 'heavy_attack_dmg_boost', min, max);
 	GMTestReport(ok && min.valueMultiplicative == 0.5, "DMG-04 sword_2: 200 armor piercing, +50% heavy attack damage");
+	// AI-A audit F1's side note: Hearts of Stone's attack_heavy_noparry, given whole (extend emptied it): its
+	// attack_heavy tag and focus_hit_drain_mod, no attack power bonus (DMG-01), no focus_gain (SKL-07)
+	dm.GetAbilityAttributeValue('attack_heavy_noparry', 'focus_hit_drain_mod', min, max);
+	ok = dm.AbilityHasTag('attack_heavy_noparry', 'attack_heavy') && min.valueMultiplicative == 1.5;
+	dm.GetAbilityAttributeValue('attack_heavy_noparry', 'attack_power', min, max);
+	ok = ok && min.valueMultiplicative == 0;
+	dm.GetAbilityAttributeValue('attack_heavy_noparry', 'focus_gain', min, max);
+	GMTestReport(ok && min.valueBase == 0, "DMG-01 attack_heavy_noparry (Hearts of Stone): tag attack_heavy " + dm.AbilityHasTag('attack_heavy_noparry', 'attack_heavy')
+		+ ", focus_hit_drain_mod x1.5, no attack power bonus, no focus_gain");
 }
 
 @addMethod(W3PlayerWitcher)

@@ -560,6 +560,14 @@ exec function gmtest_panel()
 	GMTest_ui05();
 	GMTest_item12_after();
 	GMTest_alchport_after();
+	GMTest_ai06_after();
+	GMTest_ai10_after();
+	GMTest_ai11_after();
+	GMTest_ai14_after();
+	GMTest_ai15_after();
+	GMTest_ai17_after();
+	GMTest_ai19_after();
+	GMTest_ai20_after();
 }
 
 function GMTest_panel()
@@ -2181,6 +2189,17 @@ exec function gmtest_regress()
 	GMTest_xbow07();
 	GMTest_xbow08();
 	GMTest_xbow09();
+	GMTest_ai01();
+	GMTest_ai03();
+	GMTest_ai06();	// spawns the sample entities; GMTest_ai06_after() in gmtest_panel() reads and removes them
+	GMTest_ai08();
+	GMTest_ai10();	// spawns a deserter and a shield bearer; GMTest_ai10_after() in gmtest_panel() reads the counters' window and breaks the shield
+	GMTest_ai11();	// spawns the poise and flyer NPCs; GMTest_ai11_after() in gmtest_panel() reads and removes them
+	GMTest_ai14();	// spawns a cyclops and an arachas; GMTest_ai14_after() in gmtest_panel() reads and removes them
+	GMTest_ai15();	// spawns Wild Hunt warriors and Eredin, one warrior burning with Ice Armor; GMTest_ai15_after() in gmtest_panel() reads and removes them
+	GMTest_ai17();	// spawns a contract monster, rotfiends and bandits, reads the projectile data; GMTest_ai17_after() in gmtest_panel() hits and removes them
+	GMTest_ai19();	// spawns the Caretaker and four quest monsters, the CausesDamage value, the shovel, the spade text; GMTest_ai19_after() in gmtest_panel() reads their immunities and removes them
+	GMTest_ai20();	// Geralt's maximum Vitality in a fistfight, the fist damage bonus, a fistfighter for GMTest_ai20_after() in gmtest_panel() (the fight's start)
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

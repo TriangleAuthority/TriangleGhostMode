@@ -430,12 +430,16 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 | Save impact | none |
 | NG+ counterpart | none |
 
-**What it does** (changelist 1113): an enemy far above Geralt shows its level in red instead of `???`; legacy also dropped the displayed level's fake addon and its cap at 5 above the maximum, which is DIFF's.
+**What it does** (changelist 1113): an enemy far above Geralt shows its level in red instead of `???`, from 6 levels above him (`LEVEL_DIFF_HIGH`: 6 since AI's slice A1, the owner's DA4, 2026-10-28; 10 before it, 5.x's value); legacy also dropped the displayed level's fake addon and its cap at 5 above the maximum, which is DIFF's.
 
 **Decisions:** port as legacy (DU8).
-- **Deviation:** the displayed level keeps 5.x's fake level addon, the New Game+ level addon and the cap at 5 above the maximum level, which legacy dropped; they belong to DIFF's fake levels (temporary, until DIFF; porter's call, confirmed by the owner, 2026-10-21).
+- **Deviation:** the displayed level keeps 5.x's fake level addon (`levelFakeAddon`) and the cap at 5 above the maximum level, which legacy dropped; they belong to DIFF's fake levels (temporary, until DIFF; porter's call, confirmed by the owner, 2026-10-21). The New Game+ level addon this deviation also kept is gone since AI-01 (slice A1, 2026-10-28): New Game+ adds its level to the enemy's real level, as legacy, and never sets the addon.
+
+Since the AI-C audit (F6, 2026-10-29) the 71 enemies whose fake level legacy made real carry legacy's addon (0) with their level, so the HUD shows legacy's level for them (the sergeant 11, not 22; [AI-06](ai.md#ai-06-enemy-levels-and-flags)); the code's addon stays as the deviation says.
 
 **Verification (slice 9, 2026-10-21, both trees):** scripted (`gmtest_ui12_a/b`): a hostile human 40 levels above Geralt (level 41 against 1) gives "highLevel" and its level in red (`#FF1919`), not "deadlyLevel". Real, on screen (the HUD with the enemy locked on; screenshot): "41" in the level diamond above its health bar, red; 5.x's skull marker above it remains. UI audit slice A (2026-10-21, both trees, level 30): `gmtest_ui12_a/b` pass ("highLevel", level 70 in red); the check is listed with the manual UI checks in `gmTestsUi.ws`.
+
+**Verification (AI slice A1, 2026-10-28, both trees):** scripted (`gmtest_ai01_read`, hostile human dummies): 5 levels above Geralt "normalLevel" (green), 6 levels above "highLevel" (red), 6 below "lowLevel". Real, on screen: a bandit at level 7 against Geralt's 1, locked on, shows its level in red.
 
 **Skull marker** (answered by the owner, 2026-10-21): 1.32 also shows the skull above an enemy's level, so the skull plus the red level is vanilla's and legacy's HUD; nothing to change.
 
