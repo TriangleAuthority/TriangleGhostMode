@@ -9,9 +9,6 @@
       <!-- gameplay/abilities/monster_base_abl_new.xml -->
       <!-- gameplay/abilities/opp_base_abl.xml -->
       <!-- gameplay/abilities/common_abilities.xml -->
-      <ability name="difficulty_CommonHardcore" on_conflict="extend">
-        <staminaRegen type="mult" always_random="false" min="0" max="0" />  <!-- removed by legacy -->
-      </ability>
       <!-- dlc/ep1/data/gameplay/abilities/monster_base_abl.xml -->
       <!-- dlc/ep1/data/gameplay/abilities/opp_base_abl.xml -->
       <!-- dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml -->

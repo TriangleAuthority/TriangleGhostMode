@@ -342,12 +342,16 @@ function GMTestAi06LevelSample(npc : CNewNPC, label : string, p : int, wantLevel
 }
 
 // AI-A audit F4: the level code in the regression. At a set Geralt level P: a hostile bandit set to level 2 is
-// raised to P - 6 (DA2's soft scaling) with P - 7 NPCLevelBonus and the health they give; a hostile drowner
-// set to P + 6 keeps it and gets High (DA4: 6 levels), not Deadly.
+// raised to P - 6 (soft upscaling, DIFF-04's default, set for the check whatever the player chose) with P - 7
+// NPCLevelBonus and the health they give; a hostile drowner set to P + 6 keeps it and gets High (DA4: 6
+// levels), not Deadly.
 function GMTestAi06LevelCode(bandit : CNewNPC, drowner : CNewNPC)
 {
 	var p : int;
+	var prevOpts : array<string>;
 
+	prevOpts = GMTestDiff04Record();
+	GMTestDiff04Set(3, 0, 0, false, false);
 	p = GMTestAi06SetGeraltLevel();
 	if(!bandit || !drowner)
 	{
@@ -356,6 +360,7 @@ function GMTestAi06LevelCode(bandit : CNewNPC, drowner : CNewNPC)
 	}
 	GMTestAi06LevelSample(bandit, "a bandit set to level 2", p, p - 6, false);
 	GMTestAi06LevelSample(drowner, "a drowner set to level " + (p + 6), p, p + 6, true);
+	GMTestDiff04Restore(prevOpts);
 }
 
 // Spawns the samples hostile (for gmtest_ai06_oil/hit and a look in game) without the checks: sample i at

@@ -75,7 +75,7 @@ def git(*args):
 
 def abilities(text):
     out = {}
-    for m in re.finditer(r'(?ms)^([ \t]*)<ability\s+name="([^"]+)"[^>]*>.*?</ability>', text):
+    for m in re.finditer(r'(?ms)^([ \t]*)<ability\s+name\s*=\s*"([^"]+)"[^>]*>.*?</ability>', text):
         out[m.group(2)] = m.group(0)
     return out
 

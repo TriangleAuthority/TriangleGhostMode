@@ -6,10 +6,9 @@
 // legacy's damage-over-time resistances. Wolves, boars, rats and the djinn are levelled like the
 // rest (PA5). Guards stand 16 levels above Geralt (PA4). New Game+ adds its level to every
 // non-animal's level instead of 5.x's fake addon.
-// Legacy's scaling options are DIFF's; until then its recommended preset is fixed here (DA2): "soft"
-// scaling (an enemy more than 6 levels below Geralt is raised to 6 below), no animal halving, no
-// nonlinear level-up, guards' extra levels on, no extra health or damage. 5.x's own upscaling option
-// is off, as in legacy.
+// The scaling itself follows Ghost Mode's enemy scaling options (DIFF-04, difficulty/scaling.ws; default
+// soft upscaling, DD1), and so do the progressive level-up and the health and damage modifiers (slice D5b).
+// 5.x's own upscaling option is off, as in legacy.
 // AI-06's two level fixes (the Blood and Wine nekker warrior, the deserters at one encounter) are here
 // too, as in legacy, and AI-14's cyclops and arachas lines (GMMonsterFixes, ai/monsters.ws).
 // See docs/features/ai.md.
@@ -33,6 +32,7 @@ function OnLevelUpscalingChanged()
 function SetLevel( _level : int )
 {
 	currentLevel = _level;
+	gmSavedRandomLevel = 0;	//modSigns: DIFF-04, a new random level
 	levelBonusesComputedAtPlayerLevel = 0;	//modSigns: was -1
 	AddTimer('AddLevelBonuses', 0.1, true, false, , true);
 }
@@ -42,6 +42,7 @@ function SetLevel( _level : int )
 function GMResetLevel()
 {
 	levelBonusesComputedAtPlayerLevel = -1;
+	gmKeepRandomLevel = false;	// DIFF-04: an option change rolls the random level again, also right after a load
 	AddTimer('AddLevelBonuses', RandRangeF(0.05,0.2), true, false, , true);
 }
 
@@ -49,7 +50,8 @@ function GMResetLevel()
 // NG+ level is added to the level of every NPC but animals, Ciri's enemies and NPCs with
 // NoAdaptBalance or NPCDoNotGainBoost, with no cap (5.x: capped at the maximum level + 5, and an NPC
 // with NPCDoNotGainBoost or NewGamePlusFakeLevel shows the NG+ level as a fake addon instead).
-// The entity's own fake level (levelFakeAddon) is DIFF's and stays.
+// DIFF-05: the entity's own fake level (levelFakeAddon) is zeroed, as legacy ("just in case"): no
+// level shown or used comes from it.
 @wrapMethod(CNewNPC)
 function OnSpawned(spawnData : SEntitySpawnData)
 {
@@ -57,6 +59,7 @@ function OnSpawned(spawnData : SEntitySpawnData)
 
 	ret = wrappedMethod(spawnData);
 	GMManageNGPLevels();
+	gmKeepRandomLevel = spawnData.restored;	// DIFF-04: a restored NPC keeps its saved random level
 	return ret;
 }
 
@@ -73,12 +76,13 @@ function GMManageNGPLevels()
 		}
 	}
 	currentLevel = level + gmCurrentNGPLevel;
+	levelFakeAddon = 0;	//modSigns: DIFF-05, legacy's "just in case": fake levels removed
 	newGamePlusFakeLevelAddon = false;
 }
 
 // AI-01: legacy's AddLevelBonuses (5.x's rewritten body replaced): every bonus removed, the
 // constitution template fixed (AI-02), DMG-15's armor fix, then the level: NPCDoNotGainBoost stops
-// here; guards at Geralt's level + 16; the soft scaling (DA2); level 1 gets nothing; else the
+// here; the scaling options (DIFF-04); guards at Geralt's level + 16; level 1 gets nothing; else the
 // per-level abilities by kind. Called by timer and directly (RecalcLevel).
 @replaceMethod(CNewNPC)
 function AddLevelBonuses(dt : float, id : int)
@@ -93,7 +97,12 @@ function AddLevelBonuses(dt : float, id : int)
 		return;	//modSigns
 
 	if(levelBonusesComputedAtPlayerLevel == -1 || fistFightForcedFromQuest)	//modSigns
+	{	//modSigns
 		currentLevel = level + gmCurrentNGPLevel;	//modSigns: reset and recalculate the level
+		if(!gmKeepRandomLevel)	//modSigns: DIFF-04, kept after a load (legacy rolled it again)
+			gmSavedRandomLevel = 0;	//modSigns: DIFF-04, a new random level
+	}	//modSigns
+	gmKeepRandomLevel = false;	//modSigns
 
 	levelBonusesComputedAtPlayerLevel = playerLevel;	//modSigns
 	fistFightForcedFromQuest = false;	//modSigns
@@ -106,6 +115,8 @@ function AddLevelBonuses(dt : float, id : int)
 	GMRemoveAllLevelBonuses();	//modSigns
 	GMLazyArmorFix(this);	//modSigns: DMG-15, an armor ability for humans without one
 
+	GMAddOptionBonuses();	//modSigns: DIFF-04, the menu's health and damage modifiers (every NPC, as legacy)
+
 	if( HasAbility('NPCDoNotGainBoost') )	//modSigns
 		return;	//modSigns
 
@@ -113,16 +124,17 @@ function AddLevelBonuses(dt : float, id : int)
 	if( GetNPCType() == ENGT_Guard )	//modSigns
 		currentLevel = playerLevel;	//modSigns
 
-	// the soft scaling, for Geralt only (DA2: legacy's recommended preset until DIFF)	//modSigns
-	if( (W3PlayerWitcher)thePlayer && !HasAbility('banshee_summons') && currentLevel < playerLevel - 6 )	//modSigns
-		currentLevel = playerLevel - 6;	//modSigns
+	// level scaling by the options, for Geralt only (DIFF-04)	//modSigns
+	if( (W3PlayerWitcher)thePlayer )	//modSigns
+		GMApplyLevelScaling(playerLevel);	//modSigns
 
-	// guards above Geralt's level (PA4)	//modSigns
+	// guards at least at Geralt's level, and above it (PA4) unless the option says not (DIFF-04)	//modSigns
 	if( GetNPCType() == ENGT_Guard )	//modSigns
 	{	//modSigns
 		if( currentLevel < playerLevel )	//modSigns
 			currentLevel = playerLevel;	//modSigns
-		currentLevel += theGame.params.LEVEL_DIFF_DEADLY + 1;	//modSigns
+		if( !GMGetNoAdditionalLevelsForGuards() )	//modSigns
+			currentLevel += theGame.params.LEVEL_DIFF_DEADLY + 1;	//modSigns
 	}	//modSigns
 	currentLevel = Max(1, currentLevel);	//modSigns
 	// level 1 enemies have no additional abilities	//modSigns
@@ -131,7 +143,8 @@ function AddLevelBonuses(dt : float, id : int)
 	GMInternalAddLevelBonuses();	//modSigns
 }
 
-// AI-01: legacy's RemoveAllLevelBonuses (health kept as a share of the maximum).
+// AI-01: legacy's RemoveAllLevelBonuses (health kept as a share of the maximum); DIFF-04's health and damage
+// modifiers too (legacy's removal of its older modifier names, never defined in 5.x or legacy's files, left out).
 @addMethod(CNewNPC)
 function GMRemoveAllLevelBonuses()
 {
@@ -141,6 +154,7 @@ function GMRemoveAllLevelBonuses()
 		savedHealthPerc = GetStatPercents( BCS_Vitality );
 	else if(GetStatMax( BCS_Essence ) > 0)
 		savedHealthPerc = GetStatPercents( BCS_Essence );
+	GMRemoveScalingSteps();	// DIFF-04's step abilities (difficulty/scaling.ws)
 	RemoveAbility(theGame.params.ENEMY_BONUS_DEADLY);
 	RemoveBuffImmunity(EET_Blindness, 'DeadlyEnemy');
 	RemoveBuffImmunity(EET_WraithBlindness, 'DeadlyEnemy');
@@ -245,7 +259,7 @@ function GMCheckConstitutionAbility()
 // AI-01: legacy's InternalAddLevelBonuses: the displayed level, then one per-level ability per level
 // above 1 by kind (wolves and boars; Vitality users; Essence users armored or not, in groups or
 // solo), and for a hostile non-boss 6+ or 15+ levels above Geralt the High or Deadly ability.
-// The nonlinear level-up option (DIFF) is off.
+// With DIFF-04's progressive level bonuses, more per-level abilities above the level delta (GMLevelBonusCount).
 @addMethod(CNewNPC)
 function GMInternalAddLevelBonuses()
 {
@@ -260,7 +274,7 @@ function GMInternalAddLevelBonuses()
 	else if(GetStatMax( BCS_Essence ) > 0)
 		savedHealthPerc = GetStatPercents( BCS_Essence );
 	AddAbilityMultiple('DisplayedLevelAbl', currentLevel - 1);
-	numAbls = currentLevel - 1;
+	numAbls = GMLevelBonusCount(currentLevel);	// DIFF-04: progressive level bonuses (legacy's count)
 	if ( ( HasAbility('mon_wolf_base') || HasAbility('mon_boar_base') || HasAbility('mon_boar_ep2_base') ) && GetStatMax( BCS_Vitality ) > 0 )
 	{
 		AddAbilityMultiple('AnimalLevelBonus', numAbls);

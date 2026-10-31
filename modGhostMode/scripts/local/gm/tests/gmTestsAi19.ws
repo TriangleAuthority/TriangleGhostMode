@@ -164,6 +164,8 @@ function ProcessAction( act : W3DamageAction )
 			+ " [5.x: the damage], fist bonus " + NoTrailZeros(thePlayer.gmTestAi19FistAfter - thePlayer.gmTestAi19FistBefore) + "; " + npc.GetReadableName() + " health "
 			+ NoTrailZeros(before) + " -> " + NoTrailZeros(after) + " (healed " + NoTrailZeros(after - before) + ", want " + NoTrailZeros(want) + " without shades: max "
 			+ NoTrailZeros(npc.GetMaxHealth()) + " x " + NoTrailZeros(thePlayer.gmTestAi19CD) + " x healing_per_hit_perc " + NoTrailZeros(perc) + "; number_of_shades " + NoTrailZeros(shades) + ")");
+		if( thePlayer.gmTestAi19Fistfight && thePlayer.gmTestAi19FistAfter >= 0 )
+			thePlayer.GMTestDiff02RecordFist(thePlayer.gmTestAi19FistAfter - thePlayer.gmTestAi19FistBefore);	// DIFF-02's punch check (gmTestsDiff02.ws)
 	}
 	if( onNpc )
 		LogChannel('GMTestAI', "C3EV hit on " + npc.GetReadableName() + " by Geralt (" + act.GetBuffSourceName() + "):" + s + " -> dealt " + NoTrailZeros(act.GetDamageDealt())

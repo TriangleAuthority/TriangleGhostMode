@@ -83,10 +83,10 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.StopLowStaminaSFX,STAM-07,
 scripts/game/player/r4Player.ws::CR4Player.CheckForLowStamina,STAM-07,
 scripts/game/player/r4Player.ws::CR4Player.StopLowStaminaSFX,STAM-07,
 scripts/game/gameParams.ws::W3GameParams.GetLowStaminaSFX*,STAM-07,
-menu/modSignsConfig.xml::*,OPT-01,options menu (groups shared by many features)
+menu/modSignsConfig.xml::*,OPT-01 DIFF-04,options menu (groups shared by many features); DIFF-04: the GMScalingOptions group
 scripts/gm_generic/gm_options.ws::gmIsQoLOption,OPT-01,
 scripts/gm_generic/gm_options.ws::gmIsGameplayOption,OPT-01,
-scripts/gm_generic/gm_options.ws::gmIsScalingOption,OPT-01,
+scripts/gm_generic/gm_options.ws::gmIsScalingOption,OPT-01 DIFF-04,DIFF-04: the scaling group
 scripts/gm_generic/gm_options.ws::gmLoadDefaultSettings,OPT-01,defaults for unset options
 scripts/gm_generic/gm_options.ws::gmSetGMVersion,OPT-01,
 scripts/game/gameParams.ws::W3GameParams.gmResetCachedValuesGameplay,OPT-01,
@@ -147,7 +147,7 @@ scripts/game/player/states/vehicles/useVehicle.ws::W3VehicleCombatManagerStateNu
 scripts/game/player/states/vehicles/useVehicle.ws::W3VehicleCombatManagerStateNull.StartAttackAction,STAM-03,horseback attack refused without light cost x3; HORSE: attack cost x3
 scripts/game/projectile/playerBoltProjectile.ws::W3BoltProjectile.ReleaseProjectiles2,STAM-03 XBOW-05,crossbow charged per bolt released; XBOW: bolt name
 scripts/game/gameplay/items/throwables/petards/petard.ws::W3Petard.ThrowProjectile,STAM-03 ARM-10,bomb charged on throw; the set bonus move (Wolf 2 -> Red Wolf 1) is already in 5.x; ARM: no throw delay moved from Wolven tier 2 to Manticore tier 1
-scripts/game/replacers/ciri.ws::W3ReplacerCiri.OnSpawned,STAM-03,Ciri exempt from stamina except her special attack; DIFF: Ciri quest abilities (OnSpawned)
+scripts/game/replacers/ciri.ws::W3ReplacerCiri.OnSpawned,STAM-03 DIFF-06,Ciri exempt from stamina except her special attack; DIFF: Ciri quest abilities (OnSpawned); DIFF-06: calls CheckCiriAbilities
 scripts/game/replacers/ciri.ws::W3ReplacerCiri.ProcessCombatActionBuffer,STAM-03,Ciri exempt from stamina except her special attack; DIFF: Ciri quest abilities (OnSpawned)
 scripts/game/replacers/ciri.ws::W3ReplacerCiri.DrainResourceForSpecialAttack,STAM-03,Ciri exempt from stamina except her special attack; DIFF: Ciri quest abilities (OnSpawned)
 scripts/game/gameplay/items/spells/signEntity.ws::W3SignEntityStateChanneling.Update,STAM-03 SKL-18 MUT-12,"channeled signs drain per second and end at 0 stamina, as 5.x, except the alternate Yrden and Axii, which finish (ported 2026-10-04); SKL: Perk 9 adrenaline casting, Flood of Anger cost"
@@ -544,7 +544,7 @@ files/dlc/ep1/data/gameplay/items_plus/def_item_gloves.xml::definitions/abilitie
 files/dlc/ep1/data/gameplay/items_plus/def_item_gloves.xml::definitions/abilities/ability:Burning Rose Gloves _Stats,STAM-05 ARM-01 ARM-03 ITEM-03,"staminaRegen_armor_mod values for the armor regen option; item stats: resistances; staminaRegen_armor_mod (ARM-03, STAM-05's option); level range: ITEM, weight: WGT; NG+; level generation item_level_min/max (ITEM-03)"
 files/dlc/ep1/data/gameplay/items_plus/def_item_pants.xml::definitions/abilities/ability:Ofir Pants B _Stats,STAM-05 ARM-01 ARM-03 ITEM-03,"staminaRegen_armor_mod values for the armor regen option; item stats: resistances; staminaRegen_armor_mod (ARM-03, STAM-05's option); level range: ITEM, weight: WGT; NG+; level generation item_level_min/max (ITEM-03)"
 files/dlc/ep1/data/gameplay/items_plus/def_item_pants.xml::definitions/abilities/ability:Ofir Pants _Stats,STAM-05 ARM-01 ARM-03 ITEM-03,"staminaRegen_armor_mod values for the armor regen option; item stats: resistances; staminaRegen_armor_mod (ARM-03, STAM-05's option); level range: ITEM, weight: WGT; NG+; level generation item_level_min/max (ITEM-03)"
-files/gameplay/abilities/common_abilities.xml::definitions/abilities/ability:difficulty_CommonHardcore,STAM-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
+files/gameplay/abilities/common_abilities.xml::definitions/abilities/ability:difficulty_CommonHardcore,STAM-08 DIFF-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; DIFF-01: health +150%, damage +250%, the sign resistances and root area dropped"
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:DjinnRage,STAM-08 AI-16,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:DjinnWeak,STAM-08 AI-16,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:EredinStaminaRegen,STAM-08 AI-15,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
@@ -650,7 +650,7 @@ files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:StatsFi
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ff202_einar,STAM-08 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ff203_grim,STAM-08 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:fistfight_q002,STAM-08 AI-20,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
-files/gameplay/abilities_plus/common_abilities.xml::definitions/abilities/ability:difficulty_CommonHardcore,STAM-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
+files/gameplay/abilities_plus/common_abilities.xml::definitions/abilities/ability:difficulty_CommonHardcore,STAM-08 DIFF-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+; DIFF-01: health +150%, damage +250%, the sign resistances and root area dropped"
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:DjinnRage,STAM-08 AI-16,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:DjinnWeak,STAM-08 AI-16,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:EredinStaminaRegen,STAM-08 AI-15,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
@@ -8358,7 +8358,7 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.<members>,UI-10,saved enem
 scripts/gm_generic/gm_generic.ws::EEnemyType,UI-10,enemy types (shared with XP)
 scripts/gm_generic/gm_generic.ws::GetEnemyTypeByAbility,UI-10,enemy type of an NPC (shared with XP)
 scripts/gm_generic/gm_generic.ws::GetLocStringByEnemyType,UI-10,kill count names
-scripts/game/npc/npc.ws::CNewNPC.GetExperienceDifferenceLevelName,UI-12,no ??? for deadly enemies; the fake-level removal is DIFF
+scripts/game/npc/npc.ws::CNewNPC.GetExperienceDifferenceLevelName,UI-12 DIFF-05,no ??? for deadly enemies; the fake-level removal is DIFF; DIFF-05: the fake addon and its cap dropped
 scripts/game/gui/menus/mapMenu.ws::CR4MapMenu.UpdateEntityPins,UI-16,debug labels
 scripts/game/gui/menus/mapMenu.ws::CR4MapMenu.AddPinTypeData,UI-16,debug labels
 scripts/game/gui/menus/journalQuestMenu.ws::CR4JournalQuestMenu.generateFlashObjectForQuest,UI-16,debug labels
@@ -16047,17 +16047,17 @@ scripts/game/projectile/playerBoltProjectile.ws::W3BoltProjectile.OnProjectileIn
 scripts/game/projectile/playerBoltProjectile.ws::W3BoltProjectile.ProcessDamageAction,XBOW-05,one hit per target per bolt (explosive bolts hit up to 3 times); the last bolt of a stack re-added for its hit
 scripts/game/behavior_tree/tasks/combat/btTaskShoot.ws::CBTTaskShoot.IsAvailable,XBOW-09,a shot needs the archer's stamina (the decorator's check)
 scripts/game/behavior_tree/tasks/combat/btTaskShoot.ws::CBTTaskShootDef.<members>,XBOW-09,"a shot costs the light-attack stamina cost, charged on use"
-scripts/game/npc/npc.ws::CNewNPC.<members>,AI-01 AI-14 AI-18,AI-01: currentNGPLevel; AI-14: arachas animation speed; AI-18: the Hakland mage hack timestamp; savedRandomLevel is DIFF's random scaling
+scripts/game/npc/npc.ws::CNewNPC.<members>,AI-01 AI-14 AI-18 DIFF-04,AI-01: currentNGPLevel; AI-14: arachas animation speed; AI-18: the Hakland mage hack timestamp; savedRandomLevel is DIFF's random scaling; DIFF-04: savedRandomLevel
 scripts/game/npc/npc.ws::CNewNPC.OnLevelUpscalingChanged,AI-01,vanilla upscaling switched off (level scaling is legacy's own)
 scripts/game/npc/npc.ws::CNewNPC.OnCombatModeSet,AI-14,sorceress hand fx stopped after combat (community fix; in 5.x)
-scripts/game/npc/npc.ws::CNewNPC.OnSpawned,AI-01,NG+ level and fake-level handling moved to ManageNGPLevels
-scripts/game/npc/npc.ws::CNewNPC.ManageNGPLevels,AI-01,"NG+ level added to level, fake levels zeroed, none for Ciri"
-scripts/game/npc/npc.ws::CNewNPC.SetLevel,AI-01,
-scripts/game/npc/npc.ws::CNewNPC.ResetLevel,AI-01,
-scripts/game/npc/npc.ws::CNewNPC.RemoveAllLevelBonuses,AI-01,
+scripts/game/npc/npc.ws::CNewNPC.OnSpawned,AI-01 DIFF-03,NG+ level and fake-level handling moved to ManageNGPLevels; DIFF-03: PrologModifier no longer added
+scripts/game/npc/npc.ws::CNewNPC.ManageNGPLevels,AI-01 DIFF-05,"NG+ level added to level, fake levels zeroed, none for Ciri; DIFF-05: levelFakeAddon zeroed"
+scripts/game/npc/npc.ws::CNewNPC.SetLevel,AI-01 DIFF-04,DIFF-04: savedRandomLevel reset
+scripts/game/npc/npc.ws::CNewNPC.ResetLevel,AI-01 DIFF-04,DIFF-04: called when a scaling option changes
+scripts/game/npc/npc.ws::CNewNPC.RemoveAllLevelBonuses,AI-01 DIFF-04,DIFF-04: removes the ModSigns abilities
 scripts/game/npc/npc.ws::CNewNPC.CheckConstitutionAbility,AI-02,one constitution template (ConHumanoidMonster > ConAthletic > ConDefault)
-scripts/game/npc/npc.ws::CNewNPC.InternalAddLevelBonuses,AI-01,per-level abilities by enemy kind; DIFF: the nonlinear option
-scripts/game/npc/npc.ws::CNewNPC.AddLevelBonuses,AI-01 AI-06 AI-14,"AI-01 rework; AI-06: guards, the nekker warrior and deserter level fixes; AI-14: cyclops Axii, arachas speed; DIFF: the scaling options, ModSignsAddBonuses"
+scripts/game/npc/npc.ws::CNewNPC.InternalAddLevelBonuses,AI-01 DIFF-04,per-level abilities by enemy kind; DIFF: the nonlinear option; DIFF-04: the progressive level-up
+scripts/game/npc/npc.ws::CNewNPC.AddLevelBonuses,AI-01 AI-06 AI-14 DIFF-04,"AI-01 rework; AI-06: guards, the nekker warrior and deserter level fixes; AI-14: cyclops Axii, arachas speed; DIFF: the scaling options, ModSignsAddBonuses; DIFF-04: the scaling options and ModSignsAddBonuses"
 scripts/game/npc/npc.ws::CNewNPC.OnStartFistfightMinigame,AI-20,
 scripts/game/npc/npc.ws::CNewNPC.ValidateFistfighterAbilities,AI-20,
 scripts/game/npc/npc.ws::CNewNPC.RemoveFistFightLevelDiff,AI-20,
@@ -16069,7 +16069,7 @@ scripts/game/npc/npc.ws::CNewNPC.OnFireHit,AI-15,Ice Armor removed by any fire h
 scripts/game/npc/npc.ws::CNewNPC.ProcessShieldDestruction,AI-10,"no stagger when the shield breaks, guard down, hit animations off 2 s"
 scripts/game/actor.ws::CActor.<members>,AI-21,"lastAttackTime (unused); bWasCountered is DEF-07's, isFocusGainPaused STAM's"
 scripts/game/actor.ws::CActor.IsHuman,AI-07,ethereal and ConHumanoidMonster actors count as human
-scripts/game/actor.ws::CActor.IsBeast,AI-01,helper for the scaling options (DIFF) and XP
+scripts/game/actor.ws::CActor.IsBeast,AI-01 DIFF-04,helper for the scaling options (DIFF) and XP; DIFF-04: the animal option
 scripts/game/actor.ws::CActor.IncHitCounter,AI-10,hit counter window 2 -> 2.5 s
 scripts/game/actor.ws::CActor.IncDefendCounter,AI-10,defend counter window 2 -> 2.5 s
 scripts/game/actor.ws::CActor.ReactToReflectedAttack,AI-21,comment only: nothing to port
@@ -16525,6 +16525,8 @@ files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abil
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor,AI-03,
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_turret,AI-03,
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_petals,AI-03,
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_hard,AI-03,"enemy stats AI-03's attribution missed (found by DIFF's mapping; ported with DIFF slice D1): legacy's 800 Essence base"
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q703_mqsidqpyt,AI-03,"enemy stats AI-03's attribution missed (its name with a space before =; found by DIFF's mapping; ported with DIFF slice D1): legacy's 200 Vitality, armor x60"
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_sprigan,AI-03,
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_nightwraith_banshee,AI-03 AI-08,
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_fleder,AI-08,
@@ -16608,6 +16610,8 @@ files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor,AI-03,
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_turret,AI-03,
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_petals,AI-03,
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_hard,AI-03,"enemy stats AI-03's attribution missed (found by DIFF's mapping; ported with DIFF slice D1): legacy's 800 Essence base; NG+"
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q703_mqsidqpyt,AI-03,"enemy stats AI-03's attribution missed (its name with a space before =; found by DIFF's mapping; ported with DIFF slice D1): legacy's 200 Vitality, armor x60; NG+"
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_sprigan,AI-03,
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_nightwraith_banshee,AI-03 AI-08,
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_fleder,AI-08,
@@ -17852,3 +17856,348 @@ files/dlc/ep1/data/gameplay/items/def_item_weapons.xml::definitions/abilities/ab
 files/dlc/ep1/data/gameplay/items_plus/def_item_weapons.xml::definitions/abilities/ability:NPC torch _Stats,AI-05,"Hearts of Stone's NPC torch: 150 bludgeoning, 5 silver (5.x 20, 3); AI-A audit F2; NG+"
 files/dlc/ep1/data/gameplay/items/def_item_weapons.xml::definitions/abilities/ability:Caretaker Shovel _Stats,AI-19,"the Caretaker's shovel: legacy's own ability (400 slashing, 80 silver) in place of the shared Shovel _Stats; AI-A audit F2"
 files/dlc/ep1/data/gameplay/items_plus/def_item_weapons.xml::definitions/abilities/ability:Caretaker Shovel _Stats,AI-19,"the Caretaker's shovel: legacy's own ability (400 slashing, 80 silver) in place of the shared Shovel _Stats; AI-A audit F2; NG+"
+files/gameplay/abilities/common_abilities.xml::definitions/abilities/ability:difficulty_CommonEasy,DIFF-01,difficulty multipliers: enemy health and damage per difficulty
+files/gameplay/abilities_plus/common_abilities.xml::definitions/abilities/ability:difficulty_CommonEasy,DIFF-01,difficulty multipliers: enemy health and damage per difficulty; NG+
+files/gameplay/abilities/common_abilities.xml::definitions/abilities/ability:difficulty_CommonMedium,DIFF-01,difficulty multipliers: enemy health and damage per difficulty
+files/gameplay/abilities_plus/common_abilities.xml::definitions/abilities/ability:difficulty_CommonMedium,DIFF-01,difficulty multipliers: enemy health and damage per difficulty; NG+
+files/gameplay/abilities/common_abilities.xml::definitions/abilities/ability:difficulty_CommonHard,DIFF-01,difficulty multipliers: enemy health and damage per difficulty
+files/gameplay/abilities_plus/common_abilities.xml::definitions/abilities/ability:difficulty_CommonHard,DIFF-01,difficulty multipliers: enemy health and damage per difficulty; NG+
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:barghest_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:basilisk_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dafne_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_construct_hard,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_construct_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_construct_medium,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_construct_normal,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_hard,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_medium,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_monster_hard,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_monster_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_monster_medium,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:ep2_pantherwitch_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:ghoul_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:hardcore_bruxa,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:hardcore_doge,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:hardcore_worm,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:kikimora_hard,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:kikimora_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:kikimora_hardcore_big,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_EP2_hardcore_FF,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_draco_easy,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_draco_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_draco_normal,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_gaurdknight_hard,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_gaurdknight_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_panther_ep2_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_panther_ghost_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q701_bandits_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q701_sharkley_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q702_event_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mq7004_witch_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:q701_bruxa_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:q701_giant_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:q703_arena_knights_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:q704_garkain_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:sharley_easy,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:sharley_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:sharley_medium,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:spooncollector_hard,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:spooncollector_hardcore,DIFF-02,per-difficulty enemy variant
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:barghest_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:basilisk_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dafne_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_construct_hard,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_construct_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_construct_medium,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_construct_normal,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_hard,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_medium,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_monster_hard,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_monster_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:dettlaff_monster_medium,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:ep2_pantherwitch_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:ghoul_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:hardcore_bruxa,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:hardcore_doge,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:hardcore_worm,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:kikimora_hard,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:kikimora_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:kikimora_hardcore_big,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_EP2_hardcore_FF,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_draco_easy,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_draco_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_draco_normal,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_gaurdknight_hard,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_gaurdknight_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_panther_ep2_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_panther_ghost_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q701_bandits_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q701_sharkley_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q702_event_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mq7004_witch_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:q701_bruxa_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:q701_giant_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:q703_arena_knights_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:q704_garkain_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:sharley_easy,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:sharley_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:sharley_medium,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:spooncollector_hard,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:spooncollector_hardcore,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/ep1/data/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon_frogiehard_ep1,DIFF-02,per-difficulty enemy variant
+files/dlc/ep1/data/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon_frogiehardcore_ep1,DIFF-02,per-difficulty enemy variant
+files/dlc/ep1/data/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon_irishard_ep1,DIFF-02,per-difficulty enemy variant
+files/dlc/ep1/data/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon_irishardcore_ep1,DIFF-02,per-difficulty enemy variant
+files/dlc/ep1/data/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:mon_olgierdeasy_ep1,DIFF-02,per-difficulty enemy variant
+files/dlc/ep1/data/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:mon_olgierdhard_ep1,DIFF-02,per-difficulty enemy variant
+files/dlc/ep1/data/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:mon_olgierdmedium_ep1,DIFF-02,per-difficulty enemy variant
+files/dlc/ep1/data/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:mon_olgierhardcore_ep1,DIFF-02,per-difficulty enemy variant
+files/dlc/ep1/data/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_frogiehard_ep1,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/ep1/data/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_frogiehardcore_ep1,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/ep1/data/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_irishard_ep1,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/ep1/data/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_irishardcore_ep1,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/ep1/data/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:mon_olgierdhard_ep1,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/ep1/data/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:mon_olgierdmedium_ep1,DIFF-02,per-difficulty enemy variant; NG+
+files/dlc/ep1/data/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:mon_olgierhardcore_ep1,DIFF-02,per-difficulty enemy variant; NG+
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:PrologModifier,DIFF-03,the prologue attack-power cut emptied
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:PrologModifier,DIFF-03,the prologue attack-power cut emptied; NG+
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsAdditionalHealth,DIFF-04,the scaling options' health and damage steps (10% each)
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsAdditionalHealth,DIFF-04,the scaling options' health and damage steps (10% each); NG+
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsAdditionalHealthNegative,DIFF-04,the scaling options' health and damage steps (10% each)
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsAdditionalHealthNegative,DIFF-04,the scaling options' health and damage steps (10% each); NG+
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsMaxHealthNegative,DIFF-04,the scaling options' health and damage steps (10% each)
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsMaxHealthNegative,DIFF-04,the scaling options' health and damage steps (10% each); NG+
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsAdditionalDamage,DIFF-04,the scaling options' health and damage steps (10% each)
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsAdditionalDamage,DIFF-04,the scaling options' health and damage steps (10% each); NG+
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsAdditionalDamageNegative,DIFF-04,the scaling options' health and damage steps (10% each)
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:ModSignsAdditionalDamageNegative,DIFF-04,the scaling options' health and damage steps (10% each); NG+
+scripts/game/gameParams.ws::W3GameParams.GetEnemyHealthMult,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetEnemyDamageMult,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetBossHealthMult,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetBossDamageMult,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetEnemyScalingOption,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetNoAnimalUpscaling,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetNoAdditionalLevelsForGuards,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetRandomScalingMinLevel,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetRandomScalingMaxLevel,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetNonlinearLevelup,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetNonlinearLevelDelta,DIFF-04,scaling option getter
+scripts/game/gameParams.ws::W3GameParams.GetNonlinearAbilitiesDelta,DIFF-04,scaling option getter
+scripts/game/npc/npc.ws::CNewNPC.ModSignsAddBonuses,DIFF-04,"extra health and damage from the options, bosses' extra"
+scripts/game/r4Game.ws::CR4Game.gmUserSettingsScaling,DIFF-04,levels recomputed when a scaling option changes
+localization/modGhostMode/br.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/br.csv::row:2110992498,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/cz.csv::row:2110992498,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/de.csv::row:2110992498,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/en.csv::row:2110992498,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/es.csv::row:2110992498,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/fr.csv::row:2110992498,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/it.csv::row:2110992498,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/pl.csv::row:2110992498,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992002,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992003,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992004,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992005,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992006,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992007,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992008,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992009,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992016,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992250,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992251,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992252,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992254,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992255,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992314,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992327,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992453,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992495,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992496,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992497,DIFF-04,scaling option label
+localization/modGhostMode/ru.csv::row:2110992498,DIFF-04,scaling option label
+files/quests/minor_quests/no_mans_land/quest_files/mq1028_courier/characters/mq1028_gerd.w2ent::<file>,DIFF-05,levelFakeAddon 1 -> 0 (no level change)
+files/quests/part_1/quest_files/q305_blanka/characters/q305_thug_guard2.w2ent::<file>,DIFF-05,no property change (W3Edit re-save); its levelFakeAddon 11 is cleared at runtime like every NPC's
+scripts/game/r4Game.ws::CR4Game.GetSpawnDifficultyMode,DIFF-06,no difficulty cap for Ciri
+scripts/game/replacers/ciri.ws::W3ReplacerCiri.CheckCiriAbilities,DIFF-06,Ciri_Q305 and Ciri_Q205 by journal state
+scripts/game/replacers/ciri.ws::W3ReplacerCiri.OnCombatStart,DIFF-06,calls CheckCiriAbilities
+scripts/debug/console_debug.ws::ciriquests,DIFF-06,debug: prints the two quests' journal state; not ported
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q111,DIFF-06,Ciri's stats
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q111,DIFF-06,Ciri's stats; NG+
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q205,DIFF-06,Ciri's stats
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q205,DIFF-06,Ciri's stats; NG+
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q305,DIFF-06,Ciri's stats
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q305,DIFF-06,Ciri's stats; NG+
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q403,DIFF-06,Ciri's stats
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q403,DIFF-06,Ciri's stats; NG+
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q501,DIFF-06,Ciri's stats
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Ciri_Q501,DIFF-06,Ciri's stats; NG+
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:Ciri_Rage,DIFF-06,Ciri's stats
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Ciri_Rage,DIFF-06,Ciri's stats; NG+
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:CiriHardcoreDebuffHuman,DIFF-06,Ciri's stats
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:CiriHardcoreDebuffHuman,DIFF-06,Ciri's stats; NG+
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:CiriHardcoreDebuffMonster,DIFF-06,Ciri's stats
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:CiriHardcoreDebuffMonster,DIFF-06,Ciri's stats; NG+
+scripts/game/replacers/ciri.ws::W3ReplacerCiri.DrainResourceForDodge,STAM-03,commented out as unused; nothing to port (found by the DIFF sweep)
+scripts/game/replacers/ciri.ws::W3ReplacerCiri.DrainResourceForDash,STAM-03,commented out as unused; nothing to port (found by the DIFF sweep)
+scripts/game/player/states/unconscious.ws::CR4PlayerStateUnconscious.TakeMoneyFromPlayer,DIFF-07,guards take 25% of the money on every difficulty

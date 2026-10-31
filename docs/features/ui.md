@@ -422,26 +422,25 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 | Pillars | P7, P5 |
 | 5.x class | clean |
 | Flags | — |
-| Depends on | DIFF (fake levels) |
+| Depends on | DIFF-05 (fake levels) |
 | Skill trees | n/a |
-| Port form | `ui/enemyLevel.ws`: `@replaceMethod` of `CNewNPC.GetExperienceDifferenceLevelName` (the deadly branch removed; the fake-level part with DIFF) |
-| Port status | **signed off** (2026-10-21); **ported** (slice 9, 5.x-GM `4a61e025`), verified in both trees |
+| Port form | `ui/enemyLevel.ws`: `@replaceMethod` of `CNewNPC.GetExperienceDifferenceLevelName` (the deadly branch removed; the fake addon, the NG+ addon and the cap removed by [DIFF-05](diff.md#diff-05-fake-levels), slice D6) |
+| Port status | **signed off** (2026-10-21); **ported** (slice 9, 5.x-GM `4a61e025`; the fake levels with DIFF's slice D6, 5.x-GM `523457b1`), verified in both trees |
 | Open checks | — |
 | Save impact | none |
 | NG+ counterpart | none |
 
-**What it does** (changelist 1113): an enemy far above Geralt shows its level in red instead of `???`, from 6 levels above him (`LEVEL_DIFF_HIGH`: 6 since AI's slice A1, the owner's DA4, 2026-10-28; 10 before it, 5.x's value); legacy also dropped the displayed level's fake addon and its cap at 5 above the maximum, which is DIFF's.
+**What it does** (changelist 1113): an enemy far above Geralt shows its level in red instead of `???`, from 6 levels above him (`LEVEL_DIFF_HIGH`: 6 since AI's slice A1, the owner's DA4, 2026-10-28; 10 before it, 5.x's value). The number is the enemy's real level, without 5.x's fake addon and its cap at 5 above the maximum level, as legacy ([DIFF-05](diff.md#diff-05-fake-levels), which lists the enemies whose shown level this lowers).
 
-**Decisions:** port as legacy (DU8).
-- **Deviation:** the displayed level keeps 5.x's fake level addon (`levelFakeAddon`) and the cap at 5 above the maximum level, which legacy dropped; they belong to DIFF's fake levels (temporary, until DIFF; porter's call, confirmed by the owner, 2026-10-21). The New Game+ level addon this deviation also kept is gone since AI-01 (slice A1, 2026-10-28): New Game+ adds its level to the enemy's real level, as legacy, and never sets the addon.
-
-Since the AI-C audit (F6, 2026-10-29) the 71 enemies whose fake level legacy made real carry legacy's addon (0) with their level, so the HUD shows legacy's level for them (the sergeant 11, not 22; [AI-06](ai.md#ai-06-enemy-levels-and-flags)); the code's addon stays as the deviation says.
+**Decisions:** port as legacy (DU8). The temporary deviation that kept 5.x's fake level addon and its cap until DIFF (porter's call, confirmed by the owner, 2026-10-21) ended with DIFF's slice D6 (2026-10-30): the HUD shows the real level, as legacy. The 71 enemies whose fake level legacy made real (AI-06, since the AI-C audit's F6) carry it as their level, so the sergeant shows 11.
 
 **Verification (slice 9, 2026-10-21, both trees):** scripted (`gmtest_ui12_a/b`): a hostile human 40 levels above Geralt (level 41 against 1) gives "highLevel" and its level in red (`#FF1919`), not "deadlyLevel". Real, on screen (the HUD with the enemy locked on; screenshot): "41" in the level diamond above its health bar, red; 5.x's skull marker above it remains. UI audit slice A (2026-10-21, both trees, level 30): `gmtest_ui12_a/b` pass ("highLevel", level 70 in red); the check is listed with the manual UI checks in `gmTestsUi.ws`.
 
 **Verification (AI slice A1, 2026-10-28, both trees):** scripted (`gmtest_ai01_read`, hostile human dummies): 5 levels above Geralt "normalLevel" (green), 6 levels above "highLevel" (red), 6 below "lowLevel". Real, on screen: a bandit at level 7 against Geralt's 1, locked on, shows its level in red.
 
 **Skull marker** (answered by the owner, 2026-10-21): 1.32 also shows the skull above an enemy's level, so the skull plus the red level is vanilla's and legacy's HUD; nothing to change.
+
+**Verification (DIFF slice D6, 2026-10-30, both trees):** scripted (`gmtest_diff05_*`, `GMTest_diff05`): the five 5.x entities with an addon the mod's files do not clear show their real level and legacy's colour, a hand-set addon and NG+ addon flag are not shown, a level of 120 is not capped ([DIFF-05](diff.md#diff-05-fake-levels)). The level seen on screen with an enemy locked on is pending a cleared run.
 
 **Later:** —
 

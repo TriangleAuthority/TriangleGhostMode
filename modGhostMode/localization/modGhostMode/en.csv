@@ -513,3 +513,29 @@
 2110992463|754d1895||Reduces alcohol and toxic food toxicity to zero. Removes drunken effect from alcohol. After drinking an alcoholic beverage, its bonuses last longer by $S$%.
 ; AI-19: the description of the Caretaker's spade (the player's PC Caretaker Shovel), legacy's (5.x has no text for its key)
 2110992475|        |item_name_caretaker_spade_desc|Restores Vitality proportional to damage dealt.
+; DIFF-04 (slice D5a): the enemy scaling group, its scaling types, random bounds, guards' and animals' options
+2110992327|        |panel_gm_scaling_options|Enemy scaling
+2110992004|        |option_gm_enemies_scaling|Enemy scaling
+2110992005|        |preset_value_gm_es_none|None
+2110992006|        |preset_value_gm_es_upscale|Upscale
+2110992007|        |preset_value_gm_es_match|Match
+2110992016|        |preset_value_gm_es_soft|Soft upscaling
+2110992252|        |preset_value_gm_es_random|Random
+2110992255|        |preset_value_gm_es_random_no_down|Random no downscaling
+2110992250|        |option_gm_rnd_scaling_min_slider|Random scaling: lower bound (relative to player level)
+2110992251|        |option_gm_rnd_scaling_max_slider|Random scaling: upper bound (relative to player level)
+2110992314|        |option_gm_no_add_levels_guards|No additional levels for guards
+2110992254|        |option_gm_no_animal_upscaling_toggle|Do not upscale animals
+; DIFF-04 (slice D5b): the scaling presets, the health and damage modifiers, progressive level bonuses
+2110992453|        |preset_Mods_ghost_mode_gm_scaling_options|Scaling Presets
+2110992002|        |option_gm_health_multiplier|Enemy health modifier
+2110992003|        |option_gm_damage_multiplier|Enemy damage modifier
+2110992008|        |option_gm_boss_health_multiplier|Additional health modifier for bosses
+2110992009|        |option_gm_boss_damage_multiplier|Additional damage modifier for bosses
+2110992495|        |option_gm_nonlinear_levelup_toggle|Use progressive level bonuses
+2110992496|        |option_gm_nonlinear_level_delta_slider|Level delta
+2110992497|        |option_gm_nonlinear_abs_delta_slider|Abilities per level delta
+2110992498|        |preset_value_gm_hardcore|Hardcore
+; OPT: the "Recommended" and "Off" preset labels shared by every group (first used by DIFF-04, slice D5b)
+2110992448|        |preset_value_gm_recommended|Recommended
+2110992449|        |preset_value_gm_turn_off|Off

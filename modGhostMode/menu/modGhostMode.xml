@@ -2,6 +2,89 @@
 <!-- Ghost Mode options (Options > Mods > Ghost Mode). Group and variable ids as in legacy Ghost Mode 4.1;
      only the options of features already ported are listed. Defaults: scripts/local/gm/options/gmOptions.ws. -->
 <UserConfig>
+	<Group id="GMScalingOptions" displayName="Mods.ghost_mode.gm_scaling_options">
+		<!-- DIFF-04 (slice D5b): legacy's three presets -->
+		<PresetsArray>
+			<Preset id="0" displayName="gm_recommended">
+				<Entry varId="GMScaling" value="3"/>
+				<Entry varId="GMRandomScalingMinLevel" value="0"/>
+				<Entry varId="GMRandomScalingMaxLevel" value="0"/>
+				<Entry varId="GMNonlinearLevelup" value="false"/>
+				<Entry varId="GMNonlinearLevelDelta" value="0"/>
+				<Entry varId="GMNonlinearAbilitiesDelta" value="0"/>
+				<Entry varId="GMNoAnimalUpscaling" value="false"/>
+				<Entry varId="GMNoAddLevelsGuards" value="false"/>
+				<Entry varId="GMHealthMultiplier" value="0"/>
+				<Entry varId="GMDamageMultiplier" value="0"/>
+				<Entry varId="GMBossHealthMultiplier" value="0"/>
+				<Entry varId="GMBossDamageMultiplier" value="0"/>
+			</Preset>
+			<Preset id="1" displayName="gm_hardcore">
+				<Entry varId="GMScaling" value="1"/>
+				<Entry varId="GMRandomScalingMinLevel" value="0"/>
+				<Entry varId="GMRandomScalingMaxLevel" value="0"/>
+				<Entry varId="GMNonlinearLevelup" value="true"/>
+				<Entry varId="GMNonlinearLevelDelta" value="10"/>
+				<Entry varId="GMNonlinearAbilitiesDelta" value="5"/>
+				<Entry varId="GMNoAnimalUpscaling" value="false"/>
+				<Entry varId="GMNoAddLevelsGuards" value="false"/>
+				<Entry varId="GMHealthMultiplier" value="0.5"/>
+				<Entry varId="GMDamageMultiplier" value="0.5"/>
+				<Entry varId="GMBossHealthMultiplier" value="0.5"/>
+				<Entry varId="GMBossDamageMultiplier" value="0.5"/>
+			</Preset>
+			<Preset id="2" displayName="gm_turn_off">
+				<Entry varId="GMScaling" value="0"/>
+				<Entry varId="GMRandomScalingMinLevel" value="0"/>
+				<Entry varId="GMRandomScalingMaxLevel" value="0"/>
+				<Entry varId="GMNonlinearLevelup" value="false"/>
+				<Entry varId="GMNonlinearLevelDelta" value="0"/>
+				<Entry varId="GMNonlinearAbilitiesDelta" value="0"/>
+				<Entry varId="GMNoAnimalUpscaling" value="false"/>
+				<Entry varId="GMNoAddLevelsGuards" value="false"/>
+				<Entry varId="GMHealthMultiplier" value="0"/>
+				<Entry varId="GMDamageMultiplier" value="0"/>
+				<Entry varId="GMBossHealthMultiplier" value="0"/>
+				<Entry varId="GMBossDamageMultiplier" value="0"/>
+			</Preset>
+		</PresetsArray>
+		<VisibleVars>
+			<!-- DIFF-04 (slices D5a and D5b), legacy's order -->
+			<Var id="Virtual_GMScaling" displayName="gm_enemies_scaling" displayType="OPTIONS">
+				<OptionsArray>
+					<Option id="0" displayName="gm_es_none">
+						<Entry varId="GMScaling" value="0"/>
+					</Option>
+					<Option id="1" displayName="gm_es_upscale">
+						<Entry varId="GMScaling" value="1"/>
+					</Option>
+					<Option id="2" displayName="gm_es_match">
+						<Entry varId="GMScaling" value="2"/>
+					</Option>
+					<Option id="3" displayName="gm_es_soft">
+						<Entry varId="GMScaling" value="3"/>
+					</Option>
+					<Option id="4" displayName="gm_es_random">
+						<Entry varId="GMScaling" value="4"/>
+					</Option>
+					<Option id="5" displayName="gm_es_random_no_down">
+						<Entry varId="GMScaling" value="5"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			<Var id="GMRandomScalingMinLevel" displayName="gm_rnd_scaling_min_slider" displayType="SLIDER;-12;12;24"/>
+			<Var id="GMRandomScalingMaxLevel" displayName="gm_rnd_scaling_max_slider" displayType="SLIDER;-12;12;24"/>
+			<Var id="GMNonlinearLevelup" displayName="gm_nonlinear_levelup_toggle" displayType="TOGGLE"/>
+			<Var id="GMNonlinearLevelDelta" displayName="gm_nonlinear_level_delta_slider" displayType="SLIDER;0;20;20"/>
+			<Var id="GMNonlinearAbilitiesDelta" displayName="gm_nonlinear_abs_delta_slider" displayType="SLIDER;0;20;20"/>
+			<Var id="GMNoAddLevelsGuards" displayName="gm_no_add_levels_guards" displayType="TOGGLE"/>
+			<Var id="GMNoAnimalUpscaling" displayName="gm_no_animal_upscaling_toggle" displayType="TOGGLE"/>
+			<Var id="GMHealthMultiplier" displayName="gm_health_multiplier" displayType="SLIDER;-1;5;60"/>
+			<Var id="GMDamageMultiplier" displayName="gm_damage_multiplier" displayType="SLIDER;-1;5;60"/>
+			<Var id="GMBossHealthMultiplier" displayName="gm_boss_health_multiplier" displayType="SLIDER;-1;5;60"/>
+			<Var id="GMBossDamageMultiplier" displayName="gm_boss_damage_multiplier" displayType="SLIDER;-1;5;60"/>
+		</VisibleVars>
+	</Group>
 	<Group id="GMGameplayOptions" displayName="Mods.ghost_mode.gm_gameplay_options">
 		<VisibleVars>
 			<!-- SKL-02 -->

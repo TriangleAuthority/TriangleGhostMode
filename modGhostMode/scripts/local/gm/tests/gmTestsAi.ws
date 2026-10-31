@@ -159,7 +159,7 @@ exec function gmtest_ai01_spawn()
 	GMTestAiSpawn("human", p + 6, false, 5);		// high (red)
 	GMTestAiSpawn("human", p + 14, false, 6);		// high
 	GMTestAiSpawn("human", p + 15, false, 7);		// deadly
-	GMTestAiSpawn("human", 1, false, 8);			// raised to Geralt's level - 6
+	GMTestAiSpawn("human", 1, false, 8);			// raised to Geralt's level - 6 (soft upscaling, DIFF-04's default)
 	GMTestAiSpawn("human", 1, true, 9);				// a guard: Geralt's level + 16
 	GMTestAiSpawn("wolf", 0, false, 10);
 	GMTestAiSpawn("wolf", p + 8, false, 11);
@@ -172,28 +172,19 @@ exec function gmtest_ai01_spawn()
 	LogChannel('GMTest', "INFO AI-01 " + thePlayer.gmTestAiKinds.Size() + " enemies spawned at Geralt's level " + p + "; read them in a later call");
 }
 
-// The level legacy's AddLevelBonuses gives (DA2's soft scaling, guards + 16).
+// The level legacy's AddLevelBonuses gives under the scaling options in use (DIFF-04's rule, gmTestsDiff04.ws;
+// the random types are not predicted: run gmtest_ai01 with another type).
 function GMTestAiExpectedLevel(npc : CNewNPC, setLevel : int, guard : bool, p : int) : int
 {
 	var lvl : int;
 
 	if(setLevel > 0)
-		lvl = setLevel;
+		lvl = setLevel - npc.gmCurrentNGPLevel;	// a set level already includes it
 	else
-		lvl = npc.GMTestEntityLevel() + npc.gmCurrentNGPLevel;
+		lvl = npc.GMTestEntityLevel();
 	if(npc.HasAbility('NPCDoNotGainBoost'))
 		return 1;
-	if(guard)
-		lvl = p;
-	if(lvl < p - 6)
-		lvl = p - 6;
-	if(guard)
-	{
-		if(lvl < p)
-			lvl = p;
-		lvl += theGame.params.LEVEL_DIFF_DEADLY + 1;
-	}
-	return Max(1, lvl);
+	return GMTestDiff04Expected(npc, lvl, p, GMGetEnemyScalingOption(), GMGetNoAnimalUpscaling(), GMGetNoAdditionalLevelsForGuards());
 }
 
 function GMTestAiLevelAbls() : array<name>

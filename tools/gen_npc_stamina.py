@@ -37,6 +37,10 @@ OWNED = {"Mutation4BloodDebuff": "MUT-08, gm_mutations.xml"}
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_ai import owned as _ai_owned  # noqa: E402
 OWNED.update({n: "AI, " + f for n, f in _ai_owned().items()})
+# DIFF's abilities given whole by gen_diff.py (diff.md's PD2): difficulty_CommonHardcore, legacy's entry,
+# has no stamina regen node (STAM-08's "Stamina regen for AI no longer boosted for DM").
+from gen_diff import owned as _diff_owned  # noqa: E402
+OWNED.update({n: "DIFF, " + f for n, f in _diff_owned().items()})
 NODE = re.compile(r'<([A-Za-z_][\w]*)\b([^>]*?)/>')
 
 

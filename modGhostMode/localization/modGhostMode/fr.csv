@@ -513,3 +513,29 @@
 2110992463|754d1895||Reduces alcohol and toxic food toxicity to zero. Removes drunken effect from alcohol. After drinking an alcoholic beverage, its bonuses last longer by $S$%.
 ; AI-19: the description of the Caretaker's spade (the player's PC Caretaker Shovel), legacy's (5.x has no text for its key)
 2110992475|5a519178||Restaure la vitalité proportionnelement aux dégâts infligés.
+; DIFF-04 (slice D5a): the enemy scaling group, its scaling types, random bounds, guards' and animals' options
+2110992327|        |panel_gm_scaling_options|Mise à niveau des ennemis
+2110992004|        |option_gm_enemies_scaling|Mise à niveau des ennemis
+2110992005|        |preset_value_gm_es_none|Aucun
+2110992006|        |preset_value_gm_es_upscale|Mise à niveau
+2110992007|        |preset_value_gm_es_match|Égal
+2110992016|        |preset_value_gm_es_soft|Mise à niveau légère
+2110992252|        |preset_value_gm_es_random|Aléatoire
+2110992255|        |preset_value_gm_es_random_no_down|Aléatoire sans réduction de niveau
+2110992250|        |option_gm_rnd_scaling_min_slider|Mise à niveau aléatoire : niveau le plus bas (relatif au niveau du joueur)
+2110992251|        |option_gm_rnd_scaling_max_slider|Mise à niveau aléatoire : niveau le plus haut (relatif au niveau du joueur)
+2110992314|        |option_gm_no_add_levels_guards|Pas de niveau additionnel pour les gardes
+2110992254|        |option_gm_no_animal_upscaling_toggle|Ne pas mettre les animaux à niveau
+; DIFF-04 (slice D5b): the scaling presets, the health and damage modifiers, progressive level bonuses
+2110992453|e30aa64b||Préréglages de mise à niveau
+2110992002|205aa5f5||Modificateur de santé des ennemis
+2110992003|a570c302||Modificateur de dégâts des ennemis
+2110992008|645abb61||Modificateur additionnel de santé des boss
+2110992009|e970d86e||Modificateur additionnel de dégâts des boss
+2110992495|        |option_gm_nonlinear_levelup_toggle|Use progressive level bonuses
+2110992496|        |option_gm_nonlinear_level_delta_slider|Level delta
+2110992497|        |option_gm_nonlinear_abs_delta_slider|Abilities per level delta
+2110992498|        |preset_value_gm_hardcore|Hardcore
+; OPT: the "Recommended" and "Off" preset labels shared by every group (first used by DIFF-04, slice D5b)
+2110992448|9be2d670||Recommandé
+2110992449|433edeb8||Désactivé

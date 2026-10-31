@@ -513,3 +513,29 @@
 2110992463|754d1895||Снижает токсичность алкоголя и токсичной еды до нуля. Убирает эффект опьянения. Продолжительность действия бонусов алкогольного напитка увеличивается на $S$%.
 ; AI-19: the description of the Caretaker's spade (the player's PC Caretaker Shovel), legacy's (5.x has no text for its key)
 2110992475|        |item_name_caretaker_spade_desc|Восстанавливает здоровье пропорционально нанесенному урону.
+; DIFF-04 (slice D5a): the enemy scaling group, its scaling types, random bounds, guards' and animals' options
+2110992327|        |panel_gm_scaling_options|Уровни противников
+2110992004|        |option_gm_enemies_scaling|Уровень противников
+2110992005|        |preset_value_gm_es_none|Не менять
+2110992006|        |preset_value_gm_es_upscale|Поднять до уровня Геральта
+2110992007|        |preset_value_gm_es_match|Выровнять с уровнем Геральта
+2110992016|        |preset_value_gm_es_soft|"Мягкое" масштабирование
+2110992252|        |preset_value_gm_es_random|Случайный
+2110992255|        |preset_value_gm_es_random_no_down|Случайный без снижения
+2110992250|        |option_gm_rnd_scaling_min_slider|Случайный уровень: нижняя граница (от уровня Геральта)
+2110992251|        |option_gm_rnd_scaling_max_slider|Случайный уровень: верхняя граница (от уровня Геральта)
+2110992314|        |option_gm_no_add_levels_guards|Не добавлять доп. уровни стражникам
+2110992254|        |option_gm_no_animal_upscaling_toggle|Не менять уровни животных
+; DIFF-04 (slice D5b): the scaling presets, the health and damage modifiers, progressive level bonuses
+2110992453|        |preset_Mods_ghost_mode_gm_scaling_options|Предустановки для уровней
+2110992002|        |option_gm_health_multiplier|Модификатор здоровья противников
+2110992003|        |option_gm_damage_multiplier|Модификатор урона противников
+2110992008|        |option_gm_boss_health_multiplier|Доп. модификатор здоровья для боссов
+2110992009|        |option_gm_boss_damage_multiplier|Доп. модификатор урона для боссов
+2110992495|        |option_gm_nonlinear_levelup_toggle|Вкл. прогрессивные бонусы уровней
+2110992496|        |option_gm_nonlinear_level_delta_slider|Дельта уровней
+2110992497|        |option_gm_nonlinear_abs_delta_slider|Число доп. бонусов на каждую дельту уровней
+2110992498|        |preset_value_gm_hardcore|Хардкор
+; OPT: the "Recommended" and "Off" preset labels shared by every group (first used by DIFF-04, slice D5b)
+2110992448|        |preset_value_gm_recommended|Рекомендованные
+2110992449|        |preset_value_gm_turn_off|Выключено

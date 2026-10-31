@@ -2826,6 +2826,13 @@
 				<poison_resistance_perc type="base" always_random="false" min="1.0" max="1.0" />
 				<poison_DoT_damage_resistance_perc type="base" always_random="false" min="1.0" max="1.0" />
 			</ability>
+			<ability name="mon_archespor_hard" on_conflict="replace">
+				<essence type="base" min="800" max="800" />
+			</ability>
+			<ability name="mon_q703_mqsidqpyt" on_conflict="replace">
+				<vitality type="base" min="200" max="200" />
+				<armor type="mult" min="60" max="60" />
+			</ability>
 			<ability name="mon_sprigan" on_conflict="replace">
 				<level type="add" always_random="false" min="1" max="1" />
 				<threat_level type="add" always_random="false" min="4" max="4" />

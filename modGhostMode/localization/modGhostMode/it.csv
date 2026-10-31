@@ -513,3 +513,29 @@
 2110992463|754d1895||Reduces alcohol and toxic food toxicity to zero. Removes drunken effect from alcohol. After drinking an alcoholic beverage, its bonuses last longer by $S$%.
 ; AI-19: the description of the Caretaker's spade (the player's PC Caretaker Shovel), legacy's (5.x has no text for its key)
 2110992475|5a519178||Ripristina la Vitalità proporzionalmente al danno inflitto.
+; DIFF-04 (slice D5a): the enemy scaling group, its scaling types, random bounds, guards' and animals' options
+2110992327|        |panel_gm_scaling_options|Livellamento nemici
+2110992004|        |option_gm_enemies_scaling|Livellamento nemici
+2110992005|        |preset_value_gm_es_none|Nessuno
+2110992006|        |preset_value_gm_es_upscale|Aumenta livello
+2110992007|        |preset_value_gm_es_match|Partita
+2110992016|        |preset_value_gm_es_soft|Lieve aumento del livello
+2110992252|        |preset_value_gm_es_random|Casuale
+2110992255|        |preset_value_gm_es_random_no_down|Casuale senza diminuire i livelli
+2110992250|        |option_gm_rnd_scaling_min_slider|Livellamento casuale: limite inferiore(rispetto il livello del giocatore)
+2110992251|        |option_gm_rnd_scaling_max_slider|Livellamento casuale: limite superiore(rispetto il livello del giocatore)
+2110992314|        |option_gm_no_add_levels_guards|Nessun livello aggiuntivo per le guardie
+2110992254|        |option_gm_no_animal_upscaling_toggle|Non alzare il livello degli animali
+; DIFF-04 (slice D5b): the scaling presets, the health and damage modifiers, progressive level bonuses
+2110992453|e30aa64b||Preimpostazioni Ridimensionamento
+2110992002|205aa5f5||Modificatore salute nemici
+2110992003|a570c302||Modificatore danni nemici
+2110992008|645abb61||Modificatore di salute aggiuntivo per i boss
+2110992009|e970d86e||Modificatore danni aggiuntivi per i boss
+2110992495|6438ae90||Usa bonus di livello progressivo
+2110992496|fefc523f||Delta di livello
+2110992497|1a893f11||Abilità per delta di livello
+2110992498|42290b15||Hardcore
+; OPT: the "Recommended" and "Off" preset labels shared by every group (first used by DIFF-04, slice D5b)
+2110992448|9be2d670||Raccomandato
+2110992449|433edeb8||Spento

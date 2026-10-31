@@ -444,8 +444,8 @@ function GMProcessDamageModification()
 	{
 		if(thePlayer.IsFistFightMinigameEnabled())
 			mult = 1.0 + ((int)theGame.GetSpawnDifficultyMode() - 1) * 0.25 + 0.1 * ClampF(actorAttacker.GetLevel() - actorVictim.GetLevel(), -10, 10);
-		else
-			mult = CalculateAttributeValue(actorAttacker.GetAttributeValue(theGame.params.DIFFICULTY_DMG_MULTIPLIER));
+		else	// DIFF-04 (DIFF audit F3): never below x0 (the floor's step sum can read a hair below 0)
+			mult = MaxF(0, CalculateAttributeValue(actorAttacker.GetAttributeValue(theGame.params.DIFFICULTY_DMG_MULTIPLIER)));
 		action.processedDmg.vitalityDamage *= mult;
 		action.processedDmg.essenceDamage *= mult;
 	}

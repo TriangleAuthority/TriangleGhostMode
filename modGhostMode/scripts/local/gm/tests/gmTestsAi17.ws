@@ -488,7 +488,8 @@ function GMTest_ai17_after()
 	w.GMTestAi17SetWatch(NULL);
 
 	// AI-06, AI-20 (AI-C audit F6): the sergeant's fake level is a real one (legacy: level 0 -> 11, levelFakeAddon 11 -> 0),
-	// so the HUD's level (GetExperienceDifferenceLevelName, which adds the addon to the level) reads 11, not 22. Spawned
+	// so the HUD's level (GetExperienceDifferenceLevelName) reads 11, not 22 (the addon added to it before F6;
+	// since DIFF-05 the HUD adds no addon at all). Spawned
 	// here, its level computed at once (RecalcLevel, as combat start does): spawning it in GMTest_ai17 costs the
 	// regression's timers game time
 	sergeant = GMTestAi15Spawn("quests/secondary_npcs/sergeant.w2ent", 68, -10);

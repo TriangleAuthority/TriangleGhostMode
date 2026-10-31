@@ -513,3 +513,29 @@
 2110992463|754d1895||Reduces alcohol and toxic food toxicity to zero. Removes drunken effect from alcohol. After drinking an alcoholic beverage, its bonuses last longer by $S$%.
 ; AI-19: the description of the Caretaker's spade (the player's PC Caretaker Shovel), legacy's (5.x has no text for its key)
 2110992475|5a519178||Restaura Vitalidade proporcional ao dano causado.
+; DIFF-04 (slice D5a): the enemy scaling group, its scaling types, random bounds, guards' and animals' options
+2110992327|        |panel_gm_scaling_options|Variação de Inimigos
+2110992004|        |option_gm_enemies_scaling|Escalar Inimigos
+2110992005|        |preset_value_gm_es_none|Desligado
+2110992006|        |preset_value_gm_es_upscale|Escalar
+2110992007|        |preset_value_gm_es_match|Igualado
+2110992016|        |preset_value_gm_es_soft|Suave
+2110992252|        |preset_value_gm_es_random|Randômico
+2110992255|        |preset_value_gm_es_random_no_down|Randômico sem redução de escala
+2110992250|        |option_gm_rnd_scaling_min_slider|Escala randômica: limite inferior (relativo ao nível do jogador)
+2110992251|        |option_gm_rnd_scaling_max_slider|Escala randômica: limite superior (relativo ao nível do jogador)
+2110992314|        |option_gm_no_add_levels_guards|Não elevar o nivel dos guardas
+2110992254|        |option_gm_no_animal_upscaling_toggle|Não escalar animais
+; DIFF-04 (slice D5b): the scaling presets, the health and damage modifiers, progressive level bonuses
+2110992453|e30aa64b||Variação de Inimigos
+2110992002|205aa5f5||Modificador de saúde do inimigo
+2110992003|a570c302||Modificador de dano do inimigo
+2110992008|645abb61||Modificador de saúde adicional para Chefes
+2110992009|e970d86e||Modificador de dano adicional para Chefes
+2110992495|6438ae90||Usar bônus de nível progressivo
+2110992496|fefc523f||Intervalo de nível
+2110992497|1a893f11||Habilidades por Intervalo de nível
+2110992498|42290b15||Hardcore
+; OPT: the "Recommended" and "Off" preset labels shared by every group (first used by DIFF-04, slice D5b)
+2110992448|9be2d670||Recomendado
+2110992449|433edeb8||Desligado

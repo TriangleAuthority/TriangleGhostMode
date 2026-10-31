@@ -10,7 +10,8 @@ number scaled by the NG+ rule (docs/feature-mapping.md, "NG+ numbers"):
 where vanilla is 5.x (`vanilla-5.x`), GM NG the value in Ghost Mode's file, and vanilla NG / NG+
 the same ability's node in vanilla's `abilities/` / `abilities_plus/` files (matched by tag,
 `type` and order). Edge cases: vanilla NG and NG+ equal, a node or ability vanilla does not
-have, or one missing from NG+: Ghost Mode's value as is; vanilla NG 0: the difference is added
+have, or one missing from NG+: Ghost Mode's value as is (a new entry whose name vanilla defines only in its NG+
+files gets on_conflict="replace" there); vanilla NG 0: the difference is added
 (GM NG + vanilla NG+). Legacy behaviour first: where legacy Ghost Mode (`legacy-GM`) gave a node
 the same value in NG and NG+ and Ghost Mode's value is that value, it is kept (legacy chose not to
 scale it). Comments and layout are kept. Prints every value that changes or is kept that way.
@@ -24,7 +25,7 @@ import argparse, os, re, subprocess, sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
-ABILITY = re.compile(r'(<ability\s+name="([^"]+)"[^>]*>)(.*?)(</ability>)', re.S)
+ABILITY = re.compile(r'(<ability\s+name\s*=\s*"([^"]+)"[^>]*>)(.*?)(</ability>)', re.S)
 NODE = re.compile(r'<([A-Za-z_]\w*)\b([^>]*?)/>')
 ATTR = re.compile(r'\b(min|max)="([^"]*)"')
 TYPE = re.compile(r'\btype="([^"]*)"')
@@ -93,8 +94,13 @@ def same(*xs):
 def convert(text, name, ng, ngp, lng, lngp, report):
     def ability(m):
         a = m.group(2)
+        head = m.group(1)
+        if "on_conflict" not in head and a in ngp:
+            # a new entry of the regular folder whose name 5.x defines only in its NG+ files (DIFF-02's variants)
+            head = re.sub(r"\s*>$", ' on_conflict="replace">', head)
+            report.append(f"{name}: {a} new in the regular folder, defined by vanilla NG+: replace")
         if a not in ng:
-            return m.group(0)
+            return head + m.group(3) + m.group(4)
         if a not in ngp:
             report.append(f"{name}: {a} not in vanilla NG+, copied")
             return m.group(0)
@@ -115,7 +121,7 @@ def convert(text, name, ng, ngp, lng, lngp, report):
             parts += [body[last:s], ATTR.sub(sub, attrs)]
             last = e
         parts.append(body[last:])
-        return m.group(1) + "".join(parts) + m.group(4)
+        return head + "".join(parts) + m.group(4)
     return ABILITY.sub(ability, text)
 
 

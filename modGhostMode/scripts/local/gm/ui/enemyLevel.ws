@@ -1,7 +1,7 @@
 // UI-12: an enemy far above Geralt shows its level in red on the HUD (and in the threat list) instead of
-// 5.x's "???" with a skull (legacy, changelist 1113; DU8). The displayed level's fake addon and its cap
-// at 5 above the maximum, which legacy also dropped, are DIFF's. 5.x body; changes marked //modSigns.
-// See docs/features/ui.md.
+// 5.x's "???" with a skull (legacy, changelist 1113; DU8). DIFF-05: every enemy shows its real level,
+// without the entity's fake addon, the NG+ fake addon or the cap at 5 above the maximum level, as
+// legacy. 5.x body; changes marked //modSigns. See docs/features/ui.md and docs/features/diff.md.
 @replaceMethod(CNewNPC)
 function GetExperienceDifferenceLevelName( out strLevel : string ) : string
 {
@@ -9,17 +9,11 @@ function GetExperienceDifferenceLevelName( out strLevel : string ) : string
 	var currentLevel : int;
 	var ciriEntity  : W3ReplacerCiri;
 	
-	currentLevel = GetLevel() + levelFakeAddon;
+	currentLevel = GetLevel();	//modSigns: DIFF-05, fake levels removed (legacy)
 	
-	if ( newGamePlusFakeLevelAddon )
-	{
-		currentLevel += theGame.params.GetNewGamePlusLevel();
-	}
+	//modSigns: DIFF-05, removed the NG+ fake level addon (legacy)
 	
-	if ( currentLevel > ( theGame.params.GetPlayerMaxLevel() + 5 ) ) 
-	{
-		currentLevel = theGame.params.GetPlayerMaxLevel() + 5;
-	}		
+	//modSigns: DIFF-05, removed the cap at the maximum level + 5 (legacy)
 	lvlDiff = currentLevel - thePlayer.GetLevel();
 		
 	if( GetAttitude( thePlayer ) != AIA_Hostile )

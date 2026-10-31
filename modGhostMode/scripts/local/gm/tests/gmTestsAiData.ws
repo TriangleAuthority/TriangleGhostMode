@@ -178,6 +178,8 @@ function GMTestAiData3(out port : int, out later : int) : int
 	f += GMTestAiNode('mon_archespor', 'essence', 500, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_archespor_turret', 'essence', 600, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_archespor_petals', 'will_resistance_perc', 0.5, 0, 0, false, port, later);
+	f += GMTestAiNode('mon_archespor_hard', 'essence', 800, 0, 0, false, port, later);
+	f += GMTestAiNode('mon_q703_mqsidqpyt', 'vitality', 200, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_sprigan', 'essence', 1500, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_nightwraith_banshee', 'essence', 1000, 0, 0, false, port, later);
 	f += GMTestAiNode('q704_mon_protofleder', 'essence', 1200, 0, 0, false, port, later);
@@ -200,8 +202,6 @@ function GMTestAiData3(out port : int, out later : int) : int
 	f += GMTestAiNode('mon_q704_bruxa', 'essence', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_q704_garkain', 'essence', 1000, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_EP2_fogling', 'essence', 0, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_EP2_barghestbufz', 'attack_power', 0, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_EP2_endriagaWorker', 'essence', 0, 0, 0, false, port, later);
 	return f;
 }
 
@@ -209,6 +209,8 @@ function GMTestAiData4(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('mon_EP2_barghestbufz', 'attack_power', 0, 0, 0, false, port, later);
+	f += GMTestAiNode('mon_EP2_endriagaWorker', 'essence', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_q701_bruxa', 'essence', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_q701_bruxa_quest', 'essence', 1000, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_EP2_scoloMID', 'attack_power', 0, 0, 0, false, port, later);
@@ -267,8 +269,6 @@ function GMTestAiData4(out port : int, out later : int) : int
 	f += GMTestAiNode('mon_dracolizard_head_weapon _Stats', 'RendingDamage', 400, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_barghest_body _Stats', 'RendingDamage', 150, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_barghest_bite _Stats', 'RendingDamage', 250, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_boar_charge _Stats', 'RendingDamage', 250, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_black_spider_ep2_weapon _Stats', 'RendingDamage', 250, 0, 0, false, port, later);
 	return f;
 }
 
@@ -276,6 +276,8 @@ function GMTestAiData5(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('mon_boar_charge _Stats', 'RendingDamage', 250, 0, 0, false, port, later);
+	f += GMTestAiNode('mon_black_spider_ep2_weapon _Stats', 'RendingDamage', 250, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_black_spider_large_ep2_weapon _Stats', 'RendingDamage', 300, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_q701_giant_ep2_weapon _Stats', 'RendingDamage', 550, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_q701_giant_ep2_fist _Stats', 'RendingDamage', 450, 0, 0, false, port, later);
@@ -334,8 +336,6 @@ function GMTestAiData5(out port : int, out later : int) : int
 	f += GMTestAiNode('HaklandSoldier', 'vitality', 200, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_ethereal_ep1', 'essence', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_toad_tongue_weapon _Stats', 'BludgeoningDamage', 500, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_toad_claw_weapon _Stats', 'BludgeoningDamage', 600, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_black_spider_weapon _Stats', 'RendingDamage', 250, 0, 0, false, port, later);
 	return f;
 }
 
@@ -343,6 +343,8 @@ function GMTestAiData6(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('mon_toad_claw_weapon _Stats', 'BludgeoningDamage', 600, 0, 0, false, port, later);
+	f += GMTestAiNode('mon_black_spider_weapon _Stats', 'RendingDamage', 250, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_black_spider_large_weapon _Stats', 'RendingDamage', 300, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_iris_weapon _Stats', 'ElementalDamage', 100, 0, 0, false, port, later);
 	f += GMTestAiNode('EredinFireResistance', 'fire_resistance_perc', 0, 0, 0, false, port, later);
@@ -401,8 +403,6 @@ function GMTestAiData6(out port : int, out later : int) : int
 	f += GMTestAiNode('mq3035', 'vitality', 0, -0.75, 0, false, port, later);
 	f += GMTestAiNode('sq315_troll', 'armor', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('mq0003_noonwraith', 'essence', 500, 0, 0, false, port, later);
-	f += GMTestAiNode('mq1001_dog', 'vitality', 500, 0, 0, false, port, later);
-	f += GMTestAiNode('mq1019_priestFakeLevel', 'level', 0, 0, 0, false, port, later);
 	return f;
 }
 
@@ -410,6 +410,8 @@ function GMTestAiData7(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('mq1001_dog', 'vitality', 500, 0, 0, false, port, later);
+	f += GMTestAiNode('mq1019_priestFakeLevel', 'level', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('mq1019_dealer', 'vitality', 5000, 0, 0, false, port, later);
 	f += GMTestAiNode('mq1051_wyvern', 'essence', 2000, 0, 0, false, port, later);
 	f += GMTestAiNode('mq1058_lynx_witcher', 'vitality', 1000, 0, 0, false, port, later);
@@ -468,8 +470,6 @@ function GMTestAiData7(out port : int, out later : int) : int
 	f += GMTestAiNode('q305_Kidnaper', 'vitality', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('q308_wampire', 'essence', 1000, 0, 0, false, port, later);
 	f += GMTestAiNode('q309_man_chased_key', 'attack_power', 0, -0.8, 0, false, port, later);
-	f += GMTestAiNode('q309_rats', 'level', 0, 0, 0, false, port, later);
-	f += GMTestAiNode('q309_katakan', 'burning_DoT_damage_resistance_perc', 0, 0, 0.5, false, port, later);
 	return f;
 }
 
@@ -477,6 +477,8 @@ function GMTestAiData8(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('q309_rats', 'level', 0, 0, 0, false, port, later);
+	f += GMTestAiNode('q309_katakan', 'burning_DoT_damage_resistance_perc', 0, 0, 0.5, false, port, later);
 	f += GMTestAiNode('q310_wh_officer', 'vitality', 200, 0, 0, false, port, later);
 	f += GMTestAiNode('q503_banditsFakeLevels', 'vitality', 0, -0.8, 0, false, port, later);
 	f += GMTestAiNode('q401_cyclop', 'essence', 500, 0, 0, false, port, later);
@@ -535,8 +537,6 @@ function GMTestAiData8(out port : int, out later : int) : int
 	f += GMTestAiNode('mon_noonwraith_mh', 'essence', 750, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_pesta', 'essence', 750, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_nekker', 'essence', 250, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_nekker_warrior', 'essence', 300, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_drowner', 'essence', 300, 0, 0, false, port, later);
 	return f;
 }
 
@@ -544,6 +544,8 @@ function GMTestAiData9(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('mon_nekker_warrior', 'essence', 300, 0, 0, false, port, later);
+	f += GMTestAiNode('mon_drowner', 'essence', 300, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_drowner_underwater', 'level', 0, 0, 1, false, port, later);
 	f += GMTestAiNode('mon_drowneddead', 'essence', 350, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_rotfiend', 'essence', 350, 0, 0, false, port, later);
@@ -602,8 +604,6 @@ function GMTestAiData9(out port : int, out later : int) : int
 	f += GMTestAiNode('NPC Rusty Skellige sword _Stats', 'SlashingDamage', 250, 0, 0, false, port, later);
 	f += GMTestAiNode('NPC Rusty Nilfgaardian sword _Stats', 'SlashingDamage', 250, 0, 0, false, port, later);
 	f += GMTestAiNode('NPC Rusty Novigraadan sword _Stats', 'SlashingDamage', 250, 0, 0, false, port, later);
-	f += GMTestAiNode('NPC Short sword 1 _Stats', 'SlashingDamage', 300, 0, 0, false, port, later);
-	f += GMTestAiNode('NPC Short sword 2 _Stats', 'SlashingDamage', 300, 0, 0, false, port, later);
 	return f;
 }
 
@@ -611,6 +611,8 @@ function GMTestAiData10(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('NPC Short sword 1 _Stats', 'SlashingDamage', 300, 0, 0, false, port, later);
+	f += GMTestAiNode('NPC Short sword 2 _Stats', 'SlashingDamage', 300, 0, 0, false, port, later);
 	f += GMTestAiNode('NPC No Mans Land sword 1 _Stats', 'SlashingDamage', 300, 0, 0, false, port, later);
 	f += GMTestAiNode('NPC No Mans Land sword 1 q2 _Stats', 'SlashingDamage', 300, 0, 0, false, port, later);
 	f += GMTestAiNode('NPC No Mans Land sword 2 _Stats', 'SlashingDamage', 300, 0, 0, false, port, later);
@@ -669,8 +671,6 @@ function GMTestAiData10(out port : int, out later : int) : int
 	f += GMTestAiNode('Poker _Stats', 'PiercingDamage', 200, 0, 0, false, port, later);
 	f += GMTestAiNode('Staff _Stats', 'BludgeoningDamage', 200, 0, 0, false, port, later);
 	f += GMTestAiNode('Lucerne Hammer _Stats', 'BludgeoningDamage', 300, 0, 0, false, port, later);
-	f += GMTestAiNode('Wand _Stats', 'BludgeoningDamage', 150, 0, 0, false, port, later);
-	f += GMTestAiNode('Oar _Stats', 'BludgeoningDamage', 150, 0, 0, false, port, later);
 	return f;
 }
 
@@ -678,6 +678,8 @@ function GMTestAiData11(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('Wand _Stats', 'BludgeoningDamage', 150, 0, 0, false, port, later);
+	f += GMTestAiNode('Oar _Stats', 'BludgeoningDamage', 150, 0, 0, false, port, later);
 	f += GMTestAiNode('Rake _Stats', 'BludgeoningDamage', 150, 0, 0, false, port, later);
 	f += GMTestAiNode('Scoop _Stats', 'BludgeoningDamage', 150, 0, 0, false, port, later);
 	f += GMTestAiNode('Shovel _Stats', 'SlashingDamage', 150, 0, 0, false, port, later);
@@ -736,8 +738,6 @@ function GMTestAiData11(out port : int, out later : int) : int
 	f += GMTestAiNode('mon_fiend_weapon _Stats', 'RendingDamage', 600, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_fiend_lesser_weapon _Stats', 'RendingDamage', 550, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_fogling_weapon _Stats', 'RendingDamage', 400, 0, 0, false, port, later);
-	f += GMTestAiNode('mon_fogling_doppelganger_weapon _Stats', 'ElementalDamage', 2, 0, 2, false, port, later);
-	f += GMTestAiNode('mon_forktail_weapon _Stats', 'RendingDamage', 500, 0, 0, false, port, later);
 	return f;
 }
 
@@ -745,6 +745,8 @@ function GMTestAiData12(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('mon_fogling_doppelganger_weapon _Stats', 'ElementalDamage', 2, 0, 2, false, port, later);
+	f += GMTestAiNode('mon_forktail_weapon _Stats', 'RendingDamage', 500, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_forktail_tail_weapon _Stats', 'RendingDamage', 150, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_forktail_young_weapon _Stats', 'RendingDamage', 450, 0, 0, false, port, later);
 	f += GMTestAiNode('mon_forktail_young_tail_weapon _Stats', 'RendingDamage', 100, 0, 0, false, port, later);
@@ -803,8 +805,6 @@ function GMTestAiData12(out port : int, out later : int) : int
 	f += GMTestAiNode('mon_wyvern_weapon _Stats', 'RendingDamage', 500, 0, 0, false, port, later);
 	f += GMTestAiNode('W_Axe 1 _Stats', 'SlashingDamage', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('W_Axe 1 _Stats', 'weight', 2.75, 0, 0, true, port, later);
-	f += GMTestAiNode('W_Axe 2 _Stats', 'SlashingDamage', 0, 0, 0, false, port, later);
-	f += GMTestAiNode('W_Axe 2 _Stats', 'weight', 2.75, 0, 0, true, port, later);
 	return f;
 }
 
@@ -812,6 +812,8 @@ function GMTestAiData13(out port : int, out later : int) : int
 {
 	var f : int;
 
+	f += GMTestAiNode('W_Axe 2 _Stats', 'SlashingDamage', 0, 0, 0, false, port, later);
+	f += GMTestAiNode('W_Axe 2 _Stats', 'weight', 2.75, 0, 0, true, port, later);
 	f += GMTestAiNode('W_Axe 3 _Stats', 'SlashingDamage', 0, 0, 0, false, port, later);
 	f += GMTestAiNode('W_Axe 3 _Stats', 'weight', 3.5, 0, 0, true, port, later);
 	f += GMTestAiNode('W_Axe 4 _Stats', 'SlashingDamage', 0, 0, 0, false, port, later);
@@ -881,5 +883,5 @@ function GMTestAiDataAll(out checksPort : int, out checksLater : int) : int
 
 function GMTestAiDataAbilities() : int
 {
-	return 739;
+	return 741;
 }

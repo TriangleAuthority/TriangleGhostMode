@@ -146,7 +146,7 @@ function GMTest_opt01()
 	{
 		display = cfg.GetVarDisplayName(groups[i], options[i]);
 		GMTestReport(display != "", "OPT-01 " + NameToString(options[i]) + " in menu, label '" + GetLocStringByKeyExt("option_" + display) + "'");
-		GMTestReport(cfg.GetVarValue(groups[i], options[i]) != "", "OPT-01 " + NameToString(options[i]) + " has a value: " + cfg.GetVarValue(groups[i], options[i]));
+		GMTestReport(!GMOptionUnset(options[i], cfg.GetVarValue(groups[i], options[i])), "OPT-01 " + NameToString(options[i]) + " has a value: " + cfg.GetVarValue(groups[i], options[i]));
 	}
 
 	// Changing an option changes the feature (STAM-01 sign cooldown), and 0 turns it off.
@@ -568,6 +568,7 @@ exec function gmtest_panel()
 	GMTest_ai17_after();
 	GMTest_ai19_after();
 	GMTest_ai20_after();
+	GMTest_diff04_after();	// last: DIFF-04's mode and option changes on the bandit GMTest_diff04_spawn() left (a mode change rebuilds every NPC's stats)
 }
 
 function GMTest_panel()
@@ -2200,6 +2201,11 @@ exec function gmtest_regress()
 	GMTest_ai17();	// spawns a contract monster, rotfiends and bandits, reads the projectile data; GMTest_ai17_after() in gmtest_panel() hits and removes them
 	GMTest_ai19();	// spawns the Caretaker and four quest monsters, the CausesDamage value, the shovel, the spade text; GMTest_ai19_after() in gmtest_panel() reads their immunities and removes them
 	GMTest_ai20();	// Geralt's maximum Vitality in a fistfight, the fist damage bonus, a fistfighter for GMTest_ai20_after() in gmtest_panel() (the fight's start)
+	GMTest_diffdata();	// DIFF-01, DIFF-03: the difficulty abilities and PrologModifier as the game reads them
+	GMTest_diff07();	// DIFF-07: the guards' toll on the current mode (a quarter, no cap); gmtest_diff07(true) for all four
+	GMTest_diff04();	// DIFF-04: the scaling types and the guards' option on two spawned samples at Geralt 20, options set back
+	GMTest_diff05();	// DIFF-05: Gerd and the q305 guard at their real level on the HUD, a fake addon and the cap set by hand not shown
+	GMTest_diff04_spawn();	// DIFF-04: a bandit for GMTest_diff04_after() in gmtest_panel() (mode and option changes after a load)
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

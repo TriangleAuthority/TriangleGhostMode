@@ -389,7 +389,7 @@ def entry(name, legacy, vanilla):
     """The port's entry: legacy's whole, 5.x's nodes for the LATER tags; head with on_conflict if 5.x has it."""
     body = strip(legacy)
     head = '<ability name="%s"%s>' % (name, ' on_conflict="replace"' if vanilla else "")
-    body = re.sub(r'^<ability\s+name="[^"]+"[^>]*>', head, body)
+    body = re.sub(r'^<ability\s+name\s*=\s*"[^"]+"[^>]*>', head, body)
     if vanilla:
         tags = later_tags()
         inner = body[len(head):-len("</ability>")]
