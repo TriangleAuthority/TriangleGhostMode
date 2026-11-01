@@ -284,7 +284,7 @@ function GMInternalAddLevelBonuses()
 		AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, numAbls);
 		if ( ciriEntity )
 		{
-			if(theGame.GetDifficultyMode() == EDM_Hardcore) AddAbility('CiriHardcoreDebuffHuman');
+			if(theGame.GetSpawnDifficultyMode() == EDM_Hardcore) AddAbility('CiriHardcoreDebuffHuman');	// DIFF-09: her sections' mode (legacy: GetDifficultyMode, the same without the option)
 		}
 		else if ( GetAttitudeBetween(this, thePlayer) == AIA_Hostile && !HasTag('HideHealthBarModule') )
 		{
@@ -313,7 +313,7 @@ function GMInternalAddLevelBonuses()
 		}
 		if ( ciriEntity )
 		{
-			if ( theGame.GetDifficultyMode() == EDM_Hardcore ) AddAbility('CiriHardcoreDebuffMonster');
+			if ( theGame.GetSpawnDifficultyMode() == EDM_Hardcore ) AddAbility('CiriHardcoreDebuffMonster');	// DIFF-09: her sections' mode
 		}
 		else if ( GetAttitudeBetween(this, thePlayer) == AIA_Hostile && !HasTag('HideHealthBarModule') )
 		{

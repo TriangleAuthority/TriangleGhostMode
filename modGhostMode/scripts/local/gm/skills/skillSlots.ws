@@ -175,3 +175,123 @@ function GMSwapSkillColoursAllowed(skill1 : ESkill, slotID1 : int, skill2 : ESki
 		return false;
 	return true;
 }
+
+// SKL-01 (found in XP slice X5): the skill mutagen slots unlock by Geralt's level too, as in 1.32 and legacy Ghost Mode
+// (their unlockedAtLevel). 5.x compares the same numbers with the total of skill points, so the new tree's smaller
+// income (XP-09) and Places of Power would move them. The new character menu shows the same rule.
+@replaceMethod(W3PlayerAbilityManager)
+function IsSkillMutagenSlotUnlocked( eqSlot : EEquipmentSlots ) : bool
+{
+	var i : int;	//modSigns: no skill points read
+
+	//modSigns: removed the skill points total (used, free, mutation research)
+	i = GetMutagenSlotIndex( eqSlot );
+	if( i<0 )
+	{
+		return false;
+	}
+	
+	
+	
+	return ( ( W3PlayerWitcher ) owner ).GetLevel() >= mutagenSlots[ i ].unlockedAtLevel;	//modSigns: by level (1.32, legacy)
+}
+
+@replaceMethod(CR4CharacterDupeMenu)
+function UpdateMutagens():void
+{
+	var idx               : int;
+	var mutCount          : int;
+	var slotUnlocked      : bool;
+	var gfxMutSlot        : CScriptedFlashObject;
+	var gfxMutSlotsList   : CScriptedFlashArray;
+	var skillMutagenSlots : array<SMutagenSlot>;
+	var currentMutSlot	  : SMutagenSlot;
+	var invComponent      : CInventoryComponent;
+	var playerInv 		  : W3GuiPlayerInventoryComponent;
+	//modSigns: removed the skill points total (used, free, mutation research)
+	
+	invComponent = thePlayer.GetInventory();
+	playerInv = new W3GuiPlayerInventoryComponent in this;
+	playerInv.Initialize( invComponent );
+	
+	gfxMutSlotsList = m_flashValueStorage.CreateTempFlashArray();
+	skillMutagenSlots = thePlayer.GetPlayerSkillMutagens();
+	mutCount = skillMutagenSlots.Size();
+	
+	for (idx = 0; idx < mutCount; idx+=1)
+	{
+		currentMutSlot = skillMutagenSlots[idx];
+		gfxMutSlot = m_flashValueStorage.CreateTempFlashObject();
+		slotUnlocked = GetWitcherPlayer().GetLevel() >= currentMutSlot.unlockedAtLevel;	//modSigns: by level (1.32, legacy)
+		
+		gfxMutSlot.SetMemberFlashInt('slotId', currentMutSlot.equipmentSlot);
+		gfxMutSlot.SetMemberFlashInt('groupId', currentMutSlot.skillGroupID);
+		gfxMutSlot.SetMemberFlashString('slotType', currentMutSlot.equipmentSlot);
+		gfxMutSlot.SetMemberFlashBool('unlocked', slotUnlocked);
+		gfxMutSlot.SetMemberFlashInt('unlockedAtLevel', currentMutSlot.unlockedAtLevel);
+		
+		if (invComponent.IsIdValid(currentMutSlot.item))
+		{
+			playerInv.SetInventoryFlashObjectForItem(currentMutSlot.item, gfxMutSlot);
+			gfxMutSlot.SetMemberFlashString('color', invComponent.GetSkillMutagenColor(currentMutSlot.item));
+		}
+		else
+		{
+			gfxMutSlot.SetMemberFlashString('color', SC_None);
+		}
+		gfxMutSlotsList.PushBackFlashObject(gfxMutSlot);
+	}
+	m_flashValueStorage.SetFlashArray( "character.skills.mutagens", gfxMutSlotsList);
+}
+
+// SKL-01 (XP audit F2): a locked skill or skill mutagen slot's tooltip in the new character menu (both trees) says
+// the level it opens at, with 1.32's and legacy's text "Slot unlocked at level: N" (the classic menu's strings
+// 1070951 and 1070952). 5.x's "Unlocked at N Ability Points acquired." is filled with the same number, which since
+// SKL-01 and slice X5 is a level. The wrapper lets 5.x build its tooltip, then sets it again with the level text.
+@wrapMethod(CR4CharacterDupeMenu)
+function OnGetLockedTooltipData(unlockedAtLevel : int)
+{
+	wrappedMethod(unlockedAtLevel);
+	GMSetLockedSlotTooltip(false, unlockedAtLevel);
+}
+
+@wrapMethod(CR4CharacterDupeMenu)
+function OnGetMutagenLockedTooltipData(unlockedAtLevel : int)
+{
+	wrappedMethod(unlockedAtLevel);
+	GMSetLockedSlotTooltip(true, unlockedAtLevel);
+}
+
+// The tooltip as 5.x's two events build it, with the level text.
+@addMethod(CR4CharacterDupeMenu)
+function GMSetLockedSlotTooltip(mutagen : bool, unlockedAtLevel : int)
+{
+	var resultGFxData : CScriptedFlashObject;
+
+	resultGFxData = m_flashValueStorage.CreateTempFlashObject();
+	if(mutagen)
+		resultGFxData.SetMemberFlashString('skillName', GetLocStringByKeyExt("panel_character_tooltip_mutagen_locked_title"));
+	else
+		resultGFxData.SetMemberFlashString('skillName', GetLocStringByKeyExt("panel_character_tooltip_skill_locked_title"));
+	resultGFxData.SetMemberFlashString('currentLevelDescription', GMLockedSlotDescription(mutagen, unlockedAtLevel));
+	resultGFxData.SetMemberFlashString('nextLevelDescription', "");
+	resultGFxData.SetMemberFlashString('skillLevelString', "");
+	resultGFxData.SetMemberFlashInt('level', -1);
+	resultGFxData.SetMemberFlashInt('maxLevel', -1);
+	resultGFxData.SetMemberFlashNumber('requiredPointsSpent', -1);
+	if(mutagen)
+		resultGFxData.SetMemberFlashString('IconPath', "icons\Skills\mutagen_slot_locked.png");
+	else
+		resultGFxData.SetMemberFlashString('IconPath', "icons\Skills\skill_slot_locked.png");
+	resultGFxData.SetMemberFlashBool('hasEnoughPoints', true);
+	resultGFxData.SetMemberFlashInt('curSkillPoints', -1);
+	m_flashValueStorage.SetFlashObject("context.tooltip.data", resultGFxData);
+}
+
+// 1.32's and legacy's locked-slot text (CR4CharacterMenu.OnGetLockedTooltipData, OnGetMutagenLockedTooltipData).
+function GMLockedSlotDescription(mutagen : bool, unlockedAtLevel : int) : string
+{
+	if(mutagen)
+		return GetLocStringByKeyExt("panel_character_tooltip_mutagen_locked_desc") + ": " + unlockedAtLevel;
+	return GetLocStringByKeyExt("panel_character_tooltip_skill_locked_desc") + ": " + unlockedAtLevel;
+}

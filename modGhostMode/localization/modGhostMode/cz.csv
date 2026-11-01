@@ -539,3 +539,18 @@
 ; OPT: the "Recommended" and "Off" preset labels shared by every group (first used by DIFF-04, slice D5b)
 2110992448|        |preset_value_gm_recommended|Recommended
 2110992449|        |preset_value_gm_turn_off|Off
+; DIFF-10 (owner, 2026-10-31): the seventh scaling type
+2110992666|        |preset_value_gm_es_interpolated|Interpolované
+; DIFF-09 (owner, 2026-10-31): Ciri's sections; the two modes' names are the game's own (1092307, 1092305)
+2110992667|        |option_gm_ciri_difficulty|Části za Ciri: obtížnost
+2110992668|        |preset_value_gm_ciri_diff_same|Jako ve hře
+2110992669|        |preset_value_gm_ciri_diff_medium|Děj a boj!
+2110992670|        |preset_value_gm_ciri_diff_easy|Hlavní je příběh!
+; XP-07 (slice X4): the experience options group, its preset and its four options, legacy's
+2110992328|        |panel_gm_exp_options|Zkušenosti
+2110992452|        |preset_Mods_ghost_mode_gm_exp_options|Experience Presets
+2110992451|        |preset_value_gm_default|Default
+2110992253|        |option_gm_no_quest_levels_toggle|Vypnout doporučenou úroveň pro plnění úkolů: 
+2110992300|        |option_gm_use_xml_exp_toggle|Splnění všech úkolů a vyhraných bojů dává stejný počet zkušeností:
+2110992270|        |option_gm_quest_exp_slider|Modifikátor zkušeností za plnění úkolů:
+2110992271|        |option_gm_monster_exp_slider|Modifikátor zkušeností za vyhrané souboje:

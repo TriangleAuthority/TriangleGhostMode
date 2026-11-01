@@ -7,6 +7,7 @@
 			<!-- AI-01: the human level bonuses (per level; 6+ and 15+ levels above Geralt) -->
 			<ability name="NPCLevelBonus" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="base" always_random="false" min="2" max="2" />
 				<vitality type="base" always_random="false" min="8" max="8" />
 				<vitality type="mult" always_random="false" min="0.15" max="0.15" />
 				<attack_power type="add" always_random="false" min="1" max="1" />
@@ -46,6 +47,7 @@
 			<!-- AI-01: the monster and animal level bonuses, the displayed level; AI-17: contract monsters (MonsterMHBoss: no health or attack power of its own, instant-kill immune) -->
 			<ability name="MonsterLevelBonus" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="base" always_random="false" min="4" max="4" />
 				<essence type="base" always_random="false" min="20" max="20" />
 				<essence type="mult" always_random="false" min="0.15" max="0.15" />
 				<attack_power type="add" always_random="false" min="1" max="1" />
@@ -69,11 +71,10 @@
 				<will_resistance type="add" always_random="false" min="0" max="0" />
 				<fire_resistance type="add" always_random="false" min="0" max="0" />
 				<frost_resistance type="add" always_random="false" min="0" max="0" />
-				<!-- 5.x's until XP -->
-				<experience type="base" always_random="false" min="4" max="4" />
 			</ability>
 			<ability name="MonsterLevelBonusGroup" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="base" always_random="false" min="2" max="2" />
 				<essence type="base" always_random="false" min="10" max="10" />
 				<essence type="mult" always_random="false" min="0.15" max="0.15" />
 				<attack_power type="add" always_random="false" min="1" max="1" />
@@ -97,11 +98,10 @@
 				<will_resistance type="add" always_random="false" min="0" max="0" />
 				<fire_resistance type="add" always_random="false" min="0" max="0" />
 				<frost_resistance type="add" always_random="false" min="0" max="0" />
-				<!-- 5.x's until XP -->
-				<experience type="base" always_random="false" min="2" max="2" />
 			</ability>
 			<ability name="MonsterLevelBonusArmored" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="base" always_random="false" min="4" max="4" />
 				<essence type="base" always_random="false" min="20" max="20" />
 				<essence type="mult" always_random="false" min="0.15" max="0.15" />
 				<attack_power type="add" always_random="false" min="1" max="1" />
@@ -125,11 +125,10 @@
 				<will_resistance type="add" always_random="false" min="0" max="0" />
 				<fire_resistance type="add" always_random="false" min="0" max="0" />
 				<frost_resistance type="add" always_random="false" min="0" max="0" />
-				<!-- 5.x's until XP -->
-				<experience type="base" always_random="false" min="2" max="2" />
 			</ability>
 			<ability name="MonsterLevelBonusGroupArmored" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="base" always_random="false" min="2" max="2" />
 				<essence type="base" always_random="false" min="10" max="10" />
 				<essence type="mult" always_random="false" min="0.15" max="0.15" />
 				<attack_power type="add" always_random="false" min="1" max="1" />
@@ -153,8 +152,6 @@
 				<will_resistance type="add" always_random="false" min="0" max="0" />
 				<fire_resistance type="add" always_random="false" min="0" max="0" />
 				<frost_resistance type="add" always_random="false" min="0" max="0" />
-				<!-- 5.x's until XP -->
-				<experience type="base" always_random="false" min="2" max="2" />
 			</ability>
 			<ability name="MonsterLevelBonusHigh" on_conflict="replace">
 				<tags> "base", "InstantKillImmune" </tags>
@@ -200,8 +197,6 @@
 			</ability>
 			<ability name="MonsterMHBoss" on_conflict="replace">
 				<tags> "base", "InstantKillImmune" </tags>
-				<!-- 5.x's until XP -->
-				<experience type="base" always_random="false" min="50" max="50" />
 			</ability>
 			<!-- AI-02: the NPC templates (constitution, MiniBoss, Boss) -->
 			<ability name="ConDefault" on_conflict="replace">
@@ -243,6 +238,7 @@
 			<ability name="ConAthletic" on_conflict="replace">
 				<tags> "base" </tags>
 				<level type="add" always_random="false" min="1" max="1" />
+				<experience type="add" always_random="false" min="0" max="0" />
 				<vitality type="base" always_random="false" min="320" max="320" />
 				<essence type="base" always_random="false" min="0" max="0" />
 				<stamina type="base" always_random="false" min="100" max="100" />
@@ -255,8 +251,6 @@
 				<moraleRegen type="mult" always_random="false" min="0.10" max="0.10" />
 				<attack_light is_ability="true" />
 				<attack_heavy is_ability="true" />
-				<!-- 5.x's until XP -->
-				<experience type="add" always_random="false" min="10" max="10" />
 			</ability>
 			<ability name="ConWitcher" on_conflict="replace">
 				<tags> "base" </tags>
@@ -282,6 +276,7 @@
 			</ability>
 			<ability name="MiniBoss" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="base" always_random="false" min="30" max="30" />
 				<vitality type="base" always_random="false" min="500" max="500" />
 				<attack_power type="mult" always_random="false" min="0.25" max="0.25" />
 				<attack_power type="add" always_random="false" min="50" max="50" />
@@ -305,6 +300,7 @@
 			</ability>
 			<ability name="Boss" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="base" always_random="false" min="50" max="50" />
 				<vitality type="base" always_random="false" min="1000" max="1000" />
 				<attack_power type="mult" always_random="false" min="0.5" max="0.5" />
 				<attack_power type="add" always_random="false" min="100" max="100" />

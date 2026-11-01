@@ -90,6 +90,8 @@ function GMTestDiff04Expected(npc : CNewNPC, base : int, p : int, scalingType : 
 		lvl = p;
 	else if(scalingType == 3 && lvl < p - 6)
 		lvl = p - 6;
+	else if(scalingType == 6 && lvl < p)	// DIFF-10: half the difference, rounded down
+		lvl = lvl + FloorF((p - lvl) * 0.5);
 	if(guard)
 	{
 		if(lvl < p)
@@ -120,6 +122,7 @@ function GMTestDiff04TypeName(t : int) : string
 		case 3: return "Soft";
 		case 4: return "Random";
 		case 5: return "Random no downscaling";
+		case 6: return "Interpolated";
 	}
 	return "?" + t;
 }
@@ -150,6 +153,7 @@ function GMTestDiff04Options() : array<name>
 	o.PushBack('GMDamageMultiplier');
 	o.PushBack('GMBossHealthMultiplier');
 	o.PushBack('GMBossDamageMultiplier');
+	o.PushBack('Virtual_GMCiriDifficulty');	// DIFF-09
 	return o;
 }
 
@@ -760,8 +764,10 @@ function GMTest_diff04()
 	}
 	guard.SetNPCType(ENGT_Guard);
 	ok = true;
-	for(t = 0; t <= 3; t += 1)
+	for(t = 0; t <= 6; t += 1)
 	{
+		if(t == 4 || t == 5)
+			continue;	// the random types below
 		GMTestDiff04Set(t, 0, 0, t == 2, false);
 		bandit.GMTestSetBaseLevel(2);
 		guard.GMTestSetBaseLevel(1);

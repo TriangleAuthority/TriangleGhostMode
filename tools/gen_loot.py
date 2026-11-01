@@ -9,8 +9,9 @@ DLC override if it works, else whole files; no DLC override of `<loot>` is known
 - a loot list legacy changed: legacy's entries; its opening tag (the list's attributes) legacy's where
   legacy changed it, else 5.x's (DT8: 5.x's `respawn_time` on the quest lists);
 - a list legacy added: legacy's, appended to its file;
-- a quest reward: 5.x's entry with legacy's `<items>` (LOOT-07, DT4); its experience, level and gold
-  stay 5.x's (XP, ECON).
+- a quest reward: 5.x's entry with legacy's `<items>` (LOOT-07, DT4) and legacy's `experience` and `level`
+  (XP-02, PX2: also the rewards legacy changed without items, so the free DLCs' `dlc12` and `dlc15`); gold stays
+  5.x's (ECON); a reward only 5.x has keeps 5.x's values but for DX4's (`NEW_REWARDS`).
 
     python tools/gen_loot.py [--worktree DIR] [--check | --verify]
 
@@ -25,7 +26,12 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # The features whose lists and rewards are ported (loot.md's port order).
-PORTED = {"LOOT-01", "LOOT-02", "LOOT-03", "LOOT-04", "LOOT-05", "LOOT-06", "LOOT-07", "LOOT-08", "CRAFT-10"}
+PORTED = {"LOOT-01", "LOOT-02", "LOOT-03", "LOOT-04", "LOOT-05", "LOOT-06", "LOOT-07", "LOOT-08", "CRAFT-10", "XP-02"}
+# The reward attributes XP-02 takes from legacy (docs/features/xp.md, PX2); gold stays 5.x's until ECON.
+XP_ATTRS = ("level", "experience")
+# 5.x's new rewards placed by analogy (XP-02, DX4 (a), owner, 2026-10-31): {path: {reward: {attribute: value}}}.
+# Killbill's new branch at legacy's level for the quest, 16, with 5.x's 50 XP; the other new rewards stay 5.x's.
+NEW_REWARDS = {"modGhostMode/files/gameplay/rewards/rewards.xml": {"sq106_3_hammond_killed_crach": {"level": "16"}}}
 
 UNIT = re.compile(r'^(.*\.xml)::(?:definitions/loot_definitions/(loot)|(reward)):(.+)$')
 ENTRY = {
@@ -44,19 +50,19 @@ def git_bytes(*args):
 
 
 def units():
-    """{path: {(kind, name): features}} of the loot list and reward units with a LOOT feature."""
+    """{path: {(kind, name): features}} of the loot list and reward units with a LOOT feature or XP-02."""
     out = {}
     with open(os.path.join(REPO, "docs", "features", "attribution.csv"), encoding="utf-8") as f:
         for row in csv.DictReader(f):
             m = UNIT.match(row["unit"])
             feats = set(row["features"].split())
-            if m and any(x.startswith("LOOT-") for x in feats):
+            if m and (any(x.startswith("LOOT-") for x in feats) or "XP-02" in feats):
                 out.setdefault("modGhostMode/" + m.group(1), {})[(m.group(2) or m.group(3), m.group(4))] = feats
     return out
 
 
 def area(feats):
-    return {x for x in feats if x.startswith(("LOOT-", "CRAFT-"))}
+    return {x for x in feats if x.startswith(("LOOT-", "CRAFT-")) or x == "XP-02"}
 
 
 def wanted(feats):
@@ -163,7 +169,18 @@ def head_merged(mh, lh, vh):
     return vh
 
 
-def merged(kind, ment, lent, vent):
+def set_attrs(h, values):
+    """The opening tag `h` with each attribute of `values` set (appended if it has none)."""
+    for a, val in values.items():
+        if re.search(rf'\b{a}\s*=', h):
+            h = re.sub(rf'(\b{a}\s*=\s*")[^"]*(")', lambda m: m.group(1) + val + m.group(2), h)
+        else:
+            end = len(h) - (2 if h.endswith("/>") else 1)
+            h = h[:end].rstrip() + f' {a}="{val}"' + h[end:]
+    return h
+
+
+def merged(kind, ment, lent, vent, feats=frozenset(("LOOT-07",))):
     """The final entry of a ported unit."""
     if kind == "loot":
         if vent is None:
@@ -173,9 +190,14 @@ def merged(kind, ment, lent, vent):
         if h.endswith("/>"):
             h = h[:-2].rstrip() + ">"
         return drop_unknown(h + body(lent) + "</loot>")[0]
-    # reward: 5.x's with legacy's <items>
+    # reward: 5.x's with legacy's <items> (LOOT) and legacy's experience and level (XP-02)
     if vent is None:
         return lent
+    if "XP-02" in feats:
+        la = {a: v for a, _, v, _ in ATTR.findall(head(lent))}
+        vent = set_attrs(head(vent), {a: la[a] for a in XP_ATTRS if a in la}) + vent[len(head(vent)):]
+    if not any(x.startswith("LOOT-") for x in feats):
+        return vent
     li = items_block(lent)
     vh = head(vent)
     if vh.endswith("/>"):
@@ -210,7 +232,7 @@ def generate(path, us):
             if vent is not None:
                 report.append(f"{key[0]} {key[1]}: legacy has none, 5.x's kept")
             continue
-        new = merged(key[0], ment, lent, vent)
+        new = merged(key[0], ment, lent, vent, feats)
         dropped = drop_unknown(lent)[1] if key[0] == "loot" else []
         if dropped:
             report.append(f"{key[0]} {key[1]}: left out until FOOD: {', '.join(dropped)}")
@@ -220,6 +242,13 @@ def generate(path, us):
         elif norm(new) != norm(vent):
             edits.append((ve[key][0], ve[key][1], new))
             report.append(f"{key[0]} {key[1]}")
+    for name, values in NEW_REWARDS.get(path, {}).items():
+        key = ("reward", name)
+        vent = get(vtext, ve, key)
+        if vent is None or key in us:
+            raise SystemExit(f"{path}: DX4's {name} is not a 5.x-only reward")
+        edits.append((ve[key][0], ve[key][1], set_attrs(head(vent), values) + vent[len(head(vent)):]))
+        report.append(f"reward {name}: DX4")
     text = vtext
     for s, e, new in sorted(edits, reverse=True):
         text = text[:s] + new + text[e:]
@@ -230,8 +259,8 @@ def generate(path, us):
     return text, report
 
 
-def expected(kind, ment, lent, vent):
-    return norm(merged(kind, ment, lent, vent)) if lent is not None else norm(vent)
+def expected(kind, ment, lent, vent, feats):
+    return norm(merged(kind, ment, lent, vent, feats)) if lent is not None else norm(vent)
 
 
 def verify(worktree, us_all):
@@ -250,7 +279,7 @@ def verify(worktree, us_all):
         for key, feats in sorted(us.items()):
             f, l, v, m = get(final, fe, key), get(ltext, le, key), get(vtext, ve, key), get(mtext, me, key)
             if wanted(feats):
-                if norm(f) == expected(key[0], m, l, v):
+                if norm(f) == expected(key[0], m, l, v, feats):
                     r = "legacy's" if l is not None else "legacy has none, 5.x's"
                     counts[r] = counts.get(r, 0) + 1
                 else:
@@ -261,8 +290,17 @@ def verify(worktree, us_all):
             else:
                 problems.append(f"{path}: {key[0]} {key[1]} changed before its features are ported")
 
+        for name, values in NEW_REWARDS.get(path, {}).items():
+            key = ("reward", name)
+            v = get(vtext, ve, key)
+            if v is not None and norm(get(final, fe, key)) == norm(set_attrs(head(v), values) + v[len(head(v)):]):
+                counts["XP-02 DX4: 5.x's new reward placed by analogy"] = counts.get("XP-02 DX4: 5.x's new reward placed by analogy", 0) + 1
+            else:
+                problems.append(f"{path}: reward {name} not as DX4 sets it")
+        own = set(us) | {("reward", n) for n in NEW_REWARDS.get(path, {})}
+
         def rest(text, ents):
-            for s, e in sorted((ents[k] for k in us if k in ents), reverse=True):
+            for s, e in sorted((ents[k] for k in own if k in ents), reverse=True):
                 text = text[:s] + text[e:]
             return norm(text)
         if rest(final, fe) != rest(vtext, ve):

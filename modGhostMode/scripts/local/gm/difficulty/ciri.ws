@@ -5,14 +5,52 @@
 
 // DIFF-06: no cap for Ciri: NPCs spawned or updated while she is played get the chosen mode's difficulty
 // ability and variants (5.x: at most "Story and Sword!"'s while Ciri is the player). Legacy's body.
+// DIFF-09 (owner, 2026-10-31: new, not legacy): the option "Ciri's sections: difficulty" caps the mode while Ciri
+// is the player ("Same as game", the default, is legacy's: no cap). It never raises the mode.
 // The one place that decides the mode of Ciri's sections: her spawn's update (the wrapper below), OnPlayerChanged's
-// update and every NPC spawned while she plays read it, and the scaling modifiers follow the difficulty ability it
-// gives (GMAddOptionBonuses reads the NPC's multiplier); a cap would go back in here.
+// update and every NPC spawned while she plays read it, the scaling modifiers follow the difficulty ability it
+// gives (GMAddOptionBonuses reads the NPC's multiplier), and AI-01's Death March adjustment, DMG-10's fistfight
+// rule and AI-15's Ice Armor read it.
 @replaceMethod(CR4Game)
 function GetSpawnDifficultyMode() : EDifficultyMode
 {
 	//modSigns: removed 5.x's cap while Ciri is the player (return MinDiffMode( GetDifficultyMode(), EDM_Medium ))
+	if( thePlayer && thePlayer.IsCiri() )	//modSigns: DIFF-09
+		return GMCiriSectionsMode();	//modSigns: DIFF-09, the option's cap
 	return GetDifficultyMode();
+}
+
+// DIFF-09: "Ciri's sections: difficulty" (GMScalingOptions, Virtual_GMCiriDifficulty): 0 "Same as game", 1 "Story
+// and Sword!", 2 "Just the Story!".
+function GMGetCiriDifficultyOption() : int
+{
+	return (int)GMGetOptionFloat('GMScalingOptions', 'Virtual_GMCiriDifficulty');
+}
+
+// DIFF-09: the mode of Ciri's sections: the lower of the chosen mode and the option's.
+@addMethod(CR4Game)
+function GMCiriSectionsMode() : EDifficultyMode
+{
+	switch(GMGetCiriDifficultyOption())
+	{
+		case 1:
+			return MinDiffMode( GetDifficultyMode(), EDM_Medium );
+		case 2:
+			return MinDiffMode( GetDifficultyMode(), EDM_Easy );
+	}
+	return GetDifficultyMode();
+}
+
+// DIFF-09: the option changed (the options menu's closing, gmOptions.ws): while Ciri plays, every NPC gets the new
+// mode's difficulty ability and variants at once and is re-levelled (as at a player change); as Geralt nothing
+// changes (the option applies at her next section).
+function GMOnCiriDifficultyChanged()
+{
+	if( thePlayer && thePlayer.IsCiri() )
+	{
+		theGame.UpdateStatsForDifficultyLevel( theGame.GetSpawnDifficultyMode() );
+		GMOnScalingOptionsChanged();
+	}
 }
 
 // DIFF-06: Ciri's spawn (W3ReplacerCiri.OnSpawned, 5.x's and legacy's) still updates every NPC for
@@ -20,6 +58,8 @@ function GetSpawnDifficultyMode() : EDifficultyMode
 // OnPlayerChanged updates them for the chosen mode again (a player change; seen in game, slice D3), and a variant
 // in an enemy's own entity list (the drunken master's) is lost for good. Every update uses the spawn mode, which
 // has no cap: the cap legacy's changelist removed is gone from her spawn too (porter's call, a deviation).
+// DIFF-09: with "Ciri's sections: difficulty" set, the spawn mode is the option's cap, so her spawn's call and
+// every other update agree.
 @wrapMethod(CR4Game)
 function UpdateStatsForDifficultyLevel(difficulty : EDifficultyMode)
 {
@@ -80,6 +120,28 @@ function OnSpawned(spawnData : SEntitySpawnData)
 {
 	wrappedMethod(spawnData);
 	GMCheckCiriAbilities();
+	// DIFF-09: at a save's load in her sections (OnPlayerChanged does not run), the NPCs restored with the save keep
+	// the mode they were saved with: her spawn's update does not reach them (seen in game, 2026-10-31). Every NPC
+	// gets her sections' mode a moment later (no change for those that hold it already; a player change, also
+	// "restored", gets OnPlayerChanged's update first).
+	if(spawnData.restored)
+		AddTimer('GMCiriSectionsModeAfterLoad', 0.5, false);
+}
+
+// DIFF-09: every NPC on her sections' mode (the option's cap), then its bonuses recomputed at its level: the
+// native update swaps the difficulty ability and variants but runs no level computation (seen in game: the
+// modifiers' steps stayed sized for the saved mode), and the modifiers follow the new ability.
+@addMethod(W3ReplacerCiri)
+timer function GMCiriSectionsModeAfterLoad(dt : float, id : int)
+{
+	var npcs : array<CNewNPC>;
+	var i : int;
+
+	theGame.UpdateStatsForDifficultyLevel( theGame.GetSpawnDifficultyMode() );
+	theGame.GetAllNPCs( npcs );
+	for( i = 0; i < npcs.Size(); i += 1 )
+		if( npcs[i] )
+			npcs[i].GMRecomputeLevelBonuses();
 }
 
 @wrapMethod(W3ReplacerCiri)

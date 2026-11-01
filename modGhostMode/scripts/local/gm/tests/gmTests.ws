@@ -568,6 +568,7 @@ exec function gmtest_panel()
 	GMTest_ai17_after();
 	GMTest_ai19_after();
 	GMTest_ai20_after();
+	GMTest_xp04_who_after();	// XP-04 (XP audit F1): who earns a kill's experience: Geralt's kill, allies' and a guard's near him, an ally's far away
 	GMTest_diff04_after();	// last: DIFF-04's mode and option changes on the bandit GMTest_diff04_spawn() left (a mode change rebuilds every NPC's stats)
 }
 
@@ -2204,7 +2205,13 @@ exec function gmtest_regress()
 	GMTest_diffdata();	// DIFF-01, DIFF-03: the difficulty abilities and PrologModifier as the game reads them
 	GMTest_diff07();	// DIFF-07: the guards' toll on the current mode (a quarter, no cap); gmtest_diff07(true) for all four
 	GMTest_diff04();	// DIFF-04: the scaling types and the guards' option on two spawned samples at Geralt 20, options set back
+	GMTest_diff09();	// DIFF-09: the Ciri option's cap for each mode and value, none for Geralt (current mode only, no mode change)
 	GMTest_diff05();	// DIFF-05: Gerd and the q305 guard at their real level on the HUD, a fake addon and the cap set by hand not shown
+	GMTest_xpdata();	// XP-08, XP-05: the level abilities and the enemies' experience nodes as the game reads them
+	GMTest_xp05();	// XP-05: a kill's experience the same with +1000 experience on the NPC (nothing reads the node)
+	GMTest_xpquestdata();	// XP-02, XP-03: the rewards' experience, level and gold, and the quest levels the journal reads
+	GMTest_xp07();	// XP-07: the experience options' labels, defaults and hooks (options set in memory and set back)
+	GMTest_xp04_who_spawn(false);	// XP-04 (XP audit F1): drowners, a renegade and a guard for GMTest_xp04_who_after() in gmtest_panel()
 	GMTest_diff04_spawn();	// DIFF-04: a bandit for GMTest_diff04_after() in gmtest_panel() (mode and option changes after a load)
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }

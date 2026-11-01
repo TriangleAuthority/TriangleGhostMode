@@ -24,6 +24,7 @@
 			<ability name="WildHunt_Caranthir" on_conflict="replace">
 				<tags> "Boss" </tags>
 				<essence type="base" min="2000" max="2000" />
+				<experience type="add" min="100" max="100" />
 				<threat_level type="add" min="5" max="5" />
 				<staminaRegen type="mult" min="0.5" max="0.5" />
 				<hit_severity type="add" always_random="false" min="0" max="0" />
@@ -49,12 +50,11 @@
 				<poison_DoT_damage_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
 				<bleeding_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
 				<bleeding_DoT_damage_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
-				<!-- 5.x's until XP -->
-				<experience type="add" min="100" max="100" />
 			</ability>
 			<ability name="WildHunt_Eredin" on_conflict="replace">
 				<tags> "Boss" </tags>
 				<essence type="base" min="2500" max="2500" />
+				<experience type="add" min="100" max="100" />
 				<threat_level type="add" min="5" max="5" />
 				<staminaRegen type="mult" min="0.5" max="0.5" />
 				<hit_severity type="add" always_random="false" min="0" max="0" />
@@ -82,12 +82,11 @@
 				<poison_DoT_damage_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
 				<bleeding_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
 				<bleeding_DoT_damage_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
-				<!-- 5.x's until XP -->
-				<experience type="add" min="100" max="100" />
 			</ability>
 			<ability name="WildHunt_Imlerith" on_conflict="replace">
 				<tags> "Boss" </tags>
 				<essence type="base" min="2500" max="2500" />
+				<experience type="add" min="100" max="100" />
 				<threat_level type="add" min="5" max="5" />
 				<staminaRegen type="mult" min="0.5" max="0.5" />
 				<hit_severity type="add" always_random="false" min="0" max="0" />
@@ -113,8 +112,6 @@
 				<poison_DoT_damage_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
 				<bleeding_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
 				<bleeding_DoT_damage_resistance_perc type="add" always_random="false" min="0.3" max="0.3" />
-				<!-- 5.x's until XP -->
-				<experience type="add" min="100" max="100" />
 			</ability>
 			<ability name="mon_djinn" on_conflict="replace">
 				<tags> "base", "Boss" </tags>

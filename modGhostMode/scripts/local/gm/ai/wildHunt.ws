@@ -14,7 +14,7 @@ function GMIceArmorResistBonus( action : W3DamageAction, attacker : CActor, vict
 		return 0;
 	if( !victim.HasAbility( 'IceArmor' ) || attacker.HasAbility( 'Ciri_Rage' ) )
 		return 0;
-	if( theGame.GetDifficultyMode() == EDM_Easy )
+	if( theGame.GetSpawnDifficultyMode() == EDM_Easy )	// DIFF-09: in Ciri's sections, their mode (the chosen one unless the option caps it)
 		return 0;
 	return 0.3;
 }

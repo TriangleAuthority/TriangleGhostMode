@@ -10,11 +10,13 @@
 // ("Recommended", "Hardcore", "Off": the menu XML; applying one re-levels like an option change).
 // DIFF audit F2 and F3 (owner, 2026-10-31; deviations): the modifiers combine as (1 + mode) x (1 + enemy + boss),
 // floored; the boss modifiers follow the boss bar's tag at once.
+// DIFF-10 (owner, 2026-10-31: new, not legacy): a seventh scaling type, Interpolated: an enemy below Geralt's level
+// gains half the difference, rounded down.
 // See docs/features/diff.md.
 
 // ---- option getters (legacy: W3GameParams.GetEnemyScalingOption and the like) ----
 
-// 0 None, 1 Upscale, 2 Match, 3 Soft upscaling, 4 Random, 5 Random no downscaling.
+// 0 None, 1 Upscale, 2 Match, 3 Soft upscaling, 4 Random, 5 Random no downscaling (legacy's), 6 Interpolated (DIFF-10).
 function GMGetEnemyScalingOption() : int
 {
 	return (int)GMGetOptionFloat('GMScalingOptions', 'Virtual_GMScaling');
@@ -385,6 +387,11 @@ function GMApplyLevelScaling(playerLevel : int)
 					gmSavedRandomLevel = currentLevel;
 			}
 			currentLevel = gmSavedRandomLevel;
+			break;
+		case 6:	// DIFF-10, interpolated: half the way up to Geralt's level, rounded down (Geralt 20, an enemy at 4:
+			// +8, 12; Geralt 19: +7, 11); an enemy at or above his level keeps its own (porter's assumption)
+			if(currentLevel < playerLevel)
+				currentLevel += (playerLevel - currentLevel) / 2;
 			break;
 		default:
 			break;

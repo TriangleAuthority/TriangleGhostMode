@@ -296,7 +296,7 @@ Dumplings' longer duration shows on every edible's tooltip (legacy), with FOOD-0
 | Flags | balance, needs-decision |
 | Depends on | ENCH-01, DEF's `ProcessAction` (`defense/processAction.ws` hosts 5.x's triggers), MUT's `CNewNPC.OnDeath` units |
 | Skill trees | n/a |
-| Port form | `@replaceMethod` of `W3PlayerWitcher.Runeword10Triggerred`, `Runeword12Triggerred` and `CR4Player.OnAnimEvent_pad_vibration` (5.x's finisher trigger removed; `enchantments/killWords.ws`); the triggers moved from DEF's `ProcessAction` (`defense/processAction.ws`) to ENCH's replaced `CNewNPC.OnDeath` (`enchantments/npcDeath.ws`); values in `gm_ench.xml`; the description values |
+| Port form | `@replaceMethod` of `W3PlayerWitcher.Runeword10Triggerred`, `Runeword12Triggerred` and `CR4Player.OnAnimEvent_pad_vibration` (5.x's finisher trigger removed; `enchantments/killWords.ws`); the triggers moved from DEF's `ProcessAction` (`defense/processAction.ws`) to ENCH's replaced `CNewNPC.OnDeath` (`enchantments/npcDeath.ws`, which since XP slice X3 also holds XP-04's experience lines, [xp.md](xp.md#xp-04-kill-experience); `gmtest_ench08_a/b` passed again on it, 2026-10-31); values in `gm_ench.xml`; the description values |
 | Port status | **signed off** (2026-10-19); **ported**, verified in both trees (2026-10-19) |
 | Open checks | a finisher kill; a Sign or crossbow kill |
 | Save impact | none (expected) |

@@ -11,6 +11,7 @@
 			</ability>
 			<ability name="q604_caretaker" on_conflict="replace">
 				<tags> </tags>
+				<experience type="add" min="100" max="100" />
 				<threat_level type="add" min="5" max="5" />
 				<delay_between_raise_guard type="add" always_random="false" min="0.0" max="0.0" />
 				<hits_to_raise_guard type="add" always_random="false" min="0" max="0" />
@@ -40,8 +41,6 @@
 				<mon_caretakerhardcore_ep1 is_ability="true" />
 				<mon_caretakereasy_ep1 is_ability="true" />
 				<mon_caretakermedium_ep1 is_ability="true" />
-				<!-- 5.x's until XP -->
-				<experience type="add" min="100" max="100" />
 			</ability>
 			<ability name="q604_shades" on_conflict="replace">
 				<level type="add" always_random="false" min="1" max="1" />
@@ -343,6 +342,7 @@
 				<tags> "base" </tags>
 				<level type="add" always_random="false" min="1" max="1" />
 				<threat_level type="add" min="1" max="1" />
+				<experience type="add" min="100" max="100" />
 				<vitality type="base" min="250" max="250" />
 				<essence type="base" always_random="false" min="0" max="0" />
 				<stamina type="base" always_random="false" min="100" max="100" />
@@ -369,8 +369,6 @@
 				<dodge_melee_heavy_chance type="add" always_random="false" min="0.4" max="0.4" />
 				<taunt_chance type="add" always_random="false" min="1.0" max="1.0" />
 				<force_resistance_perc type="base" always_random="false" min="0.5" max="0.5" />
-				<!-- 5.x's until XP -->
-				<experience type="add" min="100" max="100" />
 			</ability>
 			<ability name="mon_broom_base" on_conflict="replace">
 				<tags> "base" </tags>
@@ -784,6 +782,7 @@
 				<tags> "base" </tags>
 				<level type="add" always_random="false" min="1" max="1" />
 				<threat_level type="add" min="1" max="1" />
+				<experience type="add" min="100" max="100" />
 				<essence type="base" min="800" max="800" />
 				<vitality type="base" min="0" max="0" />
 				<essence type="base" min="1000" max="1000" />
@@ -810,8 +809,6 @@
 				<dodge_melee_light_chance type="add" always_random="false" min="0.2" max="0.2" />
 				<dodge_melee_heavy_chance type="add" always_random="false" min="0.4" max="0.4" />
 				<taunt_chance type="add" always_random="false" min="1.0" max="1.0" />
-				<!-- 5.x's until XP -->
-				<experience type="add" min="100" max="100" />
 			</ability>
 			<ability name="mon_kikimora_warrior" on_conflict="replace">
 				<essence type="base" always_random="false" min="250" max="250" />
@@ -1238,6 +1235,7 @@
 				<tags> "base" </tags>
 				<level type="add" min="1" max="1" />
 				<threat_level type="add" min="1" max="1" />
+				<experience type="add" min="100" max="100" />
 				<vitality type="base" min="150" max="150" />
 				<essence type="base" always_random="false" min="0" max="0" />
 				<stamina type="base" always_random="false" min="100" max="100" />
@@ -1264,8 +1262,6 @@
 				<dodge_melee_heavy_chance type="add" always_random="false" min="0.4" max="0.4" />
 				<taunt_chance type="add" always_random="false" min="1.0" max="1.0" />
 				<force_resistance_perc type="base" always_random="false" min="0.5" max="0.5" />
-				<!-- 5.x's until XP -->
-				<experience type="add" min="100" max="100" />
 			</ability>
 			<ability name="mon_nightwraith_iris" on_conflict="replace">
 				<tags> </tags>
@@ -1291,6 +1287,7 @@
 				<essence type="base" min="3000" max="3000" />
 				<stamina type="base" min="100" max="100" />
 				<morale type="base" min="100" max="100" />
+				<experience type="add" min="100" max="100" />
 				<threat_level type="add" min="5" max="5" />
 				<staminaRegen type="mult" min="0.33" max="0.33" />
 				<moraleRegen type="mult" min="0.05" max="0.05" />
@@ -1319,8 +1316,6 @@
 				<critical_hit_damage_reduction always_random="false" type="add" min="0.5" max="0.5"/>
 				<mon_frogiehard_ep1 is_ability="true" />
 				<mon_frogiehardcore_ep1 is_ability="true" />
-				<!-- 5.x's until XP -->
-				<experience type="add" min="100" max="100" />
 			</ability>
 			<!-- gameplay/abilities/monster_base_abl.xml -->
 			<ability name="mon_alghoul" on_conflict="replace">
@@ -2693,6 +2688,7 @@
 			<!-- gameplay/abilities/opp_base_abl.xml -->
 			<ability name="SkillBoss" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="add" always_random="false" min="0" max="0" />
 				<threat_level type="add" always_random="false" min="2" max="2" />
 				<staminaRegen type="mult" always_random="false" min="0.25" max="0.25" />
 				<light_action_stamina_cost type="base" always_random="false" min="20" max="20" />
@@ -2719,11 +2715,10 @@
 				<dodge_bomb_chance type="add" always_random="false" min="0.0" max="0.0" />
 				<dodge_fear_chance type="add" always_random="false" min="0.0" max="0.0" />
 				<taunt_chance type="add" always_random="false" min="0.05" max="0.05" />
-				<!-- 5.x's until XP -->
-				<experience type="add" always_random="false" min="0" max="0" />
 			</ability>
 			<ability name="SkillTwoHanded" on_conflict="replace">
 				<tags> "base" </tags>
+				<experience type="add" always_random="false" min="0" max="0" />
 				<threat_level type="add" always_random="false" min="2" max="2" />
 				<light_action_stamina_cost type="base" always_random="false" min="33" max="33" />
 				<heavy_action_stamina_cost type="base" always_random="false" min="33" max="33" />
@@ -2749,8 +2744,6 @@
 				<dodge_bomb_chance type="add" always_random="false" min="0.0" max="0.0" />
 				<dodge_fear_chance type="add" always_random="false" min="0.0" max="0.0" />
 				<taunt_chance type="add" always_random="false" min="0.2" max="0.2" />
-				<!-- 5.x's until XP -->
-				<experience type="add" always_random="false" min="0" max="0" />
 			</ability>
 			<!-- dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml -->
 			<ability name="mon_sharley_young" on_conflict="replace">
@@ -3480,8 +3473,6 @@
 				<burning_DoT_damage_resistance_perc type="add" always_random="false" min="0.5" max="0.5" />
 				<poison_DoT_damage_resistance_perc type="add" always_random="false" min="0.5" max="0.5" />
 				<bleeding_DoT_damage_resistance_perc type="add" always_random="false" min="0.5" max="0.5" />
-				<!-- 5.x's until XP -->
-				<experience type="base" always_random="false" min="44" max="44" />
 			</ability>
 			<ability name="sq204_leshy">
 				<tags> "base" </tags>

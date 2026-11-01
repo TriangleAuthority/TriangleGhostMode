@@ -1,7 +1,8 @@
 // CNewNPC.OnDeath, replaced for ENCH (legacy npc.ws): Eruption (ENCH-13: the explosion deals Glyphword 20's fire damage only, no weapon term) and Possession (ENCH-14) from the
 // chest armor; Possession transfers Axii only to an enemy not already under Axii, not immune and below
 // 100% will resistance; Usurpation no longer transfers it. The other areas' legacy changes to OnDeath stay
-// 5.x's until their areas; ENCH-08's kill triggers (Rejuvenation, Elation) are here, as legacy's. 5.x body; changes marked //modSigns. See docs/features/ench.md.
+// 5.x's until their areas; ENCH-08's kill triggers (Rejuvenation, Elation) are here, as legacy's. XP-04's experience lines are legacy's (the 1 XP
+// minimum, XP-07's combat modifier, the combat log line "Experience Points: N"; xp/killExperience.ws). 5.x body; changes marked //modSigns. See docs/features/ench.md.
 
 @replaceMethod(CNewNPC)
 function OnDeath( damageAction : W3DamageAction  )
@@ -11,6 +12,7 @@ function OnDeath( damageAction : W3DamageAction  )
 	var abilityName, tmpName 							: name;
 	var abilityCount, maxStack, minDist					: float;
 	var gmWillPts, gmWillPrc : float;	//modSigns: ENCH-14
+	var gmExpParams : array<int>;	//modSigns: XP-04
 	var itemExpBonus, radius							: float;
 	
 	var allItems 										: array<SItemUniqueId>;
@@ -206,9 +208,13 @@ function OnDeath( damageAction : W3DamageAction  )
 				bonusExp = thePlayer.GetAttributeValue('human_exp_bonus_when_fatal');
 			}				
 			
-			expPoints = RoundMath( expPoints * (1 + CalculateAttributeValue(bonusExp)) );
-			
-			witcher.AddPoints(EExperiencePoint, RoundF( expPoints * theGame.expGlobalMod_kills ), false );
+			expPoints = RoundMath( expPoints * (1 + CalculateAttributeValue(bonusExp)) * theGame.expGlobalMod_kills );	//modSigns: XP-04, legacy's
+			expPoints = Max(1, expPoints);	//modSigns: XP-04, at least 1
+			if(GMXpCombatExpModifier() != 0)	//modSigns: XP-07 "Combat experience modifier", after the minimum
+				expPoints = RoundMath(expPoints * (1 + GMXpCombatExpModifier()));	//modSigns
+			witcher.AddPoints(EExperiencePoint, expPoints, false );	//modSigns
+			gmExpParams.PushBack(expPoints);	//modSigns: XP-04, the combat log line (PX6)
+			theGame.witcherLog.AddMessage(GetLocStringByKeyExtWithParams("hud_combat_log_gained_experience", gmExpParams));	//modSigns
 		}			
 	}
 			

@@ -408,6 +408,7 @@
       <ability name="GMTD_burning_resistance_n0.1"><burning_resistance type="add" always_random="false" min="-0.1" max="-0.1" /></ability>
       <ability name="GMTD_burning_resistance_p0.01"><burning_resistance type="add" always_random="false" min="0.01" max="0.01" /></ability>
       <ability name="GMTD_burning_resistance_n0.01"><burning_resistance type="add" always_random="false" min="-0.01" max="-0.01" /></ability>
+      <ability name="GMTD_experience_p1000"><experience type="add" always_random="false" min="1000" max="1000" /></ability>
     </abilities>
   </definitions>
 </redxml>

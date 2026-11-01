@@ -8,7 +8,7 @@ How hard the game is, beyond each enemy's own numbers: what each difficulty mode
 
 **How legacy Ghost Mode implements it.** Data: the four difficulty abilities (`common_abilities.xml`), 50 per-enemy variants in the expansions' monster and NPC files (emptied or retuned), `PrologModifier` (emptied), the five `ModSigns*` health and damage step abilities (`monster_base_abl_new.xml`, new), Ciri's eight abilities (`opp_base_abl.xml`), all regular and NG+ (legacy's NG+ entries equal its regular ones); one entity file (`mq1028_gerd`, fake addon 1 → 0). Scripts: `CNewNPC.AddLevelBonuses`' scaling branches, `InternalAddLevelBonuses`' progressive level-up, `ModSignsAddBonuses` (new), `ManageNGPLevels` (fake addon zeroed), `GetExperienceDifferenceLevelName` (no addon, no cap), the option getters in `W3GameParams`, `CR4Game.gmUserSettingsScaling` and `GetSpawnDifficultyMode`, `W3ReplacerCiri.CheckCiriAbilities` (new) and its two callers, `TakeMoneyFromPlayer`; the menu group `GMScalingOptions` in `modSignsConfig.xml` and its 21 labels in 9 languages.
 
-Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-29 from the changelist's two sections, every hand-off to DIFF in the other areas' files and in [deviations.md](deviations.md), a field-by-field comparison of every ability carrying a `DifficultyModeAbility` tag in any of the three games (master, `legacy-GM`, `vanilla-5.x`, regular and NG+; 130 entries), every script line legacy changed that reads the difficulty (`GetDifficultyMode`, `GetSpawnDifficultyMode`, `EDM_*`), the 73 entity files in Ghost Mode's file set that carry `levelFakeAddon` (dumped in the three games), legacy's menu XML and option code, and the 5.x string tables (`content0/en.w3strings`, decoded with `w3strings.py`) and accessibility options. **358 units carry a DIFF feature**: 343 newly attributed (19 script units, 67 XML units and their 66 NG+ copies, 2 binary files, 189 string rows), DIFF added to 15 shared units (AI-01's level functions, UI-12's level name, STAM-08's Death March ability, STAM-03's Ciri spawn, OPT-01's menu and scaling-option list); two unattributed Ciri stamina functions the sweep found are STAM-03's (commented out as unused, nothing to port). Unattributed units: 3,477 before, 3,132 after. Port status: **mapped** (2026-10-29), analysed against 5.x from the code and data (unverified in game); **decided** (2026-10-29): the owner made the [area decisions](#area-decisions) DD1 to DD4 and confirmed the porter's calls PD1 to PD10. **Ported so far:** slice D1 (DIFF-01, DIFF-03; 5.x-GM `5d06b030`, 2026-10-29), slice D2 (DIFF-02; 5.x-GM `53427f7b`, 2026-10-29), slice D3 (DIFF-06; 5.x-GM `73734341`, 2026-10-29), slice D4 (DIFF-07; 5.x-GM `232d10f8`, 2026-10-29), each verified in both trees: **part DIFF-A is complete**; slice D5a (DIFF-04 part 1; 5.x-GM `f929bfc3`, 2026-10-30) and slice D5b (DIFF-04 part 2; 5.x-GM `ad314f9f`, 2026-10-30), each verified in both trees: **DIFF-04 is ported**; slice D6 (DIFF-05; 5.x-GM `523457b1`, 2026-10-30), verified in both trees: **every DIFF feature is ported** (DIFF-08 handed to XP) and all four temporary deviations until DIFF are ended. **Audited** 2026-10-30 ([DIFF audit](#diff-audit-2026-10-30): 6 findings, three of them owner decisions: F1 Ciri's takeover, F2 late bosses, F3 zero or negative multipliers; regression clean in both trees). The audit's clear fixes made (F4's checks, F5's independent corrections; 5.x-GM `fa4b96ff`, 2026-10-30, [close-out](#diff-audit-close-out)). The owner's decisions on F1 to F3 made and verified in both trees (2026-10-31, 5.x-GM `38e2b55e`): a player change re-levels the NPCs near the new player, the boss modifiers follow the boss bar, the difficulty mode multiplies the menu's modifiers (three deviations); the audit is closed. **Signed off** by the owner (2026-10-31), with the last fix's three porter's calls confirmed. Next: two [planned additions](#planned-additions-owner-2026-10-31).
+Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-29 from the changelist's two sections, every hand-off to DIFF in the other areas' files and in [deviations.md](deviations.md), a field-by-field comparison of every ability carrying a `DifficultyModeAbility` tag in any of the three games (master, `legacy-GM`, `vanilla-5.x`, regular and NG+; 130 entries), every script line legacy changed that reads the difficulty (`GetDifficultyMode`, `GetSpawnDifficultyMode`, `EDM_*`), the 73 entity files in Ghost Mode's file set that carry `levelFakeAddon` (dumped in the three games), legacy's menu XML and option code, and the 5.x string tables (`content0/en.w3strings`, decoded with `w3strings.py`) and accessibility options. **358 units carry a DIFF feature**: 343 newly attributed (19 script units, 67 XML units and their 66 NG+ copies, 2 binary files, 189 string rows), DIFF added to 15 shared units (AI-01's level functions, UI-12's level name, STAM-08's Death March ability, STAM-03's Ciri spawn, OPT-01's menu and scaling-option list); two unattributed Ciri stamina functions the sweep found are STAM-03's (commented out as unused, nothing to port). Unattributed units: 3,477 before, 3,132 after. Port status: **mapped** (2026-10-29), analysed against 5.x from the code and data (unverified in game); **decided** (2026-10-29): the owner made the [area decisions](#area-decisions) DD1 to DD4 and confirmed the porter's calls PD1 to PD10. **Ported so far:** slice D1 (DIFF-01, DIFF-03; 5.x-GM `5d06b030`, 2026-10-29), slice D2 (DIFF-02; 5.x-GM `53427f7b`, 2026-10-29), slice D3 (DIFF-06; 5.x-GM `73734341`, 2026-10-29), slice D4 (DIFF-07; 5.x-GM `232d10f8`, 2026-10-29), each verified in both trees: **part DIFF-A is complete**; slice D5a (DIFF-04 part 1; 5.x-GM `f929bfc3`, 2026-10-30) and slice D5b (DIFF-04 part 2; 5.x-GM `ad314f9f`, 2026-10-30), each verified in both trees: **DIFF-04 is ported**; slice D6 (DIFF-05; 5.x-GM `523457b1`, 2026-10-30), verified in both trees: **every DIFF feature is ported** (DIFF-08 handed to XP) and all four temporary deviations until DIFF are ended. **Audited** 2026-10-30 ([DIFF audit](#diff-audit-2026-10-30): 6 findings, three of them owner decisions: F1 Ciri's takeover, F2 late bosses, F3 zero or negative multipliers; regression clean in both trees). The audit's clear fixes made (F4's checks, F5's independent corrections; 5.x-GM `fa4b96ff`, 2026-10-30, [close-out](#diff-audit-close-out)). The owner's decisions on F1 to F3 made and verified in both trees (2026-10-31, 5.x-GM `38e2b55e`): a player change re-levels the NPCs near the new player, the boss modifiers follow the boss bar, the difficulty mode multiplies the menu's modifiers (three deviations); the audit is closed. **Signed off** by the owner (2026-10-31), with the last fix's three porter's calls confirmed. **Two additions the owner asked for** ([DIFF-C](#diff-c-additions-owner-2026-10-31-new-not-legacy)): DIFF-09, "Ciri's sections: difficulty", and DIFF-10, the "Interpolated" scaling type, ported and verified in both trees (5.x-GM `c0e2dcdb`, 2026-10-31); new, not legacy (deviations; their porter's calls and the assumption confirmed by the owner, 2026-10-31).
 
 **Size and a proposed split.** DIFF is small next to AI: mostly data from one generator, plus the scaling menu, which is the only part with real code. One area, two parts, one audit at the end (PD1):
 
@@ -16,6 +16,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-29 from the chang
 |---|---|---|---|
 | **DIFF-A Difficulty modes** | DIFF-01, DIFF-02, DIFF-03, DIFF-06, DIFF-07 | about 130 | What each mode does to enemies, the per-enemy variants, the prologue, Ciri, the guards' toll. Generated data with `--verify`, three small script changes |
 | **DIFF-B Scaling options and levels shown** | DIFF-04, DIFF-05 | about 230 (189 of them labels) | The enemy scaling menu on top of AI-01's level code, and the level shown above enemies |
+| **DIFF-C Additions** (owner, 2026-10-31; new) | DIFF-09, DIFF-10 | — (new code, 5 labels) | Ciri's sections capped by an option; the "Interpolated" scaling type |
 
 ## Scope
 
@@ -61,6 +62,8 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-29 from the chang
 | DIFF-06 | Ciri | Her fights capped at "Story and Sword!"; on "Death March!" her enemies get an attack-power adjustment; her quest stats | No cap, the adjustment zeroed; armor, health and attack power per quest, frost immunity in the last two; her rage's health halved; two quest abilities added by journal state | 4 script units, 8 abilities (and NG+) |
 | DIFF-07 | Money taken by guards | 25 / 50 / 75 / 100% by difficulty | 25% on every difficulty | 1 script unit |
 | DIFF-08 | Experience by difficulty | Kill experience ×1.2 / 1 / 0.9 / 0.8 by difficulty, quest experience ×0.9 and ×0.8 on the two higher modes | Removed | (XP's units) |
+| DIFF-09 | Ciri's sections: difficulty (new, owner) | — (5.x: capped at "Story and Sword!") | — (no cap) | 1 option, 4 labels, 4 script units |
+| DIFF-10 | Interpolated enemy scaling (new, owner) | — | — | 1 menu entry, 1 label, 1 script unit |
 
 ### What 5.x changed
 
@@ -227,7 +230,7 @@ On a throwaway build without the slice's data (D1's `gm_diff.xml`; deleted), the
 | Flags | balance |
 | Depends on | DIFF-01, DIFF-02 (what the mode gives her enemies), DEF-04 and STAM-03 (her dodge and stamina, signed off), AI-01 (the Death March adjustment's code, already ported) |
 | Skill trees | n/a (Ciri has no skill tree; Geralt's regression runs in both) |
-| Port form | `difficulty/ciri.ws`: `@replaceMethod(CR4Game) GetSpawnDifficultyMode` (legacy's body, no Ciri cap); `@wrapMethod(CR4Game) UpdateStatsForDifficultyLevel` (every update uses the spawn mode, so her spawn's capped call no longer caps: a deviation); `@addMethod(W3ReplacerCiri) GMCheckCiriAbilities` (legacy's `CheckCiriAbilities`) and `GMSetCiriQuestAbilities`, called from `@wrapMethod` `OnSpawned` and `OnCombatStart`; `@wrapMethod(CR4Game) OnPlayerChanged` re-levels every NPC near the new player (DIFF audit F1, a deviation); Ciri's eight abilities whole (`replace`) in `gm_diff.xml` by `gen_diff.py`, NG+ copy; legacy's `ciriquests` debug command not ported (PD8) |
+| Port form | `difficulty/ciri.ws`: `@replaceMethod(CR4Game) GetSpawnDifficultyMode` (legacy's body, no Ciri cap; since DIFF-09 the option's cap while she plays, [DIFF-09](#diff-09-ciris-sections-difficulty)); `@wrapMethod(CR4Game) UpdateStatsForDifficultyLevel` (every update uses the spawn mode, so her spawn's capped call no longer caps: a deviation); `@addMethod(W3ReplacerCiri) GMCheckCiriAbilities` (legacy's `CheckCiriAbilities`) and `GMSetCiriQuestAbilities`, called from `@wrapMethod` `OnSpawned` and `OnCombatStart`; `@wrapMethod(CR4Game) OnPlayerChanged` re-levels every NPC near the new player (DIFF audit F1, a deviation); Ciri's eight abilities whole (`replace`) in `gm_diff.xml` by `gen_diff.py`, NG+ copy; legacy's `ciriquests` debug command not ported (PD8) |
 | Port status | ported (slice D3, 5.x-GM `73734341`), verified in both trees (2026-10-29); the re-level at a player change (DIFF audit F1, 5.x-GM `38e2b55e`) verified in both trees (2026-10-31) |
 | Open checks | a save loaded during one of Ciri's sections: not tested (the test save is Geralt's, and saving as Ciri is avoided). `OnPlayerChanged` does not run at a load (none at the test save's load), so in legacy her spawn's capped update may hold until the next mode change; the port's wrapper makes that update uncapped either way. Her quest abilities in their real quests (Q205, Q302, Q305 are not reachable from the test save; their journal entries were activated by script) |
 | Save impact | none (the quest abilities are added and removed by journal state at her spawn and each combat start) |
@@ -344,6 +347,7 @@ On a throwaway build without the slice (deleted), these failed: the four modes' 
 | "Do not upscale animals" | Wolves, boars and other beasts on Vitality skip scaling, and with scaling on any above half Geralt's level are set to half of it (the changelist says only "disable upscaling for animals"; the port follows the code, DD4) |
 | "Enemy health modifier", "Enemy damage modifier" (−100% to +500%, steps of 10%) | Legacy: added to every NPC's difficulty multipliers (DIFF-01): "HP*(1 + difficultyModifier + enemyModifier + bossModifier)"; health at −100% is −99%. **The port** (owner, DIFF audit F3, a deviation): the mode multiplies, the modifiers add to each other: (1 + mode) × (1 + enemy + boss), health and damage separately, health at least ×0.01, damage at least ×0 |
 | "Additional health/damage modifier for bosses" | Added to the enemy modifier for bosses: NPCs tagged `HideHealthBarModule`, the tag that puts an enemy's health bar at the top of the screen (contract monsters with the boss bar get it at spawn, `W3MonsterHuntNPC.displayBossBar`; quests and the boss-bar HUD module add it to others). Legacy read the tag only when the level was computed; **the port** recomputes the NPC's bonuses whenever the bar adds or removes the tag (owner, DIFF audit F2, a deviation) |
+| "Enemy scaling": Interpolated (new, [DIFF-10](#diff-10-interpolated-enemy-scaling)) | Enemies below Geralt's level gain half the difference, rounded down |
 | Presets | "Recommended": Soft upscaling, the rest off; "Hardcore": Upscale, progressive LD 10, AD 5, +50% health and damage for all, +50% more for bosses; "Off": None, the rest off |
 
 Changing an option recomputes the levels of every NPC near Geralt; legacy's list of options that trigger it (`gmIsScalingOption`) misses the progressive level-up, its two level-delta options and the two boss modifiers, which then apply at the next level-up. The port adds the five to the list, so every option applies at once (the owner's decision, 2026-10-29, changing PD6: a deviation). The Blood and Wine banshee's summons never scale. Vanilla's "Enemy Upscaling" toggle does nothing (AI-01, since slice A1). Without a preset applied, legacy's code reads every scaling option as unset: no scaling, no extra health or damage, guards +16; the port applies the "Recommended" preset's values instead (DD1).
@@ -456,11 +460,113 @@ On a throwaway build without the slice (D6's two script changes undone, the test
 | Depends on | XP |
 | Skill trees | n/a |
 | Port form | none in DIFF |
-| Port status | handed off to XP |
+| Port status | handed off to XP ([XP-01](xp.md#xp-01-quest-experience-by-level), [XP-04](xp.md#xp-04-kill-experience); mapped 2026-10-31) |
 | Save impact | — |
 | NG+ counterpart | — |
 
 **What it does** (changelist 1142, 1078): quest and kill experience no longer depend on the mode (1.32: kill experience ×1.2 on "Just the Story!", ×0.9 on "Blood and Broken Bones!", ×0.8 on "Death March!"; quest experience ×0.9 and ×0.8 on the two higher modes). Legacy's code is XP's rework of `CNewNPC.CalculateExperiencePoints` and `CR4Game.OnGiveReward`; 5.x's experience code is 1.32's. The ID is kept so the changelist line is accounted for; XP ports it (PD7).
+
+## DIFF-C Additions (owner, 2026-10-31; new, not legacy)
+
+Two options the owner asked for after the audit. Neither exists in legacy or 5.x; both sit in the Enemy scaling group and are left out of its presets. Ported together (5.x-GM `c0e2dcdb`, 2026-10-31), verified in both trees.
+
+### DIFF-09 Ciri's sections: difficulty
+
+| | |
+|---|---|
+| Kind | system |
+| Pillars | P5, P10 |
+| 5.x class | new |
+| Flags | — |
+| Depends on | DIFF-06 (the one place that decides her sections' mode), DIFF-04 (the menu group, the change hook, the modifiers), DIFF-01 and DIFF-02 (what the mode gives her enemies), AI-01 (her Death March adjustment), AI-15 (Ice Armor) |
+| Skill trees | n/a (Ciri has no skill tree; Geralt's regression runs in both) |
+| Port form | the option `Virtual_GMCiriDifficulty` (entries `GMCiriDifficulty` 0, 1, 2) last in `GMScalingOptions` (`menu/modGhostMode.xml`), not in the presets; its default "0" in `options/gmOptions.ws` (`GMOptionDefault`, `GMOptionList`); `difficulty/ciri.ws`: `GetSpawnDifficultyMode` (DIFF-06's `@replaceMethod`) returns `GMCiriSectionsMode()` while Ciri is the player, `@addMethod(CR4Game) GMCiriSectionsMode` (the lower of the chosen mode and the option's), `GMOnCiriDifficultyChanged` (run when the options menu closes, from `gmOptions.ws`' `SaveChangedSettings` wrapper with its own flag), `@addMethod(W3ReplacerCiri) timer GMCiriSectionsModeAfterLoad` (from her `OnSpawned` wrapper when restored); AI-01's Death March adjustment (`GMInternalAddLevelBonuses`) and AI-15's Ice Armor bonus (`GMIceArmorResistBonus`) read `GetSpawnDifficultyMode`; 4 labels × 9 languages (2110992667 to 2110992670) |
+| Port status | ported (5.x-GM `c0e2dcdb`), verified in both trees (2026-10-31) |
+| Open checks | pending a cleared run (real input or the screen): the option seen in Options > Mods > Ghost Mode > Enemy scaling and changed there by hand (every change was driven by script through the menu's own events and closing). Not run: a real fight in one of her sections with the option on; her real quests (not reachable from the test save) |
+| Save impact | none: the option lives in the user settings; the mode it gives is applied to the NPCs at once, at a player change and after a load |
+| NG+ counterpart | none (the NG+ difficulty abilities follow the mode as in the regular game) |
+
+**What it does:** "Ciri's sections: difficulty" makes Ciri's sections easier than the chosen mode, for players who find them a chore. It only caps: while Ciri is the player, her sections are played on the lower of the chosen mode and the option's.
+
+| Value | Chosen "Death March!" | Chosen "Blood and Broken Bones!" | Chosen "Story and Sword!" | Chosen "Just the Story!" |
+|---|---|---|---|---|
+| "Same as game" (the default; legacy's: no cap) | "Death March!" | "Blood and Broken Bones!" | "Story and Sword!" | "Just the Story!" |
+| "Story and Sword!" | "Story and Sword!" | "Story and Sword!" | "Story and Sword!" | "Just the Story!" |
+| "Just the Story!" | "Just the Story!" | "Just the Story!" | "Just the Story!" | "Just the Story!" |
+
+Everything that depends on the mode in her sections follows it: her enemies' difficulty ability and per-enemy variants (DIFF-01, DIFF-02), the menu's modifiers through the owner's (1 + mode) × (1 + enemy + boss) (DIFF-04: "Death March!" with +50% health and damage gives her enemies ×3.75 / ×5.25; capped at "Story and Sword!" ×1.5 / ×1.5; at "Just the Story!" ×0.75 / ×1.125), her Death March adjustment (only on an effective "Death March!"; empty either way, PD5), DMG-10's fistfight rule, and the Wild Hunt's Ice Armor (no +30% resistances on an effective "Just the Story!", AI-15). When Geralt returns, everything is back on the chosen mode. Changing the option while Ciri plays applies when the options menu closes: every NPC gets the new mode at once and is re-levelled, as at a player change; changed as Geralt, it applies at her next section. Ciri's own stats do not depend on the mode: she holds no difficulty-tagged ability (read in game), and her quest abilities follow the journal (DIFF-06).
+
+**How the mode reaches the NPCs:** at a player change, her spawn's update and `OnPlayerChanged`'s update both pass the spawn mode (DIFF-06's wrapper), and DIFF-06's re-level follows. **At a save load** in her sections (no `OnPlayerChanged`), the NPCs restored with the save kept the mode they were saved with (seen in game: her spawn's update does not reach them); half a second after her restored spawn, every NPC gets her sections' mode and its bonuses are recomputed at its level. The native update swaps the difficulty ability and variants but runs no level computation (seen: the modifiers' steps stayed sized for the saved mode), hence the recompute.
+
+**Implementation (legacy):** none (new).
+
+**5.x:** vanilla caps Ciri's sections at "Story and Sword!" (`GetSpawnDifficultyMode`, 1.32's); legacy removed the cap (DIFF-06), and this option brings a cap back as the player's choice.
+
+**Decisions:**
+- **Deviation:** a new option, "Ciri's sections: difficulty" ("Same as game", "Story and Sword!", "Just the Story!"), caps the mode while Ciri is the player and never raises it; "Same as game", the default, plays as legacy (owner, 2026-10-31: Ciri's sections are boring)
+- **Deviation:** the option's place and values: last in the Enemy scaling group, three values (the two lower modes and "Same as game"), the default "Same as game", not in the group's presets (owner, 2026-10-31)
+- **Deviation:** everything that reads the mode in her sections follows the capped one: AI-01's Death March adjustment and AI-15's Ice Armor read the spawn mode instead of the chosen one (the same unless the option caps it), so the mode her enemies hold and these rules cannot disagree (owner, 2026-10-31)
+- **Deviation:** after a save load in her sections, every NPC gets her sections' mode and its bonuses recomputed half a second after her spawn, so a save made under another value of the option plays on the option's mode (owner, 2026-10-31)
+- Labels: the two mode values use the game's own names of the modes in each language (strings 1092307 and 1092305, copied); "Ciri's sections: difficulty" and "Same as game" are the porter's translations in de, fr, es, it, pl, ru, cz and br, not checked by a native speaker (no play effect).
+
+**Verification (2026-10-31, both trees; 5.x-GM `c0e2dcdb`; `tests/gmTestsDiff09.ws`).** On the test-only slot (Geralt at level 20), "Death March!" set through the game's path, health and damage +50%, a friendly frozen bandit and drowner spawned as Geralt, a ghoul spawned as Ciri; vanilla's `Ciri()` and `Geralt()`. Expected modes are written in the test from the option's value, not read through the code under test. All scripted (exec calls, no real input, no screen). Options and mode set back after each run.
+
+| Check | How | Classic tree | New tree |
+|---|---|---|---|
+| As Geralt with the option at "Story and Sword!" and at "Just the Story!": the spawn mode "Death March!", both samples on "Death March!" ×3.75 / ×5.25, no adjustment | scripted (`gmtest_diff09_a(1)`, `(2)`) | 3 of 3 each | 3 of 3 each |
+| As Ciri, the option at "Story and Sword!": the spawn mode "Story and Sword!", every sample (the ghoul spawned as Ciri too) holds `difficulty_CommonMedium` alone, ×1.5 / ×1.5 with one set of steps and its maximum health, re-levelled, no adjustment; Ice Armor's +0.3; `GetWitcherPlayer()` NULL | scripted swaps (`gmtest_diff09_b`, `_check`) | 5 of 5, 5 of 5 | 5 of 5, 5 of 5 |
+| As Ciri, the option at "Just the Story!" at the swap: `difficulty_CommonEasy`, ×0.75 / ×1.125, Ice Armor's bonus 0 | scripted swaps | 5 of 5, 5 of 5 | 5 of 5, 5 of 5 |
+| A change while Ciri plays, through the menu's code path (the pause menu open, `OnOptionValueChanged` called as its Flash does, the menu closed): "Story and Sword!" → "Just the Story!" (every NPC on "Just the Story!" at once, ×0.75 / ×1.125) → "Same as game" (legacy's: "Death March!", ×3.75 / ×5.25, her adjustment held) | scripted (`gmtest_diff09_menu`, `_check`) | 5 of 5 each | 5 of 5 each |
+| Back as Geralt: every sample on "Death March!", ×3.75 / ×5.25, no adjustment | scripted (`gmtest_diff09_end`) | 5 of 5 (two runs) | 5 of 5 (two runs) |
+| A load into a Ciri section: as Ciri on "Death March!" with "Same as game", a persistent bandit (on "Death March!"), saved over the test-only slot; the option set to "Just the Story!" and the slot loaded: Ciri the player, the spawn mode "Just the Story!", the restored bandit on `difficulty_CommonEasy` with ×0.75 / ×1.125, re-levelled; after `Geralt()` on "Death March!" | scripted (`gmtest_diff09_ls_*`, `gmtest_diff04_lsave_save`, `game.py load`) | 2, 3 and 2 passed | — (no tree involved) |
+| In the regression: the cap for each value on the current mode, none for Geralt | scripted (`GMTest_diff09`) | passed | passed |
+
+On a throwaway build without the option's behaviour (the cap in `GetSpawnDifficultyMode`, the change hook and the load timer removed, AI-01's and AI-15's lines as in 5.x-GM `38e2b55e`; the menu, labels and tests kept; deleted), these failed: the spawn mode as Ciri ("Death March!" for both values), every sample as Ciri (on "Death March!" ×3.75, with the adjustment), the change through the menu (nothing changed), Ice Armor on "Just the Story!" (0.3); Geralt's checks passed there. The regression's `GMTest_diff09` reads `GMCiriSectionsMode` directly, kept on the throwaway so the tests compile. The load check failed on two earlier builds of this work: with the cap but no load timer the restored bandit stayed on "Death March!"; with a timer that only updated the mode it held `difficulty_CommonEasy` with "Death March!"'s steps (×1.75 / ×2.5); both fixed before the commit.
+
+### DIFF-10 Interpolated enemy scaling
+
+| | |
+|---|---|
+| Kind | system |
+| Pillars | P5, P10 |
+| 5.x class | new |
+| Flags | — |
+| Depends on | DIFF-04 (the scaling types, the change hook), AI-01 (the level model) |
+| Skill trees | n/a |
+| Port form | a seventh entry, value 6, in `Virtual_GMScaling`'s options (`menu/modGhostMode.xml`; legacy's 0 to 5 keep their meaning), not in the presets; `case 6` in `GMApplyLevelScaling` (`difficulty/scaling.ws`); its label `preset_value_gm_es_interpolated` × 9 languages (2110992666) |
+| Port status | ported (5.x-GM `c0e2dcdb`), verified in both trees (2026-10-31) |
+| Open checks | pending a cleared run: the choice seen in the menu and picked by hand (it was set through the menu's own events and closing) |
+| Save impact | none (the type lives in the user settings; levels are recomputed as for the other types) |
+| NG+ counterpart | none |
+
+**What it does:** "Interpolated" raises an enemy below Geralt's level half the way to his level, rounded down: it gains floor((Geralt's level − its level) / 2) levels. Geralt 20 and an enemy at 4 (16 below): +8, level 12; Geralt 19, the same enemy (15 below): +7, level 11; a level-1 enemy at Geralt 20: +9, level 10; a wolf at 15 with Geralt at 20: +2, level 17. Enemies at or above his level keep their own. Everything else is as for the other types: guards stand at Geralt's level + 16 (at his level with "No additional levels for guards"), "Do not upscale animals" keeps animals at their level and lowers those above half Geralt's to half of it (DD4), NPCs with `NPCDoNotGainBoost` and the Blood and Wine banshee's summons keep their level, an enemy left at level 1 gets no level bonuses, and Ciri's sections are not scaled. Choosing it re-levels the NPCs near Geralt at once, as any scaling option.
+
+**Implementation (legacy):** none (new).
+
+**5.x:** none.
+
+**Decisions:**
+- **Deviation:** a seventh scaling type, "Interpolated": an enemy below Geralt's level gains half the difference, rounded down (owner, 2026-10-31, with the two examples)
+- **Deviation:** an enemy at or above Geralt's level keeps its own level under "Interpolated" (owner, 2026-10-31; not chosen: interpolating down as well, an enemy above him losing half the difference)
+- **Deviation:** "Interpolated" is the last choice (value 6, so a saved setting of 0 to 5 keeps its meaning) and in none of the presets (owner, 2026-10-31)
+- Label: "Interpolated" translated by the porter in de ("Interpoliert"), fr ("Interpolé"), es and br ("Interpolado"), it ("Interpolato"), pl ("Interpolowane"), ru ("Интерполяция"), cz ("Interpolované"); not checked by a native speaker.
+
+**Verification (2026-10-31, both trees; 5.x-GM `c0e2dcdb`; `tests/gmTestsDiff10.ws`, `tests/gmTestsDiff04.ws`).** Seven frozen friendly samples (bandits of level 4, 25 and 1, a drowner of 4, wolves of 4 and 15, a guard), Geralt's level held by AI-06's test override; the expected levels are the owner's figures written in the test, each also matched against the rule computed in the test. All scripted.
+
+| Check | How | Classic tree | New tree |
+|---|---|---|---|
+| At Geralt 20 and 19: the bandit, drowner and wolf at 4 → 12 and 11, the wolf at 15 → 17, the level-1 bandit → 10, the guard 36 and 35, the bandit at 25 keeps 25; the displayed-level abilities agree | scripted (`gmtest_diff10_levels`) | 2 of 2 | 2 of 2 |
+| "Do not upscale animals": the wolf at 4 stays 4, the wolf at 15 → 10 and 9; "No additional levels for guards": the guard 20 and 19 | scripted | 4 of 4 | 4 of 4 |
+| `NPCDoNotGainBoost` and `banshee_summons` on the level-4 bandit at Geralt 20: it keeps 4 | scripted | 2 of 2 | 2 of 2 |
+| Chosen through the menu's code path (the pause menu open, `OnOptionValueChanged`, the menu closed) at Geralt 20: every NPC within 100 m at once at Interpolated's level (bandits 2 → 11, the world's ghouls 2 → 11, hares and horses 1 → 10, Vesemir kept) | scripted (`gmtest_diff04_change_*`) | 30 of 30 NPCs | 29 of 29 NPCs |
+| The value after quitting and relaunching the game: `Virtual_GMScaling` reads "6", the getter Interpolated | scripted (`gmtest_diff10_persist`) | passed | passed |
+| In the regression: a level-2 bandit and a guard at Geralt 20 (11 and 36) | scripted (`GMTest_diff04`) | passed | passed |
+
+On a throwaway build without the type (no `case 6`, no menu entry; the tests kept; deleted), these failed: all six level cases (the samples at soft upscaling's 14 and 13), the menu choice (the type read back as soft upscaling) and the relaunch check ("3"); the two stop abilities passed there (they keep the level either way).
+
+**Regression with DIFF-09 and DIFF-10** (5.x-GM `c0e2dcdb`, `god()` off): `gmtest_regress()` 1,100 passed, 0 failed in each tree; `gmtest_panel()` 139 in each tree at `exec --wait 6000`. At `--wait 4500`, AI-10's counter-window check failed in three of four launches ("1 of 2" samples) and AI-18's stone check in two (classic tree: 138 + 1, 137 + 1, 136 + 2; new tree: 137 + 1); both passed at 6000 on a fresh launch in each tree.
+
+**Saves:** the test-only slot was saved over twice: as Ciri for the load check, then as Geralt (level 20, no samples) to put it back; it is now `<save name>` (the name's key changed from `7ea4f400` to `7ea4f800`). No autosave was written; the test save `<save name>` is unchanged; the user settings were restored with the game closed (no scaling group; the classic tree, sign cooldown 5, armour regen penalty off, combat stamina regen 5, difficulty 3).
 
 ### DIFF audit (2026-10-30)
 
@@ -596,12 +702,7 @@ On a throwaway build without the code they guard (legacy's sum in `GMAddOptionBo
 
 ### Planned additions (owner, 2026-10-31)
 
-New options the owner wants; not part of the audit's fixes, not designed or ported yet:
-
-| # | Addition | What is known |
-|---|---|---|
-| A | An option for a reduced difficulty in Ciri's sections: her sections easier than the chosen mode (the owner finds them boring) | Off by default. Design open (which mode or multipliers, which NPCs). Its mode would go through `GetSpawnDifficultyMode` (`difficulty/ciri.ws`), the one place that decides her sections' mode ([DIFF-06](#diff-06-ciri)) |
-| B | An "Interpolated" choice for "Enemy scaling": an enemy below Geralt's level gains half the difference, rounded down (Geralt 20, an enemy at 4, 16 below: +8, level 12; Geralt 19, the same enemy, 15 below: +7, level 11) | Enemies at or above his level keep their own level (porter's assumption, to confirm with the owner). A new entry in the scaling type's options (`GMApplyLevelScaling`, the menu XML) and its labels in the 9 languages |
+Both built (2026-10-31): (A) is [DIFF-09](#diff-09-ciris-sections-difficulty), (B) is [DIFF-10](#diff-10-interpolated-enemy-scaling).
 
 ### Dependencies on other areas
 

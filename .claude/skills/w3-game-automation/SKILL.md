@@ -10,7 +10,8 @@ Drive the game with `tools/game.py`. Normal runs need no key presses and no scre
 ## Before a run
 
 1. **Tell the user** you are starting the game: its window takes over the screen while it runs. The user may be away, which is fine.
-2. Check the prerequisites (fix what is missing):
+2. **Back up the saves before every launch** (`run`, `start`, `load`): an autosave's rotation can delete one of the owner's old saves. In PowerShell: `robocopy "$env:USERPROFILE\OneDrive\Documents\The Witcher 3\gamesaves" "$env:USERPROFILE\W3SaveBackup\gamesaves" /E /XO /NFL /NDL /NJH /NP` (copies only, never deletes; exit codes 0-7 mean success). After the session, compare the live folder with the backup and report every save missing from the live folder (name, date); restore nothing without the owner. Avoid autosave triggers (quest events, teleports, time skips) and report any autosave written.
+3. Check the prerequisites (fix what is missing):
    - `tools/rw3d/rw3d_cli.exe` exists. It is git-ignored; download it with `gh release download v0.8.0 -R SpontanCombust/rusty_witcher_debugger -p "*windows-msvc.zip" -D tools/rw3d`, then unzip it there. Downloading third-party executables needs the user's OK.
    - `modAutomation` is installed in `<game>\mods\`. If not: `python tools/build_mod.py --scripts tools/automation/scripts --name modAutomation --out build/automation --install --enable`. `game.py start` stops with this hint when it is missing.
    - The mod under test is built and installed (`python tools/build_mod.py --ref <branch> --install`, see [docs/development.md](../../../docs/development.md#build-compile-install)). Install while the game is **not** running; scripts load only at game start.

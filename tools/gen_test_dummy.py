@@ -37,6 +37,10 @@ STATS = ([("armor", "add", BIG)]
          # makes the game read (after the others, so the earlier stats keep their order).
          + [(t + "_resistance", "add", BIG) for t in ["bleeding", "will", "burning"]])
 
+# Other test-only abilities (name, attribute, XML type, value), not stats the dummy sets: XP-05's check that no
+# script reads an NPC's experience attribute (tests/gmTestsXp.ws) adds +1000 experience and nothing else.
+EXTRA = [("GMTD_experience_p1000", "experience", "add", 1000)]
+
 
 def tag(x):
     return ("%g" % x)
@@ -57,6 +61,10 @@ def main():
                 lines.append('      <ability name="GMTD_%s_%s%s"><%s type="%s" always_random="false" min="%s" max="%s" /></ability>'
                              % (stat, sign, tag(s), stat, typ, tag(val), tag(val)))
                 count += 1
+    for n, attr, typ, val in EXTRA:
+        lines.append('      <ability name="%s"><%s type="%s" always_random="false" min="%s" max="%s" /></ability>'
+                     % (n, attr, typ, tag(val), tag(val)))
+        count += 1
     lines += ["    </abilities>", "  </definitions>", "</redxml>", ""]
     out = Path(args.worktree) / DEST
     out.write_text("\n".join(lines), encoding="utf-8-sig")  # the game's XML carries a BOM

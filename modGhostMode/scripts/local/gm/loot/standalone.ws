@@ -85,7 +85,7 @@ function StandaloneEp1_1()
 	{
 		pam.ResetCharacterDev();
 	}
-	levelManager.SetFreeSkillPoints(levelManager.GetLevel() - 1 + 11);
+	levelManager.SetFreeSkillPoints(levelManager.GMGetLevelSkillPoints(!GMIsNewTreeIncome()) + 11);	//modSigns: XP-09, the tree's level points
 
 
 	//modSigns: removed inv.AddAnItem('Mutagen red', 4);
@@ -604,7 +604,7 @@ function StandaloneEp2_1()
 	{
 		pam.ResetCharacterDev();
 	}
-	levelManager.SetFreeSkillPoints( levelManager.GetLevel() - 1 + 11 );
+	levelManager.SetFreeSkillPoints( levelManager.GMGetLevelSkillPoints(!GMIsNewTreeIncome()) + 11 );	//modSigns: XP-09, the tree's level points
 
 
 	//modSigns: removed inv.AddAnItem( 'Mutagen red', 4 );

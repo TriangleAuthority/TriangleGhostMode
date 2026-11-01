@@ -46,25 +46,40 @@ function GMGetVanillaLevelSkillPoints() : int
 	return total;
 }
 
-// Skill points the current level is worth in the given tree. The same in both trees until the
-// XP area changes the new tree's income.
+// Skill points the current level is worth in the given tree: the classic tree 1 per level (the level
+// definitions), the new tree none on every level divisible by 3 (XP-09, xp/levelUp.ws).
 @addMethod(W3LevelManager)
 function GMGetLevelSkillPoints(classicTree : bool) : int
 {
-	return GMGetVanillaLevelSkillPoints();
+	var i, total : int;
+	var levelDef : SLevelDefinition;
+
+	if(classicTree)
+		return GMGetVanillaLevelSkillPoints();
+	for(i = 2; i <= level; i += 1)
+	{
+		levelDef = GetLevelDefinition(i);
+		if(!GMIsNewTreeNoPointLevel(i))
+			total += levelDef.addedSkillPoints;
+	}
+	return total;
 }
 
-// Sets the level-based skill points to what the tree in force gives for the current level;
-// points from other sources (Places of Power, quest items) are kept. Call with nothing spent.
+// Sets the level-based skill points and the level abilities (XP-08, XP-09: the Vitality per
+// level) to what the tree in force gives for the current level; points from other sources (Places
+// of Power, quest items) are kept. The points the levels gave are counted by the rule each level was
+// gained under (GMGetGainedLevelSkillPoints). Call with nothing spent.
 @addMethod(W3LevelManager)
 function GMRecomputeLevelSkillPoints(classicTree : bool)
 {
 	var other : int;
 
-	other = GetPointsTotal(ESkillPoint) - GMGetVanillaLevelSkillPoints();
+	other = GetPointsTotal(ESkillPoint) - GMGetGainedLevelSkillPoints();
 	if(other < 0)
 		return;
+	owner.GMSwapLevelAbilities(classicTree);
 	points[ESkillPoint].free = other + GMGetLevelSkillPoints(classicTree) - points[ESkillPoint].used;
+	LogChannel('GMSkills', "level points recomputed: classic tree " + classicTree + ", " + GMGetLevelSkillPoints(classicTree) + " from levels, " + other + " from other sources");
 }
 
 @addMethod(W3PlayerWitcher)

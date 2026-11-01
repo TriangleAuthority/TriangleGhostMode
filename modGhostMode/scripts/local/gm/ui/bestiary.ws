@@ -1,7 +1,8 @@
 // UI-10 and UI-11: the bestiary (UI-11 below).
 // UI-10: the bestiary's kill count (legacy's, changelist 1167; DU6: ported with UI, counting from the
 // mod's installation): a saved count per enemy type on Geralt, incremented where a kill would give
-// experience (CNewNPC.CalculateExperiencePoints; guards count as humans without experience), and a "Kill
+// experience (XP-04's CNewNPC.CalculateExperiencePoints, xp/killExperience.ws, after the experience is computed;
+// guards count as humans without experience; a call with skipLog counts nothing), and a "Kill
 // count" entry in the bestiary with the totals (humans with Wild Hunt warriors, animals, monsters, unique
 // creatures) and the kills by type. Legacy's enemy types and their names (gm_generic.ws, shared with XP),
 // with the GM prefix. Save impact: a new saved field (counts start at 0 on an existing save).
@@ -314,6 +315,7 @@ function GMGetEnemyTypeByAbility( actor : CActor ) : EGMEnemyType
 	if(actor.HasAbility('ConPudzian')) return GMENT_HUMAN;
 	if(actor.HasAbility('ConWitcher')) return GMENT_HUMAN;
 	if(actor.HasAbility('ConImmortal')) return GMENT_HUMAN;
+	if(actor.HasAbility('ConDefaultSilver')) return GMENT_HUMAN;	// XP-04 (DX4): 5.x's plague victims (mq1060), humans
 
 	if(actor.HasAbility('mon_evil_dog_lvl12')) return GMENT_DOG;
 	if(actor.HasAbility('wild_dog_lvl9')) return GMENT_DOG;
@@ -502,21 +504,6 @@ function GMGetKills(et : EGMEnemyType) : int
 	if((int)et >= gmEnemiesKilledByType.Size())
 		return 0;
 	return gmEnemiesKilledByType[et];
-}
-
-// A kill counts where it would give experience (legacy's CalculateExperiencePoints; the debug log's call
-// with skipLog does not count).
-@wrapMethod(CNewNPC)
-function CalculateExperiencePoints(optional skipLog : bool) : int
-{
-	if(!skipLog && !grantNoExperienceAfterKill && !HasAbility('Zero_XP'))
-	{
-		if(GetNPCType() == ENGT_Guard)
-			GetWitcherPlayer().GMIncKills(GMENT_HUMAN);
-		else
-			GetWitcherPlayer().GMIncKills(GMGetEnemyTypeByAbility(this));
-	}
-	return wrappedMethod(skipLog);
 }
 
 // The entry's text: the totals, then the kills by type.

@@ -83,7 +83,7 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.StopLowStaminaSFX,STAM-07,
 scripts/game/player/r4Player.ws::CR4Player.CheckForLowStamina,STAM-07,
 scripts/game/player/r4Player.ws::CR4Player.StopLowStaminaSFX,STAM-07,
 scripts/game/gameParams.ws::W3GameParams.GetLowStaminaSFX*,STAM-07,
-menu/modSignsConfig.xml::*,OPT-01 DIFF-04,options menu (groups shared by many features); DIFF-04: the GMScalingOptions group
+menu/modSignsConfig.xml::*,OPT-01 DIFF-04 XP-07,options menu (groups shared by many features); DIFF-04: the GMScalingOptions group; XP-07: the GMExpOptions group
 scripts/gm_generic/gm_options.ws::gmIsQoLOption,OPT-01,
 scripts/gm_generic/gm_options.ws::gmIsGameplayOption,OPT-01,
 scripts/gm_generic/gm_options.ws::gmIsScalingOption,OPT-01 DIFF-04,DIFF-04: the scaling group
@@ -616,11 +616,11 @@ files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon_wraith_mh,STAM-08 AI-03,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon_wyvern,STAM-08 AI-03 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon_wyvern_base,STAM-08 AI-03 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
-files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusDeadly,STAM-08 AI-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
-files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusHigh,STAM-08 AI-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
-files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConAthletic,STAM-08 AI-02,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusDeadly,STAM-08 AI-01 XP-05,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; XP: its experience node (inert)"
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusHigh,STAM-08 AI-01 XP-05,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; XP: its experience node (inert)"
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConAthletic,STAM-08 AI-02 XP-05,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; XP: its experience node (inert)"
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConDefault,STAM-08 AI-02 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
-files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConHumanoidMonster,STAM-08 AI-02,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConHumanoidMonster,STAM-08 AI-02 XP-05,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; XP: its experience node (inert)"
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:NPCLevelBonusDeadly,STAM-08 AI-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:NPCLevelBonusHigh,STAM-08 AI-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:SkillArchmage,STAM-08 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF"
@@ -722,11 +722,11 @@ files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/abilit
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_wraith_mh,STAM-08 AI-03,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_wyvern,STAM-08 AI-03 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_wyvern_base,STAM-08 AI-03 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
-files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusDeadly,STAM-08 AI-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
-files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusHigh,STAM-08 AI-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
-files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:ConAthletic,STAM-08 AI-02,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusDeadly,STAM-08 AI-01 XP-05,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+; XP: its experience node (inert)"
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusHigh,STAM-08 AI-01 XP-05,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+; XP: its experience node (inert)"
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:ConAthletic,STAM-08 AI-02 XP-05,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+; XP: its experience node (inert)"
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:ConDefault,STAM-08 AI-02 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
-files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:ConHumanoidMonster,STAM-08 AI-02,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:ConHumanoidMonster,STAM-08 AI-02 XP-05,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+; XP: its experience node (inert)"
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:NPCLevelBonusDeadly,STAM-08 AI-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:NPCLevelBonusHigh,STAM-08 AI-01,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:SkillArchmage,STAM-08 AI-08,"NPC stamina values (regen, costs); other stats belong to AI/DMG/DIFF; NG+"
@@ -1428,7 +1428,7 @@ scripts/game/gui/menus/characterMenu.ws::CR4CharacterMenu.CheckAdditionalSlots,S
 scripts/game/gui/menus/characterMenu.ws::CR4CharacterMenu.setMutationBonusMode,SKL-01 MUT-01,calls CheckAdditionalSlots (locked-slot fix)
 scripts/game/gui/menus/characterMenu.ws::CR4CharacterMenu.OnSwapSkill,SKL-01,fixes: a swap can no longer put a skill of the wrong colour into a mutation slot; both skills unequipped before re-equipping (bonuses recalculated); not in 5.x (both menus)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.Debug_ClearCharacterDevelopment,SKL-01,"debug respec rebuilt: keeps level, XP and skill points, unequips gear and mutagens, toxicity 0, clears oils (oil part: FIX)"
-scripts/game/gameplay/leveling/levelManager.ws::W3LevelManager.AddPoints,SKL-01,"optional ignoreNGP, used by Debug_ClearCharacterDevelopment to restore XP without the NG+ doubling (XP may share)"
+scripts/game/gameplay/leveling/levelManager.ws::W3LevelManager.AddPoints,SKL-01 XP-10,"optional ignoreNGP, used by Debug_ClearCharacterDevelopment to restore XP without the NG+ doubling (XP may share); XP-10: ignoreNGP for the debug level reset"
 files/gameplay/abilities/geralt_skills.xml::definitions/abilities/ability:perk_1,SKL-18,Sun and Stars: night stamina regen tooltip value 0.01 -> 0.05
 files/gameplay/abilities/geralt_skills.xml::definitions/abilities/ability:perk_1_night_ability,SKL-18,Sun and Stars: night combat stamina regen 0.01 -> 0.05 (mult)
 files/gameplay/abilities/geralt_skills.xml::definitions/abilities/ability:perk_2,SKL-18,perk_2 is Cold Blood in GM: attack_power 0.25 removed (Steady Shot moved to sword_s15); Cold Blood is code
@@ -1475,7 +1475,7 @@ scripts/game/player/playerWitcher.ws::W3PlayerWitcher.Perk21GainStamina,SKL-18,"
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GainAdrenalineFromPerk21,SKL-18,vanilla Perk 21 (adrenaline on defence) commented out
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.PerformParryCheck,SKL-18,vanilla Perk 21 adrenaline on parry removed
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.PerformCounterCheck,SKL-18,vanilla Perk 21 adrenaline on counter removed
-scripts/game/npc/npc.ws::CNewNPC.OnDeath,SKL-18 MUT-03 MUT-04 MUT-05 ARM-13 ENCH-08 ENCH-13 ENCH-14 SWD-05 ALCH-12,"Perk 21 stamina on kill; also runewords 10/12 (ENCH) and the other death changes (their owners); ARM: Tesham Mutna kill heal removed; ENCH: Rejuvenation and Elation on kills, Eruption and Possession checks; SWD: vanilla Aerondight discharge and charge on kills removed; ALCH-12: Noonwraith and Grave Hag per kill; Nekker Warrior horse panic removed"
+scripts/game/npc/npc.ws::CNewNPC.OnDeath,SKL-18 MUT-03 MUT-04 MUT-05 ARM-13 ENCH-08 ENCH-13 ENCH-14 SWD-05 ALCH-12 XP-04 XP-07,"Perk 21 stamina on kill; also runewords 10/12 (ENCH) and the other death changes (their owners); ARM: Tesham Mutna kill heal removed; ENCH: Rejuvenation and Elation on kills, Eruption and Possession checks; SWD: vanilla Aerondight discharge and charge on kills removed; ALCH-12: Noonwraith and Grave Hag per kill; Nekker Warrior horse panic removed; XP: kill experience at least 1, the combat experience modifier, the combat log line"
 scripts/game/gameplay/items/spells/signEntity.ws::W3SignEntity.ManageFocusGain,SKL-18 MUT-07,"Perk 11 Focus: signs in combat give sword-hit adrenaline (alternate casts per second, Quen per stamina spent), not when cast with adrenaline or Flood of Anger; Mutation 7 (MUT)"
 scripts/game/gui/popups/CharacterStatsPopup.ws::GetEquippedCrossbowDamage,SKL-18 MUT-11 UI-02,"perk_2 attack power removed from crossbow damage (Steady Shot moved); rest UI, XBOW; UI: crossbow damage (Water Hag line removed, ALCH audit F15)"
 scripts/game/gameplay/effects/effects/dotEffect.ws::W3DamageOverTimeEffect.OnEffectAdded,SKL-18,Heavy Artillery on bomb DoTs multiplies only the additive value (moved here from criticalDOTEffect)
@@ -7280,7 +7280,7 @@ files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:FrozenE
 files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:SilverDustEffect_Level2,ALCH-14,bomb effect values; NG+
 files/gameplay/abilities_plus/effects.xml::definitions/abilities/ability:SilverDustEffect_Level3,ALCH-14,bomb effect values; NG+
 scripts/game/gameplay/items/throwables/petards/petard.ws::W3Petard.OnProjectileCollision,ALCH-14,only Grapeshot 3 breaks shields
-scripts/game/gameplay/interactive/monsterNestEntity.ws::CMonsterNestEntity.<members>,ALCH-14,"no bomb change here: nest experience modifiers (expOnNestDestroyedMod, bonusExpOnBossKilledMod, addExpOnlyOnceMod), XP's (hand-off; ALCH audit F26)"
+scripts/game/gameplay/interactive/monsterNestEntity.ws::CMonsterNestEntity.<members>,ALCH-14 XP-06,"no bomb change here: nest experience modifiers (expOnNestDestroyedMod, bonusExpOnBossKilledMod, addExpOnlyOnceMod), XP's (hand-off; ALCH audit F26); XP-06: the nest experience fields"
 scripts/game/gameplay/interactive/monsterNestEntity.ws::CMonsterNestEntity.PlayerHasBombActivator,ALCH-14,the selected bomb destroys the nest
 scripts/game/gameplay/effects/effects/other/silverDust.ws::W3Effect_SilverDust.OnEffectAdded,ALCH-14,"Silver Dust blocks, removed from the player"
 scripts/game/behavior_tree/tasks/monsters/btTaskWraithDrainDance.ws::CBTTaskWraithDrainDance.Main,ALCH-14,"Silver Dust: no teleport, weaker drain heal"
@@ -8352,11 +8352,11 @@ scripts/game/gui/menus/glossaryBestiaryMenu.ws::CR4GlossaryBestiaryMenu.UpdateKi
 scripts/game/gui/menus/glossaryBestiaryMenu.ws::CR4GlossaryBestiaryMenu.UpdateItems,UI-10,bestiary kill count entry
 scripts/game/gui/menus/glossaryBestiaryMenu.ws::CR4GlossaryBestiaryMenu.PopulateData,UI-10 UI-16,kill count entry; debug labels
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.IncKills,UI-10,kill counter (called in CalculateExperiencePoints: shared with XP)
-scripts/game/npc/npc.ws::CNewNPC.CalculateExperiencePoints,UI-10,"kill counter: the count is incremented here (UI-10, a wrapper in ui/bestiary.ws); the experience values, level difference and diminishing returns are XP's (not mapped yet; UI audit F1)"
-scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GetKills,UI-10,kill counter (XP reads it for diminishing returns)
+scripts/game/npc/npc.ws::CNewNPC.CalculateExperiencePoints,UI-10 XP-04 XP-07,"kill counter: the count is incremented here (UI-10, a wrapper in ui/bestiary.ws); the experience values, level difference and diminishing returns are XP's (not mapped yet; UI audit F1); XP: kill experience by enemy type, level difference and diminishing returns (DIFF-08); fixed experience option"
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GetKills,UI-10 XP-04,kill counter (XP reads it for diminishing returns)
 scripts/game/player/playerWitcher.ws::W3PlayerWitcher.<members>,UI-10,saved enemiesKilledByType; the commented hasRecentlyCountered and cannotUseUndyingSkill are DEF-06 and SKL-07 (ported)
-scripts/gm_generic/gm_generic.ws::EEnemyType,UI-10,enemy types (shared with XP)
-scripts/gm_generic/gm_generic.ws::GetEnemyTypeByAbility,UI-10,enemy type of an NPC (shared with XP)
+scripts/gm_generic/gm_generic.ws::EEnemyType,UI-10 XP-04,enemy types (shared with XP)
+scripts/gm_generic/gm_generic.ws::GetEnemyTypeByAbility,UI-10 XP-04,enemy type of an NPC (shared with XP)
 scripts/gm_generic/gm_generic.ws::GetLocStringByEnemyType,UI-10,kill count names
 scripts/game/npc/npc.ws::CNewNPC.GetExperienceDifferenceLevelName,UI-12 DIFF-05,no ??? for deadly enemies; the fake-level removal is DIFF; DIFF-05: the fake addon and its cap dropped
 scripts/game/gui/menus/mapMenu.ws::CR4MapMenu.UpdateEntityPins,UI-16,debug labels
@@ -15444,20 +15444,20 @@ files/dlc/bob/data/gameplay/items/def_loot_quest.xml::definitions/loot_definitio
 files/dlc/bob/data/gameplay/items_plus/def_loot_quest.xml::definitions/loot_definitions/loot:mq7009_griffon,LOOT-07,loot definition; NG+
 files/dlc/bob/data/gameplay/items_plus/def_loot_quest.xml::definitions/loot_definitions/loot:q702_love_letter,LOOT-07 LOOT-08,loot definition; NG+
 files/dlc/bob/data/gameplay/items_plus/def_loot_quest.xml::definitions/loot_definitions/loot:q703_piece_of_scenario,LOOT-07 LOOT-08,loot definition; NG+
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:camm_final_reward,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:ff701_br_reward,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:ff701_gb_reward,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:ff701_mnt_reward,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:lw_ww_belgaard_reward,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:lw_ww_vermentino_reward,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:camm_final_reward,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:ff701_br_reward,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:ff701_gb_reward,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:ff701_mnt_reward,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:lw_ww_belgaard_reward,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:lw_ww_vermentino_reward,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7010_nest_destroyed,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7023_completed,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_cyclops_reward,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:sq703_safari,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7023_completed,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_cyclops_reward,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:sq703_safari,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/dlc/bob/data/quests/main_quests/quest_files/q704b_fairy_tale/characters/q704_ft_big_bad_wolf.w2ent::<file>,LOOT-07,NPC inventory (CInventoryInitializerUniform/CInventoryDefinitionEntry): what it carries and drops; other properties AI
 files/dlc/bob/data/quests/main_quests/quest_files/q704b_fairy_tale/characters/q704_ft_giant.w2ent::<file>,LOOT-07,NPC inventory (CInventoryInitializerUniform/CInventoryDefinitionEntry): what it carries and drops; other properties AI
 files/dlc/bob/data/quests/minor_quests/quest_files/mq7009_painter/characters/mq7009_griffon.w2ent::<file>,LOOT-07,NPC inventory (CInventoryInitializerUniform/CInventoryDefinitionEntry): what it carries and drops; other properties AI
-files/dlc/dlc3/data/gameplay/rewards/rewards.xml::reward:mh201_reward_from_troll,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/dlc/dlc3/data/gameplay/rewards/rewards.xml::reward:mh201_reward_from_troll,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
 files/dlc/ep1/data/gameplay/items/def_loot_quests.xml::definitions/loot_definitions/loot:ep1_poi_02_loot,LOOT-07 LOOT-08,loot definition
 files/dlc/ep1/data/gameplay/items/def_loot_quests.xml::definitions/loot_definitions/loot:ep1_poi_11_loot,LOOT-07 LOOT-08,loot definition
 files/dlc/ep1/data/gameplay/items/def_loot_quests.xml::definitions/loot_definitions/loot:ep1_poi_16_loot,LOOT-07 LOOT-08,loot definition
@@ -15468,7 +15468,7 @@ files/dlc/ep1/data/gameplay/items_plus/def_loot_quests.xml::definitions/loot_def
 files/dlc/ep1/data/gameplay/items_plus/def_loot_quests.xml::definitions/loot_definitions/loot:ep1_poi_16_loot,LOOT-07 LOOT-08,loot definition; NG+
 files/dlc/ep1/data/gameplay/items_plus/def_loot_quests.xml::definitions/loot_definitions/loot:q602_shani_prescription,LOOT-07,loot definition; NG+
 files/dlc/ep1/data/gameplay/items_plus/def_loot_quests.xml::definitions/loot_definitions/loot:q602_wedding_guests_list,LOOT-07,loot definition; NG+
-files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_romance_end,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_romance_end,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/gameplay/items/def_loot_quests.xml::definitions/loot_definitions/loot:mq0004_talers_monocle_loot,LOOT-07,loot definition
 files/gameplay/items/def_loot_quests.xml::definitions/loot_definitions/loot:mq1002_vault_chest,LOOT-07 LOOT-08,loot definition
 files/gameplay/items/def_loot_quests.xml::definitions/loot_definitions/loot:q002_yennefer_notes,LOOT-07 LOOT-08,loot definition
@@ -15525,72 +15525,72 @@ files/gameplay/items_plus/def_loot_unique.xml::definitions/loot_definitions/loot
 files/gameplay/items_plus/def_loot_unique.xml::definitions/loot_definitions/loot:_uniq_prolog_nilfgaardcastle,LOOT-07,loot definition; NG+
 files/gameplay/items_plus/def_loot_unique.xml::definitions/loot_definitions/loot:gargorye_cave_uniq_chest,LOOT-07,loot definition; NG+
 files/gameplay/items_plus/def_loot_unique.xml::definitions/loot_definitions/loot:q401_loot,LOOT-07,loot definition; NG+
-files/gameplay/rewards/rewards.xml::reward:ff101_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff102_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff103_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff201_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff202_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff203_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff205_1_victory,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff301_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff302_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:ff303_1_victory,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:hr202_regular_reward,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:ff101_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff102_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff103_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff201_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff202_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff203_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff205_1_victory,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff301_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff302_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:ff303_1_victory,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:hr202_regular_reward,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/gameplay/rewards/rewards.xml::reward:mh203_03_completed,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:mh305_doppler_reward,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:mh305_doppler_reward,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/gameplay/rewards/rewards.xml::reward:mh307_02_minion_killed_completed,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:mq0001_01_reunite_brothers,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:mq0002_01_extorted_merchant,LOOT-07,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:mq0003_02_found_sister,LOOT-07,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:mq1001_2_locker,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:mq1002_3_treasure_chest,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:mq1002_3_treasure_chest,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
 files/gameplay/rewards/rewards.xml::reward:mq1006_1_cheap_item,LOOT-07,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:mq1006_1_medium_item,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:mq1022_1_finished,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:mq1022_1_finished,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
 files/gameplay/rewards/rewards.xml::reward:mq1041_1_pro_soldier_ending,LOOT-07,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:mq1045_1_cache,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:mq2001_holmstein_completed,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:mq2001_kaer_trolde_completed,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:mq2001_holmstein_completed,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
+files/gameplay/rewards/rewards.xml::reward:mq2001_kaer_trolde_completed,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
 files/gameplay/rewards/rewards.xml::reward:mq2006_chest_2,LOOT-07,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:mq2008_reward_in_chest,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:mq2020_chest,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:mq2020_chest,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
 files/gameplay/rewards/rewards.xml::reward:mq2043_1_succeeded,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:mq3002_3_chest,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:mq3002_3_chest,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
 files/gameplay/rewards/rewards.xml::reward:mq3026_reward_race1,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:mq3031_2_finished_quest,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:mq3031_2_finished_quest,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
 files/gameplay/rewards/rewards.xml::reward:mq3039_1_loot_chest,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q001_2_after_bandits,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q105_3_soltis_reward,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q202_2_saved_folan,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q202_2_saved_vigi,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q202_3_killed_giant,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q203_4_exp_got_rid_of_him,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q205_1_skjal_found,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q301_4_exp_dreamer_dreams,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:q001_2_after_bandits,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:q105_3_soltis_reward,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
+files/gameplay/rewards/rewards.xml::reward:q202_2_saved_folan,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
+files/gameplay/rewards/rewards.xml::reward:q202_2_saved_vigi,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
+files/gameplay/rewards/rewards.xml::reward:q202_3_killed_giant,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
+files/gameplay/rewards/rewards.xml::reward:q203_4_exp_got_rid_of_him,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
+files/gameplay/rewards/rewards.xml::reward:q205_1_skjal_found,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
+files/gameplay/rewards/rewards.xml::reward:q301_4_exp_dreamer_dreams,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/gameplay/rewards/rewards.xml::reward:q302_01_met_big_four,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q302_02_cleaver_reward_beggarking,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:q302_02_cleaver_reward_beggarking,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
 files/gameplay/rewards/rewards.xml::reward:q304_04_saddle,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q308_2_killed_nathanel,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:q308_2_killed_nathanel,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/gameplay/rewards/rewards.xml::reward:q308_3_killed_the_real_psycho,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q309_3_killed_vampire,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:q309_3_killed_vampire,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
 files/gameplay/rewards/rewards.xml::reward:q311_01_survived_spiral_alone,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q401_01_help_yennefer,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q401_03_eskels_race_prize,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q402_1_optional_dijkstra_help,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:q403_03_elixirs,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:q401_01_help_yennefer,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:q401_03_eskels_race_prize,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:q402_1_optional_dijkstra_help,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:q403_03_elixirs,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/gameplay/rewards/rewards.xml::reward:q403_superb_elixirs,LOOT-07,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:q501_eredin_killed,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:sq102_03_told_farm_safe,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:sq106_4_tauler_killed,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:sq102_03_told_farm_safe,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
+files/gameplay/rewards/rewards.xml::reward:sq106_4_tauler_killed,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
 files/gameplay/rewards/rewards.xml::reward:sq108_griffon_killed,LOOT-07,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:sq108_unlocked_blacksmith,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:sq201_1_a_killed_werewolf_for_good,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:sq202_pirate_treasure,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:sq204_3b_leshy_reward_sven,LOOT-07,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:sq201_1_a_killed_werewolf_for_good,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience and level (XP)"
+files/gameplay/rewards/rewards.xml::reward:sq202_pirate_treasure,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward level (XP)"
+files/gameplay/rewards/rewards.xml::reward:sq204_3b_leshy_reward_sven,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/gameplay/rewards/rewards.xml::reward:sq210_wizard_reward,LOOT-07,"quest reward items; experience and level XP, gold ECON"
 files/gameplay/rewards/rewards.xml::reward:sq303_race_reward,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:sq305_1_finished_quest_vern,LOOT-07,"quest reward items; experience and level XP, gold ECON"
-files/gameplay/rewards/rewards.xml::reward:sq305_always,LOOT-07 LOOT-08,"quest reward items; experience and level XP, gold ECON"
+files/gameplay/rewards/rewards.xml::reward:sq305_1_finished_quest_vern,LOOT-07 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
+files/gameplay/rewards/rewards.xml::reward:sq305_always,LOOT-07 LOOT-08 XP-02,"quest reward items; experience and level XP, gold ECON; reward experience (XP)"
 files/living_world/custom_events/skellige/ard_skellig/sk12/lw_q210_wild_hunt_ghosts.w2ent::<file>,LOOT-07,NPC inventory (CInventoryInitializerUniform/CInventoryDefinitionEntry): what it carries and drops; other properties AI
 files/quests/minor_quests/no_mans_land/quest_files/mq1022_border_troll/characters/mq1022_redanian_troll.w2ent::<file>,LOOT-07 AI-06,NPC inventory (CInventoryInitializerUniform/CInventoryDefinitionEntry): what it carries and drops; other properties AI
 files/quests/minor_quests/no_mans_land/quest_files/mq1046_burning_down_the_house/characters/mq1046_scavenger_04.w2ent::<file>,LOOT-07 AI-06,NPC inventory (CInventoryInitializerUniform/CInventoryDefinitionEntry): what it carries and drops; other properties AI
@@ -16525,7 +16525,7 @@ files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abil
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor,AI-03,
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_turret,AI-03,
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_petals,AI-03,
-files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_hard,AI-03,"enemy stats AI-03's attribution missed (found by DIFF's mapping; ported with DIFF slice D1): legacy's 800 Essence base"
+files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_hard,AI-03,enemy stats AI-03's attribution missed (found by DIFF's mapping; ported with DIFF slice D1): legacy's 800 Essence base
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q703_mqsidqpyt,AI-03,"enemy stats AI-03's attribution missed (its name with a space before =; found by DIFF's mapping; ported with DIFF slice D1): legacy's 200 Vitality, armor x60"
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_sprigan,AI-03,
 files/dlc/bob/data/gameplay/abilities/monster_bob_base_abl.xml::definitions/abilities/ability:mon_nightwraith_banshee,AI-03 AI-08,
@@ -16610,7 +16610,7 @@ files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor,AI-03,
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_turret,AI-03,
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_petals,AI-03,
-files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_hard,AI-03,"enemy stats AI-03's attribution missed (found by DIFF's mapping; ported with DIFF slice D1): legacy's 800 Essence base; NG+"
+files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_archespor_hard,AI-03,enemy stats AI-03's attribution missed (found by DIFF's mapping; ported with DIFF slice D1): legacy's 800 Essence base; NG+
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_q703_mqsidqpyt,AI-03,"enemy stats AI-03's attribution missed (its name with a space before =; found by DIFF's mapping; ported with DIFF slice D1): legacy's 200 Vitality, armor x60; NG+"
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_sprigan,AI-03,
 files/dlc/bob/data/gameplay/abilities_plus/monster_bob_base_abl.xml::definitions/abilities/ability:mon_nightwraith_banshee,AI-03 AI-08,
@@ -16884,7 +16884,7 @@ files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:q10
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:qsq102_Letho,AI-03,
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:sq104_WW,AI-03,
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:sq108_Griffon,AI-03,
-files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:sq201_werewolf,AI-03,
+files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:sq201_werewolf,AI-03 XP-05,XP: its experience node (inert)
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:sq204_leshy,AI-03,
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:sq204_Leshywolf,AI-03,
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:sq204_alpha,AI-03,
@@ -17050,12 +17050,12 @@ files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:mon
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:animal_rat_base,AI-03,
 files/gameplay/abilities/monster_base_abl.xml::definitions/abilities/ability:qSergeantFistFIght,AI-20,
 files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:DisplayedLevelAbl,AI-01,
-files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:AnimalLevelBonus,AI-01,
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:AnimalLevelBonus,AI-01 XP-05,XP: its experience node (inert)
 files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonus,AI-01,
 files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusGroup,AI-01,
-files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusArmored,AI-01,
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusArmored,AI-01 XP-05,XP: its experience node (inert)
 files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusGroupArmored,AI-01,
-files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterMHBoss,AI-01 AI-17,
+files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:MonsterMHBoss,AI-01 AI-17 XP-05,XP: its experience node (inert)
 files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:BossNGPLevelBonus,AI-01,
 files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:_Monster_group_base,AI-03 AI-08,
 files/gameplay/abilities/monster_base_abl_new.xml::definitions/abilities/ability:_Monster_solo_base,AI-03 AI-08,
@@ -17067,9 +17067,9 @@ files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConFrai
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConFat,AI-02,
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConPudzian,AI-02,
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:ConWitcher,AI-02,
-files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:NPCLevelBonus,AI-01,
-files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:MiniBoss,AI-02,
-files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:Boss,AI-02,
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:NPCLevelBonus,AI-01 XP-05,XP: its experience node (inert)
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:MiniBoss,AI-02 XP-05,XP: its experience node (inert)
+files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:Boss,AI-02 XP-05,XP: its experience node (inert)
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:MedDamage,AI-04,
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:VesemirDamage,AI-04,
 files/gameplay/abilities/opp_base_abl.xml::definitions/abilities/ability:_q403Follower,AI-04,
@@ -17149,7 +17149,7 @@ files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/abilit
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:qsq102_Letho,AI-03,
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:sq104_WW,AI-03,
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:sq108_Griffon,AI-03,
-files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:sq201_werewolf,AI-03,
+files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:sq201_werewolf,AI-03 XP-05,XP: its experience node (inert)
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:sq204_leshy,AI-03,
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:sq204_Leshywolf,AI-03,
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:sq204_alpha,AI-03,
@@ -17318,18 +17318,18 @@ files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/abilit
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_wolf_alpha_weak,AI-03 AI-08,
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_wolf_white,AI-03,
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:mon_witch3_NGP,AI-03,
-files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:WildHunt_Caranthir_NGPlus,AI-15,
-files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:WildHunt_Imlerith_NGPlus,AI-15,
-files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:WildHunt_Eredin_NGPlus,AI-15,
+files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:WildHunt_Caranthir_NGPlus,AI-15 XP-05,XP: its experience node (inert)
+files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:WildHunt_Imlerith_NGPlus,AI-15 XP-05,XP: its experience node (inert)
+files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:WildHunt_Eredin_NGPlus,AI-15 XP-05,XP: its experience node (inert)
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:animal_rat_base,AI-03,
 files/gameplay/abilities_plus/monster_base_abl.xml::definitions/abilities/ability:qSergeantFistFIght,AI-20,
 files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:DisplayedLevelAbl,AI-01,
-files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:AnimalLevelBonus,AI-01,
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:AnimalLevelBonus,AI-01 XP-05,XP: its experience node (inert)
 files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonus,AI-01,
 files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusGroup,AI-01,
-files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusArmored,AI-01,
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusArmored,AI-01 XP-05,XP: its experience node (inert)
 files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusGroupArmored,AI-01,
-files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterMHBoss,AI-01 AI-17,
+files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterMHBoss,AI-01 AI-17 XP-05,XP: its experience node (inert)
 files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:MonsterLevelBonusLow,AI-03,
 files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:BossNGPLevelBonus,AI-01,
 files/gameplay/abilities_plus/monster_base_abl_new.xml::definitions/abilities/ability:_Monster_group_base,AI-03 AI-08,
@@ -17349,9 +17349,9 @@ files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Co
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:ConFat,AI-02,
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:ConPudzian,AI-02,
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:ConWitcher,AI-02,
-files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:NPCLevelBonus,AI-01,
-files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:MiniBoss,AI-02,
-files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Boss,AI-02,
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:NPCLevelBonus,AI-01 XP-05,XP: its experience node (inert)
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:MiniBoss,AI-02 XP-05,XP: its experience node (inert)
+files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Boss,AI-02 XP-05,XP: its experience node (inert)
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:MedDamage,AI-04,
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:VesemirDamage,AI-04,
 files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:_q403Follower,AI-04,
@@ -18201,3 +18201,908 @@ files/gameplay/abilities_plus/opp_base_abl.xml::definitions/abilities/ability:Ci
 scripts/game/replacers/ciri.ws::W3ReplacerCiri.DrainResourceForDodge,STAM-03,commented out as unused; nothing to port (found by the DIFF sweep)
 scripts/game/replacers/ciri.ws::W3ReplacerCiri.DrainResourceForDash,STAM-03,commented out as unused; nothing to port (found by the DIFF sweep)
 scripts/game/player/states/unconscious.ws::CR4PlayerStateUnconscious.TakeMoneyFromPlayer,DIFF-07,guards take 25% of the money on every difficulty
+files/gameplay/rewards/rewards.xml::reward:q001_1_after_dream,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q002_1_helped_herbalist,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q002_1_helped_hunter,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q002_2_level_up,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q002_3_griffin_dead_reward_nomoney,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q002_3_griffin_dead_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q002_4_killed_bandits,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q002_5_after_emhyr,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q101_found_hendrik_notes,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_01_baron_met,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_02_rooms_checked,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_02_ciri_room_checked,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_03_brought_goat,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_15i_ritual_end,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_04_after_fistfight,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_05_learnt_about_daughter,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_07_learnt_about_ciri,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_08_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q103_10_botchling_buried,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q104_1_met_keira,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q104_1_aarded_rat_nest,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q104_2_first_teleport_gate,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q104_3_survived_blizzard,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q104_5_quest_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q105_1_found_johnny,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q105_2_talk_gobelin,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q105_4_info_witches,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_1_oillamp_running,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_1a_oillamp_swimloot,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_1b_oillamp_ratcages,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_1c_oillamp_morowa_victim,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_2_exp_oillamp_preparing,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_3_exp_oillamp_dinner,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_4_exp_oillamp_magnate,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_5_exp_found_lab,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_6a_exp_anabelle_taken_to_graham,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q106_6b_exp_plague_maiden_uncursed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q109_01_find_keira,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q109_02_persuade_keira,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q107_1_killed_bies,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q107_2_found_johnny,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q107_3_cured_anna,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q107_5_helped_treasure,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q107_6_helped_raped,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q108_01_eve_ended,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q108_02_guslar_father_buried,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q111_1_passed_the_test,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q201_01_boat_bought,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q201_02_reached_burial,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q201_04_after_race,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q201_05_after_fistfight,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q201_06_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q201_07_afterparty,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q203_6_exp_examined_cataclysm,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q205_2_quest_completed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q208_1_finished_race_for_crown,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q202_1_undvik_discovered,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q202_2_folan_alive,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q202_4_eight_wood,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q202_5_killed_giant,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q203_1_exp_drowners_killed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q203_2_exp_found_broksvard,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q203_3_exp_discover_him,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_01_won_fistfight,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_01b_defeated_all_vildkaarls,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_02_crachs_reward,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_03_berserkers_killed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_04_discovered_hallgrim,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_04_discovered_arnvalds_involvement,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_05_stopped_aryts,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_05_stopped_arnvald,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q206_06_crachs_final_reward,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q210_1_emhyr_done,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q210_3_lab_done,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q210_4_skjall_done,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q301_1_oren_followed_thieves,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q301_2_helped_triss,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q301_3_bonus_for_house,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q302_02_investigated_ring,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q302_02_investigated_casino,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q302_02_cleaver_reward,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q302_02_cleaver_reward_half,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q302_02_cleaver_reward_nogold,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q302_04_radovid_met,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q302_5_radovid_met,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q302_whoreson_secret_stash,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q303_01_found_out_about_bomb,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q303_02_find_lead_to_margrave,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q303_05_witch_hunters_didnt_trick_menge,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q303_06_told_dijkstra_about_treasure,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q303_07_trapped_spy,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q304_01_hobos_killed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q304_07_visited_all_girls,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q304_08_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_01_play_written,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_02_jugglers_addiotionally_hired,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_03_play_finished,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_03a_play_correct,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_03b_play_almost_correct,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_03c_play_almost_all_bad,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_03d_picked_not_drunken_prince,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_9a_irina_actress,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_9b_priscilla_actress,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_6_jugglers_bonus,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_04_quest_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_10_blanka_found,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q305_03b_dandelion_free,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q309_1_saved_additional_mages,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q309_1a_saved_only_mage,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q309_1b_saved_only_sorceress,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q309_2_didnt_abandon_triss,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q309_4_left_sewers,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:q309_5_saved_mages_on_ship,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q309_6_triss_stayed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q310_1_retrieved_keiras_body,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q310_3_questioned_escapist,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q310_4_got_rita_out,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q310_5_escaped_prison_quiet,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q310_8_ciri_complete,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q310_9_lodge_gathered,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q310_10_lessons_learned,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q401_02_claim_uma,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q401_02_help_eskel,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q401_04_help_lambert,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q401_05_find_drunk_eskel,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q401_06_break_umas_curse,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q402_1_optional_crach_sword,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q402_1_full_crew_achiv,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q402_2_found_ciri,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:q403_01_got_all_supporters,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q403_02_before_battle,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q403_03_new_gear,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q403_04_killed_wild_hunt_in_forest,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q403_05_forest_done,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q403_07_final_standoff,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q403_08_survived_assault,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q403_09_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q502_02_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q503_1_optional_helped_werewolf,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q504_1_scare_bear,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q505_1_meet_emhyr,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:q505_2_killed_monster,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq101_1_found_parcel,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq101_2_won_race_keira,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq101_3_had_date,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq102_01_found_lockbox,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq102_02_found_brother,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq102_03_told_brother_dead,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq102_01_find_letho,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq102_02_defeat_assassins,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq102_03_defeat_bandits,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq104_1_lied_about_hanna,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq104_3_reward_from_margaret,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq104_4_generic_xp,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq106_1_ekimma_killed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq106_2_vienne_killed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq106_2_vienne_saved,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq106_3_hammond_killed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq106_4_tauler_saved,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq107_1_full_money,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq107_1_half_money,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq107_2_full_xp,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq107_2_half_xp,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq201_1_b_lifted_the_curse,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq201_2_a_let_morkvarg_go,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq201_2_b_kill_morkvarg,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq201_3_c_helped_morkvarg,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:for_killing_morkvarg_priestess,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq202_01_crater_found,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq202_02_completed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq204_1_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq204_2_leshy_offerings,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq204_2a_leshy_killed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq204_3a_leshy_reward_harald,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq205_1_got_alcohol,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq205_2_helped_with_ritual,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq205_3_got_fernflower,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq205_4_finished_quest,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_1_tavern_done,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_2_talked_with_lugos_the_mad,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_3_cave_of_dreams_entered,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_4_vision_1_done,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_5_vision_2_done,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_6_vision_3_done,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_7_vision_4_done,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_8_final_no_gold,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq209_8_final_with_gold,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq210_xp_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq301_1_wore_full_dublet,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq301_2_didnt_fight_drunkard,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq301_3_won_cards_on_party,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq301_4_defeated_inquisitors,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq301_5_completed_quest,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq302_01_philippa_hideout_opened,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq302_02_got_to_lowest_floor,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq302_03_crystal_gave_away_completed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq302_04_completed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq302_05_radovid_payment,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq303_2_polly_acquired,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq303_4_horse_race_won,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq303_4_quest_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq303_5_quest_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq304_2_bodyguards_resolved,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq304_negotiation_success,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq305_1_finished_quest_guard,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq306_02_defeated_sacha,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq306_03_defeated_finneas,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq306_04_defeated_tybalt,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq306_05_solved_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq306_06_retrieved_prize_money,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq310_gwint_cards,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq310_coins,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:sq312_ves_died,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq313_1_ruse_complete,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:sq315_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh101_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh101_final_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh101_final_reward_no_gold,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh102_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh102_final_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh103_final_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh105_villagers_found,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh105_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh106_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh106_final_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh107_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh107_final_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh108_final_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh202_1_investigation,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mh202_2_final_reward,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mh206_arena,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh207_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh208_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh208_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh208_final_bigger,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh208_final_reward_smaller,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh210_investigation,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mh210_final,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mh210_britt,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mh210_britt_gold,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mh301_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh302_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh302_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh303_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh304_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh305_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh306_investigation,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh307_02_minion_fleed_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mh308_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq0002_01_returned_chest,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq0002_01_deal_with_merchant,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq0003_01_dispelled_wraith,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq003_02_found_sister,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq0003_03_farmers_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq0005_02_arsonists_pay,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq0005_02_dwarf_pay,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1001_1_dog_saved,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1002_1_room_1_cleared,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1002_2_room_2_cleared,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1002_3_quest_finished,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1003_cart_burned_down,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1003_cart_owner_freed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1003_final,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1005_1_low_score,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1005_1_middle_score,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1005_1_perfect_score,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1005_1_boss_bonus,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1007_success,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1010_2_ghost_lamp,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1010_3_quest_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1011_1_merchant_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1012_3_quest_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1013_quest_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1015_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1016_2_quest_finished_gold,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1019_2_clue_dealer_story,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1019_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1019_completed_with_bribe,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1019_completed_fight,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1020_2_wrong_horse_returned,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1020_2_quick_end,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1022_1_troll_killed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1028_2_completed_no_gold,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1028_2_completed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1033_1_encounter_1,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1033_2_encounter_2,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1033_3_encounter_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1035_1_merchant_gold,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1036_deserter_met,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1036_bandits_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1039_quest_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1045_encounter_02_gold,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1045_encounter_02_exp,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1046_1_elf_saved,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1046_1_hidden_loot,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1046_burning_down_the_house_reward,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1050_1_food_delivered,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1050_2_quest_finished,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1051_1_wyvern_killed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1051_1_wyvern_killed_no_gold,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1051_1_mother_pays,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1057_fugas_located,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1057_reward_from_villagers,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq1057_no_reward_from_villagers,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2002_lied_or_no_sword,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2002_sword_given_away,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2003_enc_1_women_in_tomb,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2009_water_hag_killed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2009_water_hag_loot,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2010_all_journals_found,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2010_quest_done,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2011_final_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2011_2_final_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2012_1_final_exp_and_gold,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2013_1_location_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2013_1_half_of_bounty,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2015_1_half,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2015_2_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2017_wannabes_saved,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2018_1_final_no_gold,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2020_slaves_freed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2021_shepherd_saved,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2022_herbs_given,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2024_ghost_vanquished,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2024_first_reward,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2024_final_reward,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2030_1_lifted_curse,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2030_1_reversed_curse,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2034_01_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2037_01_completed,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2038_won_w_jutta,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2039_01_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2045_1_saved_the_prisoner,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2045_2_teach_a_lesson,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2048_saved_foreigner_n_her_child,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2049_1_saved_atheist,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2049_2_brought_him_books,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq2051_final,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3002_1_starting_stash,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3002_2_key_stash,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3002_3_final,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3005_1_encounter_1_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3005_2_encounter_2_finished,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3005_quest_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3008_encounter_01,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3009_saving_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3012_1_noble_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3012_2_soldier_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3016_bards_found,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3017_1_bribe,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3017_1_villager_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3023_1_finished_attack,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3024_1_blockade_lifted,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3026_01_1opponent_beaten,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3026_02_2oppponent_beaten,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3026_04_won_night_race,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3026_04_4_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3027_found_my_manifest,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3031_1_got_pearl,XP-02,reward experience and level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3035_1_radovid_dead,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3036_1_encounter,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3037_01_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3038_1_human_guilty,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3038_1_dwarf_guilty_or_no_clue,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq3040_3_encounter_final,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq4002_01_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:mq4003_01_completed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq4005_01_completed,XP-02,reward level (XP)
+files/gameplay/rewards/rewards.xml::reward:mq4006_01_completed,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:lw_rescuetown_plg,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:lw_rescuetown_nml,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:lw_rescuetown_nov,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:lw_rescuetown_skl,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:ff104_1_victory,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:br301_1_victory,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:br302_1_victory,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:ff304_1_victory,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:br201_1_victory,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:br202_1_victory,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:ff204_1_victory,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:hr201_regular_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:hr203_regular_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:hr204_regular_reward,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:hr201_regular_reward_repeat,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:hr202_regular_reward_repeat,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:hr203_regular_reward_repeat,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:hr101_1_victory,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_all_cards_gathered,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_card_prodigy,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_baron,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_hermit,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_talar,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_crossroads_innkeeper,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_boat_builder_nml,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_dijkstra,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_zoltan,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_olivier,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_lambert,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_vimme_vivaldi,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_roche,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_markiza_serenity,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_scojateal_trader,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_crach_an_craite,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_gremista,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_lugos_the_mad,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_stjepan,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_mousesack,XP-02,reward experience (XP)
+files/gameplay/rewards/rewards.xml::reward:cg_sjusta_the_tailor,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q601_won_fist_fight,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q601_olgierd_met,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q601_toad_killed,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q601_ofir_dialogue_choice,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q601_ofir_killed,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q601_meet_with_mirror,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q601_reward_from_olgierd,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_shani_met,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_geralt_possessed,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_gwent_lost,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_gwent_won,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_diving_lost,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_diving_won,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_pig_lost,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_pig_won,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_fight_lost,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_fight_won,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_fireeater_found,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_fireeater_not_found,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_juggled,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_wedding_end,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_romance_gift,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q602_olgier_reported,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_01_before_auction,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_02a_gambler,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_02b_gambler_no_money,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_03_connesour,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_04_noblewoman,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_05_after_auction,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_05b_painting_sold,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_11_diversion,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_13_hostage_situation,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_14_standoff,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q603_16_task_completed,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_killed_caretaker,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_killed_corridor,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_found_iris,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_gazebo_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_fountain_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_dinner_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_bedroom_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_painting_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_study_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_summer_world_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_cellar_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_sad_dinner_done,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q604_killed_ethereals,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q605_olgierd_finale_reward,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q605_mirror_finale_only_exp,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q605_mirror_finale_cornucopia,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q605_mirror_finale_booze_refill,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q605_mirror_finale_demon_horse,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:q605_mirror_finale_cash,XP-02,reward experience (XP)
+files/dlc/ep1/data/gameplay/rewards/rewards.xml::reward:mq6004_completed,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_summons_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_bruxa_recognised,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_bruxa_killed,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_coin_pouch_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_horse_item_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_swan_item_reward_just_xp,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_riddle_solved,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q701_done_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_01a_dettlaff_defeated,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_01b_geralt_defeated,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_02_regis_met,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_02b_kikimora_eggs_destroyed,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_03_wight_curse_found,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_03a_wight_killed,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_03b_wight_disenchanted,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_04_wight_brew_obtained,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_05_regis_met_again,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_06_regis_sacrifice_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_07_mill_examined,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_08a_bootblack_fight_won,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_08b_bootblack_fight_lost,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_09_toy_storage_found,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q702_10_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q703_travelling_family_saved,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q703_fake_wine_found,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q703_exchange_point_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q703_mandragora_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q703_heart_of_toussaint_sketch_reward,XP-02,reward level (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q703_doublet_from_anna_henrietta,XP-02,reward level (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q703_dun_tynne_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704_ft_all_beans,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704_ft_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_01_intro_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_02_diva_reached,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_02b_damien_found,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_03_garkain_investigated,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_03_garkain_killed,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_04_monster_hunt_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_06_gift_found,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_07_puzzle_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704a_08_gravity_cave_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q705_found_letter,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q705_ah_lives,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q705_beast_slayer,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q705_prison_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:sq701_meadow,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:sq701_champion,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:sq701_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:sq701_novigrad,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:cg700_tournament_win,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:cg700_tournament_win_alternate,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:cg700_tournament_lose,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mh701_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mh701_bonus_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mh701_wife_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mh701_locket_owner_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:q704_ft_goose,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7001_QG_bonus,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7001_gwent,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7001_louis_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7002_fiancee_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7002_knight_alive_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7002_knight_dead_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7004_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7004_reward_no_money,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7005_baroness_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7005_duchess_normal,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7005_duchess_half,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7007_gargoyles_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7009_found_paint,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7009_killed_griffon,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7009_geralt_posing,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7010_nest_found,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7010_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7011_fistfight,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7011_bank_done,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7015_hugues_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7017_hermit_reward_xp,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7018_count_side,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7018_hunter_side,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7018_count_thanks,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7019_picnic_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7023_found_lab,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7023_found_all_crystals,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:mq7024_exp_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:ff701_master_reward,XP-02,reward experience and level (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th700_fifth_sixth_diagram,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th700_preacher_bones,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_wolf_first_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_wolf_second_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_griffin_first_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_griffin_second_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_bear_first_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_bear_second_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_cat_first_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_cat_second_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_cat_third_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:th701_zdravko_reported,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:lw_ww_coronata_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:lw_ww_secret_path_done,XP-02,reward experience and level (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:lw_ww_secret_path_bulbs_destroyed,XP-02,reward level (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:lw_plegmund_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:poi_car_a_04_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:poi_gor_b_02_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:poi_vin_a_01_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:poi_vin_b_03_reward,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/rewards/rewards.xml::reward:poi_dun_b_03_reward,XP-02,reward experience (XP)
+files/dlc/dlc3/data/gameplay/rewards/rewards.xml::reward:mh201_investigation,XP-02,reward experience and level (XP)
+files/dlc/dlc3/data/gameplay/rewards/rewards.xml::reward:mh201_troll_killed,XP-02,reward experience and level (XP)
+files/dlc/dlc3/data/gameplay/rewards/rewards.xml::reward:mh201_troll_left_alone,XP-02,reward experience and level (XP)
+files/dlc/dlc12/data/gameplay/rewards/rewards.xml::reward:mq2052_monsters_killed,XP-02,reward experience and level (XP)
+files/dlc/dlc12/data/gameplay/rewards/rewards.xml::reward:mq2052_godlings_reward,XP-02,reward experience and level (XP)
+files/dlc/dlc15/data/gameplay/rewards/rewards.xml::reward:mq1058_child_found,XP-02,reward experience (XP)
+files/dlc/dlc15/data/gameplay/rewards/rewards.xml::reward:mq1058_witcher_killed,XP-02,reward experience (XP)
+files/dlc/dlc15/data/gameplay/rewards/rewards.xml::reward:mq1058_witcher_spared,XP-02,reward experience (XP)
+files/dlc/dlc15/data/gameplay/rewards/rewards.xml::reward:mq1058_lynx_stash,XP-02,reward experience (XP)
+files/dlc/bob/data/gameplay/globals/quest_levels.csv::row:ww_belgard_secret,XP-03,quest level
+files/dlc/dlc10/data/gameplay/globals/th1009_quest_levels_copy.csv::row:Wolf Set,XP-03,quest level
+files/dlc/dlc10/data/gameplay/globals/th1009_quest_levels_copy.csv::row:Wolf Upgrades 1A,XP-03,quest level
+files/dlc/dlc10/data/gameplay/globals/th1009_quest_levels_copy.csv::row:Wolf Upgrades 1B,XP-03,quest level
+files/dlc/dlc10/data/gameplay/globals/th1009_quest_levels_copy.csv::row:Wolf Upgrades 2,XP-03,quest level
+files/dlc/dlc10/data/gameplay/globals/th1009_quest_levels_copy.csv::row:Wolf Upgrades 2b,XP-03,quest level
+files/dlc/ep1/data/gameplay/globals/quest_levels.csv::row:th1010ofirarmor,XP-03,quest level
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl2,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl3,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl4,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl5,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl6,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl7,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl8,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl9,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl10,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl11,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl12,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl13,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl14,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl15,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl16,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl17,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl18,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl19,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl20,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl21,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl22,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl23,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl24,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl25,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl26,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl27,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl28,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl29,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl30,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl31,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl32,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl33,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl34,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl35,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl36,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl37,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl38,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl39,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl40,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl41,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl42,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl43,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl44,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl45,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl46,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl47,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl48,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl49,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities/geralt_stats.xml::definitions/abilities/ability:Lvl50,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl2,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl3,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl4,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl5,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl6,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl7,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl8,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl9,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl10,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl11,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl12,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl13,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl14,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl15,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl16,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl17,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl18,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl19,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl20,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl21,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl22,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl23,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl24,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl25,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl26,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl27,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl28,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl29,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl30,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl31,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl32,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl33,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl34,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl35,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl36,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl37,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl38,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl39,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl40,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl41,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl42,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl43,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl44,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl45,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl46,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl47,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl48,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl49,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl50,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl51,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl52,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl53,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl54,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl55,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl56,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl57,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl58,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl59,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl60,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl61,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl62,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl63,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl64,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl65,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl66,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl67,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl68,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl69,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl60#2,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl71,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl72,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl73,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl74,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl75,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl76,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl77,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl78,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl79,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl80,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl81,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl82,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl83,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl84,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl85,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl86,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl87,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl88,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl89,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl90,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl91,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl92,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl93,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl94,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl95,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl96,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl97,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl98,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl99,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/abilities_plus/geralt_stats.xml::definitions/abilities/ability:Lvl100,XP-08,"level-up ability: 50 Vitality per level, no attack or spell power (NG+: above 50 removed)"
+files/gameplay/globals/quest_levels.csv::row:Q302 War Of Gangs,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q202 Ice Giant,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q302 Ciri - Rescuing Dudu,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_gr_poi_042_ponds,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2020 Flesh for cash buisness,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ102 Letho,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_sk_poi_056,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q305 Ciri - chase to the temple,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq1055_nilfgaard_mom,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q205 Lofoten,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ202 Yen,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ106 Killbill,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ301 Triss,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q203 Him,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q302 King Beggar's Debt,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_sk31,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Bear Upgrades 1B,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:q302 Favour For Radovid,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ102 Dolores,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ107 Pigs,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ101 Keira,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:MQ2009 Immoral Proposition,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q205 The Garden,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq1002 Rezydencja,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Fist Fight Championship,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_gr39,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ209 Tavern Brawl,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q309 Novigrad Under Control,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2017 : For Fame And Glory,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:MQ2037 Dishonored,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq3016_wandering_bards,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq1051_nilfgaard,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq4003_lake,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2001 Kuilu,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q210 Avallach lab,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2048_msg_in_a_bottle,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_skellige_sk48_splintered_ships,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q108 Forfather's Eve,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:MQ2030_nithing,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:MQ2051 Unfinished Business,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q105 Witches,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q305 The Play,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q106 Keira's bussiness,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q206 Berserkers,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Sunken treasure,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q101 Agent,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q105 Ciri escape from swamps,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:MQ2018 : Bandits,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_sk_poi_050,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_sb2_sunken_ships_note,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ302 Philippa,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ209 Cave of Dreams,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q106 Tower,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2024: Master of the Arena,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_sk4,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ201 Curse,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq1046_burning_down_the_house,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:MQ1022 Border Troll,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q205 Ciri - safe heaven,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mh210 : Lamia,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_sk_poi_005,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq3031_aging_romance,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_sk30_mushroom_farms,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq1005 Battle Scavengers,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q402 Isle of Mists,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mh202: Nekker Warrior,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q301 Visiting Dreamer,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq3002 Spies of Novigrad,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Viper Set,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:MQ1028 Courier,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2001 Jarl's Horn,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2049_atheist,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q301 Find Dreamer,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:SQ310 Dangerous Game,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq4005_sword,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q105 Evil Spirit,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q002 Vizima Palace,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:Q002 Bandit attack,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:lw_skellige_sk3_sunken_treasure,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2052 Reversed Monster Hunt,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mh201 : Cave Troll,XP-03,quest level
+files/gameplay/globals/quest_levels.csv::row:mq2040_trial_of_power,XP-03,quest level
+scripts/game/r4Game.ws::CR4Game.OnGiveReward,XP-01 XP-07,"quest experience by level difference, at least 5, no difficulty modifier (DIFF-08); the options (XP-07)"
+scripts/gm_generic/gm_generic.ws::GetExpByEnemyType,XP-04,base kill experience by enemy type
+scripts/game/player/playerWitcher.ws::W3PlayerWitcher.GetExpModifierByEnemyType,XP-04,diminishing returns: 1% less per kill of the type
+scripts/game/gameParams.ws::W3GameParams.GetFixedExp,XP-07,option getter
+scripts/game/gameParams.ws::W3GameParams.GetQuestExpModifier,XP-07,option getter
+scripts/game/gameParams.ws::W3GameParams.GetMonsterExpModifier,XP-07,option getter
+scripts/game/gameParams.ws::W3GameParams.GetNoQuestLevels,XP-07,option getter
+scripts/game/r4Game.ws::CR4Game.LoadQuestLevels,XP-07,Disable quest levels clears every quest level table
+scripts/game/r4Game.ws::CR4Game.gmUserSettingsQuestLevels,XP-07,quest levels reloaded when the option changes
+scripts/game/gui/main_menu/ingameMenu.ws::CR4IngameMenu.OnPresetApplied,OPT-01 XP-07,option-changed flags per group (OPT-01 ports them as wrappers; also DIFF-04 and the gameplay and QoL groups)
+scripts/game/gui/main_menu/ingameMenu.ws::CR4IngameMenu.OnOptionValueChanged,OPT-01 XP-07,option-changed flags per group (OPT-01 ports them as wrappers; also DIFF-04 and the gameplay and QoL groups)
+scripts/game/gui/main_menu/ingameMenu.ws::CR4IngameMenu.gmUserSettings,OPT-01 XP-07,re-reads the changed groups; XP: the quest levels
+scripts/game/gui/main_menu/ingameMenu.ws::CR4IngameMenu.<members>,OPT-01 XP-07,option-changed flags per group (OPT-01 ports them as wrappers; also DIFF-04 and the gameplay and QoL groups); also 5.x-era menu fields
+scripts/game/gameplay/interactive/monsterNestEntity.ws::CMonsterNestEntity.AddExp,XP-06,"25 experience per nest, once"
+scripts/game/gameplay/interactive/monsterNestEntity.ws::CMonsterNestEntity.AddBonusExp,XP-06,25 bonus experience for the nest boss
+scripts/game/scenes/choiceActions.ws::CPayFactBasedStorySceneChoiceAction.PerformAction,XP-06,5 experience for a bribe (1.32: a tenth of the money)
+scripts/game/scenes/choiceActions.ws::CPayStorySceneChoiceAction.PerformAction,XP-06,5 experience for a payment choice (1.32: a tenth of the money)
+scripts/game/scenes/choiceActions.ws::CAxiiStorySceneChoiceAction.PerformAction,XP-06,5 experience for an Axii choice (1.32: a tenth of the money)
+scripts/game/geralt_templates.ws::fb1,XP-10,debug level reset
+scripts/game/geralt_templates.ws::fb2,XP-10,debug level reset
+scripts/game/geralt_templates.ws::fb3_internal,XP-10,debug level reset
+scripts/game/geralt_templates.ws::resetLevels,XP-10,debug level reset
+scripts/game/geralt_templates.ws::resetLevels_internal,XP-10,debug level reset
+scripts/game/geralt_templates.ws::cleanupInv,XP-10,debug inventory clear
+scripts/game/quests/quest_function.ws::SetGeraltLevel,XP-10,quest debug function: level reset
+scripts/game/temp.ws::addAllSkills,XP-10,debug: level reset before adding skills
+scripts/debug/console_debug.ws::resetme,XP-10,debug level reset
+localization/modGhostMode/br.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/br.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/br.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/br.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/br.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/br.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/br.csv::row:2110992452,XP-07,experience option label
+localization/modGhostMode/cz.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/cz.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/cz.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/cz.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/cz.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/cz.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/cz.csv::row:2110992452,XP-07,experience option label
+localization/modGhostMode/de.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/de.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/de.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/de.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/de.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/de.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/de.csv::row:2110992452,XP-07,experience option label
+localization/modGhostMode/en.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/en.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/en.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/en.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/en.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/en.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/en.csv::row:2110992452,XP-07,experience option label
+localization/modGhostMode/es.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/es.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/es.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/es.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/es.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/es.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/es.csv::row:2110992452,XP-07,experience option label
+localization/modGhostMode/fr.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/fr.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/fr.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/fr.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/fr.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/fr.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/fr.csv::row:2110992452,XP-07,experience option label
+localization/modGhostMode/it.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/it.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/it.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/it.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/it.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/it.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/it.csv::row:2110992452,XP-07,experience option label
+localization/modGhostMode/pl.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/pl.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/pl.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/pl.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/pl.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/pl.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/pl.csv::row:2110992452,XP-07,experience option label
+localization/modGhostMode/ru.csv::row:2110992253,XP-07,experience option label
+localization/modGhostMode/ru.csv::row:2110992270,XP-07,experience option label
+localization/modGhostMode/ru.csv::row:2110992271,XP-07,experience option label
+localization/modGhostMode/ru.csv::row:2110992300,XP-07,experience option label
+localization/modGhostMode/ru.csv::row:2110992328,XP-07,experience option label
+localization/modGhostMode/ru.csv::row:2110992451,XP-07,experience option label
+localization/modGhostMode/ru.csv::row:2110992452,XP-07,experience option label

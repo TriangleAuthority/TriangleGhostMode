@@ -48,6 +48,19 @@ function GMOptionDefault(group : name, option : name) : string
 			case 'GMDamageMultiplier' :		return "0";
 			case 'GMBossHealthMultiplier' :		return "0";
 			case 'GMBossDamageMultiplier' :		return "0";
+			// DIFF-09: "Ciri's sections: difficulty", "Same as game" (legacy's: no cap)
+			case 'Virtual_GMCiriDifficulty' :	return "0";
+		}
+	}
+	else if(group == 'GMExpOptions')
+	{
+		switch(option)
+		{
+			// XP-07: legacy's "Default" preset, everything off and 0 (PX9)
+			case 'GMNoQuestLevels' :		return "false";
+			case 'GMUseXMLExp' :			return "false";
+			case 'GMQuestExpModifier' :		return "0";
+			case 'GMMonsterExpModifier' :	return "0";
 		}
 	}
 	else if(group == 'GMQOLOptions')
@@ -93,6 +106,11 @@ function GMOptionList(out groups : array<name>, out options : array<name>)
 	groups.PushBack('GMScalingOptions');	options.PushBack('GMDamageMultiplier');
 	groups.PushBack('GMScalingOptions');	options.PushBack('GMBossHealthMultiplier');
 	groups.PushBack('GMScalingOptions');	options.PushBack('GMBossDamageMultiplier');
+	groups.PushBack('GMScalingOptions');	options.PushBack('Virtual_GMCiriDifficulty');
+	groups.PushBack('GMExpOptions');	options.PushBack('GMNoQuestLevels');
+	groups.PushBack('GMExpOptions');	options.PushBack('GMUseXMLExp');
+	groups.PushBack('GMExpOptions');	options.PushBack('GMQuestExpModifier');
+	groups.PushBack('GMExpOptions');	options.PushBack('GMMonsterExpModifier');
 	groups.PushBack('GMQOLOptions');	options.PushBack('GMLowStaminaSFX');
 	groups.PushBack('GMQOLOptions');	options.PushBack('GMLowStaminaSFXVolume');
 	groups.PushBack('GMQOLOptions');	options.PushBack('GMLowStaminaSFXDynamicVolume');
@@ -159,7 +177,7 @@ function OnSpawned(spawnData : SEntitySpawnData)
 // ---- reacting to changes in the options menu (legacy: CR4IngameMenu.gmUserSettings) ----
 // A changed option is noted when its value changes and applied when the menu saves the settings:
 // quality-of-life options restart the low-stamina sound, scaling options (DIFF-04, GMIsScalingOption in
-// difficulty/scaling.ws) re-level the NPCs near Geralt.
+// difficulty/scaling.ws) re-level the NPCs near Geralt, "Disable quest levels" (XP-07) clears or reloads the quest levels.
 
 // The quality-of-life group's options (legacy gmIsQoLOption; GMSignInstantCast is not ported yet).
 function GMIsQoLOption(option : name) : bool
@@ -193,6 +211,25 @@ var gmQoLOptionChanged : bool;
 @addField(CR4IngameMenu)
 var gmScalingOptionChanged : bool;
 
+@addField(CR4IngameMenu)
+var gmCiriDifficultyChanged : bool;
+
+// XP-07: "Disable quest levels" (legacy's gmHasChangedQuestLevelsOption).
+@addField(CR4IngameMenu)
+var gmQuestLevelsOptionChanged : bool;
+
+// XP-07: the quest levels cleared or reloaded for the new value of "Disable quest levels" (xp/expOptions.ws).
+function GMOnQuestLevelsOptionChanged()
+{
+	theGame.GMReloadQuestLevels();
+}
+
+// DIFF-09: "Ciri's sections: difficulty" (its virtual option and the variable its entries set).
+function GMIsCiriDifficultyOption(option : name) : bool
+{
+	return option == 'Virtual_GMCiriDifficulty' || option == 'GMCiriDifficulty';
+}
+
 @wrapMethod(CR4IngameMenu)
 function OnOptionValueChanged(groupId : int, optionName : name, optionValue : string)
 {
@@ -200,16 +237,23 @@ function OnOptionValueChanged(groupId : int, optionName : name, optionValue : st
 		gmQoLOptionChanged = true;
 	if(GMIsScalingOption(optionName))
 		gmScalingOptionChanged = true;
+	if(GMIsCiriDifficultyOption(optionName))
+		gmCiriDifficultyChanged = true;
+	if(optionName == 'GMNoQuestLevels')
+		gmQuestLevelsOptionChanged = true;
 	return wrappedMethod(groupId, optionName, optionValue);
 }
 
 // A preset of the scaling group (DIFF-04: "Recommended", "Hardcore", "Off") sets several scaling options at
-// once: it re-levels like an option change (legacy's OnPresetApplied).
+// once: it re-levels like an option change (legacy's OnPresetApplied). The experience group's "Default" (XP-07) sets
+// "Disable quest levels": the quest levels are reloaded like an option change.
 @wrapMethod(CR4IngameMenu)
 function OnPresetApplied(groupId : name, targetPresetIndex : int)
 {
 	if(groupId == 'GMScalingOptions')
 		gmScalingOptionChanged = true;
+	if(groupId == 'GMExpOptions')
+		gmQuestLevelsOptionChanged = true;
 	return wrappedMethod(groupId, targetPresetIndex);
 }
 
@@ -221,10 +265,21 @@ function SaveChangedSettings()
 		gmQoLOptionChanged = false;
 		GMOnQoLOptionsChanged();
 	}
+	if(gmCiriDifficultyChanged)
+	{
+		// DIFF-09: while Ciri plays, her sections' new mode at once and a re-level (difficulty/ciri.ws)
+		gmCiriDifficultyChanged = false;
+		GMOnCiriDifficultyChanged();
+	}
 	if(gmScalingOptionChanged)
 	{
 		gmScalingOptionChanged = false;
 		GMOnScalingOptionsChanged();
+	}
+	if(gmQuestLevelsOptionChanged)
+	{
+		gmQuestLevelsOptionChanged = false;
+		GMOnQuestLevelsOptionChanged();
 	}
 	wrappedMethod();
 }
