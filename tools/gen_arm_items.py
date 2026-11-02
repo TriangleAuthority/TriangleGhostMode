@@ -298,7 +298,7 @@ def generate(folder, regular=None):
         if piece:
             new = add_dne(mtags, ltags, new)
         if piece or SWORD_CATEGORY.search(ventry):
-            new = item_layer.merge_tags(folder, name, mtags, ltags, vtags, new)  # ITEM's tags (item_layer.py)
+            new = item_layer.merge_tags(folder, name, mtags, ltags, vtags, new, item_layer.WHOLE)  # ITEM's tags (item_layer.py; ECON's with apply_item)
         minor = [t for t in ltags if t.endswith("SetMinor")]
         if minor:
             ctx["minor"][name] = minor[0]
@@ -319,14 +319,14 @@ def generate(folder, regular=None):
         if piece:
             entry = carry_display(name, folder, mentry, lentry, entry, ventry, ctx, regular, changes)
             if changes:
-                entry, _ = item_layer.merge_attrs(folder, name, mentry, lentry, entry)  # ITEM's attributes
+                entry, _ = item_layer.merge_attrs(folder, name, mentry, lentry, entry, item_layer.WHOLE)  # ITEM's attributes
         if not changes or name in KM_STARTING:
             continue
         entry = re.sub(r'^<item\b', '<item on_conflict="replace"', entry)
         if SWORD_CATEGORY.search(ventry):
             ctx["swords"][name] = entry  # written by gen_swd_items.py, with SWD's changes merged in
             continue
-        entry, craft = item_layer.apply_item(folder, name, mentry, lentry, entry)  # CRAFT's fields (item_layer.py)
+        entry, craft = item_layer.apply_item(folder, name, mentry, lentry, entry)  # CRAFT's and ECON's fields (item_layer.py)
         blocks.append((vpath, name, entry))
         report.append(f"{folder}: {name}: {'; '.join(changes + craft)}")
     ma, la, va = abilities("master", folder), abilities("legacy-GM", folder), abilities("vanilla-5.x", folder)
@@ -386,9 +386,27 @@ def dlc_entries(worktree, folder):
             name = re.search(r'\bname\s*=\s*"([^"]+)"', head)
             if name:
                 its[name.group(1)] = text[start:end]
+                if re.search(r'\bon_conflict\s*=\s*"extend"', head):  # ECON's short entries (gen_econ.py)
+                    its[name.group(1)] = extend_over_5x(folder, name.group(1), text[start:end])
         for m in ABILITY.finditer(blank_comments(text)):
             abls[m.group(1)] = nodes(text[m.start(2):m.end(2)])
     return its, abls
+
+
+_V5 = {}
+
+
+def extend_over_5x(folder, name, stub):
+    """An `extend` item entry as the game reads it: over 5.x's entry; a Hearts of Stone item comes out
+    empty (verified, ECON slice E1); no 5.x entry: the stub itself."""
+    if folder not in _V5:
+        _V5[folder] = items("vanilla-5.x", folder)
+    v = _V5[folder].get(name)
+    if not v:
+        return stub
+    if "/dlc/ep1/" in v[0]:
+        return item_layer.empty_item(name)
+    return item_layer.resolve_extend(stub, v[1])
 
 
 def verify(worktree):

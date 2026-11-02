@@ -569,6 +569,7 @@ exec function gmtest_panel()
 	GMTest_ai19_after();
 	GMTest_ai20_after();
 	GMTest_xp04_who_after();	// XP-04 (XP audit F1): who earns a kill's experience: Geralt's kill, allies' and a guard's near him, an ally's far away
+	GMTest_econ_e4_give();	// ECON-10 (slice E4): rewards given through GiveReward and the crowns gained (Emhyr's payment, the sq108 griffin, the loan, races, a fistfight, Hearts of Stone's purse, Contract: The White Lady after a haggled deal), put back; here, not in gmtest_regress()'s frame, where it made AI-18's stone check fail
 	GMTest_diff04_after();	// last: DIFF-04's mode and option changes on the bandit GMTest_diff04_spawn() left (a mode change rebuilds every NPC's stats)
 }
 
@@ -2213,6 +2214,12 @@ exec function gmtest_regress()
 	GMTest_xp07();	// XP-07: the experience options' labels, defaults and hooks (options set in memory and set back)
 	GMTest_xp04_who_spawn(false);	// XP-04 (XP audit F1): drowners, a renegade and a guard for GMTest_xp04_who_after() in gmtest_panel()
 	GMTest_diff04_spawn();	// DIFF-04: a bandit for GMTest_diff04_after() in gmtest_panel() (mode and option changes after a load)
+	GMTest_econ_e1();	// ECON-05 to ECON-08 (slice E1): buy, sale and fee prices and funds at eight spawned merchants (six types, three regions) against the measured formula and legacy's price table
+	GMTest_econdata();	// ECON-01 to ECON-04 (slice E2): every regular ECON item's price, category, name key and price tags as the game reads them
+	GMTest_econ_e2();	// ECON-01 (slice E2): what spawned merchants ask and pay for reference items at legacy's list prices; CRAFT-08 (PE13): Protofleder Mutagen at the dismantling station
+	GMTest_econ_e3();	// ECON-08, ECON-09 (slice E3): merchants' money at spawn, the 3-day restock and the reset below 100 at eight spawned merchants; the haggling bar (double) and accept limits (1.2 to 1.7, always-successful 2) over many openings of the popup
+	GMTest_econrewards();	// ECON-10, DE1, PE9 (slice E4): every ECON reward's gold as GetReward reads it (the rewards given through GiveReward run in gmtest_panel(), GMTest_econ_e4_give)
+	GMTest_econ_e5();	// ECON-01, ECON-03 DE2 (slice E5): what a spawned Novigrad armorer asks and pays for a Netflix piece, a Netflix schematic and the Fire Horse saddle at DE2's list prices; ECON-11, ECON-12: the four patched scene and quest files load
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

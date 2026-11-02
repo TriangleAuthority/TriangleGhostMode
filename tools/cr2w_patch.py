@@ -10,6 +10,11 @@ path that crosses an array of structs applies to every entry, e.g. W3CraftsmanCo
     CLASS.PATH+=VALUE     append VALUE to the array
     CLASS.PATH:TYPE+=VALUE  add the property (of TYPE, e.g. Uint32) to chunks that do not have it
 
+A PATH starting with @ names a parameter of the script call the chunk makes instead of a property: a scene's
+script block (CStorySceneScript) stores its function's arguments as a second property list after its
+properties (e.g. CStorySceneScript.@rewardName=mh308_final:mh307_02_minion_killed_completed, ECON-12).
+Values: integers, floats, booleans, CNames, enums and Strings (one byte per character where Latin-1).
+
 A struct entry is written FIELD=V,FIELD=V (e.g. containers+=name=loot_x,chance=-1.0): removing matches the
 entries having those fields with those values; appending writes them in that order, each field with the
 type an existing entry of the array gives it, or FIELD:TYPE=V. Values with a decimal point are floats.
@@ -26,6 +31,7 @@ embedded-file tables are refused (none of the entity files edited so far has the
 
     python tools/cr2w_patch.py FILE EDIT [...] [--check]
     python tools/cr2w_patch.py --roundtrip FILE [...]   rebuild each file unchanged and compare
+    python tools/cr2w_patch.py --selftest               the String and @parameter edits on ECON-12's scenes
 
 Prints each change; fails if an edit matches nothing. --check changes nothing and fails if an edit would
 still change something (the file is not patched yet).
@@ -302,7 +308,46 @@ def decode(fo, t, v):
         return bool(v[0])
     if (t == "CName" or t.startswith("E")) and len(v) == 2:
         return fo.name(struct.unpack("<H", v)[0])
+    if t == "String":
+        try:
+            s, n = decode_string(v)
+        except (IndexError, UnicodeDecodeError):
+            return None
+        return s if n == len(v) else None
     return None
+
+
+def decode_string(v, pos=0):
+    """A CR2W String at v[pos:]: (text, end). First byte: 0x80 one byte per character (else UTF-16), 0x40 a
+    longer length follows, the low 6 bits the length's start; then 7 bits per byte while 0x80 is set."""
+    b = v[pos]
+    n, shift, p = b & 0x3F, 6, pos + 1
+    if b & 0x40:
+        while True:
+            c = v[p]
+            p += 1
+            n |= (c & 0x7F) << shift
+            shift += 7
+            if not c & 0x80:
+                break
+    if b & 0x80:
+        return v[p:p + n].decode("latin-1"), p + n
+    return v[p:p + 2 * n].decode("utf-16le"), p + 2 * n
+
+
+def encode_string(s):
+    """A CR2W String: one byte per character where the text is Latin-1, else UTF-16 (decode_string's layout)."""
+    try:
+        data, flag, n = s.encode("latin-1"), 0x80, len(s)
+    except UnicodeEncodeError:
+        data, flag = s.encode("utf-16le"), 0
+        n = len(data) // 2
+    out = bytearray([flag | (n & 0x3F) | (0x40 if n > 0x3F else 0)])
+    n >>= 6
+    while n:
+        out.append((n & 0x7F) | (0x80 if n > 0x7F else 0))
+        n >>= 7
+    return bytes(out) + data
 
 
 def encode(fo, t, s):
@@ -312,6 +357,8 @@ def encode(fo, t, s):
         return b"\1" if s.lower() in ("1", "true") else b"\0"
     if t == "CName" or t.startswith("E"):
         return struct.pack("<H", fo.name_index(s))
+    if t == "String":
+        return encode_string(s)
     raise ValueError("cannot write a %s" % t)
 
 
@@ -376,7 +423,7 @@ class Op:
         self.cls, nth, path, self.type = m.groups()
         self.nth = int(nth) if nth is not None else None
         self.path = []
-        for comp in re.findall(r"(\w+)(?:\[([^\]]*)\])?\.?", path):
+        for comp in re.findall(r"(@?\w+)(?:\[([^\]]*)\])?\.?", path):
             self.path.append((comp[0], parse_spec(comp[1]) if comp[1] else None))
         if "".join(c[0] for c in self.path) != re.sub(r"\[[^\]]*\]|\.", "", path):
             raise ValueError("bad path: %s" % text)
@@ -399,6 +446,20 @@ def edit_list(fo, pl, path, op, label, out):
     changed = False
     props = pl[1]
     found = False
+    if path[0][0].startswith("@"):
+        # a parameter of the script call a chunk makes (CStorySceneScript): the second property list, after
+        # the chunk's properties (`pl`'s tail)
+        tail = pl[3]
+        try:
+            tpl, end = parse_list(tail, 0, len(tail))
+        except ValueError:
+            return False
+        if end != len(tail):
+            return False
+        if edit_list(fo, tpl, [(path[0][0][1:], path[0][1])] + path[1:], op, label + " params", out):
+            pl[3] = build_list(tpl)
+            return True
+        return False
     for entry in list(props):
         ni, ti, v = entry
         pname, select = path[0]
@@ -518,13 +579,57 @@ def roundtrip(data):
     return out == data
 
 
+# ECON-12 (econ.md): the Apiarian Phantom's two scenes name the White Lady's reward; legacy's fix
+SELFTEST_FILES = ["modGhostMode/files/quests/generic_quests/novigrad/quest_files/mh307_minion/scenes/mh307_01_halflings.w2scene",
+                  "modGhostMode/files/quests/generic_quests/novigrad/quest_files/mh307_minion/scenes/mh307_05_halflings_closing.w2scene"]
+SELFTEST_EDITS = ["CStorySceneScript.comment=mh308_final:mh307_02_minion_killed_completed",
+                  "CStorySceneScript.@rewardName=mh308_final:mh307_02_minion_killed_completed"]
+
+
+def selftest():
+    """The String encoding round trip; then ECON-12's edits on vanilla-5.x's two mh307 scenes: the edited
+    script blocks must come out byte for byte as legacy's (legacy-GM, the same edit made in W3Edit), every
+    other chunk 5.x's, CRCs valid, and the file must decode; a second run must change nothing."""
+    import subprocess
+    repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    bad = 0
+    for n in (0, 1, 11, 32, 63, 64, 200, 9000):
+        for s in ("a" * n, "Ł" * n):
+            enc = encode_string(s)
+            got, end = decode_string(enc)
+            if got != s or end != len(enc):
+                print("FAIL string round trip, length %d" % n)
+                bad += 1
+    for path in SELFTEST_FILES:
+        show = lambda ref: subprocess.run(["git", "-C", repo, "show", "%s:%s" % (ref, path)], capture_output=True, check=True).stdout
+        v5, leg = show("vanilla-5.x"), show("legacy-GM")
+        ops = [Op(e) for e in SELFTEST_EDITS]
+        out, changes, hit = apply(v5, ops)
+        a, b, lg = File(v5, readonly=True), File(out, readonly=True), File(leg, readonly=True)
+        scripts = [i for i, c in enumerate(b.classes) if c == "CStorySceneScript" and b.chunks[i] != a.chunks[i]]
+        same_legacy = all(b.chunks[i] == lg.chunks[i] for i in scripts)
+        others = all(b.chunks[i] == a.chunks[i] for i in range(len(b.chunks)) if i not in scripts)
+        again, more, _ = apply(out, ops)
+        ok = len(hit) == len(ops) and scripts and same_legacy and others and check_crcs(out) and again == out and not more
+        cr2w_dump.dump_file(out)
+        print("%s %s: %d script blocks edited (%s), as legacy's: %s, other chunks 5.x's: %s, names added %s" % (
+            "ok  " if ok else "FAIL", os.path.basename(path), len(scripts), ", ".join(map(str, scripts)),
+            same_legacy, others, [c for c in changes if "name added" in c]))
+        bad += not ok
+    print("selftest:", "FAILED" if bad else "passed")
+    return bad
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("file", nargs="?")
     ap.add_argument("edits", nargs="*", help="CLASS.PATH=OLD:NEW, CLASS.PATH-=VALUE, CLASS.PATH+=VALUE")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--roundtrip", nargs="+", metavar="FILE")
+    ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
+    if a.selftest:
+        sys.exit(1 if selftest() else 0)
     if a.roundtrip:
         bad = 0
         for p in a.roundtrip:

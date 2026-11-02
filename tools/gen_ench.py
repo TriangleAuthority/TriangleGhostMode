@@ -23,7 +23,7 @@ ability legacy defines in the three files (runewords and glyphwords, runes and g
 runes and glyphs; `items` and `items_plus`) as the port leaves it (Ghost Mode's `gm_ench.xml` entry, else
 5.x's) against legacy's, attribute by attribute; the enchanter's four binary files (each must equal
 5.x's file with exactly the price edits applied, `cr2w_patch.py`, with valid CRCs); and
-`economy_tagmodifiers.csv` (5.x's rows but legacy's `mod_enchantment` and `mod_removeenchantment`).
+`economy_tagmodifiers.csv` (legacy's rows: `mod_enchantment` and `mod_removeenchantment` ENCH-02's, the others ECON's since its slice E1).
 Fails on any difference.
 """
 import argparse, os, re, subprocess, sys
@@ -62,7 +62,7 @@ SPEC = [
 ]
 
 # Items: (source file pattern, feature, item, change), taken from vanilla-5.x whole with the change.
-# Only what the feature changes and CRAFT's fields (item_layer.py); prices and weights stay 5.x's (ECON, WGT).
+# Only what the feature changes and CRAFT's and ECON's fields (item_layer.py: since ECON's slice E2 legacy's prices and price tags); weights stay 5.x's (WGT).
 ITEMS = [
     (EP1_UPGRADES, "ENCH-16: Pierog and Tvarog are not relics (legacy removed Relic _Stats)", "Rune pierog", ("drop", "<a>Relic _Stats</a>")),
     (EP1_UPGRADES, None, "Rune tvarog", ("drop", "<a>Relic _Stats</a>")),
@@ -199,9 +199,10 @@ def verify(worktree):
     port = rows(open(os.path.join(worktree, CSV), encoding="utf-8-sig", newline="").read())
     vanilla = rows(git("show", "vanilla-5.x:" + CSV))
     legacy = {l.split(";")[0]: l for l in rows(git("show", "legacy-GM:" + CSV))}
-    expected = [legacy[l.split(";")[0]] if l.split(";")[0] in CSV_ROWS else l for l in vanilla]
-    ok = port == expected
-    print("%s %s: 5.x's %d rows, legacy's %s" % ("ok  " if ok else "DIFF", os.path.basename(CSV), len(vanilla), ", ".join(CSV_ROWS)))
+    # since ECON's slice E1 (PE5) every row is legacy's: ENCH-02's two and ECON's others
+    expected = [legacy.get(l.split(";")[0], l) for l in vanilla]
+    ok = port == expected and all(r in legacy for r in CSV_ROWS)
+    print("%s %s: %d rows, legacy's (%s ENCH-02's, the others ECON's)" % ("ok  " if ok else "DIFF", os.path.basename(CSV), len(vanilla), ", ".join(CSV_ROWS)))
     if not ok:
         for a, b in zip(port, expected):
             if a != b:

@@ -205,6 +205,7 @@ def swd10_entries(folder):
             entry = entry[:m.start(1)] + str(slots) + entry[m.end(1):]
             if arm_new.MINOR.match(name):
                 entry = arm_new.minor_tags(entry)
+            entry = item_layer.apply_de2(name, entry)  # ECON's DE2 price
             out[name] = (path, "item", re.sub(r'^<item\b', '<item on_conflict="replace"', entry), None)
     return out
 
@@ -324,7 +325,7 @@ def merge_item(mentry, lentry, entry, notes, folder=None, name=None, ventry=None
     vt = arm.split_tags(arm.blank_comments(entry))
     ventry = ventry or entry
     new = arm.add_dne(mt, lt, arm.merge(mt, lt, vt, is_swd_tag))
-    new = item_layer.merge_tags(folder, name, mt, lt, arm.split_tags(arm.blank_comments(ventry)), new)  # ITEM's tags
+    new = item_layer.merge_tags(folder, name, mt, lt, arm.split_tags(arm.blank_comments(ventry)), new, item_layer.WHOLE)  # ITEM's tags (ECON's with apply_item)
     if new != vt:
         tm = arm.TAGS.search(arm.blank_comments(entry))
         if tm:
@@ -384,7 +385,7 @@ def generate(folder, armsw, ported=PORTED):
                 continue
             done.add(name)
             entry = re.sub(r'^<item\b', '<item on_conflict="replace"', entry)
-            entry, craft = item_layer.apply_item(folder, name, mi[name], li[name], entry)  # CRAFT's fields
+            entry, craft = item_layer.apply_item(folder, name, mi[name], li[name], entry)  # CRAFT's and ECON's fields
             changes = changes + craft
             iblocks.append((path, name, entry))
             report.append(f"{folder}: item {name}: {'; '.join(changes) or 'ARM set tags only'}" + (f" ({'; '.join(notes)})" if notes else ""))
@@ -395,7 +396,7 @@ def generate(folder, armsw, ported=PORTED):
                 cache["all"] = (arm.items("master", folder), arm.items("legacy-GM", folder))
             ma, la = cache["all"]
             if name in ma and name in la:
-                entry, _ = item_layer.apply_item(folder, name, ma[name][1], la[name][1], entry)  # CRAFT's fields
+                entry, _ = item_layer.apply_item(folder, name, ma[name][1], la[name][1], entry)  # CRAFT's and ECON's fields
             iblocks.append((vpath, name, entry))
             report.append(f"{folder}: item {name}: ARM set tags only (not an SWD unit)")
     if "SWD-10" in ported:

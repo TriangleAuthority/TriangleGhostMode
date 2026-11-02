@@ -4672,8 +4672,8 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_armor.xml -->
 	<item on_conflict="replace" name="Beauclair Casual Suit 01" category="armor" stackable="1" enhancement_slots="0" equip_template="t2_10_mg__bob" ability_mode="OnMount" grid_size = "2"
-			icon_path="icons/inventory/quests/Beauclair-Casual-Suit-01_64x128.png" localisation_key_name = "item_name_beauclair_suit_01" localisation_key_description = "item_desc_beauclair_suit_01" price="70">
-				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance
+			icon_path="icons/inventory/quests/Beauclair-Casual-Suit-01_64x128.png" localisation_key_name = "item_name_beauclair_suit_01" localisation_key_description = "item_desc_beauclair_suit_01" price="75">
+				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance, mod_armor
 		</tags>
 				<bound_items>
 				</bound_items>
@@ -4687,8 +4687,8 @@
 					</variants>
 		</item>
 	<item on_conflict="replace" name="Beauclair Casual Suit with medal" category="armor" stackable="1" enhancement_slots="0" equip_template="t2_10_mg_medal__bob" ability_mode="OnMount" grid_size = "2"
-			icon_path="icons/inventory/quests/Beauclair-Casual-Suit-with-medal_64x128.png" localisation_key_name = "item_name_beauclair_suit_01" localisation_key_description = "item_desc_beauclair_suit_01" price="70">
-				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance
+			icon_path="icons/inventory/quests/Beauclair-Casual-Suit-with-medal_64x128.png" localisation_key_name = "item_name_beauclair_suit_01" localisation_key_description = "item_desc_beauclair_suit_01" price="75">
+				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance, mod_armor
 		</tags>
 				<bound_items>
 				</bound_items>
@@ -4702,8 +4702,8 @@
 					</variants>
 		</item>
 	<item on_conflict="replace" name="Beauclair Prison Shirt" category="armor" stackable="1" enhancement_slots="2" equip_template="t_01_mg__prison_outfit" ability_mode="OnMount" grid_size = "2"
-			icon_path="icons/inventory/quests/Beauclair-Prison-Shirt_64x64.png" localisation_key_name = "item_name_beauclair_prison_shirt" localisation_key_description = "item_desc_beauclair_prison_shirt" price="200">
-				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance
+			icon_path="icons/inventory/quests/Beauclair-Prison-Shirt_64x64.png" localisation_key_name = "item_name_beauclair_prison_shirt" localisation_key_description = "item_desc_beauclair_prison_shirt" price="10">
+				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance, mod_armor
 		</tags>
 				<bound_items>
 				</bound_items>
@@ -4716,7 +4716,7 @@
 	<item on_conflict="replace"
 					name							="Beauclair elegant suit"
 					category						="armor"
-					price							="114"
+					price							="75"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -4740,7 +4740,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl1 A Armor 1"
 					category						="armor"
-					price							="584"
+					price							="201"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="1"
@@ -4766,7 +4766,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl1 A Armor 2"
 					category						="armor"
-					price							="640"
+					price							="389"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="2"
@@ -4792,7 +4792,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl1 Armor 1"
 					category						="armor"
-					price							="600"
+					price							="195"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="1"
@@ -4818,7 +4818,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl1 Armor 2"
 					category						="armor"
-					price							="656"
+					price							="376"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="2"
@@ -4844,7 +4844,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl2 A Armor 1"
 					category						="armor"
-					price							="472"
+					price							="365"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="1"
@@ -4870,7 +4870,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl2 A Armor 2"
 					category						="armor"
-					price							="496"
+					price							="542"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="2"
@@ -4897,7 +4897,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl2 Armor 1"
 					category						="armor"
-					price							="312"
+					price							="356"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="1"
@@ -4923,7 +4923,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl2 Armor 2"
 					category						="armor"
-					price							="312"
+					price							="523"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="2"
@@ -4950,7 +4950,7 @@
 	<item on_conflict="replace"
 					name							="Knight Geralt A Armor 1"
 					category						="armor"
-					price							="712"
+					price							="456"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="1"
@@ -4990,7 +4990,7 @@
 	<item on_conflict="replace"
 					name							="Knight Geralt A Armor 2"
 					category						="armor"
-					price							="744"
+					price							="876"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="2"
@@ -5030,7 +5030,7 @@
 	<item on_conflict="replace"
 					name							="Knight Geralt Armor 1"
 					category						="armor"
-					price							="558"
+					price							="432"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="1"
@@ -5070,7 +5070,7 @@
 	<item on_conflict="replace"
 					name							="Knight Geralt Armor 2"
 					category						="armor"
-					price							="574"
+					price							="865"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="2"
@@ -5110,7 +5110,7 @@
 	<item on_conflict="replace"
 					name							="Toussaint Armor 2"
 					category						="armor"
-					price							="3088"
+					price							="915"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="2"
@@ -5150,7 +5150,7 @@
 	<item on_conflict="replace"
 				name							="q702_vampire_armor"
 				category						="armor"
-				price							="3234"
+				price							="1617"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="3"
@@ -5192,7 +5192,7 @@
 	<item on_conflict="replace"
 				name							="q704_vampire_armor"
 				category						="armor"
-				price							="3234"
+				price							="1617"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="3"
@@ -5234,7 +5234,7 @@
 	<item on_conflict="replace"
 				name							="sq701_geralt_armor"
 				category						="armor"
-				price							="704"
+				price							="1050"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="3"
@@ -5246,7 +5246,7 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/sq701_geralt_armor_64x128.png"
 			>
-				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>sq701_geralt_armor _Stats</a>
@@ -5274,7 +5274,7 @@
 	<item on_conflict="replace"
 				name							="sq701_ravix_armor"
 				category						="armor"
-				price							="704"
+				price							="1050"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="3"
@@ -5286,7 +5286,7 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/sq701_ravix_armor_64x128.png"
 			>
-				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>sq701_ravix_armor _Stats</a>
@@ -5316,7 +5316,7 @@
 	<item on_conflict="replace"
 					name							="Beauclair casual shoes 01"
 					category						="boots"
-					price							="24"
+					price							="30"
 					initial_durability				="75"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -5329,7 +5329,7 @@
 					localisation_key_description	="item_desc_beauclair_shoes"
 					icon_path						="icons/inventory/quests/Beauclair-casual-shoes-01_64x128.png"
 				>
-					<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance
+					<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance, mod_armor
 		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>Casual shoes _Stats</a>
@@ -5340,7 +5340,7 @@
 	<item on_conflict="replace"
 					name							="Beauclair elegant shoes"
 					category						="boots"
-					price							="40"
+					price							="30"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -5371,7 +5371,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl1 A Boots 1"
 					category						="boots"
-					price							="100"
+					price							="65"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -5395,7 +5395,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl1 A Boots 2"
 					category						="boots"
-					price							="72"
+					price							="150"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="1"
@@ -5419,7 +5419,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl1 Boots 1"
 					category						="boots"
-					price							="92"
+					price							="60"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -5443,7 +5443,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl1 Boots 2"
 					category						="boots"
-					price							="104"
+					price							="145"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="1"
@@ -5467,7 +5467,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl2 A Boots 1"
 					category						="boots"
-					price							="273"
+					price							="110"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -5491,7 +5491,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl2 A Boots 2"
 					category						="boots"
-					price							="277"
+					price							="223"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="1"
@@ -5515,7 +5515,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl2 Boots 1"
 					category						="boots"
-					price							="277"
+					price							="105"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -5539,7 +5539,7 @@
 	<item on_conflict="replace"
 					name							="Guard Lvl2 Boots 2"
 					category						="boots"
-					price							="289"
+					price							="218"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="1"
@@ -5563,7 +5563,7 @@
 	<item on_conflict="replace"
 					name							="Knight Geralt A Boots 1"
 					category						="boots"
-					price							="300"
+					price							="277"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -5588,7 +5588,7 @@
 	<item on_conflict="replace"
 					name							="Knight Geralt A Boots 2"
 					category						="boots"
-					price							="320"
+					price							="411"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="1"
@@ -5613,7 +5613,7 @@
 	<item on_conflict="replace"
 					name							="Knight Geralt Boots 1"
 					category						="boots"
-					price							="292"
+					price							="272"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="0"
@@ -5638,7 +5638,7 @@
 	<item on_conflict="replace"
 					name							="Knight Geralt Boots 2"
 					category						="boots"
-					price							="312"
+					price							="406"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="1"
@@ -5663,7 +5663,7 @@
 	<item on_conflict="replace"
 					name							="Toussaint Boots 2"
 					category						="boots"
-					price							="712"
+					price							="416"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="1"
@@ -5688,7 +5688,7 @@
 	<item on_conflict="replace"
 					name							="q702_vampire_boots"
 					category						="boots"
-					price							="404"
+					price							="555"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="1"
@@ -5714,7 +5714,7 @@
 	<item on_conflict="replace"
 					name							="q704_vampire_boots"
 					category						="boots"
-					price							="406"
+					price							="555"
 					initial_durability				="100"
 					max_durability					="100" 
 					enhancement_slots				="2"
@@ -5740,7 +5740,7 @@
 	<item on_conflict="replace"
 					name							="sq701_geralt_boots"
 					category						="boots"
-					price							="126"
+					price							="540"
 					initial_durability				="100"
 					max_durability					="100"
 					enhancement_slots				="1"
@@ -5752,7 +5752,7 @@
 					localisation_key_description	="item_category_heavy_armor_description"
 					icon_path						="icons/inventory/armors/knight_1_boots_1_64x128.png"
 				>
-					<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+					<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 					<base_abilities>				<a>Default armor _Stats</a>
 													<a>sq701_geralt_boots _Stats</a>
@@ -5767,7 +5767,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Armor 4"
 		category						="armor"
-		price							="4546"
+		price							="4370"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -5800,7 +5800,7 @@
 	<item on_conflict="replace"
 		name							="Toussaint Armor 3"
 		category						="armor"
-		price							="236"
+		price							="1723"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -5844,7 +5844,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl1 A Gloves 1"
 				category						="gloves"
-				price							="116"
+				price							="57"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -5875,7 +5875,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl1 A Gloves 2"
 				category						="gloves"
-				price							="120"
+				price							="92"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -5906,7 +5906,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl1 Gloves 1"
 				category						="gloves"
-				price							="100"
+				price							="55"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -5937,7 +5937,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl1 Gloves 2"
 				category						="gloves"
-				price							="144"
+				price							="90"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -5968,7 +5968,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl2 A Gloves 1"
 				category						="gloves"
-				price							="72"
+				price							="102"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -5999,7 +5999,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl2 A Gloves 2"
 				category						="gloves"
-				price							="76"
+				price							="161"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6030,7 +6030,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl2 Gloves 1"
 				category						="gloves"
-				price							="90"
+				price							="100"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6061,7 +6061,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl2 Gloves 2"
 				category						="gloves"
-				price							="94"
+				price							="159"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6092,7 +6092,7 @@
 	<item on_conflict="replace"
 				name							="Knight Geralt A Gloves 1"
 				category						="gloves"
-				price							="236"
+				price							="202"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6137,7 +6137,7 @@
 	<item on_conflict="replace"
 				name							="Knight Geralt A Gloves 2"
 				category						="gloves"
-				price							="468"
+				price							="307"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6182,7 +6182,7 @@
 	<item on_conflict="replace"
 				name							="Knight Geralt Gloves 1"
 				category						="gloves"
-				price							="134"
+				price							="200"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6227,7 +6227,7 @@
 	<item on_conflict="replace"
 				name							="Knight Geralt Gloves 2"
 				category						="gloves"
-				price							="152"
+				price							="305"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6272,7 +6272,7 @@
 	<item on_conflict="replace"
 				name							="Toussaint Gloves 2"
 				category						="gloves"
-				price							="838"
+				price							="310"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6316,7 +6316,7 @@
 	<item on_conflict="replace"
 				name							="q702_vampire_gloves"
 				category						="gloves"
-				price							="418"
+				price							="485"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6361,7 +6361,7 @@
 	<item on_conflict="replace"
 				name							="q704_vampire_gloves"
 				category						="gloves"
-				price							="418"
+				price							="485"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6406,7 +6406,7 @@
 	<item on_conflict="replace"
 				name							="q705_mandragora_gloves"
 				category						="gloves"
-				price							="88"
+				price							="20"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6430,7 +6430,7 @@
 	<item on_conflict="replace"
 				name							="sq701_geralt_gloves"
 				category						="gloves"
-				price							="144"
+				price							="300"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6442,7 +6442,7 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/knight_1_gloves_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>sq701_geralt_gloves _Stats</a>
@@ -6474,10 +6474,10 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_pants.xml -->
 	<item on_conflict="replace" name="Beauclair Casual Pants 01" category="pants" stackable="1" enhancement_slots="0" equip_template="l_06_mg__bob" ability_mode="OnMount" grid_size = "2"
-				icon_path="icons/inventory/quests/Beauclair-Casual-Pants-01_64x128.png" localisation_key_name = "item_name_beauclair_pants" localisation_key_description = "item_desc_beauclair_pants" price = "120"
+				icon_path="icons/inventory/quests/Beauclair-Casual-Pants-01_64x128.png" localisation_key_name = "item_name_beauclair_pants" localisation_key_description = "item_desc_beauclair_pants" price = "40"
 				initial_durability="100"
 				max_durability="100">
-				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance
+				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance, mod_armor
 		</tags>
 				<base_abilities>
 					<a>Casual pants _Stats</a>
@@ -6493,10 +6493,10 @@
 						</variants>				
 			</item>
 	<item on_conflict="replace" name="Beauclair Prison Pants" category="pants" stackable="1" enhancement_slots="0" equip_template="l_01_mg__prison_outfit" ability_mode="OnMount" grid_size = "2"
-				icon_path="icons/inventory/quests/Beauclair-Prison-Pants_64x128.png" localisation_key_name = "item_name_beauclair_prison_pants" localisation_key_description = "item_desc_beauclair_prison_pants" price = "48"
+				icon_path="icons/inventory/quests/Beauclair-Prison-Pants_64x128.png" localisation_key_name = "item_name_beauclair_prison_pants" localisation_key_description = "item_desc_beauclair_prison_pants" price = "10"
 				initial_durability="100"
 				max_durability="100">
-				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance
+				<tags>							Armor, Quest, LightArmor, gm_NoSetBonuses, DoNotEnhance, mod_armor
 		</tags>
 				<base_abilities>
 					<a>Casual pants _Stats</a>
@@ -6508,7 +6508,7 @@
 	<item on_conflict="replace"
 		name							="Beauclair elegant pants"
 		category						="pants"
-		price							="80"
+		price							="40"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -6544,7 +6544,7 @@
 	<item on_conflict="replace" 
 				name							="Guard Lvl1 A Pants 1"
 				category						="pants"
-				price							="168"
+				price							="77"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6578,7 +6578,7 @@
 	<item on_conflict="replace" 
 				name							="Guard Lvl1 A Pants 2"
 				category						="pants"
-				price							="168"
+				price							="172"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6612,7 +6612,7 @@
 	<item on_conflict="replace" 
 				name							="Guard Lvl1 Pants 1"
 				category						="pants"
-				price							="152"
+				price							="75"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6646,7 +6646,7 @@
 	<item on_conflict="replace" 
 				name							="Guard Lvl1 Pants 2"
 				category						="pants"
-				price							="152"
+				price							="170"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6680,7 +6680,7 @@
 	<item on_conflict="replace" 
 				name							="Guard Lvl2 A Pants 1"
 				category						="pants"
-				price							="366"
+				price							="135"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6715,7 +6715,7 @@
 	<item on_conflict="replace" 
 				name							="Guard Lvl2 A Pants 2"
 				category						="pants"
-				price							="366"
+				price							="265"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6750,7 +6750,7 @@
 	<item on_conflict="replace" 
 				name							="Guard Lvl2 Pants 1"
 				category						="pants"
-				price							="210"
+				price							="130"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6785,7 +6785,7 @@
 	<item on_conflict="replace" 
 				name							="Guard Lvl2 Pants 2"
 				category						="pants"
-				price							="210"
+				price							="260"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6820,7 +6820,7 @@
 	<item on_conflict="replace" 
 				name							="Knight Geralt A Pants 1"
 				category						="pants"
-				price							="836"
+				price							="200"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6854,7 +6854,7 @@
 	<item on_conflict="replace" 
 				name							="Knight Geralt A Pants 2"
 				category						="pants"
-				price							="884"
+				price							="330"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6889,7 +6889,7 @@
 	<item on_conflict="replace" 
 				name							="Knight Geralt Pants 1"
 				category						="pants"
-				price							="516"
+				price							="195"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -6923,7 +6923,7 @@
 	<item on_conflict="replace" 
 				name							="Knight Geralt Pants 2"
 				category						="pants"
-				price							="564"
+				price							="325"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6958,7 +6958,7 @@
 	<item on_conflict="replace" 
 				name							="Toussaint Pants 2"
 				category						="pants"
-				price							="2172"
+				price							="350"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -6993,7 +6993,7 @@
 	<item on_conflict="replace" 
 				name							="q702_vampire_pants"
 				category						="pants"
-				price							="1160"
+				price							="580"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -7028,7 +7028,7 @@
 	<item on_conflict="replace" 
 				name							="q704_vampire_pants"
 				category						="pants"
-				price							="1192"
+				price							="580"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -7063,7 +7063,7 @@
 	<item on_conflict="replace" 
 				name							="sq701_geralt_pants"
 				category						="pants"
-				price							="564"
+				price							="500"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -7075,7 +7075,7 @@
 				localisation_key_description	="item_category_heavy_armor_description"
 				icon_path						="icons/inventory/armors/knight_1_pants_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor
+				<tags>							Autogen, AutogenForceLevel, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>sq701_geralt_pants _Stats</a>
@@ -7100,7 +7100,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Armor"
 				category						="armor"
-				price							="336"
+				price							="615"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="2"
@@ -7129,7 +7129,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Armor 1"
 				category						="armor"
-				price							="336"
+				price							="865"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="2"
@@ -7157,7 +7157,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Armor 2"
 				category						="armor"
-				price							="640"
+				price							="1875"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="3"
@@ -7185,7 +7185,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Armor 3"
 				category						="armor"
-				price							="740"
+				price							="3193"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="3"
@@ -7213,7 +7213,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Boots 1"
 				category						="boots"
-				price							="201"
+				price							="291"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -7238,7 +7238,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Boots 2"
 				category						="boots"
-				price							="201"
+				price							="628"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -7263,7 +7263,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Boots 3"
 				category						="boots"
-				price							="216"
+				price							="993"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7288,7 +7288,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Boots 4"
 				category						="boots"
-				price							="216"
+				price							="1660"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7313,7 +7313,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Gloves 1"
 				category						="gloves"
-				price							="186"
+				price							="226"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -7345,7 +7345,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Gloves 2"
 				category						="gloves"
-				price							="186"
+				price							="570"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -7377,7 +7377,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Gloves 3"
 				category						="gloves"
-				price							="186"
+				price							="934"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7409,7 +7409,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Gloves 4"
 				category						="gloves"
-				price							="186"
+				price							="1338"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7441,7 +7441,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Pants 1"
 				category						="pants"
-				price							="236"
+				price							="273"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7475,7 +7475,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Pants 2"
 				category						="pants"
-				price							="236"
+				price							="610"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7509,7 +7509,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Pants 3"
 				category						="pants"
-				price							="283"
+				price							="975"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -7543,7 +7543,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf Pants 4"
 				category						="pants"
-				price							="283"
+				price							="1642"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -7577,7 +7577,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Armor"
 				category						="armor"
-				price							="336"
+				price							="615"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="2"
@@ -7606,7 +7606,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Armor 1"
 				category						="armor"
-				price							="336"
+				price							="865"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="2"
@@ -7634,7 +7634,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Armor 2"
 				category						="armor"
-				price							="640"
+				price							="1875"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="3"
@@ -7662,7 +7662,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Armor 3"
 				category						="armor"
-				price							="740"
+				price							="3193"
 				initial_durability				="100"
 				max_durability					="100" 
 				enhancement_slots				="3"
@@ -7690,7 +7690,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Boots 1"
 				category						="boots"
-				price							="201"
+				price							="291"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -7715,7 +7715,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Boots 2"
 				category						="boots"
-				price							="201"
+				price							="628"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -7740,7 +7740,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Boots 3"
 				category						="boots"
-				price							="216"
+				price							="993"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7765,7 +7765,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Boots 4"
 				category						="boots"
-				price							="216"
+				price							="1660"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7790,7 +7790,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Gloves 1"
 				category						="gloves"
-				price							="186"
+				price							="226"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -7822,7 +7822,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Gloves 2"
 				category						="gloves"
-				price							="186"
+				price							="570"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -7854,7 +7854,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Gloves 3"
 				category						="gloves"
-				price							="186"
+				price							="934"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7886,7 +7886,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Gloves 4"
 				category						="gloves"
-				price							="186"
+				price							="1338"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7918,7 +7918,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Pants 1"
 				category						="pants"
-				price							="236"
+				price							="273"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7952,7 +7952,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Pants 2"
 				category						="pants"
-				price							="236"
+				price							="610"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -7986,7 +7986,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Pants 3"
 				category						="pants"
-				price							="283"
+				price							="975"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -8020,7 +8020,7 @@
 	<item on_conflict="replace"
 				name							="Wolf Pants 4"
 				category						="pants"
-				price							="283"
+				price							="1642"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -8056,7 +8056,7 @@
 	<item on_conflict="replace"
 				name							="Nekker Boots"
 				category						="boots"
-				price							="201"
+				price							="286"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -8068,7 +8068,7 @@
 				localisation_key_description	="item_category_medium_armor_description"
 				icon_path						="icons/inventory/quests/nekker_shoes_64x128.png"
 			>
-				<tags>							Armor, MediumArmor, Autogen
+				<tags>							Armor, MediumArmor, Autogen, mod_armor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default armor _Stats</a>
 												<a>Nekker Boots _Stats</a>
@@ -8083,7 +8083,7 @@
 	<item on_conflict="replace"
 		name							="Burning Rose Armor"
 		category						="armor"
-		price							="736"
+		price							="856"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -8109,7 +8109,7 @@
 	<item on_conflict="replace"
 		name							="Burning Rose Armor B"
 		category						="armor"
-		price							="736"
+		price							="412"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="1"
@@ -8135,7 +8135,7 @@
 	<item on_conflict="replace"
 		name							="Geralt Kontusz"
 		category						="armor"
-		price							="204"
+		price							="110"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -8166,7 +8166,7 @@
 	<item on_conflict="replace"
 		name							="Geralt Kontusz R"
 		category						="armor"
-		price							="204"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -8178,7 +8178,7 @@
 		localisation_key_description	="item_desc_kontusz"
 		icon_path						="icons/inventory/armors/wedding_suit_64x128.png"
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, LightArmor, mod_armor, mod_valuable, EP1, Sleevless, DoNotEnhance
+		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, LightArmor, mod_armor, EP1, Sleevless, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Geralt_kontusz_r _Stats</a>
 										<a>Default armor _Stats</a>
@@ -8197,7 +8197,7 @@
 	<item on_conflict="replace"
 		name							="Ofir Armor"
 		category						="armor"
-		price							="242"
+		price							="355"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -8209,7 +8209,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/ofir_armor_2_64x128.png"
 	>									  
-		<tags>							Armor, LightArmor, mod_armor, mod_armor, mod_origin_ofir, mod_valuable, Ofir, Sleevless, Autogen
+		<tags>							Armor, LightArmor, mod_armor, mod_armor, mod_origin_ofir, Ofir, Sleevless, Autogen
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Ofir Armor _Stats</a>
@@ -8223,7 +8223,7 @@
 	<item on_conflict="replace"
 		name							="Ofir Armor B"
 		category						="armor"
-		price							="242"
+		price							="182"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -8249,7 +8249,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Armor" 
 		category						="armor" 
-		price							="899"
+		price							="800"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="3" 
@@ -8261,7 +8261,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_armor_64x128.png" 
 	>
-		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_valuable, EP1
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, EP1, mod_legendary
 		</tags>
 		<bound_items>
 		</bound_items>
@@ -8280,7 +8280,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Armor B" 
 		category						="armor" 
-		price							="899"
+		price							="434"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8310,7 +8310,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Armor No Medallion" 
 		category						="armor" 
-		price							="899"
+		price							="434"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8340,7 +8340,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Armor Y" 
 		category						="armor" 
-		price							="899"
+		price							="706"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="2" 
@@ -8373,7 +8373,7 @@
 	<item on_conflict="replace"
 		name							="Geralt Kontusz Boots"
 		category						="boots"
-		price							="156"
+		price							="25"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -8396,7 +8396,7 @@
 	<item on_conflict="replace"
 		name							="Geralt Kontusz Boots R"
 		category						="boots"
-		price							="156"
+		price							="170"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -8408,7 +8408,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_boots_lvl1_64x128.png"
 	>
-		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, LightArmor, mod_armor, mod_valuable, EP1, DoNotEnhance
+		<tags>							Autogen, AutogenForceLevel, AutogenUseLevelRange, Armor, LightArmor, mod_armor, EP1, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Geralt Kontusz Boots R _Stats</a>
@@ -8420,7 +8420,7 @@
 	<item on_conflict="replace" 
 		name							="Ofir Boots" 
 		category						="boots" 
-		price							="136"
+		price							="125"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8448,7 +8448,7 @@
 	<item on_conflict="replace" 
 		name							="Ofir Boots B" 
 		category						="boots" 
-		price							="136"
+		price							="50"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="0" 
@@ -8476,7 +8476,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Boots" 
 		category						="boots" 
-		price							="135"
+		price							="286"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8489,7 +8489,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_shoes_64x128.png" 
 	>
-		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_valuable, EP1
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, EP1, mod_legendary
 		</tags>
 		<base_abilities>
 										<a>Thief Boots _Stats</a>
@@ -8505,7 +8505,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Boots B" 
 		category						="boots" 
-		price							="135"
+		price							="120"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="0" 
@@ -8533,7 +8533,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Boots No Medallion" 
 		category						="boots" 
-		price							="135"
+		price							="120"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="0" 
@@ -8546,7 +8546,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_shoes_64x128.png" 
 	>
-		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor, mod_valuable
+		<tags>							Autogen, AutogenForceLevel, Armor, MediumArmor, mod_armor
 		</tags>
 		<base_abilities>
 										<a>Thief Boots No Medallion _Stats</a>
@@ -8561,7 +8561,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Boots Y" 
 		category						="boots" 
-		price							="135"
+		price							="200"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8591,7 +8591,7 @@
 	<item on_conflict="replace"
 		name							="EP1 Witcher Armor"
 		category						="armor"
-		price							="438"
+		price							="3200"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -8622,7 +8622,7 @@
 	<item on_conflict="replace" 
 		name							="Crafted Ofir Boots" 
 		category						="boots" 
-		price							="562"
+		price							="170"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8635,7 +8635,7 @@
 		localisation_key_description 	="item_category_light_armor_description" 
 		icon_path						="icons/inventory/armors/ofir_shoes_64x128.png" 
 	>
-		<tags>							Armor, LightArmor, mod_armor, mod_origin_ofir, mod_valuable, Ofir, EP1
+		<tags>							Armor, LightArmor, mod_armor, mod_origin_ofir, Ofir, EP1, mod_legendary
 		</tags>
 		<base_abilities>
 										<a>Crafted Ofir Boots _Stats</a>
@@ -8650,7 +8650,7 @@
 	<item on_conflict="replace" 
 		name							="EP1 Witcher Boots" 
 		category						="boots" 
-		price							="136"
+		price							="1700"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8682,7 +8682,7 @@
 	<item on_conflict="replace"
 		name							="Crafted Burning Rose Gloves"
 		category						="gloves"
-		price							="140"
+		price							="500"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="1"
@@ -8713,7 +8713,7 @@
 	<item on_conflict="replace" 
 		name							="Crafted Ofir Gloves" 
 		category						="gloves" 
-		price							="511"
+		price							="170"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8726,7 +8726,7 @@
 		localisation_key_description 	="item_category_light_armor_description" 
 		icon_path						="icons/inventory/armors/ofir_gloves_1_64x128.png" 
 	>
-		<tags>							Armor, LightArmor, mod_armor, mod_origin_ofir, mod_valuable, Ofir, EP1
+		<tags>							Armor, LightArmor, mod_armor, mod_origin_ofir, Ofir, EP1, mod_legendary
 		</tags>
 		<base_abilities>
 										<a>Crafted Ofir Gloves _Stats</a>
@@ -8748,7 +8748,7 @@
 	<item on_conflict="replace" 
 		name							="EP1 Witcher Gloves" 
 		category						="gloves" 
-		price							="88"
+		price							="1400"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8784,7 +8784,7 @@
 	<item on_conflict="replace" 
 		name							="EP1 Witcher Pants" 
 		category						="pants" 
-		price							="176"
+		price							="1700"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="2" 
@@ -8835,7 +8835,7 @@
 	<item on_conflict="replace"
 		name							="Burning Rose Gloves"
 		category						="gloves"
-		price							="130"
+		price							="245"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="1"
@@ -8866,7 +8866,7 @@
 	<item on_conflict="replace"
 		name							="Burning Rose Gloves B"
 		category						="gloves"
-		price							="130"
+		price							="148"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="0"
@@ -8897,7 +8897,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Gloves" 
 		category						="gloves" 
-		price							="100"
+		price							="256"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -8910,7 +8910,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_gloves_64x128.png" 
 	>
-		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_valuable, EP1
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, EP1, mod_legendary
 		</tags>
 		<base_abilities>
 										<a>Thief Gloves _Stats</a>
@@ -8931,7 +8931,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Gloves B" 
 		category						="gloves" 
-		price							="100"
+		price							="128"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="0" 
@@ -8964,7 +8964,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Gloves No Medallion" 
 		category						="gloves" 
-		price							="100"
+		price							="128"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="0" 
@@ -8997,7 +8997,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Gloves Y" 
 		category						="gloves" 
-		price							="100"
+		price							="206"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -9032,7 +9032,7 @@
 	<item on_conflict="replace" 
 		name							="Ofir Pants" 
 		category						="pants" 
-		price							="176"
+		price							="156"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -9066,7 +9066,7 @@
 	<item on_conflict="replace" 
 		name							="Ofir Pants B" 
 		category						="pants" 
-		price							="176"
+		price							="73"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="0" 
@@ -9100,7 +9100,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Pants" 
 		category						="pants" 
-		price							="114"
+		price							="294"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="2" 
@@ -9113,7 +9113,7 @@
 		localisation_key_description 	="item_category_medium_armor_description" 
 		icon_path						="icons/inventory/armors/thief_pants_64x128.png" 
 	>
-		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_valuable, EP1
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, EP1, mod_legendary
 		</tags>
 		<base_abilities>
 										<a>Thief Pants _Stats</a>
@@ -9131,7 +9131,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Pants B" 
 		category						="pants" 
-		price							="114"
+		price							="131"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="0" 
@@ -9161,7 +9161,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Pants No Medallion" 
 		category						="pants" 
-		price							="114"
+		price							="131"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="0" 
@@ -9191,7 +9191,7 @@
 	<item on_conflict="replace" 
 		name							="Thief Pants Y" 
 		category						="pants" 
-		price							="114"
+		price							="209"
 		initial_durability				="100" 
 		max_durability					="100" 
 		enhancement_slots				="1" 
@@ -9223,7 +9223,7 @@
 	<item on_conflict="replace"
 		name							="Ciri armor 01"
 		category						="armor"
-		price							="24"
+		price							="50"
 		enhancement_slots				="0"
 		stackable						="1"
 		grid_size						="2"
@@ -9243,7 +9243,7 @@
 	<item on_conflict="replace"
 		name							="Geralt Shirt"
 		category						="armor"
-		price							="60"
+		price							="50"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="0"
@@ -9268,7 +9268,7 @@
 	<item on_conflict="replace"
 		name							="Geralt Shirt No Knife"
 		category						="armor"
-		price							="58"
+		price							="50"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="0"
@@ -9291,7 +9291,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 01"
 		category						="armor"
-		price							="736"
+		price							="284"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="0"
@@ -9317,7 +9317,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 04"
 		category						="armor"
-		price							="828"
+		price							="580"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -9343,7 +9343,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 02"
 		category						="armor"
-		price							="142"
+		price							="157"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="1"
@@ -9369,7 +9369,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 04"
 		category						="armor"
-		price							="212"
+		price							="355"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -9395,7 +9395,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 08"
 		category						="armor"
-		price							="236"
+		price							="300"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -9421,7 +9421,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 09"
 		category						="armor"
-		price							="258"
+		price							="300"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -9447,7 +9447,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 04"
 		category						="armor"
-		price							="270"
+		price							="506"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -9474,7 +9474,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 07"
 		category						="armor"
-		price							="283"
+		price							="335"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="1"
@@ -9500,7 +9500,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 11"
 		category						="armor"
-		price							="618"
+		price							="450"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -9526,7 +9526,7 @@
 	<item on_conflict="replace"
 		name							="Nilfgaardian Casual Suit 01"
 		category						="armor"
-		price							="70"
+		price							="50"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -9550,7 +9550,7 @@
 	<item on_conflict="replace"
 		name							="Nilfgaardian Casual Suit 02"
 		category						="armor"
-		price							="72"
+		price							="50"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -9574,7 +9574,7 @@
 	<item on_conflict="replace"
 		name							="Nilfgaardian Casual Suit 03"
 		category						="armor"
-		price							="62"
+		price							="50"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -9598,7 +9598,7 @@
 	<item on_conflict="replace"
 		name							="Skellige Casual Suit 01"
 		category						="armor"
-		price							="122"
+		price							="50"
 		enhancement_slots				="0"
 		stackable						="1"
 		grid_size						="2"
@@ -9620,7 +9620,7 @@
 	<item on_conflict="replace"
 		name							="Skellige Casual Suit 02"
 		category						="armor"
-		price							="126"
+		price							="50"
 		stackable						="1"
 		enhancement_slots				="0"
 		equip_template					="ta_02_mg__casual_skellige_suit"
@@ -9642,7 +9642,7 @@
 	<item on_conflict="replace"
 		name							="Wild Hunt armor 01"
 		category						="armor"
-		price							="344"
+		price							="500"
 		stackable						="1"
 		enhancement_slots				="0"
 		equip_template					="t_01_mg__nithral"
@@ -9662,7 +9662,7 @@
 	<item on_conflict="replace"
 		name							="q108 Medium armor 10"
 		category						="armor"
-		price							="408"
+		price							="1800"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9674,7 +9674,7 @@
 		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_lvl3_01_64x128.png"
 	>
-		<tags>							Armor, mod_armor, HeavyArmor, Autogen
+		<tags>							Armor, mod_armor, HeavyArmor, Autogen, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>q108 Medium armor 10 _Stats</a>
@@ -9688,7 +9688,7 @@
 	<item on_conflict="replace"
 		name							="sq108_heavy_armor"
 		category						="armor"
-		price							="808"
+		price							="700"
 		enhancement_slots				="0"
 		stackable						="1"
 		grid_size						="2"
@@ -9713,7 +9713,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 01r"
 		category						="armor"
-		price							="830"
+		price							="1500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9725,7 +9725,7 @@
 		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_lvl1_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,HeavyArmor, mod_armor
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Heavy armor 01r _Stats</a>
@@ -9739,7 +9739,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 02r"
 		category						="armor"
-		price							="956"
+		price							="1500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9751,7 +9751,7 @@
 		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_lvl2_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,HeavyArmor, mod_armor
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Heavy armor 02r _Stats</a>
@@ -9765,7 +9765,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 03r"
 		category						="armor"
-		price							="980"
+		price							="1500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9777,7 +9777,7 @@
 		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_lvl3_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,HeavyArmor, mod_armor
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Heavy armor 03r _Stats</a>
@@ -9791,7 +9791,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 05r"
 		category						="armor"
-		price							="958"
+		price							="1500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9803,7 +9803,7 @@
 		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_lvl1_02_64x128.png"
 	>
-		<tags>							Autogen, Armor,HeavyArmor, mod_armor
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Heavy armor 05r _Stats</a>
@@ -9817,7 +9817,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 01r"
 		category						="armor"
-		price							="96"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9829,7 +9829,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl1_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 01r _Stats</a>
@@ -9844,7 +9844,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 02r"
 		category						="armor"
-		price							="142"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9856,7 +9856,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl2_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 02r _Stats</a>
@@ -9871,7 +9871,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 03r"
 		category						="armor"
-		price							="184"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9883,7 +9883,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl3_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 03r _Stats</a>
@@ -9898,7 +9898,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 04r"
 		category						="armor"
-		price							="212"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9910,7 +9910,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl4_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 04r _Stats</a>
@@ -9925,7 +9925,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 06r"
 		category						="armor"
-		price							="230"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9937,7 +9937,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl2_02_64x128.png"
 	>
-		<tags>							Autogen, Armor,LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags> 				
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 06r _Stats</a>
@@ -9952,7 +9952,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 07r"
 		category						="armor"
-		price							="238"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9964,7 +9964,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl3_02_64x128.png"
 	>
-		<tags>							Autogen, Armor,LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 07r _Stats</a>
@@ -9979,7 +9979,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 08r"
 		category						="armor"
-		price							="288"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -9991,7 +9991,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl4_02_64x128.png"
 	>
-		<tags>							Autogen, Armor,LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 08r _Stats</a>
@@ -10006,7 +10006,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 09r"
 		category						="armor"
-		price							="336"
+		price							="500"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10018,7 +10018,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl2_03_64x128.png"
 	>
-		<tags>							Autogen, Armor,LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 09r _Stats</a>
@@ -10033,7 +10033,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 01r"
 		category						="armor"
-		price							="250"
+		price							="800"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10045,7 +10045,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/common_medium_lvl1_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,MediumArmor, mod_armor
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Medium armor 01r _Stats</a>
@@ -10061,7 +10061,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 02r"
 		category						="armor"
-		price							="344"
+		price							="800"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10073,7 +10073,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/t_01_mg__common_medium_lvl2-64x128.png"
 	>
-		<tags>							Autogen, Armor,MediumArmor, mod_armor
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Medium armor 02r _Stats</a>
@@ -10089,7 +10089,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 03r"
 		category						="armor"
-		price							="318"
+		price							="800"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10101,7 +10101,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/t_01_mg__common_medium_lvl3-64x128.png"
 	>
-		<tags>							Autogen, Armor,MediumArmor, mod_armor
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Medium armor 03r _Stats</a>
@@ -10117,7 +10117,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 04r"
 		category						="armor"
-		price							="348"
+		price							="800"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10129,7 +10129,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/common_medium_lvl4_01_64x128.png"
 	>
-		<tags>							Autogen, Armor,MediumArmor, mod_armor
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Medium armor 04r _Stats</a>
@@ -10145,7 +10145,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 05r"
 		category						="armor"
-		price							="300"
+		price							="800"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10157,7 +10157,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/common_medium_lvl1_02_64x128.png"
 	>
-		<tags>							Autogen, Armor,MediumArmor, mod_armor
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Medium armor 05r _Stats</a>
@@ -10173,7 +10173,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 07r"
 		category						="armor"
-		price							="361"
+		price							="800"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10185,7 +10185,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/common_medium_lvl4_03_64x128.png"
 	>
-		<tags>							Autogen, Armor,MediumArmor, mod_armor
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Medium armor 07r _Stats</a>
@@ -10201,7 +10201,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 10r"
 		category						="armor"
-		price							="512"
+		price							="800"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10213,7 +10213,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/common_medium_lvl4_02_64x128.png"
 	>
-		<tags>							Autogen, Armor,MediumArmor, mod_armor
+		<tags>							Autogen, Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Medium armor 10r _Stats</a>
@@ -10229,7 +10229,7 @@
 	<item on_conflict="replace"
 		name							="Shiadhal armor"
 		category						="armor"
-		price							="612"
+		price							="580"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="3"
@@ -10257,7 +10257,7 @@
 	<item on_conflict="replace"
 		name							="Thyssen armor"
 		category						="armor"
-		price							="880"
+		price							="845"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="3"
@@ -10287,7 +10287,7 @@
 	<item on_conflict="replace"
 		name							="Boots 01 q2"
 		category						="boots"
-		price							="82"
+		price							="50"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -10311,7 +10311,7 @@
 	<item on_conflict="replace"
 		name							="Boots 012"
 		category						="boots"
-		price							="64"
+		price							="170"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -10323,7 +10323,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_boots_lvl1_64x218.png"
 	>
-		<tags>							Autogen, Armor, LightArmor, mod_armor
+		<tags>							Autogen, Armor, LightArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Boots 012 _Stats</a>
@@ -10335,7 +10335,7 @@
 	<item on_conflict="replace"
 		name							="Boots 02"
 		category						="boots"
-		price							="56"
+		price							="46"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -10359,7 +10359,7 @@
 	<item on_conflict="replace"
 		name							="Boots 022"
 		category						="boots"
-		price							="56"
+		price							="286"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -10371,7 +10371,7 @@
 		localisation_key_description	="item_category_medium_armor_description"
 		icon_path						="icons/inventory/armors/common_light_boots_lvl2_64x128.png"
 	>
-		<tags>							Autogen, Armor, mod_armor, MediumArmor
+		<tags>							Autogen, Armor, mod_armor, MediumArmor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Boots 022 _Stats</a>
@@ -10384,7 +10384,7 @@
 	<item on_conflict="replace"
 		name							="Boots 03"
 		category						="boots"
-		price							="68"
+		price							="38"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -10407,7 +10407,7 @@
 	<item on_conflict="replace"
 		name							="Boots 032"
 		category						="boots"
-		price							="68"
+		price							="175"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -10419,7 +10419,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_boots_lvl3_64x128.png"
 	>
-		<tags>							Autogen, Armor, mod_armor, LightArmor
+		<tags>							Autogen, Armor, mod_armor, LightArmor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Boots 032 _Stats</a>
@@ -10431,7 +10431,7 @@
 	<item on_conflict="replace"
 		name							="Boots 05"
 		category						="boots"
-		price							="89"
+		price							="105"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -10455,7 +10455,7 @@
 	<item on_conflict="replace"
 		name							="Boots 06"
 		category						="boots"
-		price							="102"
+		price							="95"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -10479,7 +10479,7 @@
 	<item on_conflict="replace"
 		name							="Boots 07"
 		category						="boots"
-		price							="122"
+		price							="175"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="1"
@@ -10503,7 +10503,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 02"
 		category						="boots"
-		price							="80"
+		price							="262"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -10528,7 +10528,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 03"
 		category						="boots"
-		price							="100"
+		price							="160"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -10552,7 +10552,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 04"
 		category						="boots"
-		price							="115"
+		price							="220"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -10583,7 +10583,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 05"
 		category						="boots"
-		price							="124"
+		price							="360"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -10608,7 +10608,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 06"
 		category						="boots"
-		price							="156"
+		price							="360"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -10632,7 +10632,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 07"
 		category						="boots"
-		price							="158"
+		price							="286"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -10657,7 +10657,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 08"
 		category						="boots"
-		price							="194"
+		price							="535"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="1"
@@ -10681,7 +10681,7 @@
 	<item on_conflict="replace"
 		name							="Nilfgaardian casual shoes"
 		category						="boots"
-		price							="40"
+		price							="30"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -10728,7 +10728,7 @@
 	<item on_conflict="replace"
 		name							="Skellige casual shoes"
 		category						="boots"
-		price							="72"
+		price							="30"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -10753,7 +10753,7 @@
 	<item on_conflict="replace"
 		name							="Bear Armor"
 		category						="armor"
-		price							="335"
+		price							="1195"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="1"
@@ -10781,7 +10781,7 @@
 	<item on_conflict="replace"
 		name							="Bear Armor 1"
 		category						="armor"
-		price							="455"
+		price							="1851"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -10810,7 +10810,7 @@
 	<item on_conflict="replace"
 		name							="Bear Armor 2"
 		category						="armor"
-		price							="1946"
+		price							="3081"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10838,7 +10838,7 @@
 	<item on_conflict="replace"
 		name							="Bear Armor 3"
 		category						="armor"
-		price							="2594"
+		price							="4908"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10866,7 +10866,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Armor"
 		category						="armor"
-		price							="412"
+		price							="565"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="1"
@@ -10894,7 +10894,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Armor 1"
 		category						="armor"
-		price							="479"
+		price							="865"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -10923,7 +10923,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Armor 2"
 		category						="armor"
-		price							="1961"
+		price							="1875"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10952,7 +10952,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Armor 3"
 		category						="armor"
-		price							="2379"
+		price							="3193"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -10982,7 +10982,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 01_crafted"
 		category						="armor"
-		price							="736"
+		price							="288"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11009,7 +11009,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 02_crafted"
 		category						="armor"
-		price							="852"
+		price							="422"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11036,7 +11036,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 03_crafted"
 		category						="armor"
-		price							="928"
+		price							="478"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11064,7 +11064,7 @@
 	<item on_conflict="replace"
 		name							="Heavy armor 04_crafted"
 		category						="armor"
-		price							="932"
+		price							="878"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11091,7 +11091,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 01_crafted"
 		category						="armor"
-		price							="108"
+		price							="82"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11118,7 +11118,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 02_crafted"
 		category						="armor"
-		price							="142"
+		price							="84"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11145,7 +11145,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 03_crafted"
 		category						="armor"
-		price							="184"
+		price							="138"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11172,7 +11172,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 04_crafted"
 		category						="armor"
-		price							="212"
+		price							="192"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11199,7 +11199,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 05_crafted"
 		category						="armor"
-		price							="1282"
+		price							="568"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -11211,7 +11211,7 @@
 		localisation_key_description	="item_category_light_armor_description"
 		icon_path						="icons/inventory/armors/common_light_lvl1_02_64x128.png"
 	>
-		<tags>							Armor, LightArmor, mod_armor, DoNotEnhance
+		<tags>							Armor, LightArmor, mod_armor, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Light armor 05_crafted _Stats</a>
@@ -11226,7 +11226,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 06_crafted"
 		category						="armor"
-		price							="230"
+		price							="246"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11253,7 +11253,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 07_crafted"
 		category						="armor"
-		price							="238"
+		price							="373"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11280,7 +11280,7 @@
 	<item on_conflict="replace"
 		name							="Light armor 08_crafted"
 		category						="armor"
-		price							="236"
+		price							="433"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -11307,7 +11307,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Armor"
 		category						="armor"
-		price							="399"
+		price							="375"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="1"
@@ -11333,7 +11333,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Armor 1"
 		category						="armor"
-		price							="478"
+		price							="852"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="2"
@@ -11360,7 +11360,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Armor 2"
 		category						="armor"
-		price							="1866"
+		price							="1798"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -11387,7 +11387,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Armor 3"
 		category						="armor"
-		price							="1961"
+		price							="2937"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="3"
@@ -11414,7 +11414,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 01_crafted"
 		category						="armor"
-		price							="198"
+		price							="201"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11441,7 +11441,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 02_crafted"
 		category						="armor"
-		price							="266"
+		price							="344"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11468,7 +11468,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 03_crafted"
 		category						="armor"
-		price							="306"
+		price							="398"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11495,7 +11495,7 @@
 	<item on_conflict="replace"
 		name							="Medium armor 04_crafted"
 		category						="armor"
-		price							="428"
+		price							="524"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11523,7 +11523,7 @@
 	<item on_conflict="replace"
 		name							="Relic Heavy 3 crafted"
 		category						="armor"
-		price							="1360"
+		price							="1523"
 		initial_durability				="300"
 		max_durability					="300"
 		enhancement_slots				="3"
@@ -11552,7 +11552,7 @@
 	<item on_conflict="replace"
 		name							="Starting Armor 1"
 		category						="armor"
-		price							="108"
+		price							="132"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="0"
@@ -11579,7 +11579,7 @@
 	<item on_conflict="replace"
 		name							="Thyssen armor crafted"
 		category						="armor"
-		price							="1076"
+		price							="823"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="3"
@@ -11610,7 +11610,7 @@
 	<item on_conflict="replace"
 		name							="Bear Boots 1"
 		category						="boots"
-		price							="150"
+		price							="457"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11636,7 +11636,7 @@
 	<item on_conflict="replace"
 		name							="Bear Boots 2"
 		category						="boots"
-		price							="150"
+		price							="1320"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11662,7 +11662,7 @@
 	<item on_conflict="replace"
 		name							="Bear Boots 3"
 		category						="boots"
-		price							="190"
+		price							="2586"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11688,7 +11688,7 @@
 	<item on_conflict="replace"
 		name							="Bear Boots 4"
 		category						="boots"
-		price							="190"
+		price							="4413"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11714,7 +11714,7 @@
 	<item on_conflict="replace"
 		name							="Boots 01_crafted"
 		category						="boots"
-		price							="76"
+		price							="25"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11737,7 +11737,7 @@
 	<item on_conflict="replace"
 		name							="Boots 02_crafted"
 		category						="boots"
-		price							="60"
+		price							="95"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11762,7 +11762,7 @@
 	<item on_conflict="replace"
 		name							="Boots 03_crafted"
 		category						="boots"
-		price							="72"
+		price							="50"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11786,7 +11786,7 @@
 	<item on_conflict="replace"
 		name							="Boots 04_crafted"
 		category						="boots"
-		price							="92"
+		price							="163"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11798,7 +11798,7 @@
 		localisation_key_description	="item_category_light_armor_description "
 		icon_path						="icons/inventory/armors/common_light_boots_lvl4_64x128.png"
 	>
-		<tags>							Armor, LightArmor, mod_armor, DoNotEnhance
+		<tags>							Armor, LightArmor, mod_armor, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Boots 04_crafted _Stats</a>
@@ -11810,7 +11810,7 @@
 	<item on_conflict="replace"
 		name							="Boots 07_crafted"
 		category						="boots"
-		price							="156"
+		price							="163"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="1"
@@ -11834,7 +11834,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Boots 1"
 		category						="boots"
-		price							="129"
+		price							="291"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11859,7 +11859,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Boots 2"
 		category						="boots"
-		price							="129"
+		price							="628"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11885,7 +11885,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Boots 3"
 		category						="boots"
-		price							="236"
+		price							="993"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11911,7 +11911,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Boots 4"
 		category						="boots"
-		price							="236"
+		price							="1660"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11937,7 +11937,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 01_crafted"
 		category						="boots"
-		price							="106"
+		price							="150"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11962,7 +11962,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 02_crafted"
 		category						="boots"
-		price							="86"
+		price							="262"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -11988,7 +11988,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 03_crafted"
 		category						="boots"
-		price							="90"
+		price							="208"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12012,7 +12012,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 04_crafted"
 		category						="boots"
-		price							="150"
+		price							="400"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12043,7 +12043,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 07_crafted"
 		category						="boots"
-		price							="140"
+		price							="286"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12069,7 +12069,7 @@
 	<item on_conflict="replace"
 		name							="Heavy boots 08_crafted"
 		category						="boots"
-		price							="206"
+		price							="535"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="1"
@@ -12094,7 +12094,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Boots 1"
 		category						="boots"
-		price							="149"
+		price							="234"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12118,7 +12118,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Boots 2"
 		category						="boots"
-		price							="149"
+		price							="481"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12143,7 +12143,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Boots 3"
 		category						="boots"
-		price							="151"
+		price							="738"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12168,7 +12168,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Boots 4"
 		category						="boots"
-		price							="151"
+		price							="994"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12195,7 +12195,7 @@
 	<item on_conflict="replace"
 		name							="Bear Gloves 1"
 		category						="gloves"
-		price							="136"
+		price							="319"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12227,7 +12227,7 @@
 	<item on_conflict="replace"
 		name							="Bear Gloves 2"
 		category						="gloves"
-		price							="136"
+		price							="733"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12259,7 +12259,7 @@
 	<item on_conflict="replace"
 		name							="Bear Gloves 3"
 		category						="gloves"
-		price							="190"
+		price							="1326"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12291,7 +12291,7 @@
 	<item on_conflict="replace"
 		name							="Bear Gloves 4"
 		category						="gloves"
-		price							="190"
+		price							="2322"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12323,7 +12323,7 @@
 	<item on_conflict="replace"
 		name							="Gloves 01_crafted"
 		category						="gloves"
-		price							="60"
+		price							="50"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12353,7 +12353,7 @@
 	<item on_conflict="replace"
 		name							="Gloves 02_crafted"
 		category						="gloves"
-		price							="76"
+		price							="95"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12383,7 +12383,7 @@
 	<item on_conflict="replace"
 		name							="Gloves 03_crafted"
 		category						="gloves"
-		price							="100"
+		price							="85"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12413,7 +12413,7 @@
 	<item on_conflict="replace"
 		name							="Gloves 04_crafted"
 		category						="gloves"
-		price							="84"
+		price							="163"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12443,7 +12443,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Gloves 1"
 		category						="gloves"
-		price							="134"
+		price							="226"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12474,7 +12474,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Gloves 2"
 		category						="gloves"
-		price							="134"
+		price							="570"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12506,7 +12506,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Gloves 3"
 		category						="gloves"
-		price							="188"
+		price							="934"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12538,7 +12538,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Gloves 4"
 		category						="gloves"
-		price							="188"
+		price							="1338"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12570,7 +12570,7 @@
 	<item on_conflict="replace"
 		name							="Heavy gloves 01_crafted"
 		category						="gloves"
-		price							="80"
+		price							="195"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12601,7 +12601,7 @@
 	<item on_conflict="replace"
 		name							="Heavy gloves 02_crafted"
 		category						="gloves"
-		price							="107"
+		price							="154"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12631,7 +12631,7 @@
 	<item on_conflict="replace"
 		name							="Heavy gloves 03_crafted"
 		category						="gloves"
-		price							="134"
+		price							="300"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12662,7 +12662,7 @@
 	<item on_conflict="replace"
 		name							="Heavy gloves 04_crafted"
 		category						="gloves"
-		price							="144"
+		price							="470"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12693,7 +12693,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Gloves 1"
 		category						="gloves"
-		price							="133"
+		price							="190"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12723,7 +12723,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Gloves 2"
 		category						="gloves"
-		price							="133"
+		price							="438"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12754,7 +12754,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Gloves 3"
 		category						="gloves"
-		price							="160"
+		price							="694"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12785,7 +12785,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Gloves 4"
 		category						="gloves"
-		price							="160"
+		price							="1051"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12818,7 +12818,7 @@
 	<item on_conflict="replace"
 		name							="Bear Pants 1"
 		category						="pants"
-		price							="152"
+		price							="379"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12852,7 +12852,7 @@
 	<item on_conflict="replace"
 		name							="Bear Pants 2"
 		category						="pants"
-		price							="152"
+		price							="799"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12887,7 +12887,7 @@
 	<item on_conflict="replace"
 		name							="Bear Pants 3"
 		category						="pants"
-		price							="171"
+		price							="1392"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -12922,7 +12922,7 @@
 	<item on_conflict="replace"
 		name							="Bear Pants 4"
 		category						="pants"
-		price							="171"
+		price							="2388"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -12957,7 +12957,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Pants 1"
 		category						="pants"
-		price							="173"
+		price							="273"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12990,7 +12990,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Pants 2"
 		category						="pants"
-		price							="173"
+		price							="610"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13024,7 +13024,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Pants 3"
 		category						="pants"
-		price							="191"
+		price							="975"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13058,7 +13058,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon Pants 4"
 		category						="pants"
-		price							="191"
+		price							="1642"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13092,7 +13092,7 @@
 	<item on_conflict="replace"
 		name							="Heavy pants 01_crafted"
 		category						="pants"
-		price							="102"
+		price							="189"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13125,7 +13125,7 @@
 	<item on_conflict="replace"
 		name							="Heavy pants 02_crafted"
 		category						="pants"
-		price							="136"
+		price							="255"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13159,7 +13159,7 @@
 	<item on_conflict="replace"
 		name							="Heavy pants 03_crafted"
 		category						="pants"
-		price							="176"
+		price							="318"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13193,7 +13193,7 @@
 	<item on_conflict="replace"
 		name							="Heavy pants 04_crafted"
 		category						="pants"
-		price							="198"
+		price							="475"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13227,7 +13227,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Pants 1"
 		category						="pants"
-		price							="155"
+		price							="252"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13260,7 +13260,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Pants 2"
 		category						="pants"
-		price							="155"
+		price							="499"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13294,7 +13294,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Pants 3"
 		category						="pants"
-		price							="155"
+		price							="762"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13329,7 +13329,7 @@
 	<item on_conflict="replace"
 		name							="Lynx Pants 4"
 		category						="pants"
-		price							="155"
+		price							="1114"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13364,7 +13364,7 @@
 	<item on_conflict="replace"
 		name							="Pants 01_crafted"
 		category						="pants"
-		price							="60"
+		price							="70"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13397,7 +13397,7 @@
 	<item on_conflict="replace"
 		name							="Pants 02_crafted"
 		category						="pants"
-		price							="64"
+		price							="126"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13431,7 +13431,7 @@
 	<item on_conflict="replace"
 		name							="Pants 03_crafted"
 		category						="pants"
-		price							="78"
+		price							="165"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13465,7 +13465,7 @@
 	<item on_conflict="replace"
 		name							="Pants 04_crafted"
 		category						="pants"
-		price							="80"
+		price							="250"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13501,7 +13501,7 @@
 	<item on_conflict="replace"
 		name							="EP1 Standalone Starting Armor"
 		category						="armor"
-		price							="88"
+		price							="80"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="0"
@@ -13527,7 +13527,7 @@
 	<item on_conflict="replace"
 		name							="EP1 Standalone Starting Boots"
 		category						="boots"
-		price							="28"
+		price							="25"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13550,7 +13550,7 @@
 	<item on_conflict="replace"
 		name							="EP1 Standalone Starting Gloves"
 		category						="gloves"
-		price							="20"
+		price							="25"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13579,7 +13579,7 @@
 	<item on_conflict="replace" 
 		name							="EP1 Standalone Starting Pants"
 		category						="pants"
-		price							="66"
+		price							="36"
 		initial_durability				="100"
 		max_durability					="100"
 		stackable						="1"
@@ -13624,7 +13624,7 @@
 	<item on_conflict="replace"
 		name							="EP2 Standalone Starting Armor"
 		category						="armor"
-		price							="88"
+		price							="80"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="0"
@@ -13650,7 +13650,7 @@
 	<item on_conflict="replace"
 		name							="EP2 Standalone Starting Boots"
 		category						="boots"
-		price							="28"
+		price							="25"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13673,7 +13673,7 @@
 	<item on_conflict="replace"
 		name							="EP2 Standalone Starting Gloves"
 		category						="gloves"
-		price							="20"
+		price							="25"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13702,7 +13702,7 @@
 	<item on_conflict="replace" 
 		name							="EP2 Standalone Starting Pants"
 		category						="pants"
-		price							="66"
+		price							="36"
 		initial_durability				="100"
 		max_durability					="100"
 		stackable						="1"
@@ -13747,7 +13747,7 @@
 	<item on_conflict="replace"
 		name							="Gloves 03"
 		category						="gloves"
-		price							="88"
+		price							="55"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13777,7 +13777,7 @@
 	<item on_conflict="replace"
 		name							="Heavy gloves 02"
 		category						="gloves"
-		price							="101"
+		price							="150"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13808,7 +13808,7 @@
 	<item on_conflict="replace"
 		name							="Heavy gloves 03"
 		category						="gloves"
-		price							="124"
+		price							="210"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13838,7 +13838,7 @@
 	<item on_conflict="replace"
 		name							="Heavy gloves 04"
 		category						="gloves"
-		price							="140"
+		price							="470"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="1"
@@ -13871,7 +13871,7 @@
 	<item on_conflict="replace"
 		name							="Bath Towel Pants 01"
 		category						="pants"
-		price							="16"
+		price							="20"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13920,7 +13920,7 @@
 	<item on_conflict="replace"
 		name							="Heavy pants 02"
 		category						="pants"
-		price							="111"
+		price							="195"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13954,7 +13954,7 @@
 	<item on_conflict="replace"
 		name							="Nilfgaardian Casual Pants"
 		category						="pants"
-		price							="44"
+		price							="40"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13986,7 +13986,7 @@
 	<item on_conflict="replace"
 		name							="Pants 02"
 		category						="pants"
-		price							="60"
+		price							="72"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -14019,7 +14019,7 @@
 	<item on_conflict="replace"
 		name							="Pants 03"
 		category						="pants"
-		price							="73"
+		price							="135"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -14052,7 +14052,7 @@
 	<item on_conflict="replace"
 		name							="Skellige Casual Pants 01"
 		category						="pants"
-		price							="60"
+		price							="40"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -14077,7 +14077,7 @@
 	<item on_conflict="replace"
 		name							="Skellige Casual Pants 02"
 		category						="pants"
-		price							="60"
+		price							="40"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -14157,7 +14157,7 @@
 	<item on_conflict="replace"
 		name							="Autogen Armor"
 		category						="armor"
-		price							="236"
+		price							="80"
 		initial_durability				="100"
 		max_durability					="100" 
 		enhancement_slots				="0"
@@ -14184,7 +14184,7 @@
 	<item on_conflict="replace"
 		name							="Autogen Boots"
 		category						="boots"
-		price							="78"
+		price							="25"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -14208,7 +14208,7 @@
 	<item on_conflict="replace"
 		name							="Autogen Gloves"
 		category						="gloves"
-		price							="128"
+		price							="25"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -14238,7 +14238,7 @@
 	<item on_conflict="replace" 
 		name							="Autogen Pants"
 		category						="pants"
-		price							="110"
+		price							="36"
 		initial_durability				="100"
 		max_durability					="100"
 		stackable						="1"

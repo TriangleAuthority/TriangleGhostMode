@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- Ghost Mode: UI-15, the razor's description ("Used for shaving."): 5.x's item given whole, only its
-     description key (UI-15) and dismantling parts (CRAFT-08: Timber for Fiber) changed (legacy). Using it shaves Geralt (scripts: ui/shaving.ws). -->
+     description key (UI-15), dismantling parts (CRAFT-08: Timber for Fiber) and price (ECON-02: 5 -> 6) changed (legacy). Using it shaves Geralt (scripts: ui/shaving.ws). -->
 <redxml>
   <definitions>
     <items>
 	<item
 		name							="Razor"
 		category						="junk"
-		price							="5"
+		price							="6"
 		weight							="0.85"
 		stackable						="100"
 		localisation_key_name			="item_name_razor"

@@ -23,6 +23,7 @@ import gen_arm_items as arm  # noqa: E402
 import item_layer  # noqa: E402
 
 OUT = "gm_item.xml"
+ECON_OUT = "gm_econ.xml"  # gen_econ.py's, written after this tool: the ECON-only entries
 
 
 def other_names(worktree, folder):
@@ -30,7 +31,7 @@ def other_names(worktree, folder):
     its, abls = set(), set()
     d = os.path.join(worktree, arm.DLC, folder)
     for f in sorted(os.listdir(d)):
-        if not f.endswith(".xml") or f == OUT:
+        if not f.endswith(".xml") or f in (OUT, ECON_OUT):
             continue
         text = arm.blank_comments(open(os.path.join(d, f), encoding="utf-8-sig").read())
         for _, _, head in arm.item_spans(text):
@@ -65,6 +66,11 @@ def generate(worktree, folder):
             if name in taken_i or name not in m or name not in l or name not in v:
                 continue
             vpath, ventry, vtags = v[name]
+            # written whole only for another area's change; ECON's fields join it (gen_econ.py writes the rest)
+            if (item_layer.merge_tags(folder, name, m[name][2], l[name][2], vtags, vtags, item_layer.WHOLE) == vtags
+                    and not item_layer.merge_attrs(folder, name, m[name][1], l[name][1], ventry, item_layer.WHOLE)[1]
+                    and not item_layer.merge_blocks(folder, name, m[name][1], l[name][1], ventry, item_layer.WHOLE)[1]):
+                continue
             new = item_layer.merge_tags(folder, name, m[name][2], l[name][2], vtags, vtags)
             entry, achanges = item_layer.merge_attrs(folder, name, m[name][1], l[name][1], ventry)
             entry, bchanges = item_layer.merge_blocks(folder, name, m[name][1], l[name][1], entry)

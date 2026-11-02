@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <redxml>
     <reward name="mh201_investigation"                              experience="30"     gold="0"    achievement="0"     script="" comment="" level="27"/>
-    <reward name="mh201_troll_killed"                               experience="150"    gold="271"  achievement="0"     script="" comment="" level="27"/>
-    <reward name="mh201_troll_left_alone"                           experience="300"    gold="50"   achievement="0"     script="" comment="" level="27"/>
-    <reward name="mh201_reward_from_troll"                          experience="0"     gold="50"   achievement="0"     script="" comment="" level="27">
+    <reward name="mh201_troll_killed"                               experience="150"    gold="300"  achievement="0"     script="" comment="" level="27"/>
+    <reward name="mh201_troll_left_alone"                           experience="300"    gold="150"   achievement="0"     script="" comment="" level="27"/>
+    <reward name="mh201_reward_from_troll"                          experience="0"     gold="0"   achievement="0"     script="" comment="" level="27">
 		<items>            
             <item name="Silver ore" amount="20" />
         </items>

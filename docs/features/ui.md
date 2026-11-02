@@ -440,7 +440,7 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 
 **Skull marker** (answered by the owner, 2026-10-21): 1.32 also shows the skull above an enemy's level, so the skull plus the red level is vanilla's and legacy's HUD; nothing to change.
 
-**Verification (DIFF slice D6, 2026-10-30, both trees):** scripted (`gmtest_diff05_*`, `GMTest_diff05`): the five 5.x entities with an addon the mod's files do not clear show their real level and legacy's colour, a hand-set addon and NG+ addon flag are not shown, a level of 120 is not capped ([DIFF-05](diff.md#diff-05-fake-levels)). The level seen on screen with an enemy locked on is pending a cleared run.
+**Verification (DIFF slice D6, 2026-10-30, both trees):** scripted (`gmtest_diff05_*`, `GMTest_diff05`): the five 5.x entities with an addon the mod's files do not clear show their real level and legacy's colour, a hand-set addon and NG+ addon flag are not shown, a level of 120 is not capped ([DIFF-05](diff.md#diff-05-fake-levels)). The level seen on screen with an enemy locked on: **verified** in DIFF's [cleared run](diff.md#cleared-run-on-screen-2026-11-01) (2026-11-01, a level-1 wolf shows 1).
 
 **Later:** —
 

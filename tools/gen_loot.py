@@ -10,15 +10,19 @@ DLC override if it works, else whole files; no DLC override of `<loot>` is known
   legacy changed it, else 5.x's (DT8: 5.x's `respawn_time` on the quest lists);
 - a list legacy added: legacy's, appended to its file;
 - a quest reward: 5.x's entry with legacy's `<items>` (LOOT-07, DT4) and legacy's `experience` and `level`
-  (XP-02, PX2: also the rewards legacy changed without items, so the free DLCs' `dlc12` and `dlc15`); gold stays
-  5.x's (ECON); a reward only 5.x has keeps 5.x's values but for DX4's (`NEW_REWARDS`).
+  (XP-02, PX2: also the rewards legacy changed without items, so the free DLCs' `dlc12` and `dlc15`) and, since
+  ECON's slice E4, legacy's `gold` (ECON-10, PE8; the loan's reward `vivaldis_loan`, ECON-11's XML unit; and the
+  rewards 5.x raised where legacy kept 1.32's gold, `DE1`); a reward only 5.x has keeps 5.x's values but for DX4's
+  (`NEW_REWARDS`), its gold 5.x's (PE9).
 
     python tools/gen_loot.py [--worktree DIR] [--check | --verify]
 
 Writes the files at their vanilla paths under `modGhostMode/files/` in the 5.x-GM worktree (default
 ../TGM-5x-GM). --check fails if a file is out of date. --verify reads the written files and checks every
 LOOT unit's entry against legacy's (ported) or 5.x's (not yet ported, counted), no name defined twice,
-and the rest of each file 5.x's.
+and the rest of each file 5.x's; and every reward's gold in the six reward files against legacy's (ECON-10), each
+difference explained (5.x's new rewards, PE9). Also writes the in-game data test `tests/gmTestsEconRewards.ws`
+(`GMTest_econrewards`): the gold of every ECON reward, DE1's and PE9's as `GetReward` should read it.
 """
 import argparse, csv, os, re, struct, subprocess, sys
 
@@ -26,9 +30,23 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # The features whose lists and rewards are ported (loot.md's port order).
-PORTED = {"LOOT-01", "LOOT-02", "LOOT-03", "LOOT-04", "LOOT-05", "LOOT-06", "LOOT-07", "LOOT-08", "CRAFT-10", "XP-02"}
-# The reward attributes XP-02 takes from legacy (docs/features/xp.md, PX2); gold stays 5.x's until ECON.
+PORTED = {"LOOT-01", "LOOT-02", "LOOT-03", "LOOT-04", "LOOT-05", "LOOT-06", "LOOT-07", "LOOT-08", "CRAFT-10", "XP-02",
+          "ECON-10", "ECON-11", "DE1"}
+# The reward attributes XP-02 takes from legacy (docs/features/xp.md, PX2).
 XP_ATTRS = ("level", "experience")
+# The reward features whose gold is legacy's (econ.md, slice E4): ECON-10 (PE8); ECON-11's one XML unit, the loan's
+# reward `vivaldis_loan` (its scene and the tax quest are binary files, not this tool's); DE1 below.
+ECON_GOLD = {"ECON-10", "ECON-11", "DE1"}
+# DE1 (a) (owner, 2026-11-01): the rewards 5.x raised where legacy kept 1.32's gold pay legacy's (= 1.32's) gold.
+# `q103_06_find_daughter`, the fourth of DE1, is an ECON-10 unit (legacy 100). --verify checks this list is exactly
+# the rewards 5.x raised that legacy left at 1.32's gold.
+DE1 = {"modGhostMode/files/gameplay/rewards/rewards.xml": ["q110_1b_accepted_emhyrs_reward", "q107_4_reward_baron"],
+       "modGhostMode/files/dlc/ep1/data/gameplay/rewards/rewards.xml": ["q605_mirror_finale_cash"]}
+# The six reward files Ghost Mode overrides.
+REWARD_FILES = ["modGhostMode/files/gameplay/rewards/rewards.xml"] + [
+    "modGhostMode/files/dlc/%s/data/gameplay/rewards/rewards.xml" % d for d in ("ep1", "bob", "dlc3", "dlc12", "dlc15")]
+# ECON's reward data test (gmTestsEconRewards.ws), relative to the worktree.
+ECON_TESTS = "modGhostMode/scripts/local/gm/tests/gmTestsEconRewards.ws"
 # 5.x's new rewards placed by analogy (XP-02, DX4 (a), owner, 2026-10-31): {path: {reward: {attribute: value}}}.
 # Killbill's new branch at legacy's level for the quest, 16, with 5.x's 50 XP; the other new rewards stay 5.x's.
 NEW_REWARDS = {"modGhostMode/files/gameplay/rewards/rewards.xml": {"sq106_3_hammond_killed_crach": {"level": "16"}}}
@@ -50,19 +68,28 @@ def git_bytes(*args):
 
 
 def units():
-    """{path: {(kind, name): features}} of the loot list and reward units with a LOOT feature or XP-02."""
+    """{path: {(kind, name): features}} of the loot list and reward units with a LOOT feature, XP-02 or a reward-gold
+    feature (ECON-10, ECON-11's loan reward), and DE1's rewards (feature `DE1` added)."""
     out = {}
     with open(os.path.join(REPO, "docs", "features", "attribution.csv"), encoding="utf-8") as f:
         for row in csv.DictReader(f):
             m = UNIT.match(row["unit"])
             feats = set(row["features"].split())
-            if m and (any(x.startswith("LOOT-") for x in feats) or "XP-02" in feats):
+            if m and (any(x.startswith("LOOT-") for x in feats) or "XP-02" in feats or (m.group(3) and feats & ECON_GOLD)):
                 out.setdefault("modGhostMode/" + m.group(1), {})[(m.group(2) or m.group(3), m.group(4))] = feats
+    for path, names in DE1.items():
+        for n in names:
+            out.setdefault(path, {}).setdefault(("reward", n), set()).add("DE1")
     return out
 
 
+def econ_gold_units():
+    """{path: {reward name}} of the rewards whose gold is legacy's (ECON_GOLD)."""
+    return {p: {k[1] for k, f in us.items() if k[0] == "reward" and f & ECON_GOLD} for p, us in units().items()}
+
+
 def area(feats):
-    return {x for x in feats if x.startswith(("LOOT-", "CRAFT-")) or x == "XP-02"}
+    return {x for x in feats if x.startswith(("LOOT-", "CRAFT-")) or x in ("XP-02",) or x in ECON_GOLD}
 
 
 def wanted(feats):
@@ -193,9 +220,13 @@ def merged(kind, ment, lent, vent, feats=frozenset(("LOOT-07",))):
     # reward: 5.x's with legacy's <items> (LOOT) and legacy's experience and level (XP-02)
     if vent is None:
         return lent
+    la = {a: v for a, _, v, _ in ATTR.findall(head(lent))}
     if "XP-02" in feats:
-        la = {a: v for a, _, v, _ in ATTR.findall(head(lent))}
         vent = set_attrs(head(vent), {a: la[a] for a in XP_ATTRS if a in la}) + vent[len(head(vent)):]
+    if feats & ECON_GOLD:
+        if "gold" not in la:
+            raise SystemExit(f"reward {head(lent)[:60]}: legacy's entry has no gold")
+        vent = set_attrs(head(vent), {"gold": la["gold"]}) + vent[len(head(vent)):]
     if not any(x.startswith("LOOT-") for x in feats):
         return vent
     li = items_block(lent)
@@ -312,6 +343,116 @@ def verify(worktree, us_all):
         print("  UNEXPLAINED " + p)
     print(f"verify: {len(problems)} unexplained differences")
     return len(problems)
+
+
+# ---- reward gold (ECON-10, ECON-11's loan reward, DE1, PE9; econ.md slice E4) --------------------------------------
+
+def gold_table(text):
+    """{reward: gold (int, 0 if none)} of a reward file's text (comments ignored)."""
+    out = {}
+    if text is None:
+        return out
+    for (kind, name), (s, e) in entries(text)[0].items():
+        if kind == "reward":
+            a = {k: v for k, _, v, _ in ATTR.findall(head(text[s:e]))}
+            out[name] = int(a.get("gold", "0") or 0)
+    return out
+
+
+def gold_rows(worktree=None):
+    """[(path, reward, group, expected gold, 1.32, legacy, 5.x, final or None)] of every reward of the six files whose
+    gold ECON decides: ECON-10's units, the loan (ECON-11), DE1's, 5.x's new rewards with gold (PE9)."""
+    eg = econ_gold_units()
+    us_all = units()
+    rows = []
+    for path in REWARD_FILES:
+        mtext, ltext, vtext = texts(path)
+        m, l, v = gold_table(mtext), gold_table(ltext), gold_table(vtext)
+        fin = None
+        if worktree is not None:
+            dst = os.path.join(worktree, path)
+            fin = gold_table(open(dst, encoding="utf-8-sig").read().replace("\r\n", "\n") if os.path.exists(dst) else vtext)
+        for name in sorted(v):
+            feats = us_all.get(path, {}).get(("reward", name), set())
+            if name in eg.get(path, set()):
+                group = "DE1" if "DE1" in feats else ("ECON-11" if "ECON-11" in feats else "ECON-10")
+                want = l[name]
+            elif name not in m and name not in l and v[name] > 0:
+                group, want = "PE9", v[name]
+            else:
+                continue
+            rows.append((path, name, group, want, m.get(name), l.get(name), v[name], fin.get(name) if fin is not None else None))
+    return rows
+
+
+def gold_verify(worktree):
+    """Every reward's gold in the six files as the game reads them (the override, else 5.x's file) against legacy's:
+    equal, or explained (a reward legacy never had keeps 5.x's gold, PE9). DE1's list must be exactly the rewards 5.x
+    raised where legacy kept 1.32's gold, outside ECON-10."""
+    problems, n, counts = [], 0, {}
+    eg = econ_gold_units()
+    raised = set()
+    tot = {"ECON-10": [0, 0, 0, 0], "all": [0, 0, 0, 0]}
+    for path in REWARD_FILES:
+        mtext, ltext, vtext = texts(path)
+        m, l, v = gold_table(mtext), gold_table(ltext), gold_table(vtext)
+        dst = os.path.join(worktree, path)
+        f = gold_table(open(dst, encoding="utf-8-sig").read().replace("\r\n", "\n") if os.path.exists(dst) else vtext)
+        us = units().get(path, {})
+        for name in sorted(set(f) | set(l)):
+            if name in v and name in m and v[name] != m[name] and l.get(name) == m[name] and "ECON-10" not in us.get(("reward", name), set()):
+                raised.add((path, name))
+            if name not in f:
+                problems.append(f"{path}: reward {name} (legacy's) not in the game's file")
+                continue
+            if name in l:
+                ok, why = f[name] == l[name], "legacy's"
+            else:
+                ok, why = f[name] == v.get(name), "5.x's new reward, 5.x's gold (PE9)" if f[name] else "5.x's new reward, no gold"
+            if not ok:
+                problems.append(f"{path}: reward {name} pays {f[name]}, legacy {l.get(name)}, 5.x {v.get(name)}")
+                continue
+            counts[why] = counts.get(why, 0) + 1
+            n += 1
+            for key in (["ECON-10"] if "ECON-10" in us.get(("reward", name), set()) else []) + ["all"]:
+                for i, d in enumerate((m, l, v, f)):
+                    tot[key][i] += d.get(name, 0)
+    de1 = {(p, x) for p, xs in DE1.items() for x in xs}
+    if raised != de1:
+        problems.append(f"DE1 lists {sorted(de1 - raised)} not raised by 5.x, misses {sorted(raised - de1)}")
+    print("reward gold, every reward of the six files:")
+    for r, k in sorted(counts.items()):
+        print(f"  {k:5d}  {r}")
+    for key, (a, b, c, d) in tot.items():
+        print(f"  gold over {'the ECON-10 rewards' if key == 'ECON-10' else 'all rewards'}: 1.32 {a}, legacy {b}, 5.x {c}, the port {d}")
+    for p in problems:
+        print("  UNEXPLAINED " + p)
+    print(f"verify (gold): {len(problems)} unexplained differences")
+    return len(problems)
+
+
+def build_econ_tests():
+    rows = gold_rows()
+    out = ["// Generated by tools/gen_loot.py; do not edit. ECON's slice E4 data as the game reads it (docs/features/econ.md,",
+           "// ECON-10): the gold of every reward whose gold ECON decides, as GetReward reads it: legacy's for ECON-10's units",
+           "// and the loan (vivaldis_loan, ECON-11), legacy's (1.32's) for the rewards 5.x raised (DE1), 5.x's for 5.x's new",
+           "// rewards (PE9). `group`: 1 ECON-10, 2 the loan, 3 DE1, 4 PE9. One function per group of 60: compiler memory.", ""]
+    gid = {"ECON-10": 1, "ECON-11": 2, "DE1": 3, "PE9": 4}
+    groups = [rows[i:i + 60] for i in range(0, len(rows), 60)]
+    for k, g in enumerate(groups, 1):
+        out += ["function GMTestEconRewards%d(out checks : array<int>, out sums : array<int>) : int" % k, "{", "	var f : int;", ""]
+        out += ["	f += GMTestEconReward('%s', %d, %d, checks, sums);" % (r[1], r[3], gid[r[2]]) for r in g]
+        out += ["	return f;", "}", ""]
+    out += ["function GMTestEconRewardsAll(out checks : array<int>, out sums : array<int>) : int", "{", "	var f : int;", ""]
+    out += ["	f += GMTestEconRewards%d(checks, sums);" % k for k in range(1, len(groups) + 1)]
+    out += ["	return f;", "}", ""]
+    out += ["// The number of rewards and their gold by group (index 1 to 4), as written.",
+            "function GMTestEconRewardExpected(group : int, out count : int, out gold : int)", "{"]
+    for g, i in gid.items():
+        rs = [r for r in rows if r[2] == g]
+        out += ["	if(group == %d) { count = %d; gold = %d; }" % (i, len(rs), sum(r[3] for r in rs))]
+    out += ["}"]
+    return "\n".join(out) + "\n"
 
 
 # ---- binary entity edits (QT1): LOOT-02, LOOT-06, LOOT-07's quest NPCs, CRAFT-01's Midcotts smith ----------
@@ -581,6 +722,11 @@ def main():
     us_all = units()
     if args.verify:
         bad = verify(args.worktree, us_all)
+        bad += gold_verify(args.worktree)
+        tp = os.path.join(args.worktree, ECON_TESTS)
+        if not os.path.exists(tp) or open(tp, encoding="utf-8", newline="").read().replace("\r\n", "\n") != build_econ_tests():
+            print("  UNEXPLAINED " + ECON_TESTS + " out of date")
+            bad += 1
         bad += bin_verify(args.worktree)
         sys.exit(1 if bad else 0)
     stale = bin_generate(args.worktree, args.check)
@@ -606,6 +752,14 @@ def main():
             if not args.check:
                 with open(dst, "w", encoding="utf-8", newline="") as f:
                     f.write(new)
+    tp = os.path.join(args.worktree, ECON_TESTS)
+    text = build_econ_tests()
+    old = open(tp, encoding="utf-8", newline="").read() if os.path.exists(tp) else None
+    if old is None or old.replace("\r\n", "\n") != text:
+        stale.append(ECON_TESTS)
+        if not args.check:
+            with open(tp, "w", encoding="utf-8", newline="") as f:
+                f.write(text)
     if args.check and stale:
         sys.exit("out of date: " + ", ".join(stale) + ": run python tools/gen_loot.py")
 

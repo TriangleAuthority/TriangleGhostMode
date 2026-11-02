@@ -10,7 +10,7 @@ the Scarlet Crest set (w3r). This tool takes each of their `_Stats` abilities an
   Yrden intensity (the boots' per-tier values) instead of Aard; the trousers give sign intensity for all
   signs (0.05/0.10/0.12) instead of their stamina regen and inert base intensity; the lower tiers
   (armor and swords, Reinald's swords too) are tagged `NetflixSetMinor` and `SetBonusPiece`, so they
-  count towards the 3-piece bonus. The swords' entries are written by `gen_swd_items.py` (SWD-10, which
+  count towards the 3-piece bonus, and carry ECON's DE2 price (`item_layer.DE2`). The swords' entries are written by `gen_swd_items.py` (SWD-10, which
   also sets their stats and slots), with these tags from `minor_tags`, so each sword has one entry.
 - Dol Blathanna and White Tiger (DA4): legacy's medium resistances (legacy's DLC5 Nilfgaardian
   armor); Dol Blathanna's chest gives Igni and Aard intensity +10% instead of stamina regen.
@@ -28,6 +28,9 @@ Writes `items/gm_arm_new.xml` and `items_plus/gm_arm_new.xml` in Ghost Mode's DL
 """
 import argparse, os, re, subprocess, sys
 import xml.etree.ElementTree as ET
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import item_layer  # noqa: E402  ECON's DE2 prices of these items
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -190,7 +193,8 @@ def generate(folder):
         for name, entry in entries(text, "item", "name"):
             if not MINOR.match(name) or SWORD.search(entry):  # swords: gen_swd_items.py (SWD-10)
                 continue
-            items.append(re.sub(r'^<item\b', '<item on_conflict="replace"', minor_tags(entry)))
+            entry = item_layer.apply_de2(name, minor_tags(entry))  # ECON's DE2 price
+            items.append(re.sub(r'^<item\b', '<item on_conflict="replace"', entry))
 
     def block(lst):
         return "\n".join("\t" + e.strip() for e in lst)

@@ -5,7 +5,9 @@ CR2W is the format of .w2ent, .journal, .w2scene, .w2phase, .w2beh,
 object (chunk) with its serialized properties as indented text, recursing into
 structs, arrays and nested CR2W blobs (flatCompiledData, embedded files).
 Values it cannot decode are shown as hex; long ones are shortened but carry a
-hash, so any change still shows up when two dumps are compared.
+hash, so any change still shows up when two dumps are compared. A scene script
+block's call parameters (CStorySceneScript: a second property list after the
+properties) are shown as `params (after properties):`.
 
 Reads legacy (CR2W 162/163) and 5.0 (164) files. It is a reader only; it
 cannot write files. It is also git's text converter for these files (see the
@@ -22,6 +24,10 @@ import re
 import struct
 import subprocess
 import sys
+
+# Classes whose chunk holds a second property list after its properties: the parameters of the script
+# function it calls (a scene's script block: CStorySceneScript.functionName and its arguments).
+PARAM_CLASSES = {"CStorySceneScript"}
 
 PRIM = {"Int8": "<b", "Uint8": "<B", "Int16": "<h", "Uint16": "<H", "Int32": "<i", "Uint32": "<I",
         "Int64": "<q", "Uint64": "<Q", "Float": "<f", "Double": "<d", "Bool": "<?"}
@@ -221,7 +227,19 @@ def dump(f, out, indent=0):
             pos = f.props(d, pos, end, out, indent + 1)
             if pos < end:
                 extra = d[pos:end]
-                out.append(f"{pad}  <+{len(extra)} bytes after properties: {hexpreview(extra, 32)}>")
+                params = []
+                if c["cls"] in PARAM_CLASSES:
+                    try:
+                        if f.props(d, pos, end, params, indent + 2) != end:
+                            params = []
+                    except (ParseError, struct.error, IndexError):
+                        params = []
+                if params:
+                    # a scene script call's parameters: a second property list after the properties
+                    out.append(f"{pad}  params (after properties):")
+                    out.extend(params)
+                else:
+                    out.append(f"{pad}  <+{len(extra)} bytes after properties: {hexpreview(extra, 32)}>")
         except (ParseError, struct.error) as e:
             out.append(f"{pad}  <unparsed ({e}): {hexpreview(d[start:end], 48)}>")
     def label(e):

@@ -108,7 +108,7 @@
 <!-- Q705 -->	
 	<reward name="q705_found_letter" 							level="49"	experience="200" 	gold="0" 	achievement="0" 	script="" comment="After finishing small part of quest, optional, medium-small exp" />
 	<reward name="q705_ah_lives" 								level="49"	experience="500" 	gold="0" 	achievement="0" 	script="" comment="We went through hard dialog with choices and prevented Anna Henrietta murder, optional, high exp" />
-	<reward name="q705_beast_slayer" 							level="49"	experience="500" 	gold="5000" achievement="0" 	script="" comment="We got rewarded for killing Beast of Beauclair, optional, high exp, lots of money" />
+	<reward name="q705_beast_slayer" 							level="49"	experience="500" 	gold="6000" achievement="0" 	script="" comment="We got rewarded for killing Beast of Beauclair, optional, high exp, lots of money" />
 	<reward name="q705_prison_stash" 							level="49"	experience="200" 	gold="0" 	achievement="0" 	script="" comment="Found hidden stash in prison, very small exp" />
 	
 <!-- SIDE QUESTS -->		
@@ -117,11 +117,11 @@
 	<reward name="sq701_race" 									level="35"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="We complete the second competition of the tournament and will receive experience and a unique saddle as a price.Medium EXP" />
 	<reward name="sq701_meadow" 								level="35"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="We follow a bird and fight panthers to get to a secret meadow, we get experience for it.Small EXP" />
 	<reward name="sq701_shield_wall" 							level="35"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="We complete the second competition of the tournament and will receive experience.Medium EXP" />
-	<reward name="sq701_champion" 								level="35"	experience="500" 	gold="200" 	achievement="0" 	script="" comment="We win the tournament after fighting the champion. We get experience, victory laurels, a unique sword and money.High EXP" />
+	<reward name="sq701_champion" 								level="35"	experience="500" 	gold="500" 	achievement="0" 	script="" comment="We win the tournament after fighting the champion. We get experience, victory laurels, a unique sword and money.High EXP" />
 	<reward name="sq701_reward" 								level="35"	experience="300" 	gold="500" 	achievement="0" 	script="" comment="We solve the curse, which was the reason for participating in the tournament. We get a payment of at least 500, but we can haggle for more. High EXP" />
 	<reward name="sq701_novigrad" 								level="35"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="We meet Vivienne again in Novigrad and she gives us one of her feather as thanks for helping her. Low XP" />	
 <!-- SQ703 -->
-	<reward name="sq703_safari" 								level="37"	experience="200" 	gold="200" 	achievement="0" 	script="" comment="the basic reward for the safari that we will always get, regardless of our behavior. the value will be adjusted by +- 10%, depending on how we behaved during the quest. also, there is haggling with this reward." >
+	<reward name="sq703_safari" 								level="37"	experience="200" 	gold="400" 	achievement="0" 	script="" comment="the basic reward for the safari that we will always get, regardless of our behavior. the value will be adjusted by +- 10%, depending on how we behaved during the quest. also, there is haggling with this reward." >
 		<items>
 			<item name="sq703_wife_letter" amount="1" />
 		</items>
@@ -139,7 +139,7 @@
 			<item name="Gwent steel sword 1" amount="1" />
 		</items>
 	</reward>	
-	<reward name="cg700_tournament_win" 						level="40"	experience="200" 	gold="500" 	achievement="0" 	script="" comment="reward if geralt wins the gwent tournament" >
+	<reward name="cg700_tournament_win" 						level="40"	experience="200" 	gold="600" 	achievement="0" 	script="" comment="reward if geralt wins the gwent tournament" >
 		<items>
 			<item name="cg700_gwent_statue" amount="1" />
 		</items>
@@ -162,8 +162,8 @@
 	
 	<reward name="mh701_reward" 								level="48"	experience="500" 	gold="500" 	achievement="0" 	script="" comment="Big reward is needed he is a rich guy" />
 	<reward name="mh701_bonus_reward" 							level="48"	experience="250" 	gold="100" 	achievement="0" 	script="" comment="Small amount of Gold for burning kikimore eggs" />
-	<reward name="mh701_wife_reward" 							level="48"	experience="250" 	gold="120" 	achievement="0" 	script="" comment="Small amount of Gold of returning lost item" />
-	<reward name="mh701_locket_owner_reward" 					level="48"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="Small amount of Gold if locket given to owner instead of wife should be less than what wife would give" />
+	<reward name="mh701_wife_reward" 							level="48"	experience="250" 	gold="100" 	achievement="0" 	script="" comment="Small amount of Gold of returning lost item" />
+	<reward name="mh701_locket_owner_reward" 					level="48"	experience="100" 	gold="50" 	achievement="0" 	script="" comment="Small amount of Gold if locket given to owner instead of wife should be less than what wife would give" />
 	
 	<reward name="mq7001_QG_reward" 							level="36"	experience="100" 	gold="50" 	achievement="0" 	script="" comment="normal reward, easy quest" />
 	<reward name="mq7001_QG_bonus" 								level="36"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="more gold, if geralt convinces qg that the quest was dangerous" />
@@ -174,12 +174,12 @@
 		</items>
 	</reward>
 	
-	<reward name="mq7002_fiancee_reward" 						level="45"	experience="100" 	gold="300" 	achievement="0" 	script="" comment="rich fiancee pays geralt for helping, monsterhunt" />
+	<reward name="mq7002_fiancee_reward" 						level="45"	experience="100" 	gold="500" 	achievement="0" 	script="" comment="rich fiancee pays geralt for helping, monsterhunt" />
 	<reward name="mq7002_fiancee_reward_no_money"				level="45"	experience="200" 	gold="0" 	achievement="0" 	script="" comment="geralt doesn't ask for money because qg is sad" />
-	<reward name="mq7002_knight_alive_reward" 					level="45"	experience="300" 	gold="150" 	achievement="0" 	script="" comment="knight gives small gift" />
+	<reward name="mq7002_knight_alive_reward" 					level="45"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="knight gives small gift" />
 	<reward name="mq7002_knight_dead_reward" 					level="45"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="half or less the reward of knight_alive, geralt has to fuck this up for the knight to die" />
 	
-	<reward name="mq7004_reward" 								level="40"	experience="200" 	gold="100" 	achievement="0" 	script="" comment="qg is a lumberjack, not rich, quest involves breaking an ancient curse, big/moderate xp" />
+	<reward name="mq7004_reward" 								level="40"	experience="200" 	gold="200" 	achievement="0" 	script="" comment="qg is a lumberjack, not rich, quest involves breaking an ancient curse, big/moderate xp" />
 	<reward name="mq7004_reward_no_money" 						level="40"	experience="400" 	gold="0" 	achievement="0" 	script="" comment="same xp as mq7004_reward, no gold" />
 	<reward name="mq7004_storybook_reward" 						level="40"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="lumberjack gives geralt a storybook, token xp, no gold" >
 		<items>
@@ -199,7 +199,7 @@
 	<reward name="mq7006_aerondight" 							level="46"	experience="300" 	gold="0" 	achievement="0" 	script="" comment="XP only. It's a long, overarching quest, so the amount should be substantial." />
 	<reward name="mq7006_holy_stones_reward" 					level="46"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="XP only. Small amount for completing simple, optional objective." />
 	
-	<reward name="mq7007_gargoyles_reward" 						level="40"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="XP and gold. Medium amounts." />
+	<reward name="mq7007_gargoyles_reward" 						level="40"	experience="300" 	gold="500" 	achievement="0" 	script="" comment="XP and gold. Medium amounts." />
 	
 	<reward name="mq7009_found_paint" 							level="43"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="Made progress in 1/3 of quest, small exp" />
 	<reward name="mq7009_killed_griffon" 						level="43"	experience="300" 	gold="0" 	achievement="0" 	script="" comment="Killed gryffon, medium exp" />
@@ -207,7 +207,7 @@
 	
 	<reward name="mq7010_investigation_done" 					level="38"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="G has found a trail to follow. Give low xp, no gold, no items. " />
 	<reward name="mq7010_nest_found" 							level="38"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="G has found the dracolizard nest. Give med xp, no gold, no items." />
-	<reward name="mq7010_reward" 								level="38"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="Reward for completing the quest. Give med xp, high gold. Gold is negotiable." />
+	<reward name="mq7010_reward" 								level="38"	experience="300" 	gold="400" 	achievement="0" 	script="" comment="Reward for completing the quest. Give med xp, high gold. Gold is negotiable." />
 	<reward name="mq7010_nest_destroyed" 						level="38"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="XP reward for destroying dracolizard's nest. Nest is custom with it's features 'faked' in the quest structure." >
 		<items>
 			<item name="poi_bar_a_13_note" amount="1" />
@@ -215,15 +215,15 @@
 	</reward>
 
 	
-	<reward name="mq7011_gwent" 								level="36"	experience="50" 	gold="25" 	achievement="0" 	script="" comment="G has won am optional game of gwent with one of the clients. Give low xp, low gold." />	
+	<reward name="mq7011_gwent" 								level="36"	experience="50" 	gold="50" 	achievement="0" 	script="" comment="G has won am optional game of gwent with one of the clients. Give low xp, low gold." />	
 	<reward name="mq7011_fistfight" 							level="36"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="G has won a fistfight with one of the clients. Give low xp." />	
 	<reward name="mq7011_bank_done" 							level="36"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="G has finished the quest. Give med xp, no gold, no items." />	
-	<reward name="mq7011_peaceful_bank" 						level="36"	experience="0" 		gold="500" 	achievement="0" 	script="" comment="Additional reward if G has kept patient through the quest. No xp, high gold, any high-end or unique weapon." >
+	<reward name="mq7011_peaceful_bank" 						level="36"	experience="0" 		gold="600" 	achievement="0" 	script="" comment="Additional reward if G has kept patient through the quest. No xp, high gold, any high-end or unique weapon." >
 		<items>
 			<item name="mq7011 Cianfanelli steel sword" amount="1" />
 		</items>
 	</reward>
-	<reward name="mq7011_angry_bank" 							level="36"	experience="0"	 	gold="200" 	achievement="0" 	script="" comment="Additional reward if G has lost his patience through the quest. Give no xp, medium gold." />
+	<reward name="mq7011_angry_bank" 							level="36"	experience="0"	 	gold="300" 	achievement="0" 	script="" comment="Additional reward if G has lost his patience through the quest. Give no xp, medium gold." />
 	<reward name="mq7011_present_given" 						level="36"	experience="50"	 	gold="0" 	achievement="0" 	script="" comment="Geralt has given a clerk a small present. Small xp." />
 
 	<reward name="mq7015_caretaker_reward" 						level="36"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="this should be a figurine of Reginald d' Aubry which should have quite a big value in Novigrad" >
@@ -231,7 +231,7 @@
 			<item name="mq7015_reginalds_figurine" amount="1" />
 		</items>
 	</reward>
-	<reward name="mq7015_hugues_reward" 						level="36"	experience="50" 	gold="50" 	achievement="0" 	script="" comment="money, but not too much as QG is offering the other half later on, but never gives it" />
+	<reward name="mq7015_hugues_reward" 						level="36"	experience="50" 	gold="100" 	achievement="0" 	script="" comment="money, but not too much as QG is offering the other half later on, but never gives it" />
 	
 	<reward name="mq7017_hermit_reward" 						level="44"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="this is a special case, placeholder gold, will later be replaced with potatoes" >
 		<items>
@@ -247,16 +247,16 @@
 	
 	<reward name="mq7017_hermit_reward_xp" 						level="44"	experience="100" 	gold="0" 	achievement="" 		script="" comment="no gold, just xp, quest is moderate difficulty" />
 	
-	<reward name="mq7018_count_side" 							level="46"	experience="300" 	gold="350" 	achievement="0" 	script="" comment="this reward is given at questend, if the player doesn't kill the basilisk" />
-	<reward name="mq7018_hunter_side" 							level="46"	experience="300" 	gold="400" 	achievement="0" 	script="" comment="this reward is given at questend, if the player kills the basilisk" />
-	<reward name="mq7018_count_thanks" 							level="46"	experience="0" 	gold="50" 	achievement="0" 	script="" comment="this is some additional money the count offers in case geralt didn't kill the basilisk. the player has the opportunity to refuse this reward and gets a virtue for mq7006 if he does it. " />
+	<reward name="mq7018_count_side" 							level="46"	experience="300" 	gold="500" 	achievement="0" 	script="" comment="this reward is given at questend, if the player doesn't kill the basilisk" />
+	<reward name="mq7018_hunter_side" 							level="46"	experience="300" 	gold="500" 	achievement="0" 	script="" comment="this reward is given at questend, if the player kills the basilisk" />
+	<reward name="mq7018_count_thanks" 							level="46"	experience="0" 	gold="200" 	achievement="0" 	script="" comment="this is some additional money the count offers in case geralt didn't kill the basilisk. the player has the opportunity to refuse this reward and gets a virtue for mq7006 if he does it. " />
 
-	<reward name="mq7020_le_papillion_fake_reward" 				level="43"	experience="0" 		gold="120" 	achievement="0" 	script="" comment="For fake haggling only, not given to the player" />
+	<reward name="mq7020_le_papillion_fake_reward" 				level="43"	experience="0" 		gold="200" 	achievement="0" 	script="" comment="For fake haggling only, not given to the player" />
 	<reward name="mq7020_final" 								level="43"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="medium exp" />	
-	<reward name="mq7020_jeans_reward" 							level="43"	experience="0" 		gold="150" 	achievement="0" 	script="" comment="money from the barber" />
+	<reward name="mq7020_jeans_reward" 							level="43"	experience="0" 		gold="300" 	achievement="0" 	script="" comment="money from the barber" />
 	
-	<reward name="mq7021_whole_treasure" 						level="37"	experience="150"	gold="300"  achievement="0" 	script="" comment="the rich brothers so large gold" />
-	<reward name="mq7021_33_treasure" 							level="37"	experience="150"	gold="100" 	achievement="0" 	script="" comment="33% of mq7021_whole_treasure" />
+	<reward name="mq7021_whole_treasure" 						level="37"	experience="150"	gold="600"  achievement="0" 	script="" comment="the rich brothers so large gold" />
+	<reward name="mq7021_33_treasure" 							level="37"	experience="150"	gold="200" 	achievement="0" 	script="" comment="33% of mq7021_whole_treasure" />
 	<reward name="mq7021_xp_only" 								level="37"	experience="150"	gold="0" 	achievement="0" 	script="" comment="just xp for fighting brothers and thugs" />
 	
 	<reward name="mq7022_rafters_reward" 						level="30"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="some cash for minor" />
@@ -276,22 +276,22 @@
 	
 	<reward name="mq7024_exp_reward" 							level="35"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="XP only. Medium amount." />
 	
-	<reward name="ff701_gb_reward" 								level="0"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
+	<reward name="ff701_gb_reward" 								level="0"	experience="25" 	gold="200" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
 		<items>
 			<item name="ff701_notice" amount="1" />
 		</items>
 	</reward>
-	<reward name="ff701_mnt_reward" 							level="0"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
+	<reward name="ff701_mnt_reward" 							level="0"	experience="25" 	gold="200" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
 		<items>
 			<item name="ff701_notice" amount="1" />
 		</items>
 	</reward>
-	<reward name="ff701_br_reward" 								level="0"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
+	<reward name="ff701_br_reward" 								level="0"	experience="25" 	gold="200" 	achievement="0" 	script="" comment="XP and Gold medium amounts" >
 		<items>
 			<item name="ff701_notice" amount="1" />
 		</items>
 	</reward>
-	<reward name="ff701_master_reward" 							level="0"	experience="25" 	gold="150" 	achievement="0" 	script="" comment="XP and Gold medium amounts but more than the other fist fights" />
+	<reward name="ff701_master_reward" 							level="0"	experience="25" 	gold="300" 	achievement="0" 	script="" comment="XP and Gold medium amounts but more than the other fist fights" />
 	
 	<reward name="mq7019_picnic_reward" 						level="30"	experience="0" 	gold="0" 	achievement="0" 	script="" comment="" />
 	
@@ -311,17 +311,17 @@
 	<reward name="th701_cat_first_stash" 						level="40"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="One diagram" />
 	<reward name="th701_cat_second_stash" 						level="40"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="Two diagrams" />
 	<reward name="th701_cat_third_stash" 						level="40"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="Three diagrams" />
-	<reward name="th701_zdravko_reported"		 				level="40"	experience="25" 		gold="500" 	achievement="0" 	script="" comment="Reported to archmaster after finding any complete set. Needs money reward." />
+	<reward name="th701_zdravko_reported"		 				level="40"	experience="25" 		gold="600" 	achievement="0" 	script="" comment="Reported to archmaster after finding any complete set. Needs money reward." />
 	
 	<!-- LIVING WORLD -->
 	
-	<reward name="lw_ww_coronata_reward" 						level="37"	experience="50" 	gold="700" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" />	
-	<reward name="lw_ww_vermentino_reward" 						level="37"	experience="50" 	gold="700" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" >
+	<reward name="lw_ww_coronata_reward" 						level="37"	experience="50" 	gold="600" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" />	
+	<reward name="lw_ww_vermentino_reward" 						level="37"	experience="50" 	gold="600" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" >
 		<items>
 			<item name="poi_ww_ver_10_note" amount="1" />
 		</items>
 	</reward>			
-	<reward name="lw_ww_belgaard_reward" 						level="39"	experience="50" 	gold="900" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" >
+	<reward name="lw_ww_belgaard_reward" 						level="39"	experience="50" 	gold="600" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" >
 		<items>
 			<item name="poi_ww_bel_08_note" amount="1" />
 			<item name="poi_ww_bel_09_note" amount="1" />
@@ -329,12 +329,12 @@
 	</reward>	
 	<reward name="lw_ww_secret_path_done" 						level="38"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="Medium Exp" />
 	<reward name="lw_ww_secret_path_bulbs_destroyed" 			level="38"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="Low Exp" />
-	<reward name="lw_plegmund_reward" 							level="40"	experience="50" 	gold="800" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" />
-	<reward name="poi_car_a_04_reward"						    level="42"	experience="50" 	gold="200" 	achievement="0" 	script="" comment="LATE" />
-	<reward name="poi_gor_b_02_reward"							level="42"	experience="50" 	gold="200" 	achievement="0" 	script="" comment="LATE" />
-	<reward name="poi_vin_a_01_reward"							level="39"	experience="50" 	gold="150" 	achievement="0" 	script="" comment="MID" />
-	<reward name="poi_vin_b_03_reward"							level="39"	experience="50" 	gold="150" 	achievement="0" 	script="" comment="MID" />
-	<reward name="poi_dun_b_03_reward"							level="39"	experience="50" 	gold="150" 	achievement="0" 	script="" comment="MID" />
+	<reward name="lw_plegmund_reward" 							level="40"	experience="50" 	gold="600" 	achievement="0" 	script="" comment="Medium Exp and large gold sum" />
+	<reward name="poi_car_a_04_reward"						    level="42"	experience="50" 	gold="300" 	achievement="0" 	script="" comment="LATE" />
+	<reward name="poi_gor_b_02_reward"							level="42"	experience="50" 	gold="300" 	achievement="0" 	script="" comment="LATE" />
+	<reward name="poi_vin_a_01_reward"							level="39"	experience="50" 	gold="200" 	achievement="0" 	script="" comment="MID" />
+	<reward name="poi_vin_b_03_reward"							level="39"	experience="50" 	gold="200" 	achievement="0" 	script="" comment="MID" />
+	<reward name="poi_dun_b_03_reward"							level="39"	experience="50" 	gold="200" 	achievement="0" 	script="" comment="MID" />
 	<reward name="camm_final_reward"							level="47"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="LATE no gold, horse trophy" >
 		<items>
 			<item name="camm_trophy" amount="1" />

@@ -274,6 +274,8 @@ Free nilfgaardian lemon gets legacy's category, description and tags here; its d
 
 **Decisions:** port as legacy (DC4 for Cheesecutter, DC5 for the technique).
 
+**ECON's PE13** (found in ECON's map, fixed in ECON's slice E2, 2026-11-01, 5.x-GM `467576dc`): legacy adds `mod_alchemy_table` to Blood and Wine's Protofleder Mutagen (both folders), the tag the dismantling station reads (`W3StandaloneDismantleComponent.ShouldShowItem`); the port lacked it because CRAFT's tags skipped every `mod_*` tag. CRAFT-08 now owns that one tag (`item_layer.TAGS`, kept out of ECON's price tags by `ECON_KEEP`); **verified** by script in both trees (`GMTest_econ_e2`: the station's rule shows it, the Katakan mutagen as a control). Not a deviation: legacy's tag.
+
 **Later:** legacy's parts of Knight Geralt Pants 3 and Knight Geralt A Pants 3 name "Silver Ingot" (the item is "Silver ingot"), carried as legacy's; if the game matches item names by case, that part is never given, in legacy too ([audit](#craft-and-loot-audit-2026-10-22) F9).
 
 ### CRAFT-09 Dismantle kits

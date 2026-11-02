@@ -3379,7 +3379,7 @@
 	<item on_conflict="replace"
 				name							="Aerondight EP2"
 				category						="silversword"
-				price							="700"
+				price							="1750"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -3455,7 +3455,7 @@
 	<item on_conflict="replace"
 				name							="Damien sword"
 				category						="steelsword"
-				price							="14"
+				price							="60"
 				initial_durability				="200"
 				max_durability					="200"
 				enhancement_slots				="0"
@@ -3510,7 +3510,7 @@
 	<item on_conflict="replace"
 				name							="EP2 Silver sword 1"
 				category						="silversword" 
-				price							="574"
+				price							="508"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -3585,7 +3585,7 @@
 	<item on_conflict="replace"
 				name							="EP2 Silver sword 1R"
 				category						="silversword" 
-				price							="974"
+				price							="1025"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -3609,7 +3609,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/silver_sword_lvl7_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>EP2 Silver sword 1R _Stats</a>
@@ -3659,7 +3659,7 @@
 	<item on_conflict="replace"
 				name							="EP2 Silver sword 2"
 				category						="silversword" 
-				price							="1270"
+				price							="560"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -3734,7 +3734,7 @@
 	<item on_conflict="replace"
 				name							="EP2 Silver sword 3"
 				category						="silversword" 
-				price							="710"
+				price							="570"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -3809,7 +3809,7 @@
 	<item on_conflict="replace"
 				name							="EP2 Silver sword 3R"
 				category						="silversword" 
-				price							="1045"
+				price							="1415"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -3833,7 +3833,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/dwarven_silver_sword_lvl1-64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>EP2 Silver sword 3R _Stats</a>
@@ -3883,7 +3883,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl1 steel sword 1"
 				category						="steelsword"
-				price							="96"
+				price							="60"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -3950,7 +3950,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl1 steel sword 2"
 				category						="steelsword"
-				price							="96"
+				price							="245"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -4018,7 +4018,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl2 steel sword 1"
 				category						="steelsword"
-				price							="138"
+				price							="60"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -4085,7 +4085,7 @@
 	<item on_conflict="replace"
 				name							="Guard Lvl2 steel sword 2"
 				category						="steelsword"
-				price							="153"
+				price							="145"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -4153,7 +4153,7 @@
 	<item on_conflict="replace"
 				name							="Gwent steel sword 1"
 				category						="steelsword"
-				price							="726"
+				price							="1015"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -4177,7 +4177,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/gwent_steel_sword_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Gwent steel sword 1 _Stats</a>
@@ -4220,7 +4220,7 @@
 	<item on_conflict="replace"
 				name							="Hanza steel sword 0"
 				category						="steelsword" 
-				price							="116"
+				price							="28"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -4288,7 +4288,7 @@
 	<item on_conflict="replace"
 				name							="Hanza steel sword 1"
 				category						="steelsword" 
-				price							="216"
+				price							="75"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="0"
@@ -4355,7 +4355,7 @@
 	<item on_conflict="replace"
 				name							="Hanza steel sword 2"
 				category						="steelsword" 
-				price							="316"
+				price							="270"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -4423,7 +4423,7 @@
 	<item on_conflict="replace"
 				name							="Knights steel sword 1"
 				category						="steelsword"
-				price							="181"
+				price							="115"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -4491,7 +4491,7 @@
 	<item on_conflict="replace"
 				name							="Knights steel sword 2"
 				category						="steelsword"
-				price							="196"
+				price							="305"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -4693,7 +4693,7 @@
 	<item on_conflict="replace"
 				name							="NGP q702 vampire steel sword"
 				category						="steelsword" 
-				price							="674"
+				price							="1095"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -4760,7 +4760,7 @@
 	<item on_conflict="replace"
 				name							="Squire steel sword 1"
 				category						="steelsword"
-				price							="158"
+				price							="110"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="1"
@@ -4828,7 +4828,7 @@
 	<item on_conflict="replace"
 				name							="Squire steel sword 2"
 				category						="steelsword"
-				price							="173"
+				price							="295"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -4896,7 +4896,7 @@
 	<item on_conflict="replace"
 				name							="Toussaint steel sword 2"
 				category						="steelsword"
-				price							="976"
+				price							="310"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -4964,7 +4964,7 @@
 	<item on_conflict="replace"
 				name							="Unique silver sword"
 				category						="silversword" 
-				price							="1204"
+				price							="1650"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -4988,7 +4988,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/unique_1_silver_sword_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Unique silver sword _Stats</a>
@@ -5038,7 +5038,7 @@
 	<item on_conflict="replace"
 				name							="Unique steel sword"
 				category						="steelsword"
-				price							="830"
+				price							="1313"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5062,7 +5062,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/unique_1_steel_sword_1_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Unique steel sword _Stats</a>
@@ -5105,7 +5105,7 @@
 	<item on_conflict="replace"
 				name							="mq7001 Toussaint steel sword"
 				category						="steelsword"
-				price							="268"
+				price							="999"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5129,7 +5129,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/toussaint_1_steel_sword_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+				<tags>							Autogen, AutogenUseLevelRange, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>mq7001 Toussaint steel sword _Stats</a>
@@ -5172,7 +5172,7 @@
 	<item on_conflict="replace"
 				name							="mq7007 Elven Sword"
 				category						="steelsword"
-				price							="154"
+				price							="352"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -5240,7 +5240,7 @@
 	<item on_conflict="replace"
 				name							="mq7011 Cianfanelli steel sword"
 				category						="steelsword"
-				price							="319"
+				price							="1001"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5264,7 +5264,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/quests/Cianfanelli Sword.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq7011 Cianfanelli steel sword _Stats</a>
@@ -5307,7 +5307,7 @@
 	<item on_conflict="replace"
 				name							="q702 vampire steel sword"
 				category						="steelsword" 
-				price							="674"
+				price							="1095"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5331,7 +5331,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/q704_vampire_steel_sword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece, Autogen, AutogenUseLevelRange
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece, Autogen, AutogenUseLevelRange, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>q702 vampire steel sword _Stats</a>
@@ -5374,7 +5374,7 @@
 	<item on_conflict="replace"
 				name							="q704 vampire silver sword"
 				category						="silversword" 
-				price							="1062"
+				price							="1551"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5398,7 +5398,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/vampire_silver_sword_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>q704 vampire silver sword _Stats</a>
@@ -5448,7 +5448,7 @@
 	<item on_conflict="replace"
 				name							="q704 vampire steel sword"
 				category						="steelsword" 
-				price							="1225"
+				price							="1350"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5472,7 +5472,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/vampire_steel_sword_64x128.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, mod_weapon, EP1, VampireSet, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>q704 vampire steel sword _Stats</a>
@@ -5515,7 +5515,7 @@
 	<item on_conflict="replace"
 				name							="sq701 Geralt of Rivia sword"
 				category						="steelsword"
-				price							="842"
+				price							="995"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5539,7 +5539,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/quests/sq701_sword_geralt_of_rivia.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>sq701 Geralt of Rivia Sword _Stats</a>
@@ -5582,7 +5582,7 @@
 	<item on_conflict="replace"
 				name							="sq701 Ravix of Fourhorn sword"
 				category						="steelsword"
-				price							="857"
+				price							="995"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5606,7 +5606,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/quests/sq701_sword_ravix_of_fourhorn.png"
 			>
-				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+				<tags>							Autogen, AutogenUseLevelRange, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>sq701 Ravix of Fourhorn Sword _Stats</a>
@@ -5651,7 +5651,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf School silver sword"
 				category						="silversword" 
-				price							="152"
+				price							="324"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -5675,7 +5675,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl1_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword _Stats</a>
@@ -5726,7 +5726,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf School silver sword 1"
 				category						="silversword" 
-				price							="152"
+				price							="574"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -5750,7 +5750,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl2_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 1 _Stats</a>
@@ -5801,7 +5801,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf School silver sword 2"
 				category						="silversword" 
-				price							="224"
+				price							="1011"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5825,7 +5825,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl3_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 2 _Stats</a>
@@ -5876,7 +5876,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf School silver sword 3"
 				category						="silversword" 
-				price							="224"
+				price							="1614"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -5900,7 +5900,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl4_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School silver sword 3 _Stats</a>
@@ -5951,7 +5951,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf School steel sword"
 				category						="steelsword" 
-				price							="108"
+				price							="288"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -5975,7 +5975,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl1_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword _Stats</a>
@@ -6019,7 +6019,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf School steel sword 1"
 				category						="steelsword" 
-				price							="120"
+				price							="502"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -6043,7 +6043,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl2_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 1 _Stats</a>
@@ -6087,7 +6087,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf School steel sword 2"
 				category						="steelsword" 
-				price							="120"
+				price							="775"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -6111,7 +6111,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl3_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 2 _Stats</a>
@@ -6155,7 +6155,7 @@
 	<item on_conflict="replace"
 				name							="NGP Wolf School steel sword 3"
 				category						="steelsword" 
-				price							="664"
+				price							="1351"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -6179,7 +6179,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl4_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, WolfSetMinor, mod_weapon, SetBonusPiece, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Wolf School steel sword 3 _Stats</a>
@@ -6223,7 +6223,7 @@
 	<item on_conflict="replace"
 				name							="Wolf School silver sword"
 				category						="silversword" 
-				price							="152"
+				price							="324"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -6247,7 +6247,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl1_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword _Stats</a>
@@ -6298,7 +6298,7 @@
 	<item on_conflict="replace"
 				name							="Wolf School silver sword 1"
 				category						="silversword" 
-				price							="152"
+				price							="574"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -6322,7 +6322,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl2_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 1 _Stats</a>
@@ -6373,7 +6373,7 @@
 	<item on_conflict="replace"
 				name							="Wolf School silver sword 2"
 				category						="silversword" 
-				price							="224"
+				price							="1011"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -6397,7 +6397,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl3_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 2 _Stats</a>
@@ -6448,7 +6448,7 @@
 	<item on_conflict="replace"
 				name							="Wolf School silver sword 3"
 				category						="silversword" 
-				price							="224"
+				price							="1614"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -6472,7 +6472,7 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/witcher_silver_wolf_sword_lvl4_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School silver sword 3 _Stats</a>
@@ -6523,7 +6523,7 @@
 	<item on_conflict="replace"
 				name							="Wolf School steel sword"
 				category						="steelsword" 
-				price							="108"
+				price							="288"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -6547,7 +6547,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl1_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword _Stats</a>
@@ -6591,7 +6591,7 @@
 	<item on_conflict="replace"
 				name							="Wolf School steel sword 1"
 				category						="steelsword" 
-				price							="120"
+				price							="502"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -6615,7 +6615,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl2_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 1 _Stats</a>
@@ -6659,7 +6659,7 @@
 	<item on_conflict="replace"
 				name							="Wolf School steel sword 2"
 				category						="steelsword" 
-				price							="120"
+				price							="775"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -6683,7 +6683,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl3_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 2 _Stats</a>
@@ -6727,7 +6727,7 @@
 	<item on_conflict="replace"
 				name							="Wolf School steel sword 3"
 				category						="steelsword" 
-				price							="664"
+				price							="1351"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -6751,7 +6751,7 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/witcher_steel_wolf_sword_lvl4_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, SetBonusPiece, WolfSetMinor, mod_legendary
 		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Wolf School steel sword 3 _Stats</a>
@@ -6797,7 +6797,7 @@
 	<item on_conflict="replace"
 		name							="mq1058_cat_school_sword"
 		category						="steelsword"
-		price							="16"
+		price							="777"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -6821,7 +6821,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons\inventory\quests\cat_school_sword_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, LynxSetMinor, SetBonusPiece
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, LynxSetMinor, SetBonusPiece, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq1058_cat_school_sword _Stats</a>
@@ -6867,7 +6867,7 @@
 	<item on_conflict="replace"
 		name							="Crafted Burning Rose Sword"
 		category						="steelsword"
-		price							="1519"
+		price							="1250"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -6891,7 +6891,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/burning_rose_sword_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Crafted Burning Rose Sword _Stats</a>
@@ -6937,7 +6937,7 @@
 	<item on_conflict="replace"
 		name							="EP1 Viper School silver sword"
 		category						="silversword" 
-		price							="1039"
+		price							="1700"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7013,7 +7013,7 @@
 	<item on_conflict="replace"
 		name							="EP1 Viper School steel sword"
 		category						="steelsword" 
-		price							="890"
+		price							="1400"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7082,7 +7082,7 @@
 	<item on_conflict="replace"
 		name							="NGP EP1 Viper School silver sword"
 		category						="silversword" 
-		price							="1039"
+		price							="1700"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7158,7 +7158,7 @@
 	<item on_conflict="replace"
 		name							="NGP EP1 Viper School steel sword"
 		category						="steelsword" 
-		price							="890"
+		price							="1400"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7229,7 +7229,7 @@
 	<item on_conflict="replace"
 		name							="Burning Rose Sword"
 		category						="steelsword"
-		price							="106"
+		price							="800"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7253,7 +7253,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/burning_rose_sword_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, EP1, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Burning Rose Sword _Stats</a>
@@ -7302,7 +7302,7 @@
 	<item on_conflict="replace"
 		name							="Burning Rose Sword B"
 		category						="steelsword"
-		price							="106"
+		price							="320"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -7374,7 +7374,7 @@
 	<item on_conflict="replace"
 		name							="Hakland Sabre"
 		category						="steelsword"
-		price							="106"
+		price							="110"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -7444,7 +7444,7 @@
 	<item on_conflict="replace"
 		name							="Ofir Sabre 1"
 		category						="steelsword"
-		price							="106"
+		price							="777"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7468,7 +7468,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/ofir_steel_sabre_2_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, mod_valuable, Ofir, EP1
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, Ofir, EP1, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Ofir Sabre 1 _Stats</a>
@@ -7513,7 +7513,7 @@
 	<item on_conflict="replace"
 		name							="Ofir Sabre 2"
 		category						="steelsword"
-		price							="106"
+		price							="295"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -7537,7 +7537,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/ofir_steel_sabre_3_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, mod_valuable, Ofir, EP1, Autogen
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_ofir, Ofir, EP1, Autogen
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Ofir Sabre 2 _Stats</a>
@@ -7581,7 +7581,7 @@
 	<item on_conflict="replace"
 		name							="Olgierd Sabre"
 		category						="steelsword"
-		price							="16"
+		price							="700"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7605,7 +7605,7 @@
 		localisation_key_description	="item_desc_olgierd_sabre"
 		icon_path						="icons/inventory/weapons/olgierd_sabre_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, PhantomWeapon, OlgierdSabre, EP1, Autogen
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, PhantomWeapon, OlgierdSabre, EP1, Autogen, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>PC Olgierd Sabre _Stats</a>
@@ -7649,7 +7649,7 @@
 	<item on_conflict="replace"
 		name							="PC Caretaker Shovel"
 		category						="steelsword"
-		price							="14"
+		price							="600"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0" 
@@ -7673,7 +7673,7 @@
 		localisation_key_description 	="item_name_caretaker_spade_desc"
 		icon_path						="icons/inventory/weapons/caretaker_shovel_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeAxe, SecondaryWeapon, mod_secondary
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeAxe, SecondaryWeapon, mod_secondary, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>PC Caretaker Shovel _Stats</a>
@@ -7717,7 +7717,7 @@
 	<item on_conflict="replace"
 		name							="Arbitrator_crafted"
 		category						="steelsword"
-		price							="185"
+		price							="867"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7786,7 +7786,7 @@
 	<item on_conflict="replace"
 		name							="Beannshie_crafted" 
 		category						="steelsword" 
-		price							="913"
+		price							="942"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -7855,7 +7855,7 @@
 	<item on_conflict="replace"
 		name							="Bear School silver sword"
 		category						="silversword" 
-		price							="182"
+		price							="316"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7879,7 +7879,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/witcher_silver_bear_sword_lvl1_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, BearSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, BearSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School silver sword _Stats</a>
@@ -7930,7 +7930,7 @@
 	<item on_conflict="replace"
 		name							="Bear School silver sword 1"
 		category						="silversword" 
-		price							="694"
+		price							="679"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -7954,7 +7954,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/witcher_silver_bear_sword_lvl2_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, BearSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, BearSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Bear School silver sword 1 _Stats</a>
@@ -8006,7 +8006,7 @@
 	<item on_conflict="replace"
 		name							="Bear School silver sword 2"
 		category						="silversword" 
-		price							="694"
+		price							="1158"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -8082,7 +8082,7 @@
 	<item on_conflict="replace"
 		name							="Bear School silver sword 3"
 		category						="silversword" 
-		price							="694"
+		price							="1812"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -8158,7 +8158,7 @@
 	<item on_conflict="replace"
 		name							="Bear School steel sword"
 		category						="steelsword" 
-		price							="46"
+		price							="292"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -8226,7 +8226,7 @@
 	<item on_conflict="replace"
 		name							="Bear School steel sword 1"
 		category						="steelsword" 
-		price							="142"
+		price							="619"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -8295,7 +8295,7 @@
 	<item on_conflict="replace"
 		name							="Bear School steel sword 2"
 		category						="steelsword"
-		price							="686"
+		price							="955"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -8364,7 +8364,7 @@
 	<item on_conflict="replace"
 		name							="Bear School steel sword 3"
 		category						="steelsword" 
-		price							="710"
+		price							="1600"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -8433,7 +8433,7 @@
 	<item on_conflict="replace"
 		name							="Blackunicorn_crafted" 
 		category						="steelsword" 
-		price							="1091"
+		price							="1037"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -8502,7 +8502,7 @@
 	<item on_conflict="replace"
 		name							="Dwarven silver sword 1_crafted" 
 		category						="silversword" 
-		price							="297"
+		price							="260"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1" 
@@ -8579,7 +8579,7 @@
 	<item on_conflict="replace"
 		name							="Dwarven silver sword 2_crafted" 
 		category						="silversword" 
-		price							="725"
+		price							="582"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2" 
@@ -8655,7 +8655,7 @@
 	<item on_conflict="replace"
 		name							="Dwarven sword 1_crafted" 
 		category						="steelsword"
-		price							="181"
+		price							="80"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -8724,7 +8724,7 @@
 	<item on_conflict="replace"
 		name							="Dwarven sword 2_crafted" 
 		category						="steelsword"
-		price							="725"
+		price							="334"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -8793,7 +8793,7 @@
 	<item on_conflict="replace"
 		name							="Elven silver sword 1_crafted" 
 		category						="silversword" 
-		price							="251"
+		price							="256"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1" 
@@ -8870,7 +8870,7 @@
 	<item on_conflict="replace"
 		name							="Elven silver sword 2_crafted" 
 		category						="silversword" 
-		price							="251"
+		price							="578"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2" 
@@ -8946,7 +8946,7 @@
 	<item on_conflict="replace"
 		name							="Gnomish silver sword 1_crafted" 
 		category						="silversword" 
-		price							="243"
+		price							="316"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2" 
@@ -9023,7 +9023,7 @@
 	<item on_conflict="replace"
 		name							="Gnomish silver sword 2_crafted" 
 		category						="silversword" 
-		price							="680"
+		price							="636"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -9099,7 +9099,7 @@
 	<item on_conflict="replace"
 		name							="Gnomish sword 1_crafted" 
 		category						="steelsword"
-		price							="710"
+		price							="203"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -9168,7 +9168,7 @@
 	<item on_conflict="replace"
 		name							="Gnomish sword 2_crafted" 
 		category						="steelsword"
-		price							="925"
+		price							="394"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9237,7 +9237,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon School silver sword"
 		category						="silversword" 
-		price							="233"
+		price							="237"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9261,7 +9261,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/witcher_silver_gryphon_sword_lvl1_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, GryphonSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, GryphonSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School silver sword _Stats</a>
@@ -9312,7 +9312,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon School silver sword 1"
 		category						="silversword" 
-		price							="239"
+		price							="522"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9336,7 +9336,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/witcher_silver_gryphon_sword_lvl2_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, GryphonSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, GryphonSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Gryphon School silver sword 1 _Stats</a>
@@ -9388,7 +9388,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon School silver sword 2"
 		category						="silversword" 
-		price							="694"
+		price							="940"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9464,7 +9464,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon School silver sword 3"
 		category						="silversword" 
-		price							="694"
+		price							="1528"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9540,7 +9540,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon School steel sword"
 		category						="steelsword" 
-		price							="95"
+		price							="204"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9608,7 +9608,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon School steel sword 1"
 		category						="steelsword" 
-		price							="135"
+		price							="471"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9677,7 +9677,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon School steel sword 2"
 		category						="steelsword" 
-		price							="142"
+		price							="747"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9746,7 +9746,7 @@
 	<item on_conflict="replace"
 		name							="Gryphon School steel sword 3"
 		category						="steelsword" 
-		price							="694"
+		price							="1353"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -9815,7 +9815,7 @@
 	<item on_conflict="replace"
 		name							="Harpy_crafted" 
 		category						="silversword" 
-		price							="886"
+		price							="1295"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -9891,7 +9891,7 @@
 	<item on_conflict="replace"
 		name							="Inquisitor sword 1_crafted" 
 		category						="steelsword"
-		price							="108"
+		price							="143"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -9960,7 +9960,7 @@
 	<item on_conflict="replace"
 		name							="Inquisitor sword 2_crafted" 
 		category						="steelsword"
-		price							="108"
+		price							="342"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -10029,7 +10029,7 @@
 	<item on_conflict="replace"
 		name							="Longclaw_crafted" 
 		category						="steelsword" 
-		price							="217"
+		price							="1012"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -10098,7 +10098,7 @@
 	<item on_conflict="replace"
 		name							="Lynx School silver sword"
 		category						="silversword" 
-		price							="219"
+		price							="274"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10122,7 +10122,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/witcher_silver_lynx_sword_lvl1_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, LynxSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, LynxSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School silver sword _Stats</a>
@@ -10173,7 +10173,7 @@
 	<item on_conflict="replace"
 		name							="Lynx School silver sword 1"
 		category						="silversword" 
-		price							="343"
+		price							="574"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10197,7 +10197,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/witcher_silver_lynx_sword_lvl2_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, LynxSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, LynxSetMinor, mod_weapon, SetBonusPiece, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Lynx School silver sword 1 _Stats</a>
@@ -10249,7 +10249,7 @@
 	<item on_conflict="replace"
 		name							="Lynx School silver sword 2"
 		category						="silversword" 
-		price							="771"
+		price							="1011"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10325,7 +10325,7 @@
 	<item on_conflict="replace"
 		name							="Lynx School silver sword 3"
 		category						="silversword" 
-		price							="927"
+		price							="1614"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10401,7 +10401,7 @@
 	<item on_conflict="replace"
 		name							="Lynx School steel sword"
 		category						="steelsword" 
-		price							="133"
+		price							="238"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10469,7 +10469,7 @@
 	<item on_conflict="replace"
 		name							="Lynx School steel sword 1"
 		category						="steelsword" 
-		price							="223"
+		price							="502"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10538,7 +10538,7 @@
 	<item on_conflict="replace"
 		name							="Lynx School steel sword 2"
 		category						="steelsword" 
-		price							="327"
+		price							="775"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10607,7 +10607,7 @@
 	<item on_conflict="replace"
 		name							="Lynx School steel sword 3"
 		category						="steelsword" 
-		price							="1079"
+		price							="1351"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10676,7 +10676,7 @@
 	<item on_conflict="replace"
 		name							="NGP Bear School silver sword"
 		category						="silversword" 
-		price							="182"
+		price							="316"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -10751,7 +10751,7 @@
 	<item on_conflict="replace"
 		name							="NGP Bear School silver sword 1"
 		category						="silversword" 
-		price							="694"
+		price							="679"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -10827,7 +10827,7 @@
 	<item on_conflict="replace"
 		name							="NGP Bear School silver sword 2"
 		category						="silversword" 
-		price							="694"
+		price							="1158"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10903,7 +10903,7 @@
 	<item on_conflict="replace"
 		name							="NGP Bear School silver sword 3"
 		category						="silversword" 
-		price							="694"
+		price							="1812"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -10979,7 +10979,7 @@
 	<item on_conflict="replace"
 		name							="NGP Bear School steel sword"
 		category						="steelsword" 
-		price							="46"
+		price							="292"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11047,7 +11047,7 @@
 	<item on_conflict="replace"
 		name							="NGP Bear School steel sword 1"
 		category						="steelsword" 
-		price							="142"
+		price							="619"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11116,7 +11116,7 @@
 	<item on_conflict="replace"
 		name							="NGP Bear School steel sword 2"
 		category						="steelsword"
-		price							="686"
+		price							="955"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -11185,7 +11185,7 @@
 	<item on_conflict="replace"
 		name							="NGP Bear School steel sword 3"
 		category						="steelsword" 
-		price							="710"
+		price							="1600"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -11254,7 +11254,7 @@
 	<item on_conflict="replace"
 		name							="NGP Gryphon School silver sword"
 		category						="silversword" 
-		price							="233"
+		price							="237"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11329,7 +11329,7 @@
 	<item on_conflict="replace"
 		name							="NGP Gryphon School silver sword 1"
 		category						="silversword" 
-		price							="239"
+		price							="522"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11405,7 +11405,7 @@
 	<item on_conflict="replace"
 		name							="NGP Gryphon School silver sword 2"
 		category						="silversword" 
-		price							="694"
+		price							="940"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -11481,7 +11481,7 @@
 	<item on_conflict="replace"
 		name							="NGP Gryphon School silver sword 3"
 		category						="silversword" 
-		price							="694"
+		price							="1528"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -11557,7 +11557,7 @@
 	<item on_conflict="replace"
 		name							="NGP Gryphon School steel sword"
 		category						="steelsword" 
-		price							="95"
+		price							="204"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11625,7 +11625,7 @@
 	<item on_conflict="replace"
 		name							="NGP Gryphon School steel sword 1"
 		category						="steelsword" 
-		price							="135"
+		price							="471"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11694,7 +11694,7 @@
 	<item on_conflict="replace"
 		name							="NGP Gryphon School steel sword 2"
 		category						="steelsword" 
-		price							="142"
+		price							="747"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -11763,7 +11763,7 @@
 	<item on_conflict="replace"
 		name							="NGP Gryphon School steel sword 3"
 		category						="steelsword" 
-		price							="694"
+		price							="1353"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -11832,7 +11832,7 @@
 	<item on_conflict="replace"
 		name							="NGP Lynx School silver sword"
 		category						="silversword" 
-		price							="219"
+		price							="274"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -11907,7 +11907,7 @@
 	<item on_conflict="replace"
 		name							="NGP Lynx School silver sword 1"
 		category						="silversword" 
-		price							="343"
+		price							="574"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -11983,7 +11983,7 @@
 	<item on_conflict="replace"
 		name							="NGP Lynx School silver sword 2"
 		category						="silversword" 
-		price							="771"
+		price							="1011"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -12059,7 +12059,7 @@
 	<item on_conflict="replace"
 		name							="NGP Lynx School silver sword 3"
 		category						="silversword" 
-		price							="927"
+		price							="1614"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -12135,7 +12135,7 @@
 	<item on_conflict="replace"
 		name							="NGP Lynx School steel sword"
 		category						="steelsword" 
-		price							="133"
+		price							="238"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12203,7 +12203,7 @@
 	<item on_conflict="replace"
 		name							="NGP Lynx School steel sword 1"
 		category						="steelsword" 
-		price							="223"
+		price							="502"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -12272,7 +12272,7 @@
 	<item on_conflict="replace"
 		name							="NGP Lynx School steel sword 2"
 		category						="steelsword" 
-		price							="327"
+		price							="775"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -12341,7 +12341,7 @@
 	<item on_conflict="replace"
 		name							="NGP Lynx School steel sword 3"
 		category						="steelsword" 
-		price							="1079"
+		price							="1351"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -12410,7 +12410,7 @@
 	<item on_conflict="replace"
 		name							="NGP Viper School silver sword"
 		category						="silversword" 
-		price							="242"
+		price							="226"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12485,7 +12485,7 @@
 	<item on_conflict="replace"
 		name							="NGP Viper School steel sword"
 		category						="steelsword" 
-		price							="150"
+		price							="190"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12552,7 +12552,7 @@
 	<item on_conflict="replace"
 		name							="Negotiator_crafted" 
 		category						="silversword" 
-		price							="1010"
+		price							="1300"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -12628,7 +12628,7 @@
 	<item on_conflict="replace"
 		name							="Nilfgaardian sword 1_crafted" 
 		category						="steelsword"
-		price							="24"
+		price							="90"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="1"
@@ -12697,7 +12697,7 @@
 	<item on_conflict="replace"
 		name							="Nilfgaardian sword 4_crafted" 
 		category						="steelsword"
-		price							="108"
+		price							="224"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -12766,7 +12766,7 @@
 	<item on_conflict="replace"
 		name							="No Mans Land sword 1_crafted" 
 		category						="steelsword"
-		price							="10"
+		price							="32"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -12834,7 +12834,7 @@
 	<item on_conflict="replace"
 		name							="No Mans Land sword 2_crafted" 
 		category						="steelsword"
-		price							="12"
+		price							="84"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12903,7 +12903,7 @@
 	<item on_conflict="replace"
 		name							="No Mans Land sword 3_crafted" 
 		category						="steelsword"
-		price							="16"
+		price							="118"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -12972,7 +12972,7 @@
 	<item on_conflict="replace"
 		name							="No Mans Land sword 4_crafted" 
 		category						="steelsword"
-		price							="16"
+		price							="120"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13041,7 +13041,7 @@
 	<item on_conflict="replace"
 		name							="Novigraadan sword 1_crafted"
 		category						="steelsword"
-		price							="20"
+		price							="144"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13110,7 +13110,7 @@
 	<item on_conflict="replace"
 		name							="Novigraadan sword 2_crafted" 
 		category						="steelsword"
-		price							="20"
+		price							="146"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13179,7 +13179,7 @@
 	<item on_conflict="replace"
 		name							="Novigraadan sword 3_crafted" 
 		category						="steelsword"
-		price							="28"
+		price							="180"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13248,7 +13248,7 @@
 	<item on_conflict="replace"
 		name							="Novigraadan sword 4_crafted" 
 		category						="steelsword"
-		price							="120"
+		price							="232"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -13317,7 +13317,7 @@
 	<item on_conflict="replace"
 		name							="Scoiatael sword 1_crafted" 
 		category						="steelsword"
-		price							="140"
+		price							="55"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13386,7 +13386,7 @@
 	<item on_conflict="replace"
 		name							="Scoiatael sword 2_crafted" 
 		category						="steelsword"
-		price							="140"
+		price							="145"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -13455,7 +13455,7 @@
 	<item on_conflict="replace"
 		name							="Scoiatael sword 3_crafted" 
 		category						="steelsword"
-		price							="140"
+		price							="338"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -13524,7 +13524,7 @@
 	<item on_conflict="replace"
 		name							="Scoiatael sword 4_crafted" 
 		category						="steelsword"
-		price							="140"
+		price							="396"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -13593,7 +13593,7 @@
 	<item on_conflict="replace"
 		name							="Short sword 1_crafted" 
 		category						="steelsword" 
-		price							="16"
+		price							="28"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0" 
@@ -13661,7 +13661,7 @@
 	<item on_conflict="replace"
 		name							="Short sword 2_crafted" 
 		category						="steelsword"
-		price							="10"
+		price							="30"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -13729,7 +13729,7 @@
 	<item on_conflict="replace"
 		name							="Silver sword 1_crafted" 
 		category						="silversword" 
-		price							="152"
+		price							="68"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0" 
@@ -13804,7 +13804,7 @@
 	<item on_conflict="replace"
 		name							="Silver sword 2_crafted" 
 		category						="silversword" 
-		price							="152"
+		price							="70"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0" 
@@ -13879,7 +13879,7 @@
 	<item on_conflict="replace"
 		name							="Silver sword 3_crafted" 
 		category						="silversword" 
-		price							="154"
+		price							="124"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1" 
@@ -13955,7 +13955,7 @@
 	<item on_conflict="replace"
 		name							="Silver sword 4_crafted" 
 		category						="silversword" 
-		price							="152"
+		price							="233"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1" 
@@ -14032,7 +14032,7 @@
 	<item on_conflict="replace"
 		name							="Silver sword 5_crafted" 
 		category						="silversword" 
-		price							="252"
+		price							="287"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2" 
@@ -14109,7 +14109,7 @@
 	<item on_conflict="replace"
 		name							="Silver sword 6_crafted" 
 		category						="silversword" 
-		price							="258"
+		price							="551"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2" 
@@ -14185,7 +14185,7 @@
 	<item on_conflict="replace"
 		name							="Silver sword 7_crafted" 
 		category						="silversword" 
-		price							="266"
+		price							="605"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -14261,7 +14261,7 @@
 	<item on_conflict="replace"
 		name							="Skellige sword 1_crafted" 
 		category						="steelsword"
-		price							="89"
+		price							="57"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -14329,7 +14329,7 @@
 	<item on_conflict="replace"
 		name							="Skellige sword 2_crafted" 
 		category						="steelsword"
-		price							="89"
+		price							="147"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -14398,7 +14398,7 @@
 	<item on_conflict="replace"
 		name							="Skellige sword 3_crafted" 
 		category						="steelsword"
-		price							="89"
+		price							="205"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -14467,7 +14467,7 @@
 	<item on_conflict="replace"
 		name							="Skellige sword 4_crafted" 
 		category						="steelsword"
-		price							="181"
+		price							="265"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -14536,7 +14536,7 @@
 	<item on_conflict="replace"
 		name							="Viper School silver sword"
 		category						="silversword" 
-		price							="242"
+		price							="226"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -14560,7 +14560,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/silver_sword_lvl2_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, Upgradeable, sword1h, mod_weapon, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, Upgradeable, sword1h, mod_weapon, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Viper School silver sword _Stats</a>
@@ -14611,7 +14611,7 @@
 	<item on_conflict="replace"
 		name							="Viper School steel sword"
 		category						="steelsword" 
-		price							="150"
+		price							="190"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -14635,7 +14635,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/nomansland_sword_lvl2_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Viper School steel sword _Stats</a>
@@ -14679,7 +14679,7 @@
 	<item on_conflict="replace"
 		name							="Weeper_crafted" 
 		category						="silversword" 
-		price							="755"
+		price							="1235"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -14755,7 +14755,7 @@
 	<item on_conflict="replace"
 		name							="mq4005 Silver sword 6_crafted" 
 		category						="silversword" 
-		price							="312"
+		price							="1050"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -14779,7 +14779,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/silver_sword_lvl6_64x128.png"
 	>
-		<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, DoNotEnhance
+		<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>mq4005 Silver sword 6_crafted _Stats</a>
@@ -14833,7 +14833,7 @@
 	<item on_conflict="replace"
 		name							="EP1 Standalone Starting Silver Sword"
 		category						="silversword" 
-		price							="108"
+		price							="68"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -14907,7 +14907,7 @@
 	<item on_conflict="replace"
 		name							="EP1 Standalone Starting Steel Sword"
 		category						="steelsword"
-		price							="27"
+		price							="57"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -14977,7 +14977,7 @@
 	<item on_conflict="replace"
 		name							="EP2 Standalone Starting Silver Sword"
 		category						="silversword" 
-		price							="108"
+		price							="68"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -15051,7 +15051,7 @@
 	<item on_conflict="replace"
 		name							="EP2 Standalone Starting Steel Sword"
 		category						="steelsword"
-		price							="27"
+		price							="57"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -15121,7 +15121,7 @@
 	<item on_conflict="replace"
 				name							="Dol Blathanna longsword"
 				category						="steelsword" 
-				price							="689"
+				price							="1145"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -15189,7 +15189,7 @@
 	<item on_conflict="replace"
 				name							="NGP Dol Blathanna longsword"
 				category						="steelsword" 
-				price							="689"
+				price							="1145"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -15257,7 +15257,7 @@
 	<item on_conflict="replace"
 				name							="NGP White Widow of Dol Blathanna"
 				category						="silversword" 
-				price							="891"
+				price							="1289"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -15332,7 +15332,7 @@
 	<item on_conflict="replace"
 				name							="White Widow of Dol Blathanna"
 				category						="silversword" 
-				price							="891"
+				price							="1289"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -15409,7 +15409,7 @@
 	<item on_conflict="replace"
 				name							="NGP Silver Vixen"
 				category						="silversword" 
-				price							="891"
+				price							="1289"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -15484,7 +15484,7 @@
 	<item on_conflict="replace"
 				name							="NGP Steel Vixen"
 				category						="steelsword" 
-				price							="689"
+				price							="1145"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -15552,7 +15552,7 @@
 	<item on_conflict="replace"
 				name							="Silver Vixen"
 				category						="silversword" 
-				price							="891"
+				price							="1289"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -15627,7 +15627,7 @@
 	<item on_conflict="replace"
 				name							="Steel Vixen"
 				category						="steelsword" 
-				price							="689"
+				price							="1145"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -15697,7 +15697,7 @@
 	<item on_conflict="replace"
 		name							="DLC10_Remorse"
 		category						="silversword" 
-		price							="702"
+		price							="1200"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -15721,7 +15721,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/gnomish_silver_sword_lvl2-64x128.png"
 	>
-		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, mod_origin_nonhuman, 1handedWeapon
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, mod_origin_nonhuman, 1handedWeapon, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>DLC10_Remorse _Stats</a>
@@ -15793,11 +15793,11 @@
 				  icon_path="icons/inventory/weapons/poker_01_64x128.png"
 				  localisation_key_name = "item_name_poker" 
 				  localisation_key_description = "item_category_secondary_desc"
-				  price	= "25" >
+				  price	= "36" >
 				<recycling_parts>
 					<parts count="1">Iron ingot</parts>
 				</recycling_parts> 
-				<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, mod_weapon, TypeClub, SecondaryWeapon
+				<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeClub, SecondaryWeapon, mod_secondary
 		</tags>
 				<base_abilities>
 					<a>Iron Poker _Stats</a>
@@ -15836,7 +15836,7 @@
 	<item on_conflict="replace"
 		name							="Long Steel Sword"
 		category						="steelsword"
-		price							="27"
+		price							="57"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -15904,7 +15904,7 @@
 	<item on_conflict="replace"
 		name							="Rusty Nilfgaardian sword"
 		category						="steelsword"
-		price							="16"
+		price							="8"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -15970,7 +15970,7 @@
 	<item on_conflict="replace"
 		name							="Rusty No Mans Land sword" 
 		category						="steelsword"
-		price							="12"
+		price							="8"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -16036,7 +16036,7 @@
 	<item on_conflict="replace"
 		name							="Rusty Novigraadan sword"
 		category						="steelsword"
-		price							="16"
+		price							="8"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -16102,7 +16102,7 @@
 	<item on_conflict="replace"
 		name							="Rusty Skellige sword"
 		category						="steelsword"
-		price							="16"
+		price							="8"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -16168,7 +16168,7 @@
 	<item on_conflict="replace"
 		name							="Top Notch Silver"
 		category						="silversword" 
-		price							="102"
+		price							="1050"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -16242,7 +16242,7 @@
 	<item on_conflict="replace"
 		name							="Top Notch Steel" 
 		category						="steelsword"
-		price							="16"
+		price							="1500"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3" 
@@ -16309,7 +16309,7 @@
 	<item on_conflict="replace"
 		name							="Wild Hunt sword 1"
 		category						="steelsword" 
-		price							="139"
+		price							="236"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -16377,7 +16377,7 @@
 	<item on_conflict="replace"
 		name							="Wild Hunt sword 2"
 		category						="steelsword" 
-		price							="341"
+		price							="236"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -16401,7 +16401,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/wildhunt_sword_lvl2_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, DoNotEnhance, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 2 _Stats</a>
@@ -16445,7 +16445,7 @@
 	<item on_conflict="replace"
 		name							="Wild Hunt sword 3"
 		category						="steelsword" 
-		price							="902"
+		price							="286"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"
@@ -16513,7 +16513,7 @@
 	<item on_conflict="replace"
 		name							="Wild Hunt sword 4"
 		category						="steelsword" 
-		price							="1134"
+		price							="336"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -16581,7 +16581,7 @@
 	<item on_conflict="replace"
 		name							="Witcher Silver Sword"
 		category						="silversword" 
-		price							="108"
+		price							="68"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -16657,7 +16657,7 @@
 	<item on_conflict="replace"
 		name							="Longclaw"
 		category						="steelsword"
-		price							="269"
+		price							="1012"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -16723,7 +16723,7 @@
 	<item on_conflict="replace"
 		name							="Torlara"
 		category						="steelsword"
-		price							="1173"
+		price							="1127"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -16791,7 +16791,7 @@
 	<item on_conflict="replace"
 		name							="Torzirael"
 		category						="silversword"
-		price							="701"
+		price							="1375"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -16871,7 +16871,7 @@
 	<item on_conflict="replace"
 		name							="WitcherSilverWolf"
 		category						="silversword"
-		price							="587"
+		price							="1200"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="3"
@@ -16954,7 +16954,7 @@
 	<item on_conflict="replace"
 		name							="Autogen silver sword"
 		category						="silversword" 
-		price							="77"
+		price							="68"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -17028,7 +17028,7 @@
 	<item on_conflict="replace"
 		name							="Autogen steel sword" 
 		category						="steelsword"
-		price							="8"
+		price							="57"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -17052,7 +17052,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/nomansland_sword_lvl1_64x128.png"
 	>
-		<tags>							Autogen, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_nml
+		<tags>							Autogen, AutogenForceLevel, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Autogen steel sword _Stats</a>
@@ -17098,7 +17098,7 @@
 	<item on_conflict="replace"
 				name							="NGP Netflix silver sword"
 				category						="silversword" 
-				price							="167"
+				price							="631"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -17173,7 +17173,7 @@
 	<item on_conflict="replace"
 				name							="NGP Netflix silver sword 1"
 				category						="silversword" 
-				price							="229"
+				price							="1650"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -17249,7 +17249,7 @@
 	<item on_conflict="replace"
 				name							="NGP Netflix silver sword 2"
 				category						="silversword" 
-				price							="1973"
+				price							="2540"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -17325,7 +17325,7 @@
 	<item on_conflict="replace"
 				name							="NGP Netflix steel sword"
 				category						="steelsword" 
-				price							="130"
+				price							="544"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -17393,7 +17393,7 @@
 	<item on_conflict="replace"
 				name							="NGP Netflix steel sword 1"
 				category						="steelsword" 
-				price							="689"
+				price							="1402"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -17462,7 +17462,7 @@
 	<item on_conflict="replace"
 				name							="NGP Netflix steel sword 2"
 				category						="steelsword" 
-				price							="1958"
+				price							="1709"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -17531,7 +17531,7 @@
 	<item on_conflict="replace"
 				name							="Netflix silver sword"
 				category						="silversword" 
-				price							="167"
+				price							="631"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -17606,7 +17606,7 @@
 	<item on_conflict="replace"
 				name							="Netflix silver sword 1"
 				category						="silversword" 
-				price							="229"
+				price							="1650"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -17682,7 +17682,7 @@
 	<item on_conflict="replace"
 				name							="Netflix silver sword 2"
 				category						="silversword" 
-				price							="1973"
+				price							="2540"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -17758,7 +17758,7 @@
 	<item on_conflict="replace"
 				name							="Netflix steel sword"
 				category						="steelsword" 
-				price							="130"
+				price							="544"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -17826,7 +17826,7 @@
 	<item on_conflict="replace"
 				name							="Netflix steel sword 1"
 				category						="steelsword" 
-				price							="689"
+				price							="1402"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -17895,7 +17895,7 @@
 	<item on_conflict="replace"
 				name							="Netflix steel sword 2"
 				category						="steelsword" 
-				price							="1958"
+				price							="1709"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="3"
@@ -17964,7 +17964,7 @@
 	<item on_conflict="replace"
 				name							="Reinald Netflix silver sword"
 				category						="silversword" 
-				price							="167"
+				price							="631"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"
@@ -18039,7 +18039,7 @@
 	<item on_conflict="replace"
 				name							="Reinald Netflix steel sword"
 				category						="steelsword" 
-				price							="130"
+				price							="544"
 				initial_durability				="100"
 				max_durability					="100"
 				enhancement_slots				="2"

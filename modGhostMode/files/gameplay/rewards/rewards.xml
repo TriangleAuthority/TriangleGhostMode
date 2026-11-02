@@ -23,12 +23,12 @@
     <reward name="q103_15i_ritual_end" 								level="5"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q103_04_after_fistfight" 							level="6"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q103_05_learnt_about_daughter" 					level="6"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="q103_06_find_daughter" 							level="6"	experience="0" 		gold="200" 	achievement="0" 	script="" comment="" />
+    <reward name="q103_06_find_daughter" 							level="6"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="q103_06_visited_daughter" 						level="6"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q103_07_learnt_about_ciri" 						level="6"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q103_08_completed" 								level="6"	experience="250" 	gold="0" 	achievement="4" 	script="" comment="" />
-    <reward name="q103_09_stablemaster_reward" 						level="6"	experience="0" 		gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="q103_06_visit_oxenfurt" 							level="6"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="q103_09_stablemaster_reward" 						level="6"	experience="0" 		gold="25" 	achievement="0" 	script="" comment="" />
+    <reward name="q103_06_visit_oxenfurt" 							level="6"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="" />
 	<reward name="q103_10_botchling_buried" 						level="6"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
    	<reward name="q104_1_met_keira" 								level="5"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="q104_1_aarded_rat_nest" 							level="6"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -59,7 +59,7 @@
 	<reward name="q107_1_killed_bies" 								level="9"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q107_2_found_johnny" 								level="9"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q107_3_cured_anna" 								level="9"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="q107_4_reward_baron" 								level="9"	experience="0" 		gold="150" 	achievement="0" 	script="" comment="" />
+    <reward name="q107_4_reward_baron" 								level="9"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="" />
 	<reward name="q107_5_helped_treasure" 							level="9"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="q107_6_helped_raped" 								level="9"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="q108_01_eve_ended" 								level="9"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -70,7 +70,7 @@
     <reward name="q109_02_keira_gone" 								level="8"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q109_03_achievement" 								level="8"	experience="0" 		gold="0" 	achievement="14" 	script="" comment="" />
 	<reward name="q110_1a_refused_emhyrs_money" 					level="20"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="q110_1b_accepted_emhyrs_reward" 					level="20"	experience="0" 		gold="4000" 	achievement="0" 	script="" comment="" />
+    <reward name="q110_1b_accepted_emhyrs_reward" 					level="20"	experience="0" 		gold="2000" 	achievement="0" 	script="" comment="" />
 	<reward name="q111_1_passed_the_test" 							level="26"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q111_2_killed_witches" 							level="26"	experience="500" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q111_3_killed_imlerith" 							level="26"	experience="1000" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -164,14 +164,14 @@
     <reward name="q302_03_roche_camp_visited" 						level="12"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q302_04_radovid_met" 								level="12"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q302_05_completed" 								level="12"	experience="500" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="q302_whoreson_secret_stash" 						level="12"	experience="0" 		gold="30" 	achievement="0" 	script="" comment="" />	
+    <reward name="q302_whoreson_secret_stash" 						level="12"	experience="0" 		gold="150" 	achievement="0" 	script="" comment="" />	
 	<reward name="q302_5_radovid_met" 								level="12"	experience="0" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="q303_01_found_out_about_bomb"						level="12"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q303_02_find_lead_to_margrave" 					level="12"	experience="200" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q303_03_solve_dudus_riddle" 						level="12"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q303_04_witch_hunters_tricked_menge" 				level="12"	experience="300" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q303_05_witch_hunters_didnt_trick_menge" 			level="12"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="q303_06_told_dijkstra_about_treasure" 			level="12"	experience="50" 	gold="90" 	achievement="0" 	script="" comment="" />
+    <reward name="q303_06_told_dijkstra_about_treasure" 			level="12"	experience="50" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="q303_07_trapped_spy" 								level="12"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="" /> 
 	<reward name="q304_01_hobos_killed" 							level="11"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q304_02_visited_rosa" 							level="11"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -190,16 +190,16 @@
     <reward name="q305_01_play_written" 							level="13"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q305_02_jugglers_addiotionally_hired" 			level="13"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q305_03_play_finished" 							level="13"	experience="500" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="q305_03a_play_correct" 							level="13"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
-	<reward name="q305_03b_play_almost_correct" 					level="13"	experience="25" 	gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="q305_03a_play_correct" 							level="13"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
+	<reward name="q305_03b_play_almost_correct" 					level="13"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
 	<reward name="q305_03c_play_almost_all_bad" 					level="13"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-	<reward name="q305_03d_picked_not_drunken_prince" 				level="13"	experience="25" 	gold="30" 	achievement="0" 	script="" comment="" />
+	<reward name="q305_03d_picked_not_drunken_prince" 				level="13"	experience="25" 	gold="25" 	achievement="0" 	script="" comment="" />
     <reward name="q305_04_quest_completed" 							level="13"	experience="500" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q305_03b_dandelion_free" 							level="13"	experience="0" 		gold="0" 	achievement="2" 	script="" comment="" />
 	<reward name="q305_10_blanka_found" 							level="13"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="q305_9a_irina_actress" 							level="13"	experience="25" 	gold="10" 	achievement="0" 	script="" comment="" />
-    <reward name="q305_9b_priscilla_actress" 						level="13"	experience="25" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="q305_6_jugglers_bonus" 							level="13"	experience="25" 	gold="30" 	achievement="0" 	script="" comment="" />
+    <reward name="q305_9a_irina_actress" 							level="13"	experience="25" 	gold="25" 	achievement="0" 	script="" comment="" />
+    <reward name="q305_9b_priscilla_actress" 						level="13"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="q305_6_jugglers_bonus" 							level="13"	experience="25" 	gold="25" 	achievement="0" 	script="" comment="" />
 	<reward name="q308_1_investigated_crimescenes" 					level="16"	experience="200" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q308_2_killed_nathanel" 							level="16"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="">
 		<items>
@@ -325,9 +325,9 @@
     <reward name="sq102_01_find_letho" 								level="7"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq102_02_defeat_assassins" 						level="7"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq102_03_defeat_bandits" 							level="7"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
-	<reward name="sq104_1_lied_about_hanna" 						level="7"	experience="25" 	gold="10" 	achievement="0" 	script="" comment="" />
+	<reward name="sq104_1_lied_about_hanna" 						level="7"	experience="25" 	gold="25" 	achievement="0" 	script="" comment="" />
     <reward name="sq104_2_finished_quest" 							level="7"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="sq104_3_reward_from_margaret" 					level="7"	experience="25" 	gold="55" 	achievement="0" 	script="" comment="" />
+    <reward name="sq104_3_reward_from_margaret" 					level="7"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
 	<reward name="sq104_4_generic_xp" 								level="7"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq106_1_ekimma_killed" 							level="16"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq106_2_vienne_killed"							level="16"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -346,7 +346,7 @@
     <reward name="sq107_1_half_money" 								level="8"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="sq107_2_full_xp" 									level="8"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq107_2_half_xp" 									level="8"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="sq108_griffon_killed" 							level="24"	experience="0" 		gold="25" 	achievement="0" 	script="" comment="" >
+    <reward name="sq108_griffon_killed" 							level="24"	experience="0" 		gold="250" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="Heavy boots 06" amount="1" />
 		</items>
@@ -366,10 +366,10 @@
     <reward name="sq201_2_a_let_morkvarg_go" 						level="17"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq201_2_b_kill_morkvarg" 							level="17"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq201_3_c_helped_morkvarg" 						level="17"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" >        <items>            <item name="Deithwen" amount="1" />			<item name="Recipe for Mutagen 24" amount="1" />        </items>    </reward>
-    <reward name="for_killing_morkvarg_priestess" 					level="17"	experience="50" 	gold="85" 	achievement="0" 	script="" comment="" />
+    <reward name="for_killing_morkvarg_priestess" 					level="17"	experience="50" 	gold="100" 	achievement="0" 	script="" comment="" />
 	<reward name="sq202_01_crater_found" 							level="17"	experience="100" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq202_02_completed" 								level="17"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="sq202_pirate_treasure" 							level="17"	experience="0" 		gold="60" 	achievement="0" 	script="" comment=" " >
+    <reward name="sq202_pirate_treasure" 							level="17"	experience="0" 		gold="250" 	achievement="0" 	script="" comment=" " >
 		<items>
 			<item name="Rusty Skellige sword " amount="1" />
 			<item name="W_Axe01" amount="1" />
@@ -383,8 +383,8 @@
     <reward name="sq204_1_investigation" 							level="22"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq204_2_leshy_offerings" 							level="22"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq204_2a_leshy_killed" 							level="22"	experience="100" 	gold="0" 	achievement="34" 	script="" comment="" />
-    <reward name="sq204_3a_leshy_reward_harald" 					level="22"	experience="25" 	gold="60" 	achievement="0" 	script="" comment="" />   
-    <reward name="sq204_3b_leshy_reward_sven" 						level="22"	experience="25" 	gold="60" 	achievement="0" 	script="" comment="">
+    <reward name="sq204_3a_leshy_reward_harald" 					level="22"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />   
+    <reward name="sq204_3b_leshy_reward_sven" 						level="22"	experience="25" 	gold="200" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Light armor 09r" amount="1" />
 		</items>
@@ -401,14 +401,14 @@
     <reward name="sq209_6_vision_3_done" 							level="17"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq209_7_vision_4_done" 							level="17"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq209_8_final_no_gold" 							level="17"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="sq209_8_final_with_gold" 							level="17"	experience="25" 	gold="80" 	achievement="0" 	script="" comment="" />
+    <reward name="sq209_8_final_with_gold" 							level="17"	experience="25" 	gold="200" 	achievement="0" 	script="" comment="" />
   	<reward name="sq210_wizard_reward" 								level="30"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Negotiator" amount="1" />
 			<item name="Rune svarog" amount="1" />
 		</items>
 	</reward>
-    <reward name="sq210_villager_reward" 							level="30"	experience="0" 		gold="65" 	achievement="0" 	script="" comment="" />
+    <reward name="sq210_villager_reward" 							level="30"	experience="0" 		gold="150" 	achievement="0" 	script="" comment="" />
     <reward name="sq210_xp_reward" 									level="30"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq301_1_wore_full_dublet" 						level="13"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq301_2_didnt_fight_drunkard" 					level="13"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -419,21 +419,21 @@
     <reward name="sq302_02_got_to_lowest_floor" 					level="13"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq302_03_crystal_gave_away_completed" 			level="13"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq302_04_completed" 								level="13"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="sq302_05_radovid_payment" 						level="13"	experience="0" 		gold="135" 	achievement="0" 	script="" comment="" />
+    <reward name="sq302_05_radovid_payment" 						level="13"	experience="0" 		gold="250" 	achievement="0" 	script="" comment="" />
 	<reward name="sq303_1_lost_to_dandelion" 						level="14"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq303_1_won_with_dandelion" 						level="14"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq303_2_polly_acquired" 							level="14"	experience="25" 	gold="0" 	achievement="0"		script="" comment="" />
     <reward name="sq303_3_poster_found" 							level="14"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq303_5_quest_finished" 							level="14"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="sq303_4_horse_race_won" 							level="14"	experience="10" 	gold="80" 	achievement="0" 	script="" comment="" />
+    <reward name="sq303_4_horse_race_won" 							level="14"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" />
 	<reward name="sq303_race_reward" 								level="14"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="">
 		<items>
 				<item name="Horse Saddle 2v4" amount="1" />
 			</items>
 	</reward>
 	<reward name="sq303_4_quest_finished" 							level="14"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-	<reward name="sq304_1_deal_made"								level="24"	experience="25" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="sq304_2_bodyguards_resolved" 						level="24"	experience="25" 	gold="10" 	achievement="0" 	script="" comment="" />
+	<reward name="sq304_1_deal_made"								level="24"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="sq304_2_bodyguards_resolved" 						level="24"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="sq304_3_sword" 									level="24"	experience="0" 		gold="0"	achievement="0" 	script="" comment="">        <items>            <item name="sq304 Novigraadan sword 4" amount="1" />        </items>    </reward>
     <reward name="sq304_negotiation_success" 						level="24"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="sq305_1_finished_quest_vern" 						level="6"	experience="0" 	gold="0" 	achievement="0" 	script="" comment="">
@@ -444,7 +444,7 @@
 			<item name="Allspice root" amount="2" />
 		</items>
 	</reward>
-    <reward name="sq305_1_finished_quest_guard" 					level="6"	experience="0" 	gold="30" 	achievement="0" 	script="" comment="" />
+    <reward name="sq305_1_finished_quest_guard" 					level="6"	experience="0" 	gold="50" 	achievement="0" 	script="" comment="" />
 	<reward name="sq305_1_generic_xp" 								level="6"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="sq305_always"										level="6"	experience="10"		gold="0"	achievement="0"		script="" comment="">
 		<items>
@@ -464,33 +464,33 @@
 				<item name="gwint_card_isengrim" amount="1" />
 			</items>
 	</reward>
-    <reward name="sq310_coins" 										level="14"	experience="10" 	gold="150" 	achievement="0" 	script="" comment="" />
+    <reward name="sq310_coins" 										level="14"	experience="10" 	gold="300" 	achievement="0" 	script="" comment="" />
     <reward name="sq312_ves_assisted" 								level="12"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq312_ves_died" 									level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq313_1_ruse_complete" 							level="0"	experience="0" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="sq315_finished" 									level="14"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh101_investigation" 								level="8"	experience="20" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh101_final_reward" 								level="8"	experience="100" 	gold="235" 	achievement="0" 	script="" comment="" />
+    <reward name="mh101_final_reward" 								level="8"	experience="100" 	gold="200" 	achievement="0" 	script="" comment="" />
     <reward name="mh101_final_reward_no_gold" 						level="8"	experience="200"	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh102_final_reward" 								level="33"	experience="150" 	gold="280" 	achievement="0" 	script="" comment="" />
+    <reward name="mh102_final_reward" 								level="33"	experience="150" 	gold="300" 	achievement="0" 	script="" comment="" />
     <reward name="mh102_final_reward_no_gold" 						level="33"	experience="300" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh102_investigation" 								level="33"	experience="30" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="mh103_investigation" 								level="10"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh103_final_reward" 								level="10"	experience="250" 	gold="239" 	achievement="0" 	script="" comment="" />
+    <reward name="mh103_final_reward" 								level="10"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" />
 	<reward name="mh104_investigation_done" 						level="22"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh104_father_reward" 								level="22"	experience="25" 	gold="210" 	achievement="0" 	script="" comment="" />
-    <reward name="mh104_final_reward" 								level="22"	experience="300"	gold="260" 	achievement="0" 	script="" comment="" />
+    <reward name="mh104_father_reward" 								level="22"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mh104_final_reward" 								level="22"	experience="300"	gold="300" 	achievement="0" 	script="" comment="" />
 	<reward name="mh105_villagers_found" 							level="23"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh105_investigation" 								level="23"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh105_final" 										level="23"	experience="300"	gold="256" 	achievement="0" 	script="" comment="" />
-    <reward name="mh106_final_reward" 								level="10"	experience="250" 	gold="240" 	achievement="0" 	script="" comment="" />
+    <reward name="mh105_final" 										level="23"	experience="300"	gold="300" 	achievement="0" 	script="" comment="" />
+    <reward name="mh106_final_reward" 								level="10"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" />
     <reward name="mh106_investigation" 								level="10"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="mh107_investigation" 								level="20"	experience="30" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh107_final_reward" 								level="20"	experience="300" 	gold="258" 	achievement="0" 	script="" comment="" />
+    <reward name="mh107_final_reward" 								level="20"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="" />
 	<reward name="mh108_investigation" 								level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh108_final_reward" 								level="12"	experience="250" 	gold="242" 	achievement="0" 	script="" comment="" />
+    <reward name="mh108_final_reward" 								level="12"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" />
     <reward name="mh202_1_investigation" 							level="18"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh202_2_final_reward" 							level="18"	experience="250" 	gold="520" 	achievement="0" 	script="" comment="" />
+    <reward name="mh202_2_final_reward" 							level="18"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" />
     <reward name="mh203_01_witness_interrogated" 					level="18"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh203_02_lair_found" 								level="18"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh203_03_completed" 								level="18"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" >
@@ -500,60 +500,60 @@
 	</reward>
 	<reward name="mh206_arena" 										level="29"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh206_lair" 										level="29"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh206_final" 										level="29"	experience="300" 	gold="273" 	achievement="0" 	script="" comment="" />
+    <reward name="mh206_final" 										level="29"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="" />
     <reward name="mh207_mikkjal_found" 								level="17"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh207_investigation" 								level="17"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh207_final" 										level="17"	experience="250" 	gold="246" 	achievement="0" 	script="" comment="" />
+    <reward name="mh207_final" 										level="17"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" />
 	<reward name="mh208_investigation" 								level="28"	experience="30" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh208_final" 										level="28"	experience="300" 	gold="273" 	achievement="0" 	script="" comment="" />
-    <reward name="mh208_final_bigger" 								level="28"	experience="50" 	gold="273" 	achievement="0" 	script="" comment="" />
-    <reward name="mh208_final_reward_smaller" 						level="28"	experience="50" 	gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mh208_final" 										level="28"	experience="300" 	gold="200" 	achievement="0" 	script="" comment="" />
+    <reward name="mh208_final_bigger" 								level="28"	experience="50" 	gold="300" 	achievement="0" 	script="" comment="" />
+    <reward name="mh208_final_reward_smaller" 						level="28"	experience="50" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="mh210_investigation" 								level="22"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh210_final" 										level="22"	experience="300" 	gold="249" 	achievement="0" 	script="" comment="" />
+    <reward name="mh210_final" 										level="22"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="" />
     <reward name="mh210_britt" 										level="22"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh210_britt_gold" 								level="22"	experience="0" 	gold="25" 	achievement="0" 	script="" comment="" />
-	<reward name="mh301_reward" 									level="35"	experience="300" 	gold="295" 	achievement="0" 	script="" comment="" />
+	<reward name="mh301_reward" 									level="35"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="" />
     <reward name="mh301_investigation" 								level="35"	experience="30" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh302_investigation" 								level="25"	experience="30" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh302_final" 										level="25"	experience="300" 	gold="260" 	achievement="0" 	script="" comment="" />
+    <reward name="mh302_final" 										level="25"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="" />
 	<reward name="mh303_investigation" 								level="15"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mh303_succubus" 									level="15"	experience="0"	 	gold="0" 	achievement="0" 	script="" comment="" >	    <items>            <item name="Aerondight" amount="1" />        </items>    </reward>
-    <reward name="mh303_final" 										level="15"	experience="250" 	gold="249" 	achievement="0" 	script="" comment="" />
+    <reward name="mh303_final" 										level="15"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" />
 	<reward name="mh304_investigation" 								level="26"	experience="30" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh304_final" 										level="26"	experience="300" 	gold="273" 	achievement="0" 	script="" comment="" />
+    <reward name="mh304_final" 										level="26"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="" />
     <reward name="mh305_investigation" 								level="13"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh305_final" 										level="13"	experience="250" 	gold="243" 	achievement="0" 	script="" comment="" />
-    <reward name="mh305_doppler_reward" 							level="13"	experience="0" 	gold="215" 	achievement="0" 	script="" comment="">
+    <reward name="mh305_final" 										level="13"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" />
+    <reward name="mh305_doppler_reward" 							level="13"	experience="0" 	gold="200" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Gnomish sword 2 schematic" amount="1" />
 		</items>
 	</reward>
 	<reward name="mh306_investigation" 								level="24"	experience="30" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh306_final" 										level="24"	experience="300" 	gold="267" 	achievement="0" 	script="" comment="" />
+    <reward name="mh306_final" 										level="24"	experience="300" 	gold="300" 	achievement="0" 	script="" comment="" />
     <reward name="mh307_01_lair_located" 							level="14"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh307_02_minion_fleed_completed" 					level="14"	experience="100" 	gold="80" 	achievement="0" 	script="" comment="" />
-    <reward name="mh307_02_minion_killed_completed" 				level="14"	experience="250" 	gold="249" 	achievement="0" 	script="" comment="" >
+    <reward name="mh307_02_minion_fleed_completed" 					level="14"	experience="100" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mh307_02_minion_killed_completed" 				level="14"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="mh307_contract" amount="1" />
 			<item name="mq1016_notice" amount="1" />
 		</items>
 	</reward>
     <reward name="mh308_investigation" 								level="16"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mh308_final" 										level="16"	experience="250" 	gold="246" 	achievement="0" 	script="" comment="" />
+    <reward name="mh308_final" 										level="16"	experience="250" 	gold="250" 	achievement="0" 	script="" comment="" />
 	<reward name="mq0001_01_reunite_brothers" 						level="1"	experience="25" 	gold="25" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="lore_imperial_edict_i" amount="1" />
 		</items>
 	</reward>
-	<reward name="mq0002_01_returned_chest" 						level="1"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="mq0002_01_deal_with_merchant" 					level="1"	experience="25" 	gold="30" 	achievement="0" 	script="" comment="" />
+	<reward name="mq0002_01_returned_chest" 						level="1"	experience="10" 	gold="25" 	achievement="0" 	script="" comment="" />
+    <reward name="mq0002_01_deal_with_merchant" 					level="1"	experience="25" 	gold="25" 	achievement="0" 	script="" comment="" />
     <reward name="mq0002_01_extorted_merchant" 						level="1"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="Celandine" amount="4" />
 			<item name="White myrtle" quantity="4" />
 		</items>
 	</reward>
-    <reward name="mq0002_01_merchant_to_guards" 					level="1"	experience="10" 	gold="30" 	achievement="0" 	script="" comment="" />
+    <reward name="mq0002_01_merchant_to_guards" 					level="1"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
 	<reward name="mq0003_01_dispelled_wraith" 						level="2"	experience="150" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq0003_02_found_sister" 							level="2"	experience="10" 	gold="10" 	achievement="0" 	script="" comment="" >
 		<items>
@@ -563,25 +563,25 @@
 			<item name="Cortinarius" amount="6" />
 		</items>
 	</reward>
-	<reward name="mq0003_03_farmers_reward" 						level="2"	experience="25" 	gold="20" 	achievement="0" 	script="" comment="" />
+	<reward name="mq0003_03_farmers_reward" 						level="2"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
 	<reward name="mq0003_03_farmers_reward_refused" 				level="2"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" >        <items>            <item name="Amethyst" amount="1" />        </items>    </reward>
     <reward name="mq003_02_found_sister" 							level="2"	experience="0" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq0004_01_returned_pan" 							level="1"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" >        <items>            <item name="Baked apple" amount="5" />            <item name="Bread" amount="5" />            <item name="Apple juice" amount="5" />        </items>    </reward>	
     <reward name="mq0005_01_found_arsonist" 						level="1"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq0005_02_arsonists_pay" 							level="1"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="mq0005_02_dwarf_pay" 								level="1"	experience="25" 	gold="20" 	achievement="0" 	script="" comment="" />	
-	<reward name="mq1051_1_wyvern_killed" 							level="18"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq0005_02_arsonists_pay" 							level="1"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq0005_02_dwarf_pay" 								level="1"	experience="25" 	gold="25" 	achievement="0" 	script="" comment="" />	
+	<reward name="mq1051_1_wyvern_killed" 							level="18"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="mq1051_1_wyvern_killed_no_gold" 					level="18"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1045_encounter_02_gold" 						level="10"	experience="10" 	gold="40" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1045_encounter_02_gold" 						level="10"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="mq1045_encounter_02_exp" 							level="10"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1019_1_site01_burned" 							level="3"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1019_1_site02_burned" 							level="3"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1019_1_site03_burned" 							level="3"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1019_2_clue_dealer_story" 						level="3"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1019_completed" 								level="3"	experience="15" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1019_completed_with_bribe" 						level="3"	experience="10" 	gold="60" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1019_completed" 								level="3"	experience="15" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1019_completed_with_bribe" 						level="3"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="mq1019_completed_fight" 							level="3"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1010_3_quest_finished" 							level="9"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1010_3_quest_finished" 							level="9"	experience="10" 	gold="75" 	achievement="0" 	script="" comment="" />
     <reward name="mq1010_1_ring_placed"								level="9"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1010_2_ghost_lamp" 								level="9"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1033_1_encounter_1" 							level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -606,36 +606,36 @@
 	</reward>
     <reward name="mq1016_1_children_found" 							level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1016_2_quest_finished_no_gold" 					level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1016_2_quest_finished_gold" 					level="0"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1016_2_quest_finished_gold" 					level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="mq1024_1_encounter_finished" 						level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1012_1_helping_believer" 						level="10"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1012_2_chapel_fixed" 							level="10"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1012_3_quest_finished" 							level="10"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1051_1_mother_pays" 							level="18"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1051_1_mother_pays" 							level="18"	experience="10" 	gold="75" 	achievement="0" 	script="" comment="" />
     <reward name="mq1050_1_food_delivered" 							level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1050_2_quest_finished" 							level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1035_1_merchant_gold" 							level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1035_1_merchant_gold" 							level="0"	experience="10" 	gold="75" 	achievement="0" 	script="" comment="" />
     <reward name="mq1002_1_room_1_cleared" 							level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1002_2_room_2_cleared" 							level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1002_3_quest_finished" 							level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1002_3_treasure_chest" 							level="12"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1011_2_chest" 									level="0"	experience="0" 		gold="20" 	achievement="0" 	script="" comment="">        <items>            <item name="Deer hide" amount="5" />            <item name="Bear pelt" amount="5" />            <item name="Thread" amount="5" />            <item name="Leather" amount="4" />        </items>    </reward>
-    <reward name="mq1011_1_merchant_reward" 						level="0"	experience="10" 	gold="20"	achievement="0" 	script="" comment="" />
+    <reward name="mq1002_3_treasure_chest" 							level="12"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1011_2_chest" 									level="0"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="">        <items>            <item name="Deer hide" amount="5" />            <item name="Bear pelt" amount="5" />            <item name="Thread" amount="5" />            <item name="Leather" amount="4" />        </items>    </reward>
+    <reward name="mq1011_1_merchant_reward" 						level="0"	experience="10" 	gold="50"	achievement="0" 	script="" comment="" />
     <reward name="mq1038_1_finished" 								level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="">        <items>            <item name="Child doll" amount="1" />			<item name="Cursed Monsters vol 1" amount="1" />        </items>	</reward>
     <reward name="mq1028_2_completed_no_gold" 						level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-	<reward name="mq1028_2_completed" 								level="12"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
+	<reward name="mq1028_2_completed" 								level="12"	experience="10" 	gold="25" 	achievement="0" 	script="" comment="" />
     <reward name="mq1020_1_elves_found" 							level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1020_2_wrong_horse_returned" 					level="12"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1020_2_quick_end" 								level="12"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1020_2_quick_end" 								level="12"	experience="10" 	gold="25" 	achievement="0" 	script="" comment="" />
     <reward name="mq1036_bandits_killed" 							level="0"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1036_deserter_met" 								level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1036_bandits_reward" 							level="0"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1036_bandits_reward" 							level="0"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="mq1046_1_elf_saved" 								level="7"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1046_1_hidden_loot" 							level="7"	experience="0" 		gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1046_1_hidden_loot" 							level="7"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="mq1057_fugas_located" 							level="7"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1057_reward_from_villagers" 					level="7"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="mq1057_no_reward_from_villagers" 					level="7"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1039_quest_completed" 							level="11"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1039_quest_completed" 							level="11"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="mq1013_quest_finished" 							level="10"	experience="25" 	gold="0" 	achievement="0" 	script="" comment=""/>
     <reward name="mq1022_1_finished" 								level="9"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="">
 		<items>
@@ -648,28 +648,28 @@
     <reward name="mq1022_1_troll_killed" 							level="13"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1015_finished" 									level="7"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1007_success" 									level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1006_1_cheap_item" 								level="0"	experience="10" 	gold="10" 	achievement="0" 	script="" comment="">
+    <reward name="mq1006_1_cheap_item" 								level="0"	experience="10" 	gold="25" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Celandine" amount="4" />
 			<item name="Oil" amount="4" />
 		</items>
 	</reward>
-    <reward name="mq1006_1_medium_item" 							level="0"	experience="10" 	gold="25"	achievement="0" 	script="" comment="">
+    <reward name="mq1006_1_medium_item" 							level="0"	experience="10" 	gold="50"	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Heavy boots 3 schematic" amount="1" />
 		</items>
 	</reward>
     <reward name="mq1006_1_elf_stew" 								level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1001_1_dog_saved" 								level="5"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1001_2_locker" 									level="5"	experience="0" 		gold="10" 	achievement="0" 	script="" comment="">
+    <reward name="mq1001_2_locker" 									level="5"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Silver ingot" amount="1" />
 		</items>
 	</reward>
     <reward name="mq1037_enc_01_sword" 								level="0"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="">        <items>            <item name="Mourner" amount="1" />        </items>    </reward>
-    <reward name="mq1005_1_perfect_score"							level="7"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1005_1_middle_score" 							level="7"	experience="25" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="mq1005_1_low_score" 								level="7"	experience="25" 	gold="15" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1005_1_perfect_score"							level="7"	experience="25" 	gold="75" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1005_1_middle_score" 							level="7"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq1005_1_low_score" 								level="7"	experience="25" 	gold="25" 	achievement="0" 	script="" comment="" />
     <reward name="mq1005_1_boss_bonus" 								level="7"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="" />
 	<reward name="mq1003_final" 									level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq1003_cart_owner_freed" 							level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -709,17 +709,17 @@
 	</reward>
 	<reward name="mq1060_priest_reward" 							level="15"	experience="75" 	gold="200" 	achievement="0" 	script="" comment="" />
 	<reward name="mq1060_priest_dead_reward" 						level="15"	experience="75" 	gold="0" 	achievement="0" 	script="" comment="" />
-	<reward name="mq2013_1_location_reward" 						level="26"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2013_1_half_of_bounty" 							level="26"	experience="50" 	gold="50" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2020_chest" 									level="16"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="">
+	<reward name="mq2013_1_location_reward" 						level="26"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2013_1_half_of_bounty" 							level="26"	experience="50" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2020_chest" 									level="16"	experience="0" 		gold="75" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Heavy Armor 4 schematic" amount="1" />
 			<item name="Rune dazhbog" amount="1" />
 		</items>
 	</reward>
     <reward name="mq2020_slaves_freed" 								level="16"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2006_chest_1" 									level="18"	experience="0" 		gold="20" 	achievement="0" 	script="" comment="">        <items>            <item name="Diamond flawless" amount="1" />            <item name="Relic Heavy 3 armor" amount="1" />            <item name="Gloves 04" amount="1" />        </items>    </reward>
-    <reward name="mq2006_chest_2" 									level="18"	experience="0" 		gold="60" 	achievement="0" 	script="" comment="">
+    <reward name="mq2006_chest_1" 									level="18"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="">        <items>            <item name="Diamond flawless" amount="1" />            <item name="Relic Heavy 3 armor" amount="1" />            <item name="Gloves 04" amount="1" />        </items>    </reward>
+    <reward name="mq2006_chest_2" 									level="18"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Emerald flawless" amount="1" />
 			<item name="Caroline" amount="1" />
@@ -732,8 +732,8 @@
     <reward name="mq2015_1_half" 									level="25"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2015_2_final" 									level="25"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2030_1_lifted_curse" 							level="16"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2030_1_reversed_curse" 							level="16"	experience="25" 	gold="60" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2017_wannabes_saved" 							level="16"	experience="25" 	gold="60" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2030_1_reversed_curse" 							level="16"	experience="25" 	gold="150" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2017_wannabes_saved" 							level="16"	experience="25" 	gold="75" 	achievement="0" 	script="" comment="" />
     <reward name="mq2043_1_succeeded" 								level="0"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Heavy Gloves 3 schematic" amount="1" />
@@ -742,28 +742,28 @@
 			<item name="Hardened leather" amount="2" />
 		</items>
 	</reward>
-    <reward name="mq2008_reward_in_chest" 							level="0"	experience="0" 		gold="20" 	achievement="0" 	script="" comment="">
+    <reward name="mq2008_reward_in_chest" 							level="0"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Heavy Boots 6 schematic" amount="1" />
 			<item name="Heavy Gloves 3 schematic" amount="1" />
 			<item name="Ruby" amount="1" />
 		</items>
 	</reward>
-    <reward name="mq2011_1_second_encounter" 						level="0"	experience="0" 		gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2011_2_final_reward" 							level="0"	experience="10" 	gold="200" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2011_1_second_encounter" 						level="0"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2011_2_final_reward" 							level="0"	experience="10" 	gold="250" 	achievement="0" 	script="" comment="" />
     <reward name="mq2039_01_completed" 								level="24"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2051_final" 									level="18"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2021_shepherd_saved" 							level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2022_herbs_given" 								level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2024_ghost_vanquished" 							level="22"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2024_final_reward" 								level="22"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2024_first_reward" 								level="22"	experience="10" 	gold="15" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2001_kaer_trolde_completed" 					level="16"	experience="25" 	gold="20" 	achievement="0" 	script="" comment="" >
+    <reward name="mq2024_final_reward" 								level="22"	experience="10" 	gold="250" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2024_first_reward" 								level="22"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2001_kaer_trolde_completed" 					level="16"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="mq2001_notice_board_kaer_trolde" amount="1" />
 		</items>
 	</reward>
-    <reward name="mq2001_holmstein_completed" 						level="16"	experience="25" 	gold="20" 	achievement="0" 	script="" comment="" >
+    <reward name="mq2001_holmstein_completed" 						level="16"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="mq2001_notice_board_holmstein" amount="1" />
 			<item name="mq2001_journal_2a" amount="1" />
@@ -773,45 +773,45 @@
     <reward name="mq2037_01_completed" 								level="16"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2018_1_final_no_gold" 							level="16"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2002_lied_or_no_sword" 							level="24"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2002_sword_given_away" 							level="24"	experience="25" 	gold="55" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2010_quest_done" 								level="24"	experience="10" 		gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2002_sword_given_away" 							level="24"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2010_quest_done" 								level="24"	experience="10" 		gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="mq2038_won_w_jutta" 								level="19"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2019_1_ambushers_killed" 						level="0"	experience="15" 	gold="0"	achievement="0" 	script="" comment="" />
     <reward name="mq2012_1_final_only_exp" 							level="21"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2012_1_final_exp_and_gold" 						level="21"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2012_1_final_exp_and_gold" 						level="21"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="mq2045_1_saved_the_prisoner" 						level="18"	experience="15" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2045_2_teach_a_lesson" 							level="18"	experience="15" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2049_1_saved_atheist" 							level="17"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2049_2_brought_him_books" 						level="17"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq2010_all_journals_found" 						level="24"	experience="10" 		gold="20" 	achievement="0" 	script="" comment="" />
+    <reward name="mq2010_all_journals_found" 						level="24"	experience="10" 		gold="50" 	achievement="0" 	script="" comment="" />
 	<reward name="mq2048_saved_foreigner_n_her_child" 				level="16"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="mq2009_water_hag_killed" 							level="23"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2009_water_hag_loot" 							level="23"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2010_leshys_killed" 							level="24"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq2011_final_reward" 								level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />    
     <reward name="mq3024_1_blockade_lifted" 						level="7"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3009_saving_reward" 							level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="">        <items>            <item name="Rune perun lesser" amount="1" />            <item name="Rune veles lesser" amount="1" />            <item name="Rune elemental lesser" amount="1" />        </items>    </reward>
-    <reward name="mq3041_1_finished_reward" 						level="14"	experience="25" 	gold="15" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3009_saving_reward" 							level="0"	experience="25" 	gold="50" 	achievement="0" 	script="" comment="">        <items>            <item name="Rune perun lesser" amount="1" />            <item name="Rune veles lesser" amount="1" />            <item name="Rune elemental lesser" amount="1" />        </items>    </reward>
+    <reward name="mq3041_1_finished_reward" 						level="14"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="mq3036_1_villa" 									level="12"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3036_2_bridge" 									level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3036_3_inn" 									level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3036_1_encounter" 								level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3036_2_second_meeting" 							level="12"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3031_1_got_pearl" 								level="17"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3031_2_finished_quest" 							level="17"	experience="0" 		gold="10" 	achievement="0" 	script="" comment="" >
+    <reward name="mq3031_2_finished_quest" 							level="17"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="item_name_mq3031_notice" amount="1" />
 		</items>
 	</reward>
-    <reward name="mq3005_quest_completed" 							level="12"	experience="10" 	gold="10" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3005_quest_completed" 							level="12"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="mq3035_1_radovid_dead" 							level="30"	experience="100" 	gold="0" 	achievement="13" 	script="" comment="" />
-    <reward name="mq3017_1_bribe" 									level="15"	experience="10" 	gold="20" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3017_1_villager_reward" 						level="15"	experience="25" 	gold="10" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3026_01_1opponent_beaten" 						level="0"	experience="25" 	gold="80" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3026_02_2oppponent_beaten" 						level="0"	experience="25" 	gold="160" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3017_1_bribe" 									level="15"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3017_1_villager_reward" 						level="15"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3026_01_1opponent_beaten" 						level="0"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3026_02_2oppponent_beaten" 						level="0"	experience="25" 	gold="150" 	achievement="0" 	script="" comment="" />
     <reward name="mq3026_03_3opponent_beaten" 						level="0"	experience="25" 	gold="200" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3026_04_4_completed" 							level="0"	experience="25" 	gold="80" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3026_04_won_night_race" 						level="0"	experience="25" 		gold="40" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3026_04_4_completed" 							level="0"	experience="25" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3026_04_won_night_race" 						level="0"	experience="25" 		gold="100" 	achievement="0" 	script="" comment="" />
 	<reward name="mq3026_reward_race1" 								level="0"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Horse Saddle 3v2" amount="1" />
@@ -820,11 +820,11 @@
 	<reward name="mq3026_reward_race2" 								level="0"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="">		<items>            <item name="Horse Bag 2" amount="1" />        </items>    </reward>
 	<reward name="mq3026_reward_race3" 								level="0"	experience="0" 		gold="0" 	achievement="0" 	script="" comment="">		<items>            <item name="Horse Saddle 3v3" amount="1" />        </items>    </reward>
 	<reward name="mq3026_reward_race4" 								level="0"	experience="0"		gold="0" 	achievement="0" 	script="" comment="">		<items>            <item name="Horse Blinder 2" amount="1" />        </items>    </reward>
-    <reward name="mq3012_1_noble_reward" 							level="14"	experience="25" 	gold="30" 	achievement="0" 	script="" comment="" >        <items>            <item name="Glyph axii lesser" amount="1" />        </items>	</reward>    
-	<reward name="mq3012_2_soldier_reward" 							level="14"	experience="25"		gold="0" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3012_1_noble_reward" 							level="14"	experience="25" 	gold="150" 	achievement="0" 	script="" comment="" >        <items>            <item name="Glyph axii lesser" amount="1" />        </items>	</reward>    
+	<reward name="mq3012_2_soldier_reward" 							level="14"	experience="25"		gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="mq3002_1_starting_stash" 							level="10"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3002_2_key_stash" 								level="10"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3002_3_chest" 									level="10"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="">
+    <reward name="mq3002_3_chest" 									level="10"	experience="0" 		gold="300" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Rune stribog" amount="1" />
 		</items>
@@ -833,7 +833,7 @@
     <reward name="mq3005_1_encounter_1_finished" 					level="12"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3005_2_encounter_2_finished" 					level="12"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3015_1_final" 									level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3027_found_my_manifest" 						level="0"	experience="25" 	gold="51" 	achievement="0" 	script="" comment=""/>
+    <reward name="mq3027_found_my_manifest" 						level="0"	experience="25" 	gold="50" 	achievement="0" 	script="" comment=""/>
     <reward name="mq3040_1_encounter_01" 							level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3040_2_encounter_02" 							level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3040_3_encounter_final" 						level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -842,16 +842,16 @@
 	<reward name="mq3023_2_ignore" 									level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
 	<reward name="mq3023_3_we_are_awesome" 							level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq3037_01_completed" 								level="13"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3038_1_human_guilty" 							level="13"	experience="10" 	gold="60" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3038_1_dwarf_guilty_or_no_clue" 				level="13"	experience="10" 	gold="60" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3038_1_human_guilty" 							level="13"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" />
+    <reward name="mq3038_1_dwarf_guilty_or_no_clue" 				level="13"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="mq3008_encounter_01" 								level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="mq3008_encounter_02" 								level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
-    <reward name="mq3039_1_loot_chest" 								level="20"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="">
+    <reward name="mq3039_1_loot_chest" 								level="20"	experience="0" 		gold="150" 	achievement="0" 	script="" comment="">
 		<items>
 			<item name="Heavy boots 03" amount="1" />
 		</items>
 	</reward>
-	<reward name="mq3039_1_no_chest" 								level="20"	experience="0" 		gold="20" 	achievement="0" 	script="" comment="" />
+	<reward name="mq3039_1_no_chest" 								level="20"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="" />
 	<reward name="mq3016_bards_found" 								level="10"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />    
     <reward name="mq4006_01_completed" 								level="30"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq4002_01_completed" 								level="27"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
@@ -860,10 +860,10 @@
     <reward name="mq4001_01_completed" 								level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="mq4003_01_completed" 								level="24"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />	
 	<reward name="lw_rescuetown_plg" 								level="0"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
-	<reward name="lw_rescuetown_nml" 								level="0"	experience="50" 	gold="50" 	achievement="0" 	script="" comment="" />
-	<reward name="lw_rescuetown_nov" 								level="0"	experience="75" 	gold="50" 	achievement="0" 	script="" comment="" />
-	<reward name="lw_rescuetown_skl" 								level="0"	experience="75" 	gold="50" 	achievement="0" 	script="" comment="" />
-	<reward name="vivaldis_loan" 									level="0"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="" />
+	<reward name="lw_rescuetown_nml" 								level="0"	experience="50" 	gold="0" 	achievement="0" 	script="" comment="" />
+	<reward name="lw_rescuetown_nov" 								level="0"	experience="75" 	gold="0" 	achievement="0" 	script="" comment="" />
+	<reward name="lw_rescuetown_skl" 								level="0"	experience="75" 	gold="0" 	achievement="0" 	script="" comment="" />
+	<reward name="vivaldis_loan" 									level="0"	experience="0" 		gold="300" 	achievement="0" 	script="" comment="" />
 	<reward name="generic_gwint_reward" 							level="0"	experience="0" 		gold="10" 	achievement="0" 	script="" comment="" />
 	<reward name="high_price_gwint_reward" 							level="0"	experience="0" 		gold="100" 	achievement="0" 	script="" comment="" />
     <reward name="achievement_monster_hunt_cockatrice" 				level="0"	experience="0" 		gold="0" 	achievement="32" 	script="" comment="" />
@@ -882,25 +882,25 @@
 	</reward>
     <reward name="br301_1_victory" 									level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="br302_1_victory" 									level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
-	<reward name="ff301_1_victory" 									level="0"	experience="10" 	gold="80" 	achievement="0" 	script="" comment="" >
+	<reward name="ff301_1_victory" 									level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="ff300_notice" amount="1" />
 		</items>
 	</reward>
-    <reward name="ff304_1_victory" 									level="0"	experience="10" 	gold="120" 	achievement="0" 	script="" comment="" />
-	<reward name="ff303_1_victory" 									level="0"	experience="10" 	gold="95" 	achievement="0" 	script="" comment="" >
+    <reward name="ff304_1_victory" 									level="0"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" />
+	<reward name="ff303_1_victory" 									level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="ff300_notice" amount="1" />
 		</items>
 	</reward>
-    <reward name="ff203_1_victory" 									level="0"	experience="10" 	gold="70" 	achievement="0" 	script="" comment="" >
+    <reward name="ff203_1_victory" 									level="0"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="ff200_notice" amount="1" />
 		</items>
 	</reward> 
 	<reward name="ff204_2_achievement" 								level="0"	experience="0" 		gold="0" 	achievement="40" 	script="" comment="" />
-    <reward name="ff204_1_victory" 									level="0"	experience="10" 	gold="90" 	achievement="0" 	script="" comment="" >	    <items>            <item name="Gwestog" amount="1" />        </items>    </reward>
-    <reward name="ff201_1_victory" 									level="0"	experience="10" 	gold="70" 	achievement="0" 	script="" comment="" >
+    <reward name="ff204_1_victory" 									level="0"	experience="10" 	gold="150" 	achievement="0" 	script="" comment="" >	    <items>            <item name="Gwestog" amount="1" />        </items>    </reward>
+    <reward name="ff201_1_victory" 									level="0"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="Gnomish silver sword 1 schematic" amount="1" />
 			<item name="ff200_notice" amount="1" />
@@ -908,48 +908,48 @@
 	</reward>
     <reward name="br201_1_victory" 									level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" >      <items>            <item name="Medium Armor 4 schematic" amount="1" />        </items>    </reward>
     <reward name="br202_1_victory" 									level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" >      <items>            <item name="Dwarven silver sword 1 schematic" amount="1" />        </items>    </reward>
-    <reward name="ff205_1_victory" 									level="0"	experience="10" 	gold="90" 	achievement="38" 	script="" comment="" >
+    <reward name="ff205_1_victory" 									level="0"	experience="10" 	gold="200" 	achievement="38" 	script="" comment="" >
 		<items>
 			<item name="Thyssen armor" amount="1" />
 		</items>
 	</reward>
-	<reward name="ff202_1_victory" 									level="0"	experience="10"		gold="70" 	achievement="0" 	script="" comment="" >
+	<reward name="ff202_1_victory" 									level="0"	experience="10"		gold="100" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="Heavy Armor 3 schematic" amount="1" />
 			<item name="ff200_notice" amount="1" />
 		</items>
 	</reward>
-    <reward name="hr201_regular_reward" 							level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" >		<items>            <item name="Horse Bag 3" amount="1" />        </items>    </reward>
-    <reward name="hr202_regular_reward" 							level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" >
+    <reward name="hr201_regular_reward" 							level="0"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" >		<items>            <item name="Horse Bag 3" amount="1" />        </items>    </reward>
+    <reward name="hr202_regular_reward" 							level="0"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="Horse Saddle 3v4" amount="1" />
 		</items>
 	</reward>
-    <reward name="hr203_regular_reward" 							level="0"	experience="10" 	gold="80" 	achievement="0" 	script="" comment="" >		<items>            <item name="Horse Blinder 3" amount="1" />        </items>    </reward>
-    <reward name="hr204_regular_reward" 							level="0"	experience="10" 	gold="90" 	achievement="0" 	script="" comment="" >		<items>            <item name="Horse Saddle 4" amount="1" />        </items>    </reward>
-    <reward name="hr201_regular_reward_repeat" 						level="0"	experience="10" 	gold="30" 	achievement="0" 	script="" comment="" />
-    <reward name="hr202_regular_reward_repeat" 						level="0"	experience="10" 	gold="40" 	achievement="0" 	script="" comment="" />
+    <reward name="hr203_regular_reward" 							level="0"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" >		<items>            <item name="Horse Blinder 3" amount="1" />        </items>    </reward>
+    <reward name="hr204_regular_reward" 							level="0"	experience="10" 	gold="100" 	achievement="0" 	script="" comment="" >		<items>            <item name="Horse Saddle 4" amount="1" />        </items>    </reward>
+    <reward name="hr201_regular_reward_repeat" 						level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
+    <reward name="hr202_regular_reward_repeat" 						level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
     <reward name="hr203_regular_reward_repeat" 						level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
-    <reward name="ff101_1_victory" 									level="0"	experience="10" 	gold="70" 	achievement="0" 	script="" comment="" >
+    <reward name="ff101_1_victory" 									level="0"	experience="10" 	gold="75" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="ff100_notice" amount="1" />
 		</items>
 	</reward>
-    <reward name="ff103_1_victory" 									level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" >
+    <reward name="ff103_1_victory" 									level="0"	experience="10" 	gold="75" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="ff100_notice" amount="1" />
 		</items>
 	</reward>
-    <reward name="ff102_1_victory" 									level="0"	experience="10" 	gold="70" 	achievement="0" 	script="" comment="" >
+    <reward name="ff102_1_victory" 									level="0"	experience="10" 	gold="75" 	achievement="0" 	script="" comment="" >
 		<items>
 			<item name="ff100_notice" amount="1" />
 		</items>
 	</reward>
     <reward name="hr101_1_victory" 									level="0"	experience="10" 	gold="50" 	achievement="0" 	script="" comment="" />
-	<reward name="hr101_2_item" 									level="0"	experience="0" 		gold="20" 	achievement="0" 	script="" comment="">        <items>            <item name="Horse Saddle 2" amount="1" />        </items>    </reward>
-	<reward name="hr101_3_item" 									level="0"	experience="0" 		gold="30" 	achievement="0" 	script="" comment="">        <items>            <item name="Horse Bag 1" amount="1" />        </items>    </reward>
-	<reward name="hr101_4_item" 									level="0"	experience="0" 		gold="40"	achievement="0" 	script="" comment="">        <items>            <item name="Horse Blinder 1" amount="1" />        </items>    </reward>
-    <reward name="ff104_1_victory" 									level="0"	experience="10" 	gold="80" 	achievement="0" 	script="" comment="" />
+	<reward name="hr101_2_item" 									level="0"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="">        <items>            <item name="Horse Saddle 2" amount="1" />        </items>    </reward>
+	<reward name="hr101_3_item" 									level="0"	experience="0" 		gold="50" 	achievement="0" 	script="" comment="">        <items>            <item name="Horse Bag 1" amount="1" />        </items>    </reward>
+	<reward name="hr101_4_item" 									level="0"	experience="0" 		gold="50"	achievement="0" 	script="" comment="">        <items>            <item name="Horse Blinder 1" amount="1" />        </items>    </reward>
+    <reward name="ff104_1_victory" 									level="0"	experience="10" 	gold="125" 	achievement="0" 	script="" comment="" />
 	<reward name="cg_academic" 										level="0"	experience="0" 		gold="0"	achievement="0" 	script="" comment="">        <items>            <item name="Gwent Almanac" amount="1" /> <item name="gwint_card_zoltan" amount="1" /> </items>    </reward>	
     <reward name="cg_all_cards_gathered" 							level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="cg_card_prodigy" 									level="0"	experience="10" 	gold="0" 	achievement="0" 	script="" comment="" />

@@ -85,7 +85,7 @@ function GMTest_xpquestdata()
 
 	LogChannel('GMTest', "INFO XP-03 quest-level tables loaded:" + theGame.GMTestQuestLevelPaths());
 	f = GMTestXpRewardsAll(checks);
-	GMTestReport(f == 0 && checks == GMTestXpRewardChecks(), "XP-02 data: " + checks + " rewards read with legacy's experience and level and 5.x's gold"
+	GMTestReport(f == 0 && checks == GMTestXpRewardChecks(), "XP-02 data: " + checks + " rewards read with legacy's experience and level and ECON's gold (legacy's)"
 		+ " (5.x's new rewards 5.x's, the Killbill branch at level 16); " + f + " differ");
 	checks = 0;
 	f = GMTestXpQuestLevelsAll(checks);

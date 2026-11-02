@@ -23,11 +23,18 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PORTED = {"ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11",
           "CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09", "LOOT-08", "FOOD-04", "FOOD-07",
-          "XBOW-02", "XBOW-03"}
-AREAS = ("ITEM-", "CRAFT-", "LOOT-", "FOOD-", "XBOW-")
+          "XBOW-02", "XBOW-03", "ECON-01", "ECON-02", "ECON-03", "ECON-04"}
+AREAS = ("ITEM-", "CRAFT-", "LOOT-", "FOOD-", "XBOW-", "ECON-")
+# ECON's features (prices and price tags, docs/features/econ.md): they never make a tool write an entry whole
+# by themselves. A tool that writes an entry for another area's change applies them too (`apply_item`);
+# entries with ECON's changes only are `gen_econ.py`'s (short `extend` entries, the owner's form, 2026-11-01).
+ECON = {"ECON-01", "ECON-02", "ECON-03", "ECON-04"}
+WHOLE = tuple(a for a in AREAS if a != "ECON-")
+# The mod_ tags other areas own (ECON owns every other mod_ price tag).
+ECON_KEEP = {"mod_nosale", "mod_nosalem", "mod_alchemy_table"}
 
 # The item tags each feature owns (added or removed where legacy did); "*": every tag but the mod_*
-# price tags (ECON's).
+# price tags (ECON's); "mod_*": every mod_ price tag but ECON_KEEP.
 TAGS = {
     "CRAFT-07": {"*"},  # the ingredients' kind tags (CraftingIngredient, AlchemyIngredient, ...)
     "ITEM-03": {"AutogenUseLevelRange", "AutogenForceLevel", "EP1"},
@@ -35,6 +42,9 @@ TAGS = {
     "ITEM-05": {"Autogen", "AutogenForceLevel"},
     "ITEM-08": {"DoNotEnhance", "DoNotEnhancem"},
     "XBOW-03": {"mod_nosale", "mod_nosalem"},  # bolts sellable; the quest bolt's misspelt mod_nosalem fixed (xbow.md)
+    "CRAFT-08": {"mod_alchemy_table"},  # PE13: the tag the dismantling station reads (Protofleder Mutagen)
+    "ECON-01": {"mod_*"}, "ECON-02": {"mod_*"}, "ECON-03": {"mod_*"},
+    "ECON-04": {"mod_*"},  # the price tags; legacy's fixes of 1.32's mod_weapo, mod_legendar, mod_valuable EP1 (PE4)
     "FOOD-04": {"*"},  # the food and drink kind tags (Drinks, Alcohol, Uncooked, Potion off seven items, ...)  # DoNotEnhancem: 1.32's misspelt tag on the sq701 gloves
 }
 # The ability nodes each feature owns.
@@ -58,6 +68,7 @@ BLOCKS = {
     "CRAFT-07": {"base_abilities"},  # the ingredients' rarity (bugfix 120)
     "CRAFT-08": {"recycling_parts"},  # the dismantling parts
     "FOOD-04": {"base_abilities", "recycling_parts"},
+    "ECON-02": {"base_abilities"},  # Blood and Wine's dyes lose their Relic rarity (CRAFT's hand-off)
     "XBOW-02": {"base_abilities"},  # the two Blood and Wine quest crossbows on Toussaint Crossbow 1's stats  # the food and drink tier, rarity and toxicity abilities; Wolf liver's parts (none: audit F1)
 }
 # (block, item) where legacy's block is taken although 5.x changed it (the owner's DC4: Cheesecutter
@@ -79,10 +90,112 @@ ATTRS = {
     # every drink stacks to 100; Wolf liver's category and description (legacy moved it from the ingredients to the
     # food: its ingredient unit, CRAFT-07's and CRAFT-08's, shares the name with its food unit, which wins; audit F1)
     "FOOD-04": {"stackable", "category", "localisation_key_description"},
+    # the list price (ECON-01 to ECON-03); NG+'s Gwent Almanac also stacks as its regular entry (ECON-02)
+    "ECON-01": {"price"}, "ECON-02": {"price", "stackable"}, "ECON-03": {"price"}, "ECON-04": {"price"},
 }
 
+# DE2 (ECON-01, ECON-03; the owner's decision, 2026-11-01): the list prices of 5.x's new gear, schematics and
+# horse gear, by analogy with a legacy counterpart (legacy never had these items, so they are no ECON units).
+# {5.x item name: (price, counterpart, rule)}: "ratio" is round(5.x's price x the counterpart's legacy / 1.32
+# price), "copy" the counterpart's legacy price (an item with the counterpart's stats), "owner" a figure the
+# owner wrote in the decision (the ratio's own result in the comment). `gen_econ.py --verify` recomputes every
+# price from the branches. The Netflix set (and its schematics) by the Wolf School piece of the same tier, the
+# owner's choice; each Netflix schematic and Top Notch at its counterpart's legacy price (the owner's decision on
+# the ECON audit's F3, 2026-11-01); the other sets by hand (econ.md's DE2 table). NG+: the same price, for the
+# same name in `items_plus` and for 5.x's `NGP ` copies (legacy's NG+ prices equal its regular ones, PE3).
+# Applied by whichever tool writes the entry: gen_arm_new.py (the lower Netflix armor tiers), gen_swd_items.py
+# (SWD-10's swords), gen_econ.py (the rest). Gwent cards, potions and quest items keep 5.x's prices.
+DE2 = {}
+for _p, _w, _t in (("Armor", "Wolf Armor", (1, 3, 4)), ("Boots", "Wolf Boots", (2, 4, 5)),
+                   ("Gloves", "Wolf Gloves", (2, 4, 5)), ("Pants", "Wolf Pants", (2, 4, 5))):
+    _sch = "Witcher Wolf Jacket" if _p == "Armor" else "Witcher Wolf " + _p
+    for _i, _s in enumerate(("", " 1", " 2")):
+        DE2[f"Netflix {_p}{_s}"] = (None, f"{_w} {_t[_i]}", "ratio")
+        _u = _t[_i] - (0 if _p == "Armor" or _t[_i] == 5 else 1)  # the Upgrade schematic that crafts it
+        DE2[f"Netflix {_p} schematic{_s}"] = (None, f"{_sch} Upgrade schematic {_u}", "copy")
+for _k in ("steel", "silver"):
+    for _i, _s in enumerate(("", " 1", " 2")):
+        DE2[f"Netflix {_k} sword{_s}"] = (None, f"Wolf School {_k} sword {(1, 3, 4)[_i]}", "ratio")
+        DE2[f"Netflix {_k} sword schematic{_s}"] = (None, f"Wolf School {_k} sword Upgrade schematic {(1, 3, 4)[_i]}", "copy")
+    DE2[f"Reinald Netflix {_k} sword"] = (None, f"Wolf School {_k} sword 1", "ratio")  # = the first tier (SWD-10)
+for _n in [n for n in DE2 if "schematic" in n]:
+    DE2["NGP " + _n] = DE2[_n]  # 5.x's NG+ schematics in the regular folder: as the regular ones
+_PRICES = {  # the resulting prices (checked against the rule by gen_econ.py --verify)
+    "Netflix Armor": 842, "Netflix Armor 1": 3240, "Netflix Armor 2": 5040,
+    "Netflix Boots": 634, "Netflix Boots 1": 1660, "Netflix Boots 2": 2620,
+    "Netflix Gloves": 570, "Netflix Gloves 1": 1410, "Netflix Gloves 2": 2298,
+    "Netflix Pants": 604, "Netflix Pants 1": 1665, "Netflix Pants 2": 3272,
+    "Netflix steel sword": 544, "Netflix steel sword 1": 1402, "Netflix steel sword 2": 1709, "Reinald Netflix steel sword": 544,
+    "Netflix silver sword": 631, "Netflix silver sword 1": 1650, "Netflix silver sword 2": 2540, "Reinald Netflix silver sword": 631,
+    "Netflix Armor schematic": 173, "Netflix Armor schematic 1": 638, "Netflix Armor schematic 2": 1027,
+    "Netflix Boots schematic": 65, "Netflix Boots schematic 1": 332, "Netflix Boots schematic 2": 524,
+    "Netflix Gloves schematic": 114, "Netflix Gloves schematic 1": 267, "Netflix Gloves schematic 2": 460,
+    "Netflix Pants schematic": 122, "Netflix Pants schematic 1": 328, "Netflix Pants schematic 2": 520,
+    "Netflix steel sword schematic": 100, "Netflix steel sword schematic 1": 270, "Netflix steel sword schematic 2": 345,
+    "Netflix silver sword schematic": 114, "Netflix silver sword schematic 1": 322, "Netflix silver sword schematic 2": 505,
+}
+for _n, _v in list(_PRICES.items()):
+    if "schematic" in _n:
+        _PRICES["NGP " + _n] = _v
+for _n in DE2:
+    DE2[_n] = (_PRICES[_n],) + DE2[_n][1:]
+# The owner's figures for two Netflix trousers (the ratio gives 605 and 3,273): the decision's numbers kept.
+DE2["Netflix Pants"] = (604, "Wolf Pants 2", "owner")
+DE2["Netflix Pants 2"] = (3272, "Wolf Pants 5", "owner")
+DE2.update({
+    # copies of a 1.32 item (its price and stats): that item's legacy price
+    "Heavy armor 03 Netflix": (856, "Heavy armor 03", "ratio"),
+    "Heavy gloves 04 Netflix": (470, "Heavy gloves 04", "ratio"),
+    # Dol Blathanna and White Tiger (relic medium armor, levels 8 and 12, the same 5.x prices): the relic medium
+    # piece of the same slot nearest in 1.32 price
+    "Dol Blathanna Armor": (714, "Medium armor 10r", "ratio"), "White Tiger Armor": (714, "Medium armor 10r", "ratio"),
+    "Dol Blathanna Boots": (288, "Heavy boots 07_crafted", "ratio"), "White Tiger Boots": (288, "Heavy boots 07_crafted", "ratio"),
+    "Dol Blathanna Gloves": (280, "Guard Lvl2 Gloves 3", "ratio"), "White Tiger Gloves": (280, "Guard Lvl2 Gloves 3", "ratio"),
+    "Dol Blathanna Pants": (343, "Guard Lvl2 Pants 3", "ratio"), "White Tiger Pants": (343, "Guard Lvl2 Pants 3", "ratio"),
+    # Scarlet Crest (relic medium armor, level 41): the same rule
+    "Scarlet Crest Armor": (755, "Medium armor 11r", "ratio"), "Scarlet Crest Boots": (320, "Heavy boots 07", "ratio"),
+    "Scarlet Crest Gauntlets": (563, "Thief Gloves", "ratio"), "Scarlet Crest Trousers": (232, "Thief Pants", "ratio"),
+    # the relic swords (Dol Blathanna, the Nine-Tailed Vixen, Top Notch): the relic sword of the same kind nearest
+    # in 1.32 price; Top Notch (both 5.x prices placeholders) at its counterpart's legacy price (F3)
+    "Dol Blathanna longsword": (1145, "Lune", "ratio"), "Steel Vixen": (1145, "Lune", "ratio"),
+    "White Widow of Dol Blathanna": (1289, "Harpy", "ratio"), "Silver Vixen": (1289, "Harpy", "ratio"),
+    "Top Notch Steel": (1500, "Eredin Sword", "copy"), "Top Notch Silver": (1050, "Breathofthenorth", "copy"),
+    # the Fire Horse gear has the stats of Blood and Wine's Toussaint gear: legacy's price of that piece
+    "Fire Horse Saddle": (450, "Toussaint saddle", "copy"), "Fire Horse Blinders": (250, "Toussaint horse blinders", "copy"),
+    "Fire Horse Saddlebags": (450, "Toussaint horsebag", "copy"),
+})
+_DE2_LOWER = {n.lower(): n for n in DE2}
+
+
+def de2_name(name):
+    """The DE2 key of an item name (5.x's `NGP ` copies and NG+'s spelling variants map to the regular item),
+    or None."""
+    n = name.lower()
+    if n in _DE2_LOWER:
+        return _DE2_LOWER[n]
+    if n.startswith("ngp ") and n[4:] in _DE2_LOWER:
+        return _DE2_LOWER[n[4:]]
+    return None
+
+
+def de2_price(name):
+    k = de2_name(name)
+    return DE2[k][0] if k else None
+
+
+def apply_de2(name, entry):
+    """`entry` with DE2's price set on its opening tag (unchanged for an item DE2 does not price)."""
+    p = de2_price(name)
+    if p is None:
+        return entry
+    h, end = head(entry)
+    if "price" in h:
+        return entry[:h["price"][0]] + str(p) + entry[h["price"][1]:]
+    return entry[:end].rstrip() + f' price="{p}"' + entry[end:]
+
+
 _UNITS = None
-UNIT = re.compile(r'^(.*/gameplay/)(items|items_plus|items\*)(/[^/]+\.xml)::definitions/(items/item|abilities/ability):(.+)$')
+UNIT =re.compile(r'^(.*/gameplay/)(items|items_plus|items\*)(/[^/]+\.xml)::definitions/(items/item|abilities/ability):(.+)$')
 
 
 def units():
@@ -115,6 +228,9 @@ def own_tags(feature, mtags, ltags):
     if "*" in own:
         own.discard("*")
         own |= {t for t in set(mtags) | set(ltags) if not t.startswith("mod_")}
+    if "mod_*" in own:
+        own.discard("mod_*")
+        own |= {t for t in set(mtags) | set(ltags) if t.startswith("mod_") and t not in ECON_KEEP}
     return own
 
 
@@ -293,10 +409,10 @@ def merge_blocks(folder, name, mentry, lentry, entry, area=None):
     return entry, changes
 
 
-def apply_item(folder, name, mentry, lentry, entry, area="CRAFT-"):
-    """`entry` (an item's entry as a generator writes it) with every ported ITEM and CRAFT field of the
-    item (by default CRAFT's: the item tools apply ITEM's themselves): tags, opening-tag attributes
-    and child blocks; [changes]. Idempotent."""
+def apply_item(folder, name, mentry, lentry, entry, area=("CRAFT-", "ECON-")):
+    """`entry` (an item's entry as a generator writes it) with every ported ITEM, CRAFT and ECON field of
+    the item (by default CRAFT's and ECON's: the item tools apply ITEM's themselves; None: every area's):
+    tags, opening-tag attributes and child blocks; [changes]. Idempotent."""
     vtags = split_tags(entry)
     mt, lt = split_tags(mentry), split_tags(lentry)
     new = merge_tags(folder, name, mt, lt, vtags, vtags, area)
@@ -314,3 +430,43 @@ def apply_item(folder, name, mentry, lentry, entry, area="CRAFT-"):
 def split_tags(entry):
     m = re.search(r'<tags>(.*?)</tags>', re.sub(r'<!--.*?-->', '', entry, flags=re.S), re.S)
     return [t.strip() for t in m.group(1).split(",") if t.strip()] if m else []
+
+
+def resolve_extend(stub, ventry):
+    """The entry the game reads for an `on_conflict="extend"` item entry `stub` over 5.x's `ventry`
+    (verified, ECON slice E1): the stub's opening-tag attributes set, its `<tags>` added (a tag written
+    `-tag` removed). Any other child of the stub is not supported (ValueError)."""
+    h, end = head(stub)
+    attrs = {a: stub[s:e].strip() for a, (s, e) in h.items() if a not in ("name", "on_conflict")}
+    inner = re.sub(r'<!--.*?-->', '', stub[end + 1:], flags=re.S)
+    inner = re.sub(r'</item>\s*$', '', inner.strip())
+    tm = re.search(r'<tags>(.*?)</tags>', inner, re.S)
+    if re.sub(r'<tags>.*?</tags>', '', inner, flags=re.S).strip():
+        raise ValueError("extend entry with children other than <tags>")
+    entry = ventry
+    for a, val in attrs.items():
+        vh, vend = head(entry)
+        if a in vh:
+            entry = entry[:vh[a][0]] + val + entry[vh[a][1]:]
+        else:
+            entry = entry[:vend].rstrip() + f' {a}="{val}"' + entry[vend:]
+    if tm:
+        tags = split_tags(entry)
+        for t in (x.strip() for x in tm.group(1).split(",") if x.strip()):
+            if t.startswith("-"):
+                tags = [x for x in tags if x != t[1:]]
+            elif t not in tags:
+                tags.append(t)
+        vt = re.search(r'(<tags>)(.*?)(</tags>)', entry, re.S)
+        if vt:
+            entry = entry[:vt.start(2)] + ", ".join(tags) + entry[vt.end(2):]
+        else:
+            vh, vend = head(entry)
+            entry = entry[:vend + 1] + f"\n\t\t<tags>{', '.join(tags)}</tags>" + entry[vend + 1:]
+    return entry
+
+
+def empty_item(name):
+    """What a Hearts of Stone item reads after an `extend` (verified, ECON slice E1: no price, category,
+    tags, texts or weight)."""
+    return f'<item name="{name}"></item>'

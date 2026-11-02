@@ -8,7 +8,7 @@
 // monster (it survives) and a rotfiend (cut to its LastBreath threshold), signals a rotfiend's death next to a bandit
 // (the explosion's raw damage: its weapon's, 300 without), hits a bandit with Eredin's frost projectile (500 frost, the
 // slowdown 3 s), and (AI-C audit F3) with projectiles through their real collision: class defaults (Ifryt's 200 fire and
-// burning 3 s, a stone's 200 and knockdown, a lightning bolt's paralysis 3 s), the Wild Hunt mage's ice spear (500, its
+// burning 3 s, a stone's 200 and knockdown (on three fresh bandits, the knockdown carried by every hit: ECON audit F5), a lightning bolt's paralysis 3 s), the Wild Hunt mage's ice spear (500, its
 // slowdown 3 s), a debuff projectile without 5.x's second rending hit, the Hakland mage's debuff projectile twice
 // within 3 s (the second deals nothing), a debuff projectile and a boulder set to ignore armor on the contract monster
 // (armor ignored on an Essence user, the boulder's damage bludgeoning; owner, 2026-10-29); spawns the sergeant and reads his displayed level (AI-C audit F6); then removes them.
@@ -33,6 +33,8 @@ var gmTestAi17RawPhys : float;
 var gmTestAi17Dealt : float;
 @addField(CR4Player)
 var gmTestAi17IgnoreArmor : bool;
+@addField(CR4Player)
+var gmTestAi17Knockdown : bool;	// the watched hit's action carries EET_Knockdown (ECON audit F5)
 
 @addMethod(W3PlayerWitcher)
 function GMTestAi17Set(npcs : array<CNewNPC>)
@@ -54,11 +56,13 @@ function GMTestAi17SetWatch(a : CActor)
 	gmTestAi17RawPhys = -1;
 	gmTestAi17Dealt = -1;
 	gmTestAi17IgnoreArmor = false;
+	gmTestAi17Knockdown = false;
 }
 
 @addMethod(W3PlayerWitcher)
-function GMTestAi17Record(raw : string, phys : float, dealt : float, ignoreArmor : bool)
+function GMTestAi17Record(raw : string, phys : float, dealt : float, ignoreArmor : bool, optional knockdown : bool)
 {
+	gmTestAi17Knockdown = knockdown;
 	gmTestAi17IgnoreArmor = ignoreArmor;
 	gmTestAi17Raw = raw;
 	gmTestAi17RawPhys = phys;
@@ -199,8 +203,12 @@ function GMTest_ai17()
 	npcs.PushBack(hakland);
 	npcs.PushBack(bandit3);
 	npcs.PushBack(bandit4);
+	// AI-18's stone (ECON audit F5): three fresh deserters, the stone alone on each (a knockdown lands at random)
+	npcs.PushBack(GMTestAi15Spawn("living_world/enemy_templates/nilfgaardian_deserter_sword_hard.w2ent", 84, 10));
+	npcs.PushBack(GMTestAi15Spawn("living_world/enemy_templates/nilfgaardian_deserter_sword_hard.w2ent", 84, -10));
+	npcs.PushBack(GMTestAi15Spawn("living_world/enemy_templates/nilfgaardian_deserter_sword_hard.w2ent", 92, -10));
 	w.GMTestAi17Set(npcs);
-	GMTestReport(mh && rot1 && rot2 && bandit1 && bandit2 && hakland && bandit3 && bandit4, "AI-17 a contract monster, two rotfiends and five bandits spawned");
+	GMTestReport(mh && rot1 && rot2 && bandit1 && bandit2 && hakland && bandit3 && bandit4 && npcs[8] && npcs[9] && npcs[10], "AI-17 a contract monster, two rotfiends and eight bandits spawned");
 	h = false;
 	if( (W3MonsterHuntNPC)mh )
 		h = true;
@@ -362,12 +370,12 @@ function GMTest_ai17_after()
 	var groups : array<name>;
 	var comp : CComponent;
 	var buff : CBaseGameplayEffect;
-	var i : int;
+	var i, knocked : int;
 	var armor : float;
 
 	w = GetWitcherPlayer();
 	npcs = w.gmTestAi17Npcs;
-	if( npcs.Size() < 8 )
+	if( npcs.Size() < 11 )
 	{
 		GMTestReport(false, "AI-17 the NPCs of GMTest_ai17() are there");
 		return;
@@ -433,10 +441,23 @@ function GMTest_ai17_after()
 	GMTestReport(ok && StrFindFirst(w.gmTestAi17Raw, "FireDamage 200") >= 0 && x > 2.5 && x <= 3.01, "AI-18 Ifryt's projectile (the class default) on a bandit: raw" + w.gmTestAi17Raw
 		+ ", burning " + NoTrailZeros(x) + " s left [5.x: 200, burning 2 s; without the default 20]");
 	bandit3.RemoveAllBuffsOfType(EET_Burning);
-	bandit3.RemoveAllBuffsOfType(EET_Knockdown);
-	ok = GMTestAi17Collide("gameplay/abilities/elemental/elemental_stone_proj.w2ent", thePlayer, bandit3);
-	GMTestReport(ok && StrFindFirst(w.gmTestAi17Raw, "BludgeoningDamage 200") >= 0 && bandit3.HasBuff(EET_Knockdown), "AI-18 a stone (the class default) on a bandit: raw" + w.gmTestAi17Raw
-		+ ", knockdown " + bandit3.HasBuff(EET_Knockdown) + " [the projectile's damage and effect; without the default 20, no effect]");
+	// The stone (ECON audit F5): its knockdown lands on a deserter only at random (about 7 hits in 10, after the
+	// port's part: the native effect code), so the check is what the port controls: the stone alone on three fresh
+	// deserters, every hit deals the 200 and its damage action carries the knockdown (the class default); how
+	// many were knocked down is logged (2, 3 and 1 of 3 on three launches: at that rate a required landing on one of three would fail about 1 run in 30)
+	ok = true;
+	raw = "";
+	knocked = 0;
+	for( i = 8; i < 11; i += 1 )
+	{
+		ok = GMTestAi17Collide("gameplay/abilities/elemental/elemental_stone_proj.w2ent", thePlayer, npcs[i]) && ok
+			&& StrFindFirst(w.gmTestAi17Raw, "BludgeoningDamage 200") >= 0 && w.gmTestAi17Knockdown;
+		raw += " |" + w.gmTestAi17Raw + ", carries knockdown " + w.gmTestAi17Knockdown + ", knocked down " + npcs[i].HasBuff(EET_Knockdown);
+		if( npcs[i].HasBuff(EET_Knockdown) )
+			knocked += 1;
+	}
+	GMTestReport(ok, "AI-18 a stone (the class default) on three fresh bandits: 200 and the knockdown on every hit; " + knocked + " of 3 knocked down;" + raw
+		+ " [the projectile's damage and effect; without the default 20, no effect]");
 	ok = GMTestAi17Collide("gameplay/abilities/sorceresses/sorceress_lightining_bolt.w2ent", thePlayer, bandit4);
 	x = GMTestAi17Left(bandit4, EET_Paralyzed);
 	GMTestReport(ok && StrFindFirst(w.gmTestAi17Raw, "ShockDamage 40") >= 0 && x > 2.5 && x <= 3.01, "AI-18 a sorceress's lightning bolt (the class default) on a bandit: raw" + w.gmTestAi17Raw
@@ -692,6 +713,7 @@ function ProcessAction( act : W3DamageAction )
 	var i : int;
 	var s : string;
 	var phys, before : float;
+	var effs : array<EEffectType>;
 	var victim : CActor;
 	var ign : bool;
 
@@ -714,10 +736,11 @@ function ProcessAction( act : W3DamageAction )
 		if( victim )
 			before = victim.GetHealth();
 		ign = act.GetIgnoreArmor();
+		act.GetEffectTypes(effs);
 	}
 	wrappedMethod(act);
 	if( watch )
-		w.GMTestAi17Record(s, phys, act.GetDamageDealt(), ign);
+		w.GMTestAi17Record(s, phys, act.GetDamageDealt(), ign, effs.Contains(EET_Knockdown));
 	if( onGeralt || onNpc )
 		LogChannel('GMTestAI', "C2EV hit on " + victim.GetReadableName() + " by " + ((CActor)act.attacker).GetReadableName() + " (" + act.GetBuffSourceName() + ", causer " + GMTestAi17Causer(act.causer)
 			+ ", reaction " + act.GetHitReactionType() + ", dot " + act.IsDoTDamage() + ", ranged " + act.IsActionRanged() + ", instant kill " + act.GetInstantKill() + "):" + s

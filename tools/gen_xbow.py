@@ -30,6 +30,7 @@ import argparse, os, re, subprocess, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_ench import abilities, ability_stats  # noqa: E402
+import gen_arm_items as arm  # noqa: E402  extend_over_5x (ECON's short entries)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -140,6 +141,7 @@ def dlc_entries(worktree, folder):
                 if n in store:
                     dup.append("%s %s twice in %s" % (kind, n, folder))
                 store[n] = e
+    its = arm.dlc_entries(worktree, folder)[0]  # the items as the game reads them (ECON's extend entries resolved over 5.x's)
     return abls, its, dup
 
 
