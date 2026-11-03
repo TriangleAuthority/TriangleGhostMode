@@ -554,3 +554,15 @@
 2110992300|        |option_gm_use_xml_exp_toggle|Fixed experience for quests and combat
 2110992270|        |option_gm_quest_exp_slider|Quest experience modifier
 2110992271|        |option_gm_monster_exp_slider|Combat experience modifier
+; OPT slice O0: WGT's three options (OPT-04 boat sinking and its threshold, OPT-05 item weight reduction), legacy's
+2110992180|        |option_gm_sink_boat_toggle|Sink the boat if over encumbered
+2110992181|        |option_gm_sink_boat_slider|Over encumbrance threshold to sink the boat (%)
+2110992183|        |option_gm_encumbrance_slider|Reduce item encumbrance (%)
+; OPT slice O1: the Vitality regen options (OPT-03), legacy's
+2110992393|        |option_gm_cbtvreg|Combat vitality regen (additional)
+2110992394|        |option_gm_ocbtvreg|Out of combat vitality regen (additional)
+; OPT slice O2: the gameplay and QoL presets (OPT-07), legacy's
+2110992447|        |preset_Mods_ghost_mode_gm_qol_options|QoL Presets
+2110992450|        |preset_Mods_ghost_mode_gm_gameplay_options|Gameplay Presets
+2110992459|        |preset_value_gm_old_ver|Vanilla(ish)
+2110992179|        |gm_geralt_too_heavy|Your over encumbrance is too high

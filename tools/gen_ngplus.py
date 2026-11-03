@@ -16,12 +16,13 @@ files gets on_conflict="replace" there); vanilla NG 0: the difference is added
 the same value in NG and NG+ and Ghost Mode's value is that value, it is kept (legacy chose not to
 scale it). Comments and layout are kept. Prints every value that changes or is kept that way.
 
-    python tools/gen_ngplus.py [--worktree DIR] [--check]
+    python tools/gen_ngplus.py --worktree DIR [--check]
 
-Default worktree ../TGM-5x-GM. --check writes nothing: it prints the report and fails if a copy
+--worktree is required. --check writes nothing: it prints the report and fails if a copy
 in `abilities_plus/` is missing or out of date. Re-run after changing any file in `abilities/`.
 """
 import argparse, os, re, subprocess, sys
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -127,7 +128,7 @@ def convert(text, name, ng, ngp, lng, lngp, report):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
     ng, ngp = vanilla_abilities("abilities"), vanilla_abilities("abilities_plus")

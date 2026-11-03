@@ -13,10 +13,9 @@ quest crossbows) are not written here: `item_layer.py` holds them and `gen_item.
 New Game+ (`items_plus`): the ability as legacy's `items_plus` file has it (equal to the regular one
 in 1.32, legacy and 5.x, xbow.md's PB11).
 
-    python tools/gen_xbow.py [--worktree DIR] [--check | --verify]
+    python tools/gen_xbow.py --worktree DIR [--check | --verify]
 
-Writes `items/gm_xbow.xml` and `items_plus/gm_xbow.xml` in Ghost Mode's DLC (default worktree
-../TGM-5x-GM). --check writes nothing and fails if a file is out of date.
+Writes `items/gm_xbow.xml` and `items_plus/gm_xbow.xml` in Ghost Mode's DLC (--worktree, required). --check writes nothing and fails if a file is out of date.
 
 --verify writes nothing and compares what the game reads (Ghost Mode's DLC over 5.x) with legacy's
 data, for every ability and item legacy defines in XBOW's files (both folders): abilities node by node
@@ -31,6 +30,8 @@ import argparse, os, re, subprocess, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_ench import abilities, ability_stats  # noqa: E402
 import gen_arm_items as arm  # noqa: E402  extend_over_5x (ECON's short entries)
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
+import item_layer  # noqa: E402  (WGT's ported nodes)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -101,8 +102,8 @@ def build(folder):
             body = re.sub(r'\s*<!--.*?-->', '', legacy[n].strip())
             head = '<ability name="%s"%s>' % (n, ' on_conflict="replace"' if n in vanilla else "")
             body = re.sub(r'^<ability\s+name="[^"]+"[^>]*>', head, body)
-            # 5.x's weight node stays (WGT)
-            vw = re.findall(r'<weight\b[^>]*/>', vanilla.get(n, ""))
+            # the weight (WGT's): legacy's once WGT ports the abilities' weights (slice W2), else 5.x's; placed last
+            vw = re.findall(r'<weight\b[^>]*/>', legacy[n] if "weight" in item_layer.NODES.get("WGT-03", ()) else vanilla.get(n, ""))
             body = re.sub(r'\s*<weight\b[^>]*/>', '', body)
             if vw:
                 body = re.sub(r'</ability>$', "\n" + "\n".join(vw) + "\n</ability>", body)
@@ -215,7 +216,7 @@ def verify(worktree):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     a = ap.parse_args()

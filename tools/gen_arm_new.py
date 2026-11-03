@@ -21,16 +21,16 @@ New Game+ (`items_plus`, including 5.x's `NGP` items): resistances keep Ghost Mo
 its armor resistances in NG+); other numbers follow the NG+ rule (vanilla NG+ x GM NG / vanilla NG,
 docs/feature-mapping.md#ng-numbers), a new stat taking the ratio of the stat it replaces.
 
-    python tools/gen_arm_new.py [--worktree DIR] [--check]
+    python tools/gen_arm_new.py --worktree DIR [--check]
 
-Writes `items/gm_arm_new.xml` and `items_plus/gm_arm_new.xml` in Ghost Mode's DLC (default worktree
-../TGM-5x-GM). --check writes nothing and fails if a file is out of date.
+Writes `items/gm_arm_new.xml` and `items_plus/gm_arm_new.xml` in Ghost Mode's DLC (--worktree, required). --check writes nothing and fails if a file is out of date.
 """
 import argparse, os, re, subprocess, sys
 import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import item_layer  # noqa: E402  ECON's DE2 prices of these items
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -188,6 +188,8 @@ def generate(folder):
                     if folder == "items_plus" and vn and vc is not None:
                         v = round(v * vc / vn, 4 if v < 1 else 0)
                     body = set_node(body, tag, typ, v)
+            if item_layer.dw2_weight(name) is not None and find_node(body, "weight", "base"):  # WGT's DW2 (slice W3)
+                body = set_node(body, "weight", "base", float(item_layer.dw2_weight(name)))
             body = re.sub(r'<ability\b', '<ability on_conflict="replace"', body, count=1)
             abilities.append(body)
         for name, entry in entries(text, "item", "name"):
@@ -209,7 +211,7 @@ def generate(folder):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     a = ap.parse_args()
     bad = False

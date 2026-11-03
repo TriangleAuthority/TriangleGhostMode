@@ -13,9 +13,9 @@ override one it inherits. New methods (@addMethod, or not defined anywhere in va
 Also raises an alarm for every @wrapMethod of a native (import) function: that works only from a
 script blob, with probably no loose-script equivalent (docs/development.md, Annotations).
 
-    python tools/check_modsigns.py [--worktree DIR] [--verbose]
+    python tools/check_modsigns.py --worktree DIR [--verbose]
 
-Scans modGhostMode/scripts/local/ in the 5.x-GM worktree (default ../TGM-5x-GM), working tree
+Scans modGhostMode/scripts/local/ in the 5.x-GM worktree (--worktree, required), working tree
 files, against the vanilla-5.x branch. Exits 1 if anything is unmarked or alarming.
 """
 import argparse
@@ -24,6 +24,7 @@ import os
 import re
 import subprocess
 import sys
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS = "modGhostMode/scripts/"
@@ -235,7 +236,7 @@ def _unmarked(vcode, mcode, mod, first_line, distinct):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--verbose", action="store_true", help="also list the bodies that pass")
     args = ap.parse_args()
     classes, defs = vanilla_index()

@@ -6,7 +6,7 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_armor.xml -->
 	<ability name="Guard Lvl1 A Armor 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="14.96" 			/>
+					<weight							type="base"	min="7"		 			/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.03"				/>
 					<bludgeoning_resistance_perc	type="base" min="0.02"				/>
@@ -16,7 +16,7 @@
 		<rending_resistance_perc		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl1 A Armor 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="18.24" 			/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.03"				/>
 					<bludgeoning_resistance_perc	type="base" min="0.02"				/>
@@ -26,7 +26,7 @@
 		<rending_resistance_perc		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl1 Armor 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="15.12" 			/>
+					<weight							type="base"	min="7"		 			/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.03"				/>
 					<bludgeoning_resistance_perc	type="base" min="0.02"				/>
@@ -36,7 +36,7 @@
 		<rending_resistance_perc		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl1 Armor 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="18.4" 				/>
+					<weight							type="base"	min="7" 					/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.03"				/>
 					<bludgeoning_resistance_perc	type="base" min="0.02"				/>
@@ -46,7 +46,7 @@
 		<rending_resistance_perc		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Armor 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="12.52" 			/>
+					<weight							type="base"	min="15"	 			/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -55,7 +55,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Armor 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="14.12" 			/>
+					<weight							type="base"	min="15"	 			/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -64,7 +64,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Guard Lvl2 Armor 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="12.12" 			/>
+					<weight							type="base"	min="15"	 			/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -73,7 +73,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Guard Lvl2 Armor 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="12.12" 			/>
+					<weight							type="base"	min="15"	 			/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -82,7 +82,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Knight Geralt A Armor 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="24.28" 			/>
+					<weight							type="base"	min="18" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
@@ -92,7 +92,7 @@
 		<rending_resistance_perc		type="base" min="0.20"				/>
 	</ability>
 	<ability name="Knight Geralt A Armor 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="24.6" 				/>
+					<weight							type="base"	min="18" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
@@ -102,7 +102,7 @@
 		<rending_resistance_perc		type="base" min="0.20"				/>
 	</ability>
 	<ability name="Knight Geralt Armor 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="18.69" 			/>
+					<weight							type="base"	min="18"	 			/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
@@ -112,7 +112,7 @@
 		<rending_resistance_perc		type="base" min="0.20"				/>
 	</ability>
 	<ability name="Knight Geralt Armor 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="18.85" 			/>
+					<weight							type="base"	min="18" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
@@ -122,7 +122,7 @@
 		<rending_resistance_perc		type="base" min="0.20"				/>
 	</ability>
 	<ability name="Toussaint Armor 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="14.8" 				/>
+					<weight							type="base"	min="18" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<piercing_resistance_perc		type="base" min="0.20"				/>
@@ -132,7 +132,7 @@
 		<rending_resistance_perc		type="base" min="0.20"				/>
 	</ability>
 	<ability name="q702_vampire_armor _Stats" on_conflict="replace">
-					<weight							type="base"	min="16.93" 			/>
+					<weight							type="base"	min="18"	 			/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.22"				/>
 					<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -143,7 +143,7 @@
 		<elemental_resistance_perc		type="base"	min="0.22"				/>
 	</ability>
 	<ability name="q704_vampire_armor _Stats" on_conflict="replace">
-					<weight							type="base"	min="16.93" 			/>
+					<weight							type="base"	min="18"	 			/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.22"				/>
 					<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -154,7 +154,7 @@
 		<elemental_resistance_perc		type="base"	min="0.22"				/>
 	</ability>
 	<ability name="sq701_geralt_armor _Stats" on_conflict="replace">
-					<weight							type="base"	min="23.6"				/>
+					<weight							type="base"	min="18"				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<bludgeoning_resistance_perc	type="base" min="0.20"				/>
@@ -164,7 +164,7 @@
 		<rending_resistance_perc		type="base" min="0.20"				/>
 	</ability>
 	<ability name="sq701_ravix_armor _Stats" on_conflict="replace">
-					<weight							type="base"	min="23.6"				/>
+					<weight							type="base"	min="18"				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.20" 				/>
 					<bludgeoning_resistance_perc	type="base" min="0.20"				/>
@@ -176,7 +176,7 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_boots.xml -->
 	<ability name="Guard Lvl1 A Boots 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.32" 				/>
+					<weight							type="base"	min="2"					/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -186,7 +186,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl1 A Boots 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.56" 				/>
+					<weight							type="base"	min="2" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -196,7 +196,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl1 Boots 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.12" 				/>
+					<weight							type="base"	min="2"					/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -206,7 +206,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl1 Boots 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.36" 				/>
+					<weight							type="base"	min="2" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -216,7 +216,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Boots 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.02" 				/>
+					<weight							type="base"	min="4"					/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -225,7 +225,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Boots 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.06" 				/>
+					<weight							type="base"	min="4" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -234,7 +234,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 Boots 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.62" 				/>
+					<weight							type="base"	min="4"					/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -243,7 +243,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 Boots 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.86" 				/>
+					<weight							type="base"	min="4" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -252,7 +252,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Knight Geralt A Boots 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="4.66" 				/>
+					<weight							type="base"	min="11" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
@@ -262,7 +262,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Knight Geralt A Boots 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="5.54" 				/>
+					<weight							type="base"	min="11" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
@@ -272,7 +272,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Knight Geralt Boots 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="4.46" 				/>
+					<weight							type="base"	min="11" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
@@ -282,7 +282,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Knight Geralt Boots 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="5.34" 				/>
+					<weight							type="base"	min="11" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
@@ -292,7 +292,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Toussaint Boots 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.96" 				/>
+					<weight							type="base"	min="11" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
@@ -302,7 +302,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="q702_vampire_boots _Stats" on_conflict="replace">
-					<weight							type="base"	min="7.0" 				/>
+					<weight							type="base"	min="11" 				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.13"				/>
 					<piercing_resistance_perc		type="base"	min="0.13"				/>
@@ -313,7 +313,7 @@
 		<elemental_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="q704_vampire_boots _Stats" on_conflict="replace">
-					<weight							type="base"	min="7.75" 				/>
+					<weight							type="base"	min="11" 				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.13"				/>
 					<piercing_resistance_perc		type="base"	min="0.13"				/>
@@ -324,7 +324,7 @@
 		<elemental_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="sq701_geralt_boots _Stats" on_conflict="replace">
-					<weight							type="base"	min="6.65" 				/>
+					<weight							type="base"	min="11" 				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.12"				/>
 					<piercing_resistance_perc		type="base"	min="0.12"				/>
@@ -336,7 +336,7 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_crafting_armor.xml -->
 	<ability name="Bear Armor 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="14.3" 				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="5" 				/>
 		<armor							type="base"	min="225"				/>
 		<slashing_resistance_perc		type="base" min="0.22"				/>
@@ -348,7 +348,7 @@
 		<elemental_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Gryphon Armor 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="13.7" 				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5" 				/>
 		<armor							type="base"	min="225"				/>
 		<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -359,7 +359,7 @@
 		<elemental_resistance_perc		type="base" min="0.17"				/>
 	</ability>
 	<ability name="Guard Lvl1 A Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="18.24" 				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="4"					/>
 		<armor							type="base"	min="245" 				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -372,7 +372,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Guard Lvl1 Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="18.4" 				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="4"					/>
 		<armor							type="base"	min="240" 				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -385,7 +385,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="14.12" 				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="4"					/>
 		<armor							type="base"	min="260" 				/>
 		<slashing_resistance_perc		type="base"	min="0.14"				/>
@@ -397,7 +397,7 @@
 		<rending_resistance_perc		type="base" min="0.14"				/>
 	</ability>
 	<ability name="Guard Lvl2 Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="12.12" 				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="4"					/>
 		<armor							type="base"	min="255" 				/>
 		<slashing_resistance_perc		type="base"	min="0.14"				/>
@@ -409,7 +409,7 @@
 		<rending_resistance_perc		type="base" min="0.14"				/>
 	</ability>
 	<ability name="Knight Geralt A Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="24.6" 				/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="4"					/>
 		<armor							type="base"	min="275" 				/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
@@ -422,7 +422,7 @@
 		<rending_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Knight Geralt Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="24.6" 				/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="4"					/>
 		<armor							type="base"	min="270" 				/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
@@ -435,7 +435,7 @@
 		<rending_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Lynx Armor 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="14.5" 				/>
+		<weight							type="base"	min="5" 				/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="225"				/>
 		<slashing_resistance_perc		type="base" min="0.08"				/>
@@ -447,7 +447,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
 	</ability>
 	<ability name="Red Wolf Armor 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="19.62" 			/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5" 				/>
 		<armor							type="base"	min="225"				/>
 		<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -459,7 +459,7 @@
 		<potion_duration 				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Red Wolf Armor 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="21.7" 				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5" 				/>
 		<armor							type="base"	min="375"				/>
 		<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -471,7 +471,7 @@
 		<toxicity 						type="base" min="10" 				/>
 	</ability>
 	<ability name="Toussaint Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="10.8" 				/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="4"					/>
 		<item_level_min					type="add"	min="40"				/>
 		<item_level_max					type="add"	min="100"				/>
@@ -485,7 +485,7 @@
 		<rending_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Wolf Armor 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="13.4" 				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5" 				/>
 		<armor							type="base"	min="225"				/>
 		<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -500,7 +500,7 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_crafting_boots.xml -->
 	<ability name="Bear Boots 5 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.15"				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="85"				/>
 				<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -512,7 +512,7 @@
 		<elemental_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="Gryphon Boots 5 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.25"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="85"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -523,7 +523,7 @@
 		<elemental_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Guard Lvl1 A Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.0"				/>
+				<weight 						type="base"	min="2.5"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="93"				/>
 				<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -536,7 +536,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl1 Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="1.72"				/>
+				<weight 						type="base"	min="2.5"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="91"				/>
 				<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -549,7 +549,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.62"				/>
+				<weight 						type="base" min="4.5"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="99"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -561,7 +561,7 @@
 		<rending_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Guard Lvl2 Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.42"				/>
+				<weight 						type="base" min="4.5"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="97"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -573,7 +573,7 @@
 		<rending_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Knight Geralt A Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.3"				/>
+				<weight 						type="base" min="11"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="105"				/>
 				<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -586,7 +586,7 @@
 		<rending_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="Knight Geralt Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.8"				/>
+				<weight 						type="base" min="11"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="103"				/>
 				<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -599,7 +599,7 @@
 		<rending_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="Lynx Boots 5 _Stats" on_conflict="replace">
-				<weight							type="base"	min="7.05"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="85"				/>
 				<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -611,7 +611,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Red Wolf Boots 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="9.1" 				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5" 				/>
 				<armor							type="base"	min="85"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -623,7 +623,7 @@
 		<potion_duration 				type="add"	min="0.05"				/>
 	</ability>
 	<ability name="Red Wolf Boots 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.65" 				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5" 				/>
 				<armor							type="base"	min="145"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -635,7 +635,7 @@
 		<toxicity 						type="base" min="5" 				/>
 	</ability>
 	<ability name="Toussaint Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.92" 				/>
+				<weight 						type="base" min="11"				/>
 				<quality						type="add"	min="4"					/>
 				<item_level_min					type="add"	min="40"				/>
 				<item_level_max					type="add"	min="100"				/>
@@ -649,7 +649,7 @@
 		<rending_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="Wolf Boots 5 _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.25"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="85"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -664,7 +664,7 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_crafting_gloves.xml -->
 	<ability name="Bear Gloves 5 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.5"				/>
+				<weight							type="base" min="5"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="81"				/>
 				<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -676,7 +676,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Gryphon Gloves 5 _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.0"				/>
+				<weight							type="base"	min="3"					/>
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="81"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -687,7 +687,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl1 A Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.76"				/>
+				<weight							type="base"	min="1.5"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="89"				/>
 				<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -700,7 +700,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl1 Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.66"				/>
+				<weight							type="base"	min="1.5"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="87"				/>
 				<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -713,7 +713,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="1.72"				/>
+				<weight							type="base"	min="3.5" 				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="95"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -725,7 +725,7 @@
 		<rending_resistance_perc		type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Guard Lvl2 Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.17"				/>
+				<weight							type="base"	min="3.5" 				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="93"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -737,7 +737,7 @@
 		<rending_resistance_perc		type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Knight Geralt A Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.1"				/>
+				<weight							type="base"	min="6.5"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="101"				/>
 				<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -750,7 +750,7 @@
 		<rending_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Knight Geralt Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.08"				/>
+				<weight							type="base"	min="6.5"				/>
 				<quality						type="add"	min="4"					/>
 				<armor							type="base"	min="99"				/>
 				<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -763,7 +763,7 @@
 		<rending_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Lynx Gloves 5 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.3"				/>
+				<weight							type="base"	min="1"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="81"				/>
 				<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -775,7 +775,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
 	</ability>
 	<ability name="Red Wolf Gloves 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.7"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="81"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -787,7 +787,7 @@
 		<rending_resistance_perc		type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Red Wolf Gloves 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="8.65"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="141"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -799,7 +799,7 @@
 		<toxicity 						type="base" min="5" 				/>
 	</ability>
 	<ability name="Toussaint Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.71" 				/>
+				<weight							type="base"	min="6.5"				/>
 				<quality						type="add"	min="4"					/>
 				<item_level_min					type="add"	min="40"				/>
 				<item_level_max					type="add"	min="100"				/>
@@ -813,7 +813,7 @@
 		<rending_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Wolf Gloves 5 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.5"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="81"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -828,7 +828,7 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_crafting_pants.xml -->
 	<ability name="Bear Pants 5 _Stats" on_conflict="replace">
-				<weight 						type="base" min="4.24" 				/>
+				<weight 						type="base"	min="5" 				/>
 				<quality 						type="add" 	min="5" 			 	/>
 				<armor 							type="base" min="85"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -840,7 +840,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Gryphon Pants 5 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.64" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="85"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -851,7 +851,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl1 A Pants 3 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="1.8" 				/>
+				<weight							type="base"	min="1.5"				/>
 				<quality 						type="add" 	min="4" 				/>
 				<armor 							type="base"	min="93" 				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -864,7 +864,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Guard Lvl1 Pants 3 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="1.64" 				/>
+				<weight							type="base"	min="1.5"				/>
 				<quality 						type="add" 	min="4" 				/>
 				<armor 							type="base"	min="91" 				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -877,7 +877,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Pants 3 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.5" 				/>
+				<weight							type="base"	min="3.5"				/>
 				<quality 						type="add" 	min="4" 				/>
 				<armor 							type="base"	min="99" 				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -889,7 +889,7 @@
 		<rending_resistance_perc		type="base" min="0.06"				/>
 	</ability>
 	<ability name="Guard Lvl2 Pants 3 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="3.08" 				/>
+				<weight							type="base"	min="3.5"				/>
 				<quality 						type="add" 	min="4" 				/>
 				<armor 							type="base"	min="97" 				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -901,7 +901,7 @@
 		<rending_resistance_perc		type="base" min="0.06"				/>
 	</ability>
 	<ability name="Knight Geralt A Pants 3 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="18.78" 				/>
+				<weight							type="base"	min="6.5"				/>
 				<quality 						type="add" 	min="4" 				/>
 				<armor 							type="base"	min="105" 				/>
 				<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -914,7 +914,7 @@
 		<rending_resistance_perc		type="base" min="0.09"				/>
 	</ability>
 	<ability name="Knight Geralt Pants 3 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="17.78" 				/>
+				<weight							type="base"	min="6.5"				/>
 				<quality 						type="add" 	min="4" 				/>
 				<armor 							type="base"	min="103" 				/>
 				<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -927,7 +927,7 @@
 		<rending_resistance_perc		type="base" min="0.09"				/>
 	</ability>
 	<ability name="Lynx Pants 5 _Stats" on_conflict="replace">
-				<weight 						type="base" min="4.84" 				/>
+				<weight 						type="base" min="1" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="85"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -939,7 +939,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Red Wolf Pants 1 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.64" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="85"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -951,7 +951,7 @@
 		<potion_duration 				type="add"	min="0.05"				/>
 	</ability>
 	<ability name="Red Wolf Pants 2 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.64" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="145"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -963,7 +963,7 @@
 		<toxicity 						type="base" min="5" 				/>
 	</ability>
 	<ability name="Toussaint Pants 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="13.78" 			/>
+				<weight							type="base"	min="6.5"				/>
 				<quality						type="add"	min="4"					/>
 				<item_level_min					type="add"	min="40"				/>
 				<item_level_max					type="add"	min="100"				/>
@@ -977,7 +977,7 @@
 		<rending_resistance_perc		type="base" min="0.09"				/>
 	</ability>
 	<ability name="Wolf Pants 5 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.64" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="85"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -992,7 +992,7 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_gloves.xml -->
 	<ability name="Guard Lvl1 A Gloves 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.72" 				/>
+					<weight							type="base"	min="1" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -1002,7 +1002,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl1 A Gloves 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.76" 				/>
+					<weight							type="base"	min="1" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -1012,7 +1012,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl1 Gloves 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.32" 				/>
+					<weight							type="base"	min="1" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -1022,7 +1022,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl1 Gloves 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="3.36" 				/>
+					<weight							type="base"	min="1" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.02"				/>
 					<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -1032,7 +1032,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Gloves 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.68" 				/>
+					<weight							type="base"	min="3" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -1041,7 +1041,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Gloves 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.72" 				/>
+					<weight							type="base"	min="3" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -1050,7 +1050,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 Gloves 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.13" 				/>
+					<weight							type="base"	min="3" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -1059,7 +1059,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 Gloves 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.17" 				/>
+					<weight							type="base"	min="3" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -1068,7 +1068,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Knight Geralt A Gloves 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="7.12" 				/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1078,7 +1078,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="Knight Geralt A Gloves 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="6.1" 				/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1088,7 +1088,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="Knight Geralt Gloves 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="4.05" 				/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1098,7 +1098,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="Knight Geralt Gloves 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="5.08" 				/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1108,7 +1108,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="Toussaint Gloves 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="4.71" 				/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1118,7 +1118,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="q702_vampire_gloves _Stats" on_conflict="replace">
-					<weight							type="base"	min="5.71" 				/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1129,7 +1129,7 @@
 		<elemental_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="q704_vampire_gloves _Stats" on_conflict="replace">
-					<weight							type="base"	min="5.71" 				/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1140,7 +1140,7 @@
 		<elemental_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="sq701_geralt_gloves _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.08" 				/>
+					<weight							type="base"	min="7" 				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1152,7 +1152,7 @@
 
 <!-- dlc/bob/data/gameplay/items/def_item_pants.xml -->
 	<ability name="Guard Lvl1 A Pants 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.8" 				/>
+					<weight							type="base"	min="1.5" 				/>
 					<quality						type="add"	min="2"		max="2"		/>	
 					<slashing_resistance_perc 		type="base" min="0.02"				/>
 					<bludgeoning_resistance_perc 	type="base" min="0.00"				/>
@@ -1162,7 +1162,7 @@
 		<rending_resistance_perc		type="base" min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl1 A Pants 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.8" 				/>
+					<weight							type="base"	min="2" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc 		type="base" min="0.03"				/>
 					<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
@@ -1172,7 +1172,7 @@
 		<rending_resistance_perc		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl1 Pants 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.64" 				/>
+					<weight							type="base"	min="1.5" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc 		type="base" min="0.02"				/>
 					<bludgeoning_resistance_perc 	type="base" min="0.00"				/>
@@ -1182,7 +1182,7 @@
 		<rending_resistance_perc		type="base" min="0.02"				/>
 	</ability>
 	<ability name="Guard Lvl1 Pants 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="1.64" 				/>
+					<weight							type="base"	min="2" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc 		type="base" min="0.03"				/>
 					<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
@@ -1192,7 +1192,7 @@
 		<rending_resistance_perc		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Pants 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.5" 				/>
+					<weight							type="base"	min="3.5" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc 		type="base" min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -1201,7 +1201,7 @@
 		<rending_resistance_perc		type="base" min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 A Pants 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="2.5" 				/>
+					<weight							type="base"	min="4" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc 		type="base" min="0.05"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -1210,7 +1210,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Guard Lvl2 Pants 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="3.08" 				/>
+					<weight							type="base"	min="3.5" 				/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc 		type="base" min="0.04"				/>
 					<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -1219,7 +1219,7 @@
 		<rending_resistance_perc		type="base" min="0.04"				/>
 	</ability>
 	<ability name="Guard Lvl2 Pants 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="3.08" 				/>
+					<weight							type="base"	min="4" 				/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc 		type="base" min="0.05"				/>
 					<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -1228,7 +1228,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Knight Geralt A Pants 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="15.58" 			/>
+					<weight							type="base"	min="6.5"	 			/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.07"				/>
 					<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -1238,7 +1238,7 @@
 		<rending_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Knight Geralt A Pants 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="18.78" 			/>
+					<weight							type="base"	min="8"		 			/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1248,7 +1248,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="Knight Geralt Pants 1 _Stats" on_conflict="replace">
-					<weight							type="base"	min="14.58" 			/>
+					<weight							type="base"	min="6.5"	 			/>
 					<quality						type="add"	min="2"		max="2"		/>
 					<slashing_resistance_perc		type="base"	min="0.07"				/>
 					<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -1258,7 +1258,7 @@
 		<rending_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Knight Geralt Pants 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="17.78" 			/>
+					<weight							type="base"	min="8"		 			/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1268,7 +1268,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="Toussaint Pants 2 _Stats" on_conflict="replace">
-					<weight							type="base"	min="13.78" 			/>
+					<weight							type="base"	min="8"		 			/>
 					<quality						type="add"	min="3"		max="3"		/>
 					<slashing_resistance_perc		type="base"	min="0.08"				/>
 					<piercing_resistance_perc		type="base"	min="0.08"				/>
@@ -1278,7 +1278,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="q702_vampire_pants _Stats" on_conflict="replace">
-					<weight							type="base"	min="15.56" 			/>
+					<weight							type="base"	min="8" 				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc 		type="base"	min="0.09"				/>
 					<piercing_resistance_perc 		type="base"	min="0.09"				/>
@@ -1289,7 +1289,7 @@
 		<elemental_resistance_perc 		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="q704_vampire_pants _Stats" on_conflict="replace">
-					<weight							type="base"	min="15.88" 			/>
+					<weight							type="base"	min="8" 				/>
 					<quality						type="add"	min="4"					/>
 					<slashing_resistance_perc 		type="base"	min="0.09"				/>
 					<piercing_resistance_perc 		type="base"	min="0.09"				/>
@@ -1300,7 +1300,7 @@
 		<elemental_resistance_perc 		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="sq701_geralt_pants _Stats" on_conflict="replace">
-					<weight							type="base"	min="17.78" 			/>
+					<weight							type="base"	min="8" 				/>
 					<quality						type="add"	min="4"		max="4"		/>
 					<slashing_resistance_perc 		type="base"	min="0.09"				/>
 					<piercing_resistance_perc 		type="base"	min="0.09"				/>
@@ -1321,7 +1321,7 @@
 				<elemental_resistance_perc		type="base" min="0.08"				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.07"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="12" />
+				<weight							type="base"	min="6.5" 				/>
 			</ability>
 	<ability name="DLC1 Temerian Boots _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1333,7 +1333,7 @@
 				<elemental_resistance_perc		type="base"	min="0.04"				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.01"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight 						type="base"	min="2.5"				/>
 			</ability>
 	<ability name="DLC1 Temerian Gloves _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1345,7 +1345,7 @@
 				<elemental_resistance_perc		type="base"	min="0.03"				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.01"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="1.5"				/>
 			</ability>
 	<ability name="DLC1 Temerian Pants _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1357,7 +1357,7 @@
 				<elemental_resistance_perc		type="base" min="0.06"				/>
 				<staminaRegen_armor_mod 		type="mult" min="0.01"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="1.5"				/>
 			</ability>
 	<ability name="NGP DLC1 Temerian Armor _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1369,7 +1369,7 @@
 				<elemental_resistance_perc		type="base" min="0.08"				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.07"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="12" />
+				<weight							type="base"	min="6.5" 				/>
 			</ability>
 	<ability name="NGP DLC1 Temerian Boots _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1381,7 +1381,7 @@
 				<elemental_resistance_perc		type="base"	min="0.04"				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.01"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight 						type="base"	min="2.5"				/>
 			</ability>
 	<ability name="NGP DLC1 Temerian Gloves _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1393,7 +1393,7 @@
 				<elemental_resistance_perc		type="base"	min="0.03"				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.01"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="1.5"				/>
 			</ability>
 	<ability name="NGP DLC1 Temerian Pants _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1405,12 +1405,12 @@
 				<elemental_resistance_perc		type="base" min="0.06"				/>
 				<staminaRegen_armor_mod 		type="mult" min="0.01"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="1.5"				/>
 			</ability>
 
 <!-- dlc/dlc10/data/gameplay/items/dlc10_wolf_armor.xml -->
 	<ability name="NGP Wolf Armor 1 _Stats" on_conflict="replace">
-				<weight							type="base" min="7.39"				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="295"				/>
 				<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -1423,7 +1423,7 @@
 		<spell_power					type="mult"	min="0.08"				/>
 	</ability>
 	<ability name="NGP Wolf Armor 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="20.8"				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor 							type="base"	min="315"				/>
 				<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -1436,7 +1436,7 @@
 		<spell_power					type="mult"	min="0.11"				/>
 	</ability>
 	<ability name="NGP Wolf Armor 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="20.1" 				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5" 				/>
 				<armor							type="base"	min="345"				/>
 				<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -1449,7 +1449,7 @@
 		<spell_power					type="mult"	min="0.15"				/>
 	</ability>
 	<ability name="NGP Wolf Armor _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.67"				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="280"				/>
 				<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -1462,7 +1462,7 @@
 		<spell_power					type="mult"	min="0.05"				/>
 	</ability>
 	<ability name="NGP Wolf Boots 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.42"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="107"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -1475,7 +1475,7 @@
 		<spell_power					type="mult"	min="0.03"				/>
 	</ability>
 	<ability name="NGP Wolf Boots 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.42"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="113"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -1488,7 +1488,7 @@
 		<spell_power					type="mult"	min="0.04"				/>
 	</ability>
 	<ability name="NGP Wolf Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.06"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="121"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -1501,7 +1501,7 @@
 		<spell_power					type="mult"	min="0.05"				/>
 	</ability>
 	<ability name="NGP Wolf Boots 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.06"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="73"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -1514,7 +1514,7 @@
 		<spell_power					type="mult"	min="0.06"				/>
 	</ability>
 	<ability name="NGP Wolf Gloves 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="1.63"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="103"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -1527,7 +1527,7 @@
 		<focus_gain 					type="base" min="0.03" 				/>
 	</ability>
 	<ability name="NGP Wolf Gloves 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="1.63"				/>
+				<weight							type="base"	min="3"					/>
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="109"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -1540,7 +1540,7 @@
 		<focus_gain 					type="base" min="0.04" 				/>
 	</ability>
 	<ability name="NGP Wolf Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.46"				/>
+				<weight							type="base"	min="3"					/>
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="117"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -1553,7 +1553,7 @@
 		<focus_gain 					type="base" min="0.05" 				/>
 	</ability>
 	<ability name="NGP Wolf Gloves 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.46"				/>
+				<weight							type="base"	min="3"					/>
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="129"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -1566,7 +1566,7 @@
 		<focus_gain 					type="base" min="0.06" 				/>
 	</ability>
 	<ability name="NGP Wolf Pants 1 _Stats" on_conflict="replace">
-				<weight 						type="base" min="2.59" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 			 	/>
 				<armor 							type="base" min="107"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -1579,7 +1579,7 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="NGP Wolf Pants 2 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.59" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="113"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -1592,7 +1592,7 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="NGP Wolf Pants 3 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.64" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="121"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -1605,7 +1605,7 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="NGP Wolf Pants 4 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.64" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="133"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -1618,7 +1618,7 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Wolf Armor 1 _Stats" on_conflict="replace">
-				<weight							type="base" min="7.39"				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="145"				/>
 				<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -1631,7 +1631,7 @@
 		<spell_power					type="mult"	min="0.08"				/>
 	</ability>
 	<ability name="Wolf Armor 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="20.8"				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor 							type="base"	min="165"				/>
 				<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -1644,7 +1644,7 @@
 		<spell_power					type="mult"	min="0.11"				/>
 	</ability>
 	<ability name="Wolf Armor 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="20.1" 				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5" 				/>
 				<armor							type="base"	min="195"				/>
 				<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -1657,7 +1657,7 @@
 		<spell_power					type="mult"	min="0.15"				/>
 	</ability>
 	<ability name="Wolf Armor _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.67"				/>
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="130"				/>
 				<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -1670,7 +1670,7 @@
 		<spell_power					type="mult"	min="0.05"				/>
 	</ability>
 	<ability name="Wolf Boots 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.42"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="47"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -1683,7 +1683,7 @@
 		<spell_power					type="mult"	min="0.03"				/>
 	</ability>
 	<ability name="Wolf Boots 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="2.42"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="53"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -1696,7 +1696,7 @@
 		<spell_power					type="mult"	min="0.04"				/>
 	</ability>
 	<ability name="Wolf Boots 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.06"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="61"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -1709,7 +1709,7 @@
 		<spell_power					type="mult"	min="0.05"				/>
 	</ability>
 	<ability name="Wolf Boots 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.06"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="73"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -1722,7 +1722,7 @@
 		<spell_power					type="mult"	min="0.06"				/>
 	</ability>
 	<ability name="Wolf Gloves 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="1.63"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="43"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -1735,7 +1735,7 @@
 		<focus_gain 					type="base" min="0.03" 				/>
 	</ability>
 	<ability name="Wolf Gloves 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="1.63"				/>
+				<weight							type="base"	min="3"					/>
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="49"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -1748,7 +1748,7 @@
 		<focus_gain 					type="base" min="0.04" 				/>
 	</ability>
 	<ability name="Wolf Gloves 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.46"				/>
+				<weight							type="base"	min="3"					/>
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="57"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -1761,7 +1761,7 @@
 		<focus_gain 					type="base" min="0.05" 				/>
 	</ability>
 	<ability name="Wolf Gloves 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.46"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="69"				/>
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -1774,7 +1774,7 @@
 		<focus_gain 					type="base" min="0.06" 				/>
 	</ability>
 	<ability name="Wolf Pants 1 _Stats" on_conflict="replace">
-				<weight 						type="base" min="2.59" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 			 	/>
 				<armor 							type="base" min="47"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -1787,7 +1787,7 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Wolf Pants 2 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.59" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="53"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -1800,7 +1800,7 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Wolf Pants 3 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.64" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="61"			 	/>
 				<slashing_resistance_perc 		type="base" min="0.07"				/>
@@ -1813,7 +1813,7 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Wolf Pants 4 _Stats" on_conflict="replace">
-				<weight 						type="base"	min="2.64" 				/>
+				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base" min="73"			 	/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -1828,7 +1828,7 @@
 
 <!-- dlc/dlc12/data/gameplay/items/def_item_dlc12_armor.xml -->
 	<ability name="Nekker Boots _Stats" on_conflict="replace">
-				<weight							type="base"	min="7.8"				/>
+				<weight							type="base"	min="4.5"				/>
 				<quality						type="add"	min="4"					/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
 				<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -1849,7 +1849,7 @@
 				<elemental_resistance_perc		type="base" min="0.22"				/>
 				<staminaRegen_armor_mod 		type="mult" min="-0.20"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="12" />
+				<weight							type="base"	min="17.5"				/>
 			</ability>
 	<ability name="DLC14 Skellige Boots _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1861,7 +1861,7 @@
 				<elemental_resistance_perc		type="base"	min="0.13"				/>
 				<staminaRegen_armor_mod			type="mult" min="-0.05"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight 						type="base" min="11"				/>
 			</ability>
 	<ability name="DLC14 Skellige Gloves _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1873,7 +1873,7 @@
 				<elemental_resistance_perc		type="base"	min="0.09"				/>
 				<staminaRegen_armor_mod			type="mult"	min="-0.025"			/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="6.5"				/>
 			</ability>
 	<ability name="DLC14 Skellige Pants _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1885,7 +1885,7 @@
 				<elemental_resistance_perc		type="base" min="0.09"				/>
 				<staminaRegen_armor_mod 		type="mult" min="-0.025"			/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="5.63"				/>
 			</ability>
 	<ability name="NGP DLC14 Skellige Armor _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1897,7 +1897,7 @@
 				<elemental_resistance_perc		type="base" min="0.22"				/>
 				<staminaRegen_armor_mod 		type="mult" min="-0.20"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="12" />
+				<weight							type="base"	min="17.5"				/>
 			</ability>
 	<ability name="NGP DLC14 Skellige Boots _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1909,7 +1909,7 @@
 				<elemental_resistance_perc		type="base"	min="0.13"				/>
 				<staminaRegen_armor_mod			type="mult" min="-0.05"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight 						type="base" min="11"				/>
 			</ability>
 	<ability name="NGP DLC14 Skellige Gloves _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1921,7 +1921,7 @@
 				<elemental_resistance_perc		type="base"	min="0.09"				/>
 				<staminaRegen_armor_mod			type="mult"	min="-0.025"			/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="6.5"				/>
 			</ability>
 	<ability name="NGP DLC14 Skellige Pants _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1933,7 +1933,7 @@
 				<elemental_resistance_perc		type="base" min="0.09"				/>
 				<staminaRegen_armor_mod 		type="mult" min="-0.025"			/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="5.63"				/>
 			</ability>
 
 <!-- dlc/dlc5/data/gameplay/items/dlc5_items.xml -->
@@ -1946,7 +1946,7 @@
 				<rending_resistance_perc		type="base" min="0.14"				/>
 				<elemental_resistance_perc		type="base" min="0.14"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="12" />
+				<weight							type="base"	min="13.5"				/>
 			</ability>
 	<ability name="DLC5 Nilfgaardian Boots _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1957,7 +1957,7 @@
 				<rending_resistance_perc		type="base"	min="0.06"				/>
 				<elemental_resistance_perc		type="base"	min="0.06"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight 						type="base" min="4.5"				/>
 			</ability>
 	<ability name="DLC5 Nilfgaardian Gloves _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1968,7 +1968,7 @@
 				<rending_resistance_perc		type="base"	min="0.05"				/>
 				<elemental_resistance_perc		type="base"	min="0.05"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="3.5" 				/>
 			</ability>
 	<ability name="DLC5 Nilfgaardian Pants _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1979,7 +1979,7 @@
 				<rending_resistance_perc		type="base" min="0.07"				/>
 				<elemental_resistance_perc		type="base" min="0.07"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="3.5"				/>
 			</ability>
 	<ability name="NGP DLC5 Nilfgaardian Armor _Stats" on_conflict="replace">
 			<tags></tags>
@@ -1990,7 +1990,7 @@
 				<rending_resistance_perc		type="base" min="0.14"				/>
 				<elemental_resistance_perc		type="base" min="0.14"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="12" />
+				<weight							type="base"	min="13.5"				/>
 			</ability>
 	<ability name="NGP DLC5 Nilfgaardian Boots _Stats" on_conflict="replace">
 			<tags></tags>
@@ -2001,7 +2001,7 @@
 				<rending_resistance_perc		type="base"	min="0.06"				/>
 				<elemental_resistance_perc		type="base"	min="0.06"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight 						type="base" min="4.5"				/>
 			</ability>
 	<ability name="NGP DLC5 Nilfgaardian Gloves _Stats" on_conflict="replace">
 			<tags></tags>
@@ -2012,7 +2012,7 @@
 				<rending_resistance_perc		type="base"	min="0.05"				/>
 				<elemental_resistance_perc		type="base"	min="0.05"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="3.5" 				/>
 			</ability>
 	<ability name="NGP DLC5 Nilfgaardian Pants _Stats" on_conflict="replace">
 			<tags></tags>
@@ -2023,12 +2023,12 @@
 				<rending_resistance_perc		type="base" min="0.07"				/>
 				<elemental_resistance_perc		type="base" min="0.07"				/>
 				<quality type="add" min="4" max="4"/>
-				<weight type="base" min="5" />
+				<weight							type="base"	min="3.5"				/>
 			</ability>
 
 <!-- dlc/ep1/data/gameplay/items/def_item_armor.xml -->
 	<ability name="Burning Rose Armor B _Stats" on_conflict="replace">
-		<weight							type="base"	min="22.4"				/>
+		<weight 						type="base" min="17.5"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc 		type="base" min="0.175"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.175"				/>
@@ -2038,7 +2038,7 @@
 		<rending_resistance_perc 		type="base" min="0.175"				/>
 	</ability>
 	<ability name="Burning Rose Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="22.4"				/>
+		<weight							type="base"	min="20"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.20" 				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.20"				/>
@@ -2048,7 +2048,7 @@
 		<rending_resistance_perc		type="base" min="0.20"				/>
 	</ability>
 	<ability name="Geralt_kontusz _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.32"				/>
+		<weight							type="base" min="4"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
@@ -2058,7 +2058,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Geralt_kontusz_r _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.32"				/>
+		<weight							type="base" min="4"					/>
 		<quality						type="add"	min="4"					/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2072,7 +2072,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="Ofir Armor B _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.19"				/>
+		<weight							type="base" min="6.5"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.01"				/>
@@ -2082,7 +2082,7 @@
 		<rending_resistance_perc		type="base" min="0.02"				/>
 	</ability>
 	<ability name="Ofir Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.19"				/>
+		<weight 						type="base" min="9" 				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base" min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.02"				/>
@@ -2092,7 +2092,7 @@
 		<rending_resistance_perc		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Thief Armor B _Stats" on_conflict="replace">
-		<weight							type="base"	min="17.08"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
@@ -2103,7 +2103,7 @@
 		<rending_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Thief Armor No Medallion _Stats" on_conflict="replace">
-		<weight							type="base"	min="17.08"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
@@ -2114,7 +2114,7 @@
 		<rending_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Thief Armor Y _Stats" on_conflict="replace">
-		<weight							type="base"	min="17.08"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2125,7 +2125,7 @@
 		<rending_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Thief Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="17.08"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
@@ -2139,7 +2139,7 @@
 <!-- dlc/ep1/data/gameplay/items/def_item_boots.xml -->
 	<ability name="Geralt Kontusz Boots R _Stats" on_conflict="replace">
 		<tags></tags>		
-		<weight							type="base"	min="2.32"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -2155,7 +2155,7 @@
 	</ability>
 	<ability name="Geralt Kontusz Boots _Stats" on_conflict="replace">
 		<tags></tags>		
-		<weight							type="base"	min="2.32"				/>
+		<weight							type="base"	min="2.0"				/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.01"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
@@ -2165,7 +2165,7 @@
 		<rending_resistance_perc		type="base"	min="0.01"				/>
 	</ability>
 	<ability name="Ofir Boots B _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.92"				/>
+		<weight							type="base"	min="2.5"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -2175,7 +2175,7 @@
 		<rending_resistance_perc		type="base"	min="0.01"				/>
 	</ability>
 	<ability name="Ofir Boots _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.92"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.0"				/>
@@ -2185,7 +2185,7 @@
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Thief Boots B _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.62"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
@@ -2196,7 +2196,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Thief Boots No Medallion _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.62"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
@@ -2207,7 +2207,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Thief Boots Y _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.62"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -2218,7 +2218,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Thief Boots _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.62"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2231,7 +2231,7 @@
 
 <!-- dlc/ep1/data/gameplay/items/def_item_crafting_armor.xml -->
 	<ability name="Crafted Burning Rose Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="25.8"				/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base" min="190"	max="190"	/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
@@ -2243,7 +2243,7 @@
 		<rending_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Crafted Ofir Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="17.2"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base" min="185"	max="185"	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -2257,7 +2257,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="EP1 Witcher Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.12"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="195"	max="195"	/>
 		<slashing_resistance_perc		type="base" min="0.2"				/>
@@ -2271,7 +2271,7 @@
 
 <!-- dlc/ep1/data/gameplay/items/def_item_crafting_boots.xml -->
 	<ability name="Crafted Ofir Boots _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.3"				/>
+		<weight 						type="base"	min="2.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base" min="69"	max="69"	/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -2285,7 +2285,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="EP1 Witcher Boots _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.92"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base" min="73"	max="73"	/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
@@ -2299,7 +2299,7 @@
 
 <!-- dlc/ep1/data/gameplay/items/def_item_crafting_gloves.xml -->
 	<ability name="Crafted Burning Rose Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.92"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base" min="67"	max="67"	/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -2311,7 +2311,7 @@
 		<rending_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Crafted Ofir Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.8"				/>
+		<weight							type="base"	min="1.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base" min="65"	max="65"	/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -2325,7 +2325,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="EP1 Witcher Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.96"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base" min="69"	max="69"	/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
@@ -2339,7 +2339,7 @@
 
 <!-- dlc/ep1/data/gameplay/items/def_item_crafting_pants.xml -->
 	<ability name="Crafted Ofir Pants _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.44"				/>
+		<weight							type="base"	min="1.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base" min="69"	max="69"	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -2353,7 +2353,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="EP1 Witcher Pants _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.52"				/>
+		<weight 						type="base" min="3" 				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base" min="73"	max="73"	/>
 		<slashing_resistance_perc		type="base"	min="0.1"				/>
@@ -2367,7 +2367,7 @@
 
 <!-- dlc/ep1/data/gameplay/items/def_item_gloves.xml -->
 	<ability name="Burning Rose Gloves B _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.36"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.07"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
@@ -2377,7 +2377,7 @@
 		<rending_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Burning Rose Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.36"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.08"				/>
@@ -2387,7 +2387,7 @@
 		<rending_resistance_perc		type="base"	min="0.08"				/>
 	</ability>
 	<ability name="Thief Gloves B _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.32"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -2398,7 +2398,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Thief Gloves No Medallion _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.32"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -2409,7 +2409,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Thief Gloves Y _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.32"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -2420,7 +2420,7 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Thief Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.32"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
@@ -2433,7 +2433,7 @@
 
 <!-- dlc/ep1/data/gameplay/items/def_item_pants.xml -->
 	<ability name="Ofir Pants B _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.52"				/>
+		<weight 						type="base" min="1.5" 				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc 		type="base" min="0.02"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
@@ -2443,7 +2443,7 @@
 		<rending_resistance_perc		type="base" min="0.02"				/>
 	</ability>
 	<ability name="Ofir Pants _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.52"				/>
+		<weight 						type="base" min="2" 				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc 		type="base" min="0.03"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.01"				/>
@@ -2453,7 +2453,7 @@
 		<rending_resistance_perc		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Thief Pants B _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.71"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc 		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -2464,7 +2464,7 @@
 		<rending_resistance_perc 		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Thief Pants No Medallion _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.71"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc 		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -2475,7 +2475,7 @@
 		<rending_resistance_perc 		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Thief Pants Y _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.71"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
@@ -2486,7 +2486,7 @@
 		<rending_resistance_perc 		type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Thief Pants _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.71"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc 		type="base"	min="0.07"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
@@ -2499,7 +2499,7 @@
 
 <!-- gameplay/items/def_item_armor.xml -->
 	<ability name="Heavy armor 01 _Stats" on_conflict="replace">
-		<weight							type="base" min="24.95"				/>
+		<weight							type="base" min="15"				/>
 		<quality 						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.15"				/>
 		<piercing_resistance_perc 		type="base" min="0.15"				/>
@@ -2509,7 +2509,7 @@
 		<staminaRegen_armor_mod 		type="mult" min="-0.30"				/>
 	</ability>
 	<ability name="Heavy armor 02 _Stats" on_conflict="replace">
-		<weight 						type="base" min="21.8"				/>
+		<weight 						type="base" min="17.5"				/>
 		<quality 						type="add" 	min="2" 	max="2"		/>
 		<slashing_resistance_perc 		type="base" min="0.17"				/>
 		<piercing_resistance_perc 		type="base" min="0.17"				/>
@@ -2519,7 +2519,7 @@
 		<staminaRegen_armor_mod 		type="mult" min="-0.30"				/>
 	</ability>
 	<ability name="Heavy armor 03 _Stats" on_conflict="replace">
-		<weight							type="base"	min="20.32"				/>
+		<weight							type="base"	min="20"				/>
 		<quality 						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.20" 				/>
 		<piercing_resistance_perc		type="base" min="0.20"				/>
@@ -2529,7 +2529,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
 	</ability>
 	<ability name="Heavy armor 04 _Stats" on_conflict="replace">
-		<weight							type="base"	min="30.2"				/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.18"				/>
 		<piercing_resistance_perc		type="base"	min="0.18"				/>
@@ -2539,7 +2539,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
 		</ability>
 	<ability name="Heavy armor 05 _Stats" on_conflict="replace">
-		<weight							type="base"	min="30.65"				/>
+		<weight							type="base"	min="18.75"				/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.19"				/>
 		<piercing_resistance_perc		type="base"	min="0.19"				/>
@@ -2549,7 +2549,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.30"				/>
 	</ability>
 	<ability name="Light armor 01 _Stats" on_conflict="replace">
-		<weight							type="base" min="1.5"				/>
+		<weight							type="base" min="4"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
@@ -2559,7 +2559,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.05"				/>
 	</ability>
 	<ability name="Light armor 02 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.99"				/>
+		<weight							type="base"	min="5.75"				/>
 		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -2569,7 +2569,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.05"				/>
 	</ability>
 	<ability name="Light armor 03 _Stats" on_conflict="replace">
-		<weight							type="base" min="3.46"				/>
+		<weight							type="base" min="6.5"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -2579,7 +2579,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.06"				/>
 	</ability>
 	<ability name="Light armor 04 _Stats" on_conflict="replace">
-		<weight 						type="base" min="3.62" 				/>
+		<weight 						type="base" min="9" 				/>
 		<quality 						type="add" 	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base" min="0.03"				/>
 		<piercing_resistance_perc		type="base" min="0.02"				/>
@@ -2589,7 +2589,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.07"				/>
 	</ability>
 	<ability name="Light armor 06 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.89"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -2599,7 +2599,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.06"				/>
 	</ability>
 	<ability name="Light armor 07 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.51"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -2609,7 +2609,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.06"				/>
 	</ability>
 	<ability name="Light armor 08 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.28"				/>
+		<weight							type="base"	min="7.75"				/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -2619,7 +2619,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.06"				/>
 	</ability>
 	<ability name="Light armor 09 _Stats" on_conflict="replace">
-		<weight							type="base" min="4.53" 				/>
+		<weight							type="base"	min="7.75"				/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -2629,7 +2629,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.07"				/>
 	</ability>
 	<ability name="Medium armor 01 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="12.65"				/>
+		<weight 						type="base"	min="10"				/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<piercing_resistance_perc		type="base" min="0.03"				/>
@@ -2638,7 +2638,7 @@
 		<elemental_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Medium armor 02 _Stats" on_conflict="replace">
-		<weight							type="base"	min="16.49"				/>
+		<weight							type="base"	min="11.75"				/>
 		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.10"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -2647,7 +2647,7 @@
 		<elemental_resistance_perc		type="base"	min="0.10"				/>
 	</ability>
 	<ability name="Medium armor 03 _Stats" on_conflict="replace">
-		<weight							type="base"	min="16.01"				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.10"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -2656,7 +2656,7 @@
 		<elemental_resistance_perc		type="base"	min="0.10"				/>
 	</ability>
 	<ability name="Medium armor 04 _Stats" on_conflict="replace">
-		<weight							type="base"	min="13.15"				/>
+		<weight							type="base"	min="17"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -2665,7 +2665,7 @@
 		<elemental_resistance_perc		type="base"	min="0.12"				/>
 	</ability>
 	<ability name="Medium armor 05 _Stats" on_conflict="replace">
-		<weight							type="base"	min="13.49"				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
@@ -2674,7 +2674,7 @@
 		<elemental_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Medium armor 07 _Stats" on_conflict="replace">
-		<weight							type="base"	min="13.96"				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -2683,7 +2683,7 @@
 		<elemental_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Medium armor 10 _Stats" on_conflict="replace">
-		<weight							type="base"	min="11.48"				/>
+		<weight							type="base"	min="15.25"				/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -2692,7 +2692,7 @@
 		<elemental_resistance_perc		type="base"	min="0.11"				/>
 	</ability>
 	<ability name="Medium armor 11 _Stats" on_conflict="replace">
-		<weight							type="base"	min="12.73" 			/>
+		<weight							type="base"	min="15.25"				/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -2701,7 +2701,7 @@
 		<elemental_resistance_perc		type="base"	min="0.11"				/>
 	</ability>
 	<ability name="Starting Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.12"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<armor							type="base"	min="24"	max="24"	/>
 		<slashing_resistance_perc		type="base" min="0.08"				/>
@@ -2711,7 +2711,7 @@
 		<elemental_resistance_perc		type="base" min="0.08"				/>
 	</ability>
 	<ability name="q108 Medium armor 10 _Stats" on_conflict="replace">
-		<weight							type="base"	min="12.11"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -2722,7 +2722,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.15"				/>
 	</ability>
 	<ability name="sq108_heavy_armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="12.76"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="1"					/>
 		<armor 							type="base" min="25" 	max="25"	/>
 		<slashing_resistance_perc 		type="base"	min="0.18"				/>
@@ -2735,7 +2735,7 @@
 
 <!-- gameplay/items/def_item_armor_relics.xml -->
 	<ability name="Heavy armor 01r _Stats" on_conflict="replace">
-		<weight							type="base" min="28.35"				/>
+		<weight							type="base" min="20"				/>
 		<quality 						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc 		type="base" min="0.22"				/>
@@ -2746,7 +2746,7 @@
 		<vitality 						type="base" min="200"	max="300"	/>
 	</ability>
 	<ability name="Heavy armor 02r _Stats" on_conflict="replace">
-		<weight 						type="base" min="26.2"				/>
+		<weight							type="base" min="20"				/>
 		<quality 						type="add" 	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc 		type="base" min="0.22"				/>
@@ -2757,7 +2757,7 @@
 		<quen_chance_on_projectile		type="add"	min="0.25"				/>
 	</ability>
 	<ability name="Heavy armor 03r _Stats" on_conflict="replace">
-		<weight							type="base"	min="26.92"				/>
+		<weight							type="base" min="20"				/>
 		<quality 						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc 		type="base" min="0.22"				/>
@@ -2768,7 +2768,7 @@
 		<dismember_chance			type="add"	min="0.10"				/>
 	</ability>
 	<ability name="Heavy armor 04r _Stats" on_conflict="replace">
-		<weight							type="base"	min="35.6"				/>
+		<weight							type="base" min="20"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc 		type="base" min="0.22"				/>
@@ -2779,7 +2779,7 @@
 		<focus_gain 					type="add"	min="0.05"	max="0.10"	/>
 	</ability>
 	<ability name="Heavy armor 05r _Stats" on_conflict="replace">
-		<weight							type="base"	min="33.25"				/>
+		<weight							type="base" min="20"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc 		type="base" min="0.22"				/>
@@ -2790,7 +2790,7 @@
 		<focus_gain 					type="add"	min="0.05"	max="0.10"	/>
 	</ability>
 	<ability name="Light armor 01r _Stats" on_conflict="replace">
-		<weight							type="base" min="1.5"				/>
+		<weight							type="base" min="9"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2801,7 +2801,7 @@
 		<vitality						type="base" min="100"	max="150"	/>
 	</ability>
 	<ability name="Light armor 02r _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.99"				/>
+		<weight							type="base" min="9"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2812,7 +2812,7 @@
 		<spell_power_igni 				type="mult" min="0.05" max="0.10"	/>
 	</ability>
 	<ability name="Light armor 03r _Stats" on_conflict="replace">
-		<weight							type="base" min="3.46"				/>
+		<weight							type="base" min="9"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2823,7 +2823,7 @@
 		<spell_power_aard 				type="mult" min="0.05" max="0.10"	/>
 	</ability>
 	<ability name="Light armor 04r _Stats" on_conflict="replace">
-		<weight 						type="base" min="3.62" 				/>
+		<weight							type="base" min="9"					/>
 		<quality 						type="add" 	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2834,7 +2834,7 @@
 		<focus_gain 					type="add"	min="0.04"	max="0.08"	/>
 	</ability>
 	<ability name="Light armor 06r _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.89"				/>
+		<weight							type="base" min="9"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2845,7 +2845,7 @@
 		<spell_power_yrden 				type="mult" min="0.05" max="0.10"	/>
 	</ability>
 	<ability name="Light armor 07r _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.51"				/>
+		<weight							type="base" min="9"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2856,7 +2856,7 @@
 		<spell_power_axii 				type="mult" min="0.05" max="0.10"	/>
 	</ability>
 	<ability name="Light armor 08r _Stats" on_conflict="replace">
-		<weight							type="base"	min="7.88"				/>
+		<weight							type="base" min="9"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2867,7 +2867,7 @@
 		<spell_power_quen 				type="mult" min="0.05"  max="0.10"	/>
 	</ability>
 	<ability name="Light armor 09r _Stats" on_conflict="replace">
-		<weight							type="base" min="7.83" 				/>
+		<weight							type="base" min="9"					/>
 		<quality 						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -2878,7 +2878,7 @@
 		<spell_power_quen 				type="mult" min="0.05"  max="0.10"	/>
 	</ability>
 	<ability name="Medium armor 01r _Stats" on_conflict="replace">
-		<weight 						type="base"	min="14.85"				/>
+		<weight 						type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4" 	/>
 		<slashing_resistance_perc		type="base"	min="0.15"				/>
 		<piercing_resistance_perc		type="base" min="0.08"				/>
@@ -2888,7 +2888,7 @@
 		<vitality 						type="base" min="150"	max="200"	/>
 	</ability>
 	<ability name="Medium armor 02r _Stats" on_conflict="replace">
-		<weight							type="base"	min="19.79"				/>
+		<weight 						type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.16"				/>
 		<piercing_resistance_perc		type="base" min="0.09"				/>
@@ -2898,7 +2898,7 @@
 		<spell_power_igni 				type="mult" min="0.05" max="0.10"	/>
 	</ability>
 	<ability name="Medium armor 03r _Stats" on_conflict="replace">
-		<weight							type="base"	min="18.21"				/>
+		<weight 						type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<piercing_resistance_perc		type="base" min="0.09"				/>
@@ -2908,7 +2908,7 @@
 		<spell_power_aard 				type="mult" min="0.05" max="0.10"	/>
 	</ability>
 	<ability name="Medium armor 04r _Stats" on_conflict="replace">
-		<weight							type="base"	min="16.45"				/>
+		<weight 						type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<piercing_resistance_perc		type="base" min="0.09"				/>
@@ -2918,7 +2918,7 @@
 		<spell_power_yrden 				type="mult" min="0.05" max="0.10"	/>
 	</ability>
 	<ability name="Medium armor 05r _Stats" on_conflict="replace">
-		<weight							type="base"	min="16.79"				/>
+		<weight 						type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<piercing_resistance_perc		type="base" min="0.09"				/>
@@ -2928,7 +2928,7 @@
 		<focus_gain 					type="add"	min="0.04"	max="0.08"	/>
 	</ability>
 	<ability name="Medium armor 07r _Stats" on_conflict="replace">
-		<weight							type="base"	min="17.26"				/>
+		<weight 						type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4" 	/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<piercing_resistance_perc		type="base" min="0.09"				/>
@@ -2938,7 +2938,7 @@
 		<spell_power_axii 				type="mult" min="0.05" max="0.10"/>
 	</ability>
 	<ability name="Medium armor 10r _Stats" on_conflict="replace">
-		<weight							type="base"	min="15.88"				/>
+		<weight 						type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<piercing_resistance_perc		type="base" min="0.09"				/>
@@ -2948,7 +2948,7 @@
 		<burning_resistance_perc		type="base" min="0.10" max="0.15"	/>
 	</ability>
 	<ability name="Medium armor 11r _Stats" on_conflict="replace">
-		<weight							type="base"	min="19.33" 			/>
+		<weight 						type="base"	min="15"				/>
 		<quality 						type="add"	min="4"		max="4" 	/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<piercing_resistance_perc		type="base" min="0.09"				/>
@@ -2958,7 +2958,7 @@
 		<burning_resistance_perc		type="base" min="0.10" max="0.15"	/>
 	</ability>
 	<ability name="Oathbreaker armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="18.9"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<piercing_resistance_perc		type="base"	min="0.09"				/>
@@ -2969,7 +2969,7 @@
 		<spell_power_axii				type="mult"	min="0.10"				/>
 	</ability>
 	<ability name="Relic Heavy 3 armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="10.08"				/>
+		<weight							type="base"	min="20"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -2980,7 +2980,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.20"				/>
 	</ability>
 	<ability name="Shadaal armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="16.03"				/>
+		<weight							type="base"	min="20"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -2992,7 +2992,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.20"				/>
 	</ability>
 	<ability name="Shiadhal armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.21"				/>
+		<weight							type="base"	min="9"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -3004,7 +3004,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.07"				/>
 	</ability>
 	<ability name="Thyssen armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="10.61"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.17"				/>
 		<piercing_resistance_perc		type="base"	min="0.09"				/>
@@ -3015,7 +3015,7 @@
 		<quen_chance_on_projectile		type="add"	min="0.25"				/>
 	</ability>
 	<ability name="Zireael armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="11.58"				/>
+		<weight							type="base"	min="20"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
 		<piercing_resistance_perc		type="base"	min="0.22"				/>
@@ -3028,7 +3028,7 @@
 
 <!-- gameplay/items/def_item_boots.xml -->
 	<ability name="Boots 01 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.0"				/>
+		<weight							type="base"	min="2.0"				/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.01"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
@@ -3038,7 +3038,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Boots 01 q2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.78"				/>
+		<weight							type="base"	min="2.5"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -3048,7 +3048,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Boots 012 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.0"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -3059,7 +3059,7 @@
 		<focus_gain 					type="add" min="0.05"				/>
 	</ability>
 	<ability name="Boots 02 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.28"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -3068,7 +3068,7 @@
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Boots 022 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.28"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -3078,7 +3078,7 @@
 		<bleeding_resistance_perc 		type="base" min="0.20"				/>
 	</ability>
 	<ability name="Boots 03 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.52"				/>
+		<weight							type="base"	min="2.25"				/>
 		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.01"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -3088,7 +3088,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Boots 032 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.52"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -3099,7 +3099,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Boots 04 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.64"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -3110,7 +3110,7 @@
 		<bleeding_resistance_perc		type="base"	min="0.05"	max="0.1"	/>
 	</ability>
 	<ability name="Boots 05 _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.02"				/>
+		<weight							type="base"	min="2.5"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -3120,7 +3120,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Boots 06 _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.82"				/>
+		<weight							type="base"	min="4.5"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -3129,7 +3129,7 @@
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Boots 07 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.02"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -3140,7 +3140,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Heavy boots 01 _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.36"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.10"				/>
 		<piercing_resistance_perc		type="base"	min="0.10"				/>
@@ -3150,7 +3150,7 @@
 		<staminaRegen_armor_mod			type="mult" min="-0.1"				/>
 	</ability>
 	<ability name="Heavy boots 02 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.22"				/>
+		<weight							type="base"	min="11"				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.11"				/>
@@ -3161,7 +3161,7 @@
 	</ability>
 	<ability name="Heavy boots 03 _Stats" on_conflict="replace">
 		<tags></tags>		
-		<weight							type="base"	min="2.32"				/>
+		<weight							type="base"	min="4.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -3170,7 +3170,7 @@
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Heavy boots 04 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.37"				/>
+		<weight							type="base"	min="10.5"				/>
 		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.10"				/>
@@ -3180,7 +3180,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.1"				/>
 	</ability>
 	<ability name="Heavy boots 05 _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.92"				/>
+		<weight							type="base"	min="11.5"				/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.12"				/>
@@ -3190,7 +3190,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.1"				/>
 	</ability>
 	<ability name="Heavy boots 06 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.72"				/>
+		<weight							type="base"	min="11"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.11"				/>
 		<piercing_resistance_perc		type="base"	min="0.11"				/>
@@ -3200,7 +3200,7 @@
 		<staminaRegen_armor_mod			type="mult" min="-0.1"				/>
 	</ability>
 	<ability name="Heavy boots 07 _Stats" on_conflict="replace">
-		<weight	 						type="base" min="5.5"				/>
+		<weight	 						type="base" min="5"					/>
 		<quality 						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
@@ -3210,7 +3210,7 @@
 		<armor_reduction 				type="base"	min="20"	max="30"	/>
 	</ability>
 	<ability name="Heavy boots 08 _Stats" on_conflict="replace">
-		<weight	 						type="base"	min="6.77"				/>
+		<weight	 						type="base"	min="12"				/>
 		<quality 						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
 		<piercing_resistance_perc		type="base"	min="0.13"				/>
@@ -3221,7 +3221,7 @@
 		<vitality 						type="base" min="150" max="200"		/>
 	</ability>
 	<ability name="Starting Boots _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.4"				/>
+		<weight							type="base"	min="3.0"				/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<armor							type="base"	min="4"					/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -3233,7 +3233,7 @@
 
 <!-- gameplay/items/def_item_crafting_armor.xml -->
 	<ability name="Bear Armor 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="10.9"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="150"	max="150"	/>
 		<slashing_resistance_perc		type="base" min="0.22"				/>
@@ -3245,7 +3245,7 @@
 		<elemental_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Bear Armor 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="19.45"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base" min="175"	max="175"	/>
 		<slashing_resistance_perc		type="base" min="0.22"				/>
@@ -3257,7 +3257,7 @@
 		<elemental_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Bear Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="22.7" 				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add"	min="5" 	max="5"		/>
 		<armor							type="base"	min="195"	max="195"	/>
 		<slashing_resistance_perc		type="base" min="0.22"				/>
@@ -3269,7 +3269,7 @@
 		<elemental_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Bear Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="8.36"				/>
+		<weight							type="base"	min="15"				/>
 		<quality						type="add" 	min="5" 	max="5"		/>
 		<armor							type="base"	min="125"	max="125"	/>
 		<slashing_resistance_perc		type="base" min="0.22"				/>
@@ -3281,7 +3281,7 @@
 		<elemental_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Gryphon Armor 1 _Stats" on_conflict="replace">
-		<weight							type="base" min="8.39"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="115"	max="115"	/>
 		<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -3292,7 +3292,7 @@
 		<elemental_resistance_perc		type="base" min="0.17"				/>
 	</ability>
 	<ability name="Gryphon Armor 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="18.3"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor 							type="base"	min="155"	max="155"	/>
 		<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -3303,7 +3303,7 @@
 		<elemental_resistance_perc		type="base" min="0.17"				/>
 	</ability>
 	<ability name="Gryphon Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="20.1" 				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5" 	max="5"		/>
 		<armor							type="base"	min="195"	max="195"	/>
 		<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -3314,7 +3314,7 @@
 		<elemental_resistance_perc		type="base" min="0.17"				/>
 	</ability>
 	<ability name="Gryphon Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.67"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="80"	max="80"	/>
 		<slashing_resistance_perc		type="base" min="0.17"				/>
@@ -3325,7 +3325,7 @@
 		<elemental_resistance_perc		type="base" min="0.17"				/>
 	</ability>
 	<ability name="Heavy armor 01_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="24.95"				/>
+		<weight							type="base"	min="16.0"				/>
 		<quality						type="add"	min="1"					/>
 		<armor							type="base"	min="40"				/>
 		<slashing_resistance_perc		type="base"	min="0.18"				/>
@@ -3336,7 +3336,7 @@
 		<rending_resistance_perc		type="base" min="0.18"				/>
 	</ability>
 	<ability name="Heavy armor 02_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="21.8"				/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="55"				/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
@@ -3348,7 +3348,7 @@
 		<vitality 						type="base" min="250"				/>
 	</ability>
 	<ability name="Heavy armor 03_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="24.32" 			/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="70"				/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
@@ -3360,7 +3360,7 @@
 		<rending_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Heavy armor 04_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="34.2"				/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base"	min="85"				/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
@@ -3372,7 +3372,7 @@
 		<spell_power_quen				type="mult" min="0.1"				/>
 	</ability>
 	<ability name="Light armor 01_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.62"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="1"					/>
 		<armor							type="base"	min="30"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3383,7 +3383,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Light armor 02_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.99"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="1"					/>
 		<armor							type="base"	min="35"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3394,7 +3394,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Light armor 03_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.46"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="1"					/>
 		<armor							type="base"	min="45"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3405,7 +3405,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Light armor 04_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.62" 				/>
+		<weight							type="base"	min="6.5" 				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="55"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3417,7 +3417,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Light armor 05_crafted _Stats" on_conflict="replace"> 
-		<weight							type="base"	min="15.22"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base"	min="125" 				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3430,7 +3430,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Light armor 06_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.89"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="65"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3442,7 +3442,7 @@
 		<rending_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Light armor 07_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.51"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base"	min="75"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3454,7 +3454,7 @@
 		<spell_power_axii 				type="mult" min="0.1"				/>
 	</ability>
 	<ability name="Light armor 08_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.28" 				/>
+		<weight							type="base"	min="6.5" 				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base"	min="100"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3466,7 +3466,7 @@
 		<spell_power_yrden 				type="mult" min="0.15"				/>
 	</ability>
 	<ability name="Lynx Armor 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="7.8"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="140"	max="140"	/>
 		<slashing_resistance_perc		type="base" min="0.08"				/>
@@ -3478,7 +3478,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
 	</ability>
 	<ability name="Lynx Armor 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="13.7"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="170"	max="170"	/>
 		<slashing_resistance_perc		type="base" min="0.08"				/>
@@ -3490,7 +3490,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
 	</ability>
 	<ability name="Lynx Armor 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="17.0" 				/>
+		<weight							type="base"	min="5" 				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="195" 	max="195"	/>
 		<slashing_resistance_perc		type="base" min="0.08"				/>
@@ -3502,7 +3502,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
 	</ability>
 	<ability name="Lynx Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.52"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base" min="110"	max="110"	/>
 		<slashing_resistance_perc		type="base" min="0.08"				/>
@@ -3514,7 +3514,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
 	</ability>
 	<ability name="Medium armor 01_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="12.65"				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality 						type="add"	min="1"					/>
 		<armor							type="base"	min="45"				/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
@@ -3524,7 +3524,7 @@
 		<rending_resistance_perc		type="base" min="0.12"				/>
 	</ability>
 	<ability name="Medium armor 02_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="16.49"				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="55"				/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
@@ -3535,7 +3535,7 @@
 		<rending_resistance_perc		type="base" min="0.12"				/>
 	</ability>
 	<ability name="Medium armor 03_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="17.01"				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="65"				/>
 		<slashing_resistance_perc		type="base"	min="0.14"				/>
@@ -3546,7 +3546,7 @@
 		<rending_resistance_perc		type="base" min="0.14"				/>
 	</ability>
 	<ability name="Medium armor 04_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="12.04"				/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base" min="75"				/>
 		<slashing_resistance_perc		type="base"	min="0.14"				/>
@@ -3557,7 +3557,7 @@
 		<rending_resistance_perc		type="base" min="0.14"				/>
 	</ability>
 	<ability name="Relic Heavy 3 armor crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="11.28"				/>
+		<weight							type="base"	min="17.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base"	min="100"				/>
 		<slashing_resistance_perc		type="base"	min="0.22"				/>
@@ -3569,7 +3569,7 @@
 		<rending_resistance_perc		type="base" min="0.22"				/>
 	</ability>
 	<ability name="Starting Armor 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.08"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="1"					/>
 		<armor							type="base" min="35"				/>
 		<slashing_resistance_perc		type="base" min="0.10"				/>
@@ -3579,7 +3579,7 @@
 		<elemental_resistance_perc		type="base" min="0.10"				/>
 	</ability>
 	<ability name="Thyssen armor crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="24.05" 			/>
+		<weight							type="base"	min="13.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base"	min="100"				/>
 		<slashing_resistance_perc		type="base"	min="0.14"				/>
@@ -3593,7 +3593,7 @@
 
 <!-- gameplay/items/def_item_crafting_boots.xml -->
 	<ability name="Bear Boots 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.46"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="45"				/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -3605,7 +3605,7 @@
 		<elemental_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="Bear Boots 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.46"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="55"				/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -3617,7 +3617,7 @@
 		<elemental_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="Bear Boots 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="65"				/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -3629,7 +3629,7 @@
 		<elemental_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="Bear Boots 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="10"				/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="73"				/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -3641,7 +3641,7 @@
 		<elemental_resistance_perc		type="base"	min="0.13"				/>
 	</ability>
 	<ability name="Boots 01_crafted _Stats" on_conflict="replace">
-		<weight 						type="base"	min="1.24"				/>
+		<weight 						type="base"	min="2.5"				/>
 		<quality 						type="add"	min="1"					/>
 		<armor 							type="base"	min="9"					/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -3653,7 +3653,7 @@
 		<bleeding_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Boots 02_crafted _Stats" on_conflict="replace">
-		<weight 						type="base" min="1.32"				/>
+		<weight 						type="base" min="4.5"				/>
 		<quality 						type="add"	min="2"					/>
 		<armor 							type="base"	min="15"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3664,7 +3664,7 @@
 		<vitality						type="base"	min="150"				/>
 	</ability>
 	<ability name="Boots 03_crafted _Stats" on_conflict="replace"> 
-		<weight 						type="base" min="1.56"				/>
+		<weight 						type="base"	min="2.5"				/>
 		<quality 						type="add"	min="2"					/>
 		<armor 							type="base" min="17"				/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -3676,7 +3676,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.01"				/>
 	</ability>
 	<ability name="Boots 04_crafted _Stats" on_conflict="replace">
-		<weight 						type="base" min="1.88"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"					/>
 		<armor 							type="base"	min="29"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -3688,7 +3688,7 @@
 		<bleeding_resistance_perc		type="base"	min="0.1"				/>
 	</ability>
 	<ability name="Boots 07_crafted _Stats" on_conflict="replace">
-		<weight 						type="base" min="3.88"				/>
+		<weight 						type="base"	min="2.5"				/>
 		<quality 						type="add"	min="4"					/>
 		<armor 							type="base"	min="37"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -3700,7 +3700,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.01"				/>
 	</ability>
 	<ability name="Gryphon Boots 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.42"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="27"				/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -3711,7 +3711,7 @@
 		<elemental_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Gryphon Boots 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.42"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="41"				/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -3722,7 +3722,7 @@
 		<elemental_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Gryphon Boots 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.06"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="57"				/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -3733,7 +3733,7 @@
 		<elemental_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Gryphon Boots 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.06"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="73"				/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -3744,7 +3744,7 @@
 		<elemental_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Heavy boots 01_crafted _Stats" on_conflict="replace">
-		<weight 						type="base" min="2.86"				/>
+		<weight 						type="base" min="10"				/>
 		<quality 						type="add"	min="1"					/>
 		<armor 							type="base"	min="13"				/>
 		<slashing_resistance_perc		type="base"	min="0.12"				/>
@@ -3756,7 +3756,7 @@
 		<focus_gain						type="add"	min="0.04"				/>
 	</ability>
 	<ability name="Heavy boots 02_crafted _Stats" on_conflict="replace">
-		<weight							type="base" min="3.26"				/>
+		<weight 						type="base" min="11"				/>
 		<quality 						type="add"	min="2"					/>
 		<armor 							type="base"	min="25"				/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -3768,7 +3768,7 @@
 		<vitality 						type="base" min="200" max="200"		/>
 	</ability>
 	<ability name="Heavy boots 03_crafted _Stats" on_conflict="replace">
-		<weight							type="base" min="2.46"				/>
+		<weight 						type="base" min="4.5"				/>
 		<quality 						type="add"	min="3"					/>
 		<armor 							type="base"	min="23"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3779,7 +3779,7 @@
 		<burning_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="Heavy boots 04_crafted _Stats" on_conflict="replace">
-		<weight							type="base" min="5.42"				/>
+		<weight 						type="base" min="11"				/>
 		<quality 						type="add"	min="3"					/>
 		<armor 							type="base"	min="33"				/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -3791,7 +3791,7 @@
 		<spell_power_igni				type="mult"	min="0.05"				/>
 	</ability>
 	<ability name="Heavy boots 07_crafted _Stats" on_conflict="replace">
-		<weight 						type="base" min="3.96"				/>
+		<weight 						type="base" min="4.5"				/>
 		<quality 						type="add"	min="4"					/>
 		<armor 							type="base" min="35"				/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -3802,7 +3802,7 @@
 		<rending_resistance_perc		type="base"	min="0.06"				/>
 	</ability>
 	<ability name="Heavy boots 08_crafted _Stats" on_conflict="replace">
-		<weight 						type="base" min="7.13"				/>
+		<weight 						type="base" min="11"				/>
 		<quality 						type="add"	min="4"					/>
 		<armor 							type="base" min="41"				/>
 		<slashing_resistance_perc		type="base"	min="0.13"				/>
@@ -3814,7 +3814,7 @@
 		<vitality 						type="base" min="250" max="250"		/>
 	</ability>
 	<ability name="Lynx Boots 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.3"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="39"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -3826,7 +3826,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Lynx Boots 2 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="4.3"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="51"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -3838,7 +3838,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Lynx Boots 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.1"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="63"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -3850,7 +3850,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
 	</ability>
 	<ability name="Lynx Boots 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.1"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<armor							type="base"	min="73"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -3864,7 +3864,7 @@
 
 <!-- gameplay/items/def_item_crafting_gloves.xml -->
 	<ability name="Bear Gloves 1 _Stats" on_conflict="replace">
-		<weight							type="base" min="3.8"				/>
+		<weight							type="base" min="5"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="41"	max="41"	/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -3876,7 +3876,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Bear Gloves 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.8"				/>
+		<weight							type="base" min="5"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="51"	max="51"	/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -3888,7 +3888,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Bear Gloves 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.85"				/>
+		<weight							type="base" min="5"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="61"	max="61"	/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -3900,7 +3900,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Bear Gloves 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.85"				/>
+		<weight							type="base" min="5"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="69"	max="69"	/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -3912,7 +3912,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Gloves 01_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.32"				/>
+		<weight							type="base"	min="1.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="11"				/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -3924,7 +3924,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Gloves 02_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.72" 				/>
+		<weight							type="base"	min="3.5" 				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="9"					/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3935,7 +3935,7 @@
 		<vitality						type="base"	min="150"				/>
 	</ability>
 	<ability name="Gloves 03_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.32"				/>
+		<weight							type="base"	min="1.5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base"	min="21"				/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -3947,7 +3947,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Gloves 04_crafted _Stats" on_conflict="replace"> 
-		<weight							type="base"	min="1.92"				/>
+		<weight							type="base"	min="1.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base" min="29"				/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -3959,7 +3959,7 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Gryphon Gloves 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.63"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="23"	max="23"	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3970,7 +3970,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Gryphon Gloves 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.63"				/>
+		<weight							type="base"	min="3"					/>
 		<quality 						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="37"	max="37"	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3981,7 +3981,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Gryphon Gloves 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.46"				/>
+		<weight							type="base"	min="3"					/>
 		<quality 						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="53"	max="53"	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -3992,7 +3992,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Gryphon Gloves 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.46"				/>
+		<weight							type="base"	min="3"					/>
 		<quality 						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="69"	max="69"	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -4003,7 +4003,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Heavy gloves 01_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.64"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="13"				/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -4015,7 +4015,7 @@
 		<rending_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Heavy gloves 02_crafted _Stats" on_conflict="replace"> 
-		<weight 						type="base"	min="5.48"				/>
+		<weight							type="base"	min="3.5" 				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor 							type="base"	min="17"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -4026,7 +4026,7 @@
 		<rending_resistance_perc		type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Heavy gloves 03_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.32"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor 							type="base"	min="31"				/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -4038,7 +4038,7 @@
 		<rending_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Heavy gloves 04_crafted _Stats" on_conflict="replace"> 
-		<weight							type="base"	min="4.88"				/>
+		<weight							type="base"	min="6.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor 							type="base"	min="35"				/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -4050,7 +4050,7 @@
 		<elemental_resistance_perc		type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Lynx Gloves 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.8"				/>
+		<weight							type="base"	min="1"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="35"	max="35"	/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -4062,7 +4062,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
 	</ability>
 	<ability name="Lynx Gloves 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.8"				/>
+		<weight							type="base"	min="1"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="47"	max="47"	/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -4074,7 +4074,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
 	</ability>
 	<ability name="Lynx Gloves 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.0"				/>
+		<weight							type="base"	min="1"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="59"	max="59"	/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -4086,7 +4086,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
 	</ability>
 	<ability name="Lynx Gloves 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.0"				/>
+		<weight							type="base"	min="1"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="69"	max="69"	/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -4100,7 +4100,7 @@
 
 <!-- gameplay/items/def_item_crafting_pants.xml -->
 	<ability name="Bear Pants 1 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="3.44" 				/>
+		<weight 						type="base"	min="5" 				/>
 		<quality 						type="add"	min="5"		max="5"		/>
 		<armor 							type="base"	min="45" 	max="45" 	/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -4112,7 +4112,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Bear Pants 2 _Stats" on_conflict="replace">
-		<weight 						type="base" min="3.44" 				/>
+		<weight 						type="base"	min="5" 				/>
 		<quality 						type="add" 	min="5" 	max="5" 	/>
 		<armor 							type="base" min="55" 	max="55"	/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -4124,7 +4124,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Bear Pants 3 _Stats" on_conflict="replace">
-		<weight 						type="base" min="4.24" 				/>
+		<weight 						type="base"	min="5" 				/>
 		<quality 						type="add" 	min="5" 	max="5" 	/>
 		<armor 							type="base" min="65" 	max="65"	/>
 		<slashing_resistance_perc 		type="base" min="0.09" 				/>
@@ -4136,7 +4136,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Bear Pants 4 _Stats" on_conflict="replace">
-		<weight 						type="base" min="4.24" 				/>
+		<weight 						type="base"	min="5" 				/>
 		<quality 						type="add" 	min="5" 	max="5" 	/>
 		<armor 							type="base" min="73" 	max="73"	/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -4148,7 +4148,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.09"				/>
 	</ability>
 	<ability name="Gryphon Pants 1 _Stats" on_conflict="replace">
-		<weight 						type="base" min="2.59" 				/>
+		<weight 						type="base" min="3" 				/>
 		<quality 						type="add" 	min="5" 	max="5" 	/>
 		<armor 							type="base" min="27" 	max="27" 	/>
 		<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -4159,7 +4159,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Gryphon Pants 2 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="2.59" 				/>
+		<weight 						type="base" min="3" 				/>
 		<quality 						type="add" 	min="5" 	max="5"		/>
 		<armor 							type="base"	min="41" 	max="41"	/>
 		<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -4170,7 +4170,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Gryphon Pants 3 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="2.64" 				/>
+		<weight 						type="base" min="3" 				/>
 		<quality 						type="add" 	min="5" 	max="5"		/>
 		<armor 							type="base"	min="57" 	max="57"	/>
 		<slashing_resistance_perc 		type="base" min="0.07"				/>
@@ -4181,7 +4181,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Gryphon Pants 4 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="2.64" 				/>
+		<weight 						type="base" min="3" 				/>
 		<quality 						type="add" 	min="5" 	max="5"		/>
 		<armor 							type="base"	min="73" 	max="73"	/>
 		<slashing_resistance_perc		type="base"	min="0.07"				/>
@@ -4192,7 +4192,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Heavy pants 01_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.1"				/>
+		<weight							type="base"	min="6.0"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="15"				/>
 		<slashing_resistance_perc		type="base"	min="0.08"				/>
@@ -4204,7 +4204,7 @@
 		<rending_resistance_perc		type="base" min="0.08"				/>
 	</ability>
 	<ability name="Heavy pants 02_crafted _Stats" on_conflict="replace"> 
-		<weight							type="base"	min="3.7"				/>
+		<weight							type="base"	min="3.5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base"	min="25"				/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
@@ -4215,7 +4215,7 @@
 		<rending_resistance_perc		type="base" min="0.06"				/>
 	</ability>
 	<ability name="Heavy pants 03_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.27"				/>
+		<weight							type="base"	min="7.0"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base"	min="29"				/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -4227,7 +4227,7 @@
 		<spell_power_quen				type="mult"	min="0.05"				/>
 	</ability>
 	<ability name="Heavy pants 04_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.63"				/>
+		<weight							type="base"	min="7.0"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base"	min="37"				/>
 		<slashing_resistance_perc		type="base"	min="0.09"				/>
@@ -4239,7 +4239,7 @@
 		<vitality 						type="base" min="200" max="200"		/>
 	</ability>
 	<ability name="Lynx Pants 1 _Stats" on_conflict="replace">
-		<weight 						type="base" min="3.54" 				/>
+		<weight 						type="base" min="1" 				/>
 		<quality 						type="add" 	min="5" 	max="5" 	/>
 		<armor 							type="base" min="39" 	max="39" 	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -4251,7 +4251,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Lynx Pants 2 _Stats" on_conflict="replace">
-		<weight 						type="base" min="3.54" 				/>
+		<weight 						type="base" min="1" 				/>
 		<quality 						type="add" 	min="5" 	max="5" 	/>
 		<armor 							type="base" min="51"	max="51" 	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -4263,7 +4263,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Lynx Pants 3 _Stats" on_conflict="replace">
-		<weight 						type="base" min="4.84" 				/>
+		<weight 						type="base" min="1" 				/>
 		<quality 						type="add" 	min="5" 	max="5" 	/>
 		<armor 							type="base" min="63"	max="63" 	/>
 		<slashing_resistance_perc 		type="base" min="0.05"				/>
@@ -4275,7 +4275,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Lynx Pants 4 _Stats" on_conflict="replace">
-		<weight 						type="base" min="4.84" 				/>
+		<weight 						type="base" min="1" 				/>
 		<quality 						type="add" 	min="5" 	max="5" 	/>
 		<armor 							type="base" min="73"	max="73" 	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -4287,7 +4287,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Pants 01_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="0.72"				/>
+		<weight							type="base"	min="1.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="13"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -4299,7 +4299,7 @@
 		<rending_resistance_perc		type="base" min="0.04"				/>
 	</ability>
 	<ability name="Pants 02_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="0.98"				/>
+		<weight							type="base"	min="3.5"				/>
 		<quality						type="add"	min="2"					/>
 		<armor							type="base"	min="17"				/>
 		<slashing_resistance_perc 		type="base"	min="0.06"				/>
@@ -4310,7 +4310,7 @@
 		<vitality						type="base"	min="150"				/>
 	</ability>
 	<ability name="Pants 03_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.36"				/>
+		<weight							type="base"	min="1.5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base"	min="21"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
@@ -4322,7 +4322,7 @@
 		<staminaRegen_armor_mod 		type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Pants 04_crafted _Stats" on_conflict="replace">
-		<weight							type="base" min="1.4"				/>
+		<weight							type="base"	min="1.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor							type="base"	min="35"				/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
@@ -4336,7 +4336,7 @@
 
 <!-- gameplay/items/def_item_ep1_stand_alone.xml -->
 	<ability name="EP1 Standalone Starting Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.12"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base" min="0.10"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.05"				/>
@@ -4345,7 +4345,7 @@
 		<piercing_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="EP1 Standalone Starting Boots _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.4"				/>
+		<weight							type="base"	min="3.0"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
@@ -4354,7 +4354,7 @@
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="EP1 Standalone Starting Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.2"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
@@ -4363,7 +4363,7 @@
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="EP1 Standalone Starting Pants _Stats" on_conflict="replace">
-		<weight 						type="base" min="2.1" 				/>
+		<weight 						type="base" min="2" 				/>
 		<quality 						type="add" 	min="3" 	max="3"		/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.03"				/>
@@ -4374,7 +4374,7 @@
 
 <!-- gameplay/items/def_item_ep2_stand_alone.xml -->
 	<ability name="EP2 Standalone Starting Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.12"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base" min="0.10"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.05"				/>
@@ -4383,7 +4383,7 @@
 		<piercing_resistance_perc		type="base" min="0.05"				/>
 	</ability>
 	<ability name="EP2 Standalone Starting Boots _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.4"				/>
+		<weight							type="base"	min="3.0"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
@@ -4392,7 +4392,7 @@
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="EP2 Standalone Starting Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.2"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
@@ -4401,7 +4401,7 @@
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="EP2 Standalone Starting Pants _Stats" on_conflict="replace">
-		<weight 						type="base" min="2.1" 				/>
+		<weight 						type="base" min="2" 				/>
 		<quality 						type="add" 	min="3" 	max="3"		/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.03"				/>
@@ -4412,7 +4412,7 @@
 
 <!-- gameplay/items/def_item_gloves.xml -->
 	<ability name="Gloves 01 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.08"				/>
+		<weight							type="base"	min="1"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.01"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
@@ -4422,7 +4422,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Gloves 01 q2 _Stats" on_conflict="replace">
-		<weight							type="base" min="1.24" 				/>
+		<weight							type="base" min="1.5" 				/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
@@ -4432,7 +4432,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Gloves 02 _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.48"				/>
+		<weight							type="base"	min="3.25"				/>
 		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -4441,7 +4441,7 @@
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Gloves 03 _Stats" on_conflict="replace">
-		<weight							type="base" min="2.08"				/>
+		<weight							type="base" min="1.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.0"				/>
@@ -4451,7 +4451,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Gloves 04 _Stats" on_conflict="replace"> 
-		<weight							type="base"	min="2.48"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -4462,7 +4462,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="0.01"				/>
 	</ability>
 	<ability name="Heavy gloves 01 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.6"				/>
+		<weight							type="base"	min="5.25"				/>
 		<quality						type="add"	min="1"		max="2"		/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
 		<piercing_resistance_perc		type="base"	min="0.05"				/>
@@ -4472,7 +4472,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
 	</ability>
 	<ability name="Heavy gloves 02 _Stats" on_conflict="replace"> 
-		<weight							type="base"	min="5.45" 				/>
+		<weight							type="base" min="3.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
@@ -4481,7 +4481,7 @@
 		<elemental_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Heavy gloves 03 _Stats" on_conflict="replace">
-		<weight							type="base" min="4.78"				/>
+		<weight							type="base" min="6.5"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
 		<piercing_resistance_perc		type="base"	min="0.07"				/>
@@ -4491,7 +4491,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.05"				/>
 	</ability>
 	<ability name="Heavy gloves 04 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.92"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.10"				/>
 		<piercing_resistance_perc		type="base"	min="0.10"				/>
@@ -4502,7 +4502,7 @@
 		<staminaRegen_armor_mod			type="mult" min="-0.025"			/>
 	</ability>
 	<ability name="Starting Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="1.2"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<armor							type="base"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
@@ -4514,7 +4514,7 @@
 
 <!-- gameplay/items/def_item_pants.xml -->
 	<ability name="Heavy pants 01 _Stats" on_conflict="replace">
-		<weight							type="base" min="5.05" 				/>
+		<weight							type="base" min="5" 				/>
 		<quality 						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.05"				/>
@@ -4524,7 +4524,7 @@
 		<staminaRegen_armor_mod 		type="mult" min="-0.05"				/>
 	</ability>
 	<ability name="Heavy pants 02 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="2.85" 				/>
+		<weight 						type="base"	min="3.75" 				/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc 		type="base"	min="0.04"				/>
 		<piercing_resistance_perc 		type="base"	min="0.02"				/>
@@ -4533,7 +4533,7 @@
 		<elemental_resistance_perc		type="base"	min="0.04"				/>
 	</ability>
 	<ability name="Heavy pants 03 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="6.62" 				/>
+		<weight 						type="base"	min="6.5" 				/>
 		<quality 						type="add"	min="1"		max="3"		/>
 		<slashing_resistance_perc		type="base"	min="0.07"				/>
 		<piercing_resistance_perc		type="base"	min="0.06"				/>
@@ -4543,7 +4543,7 @@
 		<staminaRegen_armor_mod 		type="mult"	min="-0.05"				/>
 	</ability>
 	<ability name="Heavy pants 04 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.47" 				/>
+		<weight							type="base"	min="8" 				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc 		type="base"	min="0.09"				/>
 		<piercing_resistance_perc 		type="base"	min="0.09"				/>
@@ -4554,7 +4554,7 @@
 		<staminaRegen_armor_mod			type="mult"	min="-0.025"			/>
 	</ability>
 	<ability name="Pants 01 _Stats" on_conflict="replace">
-		<weight 						type="base" min="0.68" 				/>
+		<weight 						type="base" min="1" 				/>
 		<quality 						type="add"	min="1" 	max="1"		/>
 		<slashing_resistance_perc 		type="base" min="0.01"				/>
 		<piercing_resistance_perc 		type="base" min="0.0"				/>
@@ -4564,7 +4564,7 @@
 		<staminaRegen_armor_mod 		type="mult" min="0.01"				/>
 	</ability>
 	<ability name="Pants 01 q2 _Stats" on_conflict="replace">
-		<weight 						type="base" min="0.5" 				/>
+		<weight 						type="base" min="1.5" 				/>
 		<quality 						type="add" 	min="2" 	max="2" 	/>
 		<slashing_resistance_perc 		type="base" min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -4574,7 +4574,7 @@
 		<staminaRegen_armor_mod			type="mult" min="0.01" 				/>
 	</ability>
 	<ability name="Pants 02 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="0.94" 				/>
+		<weight 						type="base"	min="3"					/>
 		<quality 						type="add" 	min="1" 	max="1"		/>
 		<slashing_resistance_perc 		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>
@@ -4583,7 +4583,7 @@
 		<elemental_resistance_perc 		type="base" min="0.03"				/>
 	</ability>
 	<ability name="Pants 03 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="1.11"				/>
+		<weight 						type="base"	min="1.5" 				/>
 		<quality 						type="add" 	min="1" 	max="3"		/>
 		<slashing_resistance_perc 		type="base"	min="0.02"				/>
 		<piercing_resistance_perc 		type="base" min="0.01"				/>
@@ -4593,7 +4593,7 @@
 		<staminaRegen_armor_mod 		type="mult"	min="0.01"				/>
 	</ability>
 	<ability name="Pants 04 _Stats" on_conflict="replace">
-		<weight 						type="base"	min="1.35" 				/>
+		<weight 						type="base"	min="2" 				/>
 		<quality 						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc 		type="base"	min="0.05"				/>
 		<piercing_resistance_perc 		type="base"	min="0.03"				/>
@@ -4604,7 +4604,7 @@
 		<focus_gain						type="add" min="0.04" max="0.06"	/>
 	</ability>
 	<ability name="Starting Pants _Stats" on_conflict="replace">
-		<weight 						type="base" min="2.1" 				/>
+		<weight 						type="base" min="2" 				/>
 		<quality 						type="add" 	min="1" 	max="1"		/>
 		<armor 							type="base" min="4" 	max="4" 	/>
 		<slashing_resistance_perc 		type="base"	min="0.03"				/>
@@ -4616,7 +4616,7 @@
 
 <!-- gameplay/items/def_item_weapons_relic_autogen.xml -->
 	<ability name="Autogen Armor _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.8"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="1"		 			/>
 		<slashing_resistance_perc		type="base" min="0.08"				/>
 		<piercing_resistance_perc		type="base" min="0.02"				/>
@@ -4634,7 +4634,7 @@
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
 	</ability>
 	<ability name="Autogen Gloves _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.16"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.01"				/>

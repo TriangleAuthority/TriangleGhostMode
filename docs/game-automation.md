@@ -7,11 +7,16 @@ Status markers: **verified** (seen working on this machine), *unverified* (from 
 ## Quick start
 
 ```bash
-python tools/build_mod.py --scripts tools/automation/scripts --name modAutomation --out build/automation --install --enable   # once
-python tools/game.py run                 # launch, load the newest save, wait until playable
-python tools/game.py exec "gmpilot()"    # run exec functions, print their output
+python tools/game_lock.py request --who AREA --why "slice X checks"     # the game slot: granted (token) or queued
+python tools/game_lock.py wait --who AREA --timeout 540                 # when queued: until granted
+python tools/build_mod.py --install-from build/AREA-<commit> --holder AREA:TOKEN   # install your prebuilt build
+python tools/game.py run <save name> --holder AREA:TOKEN   # launch, load the test save, lock saving
+python tools/game.py exec "gmpilot()" --holder AREA:TOKEN              # run exec functions, print their output
 python tools/game.py quit
+python tools/game_lock.py release --holder AREA:TOKEN                   # settings restored, log archived, saves compared
 ```
+
+`modAutomation` is installed once by the parent (`build_mod.py --scripts tools/automation/scripts --name modAutomation --out build/automation --install --enable --parent`). The game is one shared slot: see [The game slot](#the-game-slot).
 
 **Verified** 2026-10-01 (game build 5.0.1044392, with `modGhostMode` pilot build and `modAutomation` installed): the whole loop above takes **about 29 s**: 10 s to the main menu, 12 s to load, 2 s to quit.
 
@@ -33,9 +38,9 @@ Three pieces:
 
 | Command | What it does |
 |---|---|
-| `run [SAVE]` | `start` then `load` |
-| `start` | Launch and wait for `[Automation] main menu`, closing the startup screens on the way (see [Startup screens](#startup-screens)) |
-| `load [SAVE]` | `autoload()` (newest save) or `autoload("<file>")`; waits for `loading`, `game started`, `ready`; then checks status and closes any open menu |
+| `run SAVE` | `start` then `load` |
+| `start` | Checks that the installed `modGhostMode` is the one the holder installed this turn, then launches and waits for `[Automation] main menu`, closing the startup screens on the way (see [Startup screens](#startup-screens)) |
+| `load SAVE` | `autoload("<file>")` of an allowed save (`ALLOWED_SAVES`, full name; a missing name is refused); waits for `loading`, `game started`, `ready`; checks status and closes any open menu; then `gmtest_nosave()` locks saving for the session (an error if it is missing; the parent's `--parent --allow-saves` skips it) |
 | `exec "CMD" ...` | Run exec functions, print their output. Fails on "Command failed to execute" (function does not exist) |
 | `status` | `autostatus()`: `ingame`, `paused`, `menu` (root menu name or `none`), `loadingvideo`, `scene` |
 | `resume` | `autoresume()`: close the open menu |
@@ -43,7 +48,38 @@ Three pieces:
 | `log [-n N]` | Last N script log lines |
 | `quit` | `autoquit()` (`theGame.RequestExit()`), then closing the window, then killing the process |
 
-Options: `--timeout S` per step (default 180), `--wait MS` how long rw3d_cli waits for exec output (default 500; raise it for functions that log over time). Exit code 1 on errors or timeouts, with the last log lines printed. A failed step leaves the game running for inspection.
+Options: `--timeout S` per step (default 180), `--wait MS` how long rw3d_cli waits for exec output (default 500; raise it for functions that log over time). `run`, `start`, `load`, `exec` and `resume` need `--holder AREA:TOKEN` ([The game slot](#the-game-slot)). Exit code 1 on errors, timeouts or refusals, with the last log lines printed; 3 when the lock refuses because the slot is paused or the token was revoked. A failed step leaves the game running for inspection.
+
+## The game slot
+
+Areas are ported in parallel, one agent each ([parallel-ports.md](proposals/parallel-ports.md)), and share the one game install. `tools/game_lock.py` hands it out, one holder at a time, in request order; `game.py` and `build_mod.py`'s installs refuse to change the game without the holder's token. **Verified** 2026-11-02: offline self-test (`game_lock.py selftest`, 82 checks) and one real turn (holder `tooling`: install, the regression in both trees, release).
+
+**Exclusive to the holder:** installing a build (`<game>\mods\modGhostMode`, the menu XML, `mods.settings`), the running game (`game.py run`, `start`, `load`, `exec`, `resume`), and what the game writes: `scriptslog.txt`, the settings files, the saves. `game.py quit`, `log`, `status` and `saves` stay open to everyone. Compiling is not exclusive: each `wcc_lite` run takes a short OS file lock of its own (`build_mod.py`).
+
+**A turn:**
+
+| Step | Command (from the main checkout's `tools/`: the only copy with rw3d_cli) |
+|---|---|
+| Ask | `game_lock.py request --who AREA --why TEXT`: exit 0 granted, the token printed; 2 queued (position printed); 3 paused |
+| Wait | `game_lock.py wait --who AREA --timeout S`: 0 granted (token), 2 timed out (still queued: run it again), 3 paused or the token revoked. In the background when there is other work (the agent is notified when it exits); in the foreground with `--timeout 540` in a loop when idle |
+| Claim | Any gated command within the **claim deadline** (default 5 minutes, `config.json`'s `claim_deadline_s`; `game_lock.py config --claim-deadline S` raises it). A grant left unclaimed is skipped: its token revoked, the next agent granted; request again |
+| Play | `build_mod.py --install-from <build> --holder AREA:TOKEN`, then `game.py ... --holder AREA:TOKEN`. Every gated command renews the **lease** (20 minutes, `lease_s`) |
+| End | `game.py quit`, then `game_lock.py release --holder AREA:TOKEN` |
+
+**What the lock does:**
+- **At a grant** (only with the slot free, nothing paused, the game closed, the settings baseline taken and the four settings files equal to it): backs up the saves (`robocopy <Documents>\The Witcher 3\gamesaves %USERPROFILE%\W3SaveBackup\gamesaves /E /XO`, exit codes 0-7 success; copies only, never deletes) and lists them.
+- **At the release** (game closed): restores `dx12user.settings`, `input.settings`, `profile.settings` and `mods.settings` from the canonical baseline, so options a test changed (the skill tree, the experience options) never reach the next holder; archives `scriptslog.txt` into `%LOCALAPPDATA%\TGM\logs\<holder>-<time>-scriptslog.txt`; compares the saves with the grant's list (gone, new, changed) and with the backup (saves in the backup missing from the live folder) and prints and logs every difference. It restores no save: that is the owner's call.
+- **The baseline** (`game_lock.py baseline --parent`): the four settings files, taken by the parent with the game closed and the owner's OK, and again only after the owner has played. Taken 2026-11-02 (classic tree, sign cooldown 5, armour regen penalty off, `GMCombatStaminaRegen=5`, difficulty 3, no `[GMScalingOptions]` or `[GMExpOptions]` section). While the live files differ from it (the owner played), nobody is granted the game, and `watch` says so.
+- **The pause** (`game_lock.py pause`, for the owner from his own terminal, or the parent): no new grants; waiting agents' `wait` exits 3; the holder's game commands are refused with exit 3, so it quits and releases. `resume` grants again.
+- **The parent:** `preempt --parent` (quits the game, restores the baseline, revokes the token), `reclaim --parent` (the same for an expired lease), `watch` (in the background; exits 4 with an `ALERT:` line on an expired lease, a stale holder (no game command for 10 minutes), a skipped grant, blocked grants, a pause, or a saves difference at a release). The parent's own emergency and integration runs: `--parent` on `game.py`, `build_mod.py` and `regress.py` skips the holder check and is logged in `events.log`; its normal integration runs queue as holder `integration`.
+
+**Guards in `game.py`:**
+- `run` and `load` take only the allowed saves, by full name: the test save `<save name>` and the test-only slot `<save name>` ([Test saves](#test-saves)). A missing name is refused (it used to load the newest save).
+- After every load, `gmtest_nosave()` locks saving for the session; its absence (a build without the tests, or not Ghost Mode) is an error.
+- `start` refuses unless the installed `modGhostMode` (its `.built-by-build_mod`: ref and commit) is the build the holder installed this turn, so no agent tests the previous holder's install.
+- `exec` refuses calls that load or save a game (`autoload`, `SaveGame`, the test save makers: `DENIED_EXEC`); saving the test-only slot is the parent's.
+
+**Prohibited for agents** (they bypass the lock): calling `rw3d_cli` directly, installing with `--scripts`, copying saves by hand, editing the settings files, `--parent`.
 
 ### modAutomation
 
@@ -279,10 +315,10 @@ What we learned about input:
 
 **The test save is `<save name>`** (made 2026-10-02 with game build 5.0.1044392, `modGhostMode` and `modAutomation` installed): White Orchard, just past the tutorial, near Vesemir and Roach. Geralt is level 1 with no skill points, the starting gear (Long Steel Sword, Witcher Silver Sword, starting armor), 250 crowns, all five signs; difficulty Blood and Broken Bones (`EDM_Hard`).
 
-Load it by name, since `game.py run` without a name loads the newest save:
+Load it by name (`game.py` takes only the allowed saves, by full name: this one and the test-only slot below):
 
 ```bash
-python tools/game.py run <save name>
+python tools/game.py run <save name> --holder AREA:TOKEN
 ```
 
 Build the character a test needs with exec functions after loading (see [Setting up Geralt and the world](#setting-up-geralt-and-the-world)), so the save itself stays a clean level 1 start.

@@ -13,20 +13,28 @@ Legacy turned the vanilla "Starting Armor Upgrade schematic 1" into the first ar
 reads every entry of that name), so the port adds it as "Kaer Morhen Armor schematic" and leaves
 the vanilla schematic alone.
 
-    python tools/gen_arm_km.py [--worktree DIR] [--check]
+In New Game+ legacy's "NGP Kaer Morhen *" pieces (which replace the regular ones at the start of NG+)
+use "Base Kaer Morhen ... _Stats" abilities, the regular game's values, defined in legacy's
+`items_plus` files only; they are copied with the others.
+
+    python tools/gen_arm_km.py --worktree DIR [--check | --verify]
 
 Writes `items/gm_arm_kaer_morhen.xml` and `items_plus/gm_arm_kaer_morhen.xml` in Ghost Mode's DLC
-(default worktree ../TGM-5x-GM). --check writes nothing and fails if a file is out of date.
+(the worktree given by --worktree). --check writes nothing and fails if a file is out of date.
+--verify also fails if an item of these files names an ability that neither they, Ghost Mode's other
+DLC files nor 5.x define (`dlc_conflicts.undefined`), or if one of legacy's Kaer Morhen abilities is missing.
 """
 import argparse, os, re, subprocess, sys
 
 import item_layer
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
 OUT = "gm_arm_kaer_morhen.xml"
 PIECES = ["armor", "boots", "gloves", "pants"]
 KM = re.compile(r'^(?:NGP )?Kaer Morhen ')
+KM_ABILITY = re.compile(r'^(?:Base )?Kaer Morhen ')  # NG+: the NGP pieces' "Base Kaer Morhen ... _Stats" (legacy's items_plus)
 STARTING = {"Starting Armor": "armor", "Starting Pants": "pants", "Starting Boots": "boots", "Starting Gloves": "gloves"}
 OLD_SCHEMATIC, NEW_SCHEMATIC = "Starting Armor Upgrade schematic 1", "Kaer Morhen Armor schematic"
 CRAFTS_KM_ARMOR = re.compile(r'craftedItem_name\s*=\s*"Kaer Morhen Armor"')
@@ -71,7 +79,7 @@ def generate(folder):
     abilities, items, schem_items, schematics, starting = [], [], [], [], []
     for p in PIECES:
         text = no_comments(git("show", "legacy-GM:modGhostMode/files/gameplay/%s/def_item_crafting_%s.xml" % (folder, p)))
-        abilities += [e for n, e in entries(text, "ability", "name") if KM.match(n)]
+        abilities += [e for n, e in entries(text, "ability", "name") if KM_ABILITY.match(n)]
         items += [e for n, e in entries(text, "item", "name") if KM.match(n)]
     text = no_comments(git("show", "legacy-GM:modGhostMode/files/gameplay/%s/def_item_crafting_recipes.xml" % folder))
     for n, e in entries(text, "item", "name"):
@@ -120,14 +128,25 @@ def generate(folder):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--verify", action="store_true", help="--check, and every ability the items name is defined")
     a = ap.parse_args()
+    a.check |= a.verify
     bad = False
     for folder in ("items", "items_plus"):
         text, counts = generate(folder)
         path = os.path.join(a.worktree, DLC, folder, OUT)
         old = open(path, encoding="utf-8").read() if os.path.exists(path) else None
+        if a.verify:
+            have = {n for n, _ in entries(no_comments(old or ""), "ability", "name")}
+            for p in PIECES:
+                leg = no_comments(git("show", "legacy-GM:modGhostMode/files/gameplay/%s/def_item_crafting_%s.xml" % (folder, p)))
+                for n, _ in entries(leg, "ability", "name"):
+                    if "Kaer Morhen" in n and n not in have:
+                        print("missing legacy ability: %s/%s: %s" % (folder, OUT, n))
+                        bad = True
+            print("%s/%s: %d abilities" % (folder, OUT, len(have)))
         if a.check:
             if old != text:
                 print("out of date:", path)
@@ -136,6 +155,13 @@ def main():
         with open(path, "w", encoding="utf-8", newline="\n") as f:
             f.write(text)
         print("%s/%s: %d abilities, %d items, %d schematic items, %d schematics, %d starting items" % ((folder, OUT) + counts))
+    if a.verify:
+        import dlc_conflicts
+        undef, inherited = dlc_conflicts.undefined(a.worktree)
+        for u in undef + inherited:
+            if u.split(":")[0].endswith("/" + OUT):
+                print("undefined ability:", u)
+                bad = True
     sys.exit(1 if bad else 0)
 
 

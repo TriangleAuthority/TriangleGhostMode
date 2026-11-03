@@ -91,7 +91,7 @@ function GetStaminaActionCost(action : EStaminaActionType, out cost : float, out
 		if(action == ESAT_Ability && IsSkillSign(SkillNameToEnum(abilityName)))
 			cost = ClampF(cost * (1 + GMSignCastingArmorPenalty()), 0, 100);
 		else if(GMIsMeleeStaminaAction(action) && action != ESAT_UsableItem)
-			cost = ClampF(cost * (1 + GMStaminaArmorPenalty()), 0, 100);
+			cost = ClampF(cost * (1 + GMStaminaArmorPenalty() + GMOverEncumbrancePenalty()), 0, 100); // WGT-07: and the overencumbrance share (PW5)
 	}
 }
 

@@ -390,12 +390,12 @@ function GMTestArmNear(a : float, b : float) : bool
 }
 
 // ARM-01: legacy's armor stats on 5.x's pieces (generic, school gear with DA5's resistances,
-// Manticore's toxicity of DA6, expansions), weights kept as 5.x (WGT), armor by item level, class
+// Manticore's toxicity of DA6, expansions), legacy's weights (WGT-03 since WGT's slice W2), armor by item level, class
 // tags and enhancement slots.
 function GMTest_arm01()
 {
-	GMTestReport(GMTestArmNear(GMTestArmAbl('Lynx Armor _Stats', 'slashing_resistance_perc'), 0.08) && GMTestArmNear(GMTestArmAbl('Lynx Armor _Stats', 'bludgeoning_resistance_perc'), 0.07) && GMTestArmNear(GMTestArmAbl('Lynx Armor _Stats', 'weight'), 6.52),
-		"ARM-01 Feline armor (tier 1): slashing " + GMTestArmAbl('Lynx Armor _Stats', 'slashing_resistance_perc') + " (expected 0.08; 5.x 0.05), bludgeoning " + GMTestArmAbl('Lynx Armor _Stats', 'bludgeoning_resistance_perc') + " (0.07), weight " + GMTestArmAbl('Lynx Armor _Stats', 'weight') + " (5.x's 6.52)");
+	GMTestReport(GMTestArmNear(GMTestArmAbl('Lynx Armor _Stats', 'slashing_resistance_perc'), 0.08) && GMTestArmNear(GMTestArmAbl('Lynx Armor _Stats', 'bludgeoning_resistance_perc'), 0.07) && GMTestArmNear(GMTestArmAbl('Lynx Armor _Stats', 'weight'), 5),
+		"ARM-01 Feline armor (tier 1): slashing " + GMTestArmAbl('Lynx Armor _Stats', 'slashing_resistance_perc') + " (expected 0.08; 5.x 0.05), bludgeoning " + GMTestArmAbl('Lynx Armor _Stats', 'bludgeoning_resistance_perc') + " (0.07), weight " + GMTestArmAbl('Lynx Armor _Stats', 'weight') + " (legacy's 5, WGT-03; 5.x 6.52)");
 	GMTestReport(GMTestArmNear(GMTestArmAbl('Bear Armor 4 _Stats', 'rending_resistance_perc'), 0.22), "ARM-01 grandmaster Bear armor (Blood and Wine): rending " + GMTestArmAbl('Bear Armor 4 _Stats', 'rending_resistance_perc') + " (expected legacy's 0.22; 5.x 0.32, DA5)");
 	GMTestReport(GMTestArmNear(GMTestArmAbl('Red Wolf Armor 1 _Stats', 'toxicity'), 10) && GMTestArmNear(GMTestArmAbl('Red Wolf Armor 1 _Stats', 'potion_duration'), 0.1), "ARM-01 Manticore armor: toxicity +" + GMTestArmAbl('Red Wolf Armor 1 _Stats', 'toxicity') + " (expected legacy's 10; 5.x 5, audit F3), potion duration +" + GMTestArmAbl('Red Wolf Armor 1 _Stats', 'potion_duration') + " (0.1)");
 	GMTestReport(GMTestArmNear(GMTestArmAbl('Heavy armor 01 _Stats', 'slashing_resistance_perc'), 0.15) && GMTestArmNear(GMTestArmAbl('Heavy armor 01 _Stats', 'elemental_resistance_perc'), 0.15), "ARM-01 generic heavy armor: 15% against every damage type");
@@ -1626,6 +1626,55 @@ exec function gmtest_arm12_oldsave()
 	w.GetItemEquippedOnSlot(EES_Armor, id);
 	GMTestReport(w.IsSetBonusActive(EISB_KaerMorhen) && w.inv.GetItemName(id) == 'Kaer Morhen Armor 3' && w.inv.HasItem('Kaer Morhen Armor 1'),
 		"ARM-12 after loading: set " + w.IsSetBonusActive(EISB_KaerMorhen) + ", armor worn " + w.inv.GetItemName(id) + ", spare in the bag " + w.inv.HasItem('Kaer Morhen Armor 1'));
+}
+
+// ARM-12 New Game+: the 16 "Base Kaer Morhen ... _Stats" abilities the NG+ pieces (NGP Kaer Morhen *)
+// carry, with legacy's values (legacy's items_plus/def_item_crafting_*.xml). They are defined only in
+// the DLC's items_plus folder; this reads them through the definitions manager. 0 if one is missing.
+// Only an NG+ game reads items_plus: in a regular game (the test save) the abilities and the NGP Kaer
+// Morhen items are unknown, before and after the fix (seen 2026-11-02), so this is not in the regression:
+// run gmtest_arm12_ngplus() in an NG+ game. Offline: gen_arm_km.py --verify and dlc_conflicts.py.
+function GMTestArm12Plus(abl : name, weight, quality, armor, slashing, piercing, bludgeoning, rending, elemental : float) : int
+{
+	if(GMTestArmNear(GMTestArmAbl(abl, 'weight'), weight) && GMTestArmNear(GMTestArmAbl(abl, 'quality'), quality) && GMTestArmNear(GMTestArmAbl(abl, 'armor'), armor)
+		&& GMTestArmNear(GMTestArmAbl(abl, 'slashing_resistance_perc'), slashing) && GMTestArmNear(GMTestArmAbl(abl, 'piercing_resistance_perc'), piercing)
+		&& GMTestArmNear(GMTestArmAbl(abl, 'bludgeoning_resistance_perc'), bludgeoning) && GMTestArmNear(GMTestArmAbl(abl, 'rending_resistance_perc'), rending)
+		&& GMTestArmNear(GMTestArmAbl(abl, 'elemental_resistance_perc'), elemental))
+		return 1;
+	LogChannel('GMTest', "INFO ARM-12 NG+ " + abl + ": armor " + GMTestArmAbl(abl, 'armor') + ", slashing " + GMTestArmAbl(abl, 'slashing_resistance_perc') + ", weight " + GMTestArmAbl(abl, 'weight'));
+	return 0;
+}
+
+function GMTest_arm12_ngplus()
+{
+	var dm : CDefinitionsManagerAccessor;
+	var n : int;
+
+	dm = theGame.GetDefinitionsManager();
+	n += GMTestArm12Plus('Base Kaer Morhen Armor _Stats', 10.0, 5.0, 35.0, 0.14, 0.06, 0.06, 0.14, 0.14);
+	n += GMTestArm12Plus('Base Kaer Morhen Armor 1 _Stats', 10.0, 5.0, 70.0, 0.16, 0.08, 0.08, 0.16, 0.16);
+	n += GMTestArm12Plus('Base Kaer Morhen Armor 2 _Stats', 10.0, 5.0, 120.0, 0.18, 0.09, 0.09, 0.18, 0.18);
+	n += GMTestArm12Plus('Base Kaer Morhen Armor 3 _Stats', 10.0, 5.0, 160.0, 0.2, 0.1, 0.1, 0.2, 0.2);
+	n += GMTestArm12Plus('Base Kaer Morhen Boots _Stats', 4.0, 5.0, 9.0, 0.05, 0.03, 0.03, 0.05, 0.05);
+	n += GMTestArm12Plus('Base Kaer Morhen Boots 1 _Stats', 4.0, 5.0, 23.0, 0.06, 0.04, 0.04, 0.06, 0.06);
+	n += GMTestArm12Plus('Base Kaer Morhen Boots 2 _Stats', 4.0, 5.0, 43.0, 0.07, 0.05, 0.05, 0.07, 0.07);
+	n += GMTestArm12Plus('Base Kaer Morhen Boots 3 _Stats', 4.0, 5.0, 59.0, 0.08, 0.06, 0.06, 0.08, 0.08);
+	n += GMTestArm12Plus('Base Kaer Morhen Gloves _Stats', 3.0, 5.0, 5.0, 0.05, 0.03, 0.03, 0.05, 0.05);
+	n += GMTestArm12Plus('Base Kaer Morhen Gloves 1 _Stats', 3.0, 5.0, 19.0, 0.05, 0.04, 0.04, 0.06, 0.05);
+	n += GMTestArm12Plus('Base Kaer Morhen Gloves 2 _Stats', 3.0, 5.0, 39.0, 0.06, 0.04, 0.04, 0.07, 0.06);
+	n += GMTestArm12Plus('Base Kaer Morhen Gloves 3 _Stats', 3.0, 5.0, 55.0, 0.07, 0.05, 0.05, 0.07, 0.07);
+	n += GMTestArm12Plus('Base Kaer Morhen Pants _Stats', 3.0, 5.0, 9.0, 0.06, 0.03, 0.03, 0.06, 0.06);
+	n += GMTestArm12Plus('Base Kaer Morhen Pants 1 _Stats', 3.0, 5.0, 23.0, 0.07, 0.04, 0.04, 0.07, 0.07);
+	n += GMTestArm12Plus('Base Kaer Morhen Pants 2 _Stats', 3.0, 5.0, 43.0, 0.08, 0.05, 0.05, 0.08, 0.08);
+	n += GMTestArm12Plus('Base Kaer Morhen Pants 3 _Stats', 3.0, 5.0, 59.0, 0.09, 0.06, 0.06, 0.09, 0.09);
+	GMTestReport(n == 16, "ARM-12 NG+ base abilities of the NGP Kaer Morhen pieces read legacy's stats: " + n + " of 16");
+	LogChannel('GMTest', "INFO ARM-12 NG+ items in this game: NGP Kaer Morhen Armor category '" + dm.GetItemCategory('NGP Kaer Morhen Armor') + "', names its base ability "
+		+ GMTestArmHasAbility('NGP Kaer Morhen Armor', 'Base Kaer Morhen Armor _Stats') + "; regular Kaer Morhen Armor 3 armor " + GMTestArmAbl('Kaer Morhen Armor 3 _Stats', 'armor'));
+}
+
+exec function gmtest_arm12_ngplus()
+{
+	GMTest_arm12_ngplus();
 }
 
 // ARM-03: with STAM-05's option on (set for the test, then put back), legacy's armor regen modifier:

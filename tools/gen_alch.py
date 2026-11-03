@@ -10,15 +10,15 @@ KEEP_5X changes. The list grows with each port slice (alch.md's port order): an 
 
 New Game+ (`items_plus`): the entry as legacy's NG+ file (`abilities_plus`, `items_plus`) has it.
 
-    python tools/gen_alch.py [--worktree DIR] [--check | --verify]
+    python tools/gen_alch.py --worktree DIR [--check | --verify]
 
-Writes `items/gm_alch.xml` and `items_plus/gm_alch.xml` in Ghost Mode's DLC (default worktree
-../TGM-5x-GM). --check writes nothing and fails if a file is out of date. --verify writes nothing and
+Writes `items/gm_alch.xml` and `items_plus/gm_alch.xml` in Ghost Mode's DLC (--worktree, required). --check writes nothing and fails if a file is out of date. --verify writes nothing and
 compares every listed entry as the port leaves it with legacy's, node by node (weights, prices and the
 KEEP_5X changes excepted), and each binary file with 5.x's plus exactly its listed cr2w_patch.py edits; it also lists, for information, the entries of the alchemy files that still
 differ from legacy's and are not listed (not ported yet, or other areas').
 """
 import argparse, os, re, subprocess, sys
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -297,7 +297,7 @@ def verify(worktree):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     ap.add_argument("--list", action="store_true", help="with --verify: name the unlisted entries that differ")

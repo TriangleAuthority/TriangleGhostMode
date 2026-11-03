@@ -34,10 +34,10 @@ The port goes in slices (swd.md's port order): PORTED lists the features ported 
 ported with its main feature (SWD-06 > 05 > 04 > 03 > 02 > 01 > 08), and the SWD-07 stats
 (`sword_dmg_bonus`, `spell_dmg_bonus`) only when SWD-07 is.
 
-    python tools/gen_swd_items.py [--worktree DIR] [--check | --verify]
+    python tools/gen_swd_items.py --worktree DIR [--check | --verify]
 
-Writes `items/gm_swd_items.xml` and `items_plus/gm_swd_items.xml` in Ghost Mode's DLC (default
-worktree ../TGM-5x-GM). --check writes nothing and fails if a file is out of date. --verify reads
+Writes `items/gm_swd_items.xml` and `items_plus/gm_swd_items.xml` in Ghost Mode's DLC
+(--worktree). --check writes nothing and fails if a file is out of date. --verify reads
 what the game reads (Ghost Mode's DLC items over 5.x's) and compares every SWD stat, field and child
 block of every SWD unit with legacy's (the dismantling parts and NPC scabbards excepted: CRAFT, AI),
 and SWD's strings in the nine tables with legacy's rows, counting the differences that are rules of
@@ -49,6 +49,7 @@ import xml.etree.ElementTree as ET
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_arm_items as arm  # noqa: E402
 import item_layer  # noqa: E402  ITEM's fields of the same entries
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = arm.REPO
 DLC = arm.DLC
@@ -148,7 +149,10 @@ def swd10_ability(folder, name, ventry_nodes, ng_nodes):
     for k, (_, _, text) in sorted(ventry_nodes.items(), key=lambda x: x[1][0]):
         if k[0] in SWD10_KEEP or (k[0] in MAIN.values() and k[0] != MAIN[kind]):
             vals = dict(re.findall(r'\b(min|max)="([^"]*)"', text))
-            out.append((k[0], k[1], float(vals["min"]), float(vals.get("max", vals["min"]))))
+            mn, mx = float(vals["min"]), float(vals.get("max", vals["min"]))
+            if k[0] == "weight" and item_layer.dw2_weight(name) is not None:  # WGT's DW2 (slice W3)
+                mn = mx = float(item_layer.dw2_weight(name))
+            out.append((k[0], k[1], mn, mx))
     if level is not None:
         if folder == "items_plus":
             level += sword_level(kind, node_min(ventry_nodes, MAIN[kind])) - sword_level(kind, node_min(ng_nodes, MAIN[kind]))
@@ -667,7 +671,7 @@ def verify_swd10(worktree):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(REPO, "..", "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true", help="compare the final items with legacy's SWD data")
     args = ap.parse_args()

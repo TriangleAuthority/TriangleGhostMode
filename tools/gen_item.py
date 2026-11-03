@@ -7,9 +7,9 @@ pieces, swords and abilities. This tool writes every other entry ITEM changes: 5
 for every ITEM unit of `docs/features/attribution.csv` whose name no other file of Ghost Mode's DLC
 defines (one entry per name: run it after the other item tools).
 
-    python tools/gen_item.py [--worktree DIR] [--check | --verify]
+    python tools/gen_item.py --worktree DIR [--check | --verify]
 
-Writes `items/gm_item.xml` and `items_plus/gm_item.xml` (default worktree ../TGM-5x-GM). --check
+Writes `items/gm_item.xml` and `items_plus/gm_item.xml` (the worktree given by --worktree). --check
 writes nothing and fails if a file is out of date. --verify reads what the game reads (Ghost Mode's DLC
 over 5.x) and compares every ITEM field of every ITEM unit with legacy's: differences that are rules of
 the port (5.x's own change kept, a slice not ported yet) are counted by reason, any other is listed and
@@ -21,9 +21,11 @@ import xml.etree.ElementTree as ET
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_arm_items as arm  # noqa: E402
 import item_layer  # noqa: E402
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 OUT = "gm_item.xml"
 ECON_OUT = "gm_econ.xml"  # gen_econ.py's, written after this tool: the ECON-only entries
+WGT_OUT = "gm_wgt.xml"  # gen_wgt.py's, written after this tool: the WGT-only abilities
 
 
 def other_names(worktree, folder):
@@ -31,7 +33,7 @@ def other_names(worktree, folder):
     its, abls = set(), set()
     d = os.path.join(worktree, arm.DLC, folder)
     for f in sorted(os.listdir(d)):
-        if not f.endswith(".xml") or f in (OUT, ECON_OUT):
+        if not f.endswith(".xml") or f in (OUT, ECON_OUT, WGT_OUT):
             continue
         text = arm.blank_comments(open(os.path.join(d, f), encoding="utf-8-sig").read())
         for _, _, head in arm.item_spans(text):
@@ -91,6 +93,9 @@ def generate(worktree, folder):
                 report.append(f"{folder}: new ability {name}")
                 continue
             if name in taken_a or name not in ma or name not in la or name not in va:
+                continue
+            # written whole only for another area's change; WGT's nodes join it (gen_wgt.py writes the rest)
+            if not item_layer.merge_nodes(folder, name, ma[name][2], la[name][2], va[name][1], arm.nodes, arm.norm, item_layer.WHOLE)[1]:
                 continue
             body, changes = item_layer.merge_nodes(folder, name, ma[name][2], la[name][2], va[name][1], arm.nodes, arm.norm)
             if not changes:
@@ -220,6 +225,8 @@ def verify(worktree):
                     elif name not in ga or {k: arm.values(x[2]) for k, x in ga[name].items()} != {k: arm.values(x[2]) for k, x in la[name][2].items()}:
                         problems.append(f"{folder}: new ability {name} missing or not legacy's")
                     continue
+                if kind == "ability" and own_n and f.startswith("WGT-"):
+                    continue  # WGT's nodes: gen_wgt.py --verify checks them, its extend entries resolved over 5.x's
                 if kind == "ability" and own_n:
                     if name not in ma or name not in la or name not in va:
                         note("ability not in all three branches")
@@ -254,7 +261,7 @@ def verify(worktree):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(arm.REPO, "..", "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     args = ap.parse_args()

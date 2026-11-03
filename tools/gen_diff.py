@@ -26,9 +26,9 @@ One home per ability (PD2): the abilities listed here leave STAM-08's `gm_npc_st
 regular file (run it afterwards); legacy's NG+ entries equal its regular ones, and gen_ngplus keeps legacy's
 value where legacy gave NG and NG+ the same (PD9). --verify checks both folders.
 
-    python tools/gen_diff.py [--worktree DIR] [--check | --verify]
+    python tools/gen_diff.py --worktree DIR [--check | --verify]
 
-Writes `abilities/gm_diff.xml` in Ghost Mode's DLC (default worktree ../TGM-5x-GM) and the in-game data test
+Writes `abilities/gm_diff.xml` in Ghost Mode's DLC (the worktree given by --worktree) and the in-game data test
 `tests/gmTestsDiffData.ws` (every numeric attribute of every listed ability, legacy's or 5.x's, read as the game
 must read it: legacy's sums, 0 where only 5.x has the attribute; read by GMTest_diffdata in the regression run).
 --check writes nothing and fails if a file is out of date.
@@ -42,6 +42,7 @@ import argparse, csv, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_ench import ability_stats  # noqa: E402
 from gen_ai import show, all_abilities, strip, indent, dlc_abilities, sums, fnum  # noqa: E402
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -220,7 +221,7 @@ def build_tests():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     a = ap.parse_args()
@@ -230,6 +231,8 @@ def main():
     for path, make in [(os.path.join(a.worktree, DLC, "abilities", OUT), build), (os.path.join(a.worktree, TESTS), build_tests)]:
         text = make()
         old = open(path, encoding="utf-8", newline="").read() if os.path.exists(path) else None
+        if old is not None and old.replace(chr(13) + chr(10), chr(10)) == text.replace(chr(13) + chr(10), chr(10)):
+            old = text  # line ends only: git's checkout may turn LF into CRLF
         if a.check:
             if old != text:
                 print("out of date:", path)

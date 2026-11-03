@@ -29,10 +29,9 @@ legacy's NG+ entries equal its regular ones, and gen_ngplus keeps legacy's value
 scale them (PA14). `items_plus` (gen_ngplus reads abilities only) is written here, from legacy's
 `items_plus` entries and 5.x's `items_plus` nodes for LATER. --verify checks all four folders.
 
-    python tools/gen_ai.py [--worktree DIR] [--check | --verify]
+    python tools/gen_ai.py --worktree DIR [--check | --verify]
 
-Writes `abilities/<file>`, `items/<file>` and `items_plus/<file>` in Ghost Mode's DLC (default worktree
-../TGM-5x-GM), and the in-game data test `tests/gmTestsAiData.ws` (per ability one value the port changes
+Writes `abilities/<file>`, `items/<file>` and `items_plus/<file>` in Ghost Mode's DLC (--worktree, required), and the in-game data test `tests/gmTestsAiData.ws` (per ability one value the port changes
 from 5.x's, and one LATER value that must still read 5.x's; read by GMTest_ai03 in the regression run; the experience nodes are
 read by gen_xp.py's data test instead).
 --check writes nothing and fails if a file is out of date.
@@ -46,6 +45,7 @@ import argparse, csv, os, re, subprocess, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_ench import abilities, ability_stats  # noqa: E402
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -56,6 +56,8 @@ EP1_MONSTER = "modGhostMode/files/dlc/ep1/data/gameplay/%s/monster_base_abl.xml"
 # The features ported so far (ai.md's port order). B1 adds AI-08 (DA3 (a), owner, 2026-10-28), B2 AI-12,
 # C1 AI-15 and AI-16, C3 AI-19 and AI-20.
 PORTED = {"AI-01", "AI-02", "AI-03", "AI-04", "AI-05", "AI-08", "AI-12", "AI-15", "AI-16", "AI-19", "AI-20", "XP"}
+# WGT's slice W2 (wgt.md): the weapons' weights, legacy's
+PORTED |= {"WGT"}
 
 # Tags of a listed ability that belong to another feature: 5.x's nodes until that feature is ported.
 LATER = {
@@ -693,7 +695,7 @@ def build_tests():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     a = ap.parse_args()
@@ -705,6 +707,8 @@ def main():
     for path, make in files:
         text = make()
         old = open(path, encoding="utf-8", newline="").read() if os.path.exists(path) else None
+        if old is not None and old.replace(chr(13) + chr(10), chr(10)) == text.replace(chr(13) + chr(10), chr(10)):
+            old = text  # line ends only: git's checkout may turn LF into CRLF
         if a.check:
             if old != text:
                 print("out of date:", path)

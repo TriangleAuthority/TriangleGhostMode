@@ -9,14 +9,14 @@ schematics and recipes, e.g. the Netflix set's, DC2). A schematic legacy changed
 legacy, also where 5.x changed it (DC4: the six Blood and Wine Wolf upgrades), with legacy's inert
 `price` (DC3). Entries another area ports its own way are left alone (`OTHER`).
 
-    python tools/gen_craft.py [--worktree DIR] [--check | --verify]
+    python tools/gen_craft.py --worktree DIR [--check | --verify]
 
-Writes the files at their vanilla paths under `modGhostMode/files/` in the 5.x-GM worktree (default
-../TGM-5x-GM), regular and NG+. --check writes nothing and fails if a file is out of date. --verify reads
+Writes the files at their vanilla paths under `modGhostMode/files/` in the 5.x-GM worktree (--worktree, required), regular and NG+. --check writes nothing and fails if a file is out of date. --verify reads
 the written files and checks that every CRAFT unit's entry equals legacy's (the ported ones) or 5.x's (the
 others, counted by reason), that no name is defined twice, and that the rest of each file is 5.x's.
 """
 import argparse, csv, os, re, subprocess, sys
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -240,7 +240,7 @@ def dlc_text(folder, eu):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(REPO, "..", "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     args = ap.parse_args()

@@ -5,7 +5,7 @@
 <definitions>
 <abilities>
 	<ability on_conflict="replace" name="Netflix Armor _Stats">
-				<weight 						type="base" min="7.32" 		/>
+				<weight 						type="base" min="10" 		/>
 				<quality 						type="add" 	min="5"			/>
 				<armor 							type="base" min="125" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
@@ -17,7 +17,7 @@
 				<bludgeoning_resistance_perc type="base" min="0.09" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Armor 1 _Stats">
-				<weight 						type="base" min="8.57" 		/>
+				<weight 						type="base" min="10" 		/>
 				<quality 						type="add" 	min="5"			/>
 				<armor 							type="base" min="195" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
@@ -29,7 +29,7 @@
 				<bludgeoning_resistance_perc type="base" min="0.09" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Armor 2 _Stats">
-				<weight 						type="base" min="11.56" 	/>
+				<weight 						type="base" min="10" 	/>
 				<quality 						type="add" 	min="5"			/>
 				<armor 							type="base" min="225" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
@@ -41,7 +41,7 @@
 				<bludgeoning_resistance_perc type="base" min="0.09" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Boots _Stats">			
-				<weight 						type="base" min="2.51" 	/>				
+				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
 				<armor 							type="base" min="45" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
@@ -52,7 +52,7 @@
 				<elemental_resistance_perc type="base" min="0.06" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Boots 1 _Stats">
-				<weight 						type="base" min="4.01" 	/>				
+				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
 				<armor 							type="base" min="73" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
@@ -63,7 +63,7 @@
 				<elemental_resistance_perc type="base" min="0.06" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Boots 2 _Stats">
-				<weight 						type="base" min="6" 	/>				
+				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
 				<armor 							type="base" min="85" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
@@ -74,7 +74,7 @@
 				<elemental_resistance_perc type="base" min="0.06" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Gloves _Stats">
-				<weight 						type="base" min="1.7" 	/>
+				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
 				<armor 							type="base" min="41"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
@@ -85,7 +85,7 @@
 				<spell_power_yrden type="mult" min="0.06" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Gloves 1 _Stats">
-				<weight 						type="base" min="3.52" 	/>
+				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
 				<armor 							type="base" min="69"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
@@ -96,7 +96,7 @@
 				<spell_power_yrden type="mult" min="0.1" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Gloves 2 _Stats">
-				<weight 						type="base" min="1.7" 	/>
+				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
 				<armor 							type="base" min="81"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
@@ -107,7 +107,7 @@
 				<spell_power_yrden type="mult" min="0.12" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Pants _Stats">
-				<weight 						type="base" min="2.6" 	/>
+				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
 				<armor 							type="base" min="45"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
@@ -118,7 +118,7 @@
 				<spell_power type="mult" min="0.05" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Pants 1 _Stats">
-				<weight 						type="base" min="2.65" 	/>
+				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
 				<armor 							type="base" min="73"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
@@ -129,7 +129,7 @@
 				<spell_power type="mult" min="0.1" />
 			</ability>
 	<ability on_conflict="replace" name="Netflix Pants 2 _Stats">
-				<weight 						type="base" min="2.77" 	/>
+				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
 				<armor 							type="base" min="85"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
@@ -147,7 +147,7 @@
 		<bludgeoning_resistance_perc	type="base" always_random="false" min="0.06" max="0.06"/>
 		<rending_resistance_perc 		type="base" always_random="false" min="0.14" max="0.14"/>
 		<quality 						type="add" min="4" max="4"/>
-		<weight 						type="base" min="9.52" />
+		<weight 						type="base" min="15" />
 				<elemental_resistance_perc type="base" min="0.14" />
 				<spell_power_igni type="mult" min="0.1" />
 				<spell_power_aard type="mult" min="0.1" />
@@ -160,7 +160,7 @@
 		<bludgeoning_resistance_perc	type="base" always_random="false" min="0.04" max="0.04"/>
 		<rending_resistance_perc 		type="base" always_random="false" min="0.06" max="0.06"/>
 		<quality 						type="add" min="4" max="4"/>
-		<weight 						type="base" min="3.4" />
+		<weight 						type="base" min="4.5" />
 				<elemental_resistance_perc type="base" min="0.06" />
 			</ability>
 	<ability on_conflict="replace" name="Dol Blathanna Gloves _Stats">
@@ -173,7 +173,7 @@
 		<spell_power_igni				type="mult"	min="0.05"/>
 		<spell_power_aard				type="mult"	min="0.05"/>
 		<quality 						type="add" min="4" max="4"/>
-		<weight 						type="base" min="3.6" />
+		<weight 						type="base" min="3.5" />
 				<elemental_resistance_perc type="base" min="0.05" />
 			</ability>
 	<ability on_conflict="replace" name="Dol Blathanna Pants _Stats">
@@ -184,7 +184,7 @@
 		<rending_resistance_perc 		type="base" always_random="false" min="0.07" max="0.07"/>
 		<bludgeoning_resistance_perc	type="base" always_random="false" min="0.04" max="0.04"/>
 		<quality 						type="add" min="4" max="4"/>
-		<weight 						type="base" min="2.7" />
+		<weight 						type="base" min="3.5" />
 				<elemental_resistance_perc type="base" min="0.07" />
 			</ability>
 	<ability on_conflict="replace" name="White Tiger Armor _Stats">
@@ -196,7 +196,7 @@
 		<rending_resistance_perc 		type="base" always_random="false" min="0.14" max="0.14"/>
 		<vitality 						type="base" always_random="false" min="75" max="75"/>
 		<quality 						type="add" min="4" max="4"/>
-		<weight 						type="base" min="9.52" />
+		<weight 						type="base" min="15" />
 				<elemental_resistance_perc type="base" min="0.14" />
 			</ability>
 	<ability on_conflict="replace" name="White Tiger Boots _Stats">
@@ -208,7 +208,7 @@
 		<rending_resistance_perc 		type="base" always_random="false" min="0.06" max="0.06"/>		
 		<elemental_resistance_perc		type="base"	always_random="false" min="0.06" max="0.06"/>
 		<quality 						type="add" min="4" max="4"/>
-		<weight 						type="base" min="3.4" />
+		<weight 						type="base" min="4.5" />
 	</ability>
 	<ability on_conflict="replace" name="White Tiger Gloves _Stats">
 	<tags></tags>
@@ -218,7 +218,7 @@
 		<bludgeoning_resistance_perc	type="base" always_random="false" min="0.03" max="0.03"/>
 		<poison_resistance_perc			type="base"	always_random="false" min="0.05" max="0.05"/>
 		<quality 						type="add" min="4" max="4"/>
-		<weight 						type="base" min="3.6" />
+		<weight 						type="base" min="3.5" />
 				<rending_resistance_perc type="base" min="0.05" />
 				<elemental_resistance_perc type="base" min="0.05" />
 			</ability>
@@ -231,11 +231,11 @@
 		<bludgeoning_resistance_perc	type="base" always_random="false" min="0.04" max="0.04"/>
 		<focus_gain 					type="base" always_random="false" min="0.05" max="0.05"/>
 		<quality 						type="add" min="4" max="4"/>
-		<weight 						type="base" min="2.7" />
+		<weight 						type="base" min="3.5" />
 				<elemental_resistance_perc type="base" min="0.07" />
 			</ability>
 	<ability on_conflict="replace" name="Scarlet Crest Armor _Stats">
-				<weight 						type="base" min="4.77" 		/>
+				<weight 						type="base" min="15" 		/>
 				<quality 						type="add" 	min="4"			/>
 				<armor 							type="base" min="220" 		/>
 				<slashing_resistance_perc 		type="base" min="0.19"		/>
@@ -245,7 +245,7 @@
 				<focus_gain 					type="base" min="0.07" 		/>
 			</ability>
 	<ability on_conflict="replace" name="Scarlet Crest Boots _Stats">			
-				<weight 						type="base" min="1.2" 	/>				
+				<weight 						type="base" min="5" 	/>				
 				<quality 						type="add" 	min="4" 	/>
 				<armor 							type="base" min="83" 	/>
 				<slashing_resistance_perc 		type="base" min="0.07" 	/>
@@ -255,7 +255,7 @@
 				<focus_gain 					type="base" min="0.07" 	/>
 			</ability>
 	<ability on_conflict="replace" name="Scarlet Crest Gauntlets _Stats">
-				<weight 						type="base" min="0.9" 	/>
+				<weight 						type="base" min="2" 	/>
 				<quality 						type="add" 	min="4"		/>
 				<armor 							type="base" min="79"	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
@@ -265,7 +265,7 @@
 				<focus_gain 					type="base" min="0.03" 	/>
 			</ability>
 	<ability on_conflict="replace" name="Scarlet Crest Trousers _Stats">
-				<weight 						type="base" min="1.33" 	/>
+				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="4"		/>
 				<armor 							type="base" min="83"	/>
 				<slashing_resistance_perc 		type="base" min="0.08" 	/>

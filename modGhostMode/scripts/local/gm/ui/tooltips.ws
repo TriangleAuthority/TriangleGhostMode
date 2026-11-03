@@ -9,6 +9,8 @@
 // - A negative value has no "+", and comparing negative modifiers shows better and worse the right way
 //   round (CalculateStatsComparance); a potion's toxicity after Expert Brewer without "/max" and a
 //   decoction's offset after Adaptation (the AddItemStats wrapper in alchemy/tooltips.ws).
+// - A trophy's stats are gear's (legacy passed IsItemTrophy with isArmorOrWeapon to AddItemStats): the Arachas
+//   trophy's toxicity is "Maximum Toxicity +40" (TRPH audit F2).
 // UI-07's rows are in tooltip_settings.csv. See docs/features/ui.md.
 
 // Whether an armor piece or weapon shows its item description (swords with their own text keep it).
@@ -20,6 +22,10 @@ function GMShowsItemDescription(item : SItemUniqueId, inv : CInventoryComponent)
 		&& !inv.ItemHasTag(item, 'sq304_unique_sword') && !inv.ItemHasTag(item, 'q402_unique_sword');
 }
 
+// Whether the tooltip being built is a trophy's (read by the AddItemStats wrapper, alchemy/tooltips.ws).
+@addField(W3TooltipComponent)
+var gmTipTrophy : bool;
+
 @wrapMethod(W3TooltipComponent)
 function GetBaseItemData( item : SItemUniqueId, itemInvComponent : CInventoryComponent, optional isShopItem : bool, optional compareWithItem : SItemUniqueId, optional compareItemInv : CInventoryComponent ) : CScriptedFlashObject
 {
@@ -29,8 +35,12 @@ function GetBaseItemData( item : SItemUniqueId, itemInvComponent : CInventoryCom
 	var descr, itemDescr, info : string;
 	var fixative : ESkill;
 	var ammo, ammoBonus : float;
+	var wasTrophy : bool;
 
+	wasTrophy = gmTipTrophy;
+	gmTipTrophy = itemInvComponent && itemInvComponent.IsItemTrophy(item);
 	tooltipData = wrappedMethod(item, itemInvComponent, isShopItem, compareWithItem, compareItemInv);
+	gmTipTrophy = wasTrophy;
 	if(!tooltipData || !itemInvComponent)
 		return tooltipData;
 

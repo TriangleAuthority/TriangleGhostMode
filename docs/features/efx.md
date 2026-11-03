@@ -351,7 +351,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-24 from the chang
 | Skill trees | n/a |
 | Port form | `@wrapMethod(W3Effect_Tangled)` `OnEffectAdded` (`effects/spiderWeb.ws`): on Geralt, `AbortSign()` after 5.x's `CastSignHold` release |
 | Port status | **signed off** (2026-10-25); ported (slice 7, 2026-10-24, 5.x-GM `cc824c9a`), verified in both trees |
-| Open checks | A real arachas's web projectile not tested (the web added by script as the projectile adds it); the instant-casting select keys wait for OPT (PX9); not compared with a build without the wrapper |
+| Open checks | A real arachas's web projectile not tested (the web added by script as the projectile adds it); the select keys' release is OPT's (slice O3, verified there); not compared with a build without the wrapper |
 | Save impact | none |
 | NG+ counterpart | none |
 
@@ -363,7 +363,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-24 from the chang
 
 **Notes** (from the code, seen in slice 7): `AbortSign` aborts the sign entity in its cast (Aard, Igni, Yrden, Axii: the entity is destroyed before the sign goes off) and ends a channel (Firestream to `Finished`). Quen's entity ignores the abort while it casts (`W3QuenEntity.OnSignAborted` is empty, 1.32, legacy and 5.x), so a web during a Quen cast still raises the shield; and a web projectile hitting Geralt while Quen is up does not entangle him at all (`W3AdvancedProjectile`: Quen takes the hit instead).
 
-**Decisions:** port as legacy without the select keys until instant casting is ported (PX9, confirmed by the owner, 2026-10-24; a deviation only if the option is ported without it). **OPT, when it ports instant casting:** the web also releases its sign-select keys (legacy's `ForceDeactivateCastSignHold` in place of 5.x's `theInput.ForceDeactivateAction('CastSignHold')`).
+**Decisions:** port as legacy without the select keys until instant casting is ported (PX9, confirmed by the owner, 2026-10-24; a deviation only if the option is ported without it). **Done by OPT** (slice O3, 2026-11-02; OPT-06's PO13): instant casting is 5.x's "Quick Sign Casting" (DO5), and while it is on the web also releases the five sign-select keys (`options/instantCasting.ws`, a second wrapper of `W3Effect_Tangled.OnEffectAdded`); 5.x's release of `CastSignHold` stays.
 
 **Verification (slice 7, 2026-10-24, both trees):** a real sign cast (the cast input called as a key press, `gmtest_efx10(sign, 0.25)`) caught 0.25 s in by a web added by script as an arachas's web projectile adds it (`AddEffectCustom`, the arachas test dummy as creator, 1 s), read 0.3 s later (a test probe on `AbortSign`): Aard, Igni, Yrden and Axii aborted (`AbortSign` called once, the sign entity destroyed before the sign went off), Quen's shield went up (above); a held Firestream channel (`autocast(ST_Igni, true)`, the classic `S_Magic_s02`, the new tree's `S_Magic_s28`) caught by the web (`gmtest_efx10_web`) went to `Finished`. `AddEffectDefault(EET_Tangled)` without a creator is denied (`EI_Deny`).
 

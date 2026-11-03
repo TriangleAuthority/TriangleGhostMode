@@ -21,15 +21,44 @@ import csv, os, re
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PORTED = {"ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11",
-          "CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09", "LOOT-08", "FOOD-04", "FOOD-07",
-          "XBOW-02", "XBOW-03", "ECON-01", "ECON-02", "ECON-03", "ECON-04"}
-AREAS = ("ITEM-", "CRAFT-", "LOOT-", "FOOD-", "XBOW-", "ECON-")
+# PORTED, AREAS, TAGS, NODES, BLOCKS and ATTRS are written per area, one line (or block) each with a comment line
+# between them, so areas ported in parallel never edit the same lines (docs/proposals/parallel-ports.md, section 5).
+# An area adds its features on its own line; WGT, OPT and TRPH have theirs ready (empty).
+PORTED = set()
+# ITEM
+PORTED |= {"ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11"}
+# CRAFT
+PORTED |= {"CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09"}
+# LOOT
+PORTED |= {"LOOT-08"}
+# FOOD
+PORTED |= {"FOOD-04", "FOOD-07"}
+# XBOW
+PORTED |= {"XBOW-02", "XBOW-03"}
+# ECON
+PORTED |= {"ECON-01", "ECON-02", "ECON-03", "ECON-04"}
+# WGT (wgt.md): slice W1, the items' weight attribute and the coins' and pig trophy's EncumbranceOff tag
+PORTED |= {"WGT-03", "WGT-04", "WGT-05", "WGT-06"}
+# OPT
+PORTED |= set()
+# TRPH
+PORTED |= {"TRPH-01", "TRPH-02", "TRPH-03"}
+# (the features' prefixes this layer reads from attribution.csv)
+AREAS = ()
+# ITEM, CRAFT, LOOT, FOOD, XBOW, ECON
+AREAS += ("ITEM-", "CRAFT-", "LOOT-", "FOOD-", "XBOW-", "ECON-")
+# WGT
+AREAS += ("WGT-",)
+# OPT
+AREAS += ()
+# TRPH
+AREAS += ("TRPH-",)
 # ECON's features (prices and price tags, docs/features/econ.md): they never make a tool write an entry whole
 # by themselves. A tool that writes an entry for another area's change applies them too (`apply_item`);
 # entries with ECON's changes only are `gen_econ.py`'s (short `extend` entries, the owner's form, 2026-11-01).
 ECON = {"ECON-01", "ECON-02", "ECON-03", "ECON-04"}
-WHOLE = tuple(a for a in AREAS if a != "ECON-")
+# WGT's fields (weights, capacities) never make a tool write an entry whole either (wgt.md PW2)
+WHOLE = tuple(a for a in AREAS if a not in ("ECON-", "WGT-"))
 # The mod_ tags other areas own (ECON owns every other mod_ price tag).
 ECON_KEEP = {"mod_nosale", "mod_nosalem", "mod_alchemy_table"}
 
@@ -47,6 +76,12 @@ TAGS = {
     "ECON-04": {"mod_*"},  # the price tags; legacy's fixes of 1.32's mod_weapo, mod_legendar, mod_valuable EP1 (PE4)
     "FOOD-04": {"*"},  # the food and drink kind tags (Drinks, Alcohol, Uncooked, Potion off seven items, ...)  # DoNotEnhancem: 1.32's misspelt tag on the sq701 gloves
 }
+# WGT: Nilfgaardian florens and Redanian orens weightless, Hearts of Stone's pig contest trophy weighted (WGT-05)
+TAGS.update({"WGT-05": {"EncumbranceOff"}})
+# OPT
+TAGS.update({})
+# TRPH
+TAGS.update({"TRPH-01": {"Quest"}, "TRPH-02": {"Quest"}})  # NG+'s Wyvern trophy mq1051 and the Camerlengo's Seal no longer quest items (PT4)
 # The ability nodes each feature owns.
 NODES = {
     "ITEM-03": {"item_level_min", "item_level_max"},
@@ -59,6 +94,14 @@ NODES = {
     "CRAFT-04": {"*"},  # the craftable quest armors' abilities (new, legacy's whole)
     "CRAFT-09": {"*"},  # the dismantle kits' abilities (new)
 }
+# WGT (slice W2): the abilities' weights; the saddlebags' capacity, the blinders' panic resistance and the base
+# horse's sprint cost (WGT-06, PW9)
+NODES.update({"WGT-03": {"weight"}, "WGT-04": {"weight"}, "WGT-05": {"weight"},
+              "WGT-06": {"weight", "encumbrance", "panic", "sprint_stamina_cost"}})
+# OPT
+NODES.update({})
+# TRPH
+NODES.update({})
 # The child blocks of an item each feature owns (taken whole from legacy).
 BLOCKS = {
     "ITEM-11": {"base_abilities"},  # the kits' quality abilities
@@ -71,6 +114,12 @@ BLOCKS = {
     "ECON-02": {"base_abilities"},  # Blood and Wine's dyes lose their Relic rarity (CRAFT's hand-off)
     "XBOW-02": {"base_abilities"},  # the two Blood and Wine quest crossbows on Toussaint Crossbow 1's stats  # the food and drink tier, rarity and toxicity abilities; Wolf liver's parts (none: audit F1)
 }
+# WGT
+BLOCKS.update({})
+# OPT
+BLOCKS.update({})
+# TRPH
+BLOCKS.update({})
 # (block, item) where legacy's block is taken although 5.x changed it (the owner's DC4: Cheesecutter
 # without 5.x's Cheese).
 FORCE_LEGACY = {("recycling_parts", "Cheesecutter")}
@@ -93,6 +142,32 @@ ATTRS = {
     # the list price (ECON-01 to ECON-03); NG+'s Gwent Almanac also stacks as its regular entry (ECON-02)
     "ECON-01": {"price"}, "ECON-02": {"price", "stackable"}, "ECON-03": {"price"}, "ECON-04": {"price"},
 }
+# WGT: an item's own weight (WGT-03 to WGT-06; the abilities' <weight> nodes in NODES)
+ATTRS.update({f: {"weight"} for f in ("WGT-03", "WGT-04", "WGT-05", "WGT-06")})
+# WGT, slice W3 (DW2, the owner's decision, 2026-11-02): the weights of 5.x's new gear, the legacy weight of the
+# counterpart ECON's DE2 gave each piece (as the game reads it: GetItemWeight), on the piece's `_Stats` ability
+# where 5.x keeps it; the same for the NG+ copies (`NGP ` and items_plus). The Fire Horse gear keeps 5.x's (legacy
+# left its counterparts at 1.32's); Heavy armor 03 Netflix and Heavy gloves 04 Netflix share their counterparts'
+# abilities (legacy's since slice W2). `gen_wgt.py --verify` recomputes each from DE2 and the branches.
+DW2 = {}
+for _t in ("", " 1", " 2"):
+    DW2.update({f"Netflix Armor{_t} _Stats": 10, f"Netflix Boots{_t} _Stats": 4, f"Netflix Gloves{_t} _Stats": 3,
+                f"Netflix Pants{_t} _Stats": 3, f"Netflix steel sword{_t} _Stats": 4, f"Netflix silver sword{_t} _Stats": 2})
+for _s in ("Dol Blathanna", "White Tiger"):
+    DW2.update({f"{_s} Armor _Stats": 15, f"{_s} Boots _Stats": 4.5, f"{_s} Gloves _Stats": 3.5, f"{_s} Pants _Stats": 3.5})
+DW2.update({"Scarlet Crest Armor _Stats": 15, "Scarlet Crest Boots _Stats": 5, "Scarlet Crest Gauntlets _Stats": 2,
+            "Scarlet Crest Trousers _Stats": 3, "Dol Blathanna longsword _Stats": 6, "Steel Vixen _Stats": 6,
+            "White Widow of Dol Blathanna _Stats": 4, "Silver Vixen _Stats": 4, "Top Notch Steel Sword _Stats": 6,
+            "Top Notch Silver sword _Stats": 4})
+
+
+def dw2_weight(ability):
+    """DW2's weight of a 5.x ability (its `NGP ` copy as the regular one), or None."""
+    return DW2.get(ability[4:] if ability.startswith("NGP ") else ability)
+# OPT
+ATTRS.update({})
+# TRPH
+ATTRS.update({})
 
 # DE2 (ECON-01, ECON-03; the owner's decision, 2026-11-01): the list prices of 5.x's new gear, schematics and
 # horse gear, by analogy with a legacy counterpart (legacy never had these items, so they are no ECON units).
@@ -248,9 +323,11 @@ def owns(own, tag):
     return tag in own or ("*" in own and tag != "weight")
 
 
-def ability_nodes(folder, name):
+def ability_nodes(folder, name, area=None):
     out = set()
     for f in ported(folder, "ability", name):
+        if area and not f.startswith(area):
+            continue
         out |= NODES.get(f, set())
     return out
 
@@ -279,10 +356,11 @@ def tag_changes(folder, name, mtags, ltags, vtags):
     return out
 
 
-def merge_nodes(folder, name, mn, ln, body, nodes_fn, norm):
+def merge_nodes(folder, name, mn, ln, body, nodes_fn, norm, area=None):
     """`body` (an ability body) with ITEM's ported node changes; mn, ln: 1.32's and legacy's nodes
-    (as `gen_arm_items.nodes`); `nodes_fn` parses a body, `norm` normalises a node's text."""
-    own = ability_nodes(folder, name)
+    (as `gen_arm_items.nodes`); `nodes_fn` parses a body, `norm` normalises a node's text; `area`: only the
+    features of these prefixes (None: every area's)."""
+    own = ability_nodes(folder, name, area)
     if not own:
         return body, []
     vn = nodes_fn(body)
@@ -409,9 +487,9 @@ def merge_blocks(folder, name, mentry, lentry, entry, area=None):
     return entry, changes
 
 
-def apply_item(folder, name, mentry, lentry, entry, area=("CRAFT-", "ECON-")):
-    """`entry` (an item's entry as a generator writes it) with every ported ITEM, CRAFT and ECON field of
-    the item (by default CRAFT's and ECON's: the item tools apply ITEM's themselves; None: every area's):
+def apply_item(folder, name, mentry, lentry, entry, area=("CRAFT-", "ECON-", "WGT-")):
+    """`entry` (an item's entry as a generator writes it) with every ported ITEM, CRAFT, ECON and WGT field of
+    the item (by default CRAFT's, ECON's and WGT's: the item tools apply ITEM's themselves; None: every area's):
     tags, opening-tag attributes and child blocks; [changes]. Idempotent."""
     vtags = split_tags(entry)
     mt, lt = split_tags(mentry), split_tags(lentry)

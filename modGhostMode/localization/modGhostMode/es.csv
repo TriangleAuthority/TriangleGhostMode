@@ -554,3 +554,15 @@
 2110992300|        |option_gm_use_xml_exp_toggle|Experiencia arreglada para misiones y combate
 2110992270|        |option_gm_quest_exp_slider|Modificador de experiencia por misiones
 2110992271|        |option_gm_monster_exp_slider|Modificador de experiencia por combate
+; OPT slice O0: WGT's three options (OPT-04 boat sinking and its threshold, OPT-05 item weight reduction), legacy's
+2110992180|        |option_gm_sink_boat_toggle|Hundir embarcación si hay sobrecarga
+2110992181|        |option_gm_sink_boat_slider|Umbral de sobrecarga para hundir embarcación (%)
+2110992183|        |option_gm_encumbrance_slider|Reducir sobrecarga de objetos (%)
+; OPT slice O1: the Vitality regen options (OPT-03), legacy's
+2110992393|        |option_gm_cbtvreg|Regeneración de vitalidad en combate (adicional)
+2110992394|        |option_gm_ocbtvreg|Regeneración de vitalidad fuera del combate (adicional)
+; OPT slice O2: the gameplay and QoL presets (OPT-07), legacy's
+2110992447|        |preset_Mods_ghost_mode_gm_qol_options|Preajustes de QoL
+2110992450|        |preset_Mods_ghost_mode_gm_gameplay_options|Preajustes de Jugabilidad
+2110992459|        |preset_value_gm_old_ver|Vanilla(casi)
+2110992179|        |gm_geralt_too_heavy|Estás sobrecargado

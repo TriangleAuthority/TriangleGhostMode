@@ -8,7 +8,7 @@ Start here when picking up work on the Ghost Mode 5.0 port.
 | [game-5.0-changes.md](game-5.0-changes.md) | Observed differences between the legacy game (1.32) and 5.0: install layout, bundle format, encodings, file structure, gameplay systems |
 | [5.x-file-status.md](5.x-file-status.md) | Generated per-file status of every Ghost Mode file against 5.x (regenerate with `python tools/port_status.py`) |
 | [development.md](development.md) | How to write, build and test the port: port forms (script annotations, XML `on_conflict` overrides, DLC mounters, whole-file overrides), conventions, `tools/build_mod.py` with its compile check, testing in game |
-| [game-automation.md](game-automation.md) | Automated game runs with `tools/game.py` (launch, load a save, run exec functions, quit in about 30 s, no key presses): the test-only `modAutomation`, rw3d_cli, startup screens, and what failed along the way |
+| [game-automation.md](game-automation.md) | Automated game runs with `tools/game.py` (launch, load a save, run exec functions, quit in about 30 s, no key presses): the game slot shared by parallel agents (`tools/game_lock.py`), the test-only `modAutomation`, rw3d_cli, startup screens, and what failed along the way |
 | [console-commands.md](console-commands.md) | Generated catalog of the game's 874 console commands (vanilla exec functions) by topic: signature, what each calls, source line; tested ones marked (regenerate with `python tools/exec_catalog.py`) |
 | [open-questions.md](open-questions.md) | Unanswered questions about modding 5.x (e.g. how several mods' script blobs merge), why they matter and how to test them |
 | [feature-mapping.md](feature-mapping.md) | How we map Ghost Mode's changes to features and classify each against 5.x (change units, pillars, classification, the `docs/features/` layout, phases), and how to port in small steps checked in game, starting with a pilot |
@@ -20,5 +20,6 @@ Start here when picking up work on the Ghost Mode 5.0 port.
 | [legacy-FullChangelist.txt](legacy-FullChangelist.txt) | Ghost Mode 4.1's full changelist from the Nexus release: every change the mod makes, feature by feature. The best starting point for deciding what to port |
 | [legacy-ModDescription.txt](legacy-ModDescription.txt) | Ghost Mode 4.1's mod description from the Nexus release: its goals and main features |
 | [legacy-readme.md](legacy-readme.md) | The original Ghost Mode README, verbatim (legacy build and install instructions) |
+| [proposals/parallel-ports.md](proposals/parallel-ports.md) | Plan (approved by the owner 2026-11-02; its prerequisites built the same day): porting areas in parallel, one agent per area, sharing the game through a lock tool and queue. An area agent's procedure: [development.md](development.md#working-in-parallel) |
 
 `design-docs/` (on the Ghost Mode branches) holds Ghost Mode's original design notes (part English, part Russian, not fully accurate).

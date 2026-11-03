@@ -51,7 +51,7 @@ function GMTest_swd()
 }
 
 // SWD-01, SWD-02, SWD-08, SWD-09 (slice 1): damage by item level, crafted and generic swords' fixed
-// bonuses, the XP bonuses removed, display fixes, the tooltip rows; weights stay 5.x's (WGT).
+// bonuses, the XP bonuses removed, display fixes, the tooltip rows; legacy's weights (WGT-03 since WGT's slice W2).
 function GMTest_swd01()
 {
 	var dm : CDefinitionsManagerAccessor;
@@ -59,8 +59,8 @@ function GMTest_swd01()
 	var found : bool;
 
 	dm = theGame.GetDefinitionsManager();
-	GMTestReport(GMTestSwdNear(GMTestSwdAbl('Short sword 1_crafted _Stats', 'SlashingDamage'), 33) && GMTestSwdNear(GMTestSwdAbl('Short sword 1_crafted _Stats', 'armor_reduction'), 20) && GMTestSwdNear(GMTestSwdAbl('Short sword 1_crafted _Stats', 'quality'), 1) && GMTestSwdNear(GMTestSwdAbl('Short sword 1_crafted _Stats', 'weight'), 3.2),
-		"SWD-01/02 crafted Short sword: damage " + GMTestSwdAbl('Short sword 1_crafted _Stats', 'SlashingDamage') + " (expected 33 = 25 + 8 x level 1; 5.x 30), armor penetration " + GMTestSwdAbl('Short sword 1_crafted _Stats', 'armor_reduction') + " (20), quality " + GMTestSwdAbl('Short sword 1_crafted _Stats', 'quality') + " (1), weight " + GMTestSwdAbl('Short sword 1_crafted _Stats', 'weight') + " (5.x's 3.2)");
+	GMTestReport(GMTestSwdNear(GMTestSwdAbl('Short sword 1_crafted _Stats', 'SlashingDamage'), 33) && GMTestSwdNear(GMTestSwdAbl('Short sword 1_crafted _Stats', 'armor_reduction'), 20) && GMTestSwdNear(GMTestSwdAbl('Short sword 1_crafted _Stats', 'quality'), 1) && GMTestSwdNear(GMTestSwdAbl('Short sword 1_crafted _Stats', 'weight'), 8),
+		"SWD-01/02 crafted Short sword: damage " + GMTestSwdAbl('Short sword 1_crafted _Stats', 'SlashingDamage') + " (expected 33 = 25 + 8 x level 1; 5.x 30), armor penetration " + GMTestSwdAbl('Short sword 1_crafted _Stats', 'armor_reduction') + " (20), quality " + GMTestSwdAbl('Short sword 1_crafted _Stats', 'quality') + " (1), weight " + GMTestSwdAbl('Short sword 1_crafted _Stats', 'weight') + " (legacy's 8, WGT-03; 5.x 3.2)");
 	GMTestReport(GMTestSwdNear(GMTestSwdAbl('Silver sword 1_crafted _Stats', 'SilverDamage'), 100) && GMTestSwdNear(GMTestSwdAbl('Short sword 2_crafted _Stats', 'armor_reduction_perc'), 0.05),
 		"SWD-01/02 crafted silver sword 1: silver damage " + GMTestSwdAbl('Silver sword 1_crafted _Stats', 'SilverDamage') + " (expected 100 = 90 + 10 x 1); crafted Short sword 2 resistance reduction " + GMTestSwdAbl('Short sword 2_crafted _Stats', 'armor_reduction_perc') + " (0.05)");
 	GMTestReport(GMTestSwdNear(GMTestSwdAbl('Nilfgaardian sword 4_crafted _Stats', 'buff_apply_chance'), 0.05) && GMTestSwdNear(GMTestSwdAbl('Nilfgaardian sword 4_crafted _Stats', 'attack_power'), 0.05),

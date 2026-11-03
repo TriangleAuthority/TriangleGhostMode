@@ -10,10 +10,10 @@ stamina nodes are taken; the abilities' other Ghost Mode changes belong to other
 Checks against vanilla-5.x and reports abilities 5.x no longer has, and conflicts: tags both
 5.x and legacy changed from 1.32 (legacy's value is written; review them).
 
-    python tools/gen_npc_stamina.py [--ref 5.x-GM-worktree-path] [--check]
+    python tools/gen_npc_stamina.py --worktree DIR [--check]
 
 Writes modGhostMode/files/dlc/dlcghostmode/data/gameplay/abilities/gm_npc_stamina.xml in the
-5.x-GM worktree (default ../TGM-5x-GM); --check only prints the report. Then run
+5.x-GM worktree (--worktree, required); --check prints the report and fails if the file is out of date. Then run
 tools/gen_ngplus.py for the New Game+ copy.
 """
 import argparse, os, re, subprocess, sys
@@ -40,6 +40,7 @@ OWNED.update({n: "AI, " + f for n, f in _ai_owned().items()})
 # DIFF's abilities given whole by gen_diff.py (diff.md's PD2): difficulty_CommonHardcore, legacy's entry,
 # has no stamina regen node (STAM-08's "Stamina regen for AI no longer boosted for DM").
 from gen_diff import owned as _diff_owned  # noqa: E402
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 OWNED.update({n: "DIFF, " + f for n, f in _diff_owned().items()})
 NODE = re.compile(r'<([A-Za-z_][\w]*)\b([^>]*?)/>')
 
@@ -93,7 +94,7 @@ def changes(old, new, v5):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
@@ -130,6 +131,10 @@ def main():
             total += 1
     lines += ["    </abilities>", "  </definitions>", "</redxml>", ""]
     print(f"{total} abilities, {removed} removed nodes neutralised")
+    if args.check:  # out of date: fail (gen_all.py --check relies on it)
+        dst = os.path.join(args.worktree, OUT)
+        if not os.path.exists(dst) or open(dst, encoding="utf-8-sig").read() != "\n".join(lines):
+            sys.exit(f"out of date: {OUT}: run python tools/gen_npc_stamina.py")
     if not args.check:
         dst = os.path.join(args.worktree, OUT)
         with open(dst, "w", encoding="utf-8-sig", newline="\r\n") as f:

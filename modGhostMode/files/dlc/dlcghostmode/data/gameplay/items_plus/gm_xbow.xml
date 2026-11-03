@@ -178,7 +178,6 @@
 				<attack_power					type="mult"	min="2.1"	max="2.1"	/>
 				<ammo							type="add"	min="3"					/>
 				<armor_reduction				type="base"	min="170"	max="190"	/>
-				<weight 						type="base" min="2.39"				/>
 			</ability>
 			<ability name="Toussaint Crossbow 2 _Stats" on_conflict="replace">
 				<quality						type="add"	min="3"		max="3"		/>
@@ -186,7 +185,6 @@
 				<ammo							type="add"	min="3"					/>
 				<focus_gain						type="add"	min="0.02"	max="0.02"	/>
 				<armor_reduction				type="base"	min="200"	max="250"	/>
-				<weight 						type="base" min="2.74"				/>
 			</ability>
 			<!-- XBOW-02: the free DLC's crossbows (armor piercing) -->
 			<ability name="DLC13 Nilfgaardian Crossbow _Stats" on_conflict="replace">
@@ -194,21 +192,21 @@
 				<quality type="add" min="2" max="2"/>
 				<ammo type="add" min="3" />
 				<armor_reduction type="base" min="60" max="60" />
-				<weight type="base" min="8" max="8"/>
+				<weight type="base" min="2" max="2"/>
 			</ability>
 			<ability name="DLC13 Skellige Crossbow _Stats" on_conflict="replace">
 				<attack_power type="mult" always_random="false" min="1.45" max="1.45"/>
 				<quality type="add" min="2" max="2"/>
 				<ammo type="add" min="3" />
 				<armor_reduction type="base" min="80" max="80" />
-				<weight type="base" min="8" max="8"/>
+				<weight type="base" min="2" max="2"/>
 			</ability>
 			<ability name="DLC13 Elven Crossbow _Stats" on_conflict="replace">
 				<attack_power type="mult" always_random="false" min="1.65" max="1.65"/>
 				<quality type="add" min="2" max="2"/>
 				<ammo type="add" min="3" />
 				<armor_reduction type="base" min="110" max="110" />
-				<weight type="base" min="8" max="8"/>
+				<weight type="base" min="2" max="2"/>
 			</ability>
 			<!-- XBOW-02: the Ofir crossbows -->
 			<ability name="Ofir Crossbow _Stats" on_conflict="replace">
@@ -216,7 +214,7 @@
 				<attack_power 					type="mult" min="2.0" 	max="2.0"	/>
 				<ammo 							type="add" 	min="3" 				/>
 				<armor_reduction				type="base"	min="130"	max="155"	/>
-				<weight 						type="base" min="2.64" 				/>
+				<weight 						type="base" min="2"					/>
 			</ability>
 			<ability name="Ofir Crossbow R _Stats" on_conflict="replace">
 				<quality 						type="add" 	min="4" 	max="4"		/>
@@ -224,7 +222,7 @@
 				<ammo 							type="add" 	min="3" 				/>
 				<critical_hit_damage_bonus		type="add"	min="0.75"	max="0.75"	/>
 				<armor_reduction				type="base"	min="170"	max="170"	/>
-				<weight 						type="base" min="2.64"				/>
+				<weight 						type="base" min="2"					/>
 			</ability>
 			<!-- XBOW-08: NPC bows and crossbows (an NPC's arrow deals its held bow's damage, npcBows.ws) -->
 			<ability name="Bow 1 _Stats" on_conflict="replace">

@@ -6,7 +6,7 @@
 
 <!-- dlc/bob/data/gameplay/items_plus/def_item_crafting_weapons.xml -->
 	<ability name="Bear School silver sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="790"				/>
@@ -15,7 +15,7 @@
 		<sword_dmg_bonus				type="add"	min="0.30" 				/>
 	</ability>
 	<ability name="Bear School steel sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.85"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="585"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -24,7 +24,7 @@
 		<sword_dmg_bonus				type="add"	min="0.30" 				/>
 	</ability>
 	<ability name="Gryphon School silver sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="790"				/>
@@ -33,7 +33,7 @@
 		<spell_dmg_bonus				type="add"	min="0.30"				/>
 	</ability>
 	<ability name="Gryphon School steel sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="585"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -42,7 +42,7 @@
 		<spell_dmg_bonus				type="add"	min="0.30"				/>
 	</ability>
 	<ability name="Guard lvl1 steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.75"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="605"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -56,7 +56,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Guard lvl2 steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.95"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="613"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -70,7 +70,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Hanza steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.8"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="637"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -83,7 +83,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Knights steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.9"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="629"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -96,7 +96,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Lynx School silver sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="790"				/>
@@ -107,7 +107,7 @@
 		<sword_dmg_bonus				type="add"	min="0.30" 				/>
 	</ability>
 	<ability name="Lynx School steel sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="585"				/>
 				<SilverDamage 					type="base"	min="1"					/>	
@@ -118,7 +118,7 @@
 		<sword_dmg_bonus				type="add"	min="0.30" 				/>
 	</ability>
 	<ability name="NGP Bear School silver sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="490"				/>
@@ -126,7 +126,7 @@
 		<attack_power					type="mult"	min="0.40"				/>
 	</ability>
 	<ability name="NGP Bear School steel sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.85"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="345"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -134,7 +134,7 @@
 		<attack_power					type="mult"	min="0.40"				/>
 	</ability>
 	<ability name="NGP Gryphon School silver sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="490"				/>
@@ -142,7 +142,7 @@
 		<FireDamage 					type="add"  min="60" 				/>
 	</ability>
 	<ability name="NGP Gryphon School steel sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="345"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -150,7 +150,7 @@
 		<FireDamage 					type="add"  min="50" 				/>
 	</ability>
 	<ability name="NGP Guard lvl1 steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.75"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="365"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -164,7 +164,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="NGP Guard lvl2 steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.95"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="373"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -178,7 +178,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="NGP Hanza steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.8"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="397"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -191,7 +191,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="NGP Knights steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.9"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="389"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -204,7 +204,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="NGP Lynx School silver sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="490"				/>
@@ -214,7 +214,7 @@
 				<BleedingEffect					is_ability="true"					/>
 			</ability>
 	<ability name="NGP Lynx School steel sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.7"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="345"				/>
 				<SilverDamage 					type="base"	min="1"					/>	
@@ -224,7 +224,7 @@
 				<BleedingEffect					is_ability="true"					/>
 			</ability>
 	<ability name="NGP Red Wolf School silver sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.1"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="490"				/>
@@ -233,7 +233,7 @@
 		<focus_gain 					type="add"	min="0.25" 				/>
 	</ability>
 	<ability name="NGP Red Wolf School steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.0"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="345"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -242,7 +242,7 @@
 		<focus_gain 					type="add"	min="0.25" 				/>
 	</ability>
 	<ability name="NGP Serpent Silver Sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="504"				/>
@@ -256,7 +256,7 @@
 		<spell_power_yrden				type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="NGP Serpent Silver Sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="534"				/>
@@ -270,7 +270,7 @@
 		<spell_power_quen				type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="NGP Serpent Silver Sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.8"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="564"				/>
@@ -283,7 +283,7 @@
 		<spell_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="NGP Serpent Steel Sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="357"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -297,7 +297,7 @@
 		<spell_power_yrden				type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="NGP Serpent Steel Sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="381"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -311,7 +311,7 @@
 		<spell_power_quen				type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="NGP Serpent Steel Sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.8"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="405"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -324,7 +324,7 @@
 		<spell_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="NGP Toussaint steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.05"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="413"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -337,7 +337,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="NGP Wolf School silver sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.45"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="490"				/>
@@ -345,7 +345,7 @@
 		<attack_power					type="mult"	min="0.30"				/>
 	</ability>
 	<ability name="NGP Wolf School steel sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.75"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="345"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -353,7 +353,7 @@
 		<attack_power					type="mult"	min="0.30"				/>
 	</ability>
 	<ability name="Red Wolf School silver sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.1"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="790"				/>
@@ -363,7 +363,7 @@
 		<sword_dmg_bonus				type="add"	min="0.30" 				/>
 	</ability>
 	<ability name="Red Wolf School steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.0"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="585"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -373,7 +373,7 @@
 		<sword_dmg_bonus				type="add"	min="0.30" 				/>
 	</ability>
 	<ability name="Serpent Silver Sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="804"				/>
@@ -387,7 +387,7 @@
 		<spell_power_yrden				type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Serpent Silver Sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="834"				/>
@@ -401,7 +401,7 @@
 		<spell_power_quen				type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Serpent Silver Sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.8"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="864"				/>
@@ -414,7 +414,7 @@
 		<spell_power					type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Serpent Steel Sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="597"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -428,7 +428,7 @@
 		<spell_power_yrden				type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Serpent Steel Sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="621"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -442,7 +442,7 @@
 		<spell_power_quen				type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Serpent Steel Sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.8"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="645"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -455,7 +455,7 @@
 		<spell_power					type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Toussaint steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.05"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="653"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -468,7 +468,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Wolf School silver sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.45"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="790"				/>
@@ -478,7 +478,7 @@
 		<sword_dmg_bonus				type="add"	min="0.20"				/>
 	</ability>
 	<ability name="Wolf School steel sword 4 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.75"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="585"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -490,19 +490,19 @@
 
 <!-- dlc/bob/data/gameplay/items_plus/def_item_weapons.xml -->
 	<ability name="Damien sword_Stats" on_conflict="replace">
-				<weight							type="base"	min="3.05"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="EP2 Silver sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.0"				/>
+				<weight							type="base"	min="6"					/>
 				<quality						type="add"	min="3"					/>
 				<SlashingDamage					type="base"	min="1"					/>
 				<armor_reduction				type="base"	min="40"	max="60"	/>
 			</ability>
 	<ability name="EP2 Silver sword 1R _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.2"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage					type="base"	min="1"					/>
 				<item_level_min					type="add"	min="36"				/>
@@ -516,19 +516,19 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="EP2 Silver sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.2"				/>
+				<weight							type="base"	min="6"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<armor_reduction				type="base"	min="40"	max="60"	/>
 			</ability>
 	<ability name="EP2 Silver sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.32"				/>
+				<weight							type="base"	min="6"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<armor_reduction				type="base"	min="40"	max="60"	/>
 			</ability>
 	<ability name="EP2 Silver sword 3R _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.62"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<item_level_min					type="add"	min="46"				/>
@@ -542,31 +542,31 @@
 		<spell_power_yrden 				type="mult" min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Guard Lvl1 steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.3"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="Guard Lvl1 steel sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.3"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Guard Lvl2 steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.9"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="Guard Lvl2 steel sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.05"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Guard lvl1 steel sword 3 Autogen _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.9"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<item_level_min					type="add"	min="41"				/>
@@ -580,7 +580,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Gwent steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.35"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<item_level_min					type="add"	min="36"				/>
 				<item_level_max					type="add"	min="100"				/>
@@ -594,37 +594,37 @@
 		<spell_power_yrden				type="mult" min="0.2" 	max="0.25"	/>
 	</ability>
 	<ability name="Hanza steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.75"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.1"	max="0.3"	/>
 	</ability>
 	<ability name="Hanza steel sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.8"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.1"	max="0.3"	/>
 	</ability>
 	<ability name="Knights steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.25"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="Knights steel sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.4"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Laundry stick _Stats" on_conflict="replace">
-				<weight							type="base"	min="0.7"				/>
+				<weight							type="base"	min="1.0"				/>
 				<quality						type="add"	min="1"					/>
 				<SilverDamage					type="base"	min="1"					/>
 		<BludgeoningDamage				type="add"	min="10"	max="30"	/>
 	</ability>
 	<ability name="NGP q702 vampire steel sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.5"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<desc_bleedingchance_mult		type="add"	min="0.15"				/>
@@ -638,7 +638,7 @@
 		<item_level_min					type="add"	min="37"				/>
 	</ability>
 	<ability name="Serpent Silver Sword 1 Autogen _Stats" on_conflict="replace">
-				<weight							type="base"	min="7.7"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage					type="base"	min="1"					/>
 				<item_level_min					type="add"	min="43"				/>
@@ -652,19 +652,19 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Squire steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.9"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="20"	max="40"	/>
 	</ability>
 	<ability name="Squire steel sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.05"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Squire steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.4"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<item_level_min					type="add"	min="44"				/>
@@ -678,13 +678,13 @@
 		<spell_power_igni 				type="mult" min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Toussaint steel sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.92"				/>
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="base"	min="40"	max="60"	/>
 	</ability>
 	<ability name="Unique silver sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.02"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="1" 				/>
 				<item_level_min					type="add"	min="45"				/>
@@ -697,7 +697,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Unique steel sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="6.4"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<item_level_min					type="add"	min="45"				/>
@@ -710,7 +710,7 @@
 		<dismember_chance				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="mq7001 Toussaint steel sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.1"				/>
+				<weight							type="base"	min="6"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<item_level_max					type="add"	min="100"				/>
@@ -724,14 +724,14 @@
 		<item_level_min					type="add"	min="34"				/>
 	</ability>
 	<ability name="mq7007 Elven Sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.82"				/>
+				<weight							type="base"	min="6"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage					type="base"	min="1"					/>
 				<critical_hit_chance			type="add"	min="0.15"	max="0.20"	/>
 				<critical_hit_damage_bonus		type="add"	min="0.30"	max="0.40"	/>
 			</ability>
 	<ability name="mq7011 Cianfanelli steel sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.15"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<item_level_max					type="add"	min="100"				/>
@@ -745,7 +745,7 @@
 		<item_level_min					type="add"	min="34"				/>
 	</ability>
 	<ability name="q702 vampire steel sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.5"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<desc_bleedingchance_mult		type="add"	min="0.25"				/>
@@ -759,7 +759,7 @@
 		<item_level_min					type="add"	min="37"				/>
 	</ability>
 	<ability name="q704 vampire silver sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.3"				/>
+				<weight							type="base"	min="3"					/>
 				<quality						type="add"	min="4"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<item_level_min					type="add"	min="45"				/>
@@ -773,7 +773,7 @@
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="q704 vampire steel sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.77"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<item_level_min					type="add"	min="45"				/>
 				<item_level_max					type="add"	min="100"				/>
@@ -787,7 +787,7 @@
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="sq701 Geralt of Rivia Sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.42"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<item_level_max					type="add"	min="100"				/>
 				<SilverDamage					type="base"	min="1"					/>
@@ -801,7 +801,7 @@
 		<item_level_min					type="add"	min="33"				/>
 	</ability>
 	<ability name="sq701 Ravix of Fourhorn Sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.57"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="4"					/>
 				<item_level_max					type="add"	min="100"				/>
 				<SilverDamage					type="base"	min="1"					/>
@@ -817,7 +817,7 @@
 
 <!-- dlc/dlc10/data/gameplay/items_plus/dlc10_wolf_swords.xml -->
 	<ability name="NGP Wolf School silver sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.2"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="631"				/>
@@ -827,7 +827,7 @@
 		<sword_dmg_bonus				type="add"	min="0.10" 				/>
 	</ability>
 	<ability name="NGP Wolf School silver sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="671"				/>
@@ -837,7 +837,7 @@
 		<sword_dmg_bonus				type="add"	min="0.15" 				/>
 	</ability>
 	<ability name="NGP Wolf School silver sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="731"				/>
@@ -847,7 +847,7 @@
 		<sword_dmg_bonus				type="add"	min="0.20" 				/>
 	</ability>
 	<ability name="NGP Wolf School silver sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.4"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="601"				/>
@@ -857,7 +857,7 @@
 		<sword_dmg_bonus				type="add"	min="0.05" 				/>
 	</ability>
 	<ability name="NGP Wolf School steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.5"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="458"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -867,7 +867,7 @@
 		<sword_dmg_bonus				type="add"	min="0.10" 				/>
 	</ability>
 	<ability name="NGP Wolf School steel sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.4"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="490"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -877,7 +877,7 @@
 		<sword_dmg_bonus				type="add"	min="0.15" 				/>
 	</ability>
 	<ability name="NGP Wolf School steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="538"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -887,7 +887,7 @@
 		<sword_dmg_bonus				type="add"	min="0.20" 				/>
 	</ability>
 	<ability name="NGP Wolf School steel sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.4"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="434"				/>
 				<SilverDamage 					type="base"	min="1"					/>	
@@ -899,7 +899,7 @@
 	<ability name="NGP Wolf Silver Sword Mod" on_conflict="replace"></ability>
 	<ability name="NGP Wolf Steel Sword Mod" on_conflict="replace"></ability>
 	<ability name="Wolf School silver sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.2"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="331"				/>
@@ -907,7 +907,7 @@
 		<attack_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="Wolf School silver sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="371"				/>
@@ -915,7 +915,7 @@
 		<attack_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="Wolf School silver sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="431"				/>
@@ -923,7 +923,7 @@
 		<attack_power					type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Wolf School silver sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.4"				/>
+				<weight							type="base"	min="2"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="301"				/>
@@ -931,7 +931,7 @@
 		<attack_power					type="mult"	min="0.15"				/>
 	</ability>
 	<ability name="Wolf School steel sword 1 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.5"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="218"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -939,7 +939,7 @@
 		<attack_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="Wolf School steel sword 2 _Stats" on_conflict="replace">
-				<weight							type="base"	min="4.4"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="250"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -947,7 +947,7 @@
 		<attack_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="Wolf School steel sword 3 _Stats" on_conflict="replace">
-				<weight							type="base"	min="5.6"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="298"				/>
 				<SilverDamage 					type="base"	min="1"					/>
@@ -955,7 +955,7 @@
 		<attack_power					type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Wolf School steel sword _Stats" on_conflict="replace">
-				<weight							type="base"	min="3.4"				/>
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="194"				/>
 				<SilverDamage 					type="base"	min="1"					/>	
@@ -965,7 +965,7 @@
 
 <!-- dlc/dlc15/data/gameplay/items_plus/def_item_dlc15_weapons.xml -->
 	<ability name="mq1058_cat_school_sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.2"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.35"				/>
@@ -977,7 +977,7 @@
 
 <!-- dlc/ep1/data/gameplay/items_plus/def_item_crafting_weapons.xml -->
 	<ability name="Crafted Burning Rose Sword _Stats" on_conflict="replace"> 
-		<weight 						type="base"	min="4.35"				/>
+		<weight 						type="base"	min="4"					/>
 		<quality 						type="add" 	min="4" 				/>
 		<SlashingDamage 				type="base"	min="530"				/>
 		<StaggerEffect 					is_ability="true" 					/>
@@ -991,7 +991,7 @@
 		<dismember_chance 			type="add"	min="0.5" 				/>
 	</ability>
 	<ability name="Crafted Ofir Steel Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.75"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage 				type="base"	min="522"				/>
 		<SilverDamage 					type="base"	min="1"					/>	
@@ -1002,7 +1002,7 @@
 		<spell_power_igni 				type="mult" min="0.25" 				/>
 	</ability>
 	<ability name="EP1 Crafted Witcher Silver Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="7.9"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="721" 				/>
@@ -1013,7 +1013,7 @@
 		<spell_power_yrden 				type="mult" min="0.25" 				/>
 	</ability>
 	<ability name="EP1 Viper School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="8.6"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="731"				/>
@@ -1024,7 +1024,7 @@
 		<armor_reduction 				type="base"	min="70"				/>
 	</ability>
 	<ability name="EP1 Viper School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="8.6"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage					type="base"	min="538"				/>
 		<SilverDamage					type="base"	min="1"					/>
@@ -1035,7 +1035,7 @@
 		<armor_reduction 				type="base"	min="70"				/>
 	</ability>
 	<ability name="NGP Crafted Burning Rose Sword _Stats" on_conflict="replace"> 
-		<weight 						type="base"	min="4.35"				/>
+		<weight 						type="base"	min="4"					/>
 		<quality 						type="add" 	min="4" 				/>
 		<SlashingDamage 				type="base"	min="290"				/>
 		<SilverDamage 					min="1" 	max="1"					/>						
@@ -1049,7 +1049,7 @@
 		<dismember_chance 			type="add"	min="0.5" 				/>
 	</ability>
 	<ability name="NGP Crafted Ofir Steel Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.75"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage 				type="base"	min="282"				/>
 		<SilverDamage 					type="base"	min="1"					/>	
@@ -1060,7 +1060,7 @@
 		<spell_power_igni 				type="mult" min="0.15" 				/>
 	</ability>
 	<ability name="NGP EP1 Crafted Witcher Silver Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.7"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="421" 				/>
@@ -1070,7 +1070,7 @@
 		<spell_power_yrden 				type="mult" min="0.15" 				/>
 	</ability>
 	<ability name="NGP EP1 Viper School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.95"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="431"				/>
@@ -1081,7 +1081,7 @@
 		<armor_reduction 				type="base"	min="60"				/>
 	</ability>
 	<ability name="NGP EP1 Viper School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.1"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage					type="base"	min="298"				/>
 		<SilverDamage					type="base"	min="1"					/>
@@ -1096,7 +1096,7 @@
 	<ability name="Burning Rose Sword B _Stats" on_conflict="replace"> 
 		<SilverDamage 					min="1" 	max="1"					/>						
 		<quality 						type="add" 	min="3" 	max="3"		/>
-		<weight 						type="base"	min="4.05"				/>
+		<weight 						type="base"	min="8"					/>
 		<dismember_chance 			type="add"	min="0.5" 				/>
 	</ability>
 	<ability name="Burning Rose Sword _Stats" on_conflict="replace"> 
@@ -1105,14 +1105,14 @@
 		<buff_apply_chance 				type="add" 	min="0.25" 				/>
 		<desc_burningchance_mult 		type="add" 	min="0.25" 				/>
 		<quality 						type="add" 	min="4" 	max="4"		/>
-		<weight 						type="base"	min="4.05"				/>
+		<weight 						type="base"	min="4"					/>
 		<dismember_chance 			type="add"	min="0.5" 				/>
 	</ability>
 	<ability name="Hakland Sabre _Stats" on_conflict="replace">
 		<SilverDamage 					min="1" 	max="1"					/>						
 		<critical_hit_chance			type="add"	min="0.15"				/>
 		<quality 						type="add" 	min="2" 	max="2"		/>
-		<weight 						type="base"	min="4.05"				/>
+		<weight 						type="base"	min="6"					/>
 	</ability>
 	<ability name="NPC Olgierd Sabre _Stats" on_conflict="replace">
 				<SlashingDamage min="500" max="500"/>
@@ -1123,7 +1123,7 @@
 	<ability name="Ofir Sabre 1 _Stats" on_conflict="replace">
 		<SilverDamage 					min="1" 	max="1"					/>	
 		<quality 						type="add" 	min="4" 	max="4"		/>
-		<weight 						type="base"	min="4.05"				/>
+		<weight 						type="base"	min="4"					/>
 		<critical_hit_chance			type="add"	min="0.35"				/>
 		<desc_burningchance_mult		type="add"	min="0.25"				/>
 		<buff_apply_chance				type="add"	min="0.25"				/>
@@ -1136,7 +1136,7 @@
 		<SilverDamage 					min="1" 	max="1"					/>						
 		<critical_hit_chance			type="add"	min="0.15"				/>
 		<quality 						type="add" 	min="3" 	max="3"		/>
-		<weight 						type="base"	min="4.05"				/>
+		<weight 						type="base"	min="6"					/>
 		<armor_reduction_perc			type="add"	min="0.25"				/>
 	</ability>
 	<ability name="PC Olgierd Sabre _Stats" on_conflict="replace">
@@ -1154,7 +1154,7 @@
 <!-- gameplay/items_plus/def_item_crafting_weapons.xml -->
 	<ability name="Arbitrator_crafted_Stats" on_conflict="replace">
 		<quality						type="add"	min="4"					/>
-		<weight							type="base"	min="3.7"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="345"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
@@ -1166,7 +1166,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Base Bear School silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.0"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="340"				/>
@@ -1174,7 +1174,7 @@
 		<attack_power					type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Base Bear School silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.0"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="390"				/>
@@ -1182,7 +1182,7 @@
 		<attack_power					type="mult"	min="0.30"				/>
 	</ability>
 	<ability name="Base Bear School silver sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.0"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="430"				/>
@@ -1190,7 +1190,7 @@
 		<attack_power					type="mult"	min="0.35"				/>
 	</ability>
 	<ability name="Base Bear School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.55"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="290" 				/>
@@ -1198,7 +1198,7 @@
 		<attack_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="Base Bear School steel sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.8"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="226"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1206,7 +1206,7 @@
 		<attack_power					type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Base Bear School steel sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="266"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1214,7 +1214,7 @@
 		<attack_power					type="mult"	min="0.30"				/>
 	</ability>
 	<ability name="Base Bear School steel sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="298"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1222,7 +1222,7 @@
 		<attack_power					type="mult"	min="0.35"				/>
 	</ability>
 	<ability name="Base Bear School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.6"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="186"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1230,7 +1230,7 @@
 		<attack_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="Base Gryphon School silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.2"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="270"				/>
@@ -1238,7 +1238,7 @@
 		<FireDamage 					type="add"  min="35" 				/>
 	</ability>
 	<ability name="Base Gryphon School silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="350"				/>
@@ -1246,7 +1246,7 @@
 		<FireDamage 					type="add"  min="40" 				/>
 	</ability>
 	<ability name="Base Gryphon School silver sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="430"				/>
@@ -1254,7 +1254,7 @@
 		<FireDamage 					type="add"  min="50" 				/>
 	</ability>
 	<ability name="Base Gryphon School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="200"				/>
@@ -1262,7 +1262,7 @@
 		<FireDamage 					type="add"  min="30" 				/>
 	</ability>
 	<ability name="Base Gryphon School steel sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.5"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="169"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1270,7 +1270,7 @@
 		<FireDamage 					type="add"  min="25" 				/>
 	</ability>
 	<ability name="Base Gryphon School steel sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="233"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1278,7 +1278,7 @@
 		<FireDamage 					type="add"  min="30" 				/>
 	</ability>
 	<ability name="Base Gryphon School steel sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="297"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1286,7 +1286,7 @@
 		<FireDamage 					type="add"  min="40" 				/>
 	</ability>
 	<ability name="Base Gryphon School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="113"				/>
 		<SilverDamage 					type="base"	min="1"					/>	
@@ -1294,7 +1294,7 @@
 		<FireDamage 					type="add"  min="20" 				/>
 	</ability>
 	<ability name="Base Lynx School silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.45"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="320"				/>
@@ -1303,7 +1303,7 @@
 		<BleedingEffect					is_ability="true"					/>
 	</ability>
 	<ability name="Base Lynx School silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.45"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="380"				/>
@@ -1313,7 +1313,7 @@
 		<BleedingEffect					is_ability="true"					/>
 	</ability>
 	<ability name="Base Lynx School silver sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.9"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="430"				/>
@@ -1323,7 +1323,7 @@
 		<BleedingEffect					is_ability="true"					/>
 	</ability>
 	<ability name="Base Lynx School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.35"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="260"				/>
@@ -1332,7 +1332,7 @@
 		<BleedingEffect					is_ability="true"					/>
 	</ability>
 	<ability name="Base Lynx School steel sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.35"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="209"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1342,7 +1342,7 @@
 		<critical_hit_chance			type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Base Lynx School steel sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.5"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="257"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1352,7 +1352,7 @@
 		<BleedingEffect					is_ability="true"					/>
 	</ability>
 	<ability name="Base Lynx School steel sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="297"				/>
 		<SilverDamage 					type="base"	min="1"					/>	
@@ -1362,7 +1362,7 @@
 		<BleedingEffect					is_ability="true"					/>
 	</ability>
 	<ability name="Base Lynx School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="161"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1372,7 +1372,7 @@
 		<critical_hit_chance			type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Base Viper School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.4"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="120"				/>
@@ -1382,7 +1382,7 @@
 		<PoisonDamage 					type="add"  min="20" 				/>
 	</ability>
 	<ability name="Base Viper School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage					type="base"	min="49"				/>
 		<SilverDamage					type="base"	min="1"					/>
@@ -1393,7 +1393,7 @@
 	</ability>
 	<ability name="Beannshie_crafted_Stats" on_conflict="replace">
 		<quality						type="add"	min="4"					/>
-		<weight							type="base"	min="7.25"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="377"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"				/>
@@ -1404,7 +1404,7 @@
 		<desc_freezingchance_mult 		type="add" 	min="0.25"				/>
 	</ability>
 	<ability name="Bear School silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.0"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="640"				/>
@@ -1413,7 +1413,7 @@
 		<sword_dmg_bonus				type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Bear School silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.0"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="690"				/>
@@ -1422,7 +1422,7 @@
 		<sword_dmg_bonus				type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Bear School silver sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.0"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="730"				/>
@@ -1431,7 +1431,7 @@
 		<sword_dmg_bonus				type="add"	min="0.25"				/>
 	</ability>
 	<ability name="Bear School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.55"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="590" 				/>
@@ -1440,7 +1440,7 @@
 		<sword_dmg_bonus				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Bear School steel sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.8"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="466"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1449,7 +1449,7 @@
 		<sword_dmg_bonus				type="add"	min="0.15" 				/>
 	</ability>
 	<ability name="Bear School steel sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="506"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1458,7 +1458,7 @@
 		<sword_dmg_bonus				type="add"	min="0.2" 				/>
 	</ability>
 	<ability name="Bear School steel sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="538"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1467,7 +1467,7 @@
 		<sword_dmg_bonus				type="add"	min="0.25" 				/>
 	</ability>
 	<ability name="Bear School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.6"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="426"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1477,7 +1477,7 @@
 	</ability>
 	<ability name="Blackunicorn_crafted_Stats" on_conflict="replace">
 		<quality						type="add"	min="4"					/>
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="449"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_aard				type="mult"	min="0.2"				/>
@@ -1488,7 +1488,7 @@
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
 	</ability>
 	<ability name="Dwarven silver sword 1_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.1"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="2"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="460"				/>
@@ -1498,7 +1498,7 @@
 		<desc_confusionchance_mult		type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Dwarven silver sword 2_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.1"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="3"					/>
 		<SlashingDamage					type="base"	min="1" 				/>
 		<SilverDamage					type="base"	min="520"				/>
@@ -1510,14 +1510,14 @@
 	</ability>
 	<ability name="Dwarven sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="5.1"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="297"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.20"				/>
 	</ability>
 	<ability name="Dwarven sword 2_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="3"					/>
-		<weight							type="base"	min="6.1" 				/>
+		<weight							type="base"	min="6" 				/>
 		<SlashingDamage					type="base"	min="329"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<SlowdownFrostEffect			is_ability="true"					/>
@@ -1527,7 +1527,7 @@
 		<spell_power_yrden				type="mult"	min="0.2"				/>
 	</ability>
 	<ability name="Elven silver sword 1_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.5"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="2"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="440"				/>
@@ -1537,7 +1537,7 @@
 		<desc_bleedingchance_mult		type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Elven silver sword 2_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.5"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="3"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="500"				/>
@@ -1548,7 +1548,7 @@
 		<spell_power_aard				type="mult"	min="0.2"				/>
 	</ability>
 	<ability name="Gnomish silver sword 1_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.3"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="2"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="480"				/>
@@ -1558,7 +1558,7 @@
 		<desc_freezingchance_mult		type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Gnomish silver sword 2_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.25"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="3"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="540"				/>
@@ -1570,7 +1570,7 @@
 	</ability>
 	<ability name="Gnomish sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="6.0"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="337"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<BleedingEffect					is_ability="true"					/>
@@ -1580,7 +1580,7 @@
 	</ability>
 	<ability name="Gnomish sword 2_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="3"					/>
-		<weight							type="base"	min="6.3"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="369"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<buff_apply_chance				type="add"	min="0.2"				/>
@@ -1590,7 +1590,7 @@
 		<spell_power_quen				type="mult"	min="0.2"				/>
 	</ability>
 	<ability name="Gryphon School silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.2"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="570"				/>
@@ -1599,7 +1599,7 @@
 		<spell_dmg_bonus				type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Gryphon School silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="650"				/>
@@ -1608,7 +1608,7 @@
 		<spell_dmg_bonus				type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Gryphon School silver sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="730"				/>
@@ -1617,7 +1617,7 @@
 		<spell_dmg_bonus				type="add"	min="0.25"				/>
 	</ability>
 	<ability name="Gryphon School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="500"				/>
@@ -1626,7 +1626,7 @@
 		<spell_dmg_bonus				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Gryphon School steel sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.5"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="409"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1635,7 +1635,7 @@
 		<spell_dmg_bonus				type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Gryphon School steel sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="473"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1644,7 +1644,7 @@
 		<spell_dmg_bonus				type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Gryphon School steel sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="537"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1653,7 +1653,7 @@
 		<spell_dmg_bonus				type="add"	min="0.25"				/>
 	</ability>
 	<ability name="Gryphon School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="353"				/>
 		<SilverDamage 					type="base"	min="1"					/>	
@@ -1662,7 +1662,7 @@
 		<spell_dmg_bonus				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Harpy_crafted_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.7"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="640"				/>
@@ -1676,7 +1676,7 @@
 	</ability>
 	<ability name="Inquisitor sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="4.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="305"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<SlowdownFrostEffect			is_ability="true"					/>
@@ -1686,7 +1686,7 @@
 	</ability>
 	<ability name="Inquisitor sword 2_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="3"					/>
-		<weight							type="base"	min="4.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="361"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<BurningEffect					is_ability="true"					/>
@@ -1697,7 +1697,7 @@
 	</ability>
 	<ability name="Longclaw_crafted_Stats" on_conflict="replace">
 		<quality						type="add"	min="4"					/>
-		<weight							type="base"	min="3.45"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="409"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"				/>
@@ -1709,7 +1709,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Lynx School silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.45"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="620"				/>
@@ -1720,7 +1720,7 @@
 		<sword_dmg_bonus				type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Lynx School silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.45"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="680"				/>
@@ -1731,7 +1731,7 @@
 		<sword_dmg_bonus				type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Lynx School silver sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.9"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="730"				/>
@@ -1742,7 +1742,7 @@
 		<sword_dmg_bonus				type="add"	min="0.25"				/>
 	</ability>
 	<ability name="Lynx School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.35"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="560"				/>
@@ -1753,7 +1753,7 @@
 		<sword_dmg_bonus				type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Lynx School steel sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.35"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="449"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1764,7 +1764,7 @@
 		<sword_dmg_bonus				type="add"	min="0.15" 				/>
 	</ability>
 	<ability name="Lynx School steel sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.5"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="497"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1775,7 +1775,7 @@
 		<sword_dmg_bonus				type="add"	min="0.20" 				/>
 	</ability>
 	<ability name="Lynx School steel sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="537"				/>
 		<SilverDamage 					type="base"	min="1"					/>	
@@ -1786,7 +1786,7 @@
 		<sword_dmg_bonus				type="add"	min="0.25" 				/>
 	</ability>
 	<ability name="Lynx School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="401"				/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -1797,7 +1797,7 @@
 		<sword_dmg_bonus				type="add"	min="0.10" 				/>
 	</ability>
 	<ability name="Negotiator_crafted_Stats" on_conflict="replace">
-		<weight							type="base"	min="7.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="610"				/>
@@ -1811,14 +1811,14 @@
 	</ability>
 	<ability name="Nilfgaardian sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="6.2"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="321"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<attack_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="Nilfgaardian sword 4_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="4.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="329"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<BleedingEffect					is_ability="true"					/>
@@ -1828,21 +1828,21 @@
 	</ability>
 	<ability name="No Mans Land sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="3.05"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="289"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<attack_power					type="mult"	min="0.20"				/>
 	</ability>
 	<ability name="No Mans Land sword 2_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="3.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="297"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.35"				/>
 	</ability>
 	<ability name="No Mans Land sword 3_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="3.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="305"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<StaggerEffect					is_ability="true"					/>
@@ -1852,7 +1852,7 @@
 	</ability>
 	<ability name="No Mans Land sword 4_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="3.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="313"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<ConfusionEffect				is_ability="true"					/>
@@ -1862,21 +1862,21 @@
 	</ability>
 	<ability name="Novigraadan sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="4.7"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="337"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
 	</ability>
 	<ability name="Novigraadan sword 2_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="3.2" 				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="345"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<attack_power					type="mult"	min="0.2"				/>
 	</ability>
 	<ability name="Novigraadan sword 3_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="353"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<StaggerEffect					is_ability="true"					/>
@@ -1886,7 +1886,7 @@
 	</ability>
 	<ability name="Novigraadan sword 4_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="4.4"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="361"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<ConfusionEffect				is_ability="true"					/>
@@ -1896,14 +1896,14 @@
 	</ability>
 	<ability name="Scoiatael sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="4.62"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="281"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.35"				/>
 	</ability>
 	<ability name="Scoiatael sword 2_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="4.42"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="313"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.35"				/>
@@ -1913,7 +1913,7 @@
 	</ability>
 	<ability name="Scoiatael sword 3_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="3"					/>
-		<weight							type="base"	min="4.42"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="345"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.35"				/>
@@ -1924,7 +1924,7 @@
 	</ability>
 	<ability name="Scoiatael sword 4_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="3"					/>
-		<weight							type="base"	min="4.42"				/>
+		<weight							type="base"	min="6"					/>
 		<SlashingDamage					type="base"	min="377"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.35"				/>
@@ -1935,41 +1935,41 @@
 	</ability>
 	<ability name="Short sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="3.2"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="273"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"				/>
 	</ability>
 	<ability name="Short sword 2_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="3.05"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="281"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.20"				/>
 	</ability>
 	<ability name="Silver sword 1_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.05"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"					/>
 		<SlashingDamage					type="base"	min="1" 				/>
 		<SilverDamage					type="base"	min="400"				/>
 		<armor_reduction				type="base"	min="80"				/>
 	</ability>
 	<ability name="Silver sword 2_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.05"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="410"				/>
 		<critical_hit_chance			type="add"	min="0.35"				/>
 	</ability>
 	<ability name="Silver sword 3_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.1"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="430"				/>
 		<armor_reduction_perc			type="base"	min="0.2"				/>
 	</ability>
 	<ability name="Silver sword 4_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.05"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="2"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="450"				/>
@@ -1979,7 +1979,7 @@
 		<desc_burningchance_mult		type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Silver sword 5_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.25"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="2"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="470"				/>
@@ -1989,7 +1989,7 @@
 		<desc_poinsonchance_mult		type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Silver sword 6_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="3"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="490"				/>
@@ -2000,7 +2000,7 @@
 		<spell_power_axii				type="mult"	min="0.2"				/>
 	</ability>
 	<ability name="Silver sword 7_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="3"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="510"				/>
@@ -2012,14 +2012,14 @@
 	</ability>
 	<ability name="Skellige sword 1_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="1"					/>
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="289"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
 	</ability>
 	<ability name="Skellige sword 2_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="4.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="321"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
@@ -2029,7 +2029,7 @@
 	</ability>
 	<ability name="Skellige sword 3_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="4.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="353"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
@@ -2039,7 +2039,7 @@
 	</ability>
 	<ability name="Skellige sword 4_crafted _Stats" on_conflict="replace">
 		<quality						type="add"	min="2"					/>
-		<weight							type="base"	min="5.1"				/>
+		<weight							type="base"	min="8"					/>
 		<SlashingDamage					type="base"	min="385"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
@@ -2048,7 +2048,7 @@
 		<desc_burningchance_mult		type="add"	min="0.2"				/>
 	</ability>
 	<ability name="Viper School silver sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.4"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="420"				/>
@@ -2058,7 +2058,7 @@
 		<PoisonDamage 					type="add"  min="55" 				/>
 	</ability>
 	<ability name="Viper School steel sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage					type="base"	min="289"				/>
 		<SilverDamage					type="base"	min="1"					/>
@@ -2068,7 +2068,7 @@
 		<PoisonDamage 					type="add"  min="45" 				/>
 	</ability>
 	<ability name="Weeper_crafted_Stats" on_conflict="replace">
-		<weight							type="base"	min="7.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="570"				/>
@@ -2079,7 +2079,7 @@
 		<focus_gain 					type="add" 	min="0.25"				/>
 	</ability>
 	<ability name="mq4005 Silver sword 6_crafted _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.35"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="610"				/>
@@ -2094,13 +2094,13 @@
 
 <!-- gameplay/items_plus/def_item_ep1_stand_alone.xml -->
 	<ability name="EP1 Standalone Starting Silver Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.2"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<armor_reduction 				type="base" min="50" 				/>
 	</ability>
 	<ability name="EP1 Standalone Starting Steel Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.45"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction 				type="base" min="50" 				/>
@@ -2108,13 +2108,13 @@
 
 <!-- gameplay/items_plus/def_item_ep2_stand_alone.xml -->
 	<ability name="EP2 Standalone Starting Silver Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.2"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<armor_reduction 				type="base" min="50" 				/>
 	</ability>
 	<ability name="EP2 Standalone Starting Steel Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.45"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="3"					/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction 				type="base" min="50" 				/>
@@ -2122,7 +2122,7 @@
 
 <!-- gameplay/items_plus/def_item_swords_dol_blathanna.xml -->
 	<ability name="Dol Blathanna longsword _Stats" on_conflict="replace">
-		<weight		type="base"	min="5.8" />
+		<weight		type="base"	min="6" />
 		<quality		type="add"	min="4" />
 		<SlashingDamage		type="base"	min="321" />
 		<SilverDamage		type="base"	min="1" />
@@ -2132,7 +2132,7 @@
 		<dismember_chance		type="add"	min="0.1" />
 	</ability>
 	<ability name="NGP Dol Blathanna longsword _Stats" on_conflict="replace">
-		<weight		type="base"	min="5.8" />
+		<weight		type="base"	min="6" />
 		<quality		type="add"	min="4" />
 		<SlashingDamage		type="base"	min="89" />
 		<SilverDamage		type="base"	min="1" />
@@ -2142,7 +2142,7 @@
 		<dismember_chance		type="add"	min="0.1" />
 	</ability>
 	<ability name="NGP White Widow of Dol Blathanna _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.8" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="4" />
 		<SilverDamage		type="base"	min="170" />
 		<SlashingDamage		type="base"	min="1" />
@@ -2154,7 +2154,7 @@
 		<dismember_chance		type="add"	min="0.1" />
 	</ability>
 	<ability name="White Widow of Dol Blathanna _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.8" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="4" />
 		<SilverDamage		type="base"	min="460" />
 		<SlashingDamage		type="base"	min="1" />
@@ -2168,7 +2168,7 @@
 
 <!-- gameplay/items_plus/def_item_swords_vixen.xml -->
 	<ability name="NGP Silver Vixen _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.8" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="4" />
 		<SilverDamage		type="base"	min="210" />
 		<SlashingDamage		type="base"	min="1" />
@@ -2181,7 +2181,7 @@
 		<focus_gain		type="add"	min="0.05" />
 	</ability>
 	<ability name="NGP Steel Vixen _Stats" on_conflict="replace">
-		<weight		type="base"	min="5.8" />
+		<weight		type="base"	min="6" />
 		<quality		type="add"	min="4" />
 		<SlashingDamage		type="base"	min="121" />
 		<SilverDamage		type="base"	min="1" />
@@ -2193,7 +2193,7 @@
 		<dismember_chance		type="add"	min="0.1" />
 	</ability>
 	<ability name="Silver Vixen _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.8" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="4" />
 		<SilverDamage		type="base"	min="490" />
 		<SlashingDamage		type="base"	min="1" />
@@ -2206,7 +2206,7 @@
 		<focus_gain		type="add"	min="0.05" />
 	</ability>
 	<ability name="Steel Vixen _Stats" on_conflict="replace">
-		<weight		type="base"	min="5.8" />
+		<weight		type="base"	min="6" />
 		<quality		type="add"	min="4" />
 		<SlashingDamage		type="base"	min="361" />
 		<SilverDamage		type="base"	min="1" />
@@ -2220,7 +2220,7 @@
 
 <!-- gameplay/items_plus/def_item_weapons.xml -->
 	<ability name="DLC10_Remorse _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.7"				/>
+		<weight							type="base"	min="3"					/>
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage 				type="base"	min="1"					/>	
 		<critical_hit_chance			type="add"	min="0.3"	max="0.35"	/>
@@ -2232,61 +2232,61 @@
 		<focus_gain 					type="add"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Dwarven silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.9"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Dwarven silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.9"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Dwarven sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.1"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Dwarven sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="6.1"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Elven silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.05"				/>
 	</ability>
 	<ability name="Elven silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.05"				/>
 	</ability>
 	<ability name="Gnomish silver sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.5"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Gnomish silver sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Gnomish sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.4"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.05"				/>
 	</ability>
 	<ability name="Gnomish sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.7"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="2"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction_perc			type="base"	min="0.05"				/>
@@ -2297,81 +2297,81 @@
 		<SilverDamage 					type="base" min="1"		max="1"		/>
 	</ability>
 	<ability name="Long Steel Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.45"				/>
+		<weight							type="base"	min="4"					/>
 		<SlashingDamage 				type="base"	min="265" 	max="265"	/>
 		<quality						type="add"	min="1"					/>
 		<SilverDamage					type="base"	min="1"					/>
 	</ability>
 	<ability name="Scoiatael sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.64"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.05"				/>
 	</ability>
 	<ability name="Scoiatael sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.64"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.05"				/>
 	</ability>
 	<ability name="Scoiatael sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.64"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.05"				/>
 	</ability>
 	<ability name="Scoiatael sword 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.64"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>			
 		<critical_hit_chance			type="add"	min="0.05"				/>
 	</ability>
 	<ability name="Silver sword 5 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.1"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 	</ability>
 	<ability name="Silver sword 6 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.1"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 	</ability>
 	<ability name="Silver sword 7 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 	</ability>
 	<ability name="Silver sword 8 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 	</ability>
 	<ability name="Skellige sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.8"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Skellige sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="3.2"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="1"		max="2"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Skellige sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.5"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Skellige sword 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.2"				/>
+		<weight							type="base"	min="8"					/>
 		<quality						type="add"	min="1"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.15"				/>
 	</ability>
 	<ability name="Top Notch Silver sword _Stats" on_conflict="replace">
-		<weight		type="base"	min="2.05" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="4" />
 		<SlashingDamage		type="base"	min="1" />
 		<spell_power		type="mult"	min="0.08" max="0.15" />
@@ -2379,7 +2379,7 @@
 		<dismember_chance		type="add"	min="0.1" />
 	</ability>
 	<ability name="Top Notch Steel Sword _Stats" on_conflict="replace">
-		<weight		type="base"	min="3.2" />
+		<weight		type="base"	min="6" />
 		<quality		type="add"	min="4" />
 		<SilverDamage		type="base"	min="1" />
 		<critical_hit_chance		type="add"	min="0.1" max="0.2" />
@@ -2387,7 +2387,7 @@
 		<dismember_chance		type="add"	min="0.1" />
 	</ability>
 	<ability name="Wild Hunt sword 1 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.2"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.65"				/>
@@ -2396,7 +2396,7 @@
 		<SlowdownFrostEffect 			is_ability="true" 					/>
 	</ability>
 	<ability name="Wild Hunt sword 2 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.25"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.65"				/>
@@ -2407,7 +2407,7 @@
 		<spell_power_aard				type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Wild Hunt sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.4"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="2"		max="2"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.7"				/>
@@ -2416,7 +2416,7 @@
 		<SlowdownFrostEffect 			is_ability="true" 					/>
 	</ability>
 	<ability name="Wild Hunt sword 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="5"					/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.7"				/>
@@ -2426,7 +2426,7 @@
 		<spell_power_aard				type="mult"	min="0.2"				/>
 	</ability>
 	<ability name="Witcher Silver Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="2.2"				/>
+		<weight							type="base"	min="2"					/>
 		<quality						type="add"	min="1"		max="1"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="390" 	max="390"	/>
@@ -2438,14 +2438,14 @@
 		<SilverDamage					type="base"	min="1"					/>
 	</ability>
 	<ability name="Zireael 01 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.2"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<PhysicalDamage					type="base"	min="350"				/>
 		<SilverDamage 					type="base"	min="350"	max="350"	/>
 		<armor_reduction				type="add"	min="1000"	max="1000"	/>
 	</ability>
 	<ability name="q402 Skellige sword 3 _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.1"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
@@ -2456,14 +2456,14 @@
 		<spell_power_aard				type="mult"	min="0.25"	max="0.25"	/>
 	</ability>
 	<ability name="q505 crafted sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.5"				/>
+		<weight							type="base"	min="3"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<critical_hit_chance			type="base"	min="0.05"				/>
 		<critical_hit_damage_bonus		type="add"	min="0.25"				/>
 	</ability>
 	<ability name="sq304 Novigraadan sword 4 _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.4"				/>
+		<weight							type="base"	min="4"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage 					type="base"	min="1"					/>
@@ -2477,7 +2477,7 @@
 
 <!-- gameplay/items_plus/def_item_weapons_relic.xml -->
 	<ability name="Abarad_Stats" on_conflict="replace">
-		<weight							type="base"	min="8.3"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<FrostDamage 					type="add"  min="45" 	max="50"	/>
@@ -2489,7 +2489,7 @@
 		<spell_power_yrden				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Addandeith_Stats" on_conflict="replace">
-		<weight							type="base"	min="2.35"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
@@ -2501,7 +2501,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Aerondight_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
@@ -2511,7 +2511,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Anathema_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.35"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
@@ -2523,7 +2523,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Angivare_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.3"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.3"	max="0.35"	/>
@@ -2535,7 +2535,7 @@
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Anth_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.6"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<desc_poinsonchance_mult		type="add"	min="0.2" 	max="0.25"	/>
@@ -2547,7 +2547,7 @@
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Arainne_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.15"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
@@ -2559,7 +2559,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Arbitrator_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.65"	max="0.75"	/>
@@ -2571,7 +2571,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Ardaenye_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.4"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
@@ -2583,7 +2583,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Ashrune_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.9"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<buff_apply_chance 				type="add" 	min="0.2"	max="0.25"	/>	
@@ -2595,7 +2595,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Azurewrath_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.5"				/>
+		<weight							type="base"	min="4"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"	/>
@@ -2607,7 +2607,7 @@
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Barbersurgeon_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.65"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>
@@ -2619,7 +2619,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Beannshie_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.45"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"	/>
@@ -2631,7 +2631,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Blackunicorn_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>
@@ -2643,7 +2643,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Bladeofys_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
@@ -2655,7 +2655,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Bloedeaedd_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.45"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_yrden				type="mult"	min="0.2"	max="0.25"	/>
@@ -2667,7 +2667,7 @@
 		<focus_gain 					type="add" 	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Bloodsword_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.0"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.3"	max="0.35"	/>
@@ -2679,7 +2679,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Breathofthenorth_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.95"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.65"	max="0.75"	/>
@@ -2691,7 +2691,7 @@
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Caerme_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.5"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<FireDamage 					type="add"  min="45" 	max="50"	/>
@@ -2703,7 +2703,7 @@
 		<focus_gain 					type="add" 	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Caroline_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.25"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
@@ -2715,7 +2715,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Cheesecutter_Stats" on_conflict="replace"> 
-		<weight							type="base"	min="7.2"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<PoisonDamage 					type="add"  min="45" 	max="50"	/>
@@ -2727,7 +2727,7 @@
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Cleaver_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"	/>
@@ -2739,7 +2739,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Dancer_Stats" on_conflict="replace">
-		<weight							type="base"	min="7.05"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.3"	max="0.35"	/>
@@ -2751,7 +2751,7 @@
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Daystar_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.55"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<FireDamage 					type="add"  min="45" 	max="50"	/>
@@ -2763,7 +2763,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Deargdeith_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>
@@ -2773,7 +2773,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Deireadh_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.0"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.65"	max="0.75"	/>
@@ -2785,7 +2785,7 @@
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Deithwen_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<FrostDamage 					type="add"  min="55" 	max="60"	/>
@@ -2797,7 +2797,7 @@
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Devine_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"	/>
@@ -2809,7 +2809,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Dyaebl_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.8"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<desc_burningchance_mult		type="add"	min="0.2"	max="0.25"	/>
@@ -2821,7 +2821,7 @@
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Eredin Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="5.4"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage 					type="base"	min="1"					/>
 		<StaggerEffect					is_ability="true"					/>
@@ -2833,7 +2833,7 @@
 		<spell_power_aard				type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Fate_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_igni				type="mult"	min="0.25"				/>
@@ -2845,7 +2845,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Forgottenvransword_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.85"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.65"	max="0.75"	/>
@@ -2857,7 +2857,7 @@
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Gloryofthenorth_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
@@ -2869,7 +2869,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Gwestog_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.35"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
@@ -2881,7 +2881,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Gwyhyr_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.65"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"   />
@@ -2891,7 +2891,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Gynvael_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.8"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"	/>
@@ -2903,7 +2903,7 @@
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Gynvaelaedd_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.35"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
@@ -2915,7 +2915,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Harpy_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.1"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<desc_bleedingchance_mult		type="add"	min="0.25"				/>
@@ -2927,7 +2927,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Harvall_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.6"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
@@ -2939,7 +2939,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Havcaaren_Stats" on_conflict="replace">
-		<weight							type="base"	min="7.9"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<buff_apply_chance 				type="add" 	min="0.25" 				/>
@@ -2952,7 +2952,7 @@
 		<spell_power_aard				type="mult"	min="0.25"				/>
 	</ability>
 	<ability name="Headtaker_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.85"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.3"	max="0.35"	/>
@@ -2964,7 +2964,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Hjalmar_Short_Steel_Sword _Stats" on_conflict="replace">
-		<weight							type="base"	min="4.3"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"					/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.75"				/>
@@ -2974,7 +2974,7 @@
 		<focus_gain 					type="add" 	min="0.2"				/>
 	</ability>
 	<ability name="Inis_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.55"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.3"	max="0.35"	/>
@@ -2986,7 +2986,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Karabela_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.25"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.3"	max="0.35"	/>
@@ -2998,7 +2998,7 @@
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Loathen_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.35"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<FireDamage 					type="add"  min="55" 	max="60"	/>
@@ -3010,7 +3010,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Longclaw_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.45"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"	/>
@@ -3022,7 +3022,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Lune_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.4"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>	
@@ -3034,7 +3034,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Moonblade_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.1"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_yrden				type="mult"	min="0.2"	max="0.25"	/>
@@ -3046,7 +3046,7 @@
 		<focus_gain 					type="add" 	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Mourner_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.0"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"	/>
@@ -3058,7 +3058,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Naevdeseidhe_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.2"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<buff_apply_chance				type="add"	min="0.2"	max="0.25"	/>
@@ -3070,7 +3070,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Negotiator_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.05"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<desc_confusionchance_mult		type="add"	min="0.25"				/>
@@ -3082,7 +3082,7 @@
 		<spell_power_yrden				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Princessxenthiasword_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.45"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
@@ -3094,7 +3094,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Reachofthedamned_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.45"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
@@ -3106,7 +3106,7 @@
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Robustswordofdolblathanna_Stats" on_conflict="replace">
-		<weight							type="base"	min="6.4"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<PoisonDamage 					type="add"  min="45" 	max="50"	/>
@@ -3118,7 +3118,7 @@
 		<spell_power_yrden				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Roseofaelirenn_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.3"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
@@ -3130,7 +3130,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Tlareg_Stats" on_conflict="replace">
-		<weight							type="base"	min="7.2"				/>
+		<weight							type="base"	min="4"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<buff_apply_chance 				type="add" 	min="0.25" 				/>	
@@ -3142,7 +3142,7 @@
 		<spell_power_aard				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Torlara_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.45"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<buff_apply_chance				type="add"	min="0.25"	 			/>
@@ -3155,7 +3155,7 @@
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Torzirael_Stats" on_conflict="replace">
-		<weight							type="base"	min="5.5"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
@@ -3168,7 +3168,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Ultimatum_Stats" on_conflict="replace">
-		<weight							type="base"	min="4.85"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<critical_hit_chance			type="add"	min="0.3"	max="0.35"	/>
@@ -3180,7 +3180,7 @@
 		<focus_gain 					type="add" 	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Virgin_Stats" on_conflict="replace">
-		<weight							type="base"	min="7.5"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<desc_bleedingchance_mult		type="add"	min="0.2"	max="0.25"	/>
@@ -3192,7 +3192,7 @@
 		<spell_power_igni				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Vynbleidd_Stats" on_conflict="replace">
-		<weight							type="base"	min="7.7"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<StaggerEffect					is_ability="true"					/>
@@ -3204,7 +3204,7 @@
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Weeper_Stats" on_conflict="replace">
-		<weight							type="base"	min="7.3"				/>
+		<weight							type="base"	min="4"				/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<critical_hit_damage_bonus		type="add"	min="0.65"	max="0.75"	/>
@@ -3214,7 +3214,7 @@
 		<focus_gain 					type="add" 	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="WitcherSilverWolf_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.35"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
@@ -3224,7 +3224,7 @@
 		<dismember_chance			type="add"	min="0.1"				/>
 	</ability>
 	<ability name="Wolf_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.9"				/>
+		<weight							type="base"	min="6"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SilverDamage					type="base"	min="1"					/>
 		<armor_reduction				type="base"	min="80"	max="90"	/>
@@ -3236,7 +3236,7 @@
 		<spell_power_quen				type="mult"	min="0.2"	max="0.25"	/>
 	</ability>
 	<ability name="Zerrikanterment_Stats" on_conflict="replace">
-		<weight							type="base"	min="3.4"				/>
+		<weight							type="base"	min="4"					/>
 		<quality						type="add"	min="4"		max="4"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<spell_power_axii				type="mult"	min="0.2"	max="0.25"	/>
@@ -3264,7 +3264,7 @@
 
 <!-- gameplay/items_plus/dlc18_netflix_swords.xml -->
 	<ability name="NGP Netflix silver sword 1 _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.8" />
+		<weight		type="base"	min="2" />
 		<quality		type="add"	min="5" />
 		<SilverDamage		type="base"	min="440" />
 		<SlashingDamage		type="base"	min="1" />
@@ -3273,7 +3273,7 @@
 		<focus_gain		type="add"	min="0.07" />
 	</ability>
 	<ability name="NGP Netflix silver sword 2 _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.5" />
+		<weight		type="base"	min="2" />
 		<quality		type="add"	min="5" />
 		<SilverDamage		type="base"	min="500" />
 		<SlashingDamage		type="base"	min="1" />
@@ -3282,7 +3282,7 @@
 		<focus_gain		type="add"	min="0.1" />
 	</ability>
 	<ability name="NGP Netflix silver sword _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.3" />
+		<weight		type="base"	min="2" />
 		<quality		type="add"	min="5" />
 		<SilverDamage		type="base"	min="300" />
 		<SlashingDamage		type="base"	min="1" />
@@ -3291,7 +3291,7 @@
 		<focus_gain		type="add"	min="0.05" />
 	</ability>
 	<ability name="NGP Netflix steel sword 1 _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.75" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="5" />
 		<SlashingDamage		type="base"	min="305" />
 		<SilverDamage		type="base"	min="1" />
@@ -3300,7 +3300,7 @@
 		<focus_gain		type="add"	min="0.07" />
 	</ability>
 	<ability name="NGP Netflix steel sword 2 _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.81" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="5" />
 		<SlashingDamage		type="base"	min="353" />
 		<SilverDamage		type="base"	min="1" />
@@ -3309,7 +3309,7 @@
 		<focus_gain		type="add"	min="0.1" />
 	</ability>
 	<ability name="NGP Netflix steel sword _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.64" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="5" />
 		<SlashingDamage		type="base"	min="193" />
 		<SilverDamage		type="base"	min="1" />
@@ -3318,7 +3318,7 @@
 		<focus_gain		type="add"	min="0.05" />
 	</ability>
 	<ability name="Netflix silver sword 1 _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.8" />
+		<weight		type="base"	min="2" />
 		<quality		type="add"	min="5" />
 		<SilverDamage		type="base"	min="750" />
 		<SlashingDamage		type="base"	min="1" />
@@ -3327,7 +3327,7 @@
 		<focus_gain		type="add"	min="0.07" />
 	</ability>
 	<ability name="Netflix silver sword 2 _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.5" />
+		<weight		type="base"	min="2" />
 		<quality		type="add"	min="5" />
 		<SilverDamage		type="base"	min="800" />
 		<SlashingDamage		type="base"	min="1" />
@@ -3336,7 +3336,7 @@
 		<focus_gain		type="add"	min="0.1" />
 	</ability>
 	<ability name="Netflix silver sword _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.3" />
+		<weight		type="base"	min="2" />
 		<quality		type="add"	min="5" />
 		<SilverDamage		type="base"	min="580" />
 		<SlashingDamage		type="base"	min="1" />
@@ -3345,7 +3345,7 @@
 		<focus_gain		type="add"	min="0.05" />
 	</ability>
 	<ability name="Netflix steel sword 1 _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.75" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="5" />
 		<SlashingDamage		type="base"	min="545" />
 		<SilverDamage		type="base"	min="1" />
@@ -3354,7 +3354,7 @@
 		<focus_gain		type="add"	min="0.07" />
 	</ability>
 	<ability name="Netflix steel sword 2 _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.81" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="5" />
 		<SlashingDamage		type="base"	min="593" />
 		<SilverDamage		type="base"	min="1" />
@@ -3363,7 +3363,7 @@
 		<focus_gain		type="add"	min="0.1" />
 	</ability>
 	<ability name="Netflix steel sword _Stats" on_conflict="replace">
-		<weight		type="base"	min="4.64" />
+		<weight		type="base"	min="4" />
 		<quality		type="add"	min="5" />
 		<SlashingDamage		type="base"	min="433" />
 		<SilverDamage		type="base"	min="1" />

@@ -29,9 +29,9 @@ Slice X5:
   them). Also writes `xp/levelNames.ws`: `GMClassicLevelAbility(n)` (5.x's `Lvl<n>`, '' past 50) and
   `GMNewTreeLevelAbility(n)`, since WitcherScript cannot build a name from a string.
 
-    python tools/gen_xp.py [--worktree DIR] [--check | --verify]
+    python tools/gen_xp.py --worktree DIR [--check | --verify]
 
-Writes `abilities/gm_xp.xml` in Ghost Mode's DLC (default worktree ../TGM-5x-GM), `xp/levelNames.ws` and the in-game data test
+Writes `abilities/gm_xp.xml` in Ghost Mode's DLC (the worktree given by --worktree), `xp/levelNames.ws` and the in-game data test
 `tests/gmTestsXpData.ws` (read by GMTest_xpdata in the regression run): every numeric attribute of the level
 abilities, legacy's or 5.x's (0 where only 5.x has it: attack power, spell power), and every `experience` node of
 the abilities gen_ai.py writes, legacy's (0 where legacy dropped it). --check writes nothing and fails if a file is
@@ -47,6 +47,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_ench import ability_stats  # noqa: E402
 import gen_ai  # noqa: E402
 from gen_ai import show, all_abilities, strip, indent, dlc_abilities, sums, fnum  # noqa: E402
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -485,7 +486,7 @@ def build_tests_x2():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     a = ap.parse_args()

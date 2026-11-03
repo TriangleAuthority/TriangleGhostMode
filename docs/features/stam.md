@@ -253,7 +253,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 
 **Decisions:** port as legacy, for `W3PlayerWitcher` only.
 
-- **Deviation:** legacy's presets for this options group and its `GMSignInstantCast` toggle are not ported, as with OPT-01's other groups (porter's call, not confirmed by the owner).
+- **Deviation:** legacy's `GMSignInstantCast` toggle is not in this options group: 5.x's own "Quick Sign Casting" (Gameplay settings) takes its place, and the group's "Recommended" preset does not turn it on (OPT-06's DO5; owner, 2026-11-02). Legacy's two presets for this group are ported (OPT-07, OPT's slice O2, 2026-11-02).
 - **Deviation:** the playing flag is not saved (legacy saved it); a loaded game starts with it off and the next stamina change starts the sound. No save impact (porter's call, not confirmed by the owner).
 
 **The legacy bank:** one sound, a 0.693 s stereo 48 kHz beat looped, on `Gameplay Master Bus`; events `play_heartbeat_02a_loop` (0.5 s fade in) and `stop_heartbeat_02a_loop` (1.5 s fade out); `heartbeat_volume` sets the volume (0 → −96 dB, sine curve, 100 → 0 dB); `heartbeat_rate` drives a Time Stretch effect (0 → 100%, 100 → 80%, so 25% faster) and its gain (0 → +6 dB); muted in 16 `game_state` states (exploration, dialogue, cutscenes, menus and the like), so in practice heard in combat. The rebuilt bank (2026-10-03, Wwise 2023.1.19, audio decoded with vgmstream and encoded with the game's conversion settings) keeps the bank and event IDs and the curves; sources in the local [audio folder](../development.md#sound-banks).

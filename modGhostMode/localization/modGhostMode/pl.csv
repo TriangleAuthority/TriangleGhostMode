@@ -554,3 +554,15 @@
 2110992300|        |option_gm_use_xml_exp_toggle|Nie skaluj ilości doświadczenia za zadania oraz walkę
 2110992270|        |option_gm_quest_exp_slider|Modyfikator doświadczenia za zadania.
 2110992271|        |option_gm_monster_exp_slider|Modyfikator doświadczenia za walkę.
+; OPT slice O0: WGT's three options (OPT-04 boat sinking and its threshold, OPT-05 item weight reduction), legacy's
+2110992180|        |option_gm_sink_boat_toggle|Zatop łódź przy przeciążeniu
+2110992181|        |option_gm_sink_boat_slider|Limit przeciążenia do zatopienia łodzi (%)
+2110992183|        |option_gm_encumbrance_slider|Zmniejsz obciążenie przedmiotów (%)
+; OPT slice O1: the Vitality regen options (OPT-03), legacy's
+2110992393|        |option_gm_cbtvreg|Regeneracja żywotności w walce (dodatkowa)
+2110992394|        |option_gm_ocbtvreg|Regeneracja żywotności poza walką (dodatkowa)
+; OPT slice O2: the gameplay and QoL presets (OPT-07), legacy's
+2110992447|        |preset_Mods_ghost_mode_gm_qol_options|Presety QoL
+2110992450|        |preset_Mods_ghost_mode_gm_gameplay_options|Presety rozgrywki
+2110992459|        |preset_value_gm_old_ver|Vanilla(ish)
+2110992179|        |gm_geralt_too_heavy|Twoje przeciążenie jest zbyt duże

@@ -39,6 +39,14 @@
         <jump_stamina_delay type="base" always_random="false" min="1" max="1" />
         <usable_item_stamina_delay type="base" always_random="false" min="1" max="1" />
       </ability>
+      <!-- OPT-02: no Vitality regen of Geralt's own, in or out of combat (vanilla 1 and 1 per second);
+           the options add to it in script (OPT-03). Vanilla's order: repeated tags are replaced in order. -->
+      <ability name="ConGeralt" on_conflict="extend">
+        <vitalityRegen type="add" always_random="false" min="0" max="0" />
+        <vitalityRegen type="mult" always_random="false" min="0" max="0" />
+        <vitalityCombatRegen type="add" always_random="false" min="0" max="0" />
+        <vitalityCombatRegen type="mult" always_random="false" min="0" max="0" />
+      </ability>
     </abilities>
   </definitions>
 </redxml>

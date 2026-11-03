@@ -46,8 +46,8 @@ function GMTest_ai03()
 
 	dm = theGame.GetDefinitionsManager();
 	f = GMTestAiDataAll(port, later);
-	GMTestReport(f == 0 && port > 690 && later > 20, "AI-03/04/05, AI-08 data: " + GMTestAiDataAbilities() + " abilities, " + port
-		+ " values the port changes from 5.x's, " + later + " weight values still 5.x's (WGT); " + f + " differ");
+	GMTestReport(f == 0 && port > 690 && later == 0, "AI-03/04/05, AI-08 data: " + GMTestAiDataAbilities() + " abilities, " + port
+		+ " values the port changes from 5.x's (legacy's weights too, WGT's slice W2), " + later + " values still 5.x's for a later feature; " + f + " differ");
 	GMTestReport(GMTestAiAblIs('mon_wolf', 'level', 0, 0, 1) && GMTestAiAblIs('mon_wolf', 'vitality', 80, 0, 0) && GMTestAiAblIs('mon_wolf', 'frost_resistance_perc', 0.3, 0, 0),
 		"AI-03 " + GMTestAiAblText('mon_wolf', 'level') + ", " + GMTestAiAblText('mon_wolf', 'vitality') + ", " + GMTestAiAblText('mon_wolf', 'frost_resistance_perc')
 		+ " (level +1, 80 Vitality, 30% frost; 5.x +5, which showed wolves 4 levels too high)");

@@ -26,7 +26,7 @@ the same bytes for them. Header-only files: a file whose only 5.x change is its 
 build fields) takes legacy's whole body with 5.x's header (HEADER_ONLY: the cave nekkers' spawn set, whose
 new entity reference `cr2w_patch.py` cannot write as an edit).
 
-    python tools/gen_ai_ent.py [--worktree DIR] [--check | --verify | --list]
+    python tools/gen_ai_ent.py --worktree DIR [--check | --verify | --list]
 
 --check writes nothing and fails if a file is out of date. --verify reads the written files: each must be
 5.x's file (LOOT's edits applied) with exactly the derived edits, every edit matching, CRCs valid, every
@@ -39,6 +39,7 @@ import argparse, csv, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cr2w_patch as cp  # noqa: E402
 import gen_loot  # noqa: E402
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 from gen_loot import Blobs, bin_chunks, fmt  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -189,7 +190,6 @@ HEADER_ONLY = {
     "modGhostMode/files/quests/sidequests/skellige/quest_files/sq209_weregild/spawnsets/sq209_cave_nekkers.w2comm",
 }
 
-WORKTREE = os.path.join(REPO, "..", "TGM-5x-GM")
 
 
 _UNITS = None
@@ -638,7 +638,8 @@ def run(worktree, mode):
     tpath = os.path.join(worktree, TESTS)
     text = build_tests(blobs)
     told = open(tpath, encoding="utf-8", newline="").read() if os.path.exists(tpath) else None
-    if told != text:
+    # compare without line endings: a worktree with core.autocrlf checks the file out with CRLF
+    if told is None or told.replace("\r\n", "\n") != text.replace("\r\n", "\n"):
         if mode == "write":
             with open(tpath, "w", encoding="utf-8", newline="") as f:
                 f.write(text)
@@ -721,7 +722,7 @@ def verify_file(blobs, path, cur, want, p, known):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=WORKTREE)
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--check", action="store_true")
     g.add_argument("--verify", action="store_true")

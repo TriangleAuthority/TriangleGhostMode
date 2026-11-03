@@ -82,23 +82,21 @@
 				<SlashingDamage 				type="base"	min="300" 				/>
 				<SilverDamage 					type="base"	min="1" 				/>
 				<quality 						type="add" 	min="1" 				/>
-				<!-- 5.x's until WGT -->
 				<weight 						type="base" min="8" 				/>
 			</ability>
 			<!-- dlc/bob/data/gameplay/items_plus/def_item_weapons_secondary.xml -->
 			<ability name="Knight Mace 1 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"					/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="4.05"				/>
 			</ability>
 			<ability name="Knight Mace 2 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="3"					/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="4.2"				/>
 			</ability>
 			<ability name="Knight Mace 3 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="4"					/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<armor_reduction 				type="base" min="60" 				/>
@@ -107,8 +105,6 @@
 				<StaggerEffect 					is_ability="true" 					/>
 				<buff_apply_chance 				type="add" min="0.05" 				/>
 				<desc_staggerchance_mult 		type="add" min="0.05" 				/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="4.2"				/>
 			</ability>
 			<!-- dlc/ep1/data/gameplay/items_plus/def_item_weapons_mon.xml -->
 			<ability name="mon_toad_tongue_weapon _Stats" on_conflict="replace">
@@ -136,91 +132,78 @@
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="5" max="5"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Short_Steel_Sword_Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Hjalmar_Short_Steel_Sword _Stats" on_conflict="replace">
 				<SlashingDamage min="350" max="350"/>
 				<SilverDamage min="300" max="300"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Wooden sword _Stats" on_conflict="replace">
 				<BludgeoningDamage min="2" max="5"/>
 				<SilverDamage min="1" max="1"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Rusty No Mans Land sword _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="5" max="5"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Rusty Skellige sword _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="5" max="5"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Rusty Nilfgaardian sword _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="5" max="5"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Rusty Novigraadan sword _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="5" max="5"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Short sword 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Short sword 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC No Mans Land sword 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="3"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC No Mans Land sword 1 q2 _Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC No Mans Land sword 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Skellige sword 1 _Stats" on_conflict="replace">
@@ -228,28 +211,24 @@
 				<SilverDamage min="40" max="40"/>
 				<critical_hit_damage_bonus type="add" min="0.75" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Nilfgaardian sword 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Novigraadan sword 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC No Mans Land sword 3 _Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Skellige sword 2 _Stats" on_conflict="replace">
@@ -257,21 +236,18 @@
 				<SilverDamage min="40" max="40"/>
 				<critical_hit_damage_bonus type="add" min="0.75" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Nilfgaardian sword 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Novigraadan sword 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Cyprianwhorenson sword _Stats" on_conflict="replace">
@@ -280,126 +256,108 @@
 				<PoisonEffect is_ability="true" />
 				<buff_apply_chance type="add" min="0.6" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Scoiatael sword 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="340" max="340"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Skellige sword 3 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC No Mans Land sword 4 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Novigraadan sword 3 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Skellige sword 4 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Nilfgaardian sword 3 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Scoiatael sword 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="340" max="340"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Novigraadan sword 4 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Nilfgaardian sword 4 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Scoiatael sword 3 _Stats" on_conflict="replace">
 				<SlashingDamage min="340" max="340"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Scoiatael sword 4 _Stats" on_conflict="replace">
 				<SlashingDamage min="340" max="340"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Inquisitor sword 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="340" max="340"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Inquisitor sword 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="340" max="340"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Dwarven sword 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="360" max="360"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Beannshie _Stats" on_conflict="replace">
 				<SlashingDamage min="400" max="400"/>
 				<SilverDamage min="100" max="100"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Dwarven sword 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="360" max="360"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Gnomish sword 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="380" max="380"/>
 				<SilverDamage min="40" max="40"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Wild Hunt sword 1 _Stats" on_conflict="replace">
@@ -407,7 +365,6 @@
 				<SilverDamage min="40" max="40"/>
 				<FrostDamage min="50" max="50" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Wild Hunt sword 2 _Stats" on_conflict="replace">
@@ -415,7 +372,6 @@
 				<SilverDamage min="40" max="40"/>
 				<FrostDamage min="50" max="50" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Gnomish sword 2 _Stats" on_conflict="replace">
@@ -428,7 +384,6 @@
 				<SilverDamage min="40" max="40"/>
 				<FrostDamage min="50" max="50" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Wild Hunt sword 4 _Stats" on_conflict="replace">
@@ -436,7 +391,6 @@
 				<SilverDamage min="40" max="40"/>
 				<FrostDamage min="50" max="50" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="NPC Eredin Sword _Stats" on_conflict="replace">
@@ -445,234 +399,197 @@
 				<FrostDamage min="50" max="50" />
 				<SlowdownFrostEffect is_ability="true" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="8" />
 			</ability>
 			<ability name="Spear 1 _Stats" on_conflict="replace">
 				<PiercingDamage min="250" max="250"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="mult" min="1" max="1"/>
 			</ability>
 			<ability name="Spear 2 _Stats" on_conflict="replace">
 				<PiercingDamage min="250" max="250"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="mult" min="1" max="1"/>
 			</ability>
 			<ability name="Halberd 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="6" max="6"/>
 			</ability>
 			<ability name="Halberd 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="6" max="6"/>
 			</ability>
 			<ability name="Guisarme 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="6" max="6"/>
 			</ability>
 			<ability name="Guisarme 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="6" max="6"/>
 			</ability>
 			<ability name="Long metal pole _Stats" on_conflict="replace">
 				<BludgeoningDamage min="200" max="200"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="3" max="3"/>
 			</ability>
 			<ability name="Mace 1 _Stats" on_conflict="replace">
 				<BludgeoningDamage min="280" max="280"/>
 				<SilverDamage min="4" max="4"/>
-				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
+				<quality type="add" min="1" max="1"/>
 			</ability>
 			<ability name="Mace 2 _Stats" on_conflict="replace">
 				<BludgeoningDamage min="280" max="280"/>
 				<SilverDamage min="4" max="4"/>
-				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
+				<quality type="add" min="1" max="1"/>
 			</ability>
 			<ability name="Club _Stats" on_conflict="replace">
 				<BludgeoningDamage min="200" max="200"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Axe 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Axe 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="300" max="300"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Great Axe 1 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="7" max="7"/>
 			</ability>
 			<ability name="Great Axe 2 _Stats" on_conflict="replace">
 				<SlashingDamage min="320" max="320"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="7" max="7"/>
 			</ability>
 			<ability name="Dwarven Axe _Stats" on_conflict="replace">
 				<SlashingDamage min="340" max="340"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="6" max="6"/>
 			</ability>
 			<ability name="Dwarven Hammer _Stats" on_conflict="replace">
 				<BludgeoningDamage min="340" max="340"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="6" max="6"/>
 			</ability>
 			<ability name="Twohanded Hammer 1 _Stats" on_conflict="replace">
 				<BludgeoningDamage min="360" max="360"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="7" max="7"/>
 			</ability>
 			<ability name="Twohanded Hammer 2 _Stats" on_conflict="replace">
 				<BludgeoningDamage min="360" max="360"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="7" max="7"/>
 			</ability>
 			<ability name="Hatchet _Stats" on_conflict="replace">
 				<SlashingDamage min="250" max="250"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Small Blackjack _Stats" on_conflict="replace">
 				<BludgeoningDamage min="160" max="160"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Blackjack _Stats" on_conflict="replace">
 				<BludgeoningDamage min="180" max="180"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Poker _Stats" on_conflict="replace">
 				<PiercingDamage min="200" max="200"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Staff _Stats" on_conflict="replace">
 				<BludgeoningDamage min="200" max="200"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="1" max="1"/>
 			</ability>
 			<ability name="Lucerne Hammer _Stats" on_conflict="replace">
 				<BludgeoningDamage min="300" max="300"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="5" max="5"/>
 			</ability>
 			<ability name="Wand _Stats" on_conflict="replace">
 				<BludgeoningDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="1" max="1"/>
 			</ability>
 			<ability name="Oar _Stats" on_conflict="replace">
 				<BludgeoningDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" max="2"/>
 			</ability>
 			<ability name="Rake _Stats" on_conflict="replace">
 				<BludgeoningDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" max="2"/>
 			</ability>
 			<ability name="Scoop _Stats" on_conflict="replace">
 				<BludgeoningDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="1" max="1"/>
 			</ability>
 			<ability name="Shovel _Stats" on_conflict="replace">
 				<SlashingDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
-				<weight type="base" min="8" />
+				<weight type="base" min="1" max="1"/>
 			</ability>
 			<ability name="Broom_Not_Work _Stats" on_conflict="replace">
 				<BludgeoningDamage min="150" max="150"/>
-				<!-- 5.x's until WGT -->
-				<weight type="base" min="1" max="1"/>
+				<weight type="base" min="4" max="4"/>
 			</ability>
 			<ability name="Paling _Stats" on_conflict="replace">
 				<BludgeoningDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="1" max="1"/>
 			</ability>
 			<ability name="Pitchfork _Stats" on_conflict="replace">
 				<PiercingDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Scythe _Stats" on_conflict="replace">
 				<SlashingDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="mult" min="1" max="1"/>
 			</ability>
 			<ability name="Shepard stick _Stats" on_conflict="replace">
 				<BludgeoningDamage min="150" max="150"/>
 				<SilverDamage min="4" max="4"/>
-				<!-- 5.x's until WGT -->
 				<weight type="mult" min="1" max="1"/>
 			</ability>
 			<ability name="q308 Iron Poker _Stats" on_conflict="replace">
 				<PiercingDamage min="200" max="200"/>
 				<SilverDamage min="4" max="4"/>
+				<weight	type="base" min="12" max="12"/>
 				<quality	type="add"	min="1" />
-				<!-- 5.x's until WGT -->
-				<weight type="base" min="12" max="12"/>
 			</ability>
 			<ability name="Pickaxe _Stats" on_conflict="replace">
 				<PiercingDamage min="200" max="200"/>
 				<SilverDamage min="4" max="4"/>
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<!-- gameplay/items_plus/def_item_weapons.xml -->
@@ -697,49 +614,43 @@
 				<SilverDamage					type="base"	min="50"				/>
 			</ability>
 			<ability name="NPC Dandelion Short Steel Sword _Stats" on_conflict="replace">
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<PhysicalDamage					type="base"	min="5"					/>
 				<SilverDamage 					type="base"	min="5"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="3.0"				/>
 			</ability>
 			<ability name="NPC_Witcher_Steel_Sword _Stats" on_conflict="replace">
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<PhysicalDamage					type="base"	min="290"				/>
 				<SilverDamage 					type="base"	min="10"				/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="3.8"				/>
 			</ability>
 			<ability name="NPC_Witcher_Silver_Sword _Stats" on_conflict="replace">
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<PhysicalDamage					type="base"	min="10"				/>
 				<SilverDamage 					type="base"	min="350"				/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="4.3"				/>
 			</ability>
 			<ability name="Caranthil Staff _Stats" on_conflict="replace">
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<BludgeoningDamage				type="base"	min="400"				/>
 				<SilverDamage 					type="base"	min="10"				/>
 				<FrostDamage 					type="base"	min="40"	max="40"	/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="2.15"				/>
 			</ability>
 			<ability name="Imlerith Mace _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="3"		max="3"		/>
 				<BludgeoningDamage				type="base"	min="400"				/>
 				<SilverDamage 					type="base"	min="50"				/>
 				<FrostDamage 					type="base"	min="40"	max="40"	/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="2.5"				/>
 			</ability>
 			<ability name="Imlerith Shield_Stats" on_conflict="replace">
+				<weight							type="base"	min="6"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<BludgeoningDamage				type="base"	min="100"				/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<FrostDamage 					type="base"	min="30"	max="30"	/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="5.25"				/>
 			</ability>
 			<!-- gameplay/items_plus/def_item_weapons_mon.xml -->
 			<ability name="mon_rat_weapon _Stats" on_conflict="replace">
@@ -1118,81 +1029,70 @@
 			</ability>
 			<!-- gameplay/items_plus/def_item_weapons_secondary.xml -->
 			<ability name="W_Axe 1 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="2.75"				/>
 			</ability>
 			<ability name="W_Axe 2 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="2.75"				/>
 			</ability>
 			<ability name="W_Axe 3 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"		max="3"		/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="3.5"				/>
 			</ability>
 			<ability name="W_Axe 4 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="2"		max="3"		/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="2.0"				/>
 			</ability>
 			<ability name="W_Axe 5 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="4"		max="4"		/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<armor_reduction				type="base"	min="100"				/>
 				<critical_hit_damage_bonus		type="add"	min="0.5"				/>
 				<dismember_chance			type="add"	min="0.1"				/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="2.45"				/>
 			</ability>
 			<ability name="W_Axe 6 _Stats" on_conflict="replace">
+				<weight							type="base"	min="8"					/>
 				<quality						type="add"	min="4"		max="4"		/>
 				<SilverDamage 					type="base"	min="1"					/>
 				<armor_reduction				type="base"	min="50"				/>
 				<dismember_chance			type="add"	min="0.1"				/>
 				<critical_hit_damage_bonus		type="add"	min="0.25"				/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="4.2"				/>
 			</ability>
 			<ability name="W_Club _Stats" on_conflict="replace">
+				<weight							type="base"	min="6"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<BludgeoningDamage				type="add"	min="8"		max="24"	/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="1.1"				/>
 			</ability>
 			<ability name="W_Mace 1 _Stats" on_conflict="replace">
+				<weight							type="base"	min="12"				/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<BludgeoningDamage				type="add"	min="8"		max="24"	/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="3.5"				/>
 			</ability>
 			<ability name="W_Mace 2 _Stats" on_conflict="replace">
+				<weight							type="base"	min="12"				/>
 				<quality						type="add"	min="1"		max="2"		/>
 				<BludgeoningDamage				type="add"	min="16"	max="32"	/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="12.5"				/>
 			</ability>
 			<ability name="W_Pickaxe _Stats" on_conflict="replace">
+				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<PiercingDamage					type="base"	min="8"		max="24"	/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="3.5"				/>
 			</ability>
 			<ability name="W_Poker _Stats" on_conflict="replace">
+				<weight							type="base"	min="6"					/>
 				<quality						type="add"	min="1"		max="2"		/>
 				<BludgeoningDamage				type="add"	min="16"	max="32"	/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="3"					/>
 			</ability>
 			<!-- dlc/ep1/data/gameplay/items_plus/def_item_weapons.xml -->
 			<ability name="NPC torch _Stats" on_conflict="replace">
@@ -1201,7 +1101,6 @@
 				<BurningEffect is_ability="true" />
 				<buff_apply_chance type="add" min="1.0" />
 				<quality type="add" min="1" max="1"/>
-				<!-- 5.x's until WGT -->
 				<weight type="base" min="2" />
 			</ability>
 			<ability name="Caretaker Shovel _Stats">
@@ -1213,11 +1112,10 @@
 			<!-- AI-03, AI-05 (AI-A audit F3), AI-19: legacy's NG+-only changes (NG+ equal to the regular game, PA14), legacy's NG+ entry whole -->
 			<!-- gameplay/items_plus/def_item_weapons.xml -->
 			<ability name="NPC_Witcher_Silver_Sword_q403_Upgrade _Stats" on_conflict="replace">
+				<weight							type="base"	min="4"					/>
 				<quality						type="add"	min="1"		max="1"		/>
 				<PhysicalDamage					type="base"	min="10"				/>
 				<SilverDamage 					type="base"	min="400"				/>
-				<!-- 5.x's until WGT -->
-				<weight							type="base"	min="4.3"				/>
 			</ability>
 			<!-- gameplay/items_plus/def_item_weapons_mon.xml -->
 			<ability name="mon_ghoul_lesser_weapon _Stats" on_conflict="replace">

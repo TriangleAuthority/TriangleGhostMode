@@ -548,7 +548,8 @@ function AddCharacterStatToxicity(tag : string, varKey : name, locKey : string, 
 }
 
 // UI-05: a Vitality regen line per second: the additive part plus the multiplicative part of maximum
-// Vitality, as the regen effect gets it (5.x's line showed base x mult + add).
+// Vitality, as the regen effect gets it (5.x's line showed base x mult + add), plus the option (OPT-03; without
+// 5.x's "Vitality Regeneration Boost", PO5).
 function GMPanelVitalityRegen(attributeName : name) : float
 {
 	var w : W3PlayerWitcher;
@@ -556,7 +557,7 @@ function GMPanelVitalityRegen(attributeName : name) : float
 
 	w = GetWitcherPlayer();
 	sp = w.GetAttributeValue(attributeName);
-	return sp.valueAdditive + sp.valueMultiplicative * w.GetStatMax(BCS_Vitality);
+	return sp.valueAdditive + sp.valueMultiplicative * w.GetStatMax(BCS_Vitality) + GMVitalityRegenOption(attributeName);
 }
 
 // UI-05: sign power as its raw value (legacy), not 5.x's average of the five signs' totals.

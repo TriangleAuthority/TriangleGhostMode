@@ -13,11 +13,19 @@ function GMOptionDefault(group : name, option : name) : string
 		{
 			// SKL-02: the classic tree is the default (D46)
 			case 'GMClassicSkillTree' :		return "true";
+			// OPT-04 (mechanics: WGT-10): boat sinking on at 20% (legacy's code and "Recommended", DO3)
+			case 'GMSinkBoat' :			return "true";
+			case 'GMSinkBoatOverEnc' :		return "20";
+			// OPT-05 (mechanics: WGT-02): no item weight reduction
+			case 'GMEncumbranceMultiplier' :	return "0";
 			// STAM-05
 			case 'GMArmorRegenPenalty' :		return "false";
 			// STAM-04
 			case 'GMCombatStaminaRegen' :		return "0";
 			case 'GMOutOfCombatStaminaRegen' :	return "0";
+			// OPT-03
+			case 'GMCombatVitalityRegen' :		return "0";
+			case 'GMOutOfCombatVitalityRegen' :	return "0";
 			// STAM-06
 			case 'GMStaminaDelay' :		return "0";
 			// STAM-03
@@ -67,7 +75,8 @@ function GMOptionDefault(group : name, option : name) : string
 	{
 		switch(option)
 		{
-			// STAM-07 (legacy's recommended preset)
+			// STAM-07: the "Recommended" preset's values with the menu untouched (DO4, a deviation: legacy wrote no QoL
+			// defaults, so its heartbeat stayed off until the player chose it)
 			case 'GMLowStaminaSFX' :			return "50";
 			case 'GMLowStaminaSFXVolume' :		return "100";
 			case 'GMLowStaminaSFXDynamicVolume' :	return "true";
@@ -84,9 +93,14 @@ function GMOptionList(out groups : array<name>, out options : array<name>)
 	groups.Clear();
 	options.Clear();
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMClassicSkillTree');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMSinkBoat');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMSinkBoatOverEnc');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMEncumbranceMultiplier');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMArmorRegenPenalty');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMCombatStaminaRegen');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMOutOfCombatStaminaRegen');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMCombatVitalityRegen');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMOutOfCombatVitalityRegen');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMAgilityStaminaCostMultiplier');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMMeleeStaminaCostMultiplier');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMSignStaminaCostMultiplier');
@@ -177,9 +191,11 @@ function OnSpawned(spawnData : SEntitySpawnData)
 // ---- reacting to changes in the options menu (legacy: CR4IngameMenu.gmUserSettings) ----
 // A changed option is noted when its value changes and applied when the menu saves the settings:
 // quality-of-life options restart the low-stamina sound, scaling options (DIFF-04, GMIsScalingOption in
-// difficulty/scaling.ws) re-level the NPCs near Geralt, "Disable quest levels" (XP-07) clears or reloads the quest levels.
+// difficulty/scaling.ws) re-level the NPCs near Geralt, "Disable quest levels" (XP-07) clears or reloads the quest levels,
+// "Ciri's sections: difficulty" (DIFF-09) sets her sections' mode while she plays, and the Vitality regen options,
+// the gameplay presets and 5.x's "Vitality Regeneration Boost" (OPT-03) start Geralt's Vitality regen if they give him one.
 
-// The quality-of-life group's options (legacy gmIsQoLOption; GMSignInstantCast is not ported yet).
+// The quality-of-life group's options (legacy gmIsQoLOption, less GMSignInstantCast: not ported, 5.x's "Quick Sign Casting" instead, DO5).
 function GMIsQoLOption(option : name) : bool
 {
 	switch(option)
@@ -211,6 +227,11 @@ var gmQoLOptionChanged : bool;
 @addField(CR4IngameMenu)
 var gmScalingOptionChanged : bool;
 
+// OPT-03: the Vitality regen options, the gameplay presets and 5.x's "Vitality Regeneration Boost" (legacy's
+// gmHasChangedGameplayOption; vitalityRegen.ws).
+@addField(CR4IngameMenu)
+var gmVitalityRegenChanged : bool;
+
 @addField(CR4IngameMenu)
 var gmCiriDifficultyChanged : bool;
 
@@ -241,6 +262,8 @@ function OnOptionValueChanged(groupId : int, optionName : name, optionValue : st
 		gmCiriDifficultyChanged = true;
 	if(optionName == 'GMNoQuestLevels')
 		gmQuestLevelsOptionChanged = true;
+	if(GMIsVitalityRegenOption(optionName))
+		gmVitalityRegenChanged = true;
 	return wrappedMethod(groupId, optionName, optionValue);
 }
 
@@ -254,6 +277,11 @@ function OnPresetApplied(groupId : name, targetPresetIndex : int)
 		gmScalingOptionChanged = true;
 	if(groupId == 'GMExpOptions')
 		gmQuestLevelsOptionChanged = true;
+	if(groupId == 'GMGameplayOptions')
+		gmVitalityRegenChanged = true;
+	// OPT-07: the QoL group's presets restart the heartbeat like a changed option
+	if(groupId == 'GMQOLOptions')
+		gmQoLOptionChanged = true;
 	return wrappedMethod(groupId, targetPresetIndex);
 }
 
@@ -280,6 +308,12 @@ function SaveChangedSettings()
 	{
 		gmQuestLevelsOptionChanged = false;
 		GMOnQuestLevelsOptionChanged();
+	}
+	if(gmVitalityRegenChanged)
+	{
+		// OPT-03: start Geralt's Vitality regen if the new values give him one (legacy's gmUpdateRegenEffects)
+		gmVitalityRegenChanged = false;
+		GMOnVitalityRegenOptionsChanged();
 	}
 	wrappedMethod();
 }

@@ -274,6 +274,8 @@ Free nilfgaardian lemon gets legacy's category, description and tags here; its d
 
 **Decisions:** port as legacy (DC4 for Cheesecutter, DC5 for the technique).
 
+**For information (WGT audit F5, accepted by the owner 2026-11-02):** Blood and Wine defines `poi_gor_d_06_note` and `poi_gor_d_06_note03` twice (as books with `Default Book _Stats` in `def_item_books.xml`, and as misc items without abilities in `def_item_living_world.xml`); CRAFT-08's whole entries in `gm_item.xml` follow the copy legacy changed (the second), so in the port they are misc items weighing 0.01. Six Hearts of Stone notes (`ep1_poi_03_note` and five more) are defined twice the same way and take the second copy's icon. Which copy legacy's game read is not known; the entries stay pinned to one copy.
+
 **ECON's PE13** (found in ECON's map, fixed in ECON's slice E2, 2026-11-01, 5.x-GM `467576dc`): legacy adds `mod_alchemy_table` to Blood and Wine's Protofleder Mutagen (both folders), the tag the dismantling station reads (`W3StandaloneDismantleComponent.ShouldShowItem`); the port lacked it because CRAFT's tags skipped every `mod_*` tag. CRAFT-08 now owns that one tag (`item_layer.TAGS`, kept out of ECON's price tags by `ECON_KEEP`); **verified** by script in both trees (`GMTest_econ_e2`: the station's rule shows it, the Katakan mutagen as a control). Not a deviation: legacy's tag.
 
 **Later:** legacy's parts of Knight Geralt Pants 3 and Knight Geralt A Pants 3 name "Silver Ingot" (the item is "Silver ingot"), carried as legacy's; if the game matches item names by case, that part is never given, in legacy too ([audit](#craft-and-loot-audit-2026-10-22) F9).

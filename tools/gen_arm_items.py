@@ -45,10 +45,10 @@ lower tiers of school gear take the regular lower tiers' set tags (`<School>SetM
 `SetBonusPiece`), the NG+ rule's non-numeric change (audit F9: legacy's NG+ entries kept the school
 tag); legacy's NG+-only display changes (NG+ names, glove looks) are not carried.
 
-    python tools/gen_arm_items.py [--worktree DIR] [--check | --verify]
+    python tools/gen_arm_items.py --worktree DIR [--check | --verify]
 
 Writes `items/gm_arm_items.xml` and `items_plus/gm_arm_items.xml` (and `gm_arm_item_extensions.xml`
-in both) in Ghost Mode's DLC (default worktree ../TGM-5x-GM). --check writes nothing and fails if a file is out of date. --verify reads
+in both) in Ghost Mode's DLC (the worktree given by --worktree). --check writes nothing and fails if a file is out of date. --verify reads
 what the game reads (Ghost Mode's DLC items over 5.x's) and compares every ARM tag (`DoNotEnhance` included), slot count,
 display field and ability stat with legacy's, counting the differences that are rules of the port
 and failing on any other (audit F10; about a minute).
@@ -58,6 +58,7 @@ import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import item_layer  # noqa: E402  ITEM's fields of the same entries
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -78,7 +79,9 @@ NAME_CARRIED = {"q108 Medium armor 10"}
 AUTOGEN = re.compile(r'^autogen_(?:fixed_)?(?:armor|pants|gloves|boots)_|^Autogen (?:Armor|Gloves|Boots|Pants) _Stats$')
 # The starting armor pieces are given whole by gen_arm_km.py (ARM-12), legacy's DoNotEnhance included.
 KM_STARTING = {"Starting Armor", "Starting Pants", "Starting Boots", "Starting Gloves"}
-ABILITY = re.compile(r'<ability\s+name="([^"]+)"[^>]*?(?<!/)>(.*?)</ability>', re.S)  # a self-closing <ability .../> has no body
+# group 1 the name (in any attribute order: gen_arm_new.py writes <ability on_conflict="replace" name="...">), group 2
+# the body; a self-closing <ability .../> has no body
+ABILITY = re.compile(r'<ability\b(?=[^>]*?\sname\s*=\s*"([^"]+)")[^>]*?(?<!/)>(.*?)</ability>', re.S)
 NODE = re.compile(r'<([A-Za-z_]\w*)\b([^>]*?)/>')
 
 
@@ -546,7 +549,7 @@ def verify(worktree):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(REPO, "..", "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true", help="compare the final items with legacy's ARM data (audit F10)")
     args = ap.parse_args()

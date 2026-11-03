@@ -121,28 +121,107 @@
 		</VisibleVars>
 	</Group>
 	<Group id="GMGameplayOptions" displayName="Mods.ghost_mode.gm_gameplay_options">
+		<!-- OPT-07 (slice O2): legacy's three presets, without GMVersion (PO2) and without the port's skill tree toggle (PO8) -->
+		<PresetsArray>
+			<Preset id="0" displayName="gm_recommended">
+				<Entry varId="GMSinkBoat" value="true"/>
+				<Entry varId="GMSinkBoatOverEnc" value="20"/>
+				<Entry varId="GMEncumbranceMultiplier" value="0"/>
+				<Entry varId="GMArmorRegenPenalty" value="false"/>
+				<Entry varId="GMCombatStaminaRegen" value="0"/>
+				<Entry varId="GMOutOfCombatStaminaRegen" value="0"/>
+				<Entry varId="GMCombatVitalityRegen" value="0"/>
+				<Entry varId="GMOutOfCombatVitalityRegen" value="0"/>
+				<Entry varId="GMAgilityStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMMeleeStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMSignStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMStaminaDelay" value="0"/>
+				<Entry varId="GMMeleeSpecialCooldown" value="7.5"/>
+				<Entry varId="GMSignCooldown" value="5"/>
+				<Entry varId="GMAltSignCooldown" value="7.5"/>
+			</Preset>
+			<Preset id="1" displayName="gm_old_ver">
+				<Entry varId="GMSinkBoat" value="false"/>
+				<Entry varId="GMSinkBoatOverEnc" value="0"/>
+				<Entry varId="GMEncumbranceMultiplier" value="0"/>
+				<Entry varId="GMArmorRegenPenalty" value="true"/>
+				<Entry varId="GMCombatStaminaRegen" value="-5"/>
+				<Entry varId="GMOutOfCombatStaminaRegen" value="0"/>
+				<Entry varId="GMCombatVitalityRegen" value="1"/>
+				<Entry varId="GMOutOfCombatVitalityRegen" value="1"/>
+				<Entry varId="GMAgilityStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMMeleeStaminaCostMultiplier" value="-1"/>
+				<Entry varId="GMSignStaminaCostMultiplier" value="1.5"/>
+				<Entry varId="GMStaminaDelay" value="0"/>
+				<Entry varId="GMMeleeSpecialCooldown" value="0"/>
+				<Entry varId="GMSignCooldown" value="0"/>
+				<Entry varId="GMAltSignCooldown" value="0"/>
+			</Preset>
+			<Preset id="2" displayName="gm_turn_off">
+				<Entry varId="GMSinkBoat" value="false"/>
+				<Entry varId="GMSinkBoatOverEnc" value="0"/>
+				<Entry varId="GMEncumbranceMultiplier" value="0"/>
+				<Entry varId="GMArmorRegenPenalty" value="false"/>
+				<Entry varId="GMCombatStaminaRegen" value="0"/>
+				<Entry varId="GMOutOfCombatStaminaRegen" value="0"/>
+				<Entry varId="GMCombatVitalityRegen" value="0"/>
+				<Entry varId="GMOutOfCombatVitalityRegen" value="0"/>
+				<Entry varId="GMAgilityStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMMeleeStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMSignStaminaCostMultiplier" value="0"/>
+				<Entry varId="GMStaminaDelay" value="0"/>
+				<Entry varId="GMMeleeSpecialCooldown" value="0"/>
+				<Entry varId="GMSignCooldown" value="0"/>
+				<Entry varId="GMAltSignCooldown" value="0"/>
+			</Preset>
+		</PresetsArray>
 		<VisibleVars>
 			<!-- SKL-02 -->
 			<Var id="GMClassicSkillTree" displayName="gm_classic_skill_tree" displayType="TOGGLE"/>
+			<!-- OPT-04 (OPT slice O0, legacy's entries; the mechanics are WGT's, WGT-10): boat sinking, on at 20% (DO3) -->
+			<Var id="GMSinkBoat" displayName="gm_sink_boat_toggle" displayType="TOGGLE"/>
+			<Var id="GMSinkBoatOverEnc" displayName="gm_sink_boat_slider" displayType="SLIDER;0;100;100"/>
+			<!-- OPT-05 (OPT slice O0, legacy's entry; the mechanics are WGT's, WGT-02): item weight reduction -->
+			<Var id="GMEncumbranceMultiplier" displayName="gm_encumbrance_slider" displayType="SLIDER;0;100;100"/>
 			<!-- STAM-05 -->
 			<Var id="GMArmorRegenPenalty" displayName="gm_armor_reg_penalty" displayType="TOGGLE"/>
 			<!-- STAM-04 -->
 			<Var id="GMCombatStaminaRegen" displayName="gm_cbtsreg" displayType="SLIDER;-15;85;100"/>
 			<Var id="GMOutOfCombatStaminaRegen" displayName="gm_ocbtsreg" displayType="SLIDER;-100;0;100"/>
+			<!-- OPT-03 (slice O1): Vitality regen per second added in and out of combat -->
+			<Var id="GMCombatVitalityRegen" displayName="gm_cbtvreg" displayType="SLIDER;0;1000;1000"/>
+			<Var id="GMOutOfCombatVitalityRegen" displayName="gm_ocbtvreg" displayType="SLIDER;0;1000;1000"/>
 			<!-- STAM-03 -->
 			<Var id="GMAgilityStaminaCostMultiplier" displayName="gm_ascost" displayType="SLIDER;-1;5;60"/>
 			<Var id="GMMeleeStaminaCostMultiplier" displayName="gm_mscost" displayType="SLIDER;-1;5;60"/>
 			<Var id="GMSignStaminaCostMultiplier" displayName="gm_sscost" displayType="SLIDER;-1;3;40"/>
 			<!-- STAM-06 -->
 			<Var id="GMStaminaDelay" displayName="gm_stdelay" displayType="SLIDER;-1;5;60"/>
+			<!-- STAM-02 (legacy's order since OPT slice O2, PO3) -->
+			<Var id="GMMeleeSpecialCooldown" displayName="gm_mcooldown" displayType="SLIDER;0;30;60"/>
 			<!-- STAM-01 -->
 			<Var id="GMSignCooldown" displayName="gm_scooldown" displayType="SLIDER;0;30;60"/>
 			<Var id="GMAltSignCooldown" displayName="gm_ascooldown" displayType="SLIDER;0;30;60"/>
-			<!-- STAM-02 -->
-			<Var id="GMMeleeSpecialCooldown" displayName="gm_mcooldown" displayType="SLIDER;0;30;60"/>
 		</VisibleVars>
 	</Group>
 	<Group id="GMQOLOptions" displayName="Mods.ghost_mode.gm_qol_options">
+		<!-- OPT-07 (slice O2): legacy's two presets, without GMSignInstantCast (DO5: 5.x's "Quick Sign Casting" instead) -->
+		<PresetsArray>
+			<Preset id="0" displayName="gm_recommended">
+				<Entry varId="GMLowStaminaSFX" value="50"/>
+				<Entry varId="GMLowStaminaSFXVolume" value="100"/>
+				<Entry varId="GMLowStaminaSFXDynamicVolume" value="true"/>
+				<Entry varId="GMLowStaminaSFXRate" value="0"/>
+				<Entry varId="GMLowStaminaSFXDynamicRate" value="true"/>
+			</Preset>
+			<Preset id="1" displayName="gm_turn_off">
+				<Entry varId="GMLowStaminaSFX" value="0"/>
+				<Entry varId="GMLowStaminaSFXVolume" value="0"/>
+				<Entry varId="GMLowStaminaSFXDynamicVolume" value="false"/>
+				<Entry varId="GMLowStaminaSFXRate" value="0"/>
+				<Entry varId="GMLowStaminaSFXDynamicRate" value="false"/>
+			</Preset>
+		</PresetsArray>
 		<VisibleVars>
 			<!-- STAM-07 -->
 			<Var id="GMLowStaminaSFX" displayName="gm_lowstamsfx" displayType="SLIDER;0;100;100"/>

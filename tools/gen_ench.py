@@ -10,13 +10,12 @@ an ability not listed keeps 5.x's definition.
 New Game+ (`items_plus`): the ability as legacy's `items_plus` file has it (for the runewords and
 glyphwords the same as the regular one, in legacy as in 5.x).
 
-    python tools/gen_ench.py [--worktree DIR] [--check | --verify]
+    python tools/gen_ench.py --worktree DIR [--check | --verify]
 
 Also writes legacy's 23 enchanter schematics (ENCH-02) whole into a `<custom><gm_enchantment_schematics>`
 node, which Ghost Mode's replaced schematic readers prefer to the vanilla entries.
 
-Writes `items/gm_ench.xml` and `items_plus/gm_ench.xml` in Ghost Mode's DLC (default worktree
-../TGM-5x-GM). --check writes nothing and fails if a file is out of date.
+Writes `items/gm_ench.xml` and `items_plus/gm_ench.xml` in Ghost Mode's DLC (--worktree, required). --check writes nothing and fails if a file is out of date.
 
 --verify (ENCH audit F10) writes nothing and compares what the game reads with legacy's data: every
 ability legacy defines in the three files (runewords and glyphwords, runes and glyphs, Hearts of Stone
@@ -30,6 +29,7 @@ import argparse, os, re, subprocess, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import item_layer  # noqa: E402  CRAFT's fields of the items written here
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -74,8 +74,10 @@ def git(*args):
 
 
 def abilities(text):
+    """{name: entry} of the abilities in a file's text, the name in any attribute order (gen_arm_new.py writes
+    <ability on_conflict="replace" name="...">); shared by gen_ai.dlc_abilities, gen_trph and gen_xbow."""
     out = {}
-    for m in re.finditer(r'(?ms)^([ \t]*)<ability\s+name\s*=\s*"([^"]+)"[^>]*>.*?</ability>', text):
+    for m in re.finditer(r'(?ms)^([ \t]*)<ability\b(?=[^>]*?\sname\s*=\s*"([^"]+)")[^>]*>.*?</ability>', text):
         out[m.group(2)] = m.group(0)
     return out
 
@@ -214,7 +216,7 @@ def verify(worktree):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(os.path.dirname(REPO), "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     a = ap.parse_args()

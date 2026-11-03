@@ -9,10 +9,9 @@ item defined once). The list grows with each port slice (food.md's port order).
 
 New Game+ (`items_plus`): the entry as legacy's NG+ file has it (legacy's NG+ food files equal the regular).
 
-    python tools/gen_food.py [--worktree DIR] [--check | --verify [--list]]
+    python tools/gen_food.py --worktree DIR [--check | --verify [--list]]
 
-Writes `items/gm_food.xml` and `items_plus/gm_food.xml` in Ghost Mode's DLC (default worktree
-../TGM-5x-GM). --check writes nothing and fails if a file is out of date. --verify writes nothing and
+Writes `items/gm_food.xml` and `items_plus/gm_food.xml` in Ghost Mode's DLC (--worktree, required). --check writes nothing and fails if a file is out of date. --verify writes nothing and
 compares every listed entry as the port leaves it with legacy's, node by node, and lists for information
 the entries of the food files still differing from legacy's and not listed.
 """
@@ -20,6 +19,7 @@ import os, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_alch as g  # noqa: E402
+import paths  # noqa: E402  (tools/: below-normal priority)
 
 g.OUT = "gm_food.xml"
 g.GENERATOR = "tools/gen_food.py"
@@ -199,8 +199,9 @@ def write_strings(worktree, check):
 
 
 if __name__ == "__main__":
-    if "--verify" not in sys.argv:
-        wt = sys.argv[sys.argv.index("--worktree") + 1] if "--worktree" in sys.argv else os.path.join(os.path.dirname(g.REPO), "TGM-5x-GM")
+    paths.below_normal()
+    if "--verify" not in sys.argv and "--worktree" in sys.argv:  # without --worktree, g.main() stops: it is required
+        wt = sys.argv[sys.argv.index("--worktree") + 1]
         if write_strings(wt, "--check" in sys.argv):
             sys.exit(1)
     g.main()

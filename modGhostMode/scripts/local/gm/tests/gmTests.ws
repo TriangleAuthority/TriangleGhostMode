@@ -570,6 +570,9 @@ exec function gmtest_panel()
 	GMTest_ai20_after();
 	GMTest_xp04_who_after();	// XP-04 (XP audit F1): who earns a kill's experience: Geralt's kill, allies' and a guard's near him, an ally's far away
 	GMTest_econ_e4_give();	// ECON-10 (slice E4): rewards given through GiveReward and the crowns gained (Emhyr's payment, the sq108 griffin, the loan, races, a fistfight, Hearts of Stone's purse, Contract: The White Lady after a haggled deal), put back; here, not in gmtest_regress()'s frame, where it made AI-18's stone check fail
+	GMTest_wgt_after();	// WGT (tests/gmTestsWgt.ws)
+	GMTest_opt_after();	// OPT (tests/gmTestsOpt.ws)
+	GMTest_trph_after();	// TRPH (tests/gmTestsTrph.ws)
 	GMTest_diff04_after();	// last: DIFF-04's mode and option changes on the bandit GMTest_diff04_spawn() left (a mode change rebuilds every NPC's stats)
 }
 
@@ -2220,6 +2223,9 @@ exec function gmtest_regress()
 	GMTest_econ_e3();	// ECON-08, ECON-09 (slice E3): merchants' money at spawn, the 3-day restock and the reset below 100 at eight spawned merchants; the haggling bar (double) and accept limits (1.2 to 1.7, always-successful 2) over many openings of the popup
 	GMTest_econrewards();	// ECON-10, DE1, PE9 (slice E4): every ECON reward's gold as GetReward reads it (the rewards given through GiveReward run in gmtest_panel(), GMTest_econ_e4_give)
 	GMTest_econ_e5();	// ECON-01, ECON-03 DE2 (slice E5): what a spawned Novigrad armorer asks and pays for a Netflix piece, a Netflix schematic and the Fire Horse saddle at DE2's list prices; ECON-11, ECON-12: the four patched scene and quest files load
+	GMTest_wgt();	// WGT (parallel ports: its checks go into tests/gmTestsWgt.ws)
+	GMTest_opt();	// OPT (parallel ports: its checks go into tests/gmTestsOpt.ws)
+	GMTest_trph();	// TRPH (parallel ports: its checks go into tests/gmTestsTrph.ws)
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

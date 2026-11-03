@@ -40,27 +40,36 @@ modGhostMode/scripts, modGhostMode/files, modGhostMode/localization,
 modGhostMode/menu and modGhostMode/sound.
 
 Usage:
-    python tools/build_mod.py --ref pilot-smoke                      # build into build/
-    python tools/build_mod.py --ref pilot-smoke --install            # and copy into <game>/mods
-    python tools/build_mod.py --ref pilot-smoke --install --enable   # and add it to mods.settings
-    python tools/build_mod.py --scripts tools/automation/scripts --name modAutomation --out build/automation --install --enable
-                                                                     # scripts from a folder instead of a branch
+    python tools/build_mod.py --ref gm/wgt --out build/wgt-1a2b3c4d          # build and compile into a folder
+    python tools/build_mod.py --install-from build/wgt-1a2b3c4d --holder AREA:TOKEN
+                                                                     # install that build (the game slot's holder)
+    python tools/build_mod.py --ref gm/wgt --out build/wgt --install --holder AREA:TOKEN
+                                                                     # build and install in one go
+    python tools/build_mod.py --scripts tools/automation/scripts --name modAutomation --out build/automation --install --enable --parent
+                                                                     # scripts from a folder instead of a branch (the parent only)
+
+--ref and --out are required (no default branch or folder, so parallel agents never build
+5.x-GM or overwrite each other's build by accident). Installing changes the shared game: it
+needs --holder AREA:TOKEN from tools/game_lock.py (or the parent's --parent) and the game closed.
+Each wcc_lite run takes a short OS file lock (wcc_lite writes shared REDkit files and listens on
+port 37000), so parallel builds wait their turn; the build runs at below-normal priority.
 
 See docs/development.md.
 """
 
 import argparse
 import configparser
-import ctypes
+import os
 import shutil
 import subprocess
 import sys
-from ctypes import wintypes
 from pathlib import Path
 
+import game_lock
 import paths
 import soundcache
 import w3strings
+from paths import documents_dir  # noqa: F401  (kept importable from here)
 
 REPO = Path(__file__).resolve().parent.parent
 SCRIPTS = "modGhostMode/scripts/"
@@ -83,18 +92,22 @@ def changed_paths(base: str, ref: str) -> list[tuple[str, str]]:
     return [(parts[i], parts[i + 1]) for i in range(0, len(parts) - 1, 2)]
 
 
-def documents_dir() -> Path:
-    """The user's Documents folder, following OneDrive or other redirection."""
-    folderid_documents = ctypes.c_byte * 16
-    guid = folderid_documents(*bytes.fromhex("D09AD3FD8F23AF46ADB46C85480369C7"))
-    path = ctypes.c_wchar_p()
-    shell32 = ctypes.windll.shell32
-    shell32.SHGetKnownFolderPath.argtypes = [ctypes.c_void_p, wintypes.DWORD, wintypes.HANDLE, ctypes.POINTER(ctypes.c_wchar_p)]
-    if shell32.SHGetKnownFolderPath(ctypes.byref(guid), 0, None, ctypes.byref(path)) != 0:
-        return Path.home() / "Documents"
-    result = Path(path.value)
-    ctypes.windll.ole32.CoTaskMemFree(path)
-    return result
+def warn_uncommitted(ref: str) -> None:
+    """Warn when a worktree that has `ref` checked out has uncommitted changes under modGhostMode/:
+    the build takes the commit, not the working tree."""
+    out = git("worktree", "list", "--porcelain").decode("utf-8", "replace")
+    for block in out.split("\n\n"):
+        lines = dict(line.split(" ", 1) for line in block.splitlines() if " " in line)
+        branch = lines.get("branch", "").removeprefix("refs/heads/")
+        if lines.get("worktree") and branch and branch == ref:
+            r = subprocess.run(["git", "-C", lines["worktree"], "status", "--porcelain", "--", "modGhostMode/"],
+                               capture_output=True, text=True, errors="replace")
+            changed = [x for x in r.stdout.splitlines() if x.strip()]
+            if changed:
+                print(f"warning: {lines['worktree']} ({ref}) has {len(changed)} uncommitted change(s) under modGhostMode/; "
+                      f"this build takes {ref}'s last commit, without them:")
+                for x in changed[:10]:
+                    print(f"  {x}")
 
 
 def collect(base: str, ref: str, out: Path, release: bool = False) -> tuple[Path | None, Path | None, list[str], list[str], list[str]]:
@@ -209,8 +222,13 @@ def wcc(redkit: Path, args: list[str], out: Path, log_name: str, what: str) -> N
         sys.exit(1)
     # -agreetoterms accepts the REDkit EULA, which wcc_lite otherwise asks for in a dialog
     # that blocks the build (the project owner accepted it and approved passing the flag).
-    result = subprocess.run([str(exe), *args, "-agreetoterms"], cwd=exe.parent, capture_output=True, text=True,
-                            errors="replace", timeout=600)
+    # wcc_lite writes REDkit's wcc.log, script cache and temp\ and editoruser.settings, and listens on
+    # port 37000: one run at a time across all checkouts (an OS file lock, freed if this process dies).
+    lock = game_lock.FileLock(game_lock.Env().state / "wcc.lock", timeout=3600, what="the compiler slot (another wcc_lite run holds it)",
+                              quiet=False)
+    with lock:
+        result = subprocess.run([str(exe), *args, "-agreetoterms"], cwd=exe.parent, capture_output=True, text=True,
+                                errors="replace", timeout=600, creationflags=paths.BELOW_NORMAL)
     log = out / log_name
     log.write_text(result.stdout + result.stderr, encoding="utf-8")
     # wcc_lite also logs unrelated [Error] lines about missing config files and asserts
@@ -358,13 +376,46 @@ def check_settings(name: str, enable: bool) -> None:
     print(f"{settings}: added [{name}] Enabled=1 Priority=100")
 
 
+def gate_install(args) -> "game_lock.Gate":
+    """Installing changes the shared game: the holder's token (or --parent), and the game closed."""
+    try:
+        g = game_lock.gate(args.holder, args.parent, "build_mod.py install")
+    except game_lock.Refused as e:
+        print(f"refused: {e}")
+        sys.exit(e.code)
+    game_lock.selftest_stop(g, "build_mod.py install")
+    if game_lock.Env().game_running():
+        print("error: the game is running; quit it first (python tools/game.py quit): scripts load only at game start")
+        sys.exit(1)
+    return g
+
+
+def install_from(args) -> None:
+    """Install a build made earlier (--out of a compile-only build), without rebuilding."""
+    src = args.install_from.resolve()
+    mod_dir = src / args.name
+    if not (mod_dir / MARKER).exists():
+        print(f"error: {mod_dir} is not a build of this script (no {MARKER}); build it first with --ref ... --out {src}")
+        sys.exit(1)
+    g = gate_install(args)
+    install(mod_dir, args.game)
+    marker = (args.game / "mods" / args.name / MARKER).read_text().splitlines()[0].strip()
+    if args.name == "modGhostMode":
+        game_lock.record_install(g, marker)
+    print(f"installed build: {marker}")
+    check_settings(args.name, args.enable)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--ref", default="5.x-GM", help="branch or commit to build (default: 5.x-GM)")
+    ap.add_argument("--ref", help="branch or commit to build (required with no --scripts or --install-from)")
     ap.add_argument("--scripts", type=Path, help="build the scripts in this folder instead of a branch's changes")
     ap.add_argument("--base", default="vanilla-5.x", help="vanilla ref to diff against (default: vanilla-5.x)")
     ap.add_argument("--name", default="modGhostMode", help="mod folder name (default: modGhostMode)")
-    ap.add_argument("--out", type=Path, default=REPO / "build", help="output directory (default: build/)")
+    ap.add_argument("--out", type=Path, help="output directory (required to build; one per area and commit, e.g. build/wgt-<commit>)")
+    ap.add_argument("--install-from", type=Path, metavar="OUT", help="install the build in OUT (an earlier --out) without rebuilding")
+    ap.add_argument("--holder", help="AREA:TOKEN of the game slot's holder (tools/game_lock.py), needed to install")
+    ap.add_argument("--parent", action="store_true", help="the parent only: install without the lock check (logged)")
     ap.add_argument("--install", action="store_true", help="copy the built mod into <game>/mods")
     ap.add_argument("--enable", action="store_true", help="with --install: add the mod to mods.settings if missing")
     ap.add_argument("--game", type=Path, help="game install directory (default: W3_GAME_DIR or Steam's, see tools/paths.py)")
@@ -375,9 +426,24 @@ def main() -> None:
     args = ap.parse_args()
     if args.no_compile and not args.loose:
         ap.error("--no-compile needs --loose (the blob is the compiler's output)")
-    out = args.out.resolve()
     args.game = args.game or paths.game_dir()
+    if args.install_from:
+        if args.ref or args.scripts or args.install:
+            ap.error("--install-from installs an existing build: no --ref, --scripts or --install")
+        install_from(args)
+        return
+    if not args.ref and not args.scripts:
+        ap.error("--ref is required (the branch to build, e.g. gm/<area>; the integration's 5.x-GM)")
+    if not args.out:
+        ap.error("--out is required (a folder of your own, e.g. build/<area>-<commit>)")
+    if args.install and args.scripts and not args.parent:
+        ap.error("installing --scripts builds (modAutomation) is the parent's: --parent")
+    gate = gate_install(args) if args.install else None  # fail fast, before a minute of building
+    paths.below_normal()
+    out = args.out.resolve()
     args.redkit = args.redkit or paths.redkit_dir()
+    if args.ref:
+        warn_uncommitted(args.ref)
 
     strings_dir, menus, sound_cache = None, [], None
     if args.scripts:
@@ -394,7 +460,10 @@ def main() -> None:
     mod_dir = assemble(out, args.name, source, scripts_dir, None if args.loose else blob, bundle_dir, strings_dir,
                        args.ref, menus, sound_cache)
     if args.install:
+        gate = gate_install(args)  # again: the build took a while
         install(mod_dir, args.game)
+        if args.name == "modGhostMode":
+            game_lock.record_install(gate, (args.game / "mods" / args.name / MARKER).read_text().splitlines()[0].strip())
         check_settings(args.name, args.enable)
 
 

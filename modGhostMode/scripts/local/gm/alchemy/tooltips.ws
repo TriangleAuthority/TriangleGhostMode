@@ -580,7 +580,8 @@ function GMItemHasRecyclingParts(id : SItemUniqueId) : bool
 // alchemy durations (a bomb's cloud, Dimeritium out of the cloud, Golden Oriole's immunity) in seconds, and
 // a decoction's toxicity offset under its own name with no "/max" (5.x shows it as "Toxicity 70/max").
 // UI-06 (legacy's AddItemStats): a potion's toxicity after Expert Brewer, without "/max"; a decoction's
-// offset after Adaptation; a negative value without "+".
+// offset after Adaptation; a negative value without "+". A trophy counts as gear here, as legacy passed it
+// (TRPH audit F2: the Arachas trophy's "Maximum Toxicity +40"; gmTipTrophy, set in ui/tooltips.ws).
 // The rows AddItemStats adds are its stats in order, less the primary ones it skips.
 @wrapMethod(W3TooltipComponent)
 function AddItemStats(itemStats : array<SAttributeTooltip>, out resultGFxArray : CScriptedFlashArray, rootGFxObject : CScriptedFlashObject, ignorePrimaryStat : bool, defaultPrefix : string, isArmorOrWeapon : bool):void
@@ -590,6 +591,8 @@ function AddItemStats(itemStats : array<SAttributeTooltip>, out resultGFxArray :
 	var witcher : W3PlayerWitcher;
 	var value : string;
 
+	if(gmTipTrophy)
+		isArmorOrWeapon = true;
 	witcher = GetWitcherPlayer();
 	for(i = 0; i < itemStats.Size() && witcher && !isArmorOrWeapon; i += 1)
 	{

@@ -15,16 +15,16 @@ DLC override if it works, else whole files; no DLC override of `<loot>` is known
   rewards 5.x raised where legacy kept 1.32's gold, `DE1`); a reward only 5.x has keeps 5.x's values but for DX4's
   (`NEW_REWARDS`), its gold 5.x's (PE9).
 
-    python tools/gen_loot.py [--worktree DIR] [--check | --verify]
+    python tools/gen_loot.py --worktree DIR [--check | --verify]
 
-Writes the files at their vanilla paths under `modGhostMode/files/` in the 5.x-GM worktree (default
-../TGM-5x-GM). --check fails if a file is out of date. --verify reads the written files and checks every
+Writes the files at their vanilla paths under `modGhostMode/files/` in the 5.x-GM worktree (--worktree, required). --check fails if a file is out of date. --verify reads the written files and checks every
 LOOT unit's entry against legacy's (ported) or 5.x's (not yet ported, counted), no name defined twice,
 and the rest of each file 5.x's; and every reward's gold in the six reward files against legacy's (ECON-10), each
 difference explained (5.x's new rewards, PE9). Also writes the in-game data test `tests/gmTestsEconRewards.ws`
 (`GMTest_econrewards`): the gold of every ECON reward, DE1's and PE9's as `GetReward` should read it.
 """
 import argparse, csv, os, re, struct, subprocess, sys
+import paths  # noqa: E402  (tools/: the shared --worktree argument)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -154,7 +154,7 @@ def known_items():
     return _KNOWN
 
 
-WORKTREE = [os.path.join(REPO, "..", "TGM-5x-GM")]
+WORKTREE = [None]  # set from --worktree by main() (and by gen_ai_ent.py)
 # Entries naming a recipe item no definition has are left out (none since FOOD-07 defined the cooking
 # recipes, 2026-10-24; legacy's lists never name Butter Bandalura's commented-out recipe).
 PENDING = re.compile(r'^Recipe for ')
@@ -714,7 +714,7 @@ def bin_verify(worktree):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--worktree", default=os.path.join(REPO, "..", "TGM-5x-GM"))
+    paths.add_worktree(ap)  # required: parallel areas each pass their own worktree
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify", action="store_true")
     args = ap.parse_args()
