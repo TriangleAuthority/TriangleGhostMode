@@ -73,6 +73,7 @@ function GMTest_food()
 	GMTest_food03();
 	GMTest_food04();
 	GMTest_food04eat();
+	GMTest_food04_liverslot();	// fix3: Wolf liver kept in its quick slot at a load
 	GMTest_food05();
 	GMTest_food06();
 	GMTest_food07();
@@ -705,4 +706,46 @@ exec function gmtest_readrecipe(item : name)
 		thePlayer.inv.ReadSchematicsAndRecipes(ids[0]);
 	known = GetWitcherPlayer().GetAlchemyRecipes();
 	LogChannel('GMTest', "read " + item + ": known " + known.Contains(item));
+}
+
+// FOOD-04 (fix3, sweep D G6): a save loaded with Wolf liver in a food quick slot keeps it there, and keeps the food in
+// the paired slot (5.x's load-time HACK_UnequipWolfLiver, which the load runs from OnSpawned, took both out; legacy
+// disabled it). Wolf liver in quick slot 1 and a Bread in slot 3, then the load's call.
+@addMethod(W3PlayerWitcher)
+function GMTestFoodLoadHack()
+{
+	HACK_UnequipWolfLiver();
+}
+
+function GMTest_food04_liverslot()
+{
+	var w : W3PlayerWitcher;
+	var liver, bread, old1, old3, now1, now3 : SItemUniqueId;
+	var ids : array<SItemUniqueId>;
+	var had1, had3 : bool;
+
+	w = GetWitcherPlayer();
+	had1 = w.GetItemEquippedOnSlot(EES_Potion1, old1);
+	had3 = w.GetItemEquippedOnSlot(EES_Potion3, old3);
+	ids = w.inv.AddAnItem('Wolf liver', 1, true, true);
+	liver = ids[0];
+	ids = w.inv.AddAnItem('Bread', 1, true, true);
+	bread = ids[0];
+	w.EquipItemInGivenSlot(liver, EES_Potion1, false);
+	w.EquipItemInGivenSlot(bread, EES_Potion3, false);
+	w.GMTestFoodLoadHack();
+	w.GetItemEquippedOnSlot(EES_Potion1, now1);
+	w.GetItemEquippedOnSlot(EES_Potion3, now3);
+	GMTestReport(now1 == liver && now3 == bread,
+		"FOOD-04 a load keeps Wolf liver in quick slot 1 (" + (now1 == liver) + ") and the Bread in the paired slot 3 (" + (now3 == bread) + "; 5.x's load took both out)");
+	if(w.inv.IsItemMounted(liver) || now1 == liver)
+		w.UnequipItem(liver);
+	if(now3 == bread)
+		w.UnequipItem(bread);
+	w.inv.RemoveItem(liver, 1);
+	w.inv.RemoveItem(bread, 1);
+	if(had1 && w.inv.IsIdValid(old1))
+		w.EquipItemInGivenSlot(old1, EES_Potion1, false);
+	if(had3 && w.inv.IsIdValid(old3))
+		w.EquipItemInGivenSlot(old3, EES_Potion3, false);
 }

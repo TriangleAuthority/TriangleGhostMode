@@ -573,6 +573,8 @@ exec function gmtest_panel()
 	GMTest_wgt_after();	// WGT (tests/gmTestsWgt.ws)
 	GMTest_opt_after();	// OPT (tests/gmTestsOpt.ws)
 	GMTest_trph_after();	// TRPH (tests/gmTestsTrph.ws)
+	GMTest_fix_after();	// FIX (tests/gmTestsFix.ws)
+	GMTest_horse_after();	// HORSE (tests/gmTestsHorse.ws)
 	GMTest_diff04_after();	// last: DIFF-04's mode and option changes on the bandit GMTest_diff04_spawn() left (a mode change rebuilds every NPC's stats)
 }
 
@@ -2226,6 +2228,8 @@ exec function gmtest_regress()
 	GMTest_wgt();	// WGT (parallel ports: its checks go into tests/gmTestsWgt.ws)
 	GMTest_opt();	// OPT (parallel ports: its checks go into tests/gmTestsOpt.ws)
 	GMTest_trph();	// TRPH (parallel ports: its checks go into tests/gmTestsTrph.ws)
+	GMTest_fix();	// FIX (parallel ports: its checks go into tests/gmTestsFix.ws)
+	GMTest_horse();	// HORSE (parallel ports: its checks go into tests/gmTestsHorse.ws)
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

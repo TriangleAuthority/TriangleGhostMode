@@ -43,6 +43,7 @@ function GMTest_arm()
 	GMTest_arm05();
 	GMTest_arm02();
 	GMTest_arm01();
+	GMTest_arm01_hair();	// fix3
 	GMTest_arm04();
 	GMTest_arm07();
 	GMTest_arm08();
@@ -1974,4 +1975,31 @@ exec function gmtest_arm15_oldsave()
 		&& GMTestArmNear(GMTestArmItemValue(inv, added[0], 'armor'), 125) && GMTestArmNear(GMTestArmItemValue(inv, added[0], 'bludgeoning_resistance_perc'), 0.09),
 		"ARM-15 Netflix pieces owned before ARM-15 (" + added.Size() + "): " + w.GetSetPartsEquipped(EIST_Netflix) + " count, tier 1 " + w.IsSetBonusActive(EISB_Netflix_1) + ", chest armor " + GMTestArmItemValue(inv, added[0], 'armor') + " (125), bludgeoning " + GMTestArmItemValue(inv, added[0], 'bludgeoning_resistance_perc') + " (0.09)");
 	GMTestReport(!known.Contains('Starting Armor Upgrade schematic 1') && known.Contains('Kaer Morhen Armor schematic'), "ARM-12 on that save: Starting Armor Upgrade schematic 1 removed at load, Kaer Morhen Armor schematic known");
+}
+
+// ARM-01 (fix3, sweep C gap 5a): the hairstyles whose inquisitor and bowl variants legacy took Yoana's reward armor out
+// of (`q108 Medium armor 10`, so Geralt keeps his default hair with it) are given whole: they still read as hair items
+// with their tags and look. Their variant lists cannot be read by script (`gen_arm_items.py --verify` compares them
+// with legacy's); the look on screen is an open check.
+function GMTest_arm01_hair()
+{
+	var dm : CDefinitionsManagerAccessor;
+	var hairs : array<name>;
+	var i : int;
+	var ok : bool;
+	var text : string;
+
+	dm = theGame.GetDefinitionsManager();
+	hairs.PushBack('Preview Hair');
+	hairs.PushBack('Half With Tail Hairstyle');
+	hairs.PushBack('Long Loose Hairstyle');
+	hairs.PushBack('Fancy Bowl');
+	ok = true;
+	for(i = 0; i < hairs.Size(); i += 1)
+	{
+		if(dm.GetItemCategory(hairs[i]) != 'hair' || !dm.ItemHasTag(hairs[i], 'Body') || !dm.ItemHasTag(hairs[i], 'NoShow'))
+			ok = false;
+		text += ", " + hairs[i] + " " + dm.GetItemCategory(hairs[i]) + " " + dm.ItemHasTag(hairs[i], 'Body') + " " + dm.ItemHasTag(hairs[i], 'NoShow');
+	}
+	GMTestReport(ok, "ARM-01 the hairstyles given whole without Yoana's armor in their variants read as hair items (category, Body and NoShow tags; Long Loose Hairstyle has no look of its own, in 5.x too)" + text);
 }

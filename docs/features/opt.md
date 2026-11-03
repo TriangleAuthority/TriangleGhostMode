@@ -177,6 +177,9 @@ The port's groups today: "Enemy scaling" and "Experience" complete with presets;
 
 ---
 
+**Fix round fix3 (2026-11-02, sweep D G8 and Q3; the owner's decision): Geralt has no natural poison or bleeding resistance**, as legacy's data (`ConGeralt`'s `poison_resistance_perc` and `bleeding_resistance_perc` 0.25 → 0, regular and NG+; the changelist does not mention it, recorded in [open-questions.md](../open-questions.md#legacy-data-vs-changelist)): a fifth `ConGeralt` extend in `gm_stats.xml` (NG+ copy by `gen_ngplus.py`). Put here because OPT-02 is the entry for Geralt's base stats (no GEN area file exists). **verified on the area build** (2026-11-02, gm/fix3 `51bce9eb`, both trees): `GMTest_opt02_resist` (regression, the definition read): 0 and 0, `ConGeralt`'s stamina regen kept; it failed first on a throwaway build with b3ec3609's code and data (gm/fix3-ff `efa40f24`, classic tree; the code checks also in the new tree) (0.25, 0.25).
+
+
 ### OPT-03 Vitality regen options
 
 | | |
@@ -322,7 +325,7 @@ The port's groups today: "Enemy scaling" and "Experience" complete with presets;
 | From | Item | OPT |
 |---|---|---|
 | UI (UI-05, the owner's F12 decision, 2026-10-21) | The Vitality regen lines without legacy's regen options: **the open temporary deviation "until OPT"** | OPT-03 ends it: the lines add the options (PO4) |
-| UI (hand-off) | `CR4IngameMenu`'s Ghost Mode units; the option strings not ported (2110992000, 180, 181, 183, 393, 394, 432, 447–450, 459; the rest went to DIFF-04 and XP-07) | OPT-01, OPT-03 to OPT-07; 448 and 449 are DIFF-04's port, attributed to OPT-07 and DIFF-04 |
+| UI (hand-off) | `CR4IngameMenu`'s Ghost Mode units; the option strings not ported, by PO2 and DO5 (2110992000, 180, 181, 183, 393, 394, 432, 447–450, 459; the rest went to DIFF-04 and XP-07) | OPT-01, OPT-03 to OPT-07; 448 and 449 are DIFF-04's port, attributed to OPT-07 and DIFF-04 |
 | UI, EFX (hand-offs to WGT) | `W3Boat.OnAreaEnter` and its message 2110992179 | OPT-04, shared with WGT |
 | EFX (EFX-10, PX9) | The web's release of the sign-select keys (`ForceDeactivateCastSignHold`) with legacy's instant casting | OPT-06 (DO5, PO13) |
 | EFX, FOOD (hand-offs to OPT and GEN) | Geralt's base Vitality regen and its options (`GetCombatVitalityRegen`, `GetOutOfCombatVitalityRegen`, `W3Effect_AutoVitalityRegen.SetEffectValue`) | OPT-02, OPT-03 |

@@ -67,3 +67,12 @@ timer function GMRestartRegen(dt : float, id : int)
 	StartVitalityRegen();
 	StartStaminaRegen();
 }
+
+// FOOD-04 (fix3, sweep D G6): Wolf liver is food (legacy moved it from the ingredients), so 5.x's load-time hack that
+// took it out of the potion quick slots, together with whatever was in the paired slot (slots 1 and 3, or 2 and 4),
+// is gone, as legacy disabled it (`//HACK_UnequipWolfLiver(); //modSigns` in OnSpawned). Every line is changed.
+@replaceMethod(W3PlayerWitcher)
+function HACK_UnequipWolfLiver()
+{
+	//modSigns: removed 5.x's body (it unequipped Wolf liver and the paired quick slot at every load)
+}

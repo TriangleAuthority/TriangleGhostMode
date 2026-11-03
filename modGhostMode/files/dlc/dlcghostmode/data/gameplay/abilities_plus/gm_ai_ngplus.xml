@@ -55,6 +55,10 @@
 			<ability name="MonsterLevelBonusLow" on_conflict="replace">
 				<tags> "base" </tags>
 			</ability>
+			<!-- gameplay/abilities_plus/opp_base_abl.xml -->
+			<ability name="_combatFollowerHardcoreV" on_conflict="replace">
+				<vitality type="mult" always_random="false" min="2.5" max="2.5" />
+			</ability>
 		</abilities>
 	</definitions>
 </redxml>

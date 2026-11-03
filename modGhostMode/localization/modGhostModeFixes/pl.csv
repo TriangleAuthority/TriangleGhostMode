@@ -1,0 +1,4 @@
+;meta[language=pl]
+; id      |key(hex)|key(str)| text
+; FIX-08: legacy's corrections of vanilla texts, by the vanilla id and key (docs/features/fix.md); legacy's ids for them stay unused.
+1092943|        |item_name_meteorite_plate|Meteorytowa płyta

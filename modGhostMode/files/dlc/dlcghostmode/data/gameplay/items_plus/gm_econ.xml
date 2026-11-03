@@ -4409,27 +4409,6 @@
 	</item>
 
 <!-- dlc/ep1/data/gameplay/items_plus/def_item_misc.xml -->
-	<item on_conflict="replace" 	name="Censer"
-			category="usable"
-			price = "1"
-			weight="0.2"
-			equip_slot=""
-			hold_slot="l_weapon"
-			equip_template="q602_item__censer"
-			hold_template="q106_magic_oillamp"			
-			icon_path="icons/inventory/quests/censer_64x64.png" 
-			localisation_key_name = "item_name_q602_censer"
-			localisation_key_description = "item_desc_q602_censer" >
-		<tags>QuickSlot,Quest, UI_OilLamp</tags>
-		<anim_actions>
-			<action
-				name="holster"
-				event="ItemUse"
-				act="hide_item_act"
-				deact="hide_item_deact">
-			</action>
-		</anim_actions>
-	</item>
 	<item on_conflict="replace" 	name="Shani Alcohol 1"
 			category="usable"
 			price = "5"

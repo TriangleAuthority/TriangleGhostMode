@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- Ghost Mode: overrides of vanilla player stat abilities (STAM-03, STAM-04, STAM-06). -->
+<!-- Ghost Mode: overrides of vanilla player stat abilities (STAM-03, STAM-04, STAM-06, OPT-02). -->
 <redxml>
   <definitions>
     <abilities>
@@ -46,6 +46,12 @@
         <vitalityRegen type="mult" always_random="false" min="0" max="0" />
         <vitalityCombatRegen type="add" always_random="false" min="0" max="0" />
         <vitalityCombatRegen type="mult" always_random="false" min="0" max="0" />
+      </ability>
+      <!-- OPT-02 (Geralt's base stats; fix3, sweep D G8, the owner's decision 2026-11-02): no natural poison or bleeding
+           resistance (vanilla 25% each), legacy's regular and NG+ value; the changelist does not mention it. -->
+      <ability name="ConGeralt" on_conflict="extend">
+        <poison_resistance_perc type="base" min="0" max="0" />
+        <bleeding_resistance_perc type="base" min="0" max="0" />
       </ability>
     </abilities>
   </definitions>

@@ -5,7 +5,7 @@ PROPS_LATER), with legacy's value also where 5.x changed it (LEGACY_OVER_5X) and
 the AI-C audit also the fake level addon where legacy made a fake level real, and files legacy left as 1.32's whose
 value 5.x changed (GAME_FILES, read from the games' bundles: the 5.x install and the legacy copy).
 
-For every binary file `docs/features/attribution.csv` gives AI-02, AI-06, AI-07, AI-18, AI-19 or AI-20, the edits legacy made to
+For every binary file `docs/features/attribution.csv` gives AI-02, AI-06, AI-07, AI-14, AI-18, AI-19 or AI-20, the edits legacy made to
 1.32's file (`master` -> `legacy-GM`) in the properties AI-A owns (PROPS) are derived object by object and
 applied to 5.x's file (`vanilla-5.x`) with `cr2w_patch.py`; the W3Edit re-save noise and every other
 property stay 5.x's. Rules:
@@ -43,7 +43,7 @@ import paths  # noqa: E402  (tools/: the shared --worktree argument)
 from gen_loot import Blobs, bin_chunks, fmt  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FEATURES = {"AI-02", "AI-06", "AI-07", "AI-18", "AI-19", "AI-20"}
+FEATURES = {"AI-02", "AI-06", "AI-07", "AI-14", "AI-18", "AI-19", "AI-20"}
 UNIT = re.compile(r'^(.*\.(?:w2ent|w2comm))::<file>$')
 
 # The properties AI-A owns, by class ("*": any class). Levels (AI-06: CNewNPC, W3MonsterHuntNPC, W3Rat,
@@ -61,11 +61,19 @@ PROPS = {
 }
 # AI parameters of later features, owned once the feature is in PORTED (AI-14, slice B3): the two quest fiends'
 # reachability tolerance (legacy: 5.x's 4 removed, so the class default 2 m), the Hakland mage's hit counter
-# (legacy: 5.x's false removed, so the default: only melee hits count).
+# (legacy: 5.x's false removed, so the default: only melee hits count); the golems', earth elementals' and Ifryts'
+# all-round slam (fix3, sweep C gap 1, changelist 136): every template's own `wide_arc` attack range 3 m (5.x: 2 m
+# for the Daos, 4 m for the golems and Ifryts), object by object, so an included base's copy stays 5.x's.
 PROPS_LATER = {
     ("CAIMonsterCombatParams", "reachabilityTolerance"): "AI-14",
     ("CAINpcWindMageCombatParams", "increaseHitCounterOnlyOnMelee"): "AI-14",
+    ("CConeAttackRange", "rangeMax"): "AI-14",
 }
+# Properties owned only in the files whose attribution note names them (the 22 golem, Dao and Ifryt files, "wide_arc"):
+# elsewhere W3Edit's re-save drops, adds and renumbers attack-range objects with no AI change. _SCOPE: the note of the
+# file plan() reads.
+FILE_SCOPED = {("CConeAttackRange", "rangeMax"): "wide_arc"}
+_SCOPE = [""]
 # AI-18 (slice C2): the special attacks' entity values (the Blood and Wine and Hearts of Stone projectiles' damage,
 # armor and Quen rules, the mages' quicksand, the toad's acid pool, the djinn's and the sorceresses' stones).
 for _cls, _props in {
@@ -193,6 +201,7 @@ HEADER_ONLY = {
 
 
 _UNITS = None
+_NOTES = {}  # {path: its attribution note}
 
 
 def units():
@@ -207,6 +216,7 @@ def units():
             feats = set(row["features"].split())
             if m and feats & FEATURES:
                 out["modGhostMode/" + m.group(1)] = feats
+                _NOTES["modGhostMode/" + m.group(1)] = row["note"]
     return out
 
 
@@ -220,7 +230,7 @@ def later(name):
 def owned(cls, name):
     f = PROPS_LATER.get((cls, name))
     if f:
-        return f in PORTED
+        return f in PORTED and ((cls, name) not in FILE_SCOPED or FILE_SCOPED[(cls, name)] in _SCOPE[0])
     return name in PROPS["*"] or name in PROPS.get(cls, ())
 
 
@@ -251,6 +261,8 @@ class Plan:
 
 def plan(blobs, path):
     p = Plan(path)
+    units()
+    _SCOPE[0] = _NOTES.get(path, "")
     if path in LATER_FILES:
         p.problems.append(LATER_FILES[path])
         return p

@@ -131,6 +131,9 @@ So in the port before ITEM-01 a sword or armor piece showed and needed 5.x's lev
 
 **Later:** —
 
+**Fix round fix3 (2026-11-02, sweep D G9, G10 and Q5; the owner's decision), NG+ only, offline checks:** ITEM-01's XML units are ported (`item_layer.py`): Hearts of Stone's NG+ `Body palms cut` (the bare-hands Body item the NG+ wedding suit's variants name, which 5.x's NG+ never defines) as legacy's new entry in `items_plus/gm_item.xml`, and the NG+ Censer's `UI_OilLamp` → `UI_Censer`, as the regular Censer (TAGS `ITEM-01`; the whole NG+ entry, with WGT's weight and ECON's price, now in `gm_item.xml` instead of `gm_econ.xml`). `gen_item.py --verify`: both legacy's (before: "not ported yet"); `dlc_conflicts.py` clean. The visible effect of `Body palms cut` in NG+: unverified.
+
+
 ### ITEM-02 Level of a level-scaled item
 
 | | |

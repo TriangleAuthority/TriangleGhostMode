@@ -36,13 +36,14 @@ function GMWardingQuen(out damageData : W3DamageAction)
 public var gmWardingQuens : int;
 
 // 5.x's body without its Quen on projectile hits (now in ReduceDamage, above). Changes marked //modSigns.
+// FIX-05: the throw abort's test is FIX's (fixes/throwAbort.ws, docs/features/fix.md).
 @replaceMethod(W3PlayerWitcher)
 function ReactToBeingHit(damageAction : W3DamageAction, optional buffNotApplied : bool) : bool
 {
 	var pam : W3PlayerAbilityManager;	//modSigns: chance and procQuen removed
 	var i : int;
 
-	if(!damageAction.IsDoTDamage() && damageAction.DealsAnyDamage())
+	if(GMFixHitAbortsThrow(damageAction))	//modSigns: FIX-05, only while throwing or aiming, and only for a hit with a hit reaction (legacy; fixes/throwAbort.ws)
 	{
 		if(inv.IsItemBomb(selectedItemId))
 		{

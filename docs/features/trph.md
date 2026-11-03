@@ -326,7 +326,7 @@ Done by a fresh session ([audit](../feature-mapping.md#audit-signing-a-feature-o
 |---|---|
 | WGT | `base_trophy_stats` weight 2 → 5 in the base game's and Blood and Wine's files, regular and NG+ (4 units, unattributed, weight-only); Hearts of Stone's `q602_pig_contest_trophy` item loses `EncumbranceOff` (regular and NG+, 2 units, unattributed); the weight nodes in `pig_contest_trophy_stats` (`max` 0 → 5) and `q603_sharley_trophy_stats` (2 → 5), inside TRPH-03's units: **written by `gen_trph.py`** with the abilities (legacy's 5), so WGT's generators skip the two names; the Wight trophy's +20 maximum weight (TRPH-02) meets legacy's weights (WGT's overburdened checks read the carry limit from the game) |
 | OPT | The Noonwraith trophy's +5 Vitality regen in and out of combat (TRPH-01) is scaled by legacy's Vitality regen options (`W3Effect_AutoVitalityRegen`, unattributed) |
-| FIX or ITEM | `FixQuestItems` (`gm_bugfixes.ws`, unattributed): its `camm_trophy` and `mq7017_zmora_trophy` cases are trophy items; TRPH-02 needs no fix-up |
+| FIX (FIX-NEW5, sweep D G11; FIX is mapped as an area of its own, the owner's decision 2026-11-02) | `FixQuestItems` (`gm_bugfixes.ws`, unattributed): its `camm_trophy` and `mq7017_zmora_trophy` cases are trophy items; TRPH-02 needs no fix-up |
 
 ### Save impact
 

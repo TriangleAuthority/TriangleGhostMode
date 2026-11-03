@@ -183,6 +183,9 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-23 from the chang
 
 **Verification (audit fix slice A, 2026-10-24, both trees; 5.x-GM `3c21723c`):** `gen_item.py --verify` 0 unexplained (Wolf liver's category, description and parts legacy's); scripted (`GMTest_food04eat`, in the regression): all 109 of legacy's foods and drinks (every item of legacy's `def_item_edibles.xml`, base and Blood and Wine, with a food or drink quality ability, Soltis Vodka and Cornucopia) pass `ConsumeItem`'s category test and give their effect when eaten through it; a Wolf liver eaten: category `edibles`, no dismantling parts, Well Fed 2 for 60 s, 5 toxicity, not drunk. Real action (quick slot 1 through the drink key's input event, classic tree): a Wolf liver eaten (1 → 0), Well Fed 2 for 60 s, 5 toxicity.
 
+**Fix round fix3 (2026-11-02, sweep D G6; the owner's decision): Wolf liver stays in its quick slot after a load.** 5.x's `HACK_UnequipWolfLiver`, which every load runs from `OnSpawned`, took Wolf liver out of the potion and food quick slots together with whatever was in the paired slot (1 and 3, or 2 and 4); legacy disabled it once Wolf liver became food. An empty `@replaceMethod` (`food/foodEffects.ws`). **verified on the area build** (2026-11-02, gm/fix3 `51bce9eb`, both trees): `GMTest_food04_liverslot` (regression, scripted): Wolf liver in slot 1 and a Bread in slot 3, then the function the load calls: both stay; it failed first on a throwaway build with b3ec3609's code and data (gm/fix3-ff `efa40f24`, classic tree; the code checks also in the new tree) (both taken out).
+
+
 ### FOOD-05 Alcohol, raw food and drunkenness
 
 | | |

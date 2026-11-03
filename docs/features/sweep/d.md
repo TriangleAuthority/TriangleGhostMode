@@ -190,3 +190,5 @@ The owner chose every recommendation of sweeps B, C and D ("all as recommended")
 - Hair: Yoana's armour gets Geralt's default hair (legacy) now; the grandmaster Feline armour's hair extensions wait for an on-screen look (an empty `item_extension` replace is untested).
 - FIX (legacy's bug fixes no area took) and HORSE (horseback hits, horse Axii's stamina) are mapped as areas of their own, each fix checked against 5.x first.
 - The six porter's calls not confirmed before (DEF-06, DEF-07, STAM-03 ×2, STAM-04, STAM-07) are confirmed.
+
+**Done** (fix round fix3, 2026-11-02; gm/fix3 `51bce9eb`, verified on the area build in both trees, regression 1,531 and 157): the slam radius (AI-14), the NG+ DLC armor (ARM-01) and followers (AI-04), horse trampling (SKL-07), the Caretaker's Shovel (SWD-03), Quen on load (SKL-11), Geralt's base resistances (OPT-02), the Wolf liver hack (FOOD-04), `Body palms cut` and the Censer tag (ITEM-01), Yoana's hair (ARM-01; the Feline extensions a temporary deviation), the stale notes above and B's two row suggestions, and the six porter's calls confirmed. FIX and HORSE: their own mapping.

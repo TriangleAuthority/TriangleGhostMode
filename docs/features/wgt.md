@@ -415,7 +415,7 @@ How the game counts weight decides what the numbers mean, so the table gives an 
 | OPT | The gameplay group's `GMSinkBoat`, `GMSinkBoatOverEnc`, `GMEncumbranceMultiplier`: entries, labels (2110992180, 181, 183), defaults (code: on, 20, 0) and presets (DW3) |
 | TRPH | `wight_trophy_stats`'s +20 carry capacity (unattributed); the bonuses in the trophy abilities WGT-05 shares (`pig_contest_trophy_stats`, `q603_sharley_trophy_stats`) |
 | ARM | `NGP Red Wolf Pants 2 _Stats`'s NG+-only stats (WGT-03 takes its weight); the port's NG+ Kaer Morhen pieces name 16 `Base Kaer Morhen … _Stats` abilities that the DLC's `items_plus` never defines (see below) |
-| FIX (or TRPH) | `camm_trophy`'s `Quest` tag removed (unattributed), with `FixQuestItems` |
+| FIX (FIX-NEW5, sweep D G11; mapped as an area of its own, the owner's decision 2026-11-02; TRPH-02 took the tag) | `camm_trophy`'s `Quest` tag removed (unattributed), with `FixQuestItems` |
 | UI (or ITEM) | The NG+ Censer's `UI_Censer` tag (WGT-05 carries its weight) |
 | HORSE | None: PW9 takes the blinders' panic and the base horse's sprint cost into WGT-06 (the alternative: HORSE, unmapped) |
 | ITEM | `Body palms cut` (Hearts of Stone's NG+ `def_item_misc.xml`): legacy added the missing NG+ definition that NG+'s armour variants name; a Body item, never counted, so not WGT's; attributed to ITEM-01 as not ported, for ITEM (WGT audit F6) |

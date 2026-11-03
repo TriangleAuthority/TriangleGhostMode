@@ -406,6 +406,7 @@ function GMTest_ai14_after()
 
 	cyclops.Destroy();
 	arachas.Destroy();
+	GMTest_ai14_slam();	// fix3: the golems' and elementals' slam radius
 	npcs.Clear();
 	GetWitcherPlayer().GMTestAi14Set(npcs, NULL);
 }
@@ -450,4 +451,41 @@ exec function gmtest_ai14_bring(d : float)
 	pos = thePlayer.GetWorldPosition() + thePlayer.GetHeadingVector() * d;
 	npc.TeleportWithRotation(pos, VecToRotation(thePlayer.GetWorldPosition() - pos));
 	LogChannel('GMTest', "INFO AI-14 " + npc.GetReadableName() + " put " + NoTrailZeros(d) + " m in front of Geralt");
+}
+
+// AI-14 (fix3, sweep C gap 1, changelist 136): the all-round slam (the template's own `wide_arc` attack range) of every
+// golem, earth elemental (Dao) and Ifryt reaches legacy's 3 m (5.x: 2 m for the Daos, 4 m for the golems, the Ifryts,
+// q104's and q310's elementals), as the game reads it for a spawned NPC. In gmtest_panel() (heavy templates).
+function GMTest_ai14_slam()
+{
+	var paths, labels : array<string>;
+	var npc : CNewNPC;
+	var range : CAIAttackRange;
+	var r : float;
+	var i : int;
+	var ok : bool;
+	var text : string;
+
+	paths.PushBack("characters/npc_entities/monsters/golem_lvl1.w2ent");	labels.PushBack("golem (5.x 4)");
+	paths.PushBack("characters/npc_entities/monsters/golem_lvl2__ifryt.w2ent");	labels.PushBack("Ifryt (5.x 4)");
+	paths.PushBack("characters/npc_entities/monsters/elemental_dao_lvl1.w2ent");	labels.PushBack("earth elemental (5.x 2)");
+	paths.PushBack("quests/generic_quests/novigrad/quest_files/mh306_dao/characters/mh306_dao.w2ent");	labels.PushBack("mh306's Dao (5.x 2)");
+	paths.PushBack("quests/part_1/quest_files/q104_mine/characters/q104_dao.w2ent");	labels.PushBack("q104's Dao (5.x 4)");
+	ok = true;
+	for(i = 0; i < paths.Size(); i += 1)
+	{
+		r = -1;
+		npc = GMTestAi06Spawn(paths[i], 40);
+		if(npc)
+		{
+			range = theGame.GetAttackRangeForEntity(npc, 'wide_arc');
+			if(range)
+				r = range.rangeMax;
+			npc.Destroy();
+		}
+		if(AbsF(r - 3) > 0.001)
+			ok = false;
+		text += ", " + labels[i] + " " + NoTrailZeros(r);
+	}
+	GMTestReport(ok, "AI-14 the all-round slam (wide_arc) reaches 3 m for every golem, elemental and Ifryt (legacy)" + text + " (-1: not spawned or no range)");
 }

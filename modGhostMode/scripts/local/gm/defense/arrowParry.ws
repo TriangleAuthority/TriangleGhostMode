@@ -5,7 +5,10 @@
 
 // 5.x body; changes marked //modSigns. Glyphword 1 (Deflection) as legacy since ENCH-11: 5.x's branch before the parry
 // removed, and the armor bounces only the arrows Geralt does not parry (enchantments/deflection.ws). Legacy's other changes here (collision groups,
-// Deflection's damage) belong to FIX and SKL; Yoana's armor's bounce chance is ARM-01's.
+// Deflection's damage) belong to FIX and SKL. The armour of Yoana's test (sq108_heavy_armor) bounces every arrow through
+// its own bounce_arrows ability (5.x's BOUNCE_ARROWS_ABILITY branch below); the q108_bounce_arrows chance line is ARM-01's,
+// for q108 Medium armor 10. FIX-01 (the arrow's stop groups) and FIX-02 (an arrow with no entity hits Geralt in the test
+// armour, so it bounces) are FIX's lines here (docs/features/fix.md).
 @replaceMethod(W3ArrowProjectile)
 function OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
 {
@@ -42,7 +45,10 @@ function OnProjectileCollision( pos, normal : Vector, collidingComponent : CComp
 		RemoveTimer( 'CheckIfInfWaterLoop' );
 	
 	super.OnProjectileCollision(pos, normal, collidingComponent, hitCollisionsGroups, actorIndex, shapeIndex);
-	
+
+	if(!victim && thePlayer.HasAbility('sq108_heavy_armor _Stats', true))	//modSigns: FIX-02, a collision with no entity while Geralt wears Yoana's test armor hits him, so the arrow bounces off (legacy, changelist 144)
+		victim = thePlayer;	//modSigns: FIX-02
+
 	if( collidingComponent && !hitCollisionsGroups.Contains( 'Static' ) )
 	{	
 		if ( !victim || collidedEntities.Contains(victim) || victim == caster )
@@ -56,7 +62,7 @@ function OnProjectileCollision( pos, normal : Vector, collidingComponent : CComp
 		}
 		
 	}
-	else if ( hitCollisionsGroups.Contains( 'Terrain' ) || hitCollisionsGroups.Contains( 'Static' ) || hitCollisionsGroups.Contains( 'Foliage' ) )	 
+	else if ( hitCollisionsGroups.Contains( 'Terrain' ) || hitCollisionsGroups.Contains( 'Static' ) || hitCollisionsGroups.Contains( 'Foliage' ) || hitCollisionsGroups.Contains( 'Debris' ) || hitCollisionsGroups.Contains( 'Destructible' ) || hitCollisionsGroups.Contains( 'RigidBody' ) || hitCollisionsGroups.Contains( 'Door' ) || hitCollisionsGroups.Contains( 'Platforms' ) || hitCollisionsGroups.Contains( 'Fence' ) )	//modSigns: FIX-01, debris, destructibles, physics objects, doors, platforms and fences stop the arrow too (legacy, W3EE)
 	{
 		StopProjectile();
 		isActive = false;

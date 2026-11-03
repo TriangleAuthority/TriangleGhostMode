@@ -638,7 +638,7 @@ All 17 deviations recorded "until UI" and STAM-05's row land in a UI feature (li
 
 | Area | Changes |
 |---|---|
-| OPT | `CR4IngameMenu`'s Ghost Mode units, the option strings not ported yet (2110992000, 002–009, 016, 180, 181, 183, 250–255, 270, 271, 300, 314, 327, 328, 393, 394, 432, 447–453, 459, 495–498; the ported ones are now attributed to OPT-01) |
+| OPT | `CR4IngameMenu`'s Ghost Mode units, the option strings (ported with OPT, 2026-11-02, but those of `GMVersion`, the "Mods" label and instant casting, by OPT's PO2 and DO5; at the hand-off: 002–009, 016, 180, 181, 183, 250–255, 270, 271, 300, 314, 327, 328, 393, 394, 432, 447–453, 459, 495–498; the ported ones are now attributed to OPT-01)) |
 | DEP | The Community Patch – Base menu units listed in [Scope](#scope) |
 | XP | `CalculateExperiencePoints` (where the kill counter is incremented), `GetExpByEnemyType`, `GetExpModifierByEnemyType`; UI-10's counter and `GetEnemyTypeByAbility` are shared |
 | DIFF | The displayed level's fake addon and cap in `GetExperienceDifferenceLevelName` |

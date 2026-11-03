@@ -26,7 +26,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # An area adds its features on its own line; WGT, OPT and TRPH have theirs ready (empty).
 PORTED = set()
 # ITEM
-PORTED |= {"ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11"}
+PORTED |= {"ITEM-01", "ITEM-03", "ITEM-04", "ITEM-05", "ITEM-06", "ITEM-07", "ITEM-08", "ITEM-09", "ITEM-10", "ITEM-11"}  # ITEM-01's XML units: fix3 (NG+)
 # CRAFT
 PORTED |= {"CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06", "CRAFT-07", "CRAFT-08", "CRAFT-09"}
 # LOOT
@@ -43,6 +43,8 @@ PORTED |= {"WGT-03", "WGT-04", "WGT-05", "WGT-06"}
 PORTED |= set()
 # TRPH
 PORTED |= {"TRPH-01", "TRPH-02", "TRPH-03"}
+# FIX (fix.md): slice K4, the quest items' tags (FIX-03)
+PORTED |= {"FIX-03"}
 # (the features' prefixes this layer reads from attribution.csv)
 AREAS = ()
 # ITEM, CRAFT, LOOT, FOOD, XBOW, ECON
@@ -53,6 +55,8 @@ AREAS += ("WGT-",)
 AREAS += ()
 # TRPH
 AREAS += ("TRPH-",)
+# FIX
+AREAS += ("FIX-",)
 # ECON's features (prices and price tags, docs/features/econ.md): they never make a tool write an entry whole
 # by themselves. A tool that writes an entry for another area's change applies them too (`apply_item`);
 # entries with ECON's changes only are `gen_econ.py`'s (short `extend` entries, the owner's form, 2026-11-01).
@@ -69,6 +73,7 @@ TAGS = {
     "ITEM-03": {"AutogenUseLevelRange", "AutogenForceLevel", "EP1"},
     "ITEM-04": {"Autogen"},
     "ITEM-05": {"Autogen", "AutogenForceLevel"},
+    "ITEM-01": {"UI_Censer", "UI_OilLamp"},  # fix3 (sweep D G9): NG+'s Censer tagged a censer for the UI, as the regular one
     "ITEM-08": {"DoNotEnhance", "DoNotEnhancem"},
     "XBOW-03": {"mod_nosale", "mod_nosalem"},  # bolts sellable; the quest bolt's misspelt mod_nosalem fixed (xbow.md)
     "CRAFT-08": {"mod_alchemy_table"},  # PE13: the tag the dismantling station reads (Protofleder Mutagen)
@@ -82,6 +87,9 @@ TAGS.update({"WGT-05": {"EncumbranceOff"}})
 TAGS.update({})
 # TRPH
 TAGS.update({"TRPH-01": {"Quest"}, "TRPH-02": {"Quest"}})  # NG+'s Wyvern trophy mq1051 and the Camerlengo's Seal no longer quest items (PT4)
+# FIX: Vivienne's feather and Thaler's wearable monocle no longer quest items, the Hearts of Stone note ep1_poi_12_note_b a
+# Hearts of Stone quest item (QuestEP1), as legacy (FIX-03)
+TAGS.update({"FIX-03": {"Quest", "QuestEP1"}})
 # The ability nodes each feature owns.
 NODES = {
     "ITEM-03": {"item_level_min", "item_level_max"},

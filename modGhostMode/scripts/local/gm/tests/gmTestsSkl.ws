@@ -2841,6 +2841,8 @@ function GMTest_skl_values()
 	var p, tree : string;
 	var n : int;
 
+	GMTest_skl07_trample();	// fix3 (data, read in both trees)
+	GMTest_skl11_load();	// fix3: Quen not restored at a load
 	if(GMIsClassicProfileInForce())
 		tree = "classic";
 	else if(GMIsNewTreeProfileInForce())
@@ -3345,4 +3347,59 @@ function GMTest_skl07_foa_keep()
 function GMTestSetTempSignSkills(list : array<SSimpleSkill>)
 {
 	tempLearnedSignSkills = list;
+}
+
+// SKL-07 (fix3, sweep C gap 4): no adrenaline from horse trampling: the horse's collision attack's ability
+// (attack_speed_based, horseComponent.ws) has no focus_gain (legacy; 5.x 0.025).
+function GMTest_skl07_trample()
+{
+	var min, max : SAbilityAttributeValue;
+	var gain : float;
+	var tags : array<name>;
+
+	theGame.GetDefinitionsManager().GetAbilityAttributeValue('attack_speed_based', 'focus_gain', min, max);
+	gain = min.valueBase + min.valueAdditive;	// a base node: CalculateAttributeValue reads 0 without a multiplier
+	theGame.GetDefinitionsManager().GetAbilityTags('attack_speed_based', tags);
+	GMTestReport(gain == 0 && tags.Contains('attack_speed_based'), "SKL-07 horse trampling's attack (attack_speed_based) gives no adrenaline: focus_gain " + gain + " (legacy 0; 5.x 0.025), its tag kept " + tags.Contains('attack_speed_based'));
+}
+
+// SKL-11 (fix3, sweep D G4): an active Quen shield is not restored when a save loads (legacy). As a load runs it:
+// the OnSpawned wrapper's rule (GMQuenNotRestoredOnLoad) on a Quen saved at 500 health and 20 s, then 5.x's
+// RestoreQuen with the saved values, as 5.x's OnSpawned calls it for a restored player. 5.x: the shield comes back.
+function GMTest_skl11_load()
+{
+	var w : W3PlayerWitcher;
+	var restored, active : bool;
+	var h, d : float;
+
+	w = GetWitcherPlayer();
+	h = w.savedQuenHealth;
+	d = w.savedQuenDuration;
+	w.FinishQuen(true);
+	w.savedQuenHealth = 500;
+	w.savedQuenDuration = 20;
+	w.GMQuenNotRestoredOnLoad();
+	restored = w.RestoreQuen(w.savedQuenHealth, w.savedQuenDuration);
+	active = w.IsAnyQuenActive();
+	GMTestReport(!restored && !active && w.savedQuenHealth == 0 && w.savedQuenDuration == 0,
+		"SKL-11 a Quen active when the game was saved is not restored at the load: restored " + restored + ", shield up " + active + ", saved values " + w.savedQuenHealth + ", " + w.savedQuenDuration + " (legacy: false, false, 0, 0; 5.x restores it)");
+	w.FinishQuen(true);
+	w.RemoveAllBuffsOfType(EET_GMQuenCooldown);
+	w.savedQuenHealth = h;
+	w.savedQuenDuration = d;
+}
+
+// fix3's new checks on their own (each also runs in the regression: the SKL, SWD, OPT, FOOD and ARM ones in
+// gmtest_regress(), AI-14's slam in gmtest_panel()), for a fail-first build and a quick re-run.
+exec function gmtest_fix3()
+{
+	thePlayer.GMTestCount(true, true);
+	GMTest_skl07_trample();
+	GMTest_skl11_load();
+	GMTest_swd03_shovel();
+	GMTest_opt02_resist();
+	GMTest_food04_liverslot();
+	GMTest_arm01_hair();
+	GMTest_ai14_slam();
+	LogChannel('GMTest', "SUMMARY fix3: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }

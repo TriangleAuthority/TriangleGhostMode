@@ -2,7 +2,8 @@
 // Bloodbath's bonus lowered by damage taken (5.x: the effect ends); MUT-10 Mutated Skin's trigger and
 // the Vitality drain it takes over; MUT-12: no death trigger for Mutation 11; ARM-13: the Tesham Mutna
 // set's heal on damage dealt (armor/vampireSet.ws). EFX-09: a LastBreath monster (rotfiend) killed by a
-// frozen hit gets the tag ExplodeNoDamage (effects/frozenRotfiend.ws).
+// frozen hit gets the tag ExplodeNoDamage (effects/frozenRotfiend.ws). SWD-03: the Caretaker's Shovel's leech, by the
+// victim's health type (swords/caretakerShovel.ws removes 5.x's from CR4Player.OnProcessActionPost).
 // See docs/features/mut.md.
 
 @replaceMethod(W3PlayerWitcher)
@@ -244,7 +245,23 @@ function OnTakeDamage( action : W3DamageAction )
 				lifeLeech = 0;
 			
 			thePlayer.GainStat(BCS_Vitality, lifeLeech);
-		}			
+		}
+		if((W3Action_Attack)action && thePlayer.inv.GetItemName(((W3Action_Attack)action).GetWeaponId()) == 'PC Caretaker Shovel')	//modSigns: SWD-03, the Caretaker's Shovel heals by the victim's health type (legacy; 5.x read Geralt's for Essence, in CR4Player.OnProcessActionPost)
+		{	//modSigns
+			lifeLeech = CalculateAttributeValue(thePlayer.inv.GetItemAttributeValue(((W3Action_Attack)action).GetWeaponId() ,'lifesteal'));	//modSigns
+			if(UsesVitality())	//modSigns
+				lifeLeech *= action.processedDmg.vitalityDamage;	//modSigns
+			else if (UsesEssence())	//modSigns
+				lifeLeech *= action.processedDmg.essenceDamage;	//modSigns
+			else	//modSigns
+				lifeLeech = 0;	//modSigns
+			if(lifeLeech > 0)	//modSigns
+			{	//modSigns
+				thePlayer.inv.PlayItemEffect(((W3Action_Attack)action).GetWeaponId(), 'stab_attack');	//modSigns
+				thePlayer.PlayEffect('drain_energy_caretaker_shovel');	//modSigns
+				thePlayer.GainStat(BCS_Vitality, lifeLeech);	//modSigns
+			}	//modSigns
+		}	//modSigns
 		if( GetWitcherPlayer() && GetWitcherPlayer().IsSetBonusActive( EISB_Vampire ) && !GetWitcherPlayer().IsInFistFight() && action.DealsAnyDamage() && !action.IsDoTDamage() )	//modSigns: ARM-13, the Tesham Mutna set heals on damage dealt (legacy)
 			GetWitcherPlayer().VampiricSetAbilityRegeneration();	//modSigns
 	}

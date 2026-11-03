@@ -16,6 +16,7 @@ function GMTest_opt()
 {
 	GMTest_opt_o0();
 	GMTest_opt_o1();
+	GMTest_opt02_resist();	// fix3
 	GMTest_opt_o2();
 	GMTest_opt_o3();
 }
@@ -824,4 +825,23 @@ exec function gmtest_opt_o3_web(want : bool)
 exec function gmtest_opt_o3_state()
 {
 	LogChannel('GMTest', "INFO OPT O3 Quick Sign Casting: setting '" + theGame.GetInGameConfigWrapper().GetVarValue('Gameplay', 'EnableAlternateSignCasting') + "', input handler " + thePlayer.GetInputHandler().GetIsAltSignCasting());
+}
+
+// OPT-02, Geralt's base stats (fix3, sweep D G8): no natural poison or bleeding resistance (legacy 0; 5.x 25% each), as
+// ConGeralt gives it, the other ConGeralt nodes (OPT-02's regen 0, STAM-04's stamina regen) kept.
+function GMTest_opt02_resist()
+{
+	var dm : CDefinitionsManagerAccessor;
+	var min, max : SAbilityAttributeValue;
+	var poison, bleeding, regen : float;
+
+	dm = theGame.GetDefinitionsManager();
+	dm.GetAbilityAttributeValue('ConGeralt', 'poison_resistance_perc', min, max);
+	poison = min.valueBase + min.valueAdditive;	// base nodes: CalculateAttributeValue reads 0 without a multiplier
+	dm.GetAbilityAttributeValue('ConGeralt', 'bleeding_resistance_perc', min, max);
+	bleeding = min.valueBase + min.valueAdditive;
+	dm.GetAbilityAttributeValue('ConGeralt', 'staminaRegen', min, max);
+	regen = min.valueMultiplicative;
+	GMTestReport(poison == 0 && bleeding == 0 && AbsF(regen - 0.15) < 0.0001,
+		"OPT-02 Geralt's base poison and bleeding resistance: " + poison + ", " + bleeding + " (legacy 0, 0; 5.x 0.25 each), ConGeralt's other nodes kept (stamina regen multiplier " + regen + ", 0.15)");
 }

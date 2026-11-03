@@ -184,7 +184,7 @@ Legacy's code for an attack that cannot be parried and knocks down or staggers (
 
 - **Deviation:** 5.x's spear break is kept: countering a two-handed spear breaks it. Legacy removed the branch as "not working anyway", which 5.x fixed (project owner, 2026-10-04).
 - **Deviation:** a counter blocks all of the attack's effects. Vanilla's code, and legacy's, applied them although the hit dealt no damage: a defect against the changelist's "prevent all negative effects" (project owner, 2026-10-04).
-- **Deviation:** counters of attacks that cannot be parried do not count toward the counter achievement and Learning the Ropes (vanilla's `TestParryAndCounter`); legacy counted them (porter's call, not confirmed by the owner).
+- **Deviation:** counters of attacks that cannot be parried do not count toward the counter achievement and Learning the Ropes (vanilla's `TestParryAndCounter`); legacy counted them (porter's call, confirmed by the owner, 2026-11-02).
 - Legacy's Lynx set change here (a kick or bash counter keeps the chain going) is ported with ARM-06 (2026-10-17). Perk 21's counter stamina is ported (SKL-18, 2026-10-15); Mutation 8 first in the repel order with MUT-06 (2026-10-17).
 
 **Slices:**
@@ -221,7 +221,7 @@ What "all the light attack bonuses" covers: the bonuses that ask `IsLightAttack`
 
 **Decisions:** keep vanilla's flag (5.x's skills need it) and add Ghost Mode's per-enemy flag beside it (an implementation difference only; behaviour as legacy). The flag is a deadline in engine time (3 s), so it needs no timer function and is not saved (legacy's timer; same behaviour). Vanilla's flag keeps the two bugs the changelist lists as fixed (not reset after a missed counter; only the first of several simultaneous counters counted); they now touch only what still reads it: 5.x's `S_Sword_s31` (Counterattack reads the enemy's flag since SKL-05, Deadly Counter since MUT-06).
 
-- **Deviation:** the +25% crit goes to the player's light and heavy attacks, not to melee attacks that are neither (e.g. `attack_super_heavy`, `attack_speed_based`); legacy gave it to every melee attack action. The crit function is asked with neither light nor heavy for bolts, signs and other actions too, so the wrapper cannot tell the rest apart (porter's call, not confirmed by the owner).
+- **Deviation:** the +25% crit goes to the player's light and heavy attacks, not to melee attacks that are neither (e.g. `attack_super_heavy`, `attack_speed_based`); legacy gave it to every melee attack action. The crit function is asked with neither light nor heavy for bolts, signs and other actions too, so the wrapper cannot tell the rest apart (porter's call, confirmed by the owner, 2026-11-02).
 
 - **Deviation:** a counter gets a light attack's attack power bonuses (Muscle Memory, the light-attack perks), as the changelist says; legacy's code gave it neither. Since SKL-03 ported D47 (2026-10-14), a counter gets Muscle Memory's attack power once, as every fast attack does. Counters stay distinguishable from light attacks, for later counter-only rules (project owner, 2026-10-04, revised 2026-10-11).
 

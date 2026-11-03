@@ -43,6 +43,7 @@ function GMTest_swd()
 	GMTest_swd01();
 	GMTest_swd02();
 	GMTest_swd03();
+	GMTest_swd03_shovel();	// fix3: the Caretaker's Shovel on every enemy type
 	GMTest_swd04();
 	GMTest_swd05();
 	GMTest_swd06();
@@ -616,4 +617,65 @@ timer function GMTestSwdDrawWatch(dt : float, id : int)
 		RemoveTimer('GMTestSwdDrawWatch');
 		LogChannel('GMTest', "INFO SWD-08 after 4 s: held " + inv.IsItemHeld(gmTestSwdDrawId) + ", mounted " + inv.IsItemMounted(gmTestSwdDrawId) + ", notifications seen " + gmTestSwdDrawSeen.Size());
 	}
+}
+
+// SWD-03 (fix3, sweep B and D G7): the Caretaker's Shovel (Hearts of Stone) heals Geralt by its lifesteal share of each
+// hit's damage on every enemy type, read by the victim's health type: a bandit (Vitality) and a wraith (Essence), hit
+// by script with the shovel as the weapon (a W3Action_Attack with 100 direct damage, plus the shovel's own). Once per
+// hit: the leech is in the victim's CActor.OnTakeDamage only (legacy). 5.x healed nothing on an Essence enemy.
+function GMTestSwd03ShovelHit(npc : CNewNPC, shovel : SItemUniqueId, out expected : float) : float
+{
+	var w : W3PlayerWitcher;
+	var action : W3Action_Attack;
+	var leech, before : float;
+
+	w = GetWitcherPlayer();
+	expected = -1;
+	if(!npc)
+		return -1;
+	leech = CalculateAttributeValue(w.inv.GetItemAttributeValue(shovel, 'lifesteal'));
+	w.ForceSetStat(BCS_Vitality, w.GetStatMax(BCS_Vitality) * 0.5);
+	before = w.GetStat(BCS_Vitality);
+	action = new W3Action_Attack in theGame.damageMgr;
+	action.Init(w, npc, NULL, shovel, 'attack_light', w.GetName(), EHRT_Light, false, false, '', AST_Jab, ASD_UpDown, true, false, false, false);
+	action.AddDamage(theGame.params.DAMAGE_NAME_DIRECT, 100);
+	action.SetSuppressHitSounds(true);
+	action.SetHitAnimationPlayType(EAHA_ForceNo);
+	theGame.damageMgr.ProcessAction(action);
+	if(npc.UsesVitality())
+		expected = leech * action.processedDmg.vitalityDamage;
+	else if(npc.UsesEssence())
+		expected = leech * action.processedDmg.essenceDamage;
+	delete action;
+	return w.GetStat(BCS_Vitality) - before;
+}
+
+function GMTest_swd03_shovel()
+{
+	var w : W3PlayerWitcher;
+	var ids : array<SItemUniqueId>;
+	var human, monster : CNewNPC;
+	var healH, healM, expH, expM, vit, leech : float;
+	var essence : bool;
+
+	w = GetWitcherPlayer();
+	vit = w.GetStat(BCS_Vitality);
+	ids = w.inv.AddAnItem('PC Caretaker Shovel', 1, true, true, false);
+	leech = CalculateAttributeValue(w.inv.GetItemAttributeValue(ids[0], 'lifesteal'));
+	human = GMTestAi06Spawn("dlc/dlc7/data/characters/sq107_bandit_lvl1_mortal.w2ent", 40);
+	monster = GMTestAi06Spawn("characters/npc_entities/monsters/wraith_lvl1.w2ent", 44);
+	if(monster)
+		essence = monster.UsesEssence();
+	healH = GMTestSwd03ShovelHit(human, ids[0], expH);
+	healM = GMTestSwd03ShovelHit(monster, ids[0], expM);
+	w.ForceSetStat(BCS_Vitality, vit);
+	w.inv.RemoveItem(ids[0], 1);
+	if(human)
+		human.Destroy();
+	if(monster)
+		monster.Destroy();
+	GMTestReport(leech > 0 && expH > 0 && AbsF(healH - expH) < 0.5,
+		"SWD-03 the Caretaker's Shovel heals on a human (Vitality): +" + NoTrailZeros(healH) + " for " + NoTrailZeros(expH) + " (lifesteal " + NoTrailZeros(leech) + " x the hit's Vitality damage, once)");
+	GMTestReport(leech > 0 && essence && expM > 0 && AbsF(healM - expM) < 0.5,
+		"SWD-03 the Caretaker's Shovel heals on a monster (Essence " + essence + "): +" + NoTrailZeros(healM) + " for " + NoTrailZeros(expM) + " (legacy; 5.x 0: it read Geralt's health type)");
 }
