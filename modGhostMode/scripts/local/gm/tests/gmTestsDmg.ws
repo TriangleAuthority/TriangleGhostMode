@@ -853,6 +853,59 @@ function GMTest_dmg06()
 		"DMG-06 sign intensity curve: 100% +0, 150% +0.40, 200% +0.75, 300% +1.30, 600% and more +2.0 ("
 		+ NoTrailZeros(GMSignPowerStatToPowerBonus(1.5)) + ", " + NoTrailZeros(GMSignPowerStatToPowerBonus(2)) + ", " + NoTrailZeros(GMSignPowerStatToPowerBonus(3))
 		+ ", " + NoTrailZeros(GMSignPowerStatToPowerBonus(6)) + ", " + NoTrailZeros(GMSignPowerStatToPowerBonus(10)) + ")");
+	GMTest_dmg01_armorflag();
+}
+
+// One scripted hit of Geralt's (one damage type, no weapon, no hit animation) on victim; whether the hit was marked
+// as stopped by armor (the flag that lets a parried or countered hit spark), and the damage it dealt.
+function GMTestDmgArmorFlag(victim : CActor, dmgType : name, value : float, out dealt : bool) : bool
+{
+	var action : W3Action_Attack;
+	var flag : bool;
+
+	action = new W3Action_Attack in theGame.damageMgr;
+	action.Init(thePlayer, victim, NULL, GetInvalidUniqueId(), 'attack_light', thePlayer.GetName(), EHRT_Light,
+		false, false, 'attack_light', AST_Jab, ASD_UpDown, true, false, false, false);
+	action.AddDamage(dmgType, value);
+	action.SetSuppressHitSounds(true);
+	action.SetHitAnimationPlayType(EAHA_ForceNo);
+	theGame.damageMgr.ProcessAction(action);
+	flag = action.DidArmorReduceDamageToZero();
+	dealt = action.DealsAnyDamage();
+	delete action;
+	victim.ForceSetStat(BCS_Vitality, victim.GetStatMax(BCS_Vitality));
+	return flag;
+}
+
+// DMG-01 (whole-port audit A2-5): legacy's CalculateDamage returns 0 at once for a damage type the victim's stat
+// ignores and for a value of 0 or less, and a hit is marked stopped by armor only when it dealt damage up to the
+// final-damage step and none after it (ProcessDamageModification), not per damage type. On a bandit (Vitality,
+// armored), hostile for the call: 1 SilverDamage (Vitality ignores it) and 1 SlashingDamage (below its armor) deal
+// nothing and are not marked [the port before: both marked, by the per-type rule].
+function GMTest_dmg01_armorflag()
+{
+	var npc : CNewNPC;
+	var armor : float;
+	var flagSilver, flagSlash, dealtSilver, dealtSlash : bool;
+
+	npc = GMTestDiff04SpawnLoose(34);
+	if(!npc)
+	{
+		GMTestReport(false, "DMG-01 the armor-flag bandit did not spawn");
+		return;
+	}
+	npc.RecalcLevel();	// its level bonuses and DMG-15's armor ability, as the spawn's timer gives them
+	if(CalculateAttributeValue(npc.GetTotalArmor()) <= 1)
+		GMTestDummySet(npc, 'armor', 20);
+	npc.SetAttitude(thePlayer, AIA_Hostile);
+	armor = CalculateAttributeValue(npc.GetTotalArmor());
+	flagSilver = GMTestDmgArmorFlag(npc, theGame.params.DAMAGE_NAME_SILVER, 1, dealtSilver);
+	flagSlash = GMTestDmgArmorFlag(npc, theGame.params.DAMAGE_NAME_SLASHING, 1, dealtSlash);
+	npc.SetAttitude(thePlayer, AIA_Neutral);
+	GMTestReport(armor > 1 && !flagSilver && !dealtSilver && !flagSlash && !dealtSlash, "DMG-01 no armor flag without the final-damage step (legacy), a bandit of armor " + NoTrailZeros(armor)
+		+ ": 1 silver (Vitality ignores it) marked " + flagSilver + ", dealt " + dealtSilver + "; 1 slashing (stopped by armor) marked " + flagSlash + ", dealt " + dealtSlash
+		+ " (want false each; the port before A2-5: marked)");
+	npc.Destroy();
 }
 
 // Makes Geralt bare-handed (fists), for gmtest_dmg06a; takes a moment.

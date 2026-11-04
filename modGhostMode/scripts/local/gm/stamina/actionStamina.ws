@@ -10,11 +10,20 @@ var gmStaminaRefusals : int;		// count of actions refused for lack of stamina (f
 @addField(CR4Player)
 var gmSuppressAttackDrain : bool;	// set while the input buffer runs: its attack drains cost nothing
 
+@addField(CR4Player)
+var gmStaminaRefusalSound : string;	// the last refusal's sound (for tests)
+
+// lowStaminaWarning: legacy's sound for bombs, the crossbow, items and horseback attacks
+// (gui_ingame_low_stamina_warning); attacks, dodges and rolls on foot play gui_no_stamina.
 @addMethod(CR4Player)
-function GMRefuseForStamina()
+function GMRefuseForStamina(optional lowStaminaWarning : bool)
 {
 	gmStaminaRefusals += 1;
-	SoundEvent("gui_no_stamina");
+	if(lowStaminaWarning)
+		gmStaminaRefusalSound = "gui_ingame_low_stamina_warning";
+	else
+		gmStaminaRefusalSound = "gui_no_stamina";
+	SoundEvent(gmStaminaRefusalSound);
 }
 
 @addMethod(CR4Player)
@@ -53,7 +62,7 @@ function EvadePressed(bufferAction : EBufferActionType)
 }
 
 // STAM-03: vanilla pays light and heavy attacks when the input buffer starts them; those drains cost
-// nothing (see GMModStaminaCost) and the attack pays in DoAttack instead.
+// nothing (GMIsAttackDrainSuppressed, in the cost wrapper in staminaCosts.ws) and the attack pays in DoAttack instead.
 @wrapMethod(W3PlayerWitcher)
 function ProcessCombatActionBuffer() : bool
 {
@@ -94,7 +103,7 @@ function GMRefuseItemForStamina(action : SInputAction) : bool
 	if(thePlayer.HasStaminaToUseAction(ESAT_UsableItem))
 		return false;
 	if(IsPressed(action))
-		thePlayer.GMRefuseForStamina();
+		thePlayer.GMRefuseForStamina(true);
 	return true;
 }
 

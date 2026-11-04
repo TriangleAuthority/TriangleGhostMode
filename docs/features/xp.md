@@ -26,7 +26,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-31 from the chang
 | The XP-on-kill bonuses of swords and crossbows removed (`human_exp_bonus_when_fatal`, `nonhuman_exp_bonus_when_fatal`), also 5.x's new swords | SWD-02, SWD-03, SWD-04, SWD-10, XBOW-02 (signed off) | item data |
 | The character panel's experience bonus lines removed | UI-05 (signed off) | |
 | The level-difference thresholds 6 and 15 that quest and kill experience read | AI-01 (DA4, signed off) | `W3GameParams` defaults |
-| The quest rewards' items | LOOT-07 (signed off) | `gen_loot.py`'s reward overrides, whose experience, level and gold stay 5.x's until XP and ECON |
+| The quest rewards' items | LOOT-07 (signed off) | `gen_loot.py`'s reward overrides; their experience and level are legacy's since XP-02 (slice X2), their gold since ECON-10 (slice E4) |
 | The character reset and the level-based skill points per tree (`GMGetLevelSkillPoints`; the new tree's rule since slice X5, XP-09) | SKL-01 (D44, signed off) | `skills/characterReset.ws` |
 | The DIFF-08 record of the difficulty line | DIFF (signed off) | the code is XP-01's and XP-04's |
 
@@ -470,7 +470,7 @@ The character panel on a no-point level: **verified** in the [cleared run](#clea
 | Save impact | — |
 | NG+ counterpart | — |
 
-**What it does:** debug only. Legacy's `resetLevels`, `fb1`, `fb2`, `fb3`, `resetme`, `addAllSkills` and the quest function `SetGeraltLevel` reset the character (legacy's respec) and set the level directly (`AddPoints` with the new `ignoreNGP`, no NG+ doubling) instead of raising it by adding experience; `cleanupInv` empties the inventory. The level-scaled gear they give is ITEM-02's (`addAutogenEquipment`, ported). 5.x's versions are 1.32's; SKL-01's `gmreset()` is the port's reset; `setlevel()` and the automation's own commands set the level for tests.
+**What it does:** debug only. Legacy's `resetLevels`, `fb1`, `fb2`, `fb3`, `resetme`, `addAllSkills` and the quest function `SetGeraltLevel` reset the character (legacy's respec) and set the level directly (`AddPoints` with the new `ignoreNGP`, no NG+ doubling) instead of raising it by adding experience; `cleanupInv` empties the inventory. The level-scaled gear they give is ITEM-02's (`addAutogenEquipment`, dropped by ITEM-02: tests add items directly). 5.x's versions are 1.32's; SKL-01's `gmreset()` is the port's reset; `setlevel()` and the automation's own commands set the level for tests.
 
 **Decisions:** not ported (PX11).
 
@@ -648,7 +648,7 @@ None for the player: rewards and quest levels are read live (expected); the leve
 | PX5 | XP-04: legacy's `CalculateExperiencePoints` with UI-10's counting folded in, so each kill is counted once and the diminishing returns read the count before the kill, as legacy (the first drowner gives 100%); UI-10's wrapper is removed; the debug log's call with `skipLog` counts nothing (UI-10's rule) |
 | PX6 | XP-04: the combat log line "Experience Points: N" for each kill, as legacy |
 | PX7 | XP-05: legacy's `experience` nodes in AI's abilities, which nothing reads (checked by script in the slice) |
-| PX8 | XP-06: nests 25 XP once and 25 for the boss, dialogue payments and Axii choices 5 XP, as legacy, in replaced methods without legacy's new fields |
+| PX8 | XP-06: nests 25 XP once and 25 for the boss, dialogue payments 5 XP and Axii choices 5 XP per Axii level (1.32: 20 + 5 per level), as legacy, in replaced methods without legacy's new fields |
 | PX9 | XP-07: legacy's group, ids, labels (2110992253, 270, 271, 300, 328, 451, 452), sliders and "Default" preset in OPT's framework; untouched options read off and 0 (legacy's and the preset's); "Disable quest levels" turned off in the menu reloads only the base game's, Hearts of Stone's and Blood and Wine's levels until the next load, as legacy |
 | PX10 | XP-08: legacy's 50 Vitality per level and no attack or spell power in the classic tree; NG+ as legacy (its regular values; 5.x's `Lvl51`–`Lvl100` are already empty, found in slice X1, so nothing to empty) |
 | PX11 | XP-10: the debug commands are not ported (debug only; `gmreset()` and the test commands do their work) |

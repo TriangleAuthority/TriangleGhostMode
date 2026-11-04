@@ -1783,10 +1783,10 @@ function GMTest_arm15()
 		"ARM-15 Netflix lower tiers (armor, swords, Reinald's) tagged NetflixSetMinor and SetBonusPiece, the top tier not; abilities kept");
 	GMTestReport(w.CheckSetTypeByName('Netflix Pants 1') == EIST_Netflix_Minor && w.CheckSetTypeByName('Netflix Pants 2') == EIST_Netflix && w.ItemSetTypeToItemSetBonus(EIST_Netflix_Minor, 1) == EISB_Netflix_1 && w.ItemSetTypeToItemSetBonus(EIST_Netflix_Minor, 2) == EISB_Undefined,
 		"ARM-15 Netflix lower tiers count for the first bonus only");
-	GMTestReport(GMTestArmNear(GMTestArmSum(top, 'armor', false), 476) && GMTestArmNear(GMTestArmSum(top, 'slashing_resistance_perc', false), 0.35) && GMTestArmNear(GMTestArmSum(top, 'piercing_resistance_perc', false), 0.20)
+	GMTestReport(GMTestArmNear(GMTestArmSum(top, 'armor', false), 487) && GMTestArmNear(GMTestArmSum(top, 'slashing_resistance_perc', false), 0.35) && GMTestArmNear(GMTestArmSum(top, 'piercing_resistance_perc', false), 0.20)
 		&& GMTestArmNear(GMTestArmSum(top, 'bludgeoning_resistance_perc', false), 0.20) && GMTestArmNear(GMTestArmSum(top, 'rending_resistance_perc', false), 0.35) && GMTestArmNear(GMTestArmSum(top, 'elemental_resistance_perc', false), 0.35)
-		&& GMTestArmNear(GMTestArmSum(low, 'armor', false), 256) && GMTestArmNear(GMTestArmSum(low, 'slashing_resistance_perc', false), 0.35),
-		"ARM-15 Netflix top tier armor " + GMTestArmSum(top, 'armor', false) + " (476), resistances " + GMTestArmSum(top, 'slashing_resistance_perc', false) + "/" + GMTestArmSum(top, 'piercing_resistance_perc', false) + "/" + GMTestArmSum(top, 'bludgeoning_resistance_perc', false) + "/" + GMTestArmSum(top, 'rending_resistance_perc', false) + "/" + GMTestArmSum(top, 'elemental_resistance_perc', false) + " (35/20/20/35/35); first tier armor " + GMTestArmSum(low, 'armor', false) + " (256), same resistances");
+		&& GMTestArmNear(GMTestArmSum(low, 'armor', false), 267) && GMTestArmNear(GMTestArmSum(low, 'slashing_resistance_perc', false), 0.35),
+		"ARM-15 Netflix top tier armor " + GMTestArmSum(top, 'armor', false) + " (487), resistances " + GMTestArmSum(top, 'slashing_resistance_perc', false) + "/" + GMTestArmSum(top, 'piercing_resistance_perc', false) + "/" + GMTestArmSum(top, 'bludgeoning_resistance_perc', false) + "/" + GMTestArmSum(top, 'rending_resistance_perc', false) + "/" + GMTestArmSum(top, 'elemental_resistance_perc', false) + " (35/20/20/35/35); first tier armor " + GMTestArmSum(low, 'armor', false) + " (267), same resistances");
 	GMTestReport(GMTestArmNear(GMTestArmAblMult('Netflix Gloves 2 _Stats', 'spell_power_yrden'), 0.12) && GMTestArmNear(GMTestArmAblMult('Netflix Gloves 1 _Stats', 'spell_power_yrden'), 0.10) && GMTestArmNear(GMTestArmAblMult('Netflix Gloves 2 _Stats', 'spell_power_aard'), 0)
 		&& GMTestArmNear(GMTestArmAblMult('Netflix Pants _Stats', 'spell_power'), 0.05) && GMTestArmNear(GMTestArmAblMult('Netflix Pants 2 _Stats', 'spell_power'), 0.12) && GMTestArmNear(GMTestArmAbl('Netflix Pants 2 _Stats', 'spell_power'), 0) && GMTestArmNear(GMTestArmAblMult('Netflix Pants 2 _Stats', 'staminaRegen_armor_mod'), 0)
 		&& GMTestArmNear(GMTestArmAblMult('Netflix Armor 2 _Stats', 'attack_power'), 0.20) && GMTestArmNear(GMTestArmAbl('Netflix Armor 2 _Stats', 'focus_gain'), 0.20),
@@ -1972,8 +1972,8 @@ exec function gmtest_arm15_oldsave()
 		}
 	}
 	GMTestReport(added.Size() == 4 && w.GetSetPartsEquipped(EIST_Netflix) == 4 && w.GMGetSetPartsEquippedRaw(EIST_Netflix_Minor) == 3 && w.IsSetBonusActive(EISB_Netflix_1) && inv.ItemHasTag(added[0], 'NetflixSetMinor')
-		&& GMTestArmNear(GMTestArmItemValue(inv, added[0], 'armor'), 125) && GMTestArmNear(GMTestArmItemValue(inv, added[0], 'bludgeoning_resistance_perc'), 0.09),
-		"ARM-15 Netflix pieces owned before ARM-15 (" + added.Size() + "): " + w.GetSetPartsEquipped(EIST_Netflix) + " count, tier 1 " + w.IsSetBonusActive(EISB_Netflix_1) + ", chest armor " + GMTestArmItemValue(inv, added[0], 'armor') + " (125), bludgeoning " + GMTestArmItemValue(inv, added[0], 'bludgeoning_resistance_perc') + " (0.09)");
+		&& GMTestArmNear(GMTestArmItemValue(inv, added[0], 'armor'), 130) && GMTestArmNear(GMTestArmItemValue(inv, added[0], 'bludgeoning_resistance_perc'), 0.09),
+		"ARM-15 Netflix pieces owned before ARM-15 (" + added.Size() + "): " + w.GetSetPartsEquipped(EIST_Netflix) + " count, tier 1 " + w.IsSetBonusActive(EISB_Netflix_1) + ", chest armor " + GMTestArmItemValue(inv, added[0], 'armor') + " (130), bludgeoning " + GMTestArmItemValue(inv, added[0], 'bludgeoning_resistance_perc') + " (0.09)");
 	GMTestReport(!known.Contains('Starting Armor Upgrade schematic 1') && known.Contains('Kaer Morhen Armor schematic'), "ARM-12 on that save: Starting Armor Upgrade schematic 1 removed at load, Kaer Morhen Armor schematic known");
 }
 

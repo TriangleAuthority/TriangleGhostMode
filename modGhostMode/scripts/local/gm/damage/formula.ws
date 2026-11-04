@@ -222,9 +222,16 @@ function CalculateDamage(dmgInfo : SRawDamage, powerMod : SAbilityAttributeValue
 
 
 
+	if(actorVictim.UsesVitality() && !DamageHitsVitality(dmgInfo.dmgType))	//modSigns: a type the victim's stat ignores deals nothing (legacy)
+		return 0;	//modSigns
+	if(actorVictim.UsesEssence() && !DamageHitsEssence(dmgInfo.dmgType))	//modSigns
+		return 0;	//modSigns
+	if(dmgInfo.dmgVal <= 0)	//modSigns: nothing to deal (legacy)
+		return 0;	//modSigns
 	if( !thePlayer.IsFistFightMinigameEnabled() && gmWeaponsAreNotDeadly )	//modSigns: non-deadly fights: the final-damage step sets the damage (DMG-10)
 		return 10;	//modSigns
 	GetDamageResists(dmgInfo.dmgType, resistPoints, resistPercents);
+	gmHasArmor = resistPoints > 0;	//modSigns: legacy's hasArmor (the last type through the formula), read by GMProcessDamageModification
 
 
 	if( thePlayer.IsFistFightMinigameEnabled() && actorAttacker == thePlayer )
@@ -239,8 +246,7 @@ function CalculateDamage(dmgInfo : SRawDamage, powerMod : SAbilityAttributeValue
 		rawDamage = MaxF(0, dmgInfo.dmgVal + powerMod.valueBase - resistPoints);	//modSigns: armor first: it must be penetrated before attack power counts
 		finalDamage = MaxF(0, rawDamage * powerMod.valueMultiplicative + powerMod.valueAdditive);	//modSigns
 		armorApplied = true;	//modSigns
-		if(rawDamage == 0 && resistPoints > 0 && dmgInfo.dmgVal + powerMod.valueBase > 0)	//modSigns
-			action.SetArmorReducedDamageToZero( true );	//modSigns
+		//modSigns: stopped by armor: set for the whole hit in GMProcessDamageModification (legacy), not per damage type
 
 
 

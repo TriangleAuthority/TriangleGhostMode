@@ -219,6 +219,7 @@ function ProcessCriticalHitCheck()
 			if( attackAction )
 			{				
 				
+				//modSigns: the two Counterattack crit terms below are 5.x's and inert: SKL-05's ProcessCriticalHitCheck wrapper (skills/counterattack.ws) takes the first back out, the second needs level 4 of a 3-level skill (whole-port audit A3-11)
 				if(GetWitcherPlayer() && GetWitcherPlayer().HasRecentlyCountered() && playerAttacker.CanUseSkill(S_Sword_s11) && playerAttacker.GetSkillLevel(S_Sword_s11) > 2)
 				{
 					critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s11, theGame.params.CRITICAL_HIT_CHANCE, false, true));

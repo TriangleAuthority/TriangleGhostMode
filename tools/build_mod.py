@@ -78,6 +78,9 @@ LOCALIZATION = "modGhostMode/localization/"
 MENU = "modGhostMode/menu/"
 SOUND = "modGhostMode/sound/"
 TESTS = "modGhostMode/scripts/local/gm/tests/"  # gmtest_* exec functions and probes; left out with --release
+# test-only data, left out with --release too: the test dummy's step abilities (tools/gen_test_dummy.py), regular
+# and NG+; the DLC mounts its folders, not single files, so a play build simply lacks them (whole-port audit A8-2)
+TEST_FILES = {FILES + f"dlc/dlcghostmode/data/gameplay/{folder}/gm_test_dummy.xml" for folder in ("abilities", "abilities_plus")}
 MENU_DIR = Path("bin") / "config" / "r4game" / "user_config_matrix" / "pc"
 MARKER = ".built-by-build_mod"  # only folders carrying this are deleted on reinstall
 
@@ -114,7 +117,7 @@ def collect(base: str, ref: str, out: Path, release: bool = False) -> tuple[Path
     """Write what ref changes relative to base into <out>/scripts and <out>/files.
 
     Also returns the localization CSVs, menu XML files and sound banks on ref (all of
-    them: vanilla has none). With release, the in-game test scripts (TESTS) are left out.
+    them: vanilla has none). With release, the in-game test scripts (TESTS) and test data (TEST_FILES) are left out.
     """
     scripts, files, other, deleted = [], [], [], []
     for status, path in changed_paths(base, ref):
@@ -125,6 +128,8 @@ def collect(base: str, ref: str, out: Path, release: bool = False) -> tuple[Path
                 continue
             scripts.append(path)
         elif path.startswith(FILES):
+            if release and path in TEST_FILES:
+                continue
             files.append(path)
         elif path.startswith(LOCALIZATION) or path.startswith(MENU) or path.startswith(SOUND):
             pass
@@ -420,7 +425,8 @@ def main() -> None:
     ap.add_argument("--enable", action="store_true", help="with --install: add the mod to mods.settings if missing")
     ap.add_argument("--game", type=Path, help="game install directory (default: W3_GAME_DIR or Steam's, see tools/paths.py)")
     ap.add_argument("--redkit", type=Path, help="REDkit install directory, for wcc_lite (default: W3_REDKIT_DIR or Steam's)")
-    ap.add_argument("--release", action="store_true", help="leave out the in-game test scripts (modGhostMode/scripts/local/gm/tests/): a build to play or publish")
+    ap.add_argument("--release", action="store_true", help="leave out the in-game test scripts (modGhostMode/scripts/local/gm/tests/) and the test dummy's"
+                    " abilities (gm_test_dummy.xml): a build to play or publish")
     ap.add_argument("--loose", action="store_true", help="ship loose scripts instead of precompiled.rsblob")
     ap.add_argument("--no-compile", action="store_true", help="with --loose: skip the wcc_lite compile check")
     args = ap.parse_args()

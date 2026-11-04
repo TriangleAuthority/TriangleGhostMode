@@ -62,7 +62,8 @@ SPEC = [
 ]
 
 # Items: (source file pattern, feature, item, change), taken from vanilla-5.x whole with the change.
-# Only what the feature changes and CRAFT's and ECON's fields (item_layer.py: since ECON's slice E2 legacy's prices and price tags); weights stay 5.x's (WGT).
+# Only what the feature changes, and CRAFT's, ECON's and WGT's fields (item_layer.py: since ECON's slice E2 legacy's prices and price tags,
+# since WGT's slice W3 WGT's weights, e.g. Rune pierog's legacy 0.06).
 ITEMS = [
     (EP1_UPGRADES, "ENCH-16: Pierog and Tvarog are not relics (legacy removed Relic _Stats)", "Rune pierog", ("drop", "<a>Relic _Stats</a>")),
     (EP1_UPGRADES, None, "Rune tvarog", ("drop", "<a>Relic _Stats</a>")),

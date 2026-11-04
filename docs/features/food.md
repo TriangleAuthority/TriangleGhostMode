@@ -20,8 +20,8 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-23 from the chang
 | Food and drink weights | WGT | |
 | Where food, drinks and recipes are sold and found ("availability in loot and shops", changelist 841) | LOOT (signed off) | The lists are ported (LOOT-01, LOOT-05); FOOD-07 ends LOOT-01's cooking-recipe deviation |
 | The refill alcohols (Local pepper vodka, Alcohest, Dwarven spirit, Mahakam spirit, Mandrake cordial, ...) and their recipes | CRAFT (signed off) | Alchemy ingredients without a drink effect in 1.32, legacy and 5.x (CRAFT-06, CRAFT-07) |
-| The general Vitality regen options (`GetCombatVitalityRegen`, `GetOutOfCombatVitalityRegen`) | OPT, GEN | Geralt's base regen, not food (UI-05's temporary deviation) |
-| `enabledeletedscene` (a debug command setting `q401_cooking_enabled`, a cut Kaer Morhen scene) | MISC (unattributed) | A quest scene, not the food system |
+| The general Vitality regen options (`GetCombatVitalityRegen`, `GetOutOfCombatVitalityRegen`) | OPT, GEN | Geralt's base regen, not food (ported by OPT-02 and OPT-03, slice O1, 2026-11-02) |
+| `enabledeletedscene` (a debug command setting `q401_cooking_enabled`, a cut Kaer Morhen scene) | MISC-03 (dropped) | A quest scene's debug command, not the food system |
 | Quest rewards naming food (`q605_mirror_finale_cornucopia`, `sq205_1_got_alcohol`, ...) | XP, LOOT | Their experience and items |
 
 ## Changes at a glance
@@ -331,7 +331,7 @@ Closed 2026-10-24: every finding is fixed, recorded or decided by the owner. Fix
 ### Dependencies on other areas
 
 - **Done areas FOOD builds on:** ALCH (toxicity, the drinking wrapper, the potion tooltip wrapper, ALCH-07's Maribor rule), SKL (Connoisseur's slots and profiles, Metabolism Boosts' toxicity check, SKL-16's recipe whitelist, SKL-19's descriptions), ENCH-06 (Dumplings' replaced methods), CRAFT (`item_layer.py`, CRAFT-07's alcohols and Wolf liver), LOOT (`gen_loot.py`, the shop lists), ITEM (`gen_item.py`), STAM-04 (regen).
-- **Areas FOOD shares with or waits for:** ECON (prices), WGT (weights), OPT and GEN (Geralt's base Vitality regen and its options).
+- **Areas FOOD shares with or waits for:** ECON (prices), WGT (weights), OPT and GEN (Geralt's base Vitality regen and its options: ported by OPT-02 and OPT-03, 2026-11-02).
 
 ### Hand-offs received
 
@@ -367,7 +367,7 @@ Every item other areas handed to FOOD, and where it lands:
 |---|---|
 | ECON | Food, drink and cooking recipe prices (the price-only units of `def_item_edibles.xml`, base and Blood and Wine, left unattributed; the new items' prices come with them), the `mod_food` tag and its modifier rows; the price tags of three moved items (audit F10): Wolf liver and the Free nilfgaardian lemon keep 5.x's `mod_alchemy` (legacy: `mod_food`), Local pepper vodka has `mod_food` (legacy: `mod_alchemy`) |
 | WGT | Food and drink weights (0.05 to 0.1 for almost everything; 23 base and 2 Blood and Wine items changed only in price or weight; the Shani alcohols and flowers) |
-| MISC | `enabledeletedscene` (debug command for a cut scene), unattributed; listed in [misc.md](misc.md) |
+| MISC | `enabledeletedscene` (debug command for a cut scene): [MISC-03](misc.md), dropped (sweep B, 2026-11-02) |
 
 ### Save impact
 

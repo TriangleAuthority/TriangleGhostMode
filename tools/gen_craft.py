@@ -22,13 +22,16 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # The CRAFT features whose schematic and recipe entries are ported (the slices of craft.md's port order).
 PORTED = {"CRAFT-01", "CRAFT-02", "CRAFT-03", "CRAFT-04", "CRAFT-05", "CRAFT-06"}
+# Features of other areas whose recipe entries this tool writes as legacy's (the recipe files are overridden whole
+# here): ALCH-08's pheromone formulas, quest formulas as legacy (the owner's decision, 2026-11-03, audit C3-4).
+HERE = {"ALCH-08"}
 # Features of other areas whose entries are ported their own way (left as 5.x's here).
 OTHER = {"ARM-12", "MUT-12", "ENCH-02"}
 
 # Attributes of an entry kept as 5.x's where the unit also carries another area's feature, which ported its
-# own way: the pheromone formulas stay potion formulas (ALCH-08's deviation, confirmed by the owner
-# 2026-10-20), with legacy's ingredients (CRAFT-06).
-KEEP_5X = {"ALCH-08": ("cookedItemType",)}
+# own way: {feature: (attribute, ...)}. None now: the pheromone formulas are legacy's quest formulas (ALCH-08,
+# the owner's decision, 2026-11-03, whole-port audit C3-4; from 2026-10-20 they were kept as potion formulas).
+KEEP_5X = {}
 
 KINDS = {"schematic": "crafting_schematics", "recipe": "alchemy_recipes"}
 UNIT = re.compile(r'^(.*\.xml)::custom/(crafting_schematics/schematic|alchemy_recipes/recipe):(.+)$')
@@ -39,13 +42,13 @@ def git(*args):
 
 
 def units():
-    """{path: {(kind, name): features}} of the schematic and recipe units with a CRAFT feature."""
+    """{path: {(kind, name): features}} of the schematic and recipe units with a CRAFT feature (or one of HERE)."""
     out = {}
     with open(os.path.join(REPO, "docs", "features", "attribution.csv"), encoding="utf-8") as f:
         for row in csv.DictReader(f):
             m = UNIT.match(row["unit"])
             feats = set(row["features"].split())
-            if m and any(x.startswith("CRAFT-") for x in feats):
+            if m and any(x.startswith("CRAFT-") or x in HERE for x in feats):
                 out.setdefault("modGhostMode/" + m.group(1), {})[(m.group(2).split("/")[1], m.group(3))] = feats
     return out
 
@@ -214,7 +217,7 @@ def ext_units():
         for row in csv.DictReader(f):
             m = EXT.match(row["unit"])
             feats = set(row["features"].split())
-            if m and any(x.startswith("CRAFT-") for x in feats):
+            if m and any(x.startswith("CRAFT-") or x in HERE for x in feats):
                 out.setdefault(m.group(2), {})[m.group(3)] = ("modGhostMode/" + m.group(1), feats)
     return out
 

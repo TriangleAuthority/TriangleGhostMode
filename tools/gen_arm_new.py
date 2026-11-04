@@ -47,7 +47,10 @@ def res(*v):
 # Nilfgaardian medium armor (Dol Blathanna, White Tiger).
 GRIFFIN = {"Armor": res(.17, .09, .09, .17, .17), "Boots": res(.06, .04, .04, .06, .06),
            "Gloves": res(.05, .03, .03, .05, .05), "Pants": res(.07, .04, .04, .07, .07)}
-NETFLIX_ARMOR = {"Armor": [125, 195, 225], "Boots": [45, 73, 85], "Gloves": [41, 69, 81], "Pants": [45, 73, 85]}
+# The Netflix tiers' armor at exactly levels 21, 35 and 41 under ITEM-01's formula (chest 25 + 5 per level, boots and
+# trousers 5 + 2, gloves 1 + 2), the levels of the tiers' swords (the owner's decision, 2026-11-03, whole-port audit
+# A4-3; until then one level's armor less: levels 20/34/40)
+NETFLIX_ARMOR = {"Armor": [130, 200, 230], "Boots": [47, 75, 87], "Gloves": [43, 71, 83], "Pants": [47, 75, 87]}
 NETFLIX_YRDEN = [.06, .10, .12]
 NETFLIX_SIGNS = [.05, .10, .12]
 SCARLET = {"Armor": (220, res(.19, .15, .21, 0, 0)), "Boots": (83, res(.07, .06, .08, 0, 0)),

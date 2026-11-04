@@ -4797,13 +4797,18 @@ function GMTestEconData38(out checks : int) : int
 	f += GMTestEconTag('weapon_repair_kit_3', 'mod_upgrade', true, checks);
 	f += GMTestEconDef('Dol Blathanna Armor', 714, 'armor', "ui_gog_reward_armor", checks);
 	f += GMTestEconTag('Dol Blathanna Armor', 'mod_armor', true, checks);
+	f += GMTestEconTag('Dol Blathanna Armor', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Dol Blathanna Boots', 288, 'boots', "ui_gog_reward_boots", checks);
 	f += GMTestEconTag('Dol Blathanna Boots', 'mod_armor', true, checks);
+	f += GMTestEconTag('Dol Blathanna Boots', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Dol Blathanna Gloves', 280, 'gloves', "ui_gog_reward_gloves", checks);
 	f += GMTestEconTag('Dol Blathanna Gloves', 'mod_armor', true, checks);
+	f += GMTestEconTag('Dol Blathanna Gloves', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Dol Blathanna Pants', 343, 'pants', "ui_gog_reward_trousers", checks);
 	f += GMTestEconTag('Dol Blathanna Pants', 'mod_armor', true, checks);
+	f += GMTestEconTag('Dol Blathanna Pants', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Dol Blathanna longsword', 1145, 'steelsword', "item_name_dol_blathanna_longsword", checks);
+	f += GMTestEconTag('Dol Blathanna longsword', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Dol Blathanna longsword', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Fire Horse Blinders', 250, 'horse_blinder', "item_name_w3r_fire_blindings", checks);
 	f += GMTestEconTag('Fire Horse Blinders', 'mod_horse', true, checks);
@@ -4821,11 +4826,6 @@ function GMTestEconData38(out checks : int) : int
 	f += GMTestEconTag('NGP Netflix Armor schematic', 'mod_legendary', true, checks);
 	f += GMTestEconDef('NGP Netflix Armor schematic 1', 638, 'crafting_schematic', "item_name_newgame_netflix_armor_dlc_schematic_1", checks);
 	f += GMTestEconTag('NGP Netflix Armor schematic 1', 'mod_crafting', true, checks);
-	f += GMTestEconTag('NGP Netflix Armor schematic 1', 'mod_legendary', true, checks);
-	f += GMTestEconDef('NGP Netflix Armor schematic 2', 1027, 'crafting_schematic', "item_name_newgame_netflix_armor_dlc_schematic_2", checks);
-	f += GMTestEconTag('NGP Netflix Armor schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('NGP Netflix Armor schematic 2', 'mod_legendary', true, checks);
-	f += GMTestEconDef('NGP Netflix Boots schematic', 65, 'crafting_schematic', "item_name_newgame_netflix_boots_dlc_schematic", checks);
 	return f;
 }
 
@@ -4833,6 +4833,11 @@ function GMTestEconData39(out checks : int) : int
 {
 	var f : int;
 
+	f += GMTestEconTag('NGP Netflix Armor schematic 1', 'mod_legendary', true, checks);
+	f += GMTestEconDef('NGP Netflix Armor schematic 2', 1027, 'crafting_schematic', "item_name_newgame_netflix_armor_dlc_schematic_2", checks);
+	f += GMTestEconTag('NGP Netflix Armor schematic 2', 'mod_crafting', true, checks);
+	f += GMTestEconTag('NGP Netflix Armor schematic 2', 'mod_legendary', false, checks);
+	f += GMTestEconDef('NGP Netflix Boots schematic', 65, 'crafting_schematic', "item_name_newgame_netflix_boots_dlc_schematic", checks);
 	f += GMTestEconTag('NGP Netflix Boots schematic', 'mod_crafting', true, checks);
 	f += GMTestEconTag('NGP Netflix Boots schematic', 'mod_legendary', true, checks);
 	f += GMTestEconDef('NGP Netflix Boots schematic 1', 332, 'crafting_schematic', "item_name_newgame_netflix_boots_dlc_schematic_1", checks);
@@ -4840,7 +4845,7 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('NGP Netflix Boots schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('NGP Netflix Boots schematic 2', 524, 'crafting_schematic', "item_name_newgame_netflix_boots_dlc_schematic_2", checks);
 	f += GMTestEconTag('NGP Netflix Boots schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('NGP Netflix Boots schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('NGP Netflix Boots schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('NGP Netflix Gloves schematic', 114, 'crafting_schematic', "item_name_newgame_netflix_gloves_dlc_schematic", checks);
 	f += GMTestEconTag('NGP Netflix Gloves schematic', 'mod_crafting', true, checks);
 	f += GMTestEconTag('NGP Netflix Gloves schematic', 'mod_legendary', true, checks);
@@ -4849,7 +4854,7 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('NGP Netflix Gloves schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('NGP Netflix Gloves schematic 2', 460, 'crafting_schematic', "item_name_newgame_netflix_gloves_dlc_schematic_2", checks);
 	f += GMTestEconTag('NGP Netflix Gloves schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('NGP Netflix Gloves schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('NGP Netflix Gloves schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('NGP Netflix Pants schematic', 122, 'crafting_schematic', "item_name_newgame_netflix_pants_dlc_schematic", checks);
 	f += GMTestEconTag('NGP Netflix Pants schematic', 'mod_crafting', true, checks);
 	f += GMTestEconTag('NGP Netflix Pants schematic', 'mod_legendary', true, checks);
@@ -4858,7 +4863,7 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('NGP Netflix Pants schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('NGP Netflix Pants schematic 2', 520, 'crafting_schematic', "item_name_newgame_netflix_pants_dlc_schematic_2", checks);
 	f += GMTestEconTag('NGP Netflix Pants schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('NGP Netflix Pants schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('NGP Netflix Pants schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('NGP Netflix silver sword schematic', 114, 'crafting_schematic', "item_name_newgame_netflix_silver_sword_schematic", checks);
 	f += GMTestEconTag('NGP Netflix silver sword schematic', 'mod_crafting', true, checks);
 	f += GMTestEconTag('NGP Netflix silver sword schematic', 'mod_legendary', true, checks);
@@ -4867,7 +4872,7 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('NGP Netflix silver sword schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('NGP Netflix silver sword schematic 2', 505, 'crafting_schematic', "item_name_newgame_netflix_silver_sword_schematic_2", checks);
 	f += GMTestEconTag('NGP Netflix silver sword schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('NGP Netflix silver sword schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('NGP Netflix silver sword schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('NGP Netflix steel sword schematic', 100, 'crafting_schematic', "item_name_newgame_netflix_steel_sword_schematic", checks);
 	f += GMTestEconTag('NGP Netflix steel sword schematic', 'mod_crafting', true, checks);
 	f += GMTestEconTag('NGP Netflix steel sword schematic', 'mod_legendary', true, checks);
@@ -4876,7 +4881,7 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('NGP Netflix steel sword schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('NGP Netflix steel sword schematic 2', 345, 'crafting_schematic', "item_name_newgame_netflix_steel_sword_schematic_2", checks);
 	f += GMTestEconTag('NGP Netflix steel sword schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('NGP Netflix steel sword schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('NGP Netflix steel sword schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('Netflix Armor', 842, 'armor', "item_name_netflix_armour_dlc", checks);
 	f += GMTestEconTag('Netflix Armor', 'mod_armor', true, checks);
 	f += GMTestEconTag('Netflix Armor', 'mod_legendary', true, checks);
@@ -4894,7 +4899,7 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('Netflix Armor schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Netflix Armor schematic 2', 1027, 'crafting_schematic', "item_name_netflix_armor_dlc_schematic_2", checks);
 	f += GMTestEconTag('Netflix Armor schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('Netflix Armor schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('Netflix Armor schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('Netflix Boots', 634, 'boots', "item_name_netflix_boots_dlc", checks);
 	f += GMTestEconTag('Netflix Boots', 'mod_armor', true, checks);
 	f += GMTestEconTag('Netflix Boots', 'mod_legendary', true, checks);
@@ -4912,7 +4917,7 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('Netflix Boots schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Netflix Boots schematic 2', 524, 'crafting_schematic', "item_name_netflix_boots_dlc_schematic_2", checks);
 	f += GMTestEconTag('Netflix Boots schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('Netflix Boots schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('Netflix Boots schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('Netflix Gloves', 570, 'gloves', "item_name_netflix_gloves_dlc", checks);
 	f += GMTestEconTag('Netflix Gloves', 'mod_armor', true, checks);
 	f += GMTestEconTag('Netflix Gloves', 'mod_legendary', true, checks);
@@ -4930,7 +4935,7 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('Netflix Gloves schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Netflix Gloves schematic 2', 460, 'crafting_schematic', "item_name_netflix_gloves_dlc_schematic_2", checks);
 	f += GMTestEconTag('Netflix Gloves schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('Netflix Gloves schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('Netflix Gloves schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('Netflix Pants', 604, 'pants', "item_name_netflix_pants_dlc", checks);
 	f += GMTestEconTag('Netflix Pants', 'mod_armor', true, checks);
 	f += GMTestEconTag('Netflix Pants', 'mod_legendary', true, checks);
@@ -4948,11 +4953,6 @@ function GMTestEconData39(out checks : int) : int
 	f += GMTestEconTag('Netflix Pants schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Netflix Pants schematic 2', 520, 'crafting_schematic', "item_name_netflix_pants_dlc_schematic_2", checks);
 	f += GMTestEconTag('Netflix Pants schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('Netflix Pants schematic 2', 'mod_legendary', true, checks);
-	f += GMTestEconDef('Netflix silver sword', 631, 'silversword', "item_name_netflix_silver_sword", checks);
-	f += GMTestEconTag('Netflix silver sword', 'mod_weapon', true, checks);
-	f += GMTestEconDef('Netflix silver sword 1', 1650, 'silversword', "item_name_netflix_silver_sword_1", checks);
-	f += GMTestEconTag('Netflix silver sword 1', 'mod_weapon', true, checks);
 	return f;
 }
 
@@ -4960,7 +4960,15 @@ function GMTestEconData40(out checks : int) : int
 {
 	var f : int;
 
+	f += GMTestEconTag('Netflix Pants schematic 2', 'mod_legendary', false, checks);
+	f += GMTestEconDef('Netflix silver sword', 631, 'silversword', "item_name_netflix_silver_sword", checks);
+	f += GMTestEconTag('Netflix silver sword', 'mod_legendary', true, checks);
+	f += GMTestEconTag('Netflix silver sword', 'mod_weapon', true, checks);
+	f += GMTestEconDef('Netflix silver sword 1', 1650, 'silversword', "item_name_netflix_silver_sword_1", checks);
+	f += GMTestEconTag('Netflix silver sword 1', 'mod_legendary', true, checks);
+	f += GMTestEconTag('Netflix silver sword 1', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Netflix silver sword 2', 2540, 'silversword', "item_name_netflix_silver_sword_2", checks);
+	f += GMTestEconTag('Netflix silver sword 2', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Netflix silver sword 2', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Netflix silver sword schematic', 114, 'crafting_schematic', "item_name_netflix_silver_sword_schematic", checks);
 	f += GMTestEconTag('Netflix silver sword schematic', 'mod_crafting', true, checks);
@@ -4970,12 +4978,15 @@ function GMTestEconData40(out checks : int) : int
 	f += GMTestEconTag('Netflix silver sword schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Netflix silver sword schematic 2', 505, 'crafting_schematic', "item_name_netflix_silver_sword_schematic_2", checks);
 	f += GMTestEconTag('Netflix silver sword schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('Netflix silver sword schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('Netflix silver sword schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('Netflix steel sword', 544, 'steelsword', "item_name_netflix_steel_sword", checks);
+	f += GMTestEconTag('Netflix steel sword', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Netflix steel sword', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Netflix steel sword 1', 1402, 'steelsword', "item_name_netflix_steel_sword_1", checks);
+	f += GMTestEconTag('Netflix steel sword 1', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Netflix steel sword 1', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Netflix steel sword 2', 1709, 'steelsword', "item_name_netflix_steel_sword_2", checks);
+	f += GMTestEconTag('Netflix steel sword 2', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Netflix steel sword 2', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Netflix steel sword schematic', 100, 'crafting_schematic', "item_name_netflix_steel_sword_schematic", checks);
 	f += GMTestEconTag('Netflix steel sword schematic', 'mod_crafting', true, checks);
@@ -4985,10 +4996,12 @@ function GMTestEconData40(out checks : int) : int
 	f += GMTestEconTag('Netflix steel sword schematic 1', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Netflix steel sword schematic 2', 345, 'crafting_schematic', "item_name_netflix_steel_sword_schematic_2", checks);
 	f += GMTestEconTag('Netflix steel sword schematic 2', 'mod_crafting', true, checks);
-	f += GMTestEconTag('Netflix steel sword schematic 2', 'mod_legendary', true, checks);
+	f += GMTestEconTag('Netflix steel sword schematic 2', 'mod_legendary', false, checks);
 	f += GMTestEconDef('Reinald Netflix silver sword', 631, 'silversword', "item_name_netflix_silver_sword", checks);
+	f += GMTestEconTag('Reinald Netflix silver sword', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Reinald Netflix silver sword', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Reinald Netflix steel sword', 544, 'steelsword', "item_name_netflix_steel_sword", checks);
+	f += GMTestEconTag('Reinald Netflix steel sword', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Reinald Netflix steel sword', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Scarlet Crest Armor', 755, 'armor', "item_name_w3r_fire_armor", checks);
 	f += GMTestEconTag('Scarlet Crest Armor', 'mod_armor', true, checks);
@@ -5003,22 +5016,31 @@ function GMTestEconData40(out checks : int) : int
 	f += GMTestEconTag('Scarlet Crest Trousers', 'mod_armor', true, checks);
 	f += GMTestEconTag('Scarlet Crest Trousers', 'mod_legendary', true, checks);
 	f += GMTestEconDef('Silver Vixen', 1289, 'silversword', "item_name_ngu_hwando_silver_sword", checks);
+	f += GMTestEconTag('Silver Vixen', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Silver Vixen', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Steel Vixen', 1145, 'steelsword', "item_name_ngu_hwando_steel_sword", checks);
+	f += GMTestEconTag('Steel Vixen', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Steel Vixen', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Top Notch Silver', 1050, 'silversword', "item_name_witcher_silver_sword", checks);
+	f += GMTestEconTag('Top Notch Silver', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Top Notch Silver', 'mod_weapon', true, checks);
 	f += GMTestEconDef('Top Notch Steel', 1500, 'steelsword', "item_name_long_steel_sword", checks);
+	f += GMTestEconTag('Top Notch Steel', 'mod_legendary', true, checks);
 	f += GMTestEconTag('Top Notch Steel', 'mod_weapon', true, checks);
 	f += GMTestEconDef('White Tiger Armor', 714, 'armor', "item_name_ngu_tiger_armor", checks);
 	f += GMTestEconTag('White Tiger Armor', 'mod_armor', true, checks);
+	f += GMTestEconTag('White Tiger Armor', 'mod_legendary', true, checks);
 	f += GMTestEconDef('White Tiger Boots', 288, 'boots', "item_name_ngu_tiger_boots", checks);
 	f += GMTestEconTag('White Tiger Boots', 'mod_armor', true, checks);
+	f += GMTestEconTag('White Tiger Boots', 'mod_legendary', true, checks);
 	f += GMTestEconDef('White Tiger Gloves', 280, 'gloves', "item_name_ngu_tiger_gloves", checks);
 	f += GMTestEconTag('White Tiger Gloves', 'mod_armor', true, checks);
+	f += GMTestEconTag('White Tiger Gloves', 'mod_legendary', true, checks);
 	f += GMTestEconDef('White Tiger Pants', 343, 'pants', "item_name_ngu_tiger_pants", checks);
 	f += GMTestEconTag('White Tiger Pants', 'mod_armor', true, checks);
+	f += GMTestEconTag('White Tiger Pants', 'mod_legendary', true, checks);
 	f += GMTestEconDef('White Widow of Dol Blathanna', 1289, 'silversword', "item_name_dol_blathanna_white_widow_silver_sword", checks);
+	f += GMTestEconTag('White Widow of Dol Blathanna', 'mod_legendary', true, checks);
 	f += GMTestEconTag('White Widow of Dol Blathanna', 'mod_weapon', true, checks);
 	return f;
 }
@@ -5077,5 +5099,5 @@ function GMTestEconDataItems() : int
 
 function GMTestEconDataChecks() : int
 {
-	return 4740;
+	return 4762;
 }

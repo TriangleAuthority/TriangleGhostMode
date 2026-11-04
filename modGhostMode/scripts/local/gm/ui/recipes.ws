@@ -7,7 +7,7 @@
 // - The extended texts (E when buying: GetAlchemyBookText, GetSchematicBookText): type and rarity, the effects
 //   as "value name", the description (a decoction's with its values), the level required (schematics), the
 //   ingredients as "have / need"; no weight and no "random attributes" lines (crafted gear has no random
-//   bonus), also in the crafting menu (GetCraftedItemInfo).
+//   bonus); in the crafting menu (GetCraftedItemInfo) no "random attributes" line and the item's real weight.
 // See docs/features/ui.md.
 
 // Legacy's addComponentsInfo: the ingredients of a schematic, recipe or enchantment schematic as have / need.
@@ -127,12 +127,18 @@ function GetBaseItemData( item : SItemUniqueId, itemInvComponent : CInventoryCom
 	return tooltipData;
 }
 
-// The crafting menu: no "random attributes" line (crafted gear has no random bonus).
+// The crafting menu: no "random attributes" line (crafted gear has no random bonus). The weight line shows
+// the item's real weight, its definition's (legacy removed 5.x's display discount: x0.2 + 0.01 for usable
+// items, upgrades and junk, x0.5 + 0.01 for the rest, 0 for crafting ingredients; whole-port audit C2-6).
 @wrapMethod(W3GuiPlayerInventoryComponent)
 function GetCraftedItemInfo(craftedItemName:name, targetObject:CScriptedFlashObject) : void
 {
+	var minWeight, maxWeight : SAbilityAttributeValue;
+
 	wrappedMethod(craftedItemName, targetObject);
 	targetObject.SetMemberFlashString("additionalDescription", "");
+	theGame.GetDefinitionsManager().GetItemAttributeValueNoRandom(craftedItemName, true, 'weight', minWeight, maxWeight);
+	targetObject.SetMemberFlashString("weight", GetLocStringByKeyExt("attribute_name_weight") + "  " + FloatToStringPrec(minWeight.valueBase, 2));
 }
 
 // Legacy's GetAlchemyBookText: the effects as "value name", the description (a decoction's with its values),

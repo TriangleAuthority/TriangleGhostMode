@@ -2843,6 +2843,7 @@ function GMTest_skl_values()
 
 	GMTest_skl07_trample();	// fix3 (data, read in both trees)
 	GMTest_skl11_load();	// fix3: Quen not restored at a load
+	GMTest_sklfix();	// the whole-port fix round (gmTestsSklFix.ws)
 	if(GMIsClassicProfileInForce())
 		tree = "classic";
 	else if(GMIsNewTreeProfileInForce())

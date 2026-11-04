@@ -175,7 +175,7 @@ function OnEnded(optional isEnd : bool)
 	var buff : EEffectInteract;
 	//modSigns: removed conf
 	var i : int;
-	var duration, durationAnimal, fortifiedSignsAtt, axiiPower, targetPower : SAbilityAttributeValue;	//modSigns
+	var duration, durationAnimal, axiiPower, targetPower : SAbilityAttributeValue;	//modSigns: removed fortifiedSignsAtt
 	var casterActor : CActor;
 	var dur, durAnimals : float;
 	var params, staggerParams : SCustomEffectParams;

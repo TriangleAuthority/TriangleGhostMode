@@ -32,10 +32,16 @@ function OnLevelUpscalingChanged()
 function SetLevel( _level : int )
 {
 	currentLevel = _level;
+	gmScriptLevel = _level;	//modSigns: DIFF-10, the level Interpolated scales from
 	gmSavedRandomLevel = 0;	//modSigns: DIFF-04, a new random level
 	levelBonusesComputedAtPlayerLevel = 0;	//modSigns: was -1
 	AddTimer('AddLevelBonuses', 0.1, true, false, , true);
 }
+
+// DIFF-10: the level a script set (SetLevel), which Interpolated scales from instead of the entity's; 0 none
+// (cleared by a full reset, which goes back to the entity's level).
+@addField(CNewNPC)
+var gmScriptLevel : int;
 
 // AI-01: legacy's ResetLevel: recompute the level and bonuses from the entity's level.
 @addMethod(CNewNPC)
@@ -99,6 +105,7 @@ function AddLevelBonuses(dt : float, id : int)
 	if(levelBonusesComputedAtPlayerLevel == -1 || fistFightForcedFromQuest)	//modSigns
 	{	//modSigns
 		currentLevel = level + gmCurrentNGPLevel;	//modSigns: reset and recalculate the level
+		gmScriptLevel = 0;	//modSigns: DIFF-10, a script's level is gone (legacy)
 		if(!gmKeepRandomLevel)	//modSigns: DIFF-04, kept after a load (legacy rolled it again)
 			gmSavedRandomLevel = 0;	//modSigns: DIFF-04, a new random level
 	}	//modSigns

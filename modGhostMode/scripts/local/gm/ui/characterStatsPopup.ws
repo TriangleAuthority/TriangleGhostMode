@@ -1,10 +1,10 @@
 // Character panel (CharacterStatsPopup.ws: the stats view of the inventory and the stats popup).
 // STAM-03: the stamina section lists every action's cost; STAM-09: Whirl's and Rend's per second
 // while the skill is equipped.
-// STAM-04: the stamina regen lines include the regen options. STAM-05: with the armor regen
-// penalty option on, a line shows the armor regen modifier (the regen line already includes
-// it through CalculatedArmorStaminaRegenBonus, which is 0 while the option is off).
-// The wrapper rewrites the value of the line vanilla just added.
+// STAM-04: the stamina regen lines include the regen options (the wrapper rewrites the value of the line
+// vanilla just added). STAM-05: with the armor regen penalty option on, the armor regen modifier gets a
+// line under Armor (UI-05, below; legacy's place); the regen line already includes it through
+// CalculatedArmorStaminaRegenBonus, which is 0 while the option is off.
 // UI-05: the armor regen modifier line sits under Armor (DU3); Vitality regen with its multiplicative part;
 // sign power as its raw value; the misc section's money bonus and adrenaline gain lines (legacy's).
 // See docs/features/stam.md.

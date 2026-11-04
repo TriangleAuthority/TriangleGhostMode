@@ -15145,8 +15145,8 @@
 				localisation_key_description	="item_desc_dol_blathanna_longsword"
 				icon_path						="icons/inventory/weapons/dol_blathanna_steel_longsword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Dol Blathanna longsword _Stats</a>
 				</base_abilities>
@@ -15213,8 +15213,8 @@
 				localisation_key_description	="item_desc_dol_blathanna_longsword"
 				icon_path						="icons/inventory/weapons/dol_blathanna_steel_longsword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Dol Blathanna longsword _Stats</a>
 				</base_abilities>
@@ -15281,8 +15281,8 @@
 				localisation_key_description	="item_desc_dol_blathanna_white_widow_silver_sword"
 				icon_path						="icons/inventory/weapons/dol_blathanna_white_widow_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP White Widow of Dol Blathanna _Stats</a>
 				</base_abilities>
@@ -15356,8 +15356,8 @@
 				localisation_key_description	="item_desc_dol_blathanna_white_widow_silver_sword"
 				icon_path						="icons/inventory/weapons/dol_blathanna_white_widow_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>White Widow of Dol Blathanna _Stats</a>
 				</base_abilities>
@@ -15433,8 +15433,8 @@
 				localisation_key_description	="item_desc_ngu_hwando_silver_sword"
 				icon_path						="icons/inventory/weapons/vixen_silver_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Silver Vixen _Stats</a>
 				</base_abilities>
@@ -15508,8 +15508,8 @@
 				localisation_key_description	="item_desc_ngu_hwando_steel_sword"
 				icon_path						="icons/inventory/weapons/vixen_steel_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Steel Vixen _Stats</a>
 				</base_abilities>
@@ -15576,8 +15576,8 @@
 				localisation_key_description	="item_desc_ngu_hwando_silver_sword"
 				icon_path						="icons/inventory/weapons/vixen_silver_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, Intact
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, Intact, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Silver Vixen _Stats</a>
 				</base_abilities>
@@ -15651,8 +15651,8 @@
 				localisation_key_description	="item_desc_ngu_hwando_steel_sword"
 				icon_path						="icons/inventory/weapons/vixen_steel_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, Intact
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, Intact, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Steel Vixen _Stats</a>
 				</base_abilities>
@@ -16192,7 +16192,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/top_notch_silver_sword.png"
 	>
-		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, mod_weapon
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, mod_weapon, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Top Notch Silver sword _Stats</a>
@@ -16266,7 +16266,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/top_notch_steel_sword.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Top Notch Steel Sword _Stats</a>
@@ -17122,8 +17122,8 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/netflix_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Netflix silver sword _Stats</a>
 				</base_abilities>
@@ -17197,8 +17197,8 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/netflix_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Netflix silver sword 1 _Stats</a>
 				</base_abilities>
@@ -17273,8 +17273,8 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/netflix_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, SetBonusPiece, EP1, noDye
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, SetBonusPiece, EP1, noDye, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Netflix silver sword 2 _Stats</a>
 				</base_abilities>
@@ -17349,8 +17349,8 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/netflix_steel_sword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Netflix steel sword _Stats</a>
 				</base_abilities>
@@ -17417,8 +17417,8 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/netflix_steel_sword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Netflix steel sword 1 _Stats</a>
 				</base_abilities>
@@ -17486,8 +17486,8 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/netflix_steel_sword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, SetBonusPiece, EP1, noDye
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, SetBonusPiece, EP1, noDye, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Netflix steel sword 2 _Stats</a>
 				</base_abilities>
@@ -17555,8 +17555,8 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/netflix_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Netflix silver sword _Stats</a>
 				</base_abilities>
@@ -17630,8 +17630,8 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/netflix_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Netflix silver sword 1 _Stats</a>
 				</base_abilities>
@@ -17706,8 +17706,8 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/netflix_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, SetBonusPiece, EP1, noDye
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, SetBonusPiece, EP1, noDye, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Netflix silver sword 2 _Stats</a>
 				</base_abilities>
@@ -17782,8 +17782,8 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/netflix_steel_sword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Netflix steel sword _Stats</a>
 				</base_abilities>
@@ -17850,8 +17850,8 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/netflix_steel_sword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, SetBonusPiece, NetflixSetMinor, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Netflix steel sword 1 _Stats</a>
 				</base_abilities>
@@ -17919,8 +17919,8 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/netflix_steel_sword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, SetBonusPiece, EP1, noDye
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, SetBonusPiece, EP1, noDye, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Netflix steel sword 2 _Stats</a>
 				</base_abilities>
@@ -17988,8 +17988,8 @@
 				localisation_key_description	="item_desc_silver_sword"
 				icon_path						="icons/inventory/weapons/netflix_silver_sword_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, NetflixSetMinor, SetBonusPiece
-				</tags>
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, NetflixSetMinor, SetBonusPiece, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Netflix silver sword _Stats</a>
 				</base_abilities>
@@ -18063,8 +18063,8 @@
 				localisation_key_description	="item_desc_steel_sword"
 				icon_path						="icons/inventory/weapons/netflix_steel_sword_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, NetflixSetMinor, SetBonusPiece
-				</tags>
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, NetflixSet, mod_weapon, noDye, NetflixSetMinor, SetBonusPiece, mod_legendary
+		</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>NGP Netflix steel sword _Stats</a>
 				</base_abilities>

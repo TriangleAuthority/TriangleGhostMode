@@ -4769,7 +4769,8 @@
 		max_durability					="100" 
 		
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor, MediumArmor, mod_armor, mod_legendary
+		</tags>
 		<bound_items>					</bound_items>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Dol Blathanna Armor _Stats</a>
@@ -4798,7 +4799,8 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor, MediumArmor, mod_armor, mod_legendary
+		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Dol Blathanna Boots _Stats</a>
 		</base_abilities>
@@ -4823,7 +4825,8 @@
 		initial_durability				="100"
 		max_durability					="100" 
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor, MediumArmor, mod_armor, mod_legendary
+		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Dol Blathanna Gloves _Stats</a>
 		</base_abilities>
@@ -4849,7 +4852,7 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor
+		<tags>							Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Dol Blathanna Pants _Stats</a>
@@ -4885,7 +4888,8 @@
 		max_durability					="100" 
 		
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor, MediumArmor, mod_armor, mod_legendary
+		</tags>
 		<bound_items>					</bound_items>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>NGP Dol Blathanna Armor _Stats</a>
@@ -4914,7 +4918,8 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor, MediumArmor, mod_armor, mod_legendary
+		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>NGP Dol Blathanna Boots _Stats</a>
 		</base_abilities>
@@ -4939,7 +4944,8 @@
 		initial_durability				="100"
 		max_durability					="100" 
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor, MediumArmor, mod_armor, mod_legendary
+		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>NGP Dol Blathanna Gloves _Stats</a>
 		</base_abilities>
@@ -4965,7 +4971,7 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor
+		<tags>							Armor, MediumArmor, mod_armor, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>NGP Dol Blathanna Pants _Stats</a>
@@ -5003,7 +5009,8 @@
 		max_durability					="100" 
 		
 	>
-		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
+		<tags>							Armor, MediumArmor, mod_armor, Intact, mod_legendary
+		</tags>
 		<bound_items>					</bound_items>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>NGP White Tiger Armor _Stats</a>
@@ -5032,7 +5039,8 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
+		<tags>							Armor, MediumArmor, mod_armor, Intact, mod_legendary
+		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>NGP White Tiger Boots _Stats</a>
 		</base_abilities>
@@ -5057,7 +5065,8 @@
 		initial_durability				="100"
 		max_durability					="100" 
 	>
-		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
+		<tags>							Armor, MediumArmor, mod_armor, Intact, mod_legendary
+		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>NGP White Tiger Gloves _Stats</a>
 		</base_abilities>
@@ -5083,7 +5092,7 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor, Intact
+		<tags>							Armor, MediumArmor, mod_armor, Intact, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>NGP White Tiger Pants _Stats</a>
@@ -5119,7 +5128,8 @@
 		max_durability					="100" 
 		
 	>
-		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
+		<tags>							Armor, MediumArmor, mod_armor, Intact, mod_legendary
+		</tags>
 		<bound_items>					</bound_items>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>White Tiger Armor _Stats</a>
@@ -5148,7 +5158,8 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
+		<tags>							Armor, MediumArmor, mod_armor, Intact, mod_legendary
+		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>White Tiger Boots _Stats</a>
 		</base_abilities>
@@ -5173,7 +5184,8 @@
 		initial_durability				="100"
 		max_durability					="100" 
 	>
-		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
+		<tags>							Armor, MediumArmor, mod_armor, Intact, mod_legendary
+		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>White Tiger Gloves _Stats</a>
 		</base_abilities>
@@ -5199,7 +5211,7 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor, Intact
+		<tags>							Armor, MediumArmor, mod_armor, Intact, mod_legendary
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>White Tiger Pants _Stats</a>
@@ -11091,7 +11103,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11133,7 +11145,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11175,7 +11187,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11217,7 +11229,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11262,7 +11274,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11307,7 +11319,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11349,7 +11361,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11391,7 +11403,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11433,7 +11445,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11475,7 +11487,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11520,7 +11532,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>
@@ -11565,7 +11577,7 @@
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
-		<tags>							ReadableItem, mod_crafting, mod_legendary, NoNotification
+		<tags>							ReadableItem, mod_crafting, NoNotification
 		</tags>
 		<base_abilities>				<a>SetItem _Stats</a>
 		</base_abilities>

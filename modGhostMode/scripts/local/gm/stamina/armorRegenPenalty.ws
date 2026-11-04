@@ -33,7 +33,7 @@ function GMRemoveArmorRegenStat(out itemStats : array<SAttributeTooltip>)
 
 // Item stats for tooltips (GetItemStats, GetItemBaseStats) and by item name (shops, crafting).
 // Tooltips only list attributes that have a row in tooltip_settings.csv; vanilla has none for
-// staminaRegen_armor_mod, Ghost Mode adds one (to be ported with its other tooltip rows), and
+// staminaRegen_armor_mod, Ghost Mode adds one (UI-07), and
 // this filter keeps the line out while the option is off.
 @wrapMethod(CInventoryComponent)
 function GetItemTooltipAttributes(itemId : SItemUniqueId, attributes : array<name>, out itemStats : array<SAttributeTooltip>, optional respectAttributeOrder : bool)

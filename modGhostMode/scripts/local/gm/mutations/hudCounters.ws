@@ -1,8 +1,9 @@
 // MUT-14: the HUD's buff list: Toxic Blood's counter (the acid's damage per second) and Euphoria's
 // (the damage added per hit) show as numbers, as legacy's (5.x: percentages). Bloodbath's stays a
 // percentage; Mutated Skin's damage over time is its own effect with a timer (MUT-10). Legacy's other
-// HUD changes in this function (other features' counters) are not ported yet (UI); Iris's charges show
-// as a counter like Aerondight's (SWD-06).
+// counters in this function are ported too: the decoctions' stacks (ALCH-10, ALCH-11), the Feline set's
+// bonus (ARM-06), Invigoration's and Prolongation's (ENCH-05, ENCH-09); Iris's charges show as a counter
+// like Aerondight's (SWD-06). OnTick (below) is replaced for ARM-06's Feline chain.
 // See docs/features/mut.md.
 
 @replaceMethod(CR4HudModuleBuffs)

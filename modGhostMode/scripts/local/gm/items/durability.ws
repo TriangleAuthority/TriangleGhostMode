@@ -1,7 +1,8 @@
 // ITEM-10: durability as legacy ("durability penalties were redone"). See docs/features/item.md.
 // The penalty on weapon damage and armor is linear in lost durability: 1 - (1 - durability)/4 on easy
-// and normal (at most -20% and -30%), 1 - (1 - durability)/2 on hard and Death March (at most -40% and
-// -50%). The wear per hit and the "damaged" threshold are W3GameParams defaults, in the class's
+// and normal (at most -20% on easy and -25% on normal: the formula never goes below 0.75, so legacy's
+// clamp of 0.7 on normal is never reached), 1 - (1 - durability)/2 on hard and Death March (at most -40%
+// and -50%). The wear per hit and the "damaged" threshold are W3GameParams defaults, in the class's
 // scope-based override block (gm/stamina/staminaCosts.ws). 5.x's Accessibility option "Disable item
 // durability" stays available (DI4).
 

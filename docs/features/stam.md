@@ -20,24 +20,28 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 | Flags | balance |
 | Depends on | OPT-01 |
 | Skill trees | both: the cooldowns hook the sign cast states, not skills, so they cover every sign skill (classic `magic_s1` to `s5`; the new tree's shared `magic_s1`, `s3`, `s4` and its `magic_s28` Firestream, `magic_s31` Puppet) |
-| Port form | enum extension, effect classes; `@wrapMethod` on the sign cast states, `W3SignEntity.ManagePlayerStamina`, `CPlayerInput.OnCastSign`/`AltCastSign`, `CActor.IsImmuneToBuff` and the effect registration; DLC XML for the HUD icons and labels. In `stamina/signCooldowns.ws`, `effects/gmEffectRegistration.ws`, `gm_effects.xml` |
-| Port status | signed off (2026-10-04; [audit](#stam-audit-2026-10-03)) |
+| Port form | enum extension, effect classes; `@wrapMethod` on the sign cast states, `W3SignEntity.ManagePlayerStamina`, `CPlayerInput.OnCastSign`/`AltCastSign` (the cooldown and legacy's refusal of a press during a cast), `CActor.IsImmuneToBuff` and the effect registration; DLC XML for the HUD icons and labels. In `stamina/signCooldowns.ws`, `effects/gmEffectRegistration.ws`, `gm_effects.xml` |
+| Port status | signed off (2026-10-04; [audit](#stam-audit-2026-10-03)); slice 3 (whole-port fix round) verified on the area build |
 | Open checks | — |
 | Save impact | none (expected) |
 | NG+ counterpart | applied and scaled, untested ([NG+ copies](#stam-audit-2026-10-03)) |
 
-**What it does:** after casting a sign, that sign cannot be cast again for 5 s (normal cast) or 7.5 s (alternate cast). Both durations are options ("Sign cooldown", "Alternate Sign cooldown"); 0 turns a cooldown off. Each sign has its own cooldown, shown as a buff.
+**What it does:** after casting a sign, that sign cannot be cast again for 5 s (normal cast) or 7.5 s (alternate cast). Both durations are options ("Sign cooldown", "Alternate Sign cooldown"); 0 turns a cooldown off. Each sign has its own cooldown, shown as a buff. A cast press while Geralt is already casting a sign is ignored.
 
-**Implementation (legacy):** new effect types `EET_AardCooldown` … `EET_AxiiCooldown`, effect classes `skill/<Sign>Cooldown.ws` (durations from `W3GameParams`), XML abilities `<Sign>CooldownEffect` in `effects.xml`, registration in `gameEffectManager.ws`. Each sign entity's cast state adds the cooldown, `CPlayerInput.CastSign` refuses while `IsSignOnCooldown`, and the buff immunity functions skip cooldowns. 40 units.
+**Implementation (legacy):** new effect types `EET_AardCooldown` … `EET_AxiiCooldown`, effect classes `skill/<Sign>Cooldown.ws` (durations from `W3GameParams`), XML abilities `<Sign>CooldownEffect` in `effects.xml`, registration in `gameEffectManager.ws`. Each sign entity's cast state adds the cooldown, `CPlayerInput.CastSign` refuses a press during a sign cast (`IsInCombatAction()` with `combatActionType` `CAT_CastSign`, silently) and while `IsSignOnCooldown`, and the buff immunity functions skip cooldowns. 40 units.
 
 **5.x:** no general sign cooldown exists; 5.x's Overload (`S_Magic_s40`) has a 2 s cooldown built the same way, which shows the pattern works. 5.x changed 5 of the units (the enum, the three registration functions, `W3AardEntityStateAardCircleCast.OnThrowing`). Its new sign skills (Avoidance, adrenaline casting, Overload, supercharged signs) change how often signs can be cast.
 
 **Decisions:** port (2026-10-02). Everything fits the 5.x port forms without replacing vanilla code. Where 5.x moved things, the hooks moved with them: 5.x has no `CastSign()`, so both cast input events are wrapped; 5.x pays Quen in its `ShieldActive` state, so normal casts are caught in `ManagePlayerStamina`; Igni's alternate cooldown is added when the channel state is left (a stream run down to 0 ends through `OnSignAborted`, not `OnEnded`), as legacy did; an aborted Axii puppet gets no cooldown, as in legacy; Life Leech's free Quen gets none ([MUT-12](mut.md#mut-12-life-leech-and-mutation-catalyst-mutation-11): only that Quen, where legacy exempted every alternate Quen while Life Leech or its cooldown ran; project owner, 2026-10-17). Names carry the `GM` prefix. Re-tune the defaults in the balance pass.
 
+- Legacy's refusal of a cast press during a sign cast is ported (whole-port audit C2-2; owner, 2026-11-03) in both cast input wrappers, `OnCastSign` and 5.x's alternative sign casting (`AltCastSign`), before the cooldown check and silently, as legacy. 5.x locks input from the press until just after the throw, by which time the cooldown is on, so the same sign cannot be cast twice at the default options; but in the cast's recovery (input allowed again, still in the sign-cast action) a press is buffered (vanilla's `SetupCombatAction`) and casts again as the first cast ends: another sign, or the same one with the cooldown option at 0 (seen in game: a second Aard 0.74 s after the first).
+- **Deviation:** 5.x's Aard finisher (the finisher `man_finisher_aard_01_rp_remaster`, drawn with the new tree's Shock Wave, `magic_s33`) casts a free Aard (its cost disabled); that Aard starts no Aard cooldown and fires no sign-cast decoction hook ([ALCH-10](alch.md#alch-10-decoctions-that-build-up-on-melee-hits-katakan-water-hag-wyvern-alghoul-forktail)), so Aard is ready right after the finisher. Legacy had no such finisher; without the exemption the free Aard put Aard on its 5 s cooldown (whole-port audit A1-2; porter's call, not confirmed by the owner, 2026-11-03).
+
 **Slices:**
 
 1. **Effects, options, HUD.** Verified 2026-10-02 (`gmtest_stam01`, scripted): the effects register, durations follow the options, the cooldown check works, HUD icons and labels come from the DLC.
 2. **Casting.** Verified 2026-10-02 (`gmtest_stam01_press/release/after`, real casts through the input handler, alternate casts with `autocast`; a fight with wolves): all five signs get 5 s after a normal cast and 7.5 s after an alternate one, and a second cast during the cooldown is refused; an Igni stream run down to 0 stamina gets its cooldown. 2026-10-03: the same for the new tree's Firestream and Puppet (real casts with `autocast`).
+3. **Whole-port fix round** (2026-11-03): the press during a cast (C2-2) and the Aard finisher's free Aard (A1-2). 5.x-GM area build `gm/fx-stam` `974e07f6`, verified on the area build 2026-11-03, both trees in the regression. The press during a cast: real casts through the input handler with a scripted press every 0.05 to 0.08 s for 2 s (`gmtest_stam01_dbl`, Quen, Aard, Igni, Yrden): at the default cooldown 5.x's input lock and the cooldown refused every press on the unchanged build too; with the cooldown option at 0 the unchanged build cast Aard again 0.74 s after the first (the press buffered in the cast's recovery), the fixed build refused every press until the cast's action ended (the next Aard 1.6 s later, a new cast). Regression check (`GMTest_stam01`, scripted presses with Geralt put in the sign-cast action and the cast set-up counted, not run): a press and an alternative-casting press refused, a press during an attack set up; it failed on a throwaway build without the fix. The Aard finisher: a real finisher forced to 5.x's Aard finisher animation (`gmtest_stam01_fin_aard`, a bandit at 1 health, `ForceFinisher`, a real light attack; Geralt at level 12 for the finisher's level rule) cast its free Aard: on the unchanged build Aard went on cooldown and the decoction hook fired, on the fixed build neither; regression check (`GMTest_stam01`, an Aard entity's `ManagePlayerStamina` with its cost disabled, scripted) failed on the throwaway build and passes. The refusal sounds (STAM-03, C2-5): `GMTest_stam03` (scripted item press and dodge at 0 stamina) and `gmtest_stam03_horse_a/b` (the horse's own input events, scripted: sword attack and bomb at 0 stamina) play legacy's sounds. Regression: `gmtest_regress()` 1,596 and `gmtest_panel()` 166 passed, 0 failed, in each tree (+12 checks).
 
 **Balance values:** sign cooldown 5 s, alternate 7.5 s (options).
 
@@ -102,12 +106,14 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 
 - Counters cost the same against any attack, as in legacy (project owner, 2026-10-04; in DEF-06's replacement of `PerformCounterCheck`, `defense/counter.ws`). Until then the port kept vanilla's counter check, whose heavy-attack multiplier read Ghost Mode's lowered `HEAVY_STRIKE_COST_MULTIPLIER` (1.25; vanilla 2).
 - <a id="stam-03-channeled-signs"></a>*Channeled signs:* 5.x drains channels per second and ends them at 0 stamina, as legacy, so the XML costs suffice, with one legacy exception ported: the alternate Yrden (trap) and Axii (puppet) channels finish even at 0 stamina, or 0 adrenaline when casting with it; releasing the sign still ends them. Today they cannot run dry (a cast needs 40 to start, the whole channels cost about 37 and 38), but skills or items that lower a sign's start cost or raise its channel cost could change that (project owner, 2026-10-04). For it, as in legacy, a drain that empties stamina no longer aborts the sign being cast (vanilla's `W3PlayerAbilityManager.DrainStamina`); every other channel still stops itself at 0. The rest of legacy's channel rework is SKL or STAM-01.
-- **Deviation:** legacy's moved charge points for normal casts are not ported: legacy charged Yrden and Quen at the throw, like the other signs; 5.x charges them when the trap or shield becomes active, which in game happens at the throw (all five measured charging once, at the throw). Only a cast interrupted between the throw and the active state would differ (porter's call, 2026-10-03, confirmed by the owner, 2026-11-02).
+- **Deviation:** legacy's moved charge points for normal casts are not ported: legacy charged Quen, Yrden and Axii while the cast was still Geralt's current sign (Quen and Yrden at the throw, Axii before the rest of its `OnEnded`); 5.x charges Quen and Yrden when the shield or trap becomes active and Axii after its cast state ends, which in game happens at the throw (all five measured charging once, at the throw). Focus's adrenaline does not depend on it: the drain credits the sign charged (SKL-18, fixed in the whole-port fix round, 2026-11-03: until then a normal Quen, Yrden or Axii earned none). Only a cast interrupted between the throw and the active state would differ (porter's call, 2026-10-03, confirmed by the owner, 2026-11-02).
 - *Horseback:* a sword attack costs 3× the light-attack cost (legacy's `ON_HORSEBACK_STAMINA_MULTIPLIER`, `GMHorsebackStaminaMult()`). Legacy's other horseback changes are HORSE's.
 - **Deviation:** a horseback sword attack is paid in `SwordAttack.DoAttack`, which both swing paths run; legacy paid on the button release, which missed the quick swing (a legacy gap; porter's call, confirmed by the owner, 2026-11-02).
 - *Partial parry:* Ghost Mode parries anyway and marks the hit as a parry-stagger in `ProcessAction` (since the DEF audit, in DEF-05's replacement of it, `defense/processAction.ws`, unless the attack knocks down or staggers), which lets part of the damage through (50% since DEF-05; vanilla's share was about 28%). The stagger it adds was not applied (vanilla's `ProcessActionBuffs` skips all effects of a parried hit of a parryable attack; legacy had the same gate); DEF-05 applies it ([DEF-05](def.md#def-05-parrying-rules)). The rest of legacy's parry rework is DEF's.
 - *Ciri* needs no code: the options and base costs apply to Geralt only, and her parry check always passes in 5.x.
-- The test counter `gmStaminaRefusals` stays in `actionStamina.ws` (it only counts; accepted at the audit).
+- The test counter `gmStaminaRefusals` stays in `actionStamina.ws` (it only counts; accepted at the audit), with the last refusal's sound (`gmStaminaRefusalSound`).
+- *Refusal sounds* as legacy (whole-port audit C2-5; owner, 2026-11-03): a bomb, crossbow or usable-item press and a horseback sword attack refused for stamina play legacy's low-stamina warning (`gui_ingame_low_stamina_warning`); attacks, dodges and rolls on foot play `gui_no_stamina`. The item refusal runs before vanilla's other checks in those input events (legacy's sat after the selected-item checks); a refused press plays the sound either way.
+- **Deviation:** each feature's wrapper of the cost functions (`GetStaminaActionCost`, `GetSkillStaminaUseCost`: STAM's, ARM's armor class and Griffin set, ENCH's glyphwords, ALCH's decoctions, SKL's school perks and Adrenaline Burst) caps its result at 100, where legacy multiplied everything through and capped once at the end. The results differ only when an intermediate cost passes 100 and a later wrapper lowers it, which takes extreme options: with the sign cost option at +3 (40 → 160, capped to 100) and Griffin School gear, the port charges 95 where legacy charged 100. At the default options nothing differs; the wrappers' order is the compile order (whole-port audit A1-3; owner, 2026-11-03).
 
 **Slices:**
 
@@ -173,12 +179,12 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 | Depends on | OPT-01 |
 | Skill trees | n/a |
 | Port form | `@wrapMethod` on `W3PlayerWitcher.CalculatedArmorStaminaRegenBonus` (feeds the regen effect and the panel) and `CInventoryComponent.GetItemTooltipAttributes`/`GetItemStatsFromName` (the armor regen line); option. In `stamina/armorRegenPenalty.ws` |
-| Port status | signed off (2026-10-04; [audit](#stam-audit-2026-10-03)), except Ghost Mode's tooltip row for the modifier (ported with the other `tooltip_settings.csv` rows) |
+| Port status | signed off (2026-10-04; [audit](#stam-audit-2026-10-03)); Ghost Mode's tooltip row for the modifier ported with UI-07 (2026-10-20) |
 | Open checks | — |
 | Save impact | none (expected) |
 | NG+ counterpart | none |
 
-**What it does:** armor no longer changes stamina regen (vanilla gives armor pieces regen penalties or bonuses); the option "Enable stamina regen penalty for armors" (`GMArmorRegenPenalty`, default off) restores the armor's regen modifier, with legacy's calculation and per-piece values since ARM-03. Tooltips and the character panel hide the modifier when it is off; with it on, the panel shows it under the regen lines ("Stamina regeneration modifier", legacy string 2110992263; legacy put it under Armor). Armor classes affect stamina costs instead (ARM).
+**What it does:** armor no longer changes stamina regen (vanilla gives armor pieces regen penalties or bonuses); the option "Enable stamina regen penalty for armors" (`GMArmorRegenPenalty`, default off) restores the armor's regen modifier, with legacy's calculation and per-piece values since ARM-03. Tooltips and the character panel hide the modifier when it is off; with it on, the panel shows it under Armor, as legacy ("Stamina regeneration modifier", legacy string 2110992263). Armor classes affect stamina costs instead (ARM).
 
 **Implementation (legacy):** `W3GameParams.IsArmorRegenPenaltyEnabled`, `W3RegenEffect.OnUpdate`, `W3PlayerWitcher.CalculatedArmorStaminaRegenBonus`, `CInventoryComponent.GetItemStatsFromName`, tooltips (`AddItemStats`, `CalculateStatsComparance`), character panel. 8 units, all unchanged in 5.x.
 
@@ -204,7 +210,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 | Flags | balance |
 | Depends on | OPT-01 |
 | Skill trees | both: delays on `magic_1` to `magic_5`, the alternate sign skills (`magic_s1` to `s5`, `magic_s28`, `magic_s31`), Whirl (classic `sword_s1`, new `sword_s35`) and Rend `sword_s2` |
-| Port form | DLC XML (`gm_stats.xml`, `gm_skills.xml`); the delay option in the `GetStaminaActionCost` wrapper (`stamina/staminaCosts.ws`), so `DrainStamina` stays vanilla; `@wrapMethod` on `CActor.OnTakeDamage` and the finisher, combat-end and spawn events (`stamina/regenPause.ws`) |
+| Port form | DLC XML (`gm_stats.xml`, `gm_skills.xml`); the delay option in the `GetStaminaActionCost` wrapper (`stamina/staminaCosts.ws`); `@wrapMethod` on `CActor.OnTakeDamage` and the finisher, combat-end and spawn events (`stamina/regenPause.ws`) |
 | Port status | signed off (2026-10-04; [audit](#stam-audit-2026-10-03)) |
 | Open checks | the pauses after real dodges and attacks (measured with scripted drains); the boss exemption; no pause after a killing blow; DoT from effects; whether regen resumes at the finisher's end or at the end of combat |
 | Save impact | none (expected) |
@@ -216,7 +222,7 @@ Ghost Mode makes combat a stamina economy (pillar P2): every action costs stamin
 
 **5.x:** 5.x changed `DrainStamina` (Avoidance's sign cost reduction).
 
-**Decisions:** port, applying the delay where the cost is computed so `DrainStamina` stays vanilla. A delay read with `GetStaminaActionDelay` and then passed to a fixed-value drain goes through the wrapper twice; `GMFixedDrainDelay` takes the option out first, so it counts once (Whirl, Rend's minimum cost). Rend needs no code: its charge drains each tick with Rend's 1 s delay, and a Rend cannot be held past full charge, so legacy's open-ended Rend pause adds nothing.
+**Decisions:** port, applying the delay where the cost is computed, so every drain gets it once whatever path it takes (`W3PlayerAbilityManager.DrainStamina` has been replaced since STAM-03's slice 8, `stamina/channelStamina.ws`, for the channels' 0-stamina exception). A delay read with `GetStaminaActionDelay` and then passed to a fixed-value drain goes through the wrapper twice; `GMFixedDrainDelay` takes the option out first, so it counts once (Whirl, Rend's minimum cost). Rend needs no code: its charge drains each tick with Rend's 1 s delay, and a Rend cannot be held past full charge, so legacy's open-ended Rend pause adds nothing.
 
 **Slices:**
 
@@ -366,7 +372,7 @@ Done by a fresh session ([audit](../feature-mapping.md#audit-signing-a-feature-o
 
 ### Hand-off to other areas
 
-Ghost Mode changes that affect stamina but belong to other features. They stay unattributed until their areas are mapped; this list is where those areas start.
+Ghost Mode changes that affect stamina but belong to other features. Every area is now mapped; each row's changes are attributed to and ported (or recorded) by that area.
 
 | Area | Changes (legacy units) |
 |---|---|

@@ -36,7 +36,7 @@ items the game reads (Ghost Mode's DLC over 5.x, `extend` entries resolved over 
 ECON unit's price and `mod_*` tags with legacy's, both folders; differences that are rules of the port are
 counted by reason; it also fails on an entry that would come out empty (a Hearts of Stone `extend`, a price
 of 0 where 5.x has one, a lost category or name key) and on a name defined twice in the DLC folder; every
-DE2 item's price as DE2 gives it (both folders, other fields 5.x's), every DE2 price recomputed from its
+DE2 item's price and price tags as DE2 gives them (both folders, other fields 5.x's), every DE2 price recomputed from its
 counterpart in 1.32 and legacy, every new priced 5.x item of a gear, schematic or horse category priced; and
 each of `BINARIES` equal to 5.x's file with exactly its edits, CRCs valid; and no entry of any of the DLC's
 definition files (whichever tool wrote it) without `on_conflict` on a name 5.x defines, which the game would
@@ -330,10 +330,11 @@ def verify(worktree, write_test=False):
             for a in ("category", "localisation_key_name"):
                 if fh.get(a) != vh.get(a):
                     problems.append(f"{folder}: DE2 item {name}: {a} {fh.get(a)} (5.x {vh.get(a)})")
-            if [t for t in item_layer.split_tags(fe) if t.startswith("mod_")] != [t for t in item_layer.split_tags(ve) if t.startswith("mod_")]:
-                problems.append(f"{folder}: DE2 item {name}: price tags changed")
+            if mods(fe) != set(item_layer.de2_tags(name)):
+                problems.append(f"{folder}: DE2 item {name}: price tags {sorted(mods(fe))}, its counterpart's"
+                                f" {sorted(item_layer.de2_tags(name))}")
             if name not in gi or name in stubs:
-                if set(item_layer.split_tags(fe)) != set(item_layer.split_tags(ve)):
+                if {t for t in item_layer.split_tags(fe) if not t.startswith("mod_")} != {t for t in item_layer.split_tags(ve) if not t.startswith("mod_")}:
                     problems.append(f"{folder}: DE2 item {name}: tags changed by ECON's entry")
             checked += 1
             if folder == "items":

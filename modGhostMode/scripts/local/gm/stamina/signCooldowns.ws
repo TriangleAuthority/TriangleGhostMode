@@ -117,13 +117,14 @@ function GMAddSignCooldown(signType : ESignType, alt : bool)
 // ---- applying cooldowns ----
 
 // Normal casts: every sign pays its stamina here, on the player's normal casts only (free casts,
-// e.g. Quen from the Bear set or Yrden not cast by the player, skip it).
+// e.g. Quen from the Bear set or Yrden not cast by the player, skip it). 5.x's Aard finisher
+// casts a free Aard (cost disabled): it starts no cooldown and fires no decoction hook (A1-2).
 @wrapMethod(W3SignEntity)
 function ManagePlayerStamina()
 {
 	wrappedMethod();
 
-	if(owner.GetActor() == thePlayer && !IsAlternateCast())
+	if(owner.GetActor() == thePlayer && !IsAlternateCast() && !disableCost)
 	{
 		GMAddSignCooldown(GetSignType(), false);
 	}
@@ -190,9 +191,20 @@ function OnEnterState(prevStateName : name)
 
 // ---- blocking casts ----
 
+// Legacy's CastSign refused a cast press, silently, while Geralt is already casting a sign
+// (C2-2); otherwise a press during the cast is buffered and casts again after it, before the
+// cooldown it started can refuse it. 5.x's alternative sign casting (AltCastSign) too.
+function GMIsSignCastInProgress() : bool
+{
+	return GetWitcherPlayer() && GetWitcherPlayer().IsInCombatAction()
+		&& thePlayer.GetBehaviorVariable('combatActionType') == (int)CAT_CastSign;
+}
+
 @wrapMethod(CPlayerInput)
 function OnCastSign(action : SInputAction)
 {
+	if(IsPressed(action) && GMIsSignCastInProgress())
+		return false;
 	if(IsPressed(action) && GMIsSignOnCooldown(thePlayer.GetEquippedSign()))
 	{
 		thePlayer.SoundEvent("gui_no_adrenaline");
@@ -204,6 +216,8 @@ function OnCastSign(action : SInputAction)
 @wrapMethod(CPlayerInput)
 function AltCastSign(signType : ESignType)
 {
+	if(GMIsSignCastInProgress())
+		return;
 	if(GMIsSignOnCooldown(signType))
 	{
 		thePlayer.SoundEvent("gui_no_adrenaline");

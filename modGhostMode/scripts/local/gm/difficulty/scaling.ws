@@ -352,7 +352,7 @@ function GMIsBeast() : bool
 @addMethod(CNewNPC)
 function GMApplyLevelScaling(playerLevel : int)
 {
-	var scalingType, minLevel, maxLevel : int;
+	var scalingType, minLevel, maxLevel, baseLevel : int;
 
 	scalingType = GMGetEnemyScalingOption();
 	if(HasAbility('banshee_summons'))
@@ -389,9 +389,15 @@ function GMApplyLevelScaling(playerLevel : int)
 			currentLevel = gmSavedRandomLevel;
 			break;
 		case 6:	// DIFF-10, interpolated: half the way up to Geralt's level, rounded down (Geralt 20, an enemy at 4:
-			// +8, 12; Geralt 19: +7, 11); an enemy at or above his level keeps its own (porter's assumption)
-			if(currentLevel < playerLevel)
-				currentLevel += (playerLevel - currentLevel) / 2;
+			// +8, 12; Geralt 19: +7, 11); an enemy at or above his level keeps its own (porter's assumption).
+			// From the NPC's own level (its entity's, or the one a script set), never from a level already raised,
+			// so a recompute without a reset (Geralt's level-up, the boss bar) gives the rule's level again
+			// (whole-port audit A2-1: it took half the remaining gap again each time)
+			baseLevel = gmScriptLevel;
+			if(baseLevel <= 0)
+				baseLevel = level + gmCurrentNGPLevel;
+			if(baseLevel < playerLevel)
+				currentLevel = baseLevel + (playerLevel - baseLevel) / 2;
 			break;
 		default:
 			break;

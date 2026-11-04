@@ -3,7 +3,8 @@
 
 // DMG-05: the order of damage steps. 5.x's body; the final-damage step (GMProcessDamageModification)
 // runs after ReduceDamage, before 5.x's immortality clamp (moved here from ReduceDamage by 5.x) and
-// before direct damage, which it does not touch. DEF-01's dodge check wraps this function.
+// before direct damage, which it does not touch. Other areas' hunks: SKL-11's Quen on the raw damage
+// (GMProcessDamageDecrease) and ARM-11's Viper set (poison cancelled and healed). DEF-01's dodge check wraps this function.
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessActionDamage() : bool
 {
@@ -329,7 +330,7 @@ function GMZeroSubOneDamage( out damageData : W3DamageAction )
 // (5.x: every NPC's raw damage); hits below 1 deal nothing. DD1's exception: Crippling Strike's
 // bonus (5.x: a raw damage multiplier; 5.x's alchemy_s24 is gone, SKL-13). SKL-06: the player's bolts and
 // bombs not thrown from aiming deal half damage. Severance (ENCH-04) and Supercharged Glyphs (SKL-10)
-// are here; Dimeritium is ALCH-15's; Perk 16 comes with its area; Mutation 8 is MUT-06's; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
+// are here; Dimeritium is ALCH-15's; In Combat's Fires (Perk 16) is SKL-18's; Mutation 8 is MUT-06's; non-deadly fights (DMG-10) and NPC friendly fire (DMG-12) are here.
 @addMethod(W3DamageManagerProcessor)
 function GMProcessDamageModification()
 {
@@ -470,7 +471,16 @@ function GMProcessDamageModification()
 		action.processedDmg.vitalityDamage = 0;
 	if( action.processedDmg.essenceDamage < 1.f && !action.IsDoTDamage() )
 		action.processedDmg.essenceDamage = 0;
+
+	// DMG-01: stopped by armor (the flag that lets a parried or countered hit spark): only a hit that dealt damage up
+	// to this step and deals none after it, when the last damage type through the formula met armor (legacy)
+	if( !action.DealsAnyDamage() && gmHasArmor )
+		action.SetArmorReducedDamageToZero( true );
 }
+
+// DMG-01: legacy's hasArmor: the last damage type CalculateDamage put through the formula had armor points.
+@addField(W3DamageManagerProcessor)
+var gmHasArmor : bool;
 
 // DMG-01, DMG-02: 5.x's CActor.ReduceDamage without the player's minimum damage (armor can stop a hit
 // completely) and without the VulnerableFromFront check, which ProcessDamageIncrease makes before the

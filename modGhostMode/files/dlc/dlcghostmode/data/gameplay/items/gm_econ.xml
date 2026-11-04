@@ -1680,22 +1680,30 @@
 
 <!-- gameplay/items/def_item_armor_dol_blathanna.xml -->
 	<item name="Dol Blathanna Armor" price="714" on_conflict="extend">
+		<tags>mod_legendary</tags>
 	</item>
 	<item name="Dol Blathanna Boots" price="288" on_conflict="extend">
+		<tags>mod_legendary</tags>
 	</item>
 	<item name="Dol Blathanna Gloves" price="280" on_conflict="extend">
+		<tags>mod_legendary</tags>
 	</item>
 	<item name="Dol Blathanna Pants" price="343" on_conflict="extend">
+		<tags>mod_legendary</tags>
 	</item>
 
 <!-- gameplay/items/def_item_armor_white_tiger.xml -->
 	<item name="White Tiger Armor" price="714" on_conflict="extend">
+		<tags>mod_legendary</tags>
 	</item>
 	<item name="White Tiger Boots" price="288" on_conflict="extend">
+		<tags>mod_legendary</tags>
 	</item>
 	<item name="White Tiger Gloves" price="280" on_conflict="extend">
+		<tags>mod_legendary</tags>
 	</item>
 	<item name="White Tiger Pants" price="343" on_conflict="extend">
+		<tags>mod_legendary</tags>
 	</item>
 
 <!-- gameplay/items/def_item_bolts.xml -->
@@ -2662,72 +2670,84 @@
 	<item name="NGP Netflix Armor schematic 1" price="638" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix Armor schematic 2" price="1027" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="NGP Netflix Boots schematic" price="65" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix Boots schematic 1" price="332" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix Boots schematic 2" price="524" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="NGP Netflix Gloves schematic" price="114" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix Gloves schematic 1" price="267" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix Gloves schematic 2" price="460" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="NGP Netflix Pants schematic" price="122" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix Pants schematic 1" price="328" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix Pants schematic 2" price="520" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="NGP Netflix silver sword schematic" price="114" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix silver sword schematic 1" price="322" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix silver sword schematic 2" price="505" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="NGP Netflix steel sword schematic" price="100" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix steel sword schematic 1" price="270" on_conflict="extend">
 	</item>
 	<item name="NGP Netflix steel sword schematic 2" price="345" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="Netflix Armor schematic" price="173" on_conflict="extend">
 	</item>
 	<item name="Netflix Armor schematic 1" price="638" on_conflict="extend">
 	</item>
 	<item name="Netflix Armor schematic 2" price="1027" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="Netflix Boots schematic" price="65" on_conflict="extend">
 	</item>
 	<item name="Netflix Boots schematic 1" price="332" on_conflict="extend">
 	</item>
 	<item name="Netflix Boots schematic 2" price="524" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="Netflix Gloves schematic" price="114" on_conflict="extend">
 	</item>
 	<item name="Netflix Gloves schematic 1" price="267" on_conflict="extend">
 	</item>
 	<item name="Netflix Gloves schematic 2" price="460" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="Netflix Pants schematic" price="122" on_conflict="extend">
 	</item>
 	<item name="Netflix Pants schematic 1" price="328" on_conflict="extend">
 	</item>
 	<item name="Netflix Pants schematic 2" price="520" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="Netflix silver sword schematic" price="114" on_conflict="extend">
 	</item>
 	<item name="Netflix silver sword schematic 1" price="322" on_conflict="extend">
 	</item>
 	<item name="Netflix silver sword schematic 2" price="505" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 	<item name="Netflix steel sword schematic" price="100" on_conflict="extend">
 	</item>
 	<item name="Netflix steel sword schematic 1" price="270" on_conflict="extend">
 	</item>
 	<item name="Netflix steel sword schematic 2" price="345" on_conflict="extend">
+		<tags>-mod_legendary</tags>
 	</item>
 
 <!-- gameplay/items/w3r_items.xml -->

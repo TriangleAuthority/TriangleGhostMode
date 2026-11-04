@@ -10,18 +10,6 @@
 		<quality type="add" min="4" max="4"/>
       </ability>
 
-<!-- dlc/bob/data/gameplay/items_plus/def_item_crafting_pants.xml -->
-	<ability name="NGP Red Wolf Pants 2 _Stats" on_conflict="replace">
-				<weight 						type="base" min="3" 				/>
-				<quality 						type="add" 	min="5" 				/>
-				<armor 							type="base"	min="151" 				/>
-				<slashing_resistance_perc 		type="base" min="0.08"				/>
-				<rending_resistance_perc 		type="base" min="0.10"				/>
-				<elemental_resistance_perc 		type="base" min="0.30"				/>
-				<attack_power					type="mult" min="0.10"				/>
-				<spell_power					type="mult"	min="0.10"				/>
-			</ability>
-
 <!-- dlc/bob/data/gameplay/items_plus/def_item_horse.xml -->
 	<ability name="ToussaintHorseBag" on_conflict="replace">
 				<tags> 								HorseBag1

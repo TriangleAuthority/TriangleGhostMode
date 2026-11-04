@@ -391,7 +391,7 @@ function OnTargetHit( out damageData : W3DamageAction )
 		else	//modSigns
 		{	//modSigns
 			drainedStamina = reducedDamagePrc * casterActor.GetStatMax(BCS_Stamina);	//modSigns
-			casterActor.DrainStamina(ESAT_FixedValue, drainedStamina, casterActor.GetStaminaActionDelay(ESAT_Ability, caster.GetSkillAbilityName(S_Magic_s04)));	//modSigns
+			casterActor.DrainStamina(ESAT_FixedValue, drainedStamina, GMQuenAbsorbDelay(casterActor, caster.GetSkillAbilityName(S_Magic_s04)));	//modSigns: the regen delay option counted once (STAM-06)
 		}	//modSigns
 		if(usesAdrenaline && casterActor.GetStat(BCS_Focus) <= 0 || !usesAdrenaline && casterActor.GetStat(BCS_Stamina) <= 0)	//modSigns: breaks at 0
 		{
@@ -675,6 +675,39 @@ function InternalAddEffect(effectType : EEffectType, creat : CGameplayEntity, sr
 		}
 	}
 	return wrappedMethod(effectType, creat, srcName, inDuration, customVal, customAbilityName, customFXName, signEffect, powerStatValue, customParams, vibratePadLowFreq, vibratePadHighFreq);
+}
+
+// The active shield's absorb drain's regen delay: Active Shield's delay, the "Stamina regen delay" option
+// counted once (STAM-06's GMFixedDrainDelay, as Whirl and Rend; fx round A1-1).
+function GMQuenAbsorbDelay(casterActor : CActor, abilityName : name) : float
+{
+	return GMFixedDrainDelay(casterActor.GetStaminaActionDelay(ESAT_Ability, abilityName));
+}
+
+// SKL-11 (fx round, C1-2): legacy removed 5.x's ApplyQuenBuffChanges ("handled by effects manager"): a
+// hit an alternate Quen fully absorbs (Geralt's) or that deals no damage (an NPC's) keeps its effects
+// (blindness, confusion, slowdowns, freezing, ...); the effect rules above deny what Quen stops
+// (knockdowns, staggers, damage over time). 5.x stripped every effect but knockdowns.
+// 5.x body removed; changes marked //modSigns.
+@replaceMethod(W3DamageManagerProcessor)
+function ApplyQuenBuffChanges()
+{
+	//modSigns: removed 5.x's body (legacy: the effect manager's rules decide, InternalAddEffect above)
+}
+
+// SKL-11 (fx round, C1-4): the basic shield's HUD percentage rounds to the nearest (legacy's RoundMath;
+// 5.x rounds up, so a nearly broken shield showed 1%).
+// 5.x body; changes marked //modSigns.
+@replaceMethod(W3Effect_BasicQuen)
+function GetStacks() : int
+{
+	if( !quenEntity )
+	{
+
+		CacheQuen();
+	}
+
+	return RoundMath( 100.f * quenEntity.GetShieldHealth() / quenEntity.GetInitialShieldHealth() );	//modSigns: legacy (5.x: CeilF)
 }
 
 // SKL-11 (found with MUT-10): a save from 5.x play can still carry the player_had_quen fact, which

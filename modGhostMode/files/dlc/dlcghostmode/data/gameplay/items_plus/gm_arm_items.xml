@@ -1433,6 +1433,18 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<potion_duration 				type="add"	min="0.05"				/>
 	</ability>
+	<ability name="NGP Red Wolf Pants 2 _Stats" on_conflict="replace">
+				<weight 						type="base" min="3" 				/>
+				<quality 						type="add" 	min="5" 				/>
+				<armor 							type="base" min="145"			 	/>
+				<slashing_resistance_perc		type="base"	min="0.07"				/>
+				<rending_resistance_perc		type="base" min="0.07"				/>
+				<elemental_resistance_perc		type="base" min="0.07"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<potion_duration 				type="add"	min="0.05"				/>
+		<toxicity 						type="base" min="5" 				/>
+	</ability>
 	<ability name="NGP Wolf Pants 5 _Stats" on_conflict="replace">
 				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>

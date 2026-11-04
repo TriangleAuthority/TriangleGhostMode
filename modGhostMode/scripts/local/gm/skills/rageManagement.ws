@@ -64,12 +64,20 @@ function GMUsedFoA() : bool
 	return GMFoaMult() > 1;
 }
 
+// The sign being charged (GMPaySignCost), for Focus's adrenaline (SKL-18): 5.x charges a normal Quen,
+// Yrden and Axii after the cast state has cleared Geralt's current sign (legacy charged them while it
+// was still current), so the drain credits this sign rather than the current one (fx round, C1-1).
+@addField(W3PlayerAbilityManager)
+var gmFocusSign : W3SignEntity;
+
 // A cast's or a channel's start cost for Geralt: 1 adrenaline point (x Flood of Anger) with Rage
 // Management and at least 1 point, else stamina (plus Flood of Anger's points). With payStamina false
 // the stamina cost is left to the caller.
 @addMethod(W3SignEntity)
 function GMPaySignCost(player : CR4Player, payStamina : bool, optional focusCostIfAny : bool)
 {
+	var pam : W3PlayerAbilityManager;
+
 	if(player.GMHasRageManagement() && player.GetStat(BCS_Focus) >= 1)
 	{
 		if(!focusCostIfAny || cachedCost > 0)
@@ -79,7 +87,14 @@ function GMPaySignCost(player : CR4Player, payStamina : bool, optional focusCost
 	else
 	{
 		if(payStamina)
+		{
+			pam = (W3PlayerAbilityManager)player.GetAbilityManager();
+			if(pam)
+				pam.gmFocusSign = this;	// Focus credits the sign charged (W3PlayerAbilityManager.DrainStamina)
 			player.DrainStamina(ESAT_Ability, 0, 0, SkillEnumToName(skillEnum));
+			if(pam)
+				pam.gmFocusSign = NULL;
+		}
 		SetUsedFocus(false);
 		if(GMUsedFoA())
 			player.DrainFocus(1 * GMFoaMult());

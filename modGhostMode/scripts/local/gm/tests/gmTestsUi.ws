@@ -212,6 +212,20 @@ exec function gmtest_ui08()
 	LogChannel('GMTest', "SUMMARY ui08: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 
+// UI-08 (whole-port audit C2-6): the crafting menu's weight line shows the item's real weight (legacy), not
+// 5.x's discounted one (x0.5 + 0.01; usable items, upgrades and junk x0.2 + 0.01).
+function GMTest_ui08_weight(comp : W3GuiPlayerInventoryComponent, itemName : name, data : CScriptedFlashObject)
+{
+	var minW, maxW : SAbilityAttributeValue;
+	var expected, shown : string;
+
+	comp.GetCraftedItemInfo(itemName, data);
+	theGame.GetDefinitionsManager().GetItemAttributeValueNoRandom(itemName, true, 'weight', minW, maxW);
+	expected = GetLocStringByKeyExt("attribute_name_weight") + "  " + FloatToStringPrec(minW.valueBase, 2);
+	shown = data.GetMemberFlashString("weight");
+	GMTestReport(minW.valueBase > 0 && shown == expected, "UI-08 audit C2-6: the crafting menu's weight for " + itemName + ": '" + shown + "' (expected '" + expected + "'; 5.x's discount: " + FloatToStringPrec(0.01 + minW.valueBase * 0.5, 2) + ")");
+}
+
 // UI-08: recipe and schematic tooltips, the extended texts, the crafting menu's line.
 function GMTest_ui08()
 {
@@ -259,6 +273,8 @@ function GMTest_ui08()
 
 	comp.GetCraftedItemInfo('Short sword 1', data);
 	GMTestReport(data.GetMemberFlashString("additionalDescription") == "", "UI-08 the crafting menu has no random attributes line");
+	GMTest_ui08_weight(comp, 'Short sword 1', data);
+	GMTest_ui08_weight(comp, 'Swallow 1', data);
 	delete comp;
 	delete tc;
 }

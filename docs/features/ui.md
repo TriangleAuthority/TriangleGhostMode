@@ -296,6 +296,7 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 **Implementation (legacy):** `tooltip_settings.csv` rows `staminaRegen_armor_mod`, `frost_resistance_perc`, `desc_knockdownchance_mult`, `vitalityCombatRegen`, `q108_bounce_arrows`; strings 2110992013, 110, 153, 156, 157, 164, 265, 476.
 
 **Decisions:** port as legacy.
+- **Deviation:** the Czech row of string 2110992110 ("Knockdown chance") carries the key `attribute_name_desc_knockdownchance_mult`, as every other language; legacy's Czech table misspelt it `attribute_name_dockdownchance_mult`, so in Czech the blunt bolts' knockdown chance row had no name (whole-port audit A7-1; owner, 2026-11-03).
 
 **Verification (slice 1, 2026-10-20, both trees):** scripted (`GMTest_ui06`, in the regression): the five names read legacy's strings by key ("Frost resistance", "Vitality regeneration outside of combat", ...). Not seen on screen: an item with one of the five rows. The combat Vitality regen name (2110992157) names a food or drink tooltip's in-combat regen row since the FOOD audit (F4, owner 2026-10-24), through FOOD-08's code ([food.md](food.md#food-08-edible-tooltip)); UI's code is unchanged.
 
@@ -313,13 +314,13 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 | Flags | — |
 | Depends on | ALCH-17 (potion, bomb and decoction texts by name), ENCH-17, CRAFT (ingredients) |
 | Skill trees | n/a |
-| Port form | `ui/recipes.ws`: `@replaceMethod`s of `W3TooltipComponent.GetRecipeDataFromXML`, `W3GuiBaseInventoryComponent.GetAlchemyBookText` and `GetSchematicBookText`; `@addMethod GMAddComponentsInfo` called from a `GetBaseItemData` wrapper (which also adds a recipe's potion or bomb effects and a decoction recipe's values); a `GetCraftedItemInfo` wrapper empties the random-attribute line |
+| Port form | `ui/recipes.ws`: `@replaceMethod`s of `W3TooltipComponent.GetRecipeDataFromXML`, `W3GuiBaseInventoryComponent.GetAlchemyBookText` and `GetSchematicBookText`; `@addMethod GMAddComponentsInfo` called from a `GetBaseItemData` wrapper (which also adds a recipe's potion or bomb effects and a decoction recipe's values); a `GetCraftedItemInfo` wrapper empties the random-attribute line and shows the item's real weight |
 | Port status | **signed off** (2026-10-21); **ported** (slice 2, 5.x-GM `5b5ab8a5`), verified in both trees |
 | Open checks | a recipe or schematic item's tooltip and the extended text (E) on screen at a merchant (scripted only: an added recipe is read at once); the crafting menu on screen |
 | Save impact | none |
 | NG+ counterpart | none |
 
-**What it does** (bugfix 87, changelist 1170): a recipe item in a shop or the inventory shows what it brews (1.32's typo `'alchemy_recipies'` made it show nothing); schematic, recipe and enchantment schematic tooltips list the ingredients as "have / need", red when short; the extended text (shown with E when buying) reads: item name in orange and rarity, the effects as "value name", the description (a decoction's with its values), the level required, the ingredients as "have / need"; the weight and the "random attributes" lines are gone (crafted gear has no random bonus: SWD's and ARM's `DoNotEnhance`), also in the crafting menu.
+**What it does** (bugfix 87, changelist 1170): a recipe item in a shop or the inventory shows what it brews (1.32's typo `'alchemy_recipies'` made it show nothing); schematic, recipe and enchantment schematic tooltips list the ingredients as "have / need", red when short; the extended text (shown with E when buying) reads: item name in orange and rarity, the effects as "value name", the description (a decoction's with its values), the level required, the ingredients as "have / need"; the weight and the "random attributes" lines are gone (crafted gear has no random bonus: SWD's and ARM's `DoNotEnhance`). The crafting and alchemy menus' item panel (`GetCraftedItemInfo`) has no "random attributes" line either, and its weight line shows the item's real weight (its definition's) where 1.32 and 5.x show a display discount (×0.5 + 0.01; usable items, upgrades and junk ×0.2 + 0.01; crafting ingredients 0): a Short sword 1 (6) shows "Weight 6", not 5.x's 3.01 (legacy commented the discount out; whole-port audit C2-6, 2026-11-03).
 
 **Implementation (legacy):** `GetRecipeDataFromXML` (the typo), `addComponentsInfo` (new), `GetAlchemyBookText`, `GetSchematicBookText`, `GetCraftedItemInfo`.
 
@@ -329,6 +330,8 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 - **Deviation:** the extended texts name and colour every effect as the item tooltip does (slowdown, breath, focus; the default colour for a stat without one); legacy printed the names as they came, so a potion's slowdown showed as a bare "50 %" (porter's call, confirmed by the owner, 2026-10-21).
 
 **Verification (slice 2, 2026-10-20, both trees):** scripted (`GMTest_ui08`, in the regression): `GetRecipeDataFromXML('Recipe for Blizzard 1')` finds Blizzard 1; the recipe's tooltip lists Toxicity 25, Effect duration 30 s, Slowdown 50 % and "0 / 1 Dwarven spirit", "1 / 5 White myrtle petals", "0 / 1 Golem's heart" (red); its extended text "Usable Items / Potion", "Master Item", "25 Toxicity", "30 Effect duration", "50 % Slowdown", the description, "Required:" and the ingredients as have / need, no weight; a decoction recipe's tooltip and text with its values (no `$`); Short sword 1's schematic tooltip and text with have / need, no weight or random-attribute line; the crafting menu's line empty. Real, on screen: the alchemy menu opened from the hub (screenshot), unchanged by this slice.
+
+**Verification (whole-port fix round, 2026-11-03, both trees; audit C2-6):** verified on the area build (gm/fx-ui `af859e22`): scripted (`GMTest_ui08_weight` in `GMTest_ui08`, the regression): the crafting menu's `GetCraftedItemInfo` gives Short sword 1 "Weight  6" (its definition's weight) and Swallow 1 its own; failed first on a throwaway build without the change ("Weight  3.01"). Not seen on screen. The Czech key (UI-07, A7-1) checked offline: the built `cz.w3strings` decoded with `w3strings.py` carries hash `328ae462` for 2110992110, as the other languages.
 
 **Ends:** ALCH-17's recipe book deviation; ENCH-17's (`addComponentsInfo`) and ITEM's (book layout) hand-offs.
 
@@ -355,6 +358,8 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 **5.x:** the same buying, from whichever NPC opened the menu (no pin check); Yolar's pin unchanged.
 
 **Decisions:** Q2 (owner, 2026-10-20): keep 5.x's buying from any merchant who opened the menu (the owner reports it if it plays wrong); legacy's herbalist gate is not ported; Yolar's pin is ported if it is a separate, clean change. It is (one line in legacy's `GetMapPinType`, a wrapper here): ported.
+
+**Known limit** (whole-port audit C2-13, owner, 2026-11-03): at a herbalist legacy's alchemy menu filled the merchant info panel (`UpdateMerchantData`: the merchant's name and money); 5.x's rewritten alchemy menu never sets it, and the port keeps 5.x's menu, so the panel stays empty while buying works. Not seen on screen.
 
 **Ends:** ALCH's hand-off (buying ingredients).
 
@@ -465,6 +470,7 @@ Each term is the one Ghost Mode's formula gives a hit: the attack power as the a
 **Implementation (legacy):** strings 2110992520–528 (by key hash) in nine languages; `modGMTutorials` rows by vanilla id in six languages (Brazilian Portuguese, German, English, Spanish, Polish, Russian).
 
 **Decisions:** DU9 (owner, 2026-10-20): legacy's tips and tutorials; languages legacy lacks keep 5.x's. The 5.x texts were compared before being overridden (English): the fast and strong attack tutorials (1075370, 1075376) describe the alternative input scheme (`<<AttackWithAlternateLight>>`, the "Modify Attack Type" key) and the sign tutorial (1075722) the sign selection keys. These are 1.32's texts too (1.32's `patch1` string table; 5.x's equal them), so legacy's tutorials already replaced them in 1.32: losing those notes is legacy's behaviour, not a deviation (UI audit F2). The input placeholders of legacy's texts (`<<AttackLight>>`, `<<AttackHeavy>>`) are bound to the gamepad only, on PC, in 1.32 and 5.x alike (`input_qwerty.ini`). Legacy's Brazilian and Russian tutorial tables declared English in their header; the port's say `br` and `ru` (the build reads the header).
+- **Known limit** (whole-port audit A7-4, owner, 2026-11-03): the rewritten tutorials exist only in Brazilian Portuguese, German, English, Spanish, Polish and Russian, as legacy's; Czech, French and Italian players see 5.x's vanilla tutorials, which describe vanilla rules (no sign cooldown, no −50% for non-aimed throws). Translating them is a later task if wanted.
 - **Deviation:** the Brazilian and Russian tutorial tables declare their own language (legacy's declared English, so whether legacy's players saw them is unknown; [to test in legacy](../open-questions.md#to-test-in-legacy-ghost-mode)) (porter's call, confirmed by the owner, 2026-10-21; recorded by the UI audit, F3).
 
 **Verification (slice 9, 2026-10-21, both trees):** scripted (`GMTest_ui13`, regression): the English fast attack tutorial is legacy's ("press <<AttackLight>> ... armor"); the tip rows 2110992520 and 528 read legacy's texts.

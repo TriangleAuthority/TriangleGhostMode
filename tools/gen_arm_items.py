@@ -83,6 +83,10 @@ KM_STARTING = {"Starting Armor", "Starting Pants", "Starting Boots", "Starting G
 # Nilfgaardian, Wolven and Skellige DLC armor -25 armor on a chest, -10 on the other pieces): given empty, which is
 # what the deleted ability did in legacy (fix3, sweep C gap 2; as SWD-04's Wolven swords, gen_swd_items.EMPTIED).
 EMPTIED = {"NGP DLC Compatibility Chest Armor Mod", "NGP DLC Compatibility Armor Mod"}
+# Abilities of armor pieces that no item names, whose stats legacy rewrote: given with legacy's ARM stats as the
+# pieces' abilities are (ARM-10: legacy's NG+-only rewrite of the second-tier Manticore trousers' stats, which no
+# item of 1.32, legacy or 5.x lists, so it has no effect in play; whole-port audit C3-1, WGT's hand-off).
+UNLISTED = {"items_plus": {"NGP Red Wolf Pants 2 _Stats"}}
 # Hair items whose variants legacy took Yoana's reward armor out of (the inquisitor and bowl haircuts), so with
 # the armor, which legacy made heavy (audit F4b), Geralt keeps his default hair, as with `Heavy armor 03` (same
 # look; fix3, sweep C gap 5a, the owner's decision, 2026-11-02): 5.x's entry whole without that variant line.
@@ -353,7 +357,7 @@ def generate(folder, regular=None):
     ma, la, va = abilities("master", folder), abilities("legacy-GM", folder), abilities("vanilla-5.x", folder)
     ablocks = []
     for name in sorted(la):
-        if name not in armor_abilities and not AUTOGEN.match(name):
+        if name not in armor_abilities and not AUTOGEN.match(name) and name not in UNLISTED.get(folder, ()):
             continue
         if name not in ma and name not in va and name in armor_abilities:
             # an ability legacy added for a piece (audit F4: the quest-equipped Autogen boots and trousers)
@@ -524,7 +528,7 @@ def verify(worktree):
                     else:
                         problems.append(f"{name}: {tag} differ from legacy's")
         for name in sorted(la):
-            if name not in armor_abilities and not AUTOGEN.match(name):
+            if name not in armor_abilities and not AUTOGEN.match(name) and name not in UNLISTED.get(folder, ()):
                 continue
             final = ga.get(name, va[name][2] if name in va else None)
             if final is None:

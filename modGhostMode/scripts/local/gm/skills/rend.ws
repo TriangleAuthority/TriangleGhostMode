@@ -143,3 +143,42 @@ function OnProcessActionPost(action : W3DamageAction)
 	if(isRend && GetStat(BCS_Focus) > 0)
 		DrainFocus(GetStat(BCS_Focus));
 }
+
+// Rend's charge: the charge ratio snaps to a full charge above 99% of the charge time (legacy; 5.x: 95%,
+// fx round C2-1). Returns the ratio Rend's charge takes.
+function GMRendChargeRatio(ratio : float) : float
+{
+	if(ratio > 0.99)
+		return 1;
+	return ratio;
+}
+
+// 5.x body; changes marked //modSigns. Declared without timer (a replaced timer, development.md).
+@replaceMethod(W3PlayerWitcher)
+function SpecialAttackHeavySustainCost(dt : float, id : int)
+{
+	var focusHighlight, ratio : float;
+	var hud : CR4ScriptedHud;
+	var hudWolfHeadModule : CR4HudModuleWolfHead;
+
+
+	DrainStamina(ESAT_Ability, 0, 0, GetSkillAbilityName(S_Sword_s02), dt);
+
+
+	if(GetStat(BCS_Stamina) <= 0)
+		OnPerformSpecialAttack(false, false);
+
+
+	ratio = EngineTimeToFloat(theGame.GetEngineTime() - specialHeavyStartEngineTime) / specialHeavyChargeDuration;
+
+
+	//modSigns: removed 5.x's full charge above 0.95
+	ratio = GMRendChargeRatio(ratio);	//modSigns: a full charge above 99% (legacy)
+
+	SetSpecialAttackTimeRatio(ratio);
+
+
+
+
+
+}

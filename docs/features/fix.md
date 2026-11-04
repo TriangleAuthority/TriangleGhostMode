@@ -8,7 +8,7 @@ The vanilla bugs legacy Ghost Mode fixed that belong to no gameplay area: enemy 
 
 **How legacy Ghost Mode implements it.** Scripts: the collision groups in `CBTTaskShoot.ShootProjectile`, `CBTTaskProjectileAttack.Initialize` and `W3ArrowProjectile.OnProjectileCollision` (W3EE's fix, credited to Reaper), with the sq108 line in the last; `gm_bugfixes.ws` (`FixQuestItems`, its console command `fixquestitems`, `FamilyIssuesAutosave`; its other functions are DMG-15's, AI-06's and dead code); the calls from `CR4InventoryMenu.OnConfigUI` and `CR4ScriptedHud.OnQuestUpdate`; `W3PlayerWitcher.ReactToBeingHit` (throw abort), `W3MerchantNPC.OnSpawned` (Wolfmark's `// WMK` block), `W3PlayerWitcher.OnSpawned` (the fistfight line). Data: the `Quest` tag off two wearables and `QuestEP1` on a Hearts of Stone note (item XML, regular and NG+); one Polish and eight Russian rows in `modGhostMode`'s string tables. No binary file, no menu.
 
-Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the changelist's "Bugfixes" and "Known bugs" sections, sweep B's and sweep D's findings ([b.md](sweep/b.md), [d.md](sweep/d.md): FIX-NEW1 to FIX-NEW4, gaps G1, G2, G3, G5, G11, G13), every hand-off to FIX in the other areas' files, every changelist fix line read against the feature docs ([below](#every-bugfix-line-traced)), a script diff of every legacy function marked `W3EE`, `WMK`, `CiriCSfix` or "fix quest", and a tag comparison of the 108 quest items in master, `legacy-GM`, `vanilla-5.x` and 5.x-GM. **30 units carry a FIX feature**: the 16 provisional FIX-NEW rows renamed, 4 MISC rows of fixes 5.x made itself moved to FIX-09, and FIX added to 10 shared rows (the 6 item entries, regular and NG+, of the feather, the monocle and the Hearts of Stone note; `ReactToBeingHit`, the two `OnSpawned` units, `OnProjectileCollision`). Unattributed units: 0 before and after. Port status: **mapped** (2026-11-02), analysed against 5.x from the code and data (unverified in game); the owner's sweep decisions (2026-11-02) already settle the main questions ([area decisions](#area-decisions)); the owner decided DK1 and DK2 as recommended and confirmed the porter's calls PK1 to PK12 (2026-11-02). **All of FIX ported** (gm/fix, 2026-11-03): slices K1 (FIX-01, FIX-02), K2 (FIX-05, FIX-07), K3 (FIX-06), K4 (FIX-03), K5 (FIX-04) verified on the area build by script, K6 (FIX-08) offline, regression +37 and +0 checks in each tree; **audited** 2026-11-03 ([FIX audit](#fix-audit-2026-11-03): 4 findings, none high; F3 fixed in K7, [close-out](#fix-audit-close-out)); **signed off** by the owner (2026-11-03).
+Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the changelist's "Bugfixes" and "Known bugs" sections, sweep B's and sweep D's findings ([b.md](sweep/b.md), [d.md](sweep/d.md): FIX-NEW1 to FIX-NEW4, gaps G1, G2, G3, G5, G11, G13), every hand-off to FIX in the other areas' files, every changelist fix line read against the feature docs ([below](#every-bugfix-line-traced)), a script diff of every legacy function marked `W3EE`, `WMK`, `CiriCSfix` or "fix quest", and a tag comparison of the 108 quest items in master, `legacy-GM`, `vanilla-5.x` and 5.x-GM. **30 units carry a FIX feature** (31 since FIX-10, whole-port fix round, 2026-11-03): the 16 provisional FIX-NEW rows renamed, 4 MISC rows of fixes 5.x made itself moved to FIX-09, and FIX added to 10 shared rows (the 6 item entries, regular and NG+, of the feather, the monocle and the Hearts of Stone note; `ReactToBeingHit`, the two `OnSpawned` units, `OnProjectileCollision`). Unattributed units: 0 before and after. Port status: **mapped** (2026-11-02), analysed against 5.x from the code and data (unverified in game); the owner's sweep decisions (2026-11-02) already settle the main questions ([area decisions](#area-decisions)); the owner decided DK1 and DK2 as recommended and confirmed the porter's calls PK1 to PK12 (2026-11-02). **All of FIX ported** (gm/fix, 2026-11-03): slices K1 (FIX-01, FIX-02), K2 (FIX-05, FIX-07), K3 (FIX-06), K4 (FIX-03), K5 (FIX-04) verified on the area build by script, K6 (FIX-08) offline, regression +37 and +0 checks in each tree; **audited** 2026-11-03 ([FIX audit](#fix-audit-2026-11-03): 4 findings, none high; F3 fixed in K7, [close-out](#fix-audit-close-out)); **signed off** by the owner (2026-11-03).
 
 **Size.** Small: eight short script fixes (each a few lines in a wrapper or a replaced body), a 108-item list, nine strings and a few item tags. The work is in verifying them on 5.x (journal entries, quest objective tags, generic merchants), not in the code.
 
@@ -46,6 +46,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the chang
 | FIX-07 | Vitality regen after a fistfight | A fistfight pauses Vitality regeneration; rarely it never resumes | Resumed at every load | 1 (shared) |
 | FIX-08 | Polish and Russian text fixes | The Polish table lacks the Meteorite plate's name; eight Russian texts misstate what an item does | The name and the eight corrections | 9 |
 | FIX-09 | Fixes 5.x made itself | — | Ciri invulnerable in her special attack, her cutscene sword, the siren finisher, the feather's quick slot | 6 (2 shared) |
+| FIX-10 | 5.x's one-time save fixes | 5.x: three one-time fixes run at the first load of a save (`ApplyPatchFixes`) | Legacy turned them off | 1 (shared) |
 
 ### What 5.x changed
 
@@ -54,6 +55,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the chang
 | FIX-01 | `Foliage` for the human archers' bow shot and in the arrow's stop list; nothing for monster projectiles |
 | FIX-03 | 9 new `Quest` items (the `mq1060` quest's notes, key and potions, the `ngu_gear` letters, `Signs Enhancement`), none in legacy's list; the feather gains `QuickSlot` |
 | FIX-09 | All four fixes, in 5.x's own code and data |
+| FIX-10 | The three one-time fixes are 5.x's own (1.32 has them too; legacy commented them out) |
 | FIX-02, FIX-04 to FIX-08 | None |
 
 ### Classification and proposed action
@@ -69,6 +71,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the chang
 | FIX-07 | Fistfight regen | clean | Legacy's line (PK9) |
 | FIX-08 | Strings | conflict (string ids) | By vanilla id and key (decided, sweep B Q5) |
 | FIX-09 | Fixes in 5.x | in-5.x | Nothing to port (PK2) |
+| FIX-10 | One-time save fixes | in-5.x | Keep 5.x's (deviation, porter's call) |
 
 ---
 
@@ -206,7 +209,7 @@ Two wearables also lose `Quest` in the item data (Vivienne's feather, Thaler's w
 | Pillars | — |
 | 5.x class | clean |
 | Flags | — |
-| Depends on | ITEM-06, ECON-08, LOOT-05 (their `W3MerchantNPC.OnSpawned` wrappers) |
+| Depends on | ECON-08 and LOOT-05 (their `W3MerchantNPC.OnSpawned` wrappers); ITEM-06's call in `OnSpawned` is 5.x's own body (ITEM's merchant hook wraps `OnInteraction`, ITEM-02) |
 | Skill trees | n/a |
 | Port form | `fixes/merchants.ws`: `@wrapMethod(W3MerchantNPC)` `OnSpawned`, legacy's block after the original (the required tags put first, the NPC's own after them) |
 | Port status | **verified on the area build** (slice K3, 2026-11-03, gm/fix): by script in both trees (`gmtest_fix06()`, in the regression): a generic merchant spawned from `shop_generic_merchant_novigrad_weapons.w2ent` carries `generic_merchant_novigrad_weapons ShopkeeperEntity` (his scene's required tag first) and `GetNPCsByTag` finds him by it; running the block again changes nothing; a merchant of another scene (the Novigrad temple alchemist, no embedded scene) keeps his tags. On the throwaway build without the call he carried `ShopkeeperEntity` only and nothing found him by the scene's tag |
@@ -294,6 +297,31 @@ Two wearables also lose `Quest` in the item data (Vivienne's feather, Thaler's w
 - **Vivienne's feather** (changelist 86): the wearable feather goes into a quick slot (`QuickSlot`, which 1.32 lacks). 5.x's entry has it. Legacy's other change to it, `Quest` removed, is FIX-03's.
 
 **Decisions:** nothing to port (PK2).
+
+### FIX-10 5.x's one-time save fixes
+
+| | |
+|---|---|
+| Kind | fix |
+| Pillars | — |
+| 5.x class | in-5.x |
+| Flags | — |
+| Depends on | SKL-01 (passive skill bonuses), SKL-16 (Acquired Tolerance, Synergy) |
+| Skill trees | both: 5.x's code, unchanged, runs the same in either tree |
+| Port form | none: 5.x's `W3PlayerWitcher.ApplyPatchFixes` kept as it is |
+| Port status | not ported (5.x's kept); recorded in the whole-port fix round (2026-11-03, C2 audit's C2-4) |
+| Open checks | — |
+| Save impact | each fix runs once per save, at its first load (a fact marks it done); none in play (below) |
+| NG+ counterpart | none |
+
+**What it does:** at the first load of a save, 5.x runs one-time repairs of old saves in `ApplyPatchFixes`. Legacy commented out three of them: `ClearingPotionPassiveBonusFix` (removes the branch passive abilities `sword_adrenalinegain`, `magic_staminaregen`, `alchemy_potionduration` and `survival_vitality` beyond the points spent in each branch), `DimeritiumSynergyFix` (unequips Synergy, removes every mutagen synergy bonus ability, equips Synergy again) and `154997` (unequips and equips Acquired Tolerance again).
+
+**Implementation (legacy):** the three blocks in `W3PlayerWitcher.ApplyPatchFixes` in comments (`//modSigns`); the unit is shared with SKL-16 and ARM-04, whose own parts are ported in those features.
+
+**5.x:** the three blocks as 1.32 has them (`playerWitcher.ws:751-805`, `:952-961`).
+
+**Decisions:**
+- **Deviation:** 5.x's three one-time save fixes stay on, where legacy turned them off: kept for save safety, since they only repair a save's skill abilities once; no play difference is known, because Ghost Mode removes the branch passive bonuses at every load (SKL-01) and the other two only unequip and equip a skill again, which restores its bonuses (porter's call, not confirmed by the owner, 2026-11-03).
 
 ---
 
@@ -390,7 +418,7 @@ Lines traced to an area rather than one feature (102–103, 104–105, 132–133
 
 ### Dependencies on other areas
 
-- **Done areas FIX builds on:** DEF-08 (`OnProjectileCollision`), ENCH-16 (`ReactToBeingHit`), STAM-08 (`CBTTaskShoot.IsAvailable`), ITEM-06, ECON-08 and LOOT-05 (`W3MerchantNPC.OnSpawned`), ARM-01 (Yoana's armour), TRPH-02, the item layer.
+- **Done areas FIX builds on:** DEF-08 (`OnProjectileCollision`), ENCH-16 (`ReactToBeingHit`), STAM-08 (`CBTTaskShoot.IsAvailable`), ECON-08 and LOOT-05 (their `W3MerchantNPC.OnSpawned` wrappers; ITEM-06's call there is 5.x's own body), ARM-01 (Yoana's armour), TRPH-02, the item layer.
 - **Areas FIX waits for:** none.
 
 ### Hand-offs received
@@ -474,7 +502,7 @@ Done by a fresh session ([audit](../feature-mapping.md#audit-signing-a-feature-o
 - **FIX-03:** legacy's whole `switch` against the port's, parsed by script: the same 108 names, each with the same condition (95 journal entries over 55 identifiers, 6 map pins, 7 unconditional), byte-equal identifiers and pin names, `NoDrop` removed only in the journal cases; the only line dropped is legacy's debug `LogChannel`. 5.x's 9 new quest items fall to `default` and are never touched (DK2). `GMFixIsOwnInventory` mirrors 5.x's `OnConfigUI` reading of the init data line for line; probed in game (`gmfa03_own`): own inventory with no init data and with init data naming nothing, not with a container or an NPC (directly or in `W3InventoryInitData`), not in stash mode. The item data in both folders' `gm_item.xml` (`on_conflict="replace"`) has legacy's tags (feather and monocle `QuickSlot`, the note `Quest, ReadableItem, QuestEP1`).
 - **FIX-04:** the rule is legacy's (the same tags, one save per active escort objective), called in legacy's place (only with the journal update module). Loading the test save called the HUD's `OnQuestUpdate` 0 times (probe wrapper logging every call), so a load replays no quest update; a save inside the escort would confirm it for Family Issues. The test probe's wrapper, when off, only calls the original; it is in `tests/` (left out of `--release`), and its flag is an unsaved field off at every load.
 - **FIX-05, FIX-07:** legacy's conditions and line; FIX-07 resumes at every spawn, as legacy's unconditional line.
-- **FIX-06:** legacy's block; with ITEM's, ECON's and LOOT's wrappers of `OnSpawned` it stacks safely in any order: FIX's touches only tags, theirs only the inventory and funds (`SetupFunds` reads the inventory component's type and region, not tags), and the original's `ShopkeeperEntity` tag is kept.
+- **FIX-06:** legacy's block; with ECON's and LOOT's wrappers of `OnSpawned` (ITEM-06's call there is 5.x's own body; corrected in the whole-port fix round, 2026-11-03, A8-3) it stacks safely in any order: FIX's touches only tags, theirs only the inventory and funds (`SetupFunds` reads the inventory component's type and region, not tags), and the original's `ShopkeeperEntity` tag is kept.
 - **FIX-08:** the built `pl.w3strings` and `ru.w3strings` of the integrated build (`build/integ-cba6ea5c`) decoded: the nine vanilla ids carry legacy's texts byte for byte with legacy's key hashes; the English and German files carry none of them. The build merges `modGhostModeFixes` into the same per-language file as `modGhostMode`'s rows, so the game reads them in one table; on screen in Polish and Russian stays an open check.
 - **The verification:** each slice's checks say scripted; the open checks are listed per feature. The regression on the integrated build passed: 1,581 + 166 in each tree, 0 failed.
 

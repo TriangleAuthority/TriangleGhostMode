@@ -317,8 +317,10 @@ function IsLightAttack(attackName : name) : bool
 
 // DEF-07: a counter gets the light-attack attack power bonuses: the abilities tagged attack_light
 // (Muscle Memory's tag is extended to counter_attack_light in gm_defense.xml; counted once, SKL's
-// D47, skills/muscleStrength.ws) and attack_power_fast_style (the new tree's light-attack perks),
-// which vanilla adds only for a light attack type; a counter has none, so it is added here.
+// D47, skills/muscleStrength.ws) and attack_power_fast_style, which vanilla adds only for a light
+// attack type; a counter has none, so it is added here. No ability in the port grants
+// attack_power_fast_style (SKL replaced the new tree's light-attack perks without it, as legacy
+// removed the style bonuses), so this share is 0 today; it is kept in case one ever does.
 @wrapMethod(W3Action_Attack)
 function GetPowerStatValue() : SAbilityAttributeValue
 {

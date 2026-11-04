@@ -184,7 +184,7 @@ ECON is **signed off** by the owner (2026-11-02).
 
 The owner chose every recommendation of the three areas and confirmed every porter's call (2026-11-02).
 
-**Next:** every legacy change is accounted for (sweeps A to D, [sweep/](sweep/), 2026-11-02: unattributed 332 → 0). The sweeps' small gaps are fixed (fix round 3, 2026-11-02). FIX and HORSE are **signed off** (2026-11-03): **every area is signed off**. Next: the first playable version and the owner's playthrough checks.
+**Next:** every legacy change is accounted for (sweeps A to D, [sweep/](sweep/), 2026-11-02: unattributed 332 → 0). The sweeps' small gaps are fixed (fix round 3, 2026-11-02). FIX and HORSE are **signed off** (2026-11-03): **every area is signed off**. A whole-port audit (2026-11-03, read-only, 12 agents: every area's changes, and every legacy unit's account) found 0 high, 7 medium and 68 low findings. The fix round fixed or recorded them all (5.x-GM `70fd2e3c`; regression 1,642 and 166 in both trees, 0 failed); the owner's answers and new porter's calls are in each area's Decisions. Next: the first playable version and the owner's playthrough checks.
 
 **Waiting on the project owner:** the contradictions between legacy's code and its changelist ([list](../open-questions.md#legacy-data-vs-changelist)); the [legacy tests](../open-questions.md#to-test-in-legacy-ghost-mode) (when legacy is reinstalled); the author's answer on [ungated NPC attacks](../open-questions.md#ungated-npc-attacks) (asked 2026-10-03); STAM-07's two listening checks ([stam.md](stam.md#stam-07-low-stamina-heartbeat)); SKL's open decisions ([list](skl.md#open-decisions)).
 

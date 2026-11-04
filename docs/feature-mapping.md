@@ -218,6 +218,8 @@ One row per change unit:
 | `ngplus` | The unit is in a `*_plus` (New Game+) folder: attributed like any unit, but [not balanced or tested](#new-game-carried-over-and-scaled-not-balanced-or-tested) |
 | `gm_line` | First line of the unit in the Ghost Mode file |
 
+**Blind spot: a class's or state's own declaration line.** The text from the declaration to its `{` (the parent class after `extends`, an `import class`) goes into no unit, so a change there is invisible. Known cases, each handled in its area (C4 audit, 2026-11-03): `edible.ws`, `wellFed.ws` and `wellHydrated.ws` (FOOD-03: the parent class), Shared Imports' `environment.ws` (an `import class` commented out; built into 5.x), and the parent changes in `TawnyOwl` and `potionVitalityRegen` (ALCH-04, ALCH-07), `mutation5` (MUT-10), `slowdownAxii` (SKL-12) and `yrdenHealthDrain` (SKL-10). When mapping a file, diff its class and state headers by hand (`git diff master legacy-GM -- <file>`).
+
 Comments and whitespace never count as changes. Binary files are one unit each for now; splitting them by property (with `tools/bindiff.py`) is left for when an area needs it.
 
 Unit keys are stable across regenerations, so attribution survives re-running the tool, including after a new 5.x release lands on `vanilla-5.x`.

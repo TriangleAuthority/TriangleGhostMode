@@ -211,19 +211,19 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-21 from the chang
 | Flags | balance, needs-decision (DC1) |
 | Depends on | ALCH (the brewed items, signed off), CRAFT-07, FOOD (the two alcohol drinks), UI-08 (recipe texts) |
 | Skill trees | n/a |
-| Port form | the recipes in the whole-file overrides of the recipe files (DC1, `gen_craft.py`); the nekker pheromone's keeps 5.x's `cookedItemType` (ALCH-08's confirmed deviation: the pheromone formulas stay potion formulas) with legacy's ingredients; the two new recipe items through `gen_item.py`; the Tawny Owl 1 recipe granted once at load (`gm/craft/grants.ws`, fact `gm_craft_recipes_added`, with CRAFT-01's grant) |
+| Port form | the recipes in the whole-file overrides of the recipe files (DC1, `gen_craft.py`); the three pheromone formulas legacy's whole, `cookedItemType` quest included (ALCH-08; until 2026-11-03 they kept 5.x's potion type); the two new recipe items through `gen_item.py`; the Tawny Owl 1 recipe granted once at load (`gm/craft/grants.ws`, fact `gm_craft_recipes_added`, with CRAFT-01's grant) |
 | Port status | **signed off** (2026-10-23); verified (2026-10-22): the recipes as legacy's and the load-time grants (`GMTest_craft01`, `GMTest_craft06`); Mandrake cordial brewed in the alchemy menu |
 | Open checks | a reworked potion brewed in play |
 | Save impact | none (expected): recipes are read from the definitions; known recipes are saved by name |
 | NG+ counterpart | applied, untested |
 
-**What it does** (changelist 682–683): 118 recipes (99 potions, oils, bombs and mutagen conversions of the base game, 3 alcohol, 14 of Blood and Wine with its dye, 1 of Hearts of Stone, and the Nekker pheromone, whose recipe type is ALCH-08's) need more varied and fewer herbs: 597 ingredients in all instead of 946 (e.g. Mutagen red to green: 4 celandine → 1). Two new recipes brew alcohol, Mandrake cordial (empty bottle, Temerian rye, Redanian herbal, mandrake root) and Mahakam spirit (empty bottle, local pepper vodka, hop umbels, sewant mushrooms); herbalists sell them (LOOT-01). Every save learns the Tawny Owl 1 recipe once at load ("fix missing Tawny Owl recipe": 1.32 and 5.x give it only in the standalone starts).
+**What it does** (changelist 682–683): 118 recipes (99 potions, oils, bombs and mutagen conversions of the base game, 3 alcohol, 14 of Blood and Wine with its dye, 1 of Hearts of Stone, and the Nekker pheromone, a quest formula as legacy's, [ALCH-08](alch.md#alch-08-pheromones-killer-whale-pops-antidote)) need more varied and fewer herbs: 597 ingredients in all instead of 946 (e.g. Mutagen red to green: 4 celandine → 1). Two new recipes brew alcohol, Mandrake cordial (empty bottle, Temerian rye, Redanian herbal, mandrake root) and Mahakam spirit (empty bottle, local pepper vodka, hop umbels, sewant mushrooms); herbalists sell them (LOOT-01). Every save learns the Tawny Owl 1 recipe once at load ("fix missing Tawny Owl recipe": 1.32 and 5.x give it only in the standalone starts).
 
 **Implementation (legacy):** `<recipe>` entries of `def_item_alchemy_recipes_potions/oils/petards/mutagens/alcohol.xml` and the Blood and Wine and Hearts of Stone files, regular and NG+; 2 new recipe items in `def_item_alchemy_recipes_alcohol.xml`; `OnSpawned` (fact `ModSignsRecipesAdded`). `ClearKnownRecipes` only renames a local (nothing to port).
 
 **5.x:** unchanged, plus 5.x's quest recipe Signs Enhancement (kept: ALCH's DL10). The Mutation Catalyst's recipe is MUT-12's (ported).
 
-**Decisions:** port as legacy through DC1's form; ends ALCH's recipe hand-off.
+**Decisions:** port as legacy through DC1's form; ends ALCH's recipe hand-off. The pheromone formulas' quest type is carried too (the owner's decision, 2026-11-03, whole-port audit C3-4: the file is overridden whole anyway).
 
 ### CRAFT-07 Ingredients
 
@@ -235,7 +235,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-21 from the chang
 | Flags | — |
 | Depends on | CRAFT-08 (the same entries), UI (rarity colours, the crafting menu) |
 | Skill trees | n/a |
-| Port form | the ingredient items' `category`, `base_abilities`, tags (not `mod_*`), `localisation_key_description` and `grid_size` through the item layer (DC5): `item_layer.py`'s CRAFT fields, written by `gen_item.py` (no other tool writes ingredients) |
+| Port form | the ingredient items' `category`, `base_abilities` (with any `<a>` legacy wrote after the block), tags (not `mod_*`), `localisation_key_description`, `grid_size` and `icon_path` through the item layer (DC5): `item_layer.py`'s CRAFT fields, written by `gen_item.py` (no other tool writes ingredients) |
 | Port status | **signed off** (2026-10-23); verified (2026-10-22, `GMTest_craft07`; the inventory's crafting and alchemy tabs seen); the two alcohols verified 2026-10-22 (5.x-GM `9b8e16a3`: `GMTest_craft07`, a potion refilled with the vodka and refused with the lemon, `gmtest_craft07_refill`); the lemon's drink abilities stay 5.x's until FOOD (porter's call, confirmed by the owner, 2026-10-23) |
 | Open checks | the crafting and alchemy menus list each moved ingredient on the right tab |
 | Save impact | none (expected): item definitions are read live (ARM-01 verified this for item fields) |
@@ -248,6 +248,9 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-21 from the chang
 **5.x:** unchanged.
 
 **Decisions:** port as legacy.
+
+- Two of legacy's edits were added by the whole-port audit (C3-3, 2026-11-03): the Jug's icon (`glass_jug_64x64.png`; 5.x `junk_jug_64x64.png`; `icon_path` in CRAFT-07's fields), and Melitele figurine's `<a>Master _Stats</a>`, which legacy wrote after the item's empty `<base_abilities>` block. It is carried where legacy put it (`item_layer.stray_abilities`): harmless, since 5.x's own `Silver sword 2` has such a node and loads; the game ignores it (a spawned figurine reads quality 1 and no abilities), so it is inert, as legacy's most likely was. Verified on the area build (fx-data, 2026-11-03, both trees; scripted: `GMTest_data_items` in the regression, failing first on a throwaway build with the old data).
+
 Free nilfgaardian lemon gets legacy's category, description and tags here; its drink abilities (Well Hydrated 3, strong alcohol) came with FOOD-04 ([food.md](food.md#food-04-food-and-drink-items), 2026-10-24), which ended the temporary deviation that kept 5.x's.
 
 ### CRAFT-08 Dismantling
@@ -273,6 +276,8 @@ Free nilfgaardian lemon gets legacy's category, description and tags here; its d
 **5.x:** `RecycleItem` unchanged; Cheesecutter also yields a Cheese (DC4). 5.x's new items keep 5.x's parts. Each item is defined once ([tools.md](../tools.md), `gen_item.py`): the item tools that write an entry apply CRAFT's fields to it (`item_layer.apply_item`), `gen_item.py` writes the rest; `gen_arm_km.py` (ARM-12's starting gear) does not yet ([audit](#craft-and-loot-audit-2026-10-22) F2).
 
 **Decisions:** port as legacy (DC4 for Cheesecutter, DC5 for the technique).
+
+- Hearts of Stone's auctioned painting (`q603_auctioned_painting`) loses the `mq7024_picture` tag, as legacy (the owner's decision, 2026-11-03, whole-port audit A6-1): Blood and Wine's painting quest content keyed on that tag no longer counts it. Carried with the item's CRAFT-08 entry (`item_layer.TAGS`); in NG+ too, where 1.32 never had the tag and 5.x added it (`item_layer.NGP_TAGS`, the NG+ rule for a non-numeric change). Verified on the area build (fx-data, 2026-11-03, both trees; scripted: `GMTest_data_items` in the regression, failing first on a throwaway build with the old data).
 
 **For information (WGT audit F5, accepted by the owner 2026-11-02):** Blood and Wine defines `poi_gor_d_06_note` and `poi_gor_d_06_note03` twice (as books with `Default Book _Stats` in `def_item_books.xml`, and as misc items without abilities in `def_item_living_world.xml`); CRAFT-08's whole entries in `gm_item.xml` follow the copy legacy changed (the second), so in the port they are misc items weighing 0.01. Six Hearts of Stone notes (`ep1_poi_03_note` and five more) are defined twice the same way and take the second copy's icon. Which copy legacy's game read is not known; the entries stay pinned to one copy.
 

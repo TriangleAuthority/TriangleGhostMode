@@ -548,8 +548,8 @@
         <slowdown_mod type="add" min="0.15" />
       </ability>
       <ability name="alchemy_s10" on_conflict="extend">
-        <PhysicalDamage type="add" min="166.666666" />
-        <SilverDamage type="add" min="166.666666" />
+        <PhysicalDamage type="add" min="83.333333" />
+        <SilverDamage type="add" min="83.333333" />
       </ability>
       <ability name="alchemy_s8" on_conflict="extend">
         <gm_efficiency_base type="add" min="-1" />

@@ -5,7 +5,8 @@
 
 // ALCH-07 (audit F4): legacy's override (legacy PlayerAbilityManager.ws GetStaminaActionCost): free, with only
 // the "Stamina regen delay" option's pause (legacy added it in DrainStamina), while Blizzard 3's slow motion runs
-// with 3 adrenaline points; 5.x's Mutation 7 toxicity denial stays in front of it.
+// with 3 adrenaline points (5.x's Mutation 7 toxicity denial is gone: Delayed Recovery's threshold, which it
+// read, can never be passed since SKL replaced the skill; whole-port audit A3-4).
 class W3PlayerAbilityManager extends W3AbilityManager
 {
 	public function GetStaminaActionCost(action : EStaminaActionType, out cost : float, out delay : float, optional fixedCost : float, optional fixedDelay : float, optional abilityName : name, optional dt : float, optional costMult : float)	//modSigns
@@ -20,8 +21,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	}	//modSigns
 }
 
-// Blizzard 3's free actions: its slow motion running, 3 adrenaline points, and not denied by 5.x's Mutation 7
-// rule (Acquired Tolerance's threshold passed with Mutation 7 active).
+// Blizzard 3's free actions: its slow motion running, 3 adrenaline points.
 @addMethod(W3PlayerAbilityManager)
 function GMBlizzardFreeActions() : bool
 {
@@ -30,8 +30,6 @@ function GMBlizzardFreeActions() : bool
 
 	witcher = GetWitcherPlayer();
 	if(!witcher || owner != witcher || witcher.GetPotionBuffLevel(EET_Blizzard) != 3 || witcher.GetStat(BCS_Focus) < 3)
-		return false;
-	if(CanUseSkill(S_Alchemy_s03) && witcher.IsMutationActive(EPMT_Mutation7) && witcher.GetStat(BCS_Toxicity, true) > witcher.GetStatMax(BCS_Toxicity) * witcher.GetAlchemyS03Threshold())
 		return false;
 	blizzard = (W3Potion_Blizzard)witcher.GetBuff(EET_Blizzard);
 	if(!blizzard)

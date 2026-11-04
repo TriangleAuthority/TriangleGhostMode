@@ -37,7 +37,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the chang
 | The Wight trophy's +20 carry capacity (`wight_trophy_stats`) and the trophies' other bonuses, also in the abilities whose weight WGT-05 changes (`pig_contest_trophy_stats`, `q603_sharley_trophy_stats`) | TRPH | A trophy bonus; the trophies' weights are WGT-05's |
 | `camm_trophy` losing its `Quest` tag; `FixQuestItems` (the `Quest` tag removed from keys, notes and masks no longer needed) | FIX (or TRPH) | Lets the items be sold or dropped; not weight |
 | The NG+ Censer's icon tag (`UI_OilLamp` → `UI_Censer`, NG+ only) in the unit whose weight WGT-05 changes | UI (or ITEM) | A display fix carried by the same entry |
-| `NGP Red Wolf Pants 2 _Stats`: legacy's NG+-only rewrite of the piece's stats (armor, resistances, attack power, toxicity, potion duration, spell power) besides its weight | ARM | Armor stats; WGT-03 takes the weight |
+| `NGP Red Wolf Pants 2 _Stats`: legacy's NG+-only rewrite of the piece's stats (armor, resistances, attack power, toxicity, potion duration, spell power) besides its weight | ARM | Armor stats; WGT-03 takes the weight (taken by ARM-10, 2026-11-03: `gen_arm_items.py` writes the entry with WGT's weight, `gen_wgt.py` skips it) |
 | The debug commands `addallgloves`, `addallboots`, `addallpants` (unattributed, found by the sweep) | ITEM or (none) | Debug item lists, no weight |
 
 ## Changes at a glance
@@ -414,7 +414,7 @@ How the game counts weight decides what the numbers mean, so the table gives an 
 |---|---|
 | OPT | The gameplay group's `GMSinkBoat`, `GMSinkBoatOverEnc`, `GMEncumbranceMultiplier`: entries, labels (2110992180, 181, 183), defaults (code: on, 20, 0) and presets (DW3) |
 | TRPH | `wight_trophy_stats`'s +20 carry capacity (unattributed); the bonuses in the trophy abilities WGT-05 shares (`pig_contest_trophy_stats`, `q603_sharley_trophy_stats`) |
-| ARM | `NGP Red Wolf Pants 2 _Stats`'s NG+-only stats (WGT-03 takes its weight); the port's NG+ Kaer Morhen pieces name 16 `Base Kaer Morhen … _Stats` abilities that the DLC's `items_plus` never defines (see below) |
+| ARM | Done: `NGP Red Wolf Pants 2 _Stats`'s NG+-only stats (ARM-10, whole-port audit C3-1, 2026-11-03; WGT-03's weight kept; no other WGT entry carries another area's legacy change); the NG+ Kaer Morhen pieces' 16 `Base Kaer Morhen … _Stats` abilities (ARM-12, fixed 2026-11-02) |
 | FIX (FIX-NEW5, sweep D G11; mapped as an area of its own, the owner's decision 2026-11-02; TRPH-02 took the tag) | `camm_trophy`'s `Quest` tag removed (unattributed), with `FixQuestItems` |
 | UI (or ITEM) | The NG+ Censer's `UI_Censer` tag (WGT-05 carries its weight) |
 | HORSE | None: PW9 takes the blinders' panic and the base horse's sprint cost into WGT-06 (the alternative: HORSE, unmapped) |
@@ -424,7 +424,6 @@ How the game counts weight decides what the numbers mean, so the table gives an 
 
 ### Surprises for other areas
 
-- **ARM-12, NG+:** legacy's NG+ Kaer Morhen pieces (`NGP Kaer Morhen Armor` and its 15 siblings) use `Base Kaer Morhen Armor _Stats` and 15 other `Base …` abilities that legacy defines only in `items_plus/def_item_crafting_*.xml`; the port's `items_plus/gm_arm_kaer_morhen.xml` names them but defines none, so in NG+ those pieces would lack their base stats (found by WGT's weight check of legacy's new items; NG+ untested by policy).
 - **FOOD-04 / CRAFT-07:** Wolf liver's food entry in `gm_item.xml` has 5.x's weight 0.9 (legacy 0.1); WGT-05 takes it.
 
 ### Save impact

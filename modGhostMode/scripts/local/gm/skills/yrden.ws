@@ -59,16 +59,23 @@ function GMYrdenIntensitySkill() : ESkill
 	return S_SUndefined;
 }
 
-// Sustained Glyphs' radius: x (1 + range_bonus) from level 2, for the trap (not the turret).
+// Sustained Glyphs' radius: x (1 + range_bonus) from level 2, for the trap (not the turret, nor
+// Entanglement's trap, which keeps the glyphword's radius: legacy, fx round A3-3).
 @addMethod(W3YrdenEntity)
 function GMSustainedGlyphsRangeMult() : float
 {
 	var sustained : ESkill;
 
 	sustained = GMSustainedGlyphsSkill();
-	if(IsAlternateCast() || sustained == S_SUndefined || owner.GetSkillLevel(sustained) < 2)
+	if(IsAlternateCast() || gmIsEntanglement || sustained == S_SUndefined || GMSustainedGlyphsLevel(sustained) < 2)
 		return 1;
 	return 1 + CalculateAttributeValue(owner.GetSkillAttributeValue(sustained, 'range_bonus', false, false));
+}
+
+@addMethod(W3YrdenEntity)
+function GMSustainedGlyphsLevel(sustained : ESkill) : int
+{
+	return owner.GetSkillLevel(sustained);
 }
 
 @addMethod(W3YrdenEntity)

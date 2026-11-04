@@ -409,8 +409,8 @@ function GMTest_craft06()
 	GMTestCraftRecipeIs('Recipe for Mandrake cordial 1', "Mandrake cordial | 1 Empty bottle, 1 Temerian Rye, 1 Redanian Herbal, 1 Mandrake root");
 	GMTestCraftRecipeIs('Recipe for Nekker Pheromone Potion 1', "Pheromone Potion Nekker 1 | 1 Dwarven spirit, 1 Nekker blood, 1 Green mold, 1 Moleyarrow");
 	rec = getAlchemyRecipeFromName('Recipe for Nekker Pheromone Potion 1');
-	GMTestReport(rec.cookedItemType == EACIT_Potion && dm.GetItemCategory('Recipe for Mahakam spirit 1') == 'alchemy_recipe' && dm.GetItemCategory('Recipe for Mandrake cordial 1') == 'alchemy_recipe',
-		"CRAFT-06 the nekker pheromone formula is a potion formula (ALCH-08's deviation): " + rec.cookedItemType + "; the alcohol recipe items exist");
+	GMTestReport(rec.cookedItemType == EACIT_Quest && dm.GetItemCategory('Recipe for Mahakam spirit 1') == 'alchemy_recipe' && dm.GetItemCategory('Recipe for Mandrake cordial 1') == 'alchemy_recipe',
+		"CRAFT-06 the nekker pheromone formula is a quest formula, as legacy (ALCH-08): " + rec.cookedItemType + "; the alcohol recipe items exist");
 }
 
 exec function gmtest_craft06()

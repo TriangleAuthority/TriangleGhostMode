@@ -526,7 +526,7 @@ Dumplings' longer duration shows on every edible's tooltip (legacy), with FOOD-0
 
 **5.x:** as 1.32.
 
-**Decisions:** port as legacy. The rune and glyph items' prices, weights and dismantling parts stay 5.x's ([hand-off](#hand-off-to-other-areas) to ECON, WGT, CRAFT).
+**Decisions:** port as legacy. The rune and glyph items' prices, weights and dismantling parts are the other areas' ([hand-off](#hand-off-to-other-areas) to ECON, WGT, CRAFT); `gen_ench.py` writes these items with those areas' fields (`item_layer.apply_item`), so they carry legacy's prices since ECON's slice E2 and legacy's weights since WGT's slice W3 (2026-11-02; Rune pierog 0.06, 5.x 0.1).
 
 **Slices:**
 

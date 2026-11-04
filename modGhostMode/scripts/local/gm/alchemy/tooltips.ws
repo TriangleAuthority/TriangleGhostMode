@@ -707,6 +707,23 @@ function AddBuffStats(itemId : SItemUniqueId, itemInvComponent : CInventoryCompo
 }
 
 // A bomb's duration attribute is its cloud's: named "Cloud duration" (legacy).
+// Whole-port audit C1-3 (2026-11-03): legacy's bomb damage lines (legacy GetItemBaseStats and
+// GetItemTooltipAttributes): with Pyrotechnics (alchemy_s10, both trees) a bomb's physical and silver damage
+// include the skill's damage per level, and the item tooltip (GetItemBaseStats) lists both lines even for a
+// bomb without them; with Heavy Artillery (classic perk_20, new tree perk_28) every damage line is
+// multiplied by 1 + its dmg_multiplier (x2). The Snow Ball gets no Pyrotechnics line: the skill does not
+// raise its damage (legacy's tooltip showed it; a deviation).
+@addField(CInventoryComponent)
+var gmBombBaseStats : bool;
+
+@wrapMethod(CInventoryComponent)
+function GetItemBaseStats(itemId : SItemUniqueId, out itemStats : array<SAttributeTooltip>)
+{
+	gmBombBaseStats = true;
+	wrappedMethod(itemId, itemStats);
+	gmBombBaseStats = false;
+}
+
 @wrapMethod(CInventoryComponent)
 function GetItemTooltipAttributes(itemId : SItemUniqueId, attributes : array<name>, out itemStats : array<SAttributeTooltip>, optional respectAttributeOrder : bool)
 {
@@ -722,6 +739,119 @@ function GetItemTooltipAttributes(itemId : SItemUniqueId, attributes : array<nam
 			itemStats[i].originName = 'cloud_duration';
 			itemStats[i].attributeName = GetAttributeNameLocStr('cloud_duration', false);
 		}
+	}
+	GMAddBombSkillDamage(itemId, itemStats, gmBombBaseStats);
+}
+
+// Pyrotechnics' damage on a bomb's physical and silver lines (added when missing and addMissing), then Heavy
+// Artillery's multiplier on every damage line (legacy's order: the skill's damage is multiplied too).
+@addMethod(CInventoryComponent)
+function GMAddBombSkillDamage(itemId : SItemUniqueId, out itemStats : array<SAttributeTooltip>, addMissing : bool)
+{
+	var witcher : W3PlayerWitcher;
+	var pyro : array<name>;
+	var bonus : float;
+	var heavy : ESkill;
+	var mult : SAbilityAttributeValue;
+	var i, j : int;
+	var found : bool;
+
+	witcher = GetWitcherPlayer();
+	if(!witcher)
+		return;
+	if(witcher.CanUseSkill(S_Alchemy_s10) && GetItemName(itemId) != 'Snow Ball')
+	{
+		pyro.PushBack('PhysicalDamage');
+		pyro.PushBack('SilverDamage');
+	}
+	for(j = 0; j < pyro.Size(); j += 1)
+	{
+		bonus = CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Alchemy_s10, pyro[j], false, false)) * witcher.GetSkillLevel(S_Alchemy_s10);
+		if(bonus == 0)
+			continue;
+		found = false;
+		for(i = 0; i < itemStats.Size(); i += 1)
+		{
+			if(itemStats[i].originName == pyro[j])
+			{
+				itemStats[i].value += bonus;
+				found = true;
+				break;
+			}
+		}
+		if(!found && addMissing)
+			GMInsertTooltipStat(itemId, pyro[j], bonus, itemStats);
+	}
+	heavy = witcher.GMHeavyArtillerySkill();
+	if(heavy == S_SUndefined)
+		return;
+	mult = witcher.GetSkillAttributeValue(heavy, 'dmg_multiplier', false, false);
+	for(i = 0; i < itemStats.Size(); i += 1)
+	{
+		if(IsDamageTypeNameValid(itemStats[i].originName))
+			itemStats[i].value *= 1 + mult.valueMultiplicative;
+	}
+}
+
+// A tooltip row for an attribute the item lacks, made as 5.x's GetItemTooltipAttributes makes one, put in
+// tooltip_settings.csv's order among the item's rows.
+@addMethod(CInventoryComponent)
+function GMInsertTooltipStat(itemId : SItemUniqueId, attributeName : name, value : float, out itemStats : array<SAttributeTooltip>)
+{
+	var stat : SAttributeTooltip;
+	var isPercentageValue, primaryStatLabel : string;
+	var row, i : int;
+
+	row = GMTooltipSettingsRow(attributeName);
+	if(row < 0)
+		return;
+	stat.attributeColor = theGame.tooltipSettings.GetValueAt(1, row);
+	isPercentageValue = theGame.tooltipSettings.GetValueAt(2, row);
+	stat.percentageValue = isPercentageValue;
+	stat.primaryStat = IsPrimaryStatById(itemId, attributeName, primaryStatLabel);
+	stat.originName = attributeName;
+	stat.value = value;
+	stat.attributeName = GetAttributeNameLocStr(attributeName, false);
+	for(i = 0; i < itemStats.Size(); i += 1)
+	{
+		if(GMTooltipSettingsRow(itemStats[i].originName) > row)
+		{
+			itemStats.Insert(i, stat);
+			return;
+		}
+	}
+	itemStats.PushBack(stat);
+}
+
+// An attribute's row in tooltip_settings.csv (-1 if none).
+function GMTooltipSettingsRow(attributeName : name) : int
+{
+	var i, n : int;
+	var s : string;
+
+	s = NameToString(attributeName);
+	n = theGame.tooltipSettings.GetNumRows();
+	for(i = 0; i < n; i += 1)
+	{
+		if(theGame.tooltipSettings.GetValueAt(0, i) == s)
+			return i;
+	}
+	return -1;
+}
+
+// Whole-port audit C1-5 (2026-11-03): a decoction's toxicity offset by name (the recipe book, the alchemy
+// menu, shops) under its own name, "Toxicity offset", as legacy's GetItemStatsFromName (5.x names it
+// "Toxicity").
+@wrapMethod(CInventoryComponent)
+function GetItemStatsFromName(itemName : name, out itemStats : array<SAttributeTooltip>)
+{
+	var i : int;
+
+	wrappedMethod(itemName, itemStats);
+	for(i = 0; i < itemStats.Size(); i += 1)
+	{
+		if(itemStats[i].originName == 'toxicity_offset')
+			itemStats[i].attributeName = GetAttributeNameLocStr('toxicity_offset', false);
 	}
 }
 

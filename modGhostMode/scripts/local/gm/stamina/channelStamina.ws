@@ -134,6 +134,7 @@ function DrainStamina(action : EStaminaActionType, optional fixedCost : float, o
 	var mutagen : W3Mutagen21_Effect;
 	var min, max : SAbilityAttributeValue;
 	//modSigns: removed var signEntity (its use is removed below)
+	var focusSign : W3SignEntity;	//modSigns: SKL-18
 	
 	if(FactsDoesExist("debug_fact_stamina_boy"))
 		return 0;
@@ -155,8 +156,11 @@ function DrainStamina(action : EStaminaActionType, optional fixedCost : float, o
 	
 	
 	
-	if(cost > 0 && owner == GetWitcherPlayer() && GetWitcherPlayer().GetCurrentSignEntity())	//modSigns: SKL-18, Focus: a sign's stamina earns adrenaline (legacy's ManageFocusGain; skills/focusPerk.ws)
-		GetWitcherPlayer().GetCurrentSignEntity().GMManageFocusGain(cost, dt);	//modSigns
+	focusSign = gmFocusSign;	//modSigns: SKL-18, Focus: the sign being charged (GMPaySignCost, skills/rageManagement.ws), else the one being cast (a channel's drain)
+	if(!focusSign && owner == GetWitcherPlayer())	//modSigns
+		focusSign = GetWitcherPlayer().GetCurrentSignEntity();	//modSigns
+	if(cost > 0 && focusSign)	//modSigns: a sign's stamina earns adrenaline (legacy's ManageFocusGain; skills/focusPerk.ws)
+		focusSign.GMManageFocusGain(cost, dt);	//modSigns
 
 	//modSigns: removed the abort of the sign being cast when stamina reaches 0 (each channel stops itself at 0 in Channeling.Update, except the alternate Yrden and Axii)
 	

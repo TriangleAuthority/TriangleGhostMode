@@ -7,7 +7,7 @@
 	<ability on_conflict="replace" name="Netflix Armor _Stats">
 				<weight 						type="base" min="10" 		/>
 				<quality 						type="add" 	min="5"			/>
-				<armor 							type="base" min="253" 		/>
+				<armor 							type="base" min="263" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
 				<piercing_resistance_perc 		type="base" min="0.09"		/>
 				<rending_resistance_perc 		type="base" min="0.17"		/>
@@ -19,7 +19,7 @@
 	<ability on_conflict="replace" name="Netflix Armor 1 _Stats">
 				<weight 						type="base" min="10" 		/>
 				<quality 						type="add" 	min="5"			/>
-				<armor 							type="base" min="333" 		/>
+				<armor 							type="base" min="341" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
 				<piercing_resistance_perc 		type="base" min="0.09"		/>
 				<rending_resistance_perc 		type="base" min="0.17"		/>
@@ -31,7 +31,7 @@
 	<ability on_conflict="replace" name="Netflix Armor 2 _Stats">
 				<weight 						type="base" min="10" 	/>
 				<quality 						type="add" 	min="5"			/>
-				<armor 							type="base" min="361" 		/>
+				<armor 							type="base" min="369" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
 				<piercing_resistance_perc 		type="base" min="0.09"		/>
 				<rending_resistance_perc 		type="base" min="0.17"		/>
@@ -43,7 +43,7 @@
 	<ability on_conflict="replace" name="Netflix Boots _Stats">			
 				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
-				<armor 							type="base" min="96" 	/>
+				<armor 							type="base" min="101" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
 				<piercing_resistance_perc 		type="base" min="0.04" 	/>
 				<bludgeoning_resistance_perc 	type="base" min="0.04" 	/>
@@ -54,7 +54,7 @@
 	<ability on_conflict="replace" name="Netflix Boots 1 _Stats">
 				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
-				<armor 							type="base" min="130" 	/>
+				<armor 							type="base" min="133" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
 				<piercing_resistance_perc 		type="base" min="0.04" 	/>
 				<bludgeoning_resistance_perc 	type="base" min="0.04" 	/>
@@ -65,7 +65,7 @@
 	<ability on_conflict="replace" name="Netflix Boots 2 _Stats">
 				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
-				<armor 							type="base" min="141" 	/>
+				<armor 							type="base" min="144" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
 				<piercing_resistance_perc 		type="base" min="0.04" 	/>
 				<bludgeoning_resistance_perc 	type="base" min="0.04" 	/>
@@ -76,7 +76,7 @@
 	<ability on_conflict="replace" name="Netflix Gloves _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
-				<armor 							type="base" min="93"	/>
+				<armor 							type="base" min="97"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
 				<piercing_resistance_perc 		type="base" min="0.03"	/>
 				<rending_resistance_perc 		type="base" min="0.05"	/>
@@ -87,7 +87,7 @@
 	<ability on_conflict="replace" name="Netflix Gloves 1 _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
-				<armor 							type="base" min="124"	/>
+				<armor 							type="base" min="128"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
 				<piercing_resistance_perc 		type="base" min="0.03"	/>
 				<rending_resistance_perc 		type="base" min="0.05"	/>
@@ -98,7 +98,7 @@
 	<ability on_conflict="replace" name="Netflix Gloves 2 _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
-				<armor 							type="base" min="137"	/>
+				<armor 							type="base" min="140"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
 				<piercing_resistance_perc 		type="base" min="0.03"	/>
 				<rending_resistance_perc 		type="base" min="0.05"	/>
@@ -109,7 +109,7 @@
 	<ability on_conflict="replace" name="Netflix Pants _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
-				<armor 							type="base" min="99"	/>
+				<armor 							type="base" min="104"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
 				<rending_resistance_perc 		type="base" min="0.07"	/>
 				<elemental_resistance_perc 		type="base" min="0.07"	/>
@@ -120,7 +120,7 @@
 	<ability on_conflict="replace" name="Netflix Pants 1 _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
-				<armor 							type="base" min="128"	/>
+				<armor 							type="base" min="132"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
 				<rending_resistance_perc 		type="base" min="0.07"	/>
 				<elemental_resistance_perc 		type="base" min="0.07"	/>
@@ -131,7 +131,7 @@
 	<ability on_conflict="replace" name="Netflix Pants 2 _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
-				<armor 							type="base" min="140"	/>
+				<armor 							type="base" min="143"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
 				<rending_resistance_perc 		type="base" min="0.07"	/>
 				<elemental_resistance_perc 		type="base" min="0.07"	/>
@@ -142,7 +142,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Armor _Stats">
 				<weight 						type="base" min="10" 		/>
 				<quality 						type="add" 	min="5"			/>
-				<armor 							type="base" min="125" 		/>
+				<armor 							type="base" min="130" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
 				<piercing_resistance_perc 		type="base" min="0.09"		/>
 				<rending_resistance_perc 		type="base" min="0.17"		/>
@@ -154,7 +154,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Armor 1 _Stats">
 				<weight 						type="base" min="10" 		/>
 				<quality 						type="add" 	min="5"			/>
-				<armor 							type="base" min="195" 		/>
+				<armor 							type="base" min="200" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
 				<piercing_resistance_perc 		type="base" min="0.09"		/>
 				<rending_resistance_perc 		type="base" min="0.17"		/>
@@ -166,7 +166,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Armor 2 _Stats">
 				<weight 						type="base" min="10" 	/>
 				<quality 						type="add" 	min="5"			/>
-				<armor 							type="base" min="225" 		/>
+				<armor 							type="base" min="230" 		/>
 				<slashing_resistance_perc 		type="base" min="0.17"		/>
 				<piercing_resistance_perc 		type="base" min="0.09"		/>
 				<rending_resistance_perc 		type="base" min="0.17"		/>
@@ -178,7 +178,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Boots _Stats">			
 				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
-				<armor 							type="base" min="45" 	/>
+				<armor 							type="base" min="47" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
 				<piercing_resistance_perc 		type="base" min="0.04" 	/>
 				<bludgeoning_resistance_perc 	type="base" min="0.04" 	/>
@@ -189,7 +189,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Boots 1 _Stats">
 				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
-				<armor 							type="base" min="73" 	/>
+				<armor 							type="base" min="75" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
 				<piercing_resistance_perc 		type="base" min="0.04" 	/>
 				<bludgeoning_resistance_perc 	type="base" min="0.04" 	/>
@@ -200,7 +200,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Boots 2 _Stats">
 				<weight 						type="base" min="4" 	/>				
 				<quality 						type="add" 	min="5" 	/>
-				<armor 							type="base" min="85" 	/>
+				<armor 							type="base" min="87" 	/>
 				<slashing_resistance_perc 		type="base" min="0.06" 	/>
 				<piercing_resistance_perc 		type="base" min="0.04" 	/>
 				<bludgeoning_resistance_perc 	type="base" min="0.04" 	/>
@@ -211,7 +211,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Gloves _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
-				<armor 							type="base" min="41"	/>
+				<armor 							type="base" min="43"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
 				<piercing_resistance_perc 		type="base" min="0.03"	/>
 				<rending_resistance_perc 		type="base" min="0.05"	/>
@@ -222,7 +222,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Gloves 1 _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
-				<armor 							type="base" min="69"	/>
+				<armor 							type="base" min="71"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
 				<piercing_resistance_perc 		type="base" min="0.03"	/>
 				<rending_resistance_perc 		type="base" min="0.05"	/>
@@ -233,7 +233,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Gloves 2 _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add" 	min="5"		/>
-				<armor 							type="base" min="81"	/>
+				<armor 							type="base" min="83"	/>
 				<slashing_resistance_perc 		type="base" min="0.05"	/>
 				<piercing_resistance_perc 		type="base" min="0.03"	/>
 				<rending_resistance_perc 		type="base" min="0.05"	/>
@@ -244,7 +244,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Pants _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
-				<armor 							type="base" min="45"	/>
+				<armor 							type="base" min="47"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
 				<rending_resistance_perc 		type="base" min="0.07"	/>
 				<elemental_resistance_perc 		type="base" min="0.07"	/>
@@ -255,7 +255,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Pants 1 _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
-				<armor 							type="base" min="73"	/>
+				<armor 							type="base" min="75"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
 				<rending_resistance_perc 		type="base" min="0.07"	/>
 				<elemental_resistance_perc 		type="base" min="0.07"	/>
@@ -266,7 +266,7 @@
 	<ability on_conflict="replace" name="NGP Netflix Pants 2 _Stats">
 				<weight 						type="base" min="3" 	/>
 				<quality 						type="add"  min="5"		/>
-				<armor 							type="base" min="85"	/>
+				<armor 							type="base" min="87"	/>
 				<slashing_resistance_perc		type="base" min="0.07"	/>
 				<rending_resistance_perc 		type="base" min="0.07"	/>
 				<elemental_resistance_perc 		type="base" min="0.07"	/>

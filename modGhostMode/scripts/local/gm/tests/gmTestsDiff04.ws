@@ -784,11 +784,77 @@ function GMTest_diff04()
 	ok = ok && bandit.currentLevel >= 18 && bandit.currentLevel <= 22 && bandit.gmSavedRandomLevel == bandit.currentLevel;
 	s += "Random -2..2 " + bandit.currentLevel;
 	GMTestDiff04bRegress(bandit);	// slice D5b: the modifiers, the boss rule, progressive level bonuses
-	GMTestDiff04Restore(prevOpts);
 	GMTestReport(ok, "DIFF-04 scaling types at Geralt 20 (a bandit of level 2, a guard; Match without guard levels): " + s);
+	GMTestDiff04Relevel(bandit);	// whole-port audit A2-1: level-ups, the boss bar and an option change
+	GMTestDiff04Restore(prevOpts);
 	GMTestReport(GMTestDiff04Text(GMTestDiff04Record()) == GMTestDiff04Text(prevOpts), "DIFF-04 options restored: " + GMTestDiff04Text(prevOpts));
 	bandit.Destroy();
 	guard.Destroy();
+}
+
+// ---- re-levels without a reset (whole-port audit A2-1, 2026-11-03) ----
+// Per scaling type, on the regression's bandit: computed at Geralt 20 (fresh), the boss bar's recompute at Geralt 20
+// (GMRecomputeLevelBonuses with the tag, then without) keeps the level; a fight's start after Geralt's level-ups to 21
+// and 22 (RecalcLevel without a reset, as legacy) gives the rule's level for each; an option change (the hook's
+// per-NPC reset) at 22 gives it too. Interpolated from level 4: 12, 12 at the bar, 12 at 21, 13 at 22 (the port
+// before the fix took half the remaining gap again at each recompute: 16 and 18 at the bar, 19 at 21, 20 at 22).
+
+// The level the rule gives the bandit of entity level base at Geralt p (random types 0..0: Geralt's level, not
+// below its own for no downscaling).
+function GMTestD04RelevelWant(npc : CNewNPC, t : int, base : int, p : int) : int
+{
+	if(t == 4 || t == 5)
+		return p;	// the bandit's own 2 is below
+	return GMTestDiff04Expected(npc, base, p, t, false, false);
+}
+
+function GMTestD04RelevelCase(npc : CNewNPC, t : int, base : int)
+{
+	var w : W3PlayerWitcher;
+	var l20, lBar, lUnbar, l21, l22, lOpt, w20, w21, w22 : int;
+	var ok : bool;
+
+	w = GetWitcherPlayer();
+	GMTestDiff04Set(t, 0, 0, false, false);
+	w20 = GMTestD04RelevelWant(npc, t, base, 20);
+	w21 = GMTestD04RelevelWant(npc, t, base, 21);
+	w22 = GMTestD04RelevelWant(npc, t, base, 22);
+	npc.GMTestSetBaseLevel(base);
+	GMTestDiff04Recalc(npc, 20, true);
+	l20 = npc.currentLevel;
+	npc.AddTag('HideHealthBarModule');
+	w.GMTestSetLevelOverride(20);
+	npc.GMRecomputeLevelBonuses();
+	lBar = npc.currentLevel;
+	npc.RemoveTag('HideHealthBarModule');
+	npc.GMRecomputeLevelBonuses();
+	w.GMTestSetLevelOverride(0);
+	lUnbar = npc.currentLevel;
+	ok = lBar == w20 && lUnbar == w20;
+	GMTestDiff04Recalc(npc, 21, false);
+	l21 = npc.currentLevel;
+	GMTestDiff04Recalc(npc, 22, false);
+	l22 = npc.currentLevel;
+	ok = ok && GMTestDiff04Abls(npc);
+	npc.GMResetLevel();
+	GMTestDiff04Recalc(npc, 22, false);
+	lOpt = npc.currentLevel;
+	ok = ok && l20 == w20 && l21 == w21 && l22 == w22 && lOpt == w22 && GMTestDiff04Abls(npc);
+	GMTestReport(ok, "DIFF-04 " + GMTestDiff04TypeName(t) + ", a bandit of level " + base + ": at Geralt 20 " + l20 + " (" + w20 + "), the boss bar " + lBar + " then " + lUnbar
+		+ " (" + w20 + ", kept); a fight's start after level-ups at Geralt 21 " + l21 + " (" + w21 + ") and 22 " + l22 + " (" + w22 + "); an option change at 22 " + lOpt + " (" + w22 + ")");
+}
+
+function GMTestDiff04Relevel(npc : CNewNPC)
+{
+	GMTestD04bSetProg(false, 0, 0);
+	GMTestD04bSetMods(0, 0, 0, 0);
+	GMTestD04RelevelCase(npc, 0, 26);	// None
+	GMTestD04RelevelCase(npc, 1, 2);	// Upscale
+	GMTestD04RelevelCase(npc, 2, 2);	// Match
+	GMTestD04RelevelCase(npc, 3, 2);	// Soft
+	GMTestD04RelevelCase(npc, 4, 2);	// Random 0..0
+	GMTestD04RelevelCase(npc, 5, 2);	// Random no downscaling 0..0
+	GMTestD04RelevelCase(npc, 6, 4);	// Interpolated: 12, 12, 12, 13 (the owner's figures)
 }
 
 // ---- in the panel: mode and option changes through the game's own paths (DIFF audit F4) ----

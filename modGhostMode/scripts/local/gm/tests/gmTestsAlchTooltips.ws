@@ -63,6 +63,179 @@ function GMTest_alch17()
 	GMTest_alch17_texts();
 	GMTestReport(GetLocStringByKeyExt("attribute_name_vsOgre_critical_hit_chance") != "" && GetLocStringByKeyExt("attribute_name_cloud_duration") != "" && GetLocStringByKeyExt("effect_dimeritium") != "",
 		"ALCH-17 attribute names: " + GetLocStringByKeyExt("attribute_name_vsOgre_critical_hit_chance") + "; " + GetLocStringByKeyExt("attribute_name_cloud_duration"));
+	GMTest_alch17_offset();
+	GMTest_alch17_bombskills();
+}
+
+// Whole-port audit C1-5: a decoction's toxicity offset by name (recipe book, alchemy menu) is named
+// "Toxicity offset" (legacy), not "Toxicity" (5.x).
+function GMTest_alch17_offset()
+{
+	var w : W3PlayerWitcher;
+	var tips : array<SAttributeTooltip>;
+	var comp : W3GuiPlayerInventoryComponent;
+	var ids : array<SItemUniqueId>;
+	var i : int;
+	var label, book, offsetName : string;
+
+	w = GetWitcherPlayer();
+	offsetName = GetAttributeNameLocStr('toxicity_offset', false);
+	w.inv.GetItemStatsFromName('Mutagen 20', tips);
+	for(i = 0; i < tips.Size(); i += 1)
+		if(tips[i].originName == 'toxicity_offset')
+			label = tips[i].attributeName;
+	comp = new W3GuiPlayerInventoryComponent in thePlayer;
+	comp.Initialize(thePlayer.inv);
+	ids = w.inv.AddAnItem('Recipe for Mutagen 20', 1);
+	book = comp.GetAlchemyBookText(ids[0]);
+	w.inv.RemoveItem(ids[0], 1);
+	delete comp;
+	GMTestReport(offsetName != "" && label == offsetName && label != GetAttributeNameLocStr('toxicity', false) && StrFindFirst(book, offsetName) >= 0,
+		"ALCH-17 audit C1-5: a decoction's toxicity offset by name is named '" + label + "' (expected '" + offsetName + "', 5.x '" + GetAttributeNameLocStr('toxicity', false) + "'); in the recipe book: " + (StrFindFirst(book, offsetName) >= 0));
+}
+
+// A bomb's tooltip stats: by GetItemBaseStats (the item tooltip) or GetItemStats.
+function GMTestBombTips(itemName : name, base : bool) : array<SAttributeTooltip>
+{
+	var w : W3PlayerWitcher;
+	var ids : array<SItemUniqueId>;
+	var tips : array<SAttributeTooltip>;
+
+	w = GetWitcherPlayer();
+	ids = w.inv.GetItemsByName(itemName);
+	if(ids.Size() == 0)
+		ids = w.inv.AddAnItem(itemName, 1);
+	if(base)
+		w.inv.GetItemBaseStats(ids[0], tips);
+	else
+		w.inv.GetItemStats(ids[0], tips);
+	return tips;
+}
+
+// Puts a skill on (learned and equipped) or off; returns whether it was equipped before.
+function GMTestAlchSkillOn(s : ESkill, on : bool) : bool
+{
+	var w : W3PlayerWitcher;
+	var was : bool;
+
+	w = GetWitcherPlayer();
+	was = w.IsSkillEquipped(s);
+	if(on && !was)
+	{
+		if(!w.HasLearnedSkill(s))
+			w.AddSkill(s);
+		w.EquipSkill(s, w.GetFreeSkillSlot());
+	}
+	else if(!on && was)
+		w.UnequipSkill(w.GetSkillSlotID(s));
+	return was;
+}
+
+// Whole-port audit C1-3: a bomb's tooltip with Pyrotechnics (+50 physical and silver damage per level, new
+// tree 83.33) and Heavy Artillery (x2 on every damage line), legacy's lines, in the tree in force.
+function GMTest_alch17_bombskills()
+{
+	var w : W3PlayerWitcher;
+	var heavy, otherHeavy : ESkill;
+	var hadPyro, hadHeavy, hadOther, hadSamum, hadStar : bool;
+	var per, pyro, fire0 : float;
+	var t : array<SAttributeTooltip>;
+	var ids : array<SItemUniqueId>;
+	var iPhys, iSilv, i, unlocked : int;
+	var s : ESkill;
+	var pam : W3PlayerAbilityManager;
+
+	w = GetWitcherPlayer();
+	if(GMIsClassicProfileInForce())
+	{
+		heavy = S_Perk_20; otherHeavy = S_Perk_28; per = 50;
+	}
+	else
+	{
+		heavy = S_Perk_28; otherHeavy = S_Perk_20; per = 83.333333;
+	}
+	hadSamum = w.inv.GetItemQuantityByName('Samum 1') > 0;
+	hadStar = w.inv.GetItemQuantityByName('Dancing Star 1') > 0;
+	hadPyro = GMTestAlchSkillOn(S_Alchemy_s10, false);
+	hadHeavy = GMTestAlchSkillOn(heavy, false);
+	hadOther = GMTestAlchSkillOn(otherHeavy, false);
+
+	t = GMTestBombTips('Samum 1', true);
+	GMTestReport(GMTestAlchTipValue(t, 'PhysicalDamage') == -1 && GMTestAlchTipValue(t, 'SilverDamage') == -1, "ALCH-17 audit C1-3: Samum 1 without Pyrotechnics lists no physical or silver damage (" + GMTestAlchTipList(t) + ")");
+	t = GMTestBombTips('Dancing Star 1', true);
+	fire0 = GMTestAlchTipValue(t, 'FireDamage');
+
+	GMTestAlchSkillOn(S_Alchemy_s10, true);
+	pyro = per * w.GetSkillLevel(S_Alchemy_s10);
+	t = GMTestBombTips('Samum 1', true);
+	iPhys = -1; iSilv = -1;
+	for(i = 0; i < t.Size(); i += 1)
+	{
+		if(t[i].originName == 'PhysicalDamage') iPhys = i;
+		if(t[i].originName == 'SilverDamage') iSilv = i;
+	}
+	GMTestReport(w.CanUseSkill(S_Alchemy_s10) && AbsF(GMTestAlchTipValue(t, 'PhysicalDamage') - pyro) < 0.01 && AbsF(GMTestAlchTipValue(t, 'SilverDamage') - pyro) < 0.01 && iPhys >= 0 && iPhys < iSilv
+		&& t[iPhys].attributeName == GetAttributeNameLocStr('PhysicalDamage', false),
+		"ALCH-17 audit C1-3: Pyrotechnics level " + w.GetSkillLevel(S_Alchemy_s10) + ": Samum 1's tooltip lists physical and silver damage " + pyro + " (" + GMTestAlchTipList(t) + ")");
+	t = GMTestBombTips('Samum 1', false);
+	GMTestReport(GMTestAlchTipValue(t, 'PhysicalDamage') == -1, "ALCH-17 audit C1-3: the item's other stat list (GetItemStats) adds no line (legacy) (" + GMTestAlchTipList(t) + ")");
+	t = GMTestBombTips('Dancing Star 1', true);
+	GMTestReport(fire0 > 0 && AbsF(GMTestAlchTipValue(t, 'FireDamage') - fire0) < 0.01 && AbsF(GMTestAlchTipValue(t, 'PhysicalDamage') - pyro) < 0.01,
+		"ALCH-17 audit C1-3: Dancing Star 1 with Pyrotechnics: fire " + fire0 + " unchanged, physical " + pyro + " (" + GMTestAlchTipList(t) + ")");
+
+	// at a low level every unlocked slot may be taken (the test save has one): unlock one for Heavy Artillery
+	// as vanilla's skilleq does, locked again at the end
+	pam = (W3PlayerAbilityManager)w.abilityManager;
+	unlocked = -1;
+	if(w.GetFreeSkillSlot() < 0)
+	{
+		for(i = 0; i < w.GetSkillSlotsCount() && unlocked < 0; i += 1)
+		{
+			if(pam.Debug_HAX_UnlockSkillSlot(i))
+				unlocked = i;
+		}
+	}
+	GMTestAlchSkillOn(heavy, true);
+	t = GMTestBombTips('Samum 1', true);
+	GMTestReport(w.GMHeavyArtillerySkill() == heavy && AbsF(GMTestAlchTipValue(t, 'PhysicalDamage') - 2 * pyro) < 0.01 && AbsF(GMTestAlchTipValue(t, 'SilverDamage') - 2 * pyro) < 0.01,
+		"ALCH-17 audit C1-3: with Heavy Artillery (" + SkillEnumToName(heavy) + ", in use: " + SkillEnumToName(w.GMHeavyArtillerySkill()) + ") and Pyrotechnics Samum 1's damage x2: " + GMTestAlchTipList(t));
+	GMTestAlchSkillOn(S_Alchemy_s10, false);
+	t = GMTestBombTips('Dancing Star 1', false);
+	GMTestReport(AbsF(GMTestAlchTipValue(t, 'FireDamage') - 2 * fire0) < 0.01 && GMTestAlchTipValue(t, 'PhysicalDamage') == -1,
+		"ALCH-17 audit C1-3: Heavy Artillery alone: Dancing Star 1's fire damage " + fire0 + " x2 in either list (" + GMTestAlchTipList(t) + ")");
+
+	GMTestAlchSkillOn(heavy, hadHeavy);
+	if(unlocked >= 0)
+	{
+		if(!w.GetSkillOnSlot(w.GetSkillSlotIDFromIndex(unlocked), s) || s == S_SUndefined)
+			pam.GMTestRelockSkillSlot(unlocked);
+	}
+	GMTestAlchSkillOn(otherHeavy, hadOther);
+	GMTestAlchSkillOn(S_Alchemy_s10, hadPyro);
+	if(!hadSamum)
+	{
+		ids = w.inv.GetItemsByName('Samum 1');
+		if(ids.Size() > 0) w.inv.RemoveItem(ids[0], w.inv.GetItemQuantity(ids[0]));
+	}
+	if(!hadStar)
+	{
+		ids = w.inv.GetItemsByName('Dancing Star 1');
+		if(ids.Size() > 0) w.inv.RemoveItem(ids[0], w.inv.GetItemQuantity(ids[0]));
+	}
+}
+
+@addMethod(W3PlayerAbilityManager)
+function GMTestRelockSkillSlot(slotIndex : int)
+{
+	skillSlots[slotIndex].unlocked = false;
+}
+
+exec function gmtest_alch17_c1()
+{
+	thePlayer.GMTestCount(true, true);
+	GMTest_alch17_offset();
+	GMTest_alch17_bombskills();
+	LogChannel('GMTest', "SUMMARY alch17_c1: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 
 // Audit F6 to F12: the texts by key (language-neutral: each key against the string row that must win).

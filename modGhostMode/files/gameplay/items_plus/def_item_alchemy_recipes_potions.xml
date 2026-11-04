@@ -646,7 +646,7 @@
 			</recipe>
 			
 			<!-- PHEROMONE POTION BEAR -->
-			<recipe name_name="Recipe for Bear Pheromone Potion 1" countsTowardsAchievement="1" type_name="pheromone_bear" level="1" cookedItem_name="Pheromone Potion Bear 1" cookedItemType="potion" cookedItemQuantity="1" localisation_key_name = "item_name_recipe_for_pheromone_potion_bear" >
+			<recipe name_name="Recipe for Bear Pheromone Potion 1" countsTowardsAchievement="1" type_name="pheromone_bear" level="1" cookedItem_name="Pheromone Potion Bear 1" cookedItemType="quest" cookedItemQuantity="1" localisation_key_name = "item_name_recipe_for_pheromone_potion_bear" >
 				<ingredients>
 					<ingredient item_name="Dwarven spirit" quantity="1" />
 					<ingredient item_name="Berbercane fruit" quantity="1" />
@@ -656,7 +656,7 @@
 			</recipe>
 			
 			<!-- PHEROMONE POTION DROWNER -->
-			<recipe name_name="Recipe for Drowner Pheromone Potion 1" countsTowardsAchievement="1" type_name="pheromone_drowner" level="1" cookedItem_name="Pheromone Potion Drowner 1" cookedItemType="potion" cookedItemQuantity="1" localisation_key_name = "item_name_recipe_for_pheromone_potion_drowner" >
+			<recipe name_name="Recipe for Drowner Pheromone Potion 1" countsTowardsAchievement="1" type_name="pheromone_drowner" level="1" cookedItem_name="Pheromone Potion Drowner 1" cookedItemType="quest" cookedItemQuantity="1" localisation_key_name = "item_name_recipe_for_pheromone_potion_drowner" >
 				<ingredients>
 					<ingredient item_name="Dwarven spirit" quantity="1" />
 					<ingredient item_name="Drowner brain" quantity="1" />
@@ -666,7 +666,7 @@
 			</recipe>
 			
 			<!-- PHEROMONE POTION NEKKER -->
-			<recipe name_name="Recipe for Nekker Pheromone Potion 1" countsTowardsAchievement="1" type_name="pheromone_nekker" level="1" cookedItem_name="Pheromone Potion Nekker 1" cookedItemType="potion" cookedItemQuantity="1" localisation_key_name = "item_name_recipe_for_pheromone_potion_nekker" >
+			<recipe name_name="Recipe for Nekker Pheromone Potion 1" countsTowardsAchievement="1" type_name="pheromone_nekker" level="1" cookedItem_name="Pheromone Potion Nekker 1" cookedItemType="quest" cookedItemQuantity="1" localisation_key_name = "item_name_recipe_for_pheromone_potion_nekker" >
 				<ingredients>
 					<ingredient item_name="Dwarven spirit" quantity="1" />
 					<ingredient item_name="Nekker blood" quantity="1" />

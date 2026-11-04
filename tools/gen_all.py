@@ -43,7 +43,7 @@ import paths  # noqa: E402
 # (generator, has --verify)
 ORDER = [
     ("gen_test_dummy", False), ("gen_ai", True), ("gen_diff", True), ("gen_xp", True),
-    ("gen_npc_stamina", False), ("gen_ngplus", False),
+    ("gen_npc_stamina", False), ("gen_ngplus", True),
     ("gen_ench", True), ("gen_alch", True), ("gen_food", True), ("gen_xbow", True),
     ("gen_trph", True),
     ("gen_arm_items", True),

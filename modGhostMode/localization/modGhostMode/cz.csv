@@ -422,7 +422,7 @@
 2110992259|        |item_desc_junk_no_ingr|Může být prodáno obchodníkům.
 ; UI-07: attribute names of Ghost Mode's tooltip rows and panel lines (legacy's ids and keys)
 2110992013|        |attribute_name_frost_resistance_perc|Odolnost proti mrazu
-2110992110|        |attribute_name_dockdownchance_mult|Šance na sražení
+2110992110|        |attribute_name_desc_knockdownchance_mult|Šance na sražení
 2110992153|c32e766a||Bonus za sílu kritického zásahu
 2110992156|        |attribute_name_vitalityRegen|Regenerace zdraví mimo boj
 2110992157|        |attribute_name_vitalityCombatRegen|Regenerace zdraví během boje

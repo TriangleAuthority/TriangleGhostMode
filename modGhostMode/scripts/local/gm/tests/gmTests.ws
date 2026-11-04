@@ -106,6 +106,322 @@ function GMTest_stam01()
 		thePlayer.RemoveBuff(effect);
 		GMTestReport(!GMIsSignOnCooldown(signs[i]), "STAM-01 " + NameToString(effectName) + " removed");
 	}
+
+	GMTestStam01CastGuard();
+	GMTestStam01FinisherAard();
+}
+
+// ---- STAM-01 (whole-port fix round, C2-2): a cast press while Geralt is already casting ----
+
+@addField(CR4Player)
+var gmTestSignSetups : int;		// SetupCombatAction(EBAT_CastSign) calls while gmTestSignArm is on
+@addField(CR4Player)
+var gmTestSignArm : bool;
+@addField(CR4Player)
+var gmTestSignCasts : int;		// sign entities created (CastSignSpecific) while gmTestSignArm is on
+@addField(CR4Player)
+var gmTestDblEnd : float;
+@addField(CR4Player)
+var gmTestSignSwallow : bool;	// SetupCombatAction(EBAT_CastSign) is counted and not run (no cast starts)
+
+@addMethod(CR4Player)
+function GMTestSignArm(on : bool)
+{
+	gmTestSignArm = on;
+	gmTestSignSetups = 0;
+	gmTestSignCasts = 0;
+}
+
+@addMethod(CR4Player)
+function GMTestSignCounted(setup : bool)
+{
+	if(setup)
+		gmTestSignSetups += 1;
+	else
+		gmTestSignCasts += 1;
+}
+
+@wrapMethod(CR4Player)
+function SetupCombatAction(action : EBufferActionType, stage : EButtonStage)
+{
+	if(gmTestSignArm && action == EBAT_CastSign)
+	{
+		GMTestSignCounted(true);
+		if(gmTestSignSwallow)
+			return;
+	}
+	wrappedMethod(action, stage);
+}
+
+@wrapMethod(W3PlayerWitcher)
+function CastSignSpecific(sign : ESignType, optional skipCastingAnimation : bool) : bool
+{
+	var ok : bool;
+
+	ok = wrappedMethod(sign, skipCastingAnimation);
+	if(gmTestSignArm && ok)
+	{
+		GMTestSignCounted(false);
+		LogChannel('GMTest', "INFO STAM-01 cast " + sign + " started at " + FloatToString(theGame.GetEngineTimeAsSeconds()) + " skipAnim " + skipCastingAnimation);
+	}
+	return ok;
+}
+
+@addMethod(CR4Player)
+function GMTestSignSwallow(on : bool)
+{
+	gmTestSignSwallow = on;
+}
+
+@addMethod(CPlayerInput)
+function GMTestAltCastSign(signType : ESignType)
+{
+	AltCastSign(signType);
+}
+
+// Situation-free: Geralt put in a combat action of the sign-cast kind with input allowed (the cast's
+// recovery, after the throw: the state legacy's guard reads), then a cast press and an
+// alternative-casting press (5.x's AltCastSign) must not set up a cast; with another combat action
+// (an attack) the same press still does. SetupCombatAction is counted and not run, so no sign is
+// cast. Everything is set back.
+function GMTestStam01CastGuard()
+{
+	var witcher : W3PlayerWitcher;
+	var prevCA : bool;
+	var prevCat, prevJump, prevOverlay : float;
+	var prevSign : ESignType;
+	var pressSetups, altSetups, controlSetups : int;
+
+	witcher = GetWitcherPlayer();
+	if(!witcher)
+		return;
+	prevCA = witcher.IsInCombatAction();
+	prevCat = witcher.GetBehaviorVariable('combatActionType');
+	prevJump = witcher.GetBehaviorVariable('inJumpState');
+	prevOverlay = witcher.GetBehaviorVariable('isInCombatActionForOverlay');
+	prevSign = witcher.GetEquippedSign();
+	GMTestReport(witcher.GetBIsInputAllowed() && !witcher.IsCastingSign(), "STAM-01 (C2-2) input allowed and no sign being cast before the check");
+	thePlayer.RemoveBuff(EET_GMQuenCooldown);
+	thePlayer.GainStat(BCS_Stamina, thePlayer.GetStatMax(BCS_Stamina));
+	witcher.SetEquippedSign(ST_Quen);
+	witcher.GMTestSignSwallow(true);
+	witcher.SetBIsInCombatAction(true);
+
+	// In a sign cast: refused.
+	witcher.SetBehaviorVariable('combatActionType', (int)CAT_CastSign);
+	witcher.GMTestSignArm(true);
+	GMTestCastInput(true);
+	GMTestCastInput(false);
+	pressSetups = witcher.gmTestSignSetups;
+	witcher.GMTestSignArm(true);
+	thePlayer.GetInputHandler().GMTestAltCastSign(ST_Quen);
+	altSetups = witcher.gmTestSignSetups;
+
+	// Control: in an attack, a cast press is set up (buffered), as in vanilla and legacy.
+	witcher.SetBehaviorVariable('combatActionType', (int)CAT_Attack);
+	witcher.GMTestSignArm(true);
+	GMTestCastInput(true);
+	GMTestCastInput(false);
+	controlSetups = witcher.gmTestSignSetups;
+	witcher.GMTestSignArm(false);
+	witcher.GMTestSignSwallow(false);
+
+	witcher.SetBIsInCombatAction(prevCA);
+	witcher.SetBehaviorVariable('combatActionType', prevCat);
+	witcher.SetBehaviorVariable('inJumpState', prevJump);
+	witcher.SetBehaviorVariable('isInCombatActionForOverlay', prevOverlay);
+	witcher.SetEquippedSign(prevSign);
+
+	GMTestReport(pressSetups == 0, "STAM-01 (C2-2) a cast press during a sign cast is refused (" + pressSetups + " set up)");
+	GMTestReport(altSetups == 0, "STAM-01 (C2-2) an alternative-casting press during a sign cast is refused (" + altSetups + " set up)");
+	GMTestReport(controlSetups == 1, "STAM-01 (C2-2) control: a cast press during an attack is set up (" + controlSetups + ")");
+	GMTestReport(witcher.IsInCombatAction() == prevCA && witcher.GetEquippedSign() == prevSign && !witcher.IsCastingSign() && witcher.GetBIsInputAllowed(), "STAM-01 (C2-2) state set back, no sign cast");
+}
+
+// gmtest_stam01_dbl(sign, seconds) casts the sign through the input handler, then presses the cast
+// input again every frame or so for that many seconds (each press logged with the state legacy's guard
+// reads); gmtest_stam01_dbl_check() a moment later counts the casts: one cast is right, two are the
+// double cast C2-2 is about. With the sign cooldown option at 5, 5.x's own input lock (until after the
+// throw) and the cooldown refuse every press; with the option at 0 (autoconfigset, set back after), a
+// press in the cast's recovery (input allowed again, still in the cast) casts again without the guard.
+@addMethod(CR4Player)
+timer function GMTestDblPress(dt : float, id : int)
+{
+	var witcher : W3PlayerWitcher;
+
+	witcher = GetWitcherPlayer();
+	if(theGame.GetEngineTimeAsSeconds() > gmTestDblEnd)
+	{
+		RemoveTimer('GMTestDblPress');
+		LogChannel('GMTest', "INFO STAM-01 dbl presses ended: setups " + gmTestSignSetups + " casts " + gmTestSignCasts);
+		return;
+	}
+	LogChannel('GMTest', "INFO STAM-01 dbl press t=" + FloatToString(theGame.GetEngineTimeAsSeconds())
+		+ " inputAllowed=" + GetBIsInputAllowed() + " inCA=" + IsInCombatAction()
+		+ " cat=" + FloatToString(GetBehaviorVariable('combatActionType')) + " casting=" + IsCastingSign()
+		+ " cooldown=" + GMIsSignOnCooldown(witcher.GetEquippedSign()) + " buffer=" + BufferCombatAction
+		+ " setups=" + gmTestSignSetups + " casts=" + gmTestSignCasts);
+	GMTestCastInput(true);
+	GMTestCastInput(false);
+}
+
+@addMethod(CR4Player)
+function GMTestDblStart(seconds : float)
+{
+	gmTestDblEnd = theGame.GetEngineTimeAsSeconds() + seconds;
+	AddTimer('GMTestDblPress', 0.05, true);
+}
+
+exec function gmtest_stam01_dbl(sign : ESignType, seconds : float)
+{
+	GetWitcherPlayer().SetEquippedSign(sign);
+	thePlayer.GainStat(BCS_Stamina, thePlayer.GetStatMax(BCS_Stamina));
+	thePlayer.GMTestSignArm(true);
+	GMTestReport(!GMIsSignOnCooldown(sign), "STAM-01 dbl " + sign + " not on cooldown before the cast");
+	GMTestCastInput(true);
+	GMTestCastInput(false);
+	GMTestReport(thePlayer.IsCastingSign(), "STAM-01 dbl " + sign + " first cast started");
+	thePlayer.GMTestDblStart(seconds);
+}
+
+exec function gmtest_stam01_dbl_check()
+{
+	LogChannel('GMTest', "INFO STAM-01 dbl setups " + thePlayer.gmTestSignSetups + " casts " + thePlayer.gmTestSignCasts);
+	GMTestReport(thePlayer.gmTestSignCasts == 1, "STAM-01 dbl one cast from a press and repeated presses during it (" + thePlayer.gmTestSignCasts + " casts)");
+	thePlayer.GMTestSignArm(false);
+}
+
+// ---- STAM-01 (whole-port fix round, A1-2): 5.x's Aard finisher casts a free Aard ----
+
+// Situation-free: an Aard entity of Geralt's whose cost is disabled (as 5.x's Aard finisher sets it,
+// W3PlayerWitcher.OnAnimEvent_SignFinisher) pays its cast (ManagePlayerStamina, what the throw calls):
+// no Aard cooldown, no sign-cast decoction hook (ALCH-10), no stamina. Control: the same entity
+// with its cost on starts the cooldown. Nothing is thrown; the entity is removed.
+@addField(CR4Player)
+var gmTestDecoctionHooks : int;
+
+@addMethod(CR4Player)
+function GMTestDecoctionHook(reset : bool)
+{
+	if(reset)
+		gmTestDecoctionHooks = 0;
+	else
+		gmTestDecoctionHooks += 1;
+}
+
+@wrapMethod
+function GMDecoctionsOnSignCast()
+{
+	if(thePlayer)
+		thePlayer.GMTestDecoctionHook(false);
+	wrappedMethod();
+}
+
+@addMethod(W3PlayerWitcher)
+function GMTestNewSignEntity(sign : ESignType) : W3SignEntity
+{
+	return (W3SignEntity)theGame.CreateEntity(signs[sign].template, GetWorldPosition() - Vector(0, 0, 50), GetWorldRotation());
+}
+
+@addMethod(W3PlayerWitcher)
+function GMTestSignOwner() : W3SignOwner
+{
+	return signOwner;
+}
+
+@addMethod(W3SignEntity)
+function GMTestSetOwner(o : W3SignOwner)
+{
+	owner = o;
+}
+
+function GMTestStam01FinisherAard()
+{
+	var witcher : W3PlayerWitcher;
+	var entity : W3SignEntity;
+	var stamina, focus : float;
+	var cooldownOn, controlOn : bool;
+	var hooks : int;
+
+	witcher = GetWitcherPlayer();
+	if(!witcher)
+		return;
+	entity = witcher.GMTestNewSignEntity(ST_Aard);
+	GMTestReport(entity, "STAM-01 (A1-2) Aard entity created for the check");
+	if(!entity)
+		return;
+	entity.GMTestSetOwner(witcher.GMTestSignOwner());
+	focus = thePlayer.GetStat(BCS_Focus);
+	thePlayer.RemoveBuff(EET_GMAardCooldown);
+	thePlayer.GainStat(BCS_Stamina, thePlayer.GetStatMax(BCS_Stamina));
+	stamina = thePlayer.GetStat(BCS_Stamina);
+
+	thePlayer.GMTestDecoctionHook(true);
+	entity.DisableStaminaCost(true);
+	entity.ManagePlayerStamina();
+	cooldownOn = thePlayer.HasBuff(EET_GMAardCooldown);
+	hooks = thePlayer.gmTestDecoctionHooks;
+	GMTestReport(!cooldownOn, "STAM-01 (A1-2) the Aard finisher's free Aard starts no Aard cooldown");
+	GMTestReport(hooks == 0, "STAM-01 (A1-2) the Aard finisher's free Aard fires no sign-cast decoction hook (" + hooks + ")");
+	GMTestReport(thePlayer.GetStat(BCS_Stamina) >= stamina, "STAM-01 (A1-2) the Aard finisher's free Aard costs no stamina");
+
+	entity.DisableStaminaCost(false);
+	entity.ManagePlayerStamina();
+	controlOn = thePlayer.HasBuff(EET_GMAardCooldown);
+	GMTestReport(controlOn && thePlayer.gmTestDecoctionHooks == hooks + 1, "STAM-01 (A1-2) control: a paid Aard starts the cooldown and the hook");
+
+	entity.Destroy();
+	thePlayer.RemoveBuff(EET_GMAardCooldown);
+	thePlayer.GainStat(BCS_Stamina, thePlayer.GetStatMax(BCS_Stamina));
+	thePlayer.ForceSetStat(BCS_Focus, focus);
+}
+
+// A real Aard finisher (5.x's man_finisher_aard_01_rp_remaster, normally drawn only with the new
+// tree's Shock Wave): gmtest_stam01_fin_aard(true) forces that finisher animation; then
+// gmtest_stam06_bandit(), ForceFinisher(true), gmtest_stam06_weaken(), autolock(),
+// gmtest_stam06_fin_a() (the killing light attack), and some 4 s later gmtest_stam01_fin_check():
+// the finisher cast its free Aard, with no Aard cooldown and no decoction hook.
+@addField(CR4Player)
+var gmTestForceAardFinisher : bool;
+
+@addMethod(CR4Player)
+function GMTestSetForceAardFinisher(on : bool)
+{
+	gmTestForceAardFinisher = on;
+}
+
+@wrapMethod(W3SyncAnimationManager)
+function GetFinisherSynAnimName(optional nonLethalFinisher : bool) : name
+{
+	var n : name;
+
+	n = wrappedMethod(nonLethalFinisher);
+	if(thePlayer.gmTestForceAardFinisher)
+	{
+		LogChannel('GMTest', "INFO STAM-01 finisher " + NameToString(n) + " forced to man_finisher_aard_01_rp_remaster");
+		return 'man_finisher_aard_01_rp_remaster';
+	}
+	return n;
+}
+
+exec function gmtest_stam01_fin_aard(on : bool)
+{
+	thePlayer.GMTestSetForceAardFinisher(on);
+	thePlayer.RemoveBuff(EET_GMAardCooldown);
+	thePlayer.GMTestDecoctionHook(true);
+	thePlayer.GMTestSignArm(on);
+	LogChannel('GMTest', "INFO STAM-01 Aard finisher forced " + on);
+}
+
+exec function gmtest_stam01_fin_check()
+{
+	LogChannel('GMTest', "INFO STAM-01 finisher check: casts " + thePlayer.gmTestSignCasts + " decoction hooks " + thePlayer.gmTestDecoctionHooks
+		+ " Aard cooldown " + thePlayer.HasBuff(EET_GMAardCooldown));
+	GMTestReport(thePlayer.gmTestSignCasts == 1, "STAM-01 (A1-2) the Aard finisher cast one Aard (" + thePlayer.gmTestSignCasts + ")");
+	GMTestReport(!thePlayer.HasBuff(EET_GMAardCooldown), "STAM-01 (A1-2) no Aard cooldown after the Aard finisher");
+	GMTestReport(thePlayer.gmTestDecoctionHooks == 0, "STAM-01 (A1-2) no sign-cast decoction hook from the Aard finisher (" + thePlayer.gmTestDecoctionHooks + ")");
+	thePlayer.GMTestSetForceAardFinisher(false);
+	thePlayer.GMTestSignArm(false);
 }
 
 // STAM-01: put all five sign cooldowns (7.5 s each) on the player, for a look at the HUD.
@@ -447,8 +763,8 @@ function GMTestStam05Check(enabled : bool, armor : SItemUniqueId)
 		GMTestReport(bonus == 0, label + "no armor regen bonus or penalty");
 
 	// Tooltips list only the attributes in tooltip_settings.csv; vanilla has no row for
-	// staminaRegen_armor_mod, Ghost Mode adds one (not ported yet). Until then the line is
-	// absent either way, so only "absent while off" is checked.
+	// staminaRegen_armor_mod, Ghost Mode adds one (UI-07, whose tests check the line while on);
+	// here only "absent while off" is checked.
 	thePlayer.inv.GetItemStats(armor, stats);
 	if(enabled)
 		LogChannel('GMTest', "INFO " + label + "armor regen line in the item's tooltip stats: " + GMTestHasArmorRegenStat(stats));
@@ -575,6 +891,7 @@ exec function gmtest_panel()
 	GMTest_trph_after();	// TRPH (tests/gmTestsTrph.ws)
 	GMTest_fix_after();	// FIX (tests/gmTestsFix.ws)
 	GMTest_horse_after();	// HORSE (tests/gmTestsHorse.ws)
+	GMTest_data_after();	// whole-port data checks (tests/gmTestsData.ws)
 	GMTest_diff04_after();	// last: DIFF-04's mode and option changes on the bandit GMTest_diff04_spawn() left (a mode change rebuilds every NPC's stats)
 }
 
@@ -826,6 +1143,26 @@ function GMTest_stam03()
 	cfg.SetVarValue('GMGameplayOptions', 'GMMeleeStaminaCostMultiplier', prevMelee);
 	cfg.SetVarValue('GMGameplayOptions', 'GMAgilityStaminaCostMultiplier', prevAgility);
 	cfg.SetVarValue('GMGameplayOptions', 'GMSignStaminaCostMultiplier', prevSign);
+
+	GMTestStam03RefusalSounds();
+}
+
+// C2-5: the refusal sounds as legacy: a bomb, crossbow or item press without stamina plays the
+// low-stamina warning (gui_ingame_low_stamina_warning), a dodge on foot gui_no_stamina.
+function GMTestStam03RefusalSounds()
+{
+	var action : SInputAction;
+	var refused : bool;
+
+	thePlayer.DrainStamina(ESAT_FixedValue, thePlayer.GetStatMax(BCS_Stamina), 0.001);
+	action.aName = 'ThrowItem';
+	action.value = 1;
+	action.lastFrameValue = 0;
+	refused = GMRefuseItemForStamina(action);
+	GMTestReport(refused && thePlayer.gmStaminaRefusalSound == "gui_ingame_low_stamina_warning", "STAM-03 (C2-5) an item press without stamina plays the low-stamina warning ('" + thePlayer.gmStaminaRefusalSound + "')");
+	GetWitcherPlayer().EvadePressed(EBAT_Dodge);
+	GMTestReport(thePlayer.gmStaminaRefusalSound == "gui_no_stamina", "STAM-03 (C2-5) a dodge without stamina plays gui_no_stamina ('" + thePlayer.gmStaminaRefusalSound + "')");
+	thePlayer.GainStat(BCS_Stamina, thePlayer.GetStatMax(BCS_Stamina));
 }
 
 // STAM-03 slice B: parries in a fight. Counts the player's parry checks through a wrapper.
@@ -1290,6 +1627,7 @@ exec function gmtest_stam03_horse_b(act : int, optional empty : bool)
 	if(empty)
 	{
 		GMTestReport(thePlayer.gmStaminaRefusals > thePlayer.gmTestRefusalsBefore, "STAM-03 " + actLabel + " refused without stamina");
+		GMTestReport(thePlayer.gmStaminaRefusalSound == "gui_ingame_low_stamina_warning", "STAM-03 (C2-5) " + actLabel + " refusal sound '" + thePlayer.gmStaminaRefusalSound + "'");
 	}
 	else
 	{
@@ -2230,6 +2568,7 @@ exec function gmtest_regress()
 	GMTest_trph();	// TRPH (parallel ports: its checks go into tests/gmTestsTrph.ws)
 	GMTest_fix();	// FIX (parallel ports: its checks go into tests/gmTestsFix.ws)
 	GMTest_horse();	// HORSE (parallel ports: its checks go into tests/gmTestsHorse.ws)
+	GMTest_data();	// whole-port data checks (tests/gmTestsData.ws)
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

@@ -120,3 +120,20 @@ function ShouldPauseHealthRegenOnHit() : bool
 		return false;
 	return pause;
 }
+
+// Legacy: Undying's immortality ends when a save loads (W3PlayerWitcher.OnSpawned, a restored spawn; fx
+// round C2-3); its removal starts the cooldown, as at the effect's end. The effect comes back with the
+// save inside CActor.OnSpawned, before this wrapper's code.
+@wrapMethod(W3PlayerWitcher)
+function OnSpawned(spawnData : SEntitySpawnData)
+{
+	wrappedMethod(spawnData);
+	if(spawnData.restored)
+		GMUndyingOnLoad();
+}
+
+@addMethod(W3PlayerWitcher)
+function GMUndyingOnLoad()
+{
+	RemoveBuff(EET_GMUndyingImmortal);
+}

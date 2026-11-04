@@ -28,7 +28,7 @@ function StartAttackAction()
 		&& (rider.IsWeaponHeld('steelsword') || rider.IsWeaponHeld('silversword'))
 		&& !rider.HasStaminaToUseAction(ESAT_LightAttack, , , GMHorsebackStaminaMult()))
 	{
-		rider.GMRefuseForStamina();
+		rider.GMRefuseForStamina(true);
 		return;
 	}
 	wrappedMethod();

@@ -61,9 +61,9 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 | Flags | balance |
 | Depends on | DMG-02, DMG-03, DMG-04 (Strong Attack's +50%) |
 | Skill trees | n/a (`sword_2` is a core skill, shared by both trees) |
-| Port form | `@replaceMethod(W3DamageManagerProcessor) CalculateDamage` (5.x body with legacy's order; `damage/formula.ws`); `@replaceMethod(CActor) ReduceDamage` (5.x body without the player's minimum damage, `damage/pipeline.ws`); new global for damage below 1 |
-| Port status | signed off (2026-10-07; slices 2, 3a, 3b) |
-| Open checks | the removal of the fist bonus by level and of the per-monster Igni weakness (no Igni or fist hit tested); real attacks (all checks are scripted hits through the damage manager) |
+| Port form | `@replaceMethod(W3DamageManagerProcessor) CalculateDamage` (5.x body with legacy's order and early returns; `damage/formula.ws`); `@replaceMethod(CActor) ReduceDamage` (5.x body without the player's minimum damage, `damage/pipeline.ws`); new global for damage below 1; legacy's "stopped by armor" rule at the end of `GMProcessDamageModification` with `@addField` `gmHasArmor` (`damage/pipeline.ws`) |
+| Port status | signed off (2026-10-07; slices 2, 3a, 3b); legacy's early returns and armor flag (whole-port audit A2-5, `gm/fx-diff`) verified on the area build in both trees (2026-11-03) |
+| Open checks | the removal of the fist bonus by level and of the per-monster Igni weakness (no Igni or fist hit tested); real attacks (all checks are scripted hits through the damage manager); the sparks of a real parried or countered hit the armor stops (the flag's only reader) |
 | Save impact | none (expected) |
 | NG+ counterpart | applied (`gm_damage.xml`'s NG+ copy; the `basic_attacks.xml` overrides reach the NG+ definitions too; Hearts of Stone's `attack_heavy_noparry` is given whole, see Decisions) |
 
@@ -73,7 +73,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 
 **5.x:** the formula as 1.32; the heavy penalty −0.433 (1.32: −0.833), ×1.833 kept; minimum damage kept; `SetArmorReducedDamageToZero` takes a bool. Removed by legacy and still in 5.x: the fistfight damage scaling by Geralt's level outside the minigame, the burning-sign log cap on attack power, the per-monster Igni weakness (`igni_damage_amplifier`, 22 Blood and Wine and 3 Hearts of Stone abilities; legacy kept the XML and dropped the script).
 
-**Decisions:** port as legacy; the per-monster Igni weakness is dropped as in legacy (weaknesses are resistances, AI).
+**Decisions:** port as legacy; the per-monster Igni weakness is dropped as in legacy (weaknesses are resistances, AI). Legacy's two early returns at the top of `CalculateDamage` are ported (whole-port audit A2-5): a damage type the victim's stat ignores (silver on a Vitality user, physical types on an Essence user) and a value of 0 or less give 0 before anything else, before the non-deadly fight's flat 10 too. So is legacy's "stopped by armor" flag (`SetArmorReducedDamageToZero`, which only decides whether a parried or countered hit sparks): set at the end of the final-damage step, for a hit that dealt damage up to that step and none after it, when the last damage type through the formula met armor (`gmHasArmor`, legacy's `hasArmor`); a hit the formula already brought to 0 is not marked, as in legacy. The port set the flag per damage type in `CalculateDamage` until then, so a type the victim ignores could mark a hit. Verified on the area build in both trees (2026-11-03, `GMTest_dmg01_armorflag` in the regression, scripted hits of Geralt's on a bandit of armor 20): 1 silver damage and 1 slashing damage deal nothing and leave the flag off; on a throwaway build with the old code both were marked.
 
 - **Deviation:** 5.x's ×1.1 to the damage the player takes in New Game+ (end of `CalculateDamage`, new in 5.x) is kept: NG+ scaled like vanilla's ([New Game+ policy](../feature-mapping.md#new-game-carried-over-and-scaled-not-balanced-or-tested)) (project owner, 2026-10-07; audit F5).
 - Hearts of Stone's `attack_heavy_noparry` (an NPC heavy attack that cannot be parried) is given whole (`replace`) as legacy's: tag `attack_heavy`, `focus_hit_drain_mod` ×1.5, no attack power bonus, no `focus_gain` (SKL-07). Until 2026-10-28 it took `extend`, which empties a Hearts of Stone ability ([development.md](../development.md#fine-grained-xml-overrides-50)): in game it read 0 attributes and had lost its `attack_heavy` tag, so heavy-attack rules keyed on the tag missed it (found by the AI-A audit, F1; fixed in 5.x-GM `2499b4f7`, verified in both trees by scripted reads, `GMTest_dmgxml` in the regression, which failed on a throwaway build with the old entry).
@@ -131,7 +131,7 @@ Stat registration (audit F4, 5.x-GM `6b90faf5`): `all_NPC_ability` registers wil
 | Flags | balance |
 | Depends on | DMG-01; GEN (headshot and backstab rule); hooks for SKL (Whirl, crit skills), ARM (Lynx, Bear, Red Wolf), SWD (Aerondight), MUT (Mutations 2, 9) |
 | Skill trees | both (crit skills `sword_s8`, `sword_s17`, `sword_s7` read by the function; ported with SKL) |
-| Port form | `@replaceMethod(W3DamageManagerProcessor) GetAttackersPowerMod` (`damage/formula.ws`), `ProcessCriticalHitCheck` (later) (shared with SKL, MUT, DEF-07: one body, feature-tagged hunks); the constants as `GMHeadShotDamageBonus()` and `GMBackAttackDamageBonus()` |
+| Port form | `@replaceMethod(W3DamageManagerProcessor) GetAttackersPowerMod` (`damage/formula.ws`); the constants as `GMHeadShotDamageBonus()` and `GMBackAttackDamageBonus()`. `ProcessCriticalHitCheck` is replaced by ALCH-14 (`alchemy/bombs.ws`, its crit rules for bombs) and wrapped by five areas: ARM-10 (`armor/manticoreSet.ws`), DMG-10 (`damage/nondeadly.ws`: no crits in non-deadly fights), MUT-03 (`mutations/magicSensibilities.ws`), SKL's Counterattack (`skills/counterattack.ws`) and Rend (`skills/rend.ws`) |
 | Port status | signed off (2026-10-07); the other areas' terms it hosts ported with those areas (the last, AI-20's fist bonus, in AI slice C3, 2026-10-28) |
 | Open checks | Igni's and Aard's projectiles at full sign intensity; no additive attack power for bolts; no crits for damage over time and in non-deadly fights (the wrapper skips the check; a crit was not attempted in those cases) |
 | Save impact | none (expected) |
@@ -161,7 +161,7 @@ No crits for damage over time or in non-deadly fights (slice 6a, 5.x-GM `5a615f8
 | Flags | balance |
 | Depends on | DMG-01; SKL (most of the pool's terms), SWD, ENCH, MUT, EFX (frozen) |
 | Skill trees | both: the pool takes legacy's terms (classic) and 5.x's new-tree multipliers (`sword_s22` to `s26`, `s29`, `s32`, `magic_s35`, `s41`, `perk_27`, `28`, `37`, `44`, `alchemy_s23` to `s26`); SKL dropped or replaced most of these ([follow-ups from SKL](#follow-ups-from-skl)) |
-| Port form | `damage/pool.ws`: `@replaceMethod(W3DamageManagerProcessor) ProcessDamageIncrease` on 5.x's signature (its multipliers as pool terms, the pool handed on in fields), `ProcessNewSkills_Combat` and the four new-tree combat skill functions (their bonuses as pool terms; the pool applied once at the end, `GMPoolApply`); the action's damage types written back (`SetDTs`, so that Quen and other later readers see the pool) with SKL-11, which needs it; XML `gm_damage.xml` (`sword_2`) |
+| Port form | `damage/pool.ws`: `@replaceMethod(W3DamageManagerProcessor) ProcessDamageIncrease` on 5.x's signature (its multipliers as pool terms, the pool handed on in fields), `ProcessNewSkills_Combat` (the pool applied once at its end, `GMPoolApply`; the new tree's Strength Training adds its weapon damage there through SKL's `GMStrengthTrainingConsume`, Muscle Memory and Sunder Armor run SKL's code; 5.x's four `ProcessNewSkill_*` functions it called, Muscle Memory, Strength Training, Precise Blows and Crushing Blows, are no longer called, SKL's own functions replace them); the action's damage types written back (`SetDTs`, so that Quen and other later readers see the pool) with SKL-11, which needs it; XML `gm_damage.xml` (`sword_2`) |
 | Port status | signed off (2026-10-07); the other areas' terms it hosts ported with those areas (the last, AI-20's fist bonus, in AI slice C3, 2026-10-28) |
 | Open checks | the pool terms of other areas: the bomb items' terms, SWD-07's NG+ `sword_dmg_bonus` and `spell_dmg_bonus` (NG+, untested by policy) (Aerondight's is gone with SWD-05; Runeword 4's with ENCH-05; Mutation 8's is gone with MUT-06; the Lynx and Wolven sets' with ARM-06 and ARM-09); the NPC ranged bonus above level 31 being gone. SKL's pool terms are checked in SKL's entries (Rend, Strength Training, Deflection, Steady Shot, Heavy Artillery, Wolf School); the 5.x new-tree terms are gone ([follow-ups from SKL](#follow-ups-from-skl)) |
 | Save impact | none (expected) |
@@ -199,7 +199,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 | Flags | balance |
 | Depends on | DMG-01 to DMG-04; SKL-11 (Quen before armor); hooks for SKL, MUT, ENCH, ALCH, XBOW, DIFF |
 | Skill trees | n/a (hooks only) |
-| Port form | `damage/pipeline.ws`: `@replaceMethod(W3DamageManagerProcessor) ProcessActionDamage` on 5.x's body, one call added (DEF-01's wrapper stacks on it); `@addMethod` `GMProcessDamageModification`; `ProcessDamageDecrease` and the damage types re-read (Quen before armor) with SKL-11 |
+| Port form | `damage/pipeline.ws`: `@replaceMethod(W3DamageManagerProcessor) ProcessActionDamage` on 5.x's body: DMG-05's call of the final-damage step, SKL-11's Quen call (`GMProcessDamageDecrease`, the damage types re-read: Quen before armor) and ARM-11's Viper-set hunk (poison cancelled and healed); DEF-01's wrapper stacks on it; `@addMethod` `GMProcessDamageModification` |
 | Port status | signed off (2026-10-07); Quen before armor added with SKL-11 slice 1 (2026-10-15: `GMProcessDamageDecrease` after the pool, the damage types written back with `GMSetDTs` and re-read); the other areas' terms it hosts are ported with those areas (deviations) |
 | Open checks | the sign rule against Vitality and Crippling Strikes' bonus in final damage (no test yet: needs a sign hit, and a fast attack on a bleeding enemy; SKL's D2 of 2026-10-09 makes the new tree's bonus legacy's, fast attacks only) |
 | Save impact | none (expected) |
@@ -419,14 +419,15 @@ Handed off to AI and DIFF (DD4, project owner, 2026-10-06): the formula can be t
 | Depends on | — |
 | Skill trees | n/a |
 | Port form | the probe: test-only wrappers in `tests/gmTestsDmg.ws` (`ProcessDamageIncrease`, `ProcessNewSkills_Combat`, `GetDamageResists`, `CalculateDamage`, `ProcessActionDamage_DealDamage`, active only with `GMTestProbes()`); legacy's tools: `@wrapMethod` `ProcessActionDamage_DealDamage`; `@addMethod` `GetAttackerAbilities`; console functions in a Ghost Mode file; the debug hunks of the replaced functions; a `gmtest_*` probe |
-| Port status | in progress (the probe is done; legacy's debug messages and console toggles not ported) |
+| Port status | the probe ported (slice 1); legacy's debug messages and console toggles not ported (PX5, confirmed by the owner, 2026-10-24) |
 | Open checks | — |
 | Save impact | none |
 | NG+ counterpart | none |
 
 **What it does:** facts that print each step of a hit to the combat log: `modSigns_debug_dmg` (crit chance, power mod, the formula's inputs and output, final damage, a full dump before dealing damage), `modSigns_debug_abl` (the attacker's abilities), `modSigns_debug_reduce_damage`, and `modSigns_zero_ally_dmg` (allies deal 0); console toggles `toggledebugdmg`, `toggledebugabl`, `toggledebugreducedamage`, `toggleallynodmg`.
 
-**Decisions:** port with the formula slices; they are also the base of the damage probe (slice 1). `toggledebugdot` and the other toggles go with their areas.
+**Decisions:** the damage probe (slice 1) is the port's debug tool for damage; legacy's messages and toggles are not ported, as EFX-12's `toggledebugdot` and ALCH-18's `toggledebugoils` (PX5). `GMAllyDamage` still reads `modSigns_zero_ally_dmg` (legacy's line), which only a console `FactsAdd` sets now.
+- **Deviation:** legacy's damage debug tools are not ported: the combat-log messages of `modSigns_debug_dmg`, `modSigns_debug_abl` and `modSigns_debug_reduce_damage` (in `CalculateDamage`, `ProcessCriticalHitCheck`, `ProcessDamageModification`, `ProcessActionDamage_DealDamage`, `GetAttackerAbilities`) and the console toggles `toggledebugdmg`, `toggledebugabl`, `toggledebugreducedamage` and `toggleallynodmg`: debug tools with no play effect; the tests read each step through the damage probe (PX5, confirmed by the owner, 2026-10-24)
 
 **Slices:**
 

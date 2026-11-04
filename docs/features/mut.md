@@ -39,7 +39,7 @@ Ghost Mode's skill-point cut is not in the changelist.
 
 | # | Mutation | Vanilla 1.32 | Legacy GM | Units (main) |
 |---|---|---|---|---|
-| 1 | Conductors of Magic | Sign damage + 50% of the held sword's raw damage attribute (quality ≥ 3) | 30%, computed from the sword's total base damage (`GetTotalWeaponDamage`, GM's weapon damage incl. upgrades); Invigoration (Runeword 4) also consumed by Sign hits with M1 (changelist; legacy's code: never, ENCH-05) | XML `Mutation1`; `ProcessDamageIncrease`; `OnProcessActionPost` (Runeword 4, ENCH) |
+| 1 | Conductors of Magic | Sign damage + 50% of the held sword's raw damage attribute (any drawn sword; the changelist and tooltip say relic and witcher swords) | 30%, computed from the sword's total base damage (`GetTotalWeaponDamage`, GM's weapon damage incl. upgrades); Invigoration (Runeword 4) also consumed by Sign hits with M1 (changelist; legacy's code: never, ENCH-05) | XML `Mutation1`; `ProcessDamageIncrease`; `OnProcessActionPost` (Runeword 4, ENCH) |
 | 2 | Magic Sensibilities | crit chance 20% + 10% × SP, crit damage 100% × SP (30%/100% at SI 0%) | Uses GM's SI→power-bonus curve B (`SignPowerStatToPowerBonus`, 0 at SI 0, 0.75 at 100%, 2.0 at ≥ 500%): chance 5% + 40% × B (5% → 85%), crit power 25% + 187.5% × B (25% → 400%) | XML `Mutation2`; `GetAttackersPowerMod`, `ProcessCriticalHitCheck`, tooltip |
 | 3 | Bloodbath | +5% AP per melee hit (max 250%), lost on any damage taken | Combat start: +10% AP per sword-path skill and +5% per other skill equipped (unlocked slots); a hit removes 0.5% per 1% of max Vitality lost; a kill restores the bonus to its peak and adds +20%; max 250%; reset at combat end. Finisher/dismember on sword kills kept | XML `Mutation3` (new attributes); `W3Effect_Mutation3` (rewritten: `InitVars`, `CalcInitialNumAbl`, `SetAbls`, `AddAbls`, `RemoveAbls`, `ManageMutation3Bonus`); callers `CNewNPC.OnDeath`, `W3PlayerWitcher.OnTakeDamage`, `OnCombatStart`; old trigger removed from `OnProcessActionPost` |
 | 4 | Toxic Blood | Attacker gets acid DoT = 1.5% of the damage dealt per toxicity point (3 s); vampires: −20% stamina regen, −2000 essence regen | Acid DoT independent of damage: 1.5 × current toxicity per second for 5 s (melee hits within 3 m, 6 m vs huge); every attacker gets −10% stamina regen while it runs; toxicity decay −50% | XML `Mutation4` (new), `AcidEffect`, `Mutation4BloodDebuff`; `ProcessActionMutation4ReturnedDamage`, `W3Effect_Acid.OnEffectAdded/Removed`, `W3Effect_Toxicity.OnUpdate` (decay), `W3Effect_Mutation4`, `AddCharacterStatToxicity`; `CNewNPC.RemoveMutation4BloodDebuff` removed |
@@ -162,7 +162,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 | Save impact | none |
 | NG+ counterpart | applied (`abilities_plus/gm_mutations.xml`, generated), untested |
 
-**What it does:** with a relic or witcher sword (quality ≥ 3) drawn, Signs gain 30% of the sword's base damage (vanilla 50% of the raw item attribute). **Scales:** sword base damage (upgrades, GM weapon damage), Sign damage. **Build:** Signs (support).
+**What it does:** with a sword drawn, Signs gain 30% of the sword's base damage (vanilla 50% of the raw item attribute). Any drawn sword counts, plain ones included, in vanilla, legacy and the port alike; legacy's changelist and the tooltip ("magic, relic and witcher swords") say otherwise (whole-port audit A3-5, 2026-11-03; whether the tooltip should say any sword is the owner's call, asked in the fix round's report). **Scales:** sword base damage (upgrades, GM weapon damage), Sign damage. **Build:** Signs (support).
 
 **Decisions:**
 
@@ -474,7 +474,7 @@ All 14 slices are done (2026-10-17), and MUT is audited with every finding close
 | Flags | — |
 | Depends on | MUT-02 to MUT-13 (values), UI (HUD buff module, the character stats popup) |
 | Skill trees | both menus show the same tooltip (`GetMutationLocalizedDescription`) |
-| Port form | `mutations/mutationDescriptions.ws`: a wrapper of `W3PlayerWitcher.GetMutationLocalizedDescription` returns `GMMutationDescription` (legacy's text and live values) for every mutation; strings `gm_mutation_desc_<n>` under legacy's ids, legacy's rows in all 9 languages (as SKL-19: legacy's rows as shipped, English where legacy had no translation); Mutation 11's name over 5.x's string (MUT-12); `mutations/hudCounters.ws`: `@replaceMethod CR4HudModuleBuffs.UpdateBuffs`, Toxic Blood's and Euphoria's counters as numbers |
+| Port form | `mutations/mutationDescriptions.ws`: a wrapper of `W3PlayerWitcher.GetMutationLocalizedDescription` returns `GMMutationDescription` (legacy's text and live values) for every mutation; strings `gm_mutation_desc_<n>` under legacy's ids, legacy's rows in all 9 languages (as SKL-19: legacy's rows as shipped, English where legacy had no translation); Mutation 11's name over 5.x's string (MUT-12); `mutations/hudCounters.ws`: `@replaceMethod CR4HudModuleBuffs.UpdateBuffs`, Toxic Blood's and Euphoria's counters as numbers (the file also replaces `OnTick` for [ARM-06](arm.md)'s Feline chain) |
 | Port status | signed off (2026-10-17); ported (2026-10-17): the descriptions with each mutation's slice, the HUD counters; verified in both trees |
 | Open checks | the texts in a language other than English in game (the regression checks the English ones) |
 | Save impact | none |

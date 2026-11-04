@@ -30,10 +30,7 @@ function OnThrowing()
 	//modSigns: removed l_gryphonBuff (ARM-07)
 
 
-	var abilityName : name;
-	var abilityCount, maxStack : float;
-	var min, max : SAbilityAttributeValue;
-	var addAbility : bool;
+	//modSigns: removed abilityName, abilityCount, maxStack, min, max, addAbility (their use is gone: ALCH-11)
 
 	l_player = caster.GetPlayer();
 

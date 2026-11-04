@@ -1,5 +1,6 @@
-"""ITEM's and CRAFT's fields of an item or ability entry, shared by the item generators
-(docs/features/item.md, docs/features/craft.md).
+"""The item areas' fields of an item or ability entry, shared by the item generators: ITEM's, CRAFT's, LOOT's,
+FOOD's, XBOW's, ECON's, WGT's, TRPH's and FIX's (each area's lines below; docs/features/item.md, craft.md, econ.md,
+wgt.md and the others), plus ECON's DE2 prices and WGT's DW2 weights of 5.x's new gear.
 
 ITEM's changes sit in the same entries as ARM's and SWD's (an armor piece's level tags next to its
 class tags, a sword's level range next to its damage), and the game reads one definition per name.
@@ -74,12 +75,13 @@ TAGS = {
     "ITEM-04": {"Autogen"},
     "ITEM-05": {"Autogen", "AutogenForceLevel"},
     "ITEM-01": {"UI_Censer", "UI_OilLamp"},  # fix3 (sweep D G9): NG+'s Censer tagged a censer for the UI, as the regular one
-    "ITEM-08": {"DoNotEnhance", "DoNotEnhancem"},
+    "ITEM-08": {"DoNotEnhance", "DoNotEnhancem"},  # DoNotEnhancem: 1.32's misspelt tag on the sq701 gloves
     "XBOW-03": {"mod_nosale", "mod_nosalem"},  # bolts sellable; the quest bolt's misspelt mod_nosalem fixed (xbow.md)
-    "CRAFT-08": {"mod_alchemy_table"},  # PE13: the tag the dismantling station reads (Protofleder Mutagen)
+    "CRAFT-08": {"mod_alchemy_table",  # PE13: the tag the dismantling station reads (Protofleder Mutagen)
+                 "mq7024_picture"},  # Hearts of Stone's auctioned painting out of Blood and Wine's painting quest (A6-1)
     "ECON-01": {"mod_*"}, "ECON-02": {"mod_*"}, "ECON-03": {"mod_*"},
     "ECON-04": {"mod_*"},  # the price tags; legacy's fixes of 1.32's mod_weapo, mod_legendar, mod_valuable EP1 (PE4)
-    "FOOD-04": {"*"},  # the food and drink kind tags (Drinks, Alcohol, Uncooked, Potion off seven items, ...)  # DoNotEnhancem: 1.32's misspelt tag on the sq701 gloves
+    "FOOD-04": {"*"},  # the food and drink kind tags (Drinks, Alcohol, Uncooked, Potion off seven items, ...)
 }
 # WGT: Nilfgaardian florens and Redanian orens weightless, Hearts of Stone's pig contest trophy weighted (WGT-05)
 TAGS.update({"WGT-05": {"EncumbranceOff"}})
@@ -118,9 +120,9 @@ BLOCKS = {
     "CRAFT-06": {"base_abilities"},  # the recipe items' rarity
     "CRAFT-07": {"base_abilities"},  # the ingredients' rarity (bugfix 120)
     "CRAFT-08": {"recycling_parts"},  # the dismantling parts
-    "FOOD-04": {"base_abilities", "recycling_parts"},
+    "FOOD-04": {"base_abilities", "recycling_parts"},  # the food and drink tier, rarity and toxicity abilities; Wolf liver's parts (none: audit F1)
     "ECON-02": {"base_abilities"},  # Blood and Wine's dyes lose their Relic rarity (CRAFT's hand-off)
-    "XBOW-02": {"base_abilities"},  # the two Blood and Wine quest crossbows on Toussaint Crossbow 1's stats  # the food and drink tier, rarity and toxicity abilities; Wolf liver's parts (none: audit F1)
+    "XBOW-02": {"base_abilities"},  # the two Blood and Wine quest crossbows on Toussaint Crossbow 1's stats
 }
 # WGT
 BLOCKS.update({})
@@ -143,7 +145,8 @@ ELSEWHERE = {("FOOD-07", r"^Recipe for "): "FOOD-07's cooking recipe items, writ
 ATTRS = {
     "ITEM-10": {"initial_durability", "max_durability"},  # the two Beauclair trousers start at full durability
     "CRAFT-02": {"localisation_key_name"},  # the NG+ Wolf school sword schematics' names
-    "CRAFT-07": {"category", "grid_size", "localisation_key_description"},
+    "CRAFT-07": {"category", "grid_size", "localisation_key_description",
+                 "icon_path"},  # the Jug's icon (glass_jug), as legacy (whole-port audit C3-3)
     # every drink stacks to 100; Wolf liver's category and description (legacy moved it from the ingredients to the
     # food: its ingredient unit, CRAFT-07's and CRAFT-08's, shares the name with its food unit, which wins; audit F1)
     "FOOD-04": {"stackable", "category", "localisation_key_description"},
@@ -178,7 +181,8 @@ ATTRS.update({})
 ATTRS.update({})
 
 # DE2 (ECON-01, ECON-03; the owner's decision, 2026-11-01): the list prices of 5.x's new gear, schematics and
-# horse gear, by analogy with a legacy counterpart (legacy never had these items, so they are no ECON units).
+# horse gear, and (the owner's decision, 2026-11-03) the counterpart's legacy price tags (`de2_tags`), by analogy
+# with a legacy counterpart (legacy never had these items, so they are no ECON units).
 # {5.x item name: (price, counterpart, rule)}: "ratio" is round(5.x's price x the counterpart's legacy / 1.32
 # price), "copy" the counterpart's legacy price (an item with the counterpart's stats), "owner" a figure the
 # owner wrote in the decision (the ratio's own result in the comment). `gen_econ.py --verify` recomputes every
@@ -266,15 +270,39 @@ def de2_price(name):
     return DE2[k][0] if k else None
 
 
+_LEGACY_ITEMS = None
+
+
+def de2_tags(name):
+    """The `mod_*` price tags DE2 gives a 5.x item: its counterpart's legacy ones, so it trades as its counterpart
+    does (`mod_legendary`'s x1.2 included; whole-port audit A6-2, the owner's decision, 2026-11-03), or None."""
+    global _LEGACY_ITEMS
+    k = de2_name(name)
+    if k is None:
+        return None
+    if _LEGACY_ITEMS is None:
+        import gen_arm_items  # noqa: E402  (imports this module: loaded on first use)
+        _LEGACY_ITEMS = gen_arm_items.items("legacy-GM", "items")
+    return [t for t in _LEGACY_ITEMS[DE2[k][1]][2] if t.startswith("mod_")]
+
+
 def apply_de2(name, entry):
-    """`entry` with DE2's price set on its opening tag (unchanged for an item DE2 does not price)."""
+    """`entry` with DE2's price set on its opening tag and its counterpart's price tags (`de2_tags`); unchanged for
+    an item DE2 does not price."""
     p = de2_price(name)
     if p is None:
         return entry
     h, end = head(entry)
     if "price" in h:
-        return entry[:h["price"][0]] + str(p) + entry[h["price"][1]:]
-    return entry[:end].rstrip() + f' price="{p}"' + entry[end:]
+        entry = entry[:h["price"][0]] + str(p) + entry[h["price"][1]:]
+    else:
+        entry = entry[:end].rstrip() + f' price="{p}"' + entry[end:]
+    tags, want = split_tags(entry), de2_tags(name)
+    new = [t for t in tags if not t.startswith("mod_") or t in want] + [t for t in want if t not in tags]
+    if new != tags:
+        tm = re.search(r'(<tags>)(.*?)(</tags>)', entry, re.S)
+        entry = entry[:tm.start(2)] + "\t\t\t\t\t\t\t" + ", ".join(new) + "\n\t\t" + entry[tm.end(2):]
+    return entry
 
 
 _UNITS = None
@@ -340,16 +368,27 @@ def ability_nodes(folder, name, area=None):
     return out
 
 
+# NG+ tags that follow legacy's change of the regular item (the NG+ rule for a non-numeric change) where 5.x gave the
+# NG+ entry a tag 1.32's lacked: {item: {tag: wanted}} (whole-port audit A6-1: 5.x tagged the NG+ painting too)
+NGP_TAGS = {"q603_auctioned_painting": {"mq7024_picture": False}}
+
+
 def merge_tags(folder, name, mtags, ltags, vtags, cur, area=None):
     """`cur` (a tag list) with ITEM's ported tag changes; `vtags` 5.x's own tags (5.x's change kept)."""
     out = list(cur)
-    for t in sorted(item_tags(folder, name, mtags, ltags, area)):
+    own = item_tags(folder, name, mtags, ltags, area)
+    for t in sorted(own):
         was, want = t in mtags, t in ltags
         if was == want or (t in vtags) != was:  # legacy did not change it, or 5.x did
             continue
         if want and t not in out:
             out.append(t)
         elif not want and t in out:
+            out.remove(t)
+    for t, want in (NGP_TAGS.get(name, {}).items() if folder == "items_plus" else ()):
+        if t in own and want and t not in out:
+            out.append(t)
+        elif t in own and not want and t in out:
             out.remove(t)
     return out
 
@@ -468,8 +507,18 @@ def norm_block(m):
     return " ".join(m.group(0).split()) if m else None
 
 
+def stray_abilities(entry):
+    """The `<a>` nodes of an item outside its `<base_abilities>` and `<variants>` blocks (legacy's Melitele figurine
+    has one after its empty block; 5.x's own Silver sword 2 has one too, so the game loads such an entry)."""
+    t = re.sub(r'<!--.*?-->', '', entry, flags=re.S)
+    t = re.sub(r'<base_abilities>.*?</base_abilities>|<base_abilities\s*/>|<variants>.*?</variants>', '', t, flags=re.S)
+    return re.findall(r'<a>[^<]*</a>', t)
+
+
 def merge_blocks(folder, name, mentry, lentry, entry, area=None):
-    """`entry` with the ported child blocks (legacy's, where 5.x kept 1.32's); [changes]."""
+    """`entry` with the ported child blocks (legacy's, where 5.x kept 1.32's); [changes]. An owner of
+    `base_abilities` also carries the `<a>` nodes legacy added after the block (`stray_abilities`), as legacy
+    placed them (whole-port audit C3-3)."""
     own = set()
     for f in ported(folder, "item", name):
         if area and not f.startswith(area):
@@ -492,6 +541,12 @@ def merge_blocks(folder, name, mentry, lentry, entry, area=None):
             end = entry.rindex("</item>")
             entry = entry[:end].rstrip() + "\n\t\t" + lb.group(0) + "\n\t" + entry[end:]
         changes.append(tag)
+    if "base_abilities" in own:
+        ms, ls = stray_abilities(mentry), stray_abilities(lentry)
+        vb = block_of(entry, "base_abilities")
+        if ls != ms and stray_abilities(entry) == ms and not ms and vb:
+            entry = entry[:vb.end()] + "\t\t\t\t" + "".join(ls) + entry[vb.end():]
+            changes.append("stray " + ", ".join(ls))
     return entry, changes
 
 
