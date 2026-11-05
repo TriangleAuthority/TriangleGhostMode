@@ -8,7 +8,7 @@ armor, GMTD_fire_resistance_perc_n0.01 adds -1% fire resistance). Only the test 
 them, so no real enemy is affected. See docs/development.md#testing-in-game.
 
 Usage:
-    python tools/gen_test_dummy.py --worktree ../TGM-5x-GM [--check]
+    python tools/gen_test_dummy.py --worktree ../TGM-<area> [--check]
 """
 import argparse
 from pathlib import Path

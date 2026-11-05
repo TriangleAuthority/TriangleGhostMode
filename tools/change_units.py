@@ -12,7 +12,7 @@ A change unit is the smallest thing Ghost Mode changed that can be judged on its
     CSV             one row, keyed by its first column
     binary          the whole file (property-level splitting is not implemented yet)
 
-States 'master' (legacy vanilla), the three legacy-GM commits (Shared Imports,
+States 'vanilla-1.32' (legacy vanilla), the three legacy-GM commits (Shared Imports,
 Community Patch - Base, Ghost Mode 4.1) and 'vanilla-5.x' are compared unit by unit.
 Comments and whitespace do not count as changes. Writes:
 
@@ -55,7 +55,7 @@ REPO = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO / "docs" / "features"
 ROOT = "modGhostMode/"
 STAGES = [("SI", "legacy-GM~2"), ("CPB", "legacy-GM~1"), ("GM", "legacy-GM")]
-BASE, NEW = "master", "vanilla-5.x"
+BASE, NEW = "vanilla-1.32", "vanilla-5.x"
 TEXT_TYPES = {".ws": "ws", ".xml": "xml", ".csv": "csv"}
 BINARY_EXT = {".w2ent", ".journal", ".w2scene", ".w2phase", ".w2beh", ".w2behtree", ".w2comm", ".reddlc"}
 

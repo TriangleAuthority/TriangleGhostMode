@@ -2,7 +2,7 @@
 
 Legacy Ghost Mode rewrote the armor and set item entries in the game's item files. This port
 carries ARM's share of those changes onto 5.x's entries: for every item legacy changed (compared
-with vanilla 1.32, `master`), it takes 5.x's entry (`vanilla-5.x`) whole, applies legacy's
+with vanilla 1.32, `vanilla-1.32`), it takes 5.x's entry (`vanilla-5.x`) whole, applies legacy's
 change as a three-way merge (what 1.32 had and legacy removed goes, what legacy added comes, what
 5.x itself changed stays), and writes it with on_conflict="replace" (an entry given whole works
 for the expansions' items too; see docs/development.md, "Fine-grained XML overrides").
@@ -264,7 +264,7 @@ def norm(text):
 
 def changed_stands(folder, carried):
     """Audit F4b: legacy's armor-stand looks of the pieces whose look ARM carries, where 5.x kept 1.32's."""
-    m, l, v = (stand_extensions(r, folder) for r in ("master", "legacy-GM", "vanilla-5.x"))
+    m, l, v = (stand_extensions(r, folder) for r in ("vanilla-1.32", "legacy-GM", "vanilla-5.x"))
     return {n: l[n] for n in sorted(l) if n in carried and n in m and n in v
             and norm(l[n]) != norm(m[n]) and norm(v[n]) == norm(m[n])}
 
@@ -298,7 +298,7 @@ def carry_display(name, folder, mentry, lentry, entry, ventry, ctx, regular, cha
 
 def generate(folder, regular=None):
     """The file's text, the report, and what items_plus takes from the regular folder (`regular`)."""
-    m, l, v = items("master", folder), items("legacy-GM", folder), items("vanilla-5.x", folder)
+    m, l, v = items("vanilla-1.32", folder), items("legacy-GM", folder), items("vanilla-5.x", folder)
     blocks, report = [], []
     armor_abilities = set()
     ctx = {"minor": {}, "display": {}, "swords": {}}
@@ -354,7 +354,7 @@ def generate(folder, regular=None):
         entry, craft = item_layer.apply_item(folder, name, m[name][1], l[name][1], entry)
         blocks.append((vpath, name, entry))
         report.append(f"{folder}: {name}: hair variants without {HAIR_ARMOR}")
-    ma, la, va = abilities("master", folder), abilities("legacy-GM", folder), abilities("vanilla-5.x", folder)
+    ma, la, va = abilities("vanilla-1.32", folder), abilities("legacy-GM", folder), abilities("vanilla-5.x", folder)
     ablocks = []
     for name in sorted(la):
         if name not in armor_abilities and not AUTOGEN.match(name) and name not in UNLISTED.get(folder, ()):
@@ -447,8 +447,8 @@ def verify(worktree):
     unexplained = 0
     regular_minor = {}
     for folder in ("items", "items_plus"):
-        m, l, v = items("master", folder), items("legacy-GM", folder), items("vanilla-5.x", folder)
-        ma, la, va = abilities("master", folder), abilities("legacy-GM", folder), abilities("vanilla-5.x", folder)
+        m, l, v = items("vanilla-1.32", folder), items("legacy-GM", folder), items("vanilla-5.x", folder)
+        ma, la, va = abilities("vanilla-1.32", folder), abilities("legacy-GM", folder), abilities("vanilla-5.x", folder)
         gi, ga = dlc_entries(worktree, folder)
         if folder == "items":
             regular = (m, l)
@@ -552,7 +552,7 @@ def verify(worktree):
                 else:
                     problems.append(f"ability {name}: {k[0]} ({k[1]}) {fv}; legacy {lv}")
         # audit F4b: armor-stand looks legacy changed for items 1.32 has (its new items' are CRAFT's)
-        sm, sl, sv = (stand_extensions(r, folder) for r in ("master", "legacy-GM", "vanilla-5.x"))
+        sm, sl, sv = (stand_extensions(r, folder) for r in ("vanilla-1.32", "legacy-GM", "vanilla-5.x"))
         ext_path = os.path.join(worktree, DLC, folder, OUT_EXT)
         ext_text = open(ext_path, encoding="utf-8-sig").read() if os.path.exists(ext_path) else ""
         gs = {mm.group(1): ext_text[mm.start():mm.end()] for mm in EXTENSION.finditer(blank_comments(ext_text))}

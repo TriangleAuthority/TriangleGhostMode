@@ -1,13 +1,13 @@
 # Sweep D: attributed but not ported (2026-11-02)
 
-Sweep D's batch is the units that **are attributed** but whose note says part of the change is not ported, handed to another area, or waiting for one. The question for each: did the port take it, was it dropped or kept for later by a recorded decision, or did it fall between two areas? Offline analysis only, against 5.x-GM `b3ec3609`, `legacy-GM`, `vanilla-5.x` and master's 1.32. **No attribution row is edited**: the stale notes are listed in [Stale notes](#stale-notes-for-the-parent-to-fix) for the parent to fix.
+Sweep D's batch is the units that **are attributed** but whose note says part of the change is not ported, handed to another area, or waiting for one. The question for each: did the port take it, was it dropped or kept for later by a recorded decision, or did it fall between two areas? Offline analysis only, against master `1c2b351a`, `legacy-GM`, `vanilla-5.x` and master's 1.32. **No attribution row is edited**: the stale notes are listed in [Stale notes](#stale-notes-for-the-parent-to-fix) for the parent to fix.
 
 Method:
 - every `attribution.csv` note matching "not ported", "LATER", "later", "hand-off", "handed", "until <AREA>", "kept 5.x's", "TODO", "NEW", "gap", "for <AREA>" or "belongs to <AREA>": 254 rows;
 - every note naming an area that was never mapped (FIX, HORSE, GEN, DEP, INFRA, MISC);
 - `deviations.py` (all deviations and the unconfirmed ones);
 - every feature doc's "Hand-off to other areas" table and "Later" list;
-- the changelist's "General player abilities", "Horse combat" and "Bugfixes" sections, against the docs and 5.x-GM's code (`modGhostMode/scripts/local/gm/`, the DLC's `gm_*.xml`).
+- the changelist's "General player abilities", "Horse combat" and "Bugfixes" sections, against the docs and the port's code (`modGhostMode/scripts/local/gm/`, the DLC's `gm_*.xml`).
 
 Unattributed units: unchanged by this sweep, which attributes nothing. The committed coverage.md says 335; regenerated on this branch, `change_units.py` says 332 (21,083 of 21,415 attributed), the same before and after.
 
@@ -27,7 +27,7 @@ Unattributed units: unchanged by this sweep, which attributes nothing. The commi
 
 ## Gaps: what a legacy player had that the port lacks
 
-Each gap is checked in 5.x-GM's code, so the note is not just stale. The legacy lines are on `legacy-GM`; the 5.x lines are in `vanilla-5.x`'s copies under `modGhostMode/scripts/game/`, which 5.x-GM leaves untouched.
+Each gap is checked in the port's code, so the note is not just stale. The legacy lines are on `legacy-GM`; the 5.x lines are in `vanilla-5.x`'s copies under `modGhostMode/scripts/game/`, which the port leaves untouched.
 
 | # | In play terms | Evidence | Proposed home and action |
 |---|---|---|---|
@@ -64,7 +64,7 @@ Gaps found in units outside this batch (unattributed, sweeps A to C), listed her
 
 ## Hand-offs between areas
 
-Every mapped area's "Hand-offs received" table places what other areas handed to it. Checked against 5.x-GM:
+Every mapped area's "Hand-offs received" table places what other areas handed to it. Checked against the port:
 
 - **Handed to areas mapped since, and taken:**
   - DMG and STAM to SKL, ALCH, ARM, ENCH, ITEM, EFX, AI, XP and DIFF;
@@ -81,7 +81,7 @@ Every mapped area's "Hand-offs received" table places what other areas handed to
 - **The Pheromone bomb's `StaminaDrowner_Stats`:** **no effect, nothing to port.** `FeromoneBomb` names it in 1.32, legacy and 5.x alike, and none of the three defines it. It is a vanilla dangling reference that legacy did not touch. `dlc_conflicts.py` lists it "for ITEM"; that label can go.
 - **Weights and prices other areas called "not ported":**
   - 495 rows say "weight: WGT" and 317 say "price: ECON" without carrying a WGT or ECON feature.
-  - Checked against master and `legacy-GM`: 359 of those weights and 103 of those prices are unchanged by legacy. The note is the ARM, CRAFT or SWD generator's template text.
+  - Checked against `vanilla-1.32` and `legacy-GM`: 359 of those weights and 103 of those prices are unchanged by legacy. The note is the ARM, CRAFT or SWD generator's template text.
   - About 130 weights and 156 prices belong to items legacy added (the craftable quest armors, the Kaer Morhen set, …). Those items' areas write them whole with legacy's weight and price (e.g. `gm_item.xml:13430` price 550, `:142` weight 6.5; `gm_arm_kaer_morhen.xml:253` 1700).
   - 6 are entries legacy removed or moved (the starting `Autogen` boots and pants abilities; Wolf liver moved to the edibles).
   - **No gap.**

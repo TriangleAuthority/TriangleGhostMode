@@ -109,7 +109,7 @@ def generate(folder):
             e = re.sub(r'(<tags>)(.*?)(\s*</tags>)', lambda m: m.group(1) + m.group(2).rstrip()
                        + ("" if "DoNotEnhance" in m.group(2) else ", DoNotEnhance") + m.group(3), e, count=1, flags=re.S)
         # CRAFT's fields (the dismantling parts, CRAFT-08; CRAFT/LOOT audit F2), as the other item tools apply them
-        mst = no_comments(git("show", "master:modGhostMode/files/gameplay/%s/def_item_%s.xml" % (folder, piece)))
+        mst = no_comments(git("show", "vanilla-1.32:modGhostMode/files/gameplay/%s/def_item_%s.xml" % (folder, piece)))
         em = [x for n, x in entries(mst, "item", "name") if n == name]
         if em:
             e, _ = item_layer.apply_item(folder, name, em[0], el[0], e)

@@ -2569,6 +2569,7 @@ exec function gmtest_regress()
 	GMTest_fix();	// FIX (parallel ports: its checks go into tests/gmTestsFix.ws)
 	GMTest_horse();	// HORSE (parallel ports: its checks go into tests/gmTestsHorse.ws)
 	GMTest_data();	// whole-port data checks (tests/gmTestsData.ws)
+	GMTest_stam10();	// STAM-10: exhaustion, paying from max stamina (tests/gmTestsStam10.ws); in the classic tree that it is off
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

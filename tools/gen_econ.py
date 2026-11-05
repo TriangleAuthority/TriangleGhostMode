@@ -14,7 +14,7 @@ owner chose (2026-11-01):
   and every NG+ (`items_plus`) entry (an NG+ `extend` cannot be read in a regular game: untested, so whole):
   5.x's entry given whole with ECON's fields, `on_conflict="replace"`.
 
-Each field is merged three-way (1.32 `master`, legacy `legacy-GM`, 5.x `vanilla-5.x`, same folder): legacy's
+Each field is merged three-way (1.32 `vanilla-1.32`, legacy `legacy-GM`, 5.x `vanilla-5.x`, same folder): legacy's
 change where 5.x kept 1.32's.
 
 WGT (docs/features/wgt.md, slice W1, PW4): the item units of WGT-03 to WGT-06 (an item's `weight` attribute, the
@@ -137,7 +137,7 @@ def replace_entry(entry):
 
 
 def generate(worktree, folder):
-    m, l, v = arm.items("master", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
+    m, l, v = arm.items("vanilla-1.32", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
     other = taken(worktree, folder)
     blocks, report, counts = [], [], collections.Counter()
     for name, (path, feats) in econ_units(folder, WGT).items():
@@ -273,7 +273,7 @@ def verify_binaries(worktree):
 def verify(worktree, write_test=False):
     unexplained, test = 0, []
     for folder in ("items", "items_plus"):
-        m, l, v = arm.items("master", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
+        m, l, v = arm.items("vanilla-1.32", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
         fin, gi = final_items(worktree, folder, v)
         econ_file = os.path.join(worktree, arm.DLC, folder, OUT)
         stubs = set(re.findall(r'<item name="([^"]+)"[^>]*on_conflict="extend"', open(econ_file, encoding="utf-8-sig").read())) if os.path.exists(econ_file) else set()

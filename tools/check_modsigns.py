@@ -15,7 +15,7 @@ script blob, with probably no loose-script equivalent (docs/development.md, Anno
 
     python tools/check_modsigns.py --worktree DIR [--verbose]
 
-Scans modGhostMode/scripts/local/ in the 5.x-GM worktree (--worktree, required), working tree
+Scans modGhostMode/scripts/local/ in the port's worktree (--worktree, required), working tree
 files, against the vanilla-5.x branch. Exits 1 if anything is unmarked or alarming.
 """
 import argparse

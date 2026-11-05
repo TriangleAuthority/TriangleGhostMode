@@ -102,9 +102,9 @@ def quest_stubs(folder):
     for pattern, feature, what in FILES:
         if feature not in PORTED or "/dlc/ep1/" in pattern:
             continue
-        tags = {r: item_tags(r, pattern, folder) for r in ("master", "legacy-GM", "vanilla-5.x")}
+        tags = {r: item_tags(r, pattern, folder) for r in ("vanilla-1.32", "legacy-GM", "vanilla-5.x")}
         for name, lt in tags["legacy-GM"].items():
-            mt, vt = tags["master"].get(name), tags["vanilla-5.x"].get(name)
+            mt, vt = tags["vanilla-1.32"].get(name), tags["vanilla-5.x"].get(name)
             if mt is None or vt is None or "Quest" not in mt or "Quest" in lt or "Quest" not in vt:
                 continue
             if sorted(x for x in mt if x != "Quest") != sorted(lt):

@@ -260,7 +260,7 @@ def verify(worktree):
                 gm = entries(gm_text, kind)
                 legacy = entries(source(key, folder, "legacy-GM"), kind)
                 vanilla = entries(source(key, folder, "vanilla-5.x"), kind)
-                master = entries(source(key, folder, "master"), kind)
+                master = entries(source(key, folder, "vanilla-1.32"), kind)
                 for name, body in legacy.items():
                     final = gm.get(port_name(name), vanilla.get(port_name(name)))
                     if (key, name) in listed:

@@ -157,7 +157,7 @@ def tag_values(nodes, tag):
 
 def generate(worktree, folder):
     """gm_wgt.xml's text: the WGT ability units no other DLC file defines; report, counts."""
-    ma, la, va = (arm.abilities(b, folder) for b in ("master", "legacy-GM", "vanilla-5.x"))
+    ma, la, va = (arm.abilities(b, folder) for b in ("vanilla-1.32", "legacy-GM", "vanilla-5.x"))
     other = dlc_abilities(worktree, folder, skip=OUT)
     blocks, report, counts = [], [], collections.Counter()
     for name, feats in wgt_units(folder, "ability").items():
@@ -277,13 +277,13 @@ def dw2_expected(name, reg, fin_v):
 
 def verify(worktree):
     unexplained, test = 0, []
-    rm, rl = arm.items("master", "items"), arm.items("legacy-GM", "items")
-    rfm = {n: node_list(x[1]) for n, x in arm.abilities("master", "items").items()}
+    rm, rl = arm.items("vanilla-1.32", "items"), arm.items("legacy-GM", "items")
+    rfm = {n: node_list(x[1]) for n, x in arm.abilities("vanilla-1.32", "items").items()}
     rfl = {n: node_list(x[1]) for n, x in arm.abilities("legacy-GM", "items").items()}
     dw2_seen = set()
     for folder in ("items", "items_plus"):
-        m, l, v = arm.items("master", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
-        ma, la, va = (arm.abilities(b, folder) for b in ("master", "legacy-GM", "vanilla-5.x"))
+        m, l, v = arm.items("vanilla-1.32", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
+        ma, la, va = (arm.abilities(b, folder) for b in ("vanilla-1.32", "legacy-GM", "vanilla-5.x"))
         gi, _ = arm.dlc_entries(worktree, folder)
         dlc = dlc_abilities(worktree, folder)
         final = {n: resolve(n, dlc, va) for n in set(va) | set(dlc)}

@@ -427,6 +427,11 @@ function GMTestOptGameplayOrder(out vars : array<name>)
 	vars.PushBack('GMMeleeSpecialCooldown');
 	vars.PushBack('GMSignCooldown');
 	vars.PushBack('GMAltSignCooldown');
+	// STAM-10 (not legacy's; after legacy's options)
+	vars.PushBack('GMExhaustion');
+	vars.PushBack('GMExhaustionMaxRegen');
+	vars.PushBack('GMExhaustionAdrenaline');
+	vars.PushBack('GMExhaustionFloor');
 }
 
 // Legacy's preset values for the gameplay group (from GMSinkBoat on, the order above): 0 "Recommended",
@@ -439,18 +444,21 @@ function GMTestOptGameplayPreset(idx : int, out vals : array<string>)
 		vals.PushBack("true"); vals.PushBack("20"); vals.PushBack("0"); vals.PushBack("false"); vals.PushBack("0"); vals.PushBack("0");
 		vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0");
 		vals.PushBack("7.5"); vals.PushBack("5"); vals.PushBack("7.5");
+		vals.PushBack("true"); vals.PushBack("0.4"); vals.PushBack("0.03"); vals.PushBack("40");	// STAM-10
 	}
 	else if(idx == 1)
 	{
 		vals.PushBack("false"); vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("true"); vals.PushBack("-5"); vals.PushBack("0");
 		vals.PushBack("1"); vals.PushBack("1"); vals.PushBack("0"); vals.PushBack("-1"); vals.PushBack("1.5"); vals.PushBack("0");
 		vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0");
+		vals.PushBack("false"); vals.PushBack("0.4"); vals.PushBack("0.03"); vals.PushBack("40");	// STAM-10
 	}
 	else
 	{
 		vals.PushBack("false"); vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("false"); vals.PushBack("0"); vals.PushBack("0");
 		vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0");
 		vals.PushBack("0"); vals.PushBack("0"); vals.PushBack("0");
+		vals.PushBack("false"); vals.PushBack("0.4"); vals.PushBack("0.03"); vals.PushBack("40");	// STAM-10
 	}
 }
 

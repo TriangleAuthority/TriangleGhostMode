@@ -14,7 +14,8 @@ function GMModStaminaRegenValue(attributeName : name, out effectValue : SAbility
 
 // 5.x body, except: the value is recomputed on every update (so option changes apply at once,
 // in and out of combat), and guarding uses SetEffectValue (50% of normal regen) instead of the
-// staminaRegenGuarded attribute.
+// staminaRegenGuarded attribute. STAM-10: while max stamina is lowered the regen keeps running and,
+// with stamina full, brings max stamina back.
 @replaceMethod(W3Effect_AutoStaminaRegen)
 function OnUpdate(dt : float)
 {
@@ -33,8 +34,9 @@ function OnUpdate(dt : float)
 	}
 
 	super.OnUpdate( dt );
+	GMExhaustionRegen( dt );	//modSigns: STAM-10, max stamina comes back while stamina is full (exhaustion.ws)
 
-	if( target.GetStatPercents( BCS_Stamina ) >= 1.0f )
+	if( target.GetStatPercents( BCS_Stamina ) >= 1.0f && !GMExhaustionKeepsRegen( target ) )	//modSigns: STAM-10, not while max stamina is lowered
 	{
 		target.StopStaminaRegen();
 	}

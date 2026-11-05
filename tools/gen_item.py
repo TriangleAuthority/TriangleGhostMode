@@ -50,8 +50,8 @@ def set_tags(entry, tags):
 
 
 def generate(worktree, folder):
-    m, l, v = arm.items("master", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
-    ma, la, va = arm.abilities("master", folder), arm.abilities("legacy-GM", folder), arm.abilities("vanilla-5.x", folder)
+    m, l, v = arm.items("vanilla-1.32", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
+    ma, la, va = arm.abilities("vanilla-1.32", folder), arm.abilities("legacy-GM", folder), arm.abilities("vanilla-5.x", folder)
     taken_i, taken_a = other_names(worktree, folder)
     iblocks, ablocks, report = [], [], []
     for (fold, kind, name), (path, feats) in sorted(item_layer.units().items()):
@@ -147,8 +147,8 @@ def verify(worktree):
     """Every ITEM field of every ITEM unit as the game reads it (DLC over 5.x) against legacy's."""
     unexplained = 0
     for folder in ("items", "items_plus"):
-        m, l, v = arm.items("master", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
-        ma, la, va = arm.abilities("master", folder), arm.abilities("legacy-GM", folder), arm.abilities("vanilla-5.x", folder)
+        m, l, v = arm.items("vanilla-1.32", folder), arm.items("legacy-GM", folder), arm.items("vanilla-5.x", folder)
+        ma, la, va = arm.abilities("vanilla-1.32", folder), arm.abilities("legacy-GM", folder), arm.abilities("vanilla-5.x", folder)
         gi, ga = arm.dlc_entries(worktree, folder)
         explained, problems, checked = {}, [], [0, 0]
 

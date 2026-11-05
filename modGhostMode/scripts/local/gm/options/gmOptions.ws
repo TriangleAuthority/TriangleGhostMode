@@ -37,6 +37,11 @@ function GMOptionDefault(group : name, option : name) : string
 			// STAM-01
 			case 'GMSignCooldown' :		return "5";
 			case 'GMAltSignCooldown' :	return "7.5";
+			// STAM-10 (new tree only): exhaustion on, max stamina regen 0.4, adrenaline 0.03 per point, floor 40
+			case 'GMExhaustion' :			return "true";
+			case 'GMExhaustionMaxRegen' :	return "0.4";
+			case 'GMExhaustionAdrenaline' :	return "0.03";
+			case 'GMExhaustionFloor' :		return "40";
 		}
 	}
 	else if(group == 'GMScalingOptions')
@@ -108,6 +113,10 @@ function GMOptionList(out groups : array<name>, out options : array<name>)
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMMeleeSpecialCooldown');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMSignCooldown');
 	groups.PushBack('GMGameplayOptions');	options.PushBack('GMAltSignCooldown');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMExhaustion');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMExhaustionMaxRegen');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMExhaustionAdrenaline');
+	groups.PushBack('GMGameplayOptions');	options.PushBack('GMExhaustionFloor');
 	groups.PushBack('GMScalingOptions');	options.PushBack('Virtual_GMScaling');
 	groups.PushBack('GMScalingOptions');	options.PushBack('GMRandomScalingMinLevel');
 	groups.PushBack('GMScalingOptions');	options.PushBack('GMRandomScalingMaxLevel');

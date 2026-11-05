@@ -16,19 +16,22 @@ The goal is to carry over the spirit of Ghost Mode wherever possible. Port what 
 
 ## How this repository is organised
 
-The git history is built so that every change is visible as a diff:
+The git history is built so that every change is visible as a diff. Every branch starts from the same root commit, the legacy (1.32) game files:
 
 | Branch | Contents |
 |---|---|
-| `master` | Unmodified legacy (1.32) game files at the mod's paths, plus the README, tools and docs shared by every branch |
-| `legacy-GM` | `master` + the original Ghost Mode v4.0 (one commit) |
-| `vanilla-5.x` | `master` + the same game files from the current 5.x release (now 5.0) |
-| `5.x-GM` | `vanilla-5.x` + the port (work in progress) |
+| `vanilla-1.32` | Unmodified legacy (1.32) game files at the mod's paths: the baseline every other branch starts from |
+| `legacy-GM` | `vanilla-1.32` + the original Ghost Mode v4.1 and its two dependencies |
+| `vanilla-5.x` | `vanilla-1.32` + the same game files from the current 5.x release (now the 5.0 hotfix) |
+| `master` | `vanilla-5.x` + the port (work in progress), plus the README, tools and docs |
 
-- What Ghost Mode changed: `git diff master...legacy-GM`
-- What CDPR changed in 5.x: `git diff master...vanilla-5.x`
+- What Ghost Mode changed: `git diff vanilla-1.32...legacy-GM`
+- What CDPR changed in 5.x: `git diff vanilla-1.32...vanilla-5.x`
+- The port so far: `git diff vanilla-5.x...master -- modGhostMode`
 
-`modGhostMode/` on the Ghost Mode branches contains the full vanilla file set with the mod's changes applied, so it is a reference tree, not a ready-to-install mod.
+A new 5.x release lands on `vanilla-5.x` first; `master`'s port is then rebased onto it. See [docs/repository.md](docs/repository.md).
+
+`modGhostMode/` on `legacy-GM` and `master` contains the full vanilla file set with the mod's changes applied, so it is a reference tree, not a ready-to-install mod.
 
 ## Documentation
 
@@ -41,4 +44,4 @@ See [docs/](docs/README.md), in particular:
 - [docs/tools.md](docs/tools.md): tools, where to find them and how to use them, and git setup (including the diff driver for binary files)
 - [docs/legacy-readme.md](docs/legacy-readme.md): the original Ghost Mode README (legacy build and install instructions)
 
-`design-docs/` (on the Ghost Mode branches) holds Ghost Mode's original design documents (not very well structured, not 100% accurate, part English, part Russian).
+`design-docs/` (on `legacy-GM`) holds Ghost Mode's original design documents (not very well structured, not 100% accurate, part English, part Russian).

@@ -49,7 +49,7 @@ Usage:
                                                                      # scripts from a folder instead of a branch (the parent only)
 
 --ref and --out are required (no default branch or folder, so parallel agents never build
-5.x-GM or overwrite each other's build by accident). Installing changes the shared game: it
+master or overwrite each other's build by accident). Installing changes the shared game: it
 needs --holder AREA:TOKEN from tools/game_lock.py (or the parent's --parent) and the game closed.
 Each wcc_lite run takes a short OS file lock (wcc_lite writes shared REDkit files and listens on
 port 37000), so parallel builds wait their turn; the build runs at below-normal priority.
@@ -439,7 +439,7 @@ def main() -> None:
         install_from(args)
         return
     if not args.ref and not args.scripts:
-        ap.error("--ref is required (the branch to build, e.g. gm/<area>; the integration's 5.x-GM)")
+        ap.error("--ref is required (the branch to build, e.g. gm/<area>, or master)")
     if not args.out:
         ap.error("--out is required (a folder of your own, e.g. build/<area>-<commit>)")
     if args.install and args.scripts and not args.parent:

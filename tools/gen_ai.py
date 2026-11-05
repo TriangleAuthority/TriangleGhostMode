@@ -307,7 +307,7 @@ def plus_units():
             legacy = show("legacy-GM", pattern % (base + "_plus")).get(name)
             if legacy is None:
                 continue
-            if strip(legacy) == strip(show("master", pattern % (base + "_plus")).get(name, "")):
+            if strip(legacy) == strip(show("vanilla-1.32", pattern % (base + "_plus")).get(name, "")):
                 raise SystemExit("%s: legacy did not change its NG+ entry" % name)
             if ability_stats(legacy) == ability_stats(all_abilities("vanilla-5.x", base + "_plus").get(name, "")):
                 continue  # 5.x made legacy's change already (the NG+ files' tag fixes)
@@ -373,7 +373,7 @@ def part_want(name, pattern, folder="abilities"):
     vanilla = all_abilities("vanilla-5.x", folder).get(name)
     if vanilla is None:
         raise SystemExit("PART %s: 5.x has no such ability" % name)
-    return part_entry(name, show("legacy-GM", pattern % folder)[name], show("master", pattern % folder).get(name), vanilla)
+    return part_entry(name, show("legacy-GM", pattern % folder)[name], show("vanilla-1.32", pattern % folder).get(name), vanilla)
 
 
 def owned():
@@ -556,7 +556,7 @@ def verify(worktree):
                     continue
                 want = entry(name, legacy, vanilla.get(name))
                 # PA1: nodes 5.x changed from 1.32 that the port sets to legacy's
-                old = show("master", src).get(name)
+                old = show("vanilla-1.32", src).get(name)
                 if old and vanilla.get(name):
                     o, v, w = set(ability_stats(old)), set(ability_stats(vanilla[name])), set(ability_stats(want))
                     for tag in sorted({x[0] for x in o ^ v}):

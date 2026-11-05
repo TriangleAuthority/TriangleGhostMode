@@ -109,8 +109,8 @@ def build(folder):
         body = body.replace("<item", '<item on_conflict="replace"', 1)
         # CRAFT's fields of the same item (dismantling parts, ...), as item_layer.py gives them
         src = {r: re.search(r'(?ms)^[ 	]*<item\s+name\s*="%s".*?</item>' % re.escape(item), git("show", f"{r}:" + pattern % folder)).group(0).strip()
-               for r in ("master", "legacy-GM")}
-        body, _ = item_layer.apply_item(folder, item, src["master"], src["legacy-GM"], body)
+               for r in ("vanilla-1.32", "legacy-GM")}
+        body, _ = item_layer.apply_item(folder, item, src["vanilla-1.32"], src["legacy-GM"], body)
         if feature:
             lines.append("\t\t\t<!-- %s -->" % feature)
         lines.append("\n".join(("\t\t\t" if l.strip().startswith(("<item", "</item", ">")) else "\t\t\t\t") + l.strip()

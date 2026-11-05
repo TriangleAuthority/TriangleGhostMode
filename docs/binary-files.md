@@ -2,7 +2,7 @@
 
 Ghost Mode ships 638 edited binary game resources, alongside its scripts and XML. The 4.1 release edits 12 more, the Blood and Wine tournament contestants (`sq701_tournament/characters/contestants/*.w2ent`): each only gains the `sq701_tournament_npcs` ability, which 4.1 defines in `monster_bob_base_abl.xml`. The analysis below covers the original 638. Almost all of them are enemy and NPC definitions. The rest are a few quests, shops, bestiary entries and one AI tree. The edits are data tweaks (levels, abilities, loot, monster type, weaknesses), not new behaviour.
 
-Everything below comes from comparing each file in `legacy-GM` against the legacy vanilla file on `master` with `tools/bindiff.py`, and from the original commit messages.
+Everything below comes from comparing each file in `legacy-GM` against the legacy vanilla file on `vanilla-1.32` with `tools/bindiff.py`, and from the original commit messages.
 
 ## What the files are
 
@@ -53,26 +53,26 @@ Changes by folder: quest characters (`quests/**/characters`) mostly got level an
 ## Porting them to 5.x
 
 - The 5.x versions of all these files exist on `vanilla-5.x` (CR2W 164). Ghost Mode's legacy files cannot be used as-is.
-- Each Ghost Mode edit is a small value change, so it can be reapplied to the 5.x file: take the 5.x file, then set the same level, ability list, loot entries, category, and so on. First check whether 5.x already changed that value: `python tools/bindiff.py master vanilla-5.x <path>`.
-- Editing needs a tool that writes 5.x CR2W files. The REDkit editor can (see [tools.md](tools.md)); `tools/cr2w_dump.py` only reads. **Same-size integer and float values** (prices, counts, levels, ranges), also inside structs, are set in place with `tools/cr2w_patch.py` on `5.x-GM`'s copy of the 5.x file, which recomputes the CRCs. An entity template holds its components twice, the editable objects and the compiled copy in `flatCompiledData` (an embedded CR2W file the game reads); the script patches both, with the embedded file's own CRCs. **Verified** 2026-10-20 (ALCH-15): the patched `petard_dimeritium_bomb.w2ent` loads and its smaller cloud shows in play (a real throw no longer reaches Geralt 5 m away); ENCH-02's four patched dialogue and quest files load (2026-10-19; the dialogue and quest not yet played). The build ships a patched file because it differs from `vanilla-5.x`. Since 2026-10-21 the script also sets name and enum values, removes properties, adds and removes array entries (struct entries too) and adds the names they need, rebuilding the file (sizes, offsets, name table, CRCs); a rebuilt unchanged file is identical byte for byte. LOOT's 211 entity files (merchants' lists, monsters' mutagen add-on, quest NPCs' inventories, the Midcotts smith's craftsman level) are written that way by `tools/gen_loot.py` (**compiles**: packed by the build, not loaded in game yet). A scene's script block (`CStorySceneScript`) stores its function's arguments as a second property list after its properties; `cr2w_patch.py` edits them with an `@` path (`CStorySceneScript.@rewardName=...`, ECON-12, 2026-11-01: the result equals legacy's W3Edit edit byte for byte, and the scenes load in game).
+- Each Ghost Mode edit is a small value change, so it can be reapplied to the 5.x file: take the 5.x file, then set the same level, ability list, loot entries, category, and so on. First check whether 5.x already changed that value: `python tools/bindiff.py vanilla-1.32 vanilla-5.x <path>`.
+- Editing needs a tool that writes 5.x CR2W files. The REDkit editor can (see [tools.md](tools.md)); `tools/cr2w_dump.py` only reads. **Same-size integer and float values** (prices, counts, levels, ranges), also inside structs, are set in place with `tools/cr2w_patch.py` on the port's copy of the 5.x file, which recomputes the CRCs. An entity template holds its components twice, the editable objects and the compiled copy in `flatCompiledData` (an embedded CR2W file the game reads); the script patches both, with the embedded file's own CRCs. **Verified** 2026-10-20 (ALCH-15): the patched `petard_dimeritium_bomb.w2ent` loads and its smaller cloud shows in play (a real throw no longer reaches Geralt 5 m away); ENCH-02's four patched dialogue and quest files load (2026-10-19; the dialogue and quest not yet played). The build ships a patched file because it differs from `vanilla-5.x`. Since 2026-10-21 the script also sets name and enum values, removes properties, adds and removes array entries (struct entries too) and adds the names they need, rebuilding the file (sizes, offsets, name table, CRCs); a rebuilt unchanged file is identical byte for byte. LOOT's 211 entity files (merchants' lists, monsters' mutagen add-on, quest NPCs' inventories, the Midcotts smith's craftsman level) are written that way by `tools/gen_loot.py` (**compiles**: packed by the build, not loaded in game yet). A scene's script block (`CStorySceneScript`) stores its function's arguments as a second property list after its properties; `cr2w_patch.py` edits them with an `@` path (`CStorySceneScript.@rewardName=...`, ECON-12, 2026-11-01: the result equals legacy's W3Edit edit byte for byte, and the scenes load in game).
 - Some edits may be better done another way in 5.x, e.g. loot through XML loot definitions. Some may be unnecessary, since 5.0 reworked monster combat and skills (see [game-5.0-changes.md](game-5.0-changes.md)).
 
 ## Inspecting them
 
-With the `cr2w` diff driver enabled (see [tools.md](tools.md#git-and-github)), plain git shows these files as text, e.g. `git diff master...legacy-GM -- modGhostMode/files/characters/npc_entities/monsters/arachas_lvl1.w2ent`. The scripts below give more focused views.
+With the `cr2w` diff driver enabled (see [tools.md](tools.md#git-and-github)), plain git shows these files as text, e.g. `git diff vanilla-1.32...legacy-GM -- modGhostMode/files/characters/npc_entities/monsters/arachas_lvl1.w2ent`. The scripts below give more focused views.
 
 ```bash
 # Readable dump of one file
 python tools/cr2w_dump.py --rev legacy-GM modGhostMode/files/characters/npc_entities/monsters/arachas_lvl1.w2ent
 
 # What Ghost Mode changed in one file (or folder)
-python tools/bindiff.py master legacy-GM modGhostMode/files/characters/npc_entities/monsters/arachas_lvl1.w2ent
+python tools/bindiff.py vanilla-1.32 legacy-GM modGhostMode/files/characters/npc_entities/monsters/arachas_lvl1.w2ent
 
 # What 5.x changed in the same file
-python tools/bindiff.py master vanilla-5.x modGhostMode/files/characters/npc_entities/monsters/arachas_lvl1.w2ent
+python tools/bindiff.py vanilla-1.32 vanilla-5.x modGhostMode/files/characters/npc_entities/monsters/arachas_lvl1.w2ent
 
 # Which properties Ghost Mode touched, across all files
-python tools/bindiff.py master legacy-GM --summary
+python tools/bindiff.py vanilla-1.32 legacy-GM --summary
 ```
 
 For example, `arachas_lvl1.w2ent`: Ghost Mode removed the 90% lesser-mutagen loot container, and 5.0 still has it.

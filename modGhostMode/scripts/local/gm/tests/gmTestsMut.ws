@@ -128,6 +128,8 @@ function GMTest_mut02()
 
 	theGame.GetDefinitionsManager().GetAbilityAttributeValue('Mutation1', 'dmg_bonus_factor', min, max);
 	GMTestReport(AbsF(min.valueAdditive - 0.3) < 0.0001, "MUT-02 Conductors of Magic: " + min.valueAdditive + " of the sword's base damage (expected 0.3)");
+	// Any drawn sword counts, so the description says so (owner, 2026-11-03).
+	GMTestReport(StrFindFirst(GetLocStringByKeyExt("gm_mutation_desc_1"), "any sword") >= 0, "MUT-02 description names any sword: '" + GetLocStringByKeyExt("gm_mutation_desc_1") + "'");
 }
 
 exec function gmtest_mut()

@@ -139,6 +139,10 @@
 				<Entry varId="GMMeleeSpecialCooldown" value="7.5"/>
 				<Entry varId="GMSignCooldown" value="5"/>
 				<Entry varId="GMAltSignCooldown" value="7.5"/>
+				<Entry varId="GMExhaustion" value="true"/>
+				<Entry varId="GMExhaustionMaxRegen" value="0.4"/>
+				<Entry varId="GMExhaustionAdrenaline" value="0.03"/>
+				<Entry varId="GMExhaustionFloor" value="40"/>
 			</Preset>
 			<Preset id="1" displayName="gm_old_ver">
 				<Entry varId="GMSinkBoat" value="false"/>
@@ -156,6 +160,10 @@
 				<Entry varId="GMMeleeSpecialCooldown" value="0"/>
 				<Entry varId="GMSignCooldown" value="0"/>
 				<Entry varId="GMAltSignCooldown" value="0"/>
+				<Entry varId="GMExhaustion" value="false"/>
+				<Entry varId="GMExhaustionMaxRegen" value="0.4"/>
+				<Entry varId="GMExhaustionAdrenaline" value="0.03"/>
+				<Entry varId="GMExhaustionFloor" value="40"/>
 			</Preset>
 			<Preset id="2" displayName="gm_turn_off">
 				<Entry varId="GMSinkBoat" value="false"/>
@@ -173,6 +181,10 @@
 				<Entry varId="GMMeleeSpecialCooldown" value="0"/>
 				<Entry varId="GMSignCooldown" value="0"/>
 				<Entry varId="GMAltSignCooldown" value="0"/>
+				<Entry varId="GMExhaustion" value="false"/>
+				<Entry varId="GMExhaustionMaxRegen" value="0.4"/>
+				<Entry varId="GMExhaustionAdrenaline" value="0.03"/>
+				<Entry varId="GMExhaustionFloor" value="40"/>
 			</Preset>
 		</PresetsArray>
 		<VisibleVars>
@@ -202,6 +214,11 @@
 			<!-- STAM-01 -->
 			<Var id="GMSignCooldown" displayName="gm_scooldown" displayType="SLIDER;0;30;60"/>
 			<Var id="GMAltSignCooldown" displayName="gm_ascooldown" displayType="SLIDER;0;30;60"/>
+			<!-- STAM-10 (new skill tree only; the menu cannot hide options per tree, so the labels say it) -->
+			<Var id="GMExhaustion" displayName="gm_exhaustion" displayType="TOGGLE"/>
+			<Var id="GMExhaustionMaxRegen" displayName="gm_exh_maxregen" displayType="SLIDER;0;1;20"/>
+			<Var id="GMExhaustionAdrenaline" displayName="gm_exh_adrenaline" displayType="SLIDER;0;0.1;20"/>
+			<Var id="GMExhaustionFloor" displayName="gm_exh_floor" displayType="SLIDER;10;100;18"/>
 		</VisibleVars>
 	</Group>
 	<Group id="GMQOLOptions" displayName="Mods.ghost_mode.gm_qol_options">

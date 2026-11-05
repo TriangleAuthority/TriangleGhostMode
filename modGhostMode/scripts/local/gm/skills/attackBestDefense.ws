@@ -30,7 +30,7 @@ function GMPerk21GainStamina(trigger : name)
 		share = GetSkillAttributeValue(skill, 'stamina_kill', false, false);
 	else
 		share = GetSkillAttributeValue(skill, 'stamina_other', false, false);
-	GainStat(BCS_Stamina, share.valueMultiplicative * GetStatMax(BCS_Stamina));
+	GainStat(BCS_Stamina, share.valueMultiplicative * GMFullMaxStamina());	// STAM-10: a share of the full max
 	AddEffectDefault(EET_Perk21InternalCooldown, this, "Perk21");
 }
 

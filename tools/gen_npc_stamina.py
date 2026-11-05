@@ -1,7 +1,7 @@
 """Generate Ghost Mode's NPC stamina overrides (STAM-08) from legacy's ability XML.
 
 For every <ability> in the listed files whose stamina nodes legacy Ghost Mode changed
-(master = vanilla 1.32 vs legacy-GM), write a DLC entry with on_conflict="extend" holding
+(vanilla-1.32 vs legacy-GM), write a DLC entry with on_conflict="extend" holding
 the stamina nodes (tags containing "stamina") legacy changed, with legacy's values; nodes of
 other tags keep 5.x's values. Nodes legacy removed are written with min/max 0 (ability values
 add up, so 0 is neutral), unless 5.x no longer has them either. Only
@@ -13,7 +13,7 @@ Checks against vanilla-5.x and reports abilities 5.x no longer has, and conflict
     python tools/gen_npc_stamina.py --worktree DIR [--check]
 
 Writes modGhostMode/files/dlc/dlcghostmode/data/gameplay/abilities/gm_npc_stamina.xml in the
-5.x-GM worktree (--worktree, required); --check prints the report and fails if the file is out of date. Then run
+port's worktree (--worktree, required); --check prints the report and fails if the file is out of date. Then run
 tools/gen_ngplus.py for the New Game+ copy.
 """
 import argparse, os, re, subprocess, sys
@@ -103,7 +103,7 @@ def main():
              "<redxml>", "  <definitions>", "    <abilities>"]
     total = removed = 0
     for path in FILES:
-        old, new, v5 = abilities(show("master", path)), abilities(show("legacy-GM", path)), abilities(show("vanilla-5.x", path))
+        old, new, v5 = abilities(show("vanilla-1.32", path)), abilities(show("legacy-GM", path)), abilities(show("vanilla-5.x", path))
         changed = [a for a in new if new[a] != old.get(a, [])]
         if not changed:
             continue

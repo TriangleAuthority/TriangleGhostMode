@@ -1,6 +1,6 @@
 """Find the change units whose Ghost Mode change touches a subject.
 
-Lists every unit in docs/features/units.csv whose change from legacy vanilla (`master`) to
+Lists every unit in docs/features/units.csv whose change from legacy vanilla (`vanilla-1.32`) to
 Ghost Mode (`legacy-GM`) adds or removes a line matching a pattern, with its attribution from
 docs/features/attribution.csv and what 5.x did to it. Used to check an area's mapping before
 calling it complete (see docs/feature-mapping.md#feature-ids-and-areas).
@@ -103,14 +103,14 @@ def main() -> None:
             if name.startswith("<") or name.endswith(">"):
                 continue
             func = name.split(".")[-1]
-            old, new = function_body(source("master", path), func), function_body(source("legacy-GM", path), func)
+            old, new = function_body(source("vanilla-1.32", path), func), function_body(source("legacy-GM", path), func)
             changed = [l for l in difflib.unified_diff(old, new, lineterm="", n=0)
                        if l[:1] in "+-" and not l.startswith(("+++", "---"))]
             hits = [l.strip() for l in changed
                     if regex.search(l.split("//")[0]) and not l[1:].strip().startswith("//")]
         else:
             element = name.rsplit("/", 1)[-1]
-            old = xml_matches("master", path, a.pattern).get(element, [])
+            old = xml_matches("vanilla-1.32", path, a.pattern).get(element, [])
             new = xml_matches("legacy-GM", path, a.pattern).get(element, [])
             if old == new:
                 continue

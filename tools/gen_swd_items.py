@@ -7,7 +7,7 @@ This port carries SWD's share of those changes onto 5.x's entries. The units are
 units `docs/features/attribution.csv` gives an SWD feature (SWD-10, 5.x's new swords, which legacy
 never had, come from the owner's values instead: the `SWD10` table below), each
 merged from its own file: 5.x's entry (`vanilla-5.x`) taken whole, legacy's change applied as a
-three-way merge against 1.32 (`master`): what legacy changed comes, what 5.x itself changed and
+three-way merge against 1.32 (`vanilla-1.32`): what legacy changed comes, what 5.x itself changed and
 legacy did not stays. Written with on_conflict="replace" (given whole, as the expansions' entries
 need; docs/development.md).
 
@@ -357,7 +357,7 @@ def generate(folder, armsw, ported=PORTED):
     for (fold, kind, name), (path, main, feats) in sorted(us.items()):
         if fold != folder:
             continue
-        mi, mab = file_entries("master", path, cache)
+        mi, mab = file_entries("vanilla-1.32", path, cache)
         li, lab = file_entries("legacy-GM", path, cache)
         vi, vab = file_entries("vanilla-5.x", path, cache)
         notes = []
@@ -397,7 +397,7 @@ def generate(folder, armsw, ported=PORTED):
         if name not in done:  # set swords not among SWD's units (none expected)
             vpath = next((p for (f, k, n), (p, _, _) in us.items() if n == name), "?")
             if "all" not in cache:
-                cache["all"] = (arm.items("master", folder), arm.items("legacy-GM", folder))
+                cache["all"] = (arm.items("vanilla-1.32", folder), arm.items("legacy-GM", folder))
             ma, la = cache["all"]
             if name in ma and name in la:
                 entry, _ = item_layer.apply_item(folder, name, ma[name][1], la[name][1], entry)  # CRAFT's and ECON's fields
@@ -456,7 +456,7 @@ def verify(worktree):
         for (fold, kind, name), (path, main, feats) in sorted(us.items()):
             if fold != folder:
                 continue
-            mi, mab = file_entries("master", path, cache)
+            mi, mab = file_entries("vanilla-1.32", path, cache)
             li, lab = file_entries("legacy-GM", path, cache)
             vi, vab = file_entries("vanilla-5.x", path, cache)
             pending = main not in PORTED

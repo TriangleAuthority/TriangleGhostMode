@@ -78,7 +78,7 @@ function GMWhirlDrainResources(dt : float)
 	delay = GetStaminaActionDelay(ESAT_Ability, GetSkillAbilityName(skill), dt);
 	DrainStamina(ESAT_FixedValue, GMGetWhirlStaminaCost(dt), GMFixedDrainDelay(delay), GetSkillAbilityName(skill));
 	cost = CalculateAttributeValue(GetSkillAttributeValue(skill, 'stamina_cost_per_sec', false, false)) * GMWhirlCostFactor() * dt;
-	DrainFocus(cost / GetStatMax(BCS_Stamina));
+	DrainFocus(cost / GMFullMaxStamina());	// STAM-10: the full max while max stamina is lowered
 }
 
 // Whirl's per-tick cost: Ghost Mode's body (legacy's model; 5.x body replaced).

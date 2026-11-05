@@ -2,7 +2,8 @@
 // (a threshold, not a cost), and holding it costs 0.5 stamina a tick, every 0.1 s plus up to a frame (about
 // 4 a second, frame-bound, as legacy's same Sleep(0.1f); regen paused 0.5 s by each drain); it ends when the key is released or the resources run out. Each tick confuses the horse
 // for 0.5 s (vanilla 0.1 s each frame). With Adrenaline Burst (classic perk_10, new tree perk_42; PH3)
-// adrenaline counts as stamina at max stamina / max adrenaline per point, to start and while held (DH3 (a)).
+// adrenaline counts as stamina at max stamina / max adrenaline per point, to start and while held (DH3 (a)); max
+// stamina is the full one, not lowered by STAM-10 (a sign; owner, 2026-11-04).
 // Legacy's leftovers (staminaSpent, a commented-out payment to 50 at the end) are not ported (PH4);
 // 5.x's voice line on the cast is kept (PH5).
 // See docs/features/horse.md.
@@ -34,7 +35,7 @@ function GMHasResourcesForAxii(cost : float) : bool
 	ret = (witcher.GetStat(BCS_Stamina) >= cost);
 	if(!ret && witcher.GMHasAdrenalineBurst())
 	{
-		ret = ((witcher.GetStat(BCS_Stamina) + witcher.GetStat(BCS_Focus) * witcher.GetStatMax(BCS_Stamina) / witcher.GetStatMax(BCS_Focus)) >= cost);
+		ret = ((witcher.GetStat(BCS_Stamina) + witcher.GetStat(BCS_Focus) * witcher.GMFullMaxStamina() / witcher.GetStatMax(BCS_Focus)) >= cost);
 	}
 	return ret;
 }
@@ -52,7 +53,7 @@ function GMDrainResourcesForAxii(cost : float)
 	}
 	if(cost > savedStamina && witcher.GMHasAdrenalineBurst())
 	{
-		witcher.DrainFocus((cost - savedStamina) * witcher.GetStatMax(BCS_Focus) / witcher.GetStatMax(BCS_Stamina));
+		witcher.DrainFocus((cost - savedStamina) * witcher.GetStatMax(BCS_Focus) / witcher.GMFullMaxStamina());
 	}
 }
 

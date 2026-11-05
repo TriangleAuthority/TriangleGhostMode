@@ -6,16 +6,27 @@ behaviour, a changed rule). Each one is a bullet of its own in the feature entry
 
   - **Deviation:** what differs and why (who decided, date)
 
+Legacy had one skill tree, the classic one. What exists only in 5.x's new tree is marked apart:
+
+  - **Deviation (new tree):** a deviation only the new tree has
+  - **New design:** a new-tree skill designed afresh (not a deviation; listed for the same review)
+
+The two kinds of page:
+  docs/features/deviations.md           the game as played with the classic tree (the default):
+                                        every plain Deviation bullet
+  docs/features/deviations-new-tree.md  what differs only in the new tree: its rules, the new
+                                        designs and the new-tree deviations
+
 "porter's call, not confirmed by the owner" marks one the project owner has not reviewed yet;
 "temporary, until <area>" one that lasts until another area is ported.
 
     python tools/deviations.py                  # print all, grouped by feature
     python tools/deviations.py --unconfirmed    # only those the owner has not confirmed
-    python tools/deviations.py --write          # write docs/features/deviations.md
-    python tools/deviations.py --check          # exit 1 if docs/features/deviations.md is out of date
+    python tools/deviations.py --write          # write both pages
+    python tools/deviations.py --check          # exit 1 if either page is out of date
 
-Reads the area files in docs/features/ (every *.md except README.md, coverage.md and
-deviations.md).
+Reads the area files in docs/features/ (every *.md except README.md, coverage.md and the two
+generated pages).
 """
 import argparse
 import os
@@ -25,11 +36,26 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FEATURES = os.path.join(REPO, "docs", "features")
 OUT = os.path.join(FEATURES, "deviations.md")
-SKIP = {"README.md", "coverage.md", "deviations.md"}
+OUT_NEW = os.path.join(FEATURES, "deviations-new-tree.md")
+SKIP = {"README.md", "coverage.md", "deviations.md", "deviations-new-tree.md"}
 HEADING = re.compile(r"^### (([A-Z]+-\d+)\b.*)$")
-BULLET = "- **Deviation:**"
+# bullet marker -> kind
+BULLETS = {
+    "- **Deviation:**": "classic",
+    "- **Deviation (new tree):**": "new",
+    "- **New design:**": "design",
+}
 UNCONFIRMED = "not confirmed by the owner"
 TEMPORARY = "temporary"
+
+NEW_TREE_RULES = (
+    "**The new tree's rules** ([SKL area decisions](skl.md#area-decisions), project owner): every new-tree skill "
+    "is its legacy counterpart under legacy's name, on 3 levels, with legacy's maximum value at level 3 (a third "
+    "per level); legacy's tiers scaled ×3/5 (sword 5/12/18, alchemy 5/12/17, signs 4/11/17) gate it in place of "
+    "5.x's prerequisites; 5.x's new-only skills and perks are replaced by the legacy skills and perks that had no "
+    "new-tree slot; general perks are legacy's, 1 point each; passive path bonuses are removed, as in the classic "
+    "tree. Below: the skills designed afresh, and the deviations beyond these rules."
+)
 
 
 def anchor(heading):
@@ -40,7 +66,7 @@ def anchor(heading):
 
 
 def collect():
-    """[(file, feature id, heading, text)] in file and document order."""
+    """[(file, feature id, heading, text, kind)] in file and document order."""
     found = []
     for name in sorted(os.listdir(FEATURES)):
         if not name.endswith(".md") or name in SKIP:
@@ -52,65 +78,110 @@ def collect():
                 m = HEADING.match(line)
                 if m:
                     heading, feature = m.group(1), m.group(2)
-                elif line.startswith("### "):
+                    continue
+                if line.startswith("### "):
                     heading = feature = None
-                elif line.startswith(BULLET):
-                    found.append((name, feature or "(no feature)", heading, line[len(BULLET):].strip()))
+                    continue
+                for marker, kind in BULLETS.items():
+                    if line.startswith(marker):
+                        found.append((name, feature or "(no feature)", heading, line[len(marker):].strip(), kind))
+                        break
     return found
 
 
-def render(items, title_note=""):
-    total = len(items)
+def counts(items):
     unconfirmed = sum(1 for i in items if UNCONFIRMED in i[3])
     temporary = sum(1 for i in items if TEMPORARY in i[3])
+    return f"not confirmed by the owner: {unconfirmed}; temporary: {temporary}"
+
+
+def sections(items, level):
+    out, last = [], None
+    for name, feature, heading, text, kind in items:
+        if (name, heading) != last:
+            link = f"{name}#{anchor(heading)}" if heading else name
+            out += ["", f"{level} [{heading or name}]({link})", ""]
+            last = (name, heading)
+        out.append(f"- {text}")
+    return out
+
+
+def finish(out):
+    return "\n".join(out).replace("\n\n\n", "\n\n") + "\n"
+
+
+def render(items):
+    """deviations.md: the game with the classic tree, and everything outside the skill trees."""
+    items = [i for i in items if i[4] == "classic"]
     out = ["# Deviations from legacy", "",
            "Generated by `python tools/deviations.py --write`; do not edit by hand. Each deviation is recorded in its "
            "feature entry's **Decisions** ([convention](../feature-mapping.md#legacy-behaviour-first)); this page "
-           "collects them for reviews." + title_note, "",
-           f"- Deviations: {total}; not confirmed by the owner: {unconfirmed}; temporary: {temporary}", ""]
-    last = None
-    for name, feature, heading, text in items:
-        if (name, heading) != last:
-            link = f"{name}#{anchor(heading)}" if heading else name
-            out += ["", f"## [{heading or name}]({link})", ""]
-            last = (name, heading)
-        out.append(f"- {text}")
-    return "\n".join(out).replace("\n\n\n", "\n\n") + "\n"
+           "collects them for reviews.", "",
+           "This is the game as played with the **classic skill tree** (legacy's tree, the default). A deviation here "
+           "applies in both trees unless its text names one. What differs only in 5.x's new tree is on its own page, "
+           "[deviations-new-tree.md](deviations-new-tree.md).", "",
+           f"- Deviations: {len(items)}; {counts(items)}", ""]
+    out += sections(items, "##")
+    return finish(out)
+
+
+def render_new(items):
+    """deviations-new-tree.md: what differs only in 5.x's new skill tree."""
+    designs = [i for i in items if i[4] == "design"]
+    devs = [i for i in items if i[4] == "new"]
+    out = ["# The new skill tree against legacy", "",
+           "Generated by `python tools/deviations.py --write`; do not edit by hand. Legacy Ghost Mode had one tree, "
+           "the classic one, so 5.x's new tree has no legacy counterpart. Everything on [deviations.md](deviations.md) "
+           "applies in the new tree too unless its text names the classic tree; this page adds what differs only here.",
+           "", NEW_TREE_RULES, "",
+           f"- New designs: {len(designs)}",
+           f"- Deviations: {len(devs)}; {counts(devs)}", "",
+           "## New designs", ""]
+    out += sections(designs, "###")
+    out += ["", "## Deviations", ""]
+    out += sections(devs, "###")
+    return finish(out)
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--unconfirmed", action="store_true", help="only deviations the owner has not confirmed")
-    ap.add_argument("--write", action="store_true", help="write docs/features/deviations.md")
-    ap.add_argument("--check", action="store_true", help="exit 1 if docs/features/deviations.md is out of date")
+    ap.add_argument("--write", action="store_true", help="write deviations.md and deviations-new-tree.md")
+    ap.add_argument("--check", action="store_true", help="exit 1 if either page is out of date")
     args = ap.parse_args()
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
     items = collect()
     if args.write or args.check:
-        text = render(items)
-        current = open(OUT, encoding="utf-8").read() if os.path.exists(OUT) else ""
+        pages = [(OUT, render(items)), (OUT_NEW, render_new(items))]
         if args.check:
-            if current != text:
-                print("docs/features/deviations.md is out of date: run python tools/deviations.py --write")
+            stale = [p for p, text in pages
+                     if (open(p, encoding="utf-8").read() if os.path.exists(p) else "") != text]
+            for p in stale:
+                print(f"{os.path.relpath(p, REPO)} is out of date: run python tools/deviations.py --write")
+            if stale:
                 return 1
-            print("docs/features/deviations.md is up to date")
+            print("docs/features/deviations.md and deviations-new-tree.md are up to date")
             return 0
-        with open(OUT, "w", encoding="utf-8", newline="\n") as f:
-            f.write(text)
-        print(f"wrote {os.path.relpath(OUT, REPO)}: {len(items)} deviations")
+        for p, text in pages:
+            with open(p, "w", encoding="utf-8", newline="\n") as f:
+                f.write(text)
+        n = {k: sum(1 for i in items if i[4] == k) for k in ("classic", "new", "design")}
+        print(f"wrote {os.path.relpath(OUT, REPO)}: {n['classic']} deviations; "
+              f"{os.path.relpath(OUT_NEW, REPO)}: {n['design']} new designs, {n['new']} new-tree deviations")
         return 0
 
     if args.unconfirmed:
         items = [i for i in items if UNCONFIRMED in i[3]]
     last = None
-    for name, feature, heading, text in items:
+    for name, feature, heading, text, kind in items:
         if heading != last:
             print(f"\n{heading or name} ({name})")
             last = heading
-        print(f"  - {text}")
-    print(f"\n{len(items)} deviation(s)")
+        tag = {"new": "[new tree] ", "design": "[new design] "}.get(kind, "")
+        print(f"  - {tag}{text}")
+    print(f"\n{len(items)} entries")
     return 0
 
 

@@ -8,11 +8,11 @@ the duplicate copy of each object inside flatCompiledData.
 
 Examples:
     # What Ghost Mode changed in its binary files
-    python tools/bindiff.py master legacy-GM
+    python tools/bindiff.py vanilla-1.32 legacy-GM
     # What CDPR changed in the same files for 5.x
-    python tools/bindiff.py master vanilla-5.x
+    python tools/bindiff.py vanilla-1.32 vanilla-5.x
     # One file or folder, and a per-property summary
-    python tools/bindiff.py master legacy-GM modGhostMode/files/living_world --summary
+    python tools/bindiff.py vanilla-1.32 legacy-GM modGhostMode/files/living_world --summary
 
 Usage:
     python tools/bindiff.py BASE OTHER [PATH_PREFIX ...] [--summary] [--keep-noise]

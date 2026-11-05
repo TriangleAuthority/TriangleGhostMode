@@ -76,7 +76,7 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 **Decisions:** port as legacy; the per-monster Igni weakness is dropped as in legacy (weaknesses are resistances, AI). Legacy's two early returns at the top of `CalculateDamage` are ported (whole-port audit A2-5): a damage type the victim's stat ignores (silver on a Vitality user, physical types on an Essence user) and a value of 0 or less give 0 before anything else, before the non-deadly fight's flat 10 too. So is legacy's "stopped by armor" flag (`SetArmorReducedDamageToZero`, which only decides whether a parried or countered hit sparks): set at the end of the final-damage step, for a hit that dealt damage up to that step and none after it, when the last damage type through the formula met armor (`gmHasArmor`, legacy's `hasArmor`); a hit the formula already brought to 0 is not marked, as in legacy. The port set the flag per damage type in `CalculateDamage` until then, so a type the victim ignores could mark a hit. Verified on the area build in both trees (2026-11-03, `GMTest_dmg01_armorflag` in the regression, scripted hits of Geralt's on a bandit of armor 20): 1 silver damage and 1 slashing damage deal nothing and leave the flag off; on a throwaway build with the old code both were marked.
 
 - **Deviation:** 5.x's ×1.1 to the damage the player takes in New Game+ (end of `CalculateDamage`, new in 5.x) is kept: NG+ scaled like vanilla's ([New Game+ policy](../feature-mapping.md#new-game-carried-over-and-scaled-not-balanced-or-tested)) (project owner, 2026-10-07; audit F5).
-- Hearts of Stone's `attack_heavy_noparry` (an NPC heavy attack that cannot be parried) is given whole (`replace`) as legacy's: tag `attack_heavy`, `focus_hit_drain_mod` ×1.5, no attack power bonus, no `focus_gain` (SKL-07). Until 2026-10-28 it took `extend`, which empties a Hearts of Stone ability ([development.md](../development.md#fine-grained-xml-overrides-50)): in game it read 0 attributes and had lost its `attack_heavy` tag, so heavy-attack rules keyed on the tag missed it (found by the AI-A audit, F1; fixed in 5.x-GM `2499b4f7`, verified in both trees by scripted reads, `GMTest_dmgxml` in the regression, which failed on a throwaway build with the old entry).
+- Hearts of Stone's `attack_heavy_noparry` (an NPC heavy attack that cannot be parried) is given whole (`replace`) as legacy's: tag `attack_heavy`, `focus_hit_drain_mod` ×1.5, no attack power bonus, no `focus_gain` (SKL-07). Until 2026-10-28 it took `extend`, which empties a Hearts of Stone ability ([development.md](../development.md#fine-grained-xml-overrides-50)): in game it read 0 attributes and had lost its `attack_heavy` tag, so heavy-attack rules keyed on the tag missed it (found by the AI-A audit, F1; fixed in master `b38c0eed`, verified in both trees by scripted reads, `GMTest_dmgxml` in the regression, which failed on a throwaway build with the old entry).
 - Mutagen 2's 1.32 resistance bonus is removed since [ALCH-13](alch.md#alch-13-defensive-and-conditional-decoctions-arachas-doppler-fiend-elemental-werewolf-leshen-griffin-relievers) (2026-10-20; until then a temporary deviation).
 
 
@@ -84,10 +84,10 @@ Made by the project owner on 2026-10-06 (DD1 to DD5):
 
 **Slices:**
 
-1. **The formula** (slice 2, 5.x-GM `6456ff4d`): `damage/formula.ws` replaces `CalculateDamage`, `GetDamageResists` and `GetAttackersPowerMod` on 5.x's bodies. Verified 2026-10-07 (`gmtest_dmg02`, `gmtest_dmg02_turn`/`_back`: scripted hits of Geralt's of one damage type on a human test dummy with set armor and resistances; `gmtest_dmg`: real weapons on dummies, a bandit and a wraith, and a live wolf; regression 181 passed): armor 40 subtracted from raw damage before attack power; a hit below the armor deals only the additive attack power; elemental damage reduced by armor; a resistance of −50% counts as 0 and leaves armor whole; a 30% resistance applied last; damage over time without armor and attack power; the player's shock damage without armor; a headshot without armor and resistance, +25% attack power; a backstab +25% attack power; the probe's recorded hits all follow the port's formula.
-2. **Heavy attacks** (slice 3a, 5.x-GM `dc81f49b`, with [DMG-04](#dmg-04-additive-raw-damage-pool)): 5.x's −0.433 attack power and ×1.833 removed; `sword_2` as legacy (`gm_damage.xml`: +50% weapon damage, 200 armor piercing, no +0.333 attack power); heavy and special attacks lose their attack power bonus (`attack_heavy` and five more). Verified 2026-10-07 (`gmtest_dmg03a`, scripted attacks built as real ones, Geralt's sword, a human test dummy with 250 armor): a heavy attack has a light attack's attack power, Geralt's and the dummy's; it follows the formula without ×1.833; Strong Attack pierces 200 armor.
-3. **No minimum damage, nothing below 1** (slice 3b, 5.x-GM `7aecd469`, with [DMG-05](#dmg-05-order-of-damage-steps-and-final-damage)): `CActor.ReduceDamage` replaced on 5.x's body without the player's minimum damage; hits below 1 deal nothing (the final-damage step). Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits of the test dummy on Geralt): a hit of 10 that Geralt's armor stops deals 0 (5.x: at least 1); a hit of 0.43 after the formula deals 0. 
-4. **Hits below 1 in `ReduceDamage`** (audit F2, 5.x-GM `6b90faf5`): `GMZeroSubOneDamage` (legacy `ModifyHitSeverityReactionFromDamage`, its damage half; the hit severity half is AI-12's `GMModifyHitSeverityFromDamage`, `ai/poise.ws`, called at its end since AI slice B2), called in `CActor.ReduceDamage` after the bolts' minimum of 1: a hit below 1 deals nothing and plays no hit animation, before final damage (so the difficulty multiplier cannot lift it). Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits of the test dummy on Geralt, the animation left to the game): a hit of 10 that his armor stops deals 0 with no hit animation; a hit of 300 deals 217 with its animation.
+1. **The formula** (slice 2, master `e03259c6`): `damage/formula.ws` replaces `CalculateDamage`, `GetDamageResists` and `GetAttackersPowerMod` on 5.x's bodies. Verified 2026-10-07 (`gmtest_dmg02`, `gmtest_dmg02_turn`/`_back`: scripted hits of Geralt's of one damage type on a human test dummy with set armor and resistances; `gmtest_dmg`: real weapons on dummies, a bandit and a wraith, and a live wolf; regression 181 passed): armor 40 subtracted from raw damage before attack power; a hit below the armor deals only the additive attack power; elemental damage reduced by armor; a resistance of −50% counts as 0 and leaves armor whole; a 30% resistance applied last; damage over time without armor and attack power; the player's shock damage without armor; a headshot without armor and resistance, +25% attack power; a backstab +25% attack power; the probe's recorded hits all follow the port's formula.
+2. **Heavy attacks** (slice 3a, master `4cbc9318`, with [DMG-04](#dmg-04-additive-raw-damage-pool)): 5.x's −0.433 attack power and ×1.833 removed; `sword_2` as legacy (`gm_damage.xml`: +50% weapon damage, 200 armor piercing, no +0.333 attack power); heavy and special attacks lose their attack power bonus (`attack_heavy` and five more). Verified 2026-10-07 (`gmtest_dmg03a`, scripted attacks built as real ones, Geralt's sword, a human test dummy with 250 armor): a heavy attack has a light attack's attack power, Geralt's and the dummy's; it follows the formula without ×1.833; Strong Attack pierces 200 armor.
+3. **No minimum damage, nothing below 1** (slice 3b, master `552ee182`, with [DMG-05](#dmg-05-order-of-damage-steps-and-final-damage)): `CActor.ReduceDamage` replaced on 5.x's body without the player's minimum damage; hits below 1 deal nothing (the final-damage step). Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits of the test dummy on Geralt): a hit of 10 that Geralt's armor stops deals 0 (5.x: at least 1); a hit of 0.43 after the formula deals 0. 
+4. **Hits below 1 in `ReduceDamage`** (audit F2, master `25b5dece`): `GMZeroSubOneDamage` (legacy `ModifyHitSeverityReactionFromDamage`, its damage half; the hit severity half is AI-12's `GMModifyHitSeverityFromDamage`, `ai/poise.ws`, called at its end since AI slice B2), called in `CActor.ReduceDamage` after the bolts' minimum of 1: a hit below 1 deals nothing and plays no hit animation, before final damage (so the difficulty multiplier cannot lift it). Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits of the test dummy on Geralt, the animation left to the game): a hit of 10 that his armor stops deals 0 with no hit animation; a hit of 300 deals 217 with its animation.
 
 ### DMG-02 Armor and resistance rules
 
@@ -117,9 +117,9 @@ The other areas' terms in this function are ported with their areas; the tempora
 
 
 **Slices:** slice 2, with [DMG-01](#dmg-01-armor-before-attack-power).
-VulnerableFromFront (slice 3b, 5.x-GM `7aecd469`): checked in `ProcessDamageIncrease`, before the formula, and taken out of `CActor.ReduceDamage` (5.x checked it there, after armor had been applied, and skipped the rest of `ReduceDamage`). Verified 2026-10-07 (`gmtest_dmg03b`): a hit from the front on a dummy with the ability and 40 armor ignores the armor.
-Point names (EFX-08, 2026-10-24, 5.x-GM `d804603d`): `bleeding_resistance`, `will_resistance` and `burning_resistance` read as point resistances; ends this feature's temporary deviation; verified in both trees ([EFX-08](efx.md#efx-08-effect-resistance-points)).
-Stat registration (audit F4, 5.x-GM `6b90faf5`): `all_NPC_ability` registers will and burning resistance points and the three damage-over-time resistances, `all_PC_ability` will and burning resistance points (`gm_damage.xml` and its NG+ copy). Verified 2026-10-07 (`GMTest_dmgxml`, in `gmtest_regress()`; scripted reads).
+VulnerableFromFront (slice 3b, master `552ee182`): checked in `ProcessDamageIncrease`, before the formula, and taken out of `CActor.ReduceDamage` (5.x checked it there, after armor had been applied, and skipped the rest of `ReduceDamage`). Verified 2026-10-07 (`gmtest_dmg03b`): a hit from the front on a dummy with the ability and 40 armor ignores the armor.
+Point names (EFX-08, 2026-10-24, master `cc96cf33`): `bleeding_resistance`, `will_resistance` and `burning_resistance` read as point resistances; ends this feature's temporary deviation; verified in both trees ([EFX-08](efx.md#efx-08-effect-resistance-points)).
+Stat registration (audit F4, master `25b5dece`): `all_NPC_ability` registers will and burning resistance points and the three damage-over-time resistances, `all_PC_ability` will and burning resistance points (`gm_damage.xml` and its NG+ copy). Verified 2026-10-07 (`GMTest_dmgxml`, in `gmtest_regress()`; scripted reads).
 
 ### DMG-03 Attack power and crits
 
@@ -149,7 +149,7 @@ Stat registration (audit F4, 5.x-GM `6b90faf5`): `all_NPC_ability` registers wil
 
 
 **Slices:** slice 2, with [DMG-01](#dmg-01-armor-before-attack-power). The 5.x level-ups' additive attack power (+31 at level 10) applies after armor and so ignores it, until GEN removes it from level-ups.
-No crits for damage over time or in non-deadly fights (slice 6a, 5.x-GM `5a615f82`): a wrapper skips the crit check (`nondeadly.ws`).
+No crits for damage over time or in non-deadly fights (slice 6a, master `c1757445`): a wrapper skips the crit check (`nondeadly.ws`).
 
 ### DMG-04 Additive raw-damage pool
 
@@ -187,7 +187,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 
 **Slices:**
 
-1. **The pool** (slice 3a, 5.x-GM `dc81f49b`). Every multiplier of 5.x's `ProcessDamageIncrease` (18) and of the four new-tree combat skills becomes a pool term; perk 37 adds to non-physical damage types only, perk 28 to poison; the confirmed exceptions are untouched; Strong Attack +50% for Geralt's heavy attacks, +25% for NPCs'; the NPC ranged bonus above level 31 removed. Verified 2026-10-07 (`gmtest_dmg03a`, scripted attacks built as real ones on a human test dummy, raw damage read before and after the pool): a light attack ×1; a heavy attack ×1.5; with the Element of Surprise perk (+10%) a heavy attack ×1.6, not 5.x's ×1.65; the dummy's heavy attack on Geralt ×1.25. The probe on a live wolf and slice 2's checks pass; regression 181 passed.
+1. **The pool** (slice 3a, master `4cbc9318`). Every multiplier of 5.x's `ProcessDamageIncrease` (18) and of the four new-tree combat skills becomes a pool term; perk 37 adds to non-physical damage types only, perk 28 to poison; the confirmed exceptions are untouched; Strong Attack +50% for Geralt's heavy attacks, +25% for NPCs'; the NPC ranged bonus above level 31 removed. Verified 2026-10-07 (`gmtest_dmg03a`, scripted attacks built as real ones on a human test dummy, raw damage read before and after the pool): a light attack ×1; a heavy attack ×1.5; with the Element of Surprise perk (+10%) a heavy attack ×1.6, not 5.x's ×1.65; the dummy's heavy attack on Geralt ×1.25. The probe on a live wolf and slice 2's checks pass; regression 181 passed.
 
 ### DMG-05 Order of damage steps and final damage
 
@@ -215,12 +215,12 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 
 - Golden Oriole's level-3 absorption of poison damage is removed from `ProcessActionDamage`, as legacy ([ALCH-05](alch.md#alch-05-golden-oriole), 2026-10-20; until then a temporary deviation); the Viper set heals from poison instead (ARM-11).
 - The other areas' final-damage terms are ported: Dimeritium's mage damage cut (ALCH-15, 2026-10-20), Mutation 8's (MUT-06, 2026-10-17), Severance's (ENCH-04, 2026-10-19). SKL's are ported: unaimed bolts and bombs ×0.5, In Combat's Fires, Supercharged Glyphs, Crippling Strikes, Muscle Memory's total damage.
-- The multiplier's values are legacy's since DIFF's slice D1 ([DIFF-01](diff.md#diff-01-difficulty-modes), 5.x-GM `5d06b030`, 2026-10-29): hostile NPCs deal ×0.75, ×1, ×2 and ×3.5 by mode at final damage (5.x: ×1, ×1.4, ×2.3, ×3.3). Verified in both trees: scripted hits of a bandit and a wolf on "Blood and Broken Bones!" and "Death March!" and a real wolf bite on "Death March!" (×3.5 at this step). Until then a temporary deviation (5.x's values at legacy's position).
+- The multiplier's values are legacy's since DIFF's slice D1 ([DIFF-01](diff.md#diff-01-difficulty-modes), master `0876cf52`, 2026-10-29): hostile NPCs deal ×0.75, ×1, ×2 and ×3.5 by mode at final damage (5.x: ×1, ×1.4, ×2.3, ×3.3). Verified in both trees: scripted hits of a bandit and a wolf on "Blood and Broken Bones!" and "Death March!" and a real wolf bite on "Death March!" (×3.5 at this step). Until then a temporary deviation (5.x's values at legacy's position).
 - The sign-damage reduction against Vitality is not in the changelist: an omission, recorded in [open-questions.md](../open-questions.md#legacy-data-vs-changelist).
 
 **Slices:**
 
-1. **The final-damage step** (slice 3b, 5.x-GM `7aecd469`): `ProcessActionDamage` calls `GMProcessDamageModification` right after `ReduceDamage`, before 5.x's immortality clamp and direct damage; it holds the signs-against-Vitality rule, Crippling Strike's bonus and `alchemy_s24` (from raw damage, DD1's exceptions), the difficulty multiplier (hostile NPCs hitting the player; from raw damage) and hits below 1. Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits on and from a human test dummy; the probe on a live wolf; slices 2 and 3a's checks; regression 181 passed): with the dummy's difficulty multiplier at 2, its raw damage is unchanged and the damage dealt is twice the formula's; Geralt's hits deal the formula's damage; a live wolf's bite on Hard: armor first, then ×2.3 (5.x's Hard value then; legacy's ×2 since DIFF's slice D1).
+1. **The final-damage step** (slice 3b, master `552ee182`): `ProcessActionDamage` calls `GMProcessDamageModification` right after `ReduceDamage`, before 5.x's immortality clamp and direct damage; it holds the signs-against-Vitality rule, Crippling Strike's bonus and `alchemy_s24` (from raw damage, DD1's exceptions), the difficulty multiplier (hostile NPCs hitting the player; from raw damage) and hits below 1. Verified 2026-10-07 (`gmtest_dmg03b`, scripted hits on and from a human test dummy; the probe on a live wolf; slices 2 and 3a's checks; regression 181 passed): with the dummy's difficulty multiplier at 2, its raw damage is unchanged and the damage dealt is twice the formula's; Geralt's hits deal the formula's damage; a live wolf's bite on Hard: armor first, then ×2.3 (5.x's Hard value then; legacy's ×2 since DIFF's slice D1).
 
 ### DMG-06 Sign intensity conversion
 
@@ -248,7 +248,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 
 **Slices:**
 
-1. **The curve** (slice 5, 5.x-GM `43e612d1`). Verified 2026-10-07 (`GMTest_dmg06`, in `gmtest_regress()`; scripted values): +0 at 100%, +0.40 at 150%, +0.75 at 200%, +1.30 at 300%, +2.0 at 600% and 1000%. No caller yet: SKL and MUT port them.
+1. **The curve** (slice 5, master `16b30206`). Verified 2026-10-07 (`GMTest_dmg06`, in `gmtest_regress()`; scripted values): +0 at 100%, +0.40 at 150%, +0.75 at 200%, +1.30 at 300%, +2.0 at 600% and 1000%. No caller yet: SKL and MUT port them.
 
 ### DMG-07 Effect durations not scaled by power
 
@@ -278,7 +278,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 
 **Slices:**
 
-1. **Durations** (slice 5, 5.x-GM `43e612d1`). Verified 2026-10-07 (`gmtest_dmg05`, a poison effect added by script to a human test dummy with Geralt as creator): 10 s at creator power ×3 stays 10 s (5.x: 30); at 50% poison resistance 5 s, still 5 s after two recalculations. Regression 182 passed.
+1. **Durations** (slice 5, master `16b30206`). Verified 2026-10-07 (`gmtest_dmg05`, a poison effect added by script to a human test dummy with Geralt as creator): 10 s at creator power ×3 stays 10 s (5.x: 30); at 50% poison resistance 5 s, still 5 s after two recalculations. Regression 182 passed.
 
 ### DMG-08 Weapon damage source
 
@@ -308,7 +308,7 @@ Exceptions, confirmed by the project owner on 2026-10-07 (DD1: "carefully consid
 
 **Slices:**
 
-1. **Weapon damage** (slice 4, 5.x-GM `a0817615`). Verified 2026-10-07 (`gmtest_dmg04`, scripted reads): a bandit's club deals its item's 150 bludgeoning damage; Geralt's relic sword Caerme deals its fire damage (2.26, 5.x: 0).
+1. **Weapon damage** (slice 4, master `d3f6f1c0`). Verified 2026-10-07 (`gmtest_dmg04`, scripted reads): a bandit's club deals its item's 150 bludgeoning damage; Geralt's relic sword Caerme deals its fire damage (2.26, 5.x: 0).
 
 ### DMG-09 Durability scaling
 
@@ -340,7 +340,7 @@ Handed off to ITEM ([hand-off](#hand-off-to-other-areas)); the ID is kept so the
 
 **Slices:**
 
-1. **Non-deadly fights** (slice 6a, 5.x-GM `5a615f82`). Verified 2026-10-07 (`gmtest_dmg06a`, scripted hits; Geralt bare-handed, the human test dummy with Olaf's ability and its club mounted in hand): Geralt's hit deals 20% of the dummy's maximum health ×0.5 (10000 of 100000); the dummy's hit on Geralt 20% of his maximum health ×0.25 (Hard, same level), with its difficulty multiplier set to 3 ignored.
+1. **Non-deadly fights** (slice 6a, master `c1757445`). Verified 2026-10-07 (`gmtest_dmg06a`, scripted hits; Geralt bare-handed, the human test dummy with Olaf's ability and its club mounted in hand): Geralt's hit deals 20% of the dummy's maximum health ×0.5 (10000 of 100000); the dummy's hit on Geralt 20% of his maximum health ×0.25 (Hard, same level), with its difficulty multiplier set to 3 ignored.
 
 ### DMG-11 Returned damage
 
@@ -370,7 +370,7 @@ Handed off to ITEM ([hand-off](#hand-off-to-other-areas)); the ID is kept so the
 
 **Slices:**
 
-1. **Returned damage** (slice 6a, 5.x-GM `5a615f82`). Verified 2026-10-07 (`gmtest_dmg06a`, scripted hits of the test dummy on Geralt): with the Thorns ability on Geralt the dummy takes 10% of its weapon's damage with Geralt's attack power (46); with Mutagen 26 it takes 10 + 10% of the damage dealt (33.1 for 231.3), without attack power.
+1. **Returned damage** (slice 6a, master `c1757445`). Verified 2026-10-07 (`gmtest_dmg06a`, scripted hits of the test dummy on Geralt): with the Thorns ability on Geralt the dummy takes 10% of its weapon's damage with Geralt's attack power (46); with Mutagen 26 it takes 10 + 10% of the damage dealt (33.1 for 231.3), without attack power.
 
 ### DMG-12 Allied NPC damage
 
@@ -401,8 +401,8 @@ Handed off to ITEM ([hand-off](#hand-off-to-other-areas)); the ID is kept so the
 
 **Slices:**
 
-1. **Allied NPC damage** (slice 6b, 5.x-GM `b056fb60`). Verified 2026-10-07 (`gmtest_dmg06b` with `gmtest_dmg06b_spawn`: two hostile and one friendly test dummy with 100000 health, scripted hits; Puppet level 3): an ally's hit on a hostile 2043 (2% to 4%); a hostile's hit on the ally 1730 (1% to 2%); a hostile's hit on another hostile ×0.25; as an Axii puppet the ally deals 8819 (6% to 12%) and takes 14119 (10% to 15%; 5.x: ×0.1). The full DMG set passes (49 checks) and the regression 182.
-2. **Hits without damage** (audit F1, 5.x-GM `5fba98de`): `CActor.ReduceDamage` no longer returns early for an action without damage (legacy), so the ally rule also covers a hostile hit the ally's armor stops and hostile actions that apply effects without damage. Verified 2026-10-07 (`gmtest_dmg06b`, scripted): a hit the friendly dummy's 5000 armor stops costs it 1540 (1% to 2%; 5.x: 0); the other DMG-12 checks and the regression (182) pass.
+1. **Allied NPC damage** (slice 6b, master `7328648b`). Verified 2026-10-07 (`gmtest_dmg06b` with `gmtest_dmg06b_spawn`: two hostile and one friendly test dummy with 100000 health, scripted hits; Puppet level 3): an ally's hit on a hostile 2043 (2% to 4%); a hostile's hit on the ally 1730 (1% to 2%); a hostile's hit on another hostile ×0.25; as an Axii puppet the ally deals 8819 (6% to 12%) and takes 14119 (10% to 15%; 5.x: ×0.1). The full DMG set passes (49 checks) and the regression 182.
+2. **Hits without damage** (audit F1, master `40e09eda`): `CActor.ReduceDamage` no longer returns early for an action without damage (legacy), so the ally rule also covers a hostile hit the ally's armor stops and hostile actions that apply effects without damage. Verified 2026-10-07 (`gmtest_dmg06b`, scripted): a hit the friendly dummy's 5000 armor stops costs it 1540 (1% to 2%; 5.x: 0); the other DMG-12 checks and the regression (182) pass.
 
 ### DMG-13 Enemy stat model
 
@@ -431,7 +431,7 @@ Handed off to AI and DIFF (DD4, project owner, 2026-10-06): the formula can be t
 
 **Slices:**
 
-1. **Damage probe** (5.x-GM `f2e20039`). Test-only wrappers record each step of a hit: the raw damage before and after the increase steps, armor points and resistance, attack power, each damage type's result, the damage dealt to the victim's stat; `gmtest_dmg()` makes a light and a heavy hit of Geralt's on the nearest hostile NPC and a light hit of the NPC's on Geralt, checks that each result follows the formula in force from the recorded inputs and that the damage dealt is their sum, and logs what legacy's formula would give from the same inputs. Verified 2026-10-07 (scripted hits through the damage manager, Geralt's real sword, the NPC's held weapon; level 10, Hard): 12 checks passed against a wolf and a bandit. Legacy's debug facts and console toggles come with the functions they belong to (slices 2 and 3).
+1. **Damage probe** (master `72825dbc`). Test-only wrappers record each step of a hit: the raw damage before and after the increase steps, armor points and resistance, attack power, each damage type's result, the damage dealt to the victim's stat; `gmtest_dmg()` makes a light and a heavy hit of Geralt's on the nearest hostile NPC and a light hit of the NPC's on Geralt, checks that each result follows the formula in force from the recorded inputs and that the damage dealt is their sum, and logs what legacy's formula would give from the same inputs. Verified 2026-10-07 (scripted hits through the damage manager, Geralt's real sword, the NPC's held weapon; level 10, Hard): 12 checks passed against a wolf and a bandit. Legacy's debug facts and console toggles come with the functions they belong to (slices 2 and 3).
 
 What the probe showed of 5.x (level 10, steel sword, Hard): Geralt's attack power carries +31 additive from 5.x's level-ups, added after armor, so it ignores armor whichever formula is used (legacy gives level-ups no attack power: GEN); heavy attacks deal about 1.8 times legacy's formula from the same inputs (5.x's ×1.833); hostile NPCs' raw damage is ×2.3 before armor (the difficulty multiplier, in raw damage in 5.x); the spawned bandit has 0 armor (DMG-15).
 
@@ -463,13 +463,13 @@ What the probe showed of 5.x (level 10, steel sword, Hard): Geralt's attack powe
 
 **Slices:**
 
-1. **Human armor** (slice 4, 5.x-GM `a0817615`). Verified 2026-10-07 (`gmtest_dmg04` with `gmtest_dmg04_spawn`: three archer templates, a bandit and Vesemir nearby): every human whose template includes an armor ability has it (a renegade 20 armor, Vesemir 30); the other templates include none. Without the fix the renegade has 0.
+1. **Human armor** (slice 4, master `d3f6f1c0`). Verified 2026-10-07 (`gmtest_dmg04` with `gmtest_dmg04_spawn`: three archer templates, a bandit and Vesemir nearby): every human whose template includes an armor ability has it (a renegade 20 armor, Vesemir 30); the other templates include none. Without the fix the renegade has 0.
 
 ### DMG audit (2026-10-07)
 
-Done by a fresh session ([audit](../feature-mapping.md#audit-signing-a-feature-off)) on its own branch off 5.x-GM `b056fb60`, in a separate worktree; regression run passing (182); every DMG check passing (the slices' 49, plus `gmtest_dmg03a` on the classic tree). The modSigns check, the deviation list and the attribution held; the unit sweep found no unit DMG misses. Findings F1 to F14, decided by the project owner on 2026-10-07:
+Done by a fresh session ([audit](../feature-mapping.md#audit-signing-a-feature-off)) on its own branch off master `7328648b`, in a separate worktree; regression run passing (182); every DMG check passing (the slices' 49, plus `gmtest_dmg03a` on the classic tree). The modSigns check, the deviation list and the attribution held; the unit sweep found no unit DMG misses. Findings F1 to F14, decided by the project owner on 2026-10-07:
 
-- **Fixed in code** (verified in game, regression 184, every DMG check passing): F1 legacy's ally rule also covers hits without damage: `CActor.ReduceDamage` no longer returns early for them (5.x-GM `5fba98de`; an armor-stopped hit costs an ally 1–2%, and so do hostile actions that apply effects without damage; the blocks the return skipped otherwise change little: a recoil off a troll's back, a parry log line, the scripted "player is the boss" hits); F2 a hit below 1 deals nothing and plays no hit animation, in `ReduceDamage` before final damage; F4 the resistance stats registered; F11 a stale comment; F12 the probe stops when its victim dies (5.x-GM `6b90faf5`).
+- **Fixed in code** (verified in game, regression 184, every DMG check passing): F1 legacy's ally rule also covers hits without damage: `CActor.ReduceDamage` no longer returns early for them (master `40e09eda`; an armor-stopped hit costs an ally 1–2%, and so do hostile actions that apply effects without damage; the blocks the return skipped otherwise change little: a recoil off a troll's back, a parry log line, the scripted "player is the boss" hits); F2 a hit below 1 deals nothing and plays no hit animation, in `ReduceDamage` before final damage; F4 the resistance stats registered; F11 a stale comment; F12 the probe stops when its victim dies (master `25b5dece`).
 - **Recorded:** F5 5.x's ×1.1 to the damage the player takes in New Game+ kept (DMG-01); F6 Golden Oriole's poison absorption kept until ALCH and ARM (DMG-05); F7 the other areas' terms missing from the deviation bullets (DMG-03, DMG-08); F8 the puppet's level read from Geralt's Puppet level, confirmed (no functional difference, one change fewer to 5.x).
 - **Corrected in the docs:** F3 the immortality-clamp deviation removed (legacy also clamped after final damage, in `CActor.OnTakeDamage`); F9 the damage types are written back with SKL-11; F10 DMG-01's NG+ cell.
 - **Accepted:** F13 the untested parts stay open checks; F14 legacy's ally rule also overrides each damage-over-time tick an ally takes: kept as legacy, on the [list to test in legacy](../open-questions.md#to-test-in-legacy-ghost-mode).

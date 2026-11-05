@@ -391,7 +391,7 @@ def ql_units():
 def ql_build(path):
     """5.x's table with legacy's changes against 1.32 (PX3); every row legacy changed, removed or added must be an XP-03
     unit, and 5.x must not have changed it."""
-    m, l, v = (dict(ql_rows(_git("show", "%s:%s" % (r, path)))) for r in ("master", "legacy-GM", "vanilla-5.x"))
+    m, l, v = (dict(ql_rows(_git("show", "%s:%s" % (r, path)))) for r in ("vanilla-1.32", "legacy-GM", "vanilla-5.x"))
     head = _git("show", "vanilla-5.x:" + path).replace("\r\n", "\n").split("\n")[0]
     units = ql_units().get(path, set())
     changes = {n for n in set(m) | set(l) if m.get(n) != l.get(n)}
@@ -434,7 +434,7 @@ def ql_verify(worktree):
             print("DIFF %s: not 5.x's table with legacy's rows" % path)
             bad = 1
         g, l, v, m = (dict(ql_rows(t)) for t in (got, _git("show", "legacy-GM:" + path), _git("show", "vanilla-5.x:" + path),
-                                                  _git("show", "master:" + path)))
+                                                  _git("show", "vanilla-1.32:" + path)))
         for name in set(g) | set(l) | set(v):
             want = l.get(name) if (name in m or name in l) else v.get(name)  # legacy's row, or 5.x's own
             if g.get(name) != want:

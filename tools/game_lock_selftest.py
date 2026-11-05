@@ -130,7 +130,7 @@ def scenario(t: T) -> None:
     t.expect(["--install-from", fake], 1, r"refused: .*--holder", "build_mod.py --install-from refused without --holder", tool="build_mod.py")
     t.expect(["--install-from", fake, "--holder", f"A:{ta}"], 0, r"gate passed for build_mod.py install",
              "build_mod.py --install-from passes with A's token", tool="build_mod.py")
-    t.expect(["--ref", "5.x-GM", "--out", fake, "--install", "--scripts", "x"], 2, r"parent's", "build_mod.py refuses --scripts installs without --parent", tool="build_mod.py")
+    t.expect(["--ref", "master", "--out", fake, "--install", "--scripts", "x"], 2, r"parent's", "build_mod.py refuses --scripts installs without --parent", tool="build_mod.py")
     t.expect(["--out", fake], 2, r"--ref is required", "build_mod.py needs --ref", tool="build_mod.py")
     st = json.loads((t.state / "state.json").read_text(encoding="utf-8"))
     t.check(st["holder"]["claimed"] and st["holder"]["last_cmd"] == "build_mod.py install", "gated commands claim the grant and renew the lease",

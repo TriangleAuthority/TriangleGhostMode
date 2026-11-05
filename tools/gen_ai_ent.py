@@ -6,7 +6,7 @@ the AI-C audit also the fake level addon where legacy made a fake level real, an
 value 5.x changed (GAME_FILES, read from the games' bundles: the 5.x install and the legacy copy).
 
 For every binary file `docs/features/attribution.csv` gives AI-02, AI-06, AI-07, AI-14, AI-18, AI-19 or AI-20, the edits legacy made to
-1.32's file (`master` -> `legacy-GM`) in the properties AI-A owns (PROPS) are derived object by object and
+1.32's file (`vanilla-1.32` -> `legacy-GM`) in the properties AI-A owns (PROPS) are derived object by object and
 applied to 5.x's file (`vanilla-5.x`) with `cr2w_patch.py`; the W3Edit re-save noise and every other
 property stay 5.x's. Rules:
 
@@ -95,7 +95,7 @@ LEGACY_OVER_5X = {"AI-18"}
 # Struct properties edited field by field.
 STRUCT_PROPS = {"poisonDamage"}
 # Files legacy left as 1.32 has them where 5.x changed an owned value of a LEGACY_OVER_5X feature: the value legacy
-# played is 1.32's (as AI-B's PART for abilities). The baselines on master and vanilla-5.x hold only the files legacy
+# played is 1.32's (as AI-B's PART for abilities). The baselines on vanilla-1.32 and vanilla-5.x hold only the files legacy
 # changed, so these are read from the games' bundles (the 5.x install; the legacy copy, docs/tools.md): AI-C audit F2's
 # scan of every projectile entity. The Wild Hunt mage's ice spear: 1.32 500, 5.x 285 (5.x lowered it for its level
 # term, which PA11 removed).
@@ -124,7 +124,7 @@ def game_file(which, path):
 
 
 class GameBlobs:
-    """Blobs, with GAME_FILES read from the games: 1.32's (= legacy's) for master and legacy-GM, 5.x's for vanilla-5.x."""
+    """Blobs, with GAME_FILES read from the games: 1.32's (= legacy's) for vanilla-1.32 and legacy-GM, 5.x's for vanilla-5.x."""
 
     def __init__(self):
         self.b = Blobs()
@@ -153,7 +153,7 @@ def eet_5x(x):
     """1.32's (and legacy's) EEffectType number -> 5.x's, by name."""
     if not _EET:
         path = "modGhostMode/scripts/game/gameplay/effects/effectTypes.ws"
-        old, new = _enum("master", path, "EEffectType"), _enum("vanilla-5.x", path, "EEffectType")
+        old, new = _enum("vanilla-1.32", path, "EEffectType"), _enum("vanilla-5.x", path, "EEffectType")
         _EET.append({i: new.index(n) for i, n in enumerate(old) if n in new})
     return _EET[0][x]
 
@@ -266,7 +266,7 @@ def plan(blobs, path):
     if path in LATER_FILES:
         p.problems.append(LATER_FILES[path])
         return p
-    m, l, v = (bin_chunks(blobs.get(r, path)) for r in ("master", "legacy-GM", "vanilla-5.x"))
+    m, l, v = (bin_chunks(blobs.get(r, path)) for r in ("vanilla-1.32", "legacy-GM", "vanilla-5.x"))
     for key in sorted(set(m) | set(l)):
         where, cls, n = key
         mr = restrict(cls, m[key]) if key in m else None
@@ -501,7 +501,7 @@ def loot_base(blobs, path):
 def header_swap(blobs, path):
     """Legacy's file with 5.x's header fields (version, build) and the header CRC recomputed; None unless
     5.x's file is 1.32's but for those header bytes."""
-    m, l, v = (blobs.get(r, path) for r in ("master", "legacy-GM", "vanilla-5.x"))
+    m, l, v = (blobs.get(r, path) for r in ("vanilla-1.32", "legacy-GM", "vanilla-5.x"))
     diff = [i for i in range(max(len(m), len(v))) if i >= len(m) or i >= len(v) or m[i] != v[i]]
     if len(m) != len(v) or any(not (4 <= i < 24 or 32 <= i < 36) for i in diff):
         return None

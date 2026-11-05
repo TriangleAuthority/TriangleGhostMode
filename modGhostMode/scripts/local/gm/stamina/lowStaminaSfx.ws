@@ -19,7 +19,7 @@ function GMCheckForLowStamina()
 		return;
 
 	threshold = 0.01 * GMGetOptionFloat('GMQOLOptions', 'GMLowStaminaSFX');
-	staminaPrc = GetStatPercents(BCS_Stamina);
+	staminaPrc = GetStat(BCS_Stamina) / ((W3PlayerWitcher)this).GMFullMaxStamina();	// STAM-10: of the full max while max stamina is lowered
 
 	if(staminaPrc < threshold && !gmLowStaminaSFXPlaying)
 	{

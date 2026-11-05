@@ -17,7 +17,7 @@ DLC override if it works, else whole files; no DLC override of `<loot>` is known
 
     python tools/gen_loot.py --worktree DIR [--check | --verify]
 
-Writes the files at their vanilla paths under `modGhostMode/files/` in the 5.x-GM worktree (--worktree, required). --check fails if a file is out of date. --verify reads the written files and checks every
+Writes the files at their vanilla paths under `modGhostMode/files/` in the port's worktree (--worktree, required). --check fails if a file is out of date. --verify reads the written files and checks every
 LOOT unit's entry against legacy's (ported) or 5.x's (not yet ported, counted), no name defined twice,
 and the rest of each file 5.x's; and every reward's gold in the six reward files against legacy's (ECON-10), each
 difference explained (5.x's new rewards, PE9). Also writes the in-game data test `tests/gmTestsEconRewards.ws`
@@ -247,7 +247,7 @@ def texts(path):
             return git("show", f"{ref}:{path}").replace("\r\n", "\n")
         except subprocess.CalledProcessError:
             return None
-    return show("master"), show("legacy-GM"), show("vanilla-5.x")
+    return show("vanilla-1.32"), show("legacy-GM"), show("vanilla-5.x")
 
 
 def generate(path, us):
@@ -604,7 +604,7 @@ def derive_ops(cls, n, mprops, lprops):
 
 def bin_plan(blobs, path):
     """(ops, touched chunk keys, conflicts) for one file: the edits legacy made to 1.32's loot objects."""
-    m, l, v = (bin_chunks(blobs.get(r, path)) for r in ("master", "legacy-GM", "vanilla-5.x"))
+    m, l, v = (bin_chunks(blobs.get(r, path)) for r in ("vanilla-1.32", "legacy-GM", "vanilla-5.x"))
     ops, touched, conflicts = [], set(), []
     for key in sorted(set(m) | set(l)):
         if key[1] not in BIN_CLASSES:

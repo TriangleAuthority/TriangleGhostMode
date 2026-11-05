@@ -158,7 +158,7 @@
 2110992630|        |gm_skill_desc_wolf_school|Dopo che un nemico ha subito danni da bomba, gli oli per lame conferiscono contro di lui il $S$% di probabilità di colpo critico e il $S$% di potenza del colpo critico. Le bombe infliggono il $S$% di danni in più ai nemici avvelenati.
 ; SKL-19 end
 ; MUT
-2110992551|        |gm_mutation_desc_1|When drawn, magic, relic and witcher swords increase Sign base damage by $S$% of their own base damage.
+2110992551|        |gm_mutation_desc_1|When drawn, any sword increases Sign base damage by $S$% of its own base damage.
 2110992149|        |gm_mutation_desc_2|Signs can deal critical hits. Their critical hit chance and power are determined by Sign Intensity (current critical hit chance -  $S$%, critical hit power bonus - $S$%). Opponents killed by critical hits from Signs explode.
 2110992150|        |gm_mutation_desc_6|Quando il Segno Aard viene lanciato, ha una probabilità del $S$% di congelare i nemici. I nemici affetti contemporaneamente da atterramento e congelamento muoiono immediatamente. I nemici non congelati ricevono $S$ danni aggiuntivi. Il danno scala con intensità del Segno. Danno attuale: $S$.
 2110992152|        |gm_mutation_desc_7|While in combat you alternate between two states: Rush state that doubles your Adrenaline gain for $S$ sec and gives additional +$S$% to Attack Power and Sign Intensity per Adrenaline Point and Recovery state that halves your Adrenaline gain for $S$ sec and gives -$S$% to the same characteristics for each Adrenaline point gained during the Rush state.
@@ -566,3 +566,8 @@
 2110992450|        |preset_Mods_ghost_mode_gm_gameplay_options|Preimpostazioni Gameplay
 2110992459|        |preset_value_gm_old_ver|Vanilla(ish)
 2110992179|        |gm_geralt_too_heavy|L'ingombro del tuo inventario è troppo alto.
+; STAM-10: the exhaustion options (new skill tree only; English text where no translation exists)
+2110992671|        |option_gm_exhaustion|Exhaustion: pay from max stamina (new skill tree only)
+2110992672|        |option_gm_exh_maxregen|Exhaustion: max stamina regen (share of regen, new skill tree only)
+2110992673|        |option_gm_exh_adrenaline|Exhaustion: adrenaline per stamina point (new skill tree only)
+2110992674|        |option_gm_exh_floor|Exhaustion: max stamina floor (new skill tree only)

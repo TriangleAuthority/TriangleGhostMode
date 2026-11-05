@@ -120,7 +120,7 @@ def add_worktree(ap) -> None:
     """The generators' and checks' --worktree: required, so no tool reads or writes another area's
     worktree by default (parallel ports, docs/proposals/parallel-ports.md). Also lowers the priority."""
     ap.add_argument("--worktree", required=True, type=_worktree,
-                    help="the mod worktree to read and write: the area's (../TGM-<area>) or the integration's (../TGM-5x-GM)")
+                    help="the mod worktree to read and write: the area's (../TGM-<area>) or the main checkout's (.)")
     below_normal()
 
 

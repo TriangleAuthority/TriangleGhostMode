@@ -11,7 +11,7 @@ legacy, also where 5.x changed it (DC4: the six Blood and Wine Wolf upgrades), w
 
     python tools/gen_craft.py --worktree DIR [--check | --verify]
 
-Writes the files at their vanilla paths under `modGhostMode/files/` in the 5.x-GM worktree (--worktree, required), regular and NG+. --check writes nothing and fails if a file is out of date. --verify reads
+Writes the files at their vanilla paths under `modGhostMode/files/` in the port's worktree (--worktree, required), regular and NG+. --check writes nothing and fails if a file is out of date. --verify reads
 the written files and checks that every CRAFT unit's entry equals legacy's (the ported ones) or 5.x's (the
 others, counted by reason), that no name is defined twice, and that the rest of each file is 5.x's.
 """
@@ -261,7 +261,7 @@ def main():
             new = write_text(text, path)
         old = open(dst, encoding="utf-8", newline="").read() if os.path.exists(dst) else None
         if new is None:
-            # the worktree holds 5.x's own copy (5.x-GM derives from vanilla-5.x): restore it if changed
+            # the worktree holds 5.x's own copy (master derives from vanilla-5.x): restore it if changed
             if old is not None and norm(old.lstrip("﻿")) != norm(vtext):
                 stale.append(path)
                 if not args.check:

@@ -15,7 +15,7 @@ So ITEM's fields are applied by whichever generator writes the entry:
 
 The units and their features come from `docs/features/attribution.csv`: a field is applied only to a
 unit attributed to the feature that owns it, and only once that feature is in PORTED (the slices of
-item.md's port order). Each field is merged three-way: legacy's change against 1.32 (`master`) applied
+item.md's port order). Each field is merged three-way: legacy's change against 1.32 (`vanilla-1.32`) applied
 to 5.x's entry; where 5.x itself changed the field, 5.x's stays.
 """
 import csv, os, re

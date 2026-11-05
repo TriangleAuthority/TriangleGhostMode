@@ -58,7 +58,7 @@ function GMBrewingAfterDrink()
 	skill = GMRefreshmentSkill();
 	if(skill != S_SUndefined)
 	{
-		value = ClampF(GetStatMax(BCS_Stamina) * CalculateAttributeValue(GetSkillAttributeValue(skill, 'stamina_gain_perc', false, true)) * GetSkillLevel(skill), 0, GetStatMax(BCS_Stamina));
+		value = ClampF(GMFullMaxStamina() * CalculateAttributeValue(GetSkillAttributeValue(skill, 'stamina_gain_perc', false, true)) * GetSkillLevel(skill), 0, GetStatMax(BCS_Stamina));	// STAM-10: a share of the full max
 		GainStat(BCS_Stamina, value);
 	}
 	if(CanUseSkill(S_Alchemy_s02))

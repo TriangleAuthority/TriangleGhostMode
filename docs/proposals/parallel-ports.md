@@ -91,20 +91,19 @@ A tool manages the slot, so grants never wait for the parent. The parent sets po
 
 ## 4. Branches and worktrees
 
-The tools live on master, and the generators read master's `attribution.csv`. So an area changes two branches, and each has its own worktree:
+Since the history rewrite (2026-11-05) the tools, docs and port share one branch, `master`. An area has one branch and one worktree:
 
 | Worktree | Branch | Holds |
 |---|---|---|
-| `../TGM-<area>` | `gm/<area>`, from `5.x-GM` | the mod code and the generated XML |
-| `../TGM-<area>-master` | `master-<area>`, from `master` | the area's **tools and generators**, its doc, its attribution rows and its open questions |
+| `../TGM-<area>` | `gm/<area>`, from `master` | the mod code, the generated XML, the area's **tools and generators**, its doc, its attribution rows and its open questions |
 
 - **Where tools run:**
-  - The area's generators and compile-only builds run from `TGM-<area>-master`, with `--worktree ..\TGM-<area>` and `--ref gm/<area>`.
-  - While parallel work runs, these two arguments become **required** in every generator and in `build_mod.py`. Today their defaults point at the shared `TGM-5x-GM` and `5.x-GM`.
+  - The area's generators and compile-only builds run from `TGM-<area>`, with `--worktree .` and `--ref gm/<area>`.
+  - While parallel work runs, these two arguments become **required** in every generator and in `build_mod.py`.
 - **Findings for shared docs:** CLAUDE.md sends findings to `development.md`, `game-5.0-changes.md` or `tools.md`. Agents put them instead in a "For the shared docs" block in their area doc, and integration moves them.
 - **Git hygiene:**
   - Agents never fetch.
-  - Agents push only their own two branches.
+  - Agents push only their own branch.
   - `gc.auto=0` while parallel work runs; the parent runs `git gc` when nothing else is running.
   - Every area worktree is created after the lock commit.
 
@@ -118,7 +117,7 @@ The tools live on master, and the generators read master's `attribution.csv`. So
   - `gen_trph.py` writes the trophy abilities whole, including legacy's weights.
   - `gen_wgt.py` skips names that another DLC file defines.
   - W5's overburdened checks read the carry limit from the game, never as a fixed number, because the Wight trophy adds +20.
-- **Pre-seeded hooks**, set up on 5.x-GM and master before branching, so areas don't edit the same lines:
+- **Pre-seeded hooks**, set up on `master` before branching, so areas don't edit the same lines:
   - per-area test stubs already called from `gmtest_regress()` and `gmtest_panel()`;
   - `item_layer.py`'s `PORTED`, `TAGS` and `NODES` split into per-area sets on separate lines;
   - the string CSVs merged by union through `.gitattributes`. The build already stops on any duplicate string id.
@@ -127,11 +126,10 @@ The tools live on master, and the generators read master's `attribution.csv`. So
 
 Integration is too heavy for the parent per slice: about 15–25 minutes each, 12–15 times. A fresh **integrator subagent** does it, in batches, and the parent verifies its result as it verifies any agent today. A batch is:
 
-1. Merge `master-<area>` into master **first**, so the new tools are in place.
-2. Merge the squashed `gm/<area>` into 5.x-GM. For generated files, take either side, then rebuild them with the merged tools: `tools/gen_all.py` runs every generator in its order, with `--check` and `--verify`, and lists the generated paths.
-3. Run every `--verify`, `check_modsigns`, `dlc_conflicts`, `deviations --check`, and a compile.
-4. Fast-forward, push, and regenerate `deviations.md` and `coverage.md`. The parent then updates `features/README.md`.
-5. Run the **integrated regression in both trees**, queued in the game lock as holder `integration`.
+1. Merge the squashed `gm/<area>` into `master` (code, tools and docs together). For generated files, take either side, then rebuild them with the merged tools: `tools/gen_all.py` runs every generator in its order, with `--check` and `--verify`, and lists the generated paths.
+2. Run every `--verify`, `check_modsigns`, `dlc_conflicts`, `deviations --check`, and a compile.
+3. Fast-forward, push, and regenerate `deviations.md` and `coverage.md`. The parent then updates `features/README.md`.
+4. Run the **integrated regression in both trees**, queued in the game lock as holder `integration`.
 
 **When integration runs:**
 - Batches happen as needed.
@@ -162,7 +160,7 @@ The new bottlenecks are integration, then the game queue, then timing flakes fro
 
 ## What is built
 
-Step 0, 2026-11-02. **Verified:** the offline self-test (`game_lock.py selftest`: 82 checks, among them FIFO queueing, the claim deadline, lease expiry and `reclaim`, pause, preempt, refusals, and a process killed while it holds the file lock) and one real turn as holder `tooling` (5.x-GM `98d1644a`: compile-only build, `--install-from`, `regress.py --trees both`: `gmtest_regress()` 1,300 passed and `gmtest_panel()` 156 passed, 0 failed, in each tree; the release restored the four settings files, archived the log, and found the saves unchanged, 1,079 live and in the backup). `gen_all.py --verify --worktree ../TGM-5x-GM`: every generator and check passed, no diff. The procedure an area agent follows is [development.md: Working in parallel](../development.md#working-in-parallel); the lock and the guards are in [game-automation.md: The game slot](../game-automation.md#the-game-slot); the tools in [tools.md](../tools.md).
+Step 0, 2026-11-02. **Verified:** the offline self-test (`game_lock.py selftest`: 82 checks, among them FIFO queueing, the claim deadline, lease expiry and `reclaim`, pause, preempt, refusals, and a process killed while it holds the file lock) and one real turn as holder `tooling` (master `3d1d8ff3`: compile-only build, `--install-from`, `regress.py --trees both`: `gmtest_regress()` 1,300 passed and `gmtest_panel()` 156 passed, 0 failed, in each tree; the release restored the four settings files, archived the log, and found the saves unchanged, 1,079 live and in the backup). `gen_all.py --verify --worktree ../TGM-5x-GM`: every generator and check passed, no diff. The procedure an area agent follows is [development.md: Working in parallel](../development.md#working-in-parallel); the lock and the guards are in [game-automation.md: The game slot](../game-automation.md#the-game-slot); the tools in [tools.md](../tools.md).
 
 | Plan | Built as |
 |---|---|
@@ -171,7 +169,7 @@ Step 0, 2026-11-02. **Verified:** the offline self-test (`game_lock.py selftest`
 | Section 2: enforcement | `game.py` (`--holder` on run, start, load, exec, resume; the save allow-list; `gmtest_nosave()` after each load; the installed-build check at `start`) and `build_mod.py --install`/`--install-from` |
 | Section 3: prebuilt installs | `build_mod.py --install-from <out>`; `--ref` and `--out` required; a warning for uncommitted changes in the ref's worktree |
 | Section 4: `--worktree` | Required in every generator, `check_modsigns.py` and `dlc_conflicts.py` (always, not only in a parallel mode); `gen_loot.py`'s and `gen_ai_ent.py`'s module defaults removed, so nothing falls back to `TGM-5x-GM`. `gc.auto` 0 in the main repository's config |
-| Section 5: pre-seeded hooks | 5.x-GM `98d1644a`: `tests/gmTestsWgt.ws`, `gmTestsOpt.ws`, `gmTestsTrph.ws` (`GMTest_<area>()` in `gmtest_regress()`, `GMTest_<area>_after()` in `gmtest_panel()`, empty) and `.gitattributes`' `merge=union` for `modGhostMode/localization/**/*.csv`. Master: `item_layer.py`'s `PORTED`, `AREAS` and the `TAGS`, `NODES`, `BLOCKS` and `ATTRS` additions one line per area, with WGT's, OPT's and TRPH's ready (the same values) |
+| Section 5: pre-seeded hooks | master `3d1d8ff3`: `tests/gmTestsWgt.ws`, `gmTestsOpt.ws`, `gmTestsTrph.ws` (`GMTest_<area>()` in `gmtest_regress()`, `GMTest_<area>_after()` in `gmtest_panel()`, empty) and `.gitattributes`' `merge=union` for `modGhostMode/localization/**/*.csv`. Master: `item_layer.py`'s `PORTED`, `AREAS` and the `TAGS`, `NODES`, `BLOCKS` and `ATTRS` additions one line per area, with WGT's, OPT's and TRPH's ready (the same values) |
 | Section 6: integration | `tools/gen_all.py` (write in order, `--check`, `--verify`, `--list`); `tools/regress.py` (both trees, counts, archived logs, the flake rerun) |
 
 **Choices made while building** (the porter's, not yet confirmed by the owner):

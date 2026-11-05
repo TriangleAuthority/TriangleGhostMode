@@ -14,7 +14,9 @@ The first version of the port reproduces legacy Ghost Mode's behaviour, which wa
 - **Deviation:** what differs from legacy's code or changelist, and why (project owner, 2026-10-04).
 ```
 
-A deviation is any behaviour that differs from legacy: a fix of a legacy defect, a 5.x behaviour kept, a rule changed or left out. Implementation differences with the same behaviour are not deviations. Each bullet ends with who decided and when; one the owner has not reviewed says "porter's call, not confirmed by the owner", one that lasts until another area is ported says "temporary, until <area>". Where only running legacy could show how it actually played, the case also goes on the [list to test in legacy](open-questions.md#to-test-in-legacy-ghost-mode). `python tools/deviations.py` lists them all (`--unconfirmed`: those waiting for the owner); `--write` regenerates [features/deviations.md](features/deviations.md) for milestone reviews.
+A deviation is any behaviour that differs from legacy: a fix of a legacy defect, a 5.x behaviour kept, a rule changed or left out. Implementation differences with the same behaviour are not deviations. Each bullet ends with who decided and when; one the owner has not reviewed says "porter's call, not confirmed by the owner", one that lasts until another area is ported says "temporary, until <area>". Where only running legacy could show how it actually played, the case also goes on the [list to test in legacy](open-questions.md#to-test-in-legacy-ghost-mode). **The two skill trees** (project owner, 2026-11-03). Legacy had one tree, the classic one, so the deviations are kept in two lists. A plain `- **Deviation:**` is the game as played with the classic tree, and it applies in the new tree too unless its text names the classic tree. A deviation only the new tree has is written `- **Deviation (new tree):**`, and a new-tree skill designed afresh (not a deviation) `- **New design:**`. The new tree's general rules (legacy's skills on 3 levels, scaled tiers, legacy's names) are not deviations per skill: they are stated once, in [SKL's area decisions](features/skl.md#area-decisions).
+
+`python tools/deviations.py` lists them all (`--unconfirmed`: those waiting for the owner); `--write` regenerates [features/deviations.md](features/deviations.md) (the classic tree) and [features/deviations-new-tree.md](features/deviations-new-tree.md) (what differs only in the new tree) for milestone reviews.
 
 **Legacy's code against its changelist** (project owner, 2026-10-05). Where they differ, the code is the better guide: the changelist could drift. Every difference is still recorded in [open-questions.md](open-questions.md#legacy-data-vs-changelist), in one of two buckets:
 - **Contradictions:** the changelist states something explicitly and the code does otherwise, e.g. a potion duration. These get special attention: each is brought to the owner.
@@ -36,7 +38,7 @@ The map therefore works at two levels:
 
 ## What counts as Ghost Mode
 
-`legacy-GM` has three commits (see [legacy-ghost-mode.md](legacy-ghost-mode.md)): Shared Imports v0.6, Community Patch – Base v1.0, then Ghost Mode 4.1. **For simplicity the map treats all three as Ghost Mode**: the unit inventory covers `master...legacy-GM`.
+`legacy-GM` has three commits (see [legacy-ghost-mode.md](legacy-ghost-mode.md)): Shared Imports v0.6, Community Patch – Base v1.0, then Ghost Mode 4.1. **For simplicity the map treats all three as Ghost Mode**: the unit inventory covers `vanilla-1.32...legacy-GM`.
 
 Every unit records which commit it came from (`SI`, `CPB` or `GM`), so the dependency changes can be filtered out in one step.
 
@@ -182,7 +184,7 @@ Features are grouped into areas that follow the sections of [legacy-FullChangeli
 
 Sources for the feature list: the changelist (primary), the 77 original commit subjects in the Ghost Mode 4.1 commit message, `design-docs/` on `legacy-GM`, and any units nobody can attribute (these become new features, marked as undocumented, or, when they fit no area, entries in the `MISC` bucket, [misc.md](features/misc.md), to be dealt with later).
 
-**Before calling an area mapped, sweep the units for its subject**, not just the changelist: `python tools/unit_sweep.py <keyword> --unattributed` lists every unattributed unit whose Ghost Mode change (master vs `legacy-GM`) touches the keyword, in scripts and XML; attribute or hand off each one, and repeat with the area's other keywords. The STAM area was first mapped from the changelist with 126 units; a sweep for `stamina` (2026-10-02) found 105 more script units and about 900 XML units (NPC abilities, armor items, skills), two missing features (STAM-08 NPC stamina, STAM-09 Whirl and Rend costs) and large gaps in STAM-03 and STAM-06. Units whose change belongs to another area go into a hand-off list in the area file (see [stam.md](features/stam.md#hand-off-to-other-areas)), so that area's mapping starts from it.
+**Before calling an area mapped, sweep the units for its subject**, not just the changelist: `python tools/unit_sweep.py <keyword> --unattributed` lists every unattributed unit whose Ghost Mode change (`vanilla-1.32` vs `legacy-GM`) touches the keyword, in scripts and XML; attribute or hand off each one, and repeat with the area's other keywords. The STAM area was first mapped from the changelist with 126 units; a sweep for `stamina` (2026-10-02) found 105 more script units and about 900 XML units (NPC abilities, armor items, skills), two missing features (STAM-08 NPC stamina, STAM-09 Whirl and Rend costs) and large gaps in STAM-03 and STAM-06. Units whose change belongs to another area go into a hand-off list in the area file (see [stam.md](features/stam.md#hand-off-to-other-areas)), so that area's mapping starts from it.
 
 ## Layout
 
@@ -218,7 +220,7 @@ One row per change unit:
 | `ngplus` | The unit is in a `*_plus` (New Game+) folder: attributed like any unit, but [not balanced or tested](#new-game-carried-over-and-scaled-not-balanced-or-tested) |
 | `gm_line` | First line of the unit in the Ghost Mode file |
 
-**Blind spot: a class's or state's own declaration line.** The text from the declaration to its `{` (the parent class after `extends`, an `import class`) goes into no unit, so a change there is invisible. Known cases, each handled in its area (C4 audit, 2026-11-03): `edible.ws`, `wellFed.ws` and `wellHydrated.ws` (FOOD-03: the parent class), Shared Imports' `environment.ws` (an `import class` commented out; built into 5.x), and the parent changes in `TawnyOwl` and `potionVitalityRegen` (ALCH-04, ALCH-07), `mutation5` (MUT-10), `slowdownAxii` (SKL-12) and `yrdenHealthDrain` (SKL-10). When mapping a file, diff its class and state headers by hand (`git diff master legacy-GM -- <file>`).
+**Blind spot: a class's or state's own declaration line.** The text from the declaration to its `{` (the parent class after `extends`, an `import class`) goes into no unit, so a change there is invisible. Known cases, each handled in its area (C4 audit, 2026-11-03): `edible.ws`, `wellFed.ws` and `wellHydrated.ws` (FOOD-03: the parent class), Shared Imports' `environment.ws` (an `import class` commented out; built into 5.x), and the parent changes in `TawnyOwl` and `potionVitalityRegen` (ALCH-04, ALCH-07), `mutation5` (MUT-10), `slowdownAxii` (SKL-12) and `yrdenHealthDrain` (SKL-10). When mapping a file, diff its class and state headers by hand (`git diff vanilla-1.32 legacy-GM -- <file>`).
 
 Comments and whitespace never count as changes. Binary files are one unit each for now; splitting them by property (with `tools/bindiff.py`) is left for when an area needs it.
 
@@ -259,7 +261,7 @@ Each `<area>.md` has an intro (what Ghost Mode does in this area, and what 5.x c
 
 **Decisions:** port as-is / adapt / drop / redesign, and why; who decided and when.
 
-- **Deviation:** each deviation from legacy as a bullet of its own, with its reason, who decided and when ([legacy behaviour first](#legacy-behaviour-first)).
+- **Deviation:** each deviation from legacy as a bullet of its own, with its reason, who decided and when ([legacy behaviour first](#legacy-behaviour-first)); `- **Deviation (new tree):**` for one only the new tree has, `- **New design:**` for a new-tree skill designed afresh.
 
 **Slices:**
 
@@ -304,7 +306,7 @@ Mapping can run ahead, but **porting moves in small steps, and each step is run 
 **What a step is:**
 
 - One feature, or one slice of a feature (e.g. the cooldown effect script before the menu option that configures it). Where a feature is too big, split it into slices that each compile and run on their own, using hard-coded defaults until the pieces they depend on exist.
-- One commit (or a few) on `5.x-GM`, with the feature IDs in the commit message, and the [save impact](#save-compatibility) if it is not `none`.
+- One commit (or a few) on `master`, with the feature IDs in the commit message, and the [save impact](#save-compatibility) if it is not `none`.
 - No mixing: no unrelated fixes, and no reformatting of code the step does not need to touch.
 
 **The in-game check**, done for every step before the next one:
@@ -327,7 +329,7 @@ The auditor checks, and reports findings rather than fixing them silently:
 
 1. **Both skill trees.** For every skill the feature touches (in its code, XML or tests): the classic tree's skill and the new tree's counterpart are both handled, or the entry says why one is not; no reworked or classic skill ID is hard-coded where the equipped one should be read; shared skills are special-cased where the trees need different rules; the checks ran on both trees. STAM was first ported for the new tree only and missed the classic Whirl and the new tree's alternate Igni and Axii ([follow-ups](features/stam.md#two-skill-trees-follow-ups)).
 2. **Completeness against legacy.** Every unit attributed to the feature (`attribution.csv`) is ported, or dropped, kept for another feature or handed off with a reason in the entry. Re-run `tools/unit_sweep.py` with the feature's keywords for units nobody attributed. Compare the entry's "What it does" with the changelist and with the legacy code: behaviour legacy had that the port lacks is a finding (legacy behaviour first).
-3. **The code.** Read the port on `5.x-GM`: each legacy change has its counterpart, deviations are marked and recorded in the entry with their reason, no leftovers (temporary probes, debug logging, dead code, test-only wrappers outside `tests/`), conventions held (prefixes, feature tags, `//modSigns` markers in replaced bodies), no absolute paths.
+3. **The code.** Read the port on `master`: each legacy change has its counterpart, deviations are marked and recorded in the entry with their reason, no leftovers (temporary probes, debug logging, dead code, test-only wrappers outside `tests/`), conventions held (prefixes, feature tags, `//modSigns` markers in replaced bodies), no absolute paths.
 4. **The verification.** The slices' recorded checks cover what the feature does; each check says real or scripted; untested parts are listed as open checks. Run the [regression check](development.md#testing-in-game).
 5. **The docs and notes.** The entry, the status page ([features/README.md](features/README.md#where-the-port-stands)) and the other docs touched say what the code does now; the working notes on the feature are still correct; nothing a reader needs exists only in the working notes.
 
@@ -377,7 +379,7 @@ Run the whole process on one small area before doing the others: mapping (phases
 
    Record the answers in [development.md](development.md), and add build and install scripts to `tools/`.
 2. **Map the pilot area.** Sign cooldowns plus stamina: they touch scripts, XML, the options menu and localization, and 5.x has its own `overloadCooldown.ws` to compare against. Inventory, attribution and 5.x analysis for just this area. *Done 2026-10-02:* `tools/change_units.py` built the inventory; [features/stam.md](features/stam.md) maps STAM-01 to STAM-07 (126 units) and [features/opt.md](features/opt.md) the parts of OPT-01 they use. A sweep of every stamina-related unit then completed the mapping (STAM-08 and STAM-09 added, 1068 units).
-3. **Port it in slices**, each through the in-game check. *Done 2026-10-03:* STAM-01 to STAM-09 ported and verified in game (34 commits on `5.x-GM` over two days), with OPT-01's gameplay and QoL groups.
+3. **Port it in slices**, each through the in-game check. *Done 2026-10-03:* STAM-01 to STAM-09 ported and verified in game (34 commits on `master` over two days), with OPT-01's gameplay and QoL groups.
 4. **Review the process.** *Done 2026-10-03.* What the pilot showed, and the changes made:
    - Small slices verified in game, the fully scripted test loop (`tools/game.py`, `gmtest_*` functions), [legacy behaviour first](#legacy-behaviour-first), the sweep before calling an area mapped, the hand-off list and the status page for session hand-offs worked; kept.
    - Entries grew into logs (one feature's verification cell reached about 4,800 characters). The [entry template](#feature-entry-template) now keeps the table to short values and records verification per slice; measurements and investigations live in working notes outside the repository.

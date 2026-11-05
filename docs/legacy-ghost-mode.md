@@ -2,7 +2,7 @@
 
 ## Versions on `legacy-GM`
 
-`legacy-GM` has three commits on top of `master`:
+`legacy-GM` has three commits on top of `vanilla-1.32`:
 
 1. **Shared Imports v0.6**: a dependency (see below), merged into `modGhostMode/scripts`.
 2. **Community Patch – Base v1.0**: a dependency (see below), merged into `modGhostMode/scripts`.
@@ -62,6 +62,6 @@ It does not change `input.settings`: every input action its scripts use already 
 
 The vanilla file set is defined by the paths under `modGhostMode/files`. Ghost Mode 4.1 has 12 paths that the original repository did not: entity templates for the Blood and Wine tournament contestants (`dlc/bob/data/quests/sidequests/quest_files/sq701_tournament/characters/contestants/*.w2ent`). They were added to both baselines afterwards:
 
-- `master` includes their legacy versions, extracted from the legacy game copy (`DLC\bob\content\bundles\blob.bundle`, zlib-compressed; see [tools.md](tools.md#game-install)) with `tools/unbundle.py`.
+- `vanilla-1.32` includes their legacy versions, extracted from the legacy game copy (`DLC\bob\content\bundles\blob.bundle`, zlib-compressed; see [tools.md](tools.md#game-install)) with `tools/unbundle.py`.
 - `vanilla-5.x` includes their 5.0 versions (from `bob.bundle`, by running `tools/extract_vanilla.py` from a `legacy-GM` checkout).
 - Every file the original repository shipped is also in 4.1; nothing was removed.

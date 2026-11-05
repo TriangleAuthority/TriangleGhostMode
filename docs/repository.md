@@ -3,74 +3,53 @@
 ## Branches
 
 ```
-master:  Legacy vanilla files (1.32) ── tools ── README ── docs ── ...     shared base
-           │
-           ├── legacy-GM:    Ghost Mode v4.0                                the original mod
-           │
-           └── vanilla-5.x:  Vanilla files (5.0) ── (5.1, 5.2, ...)         CDPR's updates
+vanilla-1.32:  Legacy vanilla files (1.32) ── tournament entities           the shared baseline
                  │
-                 └── 5.x-GM: porting work                                   the port
+                 ├── legacy-GM:    SI ── CPB ── Ghost Mode 4.1                 the original mod
+                 │
+                 └── vanilla-5.x:  Vanilla files (5.0) ── 5.0 hotfix ── ...    CDPR's updates
+                       │
+                       └── master: the port ── ... ┬── tools, docs           the port, with the project's tools and docs
+                                                    │
+                       (tools and docs history) ───┘
 ```
 
 | Branch | Contents |
 |---|---|
-| `master` | The root commit with the unmodified legacy (1.32, Steam build 3280809) game files at the mod's paths under `modGhostMode/`, plus the README, tools and docs shared by every branch. |
-| `legacy-GM` | `master` plus the legacy mod, in three commits: its Shared Imports and Community Patch – Base dependencies, then Ghost Mode 4.1, the canonical legacy version (the Nexus release; the original repository's 77 commits by wghost are squashed into it, subjects listed in its message). They hold only the mod: `modGhostMode/`, `design-docs/` and `modGhostMode.w3modproj`. See [legacy-ghost-mode.md](legacy-ghost-mode.md). |
-| `vanilla-5.x` | `master` plus the same game file set from the current 5.x release (now the 5.0 hotfix, Steam build 25646871). Each future CDPR update gets its own commit on top. |
-| `5.x-GM` | `vanilla-5.x` plus the Ghost Mode port. All porting work happens here. |
+| `vanilla-1.32` | The root commit with the unmodified legacy (1.32, Steam build 3280809) game files at the mod's paths under `modGhostMode/`, plus the Blood and Wine tournament entities Ghost Mode edits. The baseline every other branch starts from. |
+| `legacy-GM` | `vanilla-1.32` plus the legacy mod, in three commits: its Shared Imports and Community Patch – Base dependencies, then Ghost Mode 4.1, the canonical legacy version (the Nexus release; the original repository's 77 commits by wghost are squashed into it, subjects listed in its message). They hold only the mod: `modGhostMode/`, `design-docs/` and `modGhostMode.w3modproj`. See [legacy-ghost-mode.md](legacy-ghost-mode.md). |
+| `vanilla-5.x` | `vanilla-1.32` plus the same game file set from the current 5.x release (now the 5.0 hotfix, Steam build 25646871), one commit per release. |
+| `master` | `vanilla-5.x` plus the Ghost Mode port, and the project's README, tools and docs (their history joins `master` in one merge). All work happens here or on short-lived branches off it. |
+
+`vanilla-1.32`, `legacy-GM` and `vanilla-5.x` hold game and mod data only: no tools or docs. Their one other file is a `.gitattributes` with `* text=auto`, so text is stored LF-normalized whatever the committer's `core.autocrlf` (see [Encodings and line endings](#encodings-and-line-endings)).
 
 The vanilla file set is the same in every branch:
 
 - `modGhostMode/scripts/`: every vanilla script (`content/content0/scripts`).
 - `modGhostMode/files/`: every `.xml`/`.csv` under `gameplay/` and `game/` (base game and each DLC's `data/`), plus every other file Ghost Mode overrides (`.w2ent`, `.journal`, `.w2scene`, ...). Editor, engine, level-layer, sound, QA/test and console files are left out.
 
-Because the mod sits on top of the full vanilla set, `modGhostMode/` on `legacy-GM` and `5.x-GM` is the complete merged game state, not an installable mod.
+Because the mod sits on top of the full vanilla set, `modGhostMode/` on `legacy-GM` and `master` is the complete merged game state, not an installable mod.
 
 ## Keeping branches up to date
 
-- **Shared tools and docs go on `master`.** Anything that should be available everywhere must end up on `master`; if it was written on another branch, merge or cherry-pick it into `master`.
-- **`legacy-GM` and `vanilla-5.x` are rebased onto `master`** when it moves (`git rebase master legacy-GM`). Each is only data on top of `master`, so the rebase just replays it and the mod stays on top. Rebasing rewrites the branch, so pushing needs `--force-with-lease`.
-- **`5.x-GM` merges instead of rebasing**, because it holds ongoing work: `git merge vanilla-5.x` after `vanilla-5.x` gets a new game version or a rebase onto a newer `master`.
-- **A new game release** (5.1, ...) is a new commit on `vanilla-5.x`: re-extract the files (see below), commit them on top, then merge `vanilla-5.x` into `5.x-GM`. `git diff <previous>..vanilla-5.x` then shows exactly what the patch changed.
+- **`vanilla-1.32` and `legacy-GM` do not move.** They are the legacy reference.
+- **A new game release** (5.1, ...) is a new commit on `vanilla-5.x`: in a worktree of `vanilla-5.x`, re-extract the files with the main checkout's `tools/extract_vanilla.py` (see [below](#regenerating-the-baselines)) and commit them on top. `git diff <previous>..vanilla-5.x` then shows exactly what the patch changed.
+- **Then the port moves onto it, squashed.** The port is re-applied to the new release as one commit, then joined to the old history, so `master`'s first-parent history stays "vanilla releases, then the port" and `master` only moves forward (no force push, other worktrees keep working):
 
-## Useful commands
+  ```bash
+  git switch -c rebase-5.1 vanilla-5.x
+  git merge --squash master        # the port, tools and docs re-applied on the new release (base: the previous vanilla-5.x)
+  git commit -m "Ghost Mode port on 5.1 (squashed)"   # after resolving: keep the port's intent on the new vanilla file
+  git merge -s ours -m "Join the port's history before 5.1" master   # every earlier commit stays reachable; the tree is the squashed one
+  git switch master && git merge --ff-only rebase-5.1
+  ```
 
-Use three dots (`A...B`) against `master`: it diffs from where `B` branched off, so newer tools and docs on `master` do not show up as changes.
-
-```bash
-# Everything Ghost Mode changes (legacy)
-git diff master...legacy-GM -- modGhostMode
-
-# Only files Ghost Mode modified (skip its new files)
-git diff --diff-filter=M --stat master...legacy-GM -- modGhostMode
-
-# Everything CDPR changed between legacy and 5.x
-git diff master...vanilla-5.x
-
-# Same, ignoring whitespace and the reformatting noise
-git diff -w master...vanilla-5.x -- modGhostMode/scripts/game/player/playerWitcher.ws
-
-# The port so far, relative to vanilla 5.x
-git diff vanilla-5.x...5.x-GM
-
-# One file, three ways: legacy vanilla, Ghost Mode, 5.x
-git show master:modGhostMode/files/gameplay/abilities/geralt_skills.xml
-git show legacy-GM:modGhostMode/files/gameplay/abilities/geralt_skills.xml
-git show vanilla-5.x:modGhostMode/files/gameplay/abilities/geralt_skills.xml
-
-# Binary files at property level (see binary-files.md)
-python tools/bindiff.py master legacy-GM --summary
-
-# Binary files as text in plain git diffs (needs the cr2w diff driver, see tools.md)
-git diff master...legacy-GM -- modGhostMode/files/characters/npc_entities/monsters/arachas_lvl1.w2ent
-```
-
-## Encodings and line endings
+  Then regenerate (`tools/gen_all.py --worktree .`), rebuild, and run the regression in both trees.
 
 | Tree | Scripts | XML | CSV |
 |---|---|---|---|
 | Legacy game as shipped | UTF-16 LE with BOM (13 files ASCII) | UTF-16 LE with BOM | mostly ASCII, some UTF-16 |
-| `master` and `legacy-GM` | UTF-8, no BOM (converted) | UTF-8, no BOM (converted; declaration says `UTF-8`) | as shipped (ASCII/UTF-8) |
+| `vanilla-1.32` and `legacy-GM` | UTF-8, no BOM (converted) | UTF-8, no BOM (converted; declaration says `UTF-8`) | as shipped (ASCII/UTF-8) |
 | 5.0 as shipped = `vanilla-5.x` | UTF-8, no BOM | UTF-8 **with BOM** | mostly ASCII; 7 files UTF-16 LE, 1 UTF-8 with BOM, 2 UTF-8 |
 
 - The legacy baseline and the legacy mod were converted from UTF-16 to UTF-8 so git can diff them. They are not byte-identical to what the legacy game shipped.
@@ -82,10 +61,10 @@ git diff master...legacy-GM -- modGhostMode/files/characters/npc_entities/monste
 
 **Most features should not be ported by merging.** 5.x lets a mod change functions and XML entries through override files (script annotations, XML `on_conflict` overrides in a DLC, DLC mounters) instead of edited copies of vanilla files. [development.md](development.md#port-forms) sets the order of preference, and [feature-mapping.md](feature-mapping.md) the order of work. The merge below is for the analysis, and for the changes that do end up as whole-file overrides.
 
-`legacy-GM` and `vanilla-5.x` share their base on `master`, so git can do a three-way merge: base = legacy vanilla, ours = Ghost Mode, theirs = 5.x. On `5.x-GM`, Ghost Mode can be brought in wholesale or piece by piece:
+`legacy-GM` and `vanilla-5.x` share their base, `vanilla-1.32`, so git can do a three-way merge: base = legacy vanilla, ours = Ghost Mode, theirs = 5.x. On `master` (or a branch off it), Ghost Mode can be brought in wholesale or piece by piece:
 
 ```bash
-git switch 5.x-GM
+git switch master
 git merge -X ignore-all-space legacy-GM            # everything at once
 git checkout legacy-GM -- <path>                   # or one file at a time, then adapt it
 ```
@@ -102,6 +81,6 @@ A dry run (`git merge-tree --write-tree -X ignore-all-space legacy-GM vanilla-5.
 
 `tools/extract_vanilla.py` rebuilds either baseline from an installed game. See [tools.md](tools.md). Notes:
 
-- The file selection includes everything under `modGhostMode/files` on the current checkout. That path list is the same on every branch, so any of them works.
-- The Steam install is now 5.x. Legacy (1.32) files come from the legacy game copy described in [tools.md](tools.md#game-install): `extract_vanilla.py --utf8 --game <legacy copy>` reproduces the legacy baseline on `master` exactly (`--utf8` matches the committed conversion).
-- 5.x baselines are extracted without `--utf8`. Commit them with LF-normalized text (as git does on `git add`), leaving BOMs and UTF-16 files untouched. After committing a new release on `vanilla-5.x`, regenerate [5.x-file-status.md](5.x-file-status.md) with `python tools/port_status.py` and commit it on `master`.
+- The file selection includes everything under `modGhostMode/files` on the checkout the tool runs from (the main checkout, `master`): the port's whole-file overrides at vanilla paths are extracted too, and paths only the port has (its DLC) are listed as missing and skipped.
+- The Steam install is now 5.x. Legacy (1.32) files come from the legacy game copy described in [tools.md](tools.md#game-install): `extract_vanilla.py --utf8 --game <legacy copy>` reproduces the legacy baseline on `vanilla-1.32` exactly (`--utf8` matches the committed conversion).
+- 5.x baselines are extracted without `--utf8`, into the `vanilla-5.x` worktree's `modGhostMode/`. Commit them with LF-normalized text (as git does on `git add`), leaving BOMs and UTF-16 files untouched.

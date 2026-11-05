@@ -169,7 +169,7 @@ function GMSwordSkillDescription(skill : ESkill, lvl : int) : string
 		case S_Sword_s35:
 			cost = GMSkillVal(skill, 'stamina_cost_per_sec') * (1 - GMSkillVal(skill, 'stamina_cost_reduction_after_1') * (lvl - 1));
 			a.PushBack(GMDescNum(cost, 1));
-			a.PushBack(GMDescAdr(cost / witcher.GetStatMax(BCS_Stamina)));
+			a.PushBack(GMDescAdr(cost / witcher.GMFullMaxStamina()));	// STAM-10: as GMWhirlDrainResources
 			v = GMSkillVal(skill, 'whirl_dmg_bonus') * lvl;
 			a.PushBack(GMDescPct(v));
 			a.PushBack(GMDescPct(v * 5));

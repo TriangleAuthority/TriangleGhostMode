@@ -28,3 +28,7 @@
 *.w2beh     diff=cr2w
 *.w2behtree diff=cr2w
 *.w2comm    diff=cr2w
+
+# String tables: areas ported in parallel add rows to the same CSVs; merge them by union (the build stops
+# on any string id used twice). docs/proposals/parallel-ports.md, section 5.
+modGhostMode/localization/**/*.csv merge=union
