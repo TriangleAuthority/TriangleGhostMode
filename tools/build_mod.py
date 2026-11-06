@@ -151,6 +151,16 @@ def collect(base: str, ref: str, out: Path, release: bool = False) -> tuple[Path
         for p in other:
             print(f"  {p}")
         sys.exit(1)
+    vanilla_scripts = [p for p in scripts if not p.startswith(SCRIPTS + "local/")]
+    if vanilla_scripts:
+        # Ghost Mode ships no copies of vanilla scripts (docs/development.md, Choosing a technique). Such paths
+        # mean --base is not the vanilla release ref is built on, e.g. a new release's vanilla commit not yet
+        # on vanilla-5.x: build with --base <that commit's branch>.
+        print(f"error: {ref} changes {len(vanilla_scripts)} vanilla script(s) relative to {base} "
+              f"(is --base the vanilla release {ref} is built on?):")
+        for p in vanilla_scripts[:10]:
+            print(f"  {p}")
+        sys.exit(1)
     if not scripts and not files and not localization and not menus and not banks:
         print(f"nothing to build: {ref} changes nothing relative to {base}")
         sys.exit(1)

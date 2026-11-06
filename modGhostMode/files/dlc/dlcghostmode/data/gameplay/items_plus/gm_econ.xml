@@ -11585,6 +11585,25 @@
 
 <!-- gameplay/items_plus/w3r_items.xml -->
 	<item on_conflict="replace"
+				name							="Fire Horse Blinders"
+				category						="horse_blinder"
+				price							="250"
+				weight							="0.2"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				hold_slot						="head"
+				equip_template					="c_01_hd__champron_w3r_fire"
+				localisation_key_name			="item_name_w3r_fire_blindings"
+				localisation_key_description	="item_desc_w3r_fire_blinder"
+				icon_path						="icons/inventory/horse/w3r_fire_blinders_128x128.png"
+			>
+				<tags>							Blinders, mod_horse
+				</tags>
+				<base_abilities>				<a>Fire Horse Blinders _Stats</a>
+				</base_abilities>
+			</item>
+	<item on_conflict="replace"
 				name							="Fire Horse Saddle"
 				category						="horse_saddle"
 				price							="450"
@@ -11625,25 +11644,6 @@
 				<tags>							HorseBag, mod_horse
 				</tags>
 				<base_abilities>				<a>Fire Horse Saddlebags _Stats</a>
-				</base_abilities>
-			</item>
-	<item on_conflict="replace"
-				name							="Fire Horse blinders"
-				category						="horse_blinder"
-				price							="250"
-				weight							="0.2"
-				stackable						="1"
-				grid_size						="2"
-				ability_mode					="OnMount"
-				hold_slot						="head"
-				equip_template					="c_01_hd__champron_w3r_fire"
-				localisation_key_name			="item_name_w3r_fire_blindings"
-				localisation_key_description	="item_desc_w3r_fire_blinder"
-				icon_path						="icons/inventory/horse/w3r_fire_blinders_128x128.png"
-			>
-				<tags>							Blinders, mod_horse
-				</tags>
-				<base_abilities>				<a>Fire Horse blinders _Stats</a>
 				</base_abilities>
 			</item>
 	<item on_conflict="replace" 

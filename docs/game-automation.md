@@ -20,7 +20,7 @@ python tools/game_lock.py release --holder AREA:TOKEN                   # settin
 
 **Verified** 2026-10-01 (game build 5.0.1044392, with `modGhostMode` pilot build and `modAutomation` installed): the whole loop above takes **about 29 s**: 10 s to the main menu, 12 s to load, 2 s to quit.
 
-Requirements: Steam running; `tools/rw3d/rw3d_cli.exe` (see [rw3d_cli](#rw3d_cli)); `modAutomation` installed. The game window opens normally and takes the screen, but nothing needs focus or input.
+Requirements: Steam running; `tools/rw3d/rw3d_cli.exe` (see [rw3d_cli](#rw3d_cli)); `modAutomation` installed (a reinstall of the game deletes `<game>\mods`, and with it `modAutomation`: the parent installs it again; seen 2026-11-06, build 1090142). The game window opens normally and takes the screen, but nothing needs focus or input.
 
 ## How it works
 

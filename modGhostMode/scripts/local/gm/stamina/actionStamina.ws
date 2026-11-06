@@ -215,6 +215,10 @@ function CanSprint( speed : float ) : bool
 		{
 			return false;
 		}
+		if( IsGuarded() )
+		{
+			return false;
+		}
 	}
 	if( theGame.IsFocusModeActive() )
 	{

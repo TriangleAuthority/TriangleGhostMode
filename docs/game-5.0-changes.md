@@ -2,7 +2,17 @@
 
 Observations from comparing the legacy game (1.32, Steam build 3280809, `witcher3.exe` 3.0.0.1259521) with version 5.0 (Steam build 25575366, `witcher3.exe` 5.0.0.1041720, released 2026-09-29 as the "Remastered" update). Per-file details are in [5.x-file-status.md](5.x-file-status.md).
 
-**5.0 hotfix** (Steam build 25646871, `witcher3.exe` 5.0.0.1044392, installed 2026-10-01; the current `vanilla-5.x`): changes 10 files of the baseline. Scripts: meditation sound fixes (`commonMenu.ws`, `meditation.ws`), a marketing consent setting (`startupExperienceMenu.ws`), whitespace in four projectile scripts. Binary: `q604_caretaker.w2ent` (mesh, light and trigger channel flags) and a re-save of `monster_bies_combat.w2beh` and `monster_bies_constraints.w2beh` (no property changes). None of it touches what Ghost Mode changes in those files.
+**5.0 hotfix** (Steam build 25646871, `witcher3.exe` 5.0.0.1044392, installed 2026-10-01): changes 10 files of the baseline. Scripts: meditation sound fixes (`commonMenu.ws`, `meditation.ws`), a marketing consent setting (`startupExperienceMenu.ws`), whitespace in four projectile scripts. Binary: `q604_caretaker.w2ent` (mesh, light and trigger channel flags) and a re-save of `monster_bies_combat.w2beh` and `monster_bies_constraints.w2beh` (no property changes). None of it touches what Ghost Mode changes in those files.
+
+**Build 26238013** (`witcher3.exe` 5.0.0.1090142, installed 2026-11-06 on a fresh reinstall; the vanilla commit `Vanilla Witcher 3 files (5.0, Steam build 26238013)`, on `vanilla-5.x`): changes 37 files of the baseline: 21 scripts changed and 3 removed (`staringPortrait.ws`, `MarketingPopupData.ws`, `marketing.ws`: the marketing consent popup is gone), 9 XML, 2 CSV, and a re-save of the two fiend behaviour graphs (`monster_bies_combat.w2beh`, `monster_bies_constraints.w2beh`, no property changes). 44 vanilla functions changed, 32 were removed. What touches Ghost Mode (from the code and data, 2026-11-06; the port on this build passes the regression in both trees, verified, but the items below are unverified in game):
+
+- `CR4Player.CanSprint`: no sprint while guarded (a new check). STAM-03's replacement takes it, a deviation ([stam.md](features/stam.md#stam-03-stamina-costs-for-every-action)).
+- `W3DamageManagerProcessor.CanDismember`: the q803 Scolo forced-finisher branch is removed (and the archespore task's `CloseQ803` event); SKL-12's replacement follows.
+- Quen (`quenEntity.ws`, six functions): 5.x's discharge and its Bear set checks read Exploding Shield (`S_Magic_s13`, with a new `discharge_percent` 0.1 node in `magic_s13`, both folders) instead of Quen Discharge (`S_Magic_s14`), and the new tree's character menu shows it in Exploding Shield's tooltip. The port keeps legacy's discharge ([skl.md](features/skl.md#skl-11-quen)).
+- Mutagen synergy: the `*_synergy_bonus` abilities are back to 1.32's values (10% of the mutagen's bonus per copy; 5.0: 16.67%), which SKL-16's Synergy assumes ([skl.md](features/skl.md)).
+- Renamed and removed entries: the NG+ `Fire Horse blinders` (item and `_Stats` ability) is `Fire Horse Blinders`, as in the regular folder; `q802_item_geralt_festive_shirt` left the hair items' variant lists; the quest item `th807_herb1` is gone; `boid_species.xml` drops the sheep; `attitudes.xml` and `attitude_groups.csv` drop `thrall` and `mq8008_bear`; `rewardsmap.csv` (platform rewards) gained a version column. Ghost Mode's generated entries follow (`gen_all.py`).
+- Options: "Auto Apply Blade Oils" (`AutoApplyBladeOils`) moved from the `Gameplay` group to `Accessibility`; a new gamepad-only "hold dodge to sprint" (`CR4Player.SetHoldDodgeToSprint`); the telemetry options are renamed (`GameTelemetryConsent`, `MarketingTelemetryConsent`). Native signatures gained optional arguments Ghost Mode's calls do not use: `AddAnItem(..., forceAdd)`, `ToggleUserMapPin(..., insideBounds, ...)`.
+- Install layout: `dlc\dlc20`, 5.0's last separate DLC folder, moved into `content0\bundles\dlc0.bundle`, and `<game>\dlc` no longer exists. The expansions and DLCs keep their depot paths (`dlc\<name>\...`) inside content0's bundles, and the baseline's file set is unchanged. A fresh install has no `<game>\mods` folder.
 
 Anything marked *unverified* is inferred but not yet tested in game.
 
@@ -74,7 +84,7 @@ Sources: [mp1st patch notes summary](https://mp1st.com/news/the-witcher-3-remast
 | Content | `content\content0`–`content12`, `content\patch0`, `content\patch1` | `content\content0` only |
 | DLC | `DLC\<name>\content\bundles` (DLC1–16, ep1, bob) | Merged into `content0\bundles` (`bob.bundle`, `ep1.bundle`, `dlc0.bundle`). `dlc-tombstones\<name>\*.tombstone` are empty marker files. |
 | Scripts | `content\content0\scripts` (1,491 files) | Same place (1,527 files) |
-| New | | `content0\hdr`, `bin\config\r4game\legacy\base\override_input_switch2.ini`, new DLC `dlc\dlc20` (models, entities and `.w3app` appearance files only; no gameplay XML) |
+| New | | `content0\hdr`, `bin\config\r4game\legacy\base\override_input_switch2.ini`, new DLC `dlc20` (models, entities and `.w3app` appearance files only; no gameplay XML): its own `dlc\dlc20` folder in 5.0, in `content0\bundles\dlc0.bundle` since build 1090142 |
 
 Depot paths inside the bundles are unchanged: DLC files still live under `dlc\<name>\data\...`, matching the mod's `files/dlc/...` paths.
 

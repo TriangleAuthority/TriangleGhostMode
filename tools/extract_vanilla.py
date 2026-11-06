@@ -16,8 +16,11 @@ converts UTF-16/BOM text to plain UTF-8 (see to_utf8.py). The legacy baseline
 was extracted with --utf8; 5.0 files are kept exactly as shipped.
 
 Where a file exists in several bundles the one loaded last wins:
-content0..contentN, then patch0, patch1, then DLC (DLC\<name>\content\bundles).
-In 5.0 everything, DLC included, is in content0 (duplicates are identical).
+content0..contentN, then patch0, patch1, then DLC (DLC\<name>\content\bundles,
+legacy only). In 5.x everything, the expansions and DLC included, is in
+content0\bundles (duplicates are identical); 5.0's last separate DLC folder
+(dlc\dlc20) went into dlc0.bundle with build 1090142, and dlc-tombstones\ holds
+only empty marker files. The DLC data keeps its depot paths (dlc\<name>\...).
 
 Usage:
     python tools/extract_vanilla.py <out_dir> [--utf8] [--game DIR]

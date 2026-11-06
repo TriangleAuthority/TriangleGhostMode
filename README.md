@@ -22,7 +22,7 @@ The git history is built so that every change is visible as a diff. Every branch
 |---|---|
 | `vanilla-1.32` | Unmodified legacy (1.32) game files at the mod's paths: the baseline every other branch starts from |
 | `legacy-GM` | `vanilla-1.32` + the original Ghost Mode v4.1 and its two dependencies |
-| `vanilla-5.x` | `vanilla-1.32` + the same game files from the current 5.x release (now the 5.0 hotfix) |
+| `vanilla-5.x` | `vanilla-1.32` + the same game files from the current 5.x release (now Steam build 26238013, `witcher3.exe` 5.0.0.1090142) |
 | `master` | `vanilla-5.x` + the port (work in progress), plus the README, tools and docs |
 
 - What Ghost Mode changed: `git diff vanilla-1.32...legacy-GM`

@@ -7,7 +7,7 @@ vanilla-1.32:  Legacy vanilla files (1.32) ── tournament entities           
                  │
                  ├── legacy-GM:    SI ── CPB ── Ghost Mode 4.1                 the original mod
                  │
-                 └── vanilla-5.x:  Vanilla files (5.0) ── 5.0 hotfix ── ...    CDPR's updates
+                 └── vanilla-5.x:  Vanilla files (5.0) ── 5.0 hotfix ── build 26238013 ── ...   CDPR's updates
                        │
                        └── master: the port ── ... ┬── tools, docs           the port, with the project's tools and docs
                                                     │
@@ -18,7 +18,7 @@ vanilla-1.32:  Legacy vanilla files (1.32) ── tournament entities           
 |---|---|
 | `vanilla-1.32` | The root commit with the unmodified legacy (1.32, Steam build 3280809) game files at the mod's paths under `modGhostMode/`, plus the Blood and Wine tournament entities Ghost Mode edits. The baseline every other branch starts from. |
 | `legacy-GM` | `vanilla-1.32` plus the legacy mod, in three commits: its Shared Imports and Community Patch – Base dependencies, then Ghost Mode 4.1, the canonical legacy version (the Nexus release; the original repository's 77 commits by wghost are squashed into it, subjects listed in its message). They hold only the mod: `modGhostMode/`, `design-docs/` and `modGhostMode.w3modproj`. See [legacy-ghost-mode.md](legacy-ghost-mode.md). |
-| `vanilla-5.x` | `vanilla-1.32` plus the same game file set from the current 5.x release (now the 5.0 hotfix, Steam build 25646871), one commit per release. |
+| `vanilla-5.x` | `vanilla-1.32` plus the same game file set from the current 5.x release (now 5.0 Steam build 26238013, `witcher3.exe` 5.0.0.1090142), one commit per release. |
 | `master` | `vanilla-5.x` plus the Ghost Mode port, and the project's README, tools and docs (their history joins `master` in one merge). All work happens here or on short-lived branches off it. |
 
 `vanilla-1.32`, `legacy-GM` and `vanilla-5.x` hold game and mod data only: no tools or docs. Their one other file is a `.gitattributes` with `* text=auto`, so text is stored LF-normalized whatever the committer's `core.autocrlf` (see [Encodings and line endings](#encodings-and-line-endings)).
@@ -45,6 +45,7 @@ Because the mod sits on top of the full vanilla set, `modGhostMode/` on `legacy-
   ```
 
   Then regenerate (`tools/gen_all.py --worktree .`), rebuild, and run the regression in both trees.
+- **When the new vanilla commit sits on its own branch** until the owner fast-forwards `vanilla-5.x` (as for build 1090142): the tools read `vanilla-5.x` by name, so they still see the previous release. Build with `build_mod.py --base <the vanilla branch>` (without it the build stops: the ref then changes vanilla scripts), and run the generators and checks from a throwaway local clone whose `vanilla-5.x` points at the new commit (`git clone --shared --no-checkout <main checkout> <dir>`, then local `vanilla-5.x`, `vanilla-1.32` and `legacy-GM` branches, then check out the port branch), with `--worktree` at the port's worktree. Do not move the real `vanilla-5.x` for it.
 
 | Tree | Scripts | XML | CSV |
 |---|---|---|---|
