@@ -160,9 +160,23 @@ function GMGetSkillAbilityName(skill : ESkill) : name
 	return '';
 }
 
-// A character with no profile yet that has learned nothing gets the profile of the tree chosen
-// in the options: a new game, or an older save with no skill bought. One that has skills keeps
-// 5.x's definitions until the character reset.
+// The fields of the profile in force laid on the cached definitions again, after code that re-reads
+// them from the XML (5.x's copy at load, its one-time skill point fixes). Nothing with no profile.
+@addMethod(W3PlayerAbilityManager)
+function GMReapplySkillTreeProfile() : int
+{
+	if(GMIsClassicProfileInForce())
+		return GMOverlayClassicProfile();
+	if(FactsQuerySum("gm_skill_tree_set") > 0)
+		return GMOverlayNewTreeProfile();
+	return 0;
+}
+
+// On spawn and load. A character with no profile yet that has learned nothing gets the profile of
+// the tree chosen in the options: a new game, or an older save with no skill bought. One that has
+// skills keeps 5.x's definitions until the character reset. A character with a profile gets its
+// fields laid on again: a save made after 5.x's new-game fix had re-read the XML (NGEFixSkillPoints,
+// below) holds the profile's facts over 5.x's definitions, and recovers here.
 @addMethod(W3PlayerAbilityManager)
 function GMEnsureSkillTreeProfile()
 {
@@ -170,8 +184,13 @@ function GMEnsureSkillTreeProfile()
 	var i, applied : int;
 
 	witcher = (W3PlayerWitcher)owner;
-	if(!witcher || !witcher.levelManager || FactsQuerySum("gm_skill_tree_set") > 0)
+	if(!witcher || !witcher.levelManager)
 		return;
+	if(FactsQuerySum("gm_skill_tree_set") > 0)
+	{
+		GMReapplySkillTreeProfile();
+		return;
+	}
 	if(witcher.levelManager.GetPointsUsed(ESkillPoint) > 0)
 		return;
 	for(i = 0; i < skills.Size(); i += 1)
@@ -190,10 +209,26 @@ function GMEnsureSkillTreeProfile()
 function RemasterCheckAndFixSkillStatsOnLoadedSave()
 {
 	wrappedMethod();
-	if(GMIsClassicProfileInForce())
-		GMOverlayClassicProfile();
-	else if(FactsQuerySum("gm_skill_tree_set") > 0)
-		GMOverlayNewTreeProfile();
+	GMReapplySkillTreeProfile();
+}
+
+// 5.x's one-time skill point fix runs 1 s after the spawn of a character without the fact
+// NGE_SkillPointsCheck: every new game (after the profile was applied, PostInit) and a save from before
+// 5.0. It re-reads every definition from the XML, which dropped the profile and kept its facts: a new
+// game showed 5.x's tree with the new tree's profile set. 5.x's skill reset on a save from before the
+// remaster re-reads them too.
+@wrapMethod(W3PlayerAbilityManager)
+function NGEFixSkillPoints()
+{
+	wrappedMethod();
+	GMReapplySkillTreeProfile();
+}
+
+@wrapMethod(W3PlayerAbilityManager)
+function RemasterSkillResetAndRefund()
+{
+	wrappedMethod();
+	GMReapplySkillTreeProfile();
 }
 
 // A skill's ability, for all code that asks by enum: the profile's ability where it sets one.

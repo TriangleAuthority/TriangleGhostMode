@@ -2482,6 +2482,7 @@ function GMTest_stam07()
 exec function gmtest_regress()
 {
 	thePlayer.GMTestCount(true, true);
+	GMTest_skl02_newgame();	// first: needs nothing learned (right after gmreset())
 	GMTest_opt01();
 	GMTest_stam01();
 	GMTest_stam02();

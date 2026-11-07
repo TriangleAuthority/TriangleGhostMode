@@ -49,7 +49,9 @@ EXEC_WAIT_MS = 500
 STARTUP_SCREENS = ("StartupMoviesMenu", "RecapMoviesMenu", "StartupExperienceMenu")
 GATED = ("run", "start", "load", "exec", "resume")
 # The saves run and load accept, by full name: the test save and the test-only slot (docs/game-automation.md#test-saves).
-ALLOWED_SAVES = ("<save name>", "<save name>")
+# The owner's playthrough save, loaded read-only (saving locked) with the owner's OK of 2026-11-06 to reproduce bugs.
+ALLOWED_SAVES = ("<save name>", "<save name>", "<save name>",
+                 "<save name>")  # a new game's first checkpoint (new tree, build 1090142), kept as a test save by the owner, 2026-11-07
 # Exec calls that load or save behind the allow-list's back (the parent passes --parent for its own saves).
 DENIED_EXEC = (r"\bautoload\s*\(", r"savegame", r"\bgmtest_diff04_lsave_save\b", r"\bgmtest_diff04_save_mk\b",
                r"\bgmtest_xp08_vit_b\s*\(\s*true", r"\bgmtest_arm09_mksave\b")

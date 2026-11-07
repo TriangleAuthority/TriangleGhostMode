@@ -3,7 +3,8 @@
     python tools/regress.py --holder AREA:TOKEN [--trees both|classic|new] [--wait 6000] [--no-retry]
 
 Per tree, on a fresh launch of the test save (game.py run, which locks saving with gmtest_nosave()):
-  1. the new tree only: autoconfigset(GMGameplayOptions, GMClassicSkillTree, false) and gmreset(), in one call;
+  1. autoconfigset(GMGameplayOptions, GMClassicSkillTree, false) and gmreset() in one call for the new tree,
+     the same with true for the classic tree (the settings baseline may hold either tree);
   2. gmtest_regress() (exec --wait 6000), ingamemenu(), gmtest_panel(), each its own call; resume;
   3. the new tree only: the classic tree set back (autoconfigset(..., true)), always, also after a failure;
   4. quit; the script log archived (%LOCALAPPDATA%\\TGM\\logs\\regress-<holder>-<tree>-<time>.txt).
@@ -118,6 +119,8 @@ def one_tree(r, tree, attempt):
         if tree == "new":
             print(r.game("exec", *TO_NEW, wait=3000))
             switched = True
+        else:  # the save takes its tree from the option at load, and the baseline may hold the new tree
+            print(r.game("exec", *TO_CLASSIC, "gmreset()", wait=3000))
         print(r.game("exec", "gmtest_regress()", wait=a.wait)[-400:])
         settle(timeout=20, quiet=2)
         r.game("exec", "ingamemenu()")

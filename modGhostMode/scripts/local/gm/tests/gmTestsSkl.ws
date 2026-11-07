@@ -361,6 +361,131 @@ exec function gmtest_skl_profile_read()
 	LogChannel('GMTest', "INFO SKL profile read: classic " + GMIsClassicProfileInForce() + "; Rend level " + rend.level + "/" + rend.maxLevel + ", tier " + rend.requiredPointsSpent + ", shared " + rend.isUnchangedLegacy + ", prerequisites " + rend.requiredSkills.Size() + ", ability " + rend.abilityName + " x " + ((W3PlayerAbilityManager)witcher.abilityManager).GMTestCountSkillAbility(rend.abilityName) + ", name key " + rend.localisationNameKey + ", position " + rend.positionID + "; Whirl level " + whirl.level + "/" + whirl.maxLevel + ", tier " + whirl.requiredPointsSpent + ", position " + whirl.positionID);
 }
 
+// SKL-02, a new game's profile: Rend's definition matches the profile in force (gmreset() before, either tree).
+function GMTestSkl02RendInProfile(pam : W3PlayerAbilityManager, label : string)
+{
+	var rend : SSkill;
+
+	rend = pam.GetPlayerSkill(S_Sword_s02);
+	if(GMIsClassicProfileInForce())
+		GMTestReport(rend.maxLevel == 5 && rend.requiredPointsSpent == 8 && rend.positionID == 6 && rend.abilityName == 'GM_C_sword_s2' && !rend.isUnchangedLegacy && rend.requiredSkills.Size() == 0, "SKL-02 " + label + ": the classic profile's Rend (max level " + rend.maxLevel + ", tier " + rend.requiredPointsSpent + ", position " + rend.positionID + ", ability " + rend.abilityName + ", shared " + rend.isUnchangedLegacy + ", prerequisites " + rend.requiredSkills.Size() + ")");
+	else
+		GMTestReport(GMIsNewTreeProfileInForce() && rend.maxLevel == 3 && rend.requiredPointsSpent == 5 && rend.gridRow == 6 && rend.gridColumn == 3 && rend.requiredSkills.Size() == 0, "SKL-02 " + label + ": the new tree's profile in force " + GMIsNewTreeProfileInForce() + ", Rend tier " + rend.requiredPointsSpent + ", row " + rend.gridRow + ", column " + rend.gridColumn + ", prerequisites " + rend.requiredSkills.Size() + " (5.x: tier 12, row 18, 3 prerequisites)");
+}
+
+// Rend's definition as 5.x's XML gives it, its level kept: what a re-read of the XML leaves.
+@addMethod(W3PlayerAbilityManager)
+function GMTestSkl02RendFromXml()
+{
+	var skillDefs : array<name>;
+	var fresh : array<SSkill>;
+	var i, level : int;
+
+	charStats.GetAbilitiesWithTag('SkillDefinitionName', skillDefs);
+	for(i = 0; i < skillDefs.Size(); i += 1)
+		CacheSkills(skillDefs[i], fresh);
+	level = skills[S_Sword_s02].level;
+	skills[S_Sword_s02] = fresh[S_Sword_s02];
+	skills[S_Sword_s02].level = level;
+}
+
+// SKL-02, a new game's profile (2026-11-07): 5.x's one-time skill point fix (NGEFixSkillPoints), which runs
+// 1 s after every new game's spawn, re-read the definitions from the XML after the profile was applied and
+// kept its facts: a new character showed 5.x's tree. Called first in the regression, right after
+// gmreset() (nothing learned: the fix re-adds learned skills capped at level 3). Then the load's recovery:
+// Rend's definition set back to the XML's, and the spawn and load check (PostInit) lays the profile on again.
+function GMTest_skl02_newgame()
+{
+	var witcher : W3PlayerWitcher;
+	var pam : W3PlayerAbilityManager;
+	var all : array<SSkill>;
+	var i, learned, free, used : int;
+
+	witcher = GetWitcherPlayer();
+	pam = (W3PlayerAbilityManager)witcher.abilityManager;
+	all = pam.GetPlayerSkills();
+	for(i = 0; i < all.Size(); i += 1)
+	{
+		if(!all[i].isCoreSkill && all[i].level > 0)
+			learned += 1;
+	}
+	if(learned > 0)
+	{
+		GMTestReport(false, "SKL-02 new game: not run, " + learned + " skills learned (run right after gmreset())");
+		return;
+	}
+	free = witcher.levelManager.GetPointsFree(ESkillPoint);
+	used = witcher.levelManager.GetPointsUsed(ESkillPoint);
+	pam.NGEFixSkillPoints();
+	GMTestSkl02RendInProfile(pam, "after 5.x's new-game skill point fix");
+	GMTestReport(witcher.levelManager.GetPointsFree(ESkillPoint) == free && witcher.levelManager.GetPointsUsed(ESkillPoint) == used, "SKL-02 new game: skill points kept by the fix (free " + witcher.levelManager.GetPointsFree(ESkillPoint) + ", used " + witcher.levelManager.GetPointsUsed(ESkillPoint) + ")");
+
+	pam.GMTestSkl02RendFromXml();
+	pam.GMEnsureSkillTreeProfile();
+	GMTestSkl02RendInProfile(pam, "a save with the profile's facts over 5.x's definitions, at load");
+	if(!GMIsClassicProfileInForce())
+		GMTest_skl02_tree_read();
+}
+
+// SKL-02, the new tree as the menu draws it, read only (for a player's save too: nothing bought, nothing
+// changed): every new-tree skill of the three paths at its tier points, row and column, without
+// prerequisites (D59), and the new tree's profile in force (the menu then builds its tabs by GMBuildTreeTab).
+// With the character menu open (dupemenu() in an earlier call), also the entries of each tab it builds.
+function GMTest_skl02_tree_read()
+{
+	var pam : W3PlayerAbilityManager;
+	var common : CR4CommonMenu;
+	var menu : CR4CharacterDupeMenu;
+	var names : array<name>;
+	var points : array<int>;
+	var sk : SSkill;
+	var p, k, found, bad : int;
+	var problems, entries : string;
+	var path : ESkillPath;
+
+	if(!GMIsNewTreeProfileInForce())
+	{
+		GMTestReport(false, "SKL-02 the new tree as drawn: the new tree's profile is not in force (classic " + GMIsClassicProfileInForce() + ", set " + FactsQuerySum("gm_skill_tree_set") + ")");
+		return;
+	}
+	pam = (W3PlayerAbilityManager)thePlayer.abilityManager;
+	common = (CR4CommonMenu)theGame.GetGuiManager().GetRootMenu();
+	if(common)
+		menu = (CR4CharacterDupeMenu)common.GetSubMenu();
+	for(p = 0; p < 3; p += 1)
+	{
+		if(p == 0) path = ESP_Sword;
+		else if(p == 1) path = ESP_Signs;
+		else path = ESP_Alchemy;
+		GMTestNewTreeTable(path, names, points);
+		for(k = 0; k < names.Size(); k += 1)
+		{
+			sk = pam.GetPlayerSkill(SkillNameToEnum(names[k]));
+			found += 1;
+			if(sk.requiredPointsSpent != points[k % 4] || sk.gridRow != (k % 4) * 6 || sk.gridColumn != (k / 4) * 3 || sk.requiredSkills.Size() > 0)
+			{
+				bad += 1;
+				problems += " " + names[k] + "(" + sk.requiredPointsSpent + "," + sk.gridRow + "," + sk.gridColumn + "," + sk.requiredSkills.Size() + ")";
+			}
+		}
+		if(menu)
+			entries += " " + GMTestSklPathName(path) + " " + menu.GMBuildTreeTab(path, false).GetLength();
+	}
+	GMTestReport(found == 60 && bad == 0, "SKL-02 the new tree as drawn: " + (found - bad) + " of 60 skills at their tier points, row and column, without prerequisites" + problems);
+	if(menu)
+		GMTestReport(StrFindFirst(entries, " 0") < 0, "SKL-02 the new tree as drawn: the open menu's tabs (entries):" + entries);
+}
+
+exec function gmtest_skl02_tree_read()
+{
+	GMTest_skl02_tree_read();
+}
+
+exec function gmtest_skl02_newgame()
+{
+	GMTest_skl02_newgame();
+}
+
 // How often an equipped skill's ability is in the list of skill abilities (once per level).
 @addMethod(W3PlayerAbilityManager)
 function GMTestCountSkillAbility(abilityName : name) : int
