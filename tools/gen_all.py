@@ -20,7 +20,8 @@ Order (each generator's inputs are written before it runs):
 - gen_ai_ent, then gen_loot (both write the entity files LOOT and AI share; gen_loot reads the DLC's items);
 - gen_item after the other item tools (it skips the names they define);
 - gen_econ (it skips the names every other DLC file defines, and verifies the final items), then gen_wgt
-  (WGT's weights as the game reads them, and their data test).
+  (WGT's weights as the game reads them, and their data test);
+- gen_sword_glows (independent: the new tree's own sword glows, Muscle Memory's and Strength Training's, cooked files from the game's bundles).
 
 Every generator runs at below-normal priority, with its output in a log folder (printed at the end; the
 last lines of a failed one are printed). Exit code 1 if any fails.
@@ -49,6 +50,7 @@ ORDER = [
     ("gen_arm_items", True),
     ("gen_swd_items", True), ("gen_arm_km", True), ("gen_arm_new", False), ("gen_craft", True),
     ("gen_ai_ent", True), ("gen_loot", True), ("gen_item", True), ("gen_econ", True), ("gen_wgt", True),
+    ("gen_sword_glows", False),
 ]
 CHECKS = ["dlc_conflicts", "check_modsigns"]  # guards run with --verify
 DLC = "modGhostMode/files/dlc/dlcghostmode/data/gameplay/"
@@ -100,6 +102,8 @@ def generated(wt):
     add("gen_loot", *gen_loot.units(), *gen_loot.bin_units(), gen_loot.ECON_TESTS)
     add("gen_econ", gen_econ.TEST)
     add("gen_wgt", TESTS + "gmTestsWgtData.ws")
+    import gen_sword_glows
+    add("gen_sword_glows", *gen_sword_glows.outputs())
     import gen_trph
     add("gen_trph", DLC + "items/" + gen_trph.OUT, DLC + "items_plus/" + gen_trph.OUT, gen_trph.TESTS)
     return out

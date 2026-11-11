@@ -148,11 +148,11 @@ function GMTest_alch17_bombskills()
 	w = GetWitcherPlayer();
 	if(GMIsClassicProfileInForce())
 	{
-		heavy = S_Perk_20; otherHeavy = S_Perk_28; per = 50;
+		heavy = S_Perk_20; otherHeavy = S_Perk_43; per = 50;
 	}
 	else
 	{
-		heavy = S_Perk_28; otherHeavy = S_Perk_20; per = 83.333333;
+		heavy = S_Perk_43; otherHeavy = S_Perk_20; per = 83.333333;
 	}
 	hadSamum = w.inv.GetItemQuantityByName('Samum 1') > 0;
 	hadStar = w.inv.GetItemQuantityByName('Dancing Star 1') > 0;

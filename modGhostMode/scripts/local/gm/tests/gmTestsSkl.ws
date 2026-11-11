@@ -2282,10 +2282,9 @@ exec function gmtest_skl07_foa_abort()
 	LogChannel('GMTest', "INFO SKL-07 FoA after the abort: " + GMTestFoaState(witcher));
 }
 
-// SKL-03, SKL-04 new designs (D55, D57): the new tree's Crushing Blows (strong) or Precise Blows (fast).
-// Crit chance read before and after a scripted melee crit of that type on the hostile test dummy (the
-// probe records each crit's attack power); a second crit inside the chain gets the chain's crit damage.
-// With heavy: Crushing Blows, else Precise Blows; needs the skill learned and equipped.
+// SKL-03, SKL-04 new designs (D55, D57; revised 2026-11-07): the new tree's Precise Blows (crit chance) and
+// Crushing Blows (crit damage), with stacks from non-crit fast or strong hits that a melee crit clears.
+// A forced melee crit of Geralt's on the hostile test dummy (the probe records each crit's attack power).
 function GMTestCritHitPowerNamed(victim : CActor, attackName : name) : float
 {
 	var action : W3Action_Attack;
@@ -2310,58 +2309,273 @@ function GMTestCritHitPowerNamed(victim : CActor, attackName : name) : float
 	return step.mult;
 }
 
-exec function gmtest_skl_blows(heavy : bool)
+// A melee hit of Geralt's with the given attack name on the hostile test dummy, crit as rolled; true if
+// it was a crit.
+function GMTestBlowsRolledHit(victim : CActor, attackName : name) : bool
 {
-	var witcher : W3PlayerWitcher;
+	var action : W3Action_Attack;
+	var crit : bool;
+
+	thePlayer.ForceSetStat(BCS_Focus, 0);
+	action = new W3Action_Attack in theGame.damageMgr;
+	action.Init(thePlayer, victim, NULL, GetInvalidUniqueId(), attackName, thePlayer.GetName(), EHRT_Light,
+		false, false, attackName, AST_Jab, ASD_UpDown, true, false, false, false);
+	action.AddDamage(theGame.params.DAMAGE_NAME_PHYSICAL, 100);
+	action.SetSuppressHitSounds(true);
+	action.SetHitAnimationPlayType(EAHA_ForceNo);
+	theGame.damageMgr.ProcessAction(action);
+	crit = action.IsCriticalHit();
+	delete action;
+	if(victim.UsesEssence())
+		victim.ForceSetStat(BCS_Essence, victim.GetStatMax(BCS_Essence));
+	else
+		victim.ForceSetStat(BCS_Vitality, victim.GetStatMax(BCS_Vitality));
+	return crit;
+}
+
+// Each scripted hit of one exec call runs at the same engine time: the tests start a new swing by hand.
+@addMethod(W3PlayerWitcher)
+function GMTestBlowsNewSwing()
+{
+	gmBlowsCritAt = 0;
+	gmPreciseStackAt = 0;
+	gmCrushingStackAt = 0;
+}
+
+// The skill's value at n stacks from its definition: Precise Blows' crit chance, Crushing Blows' crit damage.
+function GMTestBlowsExpected(skill : ESkill, stacks : int) : float
+{
+	var w : W3PlayerWitcher;
+
+	w = GetWitcherPlayer();
+	if(skill == S_Sword_s24)
+		return w.GMBlowsValue(skill, 'gm_crit_chance') + w.GMBlowsValue(skill, 'gm_stack_crit_chance') * stacks;
+	return w.GMBlowsValue(skill, 'gm_crit_damage') + w.GMBlowsValue(skill, 'gm_stack_crit_damage') * stacks;
+}
+
+function GMTestBlowsRead(skill : ESkill) : float
+{
+	if(skill == S_Sword_s24)
+		return GetWitcherPlayer().GMBlowsCritChance();
+	return GetWitcherPlayer().GMBlowsCritDamage();
+}
+
+// heavy: Crushing Blows (strong attacks build its stacks), else Precise Blows (fast attacks). Needs the
+// skill learned and equipped and the hostile test dummy. Checks: the value at 0 stacks and after each
+// non-crit hit up to the cap and one past it (the owner's full values at every level, the cap by level:
+// Precise Blows 2 / 3 / 4, Crushing Blows 1 / 2 / 3, revised 2026-11-07); the crit
+// chance through GetCriticalHitChance for both attack types (Precise Blows); a forced crit at the cap
+// gets the full stacked bonus (Crushing Blows: its attack power against a crit at 0 stacks) and clears
+// both skills' stacks, while the rest of its swing still reads them; rolled hits stack or clear as
+// they come out; combat's end clears the stacks.
+function GMTestSklBlows(heavy : bool)
+{
+	var w : W3PlayerWitcher;
 	var npc : CActor;
-	var probes : bool;
 	var skill : ESkill;
 	var attackName : name;
-	var chanceBefore, chanceAfter, first, second, level : float;
+	var cap, i, n, expectedStacks, crits : int;
+	var level, value, expected, first, second, light, strong, none : float;
+	var ok, crit, probes : bool;
+	var msg : string;
 
-	witcher = GetWitcherPlayer();
+	w = GetWitcherPlayer();
 	npc = GMTestHostileNpc();
-	skill = witcher.GMBlowsSkill(heavy);
-	if(!npc || skill == S_SUndefined)
+	if(heavy)
 	{
-		GMTestReport(false, "SKL blows: needs a hostile test dummy and the new tree's Crushing Blows or Precise Blows");
+		skill = S_Sword_s25;
+		attackName = 'attack_heavy';
+	}
+	else
+	{
+		skill = S_Sword_s24;
+		attackName = 'attack_light';
+	}
+	if(!npc || !w.CanUseSkill(skill))
+	{
+		GMTestReport(false, "SKL blows: needs a hostile test dummy and the new tree's " + SkillEnumToName(skill) + " equipped");
 		return;
 	}
+	level = w.GetSkillLevel(skill);
+	cap = w.GMBlowsMaxStacks(skill);
+	w.GMBlowsClear();
+
+	// The stacks from non-crit hits, up to the cap.
+	ok = w.GMBlowsStacks(skill) == 0 && AbsF(GMTestBlowsRead(skill) - GMTestBlowsExpected(skill, 0)) < 0.0005;
+	msg = "0: " + GMTestBlowsRead(skill);
+	for(i = 1; i <= cap + 1; i += 1)
+	{
+		w.GMTestBlowsNewSwing();
+		w.GMBlowsOnHit(heavy);
+		w.GMBlowsOnHit(heavy);	// a second enemy of the same swing adds none
+		n = Min(i, cap);
+		value = GMTestBlowsRead(skill);
+		ok = ok && w.GMBlowsStacks(skill) == n && AbsF(value - GMTestBlowsExpected(skill, n)) < 0.0005;
+		msg += ", " + w.GMBlowsStacks(skill) + ": " + value;
+	}
 	if(heavy)
-		attackName = 'attack_heavy';
+		ok = ok && cap == RoundMath(level) && AbsF(GMTestBlowsExpected(skill, 0) - 0.5) < 0.0005 && AbsF(GMTestBlowsExpected(skill, 1) - 1.0) < 0.0005;
 	else
-		attackName = 'attack_light';
-	level = witcher.GetSkillLevel(skill);
-	witcher.GMTestEndBlowsChains();
-	chanceBefore = witcher.GetCriticalHitChance(!heavy, heavy, npc, MC_Human, false) - witcher.GetCriticalHitChance(false, false, npc, MC_Human, false);
+		ok = ok && cap == RoundMath(level) + 1 && AbsF(GMTestBlowsExpected(skill, 0) - 0.05) < 0.0005 && AbsF(GMTestBlowsExpected(skill, 1) - 0.1) < 0.0005;
+	GMTestReport(ok, "SKL blows " + SkillEnumToName(skill) + " level " + level + ": stacks: value " + msg + " (cap " + cap + ")");
+
+	// Precise Blows' crit chance through 5.x's call, for fast and strong attacks, none for bolts and signs.
+	if(!heavy)
+	{
+		none = w.GetCriticalHitChance(false, false, npc, MC_Human, false);
+		light = w.GetCriticalHitChance(true, false, npc, MC_Human, false) - none;
+		strong = w.GetCriticalHitChance(false, true, npc, MC_Human, false) - none;
+		value = w.GetCriticalHitChance(true, false, npc, MC_Human, true) - w.GetCriticalHitChance(false, false, npc, MC_Human, true);
+		expected = GMTestBlowsExpected(skill, cap);
+		GMTestReport(AbsF(light - expected) < 0.0005 && AbsF(strong - expected) < 0.0005 && AbsF(value) < 0.0005,
+			"SKL blows Precise Blows at " + cap + " stacks: crit chance fast +" + light + ", strong +" + strong + " (expected +" + expected + "), bolt +" + value);
+	}
+
+	// A forced crit at the cap: the full bonus, then both skills' stacks cleared; the rest of its swing
+	// still reads them.
 	probes = GMTestProbes();
 	thePlayer.GMTestSetProbes(true);
+	w.GMTestBlowsNewSwing();
 	first = GMTestCritHitPowerNamed(npc, attackName);
-	chanceAfter = witcher.GetCriticalHitChance(!heavy, heavy, npc, MC_Human, false) - witcher.GetCriticalHitChance(false, false, npc, MC_Human, false);
+	value = GMTestBlowsRead(skill);
+	ok = AbsF(value - GMTestBlowsExpected(skill, cap)) < 0.0005 && w.gmPreciseStacks == 0 && w.gmCrushingStacks == 0;
+	msg = "after the crit, same swing: " + value + ", stacks " + w.gmPreciseStacks + "/" + w.gmCrushingStacks;
+	w.GMTestBlowsNewSwing();
+	value = GMTestBlowsRead(skill);
 	second = GMTestCritHitPowerNamed(npc, attackName);
 	thePlayer.GMTestSetProbes(probes);
-	GMTestReport(AbsF(chanceBefore - 0.08) < 0.001 && AbsF(chanceAfter - 0.16) < 0.001 && AbsF(second - first - 0.2 * level) < 0.01 && witcher.GMBlowsChainActive(skill),
-		"SKL blows " + SkillEnumToName(skill) + " level " + level + ": crit chance +" + chanceBefore + ", +" + chanceAfter + " in the chain; crit attack power x" + first + ", x" + second + " in the chain (+" + (0.2 * level) + " expected); chain active " + witcher.GMBlowsChainActive(skill));
+	ok = ok && AbsF(value - GMTestBlowsExpected(skill, 0)) < 0.0005;
+	msg += "; next swing: " + value + "; crit attack power x" + first + " at " + cap + " stacks, x" + second + " at 0";
+	if(heavy)
+	{
+		ok = ok && AbsF(first - second - (GMTestBlowsExpected(skill, cap) - GMTestBlowsExpected(skill, 0))) < 0.01;
+		msg += " (+" + (GMTestBlowsExpected(skill, cap) - GMTestBlowsExpected(skill, 0)) + " expected)";
+	}
+	GMTestReport(ok, "SKL blows " + SkillEnumToName(skill) + " level " + level + ": " + msg);
+
+	// The other skill's stacks: a crit of this attack type clears them too.
+	if(w.CanUseSkill(S_Sword_s24) && w.CanUseSkill(S_Sword_s25))
+	{
+		w.GMTestBlowsNewSwing();
+		w.GMBlowsOnHit(!heavy);
+		ok = w.GMBlowsStacks(S_Sword_s24) + w.GMBlowsStacks(S_Sword_s25) == 1;
+		w.GMTestBlowsNewSwing();
+		GMTestCritHitPowerNamed(npc, attackName);
+		w.GMTestBlowsNewSwing();
+		GMTestReport(ok && w.GMBlowsStacks(S_Sword_s24) == 0 && w.GMBlowsStacks(S_Sword_s25) == 0,
+			"SKL blows: a crit of a " + attackName + " clears the other skill's stack too");
+	}
+
+	// Rolled hits through the damage manager: a non-crit adds a stack, a crit clears them.
+	w.GMBlowsClear();
+	expectedStacks = 0;
+	ok = true;
+	msg = "";
+	for(i = 0; i < 8; i += 1)
+	{
+		w.GMTestBlowsNewSwing();
+		crit = GMTestBlowsRolledHit(npc, attackName);
+		if(crit)
+		{
+			expectedStacks = 0;
+			crits += 1;
+		}
+		else
+			expectedStacks = Min(expectedStacks + 1, cap);
+		w.GMTestBlowsNewSwing();
+		ok = ok && w.GMBlowsStacks(skill) == expectedStacks;
+		msg += " " + crit + ":" + w.GMBlowsStacks(skill);
+	}
+	GMTestReport(ok && crits < 8, "SKL blows " + SkillEnumToName(skill) + ": rolled " + attackName + " hits (crit:stacks)" + msg);
+
+	// Combat's end clears them.
+	w.GMTestBlowsNewSwing();
+	w.GMBlowsOnHit(heavy);
+	n = w.GMBlowsStacks(skill);
+	w.OnCombatFinished();
+	GMTestReport(n > 0 && w.GMBlowsStacks(skill) == 0 && w.gmPreciseStacks == 0 && w.gmCrushingStacks == 0,
+		"SKL blows " + SkillEnumToName(skill) + ": combat's end clears the stacks (" + n + " -> " + w.GMBlowsStacks(skill) + ")");
+	w.GMBlowsClear();
 }
 
-exec function gmtest_skl_blows_chain()
+exec function gmtest_skl_blows(heavy : bool)
 {
-	var witcher : W3PlayerWitcher;
-
-	witcher = GetWitcherPlayer();
-	LogChannel('GMTest', "INFO SKL blows t=" + theGame.GetEngineTimeAsSeconds() + ": Crushing Blows chain " + witcher.GMBlowsChainActive(S_Sword_s25) + ", Precise Blows chain " + witcher.GMBlowsChainActive(S_Sword_s24));
+	GMTestSklBlows(heavy);
 }
 
-@addMethod(W3PlayerWitcher)
-function GMTestEndBlowsChains()
+// The tooltip texts at levels 1 to 3 through the skill menu's tooltip function (English).
+exec function gmtest_skl_blows_tooltips()
 {
-	gmCrushingChainEnd = 0;
-	gmPreciseChainEnd = 0;
+	var lvl : int;
+	var text, expected : string;
+
+	for(lvl = 1; lvl <= 3; lvl += 1)
+	{
+		text = GMSkillTooltip(S_Sword_s24, lvl, "");
+		expected = "Increases critical hit chance by 5%, and by a further 5% for every Fast Attack until your next critical hit. Stacks up to " + IntToString(lvl + 1) + " times.";
+		GMTestReport(text == expected, "SKL blows tooltip Precise Blows level " + lvl + ": " + text);
+		text = GMSkillTooltip(S_Sword_s25, lvl, "");
+		if(lvl == 1)
+			expected = "Increases critical hit power by 50%, and by a further 50% for every Strong Attack until your next critical hit. Stacks once.";
+		else
+			expected = "Increases critical hit power by 50%, and by a further 50% for every Strong Attack until your next critical hit. Stacks up to " + IntToString(lvl) + " times.";
+		GMTestReport(text == expected, "SKL blows tooltip Crushing Blows level " + lvl + ": " + text);
+	}
+}
+
+// SKL-03, SKL-04: the new tree's Muscle Memory's and Strength Training's tooltips at each level (English):
+// their bonuses 8/16/25 of 25 by level (owner, 2026-11-09).
+exec function gmtest_skl04_st_tooltips()
+{
+	var lvl : int;
+	var text, expected : string;
+	var flat, dodge : array<string>;
+
+	flat.PushBack("8"); flat.PushBack("16"); flat.PushBack("25");
+	dodge.PushBack("16"); dodge.PushBack("32"); dodge.PushBack("50");
+	for(lvl = 1; lvl <= 3; lvl += 1)
+	{
+		text = GMSkillTooltip(S_Sword_s23, lvl, "");
+		expected = "Strong Attacks gain " + flat[lvl - 1] + "% Attack Power and increase the next strike's Attack Power by " + flat[lvl - 1]
+			+ "%. Adrenaline gain for Strong Attacks is increased by " + IntToString(5 * lvl) + "%.";
+		GMTestReport(text == expected, "SKL-04 Strength Training tooltip level " + lvl + ": " + text);
+		text = GMSkillTooltip(S_Sword_s22, lvl, "");
+		expected = "Fast Attacks gain " + flat[lvl - 1] + "% Attack Power. After a successful dodge or roll, your next 3 Fast Attacks, or your next Strong Attack, gain a further "
+			+ dodge[lvl - 1] + "% Attack Power. Adrenaline gain for Fast Attacks is increased by " + IntToString(5 * lvl) + "%.";
+		GMTestReport(text == expected, "SKL-03 Muscle Memory tooltip level " + lvl + ": " + text);
+	}
+}
+
+// The stacks and the sword effects (fast_attack_buff, strong_attack_buff) now.
+exec function gmtest_skl_blows_state()
+{
+	var w : W3PlayerWitcher;
+	var sword : CWitcherSword;
+	var s : string;
+
+	w = GetWitcherPlayer();
+	sword = w.GetHeldSwordEntity();
+	if(sword)
+		s = ", sword effects fast " + sword.IsEffectActive('fast_attack_buff') + ", strong " + sword.IsEffectActive('strong_attack_buff');
+	else
+		s = ", no sword held";
+	LogChannel('GMTest', "INFO SKL blows t=" + theGame.GetEngineTimeAsSeconds() + ": Precise Blows stacks " + w.GMBlowsStacks(S_Sword_s24) + " (crit chance +" + w.GMBlowsCritChance() + "), Crushing Blows stacks " + w.GMBlowsStacks(S_Sword_s25) + " (crit damage +" + w.GMBlowsCritDamage() + ")" + s);
+}
+
+// Adds a stack as a non-crit hit of a new swing does (heavy: Crushing Blows).
+exec function gmtest_skl_blows_hit(heavy : bool)
+{
+	var w : W3PlayerWitcher;
+
+	w = GetWitcherPlayer();
+	w.GMTestBlowsNewSwing();
+	w.GMBlowsOnHit(heavy);
 }
 
 // SKL-04 Strength Training (D54): one scripted melee hit of Geralt's with the given attack name on the
-// hostile test dummy (100 physical, no weapon): logs the stacks before and after, the raw damage after the
-// pool and the attack power the probe recorded, and whether it was a crit.
+// hostile test dummy (100 physical, no weapon), as a new swing: logs whether the next-strike bonus waited
+// before and after, the raw damage after the pool and the attack power the probe recorded, and whether it
+// was a crit.
 exec function gmtest_skl04_st_hit(attackName : name)
 {
 	var witcher : W3PlayerWitcher;
@@ -2369,17 +2583,18 @@ exec function gmtest_skl04_st_hit(attackName : name)
 	var action : W3Action_Attack;
 	var step : SGMTestDmgStep;
 	var probes : bool;
-	var before : int;
+	var before : bool;
 
 	witcher = GetWitcherPlayer();
 	npc = GMTestHostileNpc();
 	if(!npc)
 		return;
+	witcher.GMTestNewSwing();
 	probes = GMTestProbes();
 	thePlayer.GMTestSetProbes(true);
 	thePlayer.GMTestDmgReset();
 	witcher.ForceSetStat(BCS_Focus, 0);
-	before = witcher.GMStrengthTrainingStacks();
+	before = witcher.GMStrengthTrainingArmed();
 	action = new W3Action_Attack in theGame.damageMgr;
 	action.Init(thePlayer, npc, NULL, GetInvalidUniqueId(), attackName, thePlayer.GetName(), EHRT_Light,
 		false, false, attackName, AST_Jab, ASD_UpDown, true, false, false, false);
@@ -2388,7 +2603,7 @@ exec function gmtest_skl04_st_hit(attackName : name)
 	action.SetHitAnimationPlayType(EAHA_ForceNo);
 	theGame.damageMgr.ProcessAction(action);
 	step = GMTestDmgStep0();
-	LogChannel('GMTest', "INFO SKL-04 Strength Training t=" + theGame.GetEngineTimeAsSeconds() + " " + attackName + ": stacks " + before + " -> " + witcher.GMStrengthTrainingStacks() + ", raw after the pool " + step.rawIn + " (pool x" + (step.rawIn / thePlayer.gmTestDmgRawBefore) + "), attack power x" + step.mult + ", crit " + action.IsCriticalHit() + ", adrenaline " + witcher.GetStat(BCS_Focus));
+	LogChannel('GMTest', "INFO SKL-04 Strength Training t=" + theGame.GetEngineTimeAsSeconds() + " " + attackName + ": next-strike bonus waiting " + before + " -> " + witcher.GMStrengthTrainingArmed() + ", raw after the pool " + step.rawIn + " (pool x" + (step.rawIn / thePlayer.gmTestDmgRawBefore) + "), attack power x" + step.mult + ", crit " + action.IsCriticalHit() + ", adrenaline " + witcher.GetStat(BCS_Focus));
 	delete action;
 	thePlayer.GMTestSetProbes(probes);
 	npc.ForceSetStat(BCS_Vitality, npc.GetStatMax(BCS_Vitality));
@@ -2449,6 +2664,80 @@ exec function gmtest_skl03_mm_hit(attackName : name)
 	delete action;
 	thePlayer.GMTestSetProbes(probes);
 	npc.ForceSetStat(BCS_Vitality, npc.GetStatMax(BCS_Vitality));
+}
+
+// SKL-03 Muscle Memory's own sword glow (gm_mm_buff, tools/gen_sword_glows.py): on the held sword while the
+// skill is armed (expectArmed), off otherwise; 5.x's shared fast_attack_buff stays off unless Precise Blows
+// has stacks. With checkPlay, also plays and stops gm_mm_buff once on the held sword when it is not armed
+// (PlayEffect is false for an effect the sword's templates do not define).
+exec function gmtest_skl03_mm_glow(expectArmed : bool, optional checkPlay : bool)
+{
+	var w : W3PlayerWitcher;
+	var sword : CWitcherSword;
+	var armed, mm, fast, played : bool;
+	var which : string;
+
+	w = GetWitcherPlayer();
+	sword = w.GetHeldSwordEntity();
+	if(!sword)
+	{
+		GMTestReport(false, "SKL-03 Muscle Memory glow: no sword held (gmtest_draw first)");
+		return;
+	}
+	if(w.IsWeaponHeld('silversword'))
+		which = "silver";
+	else
+		which = "steel";
+	armed = w.GMMuscleMemoryArmed();
+	mm = sword.IsEffectActive('gm_mm_buff');
+	fast = sword.IsEffectActive('fast_attack_buff');
+	GMTestReport(armed == expectArmed, "SKL-03 Muscle Memory glow (" + which + "): armed " + armed + ", expected " + expectArmed + " (boosts left " + w.gmMMRemaining + ")");
+	GMTestReport(mm == expectArmed, "SKL-03 Muscle Memory glow (" + which + "): gm_mm_buff active " + mm + ", expected " + expectArmed);
+	GMTestReport(!fast || w.GMBlowsStacks(S_Sword_s24) > 0, "SKL-03 Muscle Memory glow (" + which + "): fast_attack_buff active " + fast + " with Precise Blows stacks " + w.GMBlowsStacks(S_Sword_s24));
+	if(checkPlay && !armed)
+	{
+		played = sword.PlayEffect('gm_mm_buff');
+		mm = sword.IsEffectActive('gm_mm_buff');
+		sword.StopEffect('gm_mm_buff');
+		GMTestReport(played && mm, "SKL-03 Muscle Memory glow (" + which + "): the sword plays gm_mm_buff " + played + ", active " + mm + ", after StopEffect " + sword.IsEffectActive('gm_mm_buff'));
+	}
+}
+
+// SKL-04 Strength Training's own sword glow (gm_st_buff, tools/gen_sword_glows.py): on the held sword while
+// its next-strike bonus waits (expectArmed), off otherwise; 5.x's strong_attack_buff stays off unless
+// Crushing Blows has stacks. With checkPlay, also plays and stops gm_st_buff once on the held sword when the
+// bonus does not wait (PlayEffect is false for an effect the sword's templates do not define).
+exec function gmtest_skl04_st_glow(expectArmed : bool, optional checkPlay : bool)
+{
+	var w : W3PlayerWitcher;
+	var sword : CWitcherSword;
+	var armed, st, strong, played : bool;
+	var which : string;
+
+	w = GetWitcherPlayer();
+	sword = w.GetHeldSwordEntity();
+	if(!sword)
+	{
+		GMTestReport(false, "SKL-04 Strength Training glow: no sword held (gmtest_draw first)");
+		return;
+	}
+	if(w.IsWeaponHeld('silversword'))
+		which = "silver";
+	else
+		which = "steel";
+	armed = w.GMStrengthTrainingArmed();
+	st = sword.IsEffectActive('gm_st_buff');
+	strong = sword.IsEffectActive('strong_attack_buff');
+	GMTestReport(armed == expectArmed, "SKL-04 Strength Training glow (" + which + "): armed " + armed + ", expected " + expectArmed);
+	GMTestReport(st == expectArmed, "SKL-04 Strength Training glow (" + which + "): gm_st_buff active " + st + ", expected " + expectArmed);
+	GMTestReport(!strong || w.GMBlowsStacks(S_Sword_s25) > 0, "SKL-04 Strength Training glow (" + which + "): strong_attack_buff active " + strong + " with Crushing Blows stacks " + w.GMBlowsStacks(S_Sword_s25));
+	if(checkPlay && !armed)
+	{
+		played = sword.PlayEffect('gm_st_buff');
+		st = sword.IsEffectActive('gm_st_buff');
+		sword.StopEffect('gm_st_buff');
+		GMTestReport(played && st, "SKL-04 Strength Training glow (" + which + "): the sword plays gm_st_buff " + played + ", active " + st + ", after StopEffect " + sword.IsEffectActive('gm_st_buff'));
+	}
 }
 
 // SKL-18 perks: Geralt's stats the simple perks change and the perks' maximum levels.
@@ -2586,41 +2875,125 @@ exec function gmtest_skl18_shrine(add : bool)
 	}
 	buff = thePlayer.GetBuff(EET_ShrineIgni);
 	if(buff)
-		LogChannel('GMTest', "INFO SKL-18 Gorged on Power t=" + theGame.GetEngineTimeAsSeconds() + ": shrine bonus time left " + buff.GetDurationLeft() + ", perk_14 counts " + thePlayer.CanUseSkill(S_Perk_14) + ", perk_43 " + thePlayer.CanUseSkill(S_Perk_43));
+		LogChannel('GMTest', "INFO SKL-18 Gorged on Power t=" + theGame.GetEngineTimeAsSeconds() + ": shrine bonus time left " + buff.GetDurationLeft() + ", perk_14 counts " + thePlayer.CanUseSkill(S_Perk_14));
 	else
 		LogChannel('GMTest', "INFO SKL-18 Gorged on Power: no shrine bonus");
 }
 
-// SKL-18 Wolf School: with oil, applies the human oil to the held sword; with poison, poisons the hostile
-// test dummy; then logs the window left on the dummy, whether the bonus applies and the melee crit chance
-// against it (light attack) and without a target.
-exec function gmtest_skl18_wolf(oil : bool, poison : bool)
+// SKL-18 Wolf School and Viper School (D61, revised 2026-11-07): gmtest_skl18_wolf_add(effect) gives the
+// hostile test dummy one effect by name (stagger, longstagger, knockdown, heavyknockdown, counter, burning,
+// confusion, blindness, wraithblindness, frozen, poison, bleeding; anything else: none) and reads ten times
+// every 0.2 s; after its animation started, gmtest_skl18_wolf() logs the dummy's animated critical state,
+// whether it counts as incapacitated or poisoned/bleeding, the crit chance against it (light, heavy, bolt)
+// and without a target, each perk's crit chance and damage bonus, and a forced light crit's attack power.
+exec function gmtest_skl18_wolf_add(effect : name)
+{
+	var npc : CActor;
+	var type : EEffectType;
+
+	npc = GMTestHostileNpc();
+	if(!npc)
+		return;
+	switch(effect)
+	{
+		case 'stagger' :		type = EET_Stagger; break;
+		case 'longstagger' :	type = EET_LongStagger; break;
+		case 'knockdown' :		type = EET_Knockdown; break;
+		case 'heavyknockdown' :	type = EET_HeavyKnockdown; break;
+		case 'counter' :		type = EET_CounterStrikeHit; break;
+		case 'burning' :		type = EET_Burning; break;
+		case 'confusion' :		type = EET_Confusion; break;
+		case 'blindness' :		type = EET_Blindness; break;
+		case 'wraithblindness' :	type = EET_WraithBlindness; break;
+		case 'frozen' :		type = EET_Frozen; break;
+		case 'poison' :		type = EET_Poison; break;
+		case 'bleeding' :		type = EET_Bleeding; break;
+		default :				type = EET_Undefined;
+	}
+	if(type != EET_Undefined)
+		npc.AddEffectDefault(type, GetWitcherPlayer(), "gmtest");
+	LogChannel('GMTest', "INFO SKL-18 Wolf School: " + effect + " added " + npc.HasBuff(type));
+	GetWitcherPlayer().GMTestWolfStartReads();
+}
+
+@addField(W3PlayerWitcher)
+var gmTestWolfReads : int;
+
+@addMethod(W3PlayerWitcher)
+function GMTestWolfStartReads()
+{
+	gmTestWolfReads = 10;
+	AddTimer('GMTestWolfRead', 0.2, true);
+}
+
+// Ten reads, one every 0.2 s.
+@addMethod(W3PlayerWitcher)
+timer function GMTestWolfRead(dt : float, id : int)
+{
+	var npc : CActor;
+
+	npc = GMTestHostileNpc();
+	if(npc)
+	{
+		LogChannel('GMTest', "INFO SKL-18 Wolf/Viper School read t=" + theGame.GetEngineTimeAsSeconds() + ": poisoned or bleeding " + GMIsPoisonedOrBleeding(npc) + ", confused " + npc.HasBuff(EET_Confusion) + ", blinded " + (npc.HasBuff(EET_Blindness) || npc.HasBuff(EET_WraithBlindness)) + ", frozen " + npc.HasBuff(EET_Frozen) + ", Wolf crit damage " + GMWolfSchoolBonus(npc, 'gm_wolf_crit_damage') + ", Viper crit damage " + GMViperSchoolBonus(npc, 'gm_viper_crit_damage'));
+		LogChannel('GMTest', "INFO SKL-18 Wolf School read t=" + theGame.GetEngineTimeAsSeconds() + ": stagger " + npc.HasBuff(EET_Stagger) + ", long " + npc.HasBuff(EET_LongStagger) + ", knockdown " + npc.HasBuff(EET_Knockdown) + ", heavy " + npc.HasBuff(EET_HeavyKnockdown) + ", counter " + npc.HasBuff(EET_CounterStrikeHit) + ", burning " + npc.HasBuff(EET_Burning) + ", requested " + (bool)npc.GetNewRequestedCS() + ", incapacitated " + GMIsIncapacitated(npc) + ", crit chance " + GetCriticalHitChance(true, false, npc, MC_Human, false));
+	}
+	gmTestWolfReads -= 1;
+	if(gmTestWolfReads <= 0)
+		RemoveTimer('GMTestWolfRead');
+}
+
+exec function gmtest_skl18_wolf()
+{
+	GMTestWolfLog();
+}
+
+function GMTestWolfLog()
 {
 	var witcher : W3PlayerWitcher;
 	var npc : CActor;
-	var ids : array<SItemUniqueId>;
-	var applied : bool;
-	var oils : array<W3Effect_Oil>;
-	var i : int;
+	var cs : CBaseGameplayEffect;
+	var csName : string;
 
 	witcher = GetWitcherPlayer();
 	npc = GMTestHostileNpc();
 	if(!npc)
 		return;
-	if(oil)
-	{
-		ids = witcher.inv.AddAnItem('Hanged Man Venom 1', 1);
-		applied = witcher.ApplyOil(ids[0], witcher.GetEquippedSword(true));	// a steel-sword oil
-		witcher.OnEquipMeleeWeapon(PW_Steel, true);
-		LogChannel('GMTest', "INFO SKL-18 Wolf School: oil applied " + applied + " (oil item valid " + witcher.inv.IsIdValid(ids[0]) + ")");
-	}
-	if(poison)
-		npc.AddEffectDefault(EET_Poison, witcher, "gmtest");
-	oils = witcher.inv.GetOilsAppliedOnItem(witcher.GetHeldSword());
-	for(i = 0; i < oils.Size(); i += 1)
-		LogChannel('GMTest', "INFO SKL-18 Wolf School: oil on the held sword: category " + oils[i].GetMonsterCategory() + ", charges " + oils[i].GetAmmoCurrentCount());
-	LogChannel('GMTest', "INFO SKL-18 Wolf School: window left " + (npc.gmWolfWindowEnd - theGame.GetEngineTimeAsSeconds()) + " s, oil on the blade " + witcher.inv.ItemHasActiveOilApplied(witcher.GetHeldSword(), MC_Human) + ", active " + witcher.GMWolfSchoolActive(npc, witcher.GetHeldSword(), MC_Human)
-		+ "; crit chance vs dummy " + witcher.GetCriticalHitChance(true, false, npc, MC_Human, false) + ", without target " + witcher.GetCriticalHitChance(true, false, NULL, MC_Human, false) + ", crit damage bonus " + witcher.GMWolfSchoolCritDamage(npc, witcher.GetHeldSword(), MC_Human) + "; dummy poisoned " + npc.HasBuff(EET_Poison));
+	cs = npc.GetCurrentlyAnimatedCS();
+	if(cs)
+		csName = NameToString(EffectTypeToName(cs.GetEffectType()));
+	else
+		csName = "none";
+	LogChannel('GMTest', "INFO SKL-18 Wolf/Viper School t=" + theGame.GetEngineTimeAsSeconds() + ": Wolf " + witcher.CanUseSkill(S_Perk_26) + " (copies " + witcher.GetAbilityCount('perk_26') + "), Viper " + witcher.CanUseSkill(S_Perk_28) + " (copies " + witcher.GetAbilityCount('perk_28') + "), animated state " + csName + ", incapacitated " + GMIsIncapacitated(npc) + ", poisoned or bleeding " + GMIsPoisonedOrBleeding(npc)
+		+ "; crit chance vs dummy light " + witcher.GetCriticalHitChance(true, false, npc, MC_Human, false) + ", heavy " + witcher.GetCriticalHitChance(false, true, npc, MC_Human, false) + ", bolt " + witcher.GetCriticalHitChance(false, false, npc, MC_Human, true)
+		+ ", light without target " + witcher.GetCriticalHitChance(true, false, NULL, MC_Human, false) + "; Wolf crit chance " + witcher.GMWolfSchoolBonus(npc, 'gm_wolf_crit_chance') + " damage " + witcher.GMWolfSchoolBonus(npc, 'gm_wolf_crit_damage') + ", Viper crit chance " + witcher.GMViperSchoolBonus(npc, 'gm_viper_crit_chance') + " damage " + witcher.GMViperSchoolBonus(npc, 'gm_viper_crit_damage')
+		+ ", crit damage bonus " + witcher.GMWolfViperCritDamage(npc) + ", forced light crit attack power x" + GMTestCritHitPowerNamed(npc, 'attack_light'));
+}
+
+// SKL-18 Wolf School on a frozen enemy (project owner, 2026-11-07): forced light crits on the hostile test
+// dummy (gmtest_probes(true) first): one clean, one that shatters a freeze added by script, the next one after
+// the freeze is gone; their attack power and the dummy's state between them.
+exec function gmtest_skl18_wolf_frozen()
+{
+	var witcher : W3PlayerWitcher;
+	var npc : CActor;
+	var clean, shatter, after : float;
+	var frozenBefore, incapBefore, frozenAfter, incapAfter : bool;
+
+	witcher = GetWitcherPlayer();
+	npc = GMTestHostileNpc();
+	if(!npc)
+		return;
+	npc.RemoveAllBuffsOfType(EET_Frozen);
+	clean = GMTestCritHitPowerNamed(npc, 'attack_light');
+	npc.AddEffectDefault(EET_Frozen, witcher, "gmtest");
+	frozenBefore = npc.HasBuff(EET_Frozen);
+	incapBefore = GMIsIncapacitated(npc);
+	shatter = GMTestCritHitPowerNamed(npc, 'attack_light');
+	frozenAfter = npc.HasBuff(EET_Frozen);
+	after = GMTestCritHitPowerNamed(npc, 'attack_light');
+	incapAfter = GMIsIncapacitated(npc);
+	LogChannel('GMTest', "INFO SKL-18 Wolf School frozen: Wolf " + witcher.CanUseSkill(S_Perk_26) + ", clean crit attack power x" + clean + "; frozen " + frozenBefore + ", incapacitated " + incapBefore + ", shattering crit x" + shatter + ", frozen after it " + frozenAfter + "; next crit x" + after + ", incapacitated after it " + incapAfter);
 }
 
 // SKL-01 (D43), legacy's slot fixes, and the level sync of GlobalPassiveBonus skills. Test save at
@@ -2990,8 +3363,56 @@ function GMTest_skl_values()
 	GMTestSklValues_perk(p, n);
 	GMTestReport(p == "", "SKL values (" + tree + "): " + n + " values of the perks (SKL-18)" + p);
 	p = ""; n = 0;
+	GMTestSklIcons(p, n);
+	GMTestReport(p == "", "SKL values (" + tree + "): " + n + " skill icons in force (SKL-18, SKL-19)" + p);
+	p = ""; n = 0;
 	GMTestSklValuesOther(p, n);
 	GMTestReport(p == "", "SKL values: " + n + " values of the basic signs and the perks' effect abilities" + p);
+}
+
+// A skill's icon in force (GetSkillIconPath), by the end of its path (no backslashes in script strings): the
+// classic tree's, the new tree's.
+function GMTestSklIcon(out p : string, out n : int, skillName : name, classicIcon : string, newIcon : string)
+{
+	var expected, icon : string;
+
+	if(GMIsClassicProfileInForce())
+		expected = classicIcon;
+	else
+		expected = newIcon;
+	icon = thePlayer.GetSkillIconPath(SkillNameToEnum(skillName));
+	n += 1;
+	if(!StrEndsWith(StrLower(icon), StrLower(expected)))
+		p += "; " + skillName + " " + icon + " (expected ..." + expected + ")";
+}
+
+// SKL-18, SKL-19 (project owner, 2026-11-07): a new-tree slot that carries another skill than 5.x's shows that
+// skill's classic icon while the new tree is in force (gm_skill_trees.xml); the classic tree keeps 5.x's. A
+// few slots that keep 5.x's art, and classic skills, for comparison.
+function GMTestSklIcons(out p : string, out n : int)
+{
+	GMTestSklIcon(p, n, 'perk_27', "manticore_school_techniques.png", "ico_trick_shot.png");
+	GMTestSklIcon(p, n, 'perk_43', "synergy.png", "icon_perk_pyromaniac.png");
+	GMTestSklIcon(p, n, 'perk_44', "element_of_surprise_2.png", "icon_perk_safe_hands.png");
+	GMTestSklIcon(p, n, 'perk_37', "conjunction.png", "s_perk_16.png");
+	GMTestSklIcon(p, n, 'perk_26', "wolven_school_techniques.png", "wolven_school_techniques.png");
+	GMTestSklIcon(p, n, 'perk_28', "viper_school_techniques.png", "viper_school_techniques.png");
+	GMTestSklIcon(p, n, 'alchemy_s22', "debilitating_poison.png", "alchemy_s17.png");
+	GMTestSklIcon(p, n, 'alchemy_s23', "toxic_shock_2.png", "alchemy_s9.png");
+	GMTestSklIcon(p, n, 'alchemy_s24', "heightened_tolerance.png", "alchemy_s1.png");
+	GMTestSklIcon(p, n, 'alchemy_s25', "volatile_concoction.png", "alchemy_s6.png");
+	GMTestSklIcon(p, n, 'alchemy_s26', "wyvern_sting.png", "alchemy_s19.png");
+	GMTestSklIcon(p, n, 'magic_s35', "catalyst.png", "magic_s7.png");
+	GMTestSklIcon(p, n, 'magic_s36', "fortified_signs.png", "magic_s18.png");
+	GMTestSklIcon(p, n, 'magic_s37', "convergence_theory.png", "magic_s11.png");
+	GMTestSklIcon(p, n, 'magic_s38', "focus.png", "magic_s13.png");
+	GMTestSklIcon(p, n, 'magic_s39', "avoidance.png", "magic_s6.png");
+	GMTestSklIcon(p, n, 'magic_s40', "overload.png", "magic_s15.png");
+	GMTestSklIcon(p, n, 'magic_s41', "resonance.png", "magic_s9.png");
+	GMTestSklIcon(p, n, 'perk_20', "icon_perk_pyromaniac.png", "icon_perk_pyromaniac.png");
+	GMTestSklIcon(p, n, 'perk_17', "ico_trick_shot.png", "ico_trick_shot.png");
+	GMTestSklIcon(p, n, 'alchemy_s19', "alchemy_s19.png", "alchemy_s19.png");
+	GMTestSklIcon(p, n, 'magic_s12', "magic_s6.png", "magic_s6.png");
 }
 
 function GMTestSklAbilityValue(abilityName : name, attributeName : name, kind : name) : float
@@ -3203,27 +3624,24 @@ function GMTestSklValues_sword(out p : string, out n : int)
 	GMTestSklValue(p, n, 'sword_s20', 'focus_gain', 'add', 0.05, 0.083333);
 	GMTestSklValue(p, n, 'sword_s21', 'light_focus_gain', 'add', 0.03, -1000000);
 	GMTestSklValue(p, n, 'sword_s22', 'damage_increase', 'mult', -1000000, 0);
-	GMTestSklValue(p, n, 'sword_s22', 'gm_mm_attack_power', 'add', -1000000, 0.6);
-	GMTestSklValue(p, n, 'sword_s22', 'gm_mm_total_damage', 'add', -1000000, 0.1);
+	GMTestSklValue(p, n, 'sword_s22', 'gm_mm_attack_power', 'add', -1000000, 0.25);
+	GMTestSklValue(p, n, 'sword_s22', 'gm_mm_dodge_attack_power', 'add', -1000000, 0.5);
+	GMTestSklValue(p, n, 'sword_s22', 'gm_mm_attacks', 'add', -1000000, 3);
 	GMTestSklValue(p, n, 'sword_s22', 'gm_mm_window', 'add', -1000000, 6);
 	GMTestSklValue(p, n, 'sword_s22', 'light_focus_gain', 'add', -1000000, 0.05);
 	GMTestSklValue(p, n, 'sword_s23', 'damage_increase', 'mult', -1000000, 0);
-	GMTestSklValue(p, n, 'sword_s23', 'gm_st_attack_power', 'add', -1000000, 0.35);
-	GMTestSklValue(p, n, 'sword_s23', 'gm_st_weapon_damage', 'add', -1000000, 0.1);
+	GMTestSklValue(p, n, 'sword_s23', 'gm_st_attack_power', 'add', -1000000, 0.25);
+	GMTestSklValue(p, n, 'sword_s23', 'gm_st_next_attack_power', 'add', -1000000, 0.25);
 	GMTestSklValue(p, n, 'sword_s23', 'gm_st_duration', 'add', -1000000, 6);
 	GMTestSklValue(p, n, 'sword_s23', 'heavy_focus_gain', 'add', -1000000, 0.05);
 	GMTestSklValue(p, n, 'sword_s24', 'damage_increase', 'mult', -1000000, 0);
-	GMTestSklValue(p, n, 'sword_s24', 'gm_crit_chance', 'add', -1000000, 0.08);
-	GMTestSklValue(p, n, 'sword_s24', 'gm_crit_damage', 'add', -1000000, 0.2);
-	GMTestSklValue(p, n, 'sword_s24', 'gm_chain_crit_chance', 'add', -1000000, 0.08);
-	GMTestSklValue(p, n, 'sword_s24', 'gm_chain_crit_damage', 'add', -1000000, 0.2);
-	GMTestSklValue(p, n, 'sword_s24', 'gm_chain_duration', 'add', -1000000, 4);
+	GMTestSklValue(p, n, 'sword_s24', 'gm_crit_chance', 'add', -1000000, 0.05);
+	GMTestSklValue(p, n, 'sword_s24', 'gm_stack_crit_chance', 'add', -1000000, 0.05);
+	GMTestSklValue(p, n, 'sword_s24', 'gm_max_stacks', 'add', -1000000, 4);
 	GMTestSklValue(p, n, 'sword_s25', 'damage_increase', 'mult', -1000000, 0);
-	GMTestSklValue(p, n, 'sword_s25', 'gm_crit_chance', 'add', -1000000, 0.08);
-	GMTestSklValue(p, n, 'sword_s25', 'gm_crit_damage', 'add', -1000000, 0.2);
-	GMTestSklValue(p, n, 'sword_s25', 'gm_chain_crit_chance', 'add', -1000000, 0.08);
-	GMTestSklValue(p, n, 'sword_s25', 'gm_chain_crit_damage', 'add', -1000000, 0.2);
-	GMTestSklValue(p, n, 'sword_s25', 'gm_chain_duration', 'add', -1000000, 6);
+	GMTestSklValue(p, n, 'sword_s25', 'gm_crit_damage', 'add', -1000000, 0.5);
+	GMTestSklValue(p, n, 'sword_s25', 'gm_stack_crit_damage', 'add', -1000000, 0.5);
+	GMTestSklValue(p, n, 'sword_s25', 'gm_max_stacks', 'add', -1000000, 3);
 	GMTestSklValue(p, n, 'sword_s26', 'critical_hit_chance', 'add', -1000000, 0.083333);
 	GMTestSklValue(p, n, 'sword_s26', 'critical_hit_damage_bonus', 'add', -1000000, 0.25);
 	GMTestSklValue(p, n, 'sword_s27', 'duration', 'add', -1000000, 8.333333);
@@ -3391,11 +3809,10 @@ function GMTestSklValues_perk(out p : string, out n : int)
 	GMTestSklValue(p, n, 'perk_24', 'perk_6_stamina_cost_reduction', 'mult', -1000000, 0.05);
 	GMTestSklValue(p, n, 'perk_25', 'vitality', 'mult', -1000000, 0.075);
 	GMTestSklValue(p, n, 'perk_25', 'bonus_focus_gain', 'add', -1000000, 0.025);
-	GMTestSklValue(p, n, 'perk_26', 'gm_wolf_crit_chance', 'add', -1000000, 0.05);
-	GMTestSklValue(p, n, 'perk_26', 'gm_wolf_crit_damage', 'add', -1000000, 0.15);
-	GMTestSklValue(p, n, 'perk_26', 'gm_wolf_bomb_damage', 'add', -1000000, 0.075);
-	GMTestSklValue(p, n, 'perk_28', 'stack_multiplier', 'mult', -1000000, 0.5);
-	GMTestSklValue(p, n, 'perk_28', 'dmg_multiplier', 'mult', -1000000, 1);
+	GMTestSklValue(p, n, 'perk_26', 'gm_wolf_crit_chance', 'add', -1000000, 0.1);
+	GMTestSklValue(p, n, 'perk_26', 'gm_wolf_crit_damage', 'add', -1000000, 0.4);
+	GMTestSklValue(p, n, 'perk_28', 'gm_viper_crit_chance', 'add', -1000000, 0.03);
+	GMTestSklValue(p, n, 'perk_28', 'gm_viper_crit_damage', 'add', -1000000, 0.2);
 	GMTestSklValue(p, n, 'perk_30', 'vitality', 'base', -1000000, 750);
 	GMTestSklValue(p, n, 'perk_31', 'stamina_kill', 'mult', -1000000, 0.15);
 	GMTestSklValue(p, n, 'perk_31', 'stamina_other', 'mult', -1000000, 0.05);
@@ -3410,6 +3827,8 @@ function GMTestSklValues_perk(out p : string, out n : int)
 	GMTestSklValue(p, n, 'perk_40', 'critical_hit_chance', 'add', -1000000, 0.1);
 	GMTestSklValue(p, n, 'perk_42', 'focus_gain', 'add', -1000000, 0.05);
 	GMTestSklValue(p, n, 'perk_42', 'stamina_cost_reduction', 'add', -1000000, 0.1);
+	GMTestSklValue(p, n, 'perk_43', 'stack_multiplier', 'mult', -1000000, 0.5);
+	GMTestSklValue(p, n, 'perk_43', 'dmg_multiplier', 'mult', -1000000, 1);
 	GMTestSklValue(p, n, 'perk_5', 'critical_hit_chance', 'add', 0.05, -1000000);
 	GMTestSklValue(p, n, 'perk_5', 'critical_hit_damage_bonus', 'add', 0.2, -1000000);
 	GMTestSklValue(p, n, 'perk_6', 'spell_power', 'mult', 0.05, -1000000);

@@ -2508,7 +2508,6 @@ exec function gmtest_regress()
 	GMTest_sklg_dot();
 	GMTest_sklg_selfbomb();
 	GMTest_skla_undying();
-	GMTest_skla_gorged();
 	GMTest_skla_perk21();
 	GMTest_skla_cleanse();
 	GMTest_skl07_foa_keep();

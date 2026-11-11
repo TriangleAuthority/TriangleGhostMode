@@ -11,8 +11,9 @@
 // - Synergy (classic alchemy_s19, 5 levels; the new tree's alchemy_s26 in place of Potent Sting): +10% of
 //   the mutagen bonus per level (5.x: the classic skill's 3 levels, or the Synergy perk). 5.x adds one copy
 //   of the bonus per level; the new tree's level counts as 2, 3 and 5 levels (gm_synergy_levels, rounded),
-//   +50% at level 3. The level is applied in MutagensSyngergyBonusUpdate (skills/gorgedOnPower.ws), and the
-//   bonus is refreshed for alchemy_s26 where 5.x refreshes it only for alchemy_s19 and perk_43.
+//   +50% at level 3. The level is applied in MutagensSyngergyBonusUpdate (below; 5.x's Synergy perk, perk_43,
+//   passed its own level, and the new tree's perk_43 is Heavy Artillery, SKL-18), and the bonus is refreshed
+//   for alchemy_s26 where 5.x refreshes it only for alchemy_s19 and perk_43.
 // See docs/features/skl.md.
 
 // Synergy's level for the mutagen bonus: alchemy_s19's, or alchemy_s26's scaled to legacy's 5 levels.
@@ -29,6 +30,14 @@ function GMSynergyLevel() : int
 	if(CanUseSkill(S_Alchemy_s26))
 		return RoundMath(GetSkillLevel(S_Alchemy_s26) * CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Alchemy_s26, 'gm_synergy_levels', false, false)));
 	return 0;
+}
+
+// 5.x's Synergy perk (perk_43) passed its own level to the mutagen bonus; the level is Synergy's
+// (alchemy_s19, or the new tree's alchemy_s26), whatever the caller passes.
+@wrapMethod(W3PlayerAbilityManager)
+function MutagensSyngergyBonusUpdate( skillGroupID : int, skillLevel : int )
+{
+	wrappedMethod(skillGroupID, GMSynergyLevel());
 }
 
 // Whether a recipe counts for Acquired Tolerance (legacy's IsAlchemy18Recipe).

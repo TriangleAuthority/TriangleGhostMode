@@ -376,7 +376,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-10-24 from the chang
 | 5.x class | in-5.x |
 | Flags | — |
 | Depends on | DMG-06 (the sign intensity curve, signed off), SKL-18 (Gorged on Power, signed off) |
-| Skill trees | n/a (Gorged on Power, classic `perk_14` and new `perk_43`, is SKL-18's) |
+| Skill trees | n/a (Gorged on Power, classic `perk_14` only, is SKL-18's) |
 | Port form | nothing; a scripted check of the five `Shrine*Effect` abilities in the regression |
 | Port status | **signed off** (2026-10-25); checked (slice 7, 2026-10-24, master `7effa252`): nothing to port; `GMTest_efx11` in the regression, both trees |
 | Open checks | — |

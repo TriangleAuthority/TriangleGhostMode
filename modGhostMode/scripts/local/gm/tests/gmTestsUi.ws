@@ -370,11 +370,12 @@ function GMTestUi01Hit(npc : CActor, silver : bool, attackName : name, crit : bo
 }
 
 // Scripted hits come within one swing's time: forget Strength Training's last swing, so the next
-// strong hit is a new swing (a real one comes later anyway).
+// hit is a new swing (a real one comes later anyway).
 @addMethod(W3PlayerWitcher)
 function GMTestNewSwing()
 {
-	gmSTUsedAt = 0;
+	gmSTLastHitAt = 0;
+	gmSTSwingBoosted = false;
 }
 
 // One attack type's check: the list read just before a scripted hit against the neutral dummy: the
@@ -428,15 +429,12 @@ function GMTestUi01Compare(npc : CActor, silver : bool, heavy : bool, crit : boo
 // UI-01 against Ghost Mode's formula: needs the hostile test dummy, neutral (gmtest_dummy("human") for
 // the steel sword, gmtest_dummy("drowner") for the silver one with silver = true, then
 // gmtest_dummy_neutral()). Fast and strong, normal and crit; with the new tree's Muscle Memory armed and
-// Strength Training stacked when equipped. Run it without skills and with each tree's sword skills.
+// Strength Training's next-strike bonus waiting when equipped. Run it without skills and with each tree's sword skills.
 exec function gmtest_ui01_hits(optional silver : bool)
 {
 	var w : W3PlayerWitcher;
 	var npc : CActor;
 	var probes : bool;
-	var i : int;
-	var tmp : float;
-	var tmpCrit : bool;
 
 	thePlayer.GMTestCount(true, true);
 	w = GetWitcherPlayer();
@@ -454,9 +452,8 @@ exec function gmtest_ui01_hits(optional silver : bool)
 	GMTestUi01Compare(npc, silver, false, true);
 	if(w.CanUseSkill(S_Sword_s23))
 	{
-		for(i = 0; i < 3; i += 1)
-			GMTestUi01Hit(npc, silver, 'attack_light', false, tmp, tmpCrit);
-		LogChannel('GMTest', "INFO UI-01 Strength Training stacks " + w.GMStrengthTrainingStacks() + ", Muscle Memory armed " + w.GMMuscleMemoryArmed());
+		w.GMTestSetSTArmed(true);
+		LogChannel('GMTest', "INFO UI-01 Strength Training's next-strike bonus waiting " + w.GMStrengthTrainingArmed() + ", Muscle Memory armed " + w.GMMuscleMemoryArmed());
 	}
 	GMTestUi01Compare(npc, silver, true, false);
 	GMTestUi01Compare(npc, silver, true, true);

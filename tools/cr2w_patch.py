@@ -29,9 +29,17 @@ of its data; table: CRC32 of the table; header: CRC32 of the 160-byte header and
 field set to 0xDEADBEEF). Rebuilding reproduces an unchanged file byte for byte; files with buffers or
 embedded-file tables are refused (none of the entity files edited so far has them).
 
+Cooked files (functions for generators, SKL-03's tools/gen_mm_glow.py): `patch_bytes` makes same-size raw byte
+edits inside chunk data (values a cooked particle system or material instance keeps outside its property
+lists) and recomputes the CRCs; `repoint_imports` changes import paths (the new path appended to the string
+table); `cooked_effects` reads an entity template's cookedEffects (name -> buffer, a self-contained CR2W
+holding the CFXDefinition) and `clone_cooked_effect` appends a renamed copy of one, its buffer passed through
+a function.
+
     python tools/cr2w_patch.py FILE EDIT [...] [--check]
     python tools/cr2w_patch.py --roundtrip FILE [...]   rebuild each file unchanged and compare
-    python tools/cr2w_patch.py --selftest               the String and @parameter edits on ECON-12's scenes
+    python tools/cr2w_patch.py --selftest               the String and @parameter edits on ECON-12's scenes, and
+                                                        the cooked-file functions on the game's sword fx files
 
 Prints each change; fails if an edit matches nothing. --check changes nothing and fails if an edit would
 still change something (the file is not patched yet).
@@ -109,12 +117,43 @@ def patch(data, edits, label=""):
                 if c:
                     hit.add(k)
                 changes += c
-        struct.pack_into("<I", d, coff + 24 * i + 20, zlib.crc32(bytes(d[start:end])))
+    fix_crcs(d, f)
+    return bytes(d), changes, hit
+
+
+def fix_crcs(d, f=None):
+    """Recomputes the chunk, export table and header CRCs of the CR2W file in bytearray `d` in place (after
+    same-size edits of chunk data)."""
+    f = f or cr2w_dump.CR2W(bytes(d))
+    coff = f.tables[4][0]
+    for i, ch in enumerate(f.chunks):
+        struct.pack_into("<I", d, coff + 24 * i + 20, zlib.crc32(bytes(d[ch["off"]:ch["off"] + ch["size"]])))
     off, count, _ = f.tables[4]
     struct.pack_into("<I", d, 40 + 12 * 4 + 8, zlib.crc32(bytes(d[off:off + 24 * count])))
     struct.pack_into("<I", d, 32, 0xDEADBEEF)
     struct.pack_into("<I", d, 32, zlib.crc32(bytes(d[:160])))
-    return bytes(d), changes, hit
+
+
+def patch_bytes(data, edits, label=""):
+    """Same-size raw byte edits inside chunk data, for values a cooked file keeps outside its property lists
+    (a cooked particle system's emitter blobs, a material instance's parameters): `edits` is a list of
+    (old bytes, new bytes); each old must occur exactly once in the chunks' data. Returns (new data, list of
+    changes); CRCs recomputed. Fails if an edit matches nothing or more than once, or changes the size."""
+    d = bytearray(data)
+    f = cr2w_dump.CR2W(bytes(d))
+    start = min(c["off"] for c in f.chunks)
+    end = max(c["off"] + c["size"] for c in f.chunks)
+    changes = []
+    for old, new in edits:
+        if len(old) != len(new):
+            raise ValueError("%sbyte edit changes the size: %s" % (label, old.hex()))
+        hits = [m.start() for m in re.finditer(re.escape(old), bytes(d[start:end]))]
+        if len(hits) != 1:
+            raise ValueError("%s%s found %d times in the chunk data, expected once" % (label, old.hex(), len(hits)))
+        d[start + hits[0]:start + hits[0] + len(old)] = new
+        changes.append("%sat %d: %s -> %s" % (label, start + hits[0], old.hex(), new.hex()))
+    fix_crcs(d, f)
+    return bytes(d), changes
 
 
 def check_crcs(data):
@@ -573,6 +612,86 @@ def apply(data, ops, label=""):
     return fo.build(), changes, hit
 
 
+# ---- cooked effects: an entity template's cookedEffects (SKL-03's Muscle Memory glow) ----------------
+
+def repoint_imports(data, mapping, label=""):
+    """Changes import paths ({old path: new path}): the new path is appended to the string table and the
+    import entry points to it (a handle or soft handle to the import follows). Returns (new data, list of
+    changes); fails if an old path is not imported."""
+    fo = File(data)
+    raw = bytearray(fo.raw_tables[2])
+    changes, seen = [], set()
+    for i in range(len(raw) // 8):
+        p = struct.unpack_from("<I", raw, 8 * i)[0]
+        path = fo.f.string(p)
+        if path in mapping:
+            struct.pack_into("<I", raw, 8 * i, len(fo.strings))
+            fo.strings += mapping[path].encode("latin-1") + b"\0"
+            changes.append("%simport %d: %s -> %s" % (label, i + 1, path, mapping[path]))
+            seen.add(path)
+    missing = set(mapping) - seen
+    if missing:
+        raise ValueError("%snot imported: %s" % (label, ", ".join(sorted(missing))))
+    fo.raw_tables[2] = bytes(raw)
+    return fo.build(), changes
+
+
+def cooked_effects(data):
+    """{effect name: its buffer (a CR2W file holding the CFXDefinition)} of a cooked entity template."""
+    fo = File(data, readonly=True)
+    out = {}
+    for i, cls in enumerate(fo.classes):
+        if cls != "CEntityTemplate":
+            continue
+        d = fo.chunks[i]
+        pl, _ = parse_list(d, 0, len(d), chunk=True)
+        for ni, ti, v in pl[1]:
+            if fo.name(ni) == "cookedEffects":
+                elems, _ = parse_array(v, inner_type(fo.name(ti)))
+                for e in elems:
+                    fields = struct_fields(fo, e)
+                    name = fo.name(struct.unpack("<H", fields["name"][1])[0])
+                    out[name] = fields["buffer"][1][4:]
+    return out
+
+
+def clone_cooked_effect(data, src, dst, transform, label=""):
+    """Appends a copy of the cooked effect `src` of an entity template under the name `dst`: its buffer
+    passed through transform(buffer bytes) -> new buffer bytes (a SharedDataBuffer: a Uint32 size, then a
+    self-contained CR2W file). Every other entry keeps its bytes. Returns (new data, list of changes)."""
+    fo = File(data)
+    changes = []
+    for i, cls in enumerate(fo.classes):
+        if cls != "CEntityTemplate":
+            continue
+        d = fo.chunks[i]
+        pl, _ = parse_list(d, 0, len(d), chunk=True)
+        for entry in pl[1]:
+            if fo.name(entry[0]) != "cookedEffects":
+                continue
+            elems, _ = parse_array(entry[2], inner_type(fo.name(entry[1])))
+            names = [fo.name(struct.unpack("<H", struct_fields(fo, e)["name"][1])[0]) for e in elems]
+            if dst in names:
+                raise ValueError("%s%s already has an effect %s" % (label, cls, dst))
+            if src not in names:
+                raise ValueError("%s%s has no effect %s" % (label, cls, src))
+            e = elems[names.index(src)]
+            epl, _ = parse_list(e, 0, len(e))
+            for field in epl[1]:
+                if fo.name(field[0]) == "name":
+                    field[2] = struct.pack("<H", fo.name_index(dst))
+                elif fo.name(field[0]) == "buffer":
+                    buf = transform(field[2][4:])
+                    field[2] = struct.pack("<I", len(buf)) + buf
+            elems.append(build_list(epl))
+            entry[2] = build_array(elems)
+            fo.chunks[i] = build_list(pl)
+            changes.append("%schunk %d: cookedEffects[%d] %s added, a copy of %s" % (label, i, len(elems) - 1, dst, src))
+    if not changes:
+        raise ValueError("%sno cookedEffects array" % label)
+    return fo.build(), changes
+
+
 def roundtrip(data):
     """Rebuilds a file (and its embedded files) unchanged; returns True if the bytes are identical."""
     out, _, _ = apply(data, [])
@@ -616,8 +735,38 @@ def selftest():
             "ok  " if ok else "FAIL", os.path.basename(path), len(scripts), ", ".join(map(str, scripts)),
             same_legacy, others, [c for c in changes if "name added" in c]))
         bad += not ok
+    bad += selftest_cooked()
     print("selftest:", "FAILED" if bad else "passed")
     return bad
+
+
+def selftest_cooked():
+    """The cooked-effect edits on the installed game's sword_steel_fx.w2ent (skipped without a game): a clone
+    of fast_attack_buff with its buffer unchanged must leave every other entry byte for byte and carry the
+    source's buffer; imports repointed and back must dump as the original; a byte edit and its reverse must
+    give the original file back."""
+    try:
+        import gen_mm_glow
+        data = gen_mm_glow.game_file(gen_mm_glow.TEMPLATES[0])
+        w2p = gen_mm_glow.game_file(gen_mm_glow.SRC_W2P)
+    except (Exception, SystemExit) as e:
+        print("skip cooked-effect checks (no game files: %s)" % e)
+        return 0
+    out, _ = clone_cooked_effect(data, "fast_attack_buff", "gm_selftest", lambda b: b)
+    a, b = cooked_effects(data), cooked_effects(out)
+    ok1 = list(b) == list(a) + ["gm_selftest"] and all(a[k] == b[k] for k in a) and b["gm_selftest"] == a["fast_attack_buff"]
+    ok1 = ok1 and check_crcs(out) and bool(cr2w_dump.dump_file(out))
+    buf = a["fast_attack_buff"]
+    there, _ = repoint_imports(buf, {gen_mm_glow.SRC_W2P: "x\\y.w2p"})
+    back, _ = repoint_imports(there, {"x\\y.w2p": gen_mm_glow.SRC_W2P})
+    dump = lambda d: cr2w_dump.dump_file(d)
+    ok2 = dump(back) == dump(buf) and dump(there) != dump(buf) and "  x\\y.w2p (CParticleSystem)" in dump(there)
+    p1, _ = patch_bytes(w2p, [(w2p[2738:2741], b"\1\2\3")])
+    p2, _ = patch_bytes(p1, [(b"\1\2\3", w2p[2738:2741])])
+    ok3 = p2 == w2p and check_crcs(p1) and p1 != w2p
+    for ok, what in ((ok1, "clone_cooked_effect"), (ok2, "repoint_imports"), (ok3, "patch_bytes")):
+        print("%s %s on the game's cooked files" % ("ok  " if ok else "FAIL", what))
+    return (not ok1) + (not ok2) + (not ok3)
 
 
 def main():

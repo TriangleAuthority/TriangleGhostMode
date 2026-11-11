@@ -546,7 +546,7 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 		powerMod.valueMultiplicative += GMHeadShotDamageBonus();	//modSigns
 	if(actorVictim && actorAttacker && actorVictim.IsAttackerAtBack(actorAttacker))	//modSigns: backstabs +25% attack power (GEN)
 		powerMod.valueMultiplicative += GMBackAttackDamageBonus();	//modSigns
-	if((W3PlayerWitcher)playerAttacker && attackAction)	//modSigns: SKL-04, the new tree's Strength Training's attack power (D54)
+	if((W3PlayerWitcher)playerAttacker && attackAction)	//modSigns: SKL-04, the new tree's Strength Training's attack power: strong attacks and the next strike (D54)
 		powerMod.valueMultiplicative += ((W3PlayerWitcher)playerAttacker).GMStrengthTrainingPowerFor(attackAction) + ((W3PlayerWitcher)playerAttacker).GMMuscleMemoryPowerFor(attackAction);	//modSigns: and Muscle Memory's (SKL-03, D53)
 	if((W3PlayerWitcher)playerAttacker && ((W3PlayerWitcher)playerAttacker).GMIsWhirlingWithAdrenaline())	//modSigns: SKL-03, Whirl's attack power per extra enemy
 		powerMod.valueMultiplicative += ((W3PlayerWitcher)playerAttacker).GMGetWhirlDamageBonus();	//modSigns
@@ -577,13 +577,14 @@ function GetAttackersPowerMod() : SAbilityAttributeValue
 					criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s08);
 				else if (!playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && playerAttacker.CanUseSkill(S_Sword_s17))
 					criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s17);
-				if((W3PlayerWitcher)playerAttacker)	//modSigns: the new tree's Crushing Blows and Precise Blows (D55, D57): their crit damage, then the crit starts their chain
+				if((W3PlayerWitcher)playerAttacker)	//modSigns: the new tree's Crushing Blows (D55): its crit damage, then the crit clears the Blows' stacks (D55, D57)
 				{	//modSigns
-					criticalDamageBonus.valueAdditive += ((W3PlayerWitcher)playerAttacker).GMBlowsCritDamage(playerAttacker.IsHeavyAttack(attackAction.GetAttackName()));	//modSigns
-					((W3PlayerWitcher)playerAttacker).GMBlowsOnCrit(playerAttacker.IsHeavyAttack(attackAction.GetAttackName()));	//modSigns
-					criticalDamageBonus.valueAdditive += ((W3PlayerWitcher)playerAttacker).GMWolfSchoolCritDamage(actorVictim, weaponId, victimMonsterCategory);	//modSigns: SKL-18, Wolf School (D61)
+					criticalDamageBonus.valueAdditive += ((W3PlayerWitcher)playerAttacker).GMBlowsCritDamage();	//modSigns
+					((W3PlayerWitcher)playerAttacker).GMBlowsOnCrit();	//modSigns
 				}	//modSigns
 			}	//modSigns
+			if((W3PlayerWitcher)playerAttacker && ((attackAction && attackAction.IsActionMelee()) || (W3BoltProjectile)action.causer))	//modSigns: SKL-18, Wolf and Viper School (D61): melee and bolts against an incapacitated, a poisoned or a bleeding enemy
+				criticalDamageBonus.valueAdditive += ((W3PlayerWitcher)playerAttacker).GMWolfViperCritDamage(actorVictim);	//modSigns
 			if((W3PlayerWitcher)playerAttacker && (W3BoltProjectile)action.causer)	//modSigns: SKL-06, Anatomical Knowledge's crossbow crit damage (legacy)
 				criticalDamageBonus += ((W3PlayerWitcher)playerAttacker).GMAnatomicalKnowledgeCritDamage();	//modSigns
 			if((W3PlayerWitcher)playerAttacker && (W3Petard)action.causer)	//modSigns: ARM-10, the Manticore set's bomb crit damage per piece (legacy)

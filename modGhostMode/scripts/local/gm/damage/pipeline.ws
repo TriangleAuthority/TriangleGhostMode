@@ -406,14 +406,6 @@ function GMProcessDamageModification()
 		action.processedDmg.essenceDamage *= mult;
 	}
 
-	// Muscle Memory (SKL-03, the new tree's, D53): a boosted fast attack (skills/muscleMemory.ws)
-	mult = GMMuscleMemoryDamageMult(playerAttacker, attackAction);
-	if( mult != 1 )
-	{
-		action.processedDmg.vitalityDamage *= mult;
-		action.processedDmg.essenceDamage *= mult;
-	}
-
 	// DMG-10: non-deadly fights outside the fistfight minigame: a hit deals 20% of the victim's maximum
 	// health (x2 heavy), scaled: the player x1 (x0.5 against Olaf and the ff205 troll); the prologue's
 	// fistfighters x0.25; other NPCs x(0.25 + 0.25 per difficulty above the second + 0.1 per level

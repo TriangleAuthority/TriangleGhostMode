@@ -710,7 +710,7 @@ function AddBuffStats(itemId : SItemUniqueId, itemInvComponent : CInventoryCompo
 // Whole-port audit C1-3 (2026-11-03): legacy's bomb damage lines (legacy GetItemBaseStats and
 // GetItemTooltipAttributes): with Pyrotechnics (alchemy_s10, both trees) a bomb's physical and silver damage
 // include the skill's damage per level, and the item tooltip (GetItemBaseStats) lists both lines even for a
-// bomb without them; with Heavy Artillery (classic perk_20, new tree perk_28) every damage line is
+// bomb without them; with Heavy Artillery (classic perk_20, new tree perk_43) every damage line is
 // multiplied by 1 + its dmg_multiplier (x2). The Snow Ball gets no Pyrotechnics line: the skill does not
 // raise its damage (legacy's tooltip showed it; a deviation).
 @addField(CInventoryComponent)

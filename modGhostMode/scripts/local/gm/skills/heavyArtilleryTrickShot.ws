@@ -1,10 +1,10 @@
 // SKL-18: Heavy Artillery and Trick Shot, legacy's in both trees (D49, D61; classic perk_20 and
-// perk_17, the new tree's perk_28 and perk_27 in place of 5.x's Viper and Manticore School, which are
-// gone: their abilities are empty, their pool terms removed in damage/pool.ws).
+// perk_17, the new tree's perk_43 and perk_27 in place of 5.x's Synergy perk (which moved to alchemy_s26,
+// D60) and Manticore School (gone: its ability is empty)).
 // - Heavy Artillery: bomb damage +100% (a pool term for a bomb hit that is not damage over time, x2 on
 //   the flat part of its damage over time (legacy; 5.x doubles the whole value) and on gas clouds),
 //   bombs per slot halved (5.x: x2 damage), the stacks trimmed when the perk or Pyrotechnics is
-//   equipped (legacy). 5.x's code reads perk_20: for perk_28 the same sites are taken here (the stack,
+//   equipped (legacy). 5.x's code reads perk_20: for perk_43 the same sites are taken here (the stack,
 //   Dragon's Dream's gas, the bombs' damage over time).
 // - Trick Shot: one extra bolt before reloading.
 // See docs/features/skl.md.
@@ -14,8 +14,8 @@ function GMHeavyArtillerySkill() : ESkill
 {
 	if(CanUseSkill(S_Perk_20))
 		return S_Perk_20;
-	if(CanUseSkill(S_Perk_28))
-		return S_Perk_28;
+	if(CanUseSkill(S_Perk_43))
+		return S_Perk_43;
 	return S_SUndefined;
 }
 
@@ -109,7 +109,7 @@ function ProcessMechanicalEffect(targets : array<CGameplayEntity>, isImpact : bo
 }
 
 // A bomb's damage over time from Geralt with Heavy Artillery: only its flat part is doubled, as legacy
-// (5.x doubles the whole value, the share of maximum health included); for the new tree's perk_28 too
+// (5.x doubles the whole value, the share of maximum health included); for the new tree's perk_43 too
 // (5.x's petard sets its flag for perk_20 only). 5.x body; changes marked //modSigns.
 @replaceMethod(W3DamageOverTimeEffect)
 function OnEffectAdded(optional customParams : W3BuffCustomParams)
@@ -131,7 +131,7 @@ function OnEffectAdded(optional customParams : W3BuffCustomParams)
 
 
 
-	if( params && ( params.isPerk20Active || ( params.isFromBomb && GetCreator() == GetWitcherPlayer() && GetWitcherPlayer().CanUseSkill(S_Perk_28) ) ) )	//modSigns: either tree
+	if( params && ( params.isPerk20Active || ( params.isFromBomb && GetCreator() == GetWitcherPlayer() && GetWitcherPlayer().CanUseSkill(S_Perk_43) ) ) )	//modSigns: either tree
 	{
 		heavyArtillery = GetWitcherPlayer().GMHeavyArtillerySkill();	//modSigns
 		if( heavyArtillery == S_SUndefined )	//modSigns: the flag outlives the perk
@@ -152,7 +152,7 @@ function OnEffectAdded(optional customParams : W3BuffCustomParams)
 function OnSkillEquip(skill : ESkill)
 {
 	wrappedMethod(skill);
-	if(skill == S_Alchemy_s10 || skill == S_Perk_28)
+	if(skill == S_Alchemy_s10 || skill == S_Perk_43)
 		thePlayer.SkillReduceBombAmmoBonus();
 }
 

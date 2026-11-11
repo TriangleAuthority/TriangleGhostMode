@@ -517,13 +517,13 @@ exec function gmtest_dmg02_back()
 
 // DMG slice 3a (DMG-04): the additive raw-damage pool and heavy attacks, against the test dummy with
 // Geralt's sword (scripted attacks built as real ones). Needs a dummy (gmtest_dummy("human") in an
-// earlier call); for the additivity check also the new tree's Strength Training (skilleq(S_Sword_s23, 0, 3)).
+// earlier call); with the new tree's Strength Training (skilleq(S_Sword_s23, 0, 3)) also its attack power.
 exec function gmtest_dmg03a()
 {
 	var npc : CNewNPC;
 	var weaponId, npcWeapon : SItemUniqueId;
 	var light, heavy : SGMTestDmgStep;
-	var lightRatio, heavyRatio, ratio, eos : float;
+	var lightRatio, heavyRatio, ratio, st, stNext, mm : float;
 	var min, max : SAbilityAttributeValue;
 	var probes : bool;
 
@@ -541,7 +541,12 @@ exec function gmtest_dmg03a()
 	GMTestDummySet(npc, 'armor', 250);
 	GMTestDummySet(npc, 'critical_hit_damage_reduction', 1);
 
-	// Geralt's light attack: no pool term
+	// Geralt's light attack: no pool term (the new tree's Muscle Memory's attack power when equipped, not armed)
+	GetWitcherPlayer().GMTestSetSTArmed(false);
+	GetWitcherPlayer().GMMuscleMemoryEnd();
+	mm = GetWitcherPlayer().GMMuscleMemoryValue('gm_mm_attack_power');
+	if(!thePlayer.CanUseSkill(S_Sword_s22))
+		mm = 0;
 	thePlayer.ForceSetStat(BCS_Focus, 0);
 	GMTestDmgHit(thePlayer, npc, weaponId, 'attack_light');
 	light = GMTestDmgStep0();
@@ -550,7 +555,10 @@ exec function gmtest_dmg03a()
 	GMTestReport(GMTestDmgNear(lightRatio, 1), "DMG-04 a light attack: raw damage unchanged by the pool (x" + NoTrailZeros(lightRatio) + ")");
 
 	// Geralt's heavy attack: +50% weapon damage (Strong Attack), 200 armor piercing, no attack power change
-	GetWitcherPlayer().GMTestSetSTStacks(0);	// the light attack gave the new tree's Strength Training a stack
+	// but the new tree's Strength Training's
+	st = GetWitcherPlayer().GMStrengthTrainingValue('gm_st_attack_power');
+	stNext = GetWitcherPlayer().GMStrengthTrainingValue('gm_st_next_attack_power');
+	GetWitcherPlayer().GMTestSetSTArmed(false);
 	thePlayer.ForceSetStat(BCS_Focus, 0);
 	GMTestDmgHit(thePlayer, npc, weaponId, 'attack_heavy');
 	heavy = GMTestDmgStep0();
@@ -558,25 +566,27 @@ exec function gmtest_dmg03a()
 	GMTestDmgLogStep("heavy attack", heavy);
 	GMTestReport(GMTestDmgNear(heavyRatio, 1.5), "DMG-04 Strong Attack: a heavy attack's raw damage x1.5 (x" + NoTrailZeros(heavyRatio) + ")");
 	GMTestReport(GMTestDmgNear(light.pts - heavy.pts, 200), "DMG-04 Strong Attack pierces 200 armor (" + NoTrailZeros(light.pts) + " -> " + NoTrailZeros(heavy.pts) + ")");
-	GMTestReport(GMTestDmgNear(heavy.mult, light.mult), "DMG-01 a heavy attack has a light attack's attack power (" + NoTrailZeros(light.mult) + ", "
+	GMTestReport(GMTestDmgNear(heavy.mult, light.mult - mm + st), "DMG-01 a heavy attack has a light attack's attack power, less Muscle Memory's +" + NoTrailZeros(mm) + ", plus Strength Training's +" + NoTrailZeros(st) + " (" + NoTrailZeros(light.mult) + ", "
 		+ NoTrailZeros(heavy.mult) + "; 5.x: -0.433 + 0.333 + 0.15)");
 	GMTestReport(GMTestDmgNear(heavy.result, MaxF(0, MaxF(0, heavy.rawIn + heavy.base - heavy.pts) * heavy.mult + heavy.add) * (1 - heavy.perc)),
 		"DMG-01 a heavy attack follows the formula without 5.x's x1.833");
 
-	// Pool terms add up: Strong Attack + the new tree's Strength Training at 3 stacks (5.x's Element of
-	// Surprise, the former sample, is gone)
+	// SKL-04: the new tree's Strength Training's next-strike bonus on a strong attack: both bonuses in the
+	// attack power, nothing in the pool
 	if(thePlayer.CanUseSkill(S_Sword_s23))
 	{
-		GetWitcherPlayer().GMTestSetSTStacks(GetWitcherPlayer().GetSkillLevel(S_Sword_s23));
-		eos = GetWitcherPlayer().GMStrengthTrainingBonus('gm_st_weapon_damage', GetWitcherPlayer().GetSkillLevel(S_Sword_s23));
+		GetWitcherPlayer().GMTestNewSwing();
+		GetWitcherPlayer().GMTestSetSTArmed(true);
 		thePlayer.ForceSetStat(BCS_Focus, 0);
 		GMTestDmgHit(thePlayer, npc, weaponId, 'attack_heavy');
+		heavy = GMTestDmgStep0();
 		ratio = thePlayer.gmTestDmgRawAfter / MaxF(0.001, thePlayer.gmTestDmgRawBefore);
-		GMTestReport(GMTestDmgNear(ratio, 1 + 0.5 + eos), "DMG-04 pool terms add up: Strong Attack +50% and Strength Training +" + NoTrailZeros(eos * 100)
-			+ "% give x" + NoTrailZeros(ratio) + " (additive " + NoTrailZeros(1.5 + eos) + ", 5.x's stacking " + NoTrailZeros(1.5 * (1 + eos)) + ")");
+		GMTestReport(GMTestDmgNear(ratio, 1.5) && GMTestDmgNear(heavy.mult, light.mult - mm + st + stNext) && !GetWitcherPlayer().GMStrengthTrainingArmed(),
+			"SKL-04 Strength Training: a strong attack after a strong attack gets +" + NoTrailZeros(st) + " and +" + NoTrailZeros(stNext) + " attack power (x" + NoTrailZeros(heavy.mult)
+			+ ", light x" + NoTrailZeros(light.mult) + "), raw x" + NoTrailZeros(ratio) + " (no pool term), the bonus used up");
 	}
 	else
-		LogChannel('GMTest', "INFO DMG-04 additivity not checked: Geralt lacks the new tree's Strength Training (skilleq(S_Sword_s23, 0, 3))");
+		LogChannel('GMTest', "INFO SKL-04 Strength Training not checked: Geralt lacks the new tree's skill (skilleq(S_Sword_s23, 0, 3))");
 
 	// the dummy's heavy attack on Geralt: +25% weapon damage, no attack power bonus
 	npcWeapon = GMTestNpcWeapon(npc);
@@ -1144,10 +1154,10 @@ function GMTest_dmgxml()
 }
 
 @addMethod(W3PlayerWitcher)
-function GMTestSetSTStacks(n : int)
+function GMTestSetSTArmed(armed : bool)
 {
-	gmSTStacks = n;
-	gmSTEnd = theGame.GetEngineTimeAsSeconds() + 6;
-	gmSTLastStackAt = theGame.GetEngineTimeAsSeconds();
-	gmSTUsedAt = 0;
+	if(armed)
+		gmSTArmedEnd = theGame.GetEngineTimeAsSeconds() + 6;
+	else
+		gmSTArmedEnd = 0;
 }

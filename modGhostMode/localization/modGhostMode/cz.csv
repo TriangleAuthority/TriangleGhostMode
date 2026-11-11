@@ -89,12 +89,11 @@
 2110992612|        |gm_skill_desc_crippling_shot|Kritické zásahy kuší vyřadí jednu zvláštní schopnost nestvůry na $S$ sekund.
 2110992613|        |gm_skill_desc_anatomical_knowledge|Zvyšuje šanci na kritický zásah kuší o $S$% a sílu kritického zásahu kuší o $S$%.
 2110992614|        |gm_skill_desc_cold_blood|Každá šipka, která zasáhne cíl, vytvoří stejné množství adrenalinu jako zásah mečem. Šipky z kuše způsobují o $S$ více základního poškození.
-2110992615|        |gm_skill_desc_muscle_memory_1|Po úspěšném úskoku nebo kotoulu získá tvůj další rychlý útok $S$% síly útoku a způsobí o $S$% vyšší celkové poškození. Zisk adrenalinu z rychlých útoků je zvýšen o $S$%.
-2110992616|        |gm_skill_desc_muscle_memory_23|Po úspěšném úskoku nebo kotoulu získá tvých příštích $S$ rychlých útoků za sebou $S$% síly útoku a způsobí o $S$% vyšší celkové poškození. Zisk adrenalinu z rychlých útoků je zvýšen o $S$%.
-2110992617|        |gm_skill_desc_strength_training_1|Rychlý útok zvýší sílu dalšího silného útoku o $S$% a jeho poškození zbraně o $S$%. Zisk adrenalinu ze silných útoků je zvýšen o $S$%.
-2110992618|        |gm_skill_desc_strength_training_23|Každý rychlý útok zvýší sílu dalšího silného útoku o $S$% a jeho poškození zbraně o $S$%. Účinek se sčítá až $S$krát, přičemž každé další navýšení má poloviční účinek. Zisk adrenalinu ze silných útoků je zvýšen o $S$%.
-2110992619|        |gm_skill_desc_precise_blows|Zvyšuje sílu kritických zásahů rychlých útoků o $S$% a šanci na kritický zásah o $S$%. Kritický zásah rychlým útokem zvýší šanci rychlých útoků na kritický zásah o dalších $S$% a sílu jejich kritických zásahů o dalších $S$% na $S$ sekund.
-2110992620|        |gm_skill_desc_crushing_blows|Zvyšuje sílu kritických zásahů silných útoků o $S$% a šanci na kritický zásah o $S$%. Kritický zásah silným útokem zvýší šanci silných útoků na kritický zásah o dalších $S$% a sílu jejich kritických zásahů o dalších $S$% na $S$ sekund.
+2110992615|        |gm_skill_desc_muscle_memory|Rychlé útoky mají sílu útoku zvýšenou o $S$%. Po úspěšném úskoku nebo kotoulu získá dalších $S$ rychlých útoků, nebo další silný útok, sílu útoku navíc o $S$%. Zisk adrenalinu z rychlých útoků je zvýšen o $S$%.
+2110992617|        |gm_skill_desc_strength_training|Silné útoky mají sílu útoku zvýšenou o $S$% a zvýší sílu útoku dalšího úderu o $S$%. Zisk adrenalinu ze silných útoků je zvýšen o $S$%.
+2110992619|        |gm_skill_desc_precise_blows|Zvyšuje šanci na kritický zásah o $S$% a o dalších $S$% za každý rychlý útok až do příštího kritického zásahu. Kumuluje se až $S$krát.
+2110992620|        |gm_skill_desc_crushing_blows|Zvyšuje sílu kritických zásahů o $S$% a o dalších $S$% za každý silný útok až do příštího kritického zásahu. Kumuluje se až $S$krát.
+2110992599|        |gm_skill_desc_crushing_blows_1|Zvyšuje sílu kritických zásahů o $S$% a o dalších $S$% za každý silný útok až do příštího kritického zásahu. Kumuluje se jednou.
 2110992284|        |gm_skill_desc_aard|A directed blast of telekinetic energy that staggers opponents and has $I$% knockdown chance. Heavy knockdown chance is $I$%. Chances scale with Sign Intensity and increase if enemy is low on Stamina. Heavy knockdown activates finisher move.
 2110992151|        |gm_skill_desc_yrden|Magic trap that slows enemies down by $S$% inside its area of effect (scales with Sign Intensity, max slowdown is limited by $S$%). Trap duration: $S$s. The longer the trap persists, the less efficient it becomes.
 2110992124|        |gm_skill_desc_quen|Protective shield that absorbs up to $I$% of damage dealt by enemy's weapon. Base damage absorption: $I$. Scales with Sign intensity. Current absorption: $I$. Prevents stagger, burning, poison and bleeding effects (and then breaks). <br>Shield duration: $I$s.
@@ -155,7 +154,8 @@
 2110992399|        |gm_skill_desc_attack_best_defense|Killing an enemy restores $I$% of your Stamina (no cooldown). Critical hits and successful counters restore $I$% of your Stamina ($S$ sec cooldown).
 2110992628|        |gm_skill_desc_survival_instinct|Zvyšuje maximální vitalitu o $S$.
 2110992629|        |gm_skill_desc_heavy_artillery|Bomby způsobují o $S$% vyšší poškození, ale počet bomb v každém slotu je poloviční. Bomby, které nezpůsobují poškození, si svůj počet ponechají, pokud není vybavena Pyrotechnika.
-2110992630|        |gm_skill_desc_wolf_school|Poté, co nepřítel utrpí poškození bombou, poskytují oleje na čepele proti němu $S$% šanci na kritický zásah a $S$% síly kritického zásahu. Bomby způsobují otráveným nepřátelům o $S$% vyšší poškození.
+2110992630|        |gm_skill_desc_wolf_school|Útoky proti zneschopněným protivníkům (vyvedeným z rovnováhy, sraženým k zemi, omráčeným, zmateným, zmrazeným, oslepeným nebo hořícím) získají $S$% šanci na kritický zásah a $S$% síly kritického zásahu.
+2110992675|        |gm_skill_desc_viper_school|Útoky proti otráveným nebo krvácejícím protivníkům získají $S$% šanci na kritický zásah a $S$% síly kritického zásahu.
 ; SKL-19 end
 ; MUT
 2110992551|        |gm_mutation_desc_1|When drawn, any sword increases Sign base damage by $S$% of its own base damage.

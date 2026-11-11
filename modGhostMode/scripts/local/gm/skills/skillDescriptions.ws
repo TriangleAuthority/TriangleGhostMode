@@ -290,36 +290,32 @@ function GMSwordSkillDescription(skill : ESkill, lvl : int) : string
 			a.PushBack(GMDescAdr(GMSkillVal(skill, 'focus_add') * lvl));
 			ai.PushBack(RoundMath(GMSkillVal(skill, 'focus_gain') * lvl * 100));
 			return GetLocStringByKeyExtWithParams("gm_skill_desc_razor_focus", ai, , a);
-		// new design: Muscle Memory, new tree (D1, D53)
+		// new design: Muscle Memory, new tree (D1, D53; revised 2026-11-09): bonuses 8/16/25 of 25 by level
 		case S_Sword_s22:
-			if(lvl > 1)
-				a.PushBack(IntToString(lvl));
-			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_mm_attack_power')));
-			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_mm_total_damage')));
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_mm_attack_power') * GMNewTreeLevelShare(lvl)));
+			a.PushBack(IntToString(RoundMath(GMSkillVal(skill, 'gm_mm_attacks'))));
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_mm_dodge_attack_power') * GMNewTreeLevelShare(lvl)));
 			a.PushBack(GMDescPct(GMSkillVal(skill, 'light_focus_gain') * lvl));
-			if(lvl > 1)
-				return GetLocStringByKeyExtWithParams("gm_skill_desc_muscle_memory_23", , , a);
-			return GetLocStringByKeyExtWithParams("gm_skill_desc_muscle_memory_1", , , a);
-		// new design: Strength Training, new tree (D1, D54)
+			return GetLocStringByKeyExtWithParams("gm_skill_desc_muscle_memory", , , a);
+		// new design: Strength Training, new tree (D1, D54; revised 2026-11-08 and 2026-11-09): bonuses 8/16/25 of 25 by level
 		case S_Sword_s23:
-			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_st_attack_power')));
-			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_st_weapon_damage')));
-			if(lvl > 1)
-				a.PushBack(IntToString(lvl));
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_st_attack_power') * GMNewTreeLevelShare(lvl)));
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_st_next_attack_power') * GMNewTreeLevelShare(lvl)));
 			a.PushBack(GMDescPct(GMSkillVal(skill, 'heavy_focus_gain') * lvl));
-			if(lvl > 1)
-				return GetLocStringByKeyExtWithParams("gm_skill_desc_strength_training_23", , , a);
-			return GetLocStringByKeyExtWithParams("gm_skill_desc_strength_training_1", , , a);
-		// new designs: Precise Blows and Crushing Blows, new tree (D57, D55)
+			return GetLocStringByKeyExtWithParams("gm_skill_desc_strength_training", , , a);
+		// new designs: Precise Blows and Crushing Blows, new tree (D57, D55; revised 2026-11-07): the full
+		// values at every level, the level raises the maximum stacks; Crushing Blows' level 1 "Stacks once."
 		case S_Sword_s24:
-		case S_Sword_s25:
-			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_crit_damage') * lvl));
 			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_crit_chance')));
-			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_chain_crit_chance')));
-			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_chain_crit_damage') * lvl));
-			a.PushBack(GMDescNum(GMSkillVal(skill, 'gm_chain_duration'), 1));
-			if(skill == S_Sword_s24)
-				return GetLocStringByKeyExtWithParams("gm_skill_desc_precise_blows", , , a);
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_stack_crit_chance')));
+			a.PushBack(IntToString(GMBlowsStackCap(GMSkillVal(skill, 'gm_max_stacks'), lvl)));
+			return GetLocStringByKeyExtWithParams("gm_skill_desc_precise_blows", , , a);
+		case S_Sword_s25:
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_crit_damage')));
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_stack_crit_damage')));
+			if(GMBlowsStackCap(GMSkillVal(skill, 'gm_max_stacks'), lvl) == 1)
+				return GetLocStringByKeyExtWithParams("gm_skill_desc_crushing_blows_1", , , a);
+			a.PushBack(IntToString(GMBlowsStackCap(GMSkillVal(skill, 'gm_max_stacks'), lvl)));
 			return GetLocStringByKeyExtWithParams("gm_skill_desc_crushing_blows", , , a);
 		// new design: Cold Blood, new tree (D13, D17), with Steady Shot's damage
 		case S_Sword_s34:
@@ -719,9 +715,8 @@ function GMPerkDescription(skill : ESkill, lvl : int) : string
 		case S_Perk_32:
 			ai.PushBack(RoundMath(GMSkillVal(skill, 'cost_reduction') * 100));
 			return GetLocStringByKeyExtWithParams("skill_desc_perk_13", ai);
-		// Gorged on Power (the new tree's on perk_43, D61): 5.x's classic text
+		// Gorged on Power: 5.x's classic text (classic tree only)
 		case S_Perk_14:
-		case S_Perk_43:
 			return GetLocStringByKeyExt("skill_desc_perk_14");
 		// Connoisseur (FOOD-06; the new tree's on perk_41): legacy's text, the alcohol bonus in percent
 		case S_Perk_15:
@@ -747,9 +742,9 @@ function GMPerkDescription(skill : ESkill, lvl : int) : string
 		case S_Perk_40:
 			ai.PushBack(RoundMath(GMSkillVal(skill, theGame.params.CRITICAL_HIT_CHANCE) * 100));
 			return GetLocStringByKeyExtWithParams("skill_desc_perk_19", ai);
-		// Heavy Artillery (the new tree's on perk_28, D61): +100% bomb damage, stacks halved
+		// Heavy Artillery (the new tree's on perk_43, D61): +100% bomb damage, stacks halved
 		case S_Perk_20:
-		case S_Perk_28:
+		case S_Perk_43:
 			a.PushBack(GMDescPct(GMSkillVal(skill, 'dmg_multiplier')));
 			return GetLocStringByKeyExtWithParams("gm_skill_desc_heavy_artillery", , , a);
 		// Attack is the Best Defense: stamina, 2.5 s cooldown for crits and counters
@@ -766,12 +761,15 @@ function GMPerkDescription(skill : ESkill, lvl : int) : string
 		case S_Perk_35:
 			ai.PushBack(RoundMath(GMSkillBase(skill, 'encumbrance')));
 			return GetLocStringByKeyExtWithParams("skill_desc_perk_22", ai);
-		// new design: Wolf School (D61), the totals with four medium armor pieces
+		// new designs: Wolf School and Viper School (D61), the totals with four medium armor pieces
 		case S_Perk_26:
 			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_wolf_crit_chance') * 4));
 			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_wolf_crit_damage') * 4));
-			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_wolf_bomb_damage') * 4));
 			return GetLocStringByKeyExtWithParams("gm_skill_desc_wolf_school", , , a);
+		case S_Perk_28:
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_viper_crit_chance') * 4));
+			a.PushBack(GMDescPct(GMSkillVal(skill, 'gm_viper_crit_damage') * 4));
+			return GetLocStringByKeyExtWithParams("gm_skill_desc_viper_school", , , a);
 	}
 	return "";
 }

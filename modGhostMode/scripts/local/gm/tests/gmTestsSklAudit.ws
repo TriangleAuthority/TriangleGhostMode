@@ -170,7 +170,7 @@ function GMTest_sklg_dot()
 	off = GMTestBombDoTValue(false);
 	on = GMTestBombDoTValue(true);
 	// the new tree's Heavy Artillery doubles without 5.x's flag (the flag is set for perk_20 only)
-	newTree = GetWitcherPlayer().GMHeavyArtillerySkill() == S_Perk_28;
+	newTree = GetWitcherPlayer().GMHeavyArtillerySkill() == S_Perk_43;
 	factor = 2;
 	if(newTree)
 		factor = 1;
@@ -389,40 +389,6 @@ exec function gmtest_skla_counter(n : int, focus : float, optional twoHanded : b
 	else
 		ok = knocked == 0;
 	GMTestReport(ok, "SKL audit F2: " + n + " counters on " + npc.GetDisplayName() + " (human " + npc.IsHuman() + ", two-handed " + twoHanded + "), Counterattack " + SkillEnumToName(witcher.GMCounterattackSkill()) + " level " + witcher.GMCounterattackLevel() + ", adrenaline " + witcher.GetStat(BCS_Focus) + ": knocked down " + knocked + " (" + share + ", chance " + chance + "), kicks " + kicks + ", stunned " + stunned + ", skipped (still down) " + down);
-}
-
-// F27: CanUseSkill(S_Perk_14) answers for perk_43 only while the new tree's profile is in force: the
-// profile facts set by script to none, new tree and classic in turn (restored after); compared with the
-// ability manager's own answers.
-function GMTest_skla_gorged()
-{
-	var pam : W3PlayerAbilityManager;
-	var factSet, factClassic : int;
-	var p14, p43 : bool;
-
-	pam = (W3PlayerAbilityManager)thePlayer.abilityManager;
-	p14 = pam.CanUseSkill(S_Perk_14);
-	p43 = pam.CanUseSkill(S_Perk_43);
-	factSet = FactsQuerySum("gm_skill_tree_set");
-	factClassic = FactsQuerySum("gm_skill_tree_classic");
-	FactsRemove("gm_skill_tree_set");
-	FactsRemove("gm_skill_tree_classic");
-	GMTestReport(thePlayer.CanUseSkill(S_Perk_14) == p14, "SKL audit F27: no profile, perk_14 asked for itself (" + thePlayer.CanUseSkill(S_Perk_14) + "; perk_14 " + p14 + ", perk_43 " + p43 + ")");
-	FactsAdd("gm_skill_tree_set", 1);
-	GMTestReport(thePlayer.CanUseSkill(S_Perk_14) == p43, "SKL audit F27: the new tree's profile, perk_14 asked for perk_43 (" + thePlayer.CanUseSkill(S_Perk_14) + ")");
-	FactsAdd("gm_skill_tree_classic", 1);
-	GMTestReport(thePlayer.CanUseSkill(S_Perk_14) == p14, "SKL audit F27: the classic profile, perk_14 asked for itself (" + thePlayer.CanUseSkill(S_Perk_14) + ")");
-	FactsRemove("gm_skill_tree_set");
-	FactsRemove("gm_skill_tree_classic");
-	if(factSet > 0)
-		FactsAdd("gm_skill_tree_set", factSet);
-	if(factClassic > 0)
-		FactsAdd("gm_skill_tree_classic", factClassic);
-}
-
-exec function gmtest_skla_gorged()
-{
-	GMTest_skla_gorged();
 }
 
 // F32: Attack is the Best Defense's internal cooldown is 5.x's neutral effect (project owner, 2026-10-16; legacy: negative).

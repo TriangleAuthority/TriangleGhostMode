@@ -378,10 +378,11 @@
         <stamina_kill type="mult" min="0.15" />
         <stamina_other type="mult" min="0.05" />
       </ability>
-      <!-- Heavy Artillery on perk_28 (5.x: Viper School) and Trick Shot on perk_27 (5.x: Manticore School), D61:
-           5.x's schools are gone (their per-piece abilities are empty); Trick Shot needs no value -->
-      <ability name="perk_28" on_conflict="replace">
-        <tags>perk_28</tags>
+      <!-- Heavy Artillery on perk_43 (5.x: Synergy, D61, revised 2026-11-07) and Trick Shot on perk_27 (5.x:
+           Manticore School, D61): Manticore School is gone (its per-piece ability is empty); Trick Shot needs no
+           value -->
+      <ability name="perk_43" on_conflict="replace">
+        <tags>perk_43</tags>
         <stack_multiplier type="mult" min="0.5" />
         <dmg_multiplier type="mult" min="1.0" />
       </ability>
@@ -404,18 +405,20 @@
       <ability name="perk_32" on_conflict="extend">
         <cost_reduction type="mult" min="0.334" />
       </ability>
-      <!-- Gorged on Power on perk_43 (5.x: Synergy, D60, D61; skills/gorgedOnPower.ws): no value -->
-      <ability name="perk_43" on_conflict="replace">
-        <tags>perk_43</tags>
-      </ability>
-      <!-- Wolf School perk_26 (D61, new design), per medium armor piece: +5% crit chance and +15% crit damage for
-           melee hits with the right oil on an enemy that took bomb damage in the last 10 s, +7.5% bomb weapon
-           damage against poisoned enemies (skills/wolfSchool.ws; 5.x: +2% attack power and intensity) -->
+      <!-- Wolf School perk_26 and Viper School perk_28 (D61, new designs, revised 2026-11-07), per medium armor
+           piece (5.x adds the ability once per piece): melee hits and bolts get, against an incapacitated enemy
+           (Wolf), +10% crit chance and +40% crit damage; against a poisoned or bleeding one (Viper), +3% and +20%
+           (skills/wolfViperSchools.ws; 5.x: Wolf +2% attack power and sign intensity, Viper +2% poison damage and
+           Vitality, per piece) -->
       <ability name="perk_26" on_conflict="replace">
         <tags>perk_26</tags>
-        <gm_wolf_crit_chance type="add" min="0.05" />
-        <gm_wolf_crit_damage type="add" min="0.15" />
-        <gm_wolf_bomb_damage type="add" min="0.075" />
+        <gm_wolf_crit_chance type="add" min="0.1" />
+        <gm_wolf_crit_damage type="add" min="0.4" />
+      </ability>
+      <ability name="perk_28" on_conflict="replace">
+        <tags>perk_28</tags>
+        <gm_viper_crit_chance type="add" min="0.03" />
+        <gm_viper_crit_damage type="add" min="0.2" />
       </ability>
       <ability name="perk_38" on_conflict="extend">
         <staminaRegen_tooltip type="mult" min="0.05" />
@@ -435,45 +438,46 @@
       <ability name="perk_35" on_conflict="extend">
         <encumbrance type="base" min="40" />
       </ability>
-      <!-- SKL-03: Muscle Memory sword_s22 (D1, D53), new design: a successful dodge or roll arms 1 boosted fast
-           attack per level, each within 6 s of the one before: +60% attack power, +10% total damage; +5%
-           fast-attack adrenaline gain per level (skills/muscleMemory.ws). 5.x's raw-damage multiplier is 0 -->
+      <!-- SKL-03: Muscle Memory sword_s22 (D1, D53), new design (revised 2026-11-09): fast attacks +25% attack
+           power; a successful dodge or roll arms +50% more for the next 3 fast attacks or the next strong attack,
+           each within 6 s of the one before; level-3 values, 8/16/25 of 25 by level (skills/muscleMemory.ws);
+           +5% fast-attack adrenaline gain per level. 5.x's raw-damage multiplier is 0 -->
       <ability name="sword_s22" on_conflict="extend">
         <damage_increase type="mult" min="0" max="0" />
-        <gm_mm_attack_power type="add" min="0.6" />
-        <gm_mm_total_damage type="add" min="0.1" />
+        <gm_mm_attack_power type="add" min="0.25" />
+        <gm_mm_dodge_attack_power type="add" min="0.5" />
+        <gm_mm_attacks type="add" min="3" />
         <gm_mm_window type="add" min="6" />
         <light_focus_gain type="add" min="0.05" />
       </ability>
-      <!-- SKL-04: Strength Training sword_s23 (D54), new design: per fast-attack swing that hits, a stack for the
-           next strong attack, up to 1 per level, each half the one before: +35% attack power and +10% weapon
-           damage first; expire after 6 s; +5% strong-attack adrenaline gain per level
-           (skills/strengthTraining.ws). 5.x's bonus is 0 -->
+      <!-- SKL-04: Strength Training sword_s23 (D54), new design (revised 2026-11-08 and 2026-11-09): strong
+           attacks +25% attack power, and a strong attack that hits gives the next strike +25% attack power, for
+           6 s; level-3 values, 8/16/25 of 25 by level (skills/strengthTraining.ws); +5% strong-attack adrenaline
+           gain per level. 5.x's bonus is 0 -->
       <ability name="sword_s23" on_conflict="extend">
         <damage_increase type="mult" min="0" max="0" />
-        <gm_st_attack_power type="add" min="0.35" />
-        <gm_st_weapon_damage type="add" min="0.1" />
+        <gm_st_attack_power type="add" min="0.25" />
+        <gm_st_next_attack_power type="add" min="0.25" />
         <gm_st_duration type="add" min="6" />
         <heavy_focus_gain type="add" min="0.05" />
       </ability>
-      <!-- SKL-03, SKL-04: Precise Blows sword_s24 (D57) and Crushing Blows sword_s25 (D55), new designs: melee
-           fast or strong attacks +8% crit chance, +20% crit damage per level; a crit of the type chains for
-           4 s or 6 s: a further +8% and +20% per level (skills/critBlows.ws). 5.x's procs are 0 -->
+      <!-- SKL-03, SKL-04: Precise Blows sword_s24 (D57) and Crushing Blows sword_s25 (D55), new designs
+           (revised 2026-11-07): melee fast and strong attacks +5% crit chance (Precise Blows) or +50% crit
+           damage (Crushing Blows), and as much again per stack; a fast (Precise) or strong attack (Crushing)
+           that hits without a crit adds a stack; a melee crit clears them. The levels raise the maximum stacks,
+           not the values: gm_max_stacks is the level-3 cap, one fewer per level below (2 / 3 / 4 and
+           1 / 2 / 3; skills/critBlows.ws). 5.x's procs are 0 -->
       <ability name="sword_s24" on_conflict="extend">
         <damage_increase type="mult" min="0" max="0" />
-        <gm_crit_chance type="add" min="0.08" />
-        <gm_crit_damage type="add" min="0.2" />
-        <gm_chain_crit_chance type="add" min="0.08" />
-        <gm_chain_crit_damage type="add" min="0.2" />
-        <gm_chain_duration type="add" min="4" />
+        <gm_crit_chance type="add" min="0.05" />
+        <gm_stack_crit_chance type="add" min="0.05" />
+        <gm_max_stacks type="add" min="4" />
       </ability>
       <ability name="sword_s25" on_conflict="extend">
         <damage_increase type="mult" min="0" max="0" />
-        <gm_crit_chance type="add" min="0.08" />
-        <gm_crit_damage type="add" min="0.2" />
-        <gm_chain_crit_chance type="add" min="0.08" />
-        <gm_chain_crit_damage type="add" min="0.2" />
-        <gm_chain_duration type="add" min="6" />
+        <gm_crit_damage type="add" min="0.5" />
+        <gm_stack_crit_damage type="add" min="0.5" />
+        <gm_max_stacks type="add" min="3" />
       </ability>
       <ability name="sword_s36" on_conflict="extend">
         <s9_damage_reduction type="add" min="0.166667" />

@@ -470,28 +470,30 @@
         <skill skill_name="alchemy_s17" requiredPointsSpent="28" maxLevel="5" />
       </skill_definition>
       <!-- The new tree's profile (skills/skillTreeProfile.ws): its fields replace 5.x's definitions while the
-           new tree is in force. SKL-18 (D49): every general perk is legacy's, 1 point and 1 level (5.x: 3). -->
+           new tree is in force. SKL-18 (D49): every general perk is legacy's, 1 point and 1 level (5.x: 3). A slot
+           that carries another skill than 5.x's takes that skill's classic icon (iconPath, SKL-18/SKL-19, project
+           owner, 2026-11-07); 5.x's art stays where the slot's skill is 5.x's own or nearly. -->
       <skill_definition def_name="GMNewTreeSkills">
         <skill skill_name="perk_23" maxLevel="1" />
         <skill skill_name="perk_24" maxLevel="1" />
         <skill skill_name="perk_25" maxLevel="1" />
         <skill skill_name="perk_26" maxLevel="1" />
-        <skill skill_name="perk_27" maxLevel="1" localisationName="skill_name_perk_17" />
-        <skill skill_name="perk_28" maxLevel="1" localisationName="skill_name_perk_20" />
+        <skill skill_name="perk_27" maxLevel="1" localisationName="skill_name_perk_17" iconPath="icons\Perks\ico_trick_shot.png" />
+        <skill skill_name="perk_28" maxLevel="1" />
         <skill skill_name="perk_30" maxLevel="1" />
         <skill skill_name="perk_31" maxLevel="1" />
         <skill skill_name="perk_32" maxLevel="1" localisationName="skill_name_perk_13" />
         <skill skill_name="perk_33" maxLevel="1" />
         <skill skill_name="perk_34" maxLevel="1" localisationName="skill_name_perk_9" />
         <skill skill_name="perk_35" maxLevel="1" />
-        <skill skill_name="perk_37" maxLevel="1" localisationName="skill_name_perk_11" />
+        <skill skill_name="perk_37" maxLevel="1" localisationName="skill_name_perk_11" iconPath="icons\Perks\s_perk_16.png" />
         <skill skill_name="perk_38" maxLevel="1" />
         <skill skill_name="perk_39" maxLevel="1" />
         <skill skill_name="perk_40" maxLevel="1" />
         <skill skill_name="perk_41" maxLevel="1" localisationName="skill_name_perk_15" />
         <skill skill_name="perk_42" maxLevel="1" />
-        <skill skill_name="perk_43" maxLevel="1" localisationName="skill_name_perk_14" />
-        <skill skill_name="perk_44" maxLevel="1" localisationName="skill_name_perk_16" />
+        <skill skill_name="perk_43" maxLevel="1" localisationName="skill_name_perk_20" iconPath="icons\Perks\icon_perk_pyromaniac.png" />
+        <skill skill_name="perk_44" maxLevel="1" localisationName="skill_name_perk_16" iconPath="icons\Perks\icon_perk_safe_hands.png" />
         <!-- SKL-19: a new-tree skill takes its legacy counterpart's name (project owner, 2026-10-11); the perks' names
              are on their lines above -->
         <skill skill_name="sword_s24" requiredPointsSpent="12" gridRow="12" gridColumn="0" localisationName="skill_name_sword_s17" />
@@ -501,24 +503,24 @@
         <skill skill_name="sword_s33" requiredPointsSpent="0" gridRow="0" gridColumn="6" localisationName="gm_skill_name_deflection" />
         <skill skill_name="sword_s36" requiredPointsSpent="5" gridRow="6" gridColumn="6" localisationName="skill_name_sword_s9" />
         <skill skill_name="magic_s3" requiredPointsSpent="4" gridRow="6" gridColumn="6" localisationName="gm_skill_name_magic_turret" />
-        <skill skill_name="alchemy_s24" requiredPointsSpent="0" gridRow="0" gridColumn="0" localisationName="gm_skill_name_refreshment" />
+        <skill skill_name="alchemy_s24" requiredPointsSpent="0" gridRow="0" gridColumn="0" localisationName="gm_skill_name_refreshment" iconPath="icons\Skills\Alchemy\alchemy_s1.png" />
         <skill skill_name="alchemy_s2" requiredPointsSpent="5" gridRow="6" gridColumn="0" localisationName="gm_skill_name_restoration" />
         <skill skill_name="alchemy_s3" requiredPointsSpent="17" gridRow="18" gridColumn="0" localisationName="gm_skill_name_expert_brewer" />
         <skill skill_name="alchemy_s4" requiredPointsSpent="12" gridRow="12" gridColumn="0" localisationName="gm_skill_name_prolonged_effects" />
         <skill skill_name="alchemy_s14" requiredPointsSpent="12" gridRow="12" gridColumn="9" localisationName="skill_name_alchemy_s14" />
-        <skill skill_name="alchemy_s22" requiredPointsSpent="17" gridRow="18" gridColumn="12" localisationName="skill_name_alchemy_s17" />
-        <skill skill_name="alchemy_s23" requiredPointsSpent="0" gridRow="0" gridColumn="6" localisationName="skill_name_alchemy_s9" />
-        <skill skill_name="alchemy_s25" requiredPointsSpent="12" gridRow="12" gridColumn="3" localisationName="skill_name_alchemy_s6" />
-        <skill skill_name="alchemy_s26" requiredPointsSpent="17" gridRow="18" gridColumn="9" localisationName="skill_name_alchemy_s19" />
+        <skill skill_name="alchemy_s22" requiredPointsSpent="17" gridRow="18" gridColumn="12" localisationName="skill_name_alchemy_s17" iconPath="icons\Skills\Alchemy\alchemy_s17.png" />
+        <skill skill_name="alchemy_s23" requiredPointsSpent="0" gridRow="0" gridColumn="6" localisationName="skill_name_alchemy_s9" iconPath="icons\Skills\Alchemy\alchemy_s9.png" />
+        <skill skill_name="alchemy_s25" requiredPointsSpent="12" gridRow="12" gridColumn="3" localisationName="skill_name_alchemy_s6" iconPath="icons\Skills\Alchemy\alchemy_s6.png" />
+        <skill skill_name="alchemy_s26" requiredPointsSpent="17" gridRow="18" gridColumn="9" localisationName="skill_name_alchemy_s19" iconPath="icons\Skills\Alchemy\alchemy_s19.png" />
         <skill skill_name="magic_s31" requiredPointsSpent="4" gridRow="6" gridColumn="12" localisationName="skill_name_magic_s5" />
         <skill skill_name="magic_s33" requiredPointsSpent="17" gridRow="18" gridColumn="0" localisationName="skill_name_magic_s6" />
-        <skill skill_name="magic_s35" requiredPointsSpent="11" gridRow="12" gridColumn="3" localisationName="skill_name_magic_s7" />
-        <skill skill_name="magic_s36" requiredPointsSpent="11" gridRow="12" gridColumn="12" localisationName="skill_name_magic_s18" />
-        <skill skill_name="magic_s37" requiredPointsSpent="11" gridRow="12" gridColumn="6" localisationName="skill_name_magic_s16" />
-        <skill skill_name="magic_s38" requiredPointsSpent="11" gridRow="12" gridColumn="9" localisationName="skill_name_magic_s15" />
-        <skill skill_name="magic_s39" requiredPointsSpent="11" gridRow="12" gridColumn="0" localisationName="skill_name_magic_s12" />
-        <skill skill_name="magic_s40" requiredPointsSpent="17" gridRow="18" gridColumn="9" localisationName="skill_name_magic_s14" />
-        <skill skill_name="magic_s41" requiredPointsSpent="17" gridRow="18" gridColumn="3" localisationName="skill_name_magic_s9" />
+        <skill skill_name="magic_s35" requiredPointsSpent="11" gridRow="12" gridColumn="3" localisationName="skill_name_magic_s7" iconPath="icons\Skills\Signs\magic_s7.png" />
+        <skill skill_name="magic_s36" requiredPointsSpent="11" gridRow="12" gridColumn="12" localisationName="skill_name_magic_s18" iconPath="icons\Skills\Signs\magic_s18.png" />
+        <skill skill_name="magic_s37" requiredPointsSpent="11" gridRow="12" gridColumn="6" localisationName="skill_name_magic_s16" iconPath="icons\Skills\Signs\magic_s11.png" />
+        <skill skill_name="magic_s38" requiredPointsSpent="11" gridRow="12" gridColumn="9" localisationName="skill_name_magic_s15" iconPath="icons\Skills\Signs\magic_s13.png" />
+        <skill skill_name="magic_s39" requiredPointsSpent="11" gridRow="12" gridColumn="0" localisationName="skill_name_magic_s12" iconPath="icons\Skills\Signs\magic_s6.png" />
+        <skill skill_name="magic_s40" requiredPointsSpent="17" gridRow="18" gridColumn="9" localisationName="skill_name_magic_s14" iconPath="icons\Skills\Signs\magic_s15.png" />
+        <skill skill_name="magic_s41" requiredPointsSpent="17" gridRow="18" gridColumn="3" localisationName="skill_name_magic_s9" iconPath="icons\Skills\Signs\magic_s9.png" />
         <!-- D59: the new tree drops 5.x's prerequisite tree (the script clears the prerequisites): each skill is
              gated by points spent in its path at its legacy counterpart's tier, scaled x3/5 to the 3 levels (sword
              0/5/12/18, signs 0/4/11/17, alchemy 0/5/12/17), and drawn as the classic tree is: a column per legacy

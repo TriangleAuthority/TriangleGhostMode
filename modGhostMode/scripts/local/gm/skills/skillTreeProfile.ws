@@ -124,6 +124,8 @@ function GMOverlayProfileBlock(defName : name) : int
 				skills[skill].localisationDescriptionLevel2Key = tmpString;
 			if(dm.GetCustomNodeAttributeValueString(node, 'localisationDescriptionLevel3', tmpString))
 				skills[skill].localisationDescriptionLevel3Key = tmpString;
+			if(dm.GetCustomNodeAttributeValueString(node, 'iconPath', tmpString))
+				skills[skill].iconPath = tmpString;
 			if(dm.GetCustomNodeAttributeValueName(node, 'ability_name', tmpName) && IsNameValid(tmpName))
 				skills[skill].abilityName = tmpName;
 			applied += 1;

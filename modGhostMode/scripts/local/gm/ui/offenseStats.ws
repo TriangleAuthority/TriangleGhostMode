@@ -7,8 +7,10 @@
 // crit chance, crit damage bonus, the bolt's damage by type and its elemental damage.
 // Each term is the one Ghost Mode's formula uses for a hit (damage/formula.ws, damage/pool.ws), each
 // skill read from either tree (DU1): Muscle Memory and Strength Training (classic sword_s21, sword_s4 by
-// their abilities tagged with the attack; the new tree's sword_s22 and sword_s23 while armed or stacked),
-// Precise Blows and Crushing Blows (classic sword_s17, sword_s8 per level; new sword_s24, sword_s25),
+// their abilities tagged with the attack; the new tree's sword_s22 and sword_s23 by their own attack
+// power, and the dodge or next-strike bonus while armed),
+// Precise Blows and Crushing Blows (classic sword_s17, sword_s8 per level; new sword_s24, sword_s25 with
+// their current stacks, for both attack types),
 // the Feline chain (ARM-06), the Bear set's attack power (ARM-08), Thunderbolt 3, Heft (ENCH-10),
 // Euphoria (MUT-09), the Wolven set's oil crit bonuses (ARM-09), sword_dmg_bonus (SWD-07), Strong
 // Attack's +50% weapon damage (DMG-04); crossbow: Anatomical Knowledge (sword_s7 / sword_s26), Steady
@@ -94,8 +96,8 @@ function GMCrossbowElementaDmgName() : name
 // The attack power of a melee attack type, as a hit gets it (W3DamageAction.GetPowerStatValue: the
 // attack power plus the abilities tagged with the attack's name; W3Action_Attack.GetPowerStatValue:
 // Strong Attack's own term and the style attributes) and its conditional terms (GetAttackersPowerMod):
-// the Bear set, the Feline chain, the new tree's Muscle Memory while armed and Strength Training's
-// stacks. Situational terms (headshots, backstabs, oils against a category, counters) are not shown.
+// the Bear set, the Feline chain, the new tree's Muscle Memory (fast attacks, and both while a dodge's
+// boost is armed) and Strength Training (strong attacks, and the next strike while its bonus waits). Situational terms (headshots, backstabs, oils against a category, counters) are not shown.
 @addMethod(W3PlayerWitcher)
 function GMOffenseAttackPower(isHeavy : bool) : SAbilityAttributeValue
 {
@@ -109,15 +111,19 @@ function GMOffenseAttackPower(isHeavy : bool) : SAbilityAttributeValue
 		if(CanUseSkill(S_Sword_2))
 			ap += GetSkillAttributeValue(S_Sword_2, PowerStatEnumToName(CPS_AttackPower), false, true);
 		ap += GetAttributeValue('attack_power_heavy_style');
-		ap.valueMultiplicative += GMStrengthTrainingBonus('gm_st_attack_power', GMStrengthTrainingStacks());
+		ap.valueMultiplicative += GMStrengthTrainingValue('gm_st_attack_power');
 	}
 	else
 	{
 		ap += GetPowerStatValue(CPS_AttackPower, 'attack_light');
 		ap += GetAttributeValue('attack_power_fast_style');
-		if(GMMuscleMemoryArmed())
+		if(CanUseSkill(S_Sword_s22))
 			ap.valueMultiplicative += GMMuscleMemoryValue('gm_mm_attack_power');
 	}
+	if(GMMuscleMemoryArmed())
+		ap.valueMultiplicative += GMMuscleMemoryValue('gm_mm_dodge_attack_power');
+	if(GMStrengthTrainingArmed())
+		ap.valueMultiplicative += GMStrengthTrainingValue('gm_st_next_attack_power');
 	ap.valueMultiplicative += GMBearSetAttackPower();
 	lynx = (W3Effect_LynxSetBonus)GetBuff(EET_LynxSetBonus);
 	if(lynx)
@@ -131,7 +137,7 @@ function GMOffenseSwordStats(isSilver : bool, out stats : SGMOffenseStats)
 {
 	var fastAP, fastDmg, fastCritChance, fastCritAP, fastCritDmg, fastDPS, strongAP, strongDmg, strongCritChance, strongCritAP, strongCritDmg, strongDPS : float;
 	var sword, other : SItemUniqueId;
-	var swordDmg, elemental, critChance, critPower, swordCritChance, swordCritPower, dmgBonus, strongDmgMult, fastMult : float;
+	var swordDmg, elemental, critChance, critPower, swordCritChance, swordCritPower, dmgBonus, strongDmgMult : float;
 	var fastAPv, strongAPv, swordAP, fastCritAPv, strongCritAPv, value : SAbilityAttributeValue;
 	var thunder : W3Potion_Thunderbolt;
 
@@ -155,9 +161,7 @@ function GMOffenseSwordStats(isSilver : bool, out stats : SGMOffenseStats)
 	fastAPv = GMOffenseAttackPower(false);
 	strongAPv = GMOffenseAttackPower(true);
 	value = GetSkillAttributeValue(S_Sword_2, 'heavy_attack_dmg_boost', false, true);
-	strongDmgMult = value.valueMultiplicative + GMStrengthTrainingBonus('gm_st_weapon_damage', GMStrengthTrainingStacks());
-	if(GMMuscleMemoryArmed())
-		fastMult = GMMuscleMemoryValue('gm_mm_total_damage');
+	strongDmgMult = value.valueMultiplicative;
 	if(HasGlyphwordActive('Glyphword 4 _Stats'))	// Heft (ENCH-10)
 		dmgBonus += GMHeftDamageBonusValue();
 
@@ -214,8 +218,8 @@ function GMOffenseSwordStats(isSilver : bool, out stats : SGMOffenseStats)
 	strongCritChance = (critChance + swordCritChance + GMOffenseBlowsCritChance(true)) * 100;
 	if(swordDmg != 0)
 	{
-		fastDmg = (((swordDmg + elemental) * (1 + dmgBonus) + fastAPv.valueBase) * fastAPv.valueMultiplicative + fastAPv.valueAdditive) * (1 + fastMult);
-		fastCritDmg = (((swordDmg + elemental) * (1 + dmgBonus) + fastCritAPv.valueBase) * fastCritAPv.valueMultiplicative + fastCritAPv.valueAdditive) * (1 + fastMult);
+		fastDmg = (((swordDmg + elemental) * (1 + dmgBonus) + fastAPv.valueBase) * fastAPv.valueMultiplicative + fastAPv.valueAdditive);
+		fastCritDmg = (((swordDmg + elemental) * (1 + dmgBonus) + fastCritAPv.valueBase) * fastCritAPv.valueMultiplicative + fastCritAPv.valueAdditive);
 		fastDPS = fastDmg * (1 - ClampF(fastCritChance / 100, 0, 1)) + fastCritDmg * ClampF(fastCritChance / 100, 0, 1);
 		strongDmg = ((swordDmg + elemental) * (1 + strongDmgMult + dmgBonus) + strongAPv.valueBase) * strongAPv.valueMultiplicative + strongAPv.valueAdditive;
 		strongCritDmg = ((swordDmg + elemental) * (1 + strongDmgMult + dmgBonus) + strongCritAPv.valueBase) * strongCritAPv.valueMultiplicative + strongCritAPv.valueAdditive;
@@ -254,7 +258,7 @@ function GMOffenseBlowsCritChance(isHeavy : bool) : float
 		skill = S_Sword_s17;
 	if(CanUseSkill(skill))
 		return CalculateAttributeValue(GetSkillAttributeValue(skill, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * GetSkillLevel(skill);
-	return GMBlowsCritChance(isHeavy);
+	return GMBlowsCritChance();
 }
 
 @addMethod(W3PlayerWitcher)
@@ -269,7 +273,7 @@ function GMOffenseBlowsCritPower(isHeavy : bool) : float
 		skill = S_Sword_s17;
 	if(CanUseSkill(skill))
 		bonus = CalculateAttributeValue(GetSkillAttributeValue(skill, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * GetSkillLevel(skill);
-	return bonus + GMBlowsCritDamage(isHeavy);
+	return bonus + GMBlowsCritDamage();
 }
 
 // Heft's melee damage bonus (ENCH-10's value, without an action).

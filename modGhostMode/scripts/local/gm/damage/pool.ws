@@ -114,6 +114,8 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 
 
 
+	if(actorVictim)	//modSigns: SKL-18, Wolf School: a shattering hit counts only for itself (skills/wolfViperSchools.ws)
+		actorVictim.gmFrozenShatterTime = -1;	//modSigns
 	if( !thePlayer.IsFistFightMinigameEnabled() && gmWeaponsAreNotDeadly )	//modSigns: no raw damage bonuses in non-deadly fights (DMG-10)
 		return;	//modSigns
 	//modSigns: the difficulty multiplier applies to final damage, hostile NPCs hitting the player only (GMProcessDamageModification)
@@ -137,6 +139,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 		if( (W3AardProjectile)action.causer || (W3AardEntity)action.causer )	//modSigns: EFX-02, Aard: 5% of the victim's maximum health as force damage (legacy)
 			gmFrozenForceDamage = 0.05 * actorVictim.GetMaxHealth();	//modSigns: added after the pool (GMPoolApply), so the bonus does not multiply it
 
+		actorVictim.gmFrozenShatterTime = theGame.GetEngineTimeAsSeconds();	//modSigns: SKL-18, Wolf School counts this hit's victim as frozen (skills/wolfViperSchools.ws)
 		actorVictim.RemoveAllBuffsOfType(EET_Frozen);
 		//modSigns: removed 5.x's knockdown on the shattering hit (EFX-02, legacy: "remove knockdown, make it to multiply the damage instead")
 
@@ -259,8 +262,6 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 
 
 		//modSigns: removed 5.x's Manticore School bomb term (perk_27, now Trick Shot: SKL-18, D61)
-		if ( !action.IsDoTDamage() )	//modSigns: SKL-18, Wolf School's bomb damage against poisoned enemies (D61)
-			poolAll += GetWitcherPlayer().GMWolfSchoolBombBonus(actorVictim);	//modSigns
 
 
 		//modSigns: removed 5.x's Volatile Compound bomb term (alchemy_s25, now Fixative: SKL-14, D60)
@@ -337,7 +338,7 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	//modSigns: Crippling Strike's bonus applies to final damage (GMProcessDamageModification)
 
 
-	//modSigns: removed 5.x's Viper School poison term (perk_28, now Heavy Artillery: SKL-18, D61)
+	//modSigns: removed 5.x's Viper School poison term (perk_28, now a new design: SKL-18, D61)
 
 
 	//modSigns: removed 5.x's High Tolerance damage taken (alchemy_s24, now Refreshment: SKL-13)
@@ -377,9 +378,8 @@ function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	gmPoolPoison = poolPoison;	//modSigns
 }
 
-// DMG-04: 5.x runs this right after ProcessDamageIncrease: the new tree's Strength Training adds its weapon
-// damage to the pool (SKL's GMStrengthTrainingConsume), Muscle Memory and Sunder Armor run their own code, then
-// the pool is applied once. 5.x's four ProcessNewSkill_* functions this called (Muscle Memory, Strength Training,
+// DMG-04: 5.x runs this right after ProcessDamageIncrease: the new tree's Strength Training, Muscle Memory
+// and Sunder Armor run their own code (none adds to the pool any more), then the pool is applied once. 5.x's four ProcessNewSkill_* functions this called (Muscle Memory, Strength Training,
 // Precise Blows, Crushing Blows) are no longer called: SKL's own functions replace them (skills/).
 @replaceMethod(W3DamageManagerProcessor)
 function ProcessNewSkills_Combat(out dmgInfos : array< SRawDamage >)
@@ -401,20 +401,19 @@ function ProcessNewSkills_Combat(out dmgInfos : array< SRawDamage >)
 	if(witcherAttacker == playerAttacker
 		&& attackAction)
 	{
+		if(attackAction.IsActionMelee())	//modSigns: the new tree's Strength Training: a new swing uses up its next-strike bonus (D54)
+			witcherAttacker.GMStrengthTrainingOnAttack(attackAction);	//modSigns
+		if(attackAction.IsActionMelee() && witcherAttacker.CanUseSkill(S_Sword_s22))	//modSigns: the new tree's Muscle Memory (D53): a new swing uses up a dodge boost
+			witcherAttacker.GMMuscleMemoryOnAttack(attackAction);	//modSigns
 		if(!playerAttacker.GetInventory().IsItemFists(weaponId) && playerAttacker.IsLightAttack(attackAction.GetAttackName()))
 		{
-			if(witcherAttacker.CanUseSkill(S_Sword_s22))	//modSigns: the new tree's Muscle Memory (D53): a boosted attack's attack power and total damage, not raw damage
-			{
-				witcherAttacker.GMMuscleMemoryOnFastAttack(attackAction);	//modSigns
-			}
-			//modSigns: removed 5.x's Strength Training counter (D54: stacks per swing, skills/strengthTraining.ws)
+			//modSigns: removed 5.x's Muscle Memory multiplier (D53: attack power, skills/muscleMemory.ws)
+			//modSigns: removed 5.x's Strength Training counter (D54: skills/strengthTraining.ws)
 			//modSigns: removed 5.x's Three Strikes on sword_s24 (Precise Blows, D57: skills/critBlows.ws)
 		}
 		else if( playerAttacker.IsHeavyAttack(attackAction.GetAttackName()))
 		{
-			gmPoolAll += witcherAttacker.GMStrengthTrainingConsume(attackAction);	//modSigns: Strength Training's weapon damage (D54; 5.x: its single bonus)
-			if(witcherAttacker.GMMuscleMemoryArmed())	//modSigns: a strong attack ends Muscle Memory's boosts (D53)
-				witcherAttacker.GMMuscleMemoryEnd();	//modSigns
+			//modSigns: removed 5.x's Strength Training bonus (D54: attack power, skills/strengthTraining.ws)
 			//modSigns: removed 5.x's Three Strikes and Crushing Blow procs on sword_s24 and sword_s25 (D55, D57: skills/critBlows.ws)
 			if(witcherAttacker.CanUseSkill(S_Sword_s28))
 			{

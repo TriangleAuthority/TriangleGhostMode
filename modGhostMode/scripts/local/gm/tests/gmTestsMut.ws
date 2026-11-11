@@ -1446,7 +1446,7 @@ public var gmTestMut12CritPower : float;
 
 // Fast and strong crit chance and damage bonus of the Precise Blows and Crushing Blows of the tree in
 // force (classic sword_s17 and sword_s08 per level, as legacy's character stats list; the new tree's
-// sword_s24 and sword_s25), read without Life Leech's code.
+// sword_s24 and sword_s25 at 0 stacks), read without Life Leech's code.
 function GMTestMut12Blows(isHeavy : bool, out chance : float, out power : float)
 {
 	var w : W3PlayerWitcher;
@@ -1464,15 +1464,12 @@ function GMTestMut12Blows(isHeavy : bool, out chance : float, out power : float)
 		chance += CalculateAttributeValue(w.GetSkillAttributeValue(skill, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * w.GetSkillLevel(skill);
 		power += CalculateAttributeValue(w.GetSkillAttributeValue(skill, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * w.GetSkillLevel(skill);
 	}
-	if(isHeavy)
-		skill = S_Sword_s25;
-	else
-		skill = S_Sword_s24;
-	if(w.CanUseSkill(skill))
-	{
-		chance += CalculateAttributeValue(w.GetSkillAttributeValue(skill, 'gm_crit_chance', false, false));
-		power += CalculateAttributeValue(w.GetSkillAttributeValue(skill, 'gm_crit_damage', false, false)) * w.GetSkillLevel(skill);
-	}
+	// The new tree's (revised 2026-11-07): Precise Blows' crit chance and Crushing Blows' crit damage for
+	// both attack types, without stacks.
+	if(w.CanUseSkill(S_Sword_s24))
+		chance += CalculateAttributeValue(w.GetSkillAttributeValue(S_Sword_s24, 'gm_crit_chance', false, false));
+	if(w.CanUseSkill(S_Sword_s25))
+		power += CalculateAttributeValue(w.GetSkillAttributeValue(S_Sword_s25, 'gm_crit_damage', false, false));
 }
 
 // MUT-12 (audit F1), the drain's base strength with Precise Blows and Crushing Blows, either tree:

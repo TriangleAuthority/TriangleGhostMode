@@ -89,12 +89,11 @@
 2110992612|        |gm_skill_desc_crippling_shot|Acertos Críticos com a Besta desativam uma habilidade especial de um monstro por $S$ segundos.
 2110992613|        |gm_skill_desc_anatomical_knowledge|Aumenta a chance de Acerto Crítico da Besta em $S$% e o Poder de Acerto Crítico da Besta em $S$%.
 2110992614|        |gm_skill_desc_cold_blood|Cada virote que atinge o alvo gera a mesma quantidade de Adrenalina que um golpe de espada. Virotes de Besta causam $S$ a mais de dano base.
-2110992615|        |gm_skill_desc_muscle_memory_1|Após uma esquiva ou rolamento bem-sucedido, seu próximo Ataque Rápido ganha $S$% de Poder de Ataque e causa $S$% a mais de dano total. O ganho de Adrenalina de Ataques Rápidos é aumentado em $S$%.
-2110992616|        |gm_skill_desc_muscle_memory_23|Após uma esquiva ou rolamento bem-sucedido, seus próximos $S$ Ataques Rápidos seguidos ganham $S$% de Poder de Ataque e causam $S$% a mais de dano total. O ganho de Adrenalina de Ataques Rápidos é aumentado em $S$%.
-2110992617|        |gm_skill_desc_strength_training_1|Um Ataque Rápido aumenta o poder do próximo Ataque Forte em $S$% e o dano da arma em $S$%. O ganho de Adrenalina de Ataques Fortes é aumentado em $S$%.
-2110992618|        |gm_skill_desc_strength_training_23|Cada Ataque Rápido aumenta o poder do próximo Ataque Forte em $S$% e o dano da arma em $S$%. Acumula até $S$ vezes, e cada acúmulo tem metade do efeito do anterior. O ganho de Adrenalina de Ataques Fortes é aumentado em $S$%.
-2110992619|        |gm_skill_desc_precise_blows|Aumenta o Poder de Acerto Crítico de Ataques Rápidos em $S$% e a chance de Acerto Crítico em $S$%. Um Acerto Crítico com Ataque Rápido aumenta a chance de Acerto Crítico de Ataques Rápidos em mais $S$% e o Poder de Acerto Crítico em mais $S$% por $S$ segundos.
-2110992620|        |gm_skill_desc_crushing_blows|Aumenta o Poder de Acerto Crítico de Ataques Fortes em $S$% e a chance de Acerto Crítico em $S$%. Um Acerto Crítico com Ataque Forte aumenta a chance de Acerto Crítico de Ataques Fortes em mais $S$% e o Poder de Acerto Crítico em mais $S$% por $S$ segundos.
+2110992615|        |gm_skill_desc_muscle_memory|Ataques Rápidos ganham $S$% de Poder de Ataque. Após uma esquiva ou rolamento bem-sucedido, seus próximos $S$ Ataques Rápidos, ou seu próximo Ataque Forte, ganham mais $S$% de Poder de Ataque. O ganho de Adrenalina de Ataques Rápidos é aumentado em $S$%.
+2110992617|        |gm_skill_desc_strength_training|Ataques Fortes ganham $S$% de Poder de Ataque e aumentam o Poder de Ataque do próximo golpe em $S$%. O ganho de Adrenalina de Ataques Fortes é aumentado em $S$%.
+2110992619|        |gm_skill_desc_precise_blows|Aumenta a chance de Acerto Crítico em $S$%, e em mais $S$% a cada Ataque Rápido até o próximo Acerto Crítico. Acumula até $S$ vezes.
+2110992620|        |gm_skill_desc_crushing_blows|Aumenta o Poder de Acerto Crítico em $S$%, e em mais $S$% a cada Ataque Forte até o próximo Acerto Crítico. Acumula até $S$ vezes.
+2110992599|        |gm_skill_desc_crushing_blows_1|Aumenta o Poder de Acerto Crítico em $S$%, e em mais $S$% a cada Ataque Forte até o próximo Acerto Crítico. Acumula uma vez.
 2110992284|        |gm_skill_desc_aard|Uma explosão direta de energia telecinética que desequilibra os oponentes e tem $I$% de chance de nocautea-los. A chance de Nocaute Pesado é de $I$%. As chances variam com a Intensidade do Sinal e aumentam se o inimigo está com Vigor baixo. Nocaute pesado ativa movimento de finalização.
 2110992151|        |gm_skill_desc_yrden|Armadilha Mágica que diminui a velocidade dos inimigos em $S$% dentro de sua área de efeito (varia com a Intensidade do Sinal, desaceleração máxima é $S$%). Duração da armadilha: $S$s. Quanto mais tempo a armadilha durar, menos eficiente se tornará.
 2110992124|        |gm_skill_desc_quen|Escudo protetor que absorve até $I$% do dano feito pela arma do inimigo. Absorção base: $I$. Varia com a Intensidade do Sinal. Absorção atual: $I$. Evita atordoamento, incineração, envenenamento e sangramento (e então se quebra). <br>Duração do escudo: $I$s.
@@ -155,7 +154,8 @@
 2110992399|        |gm_skill_desc_attack_best_defense|Matar um inimigo restaura $I$% do seu Vigor (sem recarga). Acertos Críticos e Contra-ataques bem sucedidos restauram $I$% do seu Vigor ($S$s de recarga).
 2110992628|        |gm_skill_desc_survival_instinct|Aumenta a Vitalidade máxima em $S$.
 2110992629|        |gm_skill_desc_heavy_artillery|Bombas causam $S$% a mais de dano, mas o número de bombas em cada espaço é reduzido pela metade. Bombas que não causam dano mantêm seu número, a menos que Pirotecnia esteja equipada.
-2110992630|        |gm_skill_desc_wolf_school|Depois que um inimigo sofre dano de bomba, os óleos de lâmina concedem $S$% de chance de Acerto Crítico e $S$% de Poder de Acerto Crítico contra ele. Bombas causam $S$% a mais de dano contra inimigos envenenados.
+2110992630|        |gm_skill_desc_wolf_school|Ataques contra oponentes incapacitados (atordoados, derrubados, aturdidos, confusos, congelados, cegos ou em chamas) ganham $S$% de chance de Acerto Crítico e $S$% de Poder de Acerto Crítico.
+2110992675|        |gm_skill_desc_viper_school|Ataques contra oponentes envenenados ou sangrando ganham $S$% de chance de Acerto Crítico e $S$% de Poder de Acerto Crítico.
 ; SKL-19 end
 ; MUT
 2110992551|        |gm_mutation_desc_1|When drawn, any sword increases Sign base damage by $S$% of its own base damage.

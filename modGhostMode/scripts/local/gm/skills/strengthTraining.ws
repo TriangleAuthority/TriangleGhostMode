@@ -1,29 +1,33 @@
 // SKL-04: the new tree's Strength Training (sword_s23, D54), a new design by the project owner in place
-// of 5.x's single bonus: each melee fast-attack swing that hits (dealt damage, not dodged, parried or
-// countered; one per swing, however many enemies it hits) adds a stack, up to 1/2/3 by level, each
-// worth half the one before: +35% attack power and +10% weapon damage, then +17.5%/+5%, then
-// +8.75%/+2.5%. The next melee strong attack (Rend included) uses up every stack: the weapon damage is a
-// pool term (damage/pool.ws), the attack power goes to the attack-power step (damage/formula.ws); every
-// enemy that swing hits gets them. The stacks expire 6 s after the last one was added. While there are
-// stacks the sword shows strong_attack_buff (shared with Crushing Blows, skills/critBlows.ws). Plus
-// legacy's adrenaline gain for strong attacks, +5% per level (skills/muscleStrength.ws). Values in
-// gm_skills.xml; 5.x's counter and bonus are no longer called.
+// of 5.x's single bonus (revised 2026-11-08 and 2026-11-09): melee strong attacks (Rend included, fists
+// too) get +25% attack power (8/16/25% by level), and a strong attack's swing that hits (dealt damage, not
+// dodged, parried or countered; Rend too) gives Geralt's next basic attack (fast or strong) as much again,
+// so strong attacks in a row get both. Only a basic attack gets the next-strike bonus and uses it up:
+// Rend, counters and Whirl leave it waiting (Rend refreshes it) (owner, 2026-11-09). The next-strike bonus lasts 6 s; every enemy the boosted swing hits gets it.
+// While it waits the sword shows Strength Training's own glow: gm_st_buff, a yellow copy of 5.x's
+// strong_attack_buff (the orange glow Crushing Blows shows) that the mod adds to the sword fx templates
+// (tools/gen_sword_glows.py; owner's request, 2026-11-10).
+// Both go to the attack-power step (damage/formula.ws). Plus legacy's adrenaline gain for strong
+// attacks, +5% per level (skills/muscleStrength.ws). Values in gm_skills.xml; 5.x's counter and bonus
+// are no longer called.
 // See docs/features/skl.md.
 
 @addField(W3PlayerWitcher)
-var gmSTStacks : int;
+var gmSTArmedEnd : float;
 @addField(W3PlayerWitcher)
-var gmSTEnd : float;
+var gmSTLastHitAt : float;
 @addField(W3PlayerWitcher)
-var gmSTLastStackAt : float;
-@addField(W3PlayerWitcher)
-var gmSTUsedAt : float;
-@addField(W3PlayerWitcher)
-var gmSTUsedAP : float;
-@addField(W3PlayerWitcher)
-var gmSTUsedWD : float;
+var gmSTSwingBoosted : bool;
 @addField(W3PlayerWitcher)
 var gmSTAction : W3Action_Attack;
+@addField(W3PlayerWitcher)
+var gmSTSword : CWitcherSword;
+
+// Strength Training's own sword effect (tools/gen_sword_glows.py writes it into the sword fx templates).
+function GMStrengthTrainingEffect() : name
+{
+	return 'gm_st_buff';
+}
 
 // Hits of one swing on several enemies arrive within a frame or two; a new swing takes far longer.
 function GMSameSwingTime() : float
@@ -31,114 +35,114 @@ function GMSameSwingTime() : float
 	return 0.25;
 }
 
+// A bonus of the skill at Geralt's level (the xml holds the level-3 value; GMNewTreeLevelShare in
+// skills/muscleMemory.ws).
 @addMethod(W3PlayerWitcher)
-function GMStrengthTrainingStacks() : int
+function GMStrengthTrainingValue(attributeName : name) : float
 {
-	if(!CanUseSkill(S_Sword_s23) || theGame.GetEngineTimeAsSeconds() >= gmSTEnd)
+	if(!CanUseSkill(S_Sword_s23))
 		return 0;
-	return gmSTStacks;
+	return CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s23, attributeName, false, false)) * GMNewTreeLevelShare(GetSkillLevel(S_Sword_s23));
 }
 
-// The bonus of n stacks: the first stack's value, halved for each further one.
+// The next-strike bonus is waiting.
 @addMethod(W3PlayerWitcher)
-function GMStrengthTrainingBonus(attributeName : name, stacks : int) : float
+function GMStrengthTrainingArmed() : bool
 {
-	var value, bonus : float;
-	var i : int;
-
-	value = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s23, attributeName, false, false));
-	for(i = 0; i < stacks; i += 1)
-	{
-		bonus += value;
-		value *= 0.5;
-	}
-	return bonus;
+	return CanUseSkill(S_Sword_s23) && theGame.GetEngineTimeAsSeconds() < gmSTArmedEnd;
 }
 
-// A melee fast attack's hit (after its damage): a stack for a new swing.
+// A melee strong attack's hit (after its damage): arms the next-strike bonus.
 @addMethod(W3PlayerWitcher)
-function GMStrengthTrainingOnFastHit()
+function GMStrengthTrainingArm()
 {
-	var now, duration : float;
+	var duration : float;
 	var sword : CWitcherSword;
 
-	now = theGame.GetEngineTimeAsSeconds();
 	duration = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s23, 'gm_st_duration', false, false));
-	if(now >= gmSTEnd)
-		gmSTStacks = 0;
-	if(now - gmSTLastStackAt > GMSameSwingTime())
-		gmSTStacks = Min(gmSTStacks + 1, GetSkillLevel(S_Sword_s23));
-	gmSTLastStackAt = now;
-	gmSTEnd = now + duration;
+	gmSTArmedEnd = theGame.GetEngineTimeAsSeconds() + duration;
+	sword = GetHeldSwordEntity();
+	if(gmSTSword && gmSTSword != sword)
+		gmSTSword.StopEffect(GMStrengthTrainingEffect());
+	gmSTSword = sword;
+	if(sword)
+		sword.PlayEffect(GMStrengthTrainingEffect());
+	AddTimer('GMStrengthTrainingExpired', duration + 0.05, false);
+}
+
+@addMethod(W3PlayerWitcher)
+function GMStrengthTrainingDisarm()
+{
+	var sword : CWitcherSword;
+
+	gmSTArmedEnd = 0;
+	// the sword it was armed on (it may have been sheathed or swapped since), and the one held now
+	if(gmSTSword)
+		gmSTSword.StopEffect(GMStrengthTrainingEffect());
+	gmSTSword = NULL;
 	sword = GetHeldSwordEntity();
 	if(sword)
-		sword.PlayEffect('strong_attack_buff');
-	AddTimer('GMStrengthTrainingExpired', duration + 0.05, false);
+		sword.StopEffect(GMStrengthTrainingEffect());
 }
 
 @addMethod(W3PlayerWitcher)
 timer function GMStrengthTrainingExpired(dt : float, id : int)
 {
-	var sword : CWitcherSword;
-
-	if(theGame.GetEngineTimeAsSeconds() < gmSTEnd)
-		return;
-	gmSTStacks = 0;
-	sword = GetHeldSwordEntity();
-	if(sword && !GMSwordBuffInUse(true))
-		sword.StopEffect('strong_attack_buff');
+	if(theGame.GetEngineTimeAsSeconds() >= gmSTArmedEnd)
+		GMStrengthTrainingDisarm();
 }
 
-// A melee strong attack's damage step: uses up the stacks (also for the other enemies the same swing
-// hits) and returns the weapon damage for the pool; the attack power is read by the formula.
+// A basic attack's damage step: a new swing uses up the waiting bonus; the other enemies the same swing
+// hits get what its first hit got.
 @addMethod(W3PlayerWitcher)
-function GMStrengthTrainingConsume(attackAction : W3Action_Attack) : float
+function GMStrengthTrainingOnAttack(attackAction : W3Action_Attack)
 {
 	var now : float;
-	var stacks : int;
-	var sword : CWitcherSword;
 
-	if(!CanUseSkill(S_Sword_s23))
-		return 0;
+	if(!CanUseSkill(S_Sword_s23) || !GMBasicAttack(attackAction.GetAttackName()))
+		return;
 	now = theGame.GetEngineTimeAsSeconds();
-	if(gmSTUsedAt > 0 && now - gmSTUsedAt < GMSameSwingTime())
+	if(gmSTLastHitAt > 0 && now - gmSTLastHitAt < GMSameSwingTime())
+	{
+		gmSTLastHitAt = now;
+		if(gmSTSwingBoosted)
+			gmSTAction = attackAction;
+		return;
+	}
+	gmSTLastHitAt = now;
+	gmSTSwingBoosted = GMStrengthTrainingArmed();
+	if(gmSTSwingBoosted)
 	{
 		gmSTAction = attackAction;
-		return gmSTUsedWD;
+		GMStrengthTrainingDisarm();
 	}
-	stacks = GMStrengthTrainingStacks();
-	if(stacks <= 0)
-		return 0;
-	gmSTUsedAP = GMStrengthTrainingBonus('gm_st_attack_power', stacks);
-	gmSTUsedWD = GMStrengthTrainingBonus('gm_st_weapon_damage', stacks);
-	gmSTUsedAt = now;
-	gmSTAction = attackAction;
-	gmSTStacks = 0;
-	gmSTEnd = 0;
-	sword = GetHeldSwordEntity();
-	if(sword && !GMSwordBuffInUse(true))
-		sword.StopEffect('strong_attack_buff');
-	return gmSTUsedWD;
 }
 
+// The attack power a melee hit gets: the strong attack's own, and the next-strike bonus.
 @addMethod(W3PlayerWitcher)
 function GMStrengthTrainingPowerFor(attackAction : W3Action_Attack) : float
 {
-	if(attackAction && attackAction == gmSTAction && theGame.GetEngineTimeAsSeconds() - gmSTUsedAt < GMSameSwingTime())
-		return gmSTUsedAP;
-	return 0;
+	var power : float;
+
+	if(!attackAction || !attackAction.IsActionMelee() || !CanUseSkill(S_Sword_s23))
+		return 0;
+	if(IsHeavyAttack(attackAction.GetAttackName()))
+		power += GMStrengthTrainingValue('gm_st_attack_power');
+	if(gmSTSwingBoosted && attackAction == gmSTAction && GMBasicAttack(attackAction.GetAttackName()) && theGame.GetEngineTimeAsSeconds() - gmSTLastHitAt < GMSameSwingTime())
+		power += GMStrengthTrainingValue('gm_st_next_attack_power');
+	return power;
 }
 
 @wrapMethod(W3PlayerWitcher)
 function OnProcessActionPost(action : W3DamageAction)
 {
 	var attackAction : W3Action_Attack;
-	var stack : bool;
+	var arm : bool;
 
 	attackAction = (W3Action_Attack)action;
-	stack = attackAction && attackAction.IsActionMelee() && IsLightAttack(attackAction.GetAttackName()) && !inv.IsItemFists(attackAction.GetWeaponId())
+	arm = attackAction && attackAction.IsActionMelee() && IsHeavyAttack(attackAction.GetAttackName())
 		&& CanUseSkill(S_Sword_s23) && (CActor)action.victim && IsRequiredAttitudeBetween(this, (CActor)action.victim, true) && GMAttackEarnsAdrenaline(attackAction);
 	wrappedMethod(action);
-	if(stack)
-		GMStrengthTrainingOnFastHit();
+	if(arm)
+		GMStrengthTrainingArm();
 }
