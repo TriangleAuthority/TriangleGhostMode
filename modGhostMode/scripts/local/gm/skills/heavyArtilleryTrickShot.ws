@@ -25,52 +25,71 @@ function GMHasTrickShot() : bool
 	return CanUseSkill(S_Perk_17) || CanUseSkill(S_Perk_27);
 }
 
-// 5.x body; changes marked //modSigns.
-@replaceMethod(CInventoryComponent)
+// Bomb stacks: SKL-15's Efficiency bonus and SKL-18's Heavy Artillery in either tree. A wrapper, not a
+// replacement, so other mods' changes of this method (TrianglePreparations: oils and the alchemy table)
+// combine with it in either load order: it adds the difference between Ghost Mode's and 5.x's bomb formula
+// to whatever the inner chain returns, and leaves every other item alone (Ghost Mode changes only bombs).
+@wrapMethod(CInventoryComponent)
 function SingletonItemGetMaxAmmo(itemID : SItemUniqueId) : int
+{
+	var ammo : int;
+
+	ammo = wrappedMethod(itemID);
+	if( IsItemBomb(itemID) && GetEntity() == GetWitcherPlayer() && !ItemHasTag(itemID, 'NoAdditionalAmmo') )	//modSigns
+		ammo += GMBombMaxAmmo(itemID, true) - GMBombMaxAmmo(itemID, false);	//modSigns
+	return ammo;
+}
+
+// A player bomb's stack by 5.x's formula (gmRules false) or Ghost Mode's (true); 5.x's body, bombs only.
+@addMethod(CInventoryComponent)
+function GMBombMaxAmmo(itemID : SItemUniqueId, gmRules : bool) : int
 {
 	var ammo, i : int;
 	var perk20Bonus, min, max : SAbilityAttributeValue;
 	var atts : array<name>;
 	var canUseSkill : bool;
+	var heavyArtillery : ESkill;
 
 	ammo = RoundMath(CalculateAttributeValue(GetItemAttributeValue(itemID, 'ammo')));
+	if( ammo <= 0 )
+		return ammo;
 
-	if( !ItemHasTag( itemID, 'NoAdditionalAmmo' ) )
+	if( thePlayer.CanUseSkill(S_Alchemy_s08) )
 	{
-		if(GetEntity() == GetWitcherPlayer() && ammo > 0)
+		if( gmRules )
+			ammo += thePlayer.GMEfficiencyBonus();	//modSigns: SKL-15, Efficiency (legacy: +1 per level; new tree +1/+3/+5, skills/bombs.ws)
+		else
+			ammo += thePlayer.GetSkillLevel(S_Alchemy_s08);
+	}
+
+	if( thePlayer.HasBuff(EET_Mutagen03) )
+		ammo += 1;
+
+	if( GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_2 ) )
+	{
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_RedWolf_2 ), 'amount', min, max);
+		ammo += (int)min.valueAdditive;
+	}
+
+	if( gmRules )
+		heavyArtillery = GetWitcherPlayer().GMHeavyArtillerySkill();	//modSigns: either tree
+	else if( thePlayer.CanUseSkill( S_Perk_20 ) )
+		heavyArtillery = S_Perk_20;
+	else
+		heavyArtillery = S_SUndefined;
+
+	if( heavyArtillery != S_SUndefined && GetItemName( itemID ) != 'Snow Ball' )
+	{
+		GetItemAttributes( itemID, atts );
+		canUseSkill = thePlayer.CanUseSkill( S_Alchemy_s10 );
+		perk20Bonus = GetWitcherPlayer().GetSkillAttributeValue( heavyArtillery, 'stack_multiplier', false, false );
+
+		for( i=0 ; i<atts.Size() ; i+=1 )
 		{
-			if(IsItemBomb(itemID) && thePlayer.CanUseSkill(S_Alchemy_s08) )
+			if( canUseSkill || IsDamageTypeNameValid( atts[i] ) )
 			{
-				ammo += thePlayer.GMEfficiencyBonus();	//modSigns: SKL-15, Efficiency (legacy: +1 per level; new tree +1/+3/+5, skills/bombs.ws)
-			}
-
-			if(thePlayer.HasBuff(EET_Mutagen03) && (IsItemBomb(itemID) || (!IsItemMutagenPotion(itemID) && IsItemPotion(itemID))) )
-			{
-				ammo += 1;
-			}
-
-			if( GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_2 ) && !IsItemMutagenPotion(itemID) )
-			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_RedWolf_2 ), 'amount', min, max);
-				ammo += (int)min.valueAdditive;
-			}
-
-
-			if( IsItemBomb( itemID ) && GetWitcherPlayer().GMHeavyArtillerySkill() != S_SUndefined &&  GetItemName( itemID ) != 'Snow Ball' )	//modSigns: either tree
-			{
-				GetItemAttributes( itemID, atts );
-				canUseSkill = thePlayer.CanUseSkill( S_Alchemy_s10 );
-				perk20Bonus = GetWitcherPlayer().GetSkillAttributeValue( GetWitcherPlayer().GMHeavyArtillerySkill(), 'stack_multiplier', false, false );	//modSigns
-
-				for( i=0 ; i<atts.Size() ; i+=1 )
-				{
-					if( canUseSkill || IsDamageTypeNameValid( atts[i] ) )
-					{
-						ammo = RoundMath( ammo * perk20Bonus.valueMultiplicative );
-						break;
-					}
-				}
+				ammo = RoundMath( ammo * perk20Bonus.valueMultiplicative );
+				break;
 			}
 		}
 	}

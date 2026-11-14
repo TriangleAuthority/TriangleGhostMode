@@ -121,40 +121,58 @@ function OnConfigUI()
 // so each skill's bonuses are applied once (5.x equips the first skill while it still sits in the other
 // slot, and the unequip from that slot then takes away what its equip had added: Sun and Stars' day and
 // night abilities, for example).
-@replaceMethod(CR4CharacterDupeMenu)
+// A wrapper, so other mods' wrappers of this event (TrianglePreparations' meditation gate) combine with
+// it in either load order: the colour gate runs before wrappedMethod (vanilla's combat check stays
+// inside), and the slots are emptied only by the swap's first EquipSkill (GMSwapPendingEquip), so a gate
+// that refuses, whichever mod's, changes nothing.
+@wrapMethod(CR4CharacterDupeMenu)
 function OnSwapSkill(skill1 : ESkill, slotID1 : int, skill2 : ESkill, slotID2 : int)
 {
-	if (thePlayer.IsInCombat())
-	{
-		showNotification(GetLocStringByKeyExt("menu_cannot_perform_action_combat"));
-		OnPlaySoundEvent("gui_global_denied");
-	}
-	else if(!GMSwapSkillColoursAllowed(skill1, slotID1, skill2, slotID2))	//modSigns
+	var ret : bool;
+
+	if(!thePlayer.IsInCombat() && !GMSwapSkillColoursAllowed(skill1, slotID1, skill2, slotID2))	//modSigns
 	{	//modSigns
 		OnPlaySoundEvent("gui_global_denied");	//modSigns
+		return false;	//modSigns
 	}	//modSigns
-	else
-	{
-		thePlayer.UnequipSkill(slotID1);	//modSigns
-		thePlayer.UnequipSkill(slotID2);	//modSigns
-		thePlayer.EquipSkill(skill1, slotID1);
-		thePlayer.EquipSkill(skill2, slotID2);
-		
-		UpdateAppliedSkills();
-		UpdateSkillPoints();			
-		UpdatePlayerStatisticsData();						
-		UpdateGroupsData();
-		UpdateMutagens();
-		UpdateMasterMutation();
-		
-		OnPlaySoundEvent("gui_character_add_skill");
+	thePlayer.GMBeginSkillSwap(slotID1, slotID2);	//modSigns
+	ret = wrappedMethod(skill1, slotID1, skill2, slotID2);
+	thePlayer.GMEndSkillSwap();	//modSigns
+	return ret;
+}
 
-		m_fxPaperdollChanged.InvokeSelf();
+@addField(CR4Player)
+var gmSwapPendingEquip : bool;
+@addField(CR4Player)
+var gmSwapSlot1 : int;
+@addField(CR4Player)
+var gmSwapSlot2 : int;
 
-		
-		theGame.LogSkillActivated( SkillPathTypeToName(GetWitcherPlayer().GetSkillPathType(skill1)), SkillEnumToName(skill1), SkillEnumToRemasterName(skill1), slotID1 );
-		theGame.LogSkillActivated( SkillPathTypeToName(GetWitcherPlayer().GetSkillPathType(skill2)), SkillEnumToName(skill2), SkillEnumToRemasterName(skill2), slotID2 );
-	}
+@addMethod(CR4Player)
+function GMBeginSkillSwap(slotID1 : int, slotID2 : int)
+{
+	gmSwapPendingEquip = true;
+	gmSwapSlot1 = slotID1;
+	gmSwapSlot2 = slotID2;
+}
+
+@addMethod(CR4Player)
+function GMEndSkillSwap()
+{
+	gmSwapPendingEquip = false;
+}
+
+// The swap's first equip empties both slots first (see OnSwapSkill above).
+@wrapMethod(CR4Player)
+function EquipSkill(skill : ESkill, slotID : int) : bool
+{
+	if(gmSwapPendingEquip)	//modSigns
+	{	//modSigns
+		gmSwapPendingEquip = false;	//modSigns
+		UnequipSkill(gmSwapSlot1);	//modSigns
+		UnequipSkill(gmSwapSlot2);	//modSigns
+	}	//modSigns
+	return wrappedMethod(skill, slotID);
 }
 
 // Legacy's colour rule for a swap: a skill bound for a mutation slot must have one of the equipped

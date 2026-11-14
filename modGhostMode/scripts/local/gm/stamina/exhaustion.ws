@@ -384,11 +384,14 @@ function GMExhaustionKeepsRegen(target : CActor) : bool
 
 // ---- clearing ----
 
-// Meditation restores max stamina (leaving combat does not).
+// Meditation restores max stamina (leaving combat does not). Hooked on ApplyWitcherHouseBuffs, the last
+// call of 5.x's MeditationRestoring and its only caller, not on MeditationRestoring itself: TrianglePreparations
+// replaces MeditationRestoring (and keeps that call), and a wrapper of a method another mod replaces runs
+// only in one load order.
 @wrapMethod(W3PlayerWitcher)
-function MeditationRestoring(simulatedTime : float)
+function ApplyWitcherHouseBuffs()
 {
-	wrappedMethod(simulatedTime);
+	wrappedMethod();
 	GMExhClear();
 }
 
