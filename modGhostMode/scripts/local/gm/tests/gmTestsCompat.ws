@@ -17,7 +17,9 @@ function GMTest_compat()
 // SingletonItemGetMaxAmmo is a wrapper adding the difference between Ghost Mode's and 5.x's bomb formula
 // (skills/heavyArtilleryTrickShot.ws). With no other mod wrapping it, a bomb's stack must equal Ghost Mode's
 // formula in every skill state (which holds only if the wrapper's copy of 5.x's formula matches 5.x's own),
-// and a potion's must be untouched by it.
+// and a potion's must be untouched by it. Efficiency at level 3 and, in the new tree, Heavy Artillery on perk_43
+// make the two formulas differ (classic: they agree, the wrapper adds 0). The test save has one unlocked slot:
+// up to three are unlocked as vanilla's skilleq does and locked again at the end if left empty.
 function GMTest_compat_maxammo()
 {
 	var w : W3PlayerWitcher;
@@ -25,6 +27,10 @@ function GMTest_compat_maxammo()
 	var heavy, otherHeavy : ESkill;
 	var hadEff, hadPyro, hadHeavy, hadOther, hadBomb, hadPotion : bool;
 	var bomb, potion : array<SItemUniqueId>;
+	var pam : W3PlayerAbilityManager;
+	var unlocked : array<int>;
+	var effLevel, i : int;
+	var s : ESkill;
 
 	w = GetWitcherPlayer();
 	inv = w.inv;
@@ -50,12 +56,23 @@ function GMTest_compat_maxammo()
 	hadHeavy = GMTestAlchSkillOn(heavy, false);
 	hadOther = GMTestAlchSkillOn(otherHeavy, false);
 
+	pam = (W3PlayerAbilityManager)w.abilityManager;
+	for(i = 0; i < w.GetSkillSlotsCount() && unlocked.Size() < 3; i += 1)
+	{
+		if(pam.Debug_HAX_UnlockSkillSlot(i))
+			unlocked.PushBack(i);
+	}
+	effLevel = w.GetSkillLevel(S_Alchemy_s08);
+	pam.GMTestCompatSetSkillLevel(S_Alchemy_s08, 3);
+
 	GMTestCompatBombAmmo(inv, bomb[0], "no bomb skills");
 	GMTestAlchSkillOn(S_Alchemy_s08, true);
 	GMTestCompatBombAmmo(inv, bomb[0], "Efficiency level " + w.GetSkillLevel(S_Alchemy_s08));
 	GMTestAlchSkillOn(heavy, true);
 	GMTestCompatBombAmmo(inv, bomb[0], "Efficiency and Heavy Artillery (" + SkillEnumToName(heavy) + ")");
+	GMTestReport(w.CanUseSkill(S_Alchemy_s08) && w.GMHeavyArtillerySkill() == heavy, "compat: Efficiency and Heavy Artillery in use (" + SkillEnumToName(w.GMHeavyArtillerySkill()) + ")");
 	GMTestAlchSkillOn(S_Alchemy_s10, true);
+	GMTestReport(w.CanUseSkill(S_Alchemy_s10), "compat: Pyrotechnics in use");
 	GMTestCompatBombAmmo(inv, bomb[0], "Efficiency, Heavy Artillery and Pyrotechnics");
 	GMTestReport(inv.SingletonItemGetMaxAmmo(potion[0]) == RoundMath(CalculateAttributeValue(inv.GetItemAttributeValue(potion[0], 'ammo'))),
 		"compat: Swallow 1's stack untouched by the bomb wrapper (" + inv.SingletonItemGetMaxAmmo(potion[0]) + ")");
@@ -63,7 +80,14 @@ function GMTest_compat_maxammo()
 	GMTestAlchSkillOn(S_Alchemy_s10, hadPyro);
 	GMTestAlchSkillOn(heavy, hadHeavy);
 	GMTestAlchSkillOn(otherHeavy, hadOther);
+	GMTestAlchSkillOn(S_Alchemy_s08, false);
+	pam.GMTestCompatSetSkillLevel(S_Alchemy_s08, effLevel);
 	GMTestAlchSkillOn(S_Alchemy_s08, hadEff);
+	for(i = 0; i < unlocked.Size(); i += 1)
+	{
+		if(!w.GetSkillOnSlot(w.GetSkillSlotIDFromIndex(unlocked[i]), s) || s == S_SUndefined)
+			pam.GMTestRelockSkillSlot(unlocked[i]);
+	}
 	if(!hadBomb)
 		inv.RemoveItemByName('Dancing Star 1', -1);
 	if(!hadPotion)
@@ -78,4 +102,11 @@ function GMTestCompatBombAmmo(inv : CInventoryComponent, id : SItemUniqueId, sit
 	gm = inv.GMBombMaxAmmo(id, true);
 	vanilla = inv.GMBombMaxAmmo(id, false);
 	GMTestReport(got == gm, "compat: Dancing Star 1's stack with " + situation + " is Ghost Mode's " + gm + " (got " + got + ", 5.x's formula " + vanilla + ")");
+}
+
+// Sets a skill's level directly (test only; the skill unequipped, so no level-change bonuses to update).
+@addMethod(W3PlayerAbilityManager)
+function GMTestCompatSetSkillLevel(skill : ESkill, level : int)
+{
+	skills[skill].level = level;
 }
