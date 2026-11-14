@@ -698,7 +698,7 @@ function GMTestDiff04bRegress(bandit : CNewNPC)
 }
 
 // ---- the modifiers and progressive bonuses across a save and a load (DIFF audit F4) ----
-// Only into the test-only slot whose file name contains the key given (ManualSave_8559a_7ea4f400_...): never
+// Only into the test-only slot whose file name contains the key given (the slot configured as slot_save, docs/game-automation.md#test-saves): never
 // another save. Load the slot (Geralt at level 20; setlevel(20) in the test save wrote an autosave), then:
 //   gmtest_diff04_lsave_a()          the "Hardcore" preset's values in memory (Upscale, progressive 10 and 5, +50%
 //                                    health and damage, +50% more for bosses); a persistent friendly frozen bandit and

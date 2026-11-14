@@ -5,3 +5,16 @@ tools/rw3d/
 
 # Python bytecode
 __pycache__/
+
+# Local agent instructions
+CLAUDE.local.md
+
+# Claude Code: agent worktrees and per-user settings
+.claude/worktrees/
+.claude/settings.local.json
+
+# Editors and OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

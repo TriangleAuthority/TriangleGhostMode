@@ -8,9 +8,9 @@ The monster trophies Geralt hangs on Roach's saddle: the bonus each one gives hi
 
 **How legacy Ghost Mode implements it.** Data: the bonus abilities in the six `def_item_trophies.xml` files (base game, `dlc\bob`, `dlc\ep1`; `items` and `items_plus`, legacy's NG+ files equal to its regular ones): 38 abilities rewritten (1.32's experience, gold, herb and dismemberment bonuses replaced by one bonus each; 28 base game, 8 Blood and Wine, 2 Hearts of Stone), four unused abilities emptied (`nekkers_`, `drowned_dead_`, `bies_`, `erynie_trophy_stats`, which no item names); the item entries only for tags (the Camerlengo's Seal and NG+'s Wyvern trophy `mq1051` lose `Quest`; Hearts of Stone's crown loses `EncumbranceOff`) and prices (ECON-02, ported); the shared `base_trophy_stats` (weight 2 → 5). Scripts: `W3ActorRemains.OnItemTaken` and `FinalizeLooting` (the queue and the equip block commented out), `ProcessMonsterHuntTrophyQuest` (the whole body commented out: no equip and no teleport of Roach to Geralt). Legacy did not touch the horse manager, the bonus readers, the tooltips' trophy code beyond UI-06's, or any string.
 
-Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the changelist's section and its two other trophy lines, the mod description, legacy's design sheet, every hand-off to TRPH in the other areas' files (ECON, LOOT, XP, STAM, EFX, UI, balance.md, open-questions.md), a node-by-node comparison of every entry in the six trophy files in the three branches (`vanilla-1.32`, `legacy-GM`, `vanilla-5.x`; regular and NG+), a search of 5.x's full XML for trophy items (`category="trophy"`, `Trophy` tags, `*_trophy_stats`), the script diff of every function legacy changed that names a trophy, the horse's trophy slot or a bonus attribute, the readers of each bonus attribute in the three branches and in the port (master `a255d35d`), and sweeps (`unit_sweep.py --unattributed` for trophy, `bonus_money`, `bonus_herb_chance`, `HorseTrophy`, `exp_bonus_when_fatal`, `dismember_chance_mult`, `EncumbranceOff`: nothing outside the trophy files but the three script units and `FixQuestItems`, handed off). **90 units carry a TRPH feature**: 87 XML units (43 regular, 44 NG+) and 3 script units, all newly attributed; TRPH added to one shared unit (UI-07's `frost_resistance_perc` tooltip row). Six weight-only units of the trophy files are WGT's, handed off unattributed (`base_trophy_stats` in the base game's and Blood and Wine's files, Hearts of Stone's crown item; regular and NG+). Unattributed units: 1,115 before, 1,025 after. Port status: **ported**: slices T1, T2 and T3 **verified on the area build** (2026-11-02, gm/trph); **audited** 2026-11-02 ([TRPH audit](#trph-audit-2026-11-02): F1 to F3, every one fixed, [close-out](#trph-audit-close-out)); **signed off** by the owner (2026-11-02). The [area decisions](#area-decisions) and [porter's calls](#porters-calls) were decided by the owner on 2026-11-02.
+Unit lists: [attribution.csv](attribution.csv). **90 units carry a TRPH feature**: 87 XML units (43 regular, 44 NG+) and 3 script units; TRPH also shares UI-07's `frost_resistance_perc` tooltip row. Six weight-only units of the trophy files are WGT's (`base_trophy_stats` in the base game's and Blood and Wine's files, Hearts of Stone's crown item; regular and NG+).
 
-**Size.** Small and mostly data: 42 trophy abilities (38 with a bonus, four unused emptied) given whole, NG+ copies equal, two item tags, three script functions. One area, three slices, one audit at the end (PT1).
+**Status:** signed off by the owner (2026-11-02). The [area decisions](#area-decisions) and [porter's calls](#porters-calls) were decided by the owner on 2026-11-02.
 
 ## Scope
 
@@ -23,7 +23,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the chang
 | Subject | Ported by | What |
 |---|---|---|
 | The trophy items' prices (56 entries, regular and NG+; trophies ×1.28 in all) | ECON-02 (PE11, signed off) | `gm_econ.xml` `extend` entries; TRPH's bonuses are in the abilities, not the item entries |
-| A trophy's tooltip lists its stats like gear | UI-06 (signed off) | Legacy's flag passing trophies to `AddItemStats` as gear changes only the toxicity line; not ported. The Arachas trophy has one (`toxicity` 40), so its tooltip differs from legacy's: [TRPH audit](#trph-audit-2026-11-02) F2 |
+| A trophy's tooltip lists its stats like gear | UI-06 (signed off) | Legacy's flag passing trophies to `AddItemStats` as gear changes only the toxicity line; the only trophy with one is the Arachas trophy (`toxicity` 40), which the port passes as gear, so it reads "Maximum Toxicity +40" as in legacy, with and without Expert Brewer ([TRPH-01](#trph-01-base-game-trophy-bonuses)) |
 | The tooltip rows and names for frost resistance, combat Vitality regen, resistance reduction and potion duration | UI-07, SWD-09, ALCH-17 (signed off) | `tooltip_settings.csv`, strings 2110992013–015, 2110992157 |
 | The character panel's bonus gold line and the experience bonus lines removed | UI-05 (signed off) | |
 | 5.x's bomb damage bonus from `potion_duration` removed | ALCH (signed off) | So the Water Hag trophy lengthens potions only, as legacy |
@@ -34,7 +34,7 @@ Unit lists: [attribution.csv](attribution.csv): mapped 2026-11-02 from the chang
 | Subject | Area | Why |
 |---|---|---|
 | The trophies' weight: `base_trophy_stats` 2 → 5 (base game and Blood and Wine files, regular and NG+, 4 units, weight-only), Hearts of Stone's King of Swineherd's crown loses `EncumbranceOff` (2 units) and weighs 5 (`pig_contest_trophy_stats`' weight `max` 0 → 5), the Conserved shaelmaar trophy 2 → 5 | WGT | Weights are WGT's, except inside the two Hearts of Stone abilities: `gen_trph.py` gives those whole with legacy's weight nodes (5), and WGT's generators skip every name another DLC file defines (parallel-ports.md, section 5) |
-| `FixQuestItems` (`gm_bugfixes.ws`): a load fix-up removing the `Quest` tag from many items in a save, the Camerlengo's Seal among them, and the Umbra trophy's after its quest | FIX or ITEM (unattributed) | A general quest-item fix; TRPH-02's tag change on the definition already reaches items a save holds (item tags are read from the definition, [development.md](../development.md#fine-grained-xml-overrides-50)), so the port needs no fix-up for the Seal |
+| `FixQuestItems` (`gm_bugfixes.ws`): a load fix-up removing the `Quest` tag from many items in a save, the Camerlengo's Seal among them, and the Umbra trophy's after its quest | FIX-03 | A general quest-item fix (it also releases the Umbra trophy for sale after its quest, `mq7017_talking_horse`); TRPH-02's tag change on the definition already reaches items a save holds (item tags are read from the definition, [development.md](../development.md#fine-grained-xml-overrides-50)), so the port needs no fix-up for the Seal |
 | The Vitality regen options that scale the Noonwraith trophy's +5 regen (`W3Effect_AutoVitalityRegen`, `GetCombatVitalityRegen`, `GetOutOfCombatVitalityRegen`; unattributed) | OPT | Options |
 
 ## Changes at a glance
@@ -126,8 +126,8 @@ How the bonuses work in play (from the code, unverified): "bonus gold" adds its 
 | Depends on | DMG-01 (attack power, crit, armor piercing, resistance reduction, resistances), STAM-04 (stamina regen), SKL-07 (adrenaline gain), SKL-13 and ALCH (potion duration, toxicity), EFX (effect resistances), XP-04 (reads the experience bonuses the rework removes), ECON (bonus gold), UI-06 and UI-07 (tooltips) |
 | Skill trees | n/a: no trophy names a skill; the bonuses are generic attributes that the skills' own bonuses add to in both trees (adrenaline gain with Razor Focus, classic `GM_C_sword_s20`, new `sword_s20`, and Adrenaline Burst, `perk_10`, `perk_42`; potion duration with Prolonged Effects, classic `alchemy_s4`, new tree's own attribute `gm_potion_duration`; Sign intensity with the Sign skills); checked in both trees by the regression |
 | Port form | `tools/gen_trph.py`: each changed trophy ability of `gameplay/items/def_item_trophies.xml` from `legacy-GM`, whole, `on_conflict="replace"`, in `gm_trph.xml` in Ghost Mode's DLC `items/` and `items_plus/` (legacy's NG+ file equals its regular one); NG+'s Wyvern trophy `mq1051` given whole without `Quest` (PT2, PT4) |
-| Port status | **verified on the area build** (2026-11-02, slice T1; both trees) |
-| Open checks | The tooltip seen on screen (read by script only: scripted checks, no screenshots) |
+| Port status | signed off (2026-11-02) |
+| Open checks | The tooltip seen on screen (read by script only) |
 | Save impact | none (expected): the ability is given to Geralt by name and its values come from the definitions; a trophy already on Roach shows the new bonus |
 | NG+ counterpart | legacy's NG+ abilities (equal to the regular ones; 1.32's NG+ equal to its regular ones too), untested |
 
@@ -137,14 +137,22 @@ How the bonuses work in play (from the code, unverified): "bonus gold" adds its 
 
 **5.x:** 1.32's.
 
-**Port (slice T1):** `tools/gen_trph.py` writes the 32 changed abilities of the base game's file whole (`replace`) into `items/gm_trph.xml` and `items_plus/gm_trph.xml` (NG+ equal), and the data test `tests/gmTestsTrphData.ws`; `item_layer.py`'s TRPH lines (`TRPH-01`: the `Quest` tag) make `gen_item.py` write NG+'s `mq1051_wyvern_trophy` whole without `Quest`. `--verify`: the 32 abilities equal to legacy's in both folders, every trophy item's `Quest` tag as legacy's (Blood and Wine's and Hearts of Stone's counted as not ported yet).
+**Port:** `tools/gen_trph.py` writes the 32 changed abilities of the base game's file whole (`replace`) into `items/gm_trph.xml` and `items_plus/gm_trph.xml` (NG+ equal), and the data test `tests/gmTestsTrphData.ws`; `item_layer.py`'s TRPH lines make `gen_item.py` write NG+'s `mq1051_wyvern_trophy` whole without `Quest`. `--verify` compares every trophy ability and item tag with legacy's. The Arachas trophy's tooltip passes as gear to the `AddItemStats` wrapper, so it reads "Maximum Toxicity +40" as legacy's, with and without Expert Brewer (ALCH's wrapper would otherwise show the potion form "Toxicity 40", reduced by Expert Brewer).
 
-**Verified on the area build** (2026-11-02, gm/trph `b98aaf3d`, both trees; scripted calls): `gmtest_trph()` (in the regression through `GMTest_trph()`): every node of the 32 abilities as the game reads it, and the 1.32 node each dropped reads 0; each of the 28 base-game trophy items put on Roach through the horse manager (`MoveItemToHorse`, `EquipItem`) gives Geralt its ability and its bonus through the game's own reader (resistances by `GetResistValue`, Vitality and toxicity maximums, attack power and each sign's intensity by the power-stat functions, potion duration by `CalculatePotionDuration`, the rest by `GetAttributeValue`, which DMG's formula, the regen effects and `CheckForBonusMoney` read), loses it when taken off, and leaves the 1.32 bonuses (experience, dismemberment, herbs, gold) unchanged; the Doppler trophy turns 100 crowns in a spawned container into 125 (`CheckForBonusMoney`). `gmtest_trph_spawn()` then `gmtest_trph_fight()`: the Grave hag trophy adds 0.01 adrenaline to a scripted hit (0.10 → 0.11; with Razor Focus 0.105 → 0.115 classic, 0.1083 → 0.1183 new tree); a griffin three levels up gives 14 experience with and without the Chort trophy (1.32's ability: 15); every trophy again with Razor Focus equipped, then with Prolonged Effects (the Water hag trophy's +6 s on a Swallow summed with the skill's: 36 → 42 s classic, 40 → 46 s new tree); the tooltips (`W3TooltipComponent.GetBaseItemData`) list "Attack power 5 %", "Critical hit chance 10 %", "Frost resistance 50 %", "Bonus gold 25 %", "Vitality 500" (UI-06's open check, by script). Every check failed first on a throwaway build without `gm_trph.xml` (91 of 92 and 37 of 39 failed: 1.32's bonuses read; the griffin gave 15). From the code: the Wyvern trophy's stamina regen multiplies `staminaRegen`, which STAM-04's regen reads in combat (out of combat it reads `staminaOutOfCombatRegen`), as in 1.32 and legacy.
+**Bonus gold and 5.x's loot merge:** a container gets its bonus gold (`CheckForBonusMoney`) once, when Geralt first comes within its interaction range; 5.x's loot merge (the gameplay setting `LootMergeEnabled`: one loot window, or one Auto-loot, takes every remains within 15 m) also takes corpses he never walked up to. `trph/bonusGold.ws` runs the check, once per container, on every remains the merge takes, before its loot is listed (a wrapper of the loot window's `CR4LootPopup.BuildCache`) or taken (a wrapper of `W3Container.ProcessLoot`, Auto-loot with the merge). So every looted corpse's crowns get the gold trophies' bonus and gear's, as in legacy's play.
 
-**Bonus gold and 5.x's loot merge** (since the owner's decision on the [audit](#trph-audit-2026-11-02)'s F3, 2026-11-02): a container gets its bonus gold (`CheckForBonusMoney`) once, when Geralt first comes within its interaction range; 5.x's loot merge (the gameplay setting `LootMergeEnabled`: one loot window, or one Auto-loot, takes every remains within 15 m) also takes corpses he never walked up to. `trph/bonusGold.ws` runs the check, once per container, on every remains the merge takes, before its loot is listed (a wrapper of the loot window's `CR4LootPopup.BuildCache`) or taken (a wrapper of `W3Container.ProcessLoot`, Auto-loot with the merge). So every looted corpse's crowns get the gold trophies' bonus (the Doppler trophy's here, TRPH-03's two) and gear's, as in legacy's play. **Verified** (2026-11-02, scripted): three remains with 100 crowns at 2, 6 and 12 m and the Doppler trophy on Roach give 375 in one merged loot, through Auto-loot (in the regression, `GMTestTrphMerge`, both trees, and in two calls with Geralt standing by the 2 m remains in between, `gmtest_trph_merge_spawn`/`_auto`) and through the loot window (`gmtest_trph_merge_window`/`_take`: the window opened on the 2 m remains by its own `ShowLoot`, then its "take all"); failed first on a throwaway build: 325 in two calls (the 2 m remains' 125 only), 300 in one.
+From the code: the Wyvern trophy's stamina regen multiplies `staminaRegen`, which STAM-04's regen reads in combat (out of combat it reads `staminaOutOfCombatRegen`), as in 1.32 and legacy.
 
 **Decisions:** legacy's abilities (PT2). Three values differ between legacy's code and its changelist, and legacy's design sheet (`trophies.ods`) agrees with the changelist on all three: DT1 (Grave hag trophy), DT2 (Ekimmara trophy), DT3 (Wild Hunt hound trophy).
 - **Deviation:** with 5.x's loot merge on, every corpse the merge lists or takes gets its bonus gold check first, so the gold trophies (Doppler +25%, the King of Swineherd's crown +35%, the Conserved shaelmaar trophy +50%) and gear's bonus gold count on every merged corpse's crowns, not only on the one Geralt walked up to; legacy had no merge and every looted corpse had been approached, so this gives legacy's result on a 5.x path (TRPH audit F3, owner, 2026-11-02).
+
+**Slices:**
+
+1. **Base-game trophies.** Verified 2026-11-02, both trees (scripted calls, `gmtest_trph`, `gmtest_trph_spawn`/`_fight`): every ability reads legacy's values; each trophy put on Roach through the horse manager gives Geralt its bonus through the game's own reader and loses it when taken off; the Grave hag trophy raises a hit's adrenaline from 0.10 to 0.11 (with Razor Focus and Prolonged Effects in each tree); no trophy gives experience; the tooltips list the bonus.
+2. **Bonus gold on merged loot.** Verified 2026-11-02, both trees (scripted, `GMTestTrphMerge`, `gmtest_trph_merge_*`): three remains with 100 crowns at 2, 6 and 12 m and the Doppler trophy on Roach give 375 in one merged loot, through Auto-loot and through the loot window.
+3. **Arachas tooltip.** Verified 2026-11-02, both trees (scripted, `gmtest_trph_toxtip`, `GMTestTrphToxTip`): "Maximum Toxicity +40" with and without Expert Brewer.
+
+**Later:** the Noonwraith trophy's (`mh308`) combat regen row is named "Vitality regeneration per enemy killed during combat", the game's own name (1070910) for `vitalityCombatRegen`, as in 1.32 and legacy, although the bonus is 5 per second; a clearer name is a possible improvement.
 
 ### TRPH-02 Blood and Wine trophy bonuses
 
@@ -157,7 +165,7 @@ How the bonuses work in play (from the code, unverified): "bonus gold" adds its 
 | Depends on | as TRPH-01; WGT (the Wight trophy's +20 maximum weight meets legacy's weights); LOOT and CRAFT (herbs) |
 | Skill trees | n/a (as TRPH-01) |
 | Port form | `gen_trph.py`: the eight changed abilities of `dlc/bob/.../def_item_trophies.xml` whole with `replace` (they drop 1.32's nodes, so `extend` cannot express them), NG+ copies; the Camerlengo's Seal without `Quest`, an `item_layer.py` TRPH field: a short `extend` entry with `<tags>-Quest</tags>` for the regular Blood and Wine entry, the NG+ entry whole (PT4); the Wight trophy counted once in the carry limit: `trph/carryLimit.ws` (a `@wrapMethod(W3HorseManager)` `GetHorseAttributeValue`) |
-| Port status | **verified on the area build** (2026-11-02, slice T2; both trees) |
+| Port status | signed off (2026-11-02) |
 | Open checks | — |
 | Save impact | none (expected); the Seal's tag is read from its definition |
 | NG+ counterpart | legacy's NG+ abilities and Seal (equal to the regular ones), untested |
@@ -168,14 +176,17 @@ How the bonuses work in play (from the code, unverified): "bonus gold" adds its 
 
 **5.x:** 1.32's.
 
-**Port (slice T2):** `gen_trph.py` writes the eight abilities whole into `gm_trph.xml` (both folders) and the Seal's regular entry as a short `extend` entry with `<tags>-Quest</tags>` (PT4); `gen_item.py` writes NG+'s Seal whole without `Quest`.
+**Port:** `gen_trph.py` writes the eight abilities whole into `gm_trph.xml` (both folders) and the Seal's regular entry as a short `extend` entry with `<tags>-Quest</tags>` (PT4); `gen_item.py` writes NG+'s Seal whole without `Quest`.
 
-**Verified on the area build** (2026-11-02, gm/trph `50878446`, both trees; scripted calls, in `gmtest_trph()` and the regression): every node of the eight abilities as the game reads it; each Blood and Wine trophy on Roach (Golyat, Wight, Garkain, Grottore, Umbra, Slyzard, Silver basilisk, Shaelmaar, the Camerlengo's Seal, and Blood and Wine's Griffin trophy with the prologue griffin's +5% attack power, PT6) gives its bonus and drops 1.32's; a Celandine plant with 2 herbs gives 3 with the Grottore or Umbra trophy on Roach (herb chance 1.0, `CheckForBonusHerbs`); the Seal's tags read `Trophy` only, price 250, so the shop's sale check and the inventory's drop check pass. Every new check failed first on a throwaway build with T1's data (39 of 40; Blood and Wine's Griffin trophy uses T1's ability).
-
-**The Wight trophy counts once in the carry limit** (since the owner's decision on the [audit](#trph-audit-2026-11-02), 2026-11-02). 1.32's, legacy's and 5.x's code counted it twice: the horse manager gives the trophy's abilities to Geralt and also keeps them among the horse's (`EquipItem` fills `horseAbilities` with every ability of the item), and `GetMaxRunEncumbrance` adds the horse's `encumbrance` to Geralt's, so the ability's +20 (the tooltip and the changelist's "+20") raised the carry limit by 40 (60 → 100 on the test save). `trph/carryLimit.ws`: a `@wrapMethod(W3HorseManager)` `GetHorseAttributeValue` leaves out of the horse's `encumbrance` what the trophy in the slot gives Geralt (its abilities but `base_trophy_stats`, the ones he has), so it counts once, on Geralt; saddlebags work through the horse and are unchanged. **Verified** (2026-11-02, both trees, scripted, `GMTestTrphWightLimit` in `GMTest_trph`): the limit 60 → 80 with the trophy, 100 / 120 / 140 with the three base-game bags, 120 with bag 1 and the trophy; failed first on a throwaway build (100, and 140 with bag 1). WGT's overburdened checks read the carry limit from the game.
+**The Wight trophy counts once in the carry limit.** 1.32's, legacy's and 5.x's code counted it twice: the horse manager gives the trophy's abilities to Geralt and also keeps them among the horse's (`EquipItem` fills `horseAbilities` with every ability of the item), and `GetMaxRunEncumbrance` adds the horse's `encumbrance` to Geralt's, so the ability's +20 (the tooltip and the changelist's "+20") raised the carry limit by 40. `trph/carryLimit.ws`: a `@wrapMethod(W3HorseManager)` `GetHorseAttributeValue` leaves out of the horse's `encumbrance` what the trophy in the slot gives Geralt (its abilities but `base_trophy_stats`), so it counts once, on Geralt; saddlebags work through the horse and are unchanged. WGT's overburdened checks read the carry limit from the game.
 
 **Decisions:** legacy's (PT2, PT4, PT6).
 - **Deviation:** the Wight trophy gives the +20 carry weight its tooltip and the changelist show, not the +40 legacy's code gave (1.32's code, which legacy kept, counted the trophy's ability on Geralt and again on the horse); the trophy's bonus counts once and saddlebags are unchanged (TRPH audit, owner, 2026-11-02).
+
+**Slices:**
+
+1. **Blood and Wine trophies.** Verified 2026-11-02, both trees (scripted, `gmtest_trph` and the regression): each trophy on Roach gives its bonus and drops 1.32's, Blood and Wine's Griffin trophy the prologue griffin's (PT6); a herb plant with 2 herbs gives 3 with the Grottore or Umbra trophy; the Seal reads `Trophy` only, price 250, sellable and droppable.
+2. **Wight trophy carry limit.** Verified 2026-11-02, both trees (scripted, `GMTestTrphWightLimit`): the limit rises by 20 with the trophy, the saddlebags' steps are unchanged, and bag and trophy add up.
 
 ### TRPH-03 Hearts of Stone trophy bonuses
 
@@ -188,7 +199,7 @@ How the bonuses work in play (from the code, unverified): "bonus gold" adds its 
 | Depends on | ECON (money), LOOT-06 (crowns in loot), WGT (the two items' weight) |
 | Skill trees | n/a |
 | Port form | `gen_trph.py`: the two abilities whole with `replace` (Hearts of Stone: `extend` empties them, [development.md](../development.md#fine-grained-xml-overrides-50)), **with legacy's weight nodes** (the crown 0 → 5, the Conserved shaelmaar trophy 2 → 5: WGT-05's nodes, written here; WGT skips the two names), NG+ copies (PT2, PT3, PT5) |
-| Port status | **verified on the area build** (2026-11-02, slice T2; both trees) |
+| Port status | signed off (2026-11-02) |
 | Open checks | — |
 | Save impact | none (expected) |
 | NG+ counterpart | legacy's NG+ abilities (equal), untested |
@@ -199,9 +210,13 @@ How the bonuses work in play (from the code, unverified): "bonus gold" adds its 
 
 **5.x:** 1.32's.
 
-**Port (slice T2):** `gen_trph.py`, the two abilities whole with `replace`, legacy's weight nodes included (5; WGT skips the names). **Verified on the area build** (2026-11-02, both trees): the abilities read their values after `replace` (bonus gold 0.35 and 0.5), and 100 crowns in a spawned container become 135 with the crown and 150 with the Conserved shaelmaar trophy (failed first: 115 and 105).
+**Port:** `gen_trph.py`, the two abilities whole with `replace`, legacy's weight nodes included (5; WGT's generators skip the two names, so the abilities are defined once; `gen_all.py --verify` checks it after merging areas whose generators skip each other's names).
 
-**Decisions:** legacy's code (PT5; an omission of the changelist, recorded in [open-questions.md](../open-questions.md#legacy-data-vs-changelist)). The crown's weight, legacy's random 5 to 10 per copy (its `max="5"` without a `min`, on top of `base_trophy_stats`' 5; [WGT](wgt.md#slice-w2-2026-11-02)), is kept: **decided** by the owner (2026-11-02). With 5.x's loot merge the two trophies' bonus gold counts on every merged corpse (TRPH-01's deviation).
+**Decisions:** legacy's code (PT5; an omission of the changelist, recorded in [open-questions.md](../open-questions.md#legacy-data-vs-changelist)). The crown's weight, legacy's random 5 to 10 per copy (its `max="5"` without a `min`, on top of `base_trophy_stats`' 5; [WGT](wgt.md#wgt-05-other-item-weights)), is kept: **decided** by the owner (2026-11-02). With 5.x's loot merge the two trophies' bonus gold counts on every merged corpse (TRPH-01's deviation).
+
+**Slices:**
+
+1. **Hearts of Stone trophies.** Verified 2026-11-02, both trees (scripted, the regression): the abilities read their values after `replace`, and 100 crowns in a spawned container become 135 with the crown and 150 with the Conserved shaelmaar trophy.
 
 ### TRPH-04 Trophies no longer auto-equipped
 
@@ -214,8 +229,8 @@ How the bonuses work in play (from the code, unverified): "bonus gold" adds its 
 | Depends on | LOOT (the corpse containers) |
 | Skill trees | n/a |
 | Port form | `trph/looting.ws`: `@replaceMethod(W3ActorRemains)` `OnItemTaken` and `FinalizeLooting`, 5.x's bodies without the trophy queue and the equip block (marked); `@replaceMethod ProcessMonsterHuntTrophyQuest` with an empty body (PT7) |
-| Port status | **verified on the area build** (2026-11-02, slice T3; both trees), the contract path by compile and code only |
-| Open checks | A contract's trophy through its scene (`ProcessMonsterHuntTrophyQuest` cannot be run by script; needs a save at a contract's end) |
+| Port status | signed off (2026-11-02), the contract path by compile and code only |
+| Open checks | A contract's trophy through its scene: nothing equipped, Roach not moved, the quest goes on (`ProcessMonsterHuntTrophyQuest` cannot be run by script; needs a save at a contract's end) |
 | Save impact | none (expected) |
 | NG+ counterpart | none (scripts) |
 
@@ -225,108 +240,21 @@ How the bonuses work in play (from the code, unverified): "bonus gold" adds its 
 
 **5.x:** 1.32's three functions, unchanged.
 
-**Port (slice T3):** `trph/looting.ws`: `@replaceMethod(W3ActorRemains)` of `OnItemTaken` (the trophy no longer queued) and `FinalizeLooting` (the queued trophies' equip loop and its locals removed), and `@replaceMethod ProcessMonsterHuntTrophyQuest` with an empty body (declared as a plain `function`: it compiles). `check_modsigns.py`: no unmarked change.
-
-**Verified on the area build** (2026-11-02, gm/trph `07c623f2`, both trees; scripted calls, `gmtest_trph_loot()`): a monster's remains (`items\remains\remains__monster_01\remains__monster_01.w2ent`) holding the Doppler trophy, looted as the loot window does (`TakeAllItems`, then `OnContainerClosed`, which calls `FinalizeLooting`) and through 5.x's "Quick Corpse Looting" (`Accessibility`/`AutoLoot` on, `W3Container.ProcessLoot`): the trophy lands in Geralt's inventory and Roach's trophy slot stays empty. Both failed first on a throwaway build without `looting.ws` (the trophy equipped on Roach). `ProcessMonsterHuntTrophyQuest` cannot be called by script (the compiler allows a latent quest function only in a quest block), so the contract path is checked by compile and code only: its body is empty.
+**Port:** `trph/looting.ws`: `@replaceMethod(W3ActorRemains)` of `OnItemTaken` (the trophy no longer queued) and `FinalizeLooting` (the queued trophies' equip loop and its locals removed), and `@replaceMethod ProcessMonsterHuntTrophyQuest` with an empty body (declared as a plain `function`: it compiles, and the compiler still treats it as a quest function, so a call from a script fails with the quest-block error). Every 5.x looting path (the loot window, Auto-loot, the loot merge's `TakeAllItems` on each remains) goes through `OnItemTaken` and `FinalizeLooting`; the only other code that equips horse items is a quest's re-equip of items it marked (`ReequipMarkedItems`) and the standalone starts' horse gear.
 
 **Decisions:** legacy's (PT7). The Roach teleport's removal is not in the changelist (an omission, recorded in open-questions.md).
 
----
+**Slices:**
 
-### TRPH audit (2026-11-02)
-
-Done by a fresh session ([audit](../feature-mapping.md#audit-signing-a-feature-off)) on the integrated master `4f3819eb` (port) and `ba6a5abf` (docs), reading code and data, with game runs in both trees on 2026-11-02. Read: the three slices' commits (T1 `dc75f5c4`, T2 `f1dab5f6`, T3 `4f3819eb`), `gen_trph.py`, `gm_trph.xml` (both folders), `trph/looting.ws`, the two test files.
-
-**How it was checked:**
-- **Data, independent of `gen_trph.py`:** a script written for the audit compared every item and ability of the six trophy files in `legacy-GM` and `vanilla-5.x` (40 items, 45 abilities), then each of legacy's changes against the port's DLC files. Every other DLC file was searched for trophy names. `gen_trph.py --check` and `--verify`, `gen_wgt.py --check` and `check_modsigns.py` were run on the integrated tree.
-- **Code:** the horse manager (`EquipItem`, `UnequipItem`, `GetHorseAttributeValue`), each bonus attribute's readers in the port (`focus_gain`, `critical_hit_damage_bonus`, `armor_reduction`, `armor_reduction_perc`, the resistances, `potion_duration`, `staminaRegen`, `vitalityRegen`, `vitalityCombatRegen`, `encumbrance`, `bonus_money`, `bonus_herb_chance`, the sign intensities through `GetTotalSignSpellPower`), compared with legacy where 5.x or the port changed them. Every 5.x path that moves a trophy to Roach (`MoveItemToHorse` callers). 5.x's looting: the loot window, Auto-loot, the loot merge (`LootMergeEnabled`: `LootPopup.BuildCache` and `W3Container`'s Auto-loot loop), herbs. 5.x has no looting from horseback in scripts. The tooltip code (`AddItemStats`, legacy's and the port's wrapper).
-- **Sweeps:** `unit_sweep.py --unattributed` for `troph`, the horse's trophy slot and abilities, `bonus_money|bonus_herb|CheckForBonus`, the experience and dismemberment bonuses, the wight, and the trophy checks (`IsItemTrophy`): nothing new, only `FixQuestItems` (already handed off).
-- **In game** (scripted calls; throwaway probes on gm/trphaudit `2d0aaca7`, `tests/gmTestsTrphAudit.ws`, not for integration):
-  - every trophy's tooltip as the inventory builds it (`GetBaseItemData`), all 40, and the Arachas trophy's again with Expert Brewer equipped;
-  - the two Hearts of Stone abilities as the definitions give them, and the crown's weight;
-  - bonus gold on remains at 2, 6 and 12 m with the Doppler trophy on Roach, then one merged Auto-loot of all three.
-- **Regression** on the integrated build `4f3819eb` (`regress.py --trees both`): classic 1,483 and 156 passed, new tree 1,483 and 156 passed, 0 failed.
-
-**Checked and holding:**
-- **The data.** All 38 changed abilities and the four emptied ones resolve to legacy's in both folders, NG+ equal (but see F1). The two item tags are as legacy's: the Camerlengo's Seal and NG+'s `mq1051` lose `Quest`, and the other 31 keep it as legacy does. No other trophy item, ability or tag differs between legacy and 5.x. The two shared abilities (`gryphon_trophy_stats` for the prologue's and Blood and Wine's Griffin trophies, `spriggan_trophy_stats` for the Grottore and Umbra trophies) are the only shared ones, both ported. The `Werewolf Trophy` item is a debug item with a commented-out ability, the same in all branches.
-- **The bonus reaches play.** The horse manager is 1.32's in 5.x and legacy alike: a trophy's abilities but `base_trophy_stats` go to Geralt while it is in the slot, and are removed when it is taken out. Every bonus attribute has a reader in the port that reads Geralt:
-  - DMG's formula: armor piercing and resistance reduction from the attacker; the resistances by damage type (monsters deal rending damage, which the Nekker warrior trophy resists);
-  - the crit code;
-  - `CalculatePotionDuration` (the Water hag trophy summed with Prolonged Effects, potions only, as legacy). 5.x's bomb and damage-over-time readers of `potion_duration` are removed by ALCH: `bombs.ws` and the `W3DamageOverTimeEffect.OnEffectAdded` replacement;
-  - the regen effects (in combat `vitalityCombatRegen`, out of combat `vitalityRegen`; the regen starts when the out-of-combat value is above 0, which the Noonwraith trophy gives, as legacy);
-  - the carry limit;
-  - `CheckForBonusMoney` and `CheckForBonusHerbs`, and LOOT-05's Balisse fruit;
-  - the sign intensities: `GetTotalSignSpellPower` adds `spell_power` through the skill's value and each sign's own attribute, for the new tree's alternate Igni and Axii too.
-- **Adrenaline (DT1).** The Grave hag trophy's `focus_gain` also counts in the adrenaline a sign cast gives with Adrenaline Burst (`perk_10` or `perk_42`) and in the crossbow's gain, in both trees. Legacy has the same formula.
-- **The tooltips.** 39 of the 40 show their bonus by the attribute's name and value, e.g.:
-  - "Adrenaline Point gain 10 %", "Sign intensity 5 %", "Aard Sign intensity 10 %";
-  - "Stamina regeneration in combat 5 %", "Potion duration 20 %", "Enemy damage resistance reduction 10 %";
-  - "Armor penetration 40", "Resistance to damage from monsters 5 %";
-  - "Chance to find additional herbs 100 %", "Bonus gold 35 %" and "50 %";
-  - the Wight trophy's "Maximum inventory weight 20" (the +40 in play is known).
-
-  The exception is the Arachas trophy (F2). The Noonwraith trophy's (`mh308`) combat row is named "Vitality regeneration per enemy killed during combat", the game's own name (1070910) for `vitalityCombatRegen`, as in 1.32 and legacy, although the bonus is 5 per second. This is legacy as played; a possible improvement for later, not a finding.
-- **TRPH-04.** `OnItemTaken` and `FinalizeLooting` are 5.x's bodies with legacy's lines removed and marked (`check_modsigns.py`: 0 unmarked). Each looting path in 5.x (the loot window, Auto-loot, the loot merge's `TakeAllItems` on each remains) goes through these two, so no trophy is queued or equipped. The only other callers that equip horse items are a quest's re-equip of items it marked (`ReequipMarkedItems`) and the standalone starts' horse gear. On the contract path, a compile check showed the replaced `ProcessMonsterHuntTrophyQuest` still counts as a quest function: calling it from a script fails with the quest-block error. So the quest blocks should still find it, although only play shows it (open check).
-- **Hand-offs.** `FixQuestItems` (FIX or ITEM) still holds the Umbra trophy's `Quest` removal after its quest (`mq7017_talking_horse`). Until it is ported, the Umbra trophy cannot be sold or dropped in the port; in legacy it can after the quest. This is recorded as a hand-off, so there is no TRPH change.
-- **Conventions.** No leftovers or absolute paths; deviations: none recorded, none found (two came with the owner's decisions: [close-out](#trph-audit-close-out)).
-
-**Findings:**
-
-| # | Finding | Evidence | Severity | Kind |
-|---|---|---|---|---|
-| F1 | **Hearts of Stone's two gold trophies are defined twice on the port.** On the integrated tree, `gm_wgt.xml` (WGT slice W2, generated before TRPH's file was merged and not regenerated after) also replaces `pig_contest_trophy_stats` and `q603_sharley_trophy_stats`, with 1.32's bonus gold (+15%, +5%), in `items/` and `items_plus/`. In the regular game `gm_trph.xml`'s entry is the one read today (+35%, +50%), by the game's load order and not by design; NG+'s cannot be read in a regular game. | `gen_wgt.py --check`: out of date, "defined twice" (2 per folder); `gen_trph.py --verify`: "differences found" (DUPLICATE, its model resolves `gm_wgt.xml`'s 0.15/0.05); in game: the regression's TRPH-03 checks read 0.35/0.5 and 135/150 crowns, and the probe read the definitions at 0.35/0.5 | medium (latent: one file order away from 1.32's gold) | **clear fix**: run `gen_all.py` on the port (`gen_wgt.py` then skips the two names), and `gen_all.py --verify` after each merge of areas whose generators skip each other's names |
-| F2 | **The Arachas trophy's tooltip says "Toxicity 40", and "39" with Expert Brewer equipped.** Legacy shows "Maximum Toxicity +40": it passes trophies to `AddItemStats` as gear, which names the row `panel_common_statistics_tooltip_current_maximum` with a "+". The port does not port that flag (UI-06), so the row takes the potion's form. ALCH's `AddItemStats` wrapper (`alchemy/tooltips.ws`) then subtracts Expert Brewer's potion toxicity reduction from it. The bonus itself is right (+40 maximum toxicity). The docs' "no trophy has a toxicity line" (this entry's UI-06 row, corrected here; [ui.md](ui.md), UI-06's decisions) is wrong. | probe `gmaud_trph_tips()`, both runs logged: `[toxicity: Toxicity = '40']`, with Expert Brewer level 1 (reduction 1) `'39'`; legacy `guiTooltipComponent.ws` `AddItemStats(..., isArmorOrWeapon \|\| itemInvComponent.IsItemTrophy(item))` | low (one trophy, text only) | **clear fix** (legacy behaviour): treat a trophy as gear for the toxicity row (legacy's flag, or in the wrapper), owned by UI-06; **doc correction** in ui.md. **Fixed** (gm/fix1 `d25b6806`, the tested build `d2b22899`, 2026-11-02): a trophy's tooltip passes as gear to the `AddItemStats` wrapper; "Maximum Toxicity +40" with and without Expert Brewer, both trees, scripted (`gmtest_trph_toxtip()`; failed first, "Toxicity 40" and "39"); regression check `GMTestTrphToxTip` in `GMTest_trph`; ui.md corrected |
-| F3 | **5.x's loot merge loses the bonus gold of the corpses merged in.** A container gets its bonus gold (`CheckForBonusMoney`) when Geralt first comes within its interaction range. 5.x's loot merge (the gameplay option `LootMergeEnabled`: one loot window, or one Auto-loot, takes every remains within 15 m) takes the crowns of corpses Geralt never walked up to, without that check. So the gold trophies (Doppler +25%, crown +35%, Conserved shaelmaar +50%) and gear's bonus gold miss them. 1.32 and legacy have no merge: every looted corpse was approached. The option is off on the test profile. | probe `gmaud_trph_far()`: Doppler trophy on Roach, remains with 100 crowns at 2, 6 and 12 m read 125, 100, 100; one merged Auto-loot gave Geralt +325 (125 + 100 + 100). Code: `LootPopup.BuildCache`, `W3Container` Auto-loot loop (`FindGameplayEntitiesInRange(..., 15.0f, ...)`) | low to medium (with the option on, a large part of the gold trophies' value in group fights) | **owner decision**: (a) keep 5.x's: the bonus only from corpses Geralt approaches; (b) run the bonus check on each merged remains before its loot is listed or taken, so every looted corpse's crowns get it, as in legacy's play. **Recommended: (b)**: legacy's outcome on a 5.x path, a few lines in TRPH (or LOOT); it would be recorded as a deviation (a 5.x path legacy never met) |
-
-**Open checks** (need a cleared run or a later save): the tooltips on screen (read by script only); a contract's trophy through its scene (`ProcessMonsterHuntTrophyQuest` from a quest block: nothing equipped, Roach not moved, the quest goes on), which needs a save at a contract's end; NG+'s Hearts of Stone abilities after F1's fix (NG+ untested by policy).
-
-#### TRPH audit close-out
-
-**TRPH signed off by the owner (2026-11-02).** The open checks that need a later save (a contract's trophy through its scene) or the screen (the tooltips) wait for a playthrough; NG+ is checked offline only.
-
-**The owner's decisions (2026-11-02), all as recommended.** Every finding is fixed, decided or recorded.
-
-| Finding | Outcome | How tested |
-|---|---|---|
-| F1 Hearts of Stone's two gold trophies defined twice | **fixed** at integration: `gen_all.py` on the port, `gen_wgt.py` skips the two names; `gen_all.py --verify` passes | offline: `gen_all.py --verify` on gm/fix2 |
-| F2 The Arachas trophy's tooltip | **fixed** (fix1, master `d25b6806`): "Maximum Toxicity +40" | scripted (fix1), `GMTestTrphToxTip` in the regression |
-| F3 5.x's loot merge loses the bonus gold of corpses merged in | **fixed** as decided (b), a deviation ([TRPH-01](#trph-01-base-game-trophy-bonuses)): `trph/bonusGold.ws` runs the bonus gold check on every remains the merge lists (loot window) or takes (Auto-loot) | scripted: three remains with 100 crowns at 2, 6 and 12 m, the Doppler trophy on Roach: 375 in one merged loot, by Auto-loot (`GMTestTrphMerge` in the regression, both trees; in two calls, `gmtest_trph_merge_spawn`/`_auto`) and by the loot window (`gmtest_trph_merge_window`/`_take`); failed first on the throwaway build: 325 in two calls (Auto-loot and the window), 300 in one |
-| The Wight trophy's +40 (TRPH-02, the audit's checked-and-holding note) | **fixed** as decided (b), a deviation ([TRPH-02](#trph-02-blood-and-wine-trophy-bonuses)): `trph/carryLimit.ws`, the trophy counts once | scripted, both trees: `GMTestTrphWightLimit` in the regression: 60 → 80 with the trophy; 100, 120, 140 with the three bags; 120 with bag 1 and the trophy; `GMTestTrphEquip`'s Wight check now wants +20; failed first on the throwaway build (100; bag 1 and the trophy 140) |
-| The King of Swineherd's crown's weight (WGT's note) | **decided**: legacy's random 5 to 10 kept ([TRPH-03](#trph-03-hearts-of-stone-trophy-bonuses)) | data test (WGT) |
-
-**Regression** (gm/fix2 `528540ef`, `regress.py --trees both`, `god()` off, a fresh launch per tree): `gmtest_regress()` 1,524 passed, 0 failed, and `gmtest_panel()` 156 passed, 0 failed, in each tree (+13 checks over 1,511: OPT 1, TRPH 4, WGT 8). Fail first: a throwaway build (gm/fix2-fail `74c94b7a`: the fixes, WGT-07's term and WGT-09's rule removed, the tests kept) failed every new check that tests a fix; the four "unchanged" checks (Aard, a usable item and Whirl per armor class; Roach's gear back) passed there too, as they test what stays. The saves: the releases found them clean (1,079 live and in the backup; none gone, new or changed).
-
-**Deviations:** two new, both the owner's (2026-11-02): bonus gold on merged loot (TRPH-01) and the Wight trophy's +20 (TRPH-02).
+1. **No auto-equipping.** Verified 2026-11-02, both trees (scripted, `gmtest_trph_loot`): a monster's remains holding a trophy, looted as the loot window does and through 5.x's Auto-loot: the trophy lands in Geralt's inventory and Roach's trophy slot stays empty. The contract path is checked by compile and code only (its body is empty).
 
 ---
 
 ### Dependencies on other areas
 
-- **Done areas TRPH builds on:** DMG (the damage formula reading attack power, crit, armor piercing, resistance reduction, resistances), STAM-04 (stamina regen), SKL-07 and SKL-18 (adrenaline gain from hits, Razor Focus, Adrenaline Burst in both trees), SKL-11 and the Sign skills (Sign intensity), SKL-13 and ALCH (potion duration, maximum toxicity, the bomb bonus removed), EFX (effect resistances), XP-04 (no gear experience bonus left once TRPH removes the trophies'), ECON (bonus gold, the trophies' prices, PE11), LOOT-06 (crowns in containers), UI-05 to UI-07 (the panel's bonus gold line, the trophy tooltip, the rows and names), `item_layer.py` and `gen_item.py` (the two item tags).
-- **Areas TRPH shares with or waits for:** WGT (the trophies' weight, the Wight trophy's +20 maximum weight against legacy's weights), OPT (the Vitality regen options that scale the Noonwraith trophy's regen), FIX or ITEM (`FixQuestItems`).
-
-### Hand-offs received
-
-| From | Item | TRPH |
-|---|---|---|
-| ECON (hand-off) | The trophies' abilities (93 units, unattributed); the Doppler trophy's "+25% to bonus money"; `ProcessMonsterHuntTrophyQuest` (found by the money sweep) | TRPH-01 to TRPH-03 (87 units; the other six are weight-only, WGT's); TRPH-01 (Doppler); TRPH-04 |
-| LOOT (hand-off) | Trophies no longer auto-equipped (`W3ActorRemains.OnItemTaken`, `FinalizeLooting`) | TRPH-04 |
-| XP (hand-off) | The trophies' XP bonuses removed (44 trophy abilities) | TRPH-01 to TRPH-03: every trophy ability with an experience bonus is rewritten; no trophy gives experience in legacy |
-| STAM (hand-off) | Trophy stamina regen (`wyvern_mq1051_trophy_stats`, `white_basilisk_trophy_stats`) | TRPH-01 (+5%), TRPH-02 (+10%): `staminaRegen` multipliers on Geralt, read by STAM-04's regen |
-| EFX (hand-off) | Trophies' effect resistances (hound frost, forktail burning, wyvern poison, lamia bleeding) | TRPH-01; frost resistance also shortens EFX's frost slowdown (EFX-05) |
-| UI (UI-06, UI-07 dependencies) | Trophy values in tooltips; frost resistance | Nothing to port: the tooltip code and rows are ported; TRPH added to the frost resistance row; the trophy tooltip on screen is UI-06's open check, done in slice T1 |
-| balance.md (overdose) | The Arachas trophy's toxicity room | TRPH-01 (+40 maximum toxicity) |
-| open-questions.md (contradictions) | Grave Hag +10% adrenaline (changelist +5%), Ekimma +10% crit chance (+15%), Wild Hunt Minion +50% frost resistance (+25%) | DT1 to DT3 |
-
-**Temporary deviations "until TRPH"** ([deviations.md](deviations.md)): none recorded. The port's trophies give 1.32's bonuses until slice T1 (the experience bonus that XP-04 reads among them); not recorded as a deviation by XP.
-
-### Hand-off to other areas
-
-| Area | Changes |
-|---|---|
-| WGT | `base_trophy_stats` weight 2 → 5 in the base game's and Blood and Wine's files, regular and NG+ (4 units, unattributed, weight-only); Hearts of Stone's `q602_pig_contest_trophy` item loses `EncumbranceOff` (regular and NG+, 2 units, unattributed); the weight nodes in `pig_contest_trophy_stats` (`max` 0 → 5) and `q603_sharley_trophy_stats` (2 → 5), inside TRPH-03's units: **written by `gen_trph.py`** with the abilities (legacy's 5), so WGT's generators skip the two names; the Wight trophy's +20 maximum weight (TRPH-02) meets legacy's weights (WGT's overburdened checks read the carry limit from the game) |
-| OPT | The Noonwraith trophy's +5 Vitality regen in and out of combat (TRPH-01) is scaled by legacy's Vitality regen options (`W3Effect_AutoVitalityRegen`, unattributed) |
-| FIX (FIX-NEW5, sweep D G11; FIX is mapped as an area of its own, the owner's decision 2026-11-02) | `FixQuestItems` (`gm_bugfixes.ws`, unattributed): its `camm_trophy` and `mq7017_zmora_trophy` cases are trophy items; TRPH-02 needs no fix-up |
+- **Done areas TRPH builds on:** DMG (the damage formula reading attack power, crit, armor piercing, resistance reduction, resistances), STAM-04 (stamina regen), SKL-07 and SKL-18 (adrenaline gain from hits, Razor Focus, Adrenaline Burst in both trees), SKL-11 and the Sign skills (Sign intensity), SKL-13 and ALCH (potion duration, maximum toxicity, the bomb bonus removed), EFX (effect resistances), XP-04 (no gear experience bonus left once TRPH removes the trophies'), ECON (bonus gold, the trophies' prices, PE11), LOOT-06 (crowns in containers), UI-05 to UI-07 (the panel's bonus gold line, the trophy tooltip, the rows and names), FIX-03 (`FixQuestItems`), `item_layer.py` and `gen_item.py` (the two item tags).
+- **Shared with WGT:** `base_trophy_stats`' weight and the crown's `EncumbranceOff` are WGT's; the weight nodes inside the two Hearts of Stone abilities are written by `gen_trph.py` (PT3), so WGT's generators skip the two names. The Wight trophy's +20 maximum weight meets legacy's weights.
+- **Shared with OPT:** the Noonwraith trophy's +5 Vitality regen in and out of combat is scaled by legacy's Vitality regen options (`W3Effect_AutoVitalityRegen`).
 
 ### Save impact
 
@@ -334,44 +262,26 @@ None expected: the trophies' abilities are given to Geralt by name and read from
 
 ### Area decisions
 
-**Decided by the owner (2026-11-02): every recommendation**, the code's values: DT1 Grave hag +10% adrenaline gain, DT2 Ekimmara +10% crit chance, DT3 Wild Hunt hound +50% frost resistance. Porter's calls PT1 to PT9 confirmed. Formerly waiting for the owner. Each is a contradiction between legacy's code and its changelist (the rule: the code is the better guide, and every contradiction goes to the owner, [feature-mapping.md](../feature-mapping.md#legacy-behaviour-first)); legacy's design sheet `trophies.ods` agrees with the changelist on all three, the code's tooltip shows the code's value in play.
+**Decided by the owner (2026-11-02), as recommended:** the code's values. Each is a contradiction between legacy's code and its changelist (the rule: the code is the better guide, and every contradiction goes to the owner, [feature-mapping.md](../feature-mapping.md#legacy-behaviour-first)); legacy's design sheet `trophies.ods` agrees with the changelist on all three, the code's tooltip shows the code's value in play.
 
-| # | Question | Options | Recommendation | Decision |
-|---|---|---|---|---|
-| DT1 | The Grave hag trophy's adrenaline gain (TRPH-01). Code `focus_gain` +0.1: +10% adrenaline from each hit (0.1 × 1.1 = 0.11 adrenaline per hit instead of 0.1); changelist and design sheet "+5%". For scale: Adrenaline Burst gives +5%, Razor Focus +25% at its top level | (a) the code's +10%; (b) the changelist's +5% | **(a)**: legacy as played (the tooltip showed +10%); a level 10 trophy, small either way. Not a deviation | — |
-| DT2 | The Ekimmara trophy's crit chance (TRPH-01). Code +10%; changelist and design sheet "+15%". The Chort trophy (level 20) gives +25% crit damage, the Ekimmara trophy (level 22) crit chance | (a) the code's +10%; (b) the changelist's +15% | **(a)**: legacy as played; crit chance is the scarcer stat in Ghost Mode's damage model, +10% already a large step. Not a deviation | — |
-| DT3 | The Wild Hunt hound trophy's frost resistance (TRPH-01). Code +50%; the changelist's trophy list and the design sheet "+25%", but its Wild Hunt section says "monster hunt trophy (+50% resistance to frost)" against the Hunt's frost damage (AI-15) | (a) the code's +50%; (b) +25% | **(a)**: the code and the changelist's own Wild Hunt line agree; the value was likely raised with the Hunt's frost damage. It also halves the frost slowdown on Geralt (EFX-05). Not a deviation | — |
+| # | Question | Decision |
+|---|---|---|
+| DT1 | The Grave hag trophy's adrenaline gain (TRPH-01). Code `focus_gain` +0.1: +10% adrenaline from each hit (0.11 per hit instead of 0.1); changelist and design sheet "+5%". For scale: Adrenaline Burst gives +5%, Razor Focus +25% at its top level | The code's +10%: legacy as played (the tooltip showed +10%); a level 10 trophy, small either way. Not a deviation |
+| DT2 | The Ekimmara trophy's crit chance (TRPH-01). Code +10%; changelist and design sheet "+15%". The Chort trophy (level 20) gives +25% crit damage, the Ekimmara trophy (level 22) crit chance | The code's +10%: legacy as played; crit chance is the scarcer stat in Ghost Mode's damage model. Not a deviation |
+| DT3 | The Wild Hunt hound trophy's frost resistance (TRPH-01). Code +50%; the changelist's trophy list and the design sheet "+25%", but its Wild Hunt section says "monster hunt trophy (+50% resistance to frost)" against the Hunt's frost damage (AI-15) | The code's +50%: the code and the changelist's own Wild Hunt line agree. It also halves the frost slowdown on Geralt (EFX-05). Not a deviation |
 
 ### Porter's calls
 
-Each follows legacy or has no play effect; waiting for the owner's confirmation.
+Each follows legacy or has no play effect; confirmed by the owner (2026-11-02).
 
 | # | Call |
 |---|---|
-| PT1 | TRPH is ported as one area with one audit at the end, 90 units, in the slices of the [port order](#port-order) |
-| PT2 | The trophy abilities go whole from legacy with `on_conflict="replace"` (they drop 1.32's nodes, so `extend` cannot express them; Hearts of Stone's need `replace` anyway), written by a new `tools/gen_trph.py` into `gm_trph.xml` in the DLC's `items/` and `items_plus/` (abilities defined with items load from the `items` folders, as `gm_ench.xml` and `gm_xbow.xml`), with `--check` and `--verify` (every trophy ability and the two items' tags as the game reads them, Ghost Mode's entry over 5.x's, against legacy's, the weight nodes left to WGT); NG+ from legacy's `items_plus` files (equal to the regular ones); the four unused abilities emptied as legacy (no item names them; it keeps `--verify` simple) |
-| PT3 | The weight inside the two Hearts of Stone abilities is written by `gen_trph.py` as legacy's (the abilities are given whole; the parent's ownership rule of 2026-11-02, WGT's generators skip the names), and `base_trophy_stats` and the crown's `EncumbranceOff` stay WGT's; not a deviation |
+| PT1 | TRPH is ported as one area (90 units) with one audit at the end |
+| PT2 | The trophy abilities go whole from legacy with `on_conflict="replace"` (they drop 1.32's nodes, so `extend` cannot express them; Hearts of Stone's need `replace` anyway), written by `tools/gen_trph.py` into `gm_trph.xml` in the DLC's `items/` and `items_plus/` (abilities defined with items load from the `items` folders, as `gm_ench.xml` and `gm_xbow.xml`), with `--check` and `--verify`; NG+ from legacy's `items_plus` files (equal to the regular ones); the four unused abilities emptied as legacy (no item names them) |
+| PT3 | The weight inside the two Hearts of Stone abilities is written by `gen_trph.py` as legacy's (the abilities are given whole; WGT's generators skip the names), and `base_trophy_stats` and the crown's `EncumbranceOff` stay WGT's; not a deviation |
 | PT4 | The two item tags as legacy: the Camerlengo's Seal and NG+'s Wyvern trophy (`mq1051`) lose `Quest` (the Seal can be sold for 250 and dropped); through `item_layer.py` as a TRPH field, written as a short `extend` entry with `<tags>-Quest</tags>` for the Seal's regular entry (a Blood and Wine item, tags only: the allowed form) and whole for the NG+ entries |
 | PT5 | Hearts of Stone's two gold trophies take legacy's code values, +35% and +50% bonus gold, although the changelist does not list them (an omission, the code is the guide) |
 | PT6 | The Umbra trophy (+100% herbs) and Blood and Wine's Griffin trophy (+5% attack power) take the bonus of the ability they share with Grottore's and the prologue griffin's trophies, as legacy's code does, although the changelist does not list them |
-| PT7 | TRPH-04 as legacy: `@replaceMethod`s of `W3ActorRemains.OnItemTaken` and `FinalizeLooting` (5.x's bodies, the trophy lines removed and marked), and of `ProcessMonsterHuntTrophyQuest` with an empty body, which also drops 5.x's teleport of Roach next to Geralt (in legacy's code; not in the changelist); the replacement of a latent quest function is declared without `latent` ([development.md](../development.md)); whether `@replaceMethod` takes a `quest function` is the slice's first compile check (fallback: a wrapper that does not call the original) |
+| PT7 | TRPH-04 as legacy: `@replaceMethod`s of `W3ActorRemains.OnItemTaken` and `FinalizeLooting` (5.x's bodies, the trophy lines removed and marked), and of `ProcessMonsterHuntTrophyQuest` with an empty body, which also drops 5.x's teleport of Roach next to Geralt (in legacy's code; not in the changelist); the replacement of a latent quest function is declared without `latent` ([development.md](../development.md)) |
 | PT8 | The game's own trophy texts stay 5.x's, including 5.x's new common description "Strap trophies to your saddle to receive a bonus." (1.32's "Trophies can be turned in for a reward."): legacy changed no trophy string, and 5.x's text describes legacy's trophies better; not a deviation (a vanilla text, as ECON kept 5.x's haggling tutorial) |
-| PT9 | No code for the bonuses themselves: 5.x's horse manager gives a trophy's abilities to Geralt as 1.32's did, and every bonus attribute is read by code the port already has (DMG, STAM-04, SKL-07, SKL-13, ALCH, EFX, ECON's containers, the herb plants); slice T1 checks each kind of bonus reaches its reader |
-
-### Port order
-
-Each slice compiles and is verified on its own in both trees (no trophy names a skill, but the adrenaline gain, potion duration and Sign intensity bonuses add to skills' bonuses that differ by tree: the regression in both trees, and those three checked with the skills equipped in each). One audit after the last (PT1).
-
-| # | Slice | Verified by |
-|---|---|---|
-| T1 | **Base-game trophies** (TRPH-01, DT1 to DT3): `tools/gen_trph.py` (`--check`, `--verify`) with the base game's abilities and NG+'s Wyvern trophy; a data test of every base-game trophy ability against legacy's | The data test; trophies equipped on Roach by script through the horse manager (`MoveItemToHorse`, `EquipItem`) and Geralt's attributes read before, with and after (unequipped): attack power (Griffin), crit chance (Ekimmara), adrenaline gain from a scripted hit (Grave hag: 0.11 a hit), stamina regen (Wyvern `mq1051`), maximum toxicity (Arachas), frost resistance (hound), Vitality (Cave troll), armor piercing and resistance reduction through DMG's formula (Earth elemental, Leshen), potion duration of a drunk potion (Water hag), bonus gold in a spawned container with 100 crowns (Doppler: 125); a scripted kill with a monster trophy on Roach gives no experience bonus (XP-04); a trophy's tooltip read by script and seen on screen (UI-06's open check) |
-| T2 | **Expansion trophies** (TRPH-02, TRPH-03): the Blood and Wine and Hearts of Stone abilities, the Seal's tag (`item_layer.py`, `gen_item.py`) | The data test extended; equipped by script: Golyat (bludgeoning resistance), Wight (maximum weight +20), Grottore (a herb plant near Geralt gives one more of each herb), Silver basilisk (stamina regen), the crown and the Conserved shaelmaar trophy (bonus gold 135 and 150 from 100 crowns; Hearts of Stone's abilities read their values after `replace`); the Seal sellable and droppable (its tags read, the shop's sale check) |
-| T3 | **No auto-equipping** (TRPH-04): `trph/looting.ws` | A spawned corpse container holding a trophy, its loot taken by script (`TakeAllItems`, the loot window's close, `FinalizeLooting`): the trophy in the inventory, Roach's slot unchanged; the same with 5.x's "Auto-loot" on; `ProcessMonsterHuntTrophyQuest` called by script: nothing equipped, Roach not moved. Open for play: a contract trophy taken through its scene (needs a save at a contract) |
-
-**Generator work:** `tools/gen_trph.py` (new; T1 and T2, in `gen_all.py`'s order after `gen_xbow`): legacy's trophy abilities whole, `replace`, both folders, **legacy's weight nodes included** (the two Hearts of Stone abilities: WGT skips them), the data test, `--check`, `--verify`; `item_layer.py`'s TRPH lines (`PORTED`, `AREAS`, `TAGS`: the `Quest` tag removal on the two items, written by `gen_item.py`).
-
-**Later:** none so far.
-
-## For the shared docs
-
-Moved into the shared docs at integration (2026-11-02).
+| PT9 | No code for the bonuses themselves: 5.x's horse manager gives a trophy's abilities to Geralt as 1.32's did, and every bonus attribute is read by code the port already has (DMG, STAM-04, SKL-07, SKL-13, ALCH, EFX, ECON's containers, the herb plants) |

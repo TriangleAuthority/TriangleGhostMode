@@ -2570,6 +2570,7 @@ exec function gmtest_regress()
 	GMTest_horse();	// HORSE (parallel ports: its checks go into tests/gmTestsHorse.ws)
 	GMTest_data();	// whole-port data checks (tests/gmTestsData.ws)
 	GMTest_stam10();	// STAM-10: exhaustion, paying from max stamina (tests/gmTestsStam10.ws); in the classic tree that it is off
+	GMTest_classic_tree();	// the classic tree as legacy's: tree as drawn, Rend and Whirl, new-tree skills and rules off (tests/gmTestsClassic.ws); new tree: skipped
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

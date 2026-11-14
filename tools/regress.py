@@ -32,7 +32,6 @@ sys.path.insert(0, str(TOOLS))
 import game_lock  # noqa: E402
 from paths import documents_dir  # noqa: E402
 
-TEST_SAVE = "<save name>"
 TO_NEW = ["autoconfigset(GMGameplayOptions, GMClassicSkillTree, false)", "gmreset()"]
 TO_CLASSIC = ["autoconfigset(GMGameplayOptions, GMClassicSkillTree, true)"]
 FLAKES = (re.compile(r"^AI-18 a stone"), re.compile(r"^AI-10 (hit and defend counters|counters' window)"))
@@ -157,7 +156,8 @@ def main():
     ap.add_argument("--holder", help="AREA:TOKEN of the game slot (tools/game_lock.py)")
     ap.add_argument("--parent", action="store_true", help="the parent only: no lock check (logged by the lock)")
     ap.add_argument("--trees", choices=("both", "classic", "new"), default="both")
-    ap.add_argument("--save", default=TEST_SAVE, help=f"the save to load (default: the test save, {TEST_SAVE})")
+    ap.add_argument("--save", default="test", help="the save to load: test (default, the configured test save), slot "
+                                                   "or an allowed save's full name (docs/game-automation.md#test-saves)")
     ap.add_argument("--wait", type=int, default=6000, help="exec --wait for gmtest_regress() (default 6000 ms)")
     ap.add_argument("--no-retry", action="store_true", help="no second run when only a known flake failed")
     a = ap.parse_args()

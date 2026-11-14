@@ -13,7 +13,7 @@
 //   autostatus()                 what the game is doing right now
 //   autosaves()                  list the 10 newest saves; autosaves(50) for more
 //   autoload()                   load the newest save (what Continue does)
-//   autoload("<file name>")      load a specific save, e.g. "<save name>" (any case)
+//   autoload("<file name>")      load a specific save, by its file name without .sav (any case)
 //   autoresume()                 close the open menu (pause menu, inventory, intro video, ...), if any
 //   autoquit()                   exit the game (what Exit in the menu does, without asking)
 //   autonewgame()                from the main menu: start a new game (tutorial messages off), as the menu does

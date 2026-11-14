@@ -56,7 +56,7 @@ It installs nothing outside the game folder, but it leaves data in two places at
 - **`Documents\The Witcher 3\user.settings`**: the game stores options menu values here, including Ghost Mode's 38 settings (groups such as `GMGameplayOptions` and `GMScalingOptions`). On first run `gm_generic/gm_options.ws` writes Ghost Mode's defaults there via `GetInGameConfigWrapper().SetVarValue`.
 - **Save games**: Ghost Mode's facts, saved script variables, skill and character-development state, and item stats are stored in saves. That is why the release docs require the `cleardevelop` console command when starting from a vanilla save or after uninstalling, and warn that crafted items keep their modded stats.
 
-It does not change `input.settings`: every input action its scripts use already exists in vanilla, so it needs no new key bindings. *Unverified for the port*: how 5.x stores options menu values, and how custom menus like `modSignsConfig.xml` interact with 5.x's built-in mod menu (`gui/menus/modMenu.ws`).
+It does not change `input.settings`: every input action its scripts use already exists in vanilla, so it needs no new key bindings. On 5.x the options are stored in `dx12user.settings` and the port's menu sits under Options → Mods ([development.md](development.md#options-menu)).
 
 ## Effect on the vanilla baselines
 

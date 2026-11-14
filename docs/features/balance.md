@@ -9,7 +9,7 @@ How the port keeps Ghost Mode's **player-power economy** while it ports and re-b
 | [../skill-trees/](../skill-trees/) | The full trees at max level: [legacy](../skill-trees/legacy-skill-tree.html), [5.x](../skill-trees/5x-skill-trees.html); the SKL decisions side by side in [skl-decisions.md](../skill-trees/skl-decisions.md) |
 | [skl.md](skl.md), `mut.md`, `alch.md` | The feature entries: what each skill, mutation, potion does and how it is ported |
 
-Detailed notes (investigations, per-decision reasoning, verification) go into Mnemosyne with the tags `TriangleGhostMode`, `balance` and the feature ID.
+Detailed notes (investigations, per-decision reasoning, verification) go into working notes outside the repository, tagged `balance` and the feature ID.
 
 ## Rules
 
@@ -36,19 +36,13 @@ Set by the project owner (the separation and the classic tree 2026-10-05; the ne
 2. **The classic tree becomes legacy Ghost Mode's tree**, ported directly: legacy's skills, values, maximum levels (mostly 5), layout and descriptions. It is the faithful Ghost Mode and the default tree (D46).
 3. **The new tree carries legacy's skills on 3 levels.** Each new-tree skill is its legacy counterpart under legacy's name, with legacy's max-level total at level 3 (a third per level), gated by legacy's tiers scaled ×3/5 (B10); 5.x's new-only skills and perks give their slots to the legacy skills and perks that had none (SKL's D58, D60, D61). General perks (D49): every general perk with a legacy counterpart is legacy's perk in both trees: 1 point, 1 level, legacy's effect and full value; the only general perks without a legacy counterpart are the redesigned Wolf School and Viper School (D61), also 1 point and 1 level. A few parts are new designs by the project owner, not deviations from legacy: Muscle Memory, Precise Blows, Strength Training, Crushing Blows, Cold Blood carrying Steady Shot's damage, Wolf School, the 3 levels with scaled tier points, and the skill-point income rule for the XP area ([list](skl.md#new-designs)). The new tree does not affect the classic tree.
 
-**How (from the code, unverified; research 2026-10-05).** Every skill stays one definition, with a per-tree *profile* applied at runtime:
+**How.** Every skill stays one definition, with a per-tree *profile* applied at runtime:
 - **Definition fields.** A Ghost Mode definitions block (`GMClassicSkills`) holds legacy's fields (max level, tier points, position, string keys, no new-tree prerequisites). Applied over the skill table when the classic tree is active, it also clears the shared flag so tier points gate the skill.
 - **Values.** In the classic tree, the 28 formerly shared skills read their values from Ghost Mode abilities `GM_C_<skill>`, through wrappers of `SkillEnumToName` and `SkillNameToEnum`. The new tree keeps the vanilla ability names, with Ghost Mode's values.
 - **Switching trees** is not a normal workflow (project owner, 2026-10-05). It goes through Ghost Mode's character reset (D44, below), then the other profile applies.
-- **Tier gates in the new tree** (B10, SKL's D59): the block `GMNewTreeSkills` holds the scaled tier points and a tier layout, the profile clears 5.x's prerequisites, and wrappers of `CanLearnSkill` and `IsSkillUnlockedByDependency` gate by tier (5.x checks `requiredPointsSpent` only for classic-only skills). Verified 2026-10-16 ([SKL-02](skl.md#skl-02-skill-tree-option) slice 3).
+- **Tier gates in the new tree** (B10, SKL's D59): the block `GMNewTreeSkills` holds the scaled tier points and a tier layout, the profile clears 5.x's prerequisites, and wrappers of `CanLearnSkill` and `IsSkillUnlockedByDependency` gate by tier (5.x checks `requiredPointsSpent` only for classic-only skills).
 
-There are no new skill enum values and no native changes. As a side effect, this fixes 5.x's classic tree, where some shared skills are locked behind new-tree prerequisites the classic menu does not show (Razor Focus, and through it Rend). The first slice proves it with Rend and Whirl:
-- the profile is found and applied;
-- five levels can be bought;
-- the menu draws five level pips (verified in the new menu, which shows the classic tree, [SKL-02](skl.md#skl-02-skill-tree-option));
-- the `GM_C_` value is read;
-- everything survives a reload;
-- switching back restores the new tree's Rend (3 levels) with points refunded.
+There are no new skill enum values and no native changes. As a side effect, this fixes 5.x's classic tree, where some shared skills are locked behind new-tree prerequisites the classic menu does not show (Razor Focus, and through it Rend). Verified in game with [SKL-02](skl.md#skl-02-skill-tree-option): with Rend and Whirl, the profile applies, five levels can be bought and the menu draws five pips, the `GM_C_` value is read, everything survives a reload, and switching back restores the new tree's Rend (3 levels) with points refunded; the new tree's tier gates hold.
 
 **Character reset** (D44, project owner, 2026-10-05). A safe console command that resets Geralt's development so it can be rebuilt at the same level under whatever rules are now in force: a tree switch, a changed skill or progression rule, another mod added mid-game, a test. It is part of the mod, not test-only. By default it:
 - refunds every skill point, including those not from level-ups (places of power and the like);
@@ -61,7 +55,7 @@ Legacy has the base for it: `Debug_ClearCharacterDevelopment` was rebuilt into a
 **What it means for SKL** (the per-skill pass is complete, 2026-10-11; [skl.md](skl.md#area-decisions)):
 - The classic tree's port is legacy's numbers.
 - The new tree's port is legacy's numbers at a third per level on legacy's tiers, plus the new designs above. Every skill and perk was decided one by one, against the ledger and these rules.
-- Order: DMG came first (the damage and armor formula decides what every bonus is worth; signed off 2026-10-07); then (1) the character reset and the separation slice; (2) the trees branch by branch, the classic skill as legacy with its new-tree counterpart; the new tree's levels and tier points are revisited with XP's skill-point income (D59). SKL was signed off 2026-10-17.
+- The new tree's levels and tier points are revisited with XP's skill-point income (D59). SKL was signed off 2026-10-17.
 
 **Decided** (project owner, 2026-10-05): the classic tree uses legacy's tier points (8/20/28–30; Signs 6/18/28), and it is the default tree (D46). The new tree uses the same tiers scaled to its 3 levels (B10, 2026-10-09).
 
@@ -102,7 +96,7 @@ The builds legacy supports and that must stay viable (B8). Cornerstones are list
 
 ## Mutations
 
-Blood and Wine's late-game progression: research with skill points and mutagens, one active mutation, and extra skill slots. Mapped as the MUT area ([mut.md](mut.md)); what each mutation scales and costs is in the [ledger](ledger/mutations.md), and the mutations at base stats in both tree files. Ghost Mode's cornerstones: Magic Sensibilities (Signs), Bloodbath (sword), Euphoria (alchemy); Adrenaline Rush, Mutated Skin, Deadly Counter and Life Leech run on adrenaline. The mutations are legacy Ghost Mode's in both trees, research costs included (legacy's 29 skill points; MUT's DM1, project owner, 2026-10-11; [how](mut.md#mutations-in-two-trees)). They ported after SKL; MUT was signed off 2026-10-17.
+Blood and Wine's late-game progression: research with skill points and mutagens, one active mutation, and extra skill slots. Mapped as the MUT area ([mut.md](mut.md)); what each mutation scales and costs is in the [ledger](ledger/mutations.md), and the mutations at base stats in both tree files. Ghost Mode's cornerstones: Magic Sensibilities (Signs), Bloodbath (sword), Euphoria (alchemy); Adrenaline Rush, Mutated Skin, Deadly Counter and Life Leech run on adrenaline. The mutations are legacy Ghost Mode's in both trees, research costs included (legacy's 29 skill points; MUT's DM1, project owner, 2026-10-11; [how](mut.md#mutations-in-two-trees)). MUT was signed off 2026-10-17.
 
 ## How a balance-relevant change is made
 
@@ -113,7 +107,7 @@ For every skill, perk, mutation, potion or gear decision, before it is proposed:
 3. **Archetypes.** Which archetypes and synergies does it touch, and are they still viable (B8)?
 4. **Replaced effects.** Does it restore or lose something legacy replaced (B4)?
 5. **Signs and perks.** Extra scrutiny (B6, B7).
-6. **Record.** The decision in the feature entry with the rules it applies, any deviation as a deviation, the ledger and the archetype table updated, and a Mnemosyne note with the reasoning.
+6. **Record.** The decision in the feature entry with the rules it applies, any deviation as a deviation, the ledger and the archetype table updated, and a working note with the reasoning.
 
 ## Open questions
 

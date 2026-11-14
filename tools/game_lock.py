@@ -13,6 +13,8 @@ docs/game-automation.md#the-game-slot.
     python tools/game_lock.py pause [--why TEXT]              no new grants; the holder's game commands refused (the owner, the parent)
     python tools/game_lock.py resume                          grants again
     python tools/game_lock.py config [--claim-deadline S] [--lease S]   show or set the timings
+    python tools/game_lock.py config [--test-save NAME] [--slot-save NAME] [--allow-save NAME] [--disallow-save NAME]
+                                                              the saves game.py may load (per machine)
     python tools/game_lock.py preempt --parent [--why TEXT]   quit the game, end the holder's turn, revoke its token
     python tools/game_lock.py reclaim --parent [--force]      the same, for a slot whose lease expired
     python tools/game_lock.py watch [--interval S]            exit 4 with an ALERT line on anything the parent must see
@@ -60,7 +62,10 @@ import paths  # noqa: E402
 
 TEST_ENV = "TGM_LOCK_SELFTEST_ROOT"
 SETTINGS = ("dx12user.settings", "input.settings", "profile.settings", "mods.settings")
-DEFAULTS = {"claim_deadline_s": 300, "lease_s": 1200, "stale_s": 600, "poll_s": 2.0}
+DEFAULTS = {"claim_deadline_s": 300, "lease_s": 1200, "stale_s": 600, "poll_s": 2.0,
+            # The saves game.py run/load accept (docs/game-automation.md#test-saves): save file names differ
+            # on every machine, so they live here, not in the repository. `test` and `slot` are aliases.
+            "test_save": "", "slot_save": "", "other_saves": []}
 WHO = re.compile(r"^[A-Za-z0-9_.-]{1,40}$")
 # exit codes
 OK, ERROR, NOT_YET, STOPPED, ALERT = 0, 1, 2, 3, 4
@@ -172,6 +177,20 @@ def write_json(path: Path, data) -> None:
         except PermissionError:
             time.sleep(0.1)
     os.replace(tmp, path)
+
+
+def allowed_saves(env: "Env | None" = None) -> dict:
+    """The saves game.py may load, from config.json: {'test': name, 'slot': name, <name>: name, ...}."""
+    cfg = load_config(env or Env())
+    out = {}
+    for alias, key in (("test", "test_save"), ("slot", "slot_save")):
+        if cfg.get(key):
+            out[alias] = cfg[key]
+    for name in cfg.get("other_saves") or []:
+        out[name] = name
+    for name in list(out.values()):
+        out.setdefault(name, name)
+    return out
 
 
 def load_config(env: Env) -> dict:
@@ -580,13 +599,25 @@ def cmd_config(a) -> int:
     env = Env()
     with Session(env) as s:
         changed = False
-        for key, val in (("claim_deadline_s", a.claim_deadline), ("lease_s", a.lease)):
+        for key, val in (("claim_deadline_s", a.claim_deadline), ("lease_s", a.lease),
+                         ("test_save", a.test_save), ("slot_save", a.slot_save)):
             if val is not None:
                 s.cfg[key] = val
                 changed = True
+        other = list(s.cfg.get("other_saves") or [])
+        for name in a.allow_save or []:
+            if name not in other:
+                other.append(name)
+                changed = True
+        for name in a.disallow_save or []:
+            if name in other:
+                other.remove(name)
+                changed = True
+        s.cfg["other_saves"] = other
         if changed:
             write_json(env.configfile, s.cfg)
-            event(env, s.st, "config", **{k: s.cfg[k] for k in ("claim_deadline_s", "lease_s")})
+            event(env, s.st, "config", **{k: s.cfg.get(k) for k in ("claim_deadline_s", "lease_s", "test_save",
+                                                                       "slot_save", "other_saves")})
         print(json.dumps(s.cfg, indent=1))
     return OK
 
@@ -716,6 +747,10 @@ def main() -> int:
     p = sub.add_parser("resume"); p.set_defaults(fn=cmd_resume)
     p = sub.add_parser("config"); p.set_defaults(fn=cmd_config)
     p.add_argument("--claim-deadline", type=float); p.add_argument("--lease", type=float)
+    p.add_argument("--test-save", help="the test save's file name, without .sav (game.py run test)")
+    p.add_argument("--slot-save", help="the test-only slot's file name (game.py run slot)")
+    p.add_argument("--allow-save", action="append", help="another save game.py may load, by full name (repeatable)")
+    p.add_argument("--disallow-save", action="append", help="take a save off that list (repeatable)")
     for name, fn in (("preempt", cmd_preempt), ("reclaim", cmd_reclaim)):
         p = sub.add_parser(name); p.set_defaults(fn=fn)
         p.add_argument("--parent", action="store_true"); p.add_argument("--why", default="")

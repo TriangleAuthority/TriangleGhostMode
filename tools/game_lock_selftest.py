@@ -21,7 +21,7 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
 PY = sys.executable
-SAVES = ("<save name>", "<save name>")
+SAVES = ("ManualSave_test_1", "ManualSave_slot_1")  # set as the test save and the test-only slot in the fake config
 
 
 class T:
@@ -74,7 +74,8 @@ def setup(root: Path) -> T:
         (saves / f"{n}.sav").write_bytes(n.encode() * 10)
     (t.docs / "scriptslog.txt").write_text("[GMTest] PASS fake\n", encoding="utf-8")
     t.state.mkdir()
-    (t.state / "config.json").write_text(json.dumps({"claim_deadline_s": 3, "lease_s": 4, "stale_s": 2, "poll_s": 0.2}),
+    (t.state / "config.json").write_text(json.dumps({"claim_deadline_s": 3, "lease_s": 4, "stale_s": 2, "poll_s": 0.2,
+                                                       "test_save": SAVES[0], "slot_save": SAVES[1]}),
                                          encoding="utf-8")
     fake = root / "fakebuild" / "modGhostMode"
     fake.mkdir(parents=True)
@@ -121,11 +122,13 @@ def scenario(t: T) -> None:
     t.expect(["exec", "gmtest_x()", "--holder", "A:00000000"], 1, r"refused: A does not hold", "game.py exec refused with a wrong token", tool="game.py")
     t.expect(["exec", "gmtest_x()", "--holder", f"B:{ta}"], 1, r"refused: B does not hold", "game.py exec refused for a queued agent", tool="game.py")
     t.expect(["run", "--holder", f"A:{ta}"], 1, r"refused: name the save", "game.py run refused without a save name", tool="game.py")
-    t.expect(["run", "<save name>", "--holder", f"A:{ta}"], 1, r"not an allowed test save",
+    t.expect(["run", "ManualSave_owner_1", "--holder", f"A:{ta}"], 1, r"not an allowed test save",
              "game.py run refused for a save off the allow-list", tool="game.py")
     t.expect(["exec", 'autoload("x")', "--holder", f"A:{ta}"], 1, r"loads or saves", "game.py exec refuses a load behind the allow-list", tool="game.py")
     t.expect(["run", SAVES[0], "--holder", f"A:{ta}"], 0, r"selftest: gate passed for game.py run", "game.py run passes with A's token", tool="game.py")
     t.expect(["load", SAVES[1].lower(), "--holder", f"A:{ta}"], 0, r"gate passed", "game.py load takes the test-only slot by full name", tool="game.py")
+    t.expect(["run", "test", "--holder", f"A:{ta}"], 0, r"gate passed", "game.py run takes the alias test", tool="game.py")
+    t.expect(["load", "slot", "--holder", f"A:{ta}"], 0, r"gate passed", "game.py load takes the alias slot", tool="game.py")
     fake = str(t.root / "fakebuild")
     t.expect(["--install-from", fake], 1, r"refused: .*--holder", "build_mod.py --install-from refused without --holder", tool="build_mod.py")
     t.expect(["--install-from", fake, "--holder", f"A:{ta}"], 0, r"gate passed for build_mod.py install",

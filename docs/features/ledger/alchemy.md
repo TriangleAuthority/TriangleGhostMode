@@ -1,7 +1,7 @@
 # Ledger: potions, decoctions, toxicity (legacy vanilla 1.32 | legacy Ghost Mode 4.1 | vanilla 5.x)
 
 **Status of everything in this file: from data/code, not tested in game.** Sources: `git show` of
-`4f7041e5` (legacy vanilla 1.32), `legacy-GM`, `vanilla-5.x` for `gameplay/items/def_item_alchemy_potion.xml`,
+`vanilla-1.32` (legacy vanilla 1.32), `legacy-GM`, `vanilla-5.x` for `gameplay/items/def_item_alchemy_potion.xml`,
 `def_item_alchemy_mutagens.xml`, `abilities/effects_potions.xml`, `effects_mutagens.xml`, `effects.xml`,
 `geralt_skills.xml`, `def_loot_shops.xml`, `def_loot_containers.xml`, `def_loot_monsters.xml`,
 `def_item_alchemy_recipes_*.xml`; scripts under `effects/effects/potion/`, `effects/effects/mutagens/`,
@@ -45,7 +45,7 @@ Columns: tox = toxicity, dur = duration (s), ch = charges T1/T2/T3. Where all ti
 **Note A (GM durations):** the GM XML (what the game reads) gives Thunderbolt/Petri/Maribor 30/60/90 s and Swallow 30 s;
 the changelist says 60/120/180 and 60. The other potions match the changelist exactly. No GM script doubles these durations
 (`CalculatePotionDuration` only adds `potion_duration`). Either the changelist describes an older version or assumes
-Prolonged Effects (+100%). Flag for the owner before porting values.
+Prolonged Effects (+100%). Resolved: the port uses the code's durations; the changelist's values are those with Prolonged Effects maxed (ALCH's DL3, owner, 2026-10-20).
 
 **Potion-wide mechanics**
 - Legacy vanilla: drinking the same potion again replaces it. Passive `alchemy_potionduration` +5% potion and decoction duration per Alchemy point spent.

@@ -1,6 +1,6 @@
 # Ledger: gear: legacy vanilla 1.32, legacy Ghost Mode, vanilla 5.x
 
-**Status: from data/code, not tested in game.** Every number below was read from the XML definitions and scripts on the three refs: `4f7041e5` (vanilla 1.32), `legacy-GM` (Ghost Mode 4.1) and `vanilla-5.x`. For 5.x the item and set-bonus texts were decoded from the installed game's `content0/en.w3strings`. Where the GM changelist (`docs/legacy-FullChangelist.txt`) disagrees with GM's data, the data value is given and the mismatch flagged. Unless noted, the NG+ copies (`*_plus`) are ignored.
+**Status: from data/code, not tested in game.** Every number below was read from the XML definitions and scripts on the three refs: `vanilla-1.32`, `legacy-GM` (Ghost Mode 4.1) and `vanilla-5.x`. For 5.x the item and set-bonus texts were decoded from the installed game's `content0/en.w3strings`. Where the GM changelist (`docs/legacy-FullChangelist.txt`) disagrees with GM's data, the data value is given and the mismatch flagged. Unless noted, the NG+ copies (`*_plus`) are ignored.
 
 Abbreviations: **AP** attack power, **SI** sign intensity, **adr** adrenaline (`BCS_Focus`), **pc** piece(s), **GM-4** a 4-piece generic set, **3/6** minor/major set bonus thresholds (3 and 6 pieces in all three versions; GM's Kaer Morhen set has 4 pieces).
 
@@ -143,7 +143,7 @@ Note: the task brief and `docs/features/deviations.md` call these Blood and Wine
 | Usurpation (Glyphword 10) | Axii transfers on death | **Replaced:** each puppet gives +25% AP and SI (max 4 stacks) | as 1.32 | AP, SI |
 | Beguilement (Glyphword 14) | Axii +2 s per hit | **Replaced:** each confused enemy gives +25% crit chance and crit damage (max 4) | as 1.32 | crit |
 
-Elation, Rejuvenation and Prolongation were strongly buffed in 5.x (×4 to ×10 adr, ×4 stamina, ×2 potion time). The port takes legacy's numbers and mechanics for all six words 5.x raised (the owner's DE2, [ENCH](../ench.md#area-decisions), 2026-10-19). 5.x also added the dying enemy's weapon damage ×5 to Eruption's (Glyphword 20) explosion, which the port still has ([ENCH audit](../ench.md#ench-audit-2026-10-19) F2).
+Elation, Rejuvenation and Prolongation were strongly buffed in 5.x (×4 to ×10 adr, ×4 stamina, ×2 potion time). The port takes legacy's numbers and mechanics for all six words 5.x raised (the owner's DE2, [ENCH](../ench.md#area-decisions), 2026-10-19). 5.x also added the dying enemy's weapon damage ×5 to Eruption's (Glyphword 20) explosion, which the port still has ([ENCH](../ench.md) F2).
 
 ## 6. Trophies (worn on the horse; the abilities apply to Geralt)
 

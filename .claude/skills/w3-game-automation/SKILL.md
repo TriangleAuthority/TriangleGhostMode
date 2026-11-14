@@ -7,7 +7,7 @@ description: Drive The Witcher 3 (5.x) for this project without a human at the k
 
 Drive the game with `tools/game.py`. Normal runs need no key presses and no screenshots. Full reference, findings and failure notes: [docs/game-automation.md](../../../docs/game-automation.md). Read it before changing the toolset or when something below fails.
 
-**The game is one shared slot** ([The game slot](../../../docs/game-automation.md#the-game-slot)): several agents may port areas at once. Hold the slot before anything that changes the game, and run every game command from the main checkout's `tools/` (`TriangleGhostMode\tools`, the only copy with rw3d_cli). An area agent follows [Working in parallel](../../../docs/development.md#working-in-parallel).
+**The game is one shared slot** ([The game slot](../../../docs/game-automation.md#the-game-slot)): several agents may port areas at once. Hold the slot before anything that changes the game, and run every game command from the main checkout's `tools/` (the only copy with rw3d_cli). An area agent follows [Working in parallel](../../../docs/development.md#working-in-parallel).
 
 ## Before a run
 
@@ -20,11 +20,12 @@ Drive the game with `tools/game.py`. Normal runs need no key presses and no scre
    - `tools/rw3d/rw3d_cli.exe` exists (git-ignored; the parent downloads it: `gh release download v0.8.0 -R SpontanCombust/rusty_witcher_debugger -p "*windows-msvc.zip" -D tools/rw3d`, with the user's OK).
    - `modAutomation` is installed in `<game>\mods\` (the parent's: `build_mod.py --scripts tools/automation/scripts --name modAutomation --out build/automation --install --enable --parent`). `game.py start` stops with this hint when it is missing.
    - Steam is running.
+   - The test saves are configured on this machine (`python tools/game_lock.py config` shows `test_save` and `slot_save`; set them with `--test-save NAME --slot-save NAME`, see [Test saves](../../../docs/game-automation.md#test-saves)). `game.py run` refuses with this hint when they are missing.
 
 ## The loop
 
 ```bash
-python tools/game.py run <save name> --holder AREA:TOKEN   # launch, load the test save, lock saving (~25 s)
+python tools/game.py run test --holder AREA:TOKEN   # launch, load the test save, lock saving (~25 s)
 python tools/game.py exec "myfunc()" "other(1, 2)" --holder AREA:TOKEN           # run exec functions; prints their LogChannel output
 python tools/game.py status                   # ingame=, paused=, menu=, loadingvideo=, scene=
 python tools/game.py log -n 40                # last script log lines (Documents\The Witcher 3\scriptslog.txt)
@@ -39,7 +40,7 @@ Other commands: `start` (to the main menu only), `load SAVE`, `resume` (close th
 
 ## Test save and character setup
 
-- Load the test save by name: `python tools/game.py run <save name> --holder AREA:TOKEN` (White Orchard, level 1, starting gear). `run` and `load` take only it and the test-only slot `<save name>`, by full name, and lock saving after each load (`gmtest_nosave()`).
+- Load the test save: `python tools/game.py run test --holder AREA:TOKEN` (White Orchard, level 1, starting gear). `run` and `load` take `test`, `slot` (the test-only slot) or another save allowed in the lock's config, and lock saving after each load (`gmtest_nosave()`).
 - Build the character and situation a test needs with vanilla exec functions after loading: `setlevel(10)`, `addskillpoints(20)`, `skilleq(S_Sword_s01)`, `additem('<item name>', 1, true)`, `spawn(wolf, 2, 6, true)`, `killall()`, ... The verified list, with argument forms and pitfalls, is in [docs/game-automation.md](../../../docs/game-automation.md#setting-up-geralt-and-the-world).
 - Vanilla debug functions (`logskills()`, `printinv()`, ...) log nothing in the release build. Read state with `modAutomation`'s probes: `autoplayer()`, `autoskills()`, `autoinv()`, `autobuffs()`, `autoattr('<attribute>')`, `autoactors()`.
 - Never use `god()` in stamina tests: it also turns on infinite stamina. Do use it in casting tests in a fight: hits interrupt casts.

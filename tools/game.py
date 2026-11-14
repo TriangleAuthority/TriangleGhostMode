@@ -5,7 +5,7 @@ rw3d_cli (tools/rw3d) and the script log, so normal runs need no key presses or
 screenshots. See docs/game-automation.md.
 
 Usage:
-    python tools/game.py run SAVE --holder AREA:TOKEN       start, load SAVE and wait until playable
+    python tools/game.py run test --holder AREA:TOKEN       start, load the test save and wait until playable
     python tools/game.py start --holder AREA:TOKEN          launch and wait for the main menu
     python tools/game.py load SAVE --holder AREA:TOKEN      load SAVE (file name without .sav)
     python tools/game.py exec "CMD" ... --holder AREA:TOKEN run exec functions, print their output
@@ -17,8 +17,10 @@ Usage:
 
 The game is one shared slot (tools/game_lock.py, docs/game-automation.md#the-game-slot): run, start,
 load, exec and resume need --holder AREA:TOKEN from the lock's grant (the parent's --parent skips
-the check, for emergencies; it is logged). SAVE must be one of the allowed test saves
-(ALLOWED_SAVES, by full name); every load locks saving for the session with gmtest_nosave().
+the check, for emergencies; it is logged). SAVE is `test` (the test save), `slot` (the test-only slot)
+or another allowed save by full name. Save names differ per machine, so they are set in the lock's
+config, not here: `python tools/game_lock.py config --test-save NAME --slot-save NAME [--allow-save NAME]`
+(docs/game-automation.md#test-saves). Every load locks saving for the session with gmtest_nosave().
 `start` refuses a modGhostMode build the holder did not install this turn (build_mod.py --install-from).
 
 Exit code 0 on success, 1 on a timeout, error or refusal (the last script log lines are printed),
@@ -48,10 +50,6 @@ TAG = "[Automation] "
 EXEC_WAIT_MS = 500
 STARTUP_SCREENS = ("StartupMoviesMenu", "RecapMoviesMenu", "StartupExperienceMenu")
 GATED = ("run", "start", "load", "exec", "resume")
-# The saves run and load accept, by full name: the test save and the test-only slot (docs/game-automation.md#test-saves).
-# The owner's playthrough save, loaded read-only (saving locked) with the owner's OK of 2026-11-06 to reproduce bugs.
-ALLOWED_SAVES = ("<save name>", "<save name>", "<save name>",
-                 "<save name>")  # a new game's first checkpoint (new tree, build 1090142), kept as a test save by the owner, 2026-11-07
 # Exec calls that load or save behind the allow-list's back (the parent passes --parent for its own saves).
 DENIED_EXEC = (r"\bautoload\s*\(", r"savegame", r"\bgmtest_diff04_lsave_save\b", r"\bgmtest_diff04_save_mk\b",
                r"\bgmtest_xp08_vit_b\s*\(\s*true", r"\bgmtest_arm09_mksave\b")
@@ -336,7 +334,7 @@ def main() -> None:
             p.add_argument("--holder", help="AREA:TOKEN from python tools/game_lock.py request/wait")
             p.add_argument("--parent", action="store_true", help="the parent only: skip the lock check (logged)")
         if extra == "save":
-            p.add_argument("save", nargs="?", default="", help="one of the allowed saves: " + ", ".join(ALLOWED_SAVES))
+            p.add_argument("save", nargs="?", default="", help="test, slot or another allowed save by full name")
             p.add_argument("--allow-saves", action="store_true", help="with --parent: do not lock saving")
         elif extra == "cmds":
             p.add_argument("cmds", nargs="+", help='exec calls, e.g. "gmpilot()"')
@@ -364,10 +362,16 @@ def precheck(args) -> None:
         say(f"refused: {msg}")
         sys.exit(1)
     if args.command in ("run", "load"):
+        allowed = {k.lower(): v for k, v in game_lock.allowed_saves().items()}
+        if not allowed:
+            refuse("no test saves configured on this machine: python tools/game_lock.py config --test-save NAME "
+                   "[--slot-save NAME] (docs/game-automation.md#test-saves)")
+        names = " or ".join(sorted(set(allowed.values())))
         if not args.save:
-            refuse("name the save (the newest save is never loaded): " + " or ".join(ALLOWED_SAVES))
-        if args.save.lower() not in (s.lower() for s in ALLOWED_SAVES):
-            refuse(f"{args.save} is not an allowed test save: " + " or ".join(ALLOWED_SAVES))
+            refuse("name the save (the newest save is never loaded): test, slot or " + names)
+        if args.save.lower() not in allowed:
+            refuse(f"{args.save} is not an allowed test save: test, slot or " + names)
+        args.save = allowed[args.save.lower()]
         if args.allow_saves and not args.parent:
             refuse("--allow-saves is for the parent (--parent)")
     if args.command == "exec" and not args.parent:

@@ -45,7 +45,9 @@ Because the mod sits on top of the full vanilla set, `modGhostMode/` on `legacy-
   ```
 
   Then regenerate (`tools/gen_all.py --worktree .`), rebuild, and run the regression in both trees.
-- **When the new vanilla commit sits on its own branch** until the owner fast-forwards `vanilla-5.x` (as for build 1090142): the tools read `vanilla-5.x` by name, so they still see the previous release. Build with `build_mod.py --base <the vanilla branch>` (without it the build stops: the ref then changes vanilla scripts), and run the generators and checks from a throwaway local clone whose `vanilla-5.x` points at the new commit (`git clone --shared --no-checkout <main checkout> <dir>`, then local `vanilla-5.x`, `vanilla-1.32` and `legacy-GM` branches, then check out the port branch), with `--worktree` at the port's worktree. Do not move the real `vanilla-5.x` for it.
+- **When the new vanilla commit sits on its own branch** until the owner fast-forwards `vanilla-5.x`: the tools read `vanilla-5.x` by name, so they still see the previous release. Build with `build_mod.py --base <the vanilla branch>` (without it the build stops: the ref then changes vanilla scripts), and run the generators and checks from a throwaway local clone whose `vanilla-5.x` points at the new commit (`git clone --shared --no-checkout <main checkout> <dir>`, then local `vanilla-5.x`, `vanilla-1.32` and `legacy-GM` branches, then check out the port branch), with `--worktree` at the port's worktree. Do not move the real `vanilla-5.x` for it.
+
+## Encodings and line endings
 
 | Tree | Scripts | XML | CSV |
 |---|---|---|---|
