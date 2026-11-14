@@ -275,6 +275,7 @@ Unanswered questions about scripts (struct fields, state overrides) are tracked 
 ### Other mods and vanilla code
 
 - Never wrap or replace a method just to read a value: add a getter with `@addMethod` instead.
+- **Sibling ports must combine with Ghost Mode as separate blobs, in any folder order** (TrianglePreparations, TriangleFriendlyMeditation): a method Ghost Mode replaces must not be changed by them, and the reverse (rules in [How the game loads mod scripts](#how-the-game-loads-mod-scripts)). Planned Ghost Mode refactors for Preparations (proposed 2026-11-13, not done; TrianglePreparations `docs/ghost-mode-compatibility.md`): `CInventoryComponent.SingletonItemGetMaxAmmo` from a replacement to a wrapper that adds the bomb bonus as a difference; `CR4CharacterDupeMenu.OnSwapSkill` from a replacement to a wrapper (colour gate before `wrappedMethod`, the slot emptying in a wrapper of `EquipSkill` during the swap); STAM-10's exhaustion clear from the `MeditationRestoring` wrapper to a wrapper of `ApplyWitcherHouseBuffs`. Before adding a `@replaceMethod` on a method in meditation, alchemy refill, oils, food, repair kits or skill equipping, check those repos' compatibility docs.
 - Legacy Ghost Mode code calls helpers from Shared Imports and Community Patch – Base. Shared Imports is built into 5.x; check whether a Community Patch helper exists in 5.x before porting code that uses it. See [legacy-ghost-mode.md](legacy-ghost-mode.md#dependencies).
 
 ## XML and CSV
