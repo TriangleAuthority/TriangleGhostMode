@@ -8,10 +8,8 @@ vanilla-1.32:  Legacy vanilla files (1.32) ── tournament entities           
                  ├── legacy-GM:    SI ── CPB ── Ghost Mode 4.1                 the original mod
                  │
                  └── vanilla-5.x:  Vanilla files (5.0) ── 5.0 hotfix ── build 26238013 ── ...   CDPR's updates
-                       │
-                       └── master: the port ── ... ┬── tools, docs           the port, with the project's tools and docs
-                                                    │
-                       (tools and docs history) ───┘
+                                                     │                  │
+                                    master:          └── setup ── pilot ── one commit per area ── ... ┴── later milestones
 ```
 
 | Branch | Contents |
@@ -19,7 +17,7 @@ vanilla-1.32:  Legacy vanilla files (1.32) ── tournament entities           
 | `vanilla-1.32` | The root commit with the unmodified legacy (1.32, Steam build 3280809) game files at the mod's paths under `modGhostMode/`, plus the Blood and Wine tournament entities Ghost Mode edits. The baseline every other branch starts from. |
 | `legacy-GM` | `vanilla-1.32` plus the legacy mod, in three commits: its Shared Imports and Community Patch – Base dependencies, then Ghost Mode 4.1, the canonical legacy version (the Nexus release; the original repository's 77 commits by wghost are squashed into it, subjects listed in its message). They hold only the mod: `modGhostMode/`, `design-docs/` and `modGhostMode.w3modproj`. See [legacy-ghost-mode.md](legacy-ghost-mode.md). |
 | `vanilla-5.x` | `vanilla-1.32` plus the same game file set from the current 5.x release (now 5.0 Steam build 26238013, `witcher3.exe` 5.0.0.1090142), one commit per release. |
-| `master` | `vanilla-5.x` plus the Ghost Mode port, and the project's README, tools and docs (their history joins `master` in one merge). All work happens here or on short-lived branches off it. |
+| `master` | `vanilla-5.x` plus the Ghost Mode port, and the project's README, tools and docs. One commit per milestone (the project setup, the pilot, each area as the owner signed it off, the fix rounds, each move onto a new game release, later redesigns); a new game release enters through a merge of `vanilla-5.x`. Work happens on short-lived branches off it, squashed into one commit when merged. |
 
 `vanilla-1.32`, `legacy-GM` and `vanilla-5.x` hold game and mod data only: no tools or docs. Their one other file is a `.gitattributes` with `* text=auto`, so text is stored LF-normalized whatever the committer's `core.autocrlf` (see [Encodings and line endings](#encodings-and-line-endings)).
 
@@ -34,14 +32,13 @@ Because the mod sits on top of the full vanilla set, `modGhostMode/` on `legacy-
 
 - **`vanilla-1.32` and `legacy-GM` do not move.** They are the legacy reference.
 - **A new game release** (5.1, ...) is a new commit on `vanilla-5.x`: in a worktree of `vanilla-5.x`, re-extract the files with the main checkout's `tools/extract_vanilla.py` (see [below](#regenerating-the-baselines)) and commit them on top. `git diff <previous>..vanilla-5.x` then shows exactly what the patch changed.
-- **Then the port moves onto it, squashed.** The port is re-applied to the new release as one commit, then joined to the old history, so `master`'s first-parent history stays "vanilla releases, then the port" and `master` only moves forward (no force push, other worktrees keep working):
+- **Then the port moves onto it, through a merge.** Merge the new `vanilla-5.x` into a branch off `master`, resolve the conflicts by keeping the port's intent on the new vanilla file, and fast-forward `master`, so `git diff vanilla-5.x...master` still shows the port alone and `master` only moves forward:
 
   ```bash
-  git switch -c rebase-5.1 vanilla-5.x
-  git merge --squash master        # the port, tools and docs re-applied on the new release (base: the previous vanilla-5.x)
-  git commit -m "Ghost Mode port on 5.1 (squashed)"   # after resolving: keep the port's intent on the new vanilla file
-  git merge -s ours -m "Join the port's history before 5.1" master   # every earlier commit stays reachable; the tree is the squashed one
-  git switch master && git merge --ff-only rebase-5.1
+  git switch -c update-5.1 master
+  git merge vanilla-5.x -m "Move the port onto game build 5.1"
+  # resolve, then commit; then regenerate, rebuild and test (below) before:
+  git switch master && git merge --ff-only update-5.1
   ```
 
   Then regenerate (`tools/gen_all.py --worktree .`), rebuild, and run the regression in both trees.

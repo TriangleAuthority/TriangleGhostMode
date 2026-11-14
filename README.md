@@ -31,7 +31,7 @@ The git history is built so that every change is visible as a diff. Every branch
 - What CDPR changed in 5.x: `git diff vanilla-1.32...vanilla-5.x`
 - The port: `git diff vanilla-5.x...master -- modGhostMode`
 
-A new 5.x release lands on `vanilla-5.x` first; `master`'s port is then rebased onto it. See [docs/repository.md](docs/repository.md).
+A new 5.x release lands on `vanilla-5.x` first; `master`'s port is then moved onto it through a merge. See [docs/repository.md](docs/repository.md).
 
 `modGhostMode/` on `legacy-GM` and `master` contains the full vanilla file set with the mod's changes applied, so it is a reference tree, not a ready-to-install mod.
 
