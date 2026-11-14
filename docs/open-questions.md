@@ -21,7 +21,6 @@ How annotations from two blobs combine, and that a priority against the folder-n
 
 ## Install and testing
 
-- **Mods without a `mods.settings` entry.** The wiki says mods in `<game>\mods` are enabled by default; ours has always had an entry. Test by removing the entry once.
 
 ## Localization
 
