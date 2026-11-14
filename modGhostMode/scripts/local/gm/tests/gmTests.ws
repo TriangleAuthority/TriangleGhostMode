@@ -2572,6 +2572,7 @@ exec function gmtest_regress()
 	GMTest_stam10();	// STAM-10: exhaustion, paying from max stamina (tests/gmTestsStam10.ws); in the classic tree that it is off
 	GMTest_compat();	// forms that let sibling ports combine in any load order (tests/gmTestsCompat.ws)
 	GMTest_classic_tree();	// the classic tree as legacy's: tree as drawn, Rend and Whirl, new-tree skills and rules off (tests/gmTestsClassic.ws); new tree: skipped
+	GMTest_alch04_prepare();	// last: drinks the Swallow 1 (about 30 s) that gmtest_panel() checks (tests/gmTestsAlchPotions.ws)
 	LogChannel('GMTest', "SUMMARY regress: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
 }
 

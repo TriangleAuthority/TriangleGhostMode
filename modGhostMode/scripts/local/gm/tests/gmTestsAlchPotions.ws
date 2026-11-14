@@ -194,8 +194,20 @@ function GMTest_alch04()
 	witcher.ForceSetStat(BCS_Vitality, maxVit);
 	witcher.ForceSetStat(BCS_Toxicity, tox);
 
-	// Audit F1: Swallow 1 stays on; GMTest_alch04_after() (in gmtest_panel(), the regression's next call)
-	// drinks the next doses once it has run its updates.
+	// Audit F1: GMTest_alch04_prepare() drinks the Swallow 1 that GMTest_alch04_after() checks.
+	GMTest_alch04_prepare();
+}
+
+// Audit F1: Swallow 1 stays on; GMTest_alch04_after() (in gmtest_panel(), the regression's next call)
+// drinks the next doses once it has run its updates. Swallow 1 lasts about 30 s, so gmtest_regress()
+// calls this last (from GMTest_alch04, mid-run, it had worn off by the panel call).
+function GMTest_alch04_prepare()
+{
+	var witcher : W3PlayerWitcher;
+	var tox : float;
+
+	witcher = GetWitcherPlayer();
+	tox = witcher.GetStat(BCS_Toxicity, true);
 	witcher.RemoveAllBuffsOfType(EET_Swallow);
 	GMTestAlchDrink('Swallow 1');
 	witcher.ForceSetStat(BCS_Toxicity, tox);
