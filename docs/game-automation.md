@@ -352,7 +352,7 @@ Before the main menu the game shows a queue of screens (`CR4Game.PopulateMenuQue
 
 ### Two script blobs
 
-- **Verified:** two mods with a `precompiled.rsblob` each (`modAutomation` and `modGhostMode`) load together, both at priority 100: both mods' exec functions and wrappers work. They wrap different methods, so this does not yet show how wrappers of the *same* method chain (see [open-questions.md](open-questions.md#several-mods-with-script-blobs)).
+- **Verified:** two mods with a `precompiled.rsblob` each (`modAutomation` and `modGhostMode`) load together, both at priority 100: both mods' exec functions and wrappers work. How blobs that change the *same* method combine (2026-11-13: the first mod by folder name takes precedence) is in [development.md](development.md#how-the-game-loads-mod-scripts).
 
 ### Close
 

@@ -6,19 +6,13 @@ When a question is answered, move the answer into the doc it belongs to (usually
 
 ## Several mods with script blobs
 
-**How does the game merge the script blobs (`precompiled.rsblob`) of several mods?**
+How annotations from two blobs combine, and that a priority against the folder-name order crashed, is answered in [development.md](development.md#how-the-game-loads-mod-scripts). Still open:
 
-Each blob is compiled against the vanilla scripts only, so blobs are built without knowing about each other and the game must merge them at startup. What we have:
+- **Scope-based overrides of the same method in two blobs:** does the first mod win, as with `@replaceMethod`?
+- **Enum members added by two blobs:** distinct values, no error?
+- **The priority crash:** does every priority that contradicts the folder-name order crash, or only with clashing methods? (One case seen: two mods clashing on four methods.)
 
-- The executable names wrappers `%s@%s@wrapper%03d` and has a "maxWrapping index reached" error, so `@wrapMethod` wrappers from several mods most likely chain.
-- It reports "@replaceMethod duplicate found for '%s'"; unclear whether that is an error or last-one-wins between separate mods.
-- Mods may not give new enum members explicit values, which suggests the game numbers them at load time.
-- Two blob mods that wrap *different* methods load together and both work (`modAutomation` plus the pilot build, [game-automation.md](game-automation.md#two-script-blobs)).
-- The [mod.io guide](https://mod.io/g/the-witcher-3/r/what-does-the-remaster-mean-for-modding) states: when several mods' blobs change the same function or enum, the highest priority in `mods.settings` wins (default alphabetical: numbers, underscore, letters), and a blob's change beats loose scripts for the same function whatever the priority. Tested 2026-10-04 at equal priority: Ghost Mode's `@replaceMethod` of `W3PlayerWitcher.ReduceDamage` beat both a loose mod and another blob (`modGMMergeTestBlob`), silently. Still open: does a priority change flip it, and which end of the order wins; do wrappers from several blobs chain.
-
-**Why it matters:** if overrides are winner-take-all, any other mod overriding a function Ghost Mode overrides silently drops one of the two changes. That decides how strongly to prefer `@wrapMethod` over overrides, and what priority Ghost Mode should recommend. It also decides what "higher priority" means in `mods.settings` (lower or higher number).
-
-**How to answer:** two throwaway blob mods (`modGMTestA`, `modGMTestB`) that clash on purpose: both wrap the same method (do both run, in what order?), both override the same method in a scope block (which wins; does swapping their priorities flip it?), both add an enum member (distinct values, no error?). One build, two game launches (one per priority order); `tools/game.py` makes each launch a short scripted run.
+**How to answer:** throwaway blob mods built with `build_mod.py --scripts <folder> --name modPrbX`, installed with `--install-from build/<dir> --name modPrbX --enable`, read with an exec function; reinstall the installed Ghost Mode build from `build/` so `game.py` accepts the run. Remove the mods and their `mods.settings` entries afterwards.
 
 ## Scripts
 
