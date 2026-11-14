@@ -356,7 +356,7 @@ Before the main menu the game shows a queue of screens (`CR4Game.PopulateMenuQue
 
 ### ReShade
 
-The owner's install has ReShade (`bind_dx12\dxgi.dll`, with RenoDX and DLSS 5 add-ons). **Some launches crash during startup with it** (Crash Reporter about 10 to 15 s in, before the main menu; `ReShade.log` ends right after the DLSS add-on hooks `nvngx_dlss.dll`), and `game.py` then times out waiting for the main menu. Seen three times on 2026-11-13, with different mod sets that ran cleanly with ReShade off. With the owner's OK, disable it for a run by renaming `dxgi.dll` to `dxgi.dll.reshade-off`, and rename it back afterwards. A startup crash with ReShade installed is no evidence against the mods.
+The owner's install has ReShade (`bin\x64_dx12\dxgi.dll`, with RenoDX and DLSS 5 add-ons). **Some launches crash during startup with it** (Crash Reporter about 10 to 15 s in, before the main menu; `ReShade.log` ends right after the DLSS add-on hooks `nvngx_dlss.dll`), and `game.py` then times out waiting for the main menu. Seen three times on 2026-11-13, with different mod sets that ran cleanly with ReShade off. With the owner's OK, disable it for a run by renaming `dxgi.dll` to `dxgi.dll.reshade-off`, and rename it back afterwards. A startup crash with ReShade installed is no evidence against the mods.
 
 ### Close
 
