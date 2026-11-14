@@ -17,7 +17,7 @@ function GMTest_compat()
 // SingletonItemGetMaxAmmo is a wrapper adding the difference between Ghost Mode's and 5.x's bomb formula
 // (skills/heavyArtilleryTrickShot.ws). With no other mod wrapping it, a bomb's stack must equal Ghost Mode's
 // formula in every skill state (which holds only if the wrapper's copy of 5.x's formula matches 5.x's own),
-// and a potion's must be untouched by it. Efficiency at level 3 and, in the new tree, Heavy Artillery on perk_43
+// and a potion's must be untouched by it (Maribor Forest 1: no other test keeps it running; with Swallow 1, which ALCH-04 leaves running for gmtest_panel(), the running buff was gone). Efficiency at level 3 and, in the new tree, Heavy Artillery on perk_43
 // make the two formulas differ (classic: they agree, the wrapper adds 0). The test save has one unlocked slot:
 // up to three are unlocked as vanilla's skilleq does and locked again at the end if left empty.
 function GMTest_compat_maxammo()
@@ -42,14 +42,14 @@ function GMTest_compat_maxammo()
 	{
 		heavy = S_Perk_43; otherHeavy = S_Perk_20;
 	}
-	hadBomb = inv.GetItemQuantityByName('Dancing Star 1') > 0;
-	hadPotion = inv.GetItemQuantityByName('Swallow 1') > 0;
+	hadBomb = inv.GetItemsByName('Dancing Star 1').Size() > 0;
+	hadPotion = inv.GetItemsByName('Maribor Forest 1').Size() > 0;
 	bomb = inv.GetItemsByName('Dancing Star 1');
 	if(bomb.Size() == 0)
 		bomb = inv.AddAnItem('Dancing Star 1', 1);
-	potion = inv.GetItemsByName('Swallow 1');
+	potion = inv.GetItemsByName('Maribor Forest 1');
 	if(potion.Size() == 0)
-		potion = inv.AddAnItem('Swallow 1', 1);
+		potion = inv.AddAnItem('Maribor Forest 1', 1);
 
 	hadEff = GMTestAlchSkillOn(S_Alchemy_s08, false);
 	hadPyro = GMTestAlchSkillOn(S_Alchemy_s10, false);
@@ -75,7 +75,7 @@ function GMTest_compat_maxammo()
 	GMTestReport(w.CanUseSkill(S_Alchemy_s10), "compat: Pyrotechnics in use");
 	GMTestCompatBombAmmo(inv, bomb[0], "Efficiency, Heavy Artillery and Pyrotechnics");
 	GMTestReport(inv.SingletonItemGetMaxAmmo(potion[0]) == RoundMath(CalculateAttributeValue(inv.GetItemAttributeValue(potion[0], 'ammo'))),
-		"compat: Swallow 1's stack untouched by the bomb wrapper (" + inv.SingletonItemGetMaxAmmo(potion[0]) + ")");
+		"compat: Maribor Forest 1's stack untouched by the bomb wrapper (" + inv.SingletonItemGetMaxAmmo(potion[0]) + ")");
 
 	GMTestAlchSkillOn(S_Alchemy_s10, hadPyro);
 	GMTestAlchSkillOn(heavy, hadHeavy);
@@ -91,7 +91,7 @@ function GMTest_compat_maxammo()
 	if(!hadBomb)
 		inv.RemoveItemByName('Dancing Star 1', -1);
 	if(!hadPotion)
-		inv.RemoveItemByName('Swallow 1', -1);
+		inv.RemoveItemByName('Maribor Forest 1', -1);
 }
 
 function GMTestCompatBombAmmo(inv : CInventoryComponent, id : SItemUniqueId, situation : string)
