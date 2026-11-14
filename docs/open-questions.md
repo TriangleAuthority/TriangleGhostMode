@@ -6,11 +6,11 @@ When a question is answered, move the answer into the doc it belongs to (usually
 
 ## Several mods with script blobs
 
-How annotations from two blobs combine, and that a priority against the folder-name order crashed, is answered in [development.md](development.md#how-the-game-loads-mod-scripts). Still open:
+How annotations from two blobs combine, and how `mods.settings` priority reorders them, is answered in [development.md](development.md#how-the-game-loads-mod-scripts). Still open:
 
 - **Scope-based overrides of the same method in two blobs:** does the first mod win, as with `@replaceMethod`?
 - **Enum members added by two blobs:** distinct values, no error?
-- **The priority crash:** does every priority that contradicts the folder-name order crash, or only with clashing methods? (One case seen: two mods clashing on four methods.)
+- **Script Merger on Ghost Mode itself:** Ghost Mode uses scope-based overrides and enum extensions, which loose scripts cannot carry. What does Script Merger v3 make of a blob that has them (fail, drop them, or keep them somehow)?
 
 **How to answer:** throwaway blob mods built with `build_mod.py --scripts <folder> --name modPrbX`, installed with `--install-from build/<dir> --name modPrbX --enable`, read with an exec function; reinstall the installed Ghost Mode build from `build/` so `game.py` accepts the run. Remove the mods and their `mods.settings` entries afterwards.
 
