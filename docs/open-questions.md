@@ -10,7 +10,7 @@ How annotations from two blobs combine, and how `mods.settings` priority reorder
 
 - **Scope-based overrides of the same method in two blobs:** does the first mod win, as with `@replaceMethod`?
 - **Enum members added by two blobs:** distinct values, no error?
-- **Script Merger on Ghost Mode itself:** Ghost Mode uses scope-based overrides and enum extensions, which loose scripts cannot carry. What does Script Merger v3 make of a blob that has them (fail, drop them, or keep them somehow)?
+- **Script Merger and blob-only features:** what does Script Merger v3 make of a blob with scope-based overrides, enum extensions, an event added by `@addMethod` or a wrapped native function: a merged blob, loose scripts that silently lose them, or a refusal? Test with throwaway blobs that each use one, merged by the owner, read in game.
 
 **How to answer:** throwaway blob mods built with `build_mod.py --scripts <folder> --name modPrbX`, installed with `--install-from build/<dir> --name modPrbX --enable`, read with an exec function; reinstall the installed Ghost Mode build from `build/` so `game.py` accepts the run. Remove the mods and their `mods.settings` entries afterwards.
 
