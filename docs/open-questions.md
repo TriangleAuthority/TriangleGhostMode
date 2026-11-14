@@ -19,9 +19,6 @@ How annotations from two blobs combine, and that a priority against the folder-n
 - **Struct fields.** Can a blob add fields to a vanilla struct (re-declaring the struct, like a class)? Loose scripts reject it ("already exported and 'isMod' is false").
 - **State overrides in game.** A scope-based override of a state (`state CombatFists in W3PlayerWitcher extends Combat { ... }`) compiles; not yet run in game. Wrapping a state function is verified.
 
-## Install and testing
-
-
 ## Localization
 
 - **Languages without a mod table.** If Ghost Mode ships only some languages, what does the game show in the others: the English string, nothing, or a placeholder? Legacy Ghost Mode shipped br, cz, de, en, es, fr, it, pl and ru for its main table. Test by switching the game to a language the pilot has no table for.
