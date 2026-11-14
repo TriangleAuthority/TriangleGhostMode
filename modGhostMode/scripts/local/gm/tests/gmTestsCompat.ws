@@ -42,12 +42,12 @@ function GMTest_compat_maxammo()
 	{
 		heavy = S_Perk_43; otherHeavy = S_Perk_20;
 	}
-	hadBomb = inv.GetItemsByName('Dancing Star 1').Size() > 0;
-	hadPotion = inv.GetItemsByName('Maribor Forest 1').Size() > 0;
 	bomb = inv.GetItemsByName('Dancing Star 1');
+	hadBomb = bomb.Size() > 0;
 	if(bomb.Size() == 0)
 		bomb = inv.AddAnItem('Dancing Star 1', 1);
 	potion = inv.GetItemsByName('Maribor Forest 1');
+	hadPotion = potion.Size() > 0;
 	if(potion.Size() == 0)
 		potion = inv.AddAnItem('Maribor Forest 1', 1);
 
