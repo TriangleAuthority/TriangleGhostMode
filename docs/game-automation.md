@@ -313,6 +313,7 @@ If the game shows a black "Loading" screen after the save has loaded (`ready` lo
 
 - The inventory's stats view opens with `C` (`send_key.ps1 type c`); its rows do not react to the arrow keys or to a cursor moved by `SetCursorPos` (the game reads raw mouse input; `mouse_move.ps1` moves it). Check panel values from script instead: `GetPlayerStatsGFxData(menu.GetMenuFlashValueStorage())` with any menu open (e.g. `ingamemenu()`), reading the lines back with `GetMemberFlashArray` / `GetMemberFlashString` (`gmtest_panel`).
 - If another window covers the game, minimize it, then run `focus_game.ps1`.
+- **The meditation clock from a script:** `GetWitcherPlayer().Meditate()` sits Geralt down and opens the clock (`GetWitcherPlayer().clockMenu`); calling its `OnMeditate(hour)` starts the wait, but the clock's Flash then calls `OnStopMeditate` at once, which aborts 5.x's own wait too (2026-11-15, Friendly Meditation's slice 5). A test that chooses an hour this way swallows that one call in a wrapper of `CR4MeditationClockMenu.OnStopMeditate`; a real choice on the clock needs a person.
 
 ### Launch
 
