@@ -62,6 +62,10 @@ import paths  # noqa: E402
 
 TEST_ENV = "TGM_LOCK_SELFTEST_ROOT"
 SETTINGS = ("dx12user.settings", "input.settings", "profile.settings", "mods.settings")
+# The owner's ReShade (with RenoDX addons) can crash or hang the game at start; it is turned off for every turn:
+# the grant renames these files in <game>/bin/x64_dx12, the end of the turn puts them back.
+RESHADE = ("dxgi.dll",)
+RESHADE_OFF = ".gamelock-off"
 DEFAULTS = {"claim_deadline_s": 300, "lease_s": 1200, "stale_s": 600, "poll_s": 2.0,
             # The saves game.py run/load accept (docs/game-automation.md#test-saves): save file names differ
             # on every machine, so they live here, not in the repository. `test` and `slot` are aliases.
@@ -276,6 +280,41 @@ def backup_saves(env: Env) -> tuple[bool, str]:
     return r.returncode < 8, f"robocopy exit {r.returncode}"
 
 
+def reshade_dir(env: Env) -> Path | None:
+    if env.test:
+        return None
+    try:
+        return paths.game_dir() / "bin" / "x64_dx12"
+    except Exception:
+        return None
+
+
+def reshade_off(env: Env) -> str:
+    """Rename ReShade's files so the game starts without it. Returns a note for the event log."""
+    d = reshade_dir(env)
+    if not d:
+        return "no game folder"
+    done = []
+    for n in RESHADE:
+        if (d / n).exists() and not (d / (n + RESHADE_OFF)).exists():
+            (d / n).rename(d / (n + RESHADE_OFF))
+            done.append(n)
+    return f"ReShade off ({', '.join(done)})" if done else "no ReShade to turn off"
+
+
+def reshade_on(env: Env) -> str | None:
+    """Put back the files reshade_off renamed. Returns a report line, or None if nothing was off."""
+    d = reshade_dir(env)
+    if not d:
+        return None
+    done = []
+    for n in RESHADE:
+        if (d / (n + RESHADE_OFF)).exists() and not (d / n).exists():
+            (d / (n + RESHADE_OFF)).rename(d / n)
+            done.append(n)
+    return f"ReShade back on ({', '.join(done)})" if done else None
+
+
 def try_grant(env: Env, s: Session) -> None:
     st = s.st
     if st["holder"] or st["ending"] or not st["queue"]:
@@ -304,6 +343,10 @@ def try_grant(env: Env, s: Session) -> None:
             event(env, st, "blocked", reason=reason)
         return
     st["blocked"] = None
+    try:
+        info += "; " + reshade_off(env)
+    except OSError as e:
+        info += f"; ReShade not turned off ({e})"
     entry = st["queue"].pop(0)
     t = now()
     token = secrets.token_hex(4)
@@ -340,6 +383,12 @@ def end_turn(env: Env, st: dict, who: str, how: str) -> list[str]:
         if name not in missing:
             shutil.copy2(env.baseline / name, env.w3docs / name)
     report.append(f"settings restored from the baseline: {', '.join(n for n in SETTINGS if n not in missing)}")
+    try:
+        line = reshade_on(env)
+    except OSError as e:
+        line = f"WARNING: ReShade not put back ({e}): rename <game>/bin/x64_dx12/dxgi.dll{RESHADE_OFF} to dxgi.dll"
+    if line:
+        report.append(line)
     if env.scriptslog.exists():
         dst = env.logs / f"{who}-{datetime.datetime.now():%Y%m%d-%H%M%S}-scriptslog.txt"
         shutil.copy2(env.scriptslog, dst)
