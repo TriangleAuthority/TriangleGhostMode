@@ -319,7 +319,7 @@ If the game shows a black "Loading" screen after the save has loaded (`ready` lo
 - **Verified:** starting `bin\x64_dx12\witcher3.exe` directly (working directory `bin\x64_dx12`, Steam running) skips REDlauncher, and the process started is the game itself (no relaunch through Steam). Arguments pass straight through; no Steam launch-option change needed.
 - *Unverified alternative:* the Steam launch option `--launcher-skip` ([Steam guide](https://steamcommunity.com/sharedfiles/filedetails/?id=2902047062)), only needed when Steam must start the game.
 - Untested: launching while Steam is not running.
-- **Seen once** (2026-11-14, with Ghost Mode and a second blob mod installed): the game started but never opened the debug port (`game.py run`: "timed out after 60 s waiting for the debug port 37001"; the script log held only its header line). `game.py quit` (it had to kill the process) and `run` again loaded normally with the same install.
+- **Seen twice** (2026-11-14, both on the first start after installing a different build, with Ghost Mode and a second blob mod installed): the game started but never opened the debug port (`game.py run`: "timed out after 60 s waiting for the debug port 37001"; the script log held only its header line). `game.py quit` (it had to kill the process) and `run` again loaded normally with the same install.
 
 ### Startup screens
 
