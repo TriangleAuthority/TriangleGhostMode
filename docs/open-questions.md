@@ -15,6 +15,7 @@ How annotations from two blobs combine, and how `mods.settings` priority reorder
 ## Scripts
 
 - **Struct fields.** Can a blob add fields to a vanilla struct (re-declaring the struct, like a class)? Loose scripts reject it ("already exported and 'isMod' is false").
+- **Behaviour-tree difficulty checks (FIX-11).** `CBehTreeNodeConditionDifficultyCheck` is native: does `EDM_Hard` mean Hard only, or Hard and Death March? It decides on which difficulties the werewolf's `FullMoonOnSteroids` path (and its stacking, without FIX-11) runs. **How to answer:** FIX-11's in-game check on both difficulties ([fix.md](features/fix.md#fix-11-werewolf-regen-stacking)): which ability the howl adds.
 - **State overrides in game.** A scope-based override of a state (`state CombatFists in W3PlayerWitcher extends Combat { ... }`) compiles; not yet run in game. Wrapping a state function is verified.
 
 ## Localization

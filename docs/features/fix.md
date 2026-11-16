@@ -10,7 +10,7 @@ The vanilla bugs legacy Ghost Mode fixed that belong to no gameplay area: enemy 
 
 Unit lists: [attribution.csv](attribution.csv): **31 units carry a FIX feature**: the fix units, the 4 script units of fixes 5.x made itself (FIX-09), FIX-10's shared unit, and FIX beside other features on 10 shared rows (the 6 item entries, regular and NG+, of the feather, the monocle and the Hearts of Stone note; `ReactToBeingHit`, the two `OnSpawned` units, `OnProjectileCollision`). Every changelist fix line is traced [below](#every-bugfix-line-traced).
 
-Port status: **signed off** by the owner (2026-11-03): FIX-01 to FIX-08 ported and verified by script in both trees (FIX-08 offline); FIX-09 and FIX-10 are 5.x's own. The open checks per feature need a real fight, a quest save or a language switch.
+Port status: **signed off** by the owner (2026-11-03): FIX-01 to FIX-08 ported and verified by script in both trees (FIX-08 offline); FIX-09 and FIX-10 are 5.x's own. FIX-11 (werewolf regen stacking, a 5.x bug) is the port's own, applied 2026-11-16 and not yet run in game. The open checks per feature need a real fight, a quest save or a language switch.
 
 ## Scope
 
@@ -47,6 +47,7 @@ Port status: **signed off** by the owner (2026-11-03): FIX-01 to FIX-08 ported a
 | FIX-08 | Polish and Russian text fixes | The Polish table lacks the Meteorite plate's name; eight Russian texts misstate what an item does | The name and the eight corrections | 9 |
 | FIX-09 | Fixes 5.x made itself | — | Ciri invulnerable in her special attack, her cutscene sword, the siren finisher, the feather's quick slot | 6 (2 shared) |
 | FIX-10 | 5.x's one-time save fixes | 5.x: three one-time fixes run at the first load of a save (`ApplyPatchFixes`) | Legacy turned them off | 1 (shared) |
+| FIX-11 | Werewolf regen stacking (the port's own, a 5.x bug) | 5.x: on Hard, each werewolf howl that ends, even interrupted, adds another +60 regen; interrupted howls repeat | — (1.32 has no such path) | none (port-only) |
 
 ### What 5.x changed
 
@@ -57,6 +58,7 @@ Port status: **signed off** by the owner (2026-11-03): FIX-01 to FIX-08 ported a
 | FIX-09 | All four fixes, in 5.x's own code and data |
 | FIX-10 | The three one-time fixes are 5.x's own (1.32 has them too; legacy commented them out) |
 | FIX-02, FIX-04 to FIX-08 | None |
+| FIX-11 | The werewolf tree's Hard path and its `FullMoonOnSteroids` ability are new in 5.x, and stack without limit |
 
 ### Classification and action
 
@@ -72,6 +74,7 @@ Port status: **signed off** by the owner (2026-11-03): FIX-01 to FIX-08 ported a
 | FIX-08 | Strings | conflict (string ids) | By vanilla id and key (sweep B Q5) |
 | FIX-09 | Fixes in 5.x | in-5.x | Nothing to port (PK2) |
 | FIX-10 | One-time save fixes | in-5.x | Keep 5.x's (deviation) |
+| FIX-11 | Werewolf regen stacking | 5.x bug | The port's own fix (owner, 2026-11-16) |
 
 ---
 
@@ -356,6 +359,32 @@ Two wearables also lose `Quest` in the item data (Vivienne's feather, Thaler's w
 
 **Decisions:**
 - **Deviation:** 5.x's three one-time save fixes stay on, where legacy turned them off: kept for save safety, since they only repair a save's skill abilities once; no play difference is known, because Ghost Mode removes the branch passive bonuses at every load (SKL-01) and the other two only unequip and equip a skill again, which restores its bonuses (porter's call, confirmed by the owner, 2026-11-03).
+
+### FIX-11 Werewolf regen stacking
+
+| | |
+|---|---|
+| Kind | fix (the port's own: a 5.x bug, not in legacy) |
+| Pillars | — |
+| 5.x class | 5.x bug |
+| Flags | — |
+| Depends on | — |
+| Skill trees | n/a |
+| Port form | `fixes/werewolfFullMoon.ws`: `@wrapMethod(BTTaskAddRemoveAbility)` `OnDeactivate` (sets `allowMultiple` false for `FullMoonOnSteroids`); `@wrapMethod(CNewNPC)` `OnSpawned`, trimming saved stacks to one (`GMFixFullMoonStacks`) |
+| Port status | applied 2026-11-16 on the owner's word; compiles; not run in game |
+| Open checks | the in-game check below; which difficulties the tree's Hard check covers |
+| Save impact | a werewolf saved with several stacks keeps one at its next spawn |
+| NG+ counterpart | none |
+
+**What it does:** stops werewolves' health regeneration from stacking until they cannot be killed (reported by the owner in play, blocking quests).
+
+**The 5.x bug** (from `gameplay\trees\monsters\monster_werewolf_logic.w2behtree`, read with `tools/cr2w_dump.py`; not seen in game yet). Below 50% health a werewolf howls, changes form and summons wolves. The howl is open while it has `Summon` and `EssenceRegen` (not blocked by Moon Dust), stamina for a light special attack, lacks `FullMoon`, and has not finished a howl (`CBTTaskActivateOnlyOnce` with `successOnly`: an interrupted howl does not count). When the howl ends, finished or interrupted, the tree adds an ability: `FullMoon` (+30 essence regen, +0.25 attack power) with `allowMultiple` false on the normal path, or, behind `CBehTreeNodeConditionDifficultyCheck` `EDM_Hard`, `FullMoonOnSteroids` (+60, +0.30; `monster_base_abl.xml:142`) with `allowMultiple` unset, so the task's default (`btTaskAddRemoveAbility.ws`: `default allowMultiple = true`). The Hard path never adds `FullMoon`, so nothing closes the howl until one finishes: each howl cut short by a hit, stagger or knockdown adds another +60 regen per second, and nothing removes them (the Moon Dust branch removes only `FullMoon`). `FullMoonOnSteroids` is not in 1.32, and Blood and Wine's copy of the tree (`monster_bigbadwolf_logic`) has only the normal path. Ghost Mode changes neither the tree nor these scripts; its werewolf data makes it likelier (light special stamina cost 20, 5.x 40, so faster retries; larger health pools, so longer below 50%).
+
+**Decisions:** the port's own fix (owner, 2026-11-16: "Apply it"): one `FullMoonOnSteroids` at most, as the normal path's `FullMoon`. An interrupted howl on Hard still repeats (it now adds nothing), as 5.x's tree has it.
+
+**Slices:**
+
+1. **Fix and save trim.** Compiles (2026-11-16). Scripted check written, not run: `gmtest_fix11()` (stacks the ability three times on a werewolf test dummy, the trim leaves one; spawns the dummy on the first call). In-game check, not run: on Hard (`gmtest_diff_mode(EDM_Hard)`, then Death March), `gmtest_fix11_live()` spawns a live werewolf at 45% health; interrupt its howls (Aard, heavy attacks); `gmtest_fix11_read()` should show at most one `FullMoonOnSteroids` and essence regen not growing per howl (a build without the fix should show 1, 2, 3...).
 
 ---
 

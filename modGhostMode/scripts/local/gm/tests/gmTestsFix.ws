@@ -1051,3 +1051,71 @@ function GMTest_fix04()
 		+ " checkpoint(s) asked [1 and 1]");
 	GMTestReport(restoreCalls == 0, "FIX-04 journal changes without on-screen info raise no HUD update, so no checkpoint: " + restoreCalls + " call(s)");
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+// FIX-11: werewolf FullMoonOnSteroids stacks (fixes/werewolfFullMoon.ws).
+//   gmtest_fix11()       the load-time trim on the latest test dummy (spawns a werewolf first if there is none: run again)
+//   gmtest_fix11_live()  a live werewolf (not frozen) at 45% health, to howl; interrupt its howls, then
+//   gmtest_fix11_read()  its FullMoonOnSteroids count, essence regen, health and the difficulty
+
+exec function gmtest_fix11()
+{
+	thePlayer.GMTestCount(true, true);
+	GMTest_fix11();
+	LogChannel('GMTest', "SUMMARY fix11: " + thePlayer.gmTestPassed + " passed, " + thePlayer.gmTestFailed + " failed");
+}
+
+// FIX-11: three stacks added as the unfixed tree adds them; the trim leaves one and reports two removed.
+function GMTest_fix11()
+{
+	var npc : CNewNPC;
+	var before, removed, after, n0 : int;
+
+	npc = GMTestDummy();
+	if(!npc)
+	{
+		GMTestDummySpawn("werewolf");
+		LogChannel('GMTest', "INFO fix11: spawned a werewolf test dummy; run gmtest_fix11() again");
+		return;
+	}
+	n0 = npc.GetAbilityCount('FullMoonOnSteroids');
+	npc.RemoveAbilityAll('FullMoonOnSteroids');
+	npc.AddAbility('FullMoonOnSteroids', true);
+	npc.AddAbility('FullMoonOnSteroids', true);
+	npc.AddAbility('FullMoonOnSteroids', true);
+	before = npc.GetAbilityCount('FullMoonOnSteroids');
+	removed = npc.GMFixFullMoonStacks();
+	after = npc.GetAbilityCount('FullMoonOnSteroids');
+	npc.RemoveAbilityAll('FullMoonOnSteroids');
+	if(n0 > 0)
+		npc.AddAbility('FullMoonOnSteroids', true);
+	GMTestReport(before == 3 && removed == 2 && after == 1, "FIX-11 FullMoonOnSteroids stacked " + before + " times, trimmed at spawn: " + removed
+		+ " removed, " + after + " left [3, 2, 1; 5.x keeps every stack]");
+}
+
+exec function gmtest_fix11_live(optional level : int)
+{
+	var npc : CNewNPC;
+
+	npc = GMTestDummySpawn("werewolf", level, 8);
+	if(!npc)
+		return;
+	npc.SetAnimationSpeedMultiplier(1);
+	npc.ForceSetStat(BCS_Essence, npc.GetStatMax(BCS_Essence) * 0.45);
+	LogChannel('GMTest', "INFO fix11_live: werewolf spawned at 45% health, not frozen; difficulty " + theGame.GetDifficultyMode());
+}
+
+exec function gmtest_fix11_read()
+{
+	var npc : CNewNPC;
+
+	npc = GMTestDummy();
+	if(!npc)
+	{
+		LogChannel('GMTest', "FAIL fix11_read: no test dummy");
+		return;
+	}
+	LogChannel('GMTest', "INFO fix11_read: FullMoonOnSteroids " + npc.GetAbilityCount('FullMoonOnSteroids') + ", FullMoon " + npc.GetAbilityCount('FullMoon')
+		+ ", essenceRegen " + CalculateAttributeValue(npc.GetAttributeValue('essenceRegen')) + ", health " + npc.GetStat(BCS_Essence) + " / "
+		+ npc.GetStatMax(BCS_Essence) + ", difficulty " + theGame.GetDifficultyMode() + " [fixed: at most 1 FullMoonOnSteroids]");
+}
