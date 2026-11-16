@@ -2,7 +2,7 @@
 tell the skills apart from the skills that share 5.x's glows.
 
 - gm_mm_buff (Muscle Memory, SKL-03, sword_s22): a copy of fast_attack_buff, the blue glow Precise Blows and
-  the Feline set also show; green, 60,230,90 (owner's request, 2026-11-09).
+  the Feline set also show; 5.x's blue, 46,130,255 (owner's request, 2026-11-16; green 60,230,90 from 2026-11-09).
 - gm_st_buff (Strength Training, SKL-04, sword_s23): a copy of strong_attack_buff, the orange glow Crushing
   Blows also shows; yellow, 255,220,50 (owner's request, 2026-11-10).
 
@@ -62,7 +62,7 @@ GLOWS = [
     dict(opt="mm", skill="Muscle Memory", effect="gm_mm_buff", src_effect="fast_attack_buff",
          src_w2p=LYNX + "fast_attack_buff_fx.w2p", src_imtl=LYNX + "sword_fresnel_imtl.w2mi",
          w2p_color=(46, 130, 255), w2p_start=(100, 160, 255), lights=[(50, 100, 216), (52, 140, 216)],
-         default=(60, 230, 90)),    # green (owner's request, 2026-11-09)
+         default=(46, 130, 255)),   # 5.x's blue (owner's request, 2026-11-16; green before)
     dict(opt="st", skill="Strength Training", effect="gm_st_buff", src_effect="strong_attack_buff",
          src_w2p=LYNX + "strong_attack_buff_fx.w2p", src_imtl=SRC_STRONG_IMTL,
          w2p_color=(255, 130, 46), w2p_start=(255, 150, 100), lights=[(216, 51, 63), (216, 140, 52)],

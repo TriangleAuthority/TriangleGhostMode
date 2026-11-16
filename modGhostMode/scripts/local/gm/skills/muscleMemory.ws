@@ -6,9 +6,9 @@
 // (owner, 2026-11-09). Only basic attacks (attack_light, attack_heavy; fists included) get the boost and
 // count: counters, Whirl and Rend neither get it nor use it (owner, 2026-11-09). The first must come within
 // 6 s of the dodge, each further one within 6 s of the one before; every enemy a boosted swing hits gets it. All in the attack-power step (damage/formula.ws). The sword shows
-// Muscle Memory's own glow while it is armed: gm_mm_buff, a green copy of 5.x's fast_attack_buff (the blue
-// glow Precise Blows and the Feline set show) that the mod adds to the sword fx templates
-// (tools/gen_sword_glows.py; owner's request, 2026-11-09). Plus legacy's
+// Muscle Memory's own glow while it is armed: gm_mm_buff, a copy of 5.x's fast_attack_buff in its blue (the
+// glow Precise Blows and the Feline set show) that the mod adds to the sword fx templates, so stopping it
+// leaves theirs alone (tools/gen_sword_glows.py; owner's request, 2026-11-09; green until 2026-11-16). Plus legacy's
 // adrenaline gain for fast attacks, +5% per level (skills/muscleStrength.ws). Values (level 3) in
 // gm_skills.xml. 5.x's own count (CR4Player.DoAttack) finds no effect of its own and does nothing.
 // See docs/features/skl.md.
