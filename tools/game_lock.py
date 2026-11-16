@@ -25,6 +25,11 @@ State: %LOCALAPPDATA%\\TGM\\ (state.json, config.json, events.log, baseline\\, l
 OS file lock (msvcrt.locking on the permanent file `lock`; the OS frees it when a process dies) and
 written through a temporary file and os.replace.
 
+One slot per machine, whichever copy runs: every copy of this script (in another repository, a worktree, an older
+checkout) uses the same state folder and OS file lock, so copies cannot hand out the game twice. The state carries
+its format (STATE_FORMAT): a copy older than the state refuses to touch it and says to update it. Only one
+`watch` runs per machine (a second one exits at once).
+
 Not in use until a first grant: the slot exists for several agents sharing one game install. On a machine where no
 turn was ever granted (a fresh clone, one player), game.py and build_mod.py change the game without --holder, and
 say so; the first `request` that is granted turns the slot on for good (state.json `ever_granted`, or a grant in
@@ -213,6 +218,11 @@ def load_config(env: Env) -> dict:
     return cfg
 
 
+# The state file's format: raise it whenever a change to this script changes what the state's fields mean, so an
+# older copy of the script (another checkout or worktree) refuses the newer state instead of misreading it.
+STATE_FORMAT = 2
+
+
 def empty_state() -> dict:
     return {"holder": None, "queue": [], "paused": None, "ending": None, "revoked": {}, "blocked": None, "seq": 0}
 
@@ -246,6 +256,12 @@ class Session:
             self.cfg = load_config(self.env)
             self.st = load_state(self.env)
             self.before = json.dumps(self.st, sort_keys=True)
+            found = self.st.get("format", 1)
+            if found > STATE_FORMAT:
+                raise Refused(f"the game slot's state ({self.env.statefile}) has format {found}, written by a newer copy of "
+                              f"game_lock.py than this one ({TOOLS / 'game_lock.py'}, format {STATE_FORMAT}): run the newer "
+                              "copy, or update this checkout", STOPPED)
+            self.st["format"] = STATE_FORMAT
         except BaseException:
             self.lock.__exit__(None, None, None)
             raise
@@ -741,6 +757,14 @@ def cmd_reclaim(a) -> int:
 
 def cmd_watch(a) -> int:
     env = Env()
+    if not a.once:
+        # one watcher per machine, whichever copy of this script runs it: held until this process ends
+        watcher = FileLock(env.state / "watch.lock", timeout=0, what="the watcher slot")
+        try:
+            watcher.__enter__()
+        except Refused:
+            print("another `game_lock.py watch` already runs on this machine (from this or another checkout); not starting a second")
+            return ERROR
     with Session(env) as s:
         start = s.st["seq"]
     print(f"watching (every {a.interval:.0f} s) ...", flush=True)

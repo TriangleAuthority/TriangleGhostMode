@@ -253,6 +253,24 @@ def scenario(t: T) -> None:
     rc, out = finish(st_proc, 20)
     t.check(rc == 0 and "holder: none" in (out or ""), "after the helper is killed, the next process gets in", str(out))
 
+    # --- duplicates: one watcher per machine; an older copy refuses newer state -------------------
+    w1 = t.bg("watch", "--interval", "60")
+    time.sleep(2)
+    t.check(w1.poll() is None, "a watcher runs")
+    t.expect(["watch", "--interval", "60"], 1, r"already runs on this machine", "a second watcher exits at once")
+    t.expect(["watch", "--once"], 0, r".", "watch --once still runs beside it")
+    w1.kill()
+    w1.wait()
+    sf = t.state / "state.json"
+    saved_state = sf.read_text(encoding="utf-8")
+    st = json.loads(saved_state)
+    t.check(st.get("format") == 2, "the state carries its format", str(st.get("format")))
+    st["format"] = 99
+    sf.write_text(json.dumps(st), encoding="utf-8")
+    t.expect(["status"], 3, r"format 99, written by a newer copy", "a copy older than the state refuses it (exit 3)")
+    t.check(json.loads(sf.read_text(encoding="utf-8")).get("format") == 99, "and leaves it untouched")
+    sf.write_text(saved_state, encoding="utf-8")
+
     # --- concurrent requests: one queue entry each, state intact ------------------------------
     procs = [t.bg("request", "--who", f"P{i}", "--why", "race") for i in range(6)]
     for p in procs:

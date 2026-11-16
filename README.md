@@ -69,6 +69,7 @@ A new 5.x release lands on `vanilla-5.x` first; `master`'s port is then moved on
 See [docs/](docs/README.md), in particular:
 
 - [docs/features/](docs/features/README.md): where the port stands, and the feature map with every feature's legacy and 5.x behaviour, decisions and deviations; every difference from legacy Ghost Mode is listed in [docs/features/deviations.md](docs/features/deviations.md) (the classic tree) and [docs/features/deviations-new-tree.md](docs/features/deviations-new-tree.md) (the new-tree mode)
+- [docs/setup.md](docs/setup.md): setting up a new machine, from a fresh clone to building, testing in game by script and running AI agents in parallel
 - [docs/repository.md](docs/repository.md): branches, encodings, porting workflow
 - [docs/game-5.0-changes.md](docs/game-5.0-changes.md): what changed in 5.x that affects porting
 - [docs/5.x-file-status.md](docs/5.x-file-status.md): per-file status of every Ghost Mode file against 5.x (generated)
