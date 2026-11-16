@@ -77,3 +77,5 @@ See [docs/](docs/README.md), in particular:
 - [docs/legacy-readme.md](docs/legacy-readme.md): the original Ghost Mode README (legacy build and install instructions)
 
 `design-docs/` (on `legacy-GM`) holds Ghost Mode's original design documents (not very well structured, not 100% accurate, part English, part Russian).
+
+Working with an AI coding agent such as Claude Code: [CLAUDE.md.public](CLAUDE.md.public) holds this project's directions for it; copy it to `CLAUDE.md` to use them.

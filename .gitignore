@@ -6,7 +6,8 @@ tools/rw3d/
 # Python bytecode
 __pycache__/
 
-# Local agent instructions
+# Local agent instructions (CLAUDE.md.public is the shared part)
+CLAUDE.md
 CLAUDE.local.md
 
 # Claude Code: agent worktrees and per-user settings
