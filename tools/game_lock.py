@@ -62,7 +62,7 @@ import paths  # noqa: E402
 
 TEST_ENV = "TGM_LOCK_SELFTEST_ROOT"
 SETTINGS = ("dx12user.settings", "input.settings", "profile.settings", "mods.settings")
-# The owner's ReShade (with RenoDX addons) can crash or hang the game at start; it is turned off for every turn:
+# ReShade (here with RenoDX add-ons) can crash or hang the game at start; it is turned off for every turn:
 # the grant renames these files in <game>/bin/x64_dx12, the end of the turn puts them back.
 RESHADE = ("dxgi.dll",)
 RESHADE_OFF = ".gamelock-off"
