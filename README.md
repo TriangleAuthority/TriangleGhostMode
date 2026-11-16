@@ -1,20 +1,50 @@
-# Ghost Mode for The Witcher 3 — 5.0 port
+# Ghost Mode for The Witcher 3 — 5.x port
 
 Ghost Mode is a gameplay overhaul for The Witcher 3 by wghost. The last release, v4.0, targets the **legacy** game (patch 1.32) and does not work on current versions.
 
-This repository exists to port Ghost Mode to **game version 5.0** (the 2026 "Remastered" update). Version 5.0 changes a lot of what Ghost Mode touches: skills were reworked into a ranked tree with prerequisites, monster combat behaviour was reworked, and most scripts, XML files and binary resources changed. Some Ghost Mode features no longer made sense, and some already existed in the base game in another form.
+This repository exists to port Ghost Mode to **game version 5.x** (the 2026 "Remastered" update and its patches). 5.x changes a lot of what Ghost Mode touches: skills were reworked into a ranked tree with prerequisites, monster combat behaviour was reworked, and most scripts, XML files and binary resources changed. Some Ghost Mode features no longer made sense, and some already existed in the base game in another form.
 
-The goal is to carry over the spirit of Ghost Mode wherever possible. Port what is still compatible or still makes sense, adapt what needs adapting, and drop what 5.0 makes redundant, always following the original vision of the mod.
+The goal is to carry over the spirit of Ghost Mode wherever possible. Port what is still compatible or still makes sense, adapt what needs adapting, and drop what 5.x makes redundant, always following the original vision of the mod.
 
 **First version: legacy behaviour.** Legacy Ghost Mode was tested thoroughly for balance, so the first version of the port reproduces its behaviour, including its rules' limits and side effects, and does not improve on it without a good reason (for example a 5.x change that would otherwise break a rule's intent, or a bug that makes a feature not work). Improvements found along the way are recorded with the feature, for after the first version. See [docs/feature-mapping.md](docs/feature-mapping.md#legacy-behaviour-first).
 
-**Both skill trees.** 5.x keeps the classic skill tree (hidden setting) beside its new one. The port supports both: the classic tree for the most faithful Ghost Mode, the new tree with Ghost Mode's rules adapted to it. The classic tree is the default (Ghost Mode's own option). See [docs/feature-mapping.md](docs/feature-mapping.md#two-skill-trees).
+**The classic skill tree, plus an optional new-tree mode.** 5.x keeps the classic skill tree, behind a hidden setting, beside its new one. The port of Ghost Mode is played on the classic tree: legacy Ghost Mode's skills, values and rules. It is the default, set by Ghost Mode's own option "Classic skill tree". Turning that option off switches to 5.x's new tree, in a mode that is not part of the port: it is the maintainer's own modding on top of Ghost Mode, which carries Ghost Mode's skills and rules onto the new tree with some new designs. Legacy Ghost Mode had nothing like it, so its differences are listed apart ([docs/features/deviations-new-tree.md](docs/features/deviations-new-tree.md)). See [docs/feature-mapping.md](docs/feature-mapping.md#two-skill-trees).
 
 **New Game+: changes carried over and scaled, but not balanced or tested.** The port applies Ghost Mode's changes to the New Game+ data as well, scaling its numbers the way vanilla scales them from a normal game to NG+ (a reasonable effort, not a tuned NG+ experience). Only regular playthroughs are balanced and tested; NG+ is not tested at all, not even for crashes. Extending the port properly to NG+ is left to whoever wants to take it on after the port is done. See [docs/feature-mapping.md](docs/feature-mapping.md#new-game-carried-over-and-scaled-not-balanced-or-tested).
 
 **Installed at the start of a playthrough.** Adding Ghost Mode to a save, or removing it, in the middle of a playthrough is not supported. See [docs/feature-mapping.md](docs/feature-mapping.md#save-compatibility).
 
 **Status:** every area of Ghost Mode is ported and signed off; what is left (checks that need a playthrough, balance passes) is in [docs/features/README.md](docs/features/README.md#where-the-port-stands).
+
+## Installing
+
+Needs The Witcher 3 game version 5.x (PC). Legacy Ghost Mode's dependencies do not apply: 5.x contains what they provided.
+
+**Install it before starting a new game.** Adding Ghost Mode to a playthrough in progress, or removing it from one, is not supported (see above).
+
+1. **Get the mod folder** `modGhostMode`: from a release once there is one, or build it from this repository with `python tools/build_mod.py --ref master --out build/release --release` (needs Python 3 and REDkit's script compiler and packer, see [docs/tools.md](docs/tools.md)); the folder is then `build/release/modGhostMode`.
+2. **Copy the mod:** put the `modGhostMode` folder into `<game>\mods\` (create `mods` if there is none; `<game>` is the folder that holds `bin` and `content`). Its data changes and sounds come with it, in `content\`.
+3. **Copy the options menu:** copy `modGhostMode\bin\config\r4game\user_config_matrix\pc\modGhostMode.xml` into `<game>\bin\config\r4game\user_config_matrix\pc\`.
+4. Start a new game. The options are under **Options → Mods → Ghost Mode** and start at Ghost Mode's defaults. "Classic skill tree" (in the Gameplay group) chooses the tree; changing it takes effect with a character reset.
+
+## Using it with other mods (Script Merger)
+
+**With the Friendly Meditation, Preparations and Gwent Improvements ports: nothing to merge.** They are built to run side by side with Ghost Mode as separate mods, in the default folder order (tested in game with Ghost Mode's full regression run).
+
+**With other mods:** Script Merger merges *loose* scripts (`.ws` files) that two mods both edited. This port ships compiled scripts instead (`content\precompiled.rsblob`, built with 5.x's script annotations), which Script Merger cannot merge. Use it to find conflicts, not to fix Ghost Mode's:
+
+1. Install all your mods first, Ghost Mode included.
+2. Run Script Merger Remastered (the 5.x version of Script Merger, on Nexus Mods) and refresh the conflict list.
+3. Merge the conflicts it can merge between your *other* mods as usual.
+4. Conflicts that involve Ghost Mode are listed as "not mergeable": leave them unmerged. The game resolves them itself:
+   - Where two compiled mods replace the same function, the mod whose folder name sorts first wins. To change that, give the mod you want to win a lower `Priority` in `Documents\The Witcher 3\mods.settings` (a section `[modGhostMode]` with `Priority=50`, for example; the default is 100).
+   - Where a mod only adds code around a function, both mods' additions run.
+   - A loose-script mod that edits the same function as Ghost Mode loses to it, whatever its priority.
+5. Do **not** let Script Merger Remastered 3.x merge Ghost Mode's compiled scripts into a merged mod: in tests of that feature, compiled mods lost some of their changes.
+
+**Another compiled mod that adds its own effect types** (or other members of a game enum) breaks Ghost Mode's effects when both are installed: the game numbers the two mods' additions in load order, so one mod's numbers shift. `python tools/enum_sync.py apply` (from this repository) fixes the installed mods' compiled scripts so the numbers agree; run it again after installing, updating or removing such a mod. See [docs/tools.md](docs/tools.md).
+
+If two mods still clash in game, keep the one you prefer first in the load order, or do not combine them.
 
 ## How this repository is organised
 
@@ -39,9 +69,9 @@ A new 5.x release lands on `vanilla-5.x` first; `master`'s port is then moved on
 
 See [docs/](docs/README.md), in particular:
 
-- [docs/features/](docs/features/README.md): where the port stands, and the feature map with every feature's legacy and 5.x behaviour, decisions and deviations
+- [docs/features/](docs/features/README.md): where the port stands, and the feature map with every feature's legacy and 5.x behaviour, decisions and deviations; every difference from legacy Ghost Mode is listed in [docs/features/deviations.md](docs/features/deviations.md) (the classic tree) and [docs/features/deviations-new-tree.md](docs/features/deviations-new-tree.md) (the new-tree mode)
 - [docs/repository.md](docs/repository.md): branches, encodings, porting workflow
-- [docs/game-5.0-changes.md](docs/game-5.0-changes.md): what changed in 5.0 that affects porting
+- [docs/game-5.0-changes.md](docs/game-5.0-changes.md): what changed in 5.x that affects porting
 - [docs/5.x-file-status.md](docs/5.x-file-status.md): per-file status of every Ghost Mode file against 5.x (generated)
 - [docs/binary-files.md](docs/binary-files.md): what Ghost Mode's binary files (`.w2ent` and others) do and how to inspect them
 - [docs/tools.md](docs/tools.md): tools, where to find them and how to use them, and git setup (including the diff driver for binary files)
