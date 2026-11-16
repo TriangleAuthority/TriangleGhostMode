@@ -57,6 +57,8 @@ Each wcc_lite run takes a short OS file lock (wcc_lite writes shared REDkit file
 port 37000), so parallel builds wait their turn; the build runs at below-normal priority.
 
 See docs/development.md.
+
+Needs, not in this repository: REDkit (its wcc_lite; found by tools/paths.py through Steam or W3_REDKIT_DIR), to compile the scripts and pack files; the game install (5.x; found by tools/paths.py through Steam or W3_GAME_DIR), whose scripts the mod compiles against.
 """
 
 import argparse

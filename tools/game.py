@@ -25,6 +25,8 @@ config, not here: `python tools/game_lock.py config --test-save NAME --slot-save
 
 Exit code 0 on success, 1 on a timeout, error or refusal (the last script log lines are printed),
 3 when the lock refuses because the slot is paused or the holder's token was revoked.
+
+Needs, not in this repository: the game install (5.x; found by tools/paths.py through Steam or W3_GAME_DIR) and Steam running; rw3d_cli in tools/rw3d/ (downloaded, git-ignored: docs/game-automation.md); modAutomation installed (built from tools/automation); the test saves named in game_lock.py's config; the game slot's state in %LOCALAPPDATA%/TGM (not needed while the slot is not in use: see game_lock.py).
 """
 
 import argparse

@@ -25,6 +25,11 @@ State: %LOCALAPPDATA%\\TGM\\ (state.json, config.json, events.log, baseline\\, l
 OS file lock (msvcrt.locking on the permanent file `lock`; the OS frees it when a process dies) and
 written through a temporary file and os.replace.
 
+Not in use until a first grant: the slot exists for several agents sharing one game install. On a machine where no
+turn was ever granted (a fresh clone, one player), game.py and build_mod.py change the game without --holder, and
+say so; the first `request` that is granted turns the slot on for good (state.json `ever_granted`, or a grant in
+events.log for state from before that field).
+
 Rules:
 - A grant needs: the slot free, the agent first in the queue, no pause, the game closed, the canonical
   settings baseline taken and the four settings files equal to it. Every grant backs up the saves
@@ -40,6 +45,8 @@ Rules:
 The environment variable TGM_LOCK_SELFTEST_ROOT moves every path (state, Documents, backup, the game's
 running state) into a test folder; game.py and build_mod.py then stop after their gate check. Only the
 self-test sets it.
+
+Needs, not in this repository: the game install (5.x; found by tools/paths.py through Steam or W3_GAME_DIR) (to see whether it runs, and its bin/x64_dx12 for ReShade's dxgi.dll); Documents/The Witcher 3 (saves and settings files); Windows' robocopy; its state in %LOCALAPPDATA%/TGM and the save backup in %USERPROFILE%/W3SaveBackup.
 """
 
 import argparse
@@ -356,6 +363,7 @@ def try_grant(env: Env, s: Session) -> None:
     st["revoked"].pop(entry["who"], None)
     write_json(env.state / "turn_saves.json", saves_list(env))
     event(env, st, "grant", who=entry["who"], backup=info)
+    st["ever_granted"] = True
 
 
 def revoke(env: Env, st: dict, reason: str) -> None:
@@ -423,10 +431,25 @@ class Gate:
         self.who, self.token, self.parent, self.test, self.installed = who, token, parent, test, installed
 
 
+UNLOCKED = "unlocked"  # Gate.who when the slot is not in use on this machine
+
+
+def slot_in_use(env: Env) -> bool:
+    """The slot has been used on this machine: some turn was ever granted. Read without the lock (read-only)."""
+    if not env.statefile.exists():
+        return False
+    if load_state(env).get("ever_granted"):
+        return True
+    return env.events.exists() and '"event": "grant"' in env.events.read_text(encoding="utf-8", errors="replace")
+
+
 def gate(holder: str | None, parent: bool, command: str) -> Gate:
     """Check that `holder` (AREA:TOKEN) holds the slot and renew its lease; raise Refused otherwise.
     `parent` skips the check (emergencies and the parent's own runs) and logs it."""
     env = Env()
+    if not holder and not parent and not env.test and not slot_in_use(env):
+        print(f"game slot: not in use on this machine (no turn was ever granted), so {command} needs no --holder")
+        return Gate(UNLOCKED, "", True, env.test, None)
     with Session(env) as s:
         housekeeping(s)
         st = s.st
@@ -458,6 +481,8 @@ def gate(holder: str | None, parent: bool, command: str) -> Gate:
 
 def record_install(g: Gate, marker: str) -> None:
     """Remember what the holder installed this turn (the first line of .built-by-build_mod)."""
+    if g.who == UNLOCKED:
+        return  # nothing to remember: the slot is not in use
     env = Env()
     with Session(env) as s:
         h = s.st["holder"]

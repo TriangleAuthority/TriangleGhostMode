@@ -54,6 +54,8 @@ Options: `--timeout S` per step (default 180), `--wait MS` how long rw3d_cli wai
 
 Areas are ported in parallel, one agent each ([parallel-ports.md](proposals/parallel-ports.md)), and share the one game install. `tools/game_lock.py` hands it out, one holder at a time, in request order; `game.py` and `build_mod.py`'s installs refuse to change the game without the holder's token. **Verified**: offline self-test (`game_lock.py selftest`) and real turns (install, the regression in both trees, release).
 
+**Not in use until a first grant** (2026-11-15): on a machine where no turn was ever granted (a fresh clone, one player), `game.py` and `build_mod.py` change the game without `--holder` and say so; the first granted `request` turns the slot on for good (`ever_granted` in `state.json`, or a grant in `events.log`). **Verified** 2026-11-15: with a fresh `%LOCALAPPDATA%` an install went ahead without a token and left no slot state; on the machine with the slot in use the same install was refused.
+
 **Exclusive to the holder:** installing a build (`<game>\mods\modGhostMode`, the menu XML, `mods.settings`), the running game (`game.py run`, `start`, `load`, `exec`, `resume`), and what the game writes: `scriptslog.txt`, the settings files, the saves. `game.py quit`, `log`, `status` and `saves` stay open to everyone. Compiling is not exclusive: each `wcc_lite` run takes a short OS file lock of its own (`build_mod.py`).
 
 **A turn:**

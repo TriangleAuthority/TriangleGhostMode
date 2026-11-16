@@ -33,6 +33,8 @@ new entity reference `cr2w_patch.py` cannot write as an edit).
 object outside the edited ones 5.x's byte for byte, every edited property as derived, and every ability
 the edits add defined by 5.x's XML or Ghost Mode's DLC. --list prints every file's edits and the files
 left out with why.
+
+Needs, not in this repository: the game install (5.x; found by tools/paths.py through Steam or W3_GAME_DIR)'s bundles, and the legacy 1.32 game copy (docs/tools.md) for the values 5.x changed.
 """
 import argparse, csv, os, re, sys
 

@@ -16,6 +16,8 @@ the tree runs once more on a fresh launch, and a flake counts as failed only if 
 
 Needs the game slot (tools/game_lock.py) and the holder's build installed (build_mod.py --install-from).
 Exit code 0 when every tree passed, 1 otherwise.
+
+Needs, not in this repository: the same as game.py (it drives the game through it), and a Ghost Mode build with its test scripts installed.
 """
 
 import argparse

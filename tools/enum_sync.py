@@ -80,6 +80,8 @@ USAGE
     (lower first), then folder name, case-insensitive. Disabled mods are skipped.
 
     Requires Python 3.8+, no packages. Format reference: tools/rsblob.py.
+
+Needs, not in this repository: the game install (5.x; found by tools/paths.py through Steam or W3_GAME_DIR): its scripts (content/content0/scripts) for the vanilla declarations, and its mods folder for the blobs it patches.
 """
 
 import argparse

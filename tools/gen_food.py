@@ -14,6 +14,8 @@ New Game+ (`items_plus`): the entry as legacy's NG+ file has it (legacy's NG+ fo
 Writes `items/gm_food.xml` and `items_plus/gm_food.xml` in Ghost Mode's DLC (--worktree, required). --check writes nothing and fails if a file is out of date. --verify writes nothing and
 compares every listed entry as the port leaves it with legacy's, node by node, and lists for information
 the entries of the food files still differing from legacy's and not listed.
+
+Needs, not in this repository: the game install (5.x; found by tools/paths.py through Steam or W3_GAME_DIR)'s string tables (content/content0/*.w3strings).
 """
 import os, re, sys
 

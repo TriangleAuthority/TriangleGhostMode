@@ -34,6 +34,8 @@ command:
 and differ from 5.x's file only where this tool edits it (the sword templates: every vanilla effect byte for
 byte, each new effect's dump equal to its source's but for the name, the two imports and the light colors).
 See docs/features/skl.md (SKL-03, SKL-04) and docs/tools.md.
+
+Needs, not in this repository: the game install (5.x; found by tools/paths.py through Steam or W3_GAME_DIR)'s bundles, for the cooked files it copies.
 """
 import argparse
 import os
