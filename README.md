@@ -22,10 +22,9 @@ Needs The Witcher 3 game version 5.x (PC). Legacy Ghost Mode's dependencies do n
 
 **Install it before starting a new game.** Adding Ghost Mode to a playthrough in progress, or removing it from one, is not supported (see above).
 
-1. **Get the mod folder** `modGhostMode`: from a release once there is one, or build it from this repository with `python tools/build_mod.py --ref master --out build/release --release` (needs Python 3 and REDkit's script compiler and packer, see [docs/tools.md](docs/tools.md)); the folder is then `build/release/modGhostMode`.
-2. **Copy the mod:** put the `modGhostMode` folder into `<game>\mods\` (create `mods` if there is none; `<game>` is the folder that holds `bin` and `content`). Its data changes and sounds come with it, in `content\`.
-3. **Copy the options menu:** copy `modGhostMode\bin\config\r4game\user_config_matrix\pc\modGhostMode.xml` into `<game>\bin\config\r4game\user_config_matrix\pc\`.
-4. Start a new game. The options are under **Options → Mods → Ghost Mode** and start at Ghost Mode's defaults. "Classic skill tree" (in the Gameplay group) chooses the tree; changing it takes effect with a character reset.
+1. **Get the zip** `modGhostMode-<version>.zip`: from a release once there is one, or build it from this repository with `python tools/build_mod.py --ref master --out build/release --package` (needs Python 3 and REDkit, see [docs/tools.md](docs/tools.md)); the zip is then in `build/release/`.
+2. **Extract it into the game folder** `<game>` (the folder that holds `bin` and `content`), keeping its folders: it puts the mod into `<game>\mods\modGhostMode\` and its options menu into `<game>\bin\config\r4game\user_config_matrix\pc\modGhostMode.xml`. Nothing else in the game changes.
+3. Start a new game. The options are under **Options → Mods → Ghost Mode** and start at Ghost Mode's defaults. "Classic skill tree" (in the Gameplay group) chooses the tree; changing it takes effect with a character reset.
 
 ## Using it with other mods (Script Merger)
 
